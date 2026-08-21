@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Интерактивная карта районов и участков</title>
+  <script>
+    // Явная загрузка API позволяет показать понятную ошибку при проблеме с ключом или Referer.
+    window.ymaps3Ready = new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = 'https://api-maps.yandex.ru/v3/?apikey=6b197a0e-9109-4624-9520-954a47c26dda&lang=ru_RU';
+      script.onload = () => window.ymaps3 ? resolve(window.ymaps3) : reject(new Error('Объект ymaps3 не создан. Проверьте API-ключ и HTTP Referer.'));
+      script.onerror = () => reject(new Error('Yandex Maps API не загрузился. Проверьте интернет и ограничения API-ключа.'));
+      document.head.appendChild(script);
+    });
+  </script>
+  <style>
+    :root { color-scheme: light; font-family: Arial, sans-serif; }
+    * { box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; margin: 0; }
+    body { background: #f3f5f7; color: #1d2733; }
+    .app { display: grid; grid-template-columns: 350px minmax(0, 1fr); height: 100vh; }
+    .sidebar { overflow: auto; padding: 18px; background: #fff; border-right: 1px solid #dce2e8; }
+    h1 { margin: 0 0 8px; font-size: 21px; line-height: 1.2; }
+    h2 { margin: 22px 0 10px; font-size: 16px; }
+    p { margin: 8px 0; color: #5a6672; font-size: 13px; line-height: 1.45; }
+    label { display: block; margin: 12px 0 5px; font-size: 12px; font-weight: 700; color: #4c5966; }
+    select, button, .file-label { width: 100%; min-height: 36px; border: 1px solid #cbd4dd; border-radius: 7px; background: #fff; color: #1d2733; font: inherit; font-size: 13px; }
+    select { padding: 0 9px; }
+    button, .file-label { cursor: pointer; padding: 7px 10px; text-align: center; }
+    button:hover, .file-label:hover { background: #f2f6fa; }
+    .button-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+    .file-label { display: flex; align-items: center; justify-content: center; }
+    input[type=file] { display: none; }
+    .status { margin-top: 12px; padding: 9px 10px; border-radius: 7px; background: #eef4f8; color: #476071; font-size: 12px; line-height: 1.35; }
+    .status.error { background: #fff0f0; color: #9c2b2b; }
+    .legend { display: grid; gap: 7px; }
+    .legend-district { padding: 9px; border: 1px solid #e1e6eb; border-radius: 8px; }
+    .legend-title { margin-bottom: 7px; font-weight: 700; font-size: 13px; }
+    .legend-row { display: flex; align-items: center; gap: 7px; min-height: 24px; }
+    .legend-button { display: flex; align-items: center; gap: 7px; width: 100%; border: 0; padding: 2px 0; text-align: left; background: transparent; font-size: 12px; }
+    .legend-button:hover { background: #f6f8fa; }
+    .swatch { flex: 0 0 17px; width: 17px; height: 17px; border: 1px solid rgba(0,0,0,.25); border-radius: 4px; }
+    .legend-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .legend-code { margin-left: auto; color: #7d8995; font: 11px ui-monospace, SFMono-Regular, Consolas, monospace; }
+    .map-wrap { position: relative; min-width: 0; }
+    #map { width: 100%; height: 100%; }
+    .map-note { position: absolute; left: 14px; bottom: 14px; max-width: 370px; padding: 8px 10px; border-radius: 7px; background: rgba(255,255,255,.92); box-shadow: 0 2px 10px rgba(0,0,0,.12); color: #53616e; font-size: 11px; pointer-events: none; }
+    .details { margin-top: 10px; padding: 10px; border: 1px solid #e1e6eb; border-radius: 8px; font-size: 12px; line-height: 1.5; }
+    .details strong { color: #1d2733; }
+    @media (max-width: 780px) {
+      .app { grid-template-columns: 1fr; grid-template-rows: auto minmax(420px, 1fr); height: auto; min-height: 100vh; }
+      .sidebar { max-height: none; border-right: 0; border-bottom: 1px solid #dce2e8; }
+      .map-wrap { min-height: 65vh; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <h1>Районы и участки</h1>
+      <p>Нажмите на полигон или строку легенды, чтобы посмотреть объект и отфильтровать карту.</p>
+
+      <label for="districtSelect">Район</label>
+      <select id="districtSelect"></select>
+
+      <label for="sectionSelect">Участок</label>
+      <select id="sectionSelect"></select>
+
+      <div class="button-row">
+        <button id="resetButton" type="button">Сбросить</button>
+        <label class="file-label" for="geojsonInput">Загрузить GeoJSON</label>
+        <input id="geojsonInput" type="file" accept=".geojson,.json,application/geo+json,application/json" />
+      </div>
+
+      <div id="status" class="status">Загрузка карты…</div>
+      <div id="details" class="details">Выберите полигон на карте — здесь появятся его данные.</div>
+
+      <h2>Легенда</h2>
+      <div id="legend" class="legend"></div>
+    </aside>
+    <main class="map-wrap">
+      <div id="map"></div>
+      <div class="map-note">Загружены реальные полигоны из KML. Для обновления данных замените файл <code>areas.geojson</code> или используйте загрузку GeoJSON.</div>
+    </main>
+  </div>
+
+  <script>
+    // Вся цветовая схема хранится в одном месте. Ее можно редактировать без изменений логики карты.
+    const COLOR_LEGEND = {
+      'Аэропорт': {
+        'Участок 1': ['#CE3622', 'красный'], 'Участок 2': ['#1DAF59', 'тёмно-зелёный'],
+        'Участок 3': ['#9A22CE', 'фиолетовый'], 'Участок 5': ['#AFAE1D', 'тёмно-жёлтый']
+      },
+      'Беговой': {
+        'Участок 1': ['#229DCE', 'голубой'], 'Участок 2': ['#AF1D5B', 'тёмно-малиновый'],
+        'Участок 4': ['#38CE22', 'зелёный'], 'Участок 5': ['#341DAF', 'тёмно-синий']
+      },
+      'Бескудниковский': {
+        'Участок 3': ['#CE6F22', 'оранжевый'], 'Участок 4': ['#1DAF8A', 'тёмно-зелёно-бирюзовый'],
+        'Участок 5': ['#CE22C8', 'пурпурный'], 'Участок 8': ['#7FAF1D', 'тёмно-жёлто-зелёный']
+      },
+      'Войковский': {
+        'Участок 1': ['#2263CE', 'синевато-голубой'], 'Участок 2': ['#AF1D2A', 'тёмно-красно-розовый'],
+        'Участок 3': ['#22CE44', 'зелёный'], 'Участок 5': ['#651DAF', 'тёмно-сине-фиолетовый']
+      },
+      'Восточное Дегунино': {
+        'Участок 1': ['#CEA922', 'жёлто-оранжевый'], 'Участок 2': ['#1DA4AF', 'тёмно-бирюзовый'],
+        'Участок 3': ['#CE228E', 'малиновый']
+      },
+      'Головинский': {
+        'Участок 1': ['#4EAF1D', 'тёмно-зелёный'], 'Участок 2': ['#222ACE', 'синий'],
+        'Участок 3': ['#AF401D', 'тёмно-красно-оранжевый'], 'Участок 4': ['#22CE7E', 'зелёно-бирюзовый'],
+        'Участок 5': ['#961DAF', 'тёмно-фиолетовый'], 'Участок 7': ['#B9CE22', 'жёлтый']
+      },
+      'Дмитровский': {
+        'Участок 1': ['#1D73AF', 'тёмно-голубой'], 'Участок 2': ['#CE2255', 'розовый'],
+        'Участок 3': ['#1DAF1D', 'тёмно-зелёный']
+      },
+      'Западное Дегунино': {
+        'Участок 1': ['#5322CE', 'сине-фиолетовый'], 'Участок 2': ['#AF721D', 'тёмно-оранжевый'],
+        'Участок 3': ['#22CEB8', 'бирюзовый'], 'Участок 4': ['#AF1D98', 'тёмно-пурпурный'],
+        'Участок 6': ['#80CE22', 'зелёный'], 'Участок 7': ['#1D42AF', 'тёмно-синевато-голубой']
+      },
+      'Коптево': {
+        'Участок 1': ['#CE2822', 'красный'], 'Участок 2': ['#1DAF4D', 'тёмно-зелёный'],
+        'Участок 3': ['#8D22CE', 'фиолетовый'], 'Участок 4': ['#AFA31D', 'тёмно-жёлто-оранжевый'],
+        'Участок 5': ['#22ABCE', 'голубой']
+      },
+      'Левобережный': {
+        'Участок 1': ['#AF1D66', 'тёмно-малиновый'], 'Участок 2': ['#46CE22', 'зелёный'],
+        'Участок 3': ['#281DAF', 'тёмно-синий'], 'Участок 5': ['#CE6222', 'красно-оранжевый']
+      },
+      'Молжаниновский': {
+        'Участок 2': ['#1DAF7E', 'тёмно-зелёно-бирюзовый']
+      },
+      'Савеловский': {
+        'Участок 1': ['#C722CE', 'пурпурный'], 'Участок 2': ['#8BAF1D', 'тёмно-жёлто-зелёный'],
+        'Участок 3': ['#2271CE', 'синевато-голубой'], 'Участок 4': ['#AF1D35', 'тёмно-розовый']
+      },
+      'Сокол': {
+        'Участок 1': ['#22CE37', 'зелёный'], 'Участок 2': ['#591DAF', 'тёмно-сине-фиолетовый'],
+        'Участок 3': ['#CE9C22', 'жёлто-оранжевый']
+      },
+      'Тимирязевский': {
+        'Участок 1': ['#1DAFAF', 'тёмно-бирюзовый'], 'Участок 2': ['#CE229C', 'малиновый'],
+        'Участок 3': ['#5AAF1D', 'тёмно-зелёный'], 'Участок 4': ['#2237CE', 'синевато-голубой'],
+        'Участок 6': ['#AF351D', 'тёмно-красный']
+      },
+      'Ховрино': {
+        'Участок 3': ['#22CE71', 'зелёный'], 'Участок 4': ['#8B1DAF', 'тёмно-фиолетовый'],
+        'Участок 5': ['#C7CE22', 'жёлтый'], 'Участок 6': ['#1D7FAF', 'тёмно-голубой'],
+        'Участок 7': ['#CE2262', 'розовый'], 'Участок 8': ['#29AF1D', 'тёмно-зелёный']
+      },
+      'Хорошевский': {
+        'Участок 1': ['#4622CE', 'синий'], 'Участок 2': ['#AF661D', 'тёмно-оранжевый'],
+        'Участок 3': ['#22CEAA', 'зелёно-бирюзовый'], 'Участок 4': ['#AF1DA3', 'тёмно-пурпурный'],
+        'Участок 5': ['#8DCE22', 'жёлто-зелёный'], 'Участок 6': ['#1D4DAF', 'тёмно-синевато-голубой'],
+        'Участок 7': ['#CE2229', 'красно-розовый'], 'Участок 10': ['#1DAF41', 'тёмно-зелёный']
+      }
+    };
+
+    const GRAY = ['#808080', 'серый'];
+    const ALL_DISTRICTS = Object.keys(COLOR_LEGEND);
+    const state = { district: 'ALL', section: 'ALL', records: [], map: null };
+    const $ = (id) => document.getElementById(id);
+
+    function clean(value) { return String(value ?? '').trim(); }
+
+    function districtOf(properties) {
+      return clean(properties.district ?? properties.район ?? properties.District ?? properties.Rayon);
+    }
+
+    function sectionOf(properties) {
+      const value = clean(properties.section ?? properties.участок ?? properties.Section ?? properties.Uchastok);
+      if (!value) return 'Без участка';
+      if (/^без\s+участка$/i.test(value)) return 'Без участка';
+      if (/^участок\s+/i.test(value)) return value.replace(/^участок\s+/i, 'Участок ');
+      if (/^\d+$/.test(value)) return `Участок ${value}`;
+      return value;
+    }
+
+    function colorFor(district, section) {
+      return COLOR_LEGEND[district]?.[section]?.[0] || (section === 'Без участка' ? GRAY[0] : GRAY[0]);
+    }
+
+    function descriptionFor(district, section) {
+      return COLOR_LEGEND[district]?.[section]?.[1] || (section === 'Без участка' ? GRAY[1] : 'серый по умолчанию');
+    }
+
+    function allLegendEntries(district) {
+      const entries = Object.entries(COLOR_LEGEND[district] || {});
+      if (!entries.some(([section]) => section === 'Без участка')) entries.push(['Без участка', GRAY]);
+      return entries;
+    }
+
+    function normalizeFeature(feature, index) {
+      if (!feature || !feature.geometry) return null;
+      const properties = feature.properties || {};
+      const district = districtOf(properties) || 'Без района';
+      const section = sectionOf(properties);
+      const name = clean(properties.name ?? properties.название ?? properties.Name) || `${district} — ${section}`;
+      return {
+        id: clean(feature.id) || `area-${index + 1}`,
+        geometry: feature.geometry,
+        district, section, name, properties,
+        color: colorFor(district, section),
+        colorName: descriptionFor(district, section)
+      };
+    }
+
+    function featureStyle(color, opacity = 0.58) {
+      return {
+        fill: color,
+        fillOpacity: opacity,
+        stroke: [{ color: '#ffffff', width: 2, opacity: 0.95 }],
+        interactive: true,
+        cursor: 'pointer'
+      };
+    }
+
+    function renderDistrictSelect() {
+      const names = [...new Set([...ALL_DISTRICTS, ...state.records.map((item) => item.district)])].sort((a, b) => a.localeCompare(b, 'ru'));
+      $('districtSelect').innerHTML = '<option value="ALL">Все районы</option>' + names.map((name) => `<option value="${escapeHtml(name)}">${escapeHtml(name)}</option>`).join('');
+      $('districtSelect').value = state.district;
+    }
+
+    function renderSectionSelect() {
+      const source = state.district === 'ALL' ? state.records.map((item) => item.section) : state.records.filter((item) => item.district === state.district).map((item) => item.section);
+      const sections = [...new Set(source)].sort(sectionSort);
+      $('sectionSelect').innerHTML = '<option value="ALL">Все участки</option>' + sections.map((name) => `<option value="${escapeHtml(name)}">${escapeHtml(name)}</option>`).join('');
+      if (!sections.includes(state.section)) state.section = 'ALL';
+      $('sectionSelect').value = state.section;
+    }
+
+    function renderLegend() {
+      const districts = state.district === 'ALL' ? ALL_DISTRICTS : [state.district];
+      $('legend').innerHTML = districts.map((district) => {
+        const entries = allLegendEntries(district);
+        return `<section class="legend-district"><div class="legend-title">${escapeHtml(district)}</div>${entries.map(([section, [color, label]]) => `
+          <div class="legend-row">
+            <button class="legend-button" type="button" data-district="${escapeHtml(district)}" data-section="${escapeHtml(section)}">
+              <span class="swatch" style="background:${color}"></span><span class="legend-name">${escapeHtml(section)} — ${escapeHtml(label)}</span><span class="legend-code">${color}</span>
+            </button>
+          </div>`).join('')}</section>`;
+      }).join('');
+      $('legend').querySelectorAll('.legend-button').forEach((button) => button.addEventListener('click', () => {
+        state.district = button.dataset.district;
+        state.section = button.dataset.section;
+        renderDistrictSelect(); renderSectionSelect(); renderLegend(); renderVisibleFeatures();
+      }));
+    }
+
+    function isVisible(item) {
+      return (state.district === 'ALL' || item.district === state.district) && (state.section === 'ALL' || item.section === state.section);
+    }
+
+    function renderVisibleFeatures() {
+      if (!state.map) return;
+      state.records.forEach((item) => { if (item.feature.parent) state.map.removeChild(item.feature); });
+      state.records.filter(isVisible).forEach((item) => state.map.addChild(item.feature));
+      const visible = state.records.filter(isVisible).length;
+      $('status').textContent = `Объектов: ${visible} из ${state.records.length}. Цвет определяется по району и участку.`;
+    }
+
+    function showDetails(item, coordinates) {
+      const extra = Object.entries(item.properties)
+        .filter(([key]) => !['district', 'район', 'District', 'Rayon', 'section', 'участок', 'Section', 'Uchastok', 'name', 'название', 'Name'].includes(key))
+        .map(([key, value]) => `<div><strong>${escapeHtml(key)}:</strong> ${escapeHtml(value)}</div>`).join('');
+      $('details').innerHTML = `<div><strong>${escapeHtml(item.name)}</strong></div><div>Район: <strong>${escapeHtml(item.district)}</strong></div><div>Участок: <strong>${escapeHtml(item.section)}</strong></div><div>Цвет: <strong>${item.color}</strong> (${escapeHtml(item.colorName)})</div>${coordinates ? `<div>Координаты клика: ${coordinates.map((value) => Number(value).toFixed(6)).join(', ')}</div>` : ''}${extra}`;
+    }
+
+    async function createMapFeatures() {
+      const { YMapFeature } = await window.ymaps3Ready;
+      state.records.forEach((item) => {
+        item.feature = new YMapFeature({
+          id: item.id,
+          geometry: item.geometry,
+          properties: { ...item.properties, district: item.district, section: item.section, name: item.name },
+          style: featureStyle(item.color),
+          onClick: (_event, mapEvent) => showDetails(item, mapEvent?.coordinates)
+        });
+      });
+    }
+
+    function extractFeatures(data) {
+      if (data?.type === 'FeatureCollection') return data.features || [];
+      if (data?.type === 'Feature') return [data];
+      throw new Error('Ожидается GeoJSON FeatureCollection или Feature.');
+    }
+
+    async function loadGeoJSON(data, sourceName) {
+      const normalized = extractFeatures(data).map(normalizeFeature).filter(Boolean);
+      if (!normalized.length) throw new Error('В GeoJSON нет объектов с геометрией.');
+      state.records.forEach((item) => { if (item.feature?.parent && state.map) state.map.removeChild(item.feature); });
+      state.records = normalized;
+      await createMapFeatures();
+      renderDistrictSelect(); renderSectionSelect(); renderLegend(); renderVisibleFeatures();
+      fitToData(normalized);
+      $('status').textContent = `Загружено объектов: ${normalized.length} (${sourceName}).`;
+    }
+
+    function fitToData(items) {
+      const points = [];
+      const collect = (value) => Array.isArray(value) && typeof value[0] === 'number' ? points.push(value) : Array.isArray(value) ? value.forEach(collect) : null;
+      items.forEach((item) => collect(item.geometry.coordinates));
+      if (points.length && state.map) {
+        const lngs = points.map((p) => p[0]);
+        const lats = points.map((p) => p[1]);
+        state.map.update({ location: { bounds: [[Math.min(...lngs), Math.min(...lats)], [Math.max(...lngs), Math.max(...lats)]] } });
+      }
+    }
+
+    function sectionSort(a, b) {
+      const number = (value) => Number((String(value).match(/\d+/) || [999])[0]);
+      return number(a) - number(b) || String(a).localeCompare(String(b), 'ru');
+    }
+
+    function escapeHtml(value) {
+      return String(value ?? '').replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[char]));
+    }
+
+    const DEMO_GEOJSON = {
+      type: 'FeatureCollection',
+      features: [
+        { type: 'Feature', id: 'demo-1', properties: { district: 'Войковский', section: 'Участок 1', name: 'Демонстрационный полигон Войковский 1' }, geometry: { type: 'Polygon', coordinates: [[[37.480, 55.850], [37.495, 55.850], [37.495, 55.842], [37.480, 55.842], [37.480, 55.850]]] } },
+        { type: 'Feature', id: 'demo-2', properties: { district: 'Войковский', section: 'Участок 2', name: 'Демонстрационный полигон Войковский 2' }, geometry: { type: 'Polygon', coordinates: [[[37.500, 55.850], [37.515, 55.850], [37.515, 55.842], [37.500, 55.842], [37.500, 55.850]]] } },
+        { type: 'Feature', id: 'demo-3', properties: { district: 'Головинский', section: 'Участок 2', name: 'Демонстрационный полигон Головинский 2' }, geometry: { type: 'Polygon', coordinates: [[[37.500, 55.835], [37.515, 55.835], [37.515, 55.827], [37.500, 55.827], [37.500, 55.835]]] } },
+        { type: 'Feature', id: 'demo-4', properties: { district: 'Ховрино', section: 'Без участка', name: 'Демонстрационный полигон Ховрино — без участка' }, geometry: { type: 'Polygon', coordinates: [[[37.480, 55.835], [37.495, 55.835], [37.495, 55.827], [37.480, 55.827], [37.480, 55.835]]] } }
+      ]
+    };
+
+    async function init() {
+      try {
+        const ymaps3 = await window.ymaps3Ready;
+        await ymaps3.ready;
+        const { YMap, YMapDefaultSchemeLayer, YMapDefaultFeaturesLayer } = ymaps3;
+        state.map = new YMap($('map'), {
+          location: { center: [37.50, 55.84], zoom: 11 },
+          showScaleInCopyrights: true,
+          theme: 'light'
+        }, [new YMapDefaultSchemeLayer({}), new YMapDefaultFeaturesLayer({})]);
+
+        try {
+          const response = await fetch('./areas.geojson', { cache: 'no-store' });
+          if (!response.ok) throw new Error('areas.geojson not found');
+          await loadGeoJSON(await response.json(), 'areas.geojson');
+        } catch (_error) {
+          await loadGeoJSON(DEMO_GEOJSON, 'встроенный демонстрационный набор');
+          $('status').textContent = 'Файл areas.geojson не найден — показан встроенный пример. Загрузите свой GeoJSON.';
+        }
+      } catch (error) {
+        $('status').className = 'status error';
+        $('status').textContent = `Ошибка запуска карты: ${error.message}`;
+      }
+    }
+
+    $('districtSelect').addEventListener('change', (event) => {
+      state.district = event.target.value; state.section = 'ALL';
+      renderSectionSelect(); renderLegend(); renderVisibleFeatures();
+    });
+    $('sectionSelect').addEventListener('change', (event) => {
+      state.section = event.target.value; renderVisibleFeatures();
+    });
+    $('resetButton').addEventListener('click', () => {
+      state.district = 'ALL'; state.section = 'ALL';
+      renderDistrictSelect(); renderSectionSelect(); renderLegend(); renderVisibleFeatures(); fitToData(state.records);
+    });
+    $('geojsonInput').addEventListener('change', async (event) => {
+      const file = event.target.files[0];
+      if (!file) return;
+      try { await loadGeoJSON(JSON.parse(await file.text()), file.name); }
+      catch (error) {
+        $('status').className = 'status error';
+        const apiError = /ymaps3|Yandex Maps API|API-ключ|Referer/i.test(error.message);
+        $('status').textContent = `${apiError ? 'Ошибка Yandex Maps API' : 'Ошибка GeoJSON'}: ${error.message}`;
+      }
+      event.target.value = '';
+    });
+
+    init();
+  </script>
+</body>
+</html>
