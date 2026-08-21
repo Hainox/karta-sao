@@ -1,0 +1,1 @@
+{"updated_at":"2026-08-21","layers":{"mno":{"name":"МНО","file":"mno.geojson","source_rows":1861,"loaded":1831,"missing_coordinates":30},"dp":{"name":"Детские площадки","file":"dp.geojson","loaded":2254},"sp":{"name":"Спортивные площадки","file":"sp.geojson","loaded":838}},"dp_sp_source":{"source_rows":3101,"loaded":3092,"missing_coordinates":9,"other_types":{}}}
