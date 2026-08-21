@@ -48,11 +48,14 @@
     .layer-toggle input { margin: 0; accent-color: #2864c7; }
     .layer-swatch { flex: 0 0 14px; width: 14px; height: 14px; border-radius: 50%; border: 1px solid rgba(0,0,0,.25); }
     .layer-count { margin-left: auto; color: #7d8995; font-size: 11px; }
-    .map-marker { width: 14px; height: 14px; padding: 0; border: 1.5px solid #fff; box-shadow: 0 1px 3px rgba(0,0,0,.45); cursor: pointer; color: transparent; }
-    .map-marker-mno { background: #e67e22; }
-    .map-marker-mno { border-radius: 50%; }
+    .map-marker { display: flex; align-items: center; justify-content: center; width: 14px; height: 14px; padding: 0; border: 1.5px solid #fff; box-shadow: 0 1px 3px rgba(0,0,0,.45); cursor: pointer; color: transparent; overflow: hidden; transition: width .15s, height .15s, border-radius .15s; }
+    .map-marker svg { width: 80%; height: 80%; fill: none; stroke: #fff; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; pointer-events: none; }
+    .map-marker-mno { background: #e67e22; border-radius: 50%; }
     .map-marker-dp { background: #2e86de; border-radius: 3px; }
-    .map-marker-sp { background: #27ae60; border: 0; clip-path: polygon(50% 0, 100% 100%, 0 100%); filter: drop-shadow(0 1px 1px rgba(0,0,0,.55)); }
+    .map-marker-sp { background: #27ae60; border-radius: 50%; }
+    .map-marker-small { width: 10px; height: 10px; border-width: 1px; }
+    .map-marker-compact { width: 7px; height: 7px; border-width: 1px; }
+    .map-marker-compact svg { display: none; }
     .map-wrap { position: relative; min-width: 0; }
     #map { width: 100%; height: 100%; }
     .map-note { position: absolute; left: 14px; bottom: 14px; max-width: 370px; padding: 8px 10px; border-radius: 7px; background: rgba(255,255,255,.92); box-shadow: 0 2px 10px rgba(0,0,0,.12); color: #53616e; font-size: 11px; pointer-events: none; }
@@ -181,9 +184,15 @@
       dp: { label: 'Детские площадки', file: 'dp.geojson', color: '#2e86de', enabled: false },
       sp: { label: 'Спортивные площадки', file: 'sp.geojson', color: '#27ae60', enabled: false }
     };
+    const MARKER_ICONS = {
+      mno: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 5.5h8l-.7 8H4.7zM3 4h10M6 2.5h4M6.5 7.5v4M9.5 7.5v4"/></svg>',
+      dp: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13.5h10M4.5 13.5V7h3l4 3v3.5M7.5 7V4.5M6 4.5h3M11.5 10V6.5"/></svg>',
+      sp: '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="5.5"/><path d="m8 5.5 1.5 1.1-.6 1.8h-1.8l-.6-1.8zM4.6 6.4l1.9.2M11.4 6.4l-1.9.2M6.2 12l.7-2M9.8 12l-.7-2"/></svg>'
+    };
     const state = {
       district: 'ALL',
       section: 'ALL',
+      zoom: 11,
       layers: Object.fromEntries(Object.entries(LAYER_CONFIG).map(([key, config]) => [key, { ...config, records: [], error: null }])),
       map: null
     };
@@ -216,6 +225,20 @@
 
     function allRecords() {
       return Object.values(state.layers).flatMap((layer) => layer.records);
+    }
+
+    function markerSizeClass(zoom) {
+      if (zoom < 12) return 'compact';
+      if (zoom < 14) return 'small';
+      return 'normal';
+    }
+
+    function updateMarkerScale(zoom) {
+      state.zoom = zoom;
+      const size = markerSizeClass(zoom);
+      allRecords().forEach((item) => {
+        if (item.markerElement) item.markerElement.className = `map-marker map-marker-${item.layerKey} map-marker-${size}`;
+      });
     }
 
     function allLegendEntries(district) {
@@ -323,12 +346,14 @@
         if (item.geometry.type === 'Point' && YMapMarker) {
           const marker = document.createElement('button');
           marker.type = 'button';
-          marker.className = `map-marker map-marker-${item.layerKey}`;
+          marker.className = `map-marker map-marker-${item.layerKey} map-marker-${markerSizeClass(state.zoom)}`;
+          marker.innerHTML = MARKER_ICONS[item.layerKey] || '';
           marker.title = item.name;
           marker.addEventListener('click', (event) => {
             event.stopPropagation();
             showDetails(item, item.geometry.coordinates);
           });
+          item.markerElement = marker;
           item.feature = new YMapMarker({ coordinates: item.geometry.coordinates }, marker);
           return;
         }
@@ -403,12 +428,15 @@
       try {
         const ymaps3 = await window.ymaps3Ready;
         await ymaps3.ready;
-        const { YMap, YMapDefaultSchemeLayer, YMapDefaultFeaturesLayer } = ymaps3;
+        const { YMap, YMapDefaultSchemeLayer, YMapDefaultFeaturesLayer, YMapListener } = ymaps3;
         state.map = new YMap($('map'), {
           location: { center: [37.50, 55.84], zoom: 11 },
           showScaleInCopyrights: true,
           theme: 'light'
         }, [new YMapDefaultSchemeLayer({}), new YMapDefaultFeaturesLayer({})]);
+        if (YMapListener) state.map.addChild(new YMapListener({ onUpdate: (event) => {
+          if (Number.isFinite(event.location?.zoom)) updateMarkerScale(event.location.zoom);
+        } }));
 
         renderLayerControls();
         const sources = { areas: DEMO_GEOJSON, mno: null, dp: null, sp: null };
