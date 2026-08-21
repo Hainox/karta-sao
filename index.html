@@ -117,17 +117,25 @@
     .legend-code { margin-left:auto; color:#9aa7aa; font:10px ui-monospace, SFMono-Regular, Consolas, monospace; }
     .map-wrap { position:relative; flex:1; min-width:0; min-height:0; }
     #map { width:100%; height:100%; }
-    .map-overlay { position:absolute; left:18px; bottom:18px; display:flex; flex-direction:column; gap:3px; padding:11px 13px; border:1px solid rgba(255,255,255,.8); border-radius:10px; background:rgba(16,38,54,.88); color:rgba(255,255,255,.72); box-shadow:0 7px 24px rgba(16,38,54,.2); font-size:11px; pointer-events:none; }
+    .map-overlay { position:absolute; left:18px; top:18px; display:flex; flex-direction:column; gap:3px; padding:11px 13px; border:1px solid rgba(255,255,255,.8); border-radius:10px; background:rgba(16,38,54,.88); color:rgba(255,255,255,.72); box-shadow:0 7px 24px rgba(16,38,54,.2); font-size:11px; pointer-events:none; }
     .map-overlay-title { color:#f5c86a; font-size:10px; font-weight:800; letter-spacing:.1em; }
     .map-credit { position:absolute; right:12px; bottom:10px; padding:4px 7px; border-radius:5px; background:rgba(255,255,255,.75); color:#617178; font-size:10px; pointer-events:none; }
-    .map-marker { box-shadow:0 1px 3px rgba(16,38,54,.38); }
+    /* Semantic pictograms: the category is carried by the icon itself, not a dot. */
+    .map-marker { display:grid; place-items:center; width:18px; height:18px; padding:0; border:0 !important; border-radius:0 !important; background:transparent !important; box-shadow:none; overflow:visible; filter:drop-shadow(0 0 1.5px rgba(255,255,255,.96)) drop-shadow(0 1px 2px rgba(16,38,54,.4)); transition:width .15s, height .15s, filter .15s; }
+    .map-marker svg { display:block; width:100%; height:100%; fill:none; stroke:currentColor; stroke-width:1.75; stroke-linecap:round; stroke-linejoin:round; pointer-events:none; }
+    .map-marker-mno { color:#d96b16; }
+    .map-marker-dp { color:#176fc1; }
+    .map-marker-sp { color:#188b53; }
+    .map-marker-small { width:13px; height:13px; }
+    .map-marker-compact { width:9px; height:9px; filter:drop-shadow(0 0 1px rgba(255,255,255,.96)) drop-shadow(0 1px 1px rgba(16,38,54,.35)); }
+    .map-marker-compact svg { display:block; stroke-width:2.1; }
     @media (max-width: 820px) {
       .topbar { min-height:54px; padding:0 14px; }
       .topbar-meta { display:none; }
       .workspace { display:block; overflow:auto; }
       .sidebar { width:100%; max-height:none; border-right:0; border-bottom:1px solid var(--line); box-shadow:none; }
       .map-wrap { min-height:68vh; }
-      .map-overlay { left:12px; bottom:12px; }
+      .map-overlay { left:12px; top:12px; }
     }
   </style>
 </head>
