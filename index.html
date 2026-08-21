@@ -301,13 +301,23 @@
     }
 
     function fitToData(items) {
-      const points = [];
-      const collect = (value) => Array.isArray(value) && typeof value[0] === 'number' ? points.push(value) : Array.isArray(value) ? value.forEach(collect) : null;
+      let minLng = Infinity;
+      let minLat = Infinity;
+      let maxLng = -Infinity;
+      let maxLat = -Infinity;
+      const collect = (value) => {
+        if (Array.isArray(value) && typeof value[0] === 'number' && typeof value[1] === 'number') {
+          minLng = Math.min(minLng, value[0]);
+          minLat = Math.min(minLat, value[1]);
+          maxLng = Math.max(maxLng, value[0]);
+          maxLat = Math.max(maxLat, value[1]);
+          return;
+        }
+        if (Array.isArray(value)) value.forEach(collect);
+      };
       items.forEach((item) => collect(item.geometry.coordinates));
-      if (points.length && state.map) {
-        const lngs = points.map((p) => p[0]);
-        const lats = points.map((p) => p[1]);
-        state.map.update({ location: { bounds: [[Math.min(...lngs), Math.min(...lats)], [Math.max(...lngs), Math.max(...lats)]] } });
+      if (Number.isFinite(minLng) && state.map) {
+        state.map.update({ location: { bounds: [[minLng, minLat], [maxLng, maxLat]] } });
       }
     }
 
@@ -345,9 +355,9 @@
           const response = await fetch('./areas.geojson', { cache: 'no-store' });
           if (!response.ok) throw new Error('areas.geojson not found');
           await loadGeoJSON(await response.json(), 'areas.geojson');
-        } catch (_error) {
+        } catch (error) {
           await loadGeoJSON(DEMO_GEOJSON, 'встроенный демонстрационный набор');
-          $('status').textContent = 'Файл areas.geojson не найден — показан встроенный пример. Загрузите свой GeoJSON.';
+          $('status').textContent = `Не удалось загрузить areas.geojson: ${error.message}. Показан встроенный пример.`;
         }
       } catch (error) {
         $('status').className = 'status error';
