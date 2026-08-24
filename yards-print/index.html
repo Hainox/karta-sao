@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Печать дворов САО — A3</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+  <style>
+    :root { --ink:#102636; --muted:#687982; --line:#d6e0e1; --paper:#f7f5ef; --accent:#0d827c; --panel:#fff; }
+    * { box-sizing:border-box; }
+    html, body { margin:0; min-height:100%; background:#dfe8e8; color:var(--ink); font-family:"Century Gothic", Inter, Arial, sans-serif; }
+    .app { min-height:100vh; display:flex; flex-direction:column; }
+    .topbar { display:flex; align-items:center; justify-content:space-between; gap:18px; min-height:64px; padding:10px 24px; background:var(--paper); border-bottom:1px solid var(--line); }
+    .brand { display:flex; align-items:center; gap:10px; }
+    .brand-mark { display:grid; place-items:center; flex:0 0 42px; width:42px; height:42px; overflow:hidden; border-radius:10px; }
+    .brand-mark img { width:42px; height:42px; object-fit:contain; mix-blend-mode:multiply; }
+    .brand strong { display:block; font-size:16px; line-height:1.1; }
+    .brand small, .topbar-meta { color:var(--muted); font-size:10px; letter-spacing:.08em; text-transform:uppercase; }
+    .workspace { flex:1; display:grid; grid-template-columns:350px minmax(0,1fr); min-height:0; }
+    .sidebar { padding:22px 18px; background:rgba(255,255,255,.97); border-right:1px solid var(--line); }
+    .panel-heading { display:flex; align-items:start; justify-content:space-between; gap:12px; }
+    .eyebrow { color:var(--accent); font-weight:800; font-size:10px; letter-spacing:.12em; }
+    h1 { margin:5px 0 0; font-size:25px; line-height:1.05; letter-spacing:-.045em; }
+    h2 { margin:22px 0 9px; font-size:13px; }
+    .intro, .note { margin:10px 0 16px; color:var(--muted); font-size:12px; line-height:1.48; }
+    .filter-grid { display:grid; gap:10px; }
+    label { display:block; margin-bottom:6px; color:#65757d; font-size:10px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
+    select, button, .back-link { width:100%; min-height:44px; border:1px solid var(--line); border-radius:9px; background:#fff; color:var(--ink); font:inherit; font-size:12px; }
+    select { padding:0 10px; }
+    select:focus, button:focus, .back-link:focus { outline:3px solid rgba(13,130,124,.2); outline-offset:2px; }
+    .actions { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:12px; }
+    button, .back-link { display:flex; align-items:center; justify-content:center; padding:8px 10px; cursor:pointer; text-decoration:none; text-align:center; }
+    .printbtn { border-color:var(--accent); background:var(--accent); color:white; font-weight:700; }
+    button:hover { background:#086b66; border-color:#086b66; }
+    .back-link:hover { border-color:var(--accent); color:var(--accent); }
+    .active-filters, .status, .error-panel, .legend { padding:12px; border:1px solid var(--line); border-radius:10px; background:#fbfcfa; font-size:11px; line-height:1.5; }
+    .active-filters strong { color:var(--accent); }
+    .status { margin-top:14px; color:#27665a; border-color:#cfe6df; background:#eff9f5; }
+    .error-panel { display:none; margin-top:14px; color:#992f2f; border-color:#edc5c5; background:#fff1f0; font-weight:700; }
+    .legend { display:grid; gap:8px; }
+    .legend-row { display:flex; align-items:center; gap:8px; }
+    .swatch { width:12px; height:12px; border-radius:50%; background:#e67e22; }
+    .swatch.yards { border-radius:3px; background:#0d827c; } .swatch.dp { background:#2877c9; } .swatch.sp { background:#23935e; }
+    .map-wrap { position:relative; min-height:620px; background:#d8e3e3; }
+    #map { width:100%; height:100%; min-height:620px; }
+    .map-overlay { position:absolute; z-index:500; top:16px; left:16px; padding:10px 12px; border-radius:9px; background:rgba(16,38,54,.88); color:#fff; font-size:11px; pointer-events:none; }
+    .map-overlay span { display:block; margin-top:3px; color:rgba(255,255,255,.75); }
+    .leaflet-container { font-family:Arial,sans-serif; }
+    @media (max-width:780px) { .topbar { padding:10px 14px; } .topbar-meta { display:none; } .workspace { grid-template-columns:1fr; } .sidebar { border-right:0; border-bottom:1px solid var(--line); } .map-wrap, #map { min-height:68vh; } }
+    @page{size:A3 landscape;margin:8mm}
+    @media print {
+      html, body { width:100%; height:auto; background:#fff; }
+      .app { min-height:0; }
+      .topbar { min-height:17mm; padding:1mm 3mm; border-bottom:1px solid #9da9aa; }
+      .brand-mark, .brand-mark img { width:13mm; height:13mm; }
+      .brand strong { font-size:15pt; } .brand small, .topbar-meta { font-size:7pt; }
+      .workspace { display:block; }
+      .sidebar { padding:3mm; border:0; background:#fff; }
+      h1 { font-size:18pt; } .intro { margin:1mm 0 2mm; font-size:8pt; }
+      .filter-grid, .actions, .status, .note, .error-panel { display:none !important; }
+      h2 { margin:2mm 0 1mm; font-size:9pt; }
+      .active-filters, .legend { padding:2mm; border-radius:0; font-size:8pt; }
+      .legend { display:flex; flex-wrap:wrap; gap:3mm 6mm; }
+      .map-wrap, #map { height:250mm !important; min-height:250mm !important; page-break-inside:avoid; }
+      .map-overlay { top:3mm; left:3mm; padding:2mm; font-size:8pt; }
+      .leaflet-control-zoom { display:none; }
+      .leaflet-control-attribution { font-size:6pt !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark" aria-label="Герб САО"><img src="../sao-coa.png" alt="Герб Северного административного округа Москвы"></span><span><strong>Городской атлас САО</strong><small>Печатная форма · дворы и объекты</small></span></div>
+      <div class="topbar-meta">A3 · альбомная ориентация</div>
+    </header>
+    <main class="workspace">
+      <aside class="sidebar">
+        <div class="panel-heading"><div><span class="eyebrow">ПЕЧАТНАЯ КАРТА</span><h1>Дворы САО</h1></div></div>
+        <p class="intro">Выберите район и участок. Ссылка в адресной строке обновится — её можно передать коллегам.</p>
+        <div class="filter-grid">
+          <div><label for="districtSelect">Район</label><select id="districtSelect"><option value="">Все районы</option></select></div>
+          <div><label for="sectionSelect">Участок</label><select id="sectionSelect"><option value="">Все участки</option></select></div>
+        </div>
+        <div class="actions"><button id="printButton" class="printbtn" type="button">Печать / PDF A3</button><a class="back-link" href="../">К интерактивной карте</a></div>
+        <h2>Активный охват</h2><div id="activeFilters" class="active-filters">Все районы · все участки</div>
+        <div id="status" class="status">Загрузка данных GeoJSON…</div>
+        <div id="errorPanel" class="error-panel" role="alert"></div>
+        <h2>Легенда</h2><div class="legend"><div class="legend-row"><i class="swatch yards"></i>Границы дворов</div><div class="legend-row"><i class="swatch"></i>МНО</div><div class="legend-row"><i class="swatch dp"></i>Детские площадки</div><div class="legend-row"><i class="swatch sp"></i>Спортивные площадки</div></div>
+        <p id="dataDate" class="note"></p>
+      </aside>
+      <section class="map-wrap" aria-label="Карта дворов и объектов"><div id="map"></div><div class="map-overlay"><b>ПЕЧАТНАЯ КАРТА САО</b><span id="mapCaption">Все районы · все участки</span></div></section>
+    </main>
+  </div>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script>
+    function parsePrintFilters(search) {
+      const params = new URLSearchParams(search);
+      return { district: params.get("district") || "", section: params.get("section") || "" };
+    }
+    function matchesPrintFilter(properties, filters) {
+      return (!filters.district || properties.district === filters.district)
+        && (!filters.section || properties.section === filters.section);
+    }
+
+    if (location.hostname === "localhost") {
+      console.assert(parsePrintFilters("?district=Войковский&section=Участок%201").district === "Войковский");
+      console.assert(matchesPrintFilter({district:"Войковский",section:"Участок 1"},{district:"Войковский",section:"Участок 1"}));
+      console.assert(!matchesPrintFilter({district:"Аэропорт",section:"Участок 1"},{district:"Войковский",section:""}));
+    }
+
+    const SOURCES = [
+      { url:"../areas.geojson", label:"границы дворов", style:{ color:"#0d827c", weight:1.15, fillColor:"#0d827c", fillOpacity:.10 } },
+      { url:"../mno.geojson", label:"МНО", pointColor:"#e67e22" },
+      { url:"../dp.geojson", label:"детские площадки", pointColor:"#2877c9" },
+      { url:"../sp.geojson", label:"спортивные площадки", pointColor:"#23935e" }
+    ];
+    const districtSelect = document.getElementById("districtSelect");
+    const sectionSelect = document.getElementById("sectionSelect");
+    const status = document.getElementById("status");
+    const errorPanel = document.getElementById("errorPanel");
+    const activeFilters = document.getElementById("activeFilters");
+    const mapCaption = document.getElementById("mapCaption");
+    let datasets = [];
+    let map;
+    let mapLayers = [];
+
+    function textForFilters(filters) { return `${filters.district || "Все районы"} · ${filters.section || "все участки"}`; }
+    function updateUrl() {
+      const url = new URL(location.href);
+      if (districtSelect.value) url.searchParams.set("district", districtSelect.value); else url.searchParams.delete("district");
+      if (sectionSelect.value) url.searchParams.set("section", sectionSelect.value); else url.searchParams.delete("section");
+      history.replaceState({}, "", url);
+    }
+    function populateSelect(select, values, placeholder, selected) {
+      select.innerHTML = `<option value="">${placeholder}</option>`;
+      values.forEach(value => { const option = document.createElement("option"); option.value = value; option.textContent = value; option.selected = value === selected; select.append(option); });
+    }
+    function updateSectionOptions() {
+      const district = districtSelect.value;
+      const sections = new Set();
+      datasets.forEach(data => data.features.forEach(feature => { const p = feature.properties || {}; if ((!district || p.district === district) && p.section) sections.add(p.section); }));
+      const wanted = sectionSelect.value;
+      populateSelect(sectionSelect, [...sections].sort((a,b) => a.localeCompare(b, "ru")), "Все участки", sections.has(wanted) ? wanted : "");
+    }
+    function pointStyle(feature, latlng, color) { return L.circleMarker(latlng, { radius:4, color:"#fff", weight:1, fillColor:color, fillOpacity:.95 }); }
+    function popup(feature) { const p = feature.properties || {}; return `<strong>${p.name || "Объект"}</strong><br>${p.district || ""}${p.section ? ` · ${p.section}` : ""}`; }
+    function render() {
+      const filters = { district:districtSelect.value, section:sectionSelect.value };
+      mapLayers.forEach(layer => map.removeLayer(layer)); mapLayers = [];
+      const bounds = [];
+      let visible = 0;
+      datasets.forEach((data, index) => {
+        const source = SOURCES[index];
+        const filtered = { type:"FeatureCollection", features:data.features.filter(feature => matchesPrintFilter(feature.properties || {}, filters)) };
+        visible += filtered.features.length;
+        const layer = L.geoJSON(filtered, {
+          style: source.style,
+          pointToLayer: source.pointColor ? (feature, latlng) => pointStyle(feature, latlng, source.pointColor) : undefined,
+          onEachFeature: (feature, child) => child.bindPopup(popup(feature))
+        }).addTo(map);
+        mapLayers.push(layer);
+        if (filtered.features.length) bounds.push(layer.getBounds());
+      });
+      const validBounds = bounds.filter(bound => bound.isValid());
+      if (validBounds.length) map.fitBounds(validBounds.reduce((all, bound) => all.extend(bound), validBounds[0]), { padding:[28,28], maxZoom:16 });
+      activeFilters.innerHTML = `<strong>${textForFilters(filters)}</strong><br>Показано объектов: ${visible.toLocaleString("ru-RU")}`;
+      mapCaption.textContent = textForFilters(filters);
+      status.textContent = `На карте: ${visible.toLocaleString("ru-RU")} объектов`;
+    }
+    function onFilterChange(changedDistrict) {
+      if (changedDistrict) updateSectionOptions();
+      updateUrl(); render();
+    }
+    async function loadData() {
+      try {
+        const responses = await Promise.all(SOURCES.map(async source => {
+          let response;
+          try { response = await fetch(source.url); } catch (error) { throw new Error(`${source.url}: ${error.message}`); }
+          if (!response.ok) throw new Error(`${source.url}: HTTP ${response.status}`);
+          try { return await response.json(); } catch { throw new Error(`${source.url}: не удалось прочитать GeoJSON`); }
+        }));
+        datasets = responses;
+        const initial = parsePrintFilters(location.search);
+        const districts = new Set();
+        datasets.forEach(data => data.features.forEach(feature => { if (feature.properties?.district) districts.add(feature.properties.district); }));
+        populateSelect(districtSelect, [...districts].sort((a,b) => a.localeCompare(b, "ru")), "Все районы", initial.district);
+        updateSectionOptions();
+        if (initial.section && [...sectionSelect.options].some(option => option.value === initial.section)) sectionSelect.value = initial.section;
+        render();
+      } catch (error) {
+        const message = `Не удалось загрузить данные: ${error.message}`;
+        errorPanel.textContent = message; errorPanel.style.display = "block"; status.textContent = message;
+      }
+    }
+    function initializeMap() {
+      if (!window.L) { errorPanel.textContent = "Не удалось загрузить карту Leaflet."; errorPanel.style.display = "block"; return; }
+      map = L.map("map", { zoomControl:true }).setView([55.84, 37.54], 11);
+      L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", { maxZoom:20, attribution:"&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors &copy; <a href=\"https://carto.com/attributions\">CARTO</a>" }).addTo(map);
+      loadData();
+    }
+    districtSelect.addEventListener("change", () => onFilterChange(true));
+    sectionSelect.addEventListener("change", () => onFilterChange(false));
+    document.getElementById("printButton").addEventListener("click", () => window.print());
+    initializeMap();
+  </script>
+</body>
+</html>
