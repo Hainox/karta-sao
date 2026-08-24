@@ -25,11 +25,7 @@ REQUIRED_DEFAULT_KEYS = frozenset({"boundary"})
 
 def _write_shell(source_dir: Path, destination: Path, source_name: str, mode: str) -> None:
     """Copy an already generated shell, or create a shell for a partial export."""
-    source = source_dir / source_name
-    if source.is_file():
-        shutil.copyfile(source, destination)
-    else:
-        destination.write_text(render_html([], mode=mode), encoding="utf-8")
+    # Browser layers are external; never copy legacy HTML with embedded GeoJSON.`r`n    destination.write_text(render_html([], mode=mode), encoding="utf-8")
 
 
 def build_publish_bundle(
@@ -102,3 +98,4 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
