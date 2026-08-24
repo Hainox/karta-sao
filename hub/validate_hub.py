@@ -2,7 +2,8 @@
 from pathlib import Path
 
 page = Path(__file__).with_name("index.html").read_text(encoding="utf-8")
-for required in ("Дворы и участки САО", "ОДХ и очередность", "../odh-map/", "map-frame", "history.replaceState"):
-    assert required in page, f"Missing hub element: {required}"
-assert page.count('class="map-card"') == 3
-print("Hub static checks: OK (3 map directions)")
+for route in ("../", "../odh-map/", "../yards-print/", "../odh-map/print-a3.html"):
+    assert route in page, f"Missing hub route: {route}"
+assert "<iframe" not in page
+assert page.count('class="map-card"') == 4
+print("Hub static checks: OK (4 map directions)")
