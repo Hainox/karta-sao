@@ -46,6 +46,17 @@
     .map-overlay { position:absolute; z-index:500; top:16px; left:16px; padding:10px 12px; border-radius:9px; background:rgba(16,38,54,.88); color:#fff; font-size:11px; pointer-events:none; }
     .map-overlay span { display:block; margin-top:3px; color:rgba(255,255,255,.75); }
     .leaflet-container { font-family:Arial,sans-serif; }
+    /* Leaflet ships 26–30px zoom links; make both controls accessible touch targets. */
+    .leaflet-control-zoom a {
+      display:grid !important;
+      place-items:center;
+      width:44px !important;
+      height:44px !important;
+      min-width:44px;
+      min-height:44px;
+      line-height:44px !important;
+      font-size:28px !important;
+    }
     @media (max-width:780px) { .topbar { padding:10px 14px; } .topbar-meta { display:none; } .workspace { grid-template-columns:1fr; } .sidebar { border-right:0; border-bottom:1px solid var(--line); } .map-wrap, #map { min-height:68vh; } }
     @page{size:A3 landscape;margin:8mm}
     @media print {
