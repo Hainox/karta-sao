@@ -72,7 +72,8 @@
     .app { display:flex; flex-direction:column; width:100%; height:100vh; overflow:hidden; }
     .topbar { z-index:5; display:flex; align-items:center; justify-content:space-between; min-height:62px; padding:0 22px; background:var(--paper); border-bottom:1px solid var(--line); }
     .brand { display:flex; align-items:center; gap:10px; letter-spacing:-.02em; }
-    .brand-mark { display:grid; place-items:center; width:36px; height:36px; border-radius:10px; background:var(--ink); color:#f5c86a; font-size:10px; font-weight:800; letter-spacing:.04em; }
+    .brand-mark { display:grid; place-items:center; flex:0 0 42px; width:42px; height:42px; overflow:hidden; border-radius:10px; background:var(--paper); }
+    .brand-mark img { display:block; width:42px; height:42px; object-fit:contain; mix-blend-mode:multiply; }
     .brand strong { display:block; font-size:15px; line-height:1.1; }
     .brand small { display:block; margin-top:3px; color:var(--muted); font-size:10px; letter-spacing:.08em; text-transform:uppercase; }
     .topbar-meta { display:flex; align-items:center; gap:8px; color:#5a6a73; font-size:11px; }
@@ -142,7 +143,7 @@
 <body>
   <div class="app">
     <header class="topbar">
-      <div class="brand"><span class="brand-mark">САО</span><span><strong>Городской атлас</strong><small>Районы · участки · объекты</small></span></div>
+      <div class="brand"><span class="brand-mark"><img src="sao-coa.png" alt="Герб Северного административного округа Москвы"></span><span><strong>Городской атлас САО</strong><small>Районы · участки · объекты</small></span></div>
       <div class="topbar-meta"><span class="live-dot"></span><span>Данные доступны онлайн</span></div>
     </header>
     <main class="workspace">
