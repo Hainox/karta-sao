@@ -22,6 +22,7 @@ SPECS = (
     LayerSpec("sao_pgm_containers_wgs84.geojson", "pgm", "Контейнеры ПГМ (215 привязок к ОДХ; всего 451 шт.)", "#c05600", False, 451, "Точки — представители геометрии ОДХ, а не точные координаты контейнеров."),
     LayerSpec("sao_snow_storage_sites_wgs84.geojson", "snow", "Временное складирование снега (27 кандидатов, 2025–2026)", "#039be5", False, 27, "Адреса из плана-графика; геокодерные кандидаты требуют служебной сверки."),
     LayerSpec("sao_state_healthcare_confirmed_wgs84.geojson", "healthcare", "Государственные учреждения здравоохранения (10 подтверждено)", "#c62828", True, 10, "Адрес и статус подтверждены официальным источником; координаты — геокодированные точки."),
+    LayerSpec("sao_fire_hydrants_address_centroids_wgs84.geojson", "hydrants", "Пожарные гидранты (24 адресных центроида)", "#d32f2f", False, 24, "Временная адресная привязка; требуется служебная сверка точных координат гидрантов."),
 )
 
 
@@ -41,7 +42,7 @@ def symbol_svg(kind: str, color: str) -> str:
     """Return the approved inline SVG used by thematic ODH point markers."""
     icon = {
         "wave1": "road", "remaining": "road", "pgm": "container",
-        "snow": "snowflake", "healthcare": "medical",
+        "snow": "snowflake", "healthcare": "medical", "hydrants": "hydrant",
     }[kind]
     common = f'data-kind="{icon}" viewBox="0 0 24 24" aria-hidden="true" style="--symbol-color:{color}"'
     if icon == "road":
