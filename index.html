@@ -405,8 +405,8 @@
     }
 
     function showDetails(item) {
-      const labels = {address:'Адрес', source_address:'Адрес-источник', container_count:'Количество контейнеров', purpose:'Назначение', ownership:'Собственник'};
-      const allowed = ['address','source_address','container_count','purpose','ownership'];
+      const labels = {address:'Адрес', source_address:'Адрес-источник', container_count:'Количество контейнеров', purpose:'Назначение', ownership:'Собственник', 'Начальник участка':'Начальник участка', 'Телефон начальника участка':'Телефон начальника участка'};
+      const allowed = ['address','source_address','container_count','purpose','ownership','Начальник участка','Телефон начальника участка'];
       const extra = Object.entries(item.properties).filter(([key]) => allowed.includes(key)).map(([key,value]) => `<div><strong>${labels[key]}:</strong> ${escapeHtml(value)}</div>`).join('');
       $('details').innerHTML = `<div><strong>${escapeHtml(item.name)}</strong></div><div>Район: <strong>${escapeHtml(item.district)}</strong></div><div>Участок: <strong>${escapeHtml(item.section)}</strong></div>${extra}`;
     }
