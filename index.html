@@ -110,7 +110,7 @@
     .details-block, .legend-block { margin-top:22px; }
     .details { min-height:74px; max-height:245px; overflow:auto; padding:12px; border:1px solid var(--line); border-radius:10px; background:#fbfcfa; color:#50636b; font-size:11px; line-height:1.55; }
     .details strong { color:var(--ink); }
-    .legend { display:grid; gap:7px; }
+    .yard-legend summary{display:flex;justify-content:space-between;align-items:center;min-height:44px;cursor:pointer;font-weight:700;list-style:none}.yard-legend summary::-webkit-details-marker{display:none}.yard-legend summary:before{content:"▸";margin-right:7px;color:var(--accent)}.yard-legend[open] summary:before{content:"▾"}.yard-legend summary span{margin-left:auto;color:#91a0a6;font-size:10px;text-transform:uppercase;letter-spacing:.08em}.yard-legend[open] summary span{font-size:0}.yard-legend[open] summary span:after{content:"скрыть";font-size:10px}.legend { display:grid; gap:7px; }
     .legend-district { padding:10px; border:1px solid var(--line); border-radius:10px; background:#fff; }
     .legend-title { margin-bottom:7px; color:var(--ink); font-size:11px; font-weight:800; }
     .legend-row { min-height:22px; }
@@ -166,7 +166,7 @@
         <div class="panel-actions"><a class="printbtn" href="yards-print/">Печать / PDF A3</a><label class="file-label" for="geojsonInput"><span>＋</span> Загрузить GeoJSON</label><input id="geojsonInput" type="file" accept=".geojson,.json,application/geo+json,application/json" /></div>
 
         <section class="details-block"><div class="section-head"><h2>Карточка объекта</h2><span class="hint">по клику</span></div><div id="details" class="details">Выберите объект на карте — здесь появятся его данные.</div></section>
-        <section class="legend-block"><div class="section-head"><h2>Легенда участков</h2><span class="hint">по районам</span></div><div id="legend" class="legend"></div></section>
+        <section class="legend-block"><details class="yard-legend"><summary>Легенда участков <span>показать</span></summary><div id="legend" class="legend"></div></details></section>
       </aside>
       <section class="map-wrap"><div id="map"></div><div class="map-overlay"><span class="map-overlay-title">ИНТЕРАКТИВНАЯ КАРТА</span><span>Нажмите на объект, чтобы открыть сведения</span></div><div class="map-credit">Яндекс Карты · САО</div></section>
     </main>
