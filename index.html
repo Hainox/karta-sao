@@ -404,11 +404,11 @@
       $('status').textContent = `Показано объектов: ${visible}. Загружено: ${enabled}.`;
     }
 
-    function showDetails(item, coordinates) {
-      const extra = Object.entries(item.properties)
-        .filter(([key]) => !['district', 'район', 'District', 'Rayon', 'section', 'участок', 'Section', 'Uchastok', 'name', 'название', 'Name'].includes(key))
-        .map(([key, value]) => `<div><strong>${escapeHtml(key)}:</strong> ${escapeHtml(value)}</div>`).join('');
-      $('details').innerHTML = `<div><strong>${escapeHtml(item.name)}</strong></div><div>Район: <strong>${escapeHtml(item.district)}</strong></div><div>Участок: <strong>${escapeHtml(item.section)}</strong></div><div>Цвет: <strong>${item.color}</strong> (${escapeHtml(item.colorName)})</div>${coordinates ? `<div>Координаты клика: ${coordinates.map((value) => Number(value).toFixed(6)).join(', ')}</div>` : ''}${extra}`;
+    function showDetails(item) {
+      const labels = {address:'Адрес', source_address:'Адрес-источник', container_count:'Количество контейнеров', purpose:'Назначение', ownership:'Собственник'};
+      const allowed = ['address','source_address','container_count','purpose','ownership'];
+      const extra = Object.entries(item.properties).filter(([key]) => allowed.includes(key)).map(([key,value]) => `<div><strong>${labels[key]}:</strong> ${escapeHtml(value)}</div>`).join('');
+      $('details').innerHTML = `<div><strong>${escapeHtml(item.name)}</strong></div><div>Район: <strong>${escapeHtml(item.district)}</strong></div><div>Участок: <strong>${escapeHtml(item.section)}</strong></div>${extra}`;
     }
 
     async function createMapFeatures(records) {
