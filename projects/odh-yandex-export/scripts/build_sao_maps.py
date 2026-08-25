@@ -51,6 +51,8 @@ def symbol_svg(kind: str, color: str) -> str:
         path = '<rect x="6" y="4" width="12" height="16" rx="2.2"/><path d="M6 9H18M6 14H18"/>'
     elif icon == "snowflake":
         path = '<path d="M12 2V22M4.4 7L19.6 17M19.6 7L4.4 17"/><path d="M12 2L9.6 4.4M12 2L14.4 4.4M12 22L9.6 19.6M12 22L14.4 19.6M4.4 7V9.8M4.4 7L7 6.1M19.6 17V14.2M19.6 17L17 17.9M19.6 7V9.8M19.6 7L17 6.1M4.4 17V14.2M4.4 17L7 17.9"/>'
+    elif icon == "hydrant":
+        path = '<path d="M7 21h10M9 21V11h6v10M7 11h10M12 11V5M9 5h6M6 14H3M18 14h3"/><circle cx="12" cy="5" r="2.2"/>'
     else:
         path = '<rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><path d="M12 7.5V16.5M7.5 12H16.5"/>'
     return f'<svg {common} fill="none" stroke="var(--symbol-color)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">{path}</svg>'
