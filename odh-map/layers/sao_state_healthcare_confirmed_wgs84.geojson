@@ -371,6 +371,121 @@
         "official_source": "https://gkb-24.ru/about-hospital/faq",
         "official_evidence": "Стационар ГБУЗ «ГКБ №24»: ул. Писцовая, д. 10."
       }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5815778,
+          55.7941049
+        ]
+      },
+      "properties": {
+        "name": "ГБУЗ «Городская поликлиника № 6 ДЗМ», филиал №1",
+        "address": "Москва, 1-я Квесисская улица, 8",
+        "coordinate_status": "Адресный центроид",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%93%D0%91%D0%A3%D0%97+%C2%AB%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F+%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0+%E2%84%96+6+%D0%94%D0%97%D0%9C%C2%BB%2C+%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB+%E2%84%961%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+1-%D1%8F+%D0%9A%D0%B2%D0%B5%D1%81%D0%B8%D1%81%D1%81%D0%BA%D0%B0%D1%8F+%D1%83%D0%BB%D0%B8%D1%86%D0%B0%2C+8",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%93%D0%91%D0%A3%D0%97+%C2%AB%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F+%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0+%E2%84%96+6+%D0%94%D0%97%D0%9C%C2%BB%2C+%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB+%E2%84%961%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+1-%D1%8F+%D0%9A%D0%B2%D0%B5%D1%81%D0%B8%D1%81%D1%81%D0%BA%D0%B0%D1%8F+%D1%83%D0%BB%D0%B8%D1%86%D0%B0%2C+8",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%93%D0%91%D0%A3%D0%97+%C2%AB%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F+%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0+%E2%84%96+6+%D0%94%D0%97%D0%9C%C2%BB%2C+%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB+%E2%84%961%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+1-%D1%8F+%D0%9A%D0%B2%D0%B5%D1%81%D0%B8%D1%81%D1%81%D0%BA%D0%B0%D1%8F+%D1%83%D0%BB%D0%B8%D1%86%D0%B0%2C+8",
+        "facility_type": "Городская поликлиника",
+        "ownership": "ГБУЗ города Москвы",
+        "verification_status": "Подтверждено официальным сайтом учреждения",
+        "official_source": "https://gp6.moscow/contacts/",
+        "official_evidence": "Филиал №1: 1-я Квесисская ул., д. 8."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5250676,
+          55.8366056
+        ]
+      },
+      "properties": {
+        "name": "ГБУЗ «Городская поликлиника № 6 ДЗМ», филиал №2",
+        "address": "Москва, 3-й Михалковский переулок, 22",
+        "coordinate_status": "Адресный центроид",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%93%D0%91%D0%A3%D0%97+%C2%AB%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F+%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0+%E2%84%96+6+%D0%94%D0%97%D0%9C%C2%BB%2C+%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB+%E2%84%962%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+3-%D0%B9+%D0%9C%D0%B8%D1%85%D0%B0%D0%BB%D0%BA%D0%BE%D0%B2%D1%81%D0%BA%D0%B8%D0%B9+%D0%BF%D0%B5%D1%80%D0%B5%D1%83%D0%BB%D0%BE%D0%BA%2C+22",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%93%D0%91%D0%A3%D0%97+%C2%AB%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F+%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0+%E2%84%96+6+%D0%94%D0%97%D0%9C%C2%BB%2C+%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB+%E2%84%962%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+3-%D0%B9+%D0%9C%D0%B8%D1%85%D0%B0%D0%BB%D0%BA%D0%BE%D0%B2%D1%81%D0%BA%D0%B8%D0%B9+%D0%BF%D0%B5%D1%80%D0%B5%D1%83%D0%BB%D0%BE%D0%BA%2C+22",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%93%D0%91%D0%A3%D0%97+%C2%AB%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F+%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0+%E2%84%96+6+%D0%94%D0%97%D0%9C%C2%BB%2C+%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB+%E2%84%962%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+3-%D0%B9+%D0%9C%D0%B8%D1%85%D0%B0%D0%BB%D0%BA%D0%BE%D0%B2%D1%81%D0%BA%D0%B8%D0%B9+%D0%BF%D0%B5%D1%80%D0%B5%D1%83%D0%BB%D0%BE%D0%BA%2C+22",
+        "facility_type": "Городская поликлиника",
+        "ownership": "ГБУЗ города Москвы",
+        "verification_status": "Подтверждено официальным сайтом учреждения",
+        "official_source": "https://gp6.moscow/contacts/",
+        "official_evidence": "Филиал №2: 3-й Михалковский переулок, д. 22."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5428429,
+          55.8394815
+        ]
+      },
+      "properties": {
+        "name": "ГБУЗ «Городская поликлиника № 6 ДЗМ», филиал №3",
+        "address": "Москва, 3-й Новомихалковский проезд, 3А, строение 1",
+        "coordinate_status": "Адресный центроид",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%93%D0%91%D0%A3%D0%97+%C2%AB%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F+%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0+%E2%84%96+6+%D0%94%D0%97%D0%9C%C2%BB%2C+%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB+%E2%84%963%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+3-%D0%B9+%D0%9D%D0%BE%D0%B2%D0%BE%D0%BC%D0%B8%D1%85%D0%B0%D0%BB%D0%BA%D0%BE%D0%B2%D1%81%D0%BA%D0%B8%D0%B9+%D0%BF%D1%80%D0%BE%D0%B5%D0%B7%D0%B4%2C+3%D0%90%2C+%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5+1",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%93%D0%91%D0%A3%D0%97+%C2%AB%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F+%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0+%E2%84%96+6+%D0%94%D0%97%D0%9C%C2%BB%2C+%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB+%E2%84%963%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+3-%D0%B9+%D0%9D%D0%BE%D0%B2%D0%BE%D0%BC%D0%B8%D1%85%D0%B0%D0%BB%D0%BA%D0%BE%D0%B2%D1%81%D0%BA%D0%B8%D0%B9+%D0%BF%D1%80%D0%BE%D0%B5%D0%B7%D0%B4%2C+3%D0%90%2C+%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5+1",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%93%D0%91%D0%A3%D0%97+%C2%AB%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F+%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0+%E2%84%96+6+%D0%94%D0%97%D0%9C%C2%BB%2C+%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB+%E2%84%963%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+3-%D0%B9+%D0%9D%D0%BE%D0%B2%D0%BE%D0%BC%D0%B8%D1%85%D0%B0%D0%BB%D0%BA%D0%BE%D0%B2%D1%81%D0%BA%D0%B8%D0%B9+%D0%BF%D1%80%D0%BE%D0%B5%D0%B7%D0%B4%2C+3%D0%90%2C+%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5+1",
+        "facility_type": "Городская поликлиника",
+        "ownership": "ГБУЗ города Москвы",
+        "verification_status": "Подтверждено официальным сайтом учреждения",
+        "official_source": "https://gp6.moscow/contacts/",
+        "official_evidence": "Филиал №3: 3-й Новомихалковский проезд, д. 3А, стр. 1."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5646994,
+          55.8232559
+        ]
+      },
+      "properties": {
+        "name": "ГБУЗ «Городская поликлиника № 6 ДЗМ», филиал №4",
+        "address": "Москва, улица Немчинова, 14",
+        "coordinate_status": "Адресный центроид",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%93%D0%91%D0%A3%D0%97+%C2%AB%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F+%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0+%E2%84%96+6+%D0%94%D0%97%D0%9C%C2%BB%2C+%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB+%E2%84%964%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+%D1%83%D0%BB%D0%B8%D1%86%D0%B0+%D0%9D%D0%B5%D0%BC%D1%87%D0%B8%D0%BD%D0%BE%D0%B2%D0%B0%2C+14",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%93%D0%91%D0%A3%D0%97+%C2%AB%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F+%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0+%E2%84%96+6+%D0%94%D0%97%D0%9C%C2%BB%2C+%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB+%E2%84%964%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+%D1%83%D0%BB%D0%B8%D1%86%D0%B0+%D0%9D%D0%B5%D0%BC%D1%87%D0%B8%D0%BD%D0%BE%D0%B2%D0%B0%2C+14",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%93%D0%91%D0%A3%D0%97+%C2%AB%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F+%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0+%E2%84%96+6+%D0%94%D0%97%D0%9C%C2%BB%2C+%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB+%E2%84%964%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+%D1%83%D0%BB%D0%B8%D1%86%D0%B0+%D0%9D%D0%B5%D0%BC%D1%87%D0%B8%D0%BD%D0%BE%D0%B2%D0%B0%2C+14",
+        "facility_type": "Городская поликлиника",
+        "ownership": "ГБУЗ города Москвы",
+        "verification_status": "Подтверждено официальным сайтом учреждения",
+        "official_source": "https://gp6.moscow/contacts/",
+        "official_evidence": "Филиал №4: ул. Немчинова, д. 14."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5608069,
+          55.8009753
+        ]
+      },
+      "properties": {
+        "name": "ГБУЗ «Городская поликлиника № 6 ДЗМ», филиал №5",
+        "address": "Москва, улица Юннатов, 12",
+        "coordinate_status": "Адресный центроид",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%93%D0%91%D0%A3%D0%97+%C2%AB%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F+%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0+%E2%84%96+6+%D0%94%D0%97%D0%9C%C2%BB%2C+%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB+%E2%84%965%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+%D1%83%D0%BB%D0%B8%D1%86%D0%B0+%D0%AE%D0%BD%D0%BD%D0%B0%D1%82%D0%BE%D0%B2%2C+12",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%93%D0%91%D0%A3%D0%97+%C2%AB%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F+%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0+%E2%84%96+6+%D0%94%D0%97%D0%9C%C2%BB%2C+%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB+%E2%84%965%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+%D1%83%D0%BB%D0%B8%D1%86%D0%B0+%D0%AE%D0%BD%D0%BD%D0%B0%D1%82%D0%BE%D0%B2%2C+12",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%93%D0%91%D0%A3%D0%97+%C2%AB%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F+%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0+%E2%84%96+6+%D0%94%D0%97%D0%9C%C2%BB%2C+%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB+%E2%84%965%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+%D1%83%D0%BB%D0%B8%D1%86%D0%B0+%D0%AE%D0%BD%D0%BD%D0%B0%D1%82%D0%BE%D0%B2%2C+12",
+        "facility_type": "Городская поликлиника",
+        "ownership": "ГБУЗ города Москвы",
+        "verification_status": "Подтверждено официальным сайтом учреждения",
+        "official_source": "https://gp6.moscow/contacts/",
+        "official_evidence": "Филиал №5: ул. Юннатов, д. 12."
+      }
     }
   ]
 }

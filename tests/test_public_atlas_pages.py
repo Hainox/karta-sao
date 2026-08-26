@@ -43,3 +43,28 @@ def test_odh_point_symbols_stay_within_sao_boundary_and_dry_snow_dumps_are_publi
         "пр-д Черепановых, вл. 2-6",
         "Машкинское ш., вл. 38",
     }
+
+
+def test_healthcare_layer_has_only_officially_confirmed_points_and_expected_gp6_branches():
+    """Public healthcare points require a first-party source and readable Russian labels."""
+    layer_dir = Path("odh-map/layers")
+    confirmed = json.loads((layer_dir / "sao_state_healthcare_confirmed_wgs84.geojson").read_text(encoding="utf-8"))
+    assert len(confirmed["features"]) == 20
+    for feature in confirmed["features"]:
+        props = feature["properties"]
+        assert props.get("official_source", "").startswith("https://")
+        assert "_" not in " ".join(str(value) for value in props.values())
+
+    gp6 = {
+        feature["properties"]["address"]
+        for feature in confirmed["features"]
+        if "\u0413\u043e\u0440\u043e\u0434\u0441\u043a\u0430\u044f \u043f\u043e\u043b\u0438\u043a\u043b\u0438\u043d\u0438\u043a\u0430 \u2116 6" in feature["properties"].get("name", "")
+    }
+    assert gp6 == {
+        "\u041c\u043e\u0441\u043a\u0432\u0430, \u0443\u043b\u0438\u0446\u0430 \u0412\u0443\u0447\u0435\u0442\u0438\u0447\u0430, 7\u0411",
+        "\u041c\u043e\u0441\u043a\u0432\u0430, 1-\u044f \u041a\u0432\u0435\u0441\u0438\u0441\u0441\u043a\u0430\u044f \u0443\u043b\u0438\u0446\u0430, 8",
+        "\u041c\u043e\u0441\u043a\u0432\u0430, 3-\u0439 \u041c\u0438\u0445\u0430\u043b\u043a\u043e\u0432\u0441\u043a\u0438\u0439 \u043f\u0435\u0440\u0435\u0443\u043b\u043e\u043a, 22",
+        "\u041c\u043e\u0441\u043a\u0432\u0430, 3-\u0439 \u041d\u043e\u0432\u043e\u043c\u0438\u0445\u0430\u043b\u043a\u043e\u0432\u0441\u043a\u0438\u0439 \u043f\u0440\u043e\u0435\u0437\u0434, 3\u0410, \u0441\u0442\u0440\u043e\u0435\u043d\u0438\u0435 1",
+        "\u041c\u043e\u0441\u043a\u0432\u0430, \u0443\u043b\u0438\u0446\u0430 \u041d\u0435\u043c\u0447\u0438\u043d\u043e\u0432\u0430, 14",
+        "\u041c\u043e\u0441\u043a\u0432\u0430, \u0443\u043b\u0438\u0446\u0430 \u042e\u043d\u043d\u0430\u0442\u043e\u0432, 12",
+    }
