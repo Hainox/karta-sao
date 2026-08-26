@@ -68,3 +68,21 @@ def test_healthcare_layer_has_only_officially_confirmed_points_and_expected_gp6_
         "\u041c\u043e\u0441\u043a\u0432\u0430, \u0443\u043b\u0438\u0446\u0430 \u041d\u0435\u043c\u0447\u0438\u043d\u043e\u0432\u0430, 14",
         "\u041c\u043e\u0441\u043a\u0432\u0430, \u0443\u043b\u0438\u0446\u0430 \u042e\u043d\u043d\u0430\u0442\u043e\u0432, 12",
     }
+
+
+def test_first_queue_is_fixed_at_97_and_excludes_cascade_duplicates():
+    """The 56 cascade matches are duplicate references, not extra first-queue objects."""
+    layer_dir = Path("odh-map/layers")
+    manifest = json.loads((Path("odh-map") / "layers.json").read_text(encoding="utf-8"))
+    queue1 = next(layer for layer in manifest["layers"] if layer["key"] == "queue1")
+    assert "97" in queue1["name"]
+    assert "153" not in queue1["name"]
+
+    data = json.loads((layer_dir / "sao_queue1_wgs84.geojson").read_text(encoding="utf-8"))
+    queue_sources = {feature["properties"].get("queue_source") for feature in data["features"]}
+    assert len(queue_sources) == 1
+    assert "97" in next(iter(queue_sources))
+    assert len({feature["properties"]["id"] for feature in data["features"]}) <= 97
+
+    assert "489" in next(layer for layer in manifest["layers"] if layer["key"] == "queue2")["name"]
+    assert "46" in next(layer for layer in manifest["layers"] if layer["key"] == "queue3")["name"]
