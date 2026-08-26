@@ -22,4 +22,4 @@ def test_generated_map_uses_div_icons_not_circle_markers_and_has_attribution():
     assert "L.circleMarker" not in markup
     assert "L.divIcon" in markup
     assert "© OpenStreetMap contributors" in markup
-    assert "© CARTO" in markup
+    assert "tile.openstreetmap.org" in markup

@@ -19,7 +19,7 @@ def test_interactive_markup_includes_compact_osm_carto_attribution():
  markup=render_html([],mode='interactive')
  assert 'class="map-attribution"' in markup
  assert 'https://www.openstreetmap.org/copyright' in markup
- assert 'https://carto.com/attributions' in markup
+ assert 'tile.openstreetmap.org' in markup
 
 
 def test_odh_shell_fetches_manifest_and_displays_retryable_load_status():
