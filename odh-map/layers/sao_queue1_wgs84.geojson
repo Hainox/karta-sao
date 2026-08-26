@@ -426013,26 +426013,6 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          37.568,
-          55.8817
-        ]
-      },
-      "properties": {
-        "id": "marker-wave1-53",
-        "name": "Площадка у платформы «Бескудниково» и пешеходная дорожка к Керамическому проезду",
-        "wave": "1",
-        "feature_kind": "location_marker",
-        "source_list_number": "53",
-        "warning": "Ориентир МЦД Бескудниково; точечный маркер, не граница ОДХ или ТПУ.",
-        "color": "#e53935",
-        "queue_source": "Исходный список 1-й очереди (97 позиций)"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
           37.476812,
           55.8548129
         ]

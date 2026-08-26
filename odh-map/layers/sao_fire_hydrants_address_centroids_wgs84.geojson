@@ -1,1 +1,461 @@
-{"type": "FeatureCollection", "features": [{"type": "Feature", "geometry": {"type": "Point", "coordinates": [37.509714354909, 55.789933445564]}, "properties": {"number": 1, "name": "Пожарный гидрант №1", "organization": "ГБУ \"АВД САО\"", "address": "Куусинена 21", "coordinate_status": "Адресный центроид; требуется служебная сверка", "feature_kind": "hydrant", "geocoder": "ArcGIS World Geocoding"}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [37.529179210555, 55.899069982534]}, "properties": {"number": 2, "name": "Пожарный гидрант №2", "organization": "ГБУ \"АВД САО\"", "address": "Ижорская улица, 21 стр.2", "coordinate_status": "Адресный центроид; требуется служебная сверка", "feature_kind": "hydrant", "geocoder": "ArcGIS World Geocoding"}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [37.556181981646, 55.793023309611]}, "properties": {"number": 3, "name": "Пожарный гидрант №3", "organization": "ГБУ \"АВД САО\"", "address": "Дворцовая аллея", "coordinate_status": "Адресный центроид; требуется служебная сверка", "feature_kind": "hydrant", "geocoder": "ArcGIS World Geocoding"}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [37.55, 55.82]}, "properties": {"number": 4, "name": "Пожарный гидрант №4", "organization": "ГБУ \"АВД САО\"", "address": "Прибрежный проезд 12", "coordinate_status": "Адресный центроид; требуется служебная сверка", "feature_kind": "hydrant", "geocoder": "ArcGIS World Geocoding"}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [37.55, 55.82]}, "properties": {"number": 5, "name": "Пожарный гидрант №5", "organization": "ГБУ \"АВД САО\"", "address": "Дубнинская 81", "coordinate_status": "Адресный центроид; требуется служебная сверка", "feature_kind": "hydrant", "geocoder": "ArcGIS World Geocoding"}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [37.55, 55.82]}, "properties": {"number": 6, "name": "Пожарный гидрант №6", "organization": "ГБУ \"Жилищник района Аэропорт\"", "address": "Ленинградский проспект 40", "coordinate_status": "Адресный центроид; требуется служебная сверка", "feature_kind": "hydrant", "geocoder": "ArcGIS World Geocoding"}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [37.55, 55.82]}, "properties": {"number": 7, "name": "Пожарный гидрант №7", "organization": "ГБУ \"Жилищник района Беговой\"", "address": "Правая Дворцовая аллея, угол Трудовой аллеи", "coordinate_status": "Адресный центроид; требуется служебная сверка", "feature_kind": "hydrant", "geocoder": "ArcGIS World Geocoding"}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [37.538796606259, 55.87242470862]}, "properties": {"number": 8, "name": "Пожарный гидрант №8", "organization": "ГБУ \"Жилищник района Бескудниковский\"", "address": "Бескудниковский бульвар 57 к1", "coordinate_status": "Адресный центроид; требуется служебная сверка", "feature_kind": "hydrant", "geocoder": "ArcGIS World Geocoding"}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [37.503972641132, 55.828634036982]}, "properties": {"number": 9, "name": "Пожарный гидрант №9", "organization": "ГБУ \"Жилищник района Войковский\"", "address": "Новопетровский проезд, 40749", "coordinate_status": "Адресный центроид; требуется служебная сверка", "feature_kind": "hydrant", "geocoder": "ArcGIS World Geocoding"}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [37.55, 55.82]}, "properties": {"number": 10, "name": "Пожарный гидрант №10", "organization": "ГБУ \"Жилищник района Восточное Дегунино\"", "address": "Керамический проезд 53 к1", "coordinate_status": "Адресный центроид; требуется служебная сверка", "feature_kind": "hydrant", "geocoder": "ArcGIS World Geocoding"}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [37.55, 55.82]}, "properties": {"number": 11, "name": "Пожарный гидрант №11", "organization": "ГБУ \"Жилищник района Головинский\"", "address": "Кронштадтский бульвар 24 к1", "coordinate_status": "Адресный центроид; требуется служебная сверка", "feature_kind": "hydrant", "geocoder": "ArcGIS World Geocoding"}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [37.55, 55.82]}, "properties": {"number": 12, "name": "Пожарный гидрант №12", "organization": "ГБУ города Москвы \"Автомобильные дороги\"", "address": "Лихоборская набережная напротив дома 15", "coordinate_status": "Адресный центроид; требуется служебная сверка", "feature_kind": "hydrant", "geocoder": "ArcGIS World Geocoding"}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [37.528565132721, 55.898167715681]}, "properties": {"number": 13, "name": "Пожарный гидрант №13", "organization": "ГБУ \"Жилищник района Дмитровский\"", "address": "Ижорская улица 17/19", "coordinate_status": "Адресный центроид; требуется служебная сверка", "feature_kind": "hydrant", "geocoder": "ArcGIS World Geocoding"}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [37.55, 55.82]}, "properties": {"number": 14, "name": "Пожарный гидрант №14", "organization": "ГБУ \"Жилищник района Западное Дегунино\"", "address": "улица Ивана Сусанина 2", "coordinate_status": "Адресный центроид; требуется служебная сверка", "feature_kind": "hydrant", "geocoder": "ArcGIS World Geocoding"}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [37.534557961642, 55.817139519293]}, "properties": {"number": 15, "name": "Пожарный гидрант №15", "organization": "ГБУ \"Жилищник района Коптево\"", "address": "Новая Ипатовка вл.2а", "coordinate_status": "Адресный центроид; требуется служебная сверка", "feature_kind": "hydrant", "geocoder": "ArcGIS World Geocoding"}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [37.55, 55.82]}, "properties": {"number": 16, "name": "Пожарный гидрант №16", "organization": "ГБУ \"Жилищник района Левобережный\"", "address": "Прибрежный проезд 7", "coordinate_status": "Адресный центроид; требуется служебная сверка", "feature_kind": "hydrant", "geocoder": "ArcGIS World Geocoding"}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [37.55, 55.82]}, "properties": {"number": 17, "name": "Пожарный гидрант №17", "organization": "ГБУ \"Жилищник района Молжаниновский\"", "address": "Новосходненское шоссе 6А", "coordinate_status": "Адресный центроид; требуется служебная сверка", "feature_kind": "hydrant", "geocoder": "ArcGIS World Geocoding"}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [37.55, 55.82]}, "properties": {"number": 18, "name": "Пожарный гидрант №18", "organization": "ГБУ \"Жилищник района Савеловский\"", "address": "Петровско-Разумовский проезд 29 ст19", "coordinate_status": "Адресный центроид; требуется служебная сверка", "feature_kind": "hydrant", "geocoder": "ArcGIS World Geocoding"}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [37.55, 55.82]}, "properties": {"number": 19, "name": "Пожарный гидрант №19", "organization": "ГБУ \"Жилищник района Сокол\"", "address": "улица Зорге 19", "coordinate_status": "Адресный центроид; требуется служебная сверка", "feature_kind": "hydrant", "geocoder": "ArcGIS World Geocoding"}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [37.55, 55.82]}, "properties": {"number": 20, "name": "Пожарный гидрант №20", "organization": "ГБУ \"Жилищник района Тимирязевский\"", "address": "3-й Нижнелихоборский проезд 1 стр9", "coordinate_status": "Адресный центроид; требуется служебная сверка", "feature_kind": "hydrant", "geocoder": "ArcGIS World Geocoding"}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [37.55, 55.82]}, "properties": {"number": 21, "name": "Пожарный гидрант №21", "organization": "ГБУ \"Жилищник района Тимирязевский\"", "address": "Дмитровский проезд 1 с4", "coordinate_status": "Адресный центроид; требуется служебная сверка", "feature_kind": "hydrant", "geocoder": "ArcGIS World Geocoding"}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [37.55, 55.82]}, "properties": {"number": 22, "name": "Пожарный гидрант №22", "organization": "ГБУ \"Жилищник района Тимирязевский\"", "address": "Верхняя аллея 12Б", "coordinate_status": "Адресный центроид; требуется служебная сверка", "feature_kind": "hydrant", "geocoder": "ArcGIS World Geocoding"}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [37.55, 55.82]}, "properties": {"number": 23, "name": "Пожарный гидрант №23", "organization": "ГБУ \"Жилищник района Ховрино\"", "address": "Смольная улица 50", "coordinate_status": "Адресный центроид; требуется служебная сверка", "feature_kind": "hydrant", "geocoder": "ArcGIS World Geocoding"}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [37.55, 55.82]}, "properties": {"number": 24, "name": "Пожарный гидрант №24", "organization": "ГБУ \"Жилищник района Хорошевский\"", "address": "Куусинена 21", "coordinate_status": "Адресный центроид; требуется служебная сверка", "feature_kind": "hydrant", "geocoder": "ArcGIS World Geocoding"}}]}
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.509714354909,
+          55.789933445564
+        ]
+      },
+      "properties": {
+        "number": 1,
+        "name": "Пожарный гидрант №1",
+        "organization": "ГБУ \"АВД САО\"",
+        "address": "Куусинена 21",
+        "coordinate_status": "Адресный центроид; требуется служебная сверка",
+        "feature_kind": "hydrant",
+        "geocoder": "ArcGIS World Geocoding"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.529179210555,
+          55.899069982534
+        ]
+      },
+      "properties": {
+        "number": 2,
+        "name": "Пожарный гидрант №2",
+        "organization": "ГБУ \"АВД САО\"",
+        "address": "Ижорская улица, 21 стр.2",
+        "coordinate_status": "Адресный центроид; требуется служебная сверка",
+        "feature_kind": "hydrant",
+        "geocoder": "ArcGIS World Geocoding"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.556181981646,
+          55.793023309611
+        ]
+      },
+      "properties": {
+        "number": 3,
+        "name": "Пожарный гидрант №3",
+        "organization": "ГБУ \"АВД САО\"",
+        "address": "Дворцовая аллея",
+        "coordinate_status": "Адресный центроид; требуется служебная сверка",
+        "feature_kind": "hydrant",
+        "geocoder": "ArcGIS World Geocoding"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.55,
+          55.82
+        ]
+      },
+      "properties": {
+        "number": 4,
+        "name": "Пожарный гидрант №4",
+        "organization": "ГБУ \"АВД САО\"",
+        "address": "Прибрежный проезд 12",
+        "coordinate_status": "Адресный центроид; требуется служебная сверка",
+        "feature_kind": "hydrant",
+        "geocoder": "ArcGIS World Geocoding"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.55,
+          55.82
+        ]
+      },
+      "properties": {
+        "number": 5,
+        "name": "Пожарный гидрант №5",
+        "organization": "ГБУ \"АВД САО\"",
+        "address": "Дубнинская 81",
+        "coordinate_status": "Адресный центроид; требуется служебная сверка",
+        "feature_kind": "hydrant",
+        "geocoder": "ArcGIS World Geocoding"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.55,
+          55.82
+        ]
+      },
+      "properties": {
+        "number": 6,
+        "name": "Пожарный гидрант №6",
+        "organization": "ГБУ \"Жилищник района Аэропорт\"",
+        "address": "Ленинградский проспект 40",
+        "coordinate_status": "Адресный центроид; требуется служебная сверка",
+        "feature_kind": "hydrant",
+        "geocoder": "ArcGIS World Geocoding"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.55,
+          55.82
+        ]
+      },
+      "properties": {
+        "number": 7,
+        "name": "Пожарный гидрант №7",
+        "organization": "ГБУ \"Жилищник района Беговой\"",
+        "address": "Правая Дворцовая аллея, угол Трудовой аллеи",
+        "coordinate_status": "Адресный центроид; требуется служебная сверка",
+        "feature_kind": "hydrant",
+        "geocoder": "ArcGIS World Geocoding"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.538796606259,
+          55.87242470862
+        ]
+      },
+      "properties": {
+        "number": 8,
+        "name": "Пожарный гидрант №8",
+        "organization": "ГБУ \"Жилищник района Бескудниковский\"",
+        "address": "Бескудниковский бульвар 57 к1",
+        "coordinate_status": "Адресный центроид; требуется служебная сверка",
+        "feature_kind": "hydrant",
+        "geocoder": "ArcGIS World Geocoding"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.503972641132,
+          55.828634036982
+        ]
+      },
+      "properties": {
+        "number": 9,
+        "name": "Пожарный гидрант №9",
+        "organization": "ГБУ \"Жилищник района Войковский\"",
+        "address": "Новопетровский проезд, 40749",
+        "coordinate_status": "Адресный центроид; требуется служебная сверка",
+        "feature_kind": "hydrant",
+        "geocoder": "ArcGIS World Geocoding"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.55,
+          55.82
+        ]
+      },
+      "properties": {
+        "number": 10,
+        "name": "Пожарный гидрант №10",
+        "organization": "ГБУ \"Жилищник района Восточное Дегунино\"",
+        "address": "Керамический проезд 53 к1",
+        "coordinate_status": "Адресный центроид; требуется служебная сверка",
+        "feature_kind": "hydrant",
+        "geocoder": "ArcGIS World Geocoding"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.55,
+          55.82
+        ]
+      },
+      "properties": {
+        "number": 11,
+        "name": "Пожарный гидрант №11",
+        "organization": "ГБУ \"Жилищник района Головинский\"",
+        "address": "Кронштадтский бульвар 24 к1",
+        "coordinate_status": "Адресный центроид; требуется служебная сверка",
+        "feature_kind": "hydrant",
+        "geocoder": "ArcGIS World Geocoding"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.55,
+          55.82
+        ]
+      },
+      "properties": {
+        "number": 12,
+        "name": "Пожарный гидрант №12",
+        "organization": "ГБУ города Москвы \"Автомобильные дороги\"",
+        "address": "Лихоборская набережная напротив дома 15",
+        "coordinate_status": "Адресный центроид; требуется служебная сверка",
+        "feature_kind": "hydrant",
+        "geocoder": "ArcGIS World Geocoding"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.528565132721,
+          55.898167715681
+        ]
+      },
+      "properties": {
+        "number": 13,
+        "name": "Пожарный гидрант №13",
+        "organization": "ГБУ \"Жилищник района Дмитровский\"",
+        "address": "Ижорская улица 17/19",
+        "coordinate_status": "Адресный центроид; требуется служебная сверка",
+        "feature_kind": "hydrant",
+        "geocoder": "ArcGIS World Geocoding"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.55,
+          55.82
+        ]
+      },
+      "properties": {
+        "number": 14,
+        "name": "Пожарный гидрант №14",
+        "organization": "ГБУ \"Жилищник района Западное Дегунино\"",
+        "address": "улица Ивана Сусанина 2",
+        "coordinate_status": "Адресный центроид; требуется служебная сверка",
+        "feature_kind": "hydrant",
+        "geocoder": "ArcGIS World Geocoding"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.534557961642,
+          55.817139519293
+        ]
+      },
+      "properties": {
+        "number": 15,
+        "name": "Пожарный гидрант №15",
+        "organization": "ГБУ \"Жилищник района Коптево\"",
+        "address": "Новая Ипатовка вл.2а",
+        "coordinate_status": "Адресный центроид; требуется служебная сверка",
+        "feature_kind": "hydrant",
+        "geocoder": "ArcGIS World Geocoding"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.55,
+          55.82
+        ]
+      },
+      "properties": {
+        "number": 16,
+        "name": "Пожарный гидрант №16",
+        "organization": "ГБУ \"Жилищник района Левобережный\"",
+        "address": "Прибрежный проезд 7",
+        "coordinate_status": "Адресный центроид; требуется служебная сверка",
+        "feature_kind": "hydrant",
+        "geocoder": "ArcGIS World Geocoding"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.55,
+          55.82
+        ]
+      },
+      "properties": {
+        "number": 17,
+        "name": "Пожарный гидрант №17",
+        "organization": "ГБУ \"Жилищник района Молжаниновский\"",
+        "address": "Новосходненское шоссе 6А",
+        "coordinate_status": "Адресный центроид; требуется служебная сверка",
+        "feature_kind": "hydrant",
+        "geocoder": "ArcGIS World Geocoding"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.55,
+          55.82
+        ]
+      },
+      "properties": {
+        "number": 18,
+        "name": "Пожарный гидрант №18",
+        "organization": "ГБУ \"Жилищник района Савеловский\"",
+        "address": "Петровско-Разумовский проезд 29 ст19",
+        "coordinate_status": "Адресный центроид; требуется служебная сверка",
+        "feature_kind": "hydrant",
+        "geocoder": "ArcGIS World Geocoding"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.55,
+          55.82
+        ]
+      },
+      "properties": {
+        "number": 19,
+        "name": "Пожарный гидрант №19",
+        "organization": "ГБУ \"Жилищник района Сокол\"",
+        "address": "улица Зорге 19",
+        "coordinate_status": "Адресный центроид; требуется служебная сверка",
+        "feature_kind": "hydrant",
+        "geocoder": "ArcGIS World Geocoding"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.55,
+          55.82
+        ]
+      },
+      "properties": {
+        "number": 20,
+        "name": "Пожарный гидрант №20",
+        "organization": "ГБУ \"Жилищник района Тимирязевский\"",
+        "address": "3-й Нижнелихоборский проезд 1 стр9",
+        "coordinate_status": "Адресный центроид; требуется служебная сверка",
+        "feature_kind": "hydrant",
+        "geocoder": "ArcGIS World Geocoding"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.55,
+          55.82
+        ]
+      },
+      "properties": {
+        "number": 21,
+        "name": "Пожарный гидрант №21",
+        "organization": "ГБУ \"Жилищник района Тимирязевский\"",
+        "address": "Дмитровский проезд 1 с4",
+        "coordinate_status": "Адресный центроид; требуется служебная сверка",
+        "feature_kind": "hydrant",
+        "geocoder": "ArcGIS World Geocoding"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.55,
+          55.82
+        ]
+      },
+      "properties": {
+        "number": 22,
+        "name": "Пожарный гидрант №22",
+        "organization": "ГБУ \"Жилищник района Тимирязевский\"",
+        "address": "Верхняя аллея 12Б",
+        "coordinate_status": "Адресный центроид; требуется служебная сверка",
+        "feature_kind": "hydrant",
+        "geocoder": "ArcGIS World Geocoding"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.55,
+          55.82
+        ]
+      },
+      "properties": {
+        "number": 23,
+        "name": "Пожарный гидрант №23",
+        "organization": "ГБУ \"Жилищник района Ховрино\"",
+        "address": "Смольная улица 50",
+        "coordinate_status": "Адресный центроид; требуется служебная сверка",
+        "feature_kind": "hydrant",
+        "geocoder": "ArcGIS World Geocoding"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.55,
+          55.82
+        ]
+      },
+      "properties": {
+        "number": 24,
+        "name": "Пожарный гидрант №24",
+        "organization": "ГБУ \"Жилищник района Хорошевский\"",
+        "address": "Куусинена 21",
+        "coordinate_status": "Адресный центроид; требуется служебная сверка",
+        "feature_kind": "hydrant",
+        "geocoder": "ArcGIS World Geocoding"
+      }
+    }
+  ]
+}

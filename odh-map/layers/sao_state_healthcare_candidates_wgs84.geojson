@@ -1,0 +1,28 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5368282,
+          55.8171891
+        ]
+      },
+      "properties": {
+        "name": "Подстанция скорой помощи № 18",
+        "address": "Москва, ул. Новая Ипатовка, д. 3Б",
+        "coordinate_status": "Адресный центроид",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%9F%D0%BE%D0%B4%D1%81%D1%82%D0%B0%D0%BD%D1%86%D0%B8%D1%8F+%D1%81%D0%BA%D0%BE%D1%80%D0%BE%D0%B9+%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D0%B8+%E2%84%96+18%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+%D1%83%D0%BB.+%D0%9D%D0%BE%D0%B2%D0%B0%D1%8F+%D0%98%D0%BF%D0%B0%D1%82%D0%BE%D0%B2%D0%BA%D0%B0%2C+%D0%B4.+3%D0%91",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%9F%D0%BE%D0%B4%D1%81%D1%82%D0%B0%D0%BD%D1%86%D0%B8%D1%8F+%D1%81%D0%BA%D0%BE%D1%80%D0%BE%D0%B9+%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D0%B8+%E2%84%96+18%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+%D1%83%D0%BB.+%D0%9D%D0%BE%D0%B2%D0%B0%D1%8F+%D0%98%D0%BF%D0%B0%D1%82%D0%BE%D0%B2%D0%BA%D0%B0%2C+%D0%B4.+3%D0%91",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%9F%D0%BE%D0%B4%D1%81%D1%82%D0%B0%D0%BD%D1%86%D0%B8%D1%8F+%D1%81%D0%BA%D0%BE%D1%80%D0%BE%D0%B9+%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D0%B8+%E2%84%96+18%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+%D1%83%D0%BB.+%D0%9D%D0%BE%D0%B2%D0%B0%D1%8F+%D0%98%D0%BF%D0%B0%D1%82%D0%BE%D0%B2%D0%BA%D0%B0%2C+%D0%B4.+3%D0%91",
+        "facility_type": "Подстанция скорой и неотложной медицинской помощи",
+        "ownership": "ГБУЗ города Москвы",
+        "verification_status": "Учреждение государственное; адрес ожидает служебного подтверждения",
+        "official_source": "https://mos03.ru/",
+        "official_evidence": "Официальный сайт ССиНМП им. А.С. Пучкова подтверждает организацию, но не публикует адрес этой подстанции."
+      }
+    }
+  ]
+}

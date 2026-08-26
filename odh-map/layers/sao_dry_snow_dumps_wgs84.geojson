@@ -1,0 +1,80 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5015987,
+          55.8824532
+        ]
+      },
+      "properties": {
+        "name": "Сухая свалка снега",
+        "address": "ул. Ижорская, вл. 4",
+        "coordinate_status": "Адресный центроид",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%A1%D1%83%D1%85%D0%B0%D1%8F+%D1%81%D0%B2%D0%B0%D0%BB%D0%BA%D0%B0+%D1%81%D0%BD%D0%B5%D0%B3%D0%B0%2C+%D1%83%D0%BB.+%D0%98%D0%B6%D0%BE%D1%80%D1%81%D0%BA%D0%B0%D1%8F%2C+%D0%B2%D0%BB.+4",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%A1%D1%83%D1%85%D0%B0%D1%8F+%D1%81%D0%B2%D0%B0%D0%BB%D0%BA%D0%B0+%D1%81%D0%BD%D0%B5%D0%B3%D0%B0%2C+%D1%83%D0%BB.+%D0%98%D0%B6%D0%BE%D1%80%D1%81%D0%BA%D0%B0%D1%8F%2C+%D0%B2%D0%BB.+4",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%A1%D1%83%D1%85%D0%B0%D1%8F+%D1%81%D0%B2%D0%B0%D0%BB%D0%BA%D0%B0+%D1%81%D0%BD%D0%B5%D0%B3%D0%B0%2C+%D1%83%D0%BB.+%D0%98%D0%B6%D0%BE%D1%80%D1%81%D0%BA%D0%B0%D1%8F%2C+%D0%B2%D0%BB.+4",
+        "district": "Западное Дегунино",
+        "area_m2": 10500,
+        "capacity_m3": 42000,
+        "surface_type": "грунт",
+        "purpose": "ГБУ «АВД» города Москвы",
+        "verification_status": "Подтверждено презентацией КГХ по ОЗП 2026-2027, стр. 45",
+        "official_evidence": "Адресный перечень сухих свалок САО, стр. 45."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.548322,
+          55.847465
+        ]
+      },
+      "properties": {
+        "name": "Сухая свалка снега",
+        "address": "пр-д Черепановых, вл. 2-6",
+        "coordinate_status": "Адресный центроид",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%A1%D1%83%D1%85%D0%B0%D1%8F+%D1%81%D0%B2%D0%B0%D0%BB%D0%BA%D0%B0+%D1%81%D0%BD%D0%B5%D0%B3%D0%B0%2C+%D0%BF%D1%80-%D0%B4+%D0%A7%D0%B5%D1%80%D0%B5%D0%BF%D0%B0%D0%BD%D0%BE%D0%B2%D1%8B%D1%85%2C+%D0%B2%D0%BB.+2-6",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%A1%D1%83%D1%85%D0%B0%D1%8F+%D1%81%D0%B2%D0%B0%D0%BB%D0%BA%D0%B0+%D1%81%D0%BD%D0%B5%D0%B3%D0%B0%2C+%D0%BF%D1%80-%D0%B4+%D0%A7%D0%B5%D1%80%D0%B5%D0%BF%D0%B0%D0%BD%D0%BE%D0%B2%D1%8B%D1%85%2C+%D0%B2%D0%BB.+2-6",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%A1%D1%83%D1%85%D0%B0%D1%8F+%D1%81%D0%B2%D0%B0%D0%BB%D0%BA%D0%B0+%D1%81%D0%BD%D0%B5%D0%B3%D0%B0%2C+%D0%BF%D1%80-%D0%B4+%D0%A7%D0%B5%D1%80%D0%B5%D0%BF%D0%B0%D0%BD%D0%BE%D0%B2%D1%8B%D1%85%2C+%D0%B2%D0%BB.+2-6",
+        "district": "Коптево",
+        "area_m2": 36000,
+        "capacity_m3": 200000,
+        "surface_type": "асфальтобетонное покрытие",
+        "purpose": "ГБУ «АВД» города Москвы; Префектура ЦАО",
+        "verification_status": "Подтверждено презентацией КГХ по ОЗП 2026-2027, стр. 45",
+        "official_evidence": "Адресный перечень сухих свалок САО, стр. 45."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.3706243,
+          55.9088869
+        ]
+      },
+      "properties": {
+        "name": "Сухая свалка снега",
+        "address": "Машкинское ш., вл. 38",
+        "coordinate_status": "Адресный центроид",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%A1%D1%83%D1%85%D0%B0%D1%8F+%D1%81%D0%B2%D0%B0%D0%BB%D0%BA%D0%B0+%D1%81%D0%BD%D0%B5%D0%B3%D0%B0%2C+%D0%9C%D0%B0%D1%88%D0%BA%D0%B8%D0%BD%D1%81%D0%BA%D0%BE%D0%B5+%D1%88.%2C+%D0%B2%D0%BB.+38",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%A1%D1%83%D1%85%D0%B0%D1%8F+%D1%81%D0%B2%D0%B0%D0%BB%D0%BA%D0%B0+%D1%81%D0%BD%D0%B5%D0%B3%D0%B0%2C+%D0%9C%D0%B0%D1%88%D0%BA%D0%B8%D0%BD%D1%81%D0%BA%D0%BE%D0%B5+%D1%88.%2C+%D0%B2%D0%BB.+38",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%A1%D1%83%D1%85%D0%B0%D1%8F+%D1%81%D0%B2%D0%B0%D0%BB%D0%BA%D0%B0+%D1%81%D0%BD%D0%B5%D0%B3%D0%B0%2C+%D0%9C%D0%B0%D1%88%D0%BA%D0%B8%D0%BD%D1%81%D0%BA%D0%BE%D0%B5+%D1%88.%2C+%D0%B2%D0%BB.+38",
+        "district": "Молжаниновский",
+        "area_m2": 12200,
+        "capacity_m3": 48800,
+        "surface_type": "грунт",
+        "purpose": "ГБУ «АВД» города Москвы",
+        "verification_status": "Подтверждено презентацией КГХ по ОЗП 2026-2027, стр. 45",
+        "official_evidence": "Адресный перечень сухих свалок САО, стр. 45."
+      }
+    }
+  ]
+}

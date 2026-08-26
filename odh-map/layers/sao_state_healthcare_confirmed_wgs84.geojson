@@ -256,6 +256,121 @@
         "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%93%D0%91%D0%A3%D0%97%20%C2%AB%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%2045%20%D0%94%D0%97%D0%9C%C2%BB%2C%20%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D0%9F%D0%B5%D1%82%D1%80%D0%BE%D0%B7%D0%B0%D0%B2%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%2C%2026",
         "note": "Ссылки агрегаторов — поисковые ссылки для сверки карточки; не являются самостоятельным доказательством статуса."
       }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5327811,
+          55.8898254
+        ]
+      },
+      "properties": {
+        "name": "Родильный дом ГКБ им. В.В. Вересаева",
+        "address": "Москва, ул. Лобненская, д. 10, стр. 10",
+        "coordinate_status": "Адресный центроид",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%A0%D0%BE%D0%B4%D0%B8%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9+%D0%B4%D0%BE%D0%BC+%D0%93%D0%9A%D0%91+%D0%B8%D0%BC.+%D0%92.%D0%92.+%D0%92%D0%B5%D1%80%D0%B5%D1%81%D0%B0%D0%B5%D0%B2%D0%B0%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+%D1%83%D0%BB.+%D0%9B%D0%BE%D0%B1%D0%BD%D0%B5%D0%BD%D1%81%D0%BA%D0%B0%D1%8F%2C+%D0%B4.+10%2C+%D1%81%D1%82%D1%80.+10",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%A0%D0%BE%D0%B4%D0%B8%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9+%D0%B4%D0%BE%D0%BC+%D0%93%D0%9A%D0%91+%D0%B8%D0%BC.+%D0%92.%D0%92.+%D0%92%D0%B5%D1%80%D0%B5%D1%81%D0%B0%D0%B5%D0%B2%D0%B0%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+%D1%83%D0%BB.+%D0%9B%D0%BE%D0%B1%D0%BD%D0%B5%D0%BD%D1%81%D0%BA%D0%B0%D1%8F%2C+%D0%B4.+10%2C+%D1%81%D1%82%D1%80.+10",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%A0%D0%BE%D0%B4%D0%B8%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9+%D0%B4%D0%BE%D0%BC+%D0%93%D0%9A%D0%91+%D0%B8%D0%BC.+%D0%92.%D0%92.+%D0%92%D0%B5%D1%80%D0%B5%D1%81%D0%B0%D0%B5%D0%B2%D0%B0%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+%D1%83%D0%BB.+%D0%9B%D0%BE%D0%B1%D0%BD%D0%B5%D0%BD%D1%81%D0%BA%D0%B0%D1%8F%2C+%D0%B4.+10%2C+%D1%81%D1%82%D1%80.+10",
+        "facility_type": "Родильный дом",
+        "ownership": "ГБУЗ города Москвы",
+        "verification_status": "Подтверждено официальным сайтом учреждения",
+        "official_source": "https://gkb81.ru/directions/rody/",
+        "official_evidence": "Родильный дом работает по адресу: Лобненская улица, 10с10."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.4632313,
+          55.8797354
+        ]
+      },
+      "properties": {
+        "name": "Филиал № 2 НМИЦ ВМТ им. А.А. Вишневского Минобороны России",
+        "address": "Москва, ул. Левобережная, д. 11",
+        "coordinate_status": "Адресный центроид",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%A4%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB+%E2%84%96+2+%D0%9D%D0%9C%D0%98%D0%A6+%D0%92%D0%9C%D0%A2+%D0%B8%D0%BC.+%D0%90.%D0%90.+%D0%92%D0%B8%D1%88%D0%BD%D0%B5%D0%B2%D1%81%D0%BA%D0%BE%D0%B3%D0%BE+%D0%9C%D0%B8%D0%BD%D0%BE%D0%B1%D0%BE%D1%80%D0%BE%D0%BD%D1%8B+%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D0%B8%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+%D1%83%D0%BB.+%D0%9B%D0%B5%D0%B2%D0%BE%D0%B1%D0%B5%D1%80%D0%B5%D0%B6%D0%BD%D0%B0%D1%8F%2C+%D0%B4.+11",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%A4%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB+%E2%84%96+2+%D0%9D%D0%9C%D0%98%D0%A6+%D0%92%D0%9C%D0%A2+%D0%B8%D0%BC.+%D0%90.%D0%90.+%D0%92%D0%B8%D1%88%D0%BD%D0%B5%D0%B2%D1%81%D0%BA%D0%BE%D0%B3%D0%BE+%D0%9C%D0%B8%D0%BD%D0%BE%D0%B1%D0%BE%D1%80%D0%BE%D0%BD%D1%8B+%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D0%B8%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+%D1%83%D0%BB.+%D0%9B%D0%B5%D0%B2%D0%BE%D0%B1%D0%B5%D1%80%D0%B5%D0%B6%D0%BD%D0%B0%D1%8F%2C+%D0%B4.+11",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%A4%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB+%E2%84%96+2+%D0%9D%D0%9C%D0%98%D0%A6+%D0%92%D0%9C%D0%A2+%D0%B8%D0%BC.+%D0%90.%D0%90.+%D0%92%D0%B8%D1%88%D0%BD%D0%B5%D0%B2%D1%81%D0%BA%D0%BE%D0%B3%D0%BE+%D0%9C%D0%B8%D0%BD%D0%BE%D0%B1%D0%BE%D1%80%D0%BE%D0%BD%D1%8B+%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D0%B8%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+%D1%83%D0%BB.+%D0%9B%D0%B5%D0%B2%D0%BE%D0%B1%D0%B5%D1%80%D0%B5%D0%B6%D0%BD%D0%B0%D1%8F%2C+%D0%B4.+11",
+        "facility_type": "Военный клинический госпиталь",
+        "ownership": "Федеральное государственное учреждение Минобороны России",
+        "verification_status": "Подтверждено официальным сайтом учреждения",
+        "official_source": "https://www.2filial.ru/contacts/",
+        "official_evidence": "Официальный адрес филиала: Левобережная улица, д. 11."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5206136,
+          55.8718919
+        ]
+      },
+      "properties": {
+        "name": "Институт Вельтищева",
+        "address": "Москва, ул. Талдомская, д. 2",
+        "coordinate_status": "Адресный центроид",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%98%D0%BD%D1%81%D1%82%D0%B8%D1%82%D1%83%D1%82+%D0%92%D0%B5%D0%BB%D1%8C%D1%82%D0%B8%D1%89%D0%B5%D0%B2%D0%B0%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+%D1%83%D0%BB.+%D0%A2%D0%B0%D0%BB%D0%B4%D0%BE%D0%BC%D1%81%D0%BA%D0%B0%D1%8F%2C+%D0%B4.+2",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%98%D0%BD%D1%81%D1%82%D0%B8%D1%82%D1%83%D1%82+%D0%92%D0%B5%D0%BB%D1%8C%D1%82%D0%B8%D1%89%D0%B5%D0%B2%D0%B0%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+%D1%83%D0%BB.+%D0%A2%D0%B0%D0%BB%D0%B4%D0%BE%D0%BC%D1%81%D0%BA%D0%B0%D1%8F%2C+%D0%B4.+2",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%98%D0%BD%D1%81%D1%82%D0%B8%D1%82%D1%83%D1%82+%D0%92%D0%B5%D0%BB%D1%8C%D1%82%D0%B8%D1%89%D0%B5%D0%B2%D0%B0%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+%D1%83%D0%BB.+%D0%A2%D0%B0%D0%BB%D0%B4%D0%BE%D0%BC%D1%81%D0%BA%D0%B0%D1%8F%2C+%D0%B4.+2",
+        "facility_type": "Научно-исследовательский клинический институт",
+        "ownership": "Федеральное государственное учреждение Минздрава России",
+        "verification_status": "Подтверждено официальным сайтом учреждения",
+        "official_source": "https://telemed.pedklin.ru/pedklin/patient/about",
+        "official_evidence": "Почтовый адрес: Москва, ул. Талдомская, д. 2."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.53068,
+          55.8201292
+        ]
+      },
+      "properties": {
+        "name": "НМИЦ травматологии и ортопедии им. Н.Н. Приорова",
+        "address": "Москва, ул. Приорова, д. 10",
+        "coordinate_status": "Адресный центроид",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%9D%D0%9C%D0%98%D0%A6+%D1%82%D1%80%D0%B0%D0%B2%D0%BC%D0%B0%D1%82%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D0%B8+%D0%B8+%D0%BE%D1%80%D1%82%D0%BE%D0%BF%D0%B5%D0%B4%D0%B8%D0%B8+%D0%B8%D0%BC.+%D0%9D.%D0%9D.+%D0%9F%D1%80%D0%B8%D0%BE%D1%80%D0%BE%D0%B2%D0%B0%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+%D1%83%D0%BB.+%D0%9F%D1%80%D0%B8%D0%BE%D1%80%D0%BE%D0%B2%D0%B0%2C+%D0%B4.+10",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%9D%D0%9C%D0%98%D0%A6+%D1%82%D1%80%D0%B0%D0%B2%D0%BC%D0%B0%D1%82%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D0%B8+%D0%B8+%D0%BE%D1%80%D1%82%D0%BE%D0%BF%D0%B5%D0%B4%D0%B8%D0%B8+%D0%B8%D0%BC.+%D0%9D.%D0%9D.+%D0%9F%D1%80%D0%B8%D0%BE%D1%80%D0%BE%D0%B2%D0%B0%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+%D1%83%D0%BB.+%D0%9F%D1%80%D0%B8%D0%BE%D1%80%D0%BE%D0%B2%D0%B0%2C+%D0%B4.+10",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%9D%D0%9C%D0%98%D0%A6+%D1%82%D1%80%D0%B0%D0%B2%D0%BC%D0%B0%D1%82%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D0%B8+%D0%B8+%D0%BE%D1%80%D1%82%D0%BE%D0%BF%D0%B5%D0%B4%D0%B8%D0%B8+%D0%B8%D0%BC.+%D0%9D.%D0%9D.+%D0%9F%D1%80%D0%B8%D0%BE%D1%80%D0%BE%D0%B2%D0%B0%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+%D1%83%D0%BB.+%D0%9F%D1%80%D0%B8%D0%BE%D1%80%D0%BE%D0%B2%D0%B0%2C+%D0%B4.+10",
+        "facility_type": "Национальный медицинский исследовательский центр",
+        "ownership": "Федеральное государственное учреждение Минздрава России",
+        "verification_status": "Подтверждено официальным сайтом учреждения",
+        "official_source": "https://www.cito-priorov.ru/contacts/",
+        "official_evidence": "Официальный адрес: Москва, ул. Приорова, д. 10."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5789474,
+          55.7984216
+        ]
+      },
+      "properties": {
+        "name": "Городская клиническая больница № 24",
+        "address": "Москва, ул. Писцовая, д. 10",
+        "coordinate_status": "Адресный центроид",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F+%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F+%D0%B1%D0%BE%D0%BB%D1%8C%D0%BD%D0%B8%D1%86%D0%B0+%E2%84%96+24%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+%D1%83%D0%BB.+%D0%9F%D0%B8%D1%81%D1%86%D0%BE%D0%B2%D0%B0%D1%8F%2C+%D0%B4.+10",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F+%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F+%D0%B1%D0%BE%D0%BB%D1%8C%D0%BD%D0%B8%D1%86%D0%B0+%E2%84%96+24%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+%D1%83%D0%BB.+%D0%9F%D0%B8%D1%81%D1%86%D0%BE%D0%B2%D0%B0%D1%8F%2C+%D0%B4.+10",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F+%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F+%D0%B1%D0%BE%D0%BB%D1%8C%D0%BD%D0%B8%D1%86%D0%B0+%E2%84%96+24%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+%D1%83%D0%BB.+%D0%9F%D0%B8%D1%81%D1%86%D0%BE%D0%B2%D0%B0%D1%8F%2C+%D0%B4.+10",
+        "facility_type": "Городская клиническая больница",
+        "ownership": "ГБУЗ города Москвы",
+        "verification_status": "Подтверждено официальным сайтом учреждения",
+        "official_source": "https://gkb-24.ru/about-hospital/faq",
+        "official_evidence": "Стационар ГБУЗ «ГКБ №24»: ул. Писцовая, д. 10."
+      }
     }
   ]
 }

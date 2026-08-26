@@ -4,8 +4,9 @@ from __future__ import annotations
 
 import argparse
 import json
-import shutil
 from pathlib import Path
+
+from shapely.geometry import shape
 
 try:
     from scripts.build_sao_maps import SPECS, render_html
@@ -27,6 +28,23 @@ def _write_shell(source_dir: Path, destination: Path, source_name: str, mode: st
     """Copy an already generated shell, or create a shell for a partial export."""
     # Browser layers are external; never copy legacy HTML with embedded GeoJSON.
     destination.write_text(render_html([], mode=mode), encoding='utf-8')
+
+
+def _clip_point_icons_to_boundary(data: dict, boundary) -> dict:
+    """Exclude only out-of-SAO point symbols; retain road geometry unchanged."""
+    features = []
+    for feature in data.get("features", []):
+        geometry = feature.get("geometry") or {}
+        geometry_type = geometry.get("type")
+        if geometry_type == "Point" and not boundary.covers(shape(geometry)):
+            continue
+        if geometry_type == "MultiPoint":
+            inside = [coord for coord in geometry.get("coordinates", []) if boundary.covers(shape({"type": "Point", "coordinates": coord}))]
+            if not inside:
+                continue
+            feature = {**feature, "geometry": {**geometry, "coordinates": inside}}
+        features.append(feature)
+    return {**data, "features": features}
 
 
 def build_publish_bundle(
@@ -51,6 +69,12 @@ def build_publish_bundle(
     destination.mkdir(parents=True, exist_ok=True)
     layers_dir = destination / "layers"
     layers_dir.mkdir(exist_ok=True)
+    expected_filenames = {spec.filename for spec in SPECS}
+    for stale_layer in layers_dir.glob("*.geojson"):
+        if stale_layer.name not in expected_filenames:
+            stale_layer.unlink()
+    boundary_data = json.loads((source_dir / "sao_boundary_wgs84.geojson").read_text(encoding="utf-8"))
+    boundary = shape(boundary_data["features"][0]["geometry"])
 
     created: list[Path] = []
     for source_name, destination_name, mode in SHELLS:
@@ -64,7 +88,10 @@ def build_publish_bundle(
         if not source.is_file():
             continue
         target = layers_dir / spec.filename
-        shutil.copyfile(source, target)
+        data = json.loads(source.read_text(encoding="utf-8"))
+        if spec.key != "boundary":
+            data = _clip_point_icons_to_boundary(data, boundary)
+        target.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
         created.append(target)
         manifest_layers.append(
             {
