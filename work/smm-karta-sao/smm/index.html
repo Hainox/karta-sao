@@ -4,15 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Маршруты СММ — зимняя уборка дворовых территорий · САО</title>
-<script>
-window.ymaps3Ready = new Promise((resolve, reject) => {
-  const script = document.createElement('script');
-  script.src = 'https://api-maps.yandex.ru/v3/?apikey=6b197a0e-9109-4624-9520-954a47c26dda&lang=ru_RU';
-  script.onload = () => window.ymaps3 ? resolve(window.ymaps3) : reject(new Error('Карты Яндекса не инициализированы.'));
-  script.onerror = () => reject(new Error('Не удалось загрузить Карты Яндекса. Проверьте соединение и настройки ключа.'));
-  document.head.appendChild(script);
-});
-</script>
+<script src="https://api-maps.yandex.ru/v3/?apikey=6b197a0e-9109-4624-9520-954a47c26dda&lang=ru_RU"></script>
 <style>
 :root{
   --brand:#C00000; --ink:#101418; --muted:#5c6672; --line:#dfe3e8;
@@ -76,14 +68,6 @@ a.btn{text-decoration:none;display:inline-block}
 .tab-btn{border:1px solid var(--line);background:#fff;border-radius:var(--r-sm);padding:7px 14px;
   font-size:var(--fs-sm);cursor:pointer;font-family:inherit}
 .tab-btn[aria-pressed="true"]{background:var(--brand);border-color:var(--brand);color:#fff;font-weight:600}
-.quick-switch{margin-bottom:var(--sp-3)}
-.quick-switch-title{display:block;margin:0 0 8px;color:var(--brand);font-size:var(--fs-xs);font-weight:700;text-transform:uppercase;letter-spacing:.6px}
-.quick-switch-buttons{display:grid;grid-template-columns:repeat(auto-fit,minmax(92px,1fr));gap:6px}
-.qsw-btn{border:1px solid #f1c7c7;background:#fff8f7;border-radius:var(--r-sm);padding:8px 6px;font-family:inherit;font-size:var(--fs-xs);font-weight:700;color:var(--ink);line-height:1.3;cursor:pointer;text-align:center}
-.qsw-btn small{display:block;margin-top:2px;font-weight:400;color:var(--muted);font-size:10px}
-.qsw-btn:hover{border-color:var(--brand);background:#fff1f0}
-.qsw-btn[aria-pressed="true"]{border-color:var(--brand);background:var(--brand);color:#fff}
-.qsw-btn[aria-pressed="true"] small{color:rgba(255,255,255,.85)}
 #map{width:100%;height:420px;border-radius:var(--r-sm);overflow:hidden;background:#e9eef2}
 #scheme{width:100%;background:#fff;border-radius:var(--r-sm)}
 #scheme img{width:100%;height:auto;display:block}
@@ -163,27 +147,12 @@ footer{padding:var(--sp-3) var(--sp-4);font-size:var(--fs-xs);color:var(--muted)
         <div class="ttl">Узкий проход между домами, газоны и клумбы</div>
         <div class="addr">Бескудниковский б-р, д. 20 · Бескудниковский</div>
       </button>
-      <button type="button" class="yard" data-yard="dt4" aria-pressed="false">
-        <span class="code">ДТ-4 · «Два корпуса»</span>
-        <div class="ttl">Межкорпусный проезд и два параллельных фасада</div>
-        <div class="addr">1-й Амбулаторный пр-д, д. 5, к. 1 и к. 2 · Аэропорт</div>
-      </button>
-      <button type="button" class="yard" data-yard="dt5" aria-pressed="false">
-        <span class="code">ДТ-5 · «Полукольцо»</span>
-        <div class="ttl">Дуговой внутренний проезд вокруг здания</div>
-        <div class="addr">Старопетровский проезд, д. 10Б · Войковский</div>
-      </button>
       <button type="button" class="teaser-more" data-open-section="sec-objects">Как подобраны адреса-аналоги →</button>
     </section>
 
     <section class="card" style="margin-bottom:16px">
       <h2>Принятое решение</h2>
       <dl class="kv" id="factCard"></dl>
-      <button type="button" class="yard" data-yard="dt5" aria-pressed="false">
-        <span class="code">ДТ-5 · «Полукольцо»</span>
-        <div class="ttl">Дуговой внутренний проезд вокруг здания</div>
-        <div class="addr">Старопетровский проезд, д. 10Б · Войковский</div>
-      </button>
       <button type="button" class="teaser-more" data-open-section="sec-variants">Какие варианты проверялись и почему выбран этот →</button>
     </section>
 
@@ -200,11 +169,6 @@ footer{padding:var(--sp-3) var(--sp-4);font-size:var(--fs-xs);color:var(--muted)
 
   <main id="stage">
     <section class="card">
-      <section class="quick-switch" aria-label="Быстрый переход между маршрутами">
-        <span class="quick-switch-title">Маршруты СММ — быстрый переход</span>
-        <div class="quick-switch-buttons" id="quickSwitch"></div>
-      </section>
-
       <div class="tabs" role="group" aria-label="Режим просмотра">
         <button type="button" class="tab-btn" id="tabScheme" aria-pressed="true">Схема маршрута</button>
         <button type="button" class="tab-btn" id="tabMap" aria-pressed="false">Положение в округе</button>
@@ -213,23 +177,13 @@ footer{padding:var(--sp-3) var(--sp-4);font-size:var(--fs-xs);color:var(--muted)
       <div id="schemeWrap">
         <div id="scheme"><img id="schemeImg" src="dt1.svg" alt="Схема маршрута движения СММ"></div>
         <p class="cap" id="schemeCap"></p>
-        <button type="button" class="yard" data-yard="dt5" aria-pressed="false">
-        <span class="code">ДТ-5 · «Полукольцо»</span>
-        <div class="ttl">Дуговой внутренний проезд вокруг здания</div>
-        <div class="addr">Старопетровский проезд, д. 10Б · Войковский</div>
-      </button>
-      <button type="button" class="teaser-more" data-open-section="sec-read">Как читать схему: стрелки, струи, точки приземления →</button>
+        <button type="button" class="teaser-more" data-open-section="sec-read">Как читать схему: стрелки, струи, точки приземления →</button>
       </div>
 
       <div id="mapWrap" class="hidden">
         <div id="map"></div>
         <p class="status" id="status">Загрузка карты…</p>
-        <button type="button" class="yard" data-yard="dt5" aria-pressed="false">
-        <span class="code">ДТ-5 · «Полукольцо»</span>
-        <div class="ttl">Дуговой внутренний проезд вокруг здания</div>
-        <div class="addr">Старопетровский проезд, д. 10Б · Войковский</div>
-      </button>
-      <button type="button" class="teaser-more" data-open-section="sec-layer">Почему это отдельный модуль, а не только слой карты →</button>
+        <button type="button" class="teaser-more" data-open-section="sec-layer">Почему это отдельный модуль, а не только слой карты →</button>
       </div>
     </section>
   </main>
@@ -283,14 +237,11 @@ footer{padding:var(--sp-3) var(--sp-4);font-size:var(--fs-xs);color:var(--muted)
               <td>Протяжённый дом, тротуар вдоль фасада, газон с рядовой посадкой деревьев, проезд с парковочным карманом</td></tr>
           <tr><td>ДТ-3 «Гребёнка»</td><td>Бескудниковский б-р, д. 20</td><td>Бескудниковский</td>
               <td>Группа домов, узкий межквартальный проход, живая изгородь и клумбы</td></tr>
-          <tr><td>ДТ-4 «Два корпуса»</td><td>1-й Амбулаторный пр-д, д. 5, к. 1 и к. 2</td><td>Аэропорт</td>
-              <td>Межкорпусный проезд; челночная обработка от одного фасада к другому</td></tr>
-          <tr><td>ДТ-5 «Полукольцо»</td><td>Старопетровский проезд, д. 10Б</td><td>Войковский</td>
-              <td>Дуговой внутренний проезд вокруг здания; последовательный обход без выброса на посадки</td></tr>
         </table>
-        <div class="flag"><b>Статус привязки.</b> Контуры трёх дворов выгружены из АСУ ОДС
-        (тип объекта 38) и преобразованы из МСК-77 в WGS84. Для ДТ-2 уточнён адрес:
-        в АСУ ОДС указан дом 30Б, тогда как исходная схема содержала дом 30.</div>
+        <div class="flag"><b>Требует уточнения.</b> Контуры в слое <code>smm.geojson</code> — габаритные
+        прямоугольники от адресной точки. Перед вынесением на утверждение их следует заменить
+        фактическими контурами и площадями из паспортов «Планировочное решение и благоустройство
+        территории» в АСУ ОДС.</div>
       </div>
     </details>
 
@@ -330,7 +281,7 @@ footer{padding:var(--sp-3) var(--sp-4);font-size:var(--fs-xs);color:var(--muted)
         <ul>
           <li>Перекидка ведётся <b>не «на насаждения», а в назначенную зону складирования</b> —
           выделенный участок травяного покрова или подготовленная площадка, с картографически
-          зафиксированными границами (зоны Н-1…Н-4 на схемах).</li>
+          зафиксированными границами (зоны Н-1…Н-3 на схемах).</li>
           <li>На машине применяется <b>ограничитель дальности и сектора выброса</b> — то самое
           «специальное направляющее устройство» из формулировки 743-ПП. Настройка фиксируется
           в технологической карте: азимут сопла и дальность.</li>
@@ -400,7 +351,7 @@ footer{padding:var(--sp-3) var(--sp-4);font-size:var(--fs-xs);color:var(--muted)
           Показана не в каждой точке, а с прореживанием, чтобы схема читалась.</li>
           <li><b>Синие точки</b> — расчётные точки приземления снежной массы. Их облако и есть
           проверка: попадает ли снег туда, куда должен.</li>
-          <li><b>Голубая штриховка Н-1…Н-4</b> — назначенное место складирования.</li>
+          <li><b>Голубая штриховка Н-1…Н-3</b> — назначенное место складирования.</li>
           <li><b>Красный пунктирный круг</b> — приствольный круг (1,5 м), запрет выброса.
           <b>Светло-зелёный круг</b> — проекция кроны.</li>
           <li><b>Розовый</b> — клумба, <b>тёмно-зелёная полоса</b> — кустарник / живая изгородь,
@@ -497,11 +448,11 @@ footer{padding:var(--sp-3) var(--sp-4);font-size:var(--fs-xs);color:var(--muted)
         <p><b>Принято комбинированное решение — и слой, и отдельный модуль,</b> потому что у них
         разные задачи и разные масштабы.</p>
         <table>
-          <tr><th>Что</th><th>Режим работы</th><th>Зачем</th></tr>
-          <tr><td>Слой «Маршруты СММ» в общей карте САО</td><td>Общая карта</td>
+          <tr><th>Что</th><th>Где</th><th>Зачем</th></tr>
+          <tr><td>Слой <code>smm</code> в общей карте САО</td><td>karta-sao/index.html</td>
               <td>Географическая привязка: в каком районе и на каком участке находятся объекты.
               Работает существующая фильтрация «район / участок», карточка объекта, печать</td></tr>
-          <tr><td>Модуль схем СММ (эта страница)</td><td>Подробная схема</td>
+          <tr><td>Модуль <code>smm/</code> (эта страница)</td><td>karta-sao/smm/</td>
               <td>Инженерная графика масштаба 1:200–1:500: маршрут, вектор сопла, точки приземления.
               На карте округа такой масштаб нечитаем физически</td></tr>
         </table>
@@ -511,10 +462,12 @@ footer{padding:var(--sp-3) var(--sp-4);font-size:var(--fs-xs);color:var(--muted)
         <p><b>Почему нельзя ограничиться модулем.</b> Без слоя теряется главное для округа:
         сколько таких дворов, в каких районах, на чьих участках. Слой даёт эту связку и
         переиспользует уже готовую фильтрацию атласа.</p>
-        <p><b>Связка между ними.</b> В карточке объекта общей карты есть кнопка «Подробно»:
-        она открывает этот модуль сразу на выбранном дворе. Обратно работает ссылка
-        «← Городской атлас САО» в шапке.</p>
-        <p>Слой и модуль уже связаны; фильтры района и участка на общей карте работают для всех трёх объектов.</p>
+        <p><b>Связка между ними.</b> В карточке объекта на карте добавляется кнопка
+        «Подробно», которая открывает этот модуль на нужном дворе по якорю
+        (<code>smm/#dt1</code>). Обратно — ссылка «← Городской атлас САО» в шапке.</p>
+        <p>Готовый фрагмент кода для вставки в <code>karta-sao/index.html</code> приложен
+        отдельным файлом <code>karta-sao-patch.md</code>. Изменения точечные: одна строка в
+        <code>LAYER_CONFIG</code>, одна иконка маркера и один блок в отрисовке карточки объекта.</p>
       </div>
     </details>
 
@@ -522,8 +475,8 @@ footer{padding:var(--sp-3) var(--sp-4);font-size:var(--fs-xs);color:var(--muted)
       <summary>9. Что требуется для перевода проекта в рабочий документ</summary>
       <div class="drawerContent">
         <ul>
-          <li>Сверить контур ДТ-2: в действующем реестре дворов найден адрес «Дубнинская ул. 30Б»,
-          тогда как исходная схема указывает «д. 30». Для карты принят контур объекта АСУ ОДС «д. 30Б».</li>
+          <li>Заменить ориентировочные контуры в <code>smm.geojson</code> на фактические из
+          паспортов благоустройства АСУ ОДС (площади, классность территории, покрытия).</li>
           <li>Провести натурный обмер трёх пилотных дворов зимой: фактические ширины проходов,
           положение деревьев, высота нижней кромки крон, положение люков и трасс теплосети.</li>
           <li>Провести контрольный заезд с фиксацией фактической дальности выброса на реальном
@@ -533,7 +486,7 @@ footer{padding:var(--sp-3) var(--sp-4);font-size:var(--fs-xs);color:var(--muted)
           <li>Закрепить внутренним актом порядок, снимающий коллизию 743-ПП (см. блок 3):
           назначенные зоны складирования, ограничитель сектора выброса, разделение чистого
           снега и снега с ПГМ.</li>
-          <li>Внести места складирования Н-1…Н-4 в схемы уборки и в задание на вывоз снега.</li>
+          <li>Внести места складирования Н-1…Н-3 в схемы уборки и в задание на вывоз снега.</li>
         </ul>
       </div>
     </details>
@@ -598,38 +551,6 @@ footer{padding:var(--sp-3) var(--sp-4);font-size:var(--fs-xs);color:var(--muted)
         ['Нарушения','<span class="pill ok">0,0 %</span>'],
         ['Время цикла','50 мин']
       ]
-    },
-    dt4: {
-      code:'ДТ-4', name:'«Два корпуса» — межкорпусный маршрут',
-      addr:'1-й Амбулаторный пр-д, д. 5, к. 1 и к. 2', district:'Аэропорт',
-      center:[37.5351038,55.8109680], scheme:'dt4.svg',
-      cap:'ДТ-4 «Два корпуса». Рабочая схема: челночные проходы в межкорпусном проезде с контролем свободного разворота. Направление выброса и место складирования определяются после натурного осмотра.',
-      facts:[
-        ['Вариант','В-4 · межкорпусный челнок'],
-        ['Машина','СММ — по закреплению участка'],
-        ['Проходов','Уточняются по натурному замеру'],
-        ['Манёвр','Разворот только на свободной площадке'],
-        ['Направление выброса','Определяется после осмотра'],
-        ['Складирование','Н-4 · место утверждает ответственный'],
-        ['Статус привязки','<span class="pill warn">Требует сверки участка</span>'],
-        ['Статус маршрута','<span class="pill warn">Требует утверждения</span>']
-      ]
-    },
-    dt5: {
-      code:'ДТ-5', name:'«Полукольцо» — дуговой внутренний проезд',
-      addr:'Старопетровский проезд, д. 10Б', district:'Войковский',
-      center:[37.5087126,55.8229632], scheme:'dt5.svg?v=route-exterior-1',
-      cap:'ДТ-5 «Полукольцо». Рабочая схема: последовательный дуговой проход по внутреннему проезду; разворот выполняется только на свободной площадке. Направление выброса и место складирования определяются после натурного осмотра.',
-      facts:[
-        ['Вариант','В-5 · дуговой обход'],
-        ['Машина','СММ — по закреплению участка'],
-        ['Проходов','Уточняются по натурному замеру'],
-        ['Манёвр','Разворот только на свободной площадке'],
-        ['Направление выброса','Определяется после осмотра'],
-        ['Складирование','Н-5 · место утверждает ответственный'],
-        ['Статус привязки','<span class="pill warn">Требует сверки участка</span>'],
-        ['Статус маршрута','<span class="pill warn">Требует утверждения</span>']
-      ]
     }
   };
 
@@ -640,9 +561,6 @@ footer{padding:var(--sp-3) var(--sp-4);font-size:var(--fs-xs);color:var(--muted)
     var y = YARDS[key]; if(!y) return;
     current = key;
     document.querySelectorAll('.yard').forEach(function(b){
-      b.setAttribute('aria-pressed', String(b.dataset.yard === key));
-    });
-    document.querySelectorAll('.qsw-btn').forEach(function(b){
       b.setAttribute('aria-pressed', String(b.dataset.yard === key));
     });
     $('schemeImg').src = y.scheme;
@@ -660,23 +578,6 @@ footer{padding:var(--sp-3) var(--sp-4);font-size:var(--fs-xs);color:var(--muted)
   document.querySelectorAll('.yard').forEach(function(b){
     b.addEventListener('click', function(){ renderYard(b.dataset.yard); });
   });
-
-  /* ---------- быстрый переход между маршрутами ---------- */
-  var quickSwitch = $('quickSwitch');
-  if (quickSwitch){
-    Object.keys(YARDS).forEach(function(key){
-      var y = YARDS[key];
-      var b = document.createElement('button');
-      b.type = 'button';
-      b.className = 'qsw-btn';
-      b.dataset.yard = key;
-      b.setAttribute('aria-pressed', 'false');
-      b.innerHTML = y.code + '<small>' + y.name.split(' — ')[0] + '</small>';
-      b.title = y.code + ' · ' + y.name + ' — ' + y.addr;
-      b.addEventListener('click', function(){ renderYard(key); });
-      quickSwitch.appendChild(b);
-    });
-  }
 
   /* ---------- вкладки схема / карта ---------- */
   function setTab(mapMode){
@@ -696,10 +597,7 @@ footer{padding:var(--sp-3) var(--sp-4);font-size:var(--fs-xs);color:var(--muted)
     mapReady = true;
     try {
       var ymaps3 = await window.ymaps3Ready;
-      if (ymaps3.ready) await ymaps3.ready;
-      if (!ymaps3.YMap || !ymaps3.YMapDefaultSchemeLayer || !ymaps3.YMapDefaultFeaturesLayer || !ymaps3.YMapMarker) {
-        throw new Error('Карты Яндекса загружены не полностью.');
-      }
+      await ymaps3.ready;
       var YMap = ymaps3.YMap,
           YMapDefaultSchemeLayer = ymaps3.YMapDefaultSchemeLayer,
           YMapDefaultFeaturesLayer = ymaps3.YMapDefaultFeaturesLayer,

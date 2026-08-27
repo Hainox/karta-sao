@@ -99,6 +99,18 @@
     .layer-toggle input { margin:0; accent-color:var(--accent); }
     .layer-swatch { flex:0 0 9px; width:9px; height:9px; border-radius:50%; border:0; }
     .layer-count { margin-left:auto; color:#77868d; font:600 10px ui-monospace, SFMono-Regular, Consolas, monospace; }
+    .smm-variants { display:grid; gap:7px; margin-top:10px; padding:10px; border:1px solid #f1c7c7; border-radius:10px; background:#fff8f7; }
+    .smm-variants[hidden] { display:none; }
+    .smm-variants-title { color:#9e0000; font-size:10px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
+    .smm-variants-note { margin:0; color:#6d7276; font-size:10px; line-height:1.35; }
+    #smmVariantButtons { display:grid; gap:7px; }
+    .smm-variant { display:flex; align-items:center; justify-content:space-between; gap:8px; min-height:38px; padding:7px 8px; border:1px solid #e9d5d3; border-radius:8px; background:#fff; color:var(--ink); font:600 11px/1.25 inherit; text-align:left; cursor:pointer; }
+    .smm-variant:hover,.smm-variant:focus-visible { border-color:#c00000; background:#fff3f2; outline:none; }
+    .smm-variant small { display:block; margin-top:2px; color:#708089; font-size:10px; font-weight:400; }
+    .route-vector { display:grid; place-items:center; width:30px; height:30px; padding:0; border:2px solid #fff; border-radius:50%; color:#fff; box-shadow:0 2px 7px rgba(16,38,54,.42); cursor:pointer; transform:translate(-50%,-50%) rotate(var(--bearing,0deg)); }
+    .route-vector svg { width:19px; height:19px; fill:currentColor; stroke:none; pointer-events:none; }
+    .route-vector.movement { background:#c00000; }
+    .route-vector.nozzle { background:#ef6c00; }
     .status { display:flex; align-items:center; gap:9px; min-height:42px; margin-top:13px; padding:9px 11px; border:1px solid #cfe6df; border-radius:10px; background:#eff9f5; color:#27665a; font-size:11px; line-height:1.35; }
     .status.error { border-color:#f0caca; background:#fff2f1; color:#9b3838; }
     .panel-actions { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:9px; }
@@ -163,6 +175,12 @@
 
         <div class="section-head"><h2>Слои карты</h2><span class="hint">включить / скрыть</span></div>
         <div id="layerControls" class="layers"></div>
+
+        <div id="smmVariants" class="smm-variants" hidden>
+          <span class="smm-variants-title">Маршруты СММ — быстрый переход</span>
+          <p class="smm-variants-note">Пять эталонных дворов. Кнопка приближает карту; стрелки на карте — направление движения и выброса снега.</p>
+          <div id="smmVariantButtons"></div>
+        </div>
 
         <div id="status" class="status"><span class="status-dot"></span><span>Загрузка карты…</span></div>
         <div class="panel-actions"><a class="printbtn" href="yards-print/">Печать / PDF A3</a><label class="file-label" for="geojsonInput"><span>＋</span> Загрузить GeoJSON</label><input id="geojsonInput" type="file" accept=".geojson,.json,application/geo+json,application/json" /></div>
@@ -269,7 +287,9 @@
       section: 'ALL',
       zoom: 11,
       layers: Object.fromEntries(Object.entries(LAYER_CONFIG).map(([key, config]) => [key, { ...config, records: [], error: null }])),
-      map: null
+      map: null,
+      smmRoutes: null,
+      smmRouteItems: []
     };
     const $ = (id) => document.getElementById(id);
 
@@ -373,6 +393,7 @@
       $('layerControls').querySelectorAll('input[data-layer]').forEach((input) => input.addEventListener('change', () => {
         state.layers[input.dataset.layer].enabled = input.checked;
         renderVisibleFeatures();
+        updateSmmPanel();
       }));
     }
 
@@ -403,6 +424,7 @@
       const records = allRecords();
       records.forEach((item) => { if (item.feature?.parent) state.map.removeChild(item.feature); });
       records.filter(isVisible).forEach((item) => state.map.addChild(item.feature));
+      renderSmmRouteMarkers();
       const visible = records.filter(isVisible).length;
       const enabled = Object.values(state.layers).filter((layer) => layer.enabled).map((layer) => `${layer.label}: ${layer.records.length}`).join(' · ');
       $('status').textContent = `Показано объектов: ${visible}. Загружено: ${enabled}.`;
@@ -460,6 +482,105 @@
       renderDistrictSelect(); renderSectionSelect(); renderLayerControls(); renderLegend(); renderVisibleFeatures();
       fitToData(allRecords());
       $('status').textContent = `Загружено: ${state.layers[layerKey].label} — ${normalized.length} объектов (${sourceName}).`;
+    }
+
+    const SMM_ROUTES_SOURCE = 'smm_routes.geojson';
+    const ROUTE_VECTOR_MARKUP = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5v12M4 6l4-4.5L12 6"/></svg>';
+    const NOZZLE_VECTOR_MARKUP = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5 12 13H4z"/></svg>';
+
+    function variantFeature(variantId) {
+      return (state.smmRoutes?.features || []).find((feature) => feature.properties?.variant_id === variantId);
+    }
+
+    function boundsOfGeometry(geometry) {
+      let minLng = Infinity;
+      let minLat = Infinity;
+      let maxLng = -Infinity;
+      let maxLat = -Infinity;
+      const walk = (value) => {
+        if (Array.isArray(value) && typeof value[0] === 'number' && typeof value[1] === 'number') {
+          minLng = Math.min(minLng, value[0]);
+          minLat = Math.min(minLat, value[1]);
+          maxLng = Math.max(maxLng, value[0]);
+          maxLat = Math.max(maxLat, value[1]);
+          return;
+        }
+        if (Array.isArray(value)) value.forEach(walk);
+      };
+      walk(geometry?.coordinates);
+      return { minLng, minLat, maxLng, maxLat };
+    }
+
+    function updateSmmPanel() {
+      $('smmVariants').hidden = !state.layers.smm.enabled || !state.smmRoutes;
+    }
+
+    function renderSmmVariantPanel() {
+      const variants = (state.smmRoutes?.features || [])
+        .map((feature) => feature.properties)
+        .filter((properties) => properties?.feature_kind === 'variant_outline')
+        .sort((a, b) => String(a.variant_id).localeCompare(String(b.variant_id), 'ru', { numeric: true }));
+      $('smmVariantButtons').innerHTML = variants.map((properties) => `
+        <button class="smm-variant" type="button" data-variant="${escapeHtml(properties.variant_id)}">
+          <span>${escapeHtml(properties.code || properties.variant_id)} · ${escapeHtml(properties.name)}<small>${escapeHtml(properties.address || '')}</small></span>
+        </button>`).join('');
+      $('smmVariantButtons').querySelectorAll('.smm-variant').forEach((button) => button.addEventListener('click', () => zoomToSmmVariant(button.dataset.variant)));
+    }
+
+    function zoomToSmmVariant(variantId) {
+      if (!state.map) return;
+      const feature = variantFeature(variantId);
+      if (!feature) return;
+      if (!state.layers.smm.enabled) {
+        state.layers.smm.enabled = true;
+        renderLayerControls(); renderVisibleFeatures(); updateSmmPanel();
+      }
+      const bounds = boundsOfGeometry(feature.geometry);
+      if (Number.isFinite(bounds.minLng)) {
+        state.map.update({ location: { bounds: [[bounds.minLng, bounds.minLat], [bounds.maxLng, bounds.maxLat]] } });
+      }
+    }
+
+    async function createSmmRouteMarkers() {
+      const { YMapMarker } = await window.ymaps3Ready;
+      if (!YMapMarker || !state.smmRoutes) return;
+      state.smmRouteItems = [];
+      (state.smmRoutes.features || []).forEach((feature) => {
+        const kind = feature.properties?.feature_kind;
+        if (kind !== 'route_direction' && kind !== 'nozzle_direction') return;
+        const bearing = Number(feature.properties.bearing);
+        if (!Number.isFinite(bearing)) return;
+        const marker = document.createElement('button');
+        marker.type = 'button';
+        marker.className = `route-vector ${kind === 'nozzle_direction' ? 'nozzle' : 'movement'}`;
+        marker.style.setProperty('--bearing', `${bearing}deg`);
+        marker.innerHTML = kind === 'nozzle_direction' ? NOZZLE_VECTOR_MARKUP : ROUTE_VECTOR_MARKUP;
+        marker.title = `${variantFeature(feature.properties.variant_id)?.properties?.name || feature.properties.variant_id} — ${kind === 'nozzle_direction' ? 'направление выброса' : 'направление движения'}, ${Math.round(bearing)}°`;
+        marker.addEventListener('click', () => zoomToSmmVariant(feature.properties.variant_id));
+        state.smmRouteItems.push({ marker: new YMapMarker({ coordinates: feature.geometry.coordinates }, marker) });
+      });
+      renderSmmRouteMarkers();
+    }
+
+    function renderSmmRouteMarkers() {
+      if (!state.map) return;
+      state.smmRouteItems.forEach((item) => { if (item.marker.parent) state.map.removeChild(item.marker); });
+      if (state.layers.smm.enabled) state.smmRouteItems.forEach((item) => state.map.addChild(item.marker));
+    }
+
+    async function loadSmmRoutesOverlay() {
+      try {
+        const response = await fetch(`./${SMM_ROUTES_SOURCE}`, { cache: 'no-store' });
+        if (!response.ok) throw new Error(`smm_routes.geojson: HTTP ${response.status}`);
+        state.smmRoutes = await response.json();
+        renderSmmVariantPanel();
+        await createSmmRouteMarkers();
+        $('status').textContent = `Готово. Загружено объектов: ${allRecords().length}. Включайте нужные слои. Быстрые переходы СММ — активны.`;
+      } catch (error) {
+        $('smmVariants').hidden = true;
+        $('status').textContent = `Готово. Быстрые переходы СММ недоступны: ${error.message}`;
+      }
+      updateSmmPanel();
     }
 
     function fitToData(items) {
@@ -537,6 +658,7 @@
         renderLayerControls();
         fitToData(allRecords());
         $('status').textContent = `Готово. Загружено объектов: ${allRecords().length}. Включайте нужные слои.`;
+        await loadSmmRoutesOverlay();
       } catch (error) {
         $('status').className = 'status error';
         $('status').textContent = `Ошибка запуска карты: ${error.message}`;

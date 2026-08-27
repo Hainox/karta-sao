@@ -135,3 +135,17 @@ def test_dt5_route_bypasses_the_building_outline():
     svg = page("smm/dt5.svg")
     assert 'M733 200 Q695 290 660 372' in svg
     assert 'M747 245 Q533 443 242 316' not in svg
+
+
+def test_root_map_exposes_smm_variants_and_direction_overlays():
+    """Switching on SMM must reveal five quick-zoom variants and their route/nozzle vectors."""
+    markup = page("index.html")
+    assert 'id="smmVariants"' in markup
+    assert 'function zoomToSmmVariant' in markup
+    assert 'smm_routes' in markup
+
+    data = json.loads(Path("smm_routes.geojson").read_text(encoding="utf-8"))
+    variants = {feature["properties"]["variant_id"] for feature in data["features"]}
+    assert variants == {"dt1", "dt2", "dt3", "dt4", "dt5"}
+    assert any(feature["properties"]["feature_kind"] == "route_direction" for feature in data["features"])
+    assert any(feature["properties"]["feature_kind"] == "nozzle_direction" for feature in data["features"])

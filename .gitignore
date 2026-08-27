@@ -2,3 +2,6 @@
 publish/
 
 .worktrees/
+__pycache__/
+.freebuff/
+node_modules/
