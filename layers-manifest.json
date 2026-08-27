@@ -22,8 +22,8 @@
       "name": "Маршруты СММ (зимняя уборка)",
       "file": "smm.geojson",
       "loaded": 3,
-      "source": "Действующий реестр дворов САО; маршрутные схемы из рабочего архива",
-      "address_check_required": 1
+      "source": "АСУ ОДС / reestr-ogh.mos.ru, тип объекта 38; МСК-77 преобразована в WGS84",
+      "address_check_required": 0
     }
   },
   "dp_sp_source": {
