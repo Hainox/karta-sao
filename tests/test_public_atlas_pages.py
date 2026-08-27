@@ -104,3 +104,15 @@ def test_smm_storage_locations_are_published_from_winter_register_inside_sao():
         assert props["address"]
         assert props["source_rows"] >= 1
         assert props["smm_units"] >= 0
+
+
+def test_smm_routes_include_staropetrovsky_variant():
+    """The fifth SMM variant must be selectable and retain its source qualification."""
+    markup = page("smm/index.html")
+    assert 'data-yard="dt5"' in markup
+    assert "Старопетровский" in markup
+
+    data = json.loads(Path("smm.geojson").read_text(encoding="utf-8"))
+    feature = next(feature for feature in data["features"] if feature["id"] == "smm-dt5")
+    assert feature["properties"]["address"] == "Старопетровский проезд, д. 10Б"
+    assert "требует" in feature["properties"]["geometry_status"].lower()

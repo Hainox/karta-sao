@@ -160,12 +160,22 @@ footer{padding:var(--sp-3) var(--sp-4);font-size:var(--fs-xs);color:var(--muted)
         <div class="ttl">Межкорпусный проезд и два параллельных фасада</div>
         <div class="addr">1-й Амбулаторный пр-д, д. 5, к. 1 и к. 2 · Аэропорт</div>
       </button>
+      <button type="button" class="yard" data-yard="dt5" aria-pressed="false">
+        <span class="code">ДТ-5 · «Полукольцо»</span>
+        <div class="ttl">Дуговой внутренний проезд вокруг здания</div>
+        <div class="addr">Старопетровский проезд, д. 10Б · Войковский</div>
+      </button>
       <button type="button" class="teaser-more" data-open-section="sec-objects">Как подобраны адреса-аналоги →</button>
     </section>
 
     <section class="card" style="margin-bottom:16px">
       <h2>Принятое решение</h2>
       <dl class="kv" id="factCard"></dl>
+      <button type="button" class="yard" data-yard="dt5" aria-pressed="false">
+        <span class="code">ДТ-5 · «Полукольцо»</span>
+        <div class="ttl">Дуговой внутренний проезд вокруг здания</div>
+        <div class="addr">Старопетровский проезд, д. 10Б · Войковский</div>
+      </button>
       <button type="button" class="teaser-more" data-open-section="sec-variants">Какие варианты проверялись и почему выбран этот →</button>
     </section>
 
@@ -190,13 +200,23 @@ footer{padding:var(--sp-3) var(--sp-4);font-size:var(--fs-xs);color:var(--muted)
       <div id="schemeWrap">
         <div id="scheme"><img id="schemeImg" src="dt1.svg" alt="Схема маршрута движения СММ"></div>
         <p class="cap" id="schemeCap"></p>
-        <button type="button" class="teaser-more" data-open-section="sec-read">Как читать схему: стрелки, струи, точки приземления →</button>
+        <button type="button" class="yard" data-yard="dt5" aria-pressed="false">
+        <span class="code">ДТ-5 · «Полукольцо»</span>
+        <div class="ttl">Дуговой внутренний проезд вокруг здания</div>
+        <div class="addr">Старопетровский проезд, д. 10Б · Войковский</div>
+      </button>
+      <button type="button" class="teaser-more" data-open-section="sec-read">Как читать схему: стрелки, струи, точки приземления →</button>
       </div>
 
       <div id="mapWrap" class="hidden">
         <div id="map"></div>
         <p class="status" id="status">Загрузка карты…</p>
-        <button type="button" class="teaser-more" data-open-section="sec-layer">Почему это отдельный модуль, а не только слой карты →</button>
+        <button type="button" class="yard" data-yard="dt5" aria-pressed="false">
+        <span class="code">ДТ-5 · «Полукольцо»</span>
+        <div class="ttl">Дуговой внутренний проезд вокруг здания</div>
+        <div class="addr">Старопетровский проезд, д. 10Б · Войковский</div>
+      </button>
+      <button type="button" class="teaser-more" data-open-section="sec-layer">Почему это отдельный модуль, а не только слой карты →</button>
       </div>
     </section>
   </main>
@@ -252,6 +272,8 @@ footer{padding:var(--sp-3) var(--sp-4);font-size:var(--fs-xs);color:var(--muted)
               <td>Группа домов, узкий межквартальный проход, живая изгородь и клумбы</td></tr>
           <tr><td>ДТ-4 «Два корпуса»</td><td>1-й Амбулаторный пр-д, д. 5, к. 1 и к. 2</td><td>Аэропорт</td>
               <td>Межкорпусный проезд; челночная обработка от одного фасада к другому</td></tr>
+          <tr><td>ДТ-5 «Полукольцо»</td><td>Старопетровский проезд, д. 10Б</td><td>Войковский</td>
+              <td>Дуговой внутренний проезд вокруг здания; последовательный обход без выброса на посадки</td></tr>
         </table>
         <div class="flag"><b>Статус привязки.</b> Контуры трёх дворов выгружены из АСУ ОДС
         (тип объекта 38) и преобразованы из МСК-77 в WGS84. Для ДТ-2 уточнён адрес:
@@ -576,6 +598,22 @@ footer{padding:var(--sp-3) var(--sp-4);font-size:var(--fs-xs);color:var(--muted)
         ['Манёвр','Разворот только на свободной площадке'],
         ['Направление выброса','Определяется после осмотра'],
         ['Складирование','Н-4 · место утверждает ответственный'],
+        ['Статус привязки','<span class="pill warn">Требует сверки участка</span>'],
+        ['Статус маршрута','<span class="pill warn">Требует утверждения</span>']
+      ]
+    },
+    dt5: {
+      code:'ДТ-5', name:'«Полукольцо» — дуговой внутренний проезд',
+      addr:'Старопетровский проезд, д. 10Б', district:'Войковский',
+      center:[37.5087126,55.8229632], scheme:'dt5.svg',
+      cap:'ДТ-5 «Полукольцо». Рабочая схема: последовательный дуговой проход по внутреннему проезду; разворот выполняется только на свободной площадке. Направление выброса и место складирования определяются после натурного осмотра.',
+      facts:[
+        ['Вариант','В-5 · дуговой обход'],
+        ['Машина','СММ — по закреплению участка'],
+        ['Проходов','Уточняются по натурному замеру'],
+        ['Манёвр','Разворот только на свободной площадке'],
+        ['Направление выброса','Определяется после осмотра'],
+        ['Складирование','Н-5 · место утверждает ответственный'],
         ['Статус привязки','<span class="pill warn">Требует сверки участка</span>'],
         ['Статус маршрута','<span class="pill warn">Требует утверждения</span>']
       ]
