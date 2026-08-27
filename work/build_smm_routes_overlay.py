@@ -173,21 +173,26 @@ def load_nozzle_points(path):
     points = []
     if isinstance(data, dict) and "points" in data:
         for row in data["points"]:
-            if isinstance(row, dict):
-                points.append((float(row.get("lng")), float(row.get("lat")),
-                               float(row.get("bearing", row.get("azimuth", 0)))))
-            else:
-                bearing = float(row[2]) if len(row) > 2 else 0.0
-                points.append((float(row[0]), float(row[1]), bearing))
+            try:
+                if isinstance(row, dict):
+                    points.append((float(row["lng"]), float(row["lat"]),
+                                   float(row.get("bearing", row.get("azimuth", 0)))))
+                elif isinstance(row, (list, tuple)) and len(row) >= 3:
+                    points.append((float(row[0]), float(row[1]), float(row[2])))
+            except (KeyError, TypeError, ValueError):
+                continue
     elif isinstance(data, dict) and data.get("type") == "FeatureCollection":
         for feature in data.get("features", []):
-            geom = feature.get("geometry") or {}
-            coords = geom.get("coordinates")
-            if geom.get("type") != "Point" or not coords:
+            try:
+                geom = feature.get("geometry") or {}
+                coords = geom.get("coordinates")
+                if geom.get("type") != "Point" or not isinstance(coords, (list, tuple)) or len(coords) < 2:
+                    continue
+                props = feature.get("properties") or {}
+                points.append((float(coords[0]), float(coords[1]),
+                               float(props.get("bearing", props.get("azimuth", 0)))))
+            except (AttributeError, KeyError, TypeError, ValueError):
                 continue
-            props = feature.get("properties") or {}
-            points.append((float(coords[0]), float(coords[1]),
-                           float(props.get("bearing", props.get("azimuth", 0)))))
     return points
 
 
@@ -237,14 +242,14 @@ def build(src_path, out_path, tracks_dir):
         # Треки, сгенерированные build_smm_road_routes.py, помечаем как
         # route_origin="road_nav" (презентационные проезды из схемы),
         # а настоящие GPS-треки — как route_origin="gps".
-        route_origin = "road_nav"
+        route_origin = "yard_route"
         if nozzle_file.exists():
             try:
                 nozzle_meta = json.loads(nozzle_file.read_text(encoding="utf-8"))
                 if isinstance(nozzle_meta, dict) and nozzle_meta.get("source_note", "").startswith("Презентационный"):
-                    route_origin = "road_nav"
+                    route_origin = "yard_route"
             except Exception:
-                route_origin = "road_nav"
+                route_origin = "yard_route"
 
         if len(route_points) >= 2:
             usage["route"] = "gpx"
@@ -256,13 +261,14 @@ def build(src_path, out_path, tracks_dir):
                 "properties": {
                     "variant_id": variant_id,
                     "feature_kind": "route_direction",
+                    "arrow_type": "movement",
                     "bearing": round(circular_mean(bearings) if bearings else float("nan"), 1),
                     "source": "gpx",
                     "route_origin": route_origin,
                     "track_file": route_file.name,
                     "track_points": len(route_points),
                     "name": f"{code}: направление движения по маршруту",
-                    "status": (f"Маршрут по проезду из схемы (by build_smm_road_routes, {len(route_points)} точек): презентационный" if route_origin == "road_nav" else f"GPS-трек ({len(route_points)} точек): фактический маршрут"),
+                    "status": (f"Маршрут внутри двора из схемы (by build_smm_road_routes, {len(route_points)} точек): уборка двора" if route_origin == "road_nav" else f"GPS-трек ({len(route_points)} точек): фактический маршрут"),
                 },
                 "geometry": {
                     "type": "LineString",
@@ -276,6 +282,7 @@ def build(src_path, out_path, tracks_dir):
                 "properties": {
                     "variant_id": variant_id,
                     "feature_kind": "route_direction",
+                    "arrow_type": "movement",
                     "bearing": cfg["route_bearing"],
                     "name": f"{code}: направление движения по маршруту",
                     "status": VECTOR_STATUS,
@@ -299,6 +306,7 @@ def build(src_path, out_path, tracks_dir):
                 "properties": {
                     "variant_id": variant_id,
                     "feature_kind": "nozzle_direction",
+                    "arrow_type": "nozzle",
                     "bearing": round(circular_mean(bearings), 1),
                     "source": "json",
                     "route_origin": route_origin,
@@ -306,7 +314,7 @@ def build(src_path, out_path, tracks_dir):
                     "nozzle_track": [[round(p[0], 6), round(p[1], 6), round(p[2], 1)] for p in track],
                     "name": f"{code}: направление выброса снега",
                     "note": cfg["nozzle_note"],
-                    "status": (f"Векторы выброса из схемы ({len(nozzle_points)} точек, by build_smm_road_routes): презентационные" if route_origin == "road_nav" else f"Замер направлений выброса: {len(nozzle_points)} точек"),
+                    "status": (f"Векторы выброса внутри двора ({len(nozzle_points)} точек, by build_smm_road_routes): уборка двора" if route_origin == "road_nav" else f"Замер направлений выброса: {len(nozzle_points)} точек"),
                 },
                 "geometry": {
                     "type": "Point",
@@ -323,6 +331,7 @@ def build(src_path, out_path, tracks_dir):
                 "properties": {
                     "variant_id": variant_id,
                     "feature_kind": "nozzle_direction",
+                    "arrow_type": "nozzle",
                     "bearing": cfg["nozzle_bearing"],
                     "name": f"{code}: направление выброса снега",
                     "note": cfg["nozzle_note"],

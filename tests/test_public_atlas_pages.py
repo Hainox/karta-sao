@@ -153,7 +153,7 @@ def test_smm_print_a3_form_is_self_contained_and_in_sync_with_generator():
         assert f"{code} ·" in markup
     assert markup.count("data:image/svg+xml;base64,") == 5
     assert "data:image/png;base64," in markup
-    assert "Маршрут по проезду из схемы" in markup  # презентационные дорожные маршруты
+    assert "Маршрут внутри двора из схемы" in markup  # маршрут уборки двора
 
     work_dir = Path(tempfile.mkdtemp(prefix="smm-print-test-", dir=repo / "work"))
     try:
@@ -201,6 +201,18 @@ def test_root_map_exposes_smm_variants_and_direction_overlays():
     assert variants == {"dt1", "dt2", "dt3", "dt4", "dt5"}
     assert any(feature["properties"]["feature_kind"] == "route_direction" for feature in data["features"])
     assert any(feature["properties"]["feature_kind"] == "nozzle_direction" for feature in data["features"])
+
+
+def test_smm_routes_overlay_skips_malformed_nozzle_measurements():
+    """A bad nozzle row must not discard the rest of the measured vector field."""
+    from work.build_smm_routes_overlay import load_nozzle_points
+
+    path = Path("work") / "_malformed_nozzle_test.json"
+    try:
+        path.write_text(json.dumps({"points": [None, [37.5, 55.8], [37.5, 55.8, "bad"], [37.5, 55.8, 42]]}), encoding="utf-8")
+        assert load_nozzle_points(path) == [(37.5, 55.8, 42.0)]
+    finally:
+        path.unlink(missing_ok=True)
 
 
 def test_smm_routes_overlay_uses_gps_tracks_when_present():
@@ -257,6 +269,8 @@ def test_smm_routes_overlay_uses_gps_tracks_when_present():
         assert "nozzle-measure" in markup
         assert "feature.properties.nozzle_track" in markup
         assert "замер выброса №" in markup
+        assert "measure.length < 3" in markup
+        assert "Number.isFinite(longitude)" in markup
 
         schematic = next(
             f for f in data["features"]

@@ -557,7 +557,7 @@
             id: feature.id,
             geometry: feature.geometry,
             properties: feature.properties,
-            style: { stroke: [{ color: '#a30000', width: 5, opacity: 0.85 }], interactive: true, cursor: 'pointer' },
+            style: { stroke: [{ color: '#c00000', width: 5, opacity: 0.9 }], interactive: true, cursor: 'pointer' },
             onClick: () => zoomToSmmVariant(variantId)
           }) });
           return;
@@ -566,17 +566,20 @@
         if (!Number.isFinite(bearing)) return;
         if (kind === 'nozzle_direction' && Array.isArray(feature.properties.nozzle_track)) {
           feature.properties.nozzle_track.forEach((measure, index) => {
+            if (!Array.isArray(measure) || measure.length < 3) return;
             const [lng, lat, measureBearing] = measure;
+            const longitude = Number(lng);
+            const latitude = Number(lat);
             const measureNumber = Number(measureBearing);
-            if (!Array.isArray(measure) || !Number.isFinite(measureNumber)) return;
+            if (!Number.isFinite(longitude) || !Number.isFinite(latitude) || !Number.isFinite(measureNumber)) return;
             const marker = document.createElement('button');
             marker.type = 'button';
-            marker.className = 'route-vector nozzle-measure';
+            marker.className = 'route-vector nozzle nozzle-measure';
             marker.style.setProperty('--bearing', `${measureNumber}deg`);
             marker.innerHTML = NOZZLE_MEASURE_MARKUP;
             marker.title = `${variantFeature(variantId)?.properties?.name || variantId} — замер выброса №${index + 1}: ${Math.round(measureNumber)}°`;
             marker.addEventListener('click', () => zoomToSmmVariant(variantId));
-            state.smmRouteItems.push({ marker: new YMapMarker({ coordinates: [Number(lng), Number(lat)] }, marker) });
+            state.smmRouteItems.push({ marker: new YMapMarker({ coordinates: [longitude, latitude] }, marker) });
           });
           return;
         }
