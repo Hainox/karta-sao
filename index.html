@@ -107,12 +107,12 @@
     .smm-variant { display:flex; align-items:center; justify-content:space-between; gap:8px; min-height:38px; padding:7px 8px; border:1px solid #e9d5d3; border-radius:8px; background:#fff; color:var(--ink); font:600 11px/1.25 inherit; text-align:left; cursor:pointer; }
     .smm-variant:hover,.smm-variant:focus-visible { border-color:#c00000; background:#fff3f2; outline:none; }
     .smm-variant small { display:block; margin-top:2px; color:#708089; font-size:10px; font-weight:400; }
-    .route-vector { display:grid; place-items:center; width:30px; height:30px; padding:0; border:2px solid #fff; border-radius:50%; color:#fff; box-shadow:0 2px 7px rgba(16,38,54,.42); cursor:pointer; transform:translate(-50%,-50%) rotate(var(--bearing,0deg)); }
-    .route-vector svg { width:19px; height:19px; fill:currentColor; stroke:none; pointer-events:none; }
-    .route-vector.movement { background:#c00000; }
-    .route-vector.nozzle { background:#ef6c00; }
-    .nozzle-measure { width:17px; height:17px; padding:0; border:1px solid #fff; border-radius:3px; background:#7a3b00; color:#ffb877; box-shadow:0 1px 3px rgba(16,38,54,.5); cursor:pointer; transform:translate(-50%,-50%) rotate(var(--bearing,0deg)); }
-    .nozzle-measure svg { width:11px; height:11px; fill:currentColor; stroke:none; pointer-events:none; }
+    .route-vector { display:grid; place-items:center; width:28px; height:28px; padding:0; border:0; border-radius:0; background:transparent; color:#c00000; box-shadow:none; cursor:pointer; transform:translate(-50%,-50%) rotate(var(--bearing,0deg)); }
+    .route-vector svg { width:27px; height:27px; fill:none; stroke:currentColor; stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round; pointer-events:none; filter:drop-shadow(0 1px 1px rgba(255,255,255,.95)); }
+    .route-vector.movement { color:#c00000; }
+    .route-vector.nozzle { color:#ef6c00; }
+    .nozzle-measure { width:23px; height:23px; padding:0; border:0; border-radius:0; background:transparent; color:#ef6c00; box-shadow:none; cursor:pointer; transform:translate(-50%,-50%) rotate(var(--bearing,0deg)); }
+    .nozzle-measure svg { width:22px; height:22px; fill:none; stroke:currentColor; stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round; pointer-events:none; filter:drop-shadow(0 1px 1px rgba(255,255,255,.95)); }
     .status { display:flex; align-items:center; gap:9px; min-height:42px; margin-top:13px; padding:9px 11px; border:1px solid #cfe6df; border-radius:10px; background:#eff9f5; color:#27665a; font-size:11px; line-height:1.35; }
     .status.error { border-color:#f0caca; background:#fff2f1; color:#9b3838; }
     .panel-actions { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:9px; }
