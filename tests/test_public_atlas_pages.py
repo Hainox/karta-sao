@@ -234,6 +234,11 @@ def test_smm_routes_overlay_uses_gps_tracks_when_present():
         assert abs(nozzle["properties"]["bearing"] - 20) < 2.0
         assert nozzle["properties"]["nozzle_track"] == [[37.5123, 55.7942, 20], [37.5125, 55.7942, 25], [37.5127, 55.7942, 15]]
 
+        markup = page("index.html")
+        assert "nozzle-measure" in markup
+        assert "feature.properties.nozzle_track" in markup
+        assert "замер выброса №" in markup
+
         schematic = next(
             f for f in data["features"]
             if f["properties"]["variant_id"] == "dt2" and f["properties"]["feature_kind"] == "route_direction"

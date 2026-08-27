@@ -111,6 +111,8 @@
     .route-vector svg { width:19px; height:19px; fill:currentColor; stroke:none; pointer-events:none; }
     .route-vector.movement { background:#c00000; }
     .route-vector.nozzle { background:#ef6c00; }
+    .nozzle-measure { width:17px; height:17px; padding:0; border:1px solid #fff; border-radius:3px; background:#7a3b00; color:#ffb877; box-shadow:0 1px 3px rgba(16,38,54,.5); cursor:pointer; transform:translate(-50%,-50%) rotate(var(--bearing,0deg)); }
+    .nozzle-measure svg { width:11px; height:11px; fill:currentColor; stroke:none; pointer-events:none; }
     .status { display:flex; align-items:center; gap:9px; min-height:42px; margin-top:13px; padding:9px 11px; border:1px solid #cfe6df; border-radius:10px; background:#eff9f5; color:#27665a; font-size:11px; line-height:1.35; }
     .status.error { border-color:#f0caca; background:#fff2f1; color:#9b3838; }
     .panel-actions { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:9px; }
@@ -487,6 +489,7 @@
     const SMM_ROUTES_SOURCE = 'smm_routes.geojson';
     const ROUTE_VECTOR_MARKUP = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5v12M4 6l4-4.5L12 6"/></svg>';
     const NOZZLE_VECTOR_MARKUP = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5 12 13H4z"/></svg>';
+    const NOZZLE_MEASURE_MARKUP = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v11M4.5 6.5 8 2l3.5 4.5"/></svg>';
 
     function variantFeature(variantId) {
       return (state.smmRoutes?.features || []).find((feature) => feature.properties?.variant_id === variantId);
@@ -561,6 +564,22 @@
         }
         const bearing = Number(feature.properties.bearing);
         if (!Number.isFinite(bearing)) return;
+        if (kind === 'nozzle_direction' && Array.isArray(feature.properties.nozzle_track)) {
+          feature.properties.nozzle_track.forEach((measure, index) => {
+            const [lng, lat, measureBearing] = measure;
+            const measureNumber = Number(measureBearing);
+            if (!Array.isArray(measure) || !Number.isFinite(measureNumber)) return;
+            const marker = document.createElement('button');
+            marker.type = 'button';
+            marker.className = 'route-vector nozzle-measure';
+            marker.style.setProperty('--bearing', `${measureNumber}deg`);
+            marker.innerHTML = NOZZLE_MEASURE_MARKUP;
+            marker.title = `${variantFeature(variantId)?.properties?.name || variantId} — замер выброса №${index + 1}: ${Math.round(measureNumber)}°`;
+            marker.addEventListener('click', () => zoomToSmmVariant(variantId));
+            state.smmRouteItems.push({ marker: new YMapMarker({ coordinates: [Number(lng), Number(lat)] }, marker) });
+          });
+          return;
+        }
         const marker = document.createElement('button');
         marker.type = 'button';
         marker.className = `route-vector ${kind === 'nozzle_direction' ? 'nozzle' : 'movement'}`;
