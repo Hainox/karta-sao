@@ -139,6 +139,37 @@ def test_dt5_route_bypasses_the_building_outline():
     assert 'M747 245 Q533 443 242 316' not in svg
 
 
+def test_smm_print_a3_form_is_self_contained_and_in_sync_with_generator():
+    """The SMM print form must be A3-landscape, embed all five schemes and be regenerable byte-identically."""
+    import shutil
+    import tempfile
+
+    repo = Path(__file__).resolve().parents[1]
+    markup = page("smm/print-a3.html")
+    assert "@page { size:A3 landscape" in markup
+    assert 'id="printBtn"' in markup
+    assert markup.count('<section class="card">') == 5
+    for code in ("ДТ-1", "ДТ-2", "ДТ-3", "ДТ-4", "ДТ-5"):
+        assert f"{code} ·" in markup
+    assert markup.count("data:image/svg+xml;base64,") == 5
+    assert "data:image/png;base64," in markup
+    assert "уточняется после осмотра" in markup
+
+    work_dir = Path(tempfile.mkdtemp(prefix="smm-print-test-", dir=repo / "work"))
+    try:
+        out = work_dir / "print-a3.html"
+        subprocess.run(
+            [sys.executable, "work/build_smm_print_a3.py", "--out", str(out)],
+            check=True,
+            cwd=repo,
+            capture_output=True,
+            text=True,
+        )
+        assert out.read_text(encoding="utf-8") == markup
+    finally:
+        shutil.rmtree(work_dir, ignore_errors=True)
+
+
 def test_root_map_exposes_smm_variants_and_direction_overlays():
     """Switching on SMM must reveal five quick-zoom variants and their route/nozzle vectors."""
     markup = page("index.html")
