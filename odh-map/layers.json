@@ -1,1 +1,81 @@
-{"layers":[{"key":"boundary","name":"Граница САО (включая Молжаниновский район)","color":"#4a148c","default":true,"url":"layers/sao_boundary_wgs84.geojson"},{"key":"queue1","name":"ОДХ: 1-я очередь (97 позиций)","color":"#d32f2f","default":true,"url":"layers/sao_queue1_wgs84.geojson"},{"key":"queue2","name":"ОДХ: 2-я очередь (489 позиций)","color":"#1565c0","default":true,"url":"layers/sao_queue2_wgs84.geojson"},{"key":"queue3","name":"ОДХ: 3-я очередь (46 позиций)","color":"#2e7d32","default":true,"url":"layers/sao_queue3_wgs84.geojson"},{"key":"pgm","name":"Контейнеры ПГМ (215 привязок к ОДХ; всего 451 шт.)","color":"#ef6c00","default":false,"url":"layers/sao_pgm_containers_wgs84.geojson"},{"key":"snow","name":"Временное складирование снега (24 кандидата на карте)","color":"#00acc1","default":false,"url":"layers/sao_snow_storage_sites_wgs84.geojson"},{"key":"dry_snow","name":"Сухие свалки снега (3 объекта, ОЗП 2026–2027)","color":"#6d4c41","default":true,"url":"layers/sao_dry_snow_dumps_wgs84.geojson"},{"key":"healthcare","name":"Государственные учреждения здравоохранения (20 подтверждено)","color":"#ad1457","default":true,"url":"layers/sao_state_healthcare_confirmed_wgs84.geojson"},{"key":"healthcare_review","name":"Учреждение здравоохранения: адрес на уточнении (1)","color":"#f9a825","default":false,"url":"layers/sao_state_healthcare_candidates_wgs84.geojson"},{"key":"hydrants","name":"Пожарные гидранты (24 адресных центроида)","color":"#37474f","default":false,"url":"layers/sao_fire_hydrants_address_centroids_wgs84.geojson"}]}
+{
+  "layers": [
+    {
+      "key": "boundary",
+      "name": "Граница САО (включая Молжаниновский район)",
+      "color": "#4a148c",
+      "default": true,
+      "url": "layers/sao_boundary_wgs84.geojson"
+    },
+    {
+      "key": "queue1",
+      "name": "ОДХ: 1-я очередь (97 позиций)",
+      "color": "#d32f2f",
+      "default": true,
+      "url": "layers/sao_queue1_wgs84.geojson"
+    },
+    {
+      "key": "queue2",
+      "name": "ОДХ: 2-я очередь (489 позиций)",
+      "color": "#1565c0",
+      "default": true,
+      "url": "layers/sao_queue2_wgs84.geojson"
+    },
+    {
+      "key": "queue3",
+      "name": "ОДХ: 3-я очередь (46 позиций)",
+      "color": "#2e7d32",
+      "default": true,
+      "url": "layers/sao_queue3_wgs84.geojson"
+    },
+    {
+      "key": "pgm",
+      "name": "Контейнеры ПГМ (215 привязок к ОДХ; всего 451 шт.)",
+      "color": "#ef6c00",
+      "default": false,
+      "url": "layers/sao_pgm_containers_wgs84.geojson"
+    },
+    {
+      "key": "snow",
+      "name": "Временное складирование снега (24 кандидата на карте)",
+      "color": "#00acc1",
+      "default": false,
+      "url": "layers/sao_snow_storage_sites_wgs84.geojson"
+    },
+    {
+      "key": "dry_snow",
+      "name": "Сухие свалки снега (3 объекта, ОЗП 2026–2027)",
+      "color": "#6d4c41",
+      "default": true,
+      "url": "layers/sao_dry_snow_dumps_wgs84.geojson"
+    },
+    {
+      "key": "healthcare",
+      "name": "Государственные учреждения здравоохранения (20 подтверждено)",
+      "color": "#ad1457",
+      "default": true,
+      "url": "layers/sao_state_healthcare_confirmed_wgs84.geojson"
+    },
+    {
+      "key": "healthcare_review",
+      "name": "Учреждение здравоохранения: адрес на уточнении (1)",
+      "color": "#f9a825",
+      "default": false,
+      "url": "layers/sao_state_healthcare_candidates_wgs84.geojson"
+    },
+    {
+      "key": "smm_storage",
+      "name": "Места хранения СММ (402 площадки)",
+      "color": "#6a1b9a",
+      "default": false,
+      "url": "layers/sao_smm_storage_locations_wgs84.geojson"
+    },
+    {
+      "key": "hydrants",
+      "name": "Пожарные гидранты (24 адресных центроида)",
+      "color": "#37474f",
+      "default": false,
+      "url": "layers/sao_fire_hydrants_address_centroids_wgs84.geojson"
+    }
+  ]
+}

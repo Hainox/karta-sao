@@ -86,3 +86,21 @@ def test_first_queue_is_fixed_at_97_and_excludes_cascade_duplicates():
 
     assert "489" in next(layer for layer in manifest["layers"] if layer["key"] == "queue2")["name"]
     assert "46" in next(layer for layer in manifest["layers"] if layer["key"] == "queue3")["name"]
+
+
+def test_smm_storage_locations_are_published_from_winter_register_inside_sao():
+    """Winter SMM storage locations must be a distinct, inspectable ODH map layer."""
+    layer_dir = Path("odh-map/layers")
+    manifest = json.loads((Path("odh-map") / "layers.json").read_text(encoding="utf-8"))
+    storage_layer = next(layer for layer in manifest["layers"] if layer["key"] == "smm_storage")
+    assert "СММ" in storage_layer["name"]
+
+    boundary = shape(json.loads((layer_dir / "sao_boundary_wgs84.geojson").read_text(encoding="utf-8"))["features"][0]["geometry"])
+    data = json.loads((layer_dir / "sao_smm_storage_locations_wgs84.geojson").read_text(encoding="utf-8"))
+    assert len(data["features"]) >= 300
+    for feature in data["features"]:
+        assert boundary.covers(shape(feature["geometry"]))
+        props = feature["properties"]
+        assert props["address"]
+        assert props["source_rows"] >= 1
+        assert props["smm_units"] >= 0
