@@ -170,6 +170,25 @@ def test_smm_print_a3_form_is_self_contained_and_in_sync_with_generator():
         shutil.rmtree(work_dir, ignore_errors=True)
 
 
+def test_smm_detail_drawer_has_complete_dt4_dt5_cards_and_single_navigation_entry():
+    """DT-4 and DT-5 need operational cards without claiming ASU ODS contours."""
+    markup = page("smm/index.html")
+    assert markup.count('data-yard="dt5"') == 1
+    for heading in (
+        "ДТ-4 «Два корпуса»: технологическая карта",
+        "ДТ-5 «Полукольцо»: технологическая карта",
+    ):
+        assert heading in markup
+    for required_text in (
+        "Н-4",
+        "Н-5",
+        "полевой осмотр",
+        "не являются утверждённой технологической картой",
+        "OpenStreetMap",
+    ):
+        assert required_text in markup
+
+
 def test_root_map_exposes_smm_variants_and_direction_overlays():
     """Switching on SMM must reveal five quick-zoom variants and their route/nozzle vectors."""
     markup = page("index.html")
