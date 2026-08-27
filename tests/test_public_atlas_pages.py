@@ -122,3 +122,9 @@ def test_dt5_route_strokes_do_not_fill_the_inner_driveway():
     """Route highlighting is linework only; SVG paths must not create black filled sectors."""
     svg = page("smm/dt5.svg")
     assert '<g fill="none" stroke="#fff" stroke-width="1.3"' in svg
+
+
+def test_dt5_scheme_uses_a_versioned_asset_url_after_visual_fix():
+    """An old cached SVG must not be reused after a visual correction."""
+    markup = page("smm/index.html")
+    assert "scheme:'dt5.svg?v=" in markup
