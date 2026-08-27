@@ -1,1 +1,35 @@
-{"updated_at":"2026-08-21","layers":{"mno":{"name":"МНО","file":"mno.geojson","source_rows":1861,"loaded":1831,"missing_coordinates":30},"dp":{"name":"Детские площадки","file":"dp.geojson","loaded":2254},"sp":{"name":"Спортивные площадки","file":"sp.geojson","loaded":838}},"dp_sp_source":{"source_rows":3101,"loaded":3092,"missing_coordinates":9,"other_types":{}}}
+{
+  "updated_at": "2026-08-27",
+  "layers": {
+    "mno": {
+      "name": "МНО",
+      "file": "mno.geojson",
+      "source_rows": 1861,
+      "loaded": 1831,
+      "missing_coordinates": 30
+    },
+    "dp": {
+      "name": "Детские площадки",
+      "file": "dp.geojson",
+      "loaded": 2254
+    },
+    "sp": {
+      "name": "Спортивные площадки",
+      "file": "sp.geojson",
+      "loaded": 838
+    },
+    "smm": {
+      "name": "Маршруты СММ (зимняя уборка)",
+      "file": "smm.geojson",
+      "loaded": 3,
+      "source": "Действующий реестр дворов САО; маршрутные схемы из рабочего архива",
+      "address_check_required": 1
+    }
+  },
+  "dp_sp_source": {
+    "source_rows": 3101,
+    "loaded": 3092,
+    "missing_coordinates": 9,
+    "other_types": {}
+  }
+}

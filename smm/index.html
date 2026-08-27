@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Маршруты СММ — зимняя уборка дворовых территорий · САО</title>
+<script src="https://api-maps.yandex.ru/v3/?apikey=6b197a0e-9109-4624-9520-954a47c26dda&lang=ru_RU"></script>
+<style>
+:root{
+  --brand:#C00000; --ink:#101418; --muted:#5c6672; --line:#dfe3e8;
+  --panel:#ffffff; --bg:#f4f6f8; --accent:#0d47a1; --ok:#2e7d32; --warn:#e65100;
+  --r-sm:6px; --r-md:10px; --r-lg:14px;
+  --sp-1:6px; --sp-2:10px; --sp-3:16px; --sp-4:22px; --sp-5:30px;
+  --fs-xs:12px; --fs-sm:13px; --fs-md:15px; --fs-lg:19px; --lh:1.55;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  font-size:var(--fs-md);line-height:var(--lh)}
+.hidden{display:none !important}
+
+/* ---------- шапка ---------- */
+header{background:#fff;border-bottom:1px solid var(--line);padding:var(--sp-3) var(--sp-4);
+  display:flex;align-items:center;gap:var(--sp-3);flex-wrap:wrap;position:sticky;top:0;z-index:20}
+header .coa{width:40px;height:40px;flex:0 0 auto}
+header h1{margin:0;font-size:var(--fs-lg);font-weight:700;letter-spacing:.2px}
+header .sub{margin:2px 0 0;font-size:var(--fs-xs);color:var(--muted)}
+header .spacer{flex:1 1 auto}
+.btn{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:var(--r-sm);
+  padding:8px 14px;font-size:var(--fs-sm);cursor:pointer;font-family:inherit}
+.btn:hover{background:#f0f2f5}
+.btn-primary{background:var(--brand);border-color:var(--brand);color:#fff;font-weight:600}
+.btn-primary:hover{background:#a30000}
+.btn-ghost{background:transparent}
+a.btn{text-decoration:none;display:inline-block}
+
+/* ---------- раскладка ---------- */
+#main{display:grid;grid-template-columns:320px 1fr;gap:var(--sp-3);padding:var(--sp-3) var(--sp-4);
+  align-items:start}
+@media (max-width:1000px){#main{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-md);
+  padding:var(--sp-3)}
+.card h2{margin:0 0 var(--sp-2);font-size:var(--fs-sm);text-transform:uppercase;
+  letter-spacing:.6px;color:var(--muted);font-weight:700}
+
+/* выбор двора */
+.yard{display:block;width:100%;text-align:left;border:1px solid var(--line);background:#fff;
+  border-radius:var(--r-sm);padding:10px 12px;margin-bottom:8px;cursor:pointer;font-family:inherit}
+.yard:hover{border-color:#b9c1ca;background:#fafbfc}
+.yard[aria-pressed="true"]{border-color:var(--brand);box-shadow:inset 3px 0 0 var(--brand);background:#fff8f8}
+.yard .code{font-weight:700;font-size:var(--fs-sm)}
+.yard .ttl{font-size:var(--fs-xs);color:var(--muted);margin-top:2px}
+.yard .addr{font-size:var(--fs-xs);color:var(--accent);margin-top:4px}
+
+.kv{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;font-size:var(--fs-xs)}
+.kv dt{color:var(--muted)}
+.kv dd{margin:0;font-weight:600}
+.pill{display:inline-block;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:700}
+.pill.ok{background:#e8f5e9;color:var(--ok)}
+.pill.warn{background:#fff3e0;color:var(--warn)}
+.teaser-more{border:0;background:transparent;color:var(--accent);font-size:var(--fs-xs);
+  cursor:pointer;padding:6px 0 0;font-family:inherit;text-align:left}
+.teaser-more:hover{text-decoration:underline}
+
+/* карта и схема */
+#stage{display:grid;grid-template-rows:auto auto;gap:var(--sp-3)}
+.tabs{display:flex;gap:6px;margin-bottom:var(--sp-2)}
+.tab-btn{border:1px solid var(--line);background:#fff;border-radius:var(--r-sm);padding:7px 14px;
+  font-size:var(--fs-sm);cursor:pointer;font-family:inherit}
+.tab-btn[aria-pressed="true"]{background:var(--brand);border-color:var(--brand);color:#fff;font-weight:600}
+#map{width:100%;height:420px;border-radius:var(--r-sm);overflow:hidden;background:#e9eef2}
+#scheme{width:100%;background:#fff;border-radius:var(--r-sm)}
+#scheme img{width:100%;height:auto;display:block}
+.cap{font-size:var(--fs-xs);color:var(--muted);margin-top:8px}
+.status{font-size:var(--fs-xs);color:var(--muted);margin-top:8px}
+.status.error{color:var(--brand)}
+
+/* ---------- панель «Подробно» ---------- */
+#infoBackdrop{position:fixed;inset:0;background:rgba(10,15,20,.5);z-index:60}
+#infoDrawer{position:fixed;top:0;right:0;bottom:0;width:min(620px,96vw);background:#fff;
+  border-left:1px solid var(--line);z-index:61;display:flex;flex-direction:column;
+  box-shadow:-20px 0 60px rgba(0,0,0,.25);transform:translateX(102%);
+  transition:transform .28s ease}
+#infoDrawer.open{transform:translateX(0)}
+.drawerHead{display:flex;align-items:flex-start;gap:var(--sp-2);padding:var(--sp-3) var(--sp-4);
+  border-bottom:1px solid var(--line)}
+.drawerHead h2{margin:0;font-size:var(--fs-lg)}
+.drawerHead p{margin:4px 0 0;font-size:var(--fs-xs);color:var(--muted)}
+.drawerHead .spacer{flex:1 1 auto}
+.drawerBody{overflow-y:auto;padding:var(--sp-3) var(--sp-4) var(--sp-5)}
+details{border:1px solid var(--line);border-radius:var(--r-sm);margin-bottom:10px;background:#fff}
+details[open]{border-color:#c9d0d8}
+summary{cursor:pointer;padding:12px 14px;font-weight:600;font-size:var(--fs-sm);list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"▸ ";color:var(--brand)}
+details[open]>summary::before{content:"▾ "}
+.drawerContent{padding:0 14px 14px;font-size:var(--fs-sm)}
+.drawerContent p{margin:0 0 10px}
+.drawerContent ul{margin:0 0 10px;padding-left:20px}
+.drawerContent li{margin-bottom:5px}
+.drawerContent img{width:100%;height:auto;border:1px solid var(--line);border-radius:var(--r-sm);margin:6px 0}
+table{width:100%;border-collapse:collapse;font-size:var(--fs-xs);margin:6px 0 12px}
+th{background:var(--brand);color:#fff;font-weight:700;text-align:left;padding:7px 9px}
+td{border-bottom:1px solid var(--line);padding:6px 9px;vertical-align:top}
+tr:nth-child(even) td{background:#fafbfc}
+.norm{border-left:3px solid var(--brand);background:#fdf6f6;padding:9px 12px;margin:8px 0;
+  font-size:var(--fs-xs);border-radius:0 var(--r-sm) var(--r-sm) 0}
+.norm b{color:var(--brand)}
+.flag{border-left:3px solid var(--warn);background:#fff8ef;padding:9px 12px;margin:8px 0;
+  font-size:var(--fs-xs);border-radius:0 var(--r-sm) var(--r-sm) 0}
+footer{padding:var(--sp-3) var(--sp-4);font-size:var(--fs-xs);color:var(--muted)}
+</style>
+</head>
+<body>
+
+<header>
+  <img class="coa" src="../sao-coa.png" alt="Герб Северного административного округа Москвы"
+       onerror="this.style.display='none'">
+  <div>
+    <h1>Маршруты СММ — зимняя уборка дворовых территорий</h1>
+    <p class="sub">Северный административный округ · роторные снегоуборщики · схемы движения и направления сопла</p>
+  </div>
+  <div class="spacer"></div>
+  <a class="btn btn-ghost" href="../">← Городской атлас САО</a>
+  <button type="button" class="btn btn-primary" id="infoBtn" aria-haspopup="dialog" aria-controls="infoDrawer">
+    ⓘ Подробно
+  </button>
+</header>
+
+<div id="main">
+
+  <nav aria-label="Выбор дворовой территории">
+    <section class="card" style="margin-bottom:16px">
+      <h2>Эталонные дворы</h2>
+      <button type="button" class="yard" data-yard="dt1" aria-pressed="true">
+        <span class="code">ДТ-1 · «Каре»</span>
+        <div class="ttl">Замкнутый двор с кольцевым тротуаром и проездом</div>
+        <div class="addr">ул. Новопесчаная, д. 21 · Сокол</div>
+      </button>
+      <button type="button" class="yard" data-yard="dt2" aria-pressed="false">
+        <span class="code">ДТ-2 · «Линейный»</span>
+        <div class="ttl">Дом · тротуар · газон с рядовой посадкой · проезд</div>
+        <div class="addr">ул. Дубнинская, д. 30 · Восточное Дегунино</div>
+      </button>
+      <button type="button" class="yard" data-yard="dt3" aria-pressed="false">
+        <span class="code">ДТ-3 · «Гребёнка»</span>
+        <div class="ttl">Узкий проход между домами, газоны и клумбы</div>
+        <div class="addr">Бескудниковский б-р, д. 20 · Бескудниковский</div>
+      </button>
+      <button type="button" class="teaser-more" data-open-section="sec-objects">Как подобраны адреса-аналоги →</button>
+    </section>
+
+    <section class="card" style="margin-bottom:16px">
+      <h2>Принятое решение</h2>
+      <dl class="kv" id="factCard"></dl>
+      <button type="button" class="teaser-more" data-open-section="sec-variants">Какие варианты проверялись и почему выбран этот →</button>
+    </section>
+
+    <section class="card">
+      <h2>Нормативная рамка</h2>
+      <p style="font-size:var(--fs-xs);color:var(--muted);margin:0 0 8px">
+        Перекидка снега ротором на зелёные насаждения ограничена прямой нормой
+        743-ПП. Полный разбор коллизии и способ её снятия — в панели «Подробно».
+      </p>
+      <button type="button" class="btn btn-ghost" data-open-section="sec-law"
+              style="width:100%;justify-content:center">Открыть правовой блок</button>
+    </section>
+  </nav>
+
+  <main id="stage">
+    <section class="card">
+      <div class="tabs" role="group" aria-label="Режим просмотра">
+        <button type="button" class="tab-btn" id="tabScheme" aria-pressed="true">Схема маршрута</button>
+        <button type="button" class="tab-btn" id="tabMap" aria-pressed="false">Положение в округе</button>
+      </div>
+
+      <div id="schemeWrap">
+        <div id="scheme"><img id="schemeImg" src="dt1.svg" alt="Схема маршрута движения СММ"></div>
+        <p class="cap" id="schemeCap"></p>
+        <button type="button" class="teaser-more" data-open-section="sec-read">Как читать схему: стрелки, струи, точки приземления →</button>
+      </div>
+
+      <div id="mapWrap" class="hidden">
+        <div id="map"></div>
+        <p class="status" id="status">Загрузка карты…</p>
+        <button type="button" class="teaser-more" data-open-section="sec-layer">Почему это отдельный модуль, а не только слой карты →</button>
+      </div>
+    </section>
+  </main>
+</div>
+
+<footer>
+  Расчёт выполнен имитационной моделью (шаг дискретизации маршрута 0,6 м).
+  Контуры дворов ориентировочные — подлежат замене на фактические из паспортов
+  благоустройства АСУ ОДС. Яндекс Карты · САО.
+</footer>
+
+<!-- ============ Выезжающая панель «Подробно» ============ -->
+<div id="infoBackdrop" class="hidden"></div>
+<aside id="infoDrawer" aria-labelledby="infoDrawerTitle" role="dialog" aria-modal="true">
+  <div class="drawerHead">
+    <div>
+      <h2 id="infoDrawerTitle">Подробно о проекте</h2>
+      <p>Что вы видите, как это посчитано и на чём основано — по каждому элементу</p>
+    </div>
+    <div class="spacer"></div>
+    <button type="button" class="btn" id="closeDrawer" aria-label="Закрыть панель «Подробно»">✕</button>
+  </div>
+  <div class="drawerBody">
+
+    <details id="sec-task" open>
+      <summary>1. Задача и что именно сделано</summary>
+      <div class="drawerContent">
+        <p>Требовалось получить готовый проект карты маршрутов движения средств малой
+        механизации (СММ) — роторных снегоуборщиков — с указанием направления сопла,
+        на примере трёх сложных типов дворовой планировки.</p>
+        <ul>
+          <li>Собрана действующая нормативная рамка (город, охрана труда, зелёные насаждения).</li>
+          <li>Построена расчётная модель машины: баллистика выброса, производительность, время цикла.</li>
+          <li>Смоделированы три типовых двора в масштабе, с реальными препятствиями.</li>
+          <li>Для каждого двора проверено 3–5 вариантов маршрута и настройки сопла; выбран лучший по доле попадания в разрешённую зону и по числу нарушений.</li>
+          <li>Результат визуализирован: схема движения, вектор струи, точка приземления снега, места складирования.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details id="sec-objects">
+      <summary>2. Объекты-аналоги в САО — как подобраны</summary>
+      <div class="drawerContent">
+        <p>Адреса подобраны как типологические аналоги трёх заданных планировочных
+        ситуаций и подтверждены по адресному реестру:</p>
+        <table>
+          <tr><th>Тип</th><th>Адрес-аналог</th><th>Район</th><th>Что моделирует</th></tr>
+          <tr><td>ДТ-1 «Каре»</td><td>ул. Новопесчаная, д. 21</td><td>Сокол</td>
+              <td>Квартал послевоенной застройки с замкнутым двором, кольцевым тротуаром и проездом по периметру</td></tr>
+          <tr><td>ДТ-2 «Линейный»</td><td>ул. Дубнинская, д. 30</td><td>Восточное Дегунино</td>
+              <td>Протяжённый дом, тротуар вдоль фасада, газон с рядовой посадкой деревьев, проезд с парковочным карманом</td></tr>
+          <tr><td>ДТ-3 «Гребёнка»</td><td>Бескудниковский б-р, д. 20</td><td>Бескудниковский</td>
+              <td>Группа домов, узкий межквартальный проход, живая изгородь и клумбы</td></tr>
+        </table>
+        <div class="flag"><b>Статус привязки.</b> Для ДТ-1 и ДТ-3 использованы контуры действующего
+        реестра дворов САО. Для ДТ-2 в реестре найден адрес «Дубнинская ул. 30Б», поэтому
+        соответствие исходному адресу «д. 30» требует адресной сверки до утверждения схемы.</div>
+      </div>
+    </details>
+
+    <details id="sec-law">
+      <summary>3. Нормативная база и главная правовая коллизия</summary>
+      <div class="drawerContent">
+        <p><b>Действующие документы, которыми связаны работы:</b></p>
+        <table>
+          <tr><th>Документ</th><th>Что задаёт</th></tr>
+          <tr><td>ПП Москвы от 09.11.1999 № 1018</td><td>Правила санитарного содержания территорий; базовые требования к уборке</td></tr>
+          <tr><td>Распоряжение ДТЭХ Москвы от 25.10.2017 № 01-01-14-226/17</td><td>Регламент комплексного содержания дворовых территорий (действующий регламент)</td></tr>
+          <tr><td>ПП Москвы от 10.09.2002 № 743-ПП</td><td>Правила создания, содержания и охраны зелёных насаждений</td></tr>
+          <tr><td>Приказ Минтруда от 29.10.2020 № 758н</td><td>Правила по охране труда в ЖКХ, разд. IV</td></tr>
+        </table>
+
+        <p><b>Ключевые количественные требования регламента (2017):</b></p>
+        <ul>
+          <li>Дворовые территории должны быть убраны <b>до 9:00</b>; механизированная уборка с 23:00 до 7:00 не производится.</li>
+          <li>Скорость машин при механизированной уборке — <b>не более 10 км/ч</b>.</li>
+          <li>Ширина убираемого объекта — <b>не менее 3 м</b>, протяжённость — не менее 3 п. м; иначе механизированный способ исключён.</li>
+          <li>Ширина снежного вала в основании — <b>не более 1,0 м</b>.</li>
+          <li>Предельная высота снега, выпавшего на газоны, — <b>80 см</b>; выше — вывоз.</li>
+          <li>Запрещена укладка снега и скола на детских и спортивных площадках, трассах тепловых сетей, дождевых колодцах, площадках для выгула собак; запрещено переваливание снега к стенам зданий.</li>
+          <li>Снегоочистка участков с неусовершенствованным покрытием ведётся ручным способом с применением мотоблока с роторным оборудованием; при перекидке снега соблюдаются меры предосторожности по сохранению зелёных насаждений.</li>
+        </ul>
+
+        <div class="norm"><b>Коллизия.</b> Правила охраны зелёных насаждений (743-ПП, разд. 9)
+        прямо запрещают использовать роторные снегоочистительные машины для перекидки снега
+        на насаждения. Исключение сформулировано для уборки <i>улиц и площадей</i> при наличии
+        на машинах специальных направляющих устройств, предотвращающих попадание снега на
+        насаждения, а также при чрезвычайных погодных условиях. Дворовые территории в тексте
+        исключения не названы. При этом отраслевой регламент прямо предписывает применять на
+        дворах мотоблок с роторным оборудованием.</div>
+
+        <p><b>Как коллизия снимается в настоящем проекте</b> (предлагается закрепить внутренним
+        актом префектуры / технологической картой ГБУ «Жилищник»):</p>
+        <ul>
+          <li>Перекидка ведётся <b>не «на насаждения», а в назначенную зону складирования</b> —
+          выделенный участок травяного покрова или подготовленная площадка, с картографически
+          зафиксированными границами (зоны Н-1…Н-3 на схемах).</li>
+          <li>На машине применяется <b>ограничитель дальности и сектора выброса</b> — то самое
+          «специальное направляющее устройство» из формулировки 743-ПП. Настройка фиксируется
+          в технологической карте: азимут сопла и дальность.</li>
+          <li>Устанавливаются <b>защитные зоны</b>: приствольный круг 1,5 м и защитная зона ствола
+          0,8 м, проекция кроны, кустарники, цветники — выброс в них запрещён; в створе препятствия
+          оператор доворачивает сопло.</li>
+          <li>Разделяются два состояния снега: <b>чистый свежевыпавший</b> — допускается временное
+          складирование на травяном покрове (до 80 см); <b>снег с противогололёдными материалами</b> —
+          только на подготовленные площадки, вне их — лишь временно (до 10 суток) на озеленённых
+          территориях 3-й категории в жилой застройке при чрезвычайных погодных явлениях, с
+          контролем засолённости почвы хлоридами (не более 7 мг/100 г).</li>
+        </ul>
+
+        <p><b>Охрана труда (758н):</b> при перекидке снега роторным снегоочистителем необходимо
+        соблюдать особую осторожность, чтобы потоком снега не нанести повреждений пешеходам,
+        транспорту, зелёным насаждениям и сооружениям; нахождение работников в зоне работы
+        фрезерно-роторного оборудования допускается не ближе 3 м; зона производства работ
+        ограждается сигнальными ограждениями; работники — в сигнальных жилетах.</p>
+        <img src="safety.png" alt="Схема опасной зоны и сектора выброса СММ">
+      </div>
+    </details>
+
+    <details id="sec-machine">
+      <summary>4. Устройство СММ и физика выброса</summary>
+      <div class="drawerContent">
+        <p>Двухступенчатая схема: шнек захватывает и измельчает снег и подаёт его к ротору;
+        ротор разгоняет массу и выбрасывает через желоб. Дальность и направление задаются
+        <b>двумя независимыми органами</b>, и это принципиально для работы во дворе:</p>
+        <ul>
+          <li><b>Поворот желоба</b> — азимут выброса (у машин класса СММ-1 сектор 180–190°).</li>
+          <li><b>Дефлектор</b> — угол возвышения струи, фактически настильная или навесная траектория.</li>
+          <li><b>Обороты ротора / подача газа</b> — тонкая регулировка дальности при том же угле.</li>
+        </ul>
+        <p>Модель дальности: <code>R = η · v₀² · sin(2α) / g</code>, где <code>v₀ = π·D·n/60</code> —
+        окружная скорость ротора, а <code>η</code> — коэффициент потерь, зависящий от состояния снега
+        (сопротивление воздуха, сцепление массы).</p>
+        <table>
+          <tr><th>Угол дефлектора α</th><th>Сухой свежий (η=0,55)</th><th>Влажный (η=0,40)</th><th>Мокрый / слежавшийся (η=0,28)</th></tr>
+          <tr><td>20°</td><td>8,9 м</td><td>6,5 м</td><td>4,5 м</td></tr>
+          <tr><td>25°</td><td>10,6 м</td><td>7,7 м</td><td>5,4 м</td></tr>
+          <tr><td>30°</td><td>12,0 м</td><td>8,7 м</td><td>6,1 м</td></tr>
+          <tr><td>35°</td><td>13,0 м</td><td>9,5 м</td><td>6,6 м</td></tr>
+          <tr><td>40°</td><td>13,6 м</td><td>9,9 м</td><td>6,9 м</td></tr>
+          <tr><td>45°</td><td>13,8 м</td><td>10,1 м</td><td>7,0 м</td></tr>
+        </table>
+        <img src="ballistics.png" alt="График дальности выброса в зависимости от угла дефлектора">
+        <div class="flag"><b>Практический вывод.</b> На номинальных оборотах машина «перебивает»
+        любой дворовый газон. Работать во дворе без снижения оборотов нельзя — именно
+        нерегулируемый выброс даёт снег на клумбах, кустах и капотах машин. В технологической
+        карте настройка задаётся парой «угол дефлектора + доля оборотов».</div>
+        <p><b>Настильный и навесной режимы.</b> Одна и та же дальность достигается двумя способами.
+        Настильный (α≈20°, пониженные обороты) даёт низкую траекторию — струя проходит
+        <i>под кроной</i> дерева. Навесной (α≈40°) поднимает апогей до 2,0–2,2 м — струя
+        переносится <i>над проездом, валом или ограждением</i>, но бьёт в крону. Выбор режима
+        для каждого двора обоснован ниже.</p>
+      </div>
+    </details>
+
+    <details id="sec-read">
+      <summary>5. Как читать схему</summary>
+      <div class="drawerContent">
+        <ul>
+          <li><b>Красная линия</b> — осевая линия прохода СММ. Число линий равно числу проходов,
+          необходимых для перекрытия ширины тротуара при захвате 62 см и перекрытии 12 %.</li>
+          <li><b>Красная стрелка</b> — направление движения (курс).</li>
+          <li><b>Синяя тонкая стрелка</b> — вектор струи: куда в этот момент смотрит сопло.
+          Показана не в каждой точке, а с прореживанием, чтобы схема читалась.</li>
+          <li><b>Синие точки</b> — расчётные точки приземления снежной массы. Их облако и есть
+          проверка: попадает ли снег туда, куда должен.</li>
+          <li><b>Голубая штриховка Н-1…Н-3</b> — назначенное место складирования.</li>
+          <li><b>Красный пунктирный круг</b> — приствольный круг (1,5 м), запрет выброса.
+          <b>Светло-зелёный круг</b> — проекция кроны.</li>
+          <li><b>Розовый</b> — клумба, <b>тёмно-зелёная полоса</b> — кустарник / живая изгородь,
+          <b>персиковый</b> — детская площадка. Всё это запретные зоны приземления.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details id="sec-variants">
+      <summary>6. Проверенные варианты и результаты имитации</summary>
+      <div class="drawerContent">
+        <p>Маршрут дискретизируется с шагом 0,6 м. В каждой точке рассчитывается вектор струи,
+        точка приземления и проверяется пересечение струи со стволами и кронами. Точка относится
+        к одной из категорий: попадание в зону складирования, нарушение (запретная зона),
+        возврат на покрытие, перенос вдоль прохода.</p>
+
+        <p><b>ДТ-1 «Каре»</b></p>
+        <table>
+          <tr><th>Вариант</th><th>В зону складирования</th><th>Нарушения</th><th>Возврат на покрытие</th></tr>
+          <tr><td>В-1 · навесной 90°, R=5,0 м</td><td>47,9 %</td><td>0,0 %</td><td>52,1 %</td></tr>
+          <tr><td>В-2 · дальний выброс, R=9,0 м</td><td>62,5 %</td><td>9,7 %</td><td>27,8 %</td></tr>
+          <tr><td>В-3 · настильный 90°, R=5,0 м</td><td>47,9 %</td><td>0,0 %</td><td>52,1 %</td></tr>
+          <tr><td>В-4 · выброс наружу, к фасаду (контроль)</td><td>0,0 %</td><td>96,0 %</td><td>4,0 %</td></tr>
+          <tr><td><b>В-5 · адаптивная, доворот на углах</b></td><td><b>84,3 %</b></td><td><b>0,0 %</b></td><td>15,7 %</td></tr>
+        </table>
+        <p>Причина: на замкнутом кольце расстояние от прохода до зоны приёма непостоянно —
+        на коротких сторонах и особенно на углах фиксированная дальность даёт недолёт или
+        уход снега на проезд. Решение — доворот сопла на 70°/110° и изменение дальности в
+        диапазоне 3,6–8,0 м на угловых участках; доля точек с доворотом 36,4 %. Вариант В-4
+        приведён как контрольный: он показывает, что модель корректно ловит запрет
+        переваливания снега к стенам зданий.</p>
+
+        <p><b>ДТ-2 «Линейный»</b></p>
+        <table>
+          <tr><th>Вариант</th><th>В зону складирования</th><th>Нарушения</th><th>Возврат на покрытие</th></tr>
+          <tr><td>В-1 · навесной 90°, R=5,6 м (через кроны)</td><td>37,3 %</td><td>26,3 %</td><td>36,5 %</td></tr>
+          <tr><td>В-2 · настильный 90°, R=5,6 м (под кронами)</td><td>37,3 %</td><td>26,3 %</td><td>36,5 %</td></tr>
+          <tr><td><b>В-3 · адаптивная «оконная» схема</b></td><td><b>89,9 %</b></td><td>4,9 %</td><td>5,2 %</td></tr>
+        </table>
+        <p>Рядовая посадка вдоль газона — главное ограничение. В створе дерева струя либо бьёт
+        в крону (навесной режим, высота струи у ствола 1,8 м при нижней кромке кроны 2,2 м —
+        попадание), либо задевает ствол. Настильный режим проводит струю под кроной на высоте
+        1,3 м, но защитная зона ствола 0,8 м всё равно требует доворота. Отсюда «оконная»
+        схема: снег принимается в промежутки газона между кронами, дальность подбирается под
+        номер прохода (5,05–7,05 м), в створе ствола — доворот на 75°/105°. Доля точек с
+        доворотом 62 % — это норма для такой планировки и должна быть отражена в инструктаже
+        оператора.</p>
+
+        <p><b>ДТ-3 «Гребёнка»</b></p>
+        <table>
+          <tr><th>Вариант</th><th>Перенос вдоль</th><th>Нарушения</th></tr>
+          <tr><td>В-1 · поперечная в газон, R=3,5 м</td><td>—</td><td>60,6 %</td></tr>
+          <tr><td>В-2 · поперечная к дому А, R=3,5 м</td><td>—</td><td>100,0 %</td></tr>
+          <tr><td><b>В-3 · продольная «эстафетная», R=7,0 м</b></td><td><b>83,3 %</b></td><td><b>0,0 %</b></td></tr>
+        </table>
+        <p>Здесь поперечная перекидка невозможна в принципе: свободная полоса газона 2,4–2,8 м,
+        а минимально устойчивая дальность ротора 2,5–3,5 м — снег неизбежно уходит на клумбы,
+        живую изгородь или цоколь здания. Решение — <b>продольная схема</b>: сопло направлено
+        строго вперёд по ходу, снег «эстафетой» перемещается вдоль прохода за 6 перекидок по 7 м
+        к уширению у проезда, откуда одной навесной перекидкой (R=8,5 м) укладывается на
+        подготовленную площадку Н-3 — попадание 100 %. Далее вывоз.</p>
+      </div>
+    </details>
+
+    <details id="sec-volumes">
+      <summary>7. Объёмы снега, ёмкость мест складирования, время цикла</summary>
+      <div class="drawerContent">
+        <p>Расчётный снегопад — 10 см свежевыпавшего снега плотностью 120 кг/м³.
+        Ёмкость места складирования — площадь × предельная высота 0,8 м × коэффициент
+        формы отвала 0,62 (для подготовленной площадки Н-3 высота принята 1,5 м).</p>
+        <table>
+          <tr><th>Показатель</th><th>ДТ-1</th><th>ДТ-2</th><th>ДТ-3</th></tr>
+          <tr><td>Площадь уборки СММ, м²</td><td>403</td><td>240</td><td>72</td></tr>
+          <tr><td>Число проходов</td><td>5</td><td>5</td><td>4</td></tr>
+          <tr><td>Объём снега за снегопад, м³</td><td>40</td><td>24</td><td>7</td></tr>
+          <tr><td>Ёмкость места складирования, м³</td><td>395 (Н-1)</td><td>41 (Н-2)</td><td>74 (Н-3)</td></tr>
+          <tr><td>Запас по снегопадам до вывоза</td><td>≈ 9,8</td><td>≈ 1,7</td><td>≈ 10,5</td></tr>
+          <tr><td>Время цикла одной машины, мин</td><td>48</td><td>19</td><td>50</td></tr>
+        </table>
+        <div class="flag"><b>Узкое место — ДТ-2.</b> Ёмкости «окон» между деревьями хватает менее
+        чем на два расчётных снегопада. Для линейной застройки с рядовой посадкой вывоз снега
+        должен планироваться уже после второго снегопада, а не «по факту переполнения».
+        Это прямое следствие геометрии, а не качества работы подрядчика.</div>
+        <p>Производительность рассчитана как <code>b·v·3600·K</code>, где b — полезная ширина
+        захвата (0,55 м с учётом перекрытия), v — рабочая скорость, K = 0,72 — коэффициент
+        использования (развороты, переходы, дозаправка). Время цикла ДТ-3 велико именно из-за
+        эстафетной схемы: проход проходится 6 раз.</p>
+      </div>
+    </details>
+
+    <details id="sec-layer">
+      <summary>8. Архитектурное решение: слой карты или отдельный модуль</summary>
+      <div class="drawerContent">
+        <p><b>Принято комбинированное решение — и слой, и отдельный модуль,</b> потому что у них
+        разные задачи и разные масштабы.</p>
+        <table>
+          <tr><th>Что</th><th>Режим работы</th><th>Зачем</th></tr>
+          <tr><td>Слой «Маршруты СММ» в общей карте САО</td><td>Общая карта</td>
+              <td>Географическая привязка: в каком районе и на каком участке находятся объекты.
+              Работает существующая фильтрация «район / участок», карточка объекта, печать</td></tr>
+          <tr><td>Модуль схем СММ (эта страница)</td><td>Подробная схема</td>
+              <td>Инженерная графика масштаба 1:200–1:500: маршрут, вектор сопла, точки приземления.
+              На карте округа такой масштаб нечитаем физически</td></tr>
+        </table>
+        <p><b>Почему нельзя ограничиться слоем.</b> Карта округа работает в масштабе, где весь
+        двор — это объект в несколько пикселей. Маршрут из пяти проходов с шагом 0,55 м и векторы
+        струй на нём не различимы. Показывать их «слоем» — значит показывать нечитаемую кашу.</p>
+        <p><b>Почему нельзя ограничиться модулем.</b> Без слоя теряется главное для округа:
+        сколько таких дворов, в каких районах, на чьих участках. Слой даёт эту связку и
+        переиспользует уже готовую фильтрацию атласа.</p>
+        <p><b>Связка между ними.</b> В карточке объекта общей карты есть кнопка «Подробно»:
+        она открывает этот модуль сразу на выбранном дворе. Обратно работает ссылка
+        «← Городской атлас САО» в шапке.</p>
+        <p>Слой и модуль уже связаны; фильтры района и участка на общей карте работают для всех трёх объектов.</p>
+      </div>
+    </details>
+
+    <details id="sec-next">
+      <summary>9. Что требуется для перевода проекта в рабочий документ</summary>
+      <div class="drawerContent">
+        <ul>
+          <li>Сверить контур ДТ-2: в действующем реестре дворов найден адрес «Дубнинская ул. 30Б»,
+          тогда как исходная схема указывает «д. 30». Для ДТ-1 и ДТ-3 используются контуры
+          действующего реестра дворов САО.</li>
+          <li>Провести натурный обмер трёх пилотных дворов зимой: фактические ширины проходов,
+          положение деревьев, высота нижней кромки крон, положение люков и трасс теплосети.</li>
+          <li>Провести контрольный заезд с фиксацией фактической дальности выброса на реальном
+          снеге — модель даёт расчётную дальность, её нужно откалибровать по одной машине каждого типа.</li>
+          <li>Утвердить настройки сопла как <b>технологическую карту на объект</b> — азимут,
+          угол дефлектора, доля оборотов, точки доворота.</li>
+          <li>Закрепить внутренним актом порядок, снимающий коллизию 743-ПП (см. блок 3):
+          назначенные зоны складирования, ограничитель сектора выброса, разделение чистого
+          снега и снега с ПГМ.</li>
+          <li>Внести места складирования Н-1…Н-3 в схемы уборки и в задание на вывоз снега.</li>
+        </ul>
+      </div>
+    </details>
+
+  </div>
+</aside>
+
+<script>
+(function(){
+  /* ---------- данные по дворам ---------- */
+  var YARDS = {
+    dt1: {
+      code:'ДТ-1', name:'«Каре» — замкнутый двор с кольцевым тротуаром',
+      addr:'ул. Новопесчаная, д. 21', district:'Сокол',
+      center:[37.51252,55.79444], scheme:'dt1.svg',
+      cap:'ДТ-1 «Каре». Обход кольца против часовой стрелки, сопло постоянно направлено внутрь двора. На углах — доворот сопла и изменение дальности.',
+      facts:[
+        ['Вариант','В-5 · адаптивная'],
+        ['Машина','СММ-1, захват 62 см'],
+        ['Проходов','5'],
+        ['Азимут сопла','90° влево (внутрь)'],
+        ['Дефлектор','40°, навесной, обороты 61 %'],
+        ['Дальность','5,0 м (на углах 3,6–8,0 м)'],
+        ['Складирование','Н-1 · центральный газон'],
+        ['Попадание','<span class="pill ok">84,3 %</span>'],
+        ['Нарушения','<span class="pill ok">0,0 %</span>'],
+        ['Время цикла','48 мин']
+      ]
+    },
+    dt2: {
+      code:'ДТ-2', name:'«Линейный» — дом · тротуар · газон с рядовой посадкой',
+      addr:'ул. Дубнинская, д. 30', district:'Восточное Дегунино',
+      center:[37.55914,55.87736], scheme:'dt2.svg',
+      cap:'ДТ-2 «Линейный». Челнок вдоль дома, сопло вправо — от здания к проезду. В створе ствола дерева — доворот на 75°/105°, приём снега в «окна» между кронами.',
+      facts:[
+        ['Вариант','В-3 · «оконная»'],
+        ['Машина','СММ-1, захват 62 см'],
+        ['Проходов','5'],
+        ['Азимут сопла','90° вправо'],
+        ['Дефлектор','20°, настильный, обороты 79 %'],
+        ['Дальность','5,05–7,05 м по проходам'],
+        ['Складирование','Н-2 · «окна» газона'],
+        ['Попадание','<span class="pill ok">89,9 %</span>'],
+        ['Нарушения','<span class="pill warn">4,9 %</span>'],
+        ['Время цикла','19 мин']
+      ]
+    },
+    dt3: {
+      code:'ДТ-3', name:'«Гребёнка» — узкий проход между домами',
+      addr:'Бескудниковский б-р, д. 20', district:'Бескудниковский',
+      center:[37.56021,55.86551], scheme:'dt3.svg',
+      cap:'ДТ-3 «Гребёнка». Ширина прохода 1,8 м — механизированная уборка исключена, работы ведутся СММ в составе ручной уборки. Сопло строго вперёд, снег переносится эстафетой к площадке Н-3.',
+      facts:[
+        ['Вариант','В-3 · продольная'],
+        ['Машина','СММ-1, захват 62 см'],
+        ['Проходов','4 × 6 эстафет'],
+        ['Азимут сопла','0° — вперёд по ходу'],
+        ['Дефлектор','20°, настильный, обороты 89 %'],
+        ['Дальность','7,0 м; финиш 8,5 м'],
+        ['Складирование','Н-3 · подготовленная площадка'],
+        ['Попадание','<span class="pill ok">83,3 % перенос</span>'],
+        ['Нарушения','<span class="pill ok">0,0 %</span>'],
+        ['Время цикла','50 мин']
+      ]
+    }
+  };
+
+  var current = 'dt1';
+  var $ = function(id){ return document.getElementById(id); };
+
+  function renderYard(key){
+    var y = YARDS[key]; if(!y) return;
+    current = key;
+    document.querySelectorAll('.yard').forEach(function(b){
+      b.setAttribute('aria-pressed', String(b.dataset.yard === key));
+    });
+    $('schemeImg').src = y.scheme;
+    $('schemeImg').alt = 'Схема маршрута движения СММ, ' + y.code + ' ' + y.name;
+    $('schemeCap').textContent = y.cap;
+    $('factCard').innerHTML = y.facts.map(function(f){
+      return '<dt>' + f[0] + '</dt><dd>' + f[1] + '</dd>';
+    }).join('');
+    if (window.__map && window.__map.setLocation){
+      window.__map.setLocation({ center: y.center, zoom: 17, duration: 500 });
+    }
+    if (location.hash.slice(1) !== key) history.replaceState(null,'','#'+key);
+  }
+
+  document.querySelectorAll('.yard').forEach(function(b){
+    b.addEventListener('click', function(){ renderYard(b.dataset.yard); });
+  });
+
+  /* ---------- вкладки схема / карта ---------- */
+  function setTab(mapMode){
+    $('tabScheme').setAttribute('aria-pressed', String(!mapMode));
+    $('tabMap').setAttribute('aria-pressed', String(mapMode));
+    $('schemeWrap').classList.toggle('hidden', mapMode);
+    $('mapWrap').classList.toggle('hidden', !mapMode);
+    if (mapMode) initMap();
+  }
+  $('tabScheme').addEventListener('click', function(){ setTab(false); });
+  $('tabMap').addEventListener('click', function(){ setTab(true); });
+
+  /* ---------- карта ---------- */
+  var mapReady = false;
+  async function initMap(){
+    if (mapReady) return;
+    mapReady = true;
+    try {
+      var ymaps3 = await window.ymaps3Ready;
+      await ymaps3.ready;
+      var YMap = ymaps3.YMap,
+          YMapDefaultSchemeLayer = ymaps3.YMapDefaultSchemeLayer,
+          YMapDefaultFeaturesLayer = ymaps3.YMapDefaultFeaturesLayer,
+          YMapMarker = ymaps3.YMapMarker;
+      var map = new YMap($('map'), {
+        location: { center: YARDS[current].center, zoom: 16 },
+        showScaleInCopyrights: true, theme: 'light'
+      }, [new YMapDefaultSchemeLayer({}), new YMapDefaultFeaturesLayer({})]);
+      window.__map = map;
+
+      Object.keys(YARDS).forEach(function(key){
+        var y = YARDS[key];
+        var el = document.createElement('button');
+        el.type = 'button';
+        el.style.cssText = 'transform:translate(-50%,-100%);background:#C00000;color:#fff;'
+          + 'border:2px solid #fff;border-radius:8px;padding:5px 10px;font:600 12px/1.2 sans-serif;'
+          + 'cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.35);white-space:nowrap';
+        el.textContent = y.code + ' · ' + y.addr;
+        el.addEventListener('click', function(){ renderYard(key); setTab(false); });
+        map.addChild(new YMapMarker({ coordinates: y.center }, el));
+      });
+      $('status').textContent = 'Готово. Нажмите на метку, чтобы открыть схему маршрута этого двора.';
+    } catch (e){
+      $('status').className = 'status error';
+      $('status').textContent = 'Не удалось запустить карту: ' + e.message
+        + '. Схемы маршрутов доступны во вкладке «Схема маршрута».';
+    }
+  }
+
+  /* ---------- панель «Подробно» ---------- */
+  var drawer = $('infoDrawer'), backdrop = $('infoBackdrop'), lastFocused = null;
+  function drawerKeydown(e){ if (e.key === 'Escape') closeDrawer(); }
+  function openDrawer(targetSectionId){
+    lastFocused = document.activeElement;
+    backdrop.classList.remove('hidden');
+    drawer.classList.add('open');
+    if (targetSectionId){
+      var sec = document.getElementById(targetSectionId);
+      if (sec){
+        sec.open = true;
+        setTimeout(function(){ sec.scrollIntoView({ block:'start', behavior:'smooth' }); }, 120);
+      }
+    }
+    $('closeDrawer').focus();
+    document.addEventListener('keydown', drawerKeydown);
+  }
+  function closeDrawer(){
+    drawer.classList.remove('open');
+    backdrop.classList.add('hidden');
+    document.removeEventListener('keydown', drawerKeydown);
+    if (lastFocused) lastFocused.focus();
+  }
+  $('infoBtn').addEventListener('click', function(){ openDrawer(); });
+  $('closeDrawer').addEventListener('click', closeDrawer);
+  backdrop.addEventListener('click', closeDrawer);
+  document.querySelectorAll('[data-open-section]').forEach(function(btn){
+    btn.addEventListener('click', function(){ openDrawer(btn.dataset.openSection); });
+  });
+
+  /* ---------- старт ---------- */
+  var h = location.hash.slice(1);
+  renderYard(YARDS[h] ? h : 'dt1');
+  window.addEventListener('hashchange', function(){
+    var k = location.hash.slice(1);
+    if (YARDS[k]) renderYard(k);
+  });
+})();
+</script>
+</body>
+</html>
