@@ -54,8 +54,10 @@ def card(code, yard, route, nozzle, svg_b64):
 
     route_bearing = route["properties"].get("bearing")
     route_src = route["properties"].get("source")
+    route_status = route["properties"].get("status")
     nozzle_bearing = nozzle["properties"].get("bearing")
     nozzle_src = nozzle["properties"].get("source")
+    nozzle_status = nozzle["properties"].get("status")
     nozzle_note = nozzle["properties"].get("note", "")
 
     route_pill = f'<span class="pill">{route_src.upper()}</span>' if route_src else ""
@@ -88,6 +90,8 @@ def card(code, yard, route, nozzle, svg_b64):
         <span><b>Складирование:</b> {storage}</span>
         <span><b>Проходы:</b> {passes_}</span>
         <span><b>Статус:</b> {status}</span>
+        {f'<span><b>Маршрут:</b> {route_status}</span>' if route_status else ''}
+        {f'<span><b>Выброс:</b> {nozzle_status}</span>' if nozzle_status else ''}
         {f'<span class="note-strip">{nozzle_note}</span>' if nozzle_note else ''}
       </div>
     </section>"""

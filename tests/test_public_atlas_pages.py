@@ -153,7 +153,7 @@ def test_smm_print_a3_form_is_self_contained_and_in_sync_with_generator():
         assert f"{code} ·" in markup
     assert markup.count("data:image/svg+xml;base64,") == 5
     assert "data:image/png;base64," in markup
-    assert "уточняется после осмотра" in markup
+    assert "Маршрут по проезду из схемы" in markup  # презентационные дорожные маршруты
 
     work_dir = Path(tempfile.mkdtemp(prefix="smm-print-test-", dir=repo / "work"))
     try:
