@@ -4,7 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Маршруты СММ — зимняя уборка дворовых территорий · САО</title>
-<script src="https://api-maps.yandex.ru/v3/?apikey=6b197a0e-9109-4624-9520-954a47c26dda&lang=ru_RU"></script>
+<script>
+window.ymaps3Ready = new Promise((resolve, reject) => {
+  const script = document.createElement('script');
+  script.src = 'https://api-maps.yandex.ru/v3/?apikey=6b197a0e-9109-4624-9520-954a47c26dda&lang=ru_RU';
+  script.onload = () => window.ymaps3 ? resolve(window.ymaps3) : reject(new Error('Карты Яндекса не инициализированы.'));
+  script.onerror = () => reject(new Error('Не удалось загрузить Карты Яндекса. Проверьте соединение и настройки ключа.'));
+  document.head.appendChild(script);
+});
+</script>
 <style>
 :root{
   --brand:#C00000; --ink:#101418; --muted:#5c6672; --line:#dfe3e8;
@@ -594,7 +602,10 @@ footer{padding:var(--sp-3) var(--sp-4);font-size:var(--fs-xs);color:var(--muted)
     mapReady = true;
     try {
       var ymaps3 = await window.ymaps3Ready;
-      await ymaps3.ready;
+      if (ymaps3.ready) await ymaps3.ready;
+      if (!ymaps3.YMap || !ymaps3.YMapDefaultSchemeLayer || !ymaps3.YMapDefaultFeaturesLayer || !ymaps3.YMapMarker) {
+        throw new Error('Карты Яндекса загружены не полностью.');
+      }
       var YMap = ymaps3.YMap,
           YMapDefaultSchemeLayer = ymaps3.YMapDefaultSchemeLayer,
           YMapDefaultFeaturesLayer = ymaps3.YMapDefaultFeaturesLayer,
