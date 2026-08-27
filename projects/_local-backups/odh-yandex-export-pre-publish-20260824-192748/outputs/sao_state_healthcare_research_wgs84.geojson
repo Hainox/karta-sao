@@ -1,0 +1,1051 @@
+{
+  "type": "FeatureCollection",
+  "metadata": {
+    "record_count": 40,
+    "scope": "Государственные учреждения: кандидаты по картографической базе; требуется верификация",
+    "boundary": "САО, включая Молжаниновский район",
+    "sources": "OpenStreetMap discovery + prepared searches in Yandex Maps, 2GIS, Google Maps"
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5233555,
+          55.8688777
+        ]
+      },
+      "properties": {
+        "name": "Больница для детей с поражением ЦНС",
+        "address": "Адрес уточняется в агрегаторах/официальном источнике",
+        "category": "hospital",
+        "public_status": "кандидат: московское государственное учреждение",
+        "verification_status": "требуется подтверждение по официальному сайту и агрегаторам",
+        "osm_type": "relation",
+        "osm_id": 6913092,
+        "latitude": 55.8688777,
+        "longitude": 37.5233555,
+        "official_evidence": "См. реестр/официальный сайт медицинской организации; автоматическая классификация не является подтверждением.",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%91%D0%BE%D0%BB%D1%8C%D0%BD%D0%B8%D1%86%D0%B0%20%D0%B4%D0%BB%D1%8F%20%D0%B4%D0%B5%D1%82%D0%B5%D0%B9%20%D1%81%20%D0%BF%D0%BE%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5%D0%BC%20%D0%A6%D0%9D%D0%A1%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%91%D0%BE%D0%BB%D1%8C%D0%BD%D0%B8%D1%86%D0%B0%20%D0%B4%D0%BB%D1%8F%20%D0%B4%D0%B5%D1%82%D0%B5%D0%B9%20%D1%81%20%D0%BF%D0%BE%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5%D0%BC%20%D0%A6%D0%9D%D0%A1%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%91%D0%BE%D0%BB%D1%8C%D0%BD%D0%B8%D1%86%D0%B0%20%D0%B4%D0%BB%D1%8F%20%D0%B4%D0%B5%D1%82%D0%B5%D0%B9%20%D1%81%20%D0%BF%D0%BE%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5%D0%BC%20%D0%A6%D0%9D%D0%A1%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "note": "Источник координат: OpenStreetMap. Ссылки ведут к поиску в трёх агрегаторах; не означают автоматическое подтверждение карточки."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5553122,
+          55.8112969
+        ]
+      },
+      "properties": {
+        "name": "Больница № 50",
+        "address": "улица Вучетича, 21",
+        "category": "hospital",
+        "public_status": "кандидат: московское государственное учреждение",
+        "verification_status": "требуется подтверждение по официальному сайту и агрегаторам",
+        "osm_type": "relation",
+        "osm_id": 12231190,
+        "latitude": 55.8112969,
+        "longitude": 37.5553122,
+        "official_evidence": "См. реестр/официальный сайт медицинской организации; автоматическая классификация не является подтверждением.",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%91%D0%BE%D0%BB%D1%8C%D0%BD%D0%B8%D1%86%D0%B0%20%E2%84%96%2050%2C%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%20%D0%92%D1%83%D1%87%D0%B5%D1%82%D0%B8%D1%87%D0%B0%2C%2021%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%91%D0%BE%D0%BB%D1%8C%D0%BD%D0%B8%D1%86%D0%B0%20%E2%84%96%2050%2C%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%20%D0%92%D1%83%D1%87%D0%B5%D1%82%D0%B8%D1%87%D0%B0%2C%2021%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%91%D0%BE%D0%BB%D1%8C%D0%BD%D0%B8%D1%86%D0%B0%20%E2%84%96%2050%2C%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%20%D0%92%D1%83%D1%87%D0%B5%D1%82%D0%B8%D1%87%D0%B0%2C%2021%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "note": "Источник координат: OpenStreetMap. Ссылки ведут к поиску в трёх агрегаторах; не означают автоматическое подтверждение карточки."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.4734077,
+          55.8669716
+        ]
+      },
+      "properties": {
+        "name": "ГБУЗ ГП N45 ДЗМ Филиал N3 Поликлиника для взрослых",
+        "address": "Адрес уточняется в агрегаторах/официальном источнике",
+        "category": "clinic",
+        "public_status": "кандидат: московское государственное учреждение",
+        "verification_status": "требуется подтверждение по официальному сайту и агрегаторам",
+        "osm_type": "way",
+        "osm_id": 1076569810,
+        "latitude": 55.8669716,
+        "longitude": 37.4734077,
+        "official_evidence": "См. реестр/официальный сайт медицинской организации; автоматическая классификация не является подтверждением.",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%93%D0%91%D0%A3%D0%97%20%D0%93%D0%9F%20N45%20%D0%94%D0%97%D0%9C%20%D0%A4%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%20N3%20%D0%9F%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%D0%B4%D0%BB%D1%8F%20%D0%B2%D0%B7%D1%80%D0%BE%D1%81%D0%BB%D1%8B%D1%85%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%93%D0%91%D0%A3%D0%97%20%D0%93%D0%9F%20N45%20%D0%94%D0%97%D0%9C%20%D0%A4%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%20N3%20%D0%9F%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%D0%B4%D0%BB%D1%8F%20%D0%B2%D0%B7%D1%80%D0%BE%D1%81%D0%BB%D1%8B%D1%85%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%93%D0%91%D0%A3%D0%97%20%D0%93%D0%9F%20N45%20%D0%94%D0%97%D0%9C%20%D0%A4%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%20N3%20%D0%9F%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%D0%B4%D0%BB%D1%8F%20%D0%B2%D0%B7%D1%80%D0%BE%D1%81%D0%BB%D1%8B%D1%85%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "note": "Источник координат: OpenStreetMap. Ссылки ведут к поиску в трёх агрегаторах; не означают автоматическое подтверждение карточки."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5273693,
+          55.8281688
+        ]
+      },
+      "properties": {
+        "name": "ГБУЗ МНПЦДК ДЗМ филиал Тимирязевский",
+        "address": "Новопетровская улица, 20",
+        "category": "clinic",
+        "public_status": "кандидат: московское государственное учреждение",
+        "verification_status": "требуется подтверждение по официальному сайту и агрегаторам",
+        "osm_type": "way",
+        "osm_id": 332494002,
+        "latitude": 55.8281688,
+        "longitude": 37.5273693,
+        "official_evidence": "См. реестр/официальный сайт медицинской организации; автоматическая классификация не является подтверждением.",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%93%D0%91%D0%A3%D0%97%20%D0%9C%D0%9D%D0%9F%D0%A6%D0%94%D0%9A%20%D0%94%D0%97%D0%9C%20%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%20%D0%A2%D0%B8%D0%BC%D0%B8%D1%80%D1%8F%D0%B7%D0%B5%D0%B2%D1%81%D0%BA%D0%B8%D0%B9%2C%20%D0%9D%D0%BE%D0%B2%D0%BE%D0%BF%D0%B5%D1%82%D1%80%D0%BE%D0%B2%D1%81%D0%BA%D0%B0%D1%8F%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%2C%2020%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%93%D0%91%D0%A3%D0%97%20%D0%9C%D0%9D%D0%9F%D0%A6%D0%94%D0%9A%20%D0%94%D0%97%D0%9C%20%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%20%D0%A2%D0%B8%D0%BC%D0%B8%D1%80%D1%8F%D0%B7%D0%B5%D0%B2%D1%81%D0%BA%D0%B8%D0%B9%2C%20%D0%9D%D0%BE%D0%B2%D0%BE%D0%BF%D0%B5%D1%82%D1%80%D0%BE%D0%B2%D1%81%D0%BA%D0%B0%D1%8F%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%2C%2020%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%93%D0%91%D0%A3%D0%97%20%D0%9C%D0%9D%D0%9F%D0%A6%D0%94%D0%9A%20%D0%94%D0%97%D0%9C%20%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%20%D0%A2%D0%B8%D0%BC%D0%B8%D1%80%D1%8F%D0%B7%D0%B5%D0%B2%D1%81%D0%BA%D0%B8%D0%B9%2C%20%D0%9D%D0%BE%D0%B2%D0%BE%D0%BF%D0%B5%D1%82%D1%80%D0%BE%D0%B2%D1%81%D0%BA%D0%B0%D1%8F%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%2C%2020%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "note": "Источник координат: OpenStreetMap. Ссылки ведут к поиску в трёх агрегаторах; не означают автоматическое подтверждение карточки."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.3521477,
+          55.9468809
+        ]
+      },
+      "properties": {
+        "name": "Городская клиническая больница им. В.В. Вересаева. ​Женская консультация № 10",
+        "address": "Адрес уточняется в агрегаторах/официальном источнике",
+        "category": "clinic",
+        "public_status": "кандидат: московское государственное учреждение",
+        "verification_status": "требуется подтверждение по официальному сайту и агрегаторам",
+        "osm_type": "node",
+        "osm_id": 11371298791,
+        "latitude": 55.9468809,
+        "longitude": 37.3521477,
+        "official_evidence": "См. реестр/официальный сайт медицинской организации; автоматическая классификация не является подтверждением.",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F%20%D0%B1%D0%BE%D0%BB%D1%8C%D0%BD%D0%B8%D1%86%D0%B0%20%D0%B8%D0%BC.%20%D0%92.%D0%92.%20%D0%92%D0%B5%D1%80%D0%B5%D1%81%D0%B0%D0%B5%D0%B2%D0%B0.%20%E2%80%8B%D0%96%D0%B5%D0%BD%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BA%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%86%D0%B8%D1%8F%20%E2%84%96%2010%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F%20%D0%B1%D0%BE%D0%BB%D1%8C%D0%BD%D0%B8%D1%86%D0%B0%20%D0%B8%D0%BC.%20%D0%92.%D0%92.%20%D0%92%D0%B5%D1%80%D0%B5%D1%81%D0%B0%D0%B5%D0%B2%D0%B0.%20%E2%80%8B%D0%96%D0%B5%D0%BD%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BA%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%86%D0%B8%D1%8F%20%E2%84%96%2010%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F%20%D0%B1%D0%BE%D0%BB%D1%8C%D0%BD%D0%B8%D1%86%D0%B0%20%D0%B8%D0%BC.%20%D0%92.%D0%92.%20%D0%92%D0%B5%D1%80%D0%B5%D1%81%D0%B0%D0%B5%D0%B2%D0%B0.%20%E2%80%8B%D0%96%D0%B5%D0%BD%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BA%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%86%D0%B8%D1%8F%20%E2%84%96%2010%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "note": "Источник координат: OpenStreetMap. Ссылки ведут к поиску в трёх агрегаторах; не означают автоматическое подтверждение карточки."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5510155,
+          55.7805071
+        ]
+      },
+      "properties": {
+        "name": "Городская клиническая больница имени С. П. Боткина",
+        "address": "Адрес уточняется в агрегаторах/официальном источнике",
+        "category": "hospital",
+        "public_status": "кандидат: московское государственное учреждение",
+        "verification_status": "требуется подтверждение по официальному сайту и агрегаторам",
+        "osm_type": "relation",
+        "osm_id": 1788150,
+        "latitude": 55.7805071,
+        "longitude": 37.5510155,
+        "official_evidence": "См. реестр/официальный сайт медицинской организации; автоматическая классификация не является подтверждением.",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F%20%D0%B1%D0%BE%D0%BB%D1%8C%D0%BD%D0%B8%D1%86%D0%B0%20%D0%B8%D0%BC%D0%B5%D0%BD%D0%B8%20%D0%A1.%20%D0%9F.%20%D0%91%D0%BE%D1%82%D0%BA%D0%B8%D0%BD%D0%B0%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F%20%D0%B1%D0%BE%D0%BB%D1%8C%D0%BD%D0%B8%D1%86%D0%B0%20%D0%B8%D0%BC%D0%B5%D0%BD%D0%B8%20%D0%A1.%20%D0%9F.%20%D0%91%D0%BE%D1%82%D0%BA%D0%B8%D0%BD%D0%B0%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F%20%D0%B1%D0%BE%D0%BB%D1%8C%D0%BD%D0%B8%D1%86%D0%B0%20%D0%B8%D0%BC%D0%B5%D0%BD%D0%B8%20%D0%A1.%20%D0%9F.%20%D0%91%D0%BE%D1%82%D0%BA%D0%B8%D0%BD%D0%B0%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "note": "Источник координат: OpenStreetMap. Ссылки ведут к поиску в трёх агрегаторах; не означают автоматическое подтверждение карточки."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5791871,
+          55.7989115
+        ]
+      },
+      "properties": {
+        "name": "Городская клиническая больница № 24",
+        "address": "Адрес уточняется в агрегаторах/официальном источнике",
+        "category": "hospital",
+        "public_status": "кандидат: московское государственное учреждение",
+        "verification_status": "требуется подтверждение по официальному сайту и агрегаторам",
+        "osm_type": "relation",
+        "osm_id": 7283098,
+        "latitude": 55.7989115,
+        "longitude": 37.5791871,
+        "official_evidence": "См. реестр/официальный сайт медицинской организации; автоматическая классификация не является подтверждением.",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F%20%D0%B1%D0%BE%D0%BB%D1%8C%D0%BD%D0%B8%D1%86%D0%B0%20%E2%84%96%2024%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F%20%D0%B1%D0%BE%D0%BB%D1%8C%D0%BD%D0%B8%D1%86%D0%B0%20%E2%84%96%2024%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F%20%D0%B1%D0%BE%D0%BB%D1%8C%D0%BD%D0%B8%D1%86%D0%B0%20%E2%84%96%2024%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "note": "Источник координат: OpenStreetMap. Ссылки ведут к поиску в трёх агрегаторах; не означают автоматическое подтверждение карточки."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5688658,
+          55.7996842
+        ]
+      },
+      "properties": {
+        "name": "Городская клиническая больница № 24. Перинатальный центр",
+        "address": "4-й Вятский переулок, 39",
+        "category": "hospital",
+        "public_status": "кандидат: московское государственное учреждение",
+        "verification_status": "требуется подтверждение по официальному сайту и агрегаторам",
+        "osm_type": "relation",
+        "osm_id": 11327387,
+        "latitude": 55.7996842,
+        "longitude": 37.5688658,
+        "official_evidence": "См. реестр/официальный сайт медицинской организации; автоматическая классификация не является подтверждением.",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F%20%D0%B1%D0%BE%D0%BB%D1%8C%D0%BD%D0%B8%D1%86%D0%B0%20%E2%84%96%2024.%20%D0%9F%D0%B5%D1%80%D0%B8%D0%BD%D0%B0%D1%82%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9%20%D1%86%D0%B5%D0%BD%D1%82%D1%80%2C%204-%D0%B9%20%D0%92%D1%8F%D1%82%D1%81%D0%BA%D0%B8%D0%B9%20%D0%BF%D0%B5%D1%80%D0%B5%D1%83%D0%BB%D0%BE%D0%BA%2C%2039%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F%20%D0%B1%D0%BE%D0%BB%D1%8C%D0%BD%D0%B8%D1%86%D0%B0%20%E2%84%96%2024.%20%D0%9F%D0%B5%D1%80%D0%B8%D0%BD%D0%B0%D1%82%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9%20%D1%86%D0%B5%D0%BD%D1%82%D1%80%2C%204-%D0%B9%20%D0%92%D1%8F%D1%82%D1%81%D0%BA%D0%B8%D0%B9%20%D0%BF%D0%B5%D1%80%D0%B5%D1%83%D0%BB%D0%BE%D0%BA%2C%2039%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F%20%D0%B1%D0%BE%D0%BB%D1%8C%D0%BD%D0%B8%D1%86%D0%B0%20%E2%84%96%2024.%20%D0%9F%D0%B5%D1%80%D0%B8%D0%BD%D0%B0%D1%82%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9%20%D1%86%D0%B5%D0%BD%D1%82%D1%80%2C%204-%D0%B9%20%D0%92%D1%8F%D1%82%D1%81%D0%BA%D0%B8%D0%B9%20%D0%BF%D0%B5%D1%80%D0%B5%D1%83%D0%BB%D0%BE%D0%BA%2C%2039%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "note": "Источник координат: OpenStreetMap. Ссылки ведут к поиску в трёх агрегаторах; не означают автоматическое подтверждение карточки."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.3519921,
+          55.9466977
+        ]
+      },
+      "properties": {
+        "name": "Городская поликлиника № 45. Филиал № 6",
+        "address": "Адрес уточняется в агрегаторах/официальном источнике",
+        "category": "clinic",
+        "public_status": "кандидат: московское государственное учреждение",
+        "verification_status": "требуется подтверждение по официальному сайту и агрегаторам",
+        "osm_type": "node",
+        "osm_id": 11371298792,
+        "latitude": 55.9466977,
+        "longitude": 37.3519921,
+        "official_evidence": "См. реестр/официальный сайт медицинской организации; автоматическая классификация не является подтверждением.",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%2045.%20%D0%A4%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%20%E2%84%96%206%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%2045.%20%D0%A4%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%20%E2%84%96%206%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%2045.%20%D0%A4%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%20%E2%84%96%206%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "note": "Источник координат: OpenStreetMap. Ссылки ведут к поиску в трёх агрегаторах; не означают автоматическое подтверждение карточки."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5424853,
+          55.8398256
+        ]
+      },
+      "properties": {
+        "name": "Городская поликлиника № 6. Филиал №3",
+        "address": "Адрес уточняется в агрегаторах/официальном источнике",
+        "category": "clinic",
+        "public_status": "кандидат: московское государственное учреждение",
+        "verification_status": "требуется подтверждение по официальному сайту и агрегаторам",
+        "osm_type": "way",
+        "osm_id": 1257238838,
+        "latitude": 55.8398256,
+        "longitude": 37.5424853,
+        "official_evidence": "См. реестр/официальный сайт медицинской организации; автоматическая классификация не является подтверждением.",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%206.%20%D0%A4%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%20%E2%84%963%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%206.%20%D0%A4%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%20%E2%84%963%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%206.%20%D0%A4%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%20%E2%84%963%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "note": "Источник координат: OpenStreetMap. Ссылки ведут к поиску в трёх агрегаторах; не означают автоматическое подтверждение карточки."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5425075,
+          55.8040939
+        ]
+      },
+      "properties": {
+        "name": "Городская поликлиника № 62 филиал № 5",
+        "address": "Адрес уточняется в агрегаторах/официальном источнике",
+        "category": "clinic",
+        "public_status": "кандидат: московское государственное учреждение",
+        "verification_status": "требуется подтверждение по официальному сайту и агрегаторам",
+        "osm_type": "relation",
+        "osm_id": 10918095,
+        "latitude": 55.8040939,
+        "longitude": 37.5425075,
+        "official_evidence": "См. реестр/официальный сайт медицинской организации; автоматическая классификация не является подтверждением.",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%2062%20%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%20%E2%84%96%205%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%2062%20%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%20%E2%84%96%205%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%2062%20%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%20%E2%84%96%205%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "note": "Источник координат: OpenStreetMap. Ссылки ведут к поиску в трёх агрегаторах; не означают автоматическое подтверждение карточки."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5192944,
+          55.8020142
+        ]
+      },
+      "properties": {
+        "name": "Городская поликлиника № 62, филиал № 1",
+        "address": "Адрес уточняется в агрегаторах/официальном источнике",
+        "category": "clinic",
+        "public_status": "кандидат: московское государственное учреждение",
+        "verification_status": "требуется подтверждение по официальному сайту и агрегаторам",
+        "osm_type": "relation",
+        "osm_id": 8331323,
+        "latitude": 55.8020142,
+        "longitude": 37.5192944,
+        "official_evidence": "См. реестр/официальный сайт медицинской организации; автоматическая классификация не является подтверждением.",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%2062%2C%20%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%20%E2%84%96%201%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%2062%2C%20%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%20%E2%84%96%201%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%2062%2C%20%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%20%E2%84%96%201%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "note": "Источник координат: OpenStreetMap. Ссылки ведут к поиску в трёх агрегаторах; не означают автоматическое подтверждение карточки."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5845854,
+          55.7819495
+        ]
+      },
+      "properties": {
+        "name": "Городская поликлиника № 62, филиал № 4",
+        "address": "Адрес уточняется в агрегаторах/официальном источнике",
+        "category": "clinic",
+        "public_status": "кандидат: московское государственное учреждение",
+        "verification_status": "требуется подтверждение по официальному сайту и агрегаторам",
+        "osm_type": "node",
+        "osm_id": 4646515591,
+        "latitude": 55.7819495,
+        "longitude": 37.5845854,
+        "official_evidence": "См. реестр/официальный сайт медицинской организации; автоматическая классификация не является подтверждением.",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%2062%2C%20%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%20%E2%84%96%204%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%2062%2C%20%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%20%E2%84%96%204%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%2062%2C%20%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%20%E2%84%96%204%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "note": "Источник координат: OpenStreetMap. Ссылки ведут к поиску в трёх агрегаторах; не означают автоматическое подтверждение карточки."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5769812,
+          55.7821847
+        ]
+      },
+      "properties": {
+        "name": "Городская поликлиника № 62. Филиал № 4",
+        "address": "Адрес уточняется в агрегаторах/официальном источнике",
+        "category": "clinic",
+        "public_status": "кандидат: московское государственное учреждение",
+        "verification_status": "требуется подтверждение по официальному сайту и агрегаторам",
+        "osm_type": "node",
+        "osm_id": 8048602868,
+        "latitude": 55.7821847,
+        "longitude": 37.5769812,
+        "official_evidence": "См. реестр/официальный сайт медицинской организации; автоматическая классификация не является подтверждением.",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%2062.%20%D0%A4%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%20%E2%84%96%204%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%2062.%20%D0%A4%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%20%E2%84%96%204%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%2062.%20%D0%A4%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%20%E2%84%96%204%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "note": "Источник координат: OpenStreetMap. Ссылки ведут к поиску в трёх агрегаторах; не означают автоматическое подтверждение карточки."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5668493,
+          55.8350777
+        ]
+      },
+      "properties": {
+        "name": "Городская поликлиника №105",
+        "address": "Лиственничная аллея, 14Б",
+        "category": "clinic",
+        "public_status": "кандидат: московское государственное учреждение",
+        "verification_status": "требуется подтверждение по официальному сайту и агрегаторам",
+        "osm_type": "way",
+        "osm_id": 100718603,
+        "latitude": 55.8350777,
+        "longitude": 37.5668493,
+        "official_evidence": "См. реестр/официальный сайт медицинской организации; автоматическая классификация не является подтверждением.",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96105%2C%20%D0%9B%D0%B8%D1%81%D1%82%D0%B2%D0%B5%D0%BD%D0%BD%D0%B8%D1%87%D0%BD%D0%B0%D1%8F%20%D0%B0%D0%BB%D0%BB%D0%B5%D1%8F%2C%2014%D0%91%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96105%2C%20%D0%9B%D0%B8%D1%81%D1%82%D0%B2%D0%B5%D0%BD%D0%BD%D0%B8%D1%87%D0%BD%D0%B0%D1%8F%20%D0%B0%D0%BB%D0%BB%D0%B5%D1%8F%2C%2014%D0%91%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96105%2C%20%D0%9B%D0%B8%D1%81%D1%82%D0%B2%D0%B5%D0%BD%D0%BD%D0%B8%D1%87%D0%BD%D0%B0%D1%8F%20%D0%B0%D0%BB%D0%BB%D0%B5%D1%8F%2C%2014%D0%91%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "note": "Источник координат: OpenStreetMap. Ссылки ведут к поиску в трёх агрегаторах; не означают автоматическое подтверждение карточки."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5647222,
+          55.8232121
+        ]
+      },
+      "properties": {
+        "name": "Городская поликлиника №164",
+        "address": "Адрес уточняется в агрегаторах/официальном источнике",
+        "category": "clinic",
+        "public_status": "кандидат: московское государственное учреждение",
+        "verification_status": "требуется подтверждение по официальному сайту и агрегаторам",
+        "osm_type": "way",
+        "osm_id": 114871074,
+        "latitude": 55.8232121,
+        "longitude": 37.5647222,
+        "official_evidence": "См. реестр/официальный сайт медицинской организации; автоматическая классификация не является подтверждением.",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96164%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96164%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96164%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "note": "Источник координат: OpenStreetMap. Ссылки ведут к поиску в трёх агрегаторах; не означают автоматическое подтверждение карточки."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.4753281,
+          55.8662334
+        ]
+      },
+      "properties": {
+        "name": "Городская поликлиника №45 филиал №3",
+        "address": "Адрес уточняется в агрегаторах/официальном источнике",
+        "category": "clinic",
+        "public_status": "кандидат: московское государственное учреждение",
+        "verification_status": "требуется подтверждение по официальному сайту и агрегаторам",
+        "osm_type": "way",
+        "osm_id": 721957871,
+        "latitude": 55.8662334,
+        "longitude": 37.4753281,
+        "official_evidence": "См. реестр/официальный сайт медицинской организации; автоматическая классификация не является подтверждением.",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%9645%20%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%20%E2%84%963%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%9645%20%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%20%E2%84%963%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%9645%20%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%20%E2%84%963%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "note": "Источник координат: OpenStreetMap. Ссылки ведут к поиску в трёх агрегаторах; не означают автоматическое подтверждение карточки."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.581577,
+          55.7941219
+        ]
+      },
+      "properties": {
+        "name": "Городская поликлиника №6 филиал 1",
+        "address": "Адрес уточняется в агрегаторах/официальном источнике",
+        "category": "clinic",
+        "public_status": "кандидат: московское государственное учреждение",
+        "verification_status": "требуется подтверждение по официальному сайту и агрегаторам",
+        "osm_type": "way",
+        "osm_id": 91241969,
+        "latitude": 55.7941219,
+        "longitude": 37.581577,
+        "official_evidence": "См. реестр/официальный сайт медицинской организации; автоматическая классификация не является подтверждением.",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%966%20%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%201%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%966%20%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%201%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%966%20%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%201%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "note": "Источник координат: OpenStreetMap. Ссылки ведут к поиску в трёх агрегаторах; не означают автоматическое подтверждение карточки."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.582493,
+          55.801414
+        ]
+      },
+      "properties": {
+        "name": "Городская поликлиника №6 филиал №2",
+        "address": "Бутырская улица, 65/68",
+        "category": "clinic",
+        "public_status": "кандидат: московское государственное учреждение",
+        "verification_status": "требуется подтверждение по официальному сайту и агрегаторам",
+        "osm_type": "node",
+        "osm_id": 601835614,
+        "latitude": 55.801414,
+        "longitude": 37.582493,
+        "official_evidence": "См. реестр/официальный сайт медицинской организации; автоматическая классификация не является подтверждением.",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%966%20%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%20%E2%84%962%2C%20%D0%91%D1%83%D1%82%D1%8B%D1%80%D1%81%D0%BA%D0%B0%D1%8F%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%2C%2065/68%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%966%20%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%20%E2%84%962%2C%20%D0%91%D1%83%D1%82%D1%8B%D1%80%D1%81%D0%BA%D0%B0%D1%8F%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%2C%2065/68%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%966%20%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%20%E2%84%962%2C%20%D0%91%D1%83%D1%82%D1%8B%D1%80%D1%81%D0%BA%D0%B0%D1%8F%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%2C%2065/68%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "note": "Источник координат: OpenStreetMap. Ссылки ведут к поиску в трёх агрегаторах; не означают автоматическое подтверждение карточки."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5448588,
+          55.8006578
+        ]
+      },
+      "properties": {
+        "name": "Городская поликлиника №62 Амбулаторный центр",
+        "address": "Адрес уточняется в агрегаторах/официальном источнике",
+        "category": "clinic",
+        "public_status": "кандидат: московское государственное учреждение",
+        "verification_status": "требуется подтверждение по официальному сайту и агрегаторам",
+        "osm_type": "relation",
+        "osm_id": 7930950,
+        "latitude": 55.8006578,
+        "longitude": 37.5448588,
+        "official_evidence": "См. реестр/официальный сайт медицинской организации; автоматическая классификация не является подтверждением.",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%9662%20%D0%90%D0%BC%D0%B1%D1%83%D0%BB%D0%B0%D1%82%D0%BE%D1%80%D0%BD%D1%8B%D0%B9%20%D1%86%D0%B5%D0%BD%D1%82%D1%80%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%9662%20%D0%90%D0%BC%D0%B1%D1%83%D0%BB%D0%B0%D1%82%D0%BE%D1%80%D0%BD%D1%8B%D0%B9%20%D1%86%D0%B5%D0%BD%D1%82%D1%80%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%9662%20%D0%90%D0%BC%D0%B1%D1%83%D0%BB%D0%B0%D1%82%D0%BE%D1%80%D0%BD%D1%8B%D0%B9%20%D1%86%D0%B5%D0%BD%D1%82%D1%80%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "note": "Источник координат: OpenStreetMap. Ссылки ведут к поиску в трёх агрегаторах; не означают автоматическое подтверждение карточки."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5773935,
+          55.7819826
+        ]
+      },
+      "properties": {
+        "name": "Детская городская клиническая больница №9 им. Г. Н. Сперанского, Филиал №1 (Поликлиническое отделение)",
+        "address": "Адрес уточняется в агрегаторах/официальном источнике",
+        "category": "clinic",
+        "public_status": "кандидат: московское государственное учреждение",
+        "verification_status": "требуется подтверждение по официальному сайту и агрегаторам",
+        "osm_type": "way",
+        "osm_id": 867724923,
+        "latitude": 55.7819826,
+        "longitude": 37.5773935,
+        "official_evidence": "См. реестр/официальный сайт медицинской организации; автоматическая классификация не является подтверждением.",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%94%D0%B5%D1%82%D1%81%D0%BA%D0%B0%D1%8F%20%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F%20%D0%B1%D0%BE%D0%BB%D1%8C%D0%BD%D0%B8%D1%86%D0%B0%20%E2%84%969%20%D0%B8%D0%BC.%20%D0%93.%20%D0%9D.%20%D0%A1%D0%BF%D0%B5%D1%80%D0%B0%D0%BD%D1%81%D0%BA%D0%BE%D0%B3%D0%BE%2C%20%D0%A4%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%20%E2%84%961%20%28%D0%9F%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B5%20%D0%BE%D1%82%D0%B4%D0%B5%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5%29%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%94%D0%B5%D1%82%D1%81%D0%BA%D0%B0%D1%8F%20%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F%20%D0%B1%D0%BE%D0%BB%D1%8C%D0%BD%D0%B8%D1%86%D0%B0%20%E2%84%969%20%D0%B8%D0%BC.%20%D0%93.%20%D0%9D.%20%D0%A1%D0%BF%D0%B5%D1%80%D0%B0%D0%BD%D1%81%D0%BA%D0%BE%D0%B3%D0%BE%2C%20%D0%A4%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%20%E2%84%961%20%28%D0%9F%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B5%20%D0%BE%D1%82%D0%B4%D0%B5%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5%29%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%94%D0%B5%D1%82%D1%81%D0%BA%D0%B0%D1%8F%20%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F%20%D0%B1%D0%BE%D0%BB%D1%8C%D0%BD%D0%B8%D1%86%D0%B0%20%E2%84%969%20%D0%B8%D0%BC.%20%D0%93.%20%D0%9D.%20%D0%A1%D0%BF%D0%B5%D1%80%D0%B0%D0%BD%D1%81%D0%BA%D0%BE%D0%B3%D0%BE%2C%20%D0%A4%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%20%E2%84%961%20%28%D0%9F%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B5%20%D0%BE%D1%82%D0%B4%D0%B5%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5%29%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "note": "Источник координат: OpenStreetMap. Ссылки ведут к поиску в трёх агрегаторах; не означают автоматическое подтверждение карточки."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.3523623,
+          55.9468419
+        ]
+      },
+      "properties": {
+        "name": "Детская городская поликлиника № 133. Филиал № 4",
+        "address": "Адрес уточняется в агрегаторах/официальном источнике",
+        "category": "clinic",
+        "public_status": "кандидат: московское государственное учреждение",
+        "verification_status": "требуется подтверждение по официальному сайту и агрегаторам",
+        "osm_type": "node",
+        "osm_id": 11371298793,
+        "latitude": 55.9468419,
+        "longitude": 37.3523623,
+        "official_evidence": "См. реестр/официальный сайт медицинской организации; автоматическая классификация не является подтверждением.",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%94%D0%B5%D1%82%D1%81%D0%BA%D0%B0%D1%8F%20%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%20133.%20%D0%A4%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%20%E2%84%96%204%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%94%D0%B5%D1%82%D1%81%D0%BA%D0%B0%D1%8F%20%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%20133.%20%D0%A4%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%20%E2%84%96%204%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%94%D0%B5%D1%82%D1%81%D0%BA%D0%B0%D1%8F%20%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%20133.%20%D0%A4%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%20%E2%84%96%204%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "note": "Источник координат: OpenStreetMap. Ссылки ведут к поиску в трёх агрегаторах; не означают автоматическое подтверждение карточки."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5514666,
+          55.868449
+        ]
+      },
+      "properties": {
+        "name": "Детская городская поликлиника № 15. Филиал 2",
+        "address": "Адрес уточняется в агрегаторах/официальном источнике",
+        "category": "clinic",
+        "public_status": "кандидат: московское государственное учреждение",
+        "verification_status": "требуется подтверждение по официальному сайту и агрегаторам",
+        "osm_type": "relation",
+        "osm_id": 8330590,
+        "latitude": 55.868449,
+        "longitude": 37.5514666,
+        "official_evidence": "См. реестр/официальный сайт медицинской организации; автоматическая классификация не является подтверждением.",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%94%D0%B5%D1%82%D1%81%D0%BA%D0%B0%D1%8F%20%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%2015.%20%D0%A4%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%202%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%94%D0%B5%D1%82%D1%81%D0%BA%D0%B0%D1%8F%20%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%2015.%20%D0%A4%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%202%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%94%D0%B5%D1%82%D1%81%D0%BA%D0%B0%D1%8F%20%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%2015.%20%D0%A4%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%202%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "note": "Источник координат: OpenStreetMap. Ссылки ведут к поиску в трёх агрегаторах; не означают автоматическое подтверждение карточки."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5619288,
+          55.8893819
+        ]
+      },
+      "properties": {
+        "name": "Детская городская поликлиника № 86 филиал № 1",
+        "address": "Дубнинская улица, 40 к3",
+        "category": "clinic",
+        "public_status": "кандидат: московское государственное учреждение",
+        "verification_status": "требуется подтверждение по официальному сайту и агрегаторам",
+        "osm_type": "way",
+        "osm_id": 28678459,
+        "latitude": 55.8893819,
+        "longitude": 37.5619288,
+        "official_evidence": "См. реестр/официальный сайт медицинской организации; автоматическая классификация не является подтверждением.",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%94%D0%B5%D1%82%D1%81%D0%BA%D0%B0%D1%8F%20%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%2086%20%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%20%E2%84%96%201%2C%20%D0%94%D1%83%D0%B1%D0%BD%D0%B8%D0%BD%D1%81%D0%BA%D0%B0%D1%8F%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%2C%2040%20%D0%BA3%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%94%D0%B5%D1%82%D1%81%D0%BA%D0%B0%D1%8F%20%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%2086%20%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%20%E2%84%96%201%2C%20%D0%94%D1%83%D0%B1%D0%BD%D0%B8%D0%BD%D1%81%D0%BA%D0%B0%D1%8F%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%2C%2040%20%D0%BA3%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%94%D0%B5%D1%82%D1%81%D0%BA%D0%B0%D1%8F%20%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%2086%20%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%20%E2%84%96%201%2C%20%D0%94%D1%83%D0%B1%D0%BD%D0%B8%D0%BD%D1%81%D0%BA%D0%B0%D1%8F%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%2C%2040%20%D0%BA3%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "note": "Источник координат: OpenStreetMap. Ссылки ведут к поиску в трёх агрегаторах; не означают автоматическое подтверждение карточки."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5405729,
+          55.8777454
+        ]
+      },
+      "properties": {
+        "name": "Детская городская поликлиника № 86. Филиал № 3",
+        "address": "Адрес уточняется в агрегаторах/официальном источнике",
+        "category": "clinic",
+        "public_status": "кандидат: московское государственное учреждение",
+        "verification_status": "требуется подтверждение по официальному сайту и агрегаторам",
+        "osm_type": "node",
+        "osm_id": 11381429412,
+        "latitude": 55.8777454,
+        "longitude": 37.5405729,
+        "official_evidence": "См. реестр/официальный сайт медицинской организации; автоматическая классификация не является подтверждением.",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%94%D0%B5%D1%82%D1%81%D0%BA%D0%B0%D1%8F%20%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%2086.%20%D0%A4%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%20%E2%84%96%203%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%94%D0%B5%D1%82%D1%81%D0%BA%D0%B0%D1%8F%20%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%2086.%20%D0%A4%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%20%E2%84%96%203%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%94%D0%B5%D1%82%D1%81%D0%BA%D0%B0%D1%8F%20%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%2086.%20%D0%A4%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%20%E2%84%96%203%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "note": "Источник координат: OpenStreetMap. Ссылки ведут к поиску в трёх агрегаторах; не означают автоматическое подтверждение карточки."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.567579,
+          55.8008542
+        ]
+      },
+      "properties": {
+        "name": "Детская городская поликлиника №19",
+        "address": "Адрес уточняется в агрегаторах/официальном источнике",
+        "category": "clinic",
+        "public_status": "кандидат: московское государственное учреждение",
+        "verification_status": "требуется подтверждение по официальному сайту и агрегаторам",
+        "osm_type": "node",
+        "osm_id": 2298658136,
+        "latitude": 55.8008542,
+        "longitude": 37.567579,
+        "official_evidence": "См. реестр/официальный сайт медицинской организации; автоматическая классификация не является подтверждением.",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%94%D0%B5%D1%82%D1%81%D0%BA%D0%B0%D1%8F%20%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%9619%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%94%D0%B5%D1%82%D1%81%D0%BA%D0%B0%D1%8F%20%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%9619%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%94%D0%B5%D1%82%D1%81%D0%BA%D0%B0%D1%8F%20%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%9619%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "note": "Источник координат: OpenStreetMap. Ссылки ведут к поиску в трёх агрегаторах; не означают автоматическое подтверждение карточки."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.4967843,
+          55.8031934
+        ]
+      },
+      "properties": {
+        "name": "Детская городская поликлиника №39 Филиал №1",
+        "address": "Адрес уточняется в агрегаторах/официальном источнике",
+        "category": "clinic",
+        "public_status": "кандидат: московское государственное учреждение",
+        "verification_status": "требуется подтверждение по официальному сайту и агрегаторам",
+        "osm_type": "node",
+        "osm_id": 1557868571,
+        "latitude": 55.8031934,
+        "longitude": 37.4967843,
+        "official_evidence": "См. реестр/официальный сайт медицинской организации; автоматическая классификация не является подтверждением.",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%94%D0%B5%D1%82%D1%81%D0%BA%D0%B0%D1%8F%20%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%9639%20%D0%A4%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%20%E2%84%961%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%94%D0%B5%D1%82%D1%81%D0%BA%D0%B0%D1%8F%20%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%9639%20%D0%A4%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%20%E2%84%961%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%94%D0%B5%D1%82%D1%81%D0%BA%D0%B0%D1%8F%20%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%9639%20%D0%A4%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%20%E2%84%961%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "note": "Источник координат: OpenStreetMap. Ссылки ведут к поиску в трёх агрегаторах; не означают автоматическое подтверждение карточки."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.531825,
+          55.8285495
+        ]
+      },
+      "properties": {
+        "name": "Детская инфекционная больница № 6",
+        "address": "Адрес уточняется в агрегаторах/официальном источнике",
+        "category": "hospital",
+        "public_status": "кандидат: московское государственное учреждение",
+        "verification_status": "требуется подтверждение по официальному сайту и агрегаторам",
+        "osm_type": "relation",
+        "osm_id": 8342320,
+        "latitude": 55.8285495,
+        "longitude": 37.531825,
+        "official_evidence": "См. реестр/официальный сайт медицинской организации; автоматическая классификация не является подтверждением.",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%94%D0%B5%D1%82%D1%81%D0%BA%D0%B0%D1%8F%20%D0%B8%D0%BD%D1%84%D0%B5%D0%BA%D1%86%D0%B8%D0%BE%D0%BD%D0%BD%D0%B0%D1%8F%20%D0%B1%D0%BE%D0%BB%D1%8C%D0%BD%D0%B8%D1%86%D0%B0%20%E2%84%96%206%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%94%D0%B5%D1%82%D1%81%D0%BA%D0%B0%D1%8F%20%D0%B8%D0%BD%D1%84%D0%B5%D0%BA%D1%86%D0%B8%D0%BE%D0%BD%D0%BD%D0%B0%D1%8F%20%D0%B1%D0%BE%D0%BB%D1%8C%D0%BD%D0%B8%D1%86%D0%B0%20%E2%84%96%206%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%94%D0%B5%D1%82%D1%81%D0%BA%D0%B0%D1%8F%20%D0%B8%D0%BD%D1%84%D0%B5%D0%BA%D1%86%D0%B8%D0%BE%D0%BD%D0%BD%D0%B0%D1%8F%20%D0%B1%D0%BE%D0%BB%D1%8C%D0%BD%D0%B8%D1%86%D0%B0%20%E2%84%96%206%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "note": "Источник координат: OpenStreetMap. Ссылки ведут к поиску в трёх агрегаторах; не означают автоматическое подтверждение карточки."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5182691,
+          55.8472732
+        ]
+      },
+      "properties": {
+        "name": "Детская инфекционная клиническая больница",
+        "address": "Адрес уточняется в агрегаторах/официальном источнике",
+        "category": "hospital",
+        "public_status": "кандидат: московское государственное учреждение",
+        "verification_status": "требуется подтверждение по официальному сайту и агрегаторам",
+        "osm_type": "way",
+        "osm_id": 299301571,
+        "latitude": 55.8472732,
+        "longitude": 37.5182691,
+        "official_evidence": "См. реестр/официальный сайт медицинской организации; автоматическая классификация не является подтверждением.",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%94%D0%B5%D1%82%D1%81%D0%BA%D0%B0%D1%8F%20%D0%B8%D0%BD%D1%84%D0%B5%D0%BA%D1%86%D0%B8%D0%BE%D0%BD%D0%BD%D0%B0%D1%8F%20%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F%20%D0%B1%D0%BE%D0%BB%D1%8C%D0%BD%D0%B8%D1%86%D0%B0%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%94%D0%B5%D1%82%D1%81%D0%BA%D0%B0%D1%8F%20%D0%B8%D0%BD%D1%84%D0%B5%D0%BA%D1%86%D0%B8%D0%BE%D0%BD%D0%BD%D0%B0%D1%8F%20%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F%20%D0%B1%D0%BE%D0%BB%D1%8C%D0%BD%D0%B8%D1%86%D0%B0%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%94%D0%B5%D1%82%D1%81%D0%BA%D0%B0%D1%8F%20%D0%B8%D0%BD%D1%84%D0%B5%D0%BA%D1%86%D0%B8%D0%BE%D0%BD%D0%BD%D0%B0%D1%8F%20%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F%20%D0%B1%D0%BE%D0%BB%D1%8C%D0%BD%D0%B8%D1%86%D0%B0%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "note": "Источник координат: OpenStreetMap. Ссылки ведут к поиску в трёх агрегаторах; не означают автоматическое подтверждение карточки."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5437489,
+          55.7975731
+        ]
+      },
+      "properties": {
+        "name": "Женская консультация № 3",
+        "address": "Адрес уточняется в агрегаторах/официальном источнике",
+        "category": "clinic",
+        "public_status": "кандидат: московское государственное учреждение",
+        "verification_status": "требуется подтверждение по официальному сайту и агрегаторам",
+        "osm_type": "node",
+        "osm_id": 4165804993,
+        "latitude": 55.7975731,
+        "longitude": 37.5437489,
+        "official_evidence": "См. реестр/официальный сайт медицинской организации; автоматическая классификация не является подтверждением.",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%96%D0%B5%D0%BD%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BA%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%86%D0%B8%D1%8F%20%E2%84%96%203%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%96%D0%B5%D0%BD%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BA%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%86%D0%B8%D1%8F%20%E2%84%96%203%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%96%D0%B5%D0%BD%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BA%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%86%D0%B8%D1%8F%20%E2%84%96%203%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "note": "Источник координат: OpenStreetMap. Ссылки ведут к поиску в трёх агрегаторах; не означают автоматическое подтверждение карточки."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5458826,
+          55.8030875
+        ]
+      },
+      "properties": {
+        "name": "Консультативно-поликлиническое отделение для детей до 3-х лет",
+        "address": "Адрес уточняется в агрегаторах/официальном источнике",
+        "category": "hospital",
+        "public_status": "кандидат: московское государственное учреждение",
+        "verification_status": "требуется подтверждение по официальному сайту и агрегаторам",
+        "osm_type": "node",
+        "osm_id": 3300550538,
+        "latitude": 55.8030875,
+        "longitude": 37.5458826,
+        "official_evidence": "См. реестр/официальный сайт медицинской организации; автоматическая классификация не является подтверждением.",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%9A%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%82%D0%B8%D0%B2%D0%BD%D0%BE-%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B5%20%D0%BE%D1%82%D0%B4%D0%B5%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5%20%D0%B4%D0%BB%D1%8F%20%D0%B4%D0%B5%D1%82%D0%B5%D0%B9%20%D0%B4%D0%BE%203-%D1%85%20%D0%BB%D0%B5%D1%82%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%9A%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%82%D0%B8%D0%B2%D0%BD%D0%BE-%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B5%20%D0%BE%D1%82%D0%B4%D0%B5%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5%20%D0%B4%D0%BB%D1%8F%20%D0%B4%D0%B5%D1%82%D0%B5%D0%B9%20%D0%B4%D0%BE%203-%D1%85%20%D0%BB%D0%B5%D1%82%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%9A%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%82%D0%B8%D0%B2%D0%BD%D0%BE-%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B5%20%D0%BE%D1%82%D0%B4%D0%B5%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5%20%D0%B4%D0%BB%D1%8F%20%D0%B4%D0%B5%D1%82%D0%B5%D0%B9%20%D0%B4%D0%BE%203-%D1%85%20%D0%BB%D0%B5%D1%82%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "note": "Источник координат: OpenStreetMap. Ссылки ведут к поиску в трёх агрегаторах; не означают автоматическое подтверждение карточки."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5228374,
+          55.8517311
+        ]
+      },
+      "properties": {
+        "name": "Медсанчасть № 1 ФГБУЗ ЦМСЧ № 119 ФМБА России",
+        "address": "Онежская улица, 18 к4",
+        "category": "clinic",
+        "public_status": "кандидат: московское государственное учреждение",
+        "verification_status": "требуется подтверждение по официальному сайту и агрегаторам",
+        "osm_type": "way",
+        "osm_id": 127553826,
+        "latitude": 55.8517311,
+        "longitude": 37.5228374,
+        "official_evidence": "См. реестр/официальный сайт медицинской организации; автоматическая классификация не является подтверждением.",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%9C%D0%B5%D0%B4%D1%81%D0%B0%D0%BD%D1%87%D0%B0%D1%81%D1%82%D1%8C%20%E2%84%96%201%20%D0%A4%D0%93%D0%91%D0%A3%D0%97%20%D0%A6%D0%9C%D0%A1%D0%A7%20%E2%84%96%20119%20%D0%A4%D0%9C%D0%91%D0%90%20%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D0%B8%2C%20%D0%9E%D0%BD%D0%B5%D0%B6%D1%81%D0%BA%D0%B0%D1%8F%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%2C%2018%20%D0%BA4%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%9C%D0%B5%D0%B4%D1%81%D0%B0%D0%BD%D1%87%D0%B0%D1%81%D1%82%D1%8C%20%E2%84%96%201%20%D0%A4%D0%93%D0%91%D0%A3%D0%97%20%D0%A6%D0%9C%D0%A1%D0%A7%20%E2%84%96%20119%20%D0%A4%D0%9C%D0%91%D0%90%20%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D0%B8%2C%20%D0%9E%D0%BD%D0%B5%D0%B6%D1%81%D0%BA%D0%B0%D1%8F%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%2C%2018%20%D0%BA4%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%9C%D0%B5%D0%B4%D1%81%D0%B0%D0%BD%D1%87%D0%B0%D1%81%D1%82%D1%8C%20%E2%84%96%201%20%D0%A4%D0%93%D0%91%D0%A3%D0%97%20%D0%A6%D0%9C%D0%A1%D0%A7%20%E2%84%96%20119%20%D0%A4%D0%9C%D0%91%D0%90%20%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D0%B8%2C%20%D0%9E%D0%BD%D0%B5%D0%B6%D1%81%D0%BA%D0%B0%D1%8F%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%2C%2018%20%D0%BA4%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "note": "Источник координат: OpenStreetMap. Ссылки ведут к поиску в трёх агрегаторах; не означают автоматическое подтверждение карточки."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.518037,
+          55.7797999
+        ]
+      },
+      "properties": {
+        "name": "Наркологический диспансер №2",
+        "address": "Адрес уточняется в агрегаторах/официальном источнике",
+        "category": "clinic",
+        "public_status": "кандидат: московское государственное учреждение",
+        "verification_status": "требуется подтверждение по официальному сайту и агрегаторам",
+        "osm_type": "node",
+        "osm_id": 1351235455,
+        "latitude": 55.7797999,
+        "longitude": 37.518037,
+        "official_evidence": "См. реестр/официальный сайт медицинской организации; автоматическая классификация не является подтверждением.",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%9D%D0%B0%D1%80%D0%BA%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9%20%D0%B4%D0%B8%D1%81%D0%BF%D0%B0%D0%BD%D1%81%D0%B5%D1%80%20%E2%84%962%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%9D%D0%B0%D1%80%D0%BA%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9%20%D0%B4%D0%B8%D1%81%D0%BF%D0%B0%D0%BD%D1%81%D0%B5%D1%80%20%E2%84%962%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%9D%D0%B0%D1%80%D0%BA%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9%20%D0%B4%D0%B8%D1%81%D0%BF%D0%B0%D0%BD%D1%81%D0%B5%D1%80%20%E2%84%962%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "note": "Источник координат: OpenStreetMap. Ссылки ведут к поиску в трёх агрегаторах; не означают автоматическое подтверждение карточки."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.4923335,
+          55.880079
+        ]
+      },
+      "properties": {
+        "name": "Поликлиника №193",
+        "address": "улица Маршала Федоренко, 6 с1",
+        "category": "clinic",
+        "public_status": "кандидат: московское государственное учреждение",
+        "verification_status": "требуется подтверждение по официальному сайту и агрегаторам",
+        "osm_type": "way",
+        "osm_id": 28573158,
+        "latitude": 55.880079,
+        "longitude": 37.4923335,
+        "official_evidence": "См. реестр/официальный сайт медицинской организации; автоматическая классификация не является подтверждением.",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%9F%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96193%2C%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%20%D0%9C%D0%B0%D1%80%D1%88%D0%B0%D0%BB%D0%B0%20%D0%A4%D0%B5%D0%B4%D0%BE%D1%80%D0%B5%D0%BD%D0%BA%D0%BE%2C%206%20%D1%811%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%9F%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96193%2C%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%20%D0%9C%D0%B0%D1%80%D1%88%D0%B0%D0%BB%D0%B0%20%D0%A4%D0%B5%D0%B4%D0%BE%D1%80%D0%B5%D0%BD%D0%BA%D0%BE%2C%206%20%D1%811%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%9F%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96193%2C%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%20%D0%9C%D0%B0%D1%80%D1%88%D0%B0%D0%BB%D0%B0%20%D0%A4%D0%B5%D0%B4%D0%BE%D1%80%D0%B5%D0%BD%D0%BA%D0%BE%2C%206%20%D1%811%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "note": "Источник координат: OpenStreetMap. Ссылки ведут к поиску в трёх агрегаторах; не означают автоматическое подтверждение карточки."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5721947,
+          55.8127785
+        ]
+      },
+      "properties": {
+        "name": "Психоневрологический диспансер № 5",
+        "address": "Адрес уточняется в агрегаторах/официальном источнике",
+        "category": "clinic",
+        "public_status": "кандидат: московское государственное учреждение",
+        "verification_status": "требуется подтверждение по официальному сайту и агрегаторам",
+        "osm_type": "node",
+        "osm_id": 5152807321,
+        "latitude": 55.8127785,
+        "longitude": 37.5721947,
+        "official_evidence": "См. реестр/официальный сайт медицинской организации; автоматическая классификация не является подтверждением.",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%9F%D1%81%D0%B8%D1%85%D0%BE%D0%BD%D0%B5%D0%B2%D1%80%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9%20%D0%B4%D0%B8%D1%81%D0%BF%D0%B0%D0%BD%D1%81%D0%B5%D1%80%20%E2%84%96%205%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%9F%D1%81%D0%B8%D1%85%D0%BE%D0%BD%D0%B5%D0%B2%D1%80%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9%20%D0%B4%D0%B8%D1%81%D0%BF%D0%B0%D0%BD%D1%81%D0%B5%D1%80%20%E2%84%96%205%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%9F%D1%81%D0%B8%D1%85%D0%BE%D0%BD%D0%B5%D0%B2%D1%80%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9%20%D0%B4%D0%B8%D1%81%D0%BF%D0%B0%D0%BD%D1%81%D0%B5%D1%80%20%E2%84%96%205%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "note": "Источник координат: OpenStreetMap. Ссылки ведут к поиску в трёх агрегаторах; не означают автоматическое подтверждение карточки."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5812991,
+          55.7957088
+        ]
+      },
+      "properties": {
+        "name": "Стоматологическая поликлиника № 11",
+        "address": "Адрес уточняется в агрегаторах/официальном источнике",
+        "category": "dentist",
+        "public_status": "кандидат: московское государственное учреждение",
+        "verification_status": "требуется подтверждение по официальному сайту и агрегаторам",
+        "osm_type": "relation",
+        "osm_id": 11980713,
+        "latitude": 55.7957088,
+        "longitude": 37.5812991,
+        "official_evidence": "См. реестр/официальный сайт медицинской организации; автоматическая классификация не является подтверждением.",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%A1%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%2011%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%A1%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%2011%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%A1%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%2011%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "note": "Источник координат: OpenStreetMap. Ссылки ведут к поиску в трёх агрегаторах; не означают автоматическое подтверждение карточки."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.507401,
+          55.8365209
+        ]
+      },
+      "properties": {
+        "name": "Туберкулезный диспансер № 16",
+        "address": "Адрес уточняется в агрегаторах/официальном источнике",
+        "category": "clinic",
+        "public_status": "кандидат: московское государственное учреждение",
+        "verification_status": "требуется подтверждение по официальному сайту и агрегаторам",
+        "osm_type": "relation",
+        "osm_id": 11322793,
+        "latitude": 55.8365209,
+        "longitude": 37.507401,
+        "official_evidence": "См. реестр/официальный сайт медицинской организации; автоматическая классификация не является подтверждением.",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%A2%D1%83%D0%B1%D0%B5%D1%80%D0%BA%D1%83%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B9%20%D0%B4%D0%B8%D1%81%D0%BF%D0%B0%D0%BD%D1%81%D0%B5%D1%80%20%E2%84%96%2016%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%A2%D1%83%D0%B1%D0%B5%D1%80%D0%BA%D1%83%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B9%20%D0%B4%D0%B8%D1%81%D0%BF%D0%B0%D0%BD%D1%81%D0%B5%D1%80%20%E2%84%96%2016%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%A2%D1%83%D0%B1%D0%B5%D1%80%D0%BA%D1%83%D0%BB%D0%B5%D0%B7%D0%BD%D1%8B%D0%B9%20%D0%B4%D0%B8%D1%81%D0%BF%D0%B0%D0%BD%D1%81%D0%B5%D1%80%20%E2%84%96%2016%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "note": "Источник координат: OpenStreetMap. Ссылки ведут к поиску в трёх агрегаторах; не означают автоматическое подтверждение карточки."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5499642,
+          55.7976043
+        ]
+      },
+      "properties": {
+        "name": "ФГБУ \"52 консультативно-диагностический центр\"",
+        "address": "Адрес уточняется в агрегаторах/официальном источнике",
+        "category": "clinic",
+        "public_status": "кандидат: федеральное/ведомственное государственное учреждение",
+        "verification_status": "требуется подтверждение по официальному сайту и агрегаторам",
+        "osm_type": "relation",
+        "osm_id": 15001926,
+        "latitude": 55.7976043,
+        "longitude": 37.5499642,
+        "official_evidence": "См. реестр/официальный сайт медицинской организации; автоматическая классификация не является подтверждением.",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%A4%D0%93%D0%91%D0%A3%20%2252%20%D0%BA%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%82%D0%B8%D0%B2%D0%BD%D0%BE-%D0%B4%D0%B8%D0%B0%D0%B3%D0%BD%D0%BE%D1%81%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9%20%D1%86%D0%B5%D0%BD%D1%82%D1%80%22%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%A4%D0%93%D0%91%D0%A3%20%2252%20%D0%BA%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%82%D0%B8%D0%B2%D0%BD%D0%BE-%D0%B4%D0%B8%D0%B0%D0%B3%D0%BD%D0%BE%D1%81%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9%20%D1%86%D0%B5%D0%BD%D1%82%D1%80%22%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%A4%D0%93%D0%91%D0%A3%20%2252%20%D0%BA%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%82%D0%B8%D0%B2%D0%BD%D0%BE-%D0%B4%D0%B8%D0%B0%D0%B3%D0%BD%D0%BE%D1%81%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9%20%D1%86%D0%B5%D0%BD%D1%82%D1%80%22%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "note": "Источник координат: OpenStreetMap. Ссылки ведут к поиску в трёх агрегаторах; не означают автоматическое подтверждение карточки."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.530229,
+          55.8201617
+        ]
+      },
+      "properties": {
+        "name": "ФГБУ «НМИЦ ТО им. Н. Н. Приорова» Минздрава России",
+        "address": "Адрес уточняется в агрегаторах/официальном источнике",
+        "category": "hospital",
+        "public_status": "кандидат: федеральное/ведомственное государственное учреждение",
+        "verification_status": "требуется подтверждение по официальному сайту и агрегаторам",
+        "osm_type": "relation",
+        "osm_id": 7838471,
+        "latitude": 55.8201617,
+        "longitude": 37.530229,
+        "official_evidence": "См. реестр/официальный сайт медицинской организации; автоматическая классификация не является подтверждением.",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%A4%D0%93%D0%91%D0%A3%20%C2%AB%D0%9D%D0%9C%D0%98%D0%A6%20%D0%A2%D0%9E%20%D0%B8%D0%BC.%20%D0%9D.%20%D0%9D.%20%D0%9F%D1%80%D0%B8%D0%BE%D1%80%D0%BE%D0%B2%D0%B0%C2%BB%20%D0%9C%D0%B8%D0%BD%D0%B7%D0%B4%D1%80%D0%B0%D0%B2%D0%B0%20%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D0%B8%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%A4%D0%93%D0%91%D0%A3%20%C2%AB%D0%9D%D0%9C%D0%98%D0%A6%20%D0%A2%D0%9E%20%D0%B8%D0%BC.%20%D0%9D.%20%D0%9D.%20%D0%9F%D1%80%D0%B8%D0%BE%D1%80%D0%BE%D0%B2%D0%B0%C2%BB%20%D0%9C%D0%B8%D0%BD%D0%B7%D0%B4%D1%80%D0%B0%D0%B2%D0%B0%20%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D0%B8%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%A4%D0%93%D0%91%D0%A3%20%C2%AB%D0%9D%D0%9C%D0%98%D0%A6%20%D0%A2%D0%9E%20%D0%B8%D0%BC.%20%D0%9D.%20%D0%9D.%20%D0%9F%D1%80%D0%B8%D0%BE%D1%80%D0%BE%D0%B2%D0%B0%C2%BB%20%D0%9C%D0%B8%D0%BD%D0%B7%D0%B4%D1%80%D0%B0%D0%B2%D0%B0%20%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D0%B8%2C%20%D0%90%D0%B4%D1%80%D0%B5%D1%81%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D0%B5%D1%82%D1%81%D1%8F%20%D0%B2%20%D0%B0%D0%B3%D1%80%D0%B5%D0%B3%D0%B0%D1%82%D0%BE%D1%80%D0%B0%D1%85/%D0%BE%D1%84%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BC%20%D0%B8%D1%81%D1%82%D0%BE%D1%87%D0%BD%D0%B8%D0%BA%D0%B5%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "note": "Источник координат: OpenStreetMap. Ссылки ведут к поиску в трёх агрегаторах; не означают автоматическое подтверждение карточки."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5549138,
+          55.8000147
+        ]
+      },
+      "properties": {
+        "name": "Центральная клиническая психиатрическая больница им. Ф.А.Усольцева",
+        "address": "улица 8 Марта, 1",
+        "category": "hospital",
+        "public_status": "кандидат: федеральное/ведомственное государственное учреждение",
+        "verification_status": "требуется подтверждение по официальному сайту и агрегаторам",
+        "osm_type": "relation",
+        "osm_id": 7774722,
+        "latitude": 55.8000147,
+        "longitude": 37.5549138,
+        "official_evidence": "См. реестр/официальный сайт медицинской организации; автоматическая классификация не является подтверждением.",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%A6%D0%B5%D0%BD%D1%82%D1%80%D0%B0%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F%20%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D1%81%D0%B8%D1%85%D0%B8%D0%B0%D1%82%D1%80%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F%20%D0%B1%D0%BE%D0%BB%D1%8C%D0%BD%D0%B8%D1%86%D0%B0%20%D0%B8%D0%BC.%20%D0%A4.%D0%90.%D0%A3%D1%81%D0%BE%D0%BB%D1%8C%D1%86%D0%B5%D0%B2%D0%B0%2C%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%208%20%D0%9C%D0%B0%D1%80%D1%82%D0%B0%2C%201%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%A6%D0%B5%D0%BD%D1%82%D1%80%D0%B0%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F%20%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D1%81%D0%B8%D1%85%D0%B8%D0%B0%D1%82%D1%80%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F%20%D0%B1%D0%BE%D0%BB%D1%8C%D0%BD%D0%B8%D1%86%D0%B0%20%D0%B8%D0%BC.%20%D0%A4.%D0%90.%D0%A3%D1%81%D0%BE%D0%BB%D1%8C%D1%86%D0%B5%D0%B2%D0%B0%2C%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%208%20%D0%9C%D0%B0%D1%80%D1%82%D0%B0%2C%201%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%A6%D0%B5%D0%BD%D1%82%D1%80%D0%B0%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F%20%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D1%81%D0%B8%D1%85%D0%B8%D0%B0%D1%82%D1%80%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F%20%D0%B1%D0%BE%D0%BB%D1%8C%D0%BD%D0%B8%D1%86%D0%B0%20%D0%B8%D0%BC.%20%D0%A4.%D0%90.%D0%A3%D1%81%D0%BE%D0%BB%D1%8C%D1%86%D0%B5%D0%B2%D0%B0%2C%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%208%20%D0%9C%D0%B0%D1%80%D1%82%D0%B0%2C%201%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0",
+        "note": "Источник координат: OpenStreetMap. Ссылки ведут к поиску в трёх агрегаторах; не означают автоматическое подтверждение карточки."
+      }
+    }
+  ]
+}

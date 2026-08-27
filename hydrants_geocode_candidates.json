@@ -1,0 +1,570 @@
+[
+  {
+    "number": 1,
+    "organization": "ГБУ АВД САО",
+    "address": "Куусинена 21",
+    "result": {
+      "place_id": 195296164,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "way",
+      "osm_id": 46946857,
+      "lat": "55.7898208",
+      "lon": "37.5095971",
+      "category": "office",
+      "type": "government",
+      "place_rank": 30,
+      "importance": 8.908293278396304e-05,
+      "addresstype": "office",
+      "name": "Прокуратура Северного АО",
+      "display_name": "Прокуратура Северного АО, 21, улица Куусинена, Хорошёвский район, Москва, Центральный федеральный округ, 125057, Россия",
+      "boundingbox": [
+        "55.7896242",
+        "55.7903082",
+        "37.5092249",
+        "37.5098125"
+      ]
+    },
+    "error": ""
+  },
+  {
+    "number": 2,
+    "organization": "ГБУ АВД САО",
+    "address": "Ижорская улица, 21 стр.2",
+    "result": {
+      "place_id": 196504427,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "way",
+      "osm_id": 16177780,
+      "lat": "55.8917704",
+      "lon": "37.5171388",
+      "category": "highway",
+      "type": "tertiary",
+      "place_rank": 26,
+      "importance": 0.2521482229732802,
+      "addresstype": "road",
+      "name": "Ижорская улица",
+      "display_name": "Ижорская улица, Дмитровский, Дмитровский район, Москва, Центральный федеральный округ, 125412, Россия",
+      "boundingbox": [
+        "55.8894571",
+        "55.8940477",
+        "37.5119408",
+        "37.5223541"
+      ]
+    },
+    "error": ""
+  },
+  {
+    "number": 3,
+    "organization": "ГБУ АВД САО",
+    "address": "Дворцовая аллея",
+    "result": {
+      "place_id": 194843408,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "way",
+      "osm_id": 606643472,
+      "lat": "55.7934468",
+      "lon": "37.5554787",
+      "category": "highway",
+      "type": "residential",
+      "place_rank": 26,
+      "importance": 0.05342241626611731,
+      "addresstype": "road",
+      "name": "Дворцовая аллея",
+      "display_name": "Дворцовая аллея, район Аэропорт, Москва, Центральный федеральный округ, 125167, Россия",
+      "boundingbox": [
+        "55.7929996",
+        "55.7938979",
+        "37.5547628",
+        "37.5561970"
+      ]
+    },
+    "error": ""
+  },
+  {
+    "number": 4,
+    "organization": "ГБУ АВД САО",
+    "address": "Прибрежный проезд 12",
+    "result": {
+      "place_id": 193742688,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "way",
+      "osm_id": 28878511,
+      "lat": "55.8734281",
+      "lon": "37.4652887",
+      "category": "building",
+      "type": "school",
+      "place_rank": 30,
+      "importance": 8.908293278396304e-05,
+      "addresstype": "building",
+      "name": "",
+      "display_name": "12, Прибрежный проезд, район Левобережный, Москва, Центральный федеральный округ, 125445, Россия",
+      "boundingbox": [
+        "55.8732833",
+        "55.8735714",
+        "37.4649225",
+        "37.4656549"
+      ]
+    },
+    "error": ""
+  },
+  {
+    "number": 5,
+    "organization": "ГБУ АВД САО",
+    "address": "Дубнинская 81",
+    "result": {
+      "place_id": 196221417,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "relation",
+      "osm_id": 7150328,
+      "lat": "55.8913949",
+      "lon": "37.5555838",
+      "category": "building",
+      "type": "commercial",
+      "place_rank": 30,
+      "importance": 8.908293278396304e-05,
+      "addresstype": "building",
+      "name": "",
+      "display_name": "81, Дубнинская улица, район Восточное Дегунино, Москва, Центральный федеральный округ, 127591, Россия",
+      "boundingbox": [
+        "55.8911608",
+        "55.8917569",
+        "37.5552903",
+        "37.5563669"
+      ]
+    },
+    "error": ""
+  },
+  {
+    "number": 6,
+    "organization": "Жилищник Аэропорт",
+    "address": "Ленинградский проспект 40",
+    "result": {
+      "place_id": 195706072,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "relation",
+      "osm_id": 11750487,
+      "lat": "55.7936641",
+      "lon": "37.5535282",
+      "category": "building",
+      "type": "yes",
+      "place_rank": 30,
+      "importance": 8.908293278396304e-05,
+      "addresstype": "building",
+      "name": "",
+      "display_name": "40 с7Б/Н, Ленинградский проспект (дублёр), район Аэропорт, Москва, Центральный федеральный округ, 125167, Россия",
+      "boundingbox": [
+        "55.7936290",
+        "55.7936975",
+        "37.5534670",
+        "37.5535883"
+      ]
+    },
+    "error": ""
+  },
+  {
+    "number": 7,
+    "organization": "Жилищник Беговой",
+    "address": "Правая Дворцовая аллея, угол Трудовой аллеи",
+    "result": null,
+    "error": ""
+  },
+  {
+    "number": 8,
+    "organization": "Жилищник Бескудниковский",
+    "address": "Бескудниковский бульвар 57 к1",
+    "result": {
+      "place_id": 195474696,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "relation",
+      "osm_id": 8361012,
+      "lat": "55.8724908",
+      "lon": "37.5386392",
+      "category": "building",
+      "type": "apartments",
+      "place_rank": 30,
+      "importance": 8.908293278396304e-05,
+      "addresstype": "building",
+      "name": "",
+      "display_name": "57 к1, Бескудниковский бульвар, Бескудниковский район, Москва, Центральный федеральный округ, 127486, Россия",
+      "boundingbox": [
+        "55.8722685",
+        "55.8727151",
+        "37.5382866",
+        "37.5391802"
+      ]
+    },
+    "error": ""
+  },
+  {
+    "number": 9,
+    "organization": "Жилищник Войковский",
+    "address": "Новопетровский проезд, 40749",
+    "result": {
+      "place_id": 194164594,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "way",
+      "osm_id": 794558018,
+      "lat": "55.8306536",
+      "lon": "37.5079664",
+      "category": "highway",
+      "type": "tertiary",
+      "place_rank": 26,
+      "importance": 0.05342241626611731,
+      "addresstype": "road",
+      "name": "Новопетровский проезд",
+      "display_name": "Новопетровский проезд, Войковский район, Москва, Центральный федеральный округ, 125130, Россия",
+      "boundingbox": [
+        "55.8305908",
+        "55.8307164",
+        "37.5078361",
+        "37.5080967"
+      ]
+    },
+    "error": ""
+  },
+  {
+    "number": 10,
+    "organization": "Жилищник Восточное Дегунино",
+    "address": "Керамический проезд 53 к1",
+    "result": {
+      "place_id": 195903198,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "way",
+      "osm_id": 28936983,
+      "lat": "55.8764577",
+      "lon": "37.5668119",
+      "category": "building",
+      "type": "apartments",
+      "place_rank": 30,
+      "importance": 8.908293278396304e-05,
+      "addresstype": "building",
+      "name": "",
+      "display_name": "53 к1, Керамический проезд, район Восточное Дегунино, Москва, Центральный федеральный округ, 117042, Россия",
+      "boundingbox": [
+        "55.8758182",
+        "55.8769458",
+        "37.5664846",
+        "37.5671737"
+      ]
+    },
+    "error": ""
+  },
+  {
+    "number": 11,
+    "organization": "Жилищник Головинский",
+    "address": "Кронштадтский бульвар 24 к1",
+    "result": {
+      "place_id": 195325811,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "way",
+      "osm_id": 28270990,
+      "lat": "55.8480680",
+      "lon": "37.5093426",
+      "category": "building",
+      "type": "apartments",
+      "place_rank": 30,
+      "importance": 8.908293278396304e-05,
+      "addresstype": "building",
+      "name": "",
+      "display_name": "24 к1, Кронштадтский бульвар, Головинский район, Москва, Центральный федеральный округ, 125499, Россия",
+      "boundingbox": [
+        "55.8480228",
+        "55.8481725",
+        "37.5090475",
+        "37.5096435"
+      ]
+    },
+    "error": ""
+  },
+  {
+    "number": 12,
+    "organization": "ГБУ Автомобильные дороги",
+    "address": "Лихоборская набережная, напротив дома 15",
+    "result": null,
+    "error": ""
+  },
+  {
+    "number": 13,
+    "organization": "Жилищник Дмитровский",
+    "address": "Ижорская 17/19",
+    "result": {
+      "place_id": 195796947,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "way",
+      "osm_id": 97084510,
+      "lat": "55.8965999",
+      "lon": "37.5263415",
+      "category": "highway",
+      "type": "tertiary",
+      "place_rank": 26,
+      "importance": 0.2521482229732802,
+      "addresstype": "road",
+      "name": "Ижорская улица",
+      "display_name": "Ижорская улица, Дмитровский, Дмитровский район, Москва, Центральный федеральный округ, 127644, Россия",
+      "boundingbox": [
+        "55.8940477",
+        "55.8992139",
+        "37.5223541",
+        "37.5302888"
+      ]
+    },
+    "error": ""
+  },
+  {
+    "number": 14,
+    "organization": "Жилищник Западное Дегунино",
+    "address": "Ивана Сусанина 2",
+    "result": {
+      "place_id": 195334381,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "way",
+      "osm_id": 28825504,
+      "lat": "55.8663802",
+      "lon": "37.5254292",
+      "category": "building",
+      "type": "commercial",
+      "place_rank": 30,
+      "importance": 8.908293278396304e-05,
+      "addresstype": "building",
+      "name": "",
+      "display_name": "2, улица Ивана Сусанина, Бусиново, район Западное Дегунино, Москва, Центральный федеральный округ, 127486, Россия",
+      "boundingbox": [
+        "55.8662092",
+        "55.8665511",
+        "37.5250450",
+        "37.5258134"
+      ]
+    },
+    "error": ""
+  },
+  {
+    "number": 15,
+    "organization": "Жилищник Коптево",
+    "address": "Новая Ипатовка вл.2а",
+    "result": null,
+    "error": ""
+  },
+  {
+    "number": 16,
+    "organization": "Жилищник Левобережный",
+    "address": "Прибрежный проезд 7",
+    "result": {
+      "place_id": 195196212,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "node",
+      "osm_id": 1140343887,
+      "lat": "55.8736423",
+      "lon": "37.4645068",
+      "category": "highway",
+      "type": "bus_stop",
+      "place_rank": 30,
+      "importance": 8.908293278396304e-05,
+      "addresstype": "highway",
+      "name": "Прибрежный проезд, 7",
+      "display_name": "Прибрежный проезд, 7, Прибрежный проезд, район Левобережный, Москва, Центральный федеральный округ, 125445, Россия",
+      "boundingbox": [
+        "55.8735923",
+        "55.8736923",
+        "37.4644568",
+        "37.4645568"
+      ]
+    },
+    "error": ""
+  },
+  {
+    "number": 17,
+    "organization": "Жилищник Молжаниновский",
+    "address": "Новосходненское шоссе 6А",
+    "result": {
+      "place_id": 195989814,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "way",
+      "osm_id": 546607042,
+      "lat": "55.9191669",
+      "lon": "37.3865240",
+      "category": "highway",
+      "type": "secondary",
+      "place_rank": 26,
+      "importance": 0.05342241626611731,
+      "addresstype": "road",
+      "name": "Новосходненское шоссе",
+      "display_name": "Новосходненское шоссе, Молжаниновский район, Москва, Центральный федеральный округ, 141501, Россия",
+      "boundingbox": [
+        "55.9173518",
+        "55.9205758",
+        "37.3803835",
+        "37.3925560"
+      ]
+    },
+    "error": ""
+  },
+  {
+    "number": 18,
+    "organization": "Жилищник Савеловский",
+    "address": "Петровско-Разумовский проезд 29 ст19",
+    "result": null,
+    "error": ""
+  },
+  {
+    "number": 19,
+    "organization": "Жилищник Сокол",
+    "address": "Зорге 19",
+    "result": {
+      "place_id": 195841215,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "way",
+      "osm_id": 46946795,
+      "lat": "55.7873296",
+      "lon": "37.5076707",
+      "category": "building",
+      "type": "yes",
+      "place_rank": 30,
+      "importance": 8.908293278396304e-05,
+      "addresstype": "building",
+      "name": "",
+      "display_name": "19, улица Зорге, Хорошёвский район, Москва, Центральный федеральный округ, 123298, Россия",
+      "boundingbox": [
+        "55.7870456",
+        "55.7876135",
+        "37.5071343",
+        "37.5082071"
+      ]
+    },
+    "error": ""
+  },
+  {
+    "number": 20,
+    "organization": "Жилищник Тимирязевский",
+    "address": "3-й Нижнелихоборский проезд 1 стр9",
+    "result": {
+      "place_id": 195317862,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "way",
+      "osm_id": 377463625,
+      "lat": "55.8456082",
+      "lon": "37.5647179",
+      "category": "highway",
+      "type": "secondary",
+      "place_rank": 26,
+      "importance": 0.05342241626611731,
+      "addresstype": "road",
+      "name": "3-й Нижнелихоборский проезд",
+      "display_name": "3-й Нижнелихоборский проезд, Нижние Лихоборы, Тимирязевский район, Москва, Центральный федеральный округ, 125635, Россия",
+      "boundingbox": [
+        "55.8449794",
+        "55.8461013",
+        "37.5614885",
+        "37.5679742"
+      ]
+    },
+    "error": ""
+  },
+  {
+    "number": 21,
+    "organization": "Жилищник Тимирязевский",
+    "address": "Дмитровский проезд 1 с4",
+    "result": {
+      "place_id": 195543394,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "way",
+      "osm_id": 23042971,
+      "lat": "55.8099869",
+      "lon": "37.5789766",
+      "category": "highway",
+      "type": "residential",
+      "place_rank": 26,
+      "importance": 0.05342241626611731,
+      "addresstype": "road",
+      "name": "Дмитровский проезд (дублёр)",
+      "display_name": "Дмитровский проезд (дублёр), Тимирязевский район, Москва, Центральный федеральный округ, 127422, Россия",
+      "boundingbox": [
+        "55.8098020",
+        "55.8102992",
+        "37.5786262",
+        "37.5791614"
+      ]
+    },
+    "error": ""
+  },
+  {
+    "number": 22,
+    "organization": "Жилищник Тимирязевский",
+    "address": "Верхняя аллея 12Б",
+    "result": {
+      "place_id": 195340674,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "way",
+      "osm_id": 32791397,
+      "lat": "55.8335620",
+      "lon": "37.5634567",
+      "category": "building",
+      "type": "yes",
+      "place_rank": 30,
+      "importance": 8.908293278396304e-05,
+      "addresstype": "building",
+      "name": "",
+      "display_name": "12Б, Верхняя аллея, Тимирязевский район, Москва, Центральный федеральный округ, 127550, Россия",
+      "boundingbox": [
+        "55.8334167",
+        "55.8337073",
+        "37.5633015",
+        "37.5636118"
+      ]
+    },
+    "error": ""
+  },
+  {
+    "number": 23,
+    "organization": "Жилищник Ховрино",
+    "address": "Смольная 50",
+    "result": {
+      "place_id": 196250349,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "relation",
+      "osm_id": 11659058,
+      "lat": "55.8725046",
+      "lon": "37.4705152",
+      "category": "amenity",
+      "type": "fire_station",
+      "place_rank": 30,
+      "importance": 8.908293278396304e-05,
+      "addresstype": "amenity",
+      "name": "Cпециализированная пожарная часть № 51",
+      "display_name": "Cпециализированная пожарная часть № 51, 50, Смольная улица, район Левобережный, Москва, Центральный федеральный округ, 125445, Россия",
+      "boundingbox": [
+        "55.8718115",
+        "55.8732509",
+        "37.4694280",
+        "37.4715888"
+      ]
+    },
+    "error": ""
+  },
+  {
+    "number": 24,
+    "organization": "Жилищник Хорошевский",
+    "address": "Куусинена 21",
+    "result": {
+      "place_id": 195296164,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "way",
+      "osm_id": 46946857,
+      "lat": "55.7898208",
+      "lon": "37.5095971",
+      "category": "office",
+      "type": "government",
+      "place_rank": 30,
+      "importance": 8.908293278396304e-05,
+      "addresstype": "office",
+      "name": "Прокуратура Северного АО",
+      "display_name": "Прокуратура Северного АО, 21, улица Куусинена, Хорошёвский район, Москва, Центральный федеральный округ, 125057, Россия",
+      "boundingbox": [
+        "55.7896242",
+        "55.7903082",
+        "37.5092249",
+        "37.5098125"
+      ]
+    },
+    "error": ""
+  }
+]

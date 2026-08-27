@@ -1,0 +1,3511 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-08-24T10:31:00Z",
+    "timestamp_areas_base": "2026-08-23T16:30:51Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+    {
+      "type": "node",
+      "id": 601835614,
+      "lat": 55.801414,
+      "lon": 37.582493,
+      "tags": {
+        "addr:city": "Москва",
+        "addr:housenumber": "65/68",
+        "addr:street": "Бутырская улица",
+        "amenity": "clinic",
+        "contact:phone": "+7 495 6851616",
+        "contact:website": "http://www.mosgorzdrav.ru/gp93",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "name": "Городская поликлиника №6 филиал №2",
+        "name:uk": "Міська поліклініка №6 філія №2",
+        "official_name": "Городская поликлиника №93",
+        "phone": "+7 495 6851616"
+      }
+    },
+    {
+      "type": "node",
+      "id": 967680856,
+      "lat": 55.7817352,
+      "lon": 37.5844846,
+      "tags": {
+        "amenity": "clinic",
+        "contact:website": "http://www.biome.ru",
+        "entrance": "yes",
+        "health_facility:type": "clinic",
+        "health_specialty:cosmetology": "yes",
+        "healthcare": "clinic",
+        "name": "БиоМи Вита",
+        "name:uk": "БіоМі Віта",
+        "opening_hours": "Mo-Fr 09:00-21:00; Sa-Su 10:00-18:00",
+        "phone": "+7 499 2570807"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1108787419,
+      "lat": 55.8277533,
+      "lon": 37.5144488,
+      "tags": {
+        "amenity": "clinic",
+        "contact:email": "sm-admin@smpost.ru",
+        "contact:phone": "+7 495 2663868;+7 495 7774849",
+        "contact:website": "https://www.smclinic.ru/",
+        "healthcare": "clinic",
+        "name": "СМ-Клиника",
+        "name:uk": "См-клініка",
+        "opening_hours": "Mo-Su 07:30-21:00"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1156101118,
+      "lat": 55.7999839,
+      "lon": 37.5286606,
+      "tags": {
+        "amenity": "clinic",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "name": "Поликлиника при Финансовом университете",
+        "name:uk": "Поліклініка при Фінансовому університеті",
+        "operator": "Финансовый университет при правительстве РФ"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1351235455,
+      "lat": 55.7797999,
+      "lon": 37.518037,
+      "tags": {
+        "amenity": "clinic",
+        "contact:website": "https://narcologos.ru/10818-7",
+        "health_specialty:addiction_medicine": "yes",
+        "healthcare": "clinic",
+        "name": "Наркологический диспансер №2",
+        "name:uk": "Наркологічний диспансер №2",
+        "official_name": "Государственное бюджетное учреждение здравоохранения города Москвы «Московский научно-практический центр наркологии Департамента здравоохранения города Москвы» Филиал №2"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1557868571,
+      "lat": 55.8031934,
+      "lon": 37.4967843,
+      "tags": {
+        "alt_name": "Детская поликлиника №22",
+        "amenity": "clinic",
+        "emergency": "no",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "name": "Детская городская поликлиника №39 Филиал №1",
+        "name:uk": "Дитяча міська поліклініка №39 Філія №1",
+        "official_name": "Государственное бюджетное учреждение здравоохранения \"Детская городская поликлиника №39 Департамента здравоохранения города Москвы\" Филиал №1",
+        "old_name": "Детская поликлиника №22",
+        "phone": "+7 499 7626309",
+        "provided_for:adolescent": "yes",
+        "provided_for:child": "yes",
+        "provided_for:infant": "yes",
+        "provided_for:toddler": "yes",
+        "website": "https://www.mosgorzdrav.ru/dgp22"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1745422062,
+      "lat": 55.8088241,
+      "lon": 37.5696725,
+      "tags": {
+        "amenity": "clinic",
+        "contact:phone": "+7 495 6112790",
+        "contact:website": "des-service.ru",
+        "healthcare": "clinic",
+        "healthcare:speciality": "gynaecology;urology;dermatovenereology;stomatology;diagnostic_radiology",
+        "name": "ДЭЗ-сервис",
+        "name:uk": "ДЕЗ-сервіс",
+        "opening_hours": "Mo-Fr 09:00-18:00; Sa 09:00-15:00"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2261312798,
+      "lat": 55.7894186,
+      "lon": 37.5717835,
+      "tags": {
+        "amenity": "clinic",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "name": "Поликлиника №62, филиал №4",
+        "name:uk": "Поліклініка №62, філія №4",
+        "phone": "+7 495 6122321;+7 495 6122581;+7 495 6123437"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2266417415,
+      "lat": 55.7920587,
+      "lon": 37.5744793,
+      "tags": {
+        "amenity": "clinic",
+        "check_date": "2024-01-04",
+        "contact:email": "medicity@yandex.ru",
+        "contact:phone": "+7 495 8446567",
+        "contact:vk": "https://vk.com/mediccity",
+        "contact:website": "https://www.mediccity.ru",
+        "healthcare": "clinic",
+        "healthcare:speciality": "multi",
+        "name": "МедикСити",
+        "name:en": "MedicCity",
+        "name:uk": "МедикСіті",
+        "opening_hours": "Mo-Su 09:00-21:00",
+        "operator": "ООО \"МедикСити\""
+      }
+    },
+    {
+      "type": "node",
+      "id": 2291827158,
+      "lat": 55.8123193,
+      "lon": 37.5775868,
+      "tags": {
+        "amenity": "clinic",
+        "contact:email": "infokdmc@yandex.ru",
+        "contact:phone": "+7 495 1860054",
+        "contact:website": "http://1kdmc.ru",
+        "contact:whatsapp": "+7 926 7243863",
+        "healthcare": "clinic",
+        "healthcare:speciality": "gynaecology;urology;dermatology;diagnostic_radiology;gastroenterology;allergology;otolaryngology;cardiology;neurology",
+        "name": "Здоровье",
+        "name:uk": "Здоров'я",
+        "opening_hours": "Mo-Fr 09:00-21:00; Sa 10:00-18:00"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2298658136,
+      "lat": 55.8008542,
+      "lon": 37.567579,
+      "tags": {
+        "amenity": "clinic",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "name": "Детская городская поликлиника №19",
+        "name:uk": "Дитяча міська поліклініка №19"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2309662134,
+      "lat": 55.7977872,
+      "lon": 37.5663218,
+      "tags": {
+        "amenity": "clinic",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "name": "Поликлиника «Здоровье»",
+        "name:uk": "Поліклініка «Здоров'я»"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2818634402,
+      "lat": 55.8242264,
+      "lon": 37.5193047,
+      "tags": {
+        "amenity": "clinic",
+        "name": "СМ-Доктор"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2829965168,
+      "lat": 55.8732519,
+      "lon": 37.5577483,
+      "tags": {
+        "amenity": "clinic",
+        "contact:phone": "+7 499 4880303",
+        "contact:website": "http://medaus.ru",
+        "name": "МединаМед"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2899070086,
+      "lat": 55.8275651,
+      "lon": 37.5139967,
+      "tags": {
+        "amenity": "clinic",
+        "name": "СМ-Клиника (отд. МРТ и КТ)"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3138870543,
+      "lat": 55.8242534,
+      "lon": 37.5193433,
+      "tags": {
+        "amenity": "clinic",
+        "healthcare": "clinic",
+        "name": "Детская клиника «СМ-Доктор»",
+        "name:uk": "Дитяча клініка \"СМ-Доктор\""
+      }
+    },
+    {
+      "type": "node",
+      "id": 3259668493,
+      "lat": 55.8391403,
+      "lon": 37.4859469,
+      "tags": {
+        "amenity": "clinic",
+        "contact:email": "ma-cl@mail.ru",
+        "contact:instagram": "https://instagram.com/mediartklinik_msk",
+        "contact:phone": "+7 495 4521446;+7 499 3933382;+7 925 3933382",
+        "contact:website": "http://ma-cl.ru",
+        "contact:whatsapp": "https://api.whatsapp.com/send?phone=+79253933382",
+        "name": "МедиАрт Клиник",
+        "name:en": "MediArt Clinic",
+        "opening_hours": "Mo-Fr 07:30-22:00;Sa 08:30-22:00;Su 09:00-22:00",
+        "opening_hours:url": "https://ma-cl.ru/contacts",
+        "operator": "Медиарт клиник"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3300550538,
+      "lat": 55.8030875,
+      "lon": 37.5458826,
+      "tags": {
+        "amenity": "hospital",
+        "health_facility:type": "hospital",
+        "healthcare": "hospital",
+        "medical_system:western": "yes",
+        "name": "Консультативно-поликлиническое отделение для детей до 3-х лет",
+        "name:uk": "Консультативно-поліклінічне відділення для дітей до 3-х років",
+        "opening_hours": "Mo-Fr 09:00-17:00",
+        "operator": "Городская клиническая больница № 24",
+        "phone": "+7 499 1521961",
+        "website": "https://www.gkb-24.ru/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3558438506,
+      "lat": 55.7972617,
+      "lon": 37.5408255,
+      "tags": {
+        "amenity": "clinic",
+        "healthcare": "clinic",
+        "name": "Медси",
+        "name:uk": "Медсі",
+        "opening_hours": "Mo-Fr 08:00-21:00; Sa-Su 09:00-18:00",
+        "phone": "+7 495 2291875",
+        "website": "https://medsi.ru/clinics/leningradka/",
+        "wheelchair": "no"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3727804925,
+      "lat": 55.8168705,
+      "lon": 37.5022858,
+      "tags": {
+        "amenity": "clinic",
+        "contact:phone": "+7 495 5189454",
+        "contact:website": "http://www.bcode.ru",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "name": "Бикод",
+        "name:uk": "Бікод",
+        "opening_hours": "Mo-Fr 09:00-21:00; Sa 10:00-19:00"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3934020323,
+      "lat": 55.8585498,
+      "lon": 37.4857871,
+      "tags": {
+        "amenity": "clinic",
+        "contact:phone": "+7 495 1653039;+7 495 1653261",
+        "contact:website": "https://medlineservice.ru",
+        "healthcare": "doctor",
+        "name": "Медлайн-Сервис",
+        "name:uk": "Медлайн-сервіс",
+        "opening_hours": "Mo-Sa 08:00-21:00; Su 09:00-20:00"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4019686284,
+      "lat": 55.8082557,
+      "lon": 37.5059722,
+      "tags": {
+        "amenity": "clinic",
+        "contact:phone": "+7 495 5898168",
+        "contact:website": "http://ooomedservis.ru",
+        "healthcare": "clinic",
+        "name": "Медсервис",
+        "opening_hours": "Mo-Fr 09:00-19:00; Sa,Su 09:00-18:00"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4081008238,
+      "lat": 55.8228686,
+      "lon": 37.5087638,
+      "tags": {
+        "amenity": "clinic",
+        "healthcare": "clinic",
+        "name": "Клиника лечения головной боли и вегетативных расстройств им. академика Александра Вейна",
+        "name:uk": "Клініка лікування головного болю та вегетативних розладів ім. академіка Олександра Вейна",
+        "opening_hours": "Mo-Fr 09:00-20:30; Sa 10:00-17:00; Su 10:00-16:00"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4087954090,
+      "lat": 55.782913,
+      "lon": 37.5760742,
+      "tags": {
+        "amenity": "clinic",
+        "healthcare": "clinic",
+        "name": "Miz Clinic",
+        "name:ru": "Мизклиник",
+        "opening_hours": "Mo-Su 09:00-21:00",
+        "phone": "+7 800 1000536",
+        "website": "https://mizclinic.ru"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4114977913,
+      "lat": 55.8663921,
+      "lon": 37.4642222,
+      "tags": {
+        "amenity": "clinic",
+        "contact:phone": "+7 499 3504198",
+        "contact:website": "http://www.classicus.ru",
+        "name": "Бест Клиник",
+        "opening_hours": "Mo-Sa 09:00-21:00; Su 09:00-19:00",
+        "wheelchair": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4137141993,
+      "lat": 55.8618812,
+      "lon": 37.5632965,
+      "tags": {
+        "amenity": "clinic",
+        "contact:phone": "+7 499 4892485",
+        "contact:website": "http://www.klinika-mk.ru",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "name": "Клиника МК",
+        "name:uk": "Клініка МК"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4165804993,
+      "lat": 55.7975731,
+      "lon": 37.5437489,
+      "tags": {
+        "amenity": "clinic",
+        "health_facility:type": "clinic",
+        "health_specialty:gynaecology": "main",
+        "healthcare": "clinic",
+        "medical_system:western": "yes",
+        "name": "Женская консультация № 3",
+        "name:uk": "Жіноча консультація №3",
+        "old_name": "Женская консультация 5",
+        "opening_hours": "Mo-Fr 08:00-20:00; Sa 09:00-15:00",
+        "operator": "Городская клиническая больница им. В.В. Вересаева",
+        "phone": "+7 495 6148459",
+        "provided_for:female": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4207940412,
+      "lat": 55.8800263,
+      "lon": 37.5277291,
+      "tags": {
+        "amenity": "clinic",
+        "contact:phone": "+7 495 2562346",
+        "contact:website": "http://www.drclinics.ru",
+        "name": "Доктор рядом"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4209325400,
+      "lat": 55.8669265,
+      "lon": 37.5522191,
+      "tags": {
+        "amenity": "clinic",
+        "contact:phone": "+7 499 4873903",
+        "contact:website": "http://poli-klinik.ru",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "name": "Поликлиник.ру",
+        "name:uk": "Поліклінік.ру",
+        "opening_hours": "Mo-Su 08:00-21:00"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4228720083,
+      "lat": 55.8913961,
+      "lon": 37.5415008,
+      "tags": {
+        "addr:city": "Москва",
+        "addr:housenumber": "135 к1",
+        "addr:postcode": "127411",
+        "addr:street": "Дмитровское шоссе",
+        "amenity": "clinic",
+        "health_facility:type": "clinic",
+        "health_specialty:gynaecology": "main",
+        "healthcare": "clinic",
+        "medical_system:western": "yes",
+        "name": "Женская консультация №2",
+        "name:uk": "Жіноча консультація №2",
+        "opening_hours": "Mo-Fr 08:00-20:00; Sa 09:00-15:00",
+        "phone": "+7 495 4846033",
+        "provided_for:female": "yes",
+        "website": "https://www.gkb81.ru/about/filialy/zhenskaya-konsultatsiya-8.html"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4237306391,
+      "lat": 55.8618072,
+      "lon": 37.5678813,
+      "tags": {
+        "amenity": "clinic",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "name": "Медси",
+        "name:uk": "Медсі",
+        "opening_hours": "Mo-Fr 08:00-21:00; Sa,Su 09:00-15:00",
+        "website": "https://medsi.ru/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4248796492,
+      "lat": 55.8070295,
+      "lon": 37.5377096,
+      "tags": {
+        "amenity": "clinic",
+        "check_date": "2025-01-08",
+        "healthcare": "clinic",
+        "name": "Медицинский центр «Возрождение»",
+        "name:uk": "Медичний центр «Відродження»",
+        "opening_hours": "Mo-Su 09:00-21:00",
+        "phone": "+7 495 7417619;+7 499 1559707;+7 499 1525763",
+        "website": "http://www.mcv.ru/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4250850830,
+      "lat": 55.8593348,
+      "lon": 37.5683071,
+      "tags": {
+        "amenity": "clinic"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4286156189,
+      "lat": 55.7789259,
+      "lon": 37.5320333,
+      "tags": {
+        "amenity": "clinic",
+        "contact:phone": "+7 495 1653039;+7 495 2814093",
+        "contact:website": "https://medlineservice.ru/",
+        "name": "Медлайн-Сервис",
+        "opening_hours": "Mo-Sa 08:00-21:00; Su 09:00-20:00"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4287170391,
+      "lat": 55.7785248,
+      "lon": 37.5230635,
+      "tags": {
+        "addr:city": "Москва",
+        "addr:housenumber": "80",
+        "addr:postcode": "123007",
+        "addr:street": "Хорошёвское шоссе",
+        "amenity": "clinic",
+        "contact:email": "info@semeynaya.ru",
+        "contact:phone": "+7 495 6625885",
+        "contact:vk": "https://vk.com/semeynaya_klinika",
+        "contact:website": "http://semeynaya.ru/",
+        "contact:youtube": "https://www.youtube.com/c/SemeynayaDentol",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "healthcare:speciality": "cardiology;dermatology;gynaecology;neurology;ophthalmology;orthopaedics;otolaryngology;paediatrics;urology",
+        "name": "Клиника Семейная",
+        "name:uk": "Клініка Сімейна",
+        "opening_hours": "Mo-Fr 08:00-21:00; Sa-Su 09:00-21:00",
+        "operator": "ССМЦ",
+        "operator:type": "private",
+        "ownership": "private",
+        "payment:cash": "yes",
+        "payment:credit_cards": "yes",
+        "payment:debit_cards": "yes",
+        "payment:maestro": "yes",
+        "payment:mastercard": "yes",
+        "payment:telephone_cards": "yes",
+        "payment:visa": "yes",
+        "shop": "medical_supply"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4287184490,
+      "lat": 55.7787422,
+      "lon": 37.5243119,
+      "tags": {
+        "amenity": "clinic",
+        "name": "Доктор Зон"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4340336005,
+      "lat": 55.7861505,
+      "lon": 37.511614,
+      "tags": {
+        "amenity": "clinic",
+        "clinic": "cosmetic",
+        "email": "7779955@list.ru",
+        "healthcare": "clinic",
+        "internet_access": "wlan",
+        "name": "Клиника Аллы Хазовой",
+        "name:uk": "Клініка Алли Хазової",
+        "opening_hours": "Mo-Su 09:00-21:00",
+        "phone": "+7 499 1122891",
+        "website": "http://beauty-in-harmony.ru/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4343199446,
+      "lat": 55.8612729,
+      "lon": 37.5039673,
+      "tags": {
+        "alt_name": "Ниармедик",
+        "amenity": "clinic",
+        "healthcare": "clinic",
+        "name": "Доктор Рядом",
+        "name:uk": "Доктор Поруч",
+        "opening_hours": "Mo-Fr 08:00-21:00; Sa 08:00-19:00; Su 09:00-17:00",
+        "phone": "+7 495 2300309; +7 495 6171171",
+        "website": "https://www.nrmed.ru/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4502867699,
+      "lat": 55.8716699,
+      "lon": 37.556755,
+      "tags": {
+        "amenity": "clinic",
+        "contact:email": "mail@prozrenie.ru",
+        "contact:phone": "+7 495 1850113",
+        "contact:website": "https://prozrenie.ru",
+        "health_facility:type": "office",
+        "healthcare": "doctor",
+        "medical_system:western": "yes",
+        "name": "Ясный взор",
+        "name:uk": "Ясний погляд",
+        "opening_hours": "Mo-Fr 08:00-20:00; Sa-Su 09:00-18:00"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4502867762,
+      "lat": 55.8652994,
+      "lon": 37.5601088,
+      "tags": {
+        "amenity": "clinic",
+        "contact:phone": "+7 495 3747943",
+        "contact:website": "http://www.inpromed.ru",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "medical_system:western": "yes",
+        "name": "Инпромед",
+        "name:uk": "Інпромед"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4506608094,
+      "lat": 55.7843691,
+      "lon": 37.5291835,
+      "tags": {
+        "amenity": "clinic",
+        "name": "Мирал Мед"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4506635535,
+      "lat": 55.8399491,
+      "lon": 37.5461038,
+      "tags": {
+        "amenity": "clinic",
+        "contact:phone": "+7 495 6426263",
+        "contact:website": "http://lechy.ru",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "medical_system:western": "yes",
+        "name": "Лечу",
+        "name:en": "Lechu",
+        "name:uk": "Лічу",
+        "opening_hours": "Mo-Sa 07:30-20:00; Su 07:30-18:00"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4528819190,
+      "lat": 55.7731583,
+      "lon": 37.5436955,
+      "tags": {
+        "amenity": "clinic",
+        "contact:phone": "+7 495 9413909",
+        "contact:website": "https://nikio.ru/",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "name": "Сурдологический центр",
+        "name:uk": "Сурдологічний центр",
+        "opening_hours": "Mo-Fr 08:00-20:00; Sa 09:00-16:00"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4646515591,
+      "lat": 55.7819495,
+      "lon": 37.5845854,
+      "tags": {
+        "amenity": "clinic",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "name": "Городская поликлиника № 62, филиал № 4",
+        "name:uk": "Міська поліклініка №62, філія №4",
+        "operator": "Департамент здравоохранения города Москвы"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4732111067,
+      "lat": 55.8160196,
+      "lon": 37.5120661,
+      "tags": {
+        "amenity": "clinic",
+        "contact:phone": "+7 495 3080211",
+        "contact:website": "http://www.smclinic.ru",
+        "fee": "yes",
+        "healthcare": "clinic",
+        "name": "СМ-Клиника",
+        "name:en": "SM-clinic",
+        "name:uk": "СМ-клініка",
+        "opening_hours": "Mo-Fr 09:00-22:00; Sa,Su 09:00-21:00"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4737508423,
+      "lat": 55.8458551,
+      "lon": 37.4756658,
+      "tags": {
+        "amenity": "clinic",
+        "healthcare": "clinic",
+        "internet_access": "wlan",
+        "name": "Медскан.рф",
+        "name:uk": "Медскан.рф",
+        "opening_hours": "Mo-Su 08:00-21:00",
+        "website": "http://медскан.рф"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4789880630,
+      "lat": 55.8366139,
+      "lon": 37.5249007,
+      "tags": {
+        "amenity": "clinic",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "medical_system:western": "yes",
+        "name": "Поликлиника № 142",
+        "name:uk": "Поліклініка №142"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4849063523,
+      "lat": 55.874734,
+      "lon": 37.5598091,
+      "tags": {
+        "amenity": "clinic",
+        "internet_access": "wlan",
+        "name": "Уста Дент",
+        "opening_hours": "24/7",
+        "operator": "ООО \"Гиппократ\"",
+        "phone": "+7 499 9000488",
+        "website": "https://ustadent.ru/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4978072147,
+      "lat": 55.8110682,
+      "lon": 37.5188602,
+      "tags": {
+        "amenity": "clinic",
+        "check_date": "2023-11-29",
+        "contact:email": "mail@prozrenie.ru",
+        "contact:phone": "+7 495 1850113",
+        "contact:website": "https://prozrenie.ru",
+        "description": "Детская глазная клиника Академия медико-технических наук Российской Федерации",
+        "healthcare": "doctor",
+        "healthcare:speciality": "ophthalmology",
+        "name": "Ясный взор",
+        "name:uk": "Ясний погляд",
+        "opening_hours": "Mo-Fr 08:00-20:00; Sa-Su 09:00-18:00"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4980460515,
+      "lat": 55.8053504,
+      "lon": 37.53664,
+      "tags": {
+        "amenity": "clinic",
+        "description": "В медцентре на метро \"Аэропорт\" ведут прием гинекологи, венерологи. Специалисты клиники проводят хирургические операции в гинекологии, урологии, дерматологии.",
+        "name": "Сеть клиник мужского и женского здоровья",
+        "opening_hours": "Mo-Su 09:00-21:00",
+        "operator": "МедЦентрСервис",
+        "phone": "+7 499 6411302;+7 499 7225314;+7 499 7225382",
+        "website": "https://www.medcentrservis.ru/",
+        "wheelchair": "no"
+      }
+    },
+    {
+      "type": "node",
+      "id": 5071321853,
+      "lat": 55.780297,
+      "lon": 37.5528918,
+      "tags": {
+        "amenity": "clinic",
+        "healthcare": "clinic",
+        "name": "Медси",
+        "name:uk": "Медсі"
+      }
+    },
+    {
+      "type": "node",
+      "id": 5071321858,
+      "lat": 55.7799885,
+      "lon": 37.5522402,
+      "tags": {
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name": "Клиническая больница Медси",
+        "name:uk": "Клінічна лікарня Медсі"
+      }
+    },
+    {
+      "type": "node",
+      "id": 5094722194,
+      "lat": 55.8177523,
+      "lon": 37.5721532,
+      "tags": {
+        "amenity": "clinic",
+        "health_facility:type": "clinic",
+        "health_specialty:gynaecology": "main",
+        "healthcare": "clinic",
+        "medical_system:western": "yes",
+        "name": "Женская консультация",
+        "name:uk": "Жіноча консультація",
+        "opening_hours": "Mo-Fr 08:00-20:00; Sa 09:00-15:00",
+        "provided_for:female": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 5108910280,
+      "lat": 55.7825585,
+      "lon": 37.5542655,
+      "tags": {
+        "amenity": "clinic",
+        "name": "Ниармедик"
+      }
+    },
+    {
+      "type": "node",
+      "id": 5152807321,
+      "lat": 55.8127785,
+      "lon": 37.5721947,
+      "tags": {
+        "addr:postcode": "127422",
+        "amenity": "clinic",
+        "email": "pnd5-pkb4@zdrav.mos.ru",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "healthcare:speciality": "psychiatry",
+        "name": "Психоневрологический диспансер № 5",
+        "name:uk": "Психоневрологічний диспансер №5",
+        "official_name": "Психоневрологический диспансер № 5 филиал Городской клинической психиатрической больницы №4 им. П.Б. Ганнушкина",
+        "opening_hours": "Mo-Fr 08:00-20:00; Sa 09:00-16:00",
+        "phone": "+7 499 9761592"
+      }
+    },
+    {
+      "type": "node",
+      "id": 5222850942,
+      "lat": 55.8031418,
+      "lon": 37.525173,
+      "tags": {
+        "amenity": "clinic",
+        "health_facility:type": "clinic",
+        "health_specialty:ophthalmology": "yes",
+        "healthcare": "clinic",
+        "name": "Центр семейной офтальмологии",
+        "name:uk": "Центр сімейної офтальмології",
+        "opening_hours": "Mo-Fr 09:30-20:00; Sa 10:00-19:00; Su 10:00-15:00",
+        "phone": "+7 499 1518890;+7 499 3720700",
+        "start_date": "1997",
+        "website": "https://www.oftalmos.ru/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 5253040338,
+      "lat": 55.8746217,
+      "lon": 37.5354686,
+      "tags": {
+        "amenity": "clinic",
+        "contact:phone": "+7 495 6494943",
+        "contact:website": "http://rsklinika.ru/",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "medical_system:western": "yes",
+        "name": "РС-клиника",
+        "name:uk": "РС-клініка",
+        "opening_hours": "Mo-Su 09:00-20:00"
+      }
+    },
+    {
+      "type": "node",
+      "id": 5305982321,
+      "lat": 55.7864713,
+      "lon": 37.5705237,
+      "tags": {
+        "amenity": "clinic",
+        "name": "Медицинская комиссия",
+        "opening_hours": "Mo,We,Fr 09:00-15:00; Su,Tu,Th 10:00-17:00",
+        "phone": "+7 495 6146430",
+        "website": "https://gormedcom.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 5341152552,
+      "lat": 55.8514098,
+      "lon": 37.4927011,
+      "tags": {
+        "amenity": "clinic",
+        "check_date": "2025-08-17",
+        "healthcare": "clinic",
+        "name": "Семейный доктор",
+        "name:uk": "Сімейний лікар"
+      }
+    },
+    {
+      "type": "node",
+      "id": 5368712140,
+      "lat": 55.8642302,
+      "lon": 37.5548559,
+      "tags": {
+        "addr:postcode": "127474",
+        "amenity": "clinic",
+        "contact:website": "http://ridere-clinic.ru/kontakty.html",
+        "healthcare": "clinic",
+        "name": "Ридере",
+        "name:uk": "Рідере",
+        "phone": "+7 499 3410003"
+      }
+    },
+    {
+      "type": "node",
+      "id": 5420205598,
+      "lat": 55.8223858,
+      "lon": 37.499629,
+      "tags": {
+        "amenity": "clinic",
+        "contact:phone": "+7 495 6681212",
+        "contact:website": "https://chaika.com/",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "medical_system:western": "yes",
+        "name": "Чайка",
+        "name:uk": "Чайка",
+        "opening_hours": "Mo-Fr 07:30-21:30; Sa 09:00-17:00"
+      }
+    },
+    {
+      "type": "node",
+      "id": 5541156267,
+      "lat": 55.7934144,
+      "lon": 37.560891,
+      "tags": {
+        "amenity": "clinic",
+        "healthcare": "clinic",
+        "name": "Эпицентр",
+        "name:uk": "Епіцентр"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6143223739,
+      "lat": 55.8674615,
+      "lon": 37.5621137,
+      "tags": {
+        "amenity": "clinic",
+        "contact:phone": "+7 499 1304645",
+        "contact:website": "https://medcentr-endomedlab.ru/",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "medical_system:western": "yes",
+        "name": "ЭндоМедЛаб",
+        "name:uk": "ЕндомедЛаб",
+        "opening_hours": "Mo-Fr 07:30-15:00; Sa 09:00-14:00"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6193233300,
+      "lat": 55.7818435,
+      "lon": 37.5720137,
+      "tags": {
+        "amenity": "clinic",
+        "contact:phone": "+7 495 2257695",
+        "contact:website": "https://trinity-med.ru/",
+        "health_facility:type": "clinic",
+        "health_specialty:cosmetology": "yes",
+        "healthcare": "clinic",
+        "name": "Тринити",
+        "name:uk": "Трініті",
+        "opening_hours": "Mo-Su 10:00-22:15"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6318015017,
+      "lat": 55.8562924,
+      "lon": 37.4846733,
+      "tags": {
+        "addr:city": "Москва",
+        "addr:housenumber": "4",
+        "addr:postcode": "125195",
+        "addr:street": "Фестивальная улица",
+        "amenity": "clinic",
+        "contact:email": "info@semeynaya.ru",
+        "contact:phone": "+7495 6625885",
+        "contact:vk": "https://vk.com/semeynaya_klinika",
+        "contact:website": "http://semeynaya.ru/",
+        "contact:youtube": "https://www.youtube.com/c/SemeynayaDentol",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "healthcare:speciality": "cardiology;dermatology;gynaecology;ophthalmology;orthopaedics;otolaryngology;paediatrics;surgery;urology",
+        "name": "Клиника Семейная",
+        "name:uk": "Клініка Сімейна",
+        "opening_hours": "Mo-Fr 08:00-21:00; Sa-Su 09:00-21:00",
+        "operator": "ССМЦ",
+        "operator:type": "private",
+        "ownership": "private",
+        "payment:cash": "yes",
+        "payment:credit_cards": "yes",
+        "payment:debit_cards": "yes",
+        "payment:maestro": "yes",
+        "payment:mastercard": "yes",
+        "payment:telephone_cards": "yes",
+        "payment:visa": "yes",
+        "shop": "medical_supply",
+        "start_date": "2013"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6475175186,
+      "lat": 55.791655,
+      "lon": 37.5671274,
+      "tags": {
+        "amenity": "clinic",
+        "email": "cinomed@yandex.ru",
+        "healthcare": "clinic",
+        "name": "Синомед",
+        "name:en": "Cinomed",
+        "name:uk": "Синомед",
+        "opening_hours": "Mo-Sa 10:00-21:00",
+        "phone": "+7 985 9178085",
+        "website": "https://cinomed.ru/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6825820834,
+      "lat": 55.860306,
+      "lon": 37.5144371,
+      "tags": {
+        "amenity": "clinic",
+        "contact:email": "info-flot@medidom.ru",
+        "contact:phone": "+7 495 4540302",
+        "contact:website": "https://klinikanaflotskoi.ru/",
+        "name": "Здоровая семья"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6846383395,
+      "lat": 55.7989192,
+      "lon": 37.5209259,
+      "tags": {
+        "amenity": "clinic",
+        "healthcare": "clinic",
+        "name": "Сокол",
+        "name:uk": "Сокіл",
+        "website": "https://www.medsokol.ru/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6962840364,
+      "lat": 55.7965198,
+      "lon": 37.5392827,
+      "tags": {
+        "amenity": "clinic",
+        "contact:facebook": "https://www.facebook.com/zdorovlegko1/",
+        "contact:phone": "+7 495 1206686",
+        "contact:website": "https://www.zdorovlegko.ru/",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "level": "1",
+        "medical_system:western": "no",
+        "name": "Здоров легко",
+        "name:uk": "Здорів легко"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7118093206,
+      "lat": 55.8335403,
+      "lon": 37.5326577,
+      "tags": {
+        "amenity": "clinic",
+        "contact:phone": "+7 495 3200666",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "medical_system:western": "yes",
+        "name": "Центр таргетной терапии",
+        "name:uk": "Центр таргетної терапії"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7191950662,
+      "lat": 55.8683284,
+      "lon": 37.463336,
+      "tags": {
+        "amenity": "clinic",
+        "contact:instagram": "https://www.instagram.com/klevober/",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "medical_system:western": "yes",
+        "name": "Левобережная",
+        "name:uk": "Лівобережна",
+        "opening_hours": "Mo-Sa 09:00-20:00"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7267060485,
+      "lat": 55.7976161,
+      "lon": 37.547862,
+      "tags": {
+        "amenity": "clinic",
+        "healthcare": "clinic",
+        "name": "Медэталон",
+        "name:uk": "Медеталон",
+        "operator": "Мирамед"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7323140786,
+      "lat": 55.790858,
+      "lon": 37.5192765,
+      "tags": {
+        "amenity": "clinic",
+        "name": "Ортоспайн",
+        "name:en": "Orthospine",
+        "phone": "+7 499 4902863",
+        "website": "https://orthospine.ru/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7334712602,
+      "lat": 55.7984065,
+      "lon": 37.5543761,
+      "tags": {
+        "amenity": "clinic",
+        "check_date": "2024-08-06",
+        "contact:email": "grc_mnpcn@zdrav.mos.ru",
+        "contact:phone": "+7 499 1781062",
+        "contact:website": "https://narcologos.ru/",
+        "healthcare": "clinic",
+        "healthcare:speciality": "narcology",
+        "name": "Городской реабилитационный центр",
+        "operator": "ГБУ здравоохранения г.Москвы Московский научно-практический центр наркологии"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7632290904,
+      "lat": 55.8731774,
+      "lon": 37.4859136,
+      "tags": {
+        "amenity": "clinic",
+        "check_date": "2025-03-09",
+        "check_date:opening_hours": "2024-05-01",
+        "name": "Парацельс",
+        "opening_hours": "08:00-20:00",
+        "phone": "+7 499 9758264",
+        "website": "https://medparacels.ru/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7635326731,
+      "lat": 55.8039975,
+      "lon": 37.5820667,
+      "tags": {
+        "amenity": "clinic",
+        "contact:instagram": "https://www.instagram.com/santefemme.ru/",
+        "contact:phone": "+7 499 4723561",
+        "contact:website": "https://santefemme.ru/",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "medical_system:western": "yes",
+        "name": "Santefemme",
+        "name:ru": "Сантэфамм",
+        "name:uk": "Santefemme",
+        "opening_hours": "Mo-Sa 09:00-21:00",
+        "provided_for:female": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7988923338,
+      "lat": 55.7860198,
+      "lon": 37.5845933,
+      "tags": {
+        "amenity": "clinic",
+        "contact:phone": "+7 495 2155566",
+        "contact:website": "https://www.myasnikov-clinic.ru/",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "name": "Клиника доктора Мясникова",
+        "name:uk": "Клініка доктора М'ясникова",
+        "opening_hours": "Mo-Fr 10:00-19:00; Sa 10:00-17:00"
+      }
+    },
+    {
+      "type": "node",
+      "id": 8016815531,
+      "lat": 55.865117,
+      "lon": 37.4763365,
+      "tags": {
+        "amenity": "clinic",
+        "healthcare": "clinic",
+        "name": "МЕДСемья",
+        "name:uk": "МЕДСім'я"
+      }
+    },
+    {
+      "type": "node",
+      "id": 8048602868,
+      "lat": 55.7821847,
+      "lon": 37.5769812,
+      "tags": {
+        "amenity": "clinic",
+        "contact:website": "https://gp62dzm.ru/",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "medical_system:western": "yes",
+        "name": "Городская поликлиника № 62. Филиал № 4",
+        "name:de": "Stadtklinik Nr. 62. Filiale Nr. 4",
+        "name:uk": "Міська поліклініка №62. Філія №4",
+        "opening_hours": "Mo-Fr 08:00-20:00; Sa 09:00-18:00; Su 09:00-16:00"
+      }
+    },
+    {
+      "type": "node",
+      "id": 8085346797,
+      "lat": 55.7765715,
+      "lon": 37.5772977,
+      "tags": {
+        "amenity": "clinic",
+        "healthcare": "clinic",
+        "name": "Real Clinic",
+        "opening_hours": "Mo-Su,PH 09:00-21:00"
+      }
+    },
+    {
+      "type": "node",
+      "id": 8087322665,
+      "lat": 55.7883398,
+      "lon": 37.5577918,
+      "tags": {
+        "addr:floor": "2",
+        "amenity": "clinic",
+        "clinic": "physiotherapy",
+        "healthcare": "clinic",
+        "name": "Клиника здорового позвоночника \"ЗДРАВствуйте\"",
+        "name:uk": "Клініка здорового хребта \"Здрастуйте\""
+      }
+    },
+    {
+      "type": "node",
+      "id": 8305749918,
+      "lat": 55.8111086,
+      "lon": 37.4978332,
+      "tags": {
+        "amenity": "clinic",
+        "healthcare": "clinic",
+        "name": "Семья с плюсом",
+        "name:uk": "Сім'я з плюсом",
+        "opening_hours": "Mo-Sa 10:00-20:00",
+        "operator": "ООО Клиника \"Семья с плюсом\"",
+        "phone": "+74991586928",
+        "website": "https://semiaplus.ru"
+      }
+    },
+    {
+      "type": "node",
+      "id": 8480260088,
+      "lat": 55.803393,
+      "lon": 37.5265583,
+      "tags": {
+        "amenity": "clinic",
+        "check_date:opening_hours": "2024-04-26",
+        "contact:email": "info@detki-psy.ru",
+        "name": "Научно-исследовательский центр детской нейропсихологии им. А.Р. Лурии",
+        "opening_hours": "Mo-Su 10:00-18:30",
+        "phone": "+7-499-9410166; +7-499-9410167; +7-499-3900340.",
+        "website": "https://www.detki-psy.ru/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 8583371554,
+      "lat": 55.7917139,
+      "lon": 37.5669553,
+      "tags": {
+        "amenity": "clinic",
+        "contact:email": "info@childclinic.ru",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "name": "Детская поликлиника \"Лечебное дело\"",
+        "name:ru": "Детская поликлиника \"Лечебное дело\"",
+        "name:uk": "Дитяча поліклініка \"Лікувальна справа\"",
+        "ownership": "private",
+        "phone": "+7-499-1559245; +7-499-1527607",
+        "provided_for:adolescent": "yes",
+        "provided_for:child": "yes",
+        "provided_for:infant": "yes",
+        "provided_for:toddler": "yes",
+        "website": "http://childclinic.ru/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 8912000194,
+      "lat": 55.8174842,
+      "lon": 37.5032033,
+      "tags": {
+        "amenity": "clinic",
+        "contact:facebook": "https://facebook.com/cironline",
+        "contact:instagram": "https://instagram.com/cironline_live",
+        "contact:twitter": "https://twitter.com/socialnetcir",
+        "contact:vk": "https://vk.com/socialnetcir",
+        "contact:youtube": "https://youtube.com/c/CironlineVideo",
+        "healthcare": "clinic",
+        "healthcare:speciality": "gynaecology;otolaryngology;urology",
+        "name": "Центр иммунологии и репродукции",
+        "name:uk": "Центр імунології та репродукції",
+        "opening_hours": "Mo-Su 07:45-21:00; Sa-Su 08:45-17:00",
+        "phone": "+7 495 514-00-11",
+        "website": "http://www.cirlab.ru/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9644977757,
+      "lat": 55.7979513,
+      "lon": 37.5401317,
+      "tags": {
+        "amenity": "clinic",
+        "name": "Московский научно-практический центр медицинской реабилитации, восстановительной и спортивной медицины, филиал 12",
+        "opening_hours": "Mo-Fr 08:00-20:00; Sa 09:00-14:00",
+        "ref": "12"
+      }
+    },
+    {
+      "type": "node",
+      "id": 10084647311,
+      "lat": 55.8184804,
+      "lon": 37.5024799,
+      "tags": {
+        "amenity": "clinic",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "name": "Детская поликлиника",
+        "name:uk": "Дитяча поліклініка",
+        "provided_for:adolescent": "yes",
+        "provided_for:child": "yes",
+        "provided_for:infant": "yes",
+        "provided_for:toddler": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 10270441094,
+      "lat": 55.801477,
+      "lon": 37.5564328,
+      "tags": {
+        "amenity": "clinic",
+        "healthcare": "clinic",
+        "name": "H-Clinic",
+        "name:uk": "H-Clinic",
+        "website": "https://h-clinic.ru"
+      }
+    },
+    {
+      "type": "node",
+      "id": 10612687138,
+      "lat": 55.8071175,
+      "lon": 37.5006938,
+      "tags": {
+        "amenity": "clinic",
+        "contact:website": "https://ooomedservis.ru/",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "medical_system:western": "yes",
+        "name": "Медсервис",
+        "name:uk": "Медсервіс"
+      }
+    },
+    {
+      "type": "node",
+      "id": 10679361885,
+      "lat": 55.881824,
+      "lon": 37.5262003,
+      "tags": {
+        "amenity": "clinic",
+        "contact:website": "https://estettika.ru/",
+        "full_name": "Студия современной коррекции фигуры и косметологии «Estettika»",
+        "health_facility:type": "clinic",
+        "health_specialty:cosmetology": "yes",
+        "healthcare": "clinic",
+        "name": "Estet'tika",
+        "name:uk": "Estet'tika",
+        "opening_hours": "10:00-22:00",
+        "phone": "+7 926 9077585"
+      }
+    },
+    {
+      "type": "node",
+      "id": 10680320770,
+      "lat": 55.8615463,
+      "lon": 37.5500706,
+      "tags": {
+        "amenity": "clinic",
+        "contact:website": "https://kdc.clinic/",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "name": "КДС Клиник",
+        "name:uk": "КДС Клінік"
+      }
+    },
+    {
+      "type": "node",
+      "id": 10722898658,
+      "lat": 55.8028714,
+      "lon": 37.5184634,
+      "tags": {
+        "amenity": "clinic",
+        "contact:email": "2gis@medcentrservis.ru",
+        "contact:phone": "+7 495 9894482",
+        "contact:website": "https://www.medcentrservis.ru/",
+        "name": "МедЦентрСервис",
+        "opening_hours": "24/7"
+      }
+    },
+    {
+      "type": "node",
+      "id": 10928178339,
+      "lat": 55.8276365,
+      "lon": 37.5141853,
+      "tags": {
+        "amenity": "clinic",
+        "contact:email": "sm-admin@smpost.ru",
+        "contact:phone": "+7 495 1269437",
+        "contact:website": "https://www.smdoctor.ru/",
+        "name": "СМ-Клиника",
+        "opening_hours": "Mo-Su 07:30-21:00"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11007705963,
+      "lat": 55.8591451,
+      "lon": 37.5171464,
+      "tags": {
+        "amenity": "clinic",
+        "contact:email": "sm-admin@smpost.ru",
+        "contact:phone": "+7 495 2663868;+7 495 7774849",
+        "contact:website": "https://www.smclinic.ru/",
+        "name": "СМ-Клиника",
+        "opening_hours": "Mo-Fr 07:30-22:00; Sa-Su 07:30-21:00"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11147915837,
+      "lat": 55.7867513,
+      "lon": 37.5607592,
+      "tags": {
+        "amenity": "clinic",
+        "name": "Стелс Реабил",
+        "opening_hours": "Mo-Su 9:00-21:00"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11288555895,
+      "lat": 55.7749618,
+      "lon": 37.5506526,
+      "tags": {
+        "amenity": "clinic",
+        "contact:phone": "+7 499 6889715",
+        "contact:website": "https://zdravclinic.ru/",
+        "name": "ЗдравКлиник",
+        "opening_hours": "Mo-Su 09:00-21:00"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11371298791,
+      "lat": 55.9468809,
+      "lon": 37.3521477,
+      "tags": {
+        "amenity": "clinic",
+        "health_facility:type": "clinic",
+        "health_specialty:gynaecology": "main",
+        "healthcare": "clinic",
+        "medical_system:western": "yes",
+        "name": "Городская клиническая больница им. В.В. Вересаева. ​Женская консультация № 10",
+        "provided_for:female": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11371298792,
+      "lat": 55.9466977,
+      "lon": 37.3519921,
+      "tags": {
+        "amenity": "clinic",
+        "contact:website": "https://gp45msk.ru",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "medical_system:western": "yes",
+        "name": "Городская поликлиника № 45. Филиал № 6",
+        "opening_hours": "Mo-Fr 08:00-20:00"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11371298793,
+      "lat": 55.9468419,
+      "lon": 37.3523623,
+      "tags": {
+        "amenity": "clinic",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "medical_system:western": "yes",
+        "name": "Детская городская поликлиника № 133. Филиал № 4",
+        "provided_for:adolescent": "yes",
+        "provided_for:child": "yes",
+        "provided_for:infant": "yes",
+        "provided_for:toddler": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11381429412,
+      "lat": 55.8777454,
+      "lon": 37.5405729,
+      "tags": {
+        "amenity": "clinic",
+        "contact:website": "https://dgp86.ru/",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "medical_system:western": "yes",
+        "name": "Детская городская поликлиника № 86. Филиал № 3",
+        "provided_for:adolescent": "yes",
+        "provided_for:child": "yes",
+        "provided_for:infant": "yes",
+        "provided_for:toddler": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11381429413,
+      "lat": 55.8778718,
+      "lon": 37.5411737,
+      "tags": {
+        "amenity": "clinic",
+        "contact:website": "https://kdc6.ru",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "medical_system:western": "yes",
+        "name": "Консультативно-диагностический центр № 6. ​Филиал № 6",
+        "opening_hours": "Mo-Fr 08:00-20:00; Sa 09:00-18:00; Su 09:00-16:00"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11397699352,
+      "lat": 55.7944299,
+      "lon": 37.5434965,
+      "tags": {
+        "amenity": "clinic",
+        "contact:email": "sm-admin@smpost.ru",
+        "contact:phone": "+7 495 2663868",
+        "contact:website": "https://www.sm-eko.ru/",
+        "name": "См-Клиника",
+        "opening_hours": "Mo-Fr 07:30-21:00; Sa-Su 08:30-21:00"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11483313326,
+      "lat": 55.7952841,
+      "lon": 37.5732113,
+      "tags": {
+        "amenity": "clinic",
+        "healthcare": "clinic",
+        "name": "Виталмед"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11505302832,
+      "lat": 55.7940952,
+      "lon": 37.5115782,
+      "tags": {
+        "amenity": "clinic",
+        "health_facility:type": "clinic",
+        "health_specialty:gynaecology": "main",
+        "healthcare": "clinic",
+        "medical_system:western": "yes",
+        "name": "Женская консультация №6",
+        "provided_for:female": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11635671420,
+      "lat": 55.7829822,
+      "lon": 37.5522159,
+      "tags": {
+        "amenity": "clinic",
+        "healthcare": "clinic",
+        "name": "Клиника Академии им Ю.Н.Касаткина"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11638904771,
+      "lat": 55.7910888,
+      "lon": 37.570959,
+      "tags": {
+        "amenity": "clinic",
+        "contact:website": "https://immunitet.ru/",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "name": "КДО",
+        "opening_hours": "Mo-Fr 09:00-17:00"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11768746436,
+      "lat": 55.8782109,
+      "lon": 37.5407587,
+      "tags": {
+        "amenity": "clinic",
+        "check_date": "2024-03-27",
+        "contact:website": "http://medsi.ru",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "medical_system:western": "yes",
+        "name": "Медси"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11926989790,
+      "lat": 55.8110255,
+      "lon": 37.5610569,
+      "tags": {
+        "amenity": "clinic",
+        "brand": "МЕДСИ",
+        "check_date": "2024-05-22",
+        "contact:phone": "+7 495 4873834",
+        "contact:website": "https://medsi.ru",
+        "healthcare": "clinic",
+        "healthcare:speciality": "multi",
+        "name": "Медси",
+        "opening_hours": "Mo-Fr 08:00-21:00; Sa 09:00-20:00; Su 09:00-19:00"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11958415390,
+      "lat": 55.7923009,
+      "lon": 37.5277954,
+      "tags": {
+        "amenity": "clinic",
+        "contact:email": "hp@mcclinics.ru",
+        "contact:phone": "+7 800 7007001",
+        "contact:website": "https://mamadeti.ru",
+        "healthcare": "clinic",
+        "name": "Мать и дитя",
+        "opening_hours": "Mo-Fr 08:30-20:30; Sa 09:00-18:00; Su 09:00-16:00"
+      }
+    },
+    {
+      "type": "node",
+      "id": 12035788377,
+      "lat": 55.8350375,
+      "lon": 37.5351079,
+      "tags": {
+        "amenity": "clinic",
+        "contact:website": "https://mrt-ktmedsoyuz.ru/",
+        "name": "Медсоюз"
+      }
+    },
+    {
+      "type": "node",
+      "id": 12035788406,
+      "lat": 55.8224197,
+      "lon": 37.5262687,
+      "tags": {
+        "amenity": "clinic",
+        "contact:website": "https://klinika-aspirin.ru/",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "medical_system:western": "yes",
+        "name": "Аспирин"
+      }
+    },
+    {
+      "type": "node",
+      "id": 12077460269,
+      "lat": 55.8581167,
+      "lon": 37.5488827,
+      "tags": {
+        "addr:postcode": "127238",
+        "amenity": "clinic",
+        "internet_access": "wlan",
+        "name": "Медтокс",
+        "opening_hours": "24/7",
+        "phone": "+7 (499) 938-84-25",
+        "website": "https://med-toks.ru/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 12451815331,
+      "lat": 55.8073839,
+      "lon": 37.5785959,
+      "tags": {
+        "amenity": "clinic",
+        "check_date": "2024-12-25",
+        "contact:phone": "+7 499 1105540",
+        "contact:website": "https://gimed.ru/",
+        "healthcare": "centre",
+        "name": "Гимед",
+        "opening_hours": "Mo-Su 09:00-22:00"
+      }
+    },
+    {
+      "type": "node",
+      "id": 12681036731,
+      "lat": 55.8274346,
+      "lon": 37.5133378,
+      "tags": {
+        "amenity": "clinic",
+        "contact:phone": "+7 495 8467316",
+        "contact:website": "http://www.doctor03.ru",
+        "emergency": "yes",
+        "name": "СМ-Клиника",
+        "opening_hours": "24/7"
+      }
+    },
+    {
+      "type": "node",
+      "id": 12946453795,
+      "lat": 55.80612,
+      "lon": 37.5415814,
+      "tags": {
+        "amenity": "clinic",
+        "contact:vk": "https://vk.com/absolutmed_clinic",
+        "email": "info@absolutmed.ru",
+        "healthcare": "clinic",
+        "name": "Абсолют Мед",
+        "phone": "+7 499 4441403",
+        "website": "https://absolutmed.ru/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13670044029,
+      "lat": 55.8047334,
+      "lon": 37.5132753,
+      "tags": {
+        "addr:city": "Москва",
+        "addr:housenumber": "75 к1",
+        "addr:postcode": "125057",
+        "addr:street": "Ленинградский проспект",
+        "air_conditioning": "yes",
+        "amenity": "clinic",
+        "brand": "Doctor Ermilov",
+        "check_date": "2026-03-22",
+        "contact:facebook": "https://www.facebook.com/DoctorErmilov",
+        "description": "-Мануальный терапевт -Остеопат -Рефлексотерапевт -Массажист -Реабилитолог",
+        "email": "info@doctorermilov.ru",
+        "healthcare": "clinic",
+        "healthcare:speciality": "Мануальная терапия, Остеопатия, Рефлексотерапия, Медицинский массаж, Физиотерапия, Реабилитация",
+        "image": "https://doctorermilov.ru/wp-content/uploads/2024/10/photo_2024-10-22_14-53-08.jpg",
+        "level": "1",
+        "mobile": "+79264542189",
+        "name": "Doctor Ermilov",
+        "opening_hours": "10:00-23:00",
+        "payment:cards": "yes",
+        "payment:cash": "yes",
+        "payment:contactless": "yes",
+        "payment:credit_cards": "yes",
+        "payment:debit_cards": "yes",
+        "ref:vatin": "9729383005",
+        "start_date": "2024-08-13",
+        "website": "https://doctorermilov.ru"
+      }
+    },
+    {
+      "type": "way",
+      "id": 28150400,
+      "center": {
+        "lat": 55.8336822,
+        "lon": 37.5244388
+      },
+      "tags": {
+        "addr:country": "RU",
+        "addr:housenumber": "18Б",
+        "addr:street": "Коптевский бульвар",
+        "amenity": "clinic",
+        "building": "yes",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "medical_system:western": "yes",
+        "name": "Детская поликлиника",
+        "name:ru": "Детская поликлиника",
+        "name:uk": "Дитяча поліклініка",
+        "provided_for:adolescent": "yes",
+        "provided_for:child": "yes",
+        "provided_for:infant": "yes",
+        "provided_for:toddler": "yes"
+      }
+    },
+    {
+      "type": "way",
+      "id": 28150821,
+      "center": {
+        "lat": 55.8428771,
+        "lon": 37.5381263
+      },
+      "tags": {
+        "addr:housenumber": "54А",
+        "addr:street": "проезд Черепановых",
+        "amenity": "clinic",
+        "building": "yes",
+        "building:levels": "2",
+        "healthcare": "clinic",
+        "name": "Отделенческая Поликлиника на ст. Лихоборы МЖД"
+      }
+    },
+    {
+      "type": "way",
+      "id": 28377735,
+      "center": {
+        "lat": 55.8709425,
+        "lon": 37.5379253
+      },
+      "tags": {
+        "addr:housenumber": "59",
+        "addr:postcode": "109382",
+        "addr:street": "Бескудниковский бульвар",
+        "amenity": "clinic",
+        "building": "yes",
+        "building:levels": "4",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "name": "Поликлиника №155",
+        "name:uk": "Поліклініка №155",
+        "opening_hours": "Mo-Su 08:00-20:00",
+        "ref": "155"
+      }
+    },
+    {
+      "type": "way",
+      "id": 28568214,
+      "center": {
+        "lat": 55.8766719,
+        "lon": 37.5188287
+      },
+      "tags": {
+        "addr:city": "Москва",
+        "addr:country": "RU",
+        "addr:housenumber": "24",
+        "addr:street": "Ангарская улица",
+        "amenity": "clinic",
+        "building": "yes",
+        "building:levels": "4",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "name": "Поликлиника №138",
+        "name:uk": "Поліклініка №138",
+        "opening_hours": "Mo-Fr 08:00-20:00; Sa 09:00-18:00; Su 09:00-16:00",
+        "source": "survey"
+      }
+    },
+    {
+      "type": "way",
+      "id": 28573158,
+      "center": {
+        "lat": 55.880079,
+        "lon": 37.4923335
+      },
+      "tags": {
+        "addr:city": "Москва",
+        "addr:country": "RU",
+        "addr:housenumber": "6 с1",
+        "addr:housenumber2": "6",
+        "addr:postcode": "125599",
+        "addr:street": "улица Маршала Федоренко",
+        "amenity": "clinic",
+        "building": "clinic",
+        "building:levels": "5",
+        "check_date": "2026-02-24",
+        "contact:phone": "+7 499 4810310",
+        "contact:website": "http://kdc6.com/?page_id=26",
+        "email": "alievaZD@zdrav.mos.ru",
+        "full_name": "Консультативно-диагностический центр № 6 Департамента здравоохранения города Москвы Филиал № 5",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "healthcare:speciality": "general",
+        "name": "Поликлиника №193",
+        "name:uk": "Поліклініка №193",
+        "old_name": "Городская поликлиника №193",
+        "opening_hours": "Mo-Fr 08:00-20:00; Sa 09:00-18:00; Su 09:00-16:00",
+        "operator": "ГБУЗ \"КДЦ № 6 ДЗМ\" Филиал Городская Поликлиника №193",
+        "phone": "+7 495 4861595",
+        "wheelchair": "yes"
+      }
+    },
+    {
+      "type": "way",
+      "id": 28678458,
+      "center": {
+        "lat": 55.8892792,
+        "lon": 37.5607614
+      },
+      "tags": {
+        "addr:city": "Москва",
+        "addr:country": "RU",
+        "addr:housenumber": "40 к2",
+        "addr:street": "Дубнинская улица",
+        "amenity": "clinic",
+        "building": "yes",
+        "building:colour": "white;beige",
+        "building:levels": "4",
+        "design:ref": "VII-40",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "name": "Консультативно-диагностический центр № 6. Филиал № 3",
+        "opening_hours": "Mo-Fr 08:00-20:00; Sa 09:00-18:00; Su 09:00-16:00",
+        "ref": "6",
+        "website": "https://kdc6.ru"
+      }
+    },
+    {
+      "type": "way",
+      "id": 28678459,
+      "center": {
+        "lat": 55.8893819,
+        "lon": 37.5619288
+      },
+      "tags": {
+        "addr:city": "Москва",
+        "addr:country": "RU",
+        "addr:housenumber": "40 к3",
+        "addr:street": "Дубнинская улица",
+        "amenity": "clinic",
+        "building": "yes",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "name": "Детская городская поликлиника № 86 филиал № 1",
+        "name:uk": "Дитяча міська поліклініка №86 філія №1",
+        "opening_hours": "Mo-Fr 08:00-20:00; Sa 09:00-20:00",
+        "phone": "+7 495 4853192",
+        "provided_for:adolescent": "yes",
+        "provided_for:child": "yes",
+        "provided_for:infant": "yes",
+        "provided_for:toddler": "yes",
+        "website": "https://www.mosgorzdrav.ru/"
+      }
+    },
+    {
+      "type": "way",
+      "id": 28684103,
+      "center": {
+        "lat": 55.7820574,
+        "lon": 37.5835353
+      },
+      "tags": {
+        "addr:city": "Москва",
+        "addr:housenumber": "15",
+        "addr:postcode": "125040",
+        "addr:street": "1-я улица Ямского Поля",
+        "amenity": "clinic",
+        "building": "office",
+        "building:colour": "lightyellow;white",
+        "building:levels": "5",
+        "building:material": "plaster",
+        "contact:facebook": "https://www.facebook.com/people/Олимп-Клиник-МАРС/61574710397329/",
+        "contact:website": "https://olymp.clinic/clinics/mars/",
+        "healthcare": "clinic",
+        "healthcare:speciality": "general;gynaecology;paediatrics;orthopaedics;trauma;osteopathy;urology;otolaryngology",
+        "name": "Олимп Клиник Марс",
+        "opening_hours": "24/7",
+        "roof:angle": "30",
+        "roof:colour": "lightgrey",
+        "roof:material": "metal",
+        "roof:shape": "hipped"
+      }
+    },
+    {
+      "type": "way",
+      "id": 28709144,
+      "center": {
+        "lat": 55.8680176,
+        "lon": 37.492277
+      },
+      "tags": {
+        "addr:city": "Москва",
+        "addr:country": "RU",
+        "addr:housenumber": "26",
+        "addr:postcode": "125414",
+        "addr:street": "Петрозаводская улица",
+        "amenity": "clinic",
+        "building": "hospital",
+        "building:colour": "white",
+        "building:levels": "4",
+        "design:ref": "VII-42",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "name": "Поликлиника № 81",
+        "name:uk": "Поліклініка №81"
+      }
+    },
+    {
+      "type": "way",
+      "id": 28709145,
+      "center": {
+        "lat": 55.8684016,
+        "lon": 37.4918247
+      },
+      "tags": {
+        "addr:city": "Москва",
+        "addr:country": "RU",
+        "addr:housenumber": "26А",
+        "addr:postcode": "125414",
+        "addr:street": "Петрозаводская улица",
+        "amenity": "clinic",
+        "building": "hospital",
+        "building:colour": "white;blue",
+        "building:levels": "3",
+        "design:ref": "VII-42",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "name": "Детская поликлиника № 87",
+        "name:uk": "Дитяча поліклініка №87",
+        "provided_for:adolescent": "yes",
+        "provided_for:child": "yes",
+        "provided_for:infant": "yes",
+        "provided_for:toddler": "yes"
+      }
+    },
+    {
+      "type": "way",
+      "id": 28751646,
+      "center": {
+        "lat": 55.8653141,
+        "lon": 37.5388538
+      },
+      "tags": {
+        "addr:city": "Москва",
+        "addr:country": "RU",
+        "addr:housenumber": "8А",
+        "addr:postcode": "127486",
+        "addr:street": "Дегунинская улица",
+        "amenity": "clinic",
+        "building": "yes",
+        "building:levels": "4",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "name": "Детская поликлиника №79",
+        "name:uk": "Дитяча поліклініка №79"
+      }
+    },
+    {
+      "type": "way",
+      "id": 28879175,
+      "center": {
+        "lat": 55.8451652,
+        "lon": 37.488571
+      },
+      "tags": {
+        "addr:country": "RU",
+        "addr:housenumber": "8 с1",
+        "addr:street": "Пулковская улица",
+        "amenity": "clinic",
+        "building": "yes",
+        "building:levels": "4",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "name": "Поликлиника №45",
+        "name:uk": "Поліклініка №45",
+        "roof:shape": "flat"
+      }
+    },
+    {
+      "type": "way",
+      "id": 30680926,
+      "center": {
+        "lat": 55.8137065,
+        "lon": 37.5744337
+      },
+      "tags": {
+        "addr:city": "Москва",
+        "addr:country": "RU",
+        "addr:housenumber": "4А",
+        "addr:postcode": "127422",
+        "addr:street": "улица Всеволода Вишневского",
+        "amenity": "clinic",
+        "building": "clinic",
+        "building:levels": "3",
+        "contact:phone": "+7 499 1220221",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "name": "Детская поликлиника №15",
+        "name:uk": "Дитяча поліклініка №15"
+      }
+    },
+    {
+      "type": "way",
+      "id": 55695633,
+      "center": {
+        "lat": 55.7727846,
+        "lon": 37.540031
+      },
+      "tags": {
+        "addr:city": "Москва",
+        "addr:housenumber": "1 с2",
+        "addr:street": "3-й Хорошёвский проезд",
+        "air_conditioning": "yes",
+        "amenity": "clinic",
+        "building": "yes",
+        "building:architecture": "stalinist_neoclassicism",
+        "building:colour": "red;white",
+        "building:levels": "5",
+        "building:material": "brick",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "name": "Медси",
+        "name:uk": "Медсі",
+        "opening_hours": "Mo-Su 08:00-21:00",
+        "phone": "+7 495 023-60-52",
+        "roof:angle": "30",
+        "roof:colour": "lightgrey",
+        "roof:material": "metal",
+        "roof:shape": "hipped",
+        "website": "https://medsi.ru/"
+      }
+    },
+    {
+      "type": "way",
+      "id": 85136559,
+      "center": {
+        "lat": 55.7812114,
+        "lon": 37.566401
+      },
+      "tags": {
+        "addr:housenumber": "16",
+        "addr:street": "Скаковая улица",
+        "amenity": "clinic",
+        "building": "hospital",
+        "building:levels": "10",
+        "healthcare": "clinic",
+        "operator": "52 консультативно-диагностический центр"
+      }
+    },
+    {
+      "type": "way",
+      "id": 85370939,
+      "center": {
+        "lat": 55.7853894,
+        "lon": 37.5208278
+      },
+      "tags": {
+        "addr:housenumber": "2",
+        "addr:street": "проезд Берёзовой Рощи",
+        "amenity": "clinic",
+        "building": "yes",
+        "building:levels": "7",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "name": "Детская поликлиника №39",
+        "name:uk": "Дитяча поліклініка №39",
+        "opening_hours": "Mo-Fr 08:00-20:00; Sa 09:00-15:00",
+        "phone": "+7 499 7626309",
+        "roof:shape": "flat",
+        "start_date": "2008-12-17",
+        "website": "https://dgp39.ru/"
+      }
+    },
+    {
+      "type": "way",
+      "id": 91241969,
+      "center": {
+        "lat": 55.7941219,
+        "lon": 37.581577
+      },
+      "tags": {
+        "amenity": "clinic",
+        "barrier": "fence",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "name": "Городская поликлиника №6 филиал 1",
+        "name:uk": "Міська поліклініка №6 філія 1",
+        "old_name": "Поликлиника №21",
+        "opening_hours": "Mo-Fr 08:00-20:00; Sa 09:00-20:00; Su 09:00-18:00"
+      }
+    },
+    {
+      "type": "way",
+      "id": 100718603,
+      "center": {
+        "lat": 55.8350777,
+        "lon": 37.5668493
+      },
+      "tags": {
+        "addr:city": "Москва",
+        "addr:country": "RU",
+        "addr:housenumber": "14Б",
+        "addr:street": "Лиственничная аллея",
+        "amenity": "clinic",
+        "building": "clinic",
+        "building:levels": "2",
+        "contact:phone": "+7 499 9761304",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "name": "Городская поликлиника №105",
+        "name:uk": "Міська поліклініка №105",
+        "official_name": "Городская поликлиника №105 филиал №4 ГП №6"
+      }
+    },
+    {
+      "type": "way",
+      "id": 114871074,
+      "center": {
+        "lat": 55.8232121,
+        "lon": 37.5647222
+      },
+      "tags": {
+        "amenity": "clinic",
+        "barrier": "fence",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "name": "Городская поликлиника №164",
+        "name:uk": "Міська поліклініка №164"
+      }
+    },
+    {
+      "type": "way",
+      "id": 120709775,
+      "center": {
+        "lat": 55.8640635,
+        "lon": 37.5577192
+      },
+      "tags": {
+        "amenity": "clinic",
+        "barrier": "fence",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "name": "Поликлиника №146",
+        "name:uk": "Поліклініка №146",
+        "official_name": "Городская поликлиника №146",
+        "website": "https://www.mosgorzdrav.ru/gp146",
+        "wheelchair": "limited"
+      }
+    },
+    {
+      "type": "way",
+      "id": 127553826,
+      "center": {
+        "lat": 55.8517311,
+        "lon": 37.5228374
+      },
+      "tags": {
+        "addr:country": "RU",
+        "addr:housenumber": "18 к4",
+        "addr:street": "Онежская улица",
+        "amenity": "clinic",
+        "building": "yes",
+        "contact:phone": "+7 495 4566154",
+        "contact:website": "http://www.cmsch119.ru/msch1",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "medical_system:western": "yes",
+        "name": "Медсанчасть № 1 ФГБУЗ ЦМСЧ № 119 ФМБА России",
+        "name:uk": "Медсанчастина №1 ФДБУЗ ЦМСЧ №119 ФМБА Росії"
+      }
+    },
+    {
+      "type": "way",
+      "id": 128252542,
+      "center": {
+        "lat": 55.8257487,
+        "lon": 37.4980638
+      },
+      "tags": {
+        "addr:housenumber": "7А с22",
+        "addr:street": "Старопетровский проезд",
+        "amenity": "clinic",
+        "building": "yes",
+        "building:levels": "4",
+        "contact:email": "sm-admin@smpost.ru",
+        "contact:phone": "+7 495 2663868;+7 495 7774849",
+        "contact:website": "http://www.smclinic.ru/",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "medical_system:western": "yes",
+        "name": "СМ-Клиника",
+        "name:uk": "См-клініка",
+        "opening_hours": "Mo-Fr 07:30-22:00; Sa-Su 07:30-21:00",
+        "wheelchair": "yes"
+      }
+    },
+    {
+      "type": "way",
+      "id": 144798737,
+      "center": {
+        "lat": 55.887453,
+        "lon": 37.518241
+      },
+      "tags": {
+        "addr:housenumber": "36А",
+        "addr:street": "Коровинское шоссе",
+        "amenity": "clinic",
+        "building": "hospital",
+        "building:levels": "5",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "medical_system:ayurveeda": "no",
+        "medical_system:chinese": "no",
+        "medical_system:homeopathy": "no",
+        "medical_system:tibetan": "no",
+        "medical_system:western": "yes",
+        "name": "Детская поликлиника №86",
+        "name:uk": "Дитяча поліклініка №86",
+        "opening_hours": "Mo-Th 08:30-19:00; Fr 08:30-18:00; Sa 09:00-15:00",
+        "phone": "+7 495 4867637",
+        "provided_for:adolescent": "yes",
+        "provided_for:child": "yes",
+        "provided_for:infant": "yes",
+        "provided_for:toddler": "yes"
+      }
+    },
+    {
+      "type": "way",
+      "id": 176719897,
+      "center": {
+        "lat": 55.8730714,
+        "lon": 37.5350891
+      },
+      "tags": {
+        "addr:housenumber": "59А с4",
+        "addr:street": "Бескудниковский бульвар",
+        "amenity": "clinic",
+        "building": "hospital",
+        "building:colour": "grey",
+        "building:levels": "5",
+        "building:material": "concrete",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "name": "Поликлиника",
+        "name:uk": "Поліклініка",
+        "roof:colour": "grey",
+        "roof:material": "tar_paper",
+        "roof:shape": "flat"
+      }
+    },
+    {
+      "type": "way",
+      "id": 218982467,
+      "center": {
+        "lat": 55.8297141,
+        "lon": 37.5281023
+      },
+      "tags": {
+        "amenity": "hospital",
+        "barrier": "wall",
+        "health_facility:type": "hospital",
+        "health_specialty:gynaecology": "main",
+        "healthcare": "hospital",
+        "medical_system:western": "yes",
+        "name": "Родильный дом № 27",
+        "provided_for:female": "yes"
+      }
+    },
+    {
+      "type": "way",
+      "id": 238334258,
+      "center": {
+        "lat": 55.7837844,
+        "lon": 37.5199497
+      },
+      "tags": {
+        "addr:housenumber": "6Б",
+        "addr:postcode": "123308",
+        "addr:street": "улица Куусинена",
+        "alt_name": "Поликлиника №113",
+        "amenity": "clinic",
+        "barrier": "fence",
+        "full_name": "Городская поликлиника №62 Филиал №3",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "name": "Поликлиника №62 Филиал №3",
+        "name:uk": "Поліклініка №62 Філія №3",
+        "official_name": "Государственное бюджетное учреждение здравоохранения \"Городская поликлиника №62 Департамента здравоохранения города Москвы\" Филиал №3",
+        "old_name": "Поликлиника №113",
+        "phone": "+7 499 1954368",
+        "website": "https://www.mosgorzdrav.ru/gp113"
+      }
+    },
+    {
+      "type": "way",
+      "id": 274812008,
+      "center": {
+        "lat": 55.8634764,
+        "lon": 37.5220717
+      },
+      "tags": {
+        "addr:housenumber": "2 с5",
+        "addr:housenumber2": "6",
+        "addr:postcode": "125413",
+        "addr:street": "Зеленоградская улица",
+        "amenity": "clinic",
+        "building:colour": "beige;grey",
+        "building:material": "porcelain_stoneware",
+        "contact:phone": "+7 499 2609625",
+        "contact:website": "http://hovrinomed.ru",
+        "name": "Узловая поликлиника на станции Ховрино",
+        "name:ru": "Узловая поликлиника на станции Ховрино",
+        "roof:colour": "grey",
+        "roof:material": "tar_paper",
+        "roof:shape": "flat",
+        "was:building": "hospital",
+        "was:building:levels": "4"
+      }
+    },
+    {
+      "type": "way",
+      "id": 299301571,
+      "center": {
+        "lat": 55.8472732,
+        "lon": 37.5182691
+      },
+      "tags": {
+        "amenity": "hospital",
+        "barrier": "wall",
+        "health_facility:type": "hospital",
+        "healthcare": "hospital",
+        "healthcare:speciality": "infectious_diseases",
+        "medical_system:western": "yes",
+        "name": "Детская инфекционная клиническая больница",
+        "provided_for:adolescent": "yes",
+        "provided_for:child": "yes",
+        "provided_for:infant": "yes",
+        "provided_for:toddler": "yes"
+      }
+    },
+    {
+      "type": "way",
+      "id": 300225681,
+      "center": {
+        "lat": 55.8383803,
+        "lon": 37.4909238
+      },
+      "tags": {
+        "amenity": "clinic",
+        "barrier": "fence",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "name": "Поликлиника"
+      }
+    },
+    {
+      "type": "way",
+      "id": 332494002,
+      "center": {
+        "lat": 55.8281688,
+        "lon": 37.5273693
+      },
+      "tags": {
+        "addr:city": "Москва",
+        "addr:housenumber": "20",
+        "addr:postcode": "125239",
+        "addr:street": "Новопетровская улица",
+        "address:comment": "2 этаж, округ САО, район Коптево",
+        "amenity": "clinic",
+        "building": "commercial",
+        "building:colour": "orange;grey",
+        "building:levels": "1",
+        "contact:facebook": "https://www.facebook.com/mosdermsk",
+        "contact:instagram": "https://www.instagram.com/mosdermsk/",
+        "contact:vk": "https://vk.com/mosdermsk",
+        "contact:youtube": "https://www.youtube.com/channel/UCDF7gw-rWMhFHVggROZohGw",
+        "design:ref": "VI-12А",
+        "healthcare": "clinic",
+        "name": "ГБУЗ МНПЦДК ДЗМ филиал Тимирязевский",
+        "name:uk": "ГБУЗ МНПЦДК ДЗМ філія Тимірязівська",
+        "opening_hours": "Mo-Fr 08:00-20:00; Sa 09:00-16:00",
+        "phone": "74995585828;74991530523",
+        "website": "https://www.mosderm.ru/"
+      }
+    },
+    {
+      "type": "way",
+      "id": 410673512,
+      "center": {
+        "lat": 55.85459,
+        "lon": 37.5014214
+      },
+      "tags": {
+        "amenity": "clinic",
+        "disused:amenity": "clinic",
+        "disused:healthcare": "clinic",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "name": "Поликлиника № 45, филиал № 5",
+        "old_name": "Поликлиника № 154"
+      }
+    },
+    {
+      "type": "way",
+      "id": 410673513,
+      "center": {
+        "lat": 55.8551806,
+        "lon": 37.5011508
+      },
+      "tags": {
+        "amenity": "clinic",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "name": "Детская поликлиника № 133, филиал № 1",
+        "name:uk": "Дитяча поліклініка №133, філія №1",
+        "old_name": "Десткая поликлиника № 37"
+      }
+    },
+    {
+      "type": "way",
+      "id": 721957871,
+      "center": {
+        "lat": 55.8662334,
+        "lon": 37.4753281
+      },
+      "tags": {
+        "amenity": "clinic",
+        "barrier": "fence",
+        "contact:phone": "+7 499 4573151",
+        "contact:website": "https://gp45msk.ru/content/shedule/f3",
+        "description": "Отделение неотложной медицинской помощи",
+        "emergency": "yes",
+        "name": "Городская поликлиника №45 филиал №3",
+        "official_name": "Государственное бюджетное учреждение здравоохранения «Городская поликлиника № 45 Департамента здравоохранения города Москвы» Филиал № 3",
+        "old_name": "Поликлиника №108;Медико-санитарная часть №51 Филиал №3",
+        "opening_hours": "Mo-Fr 07:30-20:00; Sa 09:00-18:00; Su 09:00-16:00",
+        "phone": "+7 499 4573151"
+      }
+    },
+    {
+      "type": "way",
+      "id": 769668272,
+      "center": {
+        "lat": 55.8179021,
+        "lon": 37.4882189
+      },
+      "tags": {
+        "amenity": "clinic",
+        "barrier": "fence",
+        "contact:phone": "+7 495 6171751",
+        "fence_type": "metal",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "medical_system:western": "yes",
+        "name": "Поликлиника №45",
+        "name:uk": "Поліклініка №45",
+        "official_name": "Государственное бюджетное учреждение здравоохранения города Москвы «Городская поликлиника № 45 Департамента здравоохранения города Москвы»",
+        "short_name": "ГБУЗ «ГП №45 ДЗМ»"
+      }
+    },
+    {
+      "type": "way",
+      "id": 769867744,
+      "center": {
+        "lat": 55.8184587,
+        "lon": 37.4948742
+      },
+      "tags": {
+        "amenity": "clinic",
+        "barrier": "fence",
+        "fence_type": "metal",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "name": "Поликлиника №136",
+        "name:uk": "Поліклініка №136"
+      }
+    },
+    {
+      "type": "way",
+      "id": 867724923,
+      "center": {
+        "lat": 55.7819826,
+        "lon": 37.5773935
+      },
+      "tags": {
+        "amenity": "clinic",
+        "barrier": "fence",
+        "contact:email": "dgkb9-f1@zdrav.mos.ru",
+        "contact:phone": "+7-495-6141485",
+        "contact:website": "https://dgkb-9.ru/branch-1",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "medical_system:western": "yes",
+        "name": "Детская городская клиническая больница №9 им. Г. Н. Сперанского, Филиал №1 (Поликлиническое отделение)",
+        "name:uk": "Дитяча міська клінічна лікарня №9 ім. Г. Н. Сперанського, Філія №1 (Поліклінічне відділення)",
+        "opening_hours": "Mo-Fr 08:00-20:00; Sa,Su 09:00-15:00"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1018819390,
+      "center": {
+        "lat": 55.7988756,
+        "lon": 37.5807456
+      },
+      "tags": {
+        "addr:city": "Москва",
+        "addr:country": "RU",
+        "addr:housenumber": "37",
+        "addr:street": "Вятская улица",
+        "amenity": "clinic",
+        "building": "clinic",
+        "building:levels": "4",
+        "contact:phone": "+7 499 5308801",
+        "contact:website": "https://dgp39.ru",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "name": "Детская поликлиника №39 Филиал №3",
+        "name:uk": "Дитяча поліклініка №39 Філія №3",
+        "official_name": "Детская поликлиника №39 Северного административного округа Москвы",
+        "opening_hours": "Mo-Fr 08:00-20:00",
+        "wheelchair": "yes"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1076569810,
+      "center": {
+        "lat": 55.8669716,
+        "lon": 37.4734077
+      },
+      "tags": {
+        "amenity": "clinic",
+        "name": "ГБУЗ ГП N45 ДЗМ Филиал N3 Поликлиника для взрослых",
+        "opening_hours": "Mo-Sa 08:00-20:00"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1076569811,
+      "center": {
+        "lat": 55.8670642,
+        "lon": 37.47438
+      },
+      "tags": {
+        "amenity": "clinic",
+        "contact:phone": "+7 499 4576591",
+        "contact:website": "http://www.mosgorzdrav.ru/dgp133",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "name": "Детская поликлиника №133",
+        "name:uk": "Дитяча поліклініка №133"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1257238838,
+      "center": {
+        "lat": 55.8398256,
+        "lon": 37.5424853
+      },
+      "tags": {
+        "amenity": "clinic",
+        "check_date": "2026-08-06",
+        "check_date:opening_hours": "2026-08-06",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "name": "Городская поликлиника № 6. Филиал №3",
+        "opening_hours": "Mo-Fr 08:00-20:00; Sa 09:00-18:00; Su 09:00-16:00"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 1788150,
+      "center": {
+        "lat": 55.7805071,
+        "lon": 37.5510155
+      },
+      "tags": {
+        "alt_name": "Боткинская больница",
+        "amenity": "hospital",
+        "contact:phone": "+7 495 9450045",
+        "contact:website": "http://www.botkinmoscow.ru",
+        "healthcare": "hospital",
+        "name": "Городская клиническая больница имени С. П. Боткина",
+        "name:uk": "Міська клінічна лікарня імені С. П. Боткіна",
+        "old_name": "Больница имени Козьмы Солдатенкова",
+        "start_date": "1910",
+        "type": "multipolygon",
+        "wikidata": "Q4145421"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 1856879,
+      "center": {
+        "lat": 55.8438296,
+        "lon": 37.509726
+      },
+      "tags": {
+        "amenity": "hospital",
+        "contact:phone": "+7 495 4501656",
+        "contact:website": "http://schsi76.mskobr.ru",
+        "name": "Реабилитационно-образовательный центр № 76",
+        "official_name": "Государственное бюджетное общеобразовательное учреждение города Москвы Реабилитационно-образовательный центр № 76 Департамента социальной защиты населения города Москвы",
+        "type": "multipolygon"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 2585298,
+      "center": {
+        "lat": 55.8709027,
+        "lon": 37.5253046
+      },
+      "tags": {
+        "amenity": "hospital",
+        "name": "Бюро медико-социальной экспертизы",
+        "official_name": "Клиника ФГУ «Федеральное бюро медико-социальной экспертизы»",
+        "type": "multipolygon"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 2585300,
+      "center": {
+        "lat": 55.8710771,
+        "lon": 37.5209361
+      },
+      "tags": {
+        "amenity": "hospital",
+        "contact:website": "https://pedklin.ru",
+        "name": "НИКИ педиатрии и детской хирургии имени академика Ю.Е. Вельтищева",
+        "type": "multipolygon"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 2585303,
+      "center": {
+        "lat": 55.8696039,
+        "lon": 37.5195295
+      },
+      "tags": {
+        "amenity": "hospital",
+        "health_facility:type": "nursing_home",
+        "health_specialty:palliative_medicine": "yes",
+        "healthcare": "hospice",
+        "medical_system:western": "yes",
+        "name": "Хоспис №2",
+        "name:uk": "Хоспіс №2",
+        "type": "multipolygon"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 4111866,
+      "center": {
+        "lat": 55.7797556,
+        "lon": 37.555544
+      },
+      "tags": {
+        "amenity": "hospital",
+        "contact:website": "https://www.mnioi.nmicr.ru/",
+        "healthcare": "hospital",
+        "name": "Московский научно-исследовательский онкологический институт им. П. А. Герцена",
+        "name:uk": "Московський науково-дослідний онкологічний інститут ім. П. А. Герцена",
+        "short_name": "МНИОИ им. П. А. Герцена",
+        "type": "multipolygon",
+        "wikidata": "Q4304221",
+        "wikipedia": "ru:Московский научно-исследовательский онкологический институт имени П. А. Герцена"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 6720478,
+      "center": {
+        "lat": 55.8711264,
+        "lon": 37.5460808
+      },
+      "tags": {
+        "amenity": "hospital",
+        "contact:phone": "+7 499 4876001",
+        "contact:website": "http://www.mosgorzdrav.ru/ds6",
+        "health_facility:type": "therapy",
+        "health_specialty:nephrology": "main",
+        "healthcare": "yes",
+        "leisure": "resort",
+        "medical_system:western": "yes",
+        "name": "Детский нефрологический санаторий №6",
+        "name:uk": "Дитячий санаторій №6",
+        "resort": "sanatorium",
+        "type": "multipolygon"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 6751361,
+      "center": {
+        "lat": 55.8779709,
+        "lon": 37.554874
+      },
+      "tags": {
+        "amenity": "hospital",
+        "contact:phone": "+7 499 9060131",
+        "contact:website": "http://roddom17msk.ru",
+        "health_facility:type": "hospital",
+        "health_specialty:gynaecology": "main",
+        "healthcare": "hospital",
+        "medical_system:western": "yes",
+        "name": "Родильный дом №17",
+        "name:uk": "Пологовий будинок №17",
+        "provided_for:female": "yes",
+        "type": "multipolygon"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 6913092,
+      "center": {
+        "lat": 55.8688777,
+        "lon": 37.5233555
+      },
+      "tags": {
+        "amenity": "hospital",
+        "name": "Больница для детей с поражением ЦНС",
+        "official_name": "Московская областная больница для детей с поражением ЦНС",
+        "type": "multipolygon"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 6947138,
+      "center": {
+        "lat": 55.8904519,
+        "lon": 37.5327954
+      },
+      "tags": {
+        "addr:city": "Москва",
+        "addr:country": "RU",
+        "addr:postcode": "127644",
+        "addr:street": "Лобненская улица",
+        "amenity": "hospital",
+        "contact:email": "GKB81@MAIL.RU",
+        "contact:phone": "+7 495 0110236",
+        "contact:website": "http://gkb81.ru/",
+        "health_facility:type": "hospital",
+        "healthcare": "hospital",
+        "medical_system:western": "yes",
+        "name": "Государственная клиническая больница им. В.В. Вересаева",
+        "name:uk": "Державна клінічна лікарня ім. В.В. Вересаєва",
+        "official_name": "Государственное бюджетное учреждение здравоохранения Городская клиническая больница им.В.В.Вересаева департамента здравоохранения города Москвы",
+        "old_name": "ГКБ 81",
+        "start_date": "1995-07-05",
+        "type": "multipolygon"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 6999607,
+      "center": {
+        "lat": 55.889788,
+        "lon": 37.5327326
+      },
+      "tags": {
+        "addr:housenumber": "10",
+        "addr:street": "Лобненская улица",
+        "alt_name": "Поликлиническое отделение",
+        "amenity": "clinic",
+        "building": "hospital",
+        "building:colour": "lightgrey;yellow",
+        "building:levels": "4",
+        "building:material": "porcelain_stoneware",
+        "contact:phone": "+7 495 4830682",
+        "contact:website": "http://www.gkb81.ru/about/poliklinika.html",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "medical_system:western": "yes",
+        "name": "ЦЖЗ",
+        "name:uk": "ЦЖЗ",
+        "opening_hours": "Mo-Fr 08:00-20:00; Sa 09:00-18:00; Su 09:00-16:00",
+        "provided_for:adolescent": "yes",
+        "provided_for:adult": "yes",
+        "provided_for:senior": "yes",
+        "roof:colour": "grey",
+        "roof:material": "tar_paper",
+        "roof:shape": "flat",
+        "type": "multipolygon",
+        "wheelchair": "yes"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 7283098,
+      "center": {
+        "lat": 55.7989115,
+        "lon": 37.5791871
+      },
+      "tags": {
+        "amenity": "hospital",
+        "contact:email": "info@gkb24.mosgorzdrav.ru",
+        "contact:phone": "+7 495 6851794",
+        "contact:website": "http://www.gkb-24.ru/",
+        "emergency": "yes",
+        "health_facility:type": "hospital",
+        "healthcare": "hospital",
+        "medical_system:western": "yes",
+        "name": "Городская клиническая больница № 24",
+        "name:uk": "Міська клінічна лікарня №24",
+        "short_name": "ГКБ № 24",
+        "type": "multipolygon"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 7770738,
+      "center": {
+        "lat": 55.8157918,
+        "lon": 37.5371305
+      },
+      "tags": {
+        "amenity": "hospital",
+        "health_facility:type": "hospital",
+        "healthcare": "hospital",
+        "medical_system:western": "yes",
+        "name": "Клинический госпиталь ГУВД",
+        "name:uk": "Клінічний шпиталь ГУВС",
+        "type": "multipolygon"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 7774722,
+      "center": {
+        "lat": 55.8000147,
+        "lon": 37.5549138
+      },
+      "tags": {
+        "addr:housenumber": "1",
+        "addr:postcode": "127083",
+        "addr:street": "улица 8 Марта",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "healthcare:speciality": "psychiatry",
+        "name": "Центральная клиническая психиатрическая больница им. Ф.А.Усольцева",
+        "name:uk": "Центральна клінічна психіатрична лікарня",
+        "official_name": "Государственное бюджетное учреждение Московской области «Центральная клиническая психиатрическая больница»",
+        "old_name": "Центральная Московская областная клиническая психиатрическая больница",
+        "phone": "+7 495 1818732",
+        "type": "multipolygon",
+        "website": "http://ckpbmo.ru/"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 7838471,
+      "center": {
+        "lat": 55.8201617,
+        "lon": 37.530229
+      },
+      "tags": {
+        "amenity": "hospital",
+        "health_facility:type": "hospital",
+        "health_specialty:orthopaedics": "yes",
+        "health_specialty:trauma_surgery": "yes",
+        "healthcare": "hospital",
+        "medical_system:western": "yes",
+        "name": "ФГБУ «НМИЦ ТО им. Н. Н. Приорова» Минздрава России",
+        "name:uk": "ФДБУ «НМІЦ ТО ім. М. М. Пріорова» МОЗ Росії",
+        "official_name": "Центральный научно-исследовательский институт травматологии и ортопедии им. Н. Н. Приорова",
+        "opening_hours": "Mo-Fr 08:30-20:00",
+        "phone": "+7 499 9409747;+7 499 9409747",
+        "short_name": "ЦИТО",
+        "type": "multipolygon",
+        "website": "https://cito-priorov.ru/",
+        "wikidata": "Q136231"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 7894672,
+      "center": {
+        "lat": 55.8018079,
+        "lon": 37.5148781
+      },
+      "tags": {
+        "amenity": "clinic",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "name": "Медицинский Центр ОАО «Аэрофлот — Российские международные авиалинии»",
+        "name:uk": "Медичний Центр ВАТ \"Аерофлот - Російські міжнародні авіалінії\"",
+        "type": "multipolygon"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 7930950,
+      "center": {
+        "lat": 55.8006578,
+        "lon": 37.5448588
+      },
+      "tags": {
+        "amenity": "clinic",
+        "description": "приёмная: +7 495 1559757 регистратура: +7 495 1559709 вызов врача на дом: +7 495 1200662",
+        "healthcare": "clinic",
+        "name": "Городская поликлиника №62 Амбулаторный центр",
+        "name:uk": "Міська поліклініка №62 Амбулаторний центр",
+        "opening_hours": "Mo-Fr 08:00-20:00; Sa 09:00-18:00; 09:00-16:00",
+        "phone": "+7 495 1559757;+7 495 1559709;+7 495 1200662",
+        "type": "multipolygon",
+        "website": "https://gp62dzm.ru/"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 7932104,
+      "center": {
+        "lat": 55.8013548,
+        "lon": 37.535623
+      },
+      "tags": {
+        "amenity": "clinic",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "name": "Центральная поликлиника Литфонда",
+        "name:uk": "Центральна поліклініка Літфонду",
+        "opening_hours": "Mo-Fr 08:00-20:00; Sa 09:00-15:00",
+        "phone": "+7 495 7081025",
+        "type": "multipolygon",
+        "website": "https://www.lit-clinic.ru/"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 7932107,
+      "center": {
+        "lat": 55.8020801,
+        "lon": 37.5354215
+      },
+      "tags": {
+        "amenity": "clinic",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "name": "Поликлиника ЛитФонда (детское отделение)",
+        "name:uk": "Поліклініка ЛітФонду (дитяче відділення)",
+        "opening_hours": "Mo-Fr 08:00-20:00; Sa 09:00-19:00",
+        "phone": "+7 495 1506003",
+        "provided_for:adolescent": "yes",
+        "provided_for:child": "yes",
+        "provided_for:infant": "yes",
+        "provided_for:toddler": "yes",
+        "type": "multipolygon",
+        "website": "https://lit-baby.ru/"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 8330590,
+      "center": {
+        "lat": 55.868449,
+        "lon": 37.5514666
+      },
+      "tags": {
+        "amenity": "clinic",
+        "check_date": "2025-12-30",
+        "contact:website": "https://dgp15.ru/",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "medical_system:western": "yes",
+        "name": "Детская городская поликлиника № 15. Филиал 2",
+        "old_name": "Детская поликлиника №77",
+        "type": "multipolygon",
+        "wheelchair": "yes"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 8331323,
+      "center": {
+        "lat": 55.8020142,
+        "lon": 37.5192944
+      },
+      "tags": {
+        "amenity": "clinic",
+        "check_date:opening_hours": "2022-08-10",
+        "email": "gp62@zdrav.mos.ru",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "name": "Городская поликлиника № 62, филиал № 1",
+        "name:uk": "Міська поліклініка №62, філія №1",
+        "old_name": "Поликлиника №71",
+        "opening_hours": "Mo-Fr 08:00-20:00; Sa 09:00-18:00; Su 09:00-16:00",
+        "phone": "+7 499 1572323",
+        "short_name": "ГБУЗ «ГП №62 ДЗМ», филиал № 1",
+        "type": "multipolygon",
+        "website": "https://www.gp62dzm.ru/"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 8342320,
+      "center": {
+        "lat": 55.8285495,
+        "lon": 37.531825
+      },
+      "tags": {
+        "amenity": "hospital",
+        "contact:email": "dib6@zdrav.mos.ru; dib6@yandex.ru",
+        "contact:phone": "+7-499-1546054",
+        "healthcare": "hospital",
+        "name": "Детская инфекционная больница № 6",
+        "name:uk": "Дитяча інфекційна лікарня №6",
+        "old_ref": "Детская инфекционная больница № 4",
+        "opening_hours": "7/24",
+        "phone": "+7-499-1534104",
+        "type": "multipolygon",
+        "website": "https://dikb6.ru/"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 8361044,
+      "center": {
+        "lat": 55.8730109,
+        "lon": 37.5338337
+      },
+      "tags": {
+        "amenity": "hospital",
+        "contact:facebook": "https://www.facebook.com/mntkofficial",
+        "contact:phone": "+7 499 9065001",
+        "contact:vk": "https://vk.com/mntk_official",
+        "contact:website": "http://www.mntk.ru",
+        "contact:youtube": "https://www.youtube.com/user/mntkTV/videos",
+        "health_facility:type": "hospital",
+        "health_specialty:ophthalmology": "yes",
+        "healthcare": "hospital",
+        "medical_system:western": "yes",
+        "name": "Межотраслевой научно-технический комплекс «Микрохирургия глаза»",
+        "name:uk": "Міжгалузевий науково-технічний комплекс «Мікрохірургія ока»",
+        "official_name": "ФГУ Межотраслевой научно-технический комплекс «Микрохирургия глаза» им. академика Святослава Фёдорова",
+        "type": "multipolygon"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 9127195,
+      "center": {
+        "lat": 55.817147,
+        "lon": 37.5357243
+      },
+      "tags": {
+        "amenity": "clinic",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "name": "Медсанчасть ГУВД МО",
+        "name:uk": "Медсанчастина ГУВС МО",
+        "type": "multipolygon"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 10291035,
+      "center": {
+        "lat": 55.8232523,
+        "lon": 37.503349
+      },
+      "tags": {
+        "addr:city": "Москва",
+        "addr:country": "RU",
+        "addr:housenumber": "6",
+        "addr:street": "Старопетровский проезд",
+        "amenity": "clinic",
+        "building": "hospital",
+        "building:colour": "yellow;white;brown",
+        "building:levels": "1",
+        "building:material": "plaster",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "name": "Поликлиника Московской городской онкологической больницы №62",
+        "name:uk": "Поліклініка Московської міської онкологічної лікарні №62",
+        "opening_hours": "Mo-Fr 08:00-20:00",
+        "roof:angle": "30",
+        "roof:colour": "green",
+        "roof:material": "metal",
+        "roof:shape": "gabled",
+        "type": "multipolygon",
+        "website": "http://mgob62.ru"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 10918095,
+      "center": {
+        "lat": 55.8040939,
+        "lon": 37.5425075
+      },
+      "tags": {
+        "amenity": "clinic",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "name": "Городская поликлиника № 62 филиал № 5",
+        "name:uk": "Міська поліклініка №62 філія №5",
+        "opening_hours": "Mo-Fr 08:00-20:00; Sa 09:00-18:00; Su 09:00-16:00",
+        "phone": "+7 499 1524140",
+        "type": "multipolygon",
+        "website": "https://pclinica.ru/"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 11322793,
+      "center": {
+        "lat": 55.8365209,
+        "lon": 37.507401
+      },
+      "tags": {
+        "amenity": "clinic",
+        "name": "Туберкулезный диспансер № 16",
+        "type": "multipolygon"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 11327387,
+      "center": {
+        "lat": 55.7996842,
+        "lon": 37.5688658
+      },
+      "tags": {
+        "addr:city": "Москва",
+        "addr:country": "RU",
+        "addr:housenumber": "39",
+        "addr:postcode": "127287",
+        "addr:street": "4-й Вятский переулок",
+        "amenity": "hospital",
+        "contact:phone": "+7 495 6134377",
+        "health_facility:type": "hospital",
+        "healthcare": "hospital",
+        "medical_system:western": "yes",
+        "name": "Городская клиническая больница № 24. Перинатальный центр",
+        "name:uk": "Міська клінічна лікарня №24. Перинатальний центр",
+        "old_name": "Больница №8",
+        "type": "multipolygon"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 11750180,
+      "center": {
+        "lat": 55.7979703,
+        "lon": 37.5624415
+      },
+      "tags": {
+        "amenity": "clinic",
+        "contact:website": "http://www.fesfarm.ru/",
+        "description": "Клиника амбулаторного гемодиализа",
+        "healthcare": "clinic",
+        "name": "Фесфарм",
+        "name:uk": "Фесфарм",
+        "type": "multipolygon"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 11760035,
+      "center": {
+        "lat": 55.8015068,
+        "lon": 37.5568674
+      },
+      "tags": {
+        "addr:housenumber": "8А с1",
+        "addr:postcode": "127083",
+        "addr:street": "улица 8 Марта",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name": "Реабилитационный центр «Преодоление»",
+        "name:uk": "Реабілітаційний центр «Подолання»",
+        "official_name": "ОАО Реабилитационный центр для инвалидов «Преодоление»",
+        "phone": "+7 495 6120043",
+        "type": "multipolygon",
+        "website": "https://preo.ru/"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 11980713,
+      "center": {
+        "lat": 55.7957088,
+        "lon": 37.5812991
+      },
+      "tags": {
+        "amenity": "clinic",
+        "contact:email": "sp11@zdrav.mos.ru",
+        "contact:phone": "+7-495-6853905",
+        "contact:website": "https://sp11.ru/",
+        "healthcare": "dentist",
+        "name": "Стоматологическая поликлиника № 11",
+        "name:uk": "Стоматологічна поліклініка №11",
+        "opening_hours": "Mo-Su 08:00-20:00",
+        "type": "multipolygon"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 12231188,
+      "center": {
+        "lat": 55.807596,
+        "lon": 37.5570256
+      },
+      "tags": {
+        "amenity": "clinic",
+        "contact:phone": "+7 903 7444359",
+        "contact:website": "https://mosgorzdrav.ru/gp6",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "name": "Поликлиника № 6",
+        "opening_hours": "Mo-Fr 08:00-20:00; Sa 09:00-18:00; Su 09:00-16:00",
+        "type": "multipolygon"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 12231190,
+      "center": {
+        "lat": 55.8112969,
+        "lon": 37.5553122
+      },
+      "tags": {
+        "addr:housenumber": "21",
+        "addr:postcode": "127206",
+        "addr:street": "улица Вучетича",
+        "amenity": "hospital",
+        "health_facility:type": "hospital",
+        "healthcare": "hospital",
+        "medical_system:western": "yes",
+        "name": "Больница № 50",
+        "name:uk": "Лікарня №50",
+        "official_name": "Городская Клиническая Больница №50",
+        "phone": "+7 495 9761498",
+        "type": "multipolygon"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 12380318,
+      "center": {
+        "lat": 55.8106892,
+        "lon": 37.5295646
+      },
+      "tags": {
+        "addr:housenumber": "20",
+        "addr:street": "Часовая улица",
+        "alt_name": "ЦКБ №1 ОАО РЖД",
+        "amenity": "hospital",
+        "health_facility:type": "hospital",
+        "healthcare": "hospital",
+        "medical_system:western": "yes",
+        "name": "Центральная клиническая больница №1 ОАО \"РЖД\" (2-я территория)",
+        "name:uk": "Центральна клінічна лікарня №1 ВАТ \"РЗ\" (2-а територія)",
+        "phone": "+7 495 9256886",
+        "type": "multipolygon",
+        "website": "https://www.ckb-rzd.ru/"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 12508668,
+      "center": {
+        "lat": 55.8009464,
+        "lon": 37.5609099
+      },
+      "tags": {
+        "amenity": "clinic",
+        "check_date": "2026-06-27",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "name": "Поликлиника № 6",
+        "name:ru": "Поликлиника № 6",
+        "name:uk": "Поліклініка № 6",
+        "phone": "+7 495 6127418",
+        "type": "multipolygon",
+        "wheelchair": "yes"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 12565525,
+      "center": {
+        "lat": 55.7869288,
+        "lon": 37.5776779
+      },
+      "tags": {
+        "amenity": "hospital",
+        "contact:phone": "+7 495 9336655",
+        "contact:website": "https://www.emcmos.ru/contact/?directionCode=klinika-reproduktivnoy-i-prenatalnoy-mediciny",
+        "health_facility:type": "hospital",
+        "health_specialty:gynaecology": "main",
+        "healthcare": "hospital",
+        "medical_system:western": "yes",
+        "name": "Родильный дом на улице Правды",
+        "name:de": "Entbindungsklinik in der Pravdy-Straße",
+        "name:uk": "Пологовий будинок на вулиці Правди",
+        "opening_hours": "24/7",
+        "provided_for:female": "yes",
+        "type": "multipolygon"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 14346818,
+      "center": {
+        "lat": 55.8007634,
+        "lon": 37.5526312
+      },
+      "tags": {
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name": "Национальный медицинский исследовательский центр гематологии",
+        "name:uk": "Центр гематології",
+        "opening_hours": "07:30-19:30",
+        "phone": "+7 495 6124551",
+        "type": "multipolygon",
+        "website": "https://blood.ru"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 15001926,
+      "center": {
+        "lat": 55.7976043,
+        "lon": 37.5499642
+      },
+      "tags": {
+        "amenity": "clinic",
+        "contact:email": "52kdc@mil.ru",
+        "contact:phone": "8-495-6399049",
+        "contact:website": "http://www.52kdc.ru/",
+        "health_facility:type": "clinic",
+        "healthcare": "clinic",
+        "name": "ФГБУ \"52 консультативно-диагностический центр\"",
+        "name:uk": "ФДБУ \"52 консультативно-діагностичний центр\"",
+        "official_name": "Филиал № 6 ФГКУ «3 ЦВКГ им. А.А.Вишневского» Минобороны России",
+        "old_name": "Консультативно-диагностический центр №52 МО РФ",
+        "operator": "Министерство обороны Российской Федерации",
+        "phone": "+7 495 6399040",
+        "type": "multipolygon"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 16131927,
+      "center": {
+        "lat": 55.8801024,
+        "lon": 37.462652
+      },
+      "tags": {
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name": "Центральный военно-клинический госпиталь № 6",
+        "name:en": "Central Military Clinical Hospital No 6",
+        "name:ru": "Центральный военно-клинический госпиталь № 6",
+        "name:uk": "Центральний військово-клінічний шпиталь №6",
+        "type": "multipolygon"
+      }
+    }
+  ]
+}

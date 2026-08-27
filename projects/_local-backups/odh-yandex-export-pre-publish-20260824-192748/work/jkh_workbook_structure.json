@@ -1,0 +1,1021 @@
+[
+  {
+    "title": "Лист1",
+    "max_row": null,
+    "max_column": null,
+    "nonempty_sample": [
+      {
+        "row": 1,
+        "values": [
+          null,
+          "Подготовка к прохождению зимнего периода 2026-2027 гг. в части УЭЖФ",
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 2,
+        "values": [
+          null,
+          "№",
+          "Мероприятие",
+          "Срок",
+          null,
+          null
+        ]
+      },
+      {
+        "row": 3,
+        "values": [
+          null,
+          "1.0",
+          "Проведение конкурсных процедур на привлечение кровельщиков",
+          "2026-09-15 00:00:00",
+          null,
+          null
+        ]
+      },
+      {
+        "row": 4,
+        "values": [
+          null,
+          "2.0",
+          "Проведение конкурсных процедур на привлечение альпинистов",
+          "2026-10-01 00:00:00",
+          null,
+          null
+        ]
+      },
+      {
+        "row": 5,
+        "values": [
+          null,
+          "3.0",
+          "Проведение конкурсных процедур на обучение кровельщиков",
+          "2026-10-15 00:00:00",
+          null,
+          null
+        ]
+      },
+      {
+        "row": 6,
+        "values": [
+          null,
+          "4.0",
+          "Увеличение стоимости действующих контрактов на использование автовышек на 30%",
+          "2026-09-01 00:00:00",
+          null,
+          null
+        ]
+      },
+      {
+        "row": 7,
+        "values": [
+          null,
+          "5.0",
+          "Закупка недостающего инвентаря",
+          "2026-10-15 00:00:00",
+          null,
+          null
+        ]
+      },
+      {
+        "row": 8,
+        "values": [
+          null,
+          "6.0",
+          "Закупка ограждений",
+          "2026-10-15 00:00:00",
+          null,
+          null
+        ]
+      },
+      {
+        "row": 9,
+        "values": [
+          null,
+          "7.0",
+          "Совместно с ЖИ по САО формирование адресного перечня МКД с кровлями подлежащими очистке от снега и наледи",
+          "2026-10-01 00:00:00",
+          null,
+          null
+        ]
+      },
+      {
+        "row": 10,
+        "values": [
+          null,
+          "Подготовка к прохождению зимнего периода 2026-2027 гг. в части УЖКХ",
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 12,
+        "values": [
+          null,
+          "1.0",
+          "Подготовка коммунальной техники  к прохождению осенне-зимнего периода",
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 13,
+        "values": [
+          null,
+          "2.0",
+          "Проведение конкурсных процедур на контракт вывоза и погрузки снега",
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 14,
+        "values": [
+          null,
+          "3.0",
+          "Определение перечня мест складирования снега",
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 15,
+        "values": [
+          null,
+          "4.0",
+          "Определение подрядных организаций задействованных в уборке снега",
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 16,
+        "values": [
+          null,
+          "5.0",
+          "Проработка  вопроса маршрутов механизированной уборки территории",
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 17,
+        "values": [
+          null,
+          "6.0",
+          "Закупка недостающего инвентаря и СММ",
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 18,
+        "values": [
+          null,
+          "7.0",
+          "Набор дворников согласно штатному расписанию ",
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 19,
+        "values": [
+          null,
+          "8.0",
+          "Набор дорожных рабочих согласно штатному расписанию ",
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 20,
+        "values": [
+          null,
+          "9.0",
+          "Набор водителей согласно штатному расписанию ",
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 21,
+        "values": [
+          null,
+          "10.0",
+          "Набор механизаторов согласно штатному расписанию ",
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 22,
+        "values": [
+          null,
+          "11.0",
+          "Закрепление дворников за уборкой дворовых территории посредтсвом окружного приложения \"Север - ЖКХ\"",
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 23,
+        "values": [
+          null,
+          "12.0",
+          "Определение формы контроля за уборкой подведомтсвенной территории",
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 24,
+        "values": [
+          null,
+          "13.0",
+          "Совместно с ОАТИ по САО формирование адресного перечня нежилых строений с кровлями подлежащими очистке от снега и наледи",
+          "2026-10-01 00:00:00",
+          null,
+          null
+        ]
+      },
+      {
+        "row": 25,
+        "values": [
+          null,
+          "14.0",
+          "Закрепление ответственных от Управления ЖКХ за проведение контрольных мероприятий в зимний период работы",
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 26,
+        "values": [
+          null,
+          "15.0",
+          "Формирование плана графика уборки территории на случай выпадения обильных снегопадов (как в ночь так и в день)",
+          null,
+          null,
+          null
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Лист2",
+    "max_row": null,
+    "max_column": null,
+    "nonempty_sample": []
+  },
+  {
+    "title": "Лист1 (1)",
+    "max_row": null,
+    "max_column": null,
+    "nonempty_sample": [
+      {
+        "row": 1,
+        "values": [
+          "Сухие свалки в период 2025-2026 гг.",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 3,
+        "values": [
+          "п/п №",
+          "Район",
+          "Утвержденный адресный перечень мест временного складирования снега",
+          "S, м2",
+          "Примечание Управления строительства",
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 4,
+        "values": [
+          "1.0",
+          "2.0",
+          "3.0",
+          "4.0",
+          "5.0",
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 5,
+        "values": [
+          "1.0",
+          "АВД САО",
+          "Ижорская 17-19",
+          "10000.0",
+          "Сохраняется",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 6,
+        "values": [
+          "2.0",
+          "Аэропорт",
+          "ул. Черняховского, вл. 19",
+          "20500.0",
+          "Сохраняется",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 7,
+        "values": [
+          "3.0",
+          "Беговой",
+          "1-й Боткинский пр-д, вл. 7",
+          "8000.0",
+          "Ведется передача площадок под реновацию, выход на смр в октябре ",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 8,
+        "values": [
+          "4.0",
+          "Беговой",
+          "Брянский пост",
+          "4000.0",
+          "На участке завершены работы по возвезению новой базы ГБУ",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 9,
+        "values": [
+          "5.0",
+          "Бескудниковский",
+          "Дмитровское шоссе, д. 62В",
+          "5000.0",
+          "Сохраняется",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 10,
+        "values": [
+          "6.0",
+          "Войковский",
+          "Нарвская 2",
+          "750.0",
+          "Планируется СМР базы ГБУ",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 11,
+        "values": [
+          "7.0",
+          "Восточное Дегунино",
+          "Керамический проезд вл.63",
+          "6500.0",
+          "Сохраняется",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 12,
+        "values": [
+          "8.0",
+          "Головинский",
+          "4-й Лихачевкий переулок, 5с3",
+          "7520.0",
+          "Площадки переданы в МФР, начало смр в сентябре",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 13,
+        "values": [
+          "9.0",
+          "Головинский",
+          "3-й Лихачевкий переулок, 2",
+          "7500.0",
+          "Площадки переданы в МФР, начало смр в сентябре",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 14,
+        "values": [
+          "10.0",
+          "Головинский",
+          "Лавочкина 26",
+          "8500.0",
+          "На участке установлен бытовой городок МФР",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 15,
+        "values": [
+          "11.0",
+          "Западное Дегунино",
+          "ул. Краснополянская, вл. 2/6",
+          "5800.0",
+          "Сохраняется",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 16,
+        "values": [
+          "12.0",
+          "Западное Дегунино",
+          "Ижорская 4",
+          "8000.0",
+          "Сохраняется",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 17,
+        "values": [
+          "13.0",
+          "Коптево",
+          "ул. Михалковская, дом 65 стр 3",
+          "4000.0",
+          "Сохраняется",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 18,
+        "values": [
+          "14.0",
+          "Коптево",
+          "Черепановых вл.3",
+          "8000.0",
+          "Сохраняется",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 19,
+        "values": [
+          "15.0",
+          "Коптево",
+          "Нарвская 2",
+          "15000.0",
+          "Планируется СМР базы ГБУ",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 20,
+        "values": [
+          "16.0",
+          "Коптево",
+          "Черепановых вл 2-10",
+          "5000.0",
+          "Сохраняется",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 21,
+        "values": [
+          "17.0",
+          "Левобережный",
+          "Фестивальная улица, вл. 6",
+          "5500.0",
+          "Выход подрядчика на работы в октябре 2026",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 22,
+        "values": [
+          "18.0",
+          "Молжаниновский",
+          "Ленинградское шоссе 288",
+          "2500.0",
+          "Сохраняется",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 23,
+        "values": [
+          "19.0",
+          "Сокол",
+          "ул. Куусинена вл. 25А",
+          "8000.0",
+          "Сохраняется",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 24,
+        "values": [
+          "20.0",
+          "Тимирязевский",
+          "Дмитровский проезд 18",
+          "10000.0",
+          "Сохраняется",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 25,
+        "values": [
+          "21.0",
+          "Ховрино",
+          "Библиотечный 2б",
+          "3500.0",
+          "Завершение работ по благоустройству в сентябре (ТПУ)",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "row": 26,
+        "values": [
+          "22.0",
+          "Ховрино",
+          "Зеленоградская 18Б",
+          "5000.0",
+          "Сохраняется",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    ]
+  }
+]

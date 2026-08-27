@@ -1,0 +1,618 @@
+{
+  "Ижорская 17-19, Москва, Россия": [
+    {
+      "place_id": 194774471,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "way",
+      "osm_id": 97084510,
+      "lat": "55.8965999",
+      "lon": "37.5263415",
+      "category": "highway",
+      "type": "tertiary",
+      "place_rank": 26,
+      "importance": 0.2521482229732802,
+      "addresstype": "road",
+      "name": "Ижорская улица",
+      "display_name": "Ижорская улица, Дмитровский, Дмитровский район, Москва, Центральный федеральный округ, 127644, Россия",
+      "boundingbox": [
+        "55.8940477",
+        "55.8992139",
+        "37.5223541",
+        "37.5302888"
+      ]
+    }
+  ],
+  "ул. Черняховского, вл. 19, Москва, Россия": [
+    {
+      "place_id": 194836354,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "way",
+      "osm_id": 1228240357,
+      "lat": "55.8020345",
+      "lon": "37.5330544",
+      "category": "highway",
+      "type": "residential",
+      "place_rank": 26,
+      "importance": 0.05342241626611731,
+      "addresstype": "road",
+      "name": "улица Черняховского",
+      "display_name": "улица Черняховского, район Аэропорт, Москва, Центральный федеральный округ, 125319, Россия",
+      "boundingbox": [
+        "55.8019501",
+        "55.8021182",
+        "37.5329576",
+        "37.5331518"
+      ]
+    }
+  ],
+  "1-й Боткинский пр-д, вл. 7, Москва, Россия": [],
+  "Брянский пост, Москва, Россия": [
+    {
+      "place_id": 199242381,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "way",
+      "osm_id": 296332935,
+      "lat": "55.7727921",
+      "lon": "37.5493180",
+      "category": "highway",
+      "type": "unclassified",
+      "place_rank": 26,
+      "importance": 0.05342241626611731,
+      "addresstype": "road",
+      "name": "улица Брянский Пост",
+      "display_name": "улица Брянский Пост, Пресненский район, Москва, Центральный федеральный округ, 125284, Россия",
+      "boundingbox": [
+        "55.7721906",
+        "55.7731490",
+        "37.5475009",
+        "37.5516532"
+      ]
+    }
+  ],
+  "Дмитровское шоссе, д. 62В, Москва, Россия": [],
+  "Нарвская 2, Москва, Россия": [
+    {
+      "place_id": 195745638,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "way",
+      "osm_id": 60095360,
+      "lat": "55.8336384",
+      "lon": "37.5086897",
+      "category": "building",
+      "type": "industrial",
+      "place_rank": 30,
+      "importance": 8.908293278396304e-05,
+      "addresstype": "building",
+      "name": "",
+      "display_name": "2, Нарвская улица, район Коптево, Москва, Центральный федеральный округ, 125130, Россия",
+      "boundingbox": [
+        "55.8332099",
+        "55.8340488",
+        "37.5081683",
+        "37.5092317"
+      ]
+    }
+  ],
+  "Керамический проезд вл.63, Москва, Россия": [
+    {
+      "place_id": 195167868,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "way",
+      "osm_id": 1065531528,
+      "lat": "55.8790927",
+      "lon": "37.5672490",
+      "category": "highway",
+      "type": "tertiary",
+      "place_rank": 26,
+      "importance": 0.05342241626611731,
+      "addresstype": "road",
+      "name": "Керамический проезд",
+      "display_name": "Керамический проезд, район Восточное Дегунино, Москва, Центральный федеральный округ, 127540, Россия",
+      "boundingbox": [
+        "55.8783087",
+        "55.8798901",
+        "37.5671073",
+        "37.5672743"
+      ]
+    }
+  ],
+  "4-й Лихачевкий переулок, 5с3, Москва, Россия": [],
+  "3-й Лихачевкий переулок, 2, Москва, Россия": [],
+  "Лавочкина 26, Москва, Россия": [
+    {
+      "place_id": 195656781,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "way",
+      "osm_id": 28270731,
+      "lat": "55.8520736",
+      "lon": "37.4990503",
+      "category": "building",
+      "type": "apartments",
+      "place_rank": 30,
+      "importance": 8.908293278396304e-05,
+      "addresstype": "building",
+      "name": "",
+      "display_name": "26, улица Лавочкина, район Ховрино, Москва, Центральный федеральный округ, 125581, Россия",
+      "boundingbox": [
+        "55.8517567",
+        "55.8523808",
+        "37.4987047",
+        "37.4993873"
+      ]
+    }
+  ],
+  "ул. Краснополянская, вл. 2/6, Москва, Россия": [
+    {
+      "place_id": 196196268,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "way",
+      "osm_id": 28573142,
+      "lat": "55.8845051",
+      "lon": "37.4880549",
+      "category": "highway",
+      "type": "tertiary",
+      "place_rank": 26,
+      "importance": 0.21080589711721126,
+      "addresstype": "road",
+      "name": "Краснополянская улица",
+      "display_name": "Краснополянская улица, Бусиново, район Западное Дегунино, Москва, Центральный федеральный округ, 125599, Россия",
+      "boundingbox": [
+        "55.8838837",
+        "55.8851046",
+        "37.4867199",
+        "37.4894000"
+      ]
+    }
+  ],
+  "Ижорская 4, Москва, Россия": [
+    {
+      "place_id": 195741994,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "way",
+      "osm_id": 123440195,
+      "lat": "55.8862809",
+      "lon": "37.5007565",
+      "category": "building",
+      "type": "works",
+      "place_rank": 30,
+      "importance": 8.908293278396304e-05,
+      "addresstype": "building",
+      "name": "",
+      "display_name": "7 с4, Ижорская улица, Бусиново, район Западное Дегунино, Москва, Центральный федеральный округ, 125599, Россия",
+      "boundingbox": [
+        "55.8853214",
+        "55.8873424",
+        "37.4994949",
+        "37.5019879"
+      ]
+    }
+  ],
+  "ул. Михалковская, дом 65 стр 3, Москва, Россия": [],
+  "Черепановых вл.3, Москва, Россия": [
+    {
+      "place_id": 195299559,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "way",
+      "osm_id": 5204810,
+      "lat": "55.8460483",
+      "lon": "37.5521173",
+      "category": "highway",
+      "type": "unclassified",
+      "place_rank": 26,
+      "importance": 0.05342241626611731,
+      "addresstype": "road",
+      "name": "проезд Черепановых",
+      "display_name": "проезд Черепановых, район Коптево, Москва, Центральный федеральный округ, 125183, Россия",
+      "boundingbox": [
+        "55.8452665",
+        "55.8470470",
+        "37.5493311",
+        "37.5548355"
+      ]
+    }
+  ],
+  "Черепановых вл 2-10, Москва, Россия": [],
+  "Фестивальная улица, вл. 6, Москва, Россия": [
+    {
+      "place_id": 195377387,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "way",
+      "osm_id": 206359448,
+      "lat": "55.8620377",
+      "lon": "37.5043285",
+      "category": "highway",
+      "type": "tertiary",
+      "place_rank": 26,
+      "importance": 0.05342241626611731,
+      "addresstype": "road",
+      "name": "Фестивальная улица",
+      "display_name": "Фестивальная улица, район Ховрино, Москва, Центральный федеральный округ, 125414, Россия",
+      "boundingbox": [
+        "55.8619132",
+        "55.8622358",
+        "37.5040927",
+        "37.5045034"
+      ]
+    }
+  ],
+  "Ленинградское шоссе 288, Москва, Россия": [
+    {
+      "place_id": 195449346,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "way",
+      "osm_id": 50052144,
+      "lat": "55.9392079",
+      "lon": "37.3728248",
+      "category": "building",
+      "type": "yes",
+      "place_rank": 30,
+      "importance": 8.908293278396304e-05,
+      "addresstype": "building",
+      "name": "",
+      "display_name": "288, Ленинградское шоссе, Молжаниновский район, Москва, Центральный федеральный округ, 141501, Россия",
+      "boundingbox": [
+        "55.9390671",
+        "55.9393486",
+        "37.3725618",
+        "37.3730878"
+      ]
+    }
+  ],
+  "ул. Куусинена вл. 25А, Москва, Россия": [],
+  "Дмитровский проезд 18, Москва, Россия": [
+    {
+      "place_id": 195198027,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "way",
+      "osm_id": 30628681,
+      "lat": "55.8076638",
+      "lon": "37.5642799",
+      "category": "building",
+      "type": "apartments",
+      "place_rank": 30,
+      "importance": 8.908293278396304e-05,
+      "addresstype": "building",
+      "name": "",
+      "display_name": "18, Дмитровский проезд, Тимирязевский район, Москва, Центральный федеральный округ, 125206, Россия",
+      "boundingbox": [
+        "55.8074446",
+        "55.8078906",
+        "37.5632593",
+        "37.5653461"
+      ]
+    }
+  ],
+  "Библиотечный 2б, Москва, Россия": [
+    {
+      "place_id": 196037889,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "way",
+      "osm_id": 877785250,
+      "lat": "55.8797096",
+      "lon": "37.4843825",
+      "category": "building",
+      "type": "train_station",
+      "place_rank": 30,
+      "importance": 8.908293278396304e-05,
+      "addresstype": "building",
+      "name": "",
+      "display_name": "2Б, Библиотечный проезд, район Ховрино, Москва, Центральный федеральный округ, 125475, Россия",
+      "boundingbox": [
+        "55.8794460",
+        "55.8799251",
+        "37.4840343",
+        "37.4847429"
+      ]
+    }
+  ],
+  "Зеленоградская 18Б, Москва, Россия": [
+    {
+      "place_id": 196224656,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "node",
+      "osm_id": 5580251674,
+      "lat": "55.8709190",
+      "lon": "37.5037918",
+      "category": "place",
+      "type": "house",
+      "place_rank": 30,
+      "importance": 8.908293278396304e-05,
+      "addresstype": "place",
+      "name": "",
+      "display_name": "18Б, Зеленоградская улица, район Ховрино, Москва, Центральный федеральный округ, 125475, Россия",
+      "boundingbox": [
+        "55.8708690",
+        "55.8709690",
+        "37.5037418",
+        "37.5038418"
+      ]
+    }
+  ],
+  "Хорошевское шоссе 100, Москва, Россия": [
+    {
+      "place_id": 194196716,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "way",
+      "osm_id": 425614933,
+      "lat": "55.7776455",
+      "lon": "37.5200337",
+      "category": "highway",
+      "type": "secondary",
+      "place_rank": 26,
+      "importance": 0.05342241626611731,
+      "addresstype": "road",
+      "name": "Хорошёвское шоссе",
+      "display_name": "Хорошёвское шоссе, Хорошёвский район, Москва, Центральный федеральный округ, 123007, Россия",
+      "boundingbox": [
+        "55.7774762",
+        "55.7778193",
+        "37.5190616",
+        "37.5210051"
+      ]
+    }
+  ],
+  "Зорге 7, Москва, Россия": [
+    {
+      "place_id": 195357605,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "way",
+      "osm_id": 46946814,
+      "lat": "55.7801756",
+      "lon": "37.5085176",
+      "category": "building",
+      "type": "yes",
+      "place_rank": 30,
+      "importance": 8.908293278396304e-05,
+      "addresstype": "building",
+      "name": "",
+      "display_name": "7 с1, улица Зорге, Хорошёвский район, Москва, Центральный федеральный округ, 125252, Россия",
+      "boundingbox": [
+        "55.7799243",
+        "55.7804479",
+        "37.5081611",
+        "37.5088806"
+      ]
+    }
+  ],
+  "Зорге 25, Москва, Россия": [
+    {
+      "place_id": 195556534,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "way",
+      "osm_id": 52593107,
+      "lat": "55.7950648",
+      "lon": "37.5037820",
+      "category": "amenity",
+      "type": "parking",
+      "place_rank": 30,
+      "importance": 8.908293278396304e-05,
+      "addresstype": "amenity",
+      "name": "",
+      "display_name": "25, улица Зорге, район Сокол, Москва, Центральный федеральный округ, 123298, Россия",
+      "boundingbox": [
+        "55.7947686",
+        "55.7953610",
+        "37.5033375",
+        "37.5042265"
+      ]
+    }
+  ],
+  "3.0, Москва, Россия": [
+    {
+      "place_id": 195627617,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "relation",
+      "osm_id": 2555133,
+      "lat": "55.7505412",
+      "lon": "37.6174782",
+      "category": "place",
+      "type": "city",
+      "place_rank": 15,
+      "importance": 0.871311709597481,
+      "addresstype": "city",
+      "name": "Москва",
+      "display_name": "Москва, Центральный федеральный округ, Россия",
+      "boundingbox": [
+        "55.5166840",
+        "55.9577717",
+        "37.2905020",
+        "37.9674277"
+      ]
+    }
+  ],
+  "Талдомская 2 Б (Ангары), Москва, Россия": [],
+  "ул. Клары Цеткин, д. 33, корп. 50 (вдоль ЖД), Москва, Россия": [],
+  "Проезд Черепановых 23-29А, Москва, Россия": [
+    {
+      "place_id": 196548513,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "way",
+      "osm_id": 48165812,
+      "lat": "55.8448647",
+      "lon": "37.5475803",
+      "category": "highway",
+      "type": "unclassified",
+      "place_rank": 26,
+      "importance": 0.05342241626611731,
+      "addresstype": "road",
+      "name": "проезд Черепановых",
+      "display_name": "проезд Черепановых, район Коптево, Москва, Центральный федеральный округ, 125183, Россия",
+      "boundingbox": [
+        "55.8444648",
+        "55.8452665",
+        "37.5458290",
+        "37.5493311"
+      ]
+    }
+  ],
+  "2-й Лихачевский переулок, \nд. 12А (напротив вл. 9), Москва, Россия": [],
+  "Ижорская  улица 9Бс2, Москва, Россия": [
+    {
+      "place_id": 195512928,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "way",
+      "osm_id": 48980114,
+      "lat": "55.8878541",
+      "lon": "37.5087509",
+      "category": "highway",
+      "type": "secondary",
+      "place_rank": 26,
+      "importance": 0.2521482229732802,
+      "addresstype": "road",
+      "name": "Ижорская улица",
+      "display_name": "Ижорская улица, Дмитровский, Дмитровский район, Москва, Центральный федеральный округ, 125599, Россия",
+      "boundingbox": [
+        "55.8860910",
+        "55.8892942",
+        "37.5060167",
+        "37.5116685"
+      ]
+    }
+  ],
+  "Ижорская улица, 9, Москва, Россия": [
+    {
+      "place_id": 195308950,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "way",
+      "osm_id": 36816492,
+      "lat": "55.8945773",
+      "lon": "37.5109271",
+      "category": "building",
+      "type": "industrial",
+      "place_rank": 30,
+      "importance": 8.908293278396304e-05,
+      "addresstype": "building",
+      "name": "Котельно-турбинное отделение № 1",
+      "display_name": "Котельно-турбинное отделение № 1, 9 с1, Ижорская улица, Дмитровский, Дмитровский район, Москва, Центральный федеральный округ, 125412, Россия",
+      "boundingbox": [
+        "55.8934070",
+        "55.8956974",
+        "37.5086722",
+        "37.5131821"
+      ]
+    }
+  ],
+  "Лобненская 21, с.22, Москва, Россия": [],
+  "Вагоноремонтная ул., д. 2, стр. 2, Москва, Россия": [],
+  "Нарвская ул., вл. 4 (территория под Коптевским путепроводом и вблизи), Москва, Россия": [],
+  "Ленинградское ш., вл. 73, Москва, Россия": [
+    {
+      "place_id": 195281716,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "way",
+      "osm_id": 157617263,
+      "lat": "55.8147905",
+      "lon": "37.5011558",
+      "category": "highway",
+      "type": "primary",
+      "place_rank": 26,
+      "importance": 0.4141856465713948,
+      "addresstype": "road",
+      "name": "Ленинградское шоссе",
+      "display_name": "Ленинградское шоссе, район Сокол, Москва, Центральный федеральный округ, 125493, Россия",
+      "boundingbox": [
+        "55.8144039",
+        "55.8151754",
+        "37.5008385",
+        "37.5014709"
+      ]
+    }
+  ],
+  "Новосходненское ш. 2, Москва, Россия": [
+    {
+      "place_id": 198644831,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "way",
+      "osm_id": 542321938,
+      "lat": "55.9352955",
+      "lon": "37.3519439",
+      "category": "building",
+      "type": "house",
+      "place_rank": 30,
+      "importance": 8.908293278396304e-05,
+      "addresstype": "building",
+      "name": "",
+      "display_name": "170/2, Новосходненское шоссе, Верескино, Молжаниновский район, Москва, Центральный федеральный округ, 141431, Россия",
+      "boundingbox": [
+        "55.9352507",
+        "55.9353408",
+        "37.3518462",
+        "37.3520017"
+      ]
+    }
+  ],
+  "Ленинградское шоссе  311, стр. 11, Москва, Россия": [],
+  "Приозёрная улица, 42А, Москва, Россия": [
+    {
+      "place_id": 199664211,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "way",
+      "osm_id": 30194009,
+      "lat": "55.9509867",
+      "lon": "37.3557337",
+      "category": "highway",
+      "type": "living_street",
+      "place_rank": 26,
+      "importance": 0.05342241626611731,
+      "addresstype": "road",
+      "name": "Приозёрная улица",
+      "display_name": "Приозёрная улица, Черкизово, Молжаниновский район, Москва, Центральный федеральный округ, 141431, Россия",
+      "boundingbox": [
+        "55.9491353",
+        "55.9532000",
+        "37.3534117",
+        "37.3576000"
+      ]
+    }
+  ],
+  "ул. Зорге, влд. 30А, Москва, Россия": [],
+  "Светлый пр-д, 2, Москва, Россия": [
+    {
+      "place_id": 194664327,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "way",
+      "osm_id": 154198945,
+      "lat": "55.8918397",
+      "lon": "38.1469847",
+      "category": "highway",
+      "type": "residential",
+      "place_rank": 26,
+      "importance": 0.053393418020904825,
+      "addresstype": "road",
+      "name": "Светлый проезд",
+      "display_name": "Светлый проезд, Свердловский, городской округ Лосино-Петровский, Московская область, Центральный федеральный округ, 141140, Россия",
+      "boundingbox": [
+        "55.8914834",
+        "55.8921960",
+        "38.1467188",
+        "38.1472506"
+      ]
+    }
+  ],
+  "2-я Магистральная ул., вл. 18, Москва, Россия": [
+    {
+      "place_id": 195654926,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "way",
+      "osm_id": 800539045,
+      "lat": "55.7608391",
+      "lon": "37.5261862",
+      "category": "highway",
+      "type": "tertiary",
+      "place_rank": 26,
+      "importance": 0.05342241626611731,
+      "addresstype": "road",
+      "name": "2-я Магистральная улица",
+      "display_name": "2-я Магистральная улица, Хорошёвский район, Москва, Центральный федеральный округ, 123290, Россия",
+      "boundingbox": [
+        "55.7604397",
+        "55.7612451",
+        "37.5251962",
+        "37.5271728"
+      ]
+    }
+  ],
+  "1-я Магистральная ул, д. 2 (около), Москва, Россия": [],
+  "3-я магистральная ул, д. 26с1 (около), Москва, Россия": [],
+  "Хорошевское ш., д. 46 (около), Москва, Россия": []
+}

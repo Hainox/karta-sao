@@ -1,0 +1,47 @@
+{
+  "snapshot_date": "2026-08-24",
+  "first_wave": {
+    "required_count": 97,
+    "represented_count": 97,
+    "registry_geometry_objects": 94,
+    "location_markers": 3,
+    "geojson_geometries": 156,
+    "match_methods": {
+      "exact": 90,
+      "fuzzy": 4,
+      "no_match": 3
+    }
+  },
+  "remaining_odh": {
+    "objects": 594,
+    "source": "preserved reestr-ogh.mos.ru export",
+    "note": "Raw MSK-77 and WGS-84 files are in the preserved source snapshot; rerun sao_export_remaining.py for a fresh export."
+  },
+  "snow_storage_2025_2026": {
+    "address_records": 45,
+    "geocode_statuses": {
+      "candidate": 27,
+      "not_found": 18
+    },
+    "map_markers": 27
+  },
+  "pgm_containers_2025_2026": {
+    "placement_records": 435,
+    "container_total": 451,
+    "odh_geometry_proxies": 215,
+    "unmatched_odh_records": 220
+  },
+  "state_healthcare": {
+    "officially_confirmed_map_points": 10,
+    "candidate_records_held_out_of_map": 40,
+    "coordinate_system": "WGS84 / EPSG:4326",
+    "note": "Ten records were checked against an official organisation page; map-aggregator links are provided in each card for manual reconciliation."
+  },
+  "blockers": [
+    "4 fuzzy name matches need manual confirmation before operational use.",
+    "3 first-wave markers are location references, not cadastral or legal boundaries.",
+    "18 snow-storage addresses were not resolved by the geocoder; verify them internally.",
+    "Hydrants, DEU bases, reagent stores and SSP MVS/MVK are not added without verified source datasets.",
+    "40 healthcare candidate records remain outside the map pending official-source verification."
+  ]
+}

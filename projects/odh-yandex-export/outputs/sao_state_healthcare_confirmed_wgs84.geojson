@@ -1,0 +1,491 @@
+{
+  "type": "FeatureCollection",
+  "metadata": {
+    "record_count": 10,
+    "scope": "Подтвержденные официальными источниками государственные учреждения здравоохранения САО",
+    "coordinate_system": "WGS84 / EPSG:4326",
+    "verification_rule": "Официальный источник подтвердил адрес и принадлежность; координаты геокодированы. Кандидаты без такой сверки не включены."
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.4881479,
+          55.8179022
+        ]
+      },
+      "properties": {
+        "name": "ГБУЗ «Городская поликлиника № 45 ДЗМ»",
+        "address": "Москва, 5-й Войковский проезд, 12",
+        "facility_type": "взрослая поликлиника",
+        "ownership": "государственное учреждение здравоохранения города Москвы (ДЗМ)",
+        "verification_status": "подтверждено официальным сайтом; координата геокодирована",
+        "latitude": 55.8179022,
+        "longitude": 37.4881479,
+        "official_source": "https://gp45msk.ru/content/info",
+        "official_evidence": "Официальная страница контактов: головное учреждение.",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%93%D0%91%D0%A3%D0%97%20%C2%AB%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%2045%20%D0%94%D0%97%D0%9C%C2%BB%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%205-%D0%B9%20%D0%92%D0%BE%D0%B9%D0%BA%D0%BE%D0%B2%D1%81%D0%BA%D0%B8%D0%B9%20%D0%BF%D1%80%D0%BE%D0%B5%D0%B7%D0%B4%2C%2012",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%93%D0%91%D0%A3%D0%97%20%C2%AB%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%2045%20%D0%94%D0%97%D0%9C%C2%BB%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%205-%D0%B9%20%D0%92%D0%BE%D0%B9%D0%BA%D0%BE%D0%B2%D1%81%D0%BA%D0%B8%D0%B9%20%D0%BF%D1%80%D0%BE%D0%B5%D0%B7%D0%B4%2C%2012",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%93%D0%91%D0%A3%D0%97%20%C2%AB%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%2045%20%D0%94%D0%97%D0%9C%C2%BB%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%205-%D0%B9%20%D0%92%D0%BE%D0%B9%D0%BA%D0%BE%D0%B2%D1%81%D0%BA%D0%B8%D0%B9%20%D0%BF%D1%80%D0%BE%D0%B5%D0%B7%D0%B4%2C%2012",
+        "note": "Ссылки агрегаторов — поисковые ссылки для сверки карточки; не являются самостоятельным доказательством статуса."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.4886374,
+          55.8450761
+        ]
+      },
+      "properties": {
+        "name": "ГБУЗ «Городская поликлиника № 45 ДЗМ», филиал",
+        "address": "Москва, Пулковская улица, 8, строение 1",
+        "facility_type": "взрослая поликлиника",
+        "ownership": "государственное учреждение здравоохранения города Москвы (ДЗМ)",
+        "verification_status": "подтверждено официальным сайтом; координата геокодирована",
+        "latitude": 55.8450761,
+        "longitude": 37.4886374,
+        "official_source": "https://gp45msk.ru/content/info",
+        "official_evidence": "Официальная страница контактов: филиал.",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%93%D0%91%D0%A3%D0%97%20%C2%AB%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%2045%20%D0%94%D0%97%D0%9C%C2%BB%2C%20%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D0%9F%D1%83%D0%BB%D0%BA%D0%BE%D0%B2%D1%81%D0%BA%D0%B0%D1%8F%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%2C%208%2C%20%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5%201",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%93%D0%91%D0%A3%D0%97%20%C2%AB%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%2045%20%D0%94%D0%97%D0%9C%C2%BB%2C%20%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D0%9F%D1%83%D0%BB%D0%BA%D0%BE%D0%B2%D1%81%D0%BA%D0%B0%D1%8F%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%2C%208%2C%20%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5%201",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%93%D0%91%D0%A3%D0%97%20%C2%AB%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%2045%20%D0%94%D0%97%D0%9C%C2%BB%2C%20%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D0%9F%D1%83%D0%BB%D0%BA%D0%BE%D0%B2%D1%81%D0%BA%D0%B0%D1%8F%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%2C%208%2C%20%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5%201",
+        "note": "Ссылки агрегаторов — поисковые ссылки для сверки карточки; не являются самостоятельным доказательством статуса."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5001724,
+          55.8541982
+        ]
+      },
+      "properties": {
+        "name": "ГБУЗ «Городская поликлиника № 45 ДЗМ», филиал",
+        "address": "Москва, Флотская улица, 9, строение 1",
+        "facility_type": "взрослая поликлиника",
+        "ownership": "государственное учреждение здравоохранения города Москвы (ДЗМ)",
+        "verification_status": "подтверждено официальным сайтом; координата геокодирована",
+        "latitude": 55.8541982,
+        "longitude": 37.5001724,
+        "official_source": "https://gp45msk.ru/content/info",
+        "official_evidence": "Официальная страница контактов: филиал.",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%93%D0%91%D0%A3%D0%97%20%C2%AB%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%2045%20%D0%94%D0%97%D0%9C%C2%BB%2C%20%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D0%A4%D0%BB%D0%BE%D1%82%D1%81%D0%BA%D0%B0%D1%8F%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%2C%209%2C%20%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5%201",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%93%D0%91%D0%A3%D0%97%20%C2%AB%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%2045%20%D0%94%D0%97%D0%9C%C2%BB%2C%20%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D0%A4%D0%BB%D0%BE%D1%82%D1%81%D0%BA%D0%B0%D1%8F%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%2C%209%2C%20%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5%201",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%93%D0%91%D0%A3%D0%97%20%C2%AB%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%2045%20%D0%94%D0%97%D0%9C%C2%BB%2C%20%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D0%A4%D0%BB%D0%BE%D1%82%D1%81%D0%BA%D0%B0%D1%8F%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%2C%209%2C%20%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5%201",
+        "note": "Ссылки агрегаторов — поисковые ссылки для сверки карточки; не являются самостоятельным доказательством статуса."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.3520252,
+          55.946722
+        ]
+      },
+      "properties": {
+        "name": "ГБУЗ «Городская поликлиника № 45 ДЗМ», филиал",
+        "address": "Москва, Синявинская улица, 1Б",
+        "facility_type": "взрослая поликлиника",
+        "ownership": "государственное учреждение здравоохранения города Москвы (ДЗМ)",
+        "verification_status": "подтверждено официальным сайтом; координата геокодирована",
+        "latitude": 55.946722,
+        "longitude": 37.3520252,
+        "official_source": "https://gp45msk.ru/content/info",
+        "official_evidence": "Официальная страница контактов: филиал в Молжаниновском районе.",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%93%D0%91%D0%A3%D0%97%20%C2%AB%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%2045%20%D0%94%D0%97%D0%9C%C2%BB%2C%20%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D0%A1%D0%B8%D0%BD%D1%8F%D0%B2%D0%B8%D0%BD%D1%81%D0%BA%D0%B0%D1%8F%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%2C%201%D0%91",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%93%D0%91%D0%A3%D0%97%20%C2%AB%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%2045%20%D0%94%D0%97%D0%9C%C2%BB%2C%20%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D0%A1%D0%B8%D0%BD%D1%8F%D0%B2%D0%B8%D0%BD%D1%81%D0%BA%D0%B0%D1%8F%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%2C%201%D0%91",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%93%D0%91%D0%A3%D0%97%20%C2%AB%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%2045%20%D0%94%D0%97%D0%9C%C2%BB%2C%20%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D0%A1%D0%B8%D0%BD%D1%8F%D0%B2%D0%B8%D0%BD%D1%81%D0%BA%D0%B0%D1%8F%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%2C%201%D0%91",
+        "note": "Ссылки агрегаторов — поисковые ссылки для сверки карточки; не являются самостоятельным доказательством статуса."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.4949108,
+          55.8183615
+        ]
+      },
+      "properties": {
+        "name": "ГБУЗ «Городская поликлиника № 45 ДЗМ», филиал",
+        "address": "Москва, 1-я Радиаторская улица, 5",
+        "facility_type": "взрослая поликлиника",
+        "ownership": "государственное учреждение здравоохранения города Москвы (ДЗМ)",
+        "verification_status": "подтверждено официальным сайтом; координата геокодирована",
+        "latitude": 55.8183615,
+        "longitude": 37.4949108,
+        "official_source": "https://gp45msk.ru/content/info",
+        "official_evidence": "Официальная страница контактов: филиал.",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%93%D0%91%D0%A3%D0%97%20%C2%AB%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%2045%20%D0%94%D0%97%D0%9C%C2%BB%2C%20%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%201-%D1%8F%20%D0%A0%D0%B0%D0%B4%D0%B8%D0%B0%D1%82%D0%BE%D1%80%D1%81%D0%BA%D0%B0%D1%8F%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%2C%205",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%93%D0%91%D0%A3%D0%97%20%C2%AB%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%2045%20%D0%94%D0%97%D0%9C%C2%BB%2C%20%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%201-%D1%8F%20%D0%A0%D0%B0%D0%B4%D0%B8%D0%B0%D1%82%D0%BE%D1%80%D1%81%D0%BA%D0%B0%D1%8F%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%2C%205",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%93%D0%91%D0%A3%D0%97%20%C2%AB%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%2045%20%D0%94%D0%97%D0%9C%C2%BB%2C%20%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%201-%D1%8F%20%D0%A0%D0%B0%D0%B4%D0%B8%D0%B0%D1%82%D0%BE%D1%80%D1%81%D0%BA%D0%B0%D1%8F%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%2C%205",
+        "note": "Ссылки агрегаторов — поисковые ссылки для сверки карточки; не являются самостоятельным доказательством статуса."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5567689,
+          55.8075747
+        ]
+      },
+      "properties": {
+        "name": "ГБУЗ «Городская поликлиника № 6 ДЗМ»",
+        "address": "Москва, улица Вучетича, 7Б",
+        "facility_type": "взрослая поликлиника",
+        "ownership": "государственное учреждение здравоохранения города Москвы (ДЗМ)",
+        "verification_status": "подтверждено официальным сайтом; координата геокодирована",
+        "latitude": 55.8075747,
+        "longitude": 37.5567689,
+        "official_source": "https://gp6.moscow/m/contacts/",
+        "official_evidence": "Официальная страница контактов: головное учреждение.",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%93%D0%91%D0%A3%D0%97%20%C2%AB%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%206%20%D0%94%D0%97%D0%9C%C2%BB%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%20%D0%92%D1%83%D1%87%D0%B5%D1%82%D0%B8%D1%87%D0%B0%2C%207%D0%91",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%93%D0%91%D0%A3%D0%97%20%C2%AB%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%206%20%D0%94%D0%97%D0%9C%C2%BB%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%20%D0%92%D1%83%D1%87%D0%B5%D1%82%D0%B8%D1%87%D0%B0%2C%207%D0%91",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%93%D0%91%D0%A3%D0%97%20%C2%AB%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%206%20%D0%94%D0%97%D0%9C%C2%BB%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%20%D0%92%D1%83%D1%87%D0%B5%D1%82%D0%B8%D1%87%D0%B0%2C%207%D0%91",
+        "note": "Ссылки агрегаторов — поисковые ссылки для сверки карточки; не являются самостоятельным доказательством статуса."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5495726,
+          55.7814819
+        ]
+      },
+      "properties": {
+        "name": "ГБУЗ «ГКБ им. С. П. Боткина ДЗМ»",
+        "address": "Москва, 2-й Боткинский проезд, 5",
+        "facility_type": "городская клиническая больница",
+        "ownership": "государственное учреждение здравоохранения города Москвы (ДЗМ)",
+        "verification_status": "подтверждено официальным сайтом; координата геокодирована",
+        "latitude": 55.7814819,
+        "longitude": 37.5495726,
+        "official_source": "https://botkinmoscow.ru/contacts/",
+        "official_evidence": "Официальная страница контактов больницы ДЗМ.",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%93%D0%91%D0%A3%D0%97%20%C2%AB%D0%93%D0%9A%D0%91%20%D0%B8%D0%BC.%20%D0%A1.%20%D0%9F.%20%D0%91%D0%BE%D1%82%D0%BA%D0%B8%D0%BD%D0%B0%20%D0%94%D0%97%D0%9C%C2%BB%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%202-%D0%B9%20%D0%91%D0%BE%D1%82%D0%BA%D0%B8%D0%BD%D1%81%D0%BA%D0%B8%D0%B9%20%D0%BF%D1%80%D0%BE%D0%B5%D0%B7%D0%B4%2C%205",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%93%D0%91%D0%A3%D0%97%20%C2%AB%D0%93%D0%9A%D0%91%20%D0%B8%D0%BC.%20%D0%A1.%20%D0%9F.%20%D0%91%D0%BE%D1%82%D0%BA%D0%B8%D0%BD%D0%B0%20%D0%94%D0%97%D0%9C%C2%BB%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%202-%D0%B9%20%D0%91%D0%BE%D1%82%D0%BA%D0%B8%D0%BD%D1%81%D0%BA%D0%B8%D0%B9%20%D0%BF%D1%80%D0%BE%D0%B5%D0%B7%D0%B4%2C%205",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%93%D0%91%D0%A3%D0%97%20%C2%AB%D0%93%D0%9A%D0%91%20%D0%B8%D0%BC.%20%D0%A1.%20%D0%9F.%20%D0%91%D0%BE%D1%82%D0%BA%D0%B8%D0%BD%D0%B0%20%D0%94%D0%97%D0%9C%C2%BB%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%202-%D0%B9%20%D0%91%D0%BE%D1%82%D0%BA%D0%B8%D0%BD%D1%81%D0%BA%D0%B8%D0%B9%20%D0%BF%D1%80%D0%BE%D0%B5%D0%B7%D0%B4%2C%205",
+        "note": "Ссылки агрегаторов — поисковые ссылки для сверки карточки; не являются самостоятельным доказательством статуса."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5206101,
+          55.7853805
+        ]
+      },
+      "properties": {
+        "name": "ГБУЗ «Детская городская поликлиника № 39 ДЗМ»",
+        "address": "Москва, проезд Берёзовой Рощи, 2",
+        "facility_type": "детская поликлиника / травматологический пункт",
+        "ownership": "государственное учреждение здравоохранения города Москвы (ДЗМ)",
+        "verification_status": "подтверждено официальным сайтом; координата геокодирована",
+        "latitude": 55.7853805,
+        "longitude": 37.5206101,
+        "official_source": "https://www.dgp86.ru/poliklinika/travmpunkt/",
+        "official_evidence": "Официальная страница ДГП № 86 перечисляет детский травмпункт ДГП № 39 по этому адресу.",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%93%D0%91%D0%A3%D0%97%20%C2%AB%D0%94%D0%B5%D1%82%D1%81%D0%BA%D0%B0%D1%8F%20%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%2039%20%D0%94%D0%97%D0%9C%C2%BB%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D0%BF%D1%80%D0%BE%D0%B5%D0%B7%D0%B4%20%D0%91%D0%B5%D1%80%D1%91%D0%B7%D0%BE%D0%B2%D0%BE%D0%B9%20%D0%A0%D0%BE%D1%89%D0%B8%2C%202",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%93%D0%91%D0%A3%D0%97%20%C2%AB%D0%94%D0%B5%D1%82%D1%81%D0%BA%D0%B0%D1%8F%20%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%2039%20%D0%94%D0%97%D0%9C%C2%BB%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D0%BF%D1%80%D0%BE%D0%B5%D0%B7%D0%B4%20%D0%91%D0%B5%D1%80%D1%91%D0%B7%D0%BE%D0%B2%D0%BE%D0%B9%20%D0%A0%D0%BE%D1%89%D0%B8%2C%202",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%93%D0%91%D0%A3%D0%97%20%C2%AB%D0%94%D0%B5%D1%82%D1%81%D0%BA%D0%B0%D1%8F%20%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%2039%20%D0%94%D0%97%D0%9C%C2%BB%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D0%BF%D1%80%D0%BE%D0%B5%D0%B7%D0%B4%20%D0%91%D0%B5%D1%80%D1%91%D0%B7%D0%BE%D0%B2%D0%BE%D0%B9%20%D0%A0%D0%BE%D1%89%D0%B8%2C%202",
+        "note": "Ссылки агрегаторов — поисковые ссылки для сверки карточки; не являются самостоятельным доказательством статуса."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5182424,
+          55.887451
+        ]
+      },
+      "properties": {
+        "name": "ГБУЗ «Детская городская поликлиника № 86 ДЗМ»",
+        "address": "Москва, Коровинское шоссе, 36А",
+        "facility_type": "детская поликлиника / травматологический пункт",
+        "ownership": "государственное учреждение здравоохранения города Москвы (ДЗМ)",
+        "verification_status": "подтверждено официальным сайтом; координата геокодирована",
+        "latitude": 55.887451,
+        "longitude": 37.5182424,
+        "official_source": "https://www.dgp86.ru/poliklinika/travmpunkt/",
+        "official_evidence": "Официальная страница ДГП № 86: адрес травматологического пункта.",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%93%D0%91%D0%A3%D0%97%20%C2%AB%D0%94%D0%B5%D1%82%D1%81%D0%BA%D0%B0%D1%8F%20%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%2086%20%D0%94%D0%97%D0%9C%C2%BB%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D0%9A%D0%BE%D1%80%D0%BE%D0%B2%D0%B8%D0%BD%D1%81%D0%BA%D0%BE%D0%B5%20%D1%88%D0%BE%D1%81%D1%81%D0%B5%2C%2036%D0%90",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%93%D0%91%D0%A3%D0%97%20%C2%AB%D0%94%D0%B5%D1%82%D1%81%D0%BA%D0%B0%D1%8F%20%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%2086%20%D0%94%D0%97%D0%9C%C2%BB%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D0%9A%D0%BE%D1%80%D0%BE%D0%B2%D0%B8%D0%BD%D1%81%D0%BA%D0%BE%D0%B5%20%D1%88%D0%BE%D1%81%D1%81%D0%B5%2C%2036%D0%90",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%93%D0%91%D0%A3%D0%97%20%C2%AB%D0%94%D0%B5%D1%82%D1%81%D0%BA%D0%B0%D1%8F%20%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%2086%20%D0%94%D0%97%D0%9C%C2%BB%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D0%9A%D0%BE%D1%80%D0%BE%D0%B2%D0%B8%D0%BD%D1%81%D0%BA%D0%BE%D0%B5%20%D1%88%D0%BE%D1%81%D1%81%D0%B5%2C%2036%D0%90",
+        "note": "Ссылки агрегаторов — поисковые ссылки для сверки карточки; не являются самостоятельным доказательством статуса."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.492277,
+          55.8680177
+        ]
+      },
+      "properties": {
+        "name": "ГБУЗ «Городская поликлиника № 45 ДЗМ», филиал",
+        "address": "Москва, Петрозаводская улица, 26",
+        "facility_type": "взрослая поликлиника",
+        "ownership": "государственное учреждение здравоохранения города Москвы (ДЗМ)",
+        "verification_status": "подтверждено официальным сайтом; координата геокодирована",
+        "latitude": 55.8680177,
+        "longitude": 37.492277,
+        "official_source": "https://gp45msk.ru/content/info",
+        "official_evidence": "Официальная страница контактов: филиал.",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%93%D0%91%D0%A3%D0%97%20%C2%AB%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%2045%20%D0%94%D0%97%D0%9C%C2%BB%2C%20%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D0%9F%D0%B5%D1%82%D1%80%D0%BE%D0%B7%D0%B0%D0%B2%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%2C%2026",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%93%D0%91%D0%A3%D0%97%20%C2%AB%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%2045%20%D0%94%D0%97%D0%9C%C2%BB%2C%20%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D0%9F%D0%B5%D1%82%D1%80%D0%BE%D0%B7%D0%B0%D0%B2%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%2C%2026",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%93%D0%91%D0%A3%D0%97%20%C2%AB%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0%20%E2%84%96%2045%20%D0%94%D0%97%D0%9C%C2%BB%2C%20%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D0%9F%D0%B5%D1%82%D1%80%D0%BE%D0%B7%D0%B0%D0%B2%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%2C%2026",
+        "note": "Ссылки агрегаторов — поисковые ссылки для сверки карточки; не являются самостоятельным доказательством статуса."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5327811,
+          55.8898254
+        ]
+      },
+      "properties": {
+        "name": "Родильный дом ГКБ им. В.В. Вересаева",
+        "address": "Москва, ул. Лобненская, д. 10, стр. 10",
+        "coordinate_status": "Адресный центроид",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%A0%D0%BE%D0%B4%D0%B8%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9+%D0%B4%D0%BE%D0%BC+%D0%93%D0%9A%D0%91+%D0%B8%D0%BC.+%D0%92.%D0%92.+%D0%92%D0%B5%D1%80%D0%B5%D1%81%D0%B0%D0%B5%D0%B2%D0%B0%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+%D1%83%D0%BB.+%D0%9B%D0%BE%D0%B1%D0%BD%D0%B5%D0%BD%D1%81%D0%BA%D0%B0%D1%8F%2C+%D0%B4.+10%2C+%D1%81%D1%82%D1%80.+10",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%A0%D0%BE%D0%B4%D0%B8%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9+%D0%B4%D0%BE%D0%BC+%D0%93%D0%9A%D0%91+%D0%B8%D0%BC.+%D0%92.%D0%92.+%D0%92%D0%B5%D1%80%D0%B5%D1%81%D0%B0%D0%B5%D0%B2%D0%B0%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+%D1%83%D0%BB.+%D0%9B%D0%BE%D0%B1%D0%BD%D0%B5%D0%BD%D1%81%D0%BA%D0%B0%D1%8F%2C+%D0%B4.+10%2C+%D1%81%D1%82%D1%80.+10",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%A0%D0%BE%D0%B4%D0%B8%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9+%D0%B4%D0%BE%D0%BC+%D0%93%D0%9A%D0%91+%D0%B8%D0%BC.+%D0%92.%D0%92.+%D0%92%D0%B5%D1%80%D0%B5%D1%81%D0%B0%D0%B5%D0%B2%D0%B0%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+%D1%83%D0%BB.+%D0%9B%D0%BE%D0%B1%D0%BD%D0%B5%D0%BD%D1%81%D0%BA%D0%B0%D1%8F%2C+%D0%B4.+10%2C+%D1%81%D1%82%D1%80.+10",
+        "facility_type": "Родильный дом",
+        "ownership": "ГБУЗ города Москвы",
+        "verification_status": "Подтверждено официальным сайтом учреждения",
+        "official_source": "https://gkb81.ru/directions/rody/",
+        "official_evidence": "Родильный дом работает по адресу: Лобненская улица, 10с10."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.4632313,
+          55.8797354
+        ]
+      },
+      "properties": {
+        "name": "Филиал № 2 НМИЦ ВМТ им. А.А. Вишневского Минобороны России",
+        "address": "Москва, ул. Левобережная, д. 11",
+        "coordinate_status": "Адресный центроид",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%A4%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB+%E2%84%96+2+%D0%9D%D0%9C%D0%98%D0%A6+%D0%92%D0%9C%D0%A2+%D0%B8%D0%BC.+%D0%90.%D0%90.+%D0%92%D0%B8%D1%88%D0%BD%D0%B5%D0%B2%D1%81%D0%BA%D0%BE%D0%B3%D0%BE+%D0%9C%D0%B8%D0%BD%D0%BE%D0%B1%D0%BE%D1%80%D0%BE%D0%BD%D1%8B+%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D0%B8%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+%D1%83%D0%BB.+%D0%9B%D0%B5%D0%B2%D0%BE%D0%B1%D0%B5%D1%80%D0%B5%D0%B6%D0%BD%D0%B0%D1%8F%2C+%D0%B4.+11",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%A4%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB+%E2%84%96+2+%D0%9D%D0%9C%D0%98%D0%A6+%D0%92%D0%9C%D0%A2+%D0%B8%D0%BC.+%D0%90.%D0%90.+%D0%92%D0%B8%D1%88%D0%BD%D0%B5%D0%B2%D1%81%D0%BA%D0%BE%D0%B3%D0%BE+%D0%9C%D0%B8%D0%BD%D0%BE%D0%B1%D0%BE%D1%80%D0%BE%D0%BD%D1%8B+%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D0%B8%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+%D1%83%D0%BB.+%D0%9B%D0%B5%D0%B2%D0%BE%D0%B1%D0%B5%D1%80%D0%B5%D0%B6%D0%BD%D0%B0%D1%8F%2C+%D0%B4.+11",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%A4%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB+%E2%84%96+2+%D0%9D%D0%9C%D0%98%D0%A6+%D0%92%D0%9C%D0%A2+%D0%B8%D0%BC.+%D0%90.%D0%90.+%D0%92%D0%B8%D1%88%D0%BD%D0%B5%D0%B2%D1%81%D0%BA%D0%BE%D0%B3%D0%BE+%D0%9C%D0%B8%D0%BD%D0%BE%D0%B1%D0%BE%D1%80%D0%BE%D0%BD%D1%8B+%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D0%B8%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+%D1%83%D0%BB.+%D0%9B%D0%B5%D0%B2%D0%BE%D0%B1%D0%B5%D1%80%D0%B5%D0%B6%D0%BD%D0%B0%D1%8F%2C+%D0%B4.+11",
+        "facility_type": "Военный клинический госпиталь",
+        "ownership": "Федеральное государственное учреждение Минобороны России",
+        "verification_status": "Подтверждено официальным сайтом учреждения",
+        "official_source": "https://www.2filial.ru/contacts/",
+        "official_evidence": "Официальный адрес филиала: Левобережная улица, д. 11."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5206136,
+          55.8718919
+        ]
+      },
+      "properties": {
+        "name": "Институт Вельтищева",
+        "address": "Москва, ул. Талдомская, д. 2",
+        "coordinate_status": "Адресный центроид",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%98%D0%BD%D1%81%D1%82%D0%B8%D1%82%D1%83%D1%82+%D0%92%D0%B5%D0%BB%D1%8C%D1%82%D0%B8%D1%89%D0%B5%D0%B2%D0%B0%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+%D1%83%D0%BB.+%D0%A2%D0%B0%D0%BB%D0%B4%D0%BE%D0%BC%D1%81%D0%BA%D0%B0%D1%8F%2C+%D0%B4.+2",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%98%D0%BD%D1%81%D1%82%D0%B8%D1%82%D1%83%D1%82+%D0%92%D0%B5%D0%BB%D1%8C%D1%82%D0%B8%D1%89%D0%B5%D0%B2%D0%B0%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+%D1%83%D0%BB.+%D0%A2%D0%B0%D0%BB%D0%B4%D0%BE%D0%BC%D1%81%D0%BA%D0%B0%D1%8F%2C+%D0%B4.+2",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%98%D0%BD%D1%81%D1%82%D0%B8%D1%82%D1%83%D1%82+%D0%92%D0%B5%D0%BB%D1%8C%D1%82%D0%B8%D1%89%D0%B5%D0%B2%D0%B0%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+%D1%83%D0%BB.+%D0%A2%D0%B0%D0%BB%D0%B4%D0%BE%D0%BC%D1%81%D0%BA%D0%B0%D1%8F%2C+%D0%B4.+2",
+        "facility_type": "Научно-исследовательский клинический институт",
+        "ownership": "Федеральное государственное учреждение Минздрава России",
+        "verification_status": "Подтверждено официальным сайтом учреждения",
+        "official_source": "https://telemed.pedklin.ru/pedklin/patient/about",
+        "official_evidence": "Почтовый адрес: Москва, ул. Талдомская, д. 2."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.53068,
+          55.8201292
+        ]
+      },
+      "properties": {
+        "name": "НМИЦ травматологии и ортопедии им. Н.Н. Приорова",
+        "address": "Москва, ул. Приорова, д. 10",
+        "coordinate_status": "Адресный центроид",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%9D%D0%9C%D0%98%D0%A6+%D1%82%D1%80%D0%B0%D0%B2%D0%BC%D0%B0%D1%82%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D0%B8+%D0%B8+%D0%BE%D1%80%D1%82%D0%BE%D0%BF%D0%B5%D0%B4%D0%B8%D0%B8+%D0%B8%D0%BC.+%D0%9D.%D0%9D.+%D0%9F%D1%80%D0%B8%D0%BE%D1%80%D0%BE%D0%B2%D0%B0%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+%D1%83%D0%BB.+%D0%9F%D1%80%D0%B8%D0%BE%D1%80%D0%BE%D0%B2%D0%B0%2C+%D0%B4.+10",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%9D%D0%9C%D0%98%D0%A6+%D1%82%D1%80%D0%B0%D0%B2%D0%BC%D0%B0%D1%82%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D0%B8+%D0%B8+%D0%BE%D1%80%D1%82%D0%BE%D0%BF%D0%B5%D0%B4%D0%B8%D0%B8+%D0%B8%D0%BC.+%D0%9D.%D0%9D.+%D0%9F%D1%80%D0%B8%D0%BE%D1%80%D0%BE%D0%B2%D0%B0%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+%D1%83%D0%BB.+%D0%9F%D1%80%D0%B8%D0%BE%D1%80%D0%BE%D0%B2%D0%B0%2C+%D0%B4.+10",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%9D%D0%9C%D0%98%D0%A6+%D1%82%D1%80%D0%B0%D0%B2%D0%BC%D0%B0%D1%82%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D0%B8+%D0%B8+%D0%BE%D1%80%D1%82%D0%BE%D0%BF%D0%B5%D0%B4%D0%B8%D0%B8+%D0%B8%D0%BC.+%D0%9D.%D0%9D.+%D0%9F%D1%80%D0%B8%D0%BE%D1%80%D0%BE%D0%B2%D0%B0%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+%D1%83%D0%BB.+%D0%9F%D1%80%D0%B8%D0%BE%D1%80%D0%BE%D0%B2%D0%B0%2C+%D0%B4.+10",
+        "facility_type": "Национальный медицинский исследовательский центр",
+        "ownership": "Федеральное государственное учреждение Минздрава России",
+        "verification_status": "Подтверждено официальным сайтом учреждения",
+        "official_source": "https://www.cito-priorov.ru/contacts/",
+        "official_evidence": "Официальный адрес: Москва, ул. Приорова, д. 10."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5789474,
+          55.7984216
+        ]
+      },
+      "properties": {
+        "name": "Городская клиническая больница № 24",
+        "address": "Москва, ул. Писцовая, д. 10",
+        "coordinate_status": "Адресный центроид",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F+%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F+%D0%B1%D0%BE%D0%BB%D1%8C%D0%BD%D0%B8%D1%86%D0%B0+%E2%84%96+24%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+%D1%83%D0%BB.+%D0%9F%D0%B8%D1%81%D1%86%D0%BE%D0%B2%D0%B0%D1%8F%2C+%D0%B4.+10",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F+%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F+%D0%B1%D0%BE%D0%BB%D1%8C%D0%BD%D0%B8%D1%86%D0%B0+%E2%84%96+24%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+%D1%83%D0%BB.+%D0%9F%D0%B8%D1%81%D1%86%D0%BE%D0%B2%D0%B0%D1%8F%2C+%D0%B4.+10",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F+%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F+%D0%B1%D0%BE%D0%BB%D1%8C%D0%BD%D0%B8%D1%86%D0%B0+%E2%84%96+24%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+%D1%83%D0%BB.+%D0%9F%D0%B8%D1%81%D1%86%D0%BE%D0%B2%D0%B0%D1%8F%2C+%D0%B4.+10",
+        "facility_type": "Городская клиническая больница",
+        "ownership": "ГБУЗ города Москвы",
+        "verification_status": "Подтверждено официальным сайтом учреждения",
+        "official_source": "https://gkb-24.ru/about-hospital/faq",
+        "official_evidence": "Стационар ГБУЗ «ГКБ №24»: ул. Писцовая, д. 10."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5815778,
+          55.7941049
+        ]
+      },
+      "properties": {
+        "name": "ГБУЗ «Городская поликлиника № 6 ДЗМ», филиал №1",
+        "address": "Москва, 1-я Квесисская улица, 8",
+        "coordinate_status": "Адресный центроид",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%93%D0%91%D0%A3%D0%97+%C2%AB%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F+%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0+%E2%84%96+6+%D0%94%D0%97%D0%9C%C2%BB%2C+%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB+%E2%84%961%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+1-%D1%8F+%D0%9A%D0%B2%D0%B5%D1%81%D0%B8%D1%81%D1%81%D0%BA%D0%B0%D1%8F+%D1%83%D0%BB%D0%B8%D1%86%D0%B0%2C+8",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%93%D0%91%D0%A3%D0%97+%C2%AB%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F+%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0+%E2%84%96+6+%D0%94%D0%97%D0%9C%C2%BB%2C+%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB+%E2%84%961%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+1-%D1%8F+%D0%9A%D0%B2%D0%B5%D1%81%D0%B8%D1%81%D1%81%D0%BA%D0%B0%D1%8F+%D1%83%D0%BB%D0%B8%D1%86%D0%B0%2C+8",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%93%D0%91%D0%A3%D0%97+%C2%AB%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F+%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0+%E2%84%96+6+%D0%94%D0%97%D0%9C%C2%BB%2C+%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB+%E2%84%961%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+1-%D1%8F+%D0%9A%D0%B2%D0%B5%D1%81%D0%B8%D1%81%D1%81%D0%BA%D0%B0%D1%8F+%D1%83%D0%BB%D0%B8%D1%86%D0%B0%2C+8",
+        "facility_type": "Городская поликлиника",
+        "ownership": "ГБУЗ города Москвы",
+        "verification_status": "Подтверждено официальным сайтом учреждения",
+        "official_source": "https://gp6.moscow/contacts/",
+        "official_evidence": "Филиал №1: 1-я Квесисская ул., д. 8."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5250676,
+          55.8366056
+        ]
+      },
+      "properties": {
+        "name": "ГБУЗ «Городская поликлиника № 6 ДЗМ», филиал №2",
+        "address": "Москва, 3-й Михалковский переулок, 22",
+        "coordinate_status": "Адресный центроид",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%93%D0%91%D0%A3%D0%97+%C2%AB%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F+%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0+%E2%84%96+6+%D0%94%D0%97%D0%9C%C2%BB%2C+%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB+%E2%84%962%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+3-%D0%B9+%D0%9C%D0%B8%D1%85%D0%B0%D0%BB%D0%BA%D0%BE%D0%B2%D1%81%D0%BA%D0%B8%D0%B9+%D0%BF%D0%B5%D1%80%D0%B5%D1%83%D0%BB%D0%BE%D0%BA%2C+22",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%93%D0%91%D0%A3%D0%97+%C2%AB%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F+%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0+%E2%84%96+6+%D0%94%D0%97%D0%9C%C2%BB%2C+%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB+%E2%84%962%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+3-%D0%B9+%D0%9C%D0%B8%D1%85%D0%B0%D0%BB%D0%BA%D0%BE%D0%B2%D1%81%D0%BA%D0%B8%D0%B9+%D0%BF%D0%B5%D1%80%D0%B5%D1%83%D0%BB%D0%BE%D0%BA%2C+22",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%93%D0%91%D0%A3%D0%97+%C2%AB%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F+%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0+%E2%84%96+6+%D0%94%D0%97%D0%9C%C2%BB%2C+%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB+%E2%84%962%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+3-%D0%B9+%D0%9C%D0%B8%D1%85%D0%B0%D0%BB%D0%BA%D0%BE%D0%B2%D1%81%D0%BA%D0%B8%D0%B9+%D0%BF%D0%B5%D1%80%D0%B5%D1%83%D0%BB%D0%BE%D0%BA%2C+22",
+        "facility_type": "Городская поликлиника",
+        "ownership": "ГБУЗ города Москвы",
+        "verification_status": "Подтверждено официальным сайтом учреждения",
+        "official_source": "https://gp6.moscow/contacts/",
+        "official_evidence": "Филиал №2: 3-й Михалковский переулок, д. 22."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5428429,
+          55.8394815
+        ]
+      },
+      "properties": {
+        "name": "ГБУЗ «Городская поликлиника № 6 ДЗМ», филиал №3",
+        "address": "Москва, 3-й Новомихалковский проезд, 3А, строение 1",
+        "coordinate_status": "Адресный центроид",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%93%D0%91%D0%A3%D0%97+%C2%AB%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F+%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0+%E2%84%96+6+%D0%94%D0%97%D0%9C%C2%BB%2C+%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB+%E2%84%963%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+3-%D0%B9+%D0%9D%D0%BE%D0%B2%D0%BE%D0%BC%D0%B8%D1%85%D0%B0%D0%BB%D0%BA%D0%BE%D0%B2%D1%81%D0%BA%D0%B8%D0%B9+%D0%BF%D1%80%D0%BE%D0%B5%D0%B7%D0%B4%2C+3%D0%90%2C+%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5+1",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%93%D0%91%D0%A3%D0%97+%C2%AB%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F+%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0+%E2%84%96+6+%D0%94%D0%97%D0%9C%C2%BB%2C+%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB+%E2%84%963%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+3-%D0%B9+%D0%9D%D0%BE%D0%B2%D0%BE%D0%BC%D0%B8%D1%85%D0%B0%D0%BB%D0%BA%D0%BE%D0%B2%D1%81%D0%BA%D0%B8%D0%B9+%D0%BF%D1%80%D0%BE%D0%B5%D0%B7%D0%B4%2C+3%D0%90%2C+%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5+1",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%93%D0%91%D0%A3%D0%97+%C2%AB%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F+%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0+%E2%84%96+6+%D0%94%D0%97%D0%9C%C2%BB%2C+%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB+%E2%84%963%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+3-%D0%B9+%D0%9D%D0%BE%D0%B2%D0%BE%D0%BC%D0%B8%D1%85%D0%B0%D0%BB%D0%BA%D0%BE%D0%B2%D1%81%D0%BA%D0%B8%D0%B9+%D0%BF%D1%80%D0%BE%D0%B5%D0%B7%D0%B4%2C+3%D0%90%2C+%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5+1",
+        "facility_type": "Городская поликлиника",
+        "ownership": "ГБУЗ города Москвы",
+        "verification_status": "Подтверждено официальным сайтом учреждения",
+        "official_source": "https://gp6.moscow/contacts/",
+        "official_evidence": "Филиал №3: 3-й Новомихалковский проезд, д. 3А, стр. 1."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5646994,
+          55.8232559
+        ]
+      },
+      "properties": {
+        "name": "ГБУЗ «Городская поликлиника № 6 ДЗМ», филиал №4",
+        "address": "Москва, улица Немчинова, 14",
+        "coordinate_status": "Адресный центроид",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%93%D0%91%D0%A3%D0%97+%C2%AB%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F+%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0+%E2%84%96+6+%D0%94%D0%97%D0%9C%C2%BB%2C+%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB+%E2%84%964%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+%D1%83%D0%BB%D0%B8%D1%86%D0%B0+%D0%9D%D0%B5%D0%BC%D1%87%D0%B8%D0%BD%D0%BE%D0%B2%D0%B0%2C+14",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%93%D0%91%D0%A3%D0%97+%C2%AB%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F+%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0+%E2%84%96+6+%D0%94%D0%97%D0%9C%C2%BB%2C+%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB+%E2%84%964%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+%D1%83%D0%BB%D0%B8%D1%86%D0%B0+%D0%9D%D0%B5%D0%BC%D1%87%D0%B8%D0%BD%D0%BE%D0%B2%D0%B0%2C+14",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%93%D0%91%D0%A3%D0%97+%C2%AB%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F+%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0+%E2%84%96+6+%D0%94%D0%97%D0%9C%C2%BB%2C+%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB+%E2%84%964%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+%D1%83%D0%BB%D0%B8%D1%86%D0%B0+%D0%9D%D0%B5%D0%BC%D1%87%D0%B8%D0%BD%D0%BE%D0%B2%D0%B0%2C+14",
+        "facility_type": "Городская поликлиника",
+        "ownership": "ГБУЗ города Москвы",
+        "verification_status": "Подтверждено официальным сайтом учреждения",
+        "official_source": "https://gp6.moscow/contacts/",
+        "official_evidence": "Филиал №4: ул. Немчинова, д. 14."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5608069,
+          55.8009753
+        ]
+      },
+      "properties": {
+        "name": "ГБУЗ «Городская поликлиника № 6 ДЗМ», филиал №5",
+        "address": "Москва, улица Юннатов, 12",
+        "coordinate_status": "Адресный центроид",
+        "yandex_maps_search": "https://yandex.ru/maps/?text=%D0%93%D0%91%D0%A3%D0%97+%C2%AB%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F+%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0+%E2%84%96+6+%D0%94%D0%97%D0%9C%C2%BB%2C+%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB+%E2%84%965%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+%D1%83%D0%BB%D0%B8%D1%86%D0%B0+%D0%AE%D0%BD%D0%BD%D0%B0%D1%82%D0%BE%D0%B2%2C+12",
+        "2gis_search": "https://2gis.ru/moscow/search/%D0%93%D0%91%D0%A3%D0%97+%C2%AB%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F+%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0+%E2%84%96+6+%D0%94%D0%97%D0%9C%C2%BB%2C+%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB+%E2%84%965%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+%D1%83%D0%BB%D0%B8%D1%86%D0%B0+%D0%AE%D0%BD%D0%BD%D0%B0%D1%82%D0%BE%D0%B2%2C+12",
+        "google_maps_search": "https://www.google.com/maps/search/?api=1&query=%D0%93%D0%91%D0%A3%D0%97+%C2%AB%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F+%D0%BF%D0%BE%D0%BB%D0%B8%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B0+%E2%84%96+6+%D0%94%D0%97%D0%9C%C2%BB%2C+%D1%84%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB+%E2%84%965%2C+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+%D1%83%D0%BB%D0%B8%D1%86%D0%B0+%D0%AE%D0%BD%D0%BD%D0%B0%D1%82%D0%BE%D0%B2%2C+12",
+        "facility_type": "Городская поликлиника",
+        "ownership": "ГБУЗ города Москвы",
+        "verification_status": "Подтверждено официальным сайтом учреждения",
+        "official_source": "https://gp6.moscow/contacts/",
+        "official_evidence": "Филиал №5: ул. Юннатов, д. 12."
+      }
+    }
+  ]
+}
