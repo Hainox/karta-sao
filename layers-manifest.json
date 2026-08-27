@@ -21,7 +21,7 @@
     "smm": {
       "name": "Маршруты СММ (зимняя уборка)",
       "file": "smm.geojson",
-      "loaded": 3,
+      "loaded": 4,
       "source": "АСУ ОДС / reestr-ogh.mos.ru, тип объекта 38; МСК-77 преобразована в WGS84",
       "address_check_required": 0
     }
