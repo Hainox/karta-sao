@@ -542,12 +542,23 @@
     }
 
     async function createSmmRouteMarkers() {
-      const { YMapMarker } = await window.ymaps3Ready;
-      if (!YMapMarker || !state.smmRoutes) return;
+      const { YMapMarker, YMapFeature } = await window.ymaps3Ready;
+      if (!state.smmRoutes) return;
       state.smmRouteItems = [];
       (state.smmRoutes.features || []).forEach((feature) => {
         const kind = feature.properties?.feature_kind;
         if (kind !== 'route_direction' && kind !== 'nozzle_direction') return;
+        const variantId = feature.properties.variant_id;
+        if (feature.geometry?.type === 'LineString') {
+          state.smmRouteItems.push({ marker: new YMapFeature({
+            id: feature.id,
+            geometry: feature.geometry,
+            properties: feature.properties,
+            style: { stroke: [{ color: '#a30000', width: 5, opacity: 0.85 }], interactive: true, cursor: 'pointer' },
+            onClick: () => zoomToSmmVariant(variantId)
+          }) });
+          return;
+        }
         const bearing = Number(feature.properties.bearing);
         if (!Number.isFinite(bearing)) return;
         const marker = document.createElement('button');
@@ -555,8 +566,8 @@
         marker.className = `route-vector ${kind === 'nozzle_direction' ? 'nozzle' : 'movement'}`;
         marker.style.setProperty('--bearing', `${bearing}deg`);
         marker.innerHTML = kind === 'nozzle_direction' ? NOZZLE_VECTOR_MARKUP : ROUTE_VECTOR_MARKUP;
-        marker.title = `${variantFeature(feature.properties.variant_id)?.properties?.name || feature.properties.variant_id} — ${kind === 'nozzle_direction' ? 'направление выброса' : 'направление движения'}, ${Math.round(bearing)}°`;
-        marker.addEventListener('click', () => zoomToSmmVariant(feature.properties.variant_id));
+        marker.title = `${variantFeature(variantId)?.properties?.name || variantId} — ${kind === 'nozzle_direction' ? 'направление выброса' : 'направление движения'}, ${Math.round(bearing)}°`;
+        marker.addEventListener('click', () => zoomToSmmVariant(variantId));
         state.smmRouteItems.push({ marker: new YMapMarker({ coordinates: feature.geometry.coordinates }, marker) });
       });
       renderSmmRouteMarkers();
@@ -575,7 +586,8 @@
         state.smmRoutes = await response.json();
         renderSmmVariantPanel();
         await createSmmRouteMarkers();
-        $('status').textContent = `Готово. Загружено объектов: ${allRecords().length}. Включайте нужные слои. Быстрые переходы СММ — активны.`;
+        const gpsRoutes = (state.smmRoutes.features || []).filter((feature) => feature.properties?.source === 'gpx').length;
+        $('status').textContent = `Готово. Загружено объектов: ${allRecords().length}. Включайте нужные слои. Быстрые переходы СММ — активны${gpsRoutes ? `; GPS-треков маршрутов: ${gpsRoutes}` : ''}.`;
       } catch (error) {
         $('smmVariants').hidden = true;
         $('status').textContent = `Готово. Быстрые переходы СММ недоступны: ${error.message}`;

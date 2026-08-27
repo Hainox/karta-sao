@@ -4,9 +4,31 @@
   "metadata": {
     "title": "Маршруты СММ — быстрые переходы и направления",
     "description": "Слой-оверлей к слою «Маршруты СММ» общей карты: кнопки быстрого приближения к пяти эталонным дворам и векторы направления движения и выброса снега.",
-    "source": "Контуры: АСУ ОДС (smm.geojson). Направления: схемы smm/dt*.svg и паспортные описания из work/smm-karta-sao.",
+    "source": "Контуры: АСУ ОДС (smm.geojson). Направления: реальные GPS-треки work/smm_tracks/ при наличии, иначе схемы smm/dt*.svg и паспортные описания из work/smm-karta-sao.",
     "bearing_convention": "Азимут, градусов: 0 = север, по часовой стрелке. bearing = null — направление не утверждено.",
-    "note": "Векторы схематичны и привязаны к контуру двора; точные GPS-треки и азимуты выброса утверждаются после натурного осмотра.",
+    "track_note": "route_direction с source=gpx — фактический маршрут (LineString); nozzle_direction с source=json — замеры азимутов выброса (nozzle_track). Без треков оверлей остаётся схематичным.",
+    "track_usage": {
+      "dt1": {
+        "route": "schematic",
+        "nozzle": "schematic"
+      },
+      "dt2": {
+        "route": "schematic",
+        "nozzle": "schematic"
+      },
+      "dt3": {
+        "route": "schematic",
+        "nozzle": "schematic"
+      },
+      "dt4": {
+        "route": "schematic",
+        "nozzle": "schematic"
+      },
+      "dt5": {
+        "route": "schematic",
+        "nozzle": "schematic"
+      }
+    },
     "generated_at": "2026-08-27",
     "feature_count": 15
   },

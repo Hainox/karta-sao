@@ -1,6 +1,8 @@
 from pathlib import Path
 
 import json
+import subprocess
+import sys
 from shapely.geometry import shape
 
 
@@ -149,3 +151,63 @@ def test_root_map_exposes_smm_variants_and_direction_overlays():
     assert variants == {"dt1", "dt2", "dt3", "dt4", "dt5"}
     assert any(feature["properties"]["feature_kind"] == "route_direction" for feature in data["features"])
     assert any(feature["properties"]["feature_kind"] == "nozzle_direction" for feature in data["features"])
+
+
+def test_smm_routes_overlay_uses_gps_tracks_when_present():
+    """GPX/nozzle tracks must replace schematic anchors; variants without tracks keep them."""
+    import shutil
+    import tempfile
+
+    work_dir = Path(tempfile.mkdtemp(prefix="smm-track-test-", dir=Path(__file__).resolve().parents[1] / "work"))
+    try:
+        tracks = work_dir / "tracks"
+        tracks.mkdir()
+        (tracks / "dt1.gpx").write_text(
+            '<?xml version="1.0" encoding="UTF-8"?>'
+            '<gpx version="1.1" creator="test" xmlns="http://www.topografix.com/GPX/1/1">'
+            '<trk><name>dt1</name><trkseg>'
+            '<trkpt lat="55.79450" lon="37.51200"/>'
+            '<trkpt lat="55.79450" lon="37.51240"/>'
+            '<trkpt lat="55.79450" lon="37.51300"/>'
+            '</trkseg></trk></gpx>',
+            encoding="utf-8",
+        )
+        (tracks / "dt1.nozzle.json").write_text(
+            json.dumps({"points": [[37.5123, 55.7942, 20], [37.5125, 55.7942, 25], [37.5127, 55.7942, 15]]}),
+            encoding="utf-8",
+        )
+        out = work_dir / "smm_routes.geojson"
+        subprocess.run(
+            [sys.executable, "work/build_smm_routes_overlay.py", "--out", str(out), "--tracks-dir", str(tracks)],
+            check=True,
+            cwd=Path(__file__).resolve().parents[1],
+            capture_output=True,
+            text=True,
+        )
+
+        data = json.loads(out.read_text(encoding="utf-8"))
+        route = next(
+            f for f in data["features"]
+            if f["properties"]["variant_id"] == "dt1" and f["properties"]["feature_kind"] == "route_direction"
+        )
+        assert route["geometry"]["type"] == "LineString"
+        assert len(route["geometry"]["coordinates"]) == 3
+        assert abs(route["properties"]["bearing"] - 90) < 0.5
+        assert route["properties"]["source"] == "gpx"
+
+        nozzle = next(
+            f for f in data["features"]
+            if f["properties"]["variant_id"] == "dt1" and f["properties"]["feature_kind"] == "nozzle_direction"
+        )
+        assert nozzle["properties"]["source"] == "json"
+        assert abs(nozzle["properties"]["bearing"] - 20) < 2.0
+        assert nozzle["properties"]["nozzle_track"] == [[37.5123, 55.7942, 20], [37.5125, 55.7942, 25], [37.5127, 55.7942, 15]]
+
+        schematic = next(
+            f for f in data["features"]
+            if f["properties"]["variant_id"] == "dt2" and f["properties"]["feature_kind"] == "route_direction"
+        )
+        assert schematic["geometry"]["type"] == "Point"
+        assert "source" not in schematic["properties"]
+    finally:
+        shutil.rmtree(work_dir, ignore_errors=True)
