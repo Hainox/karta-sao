@@ -128,3 +128,10 @@ def test_dt5_scheme_uses_a_versioned_asset_url_after_visual_fix():
     """An old cached SVG must not be reused after a visual correction."""
     markup = page("smm/index.html")
     assert "scheme:'dt5.svg?v=" in markup
+
+
+def test_dt5_route_bypasses_the_building_outline():
+    """The route must follow the exterior drive, not cross the building footprint."""
+    svg = page("smm/dt5.svg")
+    assert 'M733 200 Q695 290 660 372' in svg
+    assert 'M747 245 Q533 443 242 316' not in svg
