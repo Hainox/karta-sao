@@ -116,3 +116,9 @@ def test_smm_routes_include_staropetrovsky_variant():
     feature = next(feature for feature in data["features"] if feature["id"] == "smm-dt5")
     assert feature["properties"]["address"] == "Старопетровский проезд, д. 10Б"
     assert "требует" in feature["properties"]["geometry_status"].lower()
+
+
+def test_dt5_route_strokes_do_not_fill_the_inner_driveway():
+    """Route highlighting is linework only; SVG paths must not create black filled sectors."""
+    svg = page("smm/dt5.svg")
+    assert '<g fill="none" stroke="#fff" stroke-width="1.3"' in svg
