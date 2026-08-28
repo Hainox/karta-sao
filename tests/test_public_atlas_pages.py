@@ -1,6 +1,7 @@
 from pathlib import Path
 
 import json
+import os
 import subprocess
 import sys
 from shapely.geometry import shape
@@ -153,7 +154,7 @@ def test_smm_print_a3_form_is_self_contained_and_in_sync_with_generator():
         assert f"{code} ·" in markup
     assert markup.count("data:image/svg+xml;base64,") == 5
     assert "data:image/png;base64," in markup
-    assert "Маршрут внутри двора из схемы" in markup  # маршрут уборки двора
+    assert "<b>Маршрут:</b>" in markup  # маршрут отображается в печатной форме
 
     work_dir = Path(tempfile.mkdtemp(prefix="smm-print-test-", dir=repo / "work"))
     try:
@@ -164,6 +165,7 @@ def test_smm_print_a3_form_is_self_contained_and_in_sync_with_generator():
             cwd=repo,
             capture_output=True,
             text=True,
+            env={**os.environ, "PYTHONUTF8": "1"},
         )
         assert out.read_text(encoding="utf-8") == markup
     finally:
@@ -201,6 +203,25 @@ def test_root_map_exposes_smm_variants_and_direction_overlays():
     assert variants == {"dt1", "dt2", "dt3", "dt4", "dt5"}
     assert any(feature["properties"]["feature_kind"] == "route_direction" for feature in data["features"])
     assert any(feature["properties"]["feature_kind"] == "nozzle_direction" for feature in data["features"])
+
+
+def test_reference_routes_for_dt1_dt2_are_labeled_as_diagrams_not_gps():
+    """Routes drawn from supplied sketches must remain preliminary design data."""
+    data = json.loads(Path("smm_routes.geojson").read_text(encoding="utf-8"))
+    for variant in ("dt1", "dt2"):
+        route = next(
+            feature for feature in data["features"]
+            if feature["properties"].get("variant_id") == variant
+            and feature["properties"].get("feature_kind") == "route_direction"
+        )
+        nozzle = next(
+            feature for feature in data["features"]
+            if feature["properties"].get("variant_id") == variant
+            and feature["properties"].get("feature_kind") == "nozzle_direction"
+        )
+        assert route["properties"]["source"] == "reference_scheme"
+        assert "приложенным схемам" in route["properties"]["status"].lower()
+        assert nozzle["properties"]["source"] == "reference_scheme"
 
 
 def test_smm_routes_overlay_skips_malformed_nozzle_measurements():
@@ -245,6 +266,7 @@ def test_smm_routes_overlay_uses_gps_tracks_when_present():
             cwd=Path(__file__).resolve().parents[1],
             capture_output=True,
             text=True,
+            env={**os.environ, "PYTHONUTF8": "1"},
         )
 
         data = json.loads(out.read_text(encoding="utf-8"))

@@ -239,17 +239,25 @@ def build(src_path, out_path, tracks_dir):
         nozzle_file = tracks_dir / f"{variant_id}.nozzle.json"
         usage = {"route": "schematic", "nozzle": "schematic"}
         route_points = load_gpx_track(route_file) if route_file.exists() else []
-        # Треки, сгенерированные build_smm_road_routes.py, помечаем как
-        # route_origin="road_nav" (презентационные проезды из схемы),
-        # а настоящие GPS-треки — как route_origin="gps".
-        route_origin = "yard_route"
+        # Файл GPX используется и как технический контейнер проектной линии.
+        # Настоящим GNSS-треком он считается только при явной маркировке.
+        route_origin = "gps"
+        source_kind = "gpx"
+        source_note = ""
         if nozzle_file.exists():
             try:
                 nozzle_meta = json.loads(nozzle_file.read_text(encoding="utf-8"))
-                if isinstance(nozzle_meta, dict) and nozzle_meta.get("source_note", "").startswith("Презентационный"):
-                    route_origin = "yard_route"
+                if isinstance(nozzle_meta, dict):
+                    source_note = str(nozzle_meta.get("source_note", ""))
+                    if nozzle_meta.get("source_kind") == "reference_scheme":
+                        route_origin = "reference_scheme"
+                        source_kind = "reference_scheme"
+                    elif source_note.startswith("Презентационный"):
+                        route_origin = "yard_route"
+                        source_kind = "yard_route"
             except Exception:
                 route_origin = "yard_route"
+                source_kind = "yard_route"
 
         if len(route_points) >= 2:
             usage["route"] = "gpx"
@@ -263,12 +271,18 @@ def build(src_path, out_path, tracks_dir):
                     "feature_kind": "route_direction",
                     "arrow_type": "movement",
                     "bearing": round(circular_mean(bearings) if bearings else float("nan"), 1),
-                    "source": "gpx",
+                    "source": source_kind,
                     "route_origin": route_origin,
                     "track_file": route_file.name,
                     "track_points": len(route_points),
                     "name": f"{code}: направление движения по маршруту",
-                    "status": (f"Маршрут внутри двора из схемы (by build_smm_road_routes, {len(route_points)} точек): уборка двора" if route_origin == "road_nav" else f"GPS-трек ({len(route_points)} точек): фактический маршрут"),
+                    "status": (
+                        f"Проектная схема по приложенным схемам ({len(route_points)} точек): требует полевой сверки"
+                        if route_origin == "reference_scheme" else
+                        f"Маршрут внутри двора из схемы ({len(route_points)} точек): уборка двора"
+                        if route_origin == "yard_route" else
+                        f"GPS-трек ({len(route_points)} точек): фактический маршрут"
+                    ),
                 },
                 "geometry": {
                     "type": "LineString",
@@ -308,13 +322,19 @@ def build(src_path, out_path, tracks_dir):
                     "feature_kind": "nozzle_direction",
                     "arrow_type": "nozzle",
                     "bearing": round(circular_mean(bearings), 1),
-                    "source": "json",
+                    "source": source_kind if route_origin == "reference_scheme" else "json",
                     "route_origin": route_origin,
                     "track_file": nozzle_file.name,
                     "nozzle_track": [[round(p[0], 6), round(p[1], 6), round(p[2], 1)] for p in track],
                     "name": f"{code}: направление выброса снега",
                     "note": cfg["nozzle_note"],
-                    "status": (f"Векторы выброса внутри двора ({len(nozzle_points)} точек, by build_smm_road_routes): уборка двора" if route_origin == "road_nav" else f"Замер направлений выброса: {len(nozzle_points)} точек"),
+                    "status": (
+                        f"Направления сопла по приложенным схемам ({len(nozzle_points)} точек): требуют полевой сверки"
+                        if route_origin == "reference_scheme" else
+                        f"Векторы выброса внутри двора ({len(nozzle_points)} точек): уборка двора"
+                        if route_origin == "yard_route" else
+                        f"Замер направлений выброса: {len(nozzle_points)} точек"
+                    ),
                 },
                 "geometry": {
                     "type": "Point",
