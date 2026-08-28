@@ -48,6 +48,17 @@ def test_odh_point_symbols_stay_within_sao_boundary_and_dry_snow_dumps_are_publi
     }
 
 
+def test_odh_point_symbols_use_the_same_zoom_scale_as_the_main_atlas():
+    """ОДХ markers use the main atlas sizes: 9, 13 and 18 px by zoom."""
+    markup = page("odh-map/index.html")
+    assert "iconSize:[18,18]" in markup
+    assert "iconAnchor:[9,9]" in markup
+    assert ".odh-symbol-compact" in markup
+    assert ".odh-symbol-small" in markup
+    assert "function syncSymbolScale" in markup
+    assert "zoomend" in markup
+
+
 def test_healthcare_layer_has_only_officially_confirmed_points_and_expected_gp6_branches():
     """Public healthcare points require a first-party source and readable Russian labels."""
     layer_dir = Path("odh-map/layers")
