@@ -205,6 +205,34 @@ def test_root_map_exposes_smm_variants_and_direction_overlays():
     assert any(feature["properties"]["feature_kind"] == "nozzle_direction" for feature in data["features"])
 
 
+def test_dt1_dt2_reference_routes_stay_in_inner_yard_not_external_perimeter():
+    """The DT-1 and DT-2 reference routes follow internal courtyard passages only."""
+    yards = {
+        feature["id"]: shape(feature["geometry"])
+        for feature in json.loads(Path("smm.geojson").read_text(encoding="utf-8"))["features"]
+    }
+    data = json.loads(Path("smm_routes.geojson").read_text(encoding="utf-8"))
+    for variant in ("dt1", "dt2"):
+        route = next(
+            feature for feature in data["features"]
+            if feature["properties"].get("variant_id") == variant
+            and feature["properties"].get("feature_kind") == "route_direction"
+        )
+        inner_yard = yards[f"smm-{variant}"].buffer(-4 / 111320)
+        assert route["properties"].get("route_origin") == "inner_yard_reference"
+        assert all(inner_yard.covers(shape({"type": "Point", "coordinates": point})) for point in route["geometry"]["coordinates"])
+        nozzle = next(
+            feature for feature in data["features"]
+            if feature["properties"].get("variant_id") == variant
+            and feature["properties"].get("feature_kind") == "nozzle_direction"
+        )
+        assert nozzle["properties"].get("route_origin") == "inner_yard_reference"
+        assert all(
+            inner_yard.covers(shape({"type": "Point", "coordinates": point[:2]}))
+            for point in nozzle["properties"].get("nozzle_track", [])
+        )
+
+
 def test_reference_routes_for_dt1_dt2_are_labeled_as_diagrams_not_gps():
     """Routes drawn from supplied sketches must remain preliminary design data."""
     data = json.loads(Path("smm_routes.geojson").read_text(encoding="utf-8"))

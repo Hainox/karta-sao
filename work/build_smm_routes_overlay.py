@@ -6,10 +6,12 @@
   - nozzle_direction — направление выброса снега.
 
 Источники направлений, в порядке приоритета:
-  1. Реальные GPS-треки из work/smm_tracks/ (если есть):
+  1. Реальные GPS-треки из work/smm_tracks/ (если есть) или проектные линии
+     из приложенных схем в том же техническом формате GPX:
        dt1.gpx ... dt5.gpx          — трек движения машины: из него строится
-                                      геометрия LineString (фактический маршрут)
-                                      и вычисляется азимут по сегментам;
+                                      геометрия LineString; статус источника
+                                      определяется метаданными, а азимут
+                                      вычисляется по сегментам;
        dt1.nozzle.json ... — замеры направлений выброса: точки с азимутами
                                       ({"points": [[lng, lat, bearing], ...]}
                                       или FeatureCollection с bearing).
@@ -249,9 +251,11 @@ def build(src_path, out_path, tracks_dir):
                 nozzle_meta = json.loads(nozzle_file.read_text(encoding="utf-8"))
                 if isinstance(nozzle_meta, dict):
                     source_note = str(nozzle_meta.get("source_note", ""))
-                    if nozzle_meta.get("source_kind") == "reference_scheme":
+                    if nozzle_meta.get("source_kind") in {"reference_scheme", "inner_yard_reference"}:
                         route_origin = "reference_scheme"
                         source_kind = "reference_scheme"
+                        if nozzle_meta.get("source_kind") == "inner_yard_reference":
+                            route_origin = "inner_yard_reference"
                     elif source_note.startswith("Презентационный"):
                         route_origin = "yard_route"
                         source_kind = "yard_route"
@@ -277,6 +281,8 @@ def build(src_path, out_path, tracks_dir):
                     "track_points": len(route_points),
                     "name": f"{code}: направление движения по маршруту",
                     "status": (
+                        f"Внутридворовая проектная схема по приложенным схемам ({len(route_points)} точек): требует полевой сверки"
+                        if route_origin == "inner_yard_reference" else
                         f"Проектная схема по приложенным схемам ({len(route_points)} точек): требует полевой сверки"
                         if route_origin == "reference_scheme" else
                         f"Маршрут внутри двора из схемы ({len(route_points)} точек): уборка двора"
@@ -322,13 +328,15 @@ def build(src_path, out_path, tracks_dir):
                     "feature_kind": "nozzle_direction",
                     "arrow_type": "nozzle",
                     "bearing": round(circular_mean(bearings), 1),
-                    "source": source_kind if route_origin == "reference_scheme" else "json",
+                    "source": source_kind if route_origin in {"reference_scheme", "inner_yard_reference"} else "json",
                     "route_origin": route_origin,
                     "track_file": nozzle_file.name,
                     "nozzle_track": [[round(p[0], 6), round(p[1], 6), round(p[2], 1)] for p in track],
                     "name": f"{code}: направление выброса снега",
                     "note": cfg["nozzle_note"],
                     "status": (
+                        f"Направления сопла по внутридворовой схеме ({len(nozzle_points)} точек): требуют полевой сверки"
+                        if route_origin == "inner_yard_reference" else
                         f"Направления сопла по приложенным схемам ({len(nozzle_points)} точек): требуют полевой сверки"
                         if route_origin == "reference_scheme" else
                         f"Векторы выброса внутри двора ({len(nozzle_points)} точек): уборка двора"
@@ -372,9 +380,9 @@ def build(src_path, out_path, tracks_dir):
         "metadata": {
             "title": "Маршруты СММ — быстрые переходы и направления",
             "description": "Слой-оверлей к слою «Маршруты СММ» общей карты: кнопки быстрого приближения к пяти эталонным дворам и векторы направления движения и выброса снега.",
-            "source": "Контуры: АСУ ОДС (smm.geojson). Направления: реальные GPS-треки work/smm_tracks/ при наличии, иначе схемы smm/dt*.svg и паспортные описания из work/smm-karta-sao.",
+            "source": "Контуры: АСУ ОДС (smm.geojson). Направления: реальные GNSS-треки только при явной маркировке; проектные линии из приложенных схем могут храниться в GPX как техническом формате. Схемы smm/dt*.svg и паспортные описания — вспомогательные источники.",
             "bearing_convention": "Азимут, градусов: 0 = север, по часовой стрелке. bearing = null — направление не утверждено.",
-            "track_note": "route_direction с source=gpx — фактический маршрут (LineString); nozzle_direction с source=json — замеры азимутов выброса (nozzle_track). Без треков оверлей остаётся схематичным.",
+            "track_note": "route_origin=inner_yard_reference — проектная внутридворовая линия по чертежу, не GPS и требует полевой сверки; route_origin=gps — фактический маршрут. nozzle_direction с source=json — замеры или проектные направления выброса в nozzle_track. Без линий оверлей остаётся схематичным.",
             "track_usage": track_usage,
             "generated_at": "2026-08-27",
             "feature_count": len(features),
