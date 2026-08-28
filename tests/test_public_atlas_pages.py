@@ -252,6 +252,30 @@ def test_reference_routes_for_dt1_dt2_are_labeled_as_diagrams_not_gps():
         assert nozzle["properties"]["source"] == "reference_scheme"
 
 
+def test_dt3_reference_route_uses_the_supplied_comb_diagram_inside_the_yard():
+    """The third supplied diagram is a preliminary internal courtyard route, not GPS."""
+    yards = {
+        feature["id"]: shape(feature["geometry"])
+        for feature in json.loads(Path("smm.geojson").read_text(encoding="utf-8"))["features"]
+    }
+    data = json.loads(Path("smm_routes.geojson").read_text(encoding="utf-8"))
+    yard = yards["smm-dt3"]
+    for kind in ("route_direction", "nozzle_direction"):
+        feature = next(
+            feature for feature in data["features"]
+            if feature["properties"].get("variant_id") == "dt3"
+            and feature["properties"].get("feature_kind") == kind
+        )
+        assert feature["properties"].get("route_origin") == "inner_yard_reference"
+        assert feature["properties"].get("source") == "reference_scheme"
+    route = next(
+        feature for feature in data["features"]
+        if feature["properties"].get("variant_id") == "dt3"
+        and feature["properties"].get("feature_kind") == "route_direction"
+    )
+    assert yard.covers(shape(route["geometry"]))
+
+
 def test_smm_routes_overlay_skips_malformed_nozzle_measurements():
     """A bad nozzle row must not discard the rest of the measured vector field."""
     from work.build_smm_routes_overlay import load_nozzle_points
