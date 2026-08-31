@@ -567,13 +567,13 @@ function addDistrictLayers(){
   clearF(state.districtFeatures, map);
   const df = state.districtGeom[state.district];
   if(df){
-    const g = new window.ymaps3.YMapFeature({ geometry: df.geometry, style: { stroke: [{ color: '#0d827c', width: 3 }] }, zIndex: 1700 });
+    const g = new window.ymaps3.YMapFeature({ geometry: df.geometry, style: { fill: '#0d827c', fillOpacity: 0, stroke: [{ color: '#0d827c', width: 3 }] }, zIndex: 1700 });
     map.addChild(g); state.districtFeatures.push(g);
   }
   if(state.areasGeo){
     const ys = (state.areasGeo.features || []).filter(f => f.properties && f.properties.district === state.district);
     ys.forEach(f => {
-      const g = new window.ymaps3.YMapFeature({ geometry: f.geometry, style: { stroke: [{ color: 'rgba(13,130,124,.55)', width: 1.2 }] }, zIndex: 1600 });
+      const g = new window.ymaps3.YMapFeature({ geometry: f.geometry, style: { fill: '#0d827c', fillOpacity: 0, stroke: [{ color: 'rgba(13,130,124,.55)', width: 1.2 }] }, zIndex: 1600 });
       map.addChild(g); state.districtFeatures.push(g);
     });
   }
@@ -583,7 +583,7 @@ function addPrefectureLayers(){
   clearF(state.districtFeatures, map);
   const ds = (state.districtsGeo && state.districtsGeo.features) || [];
   ds.forEach(f => {
-    const g = new window.ymaps3.YMapFeature({ geometry: f.geometry, style: { stroke: [{ color: '#0d827c', width: 2 }] }, zIndex: 1700 });
+    const g = new window.ymaps3.YMapFeature({ geometry: f.geometry, style: { fill: '#0d827c', fillOpacity: 0, stroke: [{ color: '#0d827c', width: 2 }] }, zIndex: 1700 });
     map.addChild(g); state.districtFeatures.push(g);
   });
   if(state.areasGeo){
@@ -592,7 +592,7 @@ function addPrefectureLayers(){
     const next = () => {
       const sl = all.slice(i, i + step);
       sl.forEach(f => {
-        const g = new window.ymaps3.YMapFeature({ geometry: f.geometry, style: { stroke: [{ color: 'rgba(13,130,124,.4)', width: 0.8 }] }, zIndex: 1500 });
+        const g = new window.ymaps3.YMapFeature({ geometry: f.geometry, style: { fill: '#0d827c', fillOpacity: 0, stroke: [{ color: 'rgba(13,130,124,.4)', width: 0.8 }] }, zIndex: 1500 });
         map.addChild(g); state.districtFeatures.push(g);
       });
       i += step;
