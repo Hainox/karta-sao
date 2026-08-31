@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="ru">
 <head>
 <meta charset="utf-8">
@@ -16,8 +16,10 @@
 <style>
 :root{
   --ink:#102636; --muted:#63747d; --line:#d7e0e2; --paper:#f7f5ef; --canvas:#dfe8e8;
-  --panel:#fff; --accent:#0d827c; --accent-soft:#e8f5f2;
+  --panel:#fff; --accent:#0d827c; --accent-soft:#e8f5f2; --accent-ink:#084c49;
+  --red:#c9302c; --red-soft:#fde3e3; --amber:#f5c86a;
   --shadow:0 14px 36px rgba(16,38,54,.12);
+  --shadow-sm:0 4px 12px rgba(16,38,54,.08);
   font-family:"Century Gothic",Inter,Arial,sans-serif;
   color-scheme:light;
 }
@@ -34,11 +36,11 @@ input,select,textarea{font-family:inherit}
 input[type=file]{display:none}
 
 /* -- Верхняя панель -- */
-.topbar{display:flex;align-items:center;gap:14px;padding:10px 18px;background:var(--panel);border-bottom:1px solid var(--line);box-shadow:0 2px 10px rgba(16,38,54,.05);z-index:10}
-.coa{width:36px;height:36px;border-radius:8px;object-fit:cover;border:1px solid var(--line)}
+.topbar{display:flex;align-items:center;gap:14px;padding:12px 20px;background:var(--panel);border-bottom:1px solid var(--line);box-shadow:0 2px 10px rgba(16,38,54,.05);z-index:10}
+.coa{width:38px;height:38px;border-radius:10px;object-fit:cover;border:1px solid var(--line);background:var(--paper)}
 .titles{flex:1;min-width:0}
-.titles h1{font-size:19px;letter-spacing:.4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.subtitle{font-size:12px;color:var(--muted);margin-top:2px}
+.titles h1{font-size:20px;letter-spacing:.3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.subtitle{font-size:12px;color:var(--muted);margin-top:2px;letter-spacing:.2px}
 .top-actions{display:flex;gap:8px}
 
 /* -- Экраны -- */
@@ -47,113 +49,179 @@ main{flex:1;display:flex;min-height:0}
 .screen[hidden]{display:none}
 
 /* -- Кнопки -- */
-.btn{border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:9px 14px;border-radius:10px;font-size:13.5px;font-weight:700;transition:background .12s,border-color .12s,transform .06s}
-.btn:hover{border-color:var(--accent);color:var(--accent)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:10px 14px;border-radius:12px;font-size:13.5px;font-weight:700;transition:background .15s,border-color .15s,color .15s,transform .08s,box-shadow .15s}
+.btn:hover{border-color:var(--accent);color:var(--accent);box-shadow:var(--shadow-sm)}
 .btn:active{transform:translateY(1px)}
-.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
-.btn.primary:hover{background:#0b716c;color:#fff}
-.btn.danger{background:var(--panel);border-color:#d9534f;color:#c9302c}
-.btn.danger:hover{background:#fde3e3;border-color:#c9302c}
-.btn.small{padding:6px 10px;font-size:12px;border-radius:8px}
-.btn:disabled{opacity:.55;cursor:not-allowed}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff;box-shadow:0 4px 12px rgba(13,130,124,.22)}
+.btn.primary:hover{background:var(--accent-ink);border-color:var(--accent-ink);color:#fff}
+.btn.danger{background:var(--panel);border-color:var(--red);color:var(--red)}
+.btn.danger:hover{background:var(--red-soft);border-color:var(--red);color:var(--red)}
+.btn.small{padding:7px 11px;font-size:12px;border-radius:10px}
+.btn:disabled{opacity:.5;cursor:not-allowed;box-shadow:none}
+.btn.armed{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.armed:hover{background:var(--accent-ink);border-color:var(--accent-ink)}
+.btn.full{width:100%}
 
 /* -- Стартовый экран -- */
-.entry-panel{margin:auto;width:min(880px,92vw);background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:36px;box-shadow:var(--shadow);text-align:center}
-.entry-panel h2{font-size:26px;margin-bottom:8px}
-.entry-sub{color:var(--muted);font-size:14px;margin-bottom:28px}
-.entry-cards{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-.atlas-card{display:flex;flex-direction:column;align-items:flex-start;gap:10px;padding:22px;background:var(--paper);border:1px solid var(--line);border-radius:14px;text-align:left;transition:transform .15s ease,box-shadow .15s ease,border-color .15s ease}
-.atlas-card:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:var(--accent)}
-.icon-chip{width:44px;height:44px;border-radius:12px;background:var(--ink);color:#f5c86a;display:flex;align-items:center;justify-content:center;font-size:20px}
-.card-title{font-size:18px;font-weight:700}
-.card-desc{font-size:13px;color:var(--muted);line-height:1.45}
+.entry-panel{margin:auto;width:min(860px,92vw);background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:44px 40px;box-shadow:var(--shadow);text-align:center}
+.entry-panel h2{font-size:28px;margin-bottom:10px;letter-spacing:.3px}
+.entry-sub{color:var(--muted);font-size:14px;margin-bottom:34px;line-height:1.5}
+.entry-cards{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.atlas-card{display:flex;flex-direction:column;align-items:flex-start;gap:12px;padding:26px;background:var(--paper);border:1px solid var(--line);border-radius:18px;text-align:left;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;position:relative;overflow:hidden}
+.atlas-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--accent);opacity:0;transition:opacity .18s}
+.atlas-card:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--accent)}
+.atlas-card:hover::before{opacity:1}
+.icon-chip{width:48px;height:48px;border-radius:14px;background:var(--ink);color:var(--amber);display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:var(--shadow-sm)}
+.card-title{font-size:19px;font-weight:700}
+.card-desc{font-size:13px;color:var(--muted);line-height:1.5}
 
 /* -- Выбор района -- */
-.picker-panel{margin:auto;width:min(940px,94vw);background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:28px;box-shadow:var(--shadow)}
-.picker-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:18px}
-.picker-head h2{font-size:22px}
-.progress-line{font-size:13px;color:var(--muted);font-weight:700}
-.district-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.district-btn{display:flex;flex-direction:column;gap:8px;padding:14px;border:1px solid var(--line);border-radius:12px;background:var(--paper);text-align:left;font-size:14px;font-weight:700;transition:transform .12s,border-color .12s,box-shadow .12s}
-.district-btn:hover:not(.is-locked){border-color:var(--accent);transform:translateY(-2px);box-shadow:var(--shadow)}
-.district-btn.is-locked{opacity:.62;cursor:not-allowed}
-.picker-actions{margin-top:18px;display:flex;gap:10px}
+.picker-panel{margin:auto;width:min(980px,94vw);background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:32px;box-shadow:var(--shadow)}
+.picker-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:22px}
+.picker-head h2{font-size:24px;letter-spacing:.2px}
+.progress-wrap{display:flex;flex-direction:column;align-items:flex-end;gap:6px;min-width:180px}
+.progress-line{font-size:12px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.6px}
+.progress-bar{width:220px;height:8px;background:var(--paper);border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),#10a396);border-radius:999px;transition:width .35s ease}
+.district-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.district-btn{display:flex;flex-direction:column;gap:10px;padding:16px;border:1px solid var(--line);border-radius:16px;background:var(--paper);text-align:left;font-size:14px;font-weight:700;transition:transform .16s,border-color .16s,box-shadow .16s,opacity .16s;position:relative}
+.district-btn:hover:not(.is-locked){border-color:var(--accent);transform:translateY(-3px);box-shadow:var(--shadow);background:#fff}
+.district-btn.is-locked{opacity:.6;cursor:not-allowed;background:#f3f5f5}
+.district-btn.is-locked::after{content:"🔒";position:absolute;right:12px;top:12px;font-size:14px;opacity:.8}
+.picker-actions{margin-top:22px;display:flex;gap:10px}
 
 /* -- Статусные чипы -- */
-.chip{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px;line-height:1.4;white-space:nowrap}
-.chip.draft{background:#fff3cd;color:#8a6d1a}
-.chip.locked{background:#fde3e3;color:#b3362b}
+.chip{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;padding:4px 10px;border-radius:999px;line-height:1.4;white-space:nowrap;text-transform:uppercase;letter-spacing:.4px}
+.chip::before{content:"";width:6px;height:6px;border-radius:50%}
+.chip.draft{background:#fff6db;color:#8a6d1a}
+.chip.draft::before{background:#f0b429}
+.chip.locked{background:var(--red-soft);color:#b3362b}
+.chip.locked::before{content:"🔒";width:auto;height:auto;background:none;font-size:9px}
 .chip.done{background:#e2f3e6;color:#1e7a41}
+.chip.done::before{background:#38b259}
 .chip.empty{background:#eef1f2;color:var(--muted)}
+.chip.empty::before{background:#a6b4ba}
 .chip.loaded{background:var(--accent-soft);color:var(--accent)}
+.chip.loaded::before{background:var(--accent)}
 
 /* -- Редактор: сетка -- */
-.editor-grid{flex:1;display:grid;grid-template-columns:340px 1fr;min-height:0}
-.sidebar{background:var(--panel);border-right:1px solid var(--line);overflow-y:auto;padding:16px}
-.side-panel{display:flex;flex-direction:column;gap:14px}
-.side-title{font-size:15px;font-weight:700;line-height:1.4}
-.side-sub{font-size:12px;color:var(--muted)}
-.side-block{border:1px solid var(--line);border-radius:12px;padding:12px;background:var(--paper);display:flex;flex-direction:column;gap:10px}
-.side-block h3{font-size:11px;text-transform:uppercase;letter-spacing:.7px;color:var(--muted)}
+.editor-grid{flex:1;display:grid;grid-template-columns:360px 1fr;min-height:0}
+.sidebar{background:var(--paper);border-right:1px solid var(--line);overflow-y:auto;padding:18px;scrollbar-width:thin;scrollbar-color:var(--line) transparent}
+.sidebar::-webkit-scrollbar{width:7px}
+.sidebar::-webkit-scrollbar-thumb{background:var(--line);border-radius:999px}
+.side-panel{display:flex;flex-direction:column;gap:16px}
+.side-card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:14px;box-shadow:var(--shadow-sm)}
+.side-title{font-size:16px;font-weight:700;line-height:1.4}
+.side-sub{font-size:12px;color:var(--muted);line-height:1.45}
+.side-card h3{display:flex;align-items:center;gap:8px;font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin:0}
+.side-card h3::before{content:"";width:4px;height:14px;background:var(--accent);border-radius:2px}
 .map-wrap{position:relative;min-width:0}
 .map-container{position:relative;width:100%;height:100%}
-.map-credit{position:absolute;right:10px;bottom:8px;font-size:11px;color:var(--muted);background:rgba(247,245,239,.78);padding:2px 8px;border-radius:6px;pointer-events:none;z-index:400}
-.error-banner{background:#fde3e3;color:#b3362b;border:1px solid #f3c2bd;border-radius:10px;padding:9px 11px;font-size:12.5px;line-height:1.4}
+.map-credit{position:absolute;right:10px;bottom:8px;font-size:11px;color:var(--muted);background:rgba(255,255,255,.82);padding:4px 10px;border-radius:8px;pointer-events:none;z-index:400;backdrop-filter:blur(2px);border:1px solid rgba(215,224,226,.5)}
+.error-banner{background:var(--red-soft);color:#b3362b;border:1px solid #f3c2bd;border-radius:12px;padding:10px 12px;font-size:12.5px;line-height:1.4;display:flex;align-items:flex-start;gap:8px}
+.error-banner::before{content:"⚠";font-size:14px}
 .toolbar{display:flex;flex-wrap:wrap;gap:8px}
-.draw-hint{font-size:12.5px;color:var(--accent);background:var(--accent-soft);border-radius:8px;padding:8px 10px;line-height:1.45}
-.lock-note{font-size:11.5px;color:var(--muted);background:#f3f5f5;border-radius:8px;padding:6px 9px;line-height:1.45}
-.field-label{font-size:12px;color:var(--muted)}
-.select{width:100%;border:1px solid var(--line);border-radius:10px;padding:8px 10px;font-size:13px;background:var(--panel);color:var(--ink)}
-.switch-row{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700}
-.switch-row input{width:16px;height:16px;accent-color:var(--accent)}
+.draw-hint{font-size:12.5px;color:var(--accent);background:var(--accent-soft);border-radius:10px;padding:10px 12px;line-height:1.5;border:1px dashed rgba(13,130,124,.25)}
+.lock-note{font-size:11.5px;color:var(--muted);background:#f3f5f5;border-radius:10px;padding:8px 10px;line-height:1.45}
+.field-label{font-size:12px;color:var(--muted);font-weight:700}
+.select{width:100%;border:1px solid var(--line);border-radius:12px;padding:9px 11px;font-size:13px;background:var(--panel);color:var(--ink);outline:none;transition:border-color .15s,box-shadow .15s}
+.select:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+
+/* -- Переключатели -- */
+.switch-row{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:13px;font-weight:700}
+.switch-row .switch-label{color:var(--ink)}
+.switch{position:relative;display:inline-block;width:44px;height:26px;flex:none}
+.switch input{opacity:0;width:0;height:0}
+.switch-track{position:absolute;cursor:pointer;inset:0;background:var(--line);border-radius:999px;transition:background .2s}
+.switch-track::after{content:"";position:absolute;left:3px;top:3px;width:20px;height:20px;background:#fff;border-radius:50%;box-shadow:0 1px 3px rgba(16,38,54,.25);transition:transform .2s}
+.switch input:checked + .switch-track{background:var(--accent)}
+.switch input:checked + .switch-track::after{transform:translateX(18px)}
+.switch input:focus + .switch-track{box-shadow:0 0 0 3px var(--accent-soft)}
+.switch input:disabled + .switch-track{opacity:.5;cursor:not-allowed}
 
 /* -- Список маршрутов -- */
-.route-list{display:flex;flex-direction:column;gap:8px;max-height:240px;overflow-y:auto}
-.route-row{border:1px solid var(--line);border-radius:10px;padding:8px 10px;background:var(--panel);display:flex;flex-direction:column;gap:7px}
-.route-row.selected{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-soft)}
-.route-name-input{width:100%;border:1px solid var(--line);border-radius:8px;padding:6px 8px;font-size:13px}
+.route-list{display:flex;flex-direction:column;gap:10px;max-height:260px;overflow-y:auto;padding-right:4px}
+.route-row{border:1px solid var(--line);border-radius:14px;padding:12px;background:var(--panel);display:flex;flex-direction:column;gap:8px;cursor:pointer;transition:border-color .15s,background .15s,box-shadow .15s}
+.route-row:hover{border-color:#b8c5c8}
+.route-row.selected{border-color:var(--accent);background:var(--accent-soft);box-shadow:0 0 0 1px var(--accent) inset}
+.route-head{display:flex;align-items:center;gap:10px}
+.swatch{width:18px;height:18px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px rgba(16,38,54,.15);flex:none}
+.route-label{font-size:13px;font-weight:700;color:var(--ink);flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.route-name-input{width:100%;border:1px solid var(--line);border-radius:10px;padding:8px 10px;font-size:13px;background:var(--paper);outline:none;transition:border-color .15s,box-shadow .15s,background .15s}
+.route-name-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft);background:#fff}
+.route-row.selected .route-name-input{background:#fff}
 .route-actions{display:flex;gap:6px;flex-wrap:wrap}
 .route-meta{font-size:11px;color:var(--muted)}
+.route-opts{display:flex;align-items:center;gap:8px;font-size:11.5px;color:var(--muted);flex-wrap:wrap}
+.route-width{width:68px;border:1px solid var(--line);border-radius:10px;padding:5px 6px;font-size:12px;background:var(--panel);color:var(--ink);outline:none}
+.route-width:focus{border-color:var(--accent)}
 
 /* -- Таблица статусов -- */
-.status-list{display:flex;flex-direction:column;gap:8px;max-height:320px;overflow-y:auto}
-.status-row{border:1px solid var(--line);border-radius:10px;padding:8px 10px;background:var(--panel)}
-.row-head{display:flex;justify-content:space-between;align-items:center;gap:8px}
-.row-name{font-size:13px;font-weight:700}
-.row-actions{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
-.row-sub{font-size:11px;color:var(--muted);margin-top:6px}
+.status-list{display:flex;flex-direction:column;gap:10px;max-height:340px;overflow-y:auto;padding-right:4px}
+.status-row{border:1px solid var(--line);border-radius:14px;padding:13px;background:var(--panel);transition:border-color .15s,box-shadow .15s}
+.status-row:hover{border-color:#b8c5c8;box-shadow:var(--shadow-sm)}
+.row-head{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.row-name{font-size:14px;font-weight:700}
+.row-actions{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+.row-sub{font-size:11.5px;color:var(--muted);margin-top:6px;line-height:1.4}
+
+/* -- Палитра -- */
+.palette-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.palette-swatch{position:relative;height:34px;border-radius:10px;border:2px solid #fff;box-shadow:0 0 0 1px var(--line);cursor:default;transition:transform .12s,box-shadow .12s}
+.palette-swatch:hover{transform:scale(1.05);z-index:1;box-shadow:0 2px 8px rgba(16,38,54,.15)}
+.palette-num{position:absolute;left:4px;top:3px;font-size:9px;font-weight:800;color:#fff;background:rgba(16,38,54,.55);padding:1px 4px;border-radius:999px;line-height:1}
+.palette-caption{font-size:11.5px;color:var(--muted);line-height:1.4}
+
+/* -- Горячие клавиши -- */
+.hotkeys{display:flex;flex-direction:column;gap:8px;font-size:12px;color:var(--muted)}
+.hotkey-row{display:flex;align-items:center;gap:10px}
+kbd{font-family:inherit;background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:3px 7px;font-size:11px;font-weight:800;color:var(--ink);box-shadow:0 1px 0 var(--line)}
 
 /* -- Маркеры и точки -- */
-.photo-marker{position:relative;width:26px;height:26px;border-radius:50%;background:var(--ink);border:2px solid #f5c86a;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;cursor:pointer;box-shadow:0 2px 6px rgba(16,38,54,.35)}
-.photo-marker .cam{font-size:12px;line-height:1}
-.photo-marker .num{position:absolute;right:-8px;top:-8px;background:#f5c86a;color:var(--ink);font-size:9px;font-weight:800;border-radius:999px;min-width:15px;height:15px;display:flex;align-items:center;justify-content:center;padding:0 3px}
+.photo-marker{position:relative;width:28px;height:28px;border-radius:50%;background:var(--ink);border:2px solid var(--amber);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;cursor:pointer;box-shadow:0 3px 8px rgba(16,38,54,.35);transition:transform .12s}
+.photo-marker:hover{transform:scale(1.1)}
+.photo-marker .cam{font-size:13px;line-height:1}
+.photo-marker .num{position:absolute;right:-7px;top:-7px;background:var(--amber);color:var(--ink);font-size:9px;font-weight:800;border-radius:999px;min-width:16px;height:16px;display:flex;align-items:center;justify-content:center;padding:0 4px}
 .vertex-dot{width:8px;height:8px;border-radius:50%;background:#c00000;border:2px solid #fff;box-shadow:0 0 4px rgba(0,0,0,.4)}
+.route-start{width:14px;height:14px;border-radius:50%;border:2px solid #fff;box-shadow:0 1px 4px rgba(16,38,54,.45)}
+.route-end{width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-bottom:12px solid #c00000;filter:drop-shadow(0 1px 2px rgba(16,38,54,.45))}
+.route-arrow{width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-bottom:9px solid currentColor;filter:drop-shadow(0 1px 2px rgba(16,38,54,.35))}
 
 /* -- Toast -- */
-.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:11px 18px;border-radius:12px;font-size:13.5px;box-shadow:var(--shadow);z-index:3000;max-width:80vw;text-align:center}
+.toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(0);background:var(--ink);color:#fff;padding:13px 20px;border-radius:14px;font-size:13.5px;box-shadow:var(--shadow);z-index:3000;max-width:min(560px,86vw);text-align:center;opacity:1;transition:opacity .2s,transform .2s}
+.toast[hidden]{opacity:0;transform:translateX(-50%) translateY(12px);display:block!important;pointer-events:none}
 
 /* -- Попап фото-метки -- */
-.photo-popup{position:fixed;right:18px;bottom:18px;width:300px;background:var(--panel);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:14px;z-index:4000;display:flex;flex-direction:column;gap:9px}
-.photo-popup h4{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px}
-.pp-id{font-size:14px;font-weight:700}
-.pp-photo{width:96px;height:96px;object-fit:cover;border-radius:10px;border:1px solid var(--line);background:var(--canvas)}
+.photo-popup{position:fixed;right:18px;bottom:18px;width:320px;background:var(--panel);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:18px;z-index:4000;display:flex;flex-direction:column;gap:12px}
+.photo-popup h4{display:flex;align-items:center;gap:8px;font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--muted)}
+.photo-popup h4::before{content:"";width:4px;height:12px;background:var(--accent);border-radius:2px}
+.pp-id{font-size:15px;font-weight:700}
+.pp-photo{width:104px;height:104px;object-fit:cover;border-radius:12px;border:1px solid var(--line);background:var(--canvas)}
 .pp-photo-name{font-size:11px;color:var(--muted);word-break:break-all}
-.photo-popup textarea{width:100%;min-height:64px;border:1px solid var(--line);border-radius:10px;padding:8px;font-size:13px;resize:vertical;background:var(--paper)}
-.pp-actions{display:flex;gap:6px;flex-wrap:wrap}
-.file-label{display:inline-flex;align-items:center;gap:6px;border:1px dashed var(--accent);color:var(--accent);background:var(--accent-soft);padding:6px 10px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer}
+.photo-popup textarea{width:100%;min-height:72px;border:1px solid var(--line);border-radius:12px;padding:10px;font-size:13px;resize:vertical;background:var(--paper);outline:none;transition:border-color .15s,box-shadow .15s}
+.photo-popup textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.pp-actions{display:flex;gap:8px;flex-wrap:wrap}
+.file-label{display:inline-flex;align-items:center;gap:6px;border:1px dashed var(--accent);color:var(--accent);background:var(--accent-soft);padding:8px 12px;border-radius:10px;font-size:12px;font-weight:700;cursor:pointer;transition:background .15s}
 .file-label:hover{background:#dcefec}
 
-/* -- Инструменты и маршруты -- */
-.route-row{cursor:pointer}
+/* -- Инструменты и карта -- */
 .btn.armed{background:var(--accent);border-color:var(--accent);color:#fff}
-.map-reset{position:absolute;top:10px;right:10px;z-index:500;box-shadow:var(--shadow);background:var(--panel)}
-.route-head{display:flex;align-items:center;gap:7px}
-.swatch{width:14px;height:14px;border-radius:4px;border:1px solid rgba(16,38,54,.3);flex:none}
-.route-label{font-size:12px;font-weight:700;color:var(--muted);flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.route-opts{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--muted);flex-wrap:wrap}
-.route-width{width:64px;border:1px solid var(--line);border-radius:8px;padding:3px 4px;font-size:12px;background:var(--panel);color:var(--ink)}
-.route-start{width:12px;height:12px;border-radius:50%;border:2px solid #fff;box-shadow:0 1px 4px rgba(16,38,54,.45)}
-.route-end{width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:11px solid #c00000;filter:drop-shadow(0 1px 2px rgba(16,38,54,.45))}
+.map-reset{position:absolute;top:12px;right:12px;z-index:500;box-shadow:var(--shadow);background:var(--panel);border-radius:12px}
+.divider{height:1px;background:var(--line);margin:2px 0}
+
+/* -- Адаптив -- */
+@media (max-width:900px){
+  .editor-grid{grid-template-columns:1fr;grid-template-rows:45% 55%}
+  .sidebar{border-right:none;border-bottom:1px solid var(--line)}
+  .district-grid{grid-template-columns:repeat(3,1fr)}
+}
+@media (max-width:640px){
+  .entry-cards{grid-template-columns:1fr}
+  .district-grid{grid-template-columns:repeat(2,1fr)}
+  .picker-head{flex-direction:column;align-items:flex-start}
+  .progress-wrap{align-items:flex-start;width:100%}
+  .progress-bar{width:100%}
+}
 </style>
 </head>
 <body>
@@ -194,7 +262,10 @@ main{flex:1;display:flex;min-height:0}
     <div class="picker-panel">
       <div class="picker-head">
         <h2>Выбор района</h2>
-        <div class="progress-line" id="picker-progress">Размечено маршрутами: 0 из 16</div>
+        <div class="progress-wrap">
+          <div class="progress-line" id="picker-progress">Размечено: 0 из 16</div>
+          <div class="progress-bar" aria-hidden="true"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+        </div>
       </div>
       <div class="district-grid" id="district-grid"></div>
       <div class="picker-actions">
@@ -208,27 +279,68 @@ main{flex:1;display:flex;min-height:0}
     <div class="editor-grid">
       <aside class="sidebar">
         <div class="side-panel">
-          <div class="side-title">Район: <span id="district-title"></span></div>
-          <div class="side-sub">Границы: OSM / GIS-Lab . дворовые территории: areas.geojson</div>
-          <span class="chip" id="district-status"></span>
-          <div class="error-banner" id="error-banner-district" hidden>districts.geojson не найден</div>
-          <div class="side-block">
+          <div class="side-card">
+            <div>
+              <div class="side-title">🏘️ Район: <span id="district-title"></span></div>
+              <div class="side-sub" style="margin-top:4px">Границы: OSM / GIS-Lab . дворовые территории: areas.geojson</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+              <span class="chip" id="district-status"></span>
+            </div>
+            <div class="error-banner" id="error-banner-district" hidden>districts.geojson не найден</div>
+          </div>
+
+          <div class="side-card">
+            <h3>Настройки отображения</h3>
+            <label class="field-label" for="setting-default-width">Толщина линии по умолчанию</label>
+            <select id="setting-default-width" class="select">
+              <option value="2">2 px</option>
+              <option value="3">3 px</option>
+              <option value="4" selected>4 px</option>
+              <option value="6">6 px</option>
+              <option value="8">8 px</option>
+            </select>
+            <label class="switch-row">
+              <span class="switch-label">Стрелки направления</span>
+              <span class="switch"><input type="checkbox" id="setting-arrows" checked><span class="switch-track"></span></span>
+            </label>
+            <label class="switch-row">
+              <span class="switch-label">Метки старт / финиш</span>
+              <span class="switch"><input type="checkbox" id="setting-endpoints" checked><span class="switch-track"></span></span>
+            </label>
+          </div>
+
+          <div class="side-card">
             <h3>Рисование</h3>
             <div class="toolbar">
-              <button class="btn primary small" id="btn-draw-route" type="button">＋ Маршрут</button>
-              <button class="btn small" id="btn-undo-point" type="button">Отменить точку</button>
-              <button class="btn small" id="btn-finish-route" type="button">Завершить маршрут</button>
+              <button class="btn primary small" id="btn-draw-route" type="button"><span aria-hidden="true">＋</span> Маршрут</button>
+              <button class="btn small" id="btn-undo-point" type="button">↶ Отменить точку</button>
+              <button class="btn small" id="btn-finish-route" type="button">✓ Завершить маршрут</button>
             </div>
             <div class="draw-hint" id="district-draw-hint" hidden>Кликайте по карте...</div>
             <div class="lock-note" id="district-draw-note">Точки вне границ района добавлять нельзя.</div>
+            <div class="hotkeys" id="hotkeys-help">
+              <div class="hotkey-row"><kbd>Esc</kbd><span>завершить маршрут / выйти из рисования</span></div>
+              <div class="hotkey-row"><kbd>Ctrl</kbd>+<kbd>Z</kbd><span>отменить последнюю точку</span></div>
+            </div>
           </div>
-          <div class="side-block">
+
+          <div class="side-card">
             <h3>Маршруты: <span id="route-count">0</span></h3>
             <div class="route-list" id="route-list"></div>
+            <div class="divider"></div>
+            <h3>Цвета маршрутов 1-15</h3>
+            <div class="palette-grid" id="palette-legend"></div>
+            <div class="palette-caption">Каждому маршруту присваивается свой цвет по порядку.</div>
           </div>
-          <div class="side-block">
-            <button class="btn primary" id="btn-save-lock" type="button">Сохранить и завершить работу района</button>
-            <button class="btn" id="btn-editor-exit" type="button">Выход</button>
+
+          <div class="side-card">
+            <h3>Действия</h3>
+            <button class="btn primary full" id="btn-save-lock" type="button">Сохранить и завершить работу района</button>
+            <div class="toolbar" style="margin-top:2px">
+              <button class="btn small" id="btn-fit-district-side" type="button">⤢ К границам района</button>
+              <button class="btn small" id="btn-editor-exit" type="button">Выход</button>
+            </div>
           </div>
         </div>
       </aside>
@@ -245,34 +357,76 @@ main{flex:1;display:flex;min-height:0}
     <div class="editor-grid">
       <aside class="sidebar">
         <div class="side-panel">
-          <div class="side-title">Префектура САО - сводный слой</div>
-          <div class="side-sub">Все 16 районов . дворовые территории . фото-метки</div>
-          <div class="error-banner" id="error-banner-prefecture" hidden>districts.geojson не найден</div>
-          <div class="side-block">
+          <div class="side-card">
+            <div>
+              <div class="side-title">🏛️ Префектура САО - сводный слой</div>
+              <div class="side-sub" style="margin-top:4px">Все 16 районов . дворовые территории . фото-метки</div>
+            </div>
+            <div class="error-banner" id="error-banner-prefecture" hidden>districts.geojson не найден</div>
+          </div>
+
+          <div class="side-card">
+            <h3>Настройки отображения</h3>
+            <label class="field-label" for="pref-setting-default-width">Толщина линии по умолчанию</label>
+            <select id="pref-setting-default-width" class="select">
+              <option value="2">2 px</option>
+              <option value="3">3 px</option>
+              <option value="4" selected>4 px</option>
+              <option value="6">6 px</option>
+              <option value="8">8 px</option>
+            </select>
+            <label class="switch-row">
+              <span class="switch-label">Стрелки направления</span>
+              <span class="switch"><input type="checkbox" id="pref-setting-arrows" checked><span class="switch-track"></span></span>
+            </label>
+            <label class="switch-row">
+              <span class="switch-label">Метки старт / финиш</span>
+              <span class="switch"><input type="checkbox" id="pref-setting-endpoints" checked><span class="switch-track"></span></span>
+            </label>
+          </div>
+
+          <div class="side-card">
             <h3>Районы - статусы</h3>
             <div class="status-list" id="pref-status-list"></div>
           </div>
-          <div class="side-block">
+
+          <div class="side-card">
             <h3>Рисование маршрутов</h3>
             <label class="field-label" for="pref-draw-district">Район для рисования (или без ограничения)</label>
             <select id="pref-draw-district" class="select"></select>
             <div class="toolbar">
-              <button class="btn primary small" id="pref-btn-draw" type="button">＋ Маршрут</button>
-              <button class="btn small" id="pref-btn-undo" type="button">Отменить точку</button>
-              <button class="btn small" id="pref-btn-finish" type="button">Завершить маршрут</button>
+              <button class="btn primary small" id="pref-btn-draw" type="button"><span aria-hidden="true">＋</span> Маршрут</button>
+              <button class="btn small" id="pref-btn-undo" type="button">↶ Отменить точку</button>
+              <button class="btn small" id="pref-btn-finish" type="button">✓ Завершить маршрут</button>
             </div>
             <div class="draw-hint" id="pref-draw-hint" hidden>Кликайте по карте...</div>
+            <div class="hotkeys" id="pref-hotkeys-help">
+              <div class="hotkey-row"><kbd>Esc</kbd><span>завершить маршрут / выйти из рисования</span></div>
+              <div class="hotkey-row"><kbd>Ctrl</kbd>+<kbd>Z</kbd><span>отменить последнюю точку</span></div>
+            </div>
             <div class="route-list" id="pref-route-list"></div>
+            <div class="divider"></div>
+            <h3>Цвета маршрутов 1-15</h3>
+            <div class="palette-grid" id="pref-palette-legend"></div>
+            <div class="palette-caption">Каждому маршруту присваивается свой цвет по порядку.</div>
           </div>
-          <div class="side-block">
+
+          <div class="side-card">
             <h3>Фото-метки</h3>
-            <label class="switch-row"><input type="checkbox" id="photo-mode-toggle"> Расставить фото-метки</label>
+            <label class="switch-row">
+              <span class="switch-label">Расставить фото-метки</span>
+              <span class="switch"><input type="checkbox" id="photo-mode-toggle"><span class="switch-track"></span></span>
+            </label>
             <div class="route-list" id="photo-marker-list"></div>
           </div>
-          <div class="side-block">
+
+          <div class="side-card">
             <h3>Экспорт</h3>
-            <button class="btn primary" id="btn-export-prefecture" type="button">Выгрузить сводный слой САО</button>
-            <button class="btn" id="btn-pref-exit" type="button">Выход</button>
+            <button class="btn primary full" id="btn-export-prefecture" type="button">Выгрузить сводный слой САО</button>
+            <div class="toolbar" style="margin-top:2px">
+              <button class="btn small" id="btn-fit-prefecture-side" type="button">⤢ Вся карта</button>
+              <button class="btn small" id="btn-pref-exit" type="button">Выход</button>
+            </div>
           </div>
         </div>
       </aside>
@@ -313,7 +467,8 @@ const LS = {
   locks: 'markup_locks',
   layers: 'markup_prefecture_layers',
   photos: 'markup_photo_markers',
-  draft: d => 'markup_draft_' + d
+  draft: d => 'markup_draft_' + d,
+  settings: 'markup_settings'
 };
 const STATUS_TEXT = { locked: '\uD83D\uDD12 Заблокирован', draft: 'Черновик', loaded: 'Размечен', empty: 'Не размечен' };
 
@@ -333,6 +488,7 @@ const state = {
   previewFeature: null,
   vertexMarkers: [],
   routeFeatures: {},
+  routeArrows: {},
   layerFeatures: [],
   districtFeatures: [],
   photoMode: false,
@@ -343,6 +499,33 @@ const state = {
   districtMap: null, districtMapPromise: null, districtMapReady: false,
   prefMap: null, prefMapPromise: null, prefMapReady: false
 };
+
+const settings = { defaultWidth: 4, arrows: true, endpoints: true };
+function loadSettings(){
+  const s = lsGet(LS.settings, {});
+  settings.defaultWidth = [2,3,4,6,8].includes(s.defaultWidth) ? s.defaultWidth : 4;
+  settings.arrows = s.arrows !== false;
+  settings.endpoints = s.endpoints !== false;
+}
+function saveSettings(){ lsSet(LS.settings, Object.assign({}, settings)); }
+function applySettingsToControls(){
+  const pairs = [
+    ['setting-default-width','pref-setting-default-width','defaultWidth',true],
+    ['setting-arrows','pref-setting-arrows','arrows',false],
+    ['setting-endpoints','pref-setting-endpoints','endpoints',false]
+  ];
+  pairs.forEach(([dId,pId,key,isNum]) => {
+    const de = document.getElementById(dId), pe = document.getElementById(pId);
+    const v = settings[key];
+    if(isNum){
+      if(de) de.value = String(v);
+      if(pe) pe.value = String(v);
+    }else{
+      if(de) de.checked = v;
+      if(pe) pe.checked = v;
+    }
+  });
+}
 
 /* ═══════════ ХРАНИЛИЩЕ: localStorage ═══════════ */
 function lsGet(key, fallback){ try{ const v = localStorage.getItem(key); return v == null ? fallback : JSON.parse(v); }catch(e){ return fallback; } }
@@ -469,7 +652,25 @@ function statusText(st){ return STATUS_TEXT[st] || st; }
 function countDone(){ return DISTRICTS.filter(d => getLock(d) || getLayer(d)).length; }
 function updatePickerProgress(){
   const el = document.getElementById('picker-progress');
-  if(el) el.textContent = 'Размечено маршрутами: ' + countDone() + ' из ' + DISTRICTS.length;
+  const bar = document.getElementById('progress-fill');
+  const done = countDone();
+  const total = DISTRICTS.length;
+  if(el) el.textContent = 'Размечено: ' + done + ' из ' + total;
+  if(bar) bar.style.width = Math.round(100 * done / total) + '%';
+}
+function renderPaletteLegend(){
+  ['palette-legend','pref-palette-legend'].forEach(id => {
+    const el = document.getElementById(id); if(!el) return;
+    el.innerHTML = '';
+    ROUTE_COLORS.forEach((c,i) => {
+      const sw = document.createElement('div');
+      sw.className = 'palette-swatch';
+      sw.style.background = c;
+      sw.title = 'Маршрут ' + (i+1);
+      sw.innerHTML = '<span class="palette-num">' + (i+1) + '</span>';
+      el.appendChild(sw);
+    });
+  });
 }
 
 /* -- Загрузка данных (fetch) -- */
@@ -672,6 +873,7 @@ function removeRF(id){
   const f = state.routeFeatures[id];
   if(f){ try{ curMap().removeChild(f); }catch(e){} delete state.routeFeatures[id]; }
   removeRouteEndpoints(id);
+  removeRouteDirectionArrows(id);
 }
 function renderRF(r, selected){
   const map = curMap(); if(!map) return;
@@ -688,6 +890,7 @@ function renderRF(r, selected){
   map.addChild(f);
   state.routeFeatures[r.route_id] = f;
   renderRouteEndpoints(r, color);
+  renderRouteDirectionArrows(r);
 }
 function restyle(){
   state.routes.forEach(r => { removeRF(r.route_id); renderRF(r, r.route_id === state.selectedRouteId); });
@@ -715,7 +918,7 @@ function renderRouteEndpoints(r, colorOverride){
   const map = curMap(); if(!map) return;
   const Y = window.ymaps3;
   removeRouteEndpoints(r.route_id);
-  if(!Array.isArray(r.coords) || r.coords.length < 2) return;
+  if(!settings.endpoints || !Array.isArray(r.coords) || r.coords.length < 2) return;
   const color = colorOverride || r.color || ROUTE_COLORS[((r.route_no || 1) - 1) % ROUTE_COLORS.length];
   const start = r.coords[0];
   const last = r.coords[r.coords.length - 1];
@@ -738,6 +941,36 @@ function removeRouteEndpoints(id){
   const map = curMap(); if(!map) return;
   (state.endpointMarkers[id] || []).forEach(m => { try{ map.removeChild(m); }catch(e){} });
   delete state.endpointMarkers[id];
+}
+function renderRouteDirectionArrows(r){
+  const map = curMap(); if(!map) return;
+  const Y = window.ymaps3;
+  removeRouteDirectionArrows(r.route_id);
+  if(!settings.arrows || !Array.isArray(r.coords) || r.coords.length < 2) return;
+  const color = r.color || ROUTE_COLORS[((r.route_no || 1) - 1) % ROUTE_COLORS.length];
+  const arrows = [];
+  const segStep = Math.max(1, Math.floor(r.coords.length / 4));
+  for(let i = 0; i < r.coords.length - 1; i += segStep){
+    const a = r.coords[i], b = r.coords[i+1];
+    const mid = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
+    const deg = Math.atan2(b[0] - a[0], b[1] - a[1]) * 180 / Math.PI;
+    const el = document.createElement('div');
+    el.className = 'route-arrow';
+    el.style.color = color;
+    el.style.transform = 'rotate(' + deg + 'deg)';
+    const mk = new Y.YMapMarker({ coordinates: mid, zIndex: 2040 }, el);
+    map.addChild(mk);
+    arrows.push(mk);
+  }
+  state.routeArrows[r.route_id] = arrows;
+}
+function removeRouteDirectionArrows(id){
+  const map = curMap(); if(!map) return;
+  (state.routeArrows[id] || []).forEach(m => { try{ map.removeChild(m); }catch(e){} });
+  delete state.routeArrows[id];
+}
+function rebuildDirectionArrows(){
+  state.routes.forEach(r => { removeRouteDirectionArrows(r.route_id); renderRouteDirectionArrows(r); });
 }
 function finishRoute(){
   if(state.points.length < 2){ toast('Маршрут должен содержать минимум 2 точки'); return; }
@@ -762,7 +995,7 @@ function finishRoute(){
     district: state.mode === 'district' ? state.district : state.drawDistrict,
     route_no: route_no,
     color: ROUTE_COLORS[(route_no - 1) % ROUTE_COLORS.length],
-    width: 4,
+    width: settings.defaultWidth,
     created_at: new Date().toISOString(),
     coords: state.points.slice()
   };
@@ -1119,6 +1352,7 @@ function resetEditorState(mode, district){
   state.previewFeature = null;
   state.vertexMarkers = [];
   state.routeFeatures = {};
+  state.routeArrows = {};
   state.endpointMarkers = {};
   state.routeCounter = 1;
   state.ptCounters = {};
@@ -1264,10 +1498,40 @@ function wireEvents(){
     else toast('Границы района не загружены');
   };
   by('btn-fit-prefecture').onclick = () => { fitToBounds(state.prefMap, allDistrictsBbox()); };
+  by('btn-fit-district-side').onclick = by('btn-fit-district').onclick;
+  by('btn-fit-prefecture-side').onclick = by('btn-fit-prefecture').onclick;
+  const bindSetting = (dId,pId,key,isNum) => {
+    const de = by(dId), pe = by(pId);
+    const onChange = (e) => {
+      const el = e && e.target;
+      if(isNum){
+        const v = Number(el ? el.value : ((de && de.value) || (pe && pe.value)));
+        settings[key] = v;
+        if(de) de.value = String(v);
+        if(pe) pe.value = String(v);
+      }else{
+        const v = el ? el.checked : (de ? de.checked : (pe ? pe.checked : true));
+        settings[key] = v;
+        if(de) de.checked = v;
+        if(pe) pe.checked = v;
+      }
+      saveSettings();
+      if(key === 'arrows') rebuildDirectionArrows();
+      if(key === 'endpoints') state.routes.forEach(r => { removeRouteEndpoints(r.route_id); renderRouteEndpoints(r); });
+    };
+    if(de) de.addEventListener('change', onChange);
+    if(pe) pe.addEventListener('change', onChange);
+  };
+  bindSetting('setting-default-width','pref-setting-default-width','defaultWidth',true);
+  bindSetting('setting-arrows','pref-setting-arrows','arrows',false);
+  bindSetting('setting-endpoints','pref-setting-endpoints','endpoints',false);
   window.addEventListener('keydown', onWindowKeydown);
 }
 function init(){
+  loadSettings();
   wireEvents();
+  applySettingsToControls();
+  renderPaletteLegend();
   showScreen('screen-entry');
   renderDistrictGrid();
   updatePickerProgress();
