@@ -153,6 +153,7 @@
     .map-marker-small { width:13px; height:13px; }
     .map-marker-compact { width:9px; height:9px; filter:drop-shadow(0 0 1px rgba(255,255,255,.96)) drop-shadow(0 1px 1px rgba(16,38,54,.35)); }
     .map-marker-compact svg { display:block; stroke-width:2.1; }
+    .urn-cluster { display:grid; place-items:center; width:30px; height:30px; border:2px solid #fff; border-radius:50%; background:#7457a6; color:#fff; box-shadow:0 2px 7px rgba(16,38,54,.35); font:700 10px/1 ui-monospace, SFMono-Regular, Consolas, monospace; cursor:pointer; }
     @media (max-width: 780px) {
       .topbar { min-height:54px; padding:0 14px; }
       .topbar-meta { display:none; }
@@ -298,7 +299,8 @@
       layers: Object.fromEntries(Object.entries(LAYER_CONFIG).map(([key, config]) => [key, { ...config, records: [], error: null }])),
       map: null,
       smmRoutes: null,
-      smmRouteItems: []
+      smmRouteItems: [],
+      urnsClusterer: null
     };
     const $ = (id) => document.getElementById(id);
 
@@ -454,10 +456,13 @@
     function renderVisibleFeatures() {
       if (!state.map) return;
       const records = allRecords();
-      records.forEach((item) => { if (item.feature?.parent) state.map.removeChild(item.feature); });
-      records.filter(isVisible).forEach((item) => state.map.addChild(item.feature));
+      const regularRecords = records.filter((item) => item.layerKey !== 'urns');
+      regularRecords.forEach((item) => { if (item.feature?.parent) state.map.removeChild(item.feature); });
+      regularRecords.filter(isVisible).forEach((item) => state.map.addChild(item.feature));
+      if (state.urnsClusterer?.parent) state.map.removeChild(state.urnsClusterer);
+      if (state.layers.urns?.enabled && state.urnsClusterer) state.map.addChild(state.urnsClusterer);
       renderSmmRouteMarkers();
-      const visible = records.filter(isVisible).length;
+      const visible = regularRecords.filter(isVisible).length + (state.layers.urns?.enabled ? records.filter((item) => item.layerKey === 'urns' && isVisible(item)).length : 0);
       const enabled = Object.values(state.layers).filter((layer) => layer.enabled).map((layer) => `${layer.label}: ${layer.records.length}`).join(' · ');
       $('status').textContent = `Показано объектов: ${visible}. Загружено: ${enabled}.`;
     }
@@ -474,6 +479,44 @@
 
     async function createMapFeatures(records) {
       const { YMapFeature, YMapMarker } = await window.ymaps3Ready;
+      if (records.length && records.every((item) => item.layerKey === 'urns')) {
+        const { YMapClusterer, clusterByGrid } = await window.ymaps3.import('@yandex/ymaps3-clusterer');
+        const byId = new Map(records.map((item) => [String(item.id), item]));
+        const marker = (feature) => {
+          const item = byId.get(String(feature.id));
+          if (!item) return null;
+          const markerElement = document.createElement('button');
+          markerElement.type = 'button';
+          markerElement.className = `map-marker map-marker-urns map-marker-${markerSizeClass(state.zoom)}`;
+          markerElement.innerHTML = MARKER_ICONS.urns;
+          markerElement.title = item.name;
+          markerElement.addEventListener('click', (event) => {
+            event.stopPropagation();
+            showDetails(item, item.geometry.coordinates);
+          });
+          return new YMapMarker({ coordinates: item.geometry.coordinates }, markerElement);
+        };
+        const cluster = (coordinates, features) => {
+          const clusterElement = document.createElement('button');
+          clusterElement.type = 'button';
+          clusterElement.className = 'urn-cluster';
+          clusterElement.textContent = String(features.length);
+          clusterElement.title = `${features.length} urns`;
+          clusterElement.setAttribute('aria-label', `${features.length} urns`);
+          clusterElement.addEventListener('click', (event) => {
+            event.stopPropagation();
+            state.map.update({ location: { center: coordinates, zoom: Math.min((state.map.zoom || 11) + 2, 18) } });
+          });
+          return new YMapMarker({ coordinates }, clusterElement);
+        };
+        state.urnsClusterer = new YMapClusterer({
+          method: clusterByGrid({ gridSize: 80 }),
+          features: records.map((item) => ({ type: 'Feature', id: item.id, properties: item.properties, geometry: item.geometry })),
+          marker,
+          cluster
+        });
+        return;
+      }
       records.forEach((item) => {
         if (item.geometry.type === 'Point' && YMapMarker) {
           const marker = document.createElement('button');
@@ -509,6 +552,8 @@
       const normalized = extractFeatures(data).map((item, index) => normalizeFeature(item, index, layerKey)).filter(Boolean);
       if (!normalized.length) throw new Error('В GeoJSON нет объектов с геометрией.');
       state.layers[layerKey].records.forEach((item) => { if (item.feature?.parent && state.map) state.map.removeChild(item.feature); });
+      if (layerKey === 'urns' && state.urnsClusterer?.parent && state.map) state.map.removeChild(state.urnsClusterer);
+      if (layerKey === 'urns') state.urnsClusterer = null;
       state.layers[layerKey].records = normalized;
       await createMapFeatures(normalized);
       renderDistrictSelect(); renderSectionSelect(); renderLayerControls(); renderLegend(); renderVisibleFeatures();
