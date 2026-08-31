@@ -421,7 +421,7 @@
           } finally {
             layer.loading = false;
             renderLayerControls();
-            renderVisibleFeatures();
+            if (!layer.error) renderVisibleFeatures();
             updateSmmPanel();
           }
           return;
