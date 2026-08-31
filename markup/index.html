@@ -142,6 +142,18 @@ main{flex:1;display:flex;min-height:0}
 .pp-actions{display:flex;gap:6px;flex-wrap:wrap}
 .file-label{display:inline-flex;align-items:center;gap:6px;border:1px dashed var(--accent);color:var(--accent);background:var(--accent-soft);padding:6px 10px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer}
 .file-label:hover{background:#dcefec}
+
+/* -- Инструменты и маршруты -- */
+.route-row{cursor:pointer}
+.btn.armed{background:var(--accent);border-color:var(--accent);color:#fff}
+.map-reset{position:absolute;top:10px;right:10px;z-index:500;box-shadow:var(--shadow);background:var(--panel)}
+.route-head{display:flex;align-items:center;gap:7px}
+.swatch{width:14px;height:14px;border-radius:4px;border:1px solid rgba(16,38,54,.3);flex:none}
+.route-label{font-size:12px;font-weight:700;color:var(--muted);flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.route-opts{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--muted);flex-wrap:wrap}
+.route-width{width:64px;border:1px solid var(--line);border-radius:8px;padding:3px 4px;font-size:12px;background:var(--panel);color:var(--ink)}
+.route-start{width:12px;height:12px;border-radius:50%;border:2px solid #fff;box-shadow:0 1px 4px rgba(16,38,54,.45)}
+.route-end{width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:11px solid #c00000;filter:drop-shadow(0 1px 2px rgba(16,38,54,.45))}
 </style>
 </head>
 <body>
@@ -222,6 +234,7 @@ main{flex:1;display:flex;min-height:0}
       </aside>
       <div class="map-wrap">
         <div id="map-district" class="map-container"></div>
+        <button class="btn small map-reset" id="btn-fit-district" type="button">⤢ К границам района</button>
         <div class="map-credit">Границы районов: © участники OpenStreetMap, GIS-Lab</div>
       </div>
     </div>
@@ -265,6 +278,7 @@ main{flex:1;display:flex;min-height:0}
       </aside>
       <div class="map-wrap">
         <div id="map-prefecture" class="map-container"></div>
+        <button class="btn small map-reset" id="btn-fit-prefecture" type="button">⤢ Вся карта</button>
         <div class="map-credit">Границы районов: © участники OpenStreetMap, GIS-Lab</div>
       </div>
     </div>
@@ -293,6 +307,7 @@ main{flex:1;display:flex;min-height:0}
 /* ═══════════ КОНФИГУРАЦИЯ ═══════════ */
 const DISTRICTS = ['Аэропорт','Беговой','Бескудниковский','Войковский','Восточное Дегунино','Головинский','Дмитровский','Западное Дегунино','Коптево','Левобережный','Молжаниновский','Савеловский','Сокол','Тимирязевский','Ховрино','Хорошевский'];
 const PALETTE = ['#d81b60','#7b1fa2','#3949ab','#1e88e5','#00acc1','#00897b','#43a047','#7cb342','#c0ca33','#fdd835','#fb8c00','#f4511e','#e53935','#8d6e63','#5d4037','#455a64'];
+const ROUTE_COLORS = ['#e6194b','#3cb44b','#4363d8','#f58231','#911eb4','#42d4f4','#f032e6','#bfef45','#fabed4','#469990','#dcbeff','#9a6324','#800000','#000075','#666666'];
 const PREFECTURE_CODE = '';
 const LS = {
   locks: 'markup_locks',
@@ -322,6 +337,9 @@ const state = {
   districtFeatures: [],
   photoMode: false,
   photoMarkerObjs: {},
+  routeCounter: 1,
+  ptCounters: {},
+  endpointMarkers: {},
   districtMap: null, districtMapPromise: null, districtMapReady: false,
   prefMap: null, prefMapPromise: null, prefMapReady: false
 };
@@ -549,13 +567,13 @@ function addDistrictLayers(){
   clearF(state.districtFeatures, map);
   const df = state.districtGeom[state.district];
   if(df){
-    const g = new window.ymaps3.YMapFeature({ geometry: df.geometry, style: { stroke: [{ color: '#0d827c', width: 3 }], fill: [{ color: '#0d827c', opacity: 0.03 }] }, zIndex: 1700 });
+    const g = new window.ymaps3.YMapFeature({ geometry: df.geometry, style: { stroke: [{ color: '#0d827c', width: 3 }] }, zIndex: 1700 });
     map.addChild(g); state.districtFeatures.push(g);
   }
   if(state.areasGeo){
     const ys = (state.areasGeo.features || []).filter(f => f.properties && f.properties.district === state.district);
     ys.forEach(f => {
-      const g = new window.ymaps3.YMapFeature({ geometry: f.geometry, style: { stroke: [{ color: 'rgba(13,130,124,.55)', width: 1.2 }], fill: [{ color: '#0d827c', opacity: 0.05 }] }, zIndex: 1600 });
+      const g = new window.ymaps3.YMapFeature({ geometry: f.geometry, style: { stroke: [{ color: 'rgba(13,130,124,.55)', width: 1.2 }] }, zIndex: 1600 });
       map.addChild(g); state.districtFeatures.push(g);
     });
   }
@@ -565,7 +583,7 @@ function addPrefectureLayers(){
   clearF(state.districtFeatures, map);
   const ds = (state.districtsGeo && state.districtsGeo.features) || [];
   ds.forEach(f => {
-    const g = new window.ymaps3.YMapFeature({ geometry: f.geometry, style: { stroke: [{ color: '#0d827c', width: 2 }], fill: [{ color: '#0d827c', opacity: 0.02 }] }, zIndex: 1700 });
+    const g = new window.ymaps3.YMapFeature({ geometry: f.geometry, style: { stroke: [{ color: '#0d827c', width: 2 }] }, zIndex: 1700 });
     map.addChild(g); state.districtFeatures.push(g);
   });
   if(state.areasGeo){
@@ -574,7 +592,7 @@ function addPrefectureLayers(){
     const next = () => {
       const sl = all.slice(i, i + step);
       sl.forEach(f => {
-        const g = new window.ymaps3.YMapFeature({ geometry: f.geometry, style: { stroke: [{ color: 'rgba(13,130,124,.4)', width: 0.8 }], fill: [{ color: '#0d827c', opacity: 0.02 }] }, zIndex: 1500 });
+        const g = new window.ymaps3.YMapFeature({ geometry: f.geometry, style: { stroke: [{ color: 'rgba(13,130,124,.4)', width: 0.8 }] }, zIndex: 1500 });
         map.addChild(g); state.districtFeatures.push(g);
       });
       i += step;
@@ -591,9 +609,10 @@ function renderPrefectureLayerRoutes(){
     const idx = DISTRICTS.indexOf(d); if(idx < 0) continue;
     const fc = layers[d].geojson;
     if(!fc || !Array.isArray(fc.features)) continue;
-    fc.features.forEach(f => {
+    fc.features.forEach((f, i) => {
       if(f.geometry && f.geometry.type === 'LineString'){
-        const g = new window.ymaps3.YMapFeature({ geometry: f.geometry, style: { stroke: [{ color: PALETTE[idx], width: 4 }] }, zIndex: 1900 + idx });
+        const eff = enrichRouteFeature(f, i);
+        const g = new window.ymaps3.YMapFeature({ geometry: eff.geometry, style: { stroke: [{ color: PALETTE[idx], width: eff.properties.width }] }, zIndex: 1900 + idx });
         map.addChild(g); state.layerFeatures.push(g);
       }
     });
@@ -644,30 +663,82 @@ function undoVertex(){
 }
 function setDrawing(on, text){
   state.drawing = on;
-  if(on) hint(text || 'Кликайте по карте...');
-  else{ clearPreview(); state.points = []; state.continueRouteId = null; hint(null); }
+  const armedBtn = document.getElementById(state.mode === 'prefecture' ? 'pref-btn-draw' : 'btn-draw-route');
+  if(armedBtn) armedBtn.classList.toggle('armed', on);
+  if(on) hint(text || 'Режим рисования: клик - точка, Esc - завершить, Ctrl+Z - отменить точку');
+  else{ clearPreview(); state.points = []; state.continueRouteId = null; hint('Готов к работе. "＋ Маршрут" - новый маршрут, "Продолжить" - дорисовать.'); }
 }
 function removeRF(id){
   const f = state.routeFeatures[id];
   if(f){ try{ curMap().removeChild(f); }catch(e){} delete state.routeFeatures[id]; }
+  removeRouteEndpoints(id);
 }
-function renderRF(r, w){
+function renderRF(r, selected){
   const map = curMap(); if(!map) return;
+  const base = [2,3,4,6,8].includes(r.width) ? r.width : 4;
+  const width = selected ? Math.min(base + 3, 12) : base;
+  const color = r.color || ROUTE_COLORS[((r.route_no || 1) - 1) % ROUTE_COLORS.length];
   const idx = state.mode === 'prefecture' && r.district ? DISTRICTS.indexOf(r.district) : -1;
-  const color = idx >= 0 ? PALETTE[idx] : '#c00000';
   const f = new window.ymaps3.YMapFeature({
     geometry: { type: 'LineString', coordinates: r.coords },
-    style: { stroke: [{ color: color, width: w || 4 }] },
-    zIndex: (idx >= 0 ? 1900 + idx : 1900) + (w === 7 ? 1 : 0)
+    style: { stroke: [{ color: color, width: width }] },
+    zIndex: (idx >= 0 ? 1900 + idx : 1900) + (selected ? 1 : 0)
   });
   f._routeId = r.route_id;
   map.addChild(f);
   state.routeFeatures[r.route_id] = f;
+  renderRouteEndpoints(r, color);
 }
 function restyle(){
-  state.routes.forEach(r => { removeRF(r.route_id); renderRF(r, r.route_id === state.selectedRouteId ? 7 : 4); });
+  state.routes.forEach(r => { removeRF(r.route_id); renderRF(r, r.route_id === state.selectedRouteId); });
 }
 const selectRoute = id => { state.selectedRouteId = id; restyle(); renderRouteList(); };
+function nextRouteNo(){
+  if(state.mode === 'district'){
+    const n = state.routeCounter || 1;
+    state.routeCounter = n + 1;
+    return n;
+  }
+  const dk = state.drawDistrict || '__all__';
+  const n = state.ptCounters[dk] || 1;
+  state.ptCounters[dk] = n + 1;
+  return n;
+}
+function enrichRouteFeature(f, index){
+  const p = (f && f.properties) || {};
+  const route_no = p.route_no || (index + 1);
+  const color = p.color || ROUTE_COLORS[(route_no - 1) % ROUTE_COLORS.length];
+  const width = [2,3,4,6,8].includes(p.width) ? p.width : 4;
+  return { type: (f && f.type) || 'Feature', properties: Object.assign({}, p, { route_no: route_no, color: color, width: width }), geometry: f.geometry };
+}
+function renderRouteEndpoints(r, colorOverride){
+  const map = curMap(); if(!map) return;
+  const Y = window.ymaps3;
+  removeRouteEndpoints(r.route_id);
+  if(!Array.isArray(r.coords) || r.coords.length < 2) return;
+  const color = colorOverride || r.color || ROUTE_COLORS[((r.route_no || 1) - 1) % ROUTE_COLORS.length];
+  const start = r.coords[0];
+  const last = r.coords[r.coords.length - 1];
+  const sEl = document.createElement('div');
+  sEl.className = 'route-start';
+  sEl.style.background = color;
+  const sMk = new Y.YMapMarker({ coordinates: start, zIndex: 2050 }, sEl);
+  map.addChild(sMk);
+  const p1 = r.coords[r.coords.length - 2];
+  const deg = Math.atan2(last[0] - p1[0], last[1] - p1[1]) * 180 / Math.PI;
+  const eEl = document.createElement('div');
+  eEl.className = 'route-end';
+  eEl.style.borderBottomColor = color;
+  eEl.style.transform = 'rotate(' + deg + 'deg)';
+  const eMk = new Y.YMapMarker({ coordinates: last, zIndex: 2050 }, eEl);
+  map.addChild(eMk);
+  state.endpointMarkers[r.route_id] = [sMk, eMk];
+}
+function removeRouteEndpoints(id){
+  const map = curMap(); if(!map) return;
+  (state.endpointMarkers[id] || []).forEach(m => { try{ map.removeChild(m); }catch(e){} });
+  delete state.endpointMarkers[id];
+}
 function finishRoute(){
   if(state.points.length < 2){ toast('Маршрут должен содержать минимум 2 точки'); return; }
   if(state.continueRouteId){
@@ -684,10 +755,14 @@ function finishRoute(){
     }
     state.continueRouteId = null;
   }
+  const route_no = nextRouteNo();
   const route = {
     route_id: 'R' + Date.now(),
-    name: 'Маршрут ' + (state.routes.length + 1),
+    name: 'Маршрут ' + route_no,
     district: state.mode === 'district' ? state.district : state.drawDistrict,
+    route_no: route_no,
+    color: ROUTE_COLORS[(route_no - 1) % ROUTE_COLORS.length],
+    width: 4,
     created_at: new Date().toISOString(),
     coords: state.points.slice()
   };
@@ -707,7 +782,7 @@ function deleteRoute(id){
 function continueRoute(id){
   const r = state.routes.find(x => x.route_id === id);
   if(!r) return;
-  setDrawing(true, 'Продолжение маршрута "' + r.name + '". Кликайте по карте...');
+  setDrawing(true, 'Режим рисования (продолжение "' + r.name + '"): клик - точка, Esc - завершить, Ctrl+Z - отменить точку');
   state.continueRouteId = id;
   state.points = r.coords.slice();
   state.points.forEach(c => { dot(c[0], c[1]); });
@@ -715,7 +790,7 @@ function continueRoute(id){
 }
 function autosave(){
   if(state.mode !== 'district' || !state.district) return;
-  setDraft(state.district, { routes: state.routes.map(r => Object.assign({}, r)), saved_at: new Date().toISOString() });
+  setDraft(state.district, { routes: state.routes.map(r => Object.assign({}, r)), next_route_no: state.routeCounter, saved_at: new Date().toISOString() });
 }
 function renderRouteList(){
   const wrap = document.getElementById(state.mode === 'prefecture' ? 'pref-route-list' : 'route-list');
@@ -730,6 +805,16 @@ function renderRouteList(){
   state.routes.forEach(r => {
     const row = document.createElement('div');
     row.className = 'route-row' + (r.route_id === state.selectedRouteId ? ' selected' : '');
+    row.onclick = () => selectRoute(r.route_id);
+    const head = document.createElement('div');
+    head.className = 'route-head';
+    const swatch = document.createElement('span');
+    swatch.className = 'swatch';
+    swatch.style.background = r.color || ROUTE_COLORS[((r.route_no || 1) - 1) % ROUTE_COLORS.length];
+    const label = document.createElement('span');
+    label.className = 'route-label';
+    label.textContent = 'Маршрут ' + (r.route_no || (state.routes.indexOf(r) + 1));
+    head.append(swatch, label);
     const inp = document.createElement('input');
     inp.className = 'route-name-input';
     inp.value = r.name;
@@ -738,11 +823,25 @@ function renderRouteList(){
     const meta = document.createElement('div');
     meta.className = 'route-meta';
     meta.textContent = r.coords.length + ' точек . ' + new Date(r.created_at).toLocaleString('ru-RU');
+    const opts = document.createElement('div');
+    opts.className = 'route-opts';
+    const wLab = document.createElement('span');
+    wLab.textContent = 'Толщина:';
+    const wSel = document.createElement('select');
+    wSel.className = 'route-width';
+    [2,3,4,6,8].forEach(v => { const o = document.createElement('option'); o.value = String(v); o.textContent = v + ' px'; if((r.width || 4) === v) o.selected = true; wSel.appendChild(o); });
+    wSel.addEventListener('click', e => e.stopPropagation());
+    wSel.onchange = () => {
+      r.width = Number(wSel.value);
+      if(state.mode === 'district') autosave();
+      renderRF(r, r.route_id === state.selectedRouteId);
+    };
+    opts.append(wLab, wSel);
     const acts = document.createElement('div');
     acts.className = 'route-actions';
-    const mk = (t, cls, fn) => { const b = document.createElement('button'); b.className = 'btn small' + (cls ? ' ' + cls : ''); b.textContent = t; b.onclick = fn; return b; };
-    acts.append(mk('Выбрать', '', () => selectRoute(r.route_id)), mk('Продолжить', '', () => continueRoute(r.route_id)), mk('Удалить', 'danger', () => deleteRoute(r.route_id)));
-    row.append(inp, meta, acts);
+    const mk = (t, cls, fn) => { const b = document.createElement('button'); b.className = 'btn small' + (cls ? ' ' + cls : ''); b.textContent = t; b.onclick = e => { if(e && e.stopPropagation) e.stopPropagation(); fn(); }; return b; };
+    acts.append(mk('Продолжить', '', () => continueRoute(r.route_id)), mk('Удалить', 'danger', () => deleteRoute(r.route_id)));
+    row.append(head, inp, meta, opts, acts);
     wrap.appendChild(row);
   });
 }
@@ -768,6 +867,34 @@ function prefectureMapClick(obj, ev){
     return;
   }
   if(state.photoMode) placePhotoMarker(c[0], c[1]);
+}
+function editorScreenVisible(){
+  if(state.mode !== 'district' && state.mode !== 'prefecture') return false;
+  const el = document.getElementById(state.mode === 'prefecture' ? 'screen-editor-prefecture' : 'screen-editor-district');
+  return !!el && !el.hidden;
+}
+function onWindowKeydown(e){
+  if(!editorScreenVisible()) return;
+  const tag = e.target && e.target.tagName;
+  if(tag === 'INPUT' || tag === 'SELECT' || tag === 'TEXTAREA') return;
+  if(e.key === 'Escape'){
+    if(state.drawing){
+      if(state.points.length >= 2) finishRoute();
+      else setDrawing(false);
+      e.preventDefault();
+    }
+    return;
+  }
+  if(!state.drawing) return;
+  if(e.ctrlKey && (e.key === 'z' || e.key === 'Z' || e.key === 'я' || e.key === 'Я')){
+    undoVertex();
+    e.preventDefault();
+    return;
+  }
+  if(e.key === 'Backspace'){
+    undoVertex();
+    e.preventDefault();
+  }
 }
 
 /* ═══════════ ПРЕФЕКТУРА: СТАТУСЫ ═══════════ */
@@ -810,6 +937,7 @@ function renderPrefectureSidebar(){
   const sel = document.getElementById('pref-draw-district');
   sel.innerHTML = '<option value="">- Без ограничения -</option>' + DISTRICTS.map(d => '<option value="' + esc(d) + '">' + esc(d) + '</option>').join('');
   sel.value = state.drawDistrict;
+  if(!state.drawing) hint('Готов к работе. "＋ Маршрут" - новый маршрут, "Продолжить" - дорисовать.');
   renderRouteList();
   renderPhotoList();
 }
@@ -913,7 +1041,7 @@ function uploadDraftAsLayer(d){
     .filter(r => Array.isArray(r.coords) && r.coords.length >= 2)
     .map(r => ({
       type: 'Feature',
-      properties: { route_id: r.route_id, name: r.name, district: r.district || d, created_at: r.created_at },
+      properties: { route_id: r.route_id, name: r.name, district: r.district || d, route_no: r.route_no, color: r.color, width: r.width, created_at: r.created_at },
       geometry: { type: 'LineString', coordinates: r.coords }
     }));
   if(!features.length){
@@ -961,7 +1089,7 @@ function exportPrefecture(){
     const fc = layers[d].geojson;
     if(fc && Array.isArray(fc.features)) fc.features.forEach(f => { if(f.geometry && f.geometry.type === 'LineString') features.push(f); });
   });
-  state.routes.forEach(r => { features.push({ type: 'Feature', properties: { route_id: r.route_id, name: r.name, district: r.district, created_at: r.created_at, author: 'prefecture' }, geometry: { type: 'LineString', coordinates: r.coords } }); });
+  state.routes.forEach(r => { features.push({ type: 'Feature', properties: { route_id: r.route_id, name: r.name, district: r.district, route_no: r.route_no, color: r.color, width: r.width, created_at: r.created_at, author: 'prefecture' }, geometry: { type: 'LineString', coordinates: r.coords } }); });
   const markers = getMarkers();
   markers.forEach(m => { features.push({ type: 'Feature', properties: { photo_id: m.photo_id, note: m.note, has_photo: !!m.has_photo, photo_name: m.photo_name || '', attached_at: m.created_at, marker: 'photo' }, geometry: { type: 'Point', coordinates: m.coords } }); });
   const out = { type: 'FeatureCollection', features: features, metadata: { status: 'prefecture_export', exported_at: new Date().toISOString(), districts_included: districtsIncluded, photo_markers: markers.length, app: 'karta-sao/markup' } };
@@ -974,6 +1102,7 @@ function resetEditorState(mode, district){
   const map = curMap();
   if(map){
     Object.keys(state.routeFeatures).forEach(k => { const f = state.routeFeatures[k]; try{ map.removeChild(f); }catch(e){} });
+    Object.keys(state.endpointMarkers).forEach(k => { removeRouteEndpoints(k); });
     clearF(state.layerFeatures, map);
     clearF(state.districtFeatures, map);
     Object.keys(state.photoMarkerObjs).forEach(k => { const m = state.photoMarkerObjs[k]; try{ map.removeChild(m); }catch(e){} });
@@ -990,6 +1119,9 @@ function resetEditorState(mode, district){
   state.previewFeature = null;
   state.vertexMarkers = [];
   state.routeFeatures = {};
+  state.endpointMarkers = {};
+  state.routeCounter = 1;
+  state.ptCounters = {};
   state.photoMarkerObjs = {};
   state.photoMode = false;
   const t = document.getElementById('photo-mode-toggle');
@@ -1008,6 +1140,14 @@ async function openDistrictEditor(district){
   const draft = getDraft(state.district);
   if(draft && Array.isArray(draft.routes) && draft.routes.length){
     state.routes = draft.routes.map(r => Object.assign({}, r, { coords: (r.coords || []).map(c => c.slice()) }));
+    let maxNo = 0;
+    state.routes.forEach((r, i) => {
+      if(!r.route_no) r.route_no = i + 1;
+      if(!r.color) r.color = ROUTE_COLORS[(r.route_no - 1) % ROUTE_COLORS.length];
+      if(![2,3,4,6,8].includes(r.width)) r.width = 4;
+      if(r.route_no > maxNo) maxNo = r.route_no;
+    });
+    state.routeCounter = Math.max(draft.next_route_no || 0, maxNo + 1);
     state.routes.forEach(r => { renderRF(r); });
     renderRouteList();
     toast('Восстановлен черновик района: ' + state.routes.length + ' маршр. от ' + new Date(draft.saved_at).toLocaleString('ru-RU'));
@@ -1019,6 +1159,7 @@ function renderDistrictSidebar(){
   const chip = document.getElementById('district-status');
   chip.className = 'chip ' + stClass(st);
   chip.textContent = statusText(st);
+  if(!state.drawing) hint('Готов к работе. "＋ Маршрут" - новый маршрут, "Продолжить" - дорисовать.');
   renderRouteList();
 }
 async function openPrefectureEditor(){
@@ -1039,7 +1180,7 @@ function saveAndLockDistrict(){
   if(!confirm('Район будет заблокирован до особого распоряжения префектуры. Файл слоя будет выгружен. Продолжить?')) return;
   const features = state.routes.map(r => ({
     type: 'Feature',
-    properties: { route_id: r.route_id, name: r.name, district: r.district, created_at: r.created_at },
+    properties: { route_id: r.route_id, name: r.name, district: r.district, route_no: r.route_no, color: r.color, width: r.width, created_at: r.created_at },
     geometry: { type: 'LineString', coordinates: r.coords }
   }));
   const fc = { type: 'FeatureCollection', features: features, metadata: { district: state.district, status: 'locked', author_mode: 'район', exported_at: new Date().toISOString(), app: 'karta-sao/markup' } };
@@ -1088,7 +1229,7 @@ function wireEvents(){
   const drawStart = () => {
     if(state.drawing){ clearPreview(); state.points = []; }
     state.continueRouteId = null;
-    setDrawing(true, 'Кликайте по карте...');
+    setDrawing(true);
     renderRouteList();
   };
   by('btn-draw-route').onclick = drawStart;
@@ -1117,6 +1258,13 @@ function wireEvents(){
     e.target.value = '';
     if(f) attachPhotoToMarker(currentPhotoId, f);
   });
+  by('btn-fit-district').onclick = () => {
+    const f = state.districtGeom[state.district];
+    if(f) fitToBounds(state.districtMap, f.geometry);
+    else toast('Границы района не загружены');
+  };
+  by('btn-fit-prefecture').onclick = () => { fitToBounds(state.prefMap, allDistrictsBbox()); };
+  window.addEventListener('keydown', onWindowKeydown);
 }
 function init(){
   wireEvents();
