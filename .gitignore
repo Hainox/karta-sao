@@ -5,3 +5,4 @@ publish/
 __pycache__/
 .freebuff/
 node_modules/
+work/mo_source.geojson

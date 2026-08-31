@@ -1,0 +1,1098 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Разметка маршрутов САО</title>
+<script>
+  window.ymaps3Ready = new Promise((resolve, reject) => {
+    const script = document.createElement('script');
+    script.src = 'https://api-maps.yandex.ru/v3/?apikey=6b197a0e-9109-4624-9520-954a47c26dda&lang=ru_RU';
+    script.onload = () => window.ymaps3 ? resolve(window.ymaps3) : reject(new Error('Объект ymaps3 не создан. Проверьте API-ключ и HTTP Referer.'));
+    script.onerror = () => reject(new Error('Yandex Maps API не загрузился. Проверьте интернет и ограничения API-ключа.'));
+    document.head.appendChild(script);
+  });
+</script>
+<style>
+:root{
+  --ink:#102636; --muted:#63747d; --line:#d7e0e2; --paper:#f7f5ef; --canvas:#dfe8e8;
+  --panel:#fff; --accent:#0d827c; --accent-soft:#e8f5f2;
+  --shadow:0 14px 36px rgba(16,38,54,.12);
+  font-family:"Century Gothic",Inter,Arial,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family:"Century Gothic",Inter,Arial,sans-serif;
+  background:var(--paper);color:var(--ink);
+  display:flex;flex-direction:column;overflow:hidden;
+}
+button{font-family:inherit;cursor:pointer}
+input,select,textarea{font-family:inherit}
+[hidden]{display:none!important}
+input[type=file]{display:none}
+
+/* -- Верхняя панель -- */
+.topbar{display:flex;align-items:center;gap:14px;padding:10px 18px;background:var(--panel);border-bottom:1px solid var(--line);box-shadow:0 2px 10px rgba(16,38,54,.05);z-index:10}
+.coa{width:36px;height:36px;border-radius:8px;object-fit:cover;border:1px solid var(--line)}
+.titles{flex:1;min-width:0}
+.titles h1{font-size:19px;letter-spacing:.4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.subtitle{font-size:12px;color:var(--muted);margin-top:2px}
+.top-actions{display:flex;gap:8px}
+
+/* -- Экраны -- */
+main{flex:1;display:flex;min-height:0}
+.screen{flex:1;display:flex;min-height:0}
+.screen[hidden]{display:none}
+
+/* -- Кнопки -- */
+.btn{border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:9px 14px;border-radius:10px;font-size:13.5px;font-weight:700;transition:background .12s,border-color .12s,transform .06s}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
+.btn:active{transform:translateY(1px)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.primary:hover{background:#0b716c;color:#fff}
+.btn.danger{background:var(--panel);border-color:#d9534f;color:#c9302c}
+.btn.danger:hover{background:#fde3e3;border-color:#c9302c}
+.btn.small{padding:6px 10px;font-size:12px;border-radius:8px}
+.btn:disabled{opacity:.55;cursor:not-allowed}
+
+/* -- Стартовый экран -- */
+.entry-panel{margin:auto;width:min(880px,92vw);background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:36px;box-shadow:var(--shadow);text-align:center}
+.entry-panel h2{font-size:26px;margin-bottom:8px}
+.entry-sub{color:var(--muted);font-size:14px;margin-bottom:28px}
+.entry-cards{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.atlas-card{display:flex;flex-direction:column;align-items:flex-start;gap:10px;padding:22px;background:var(--paper);border:1px solid var(--line);border-radius:14px;text-align:left;transition:transform .15s ease,box-shadow .15s ease,border-color .15s ease}
+.atlas-card:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:var(--accent)}
+.icon-chip{width:44px;height:44px;border-radius:12px;background:var(--ink);color:#f5c86a;display:flex;align-items:center;justify-content:center;font-size:20px}
+.card-title{font-size:18px;font-weight:700}
+.card-desc{font-size:13px;color:var(--muted);line-height:1.45}
+
+/* -- Выбор района -- */
+.picker-panel{margin:auto;width:min(940px,94vw);background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:28px;box-shadow:var(--shadow)}
+.picker-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.picker-head h2{font-size:22px}
+.progress-line{font-size:13px;color:var(--muted);font-weight:700}
+.district-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.district-btn{display:flex;flex-direction:column;gap:8px;padding:14px;border:1px solid var(--line);border-radius:12px;background:var(--paper);text-align:left;font-size:14px;font-weight:700;transition:transform .12s,border-color .12s,box-shadow .12s}
+.district-btn:hover:not(.is-locked){border-color:var(--accent);transform:translateY(-2px);box-shadow:var(--shadow)}
+.district-btn.is-locked{opacity:.62;cursor:not-allowed}
+.picker-actions{margin-top:18px;display:flex;gap:10px}
+
+/* -- Статусные чипы -- */
+.chip{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px;line-height:1.4;white-space:nowrap}
+.chip.draft{background:#fff3cd;color:#8a6d1a}
+.chip.locked{background:#fde3e3;color:#b3362b}
+.chip.done{background:#e2f3e6;color:#1e7a41}
+.chip.empty{background:#eef1f2;color:var(--muted)}
+.chip.loaded{background:var(--accent-soft);color:var(--accent)}
+
+/* -- Редактор: сетка -- */
+.editor-grid{flex:1;display:grid;grid-template-columns:340px 1fr;min-height:0}
+.sidebar{background:var(--panel);border-right:1px solid var(--line);overflow-y:auto;padding:16px}
+.side-panel{display:flex;flex-direction:column;gap:14px}
+.side-title{font-size:15px;font-weight:700;line-height:1.4}
+.side-sub{font-size:12px;color:var(--muted)}
+.side-block{border:1px solid var(--line);border-radius:12px;padding:12px;background:var(--paper);display:flex;flex-direction:column;gap:10px}
+.side-block h3{font-size:11px;text-transform:uppercase;letter-spacing:.7px;color:var(--muted)}
+.map-wrap{position:relative;min-width:0}
+.map-container{position:relative;width:100%;height:100%}
+.map-credit{position:absolute;right:10px;bottom:8px;font-size:11px;color:var(--muted);background:rgba(247,245,239,.78);padding:2px 8px;border-radius:6px;pointer-events:none;z-index:400}
+.error-banner{background:#fde3e3;color:#b3362b;border:1px solid #f3c2bd;border-radius:10px;padding:9px 11px;font-size:12.5px;line-height:1.4}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px}
+.draw-hint{font-size:12.5px;color:var(--accent);background:var(--accent-soft);border-radius:8px;padding:8px 10px;line-height:1.45}
+.lock-note{font-size:11.5px;color:var(--muted);background:#f3f5f5;border-radius:8px;padding:6px 9px;line-height:1.45}
+.field-label{font-size:12px;color:var(--muted)}
+.select{width:100%;border:1px solid var(--line);border-radius:10px;padding:8px 10px;font-size:13px;background:var(--panel);color:var(--ink)}
+.switch-row{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700}
+.switch-row input{width:16px;height:16px;accent-color:var(--accent)}
+
+/* -- Список маршрутов -- */
+.route-list{display:flex;flex-direction:column;gap:8px;max-height:240px;overflow-y:auto}
+.route-row{border:1px solid var(--line);border-radius:10px;padding:8px 10px;background:var(--panel);display:flex;flex-direction:column;gap:7px}
+.route-row.selected{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-soft)}
+.route-name-input{width:100%;border:1px solid var(--line);border-radius:8px;padding:6px 8px;font-size:13px}
+.route-actions{display:flex;gap:6px;flex-wrap:wrap}
+.route-meta{font-size:11px;color:var(--muted)}
+
+/* -- Таблица статусов -- */
+.status-list{display:flex;flex-direction:column;gap:8px;max-height:320px;overflow-y:auto}
+.status-row{border:1px solid var(--line);border-radius:10px;padding:8px 10px;background:var(--panel)}
+.row-head{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.row-name{font-size:13px;font-weight:700}
+.row-actions{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+.row-sub{font-size:11px;color:var(--muted);margin-top:6px}
+
+/* -- Маркеры и точки -- */
+.photo-marker{position:relative;width:26px;height:26px;border-radius:50%;background:var(--ink);border:2px solid #f5c86a;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;cursor:pointer;box-shadow:0 2px 6px rgba(16,38,54,.35)}
+.photo-marker .cam{font-size:12px;line-height:1}
+.photo-marker .num{position:absolute;right:-8px;top:-8px;background:#f5c86a;color:var(--ink);font-size:9px;font-weight:800;border-radius:999px;min-width:15px;height:15px;display:flex;align-items:center;justify-content:center;padding:0 3px}
+.vertex-dot{width:8px;height:8px;border-radius:50%;background:#c00000;border:2px solid #fff;box-shadow:0 0 4px rgba(0,0,0,.4)}
+
+/* -- Toast -- */
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:11px 18px;border-radius:12px;font-size:13.5px;box-shadow:var(--shadow);z-index:3000;max-width:80vw;text-align:center}
+
+/* -- Попап фото-метки -- */
+.photo-popup{position:fixed;right:18px;bottom:18px;width:300px;background:var(--panel);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:14px;z-index:4000;display:flex;flex-direction:column;gap:9px}
+.photo-popup h4{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px}
+.pp-id{font-size:14px;font-weight:700}
+.pp-photo{width:96px;height:96px;object-fit:cover;border-radius:10px;border:1px solid var(--line);background:var(--canvas)}
+.pp-photo-name{font-size:11px;color:var(--muted);word-break:break-all}
+.photo-popup textarea{width:100%;min-height:64px;border:1px solid var(--line);border-radius:10px;padding:8px;font-size:13px;resize:vertical;background:var(--paper)}
+.pp-actions{display:flex;gap:6px;flex-wrap:wrap}
+.file-label{display:inline-flex;align-items:center;gap:6px;border:1px dashed var(--accent);color:var(--accent);background:var(--accent-soft);padding:6px 10px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer}
+.file-label:hover{background:#dcefec}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <img src="../sao-coa.png" alt="Герб САО" class="coa">
+  <div class="titles">
+    <h1>Разметка маршрутов САО</h1>
+    <p class="subtitle">Границы районов . дворовые территории . маршруты</p>
+  </div>
+  <div class="top-actions">
+    <button class="btn small" id="btn-header-exit" type="button" title="Выйти на стартовый экран">Выход</button>
+  </div>
+</header>
+
+<main>
+  <!-- ЭКРАН 1: Вход -->
+  <section id="screen-entry" class="screen">
+    <div class="entry-panel">
+      <h2>Модуль разметки маршрутов</h2>
+      <p class="entry-sub">Выберите режим работы. Данные сохраняются локально в браузере и выгружаются в GeoJSON.</p>
+      <div class="entry-cards">
+        <button class="atlas-card" id="btn-open-districts" type="button">
+          <span class="icon-chip">🏘️</span>
+          <span class="card-title">Район</span>
+          <span class="card-desc">Разметка маршрутов в границах одного района с автозаполнением черновика.</span>
+        </button>
+        <button class="atlas-card" id="btn-open-prefecture" type="button">
+          <span class="icon-chip">🏛️</span>
+          <span class="card-title">Префектура</span>
+          <span class="card-desc">Сводный слой САО: статусы районов, загрузка слоёв, фото-метки, экспорт.</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ЭКРАН 2: Выбор района -->
+  <section id="screen-picker" class="screen" hidden>
+    <div class="picker-panel">
+      <div class="picker-head">
+        <h2>Выбор района</h2>
+        <div class="progress-line" id="picker-progress">Размечено маршрутами: 0 из 16</div>
+      </div>
+      <div class="district-grid" id="district-grid"></div>
+      <div class="picker-actions">
+        <button class="btn" id="btn-picker-back" type="button"><span aria-hidden="true">&#8592;</span> Назад</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ЭКРАН 3: Редактор района -->
+  <section id="screen-editor-district" class="screen" hidden>
+    <div class="editor-grid">
+      <aside class="sidebar">
+        <div class="side-panel">
+          <div class="side-title">Район: <span id="district-title"></span></div>
+          <div class="side-sub">Границы: OSM / GIS-Lab . дворовые территории: areas.geojson</div>
+          <span class="chip" id="district-status"></span>
+          <div class="error-banner" id="error-banner-district" hidden>districts.geojson не найден</div>
+          <div class="side-block">
+            <h3>Рисование</h3>
+            <div class="toolbar">
+              <button class="btn primary small" id="btn-draw-route" type="button">＋ Маршрут</button>
+              <button class="btn small" id="btn-undo-point" type="button">Отменить точку</button>
+              <button class="btn small" id="btn-finish-route" type="button">Завершить маршрут</button>
+            </div>
+            <div class="draw-hint" id="district-draw-hint" hidden>Кликайте по карте...</div>
+            <div class="lock-note" id="district-draw-note">Точки вне границ района добавлять нельзя.</div>
+          </div>
+          <div class="side-block">
+            <h3>Маршруты: <span id="route-count">0</span></h3>
+            <div class="route-list" id="route-list"></div>
+          </div>
+          <div class="side-block">
+            <button class="btn primary" id="btn-save-lock" type="button">Сохранить и завершить работу района</button>
+            <button class="btn" id="btn-editor-exit" type="button">Выход</button>
+          </div>
+        </div>
+      </aside>
+      <div class="map-wrap">
+        <div id="map-district" class="map-container"></div>
+        <div class="map-credit">Границы районов: © участники OpenStreetMap, GIS-Lab</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ЭКРАН 4: Редактор префектуры -->
+  <section id="screen-editor-prefecture" class="screen" hidden>
+    <div class="editor-grid">
+      <aside class="sidebar">
+        <div class="side-panel">
+          <div class="side-title">Префектура САО - сводный слой</div>
+          <div class="side-sub">Все 16 районов . дворовые территории . фото-метки</div>
+          <div class="error-banner" id="error-banner-prefecture" hidden>districts.geojson не найден</div>
+          <div class="side-block">
+            <h3>Районы - статусы</h3>
+            <div class="status-list" id="pref-status-list"></div>
+          </div>
+          <div class="side-block">
+            <h3>Рисование маршрутов</h3>
+            <label class="field-label" for="pref-draw-district">Район для рисования (или без ограничения)</label>
+            <select id="pref-draw-district" class="select"></select>
+            <div class="toolbar">
+              <button class="btn primary small" id="pref-btn-draw" type="button">＋ Маршрут</button>
+              <button class="btn small" id="pref-btn-undo" type="button">Отменить точку</button>
+              <button class="btn small" id="pref-btn-finish" type="button">Завершить маршрут</button>
+            </div>
+            <div class="draw-hint" id="pref-draw-hint" hidden>Кликайте по карте...</div>
+            <div class="route-list" id="pref-route-list"></div>
+          </div>
+          <div class="side-block">
+            <h3>Фото-метки</h3>
+            <label class="switch-row"><input type="checkbox" id="photo-mode-toggle"> Расставить фото-метки</label>
+            <div class="route-list" id="photo-marker-list"></div>
+          </div>
+          <div class="side-block">
+            <h3>Экспорт</h3>
+            <button class="btn primary" id="btn-export-prefecture" type="button">Выгрузить сводный слой САО</button>
+            <button class="btn" id="btn-pref-exit" type="button">Выход</button>
+          </div>
+        </div>
+      </aside>
+      <div class="map-wrap">
+        <div id="map-prefecture" class="map-container"></div>
+        <div class="map-credit">Границы районов: © участники OpenStreetMap, GIS-Lab</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="toast" id="toast" hidden></div>
+
+<div class="photo-popup" id="photo-popup" hidden>
+  <h4>Фото-метка</h4>
+  <div class="pp-id" id="pp-id"></div>
+  <img class="pp-photo" id="pp-thumb" hidden alt="Прикреплённое фото">
+  <div class="pp-photo-name" id="pp-photo-name"></div>
+  <textarea id="pp-note" placeholder="Заметка... (сохраняется автоматически)"></textarea>
+  <div class="pp-actions">
+    <label class="file-label" for="photo-file-input">📷 Прикрепить фото</label>
+    <button class="btn small danger" id="pp-delete-photo" type="button">Удалить фото</button>
+    <button class="btn small" id="pp-close" type="button">Закрыть</button>
+  </div>
+</div>
+
+<input type="file" id="layer-file-input" accept=".geojson,application/geo+json,application/json" hidden>
+<input type="file" id="photo-file-input" accept="image/*" hidden>
+<script>
+'use strict';
+/* ═══════════ КОНФИГУРАЦИЯ ═══════════ */
+const DISTRICTS = ['Аэропорт','Беговой','Бескудниковский','Войковский','Восточное Дегунино','Головинский','Дмитровский','Западное Дегунино','Коптево','Левобережный','Молжаниновский','Савеловский','Сокол','Тимирязевский','Ховрино','Хорошевский'];
+const PALETTE = ['#d81b60','#7b1fa2','#3949ab','#1e88e5','#00acc1','#00897b','#43a047','#7cb342','#c0ca33','#fdd835','#fb8c00','#f4511e','#e53935','#8d6e63','#5d4037','#455a64'];
+const PREFECTURE_CODE = '';
+const LS = {
+  locks: 'markup_locks',
+  layers: 'markup_prefecture_layers',
+  photos: 'markup_photo_markers',
+  draft: d => 'markup_draft_' + d
+};
+const STATUS_TEXT = { locked: '\uD83D\uDD12 Заблокирован', draft: 'Черновик', loaded: 'Размечен', empty: 'Не размечен' };
+
+/* ═══════════ СОСТОЯНИЕ ═══════════ */
+const state = {
+  mode: null,
+  district: null,
+  drawDistrict: '',
+  districtsGeo: null,
+  districtGeom: {},
+  areasGeo: null,
+  routes: [],
+  selectedRouteId: null,
+  drawing: false,
+  points: [],
+  continueRouteId: null,
+  previewFeature: null,
+  vertexMarkers: [],
+  routeFeatures: {},
+  layerFeatures: [],
+  districtFeatures: [],
+  photoMode: false,
+  photoMarkerObjs: {},
+  districtMap: null, districtMapPromise: null, districtMapReady: false,
+  prefMap: null, prefMapPromise: null, prefMapReady: false
+};
+
+/* ═══════════ ХРАНИЛИЩЕ: localStorage ═══════════ */
+function lsGet(key, fallback){ try{ const v = localStorage.getItem(key); return v == null ? fallback : JSON.parse(v); }catch(e){ return fallback; } }
+function lsSet(key, val){ try{ localStorage.setItem(key, JSON.stringify(val)); }catch(e){} }
+function getLocks(){ return lsGet(LS.locks, {}); }
+function getLock(d){ const l = getLocks(); return l[d] || null; }
+function setLock(d, at){ const l = getLocks(); l[d] = { at: at || new Date().toISOString() }; lsSet(LS.locks, l); }
+function unsetLock(d){ const l = getLocks(); delete l[d]; lsSet(LS.locks, l); }
+function getLayers(){ return lsGet(LS.layers, {}); }
+function getLayer(d){ const l = getLayers(); return l[d] || null; }
+function setLayer(d, geojson){ const l = getLayers(); l[d] = { geojson: geojson, added_at: new Date().toISOString() }; lsSet(LS.layers, l); }
+function unsetLayer(d){ const l = getLayers(); delete l[d]; lsSet(LS.layers, l); }
+function getDraft(d){ return lsGet(LS.draft(d), null); }
+function setDraft(d, obj){ lsSet(LS.draft(d), obj); }
+function clearDraft(d){ try{ localStorage.removeItem(LS.draft(d)); }catch(e){} }
+function getMarkers(){ return lsGet(LS.photos, []); }
+function saveMarkers(m){ lsSet(LS.photos, m); }
+
+/* ═══════════ ХРАНИЛИЩЕ: IndexedDB (фото) ═══════════ */
+let idb = null;
+function idbOpen(){
+  return new Promise((resolve, reject) => {
+    if(idb) return resolve(idb);
+    const req = indexedDB.open('markup-photos', 1);
+    req.onupgradeneeded = () => { const db = req.result; if(!db.objectStoreNames.contains('photos')) db.createObjectStore('photos', { keyPath: 'photo_id' }); };
+    req.onsuccess = () => { idb = req.result; resolve(idb); };
+    req.onerror = () => reject(req.error || new Error('IndexedDB недоступна'));
+  });
+}
+function idbPut(rec){ return idbOpen().then(db => new Promise((res, rej) => { const t = db.transaction('photos', 'readwrite'); t.objectStore('photos').put(rec); t.oncomplete = () => res(); t.onerror = () => rej(t.error); })); }
+function idbGet(key){ return idbOpen().then(db => new Promise((res, rej) => { const r = db.transaction('photos', 'readonly').objectStore('photos').get(key); r.onsuccess = () => res(r.result || null); r.onerror = () => rej(r.error); })); }
+function idbDelete(key){ return idbOpen().then(db => new Promise((res, rej) => { const t = db.transaction('photos', 'readwrite'); t.objectStore('photos').delete(key); t.oncomplete = () => res(); t.onerror = () => rej(t.error); })); }
+
+/* ═══════════ УТИЛИТЫ ═══════════ */
+function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
+let toastTimer = null;
+function toast(msg){
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.hidden = false;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { el.hidden = true; }, 3500);
+}
+function download(name, obj){
+  const blob = new Blob([JSON.stringify(obj, null, 1)], { type: 'application/geo+json;charset=utf-8' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = name;
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 800);
+}
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s => { s.hidden = true; });
+  document.getElementById(id).hidden = false;
+}
+function setErrorBanner(on){
+  document.querySelectorAll('.error-banner').forEach(el => { el.hidden = !on; });
+}
+
+/* -- Геометрия -- */
+function pointInRing(lon, lat, ring){
+  let inside = false;
+  for(let i = 0, j = ring.length - 1; i < ring.length; j = i++){
+    const xi = ring[i][0], yi = ring[i][1], xj = ring[j][0], yj = ring[j][1];
+    if(((yi > lat) !== (yj > lat)) && (lon < (xj - xi) * (lat - yi) / (yj - yi) + xi)) inside = !inside;
+  }
+  return inside;
+}
+function pointInPolygon(lon, lat, geom){
+  if(!geom) return true;
+  if(geom.type === 'Polygon') return pointInRing(lon, lat, geom.coordinates[0]);
+  if(geom.type === 'MultiPolygon') return geom.coordinates.some(p => pointInRing(lon, lat, p[0]));
+  return true;
+}
+function pointInDistrict(lon, lat, district){
+  const f = state.districtGeom[district];
+  if(!f) return true;
+  return pointInPolygon(lon, lat, f.geometry);
+}
+function bboxOf(geom){
+  let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+  const walk = ring => ring.forEach(c => { const x = c[0], y = c[1]; if(x < minX) minX = x; if(x > maxX) maxX = x; if(y < minY) minY = y; if(y > maxY) maxY = y; });
+  if(geom.type === 'Polygon') geom.coordinates.forEach(walk);
+  else if(geom.type === 'MultiPolygon') geom.coordinates.forEach(p => { p.forEach(walk); });
+  return [[minX, minY], [maxX, maxY]];
+}
+function fitToBounds(map, geomOrBounds){
+  if(!map || !geomOrBounds) return;
+  let b;
+  if(Array.isArray(geomOrBounds) && Array.isArray(geomOrBounds[0])) b = geomOrBounds;
+  else b = bboxOf(geomOrBounds);
+  try{
+    map.setBounds(b, { top: 50, right: 50, bottom: 50, left: 50 });
+  }catch(e){
+    try{ map.setLocation({ center: [(b[0][0] + b[1][0]) / 2, (b[0][1] + b[1][1]) / 2], zoom: 11 }); }catch(e2){}
+  }
+}
+function allDistrictsBbox(){
+  const fs = state.districtsGeo && state.districtsGeo.features;
+  if(fs && fs.length){
+    let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+    fs.forEach(f => {
+      const b = bboxOf(f.geometry);
+      if(b[0][0] < minX) minX = b[0][0];
+      if(b[0][1] < minY) minY = b[0][1];
+      if(b[1][0] > maxX) maxX = b[1][0];
+      if(b[1][1] > maxY) maxY = b[1][1];
+    });
+    return [[minX, minY], [maxX, maxY]];
+  }
+  return null;
+}
+
+/* -- Статусы районов -- */
+function districtStatus(d){
+  if(getLock(d)) return 'locked';
+  if(getDraft(d)) return 'draft';
+  if(getLayer(d)) return 'loaded';
+  return 'empty';
+}
+function stClass(st){ return st === 'locked' ? 'locked' : st === 'draft' ? 'draft' : st === 'loaded' ? 'done' : 'empty'; }
+function statusText(st){ return STATUS_TEXT[st] || st; }
+function countDone(){ return DISTRICTS.filter(d => getLock(d) || getLayer(d)).length; }
+function updatePickerProgress(){
+  const el = document.getElementById('picker-progress');
+  if(el) el.textContent = 'Размечено маршрутами: ' + countDone() + ' из ' + DISTRICTS.length;
+}
+
+/* -- Загрузка данных (fetch) -- */
+async function loadDistricts(){
+  try{
+    const r = await fetch('../districts.geojson', { cache: 'no-store' });
+    if(!r.ok) throw new Error('HTTP ' + r.status);
+    state.districtsGeo = await r.json();
+    state.districtGeom = {};
+    (state.districtsGeo.features || []).forEach(f => {
+      const p = f.properties || {};
+      if(p.district) state.districtGeom[p.district] = f;
+    });
+    setErrorBanner(false);
+  }catch(e){
+    state.districtsGeo = null;
+    setErrorBanner(true);
+  }
+  refreshCurrentLayers();
+}
+async function loadAreas(){
+  try{
+    const r = await fetch('../areas.geojson', { cache: 'no-store' });
+    if(!r.ok) throw new Error('HTTP ' + r.status);
+    state.areasGeo = await r.json();
+  }catch(e){ state.areasGeo = null; }
+  refreshCurrentLayers();
+}
+function refreshCurrentLayers(){
+  if(state.mode === 'district' && state.districtMapReady){
+    addDistrictLayers();
+    const f = state.districtGeom[state.district];
+    if(f) fitToBounds(state.districtMap, f.geometry);
+  }
+  if(state.mode === 'prefecture' && state.prefMapReady){
+    addPrefectureLayers();
+    renderPrefectureLayerRoutes();
+    fitToBounds(state.prefMap, allDistrictsBbox());
+  }
+}
+/* ═══════════ YANDEX MAPS v3 ═══════════ */
+let mapLib = null;
+async function ymaps(){
+  if(mapLib) return mapLib;
+  await window.ymaps3Ready;
+  await window.ymaps3.ready;
+  const Y = window.ymaps3;
+  mapLib = { YMap: Y.YMap, YMapDefaultSchemeLayer: Y.YMapDefaultSchemeLayer, YMapDefaultFeaturesLayer: Y.YMapDefaultFeaturesLayer, YMapListener: Y.YMapListener, YMapFeature: Y.YMapFeature, YMapMarker: Y.YMapMarker };
+  return mapLib;
+}
+const curMap = () => state.mode === 'prefecture' ? state.prefMap : state.districtMap;
+function makeMap(el){
+  const Y = window.ymaps3;
+  return new Y.YMap(el, { location: { center: [37.50, 55.84], zoom: 11 }, theme: 'light' }, [
+    new Y.YMapDefaultSchemeLayer({}),
+    new Y.YMapDefaultFeaturesLayer({ zIndex: 1800 })
+  ]);
+}
+async function initDistrictMap(){
+  if(state.districtMapReady) return state.districtMap;
+  if(!state.districtMapPromise){
+    state.districtMapPromise = (async () => {
+      await ymaps();
+      const map = makeMap(document.getElementById('map-district'));
+      map.addChild(new window.ymaps3.YMapListener({ layer: 'any', onFastClick: (o, e) => districtMapClick(o, e) }));
+      state.districtMap = map;
+      state.districtMapReady = true;
+    })();
+  }
+  await state.districtMapPromise;
+  return state.districtMap;
+}
+async function initPrefectureMap(){
+  if(state.prefMapReady) return state.prefMap;
+  if(!state.prefMapPromise){
+    state.prefMapPromise = (async () => {
+      await ymaps();
+      const map = makeMap(document.getElementById('map-prefecture'));
+      map.addChild(new window.ymaps3.YMapListener({ layer: 'any', onFastClick: (o, e) => prefectureMapClick(o, e) }));
+      state.prefMap = map;
+      state.prefMapReady = true;
+    })();
+  }
+  await state.prefMapPromise;
+  return state.prefMap;
+}
+
+/* ═══════════ СЛОИ ═══════════ */
+function clearF(list, map){
+  (list || []).forEach(f => { try{ map.removeChild(f); }catch(e){} });
+  if(list) list.length = 0;
+}
+function addDistrictLayers(){
+  const map = state.districtMap; if(!map) return;
+  clearF(state.districtFeatures, map);
+  const df = state.districtGeom[state.district];
+  if(df){
+    const g = new window.ymaps3.YMapFeature({ geometry: df.geometry, style: { stroke: [{ color: '#0d827c', width: 3 }], fill: [{ color: '#0d827c', opacity: 0.03 }] }, zIndex: 1700 });
+    map.addChild(g); state.districtFeatures.push(g);
+  }
+  if(state.areasGeo){
+    const ys = (state.areasGeo.features || []).filter(f => f.properties && f.properties.district === state.district);
+    ys.forEach(f => {
+      const g = new window.ymaps3.YMapFeature({ geometry: f.geometry, style: { stroke: [{ color: 'rgba(13,130,124,.55)', width: 1.2 }], fill: [{ color: '#0d827c', opacity: 0.05 }] }, zIndex: 1600 });
+      map.addChild(g); state.districtFeatures.push(g);
+    });
+  }
+}
+function addPrefectureLayers(){
+  const map = state.prefMap; if(!map) return;
+  clearF(state.districtFeatures, map);
+  const ds = (state.districtsGeo && state.districtsGeo.features) || [];
+  ds.forEach(f => {
+    const g = new window.ymaps3.YMapFeature({ geometry: f.geometry, style: { stroke: [{ color: '#0d827c', width: 2 }], fill: [{ color: '#0d827c', opacity: 0.02 }] }, zIndex: 1700 });
+    map.addChild(g); state.districtFeatures.push(g);
+  });
+  if(state.areasGeo){
+    const all = state.areasGeo.features || [];
+    const step = 300; let i = 0;
+    const next = () => {
+      const sl = all.slice(i, i + step);
+      sl.forEach(f => {
+        const g = new window.ymaps3.YMapFeature({ geometry: f.geometry, style: { stroke: [{ color: 'rgba(13,130,124,.4)', width: 0.8 }], fill: [{ color: '#0d827c', opacity: 0.02 }] }, zIndex: 1500 });
+        map.addChild(g); state.districtFeatures.push(g);
+      });
+      i += step;
+      if(i < all.length) setTimeout(next, 0);
+    };
+    next();
+  }
+}
+function renderPrefectureLayerRoutes(){
+  const map = state.prefMap; if(!map) return;
+  clearF(state.layerFeatures, map);
+  const layers = getLayers();
+  for(const d of Object.keys(layers)){
+    const idx = DISTRICTS.indexOf(d); if(idx < 0) continue;
+    const fc = layers[d].geojson;
+    if(!fc || !Array.isArray(fc.features)) continue;
+    fc.features.forEach(f => {
+      if(f.geometry && f.geometry.type === 'LineString'){
+        const g = new window.ymaps3.YMapFeature({ geometry: f.geometry, style: { stroke: [{ color: PALETTE[idx], width: 4 }] }, zIndex: 1900 + idx });
+        map.addChild(g); state.layerFeatures.push(g);
+      }
+    });
+  }
+}
+
+/* ═══════════ РИСОВАНИЕ ═══════════ */
+function hint(text){
+  const el = document.getElementById(state.mode === 'prefecture' ? 'pref-draw-hint' : 'district-draw-hint');
+  if(el){ el.textContent = text; el.hidden = !text; }
+}
+function dot(lon, lat){
+  const map = curMap(); if(!map) return;
+  const el = document.createElement('div');
+  el.className = 'vertex-dot';
+  const mk = new window.ymaps3.YMapMarker({ coordinates: [lon, lat], zIndex: 2100 }, el);
+  map.addChild(mk);
+  state.vertexMarkers.push(mk);
+}
+function updatePreview(){
+  const map = curMap(); if(!map) return;
+  if(state.points.length >= 2){
+    if(!state.previewFeature){
+      const f = new window.ymaps3.YMapFeature({ geometry: { type: 'LineString', coordinates: state.points.slice() }, style: { stroke: [{ color: '#c00000', width: 4 }] }, zIndex: 2100 });
+      map.addChild(f);
+      state.previewFeature = f;
+    }else{
+      state.previewFeature.update({ geometry: { type: 'LineString', coordinates: state.points.slice() } });
+    }
+  }else if(state.previewFeature){
+    try{ map.removeChild(state.previewFeature); }catch(e){}
+    state.previewFeature = null;
+  }
+}
+function clearPreview(){
+  const map = curMap(); if(!map) return;
+  state.vertexMarkers.forEach(mk => { try{ map.removeChild(mk); }catch(e){} });
+  state.vertexMarkers = [];
+  if(state.previewFeature){ try{ map.removeChild(state.previewFeature); }catch(e){} state.previewFeature = null; }
+}
+function addVertex(lon, lat){ state.points.push([lon, lat]); dot(lon, lat); updatePreview(); }
+function undoVertex(){
+  if(!state.points.length){ toast('Нет точек для отмены'); return; }
+  state.points.pop();
+  const mk = state.vertexMarkers.pop();
+  if(mk){ try{ curMap().removeChild(mk); }catch(e){} }
+  updatePreview();
+}
+function setDrawing(on, text){
+  state.drawing = on;
+  if(on) hint(text || 'Кликайте по карте...');
+  else{ clearPreview(); state.points = []; state.continueRouteId = null; hint(null); }
+}
+function removeRF(id){
+  const f = state.routeFeatures[id];
+  if(f){ try{ curMap().removeChild(f); }catch(e){} delete state.routeFeatures[id]; }
+}
+function renderRF(r, w){
+  const map = curMap(); if(!map) return;
+  const idx = state.mode === 'prefecture' && r.district ? DISTRICTS.indexOf(r.district) : -1;
+  const color = idx >= 0 ? PALETTE[idx] : '#c00000';
+  const f = new window.ymaps3.YMapFeature({
+    geometry: { type: 'LineString', coordinates: r.coords },
+    style: { stroke: [{ color: color, width: w || 4 }] },
+    zIndex: (idx >= 0 ? 1900 + idx : 1900) + (w === 7 ? 1 : 0)
+  });
+  f._routeId = r.route_id;
+  map.addChild(f);
+  state.routeFeatures[r.route_id] = f;
+}
+function restyle(){
+  state.routes.forEach(r => { removeRF(r.route_id); renderRF(r, r.route_id === state.selectedRouteId ? 7 : 4); });
+}
+const selectRoute = id => { state.selectedRouteId = id; restyle(); renderRouteList(); };
+function finishRoute(){
+  if(state.points.length < 2){ toast('Маршрут должен содержать минимум 2 точки'); return; }
+  if(state.continueRouteId){
+    const r = state.routes.find(x => x.route_id === state.continueRouteId);
+    if(r){
+      r.coords = state.points.slice();
+      r.updated_at = new Date().toISOString();
+      removeRF(r.route_id); renderRF(r);
+      state.continueRouteId = null;
+      state.selectedRouteId = r.route_id;
+      restyle(); setDrawing(false); autosave(); renderRouteList();
+      toast('Маршрут "' + r.name + '" продолжен');
+      return;
+    }
+    state.continueRouteId = null;
+  }
+  const route = {
+    route_id: 'R' + Date.now(),
+    name: 'Маршрут ' + (state.routes.length + 1),
+    district: state.mode === 'district' ? state.district : state.drawDistrict,
+    created_at: new Date().toISOString(),
+    coords: state.points.slice()
+  };
+  state.routes.push(route);
+  renderRF(route);
+  state.selectedRouteId = route.route_id;
+  restyle(); setDrawing(false); autosave(); renderRouteList();
+  toast('Маршрут сохранён: ' + route.name);
+}
+function deleteRoute(id){
+  state.routes = state.routes.filter(r => r.route_id !== id);
+  removeRF(id);
+  if(state.selectedRouteId === id) state.selectedRouteId = null;
+  autosave(); renderRouteList();
+  toast('Маршрут удалён');
+}
+function continueRoute(id){
+  const r = state.routes.find(x => x.route_id === id);
+  if(!r) return;
+  setDrawing(true, 'Продолжение маршрута "' + r.name + '". Кликайте по карте...');
+  state.continueRouteId = id;
+  state.points = r.coords.slice();
+  state.points.forEach(c => { dot(c[0], c[1]); });
+  updatePreview();
+}
+function autosave(){
+  if(state.mode !== 'district' || !state.district) return;
+  setDraft(state.district, { routes: state.routes.map(r => Object.assign({}, r)), saved_at: new Date().toISOString() });
+}
+function renderRouteList(){
+  const wrap = document.getElementById(state.mode === 'prefecture' ? 'pref-route-list' : 'route-list');
+  if(!wrap) return;
+  const cnt = document.getElementById('route-count');
+  if(cnt) cnt.textContent = state.routes.length;
+  wrap.innerHTML = '';
+  if(!state.routes.length){
+    wrap.innerHTML = '<div class="lock-note">Маршрутов пока нет. Нажмите "＋ Маршрут" и кликайте по карте.</div>';
+    return;
+  }
+  state.routes.forEach(r => {
+    const row = document.createElement('div');
+    row.className = 'route-row' + (r.route_id === state.selectedRouteId ? ' selected' : '');
+    const inp = document.createElement('input');
+    inp.className = 'route-name-input';
+    inp.value = r.name;
+    inp.addEventListener('input', () => { r.name = inp.value; autosave(); });
+    inp.addEventListener('click', e => e.stopPropagation());
+    const meta = document.createElement('div');
+    meta.className = 'route-meta';
+    meta.textContent = r.coords.length + ' точек . ' + new Date(r.created_at).toLocaleString('ru-RU');
+    const acts = document.createElement('div');
+    acts.className = 'route-actions';
+    const mk = (t, cls, fn) => { const b = document.createElement('button'); b.className = 'btn small' + (cls ? ' ' + cls : ''); b.textContent = t; b.onclick = fn; return b; };
+    acts.append(mk('Выбрать', '', () => selectRoute(r.route_id)), mk('Продолжить', '', () => continueRoute(r.route_id)), mk('Удалить', 'danger', () => deleteRoute(r.route_id)));
+    row.append(inp, meta, acts);
+    wrap.appendChild(row);
+  });
+}
+function districtMapClick(obj, ev){
+  if(obj && obj._routeId){ selectRoute(obj._routeId); return; }
+  if(!state.drawing) return;
+  const c = ev.coordinates;
+  if(!pointInDistrict(c[0], c[1], state.district)){
+    toast('Точка вне границ района - добавление запрещено');
+    return;
+  }
+  addVertex(c[0], c[1]);
+}
+function prefectureMapClick(obj, ev){
+  if(obj && obj._routeId){ selectRoute(obj._routeId); return; }
+  const c = ev.coordinates;
+  if(state.drawing){
+    if(state.drawDistrict && !pointInDistrict(c[0], c[1], state.drawDistrict)){
+      toast('Точка вне границ района "' + state.drawDistrict + '" - добавление запрещено');
+      return;
+    }
+    addVertex(c[0], c[1]);
+    return;
+  }
+  if(state.photoMode) placePhotoMarker(c[0], c[1]);
+}
+
+/* ═══════════ ПРЕФЕКТУРА: СТАТУСЫ ═══════════ */
+function renderPrefectureSidebar(){
+  const list = document.getElementById('pref-status-list');
+  list.innerHTML = '';
+  DISTRICTS.forEach(d => {
+    const st = districtStatus(d);
+    const row = document.createElement('div');
+    row.className = 'status-row';
+    const head = document.createElement('div');
+    head.className = 'row-head';
+    const name = document.createElement('span');
+    name.className = 'row-name';
+    name.textContent = d;
+    const chip = document.createElement('span');
+    chip.className = 'chip ' + stClass(st);
+    chip.textContent = statusText(st);
+    head.append(name, chip);
+    row.appendChild(head);
+    const sub = document.createElement('div');
+    sub.className = 'row-sub';
+    const lock = getLock(d), layer = getLayer(d);
+    if(lock) sub.textContent = 'Заблокирован: ' + new Date(lock.at).toLocaleString('ru-RU');
+    else if(layer) sub.textContent = 'Слой загружен: ' + new Date(layer.added_at).toLocaleString('ru-RU') + ' . маршрутов: ' + ((layer.geojson && layer.geojson.features) ? layer.geojson.features.length : 0);
+    else sub.textContent = 'Не размечен';
+    row.appendChild(sub);
+    const acts = document.createElement('div');
+    acts.className = 'row-actions';
+    const mk = (t, cls, fn) => { const b = document.createElement('button'); b.className = 'btn small' + (cls ? ' ' + cls : ''); b.textContent = t; b.onclick = fn; return b; };
+    acts.appendChild(mk('Загрузить слой', '', () => { pendingLayerDistrict = d; document.getElementById('layer-file-input').click(); }));
+    if(layer) acts.appendChild(mk('Удалить слой', 'danger', () => { unsetLayer(d); renderPrefectureSidebar(); renderPrefectureLayerRoutes(); updatePickerProgress(); toast('Слой района "' + d + '" удалён'); }));
+    if(lock) acts.appendChild(mk('Разблокировать', '', () => { if(confirm('Снять блокировку района (особое распоряжение)?')){ unsetLock(d); renderPrefectureSidebar(); updatePickerProgress(); toast('Район "' + d + '" разблокирован'); } }));
+    row.appendChild(acts);
+    list.appendChild(row);
+  });
+  const sel = document.getElementById('pref-draw-district');
+  sel.innerHTML = '<option value="">- Без ограничения -</option>' + DISTRICTS.map(d => '<option value="' + esc(d) + '">' + esc(d) + '</option>').join('');
+  sel.value = state.drawDistrict;
+  renderRouteList();
+  renderPhotoList();
+}
+
+/* ═══════════ ФОТО-МЕТКИ ═══════════ */
+function nextPhotoSeq(){ return getMarkers().reduce((m, x) => Math.max(m, x.seq || 0), 0) + 1; }
+function addPhotoMarkerToMap(mk){
+  const map = state.prefMap; if(!map) return;
+  const el = document.createElement('div');
+  el.className = 'photo-marker';
+  el.innerHTML = '<span class="cam">📷</span><span class="num">' + mk.seq + '</span>';
+  el.addEventListener('click', e => { e.stopPropagation(); openPhotoPopup(mk); });
+  const m = new window.ymaps3.YMapMarker({ coordinates: mk.coords, zIndex: 2000 }, el);
+  map.addChild(m);
+  state.photoMarkerObjs[mk.photo_id] = m;
+}
+function renderPhotoMarkersOnMap(){
+  const map = state.prefMap; if(!map) return;
+  Object.keys(state.photoMarkerObjs).forEach(k => { const m = state.photoMarkerObjs[k]; try{ map.removeChild(m); }catch(e){} });
+  state.photoMarkerObjs = {};
+  getMarkers().forEach(m => { addPhotoMarkerToMap(m); });
+}
+function placePhotoMarker(lon, lat){
+  const seq = nextPhotoSeq();
+  const mk = { photo_id: 'FM-' + String(seq).padStart(3, '0'), seq: seq, note: '', created_at: new Date().toISOString(), coords: [lon, lat], has_photo: false, photo_name: '' };
+  const m = getMarkers();
+  m.push(mk);
+  saveMarkers(m);
+  addPhotoMarkerToMap(mk);
+  renderPhotoList();
+  toast('Фото-метка ' + mk.photo_id + ' добавлена');
+}
+function renderPhotoList(){
+  const wrap = document.getElementById('photo-marker-list');
+  wrap.innerHTML = '';
+  const m = getMarkers();
+  if(!m.length){ wrap.innerHTML = '<div class="lock-note">Меток пока нет. Включите режим и кликните по карте.</div>'; return; }
+  m.forEach(mk => {
+    const row = document.createElement('div');
+    row.className = 'route-row';
+    row.innerHTML = '<div class="row-head"><b>' + esc(mk.photo_id) + '</b><span class="chip ' + (mk.has_photo ? 'done' : 'empty') + '">' + (mk.has_photo ? '📷 фото' : 'без фото') + '</span></div>'
+      + '<div class="route-meta">' + (mk.note ? esc(mk.note) : '') + '</div>';
+    row.onclick = () => openPhotoPopup(mk);
+    wrap.appendChild(row);
+  });
+}
+let currentPhotoId = null;
+let pendingLayerDistrict = null;
+function openPhotoPopup(mk){
+  currentPhotoId = mk.photo_id;
+  document.getElementById('pp-id').textContent = mk.photo_id;
+  document.getElementById('pp-note').value = mk.note || '';
+  const thumb = document.getElementById('pp-thumb');
+  const nm = document.getElementById('pp-photo-name');
+  thumb.hidden = true;
+  thumb.removeAttribute('src');
+  nm.textContent = '';
+  idbGet(mk.photo_id).then(rec => {
+    if(rec && rec.data_b64){
+      thumb.src = 'data:image/jpeg;base64,' + rec.data_b64;
+      thumb.hidden = false;
+      nm.textContent = rec.name || '';
+    }
+  });
+  document.getElementById('photo-popup').hidden = false;
+}
+function attachPhotoToMarker(photoId, file){
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    idbPut({ photo_id: photoId, data_b64: reader.result.split(',')[1], name: file.name, attached_at: new Date().toISOString() }).then(() => {
+      const m = getMarkers();
+      const mk = m.find(x => x.photo_id === photoId);
+      if(mk){ mk.has_photo = true; mk.photo_name = file.name; saveMarkers(m); }
+      toast('Фото прикреплено к ' + photoId);
+      if(currentPhotoId === photoId){ const c = m.find(x => x.photo_id === photoId); if(c) openPhotoPopup(c); }
+      renderPhotoList();
+    }).catch(() => toast('Не удалось сохранить фото (IndexedDB)'));
+  };
+  reader.readAsDataURL(file);
+}
+function deleteAttachedPhoto(photoId){
+  idbDelete(photoId).then(() => {
+    const m = getMarkers();
+    const mk = m.find(x => x.photo_id === photoId);
+    if(mk){ mk.has_photo = false; mk.photo_name = ''; saveMarkers(m); }
+    toast('Фото удалено');
+    if(currentPhotoId === photoId){ const c = m.find(x => x.photo_id === photoId); if(c) openPhotoPopup(c); }
+    renderPhotoList();
+  });
+}
+
+/* ═══════════ ЭКСПОРТ ═══════════ */
+function handleLayerFile(district, file){
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    try{
+      const fc = JSON.parse(reader.result);
+      let d = district;
+      if(fc.metadata && DISTRICTS.indexOf(fc.metadata.district) >= 0) d = fc.metadata.district;
+      else if(fc.features && fc.features[0] && fc.features[0].properties && DISTRICTS.indexOf(fc.features[0].properties.district) >= 0) d = fc.features[0].properties.district;
+      if(DISTRICTS.indexOf(d) < 0){ toast('Не удалось определить район в файле слоя'); return; }
+      setLayer(d, fc);
+      toast('Слой района "' + d + '" загружен (' + ((fc.features || []).length) + ' объектов)');
+      renderPrefectureSidebar();
+      renderPrefectureLayerRoutes();
+      updatePickerProgress();
+    }catch(e){ toast('Ошибка чтения файла слоя: ' + e.message); }
+  };
+  reader.readAsText(file);
+}
+function exportPrefecture(){
+  const layers = getLayers();
+  const districtsIncluded = Object.keys(layers).filter(d => DISTRICTS.indexOf(d) >= 0);
+  const features = [];
+  districtsIncluded.forEach(d => {
+    const fc = layers[d].geojson;
+    if(fc && Array.isArray(fc.features)) fc.features.forEach(f => { if(f.geometry && f.geometry.type === 'LineString') features.push(f); });
+  });
+  state.routes.forEach(r => { features.push({ type: 'Feature', properties: { route_id: r.route_id, name: r.name, district: r.district, created_at: r.created_at, author: 'prefecture' }, geometry: { type: 'LineString', coordinates: r.coords } }); });
+  const markers = getMarkers();
+  markers.forEach(m => { features.push({ type: 'Feature', properties: { photo_id: m.photo_id, note: m.note, has_photo: !!m.has_photo, photo_name: m.photo_name || '', attached_at: m.created_at, marker: 'photo' }, geometry: { type: 'Point', coordinates: m.coords } }); });
+  const out = { type: 'FeatureCollection', features: features, metadata: { status: 'prefecture_export', exported_at: new Date().toISOString(), districts_included: districtsIncluded, photo_markers: markers.length, app: 'karta-sao/markup' } };
+  download('razmetka-САО.geojson', out);
+  toast('Сводный слой выгружен: ' + features.length + ' объектов');
+}
+
+/* ═══════════ НАВИГАЦИЯ И РЕДАКТОРЫ ═══════════ */
+function resetEditorState(mode, district){
+  const map = curMap();
+  if(map){
+    Object.keys(state.routeFeatures).forEach(k => { const f = state.routeFeatures[k]; try{ map.removeChild(f); }catch(e){} });
+    clearF(state.layerFeatures, map);
+    clearF(state.districtFeatures, map);
+    Object.keys(state.photoMarkerObjs).forEach(k => { const m = state.photoMarkerObjs[k]; try{ map.removeChild(m); }catch(e){} });
+    if(state.drawing) clearPreview();
+  }
+  state.mode = mode;
+  state.district = district || null;
+  state.drawDistrict = '';
+  state.routes = [];
+  state.selectedRouteId = null;
+  state.drawing = false;
+  state.points = [];
+  state.continueRouteId = null;
+  state.previewFeature = null;
+  state.vertexMarkers = [];
+  state.routeFeatures = {};
+  state.photoMarkerObjs = {};
+  state.photoMode = false;
+  const t = document.getElementById('photo-mode-toggle');
+  if(t) t.checked = false;
+  document.getElementById('photo-popup').hidden = true;
+}
+async function openDistrictEditor(district){
+  resetEditorState('district', district);
+  showScreen('screen-editor-district');
+  document.getElementById('district-title').textContent = district;
+  renderDistrictSidebar();
+  await initDistrictMap();
+  addDistrictLayers();
+  const f = state.districtGeom[state.district];
+  if(f) fitToBounds(state.districtMap, f.geometry);
+  const draft = getDraft(state.district);
+  if(draft && Array.isArray(draft.routes) && draft.routes.length){
+    state.routes = draft.routes.map(r => Object.assign({}, r, { coords: (r.coords || []).map(c => c.slice()) }));
+    state.routes.forEach(r => { renderRF(r); });
+    renderRouteList();
+    toast('Восстановлен черновик района: ' + state.routes.length + ' маршр. от ' + new Date(draft.saved_at).toLocaleString('ru-RU'));
+  }
+  updatePickerProgress();
+}
+function renderDistrictSidebar(){
+  const st = districtStatus(state.district);
+  const chip = document.getElementById('district-status');
+  chip.className = 'chip ' + stClass(st);
+  chip.textContent = statusText(st);
+  renderRouteList();
+}
+async function openPrefectureEditor(){
+  if(PREFECTURE_CODE){
+    const c = prompt('Введите код доступа префектуры:');
+    if(c !== PREFECTURE_CODE){ toast('Неверный код доступа'); return; }
+  }
+  resetEditorState('prefecture');
+  showScreen('screen-editor-prefecture');
+  renderPrefectureSidebar();
+  await initPrefectureMap();
+  addPrefectureLayers();
+  renderPrefectureLayerRoutes();
+  renderPhotoMarkersOnMap();
+  fitToBounds(state.prefMap, allDistrictsBbox());
+}
+function saveAndLockDistrict(){
+  if(!confirm('Район будет заблокирован до особого распоряжения префектуры. Файл слоя будет выгружен. Продолжить?')) return;
+  const features = state.routes.map(r => ({
+    type: 'Feature',
+    properties: { route_id: r.route_id, name: r.name, district: r.district, created_at: r.created_at },
+    geometry: { type: 'LineString', coordinates: r.coords }
+  }));
+  const fc = { type: 'FeatureCollection', features: features, metadata: { district: state.district, status: 'locked', author_mode: 'район', exported_at: new Date().toISOString(), app: 'karta-sao/markup' } };
+  download('razmetka-' + state.district + '.geojson', fc);
+  setLock(state.district);
+  clearDraft(state.district);
+  state.routes.forEach(r => { removeRF(r.route_id); });
+  state.routes = [];
+  toast('Слой выгружен, район заблокирован');
+  showScreen('screen-picker');
+  renderDistrictGrid();
+  updatePickerProgress();
+}
+function renderDistrictGrid(){
+  const grid = document.getElementById('district-grid');
+  grid.innerHTML = '';
+  DISTRICTS.forEach(d => {
+    const st = districtStatus(d);
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'district-btn' + (st === 'locked' ? ' is-locked' : '');
+    const nm = document.createElement('span');
+    nm.textContent = d;
+    const chip = document.createElement('span');
+    chip.className = 'chip ' + stClass(st);
+    chip.textContent = statusText(st);
+    btn.append(nm, chip);
+    btn.onclick = () => {
+      if(st === 'locked'){ toast('Район заблокирован до особого распоряжения префектуры'); return; }
+      openDistrictEditor(d);
+    };
+    grid.appendChild(btn);
+  });
+}
+
+/* ═══════════ СОБЫТИЯ И СТАРТ ═══════════ */
+function wireEvents(){
+  const by = id => document.getElementById(id);
+  by('btn-header-exit').onclick = () => showScreen('screen-entry');
+  by('btn-open-districts').onclick = () => { showScreen('screen-picker'); renderDistrictGrid(); updatePickerProgress(); };
+  by('btn-open-prefecture').onclick = openPrefectureEditor;
+  by('btn-picker-back').onclick = () => showScreen('screen-entry');
+  by('btn-editor-exit').onclick = () => { showScreen('screen-picker'); renderDistrictGrid(); updatePickerProgress(); };
+  by('btn-pref-exit').onclick = () => showScreen('screen-entry');
+  by('btn-save-lock').onclick = saveAndLockDistrict;
+  const drawStart = () => {
+    if(state.drawing){ clearPreview(); state.points = []; }
+    state.continueRouteId = null;
+    setDrawing(true, 'Кликайте по карте...');
+    renderRouteList();
+  };
+  by('btn-draw-route').onclick = drawStart;
+  by('btn-undo-point').onclick = undoVertex;
+  by('btn-finish-route').onclick = finishRoute;
+  by('pref-btn-draw').onclick = drawStart;
+  by('pref-btn-undo').onclick = undoVertex;
+  by('pref-btn-finish').onclick = finishRoute;
+  by('pref-draw-district').onchange = e => { state.drawDistrict = e.target.value; };
+  by('photo-mode-toggle').onchange = e => { state.photoMode = e.target.checked; toast(state.photoMode ? 'Режим фото-меток включён: кликайте по карте' : 'Режим фото-меток выключен'); };
+  by('btn-export-prefecture').onclick = exportPrefecture;
+  by('pp-note').oninput = e => {
+    const m = getMarkers();
+    const mk = m.find(x => x.photo_id === currentPhotoId);
+    if(mk){ mk.note = e.target.value; saveMarkers(m); renderPhotoList(); }
+  };
+  by('pp-delete-photo').onclick = () => deleteAttachedPhoto(currentPhotoId);
+  by('pp-close').onclick = () => { by('photo-popup').hidden = true; };
+  by('layer-file-input').addEventListener('change', e => {
+    const f = e.target.files[0];
+    e.target.value = '';
+    if(f) handleLayerFile(pendingLayerDistrict, f);
+  });
+  by('photo-file-input').addEventListener('change', e => {
+    const f = e.target.files[0];
+    e.target.value = '';
+    if(f) attachPhotoToMarker(currentPhotoId, f);
+  });
+}
+function init(){
+  wireEvents();
+  showScreen('screen-entry');
+  renderDistrictGrid();
+  updatePickerProgress();
+  loadDistricts();
+  loadAreas();
+}
+init();
+</script>
+</body>
+</html>
