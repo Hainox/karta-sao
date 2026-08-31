@@ -24,6 +24,15 @@
       "loaded": 4,
       "source": "АСУ ОДС / reestr-ogh.mos.ru, тип объекта 38; МСК-77 преобразована в WGS84",
       "address_check_required": 0
+    },
+    "urns": {
+      "name": "SAO urns",
+      "file": "urns_sao_active_snapshot.geojson",
+      "kml_file": "urns_sao_active_snapshot.kml",
+      "loaded": 27029,
+      "source": "MAF SAO active snapshot",
+      "coordinate_system": "WGS84",
+      "included_statuses": ["approved", "external_system_agreement"]
     }
   },
   "dp_sp_source": {

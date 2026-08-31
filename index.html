@@ -99,6 +99,8 @@
     .layer-toggle input { margin:0; accent-color:var(--accent); }
     .layer-swatch { flex:0 0 9px; width:9px; height:9px; border-radius:50%; border:0; }
     .layer-count { margin-left:auto; color:#77868d; font:600 10px ui-monospace, SFMono-Regular, Consolas, monospace; }
+    .layer-download { margin-left:5px; color:var(--accent); font-size:10px; font-weight:800; text-decoration:none; }
+    .layer-download:hover { text-decoration:underline; }
     .smm-variants { display:grid; gap:7px; margin-top:10px; padding:10px; border:1px solid #f1c7c7; border-radius:10px; background:#fff8f7; }
     .smm-variants[hidden] { display:none; }
     .smm-variants-title { color:#9e0000; font-size:10px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
@@ -146,6 +148,7 @@
     .map-marker-mno { color:#d96b16; }
     .map-marker-dp { color:#176fc1; }
     .map-marker-sp { color:#188b53; }
+    .map-marker-urns { color:#7b61a8; }
     .map-marker-small { width:13px; height:13px; }
     .map-marker-compact { width:9px; height:9px; filter:drop-shadow(0 0 1px rgba(255,255,255,.96)) drop-shadow(0 1px 1px rgba(16,38,54,.35)); }
     .map-marker-compact svg { display:block; stroke-width:2.1; }
@@ -271,18 +274,21 @@
 
     const GRAY = ['#808080', 'серый'];
     const ALL_DISTRICTS = Object.keys(COLOR_LEGEND);
+    const URNS_LABEL = String.fromCodePoint(0x0423, 0x0440, 0x043d, 0x044b, 0x20, 0x0421, 0x0410, 0x041e);
     const LAYER_CONFIG = {
       areas: { label: 'Районы и участки', file: 'areas.geojson', color: '#808080', enabled: true },
       mno: { label: 'МНО', file: 'mno.geojson', color: '#e67e22', enabled: false },
       dp: { label: 'Детские площадки', file: 'dp.geojson', color: '#2e86de', enabled: false },
       sp: { label: 'Спортивные площадки', file: 'sp.geojson', color: '#27ae60', enabled: false },
-      smm: { label: 'Маршруты СММ (зимняя уборка)', file: 'smm.geojson', color: '#c00000', enabled: false }
+      smm: { label: 'Маршруты СММ (зимняя уборка)', file: 'smm.geojson', color: '#c00000', enabled: false },
+      urns: { label: URNS_LABEL, file: 'urns_sao_active_snapshot.geojson', kmlFile: 'urns_sao_active_snapshot.kml', color: '#7b61a8', enabled: false, lazy: true }
     };
     const MARKER_ICONS = {
       mno: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 5.5h8l-.7 8H4.7zM3 4h10M6 2.5h4M6.5 7.5v4M9.5 7.5v4"/></svg>',
       dp: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13.5h10M4.5 13.5V7h3l4 3v3.5M7.5 7V4.5M6 4.5h3M11.5 10V6.5"/></svg>',
       sp: '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="5.5"/><path d="m8 5.5 1.5 1.1-.6 1.8h-1.8l-.6-1.8zM4.6 6.4l1.9.2M11.4 6.4l-1.9.2M6.2 12l.7-2M9.8 12l-.7-2"/></svg>',
-      smm: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 12.5h9M3.5 12.5V9h6v3.5M4.5 9V7h4v2M11 8.5l3-3M14 5.5h-2.2M14 5.5v2.2M5.5 10.5h3"/></svg>'
+      smm: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 12.5h9M3.5 12.5V9h6v3.5M4.5 9V7h4v2M11 8.5l3-3M14 5.5h-2.2M14 5.5v2.2M5.5 10.5h3"/></svg>',
+      urns: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 5.5h8l-.7 8H4.7zM3 4h10M6 2.5h4M6.5 7.5v4M9.5 7.5v4"/></svg>'
     };
     const state = {
       district: 'ALL',
@@ -387,13 +393,36 @@
     function renderLayerControls() {
       $('layerControls').innerHTML = Object.entries(state.layers).map(([key, layer]) => `
         <label class="layer-toggle">
-          <input type="checkbox" data-layer="${key}" ${layer.enabled ? 'checked' : ''} ${layer.error ? 'disabled' : ''}>
+          <input type="checkbox" data-layer="${key}" aria-label="${escapeHtml(layer.label)}" ${layer.enabled ? 'checked' : ''} ${layer.error || layer.loading ? 'disabled' : ''}>
           <span class="layer-swatch" style="background:${layer.color}"></span>
           <span>${escapeHtml(layer.label)}</span>
-          <span class="layer-count">${layer.error ? 'ошибка' : layer.records.length}</span>
+          <span class="layer-count">${layer.error ? 'error' : layer.loading ? '...' : layer.records.length}</span>
+          ${layer.kmlFile ? `<a class="layer-download" href="${escapeHtml(layer.kmlFile)}" download title="Download KML">KML</a>` : ''}
         </label>`).join('');
-      $('layerControls').querySelectorAll('input[data-layer]').forEach((input) => input.addEventListener('change', () => {
-        state.layers[input.dataset.layer].enabled = input.checked;
+      $('layerControls').querySelectorAll('input[data-layer]').forEach((input) => input.addEventListener('change', async () => {
+        const layerKey = input.dataset.layer;
+        const layer = state.layers[layerKey];
+        layer.enabled = input.checked;
+        if (layer.enabled && layer.lazy && !layer.records.length && !layer.loading) {
+          layer.loading = true;
+          renderLayerControls();
+          try {
+            const response = await fetch(`./${layer.file}`, { cache: 'no-store' });
+            if (!response.ok) throw new Error(layer.file + ': HTTP ' + response.status);
+            await loadGeoJSON(await response.json(), layer.file, layerKey);
+          } catch (error) {
+            layer.error = error.message;
+            layer.enabled = false;
+            $('status').className = 'status error';
+            $('status').textContent = 'Layer load error: ' + error.message;
+          } finally {
+            layer.loading = false;
+            renderLayerControls();
+            renderVisibleFeatures();
+            updateSmmPanel();
+          }
+          return;
+        }
         renderVisibleFeatures();
         updateSmmPanel();
       }));
@@ -672,8 +701,9 @@
         } }));
 
         renderLayerControls();
-        const sources = { areas: DEMO_GEOJSON, mno: null, dp: null, sp: null };
+        const sources = { areas: DEMO_GEOJSON, mno: null, dp: null, sp: null, smm: null, urns: null };
         for (const [layerKey, layer] of Object.entries(state.layers)) {
+          if (layer.lazy) continue;
           try {
             const response = await fetch(`./${layer.file}`, { cache: 'no-store' });
             if (!response.ok) throw new Error(`${layer.file}: HTTP ${response.status}`);
