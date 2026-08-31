@@ -736,6 +736,7 @@
       try {
         const ymaps3 = await window.ymaps3Ready;
         await ymaps3.ready;
+        ymaps3.import.registerCdn('https://cdn.jsdelivr.net/npm/{package}', ['@yandex/ymaps3-clusterer@0.0']);
         const { YMap, YMapDefaultSchemeLayer, YMapDefaultFeaturesLayer, YMapListener } = ymaps3;
         state.map = new YMap($('map'), {
           location: { center: [37.50, 55.84], zoom: 11 },

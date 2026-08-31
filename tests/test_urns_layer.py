@@ -13,6 +13,7 @@ def test_urns_layer_is_published_as_geojson_and_downloadable_kml():
     assert "urns_sao_active_snapshot.kml" in markup
     assert "YMapClusterer" in markup
     assert "clusterByGrid" in markup
+    assert "registerCdn" in markup
     assert "map-marker-urns" in markup
     assert (REPO / "urns_sao_active_snapshot.kml").is_file()
     assert data["type"] == "FeatureCollection"
