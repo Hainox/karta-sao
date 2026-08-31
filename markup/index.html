@@ -442,8 +442,8 @@ function allDistrictsBbox(){
 /* -- Статусы районов -- */
 function districtStatus(d){
   if(getLock(d)) return 'locked';
-  if(getDraft(d)) return 'draft';
   if(getLayer(d)) return 'loaded';
+  if(getDraft(d)) return 'draft';
   return 'empty';
 }
 function stClass(st){ return st === 'locked' ? 'locked' : st === 'draft' ? 'draft' : st === 'loaded' ? 'done' : 'empty'; }
@@ -785,12 +785,12 @@ function renderPrefectureSidebar(){
     name.textContent = d;
     const chip = document.createElement('span');
     chip.className = 'chip ' + stClass(st);
-    chip.textContent = statusText(st);
+    chip.textContent = st === 'loaded' ? 'Слой загружен' : statusText(st);
     head.append(name, chip);
     row.appendChild(head);
     const sub = document.createElement('div');
     sub.className = 'row-sub';
-    const lock = getLock(d), layer = getLayer(d);
+    const lock = getLock(d), layer = getLayer(d), draft = getDraft(d);
     if(lock) sub.textContent = 'Заблокирован: ' + new Date(lock.at).toLocaleString('ru-RU');
     else if(layer) sub.textContent = 'Слой загружен: ' + new Date(layer.added_at).toLocaleString('ru-RU') + ' . маршрутов: ' + ((layer.geojson && layer.geojson.features) ? layer.geojson.features.length : 0);
     else sub.textContent = 'Не размечен';
@@ -799,6 +799,9 @@ function renderPrefectureSidebar(){
     acts.className = 'row-actions';
     const mk = (t, cls, fn) => { const b = document.createElement('button'); b.className = 'btn small' + (cls ? ' ' + cls : ''); b.textContent = t; b.onclick = fn; return b; };
     acts.appendChild(mk('Загрузить слой', '', () => { pendingLayerDistrict = d; document.getElementById('layer-file-input').click(); }));
+    if(draft && Array.isArray(draft.routes) && draft.routes.length){
+      acts.appendChild(mk('Взять слой с этого компьютера', '', () => uploadDraftAsLayer(d)));
+    }
     if(layer) acts.appendChild(mk('Удалить слой', 'danger', () => { unsetLayer(d); renderPrefectureSidebar(); renderPrefectureLayerRoutes(); updatePickerProgress(); toast('Слой района "' + d + '" удалён'); }));
     if(lock) acts.appendChild(mk('Разблокировать', '', () => { if(confirm('Снять блокировку района (особое распоряжение)?')){ unsetLock(d); renderPrefectureSidebar(); updatePickerProgress(); toast('Район "' + d + '" разблокирован'); } }));
     row.appendChild(acts);
@@ -900,6 +903,37 @@ function deleteAttachedPhoto(photoId){
 }
 
 /* ═══════════ ЭКСПОРТ ═══════════ */
+function uploadDraftAsLayer(d){
+  const draft = getDraft(d);
+  if(!draft || !Array.isArray(draft.routes)){
+    toast('Черновик района "' + d + '" пуст или отсутствует');
+    return;
+  }
+  const features = draft.routes
+    .filter(r => Array.isArray(r.coords) && r.coords.length >= 2)
+    .map(r => ({
+      type: 'Feature',
+      properties: { route_id: r.route_id, name: r.name, district: r.district || d, created_at: r.created_at },
+      geometry: { type: 'LineString', coordinates: r.coords }
+    }));
+  if(!features.length){
+    toast('В черновике района "' + d + '" нет готовых маршрутов');
+    return;
+  }
+  const fc = {
+    type: 'FeatureCollection',
+    features: features,
+    metadata: { district: d, status: 'draft_upload', source: 'local', uploaded_at: new Date().toISOString(), app: 'karta-sao/markup' }
+  };
+  setLayer(d, fc);
+  const layers = getLayers();
+  if(layers[d]) layers[d].source = 'local';
+  lsSet(LS.layers, layers);
+  toast('Черновик района "' + d + '" выгружен как слой (' + features.length + ' маршр.)');
+  renderPrefectureSidebar();
+  renderPrefectureLayerRoutes();
+  updatePickerProgress();
+}
 function handleLayerFile(district, file){
   if(!file) return;
   const reader = new FileReader();
