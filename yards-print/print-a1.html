@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Печать дворов САО — A3</title>
+  <title>Печать дворов САО — A1</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
   <style>
     :root { --ink:#102636; --muted:#687982; --line:#d6e0e1; --paper:#f7f5ef; --accent:#0d827c; --panel:#fff; }
@@ -58,7 +58,7 @@
       font-size:28px !important;
     }
     @media (max-width:780px) { .topbar { padding:10px 14px; } .topbar-meta { display:none; } .workspace { grid-template-columns:1fr; } .sidebar { border-right:0; border-bottom:1px solid var(--line); } .map-wrap, #map { min-height:68vh; } }
-    @page{size:297mm 420mm;margin:10mm}
+    @page{size:594mm 841mm;margin:14mm}
     @media print {
       html, body { width:100%; height:auto; background:#fff; }
       .app { min-height:0; }
@@ -72,7 +72,7 @@
       h2 { margin:2mm 0 1mm; font-size:9pt; }
       .active-filters, .legend { padding:2mm; border-radius:0; font-size:8pt; }
       .legend { display:flex; flex-wrap:wrap; gap:3mm 6mm; }
-      .map-wrap, #map { width:215mm !important; height:381mm !important; min-height:381mm !important; page-break-inside:avoid; }
+      .map-wrap, #map { width:466mm !important; height:787mm !important; min-height:787mm !important; page-break-inside:avoid; }
       .map-overlay { top:3mm; left:3mm; padding:2mm; font-size:8pt; }
       .leaflet-control-zoom { display:none; }
       .leaflet-control-attribution { font-size:6pt !important; }
@@ -80,16 +80,16 @@
 
     html, body { height:auto !important; min-height:0 !important; }
     body { display:flex; justify-content:center; }
-    .app { width:277mm !important; height:398mm !important; min-height:0 !important; max-height:398mm !important; flex:none !important; overflow:hidden !important; }
+    .app { width:566mm !important; height:811mm !important; min-height:0 !important; max-height:811mm !important; flex:none !important; overflow:hidden !important; }
     html, body { overflow:hidden !important; }
-    .workspace { display:grid !important; grid-template-columns:62mm 1fr !important; width:277mm !important; height:398mm !important; flex:none !important; }
-    .sidebar { width:62mm !important; overflow:hidden; }
-    h1 { font-size:18pt !important; }
-    .intro, .note { font-size:8.0pt !important; }
-    .active-filters, .legend, .legend-hint { font-size:8.0pt !important; }
+    .workspace { display:grid !important; grid-template-columns:100mm 1fr !important; width:566mm !important; height:811mm !important; flex:none !important; }
+    .sidebar { width:100mm !important; overflow:hidden; }
+    h1 { font-size:27pt !important; }
+    .intro, .note { font-size:12.0pt !important; }
+    .active-filters, .legend, .legend-hint { font-size:12.0pt !important; }
     .legend-hint { color:#687982; margin:2mm 0 0; line-height:1.35; }
     .legend { border:1.2pt solid #163a68 !important; background:#fff !important; }
-    h2 { font-size:9.0pt !important; text-decoration:underline; }
+    h2 { font-size:13.5pt !important; text-decoration:underline; }
     .swatch.districts { width:16px; height:8px; border-radius:0; background:transparent; border:2px dashed #173f74; }
     .leaflet-tile { opacity:1 !important; transition:none !important; visibility:inherit !important; }
     .leaflet-fade-anim .leaflet-tile { opacity:1 !important; }
@@ -100,7 +100,7 @@
   <div class="app">
     <header class="topbar">
       <div class="brand"><span class="brand-mark" aria-label="Герб САО"><img src="../sao-coa.png" alt="Герб Северного административного округа Москвы"></span><span><strong>Городской атлас САО</strong><small>Печатная форма · дворы и объекты</small></span></div>
-      <div class="topbar-meta">A3 · книжная ориентация</div>
+      <div class="topbar-meta">A1 · книжная ориентация</div>
     </header>
     <main class="workspace">
       <aside class="sidebar">
