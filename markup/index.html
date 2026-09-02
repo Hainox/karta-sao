@@ -183,9 +183,12 @@ kbd{font-family:inherit;background:var(--paper);border:1px solid var(--line);bor
 .photo-marker .cam{font-size:13px;line-height:1}
 .photo-marker .num{position:absolute;right:-7px;top:-7px;background:var(--amber);color:var(--ink);font-size:9px;font-weight:800;border-radius:999px;min-width:16px;height:16px;display:flex;align-items:center;justify-content:center;padding:0 4px}
 .vertex-dot{width:8px;height:8px;border-radius:50%;background:#c00000;border:2px solid #fff;box-shadow:0 0 4px rgba(0,0,0,.4)}
-.route-start{width:14px;height:14px;border-radius:50%;border:2px solid #fff;box-shadow:0 1px 4px rgba(16,38,54,.45)}
-.route-end{width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-bottom:12px solid #c00000;filter:drop-shadow(0 1px 2px rgba(16,38,54,.45))}
-.route-arrow{width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-bottom:9px solid currentColor;filter:drop-shadow(0 1px 2px rgba(16,38,54,.35))}
+.route-endpoint{display:flex;align-items:center;gap:5px;pointer-events:none;white-space:nowrap}
+.route-endpoint-end{flex-direction:row}
+.route-endpoint-dot{width:16px;height:16px;border-radius:50%;border:2.5px solid #fff;box-shadow:0 1px 4px rgba(16,38,54,.5);flex:none}
+.route-endpoint-tri{width:0;height:0;border-left:8px solid transparent;border-right:8px solid transparent;border-bottom:14px solid #c00000;filter:drop-shadow(0 0 2px #fff) drop-shadow(0 0 2px #fff) drop-shadow(0 1px 2px rgba(16,38,54,.5));flex:none}
+.route-endpoint-label{font-size:10.5px;font-weight:700;letter-spacing:.03em;color:#17303b;background:#fff;padding:2px 6px;border-radius:5px;box-shadow:0 1px 3px rgba(16,38,54,.4)}
+.route-arrow{width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:11px solid currentColor;filter:drop-shadow(0 0 1.5px #fff) drop-shadow(0 0 1.5px #fff) drop-shadow(0 1px 2px rgba(16,38,54,.4))}
 
 /* -- Toast -- */
 .toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(0);background:var(--ink);color:#fff;padding:13px 20px;border-radius:14px;font-size:13.5px;box-shadow:var(--shadow);z-index:3000;max-width:min(560px,86vw);text-align:center;opacity:1;transition:opacity .2s,transform .2s}
@@ -923,16 +926,15 @@ function renderRouteEndpoints(r, colorOverride){
   const start = r.coords[0];
   const last = r.coords[r.coords.length - 1];
   const sEl = document.createElement('div');
-  sEl.className = 'route-start';
-  sEl.style.background = color;
+  sEl.className = 'route-endpoint route-endpoint-start';
+  sEl.innerHTML = '<span class="route-endpoint-dot" style="background:' + color + '"></span><span class="route-endpoint-label" style="color:' + color + '">НАЧАЛО</span>';
   const sMk = new Y.YMapMarker({ coordinates: start, zIndex: 2050 }, sEl);
   map.addChild(sMk);
   const p1 = r.coords[r.coords.length - 2];
   const deg = Math.atan2(last[0] - p1[0], last[1] - p1[1]) * 180 / Math.PI;
   const eEl = document.createElement('div');
-  eEl.className = 'route-end';
-  eEl.style.borderBottomColor = color;
-  eEl.style.transform = 'rotate(' + deg + 'deg)';
+  eEl.className = 'route-endpoint route-endpoint-end';
+  eEl.innerHTML = '<span class="route-endpoint-tri" style="border-bottom-color:' + color + ';transform:rotate(' + deg + 'deg)"></span><span class="route-endpoint-label" style="color:' + color + '">КОНЕЦ</span>';
   const eMk = new Y.YMapMarker({ coordinates: last, zIndex: 2050 }, eEl);
   map.addChild(eMk);
   state.endpointMarkers[r.route_id] = [sMk, eMk];
