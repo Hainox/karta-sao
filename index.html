@@ -54,9 +54,6 @@
     .map-marker-dp { background: #2e86de; border-radius: 3px; }
     .map-marker-sp { background: #27ae60; border-radius: 50%; }
     .map-marker-smm_storage { background: #6a1b9a; border-radius: 3px; }
-    .map-marker-queue1 { background: #d32f2f; border-radius: 50%; }
-    .map-marker-queue2 { background: #1565c0; border-radius: 50%; }
-    .map-marker-queue3 { background: #2e7d32; border-radius: 50%; }
     .map-marker-small { width: 10px; height: 10px; border-width: 1px; }
     .map-marker-compact { width: 7px; height: 7px; border-width: 1px; }
     .map-marker-compact svg { display: none; }
@@ -153,9 +150,6 @@
     .map-marker-dp { color:#176fc1; }
     .map-marker-sp { color:#188b53; }
     .map-marker-smm_storage { color:#6a1b9a; }
-    .map-marker-queue1 { color:#d32f2f; }
-    .map-marker-queue2 { color:#1565c0; }
-    .map-marker-queue3 { color:#2e7d32; }
     .map-marker-urns { color:#7457a6; }
     .map-marker-urns svg { stroke-width:1.9; }
     .map-marker-small { width:13px; height:13px; }
@@ -292,9 +286,6 @@
       sp: { label: 'Спортивные площадки', file: 'sp.geojson', color: '#27ae60', enabled: false },
       smm: { label: 'Маршруты СММ (зимняя уборка)', file: 'smm.geojson', color: '#c00000', enabled: false },
       smm_storage: { label: 'Места хранения СММ (402 площадки)', file: 'odh-map/layers/sao_smm_storage_locations_wgs84.geojson', color: '#6a1b9a', enabled: false, lazy: true },
-      queue1: { label: 'ОДХ: 1-я очередь уборки (97 позиций)', file: 'odh-map/layers/sao_queue1_wgs84.geojson', color: '#d32f2f', enabled: false, lazy: true, noDistrictFilter: true },
-      queue2: { label: 'ОДХ: 2-я очередь уборки (489 позиций)', file: 'odh-map/layers/sao_queue2_wgs84.geojson', color: '#1565c0', enabled: false, lazy: true, noDistrictFilter: true },
-      queue3: { label: 'ОДХ: 3-я очередь уборки (46 позиций)', file: 'odh-map/layers/sao_queue3_wgs84.geojson', color: '#2e7d32', enabled: false, lazy: true, noDistrictFilter: true },
       urns: { label: URNS_LABEL, file: 'urns_sao_active_snapshot.geojson', kmlFile: 'urns_sao_active_snapshot.kml', color: '#7b61a8', enabled: false, lazy: true }
     };
     const MARKER_ICONS = {
@@ -303,9 +294,6 @@
       sp: '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="5.5"/><path d="m8 5.5 1.5 1.1-.6 1.8h-1.8l-.6-1.8zM4.6 6.4l1.9.2M11.4 6.4l-1.9.2M6.2 12l.7-2M9.8 12l-.7-2"/></svg>',
       smm: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 12.5h9M3.5 12.5V9h6v3.5M4.5 9V7h4v2M11 8.5l3-3M14 5.5h-2.2M14 5.5v2.2M5.5 10.5h3"/></svg>',
       smm_storage: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 14h12M2.7 14V5.3l4.7-3.3 4.7 3.3V14M6 14v-4h4v4M4.7 6.7h1.3M10 6.7h1.3"/><path d="M2.7 8.7h2M11.3 8.7h2"/></svg>',
-      queue1: '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="4.5"/></svg>',
-      queue2: '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="4.5"/></svg>',
-      queue3: '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="4.5"/></svg>',
       urns: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.25 5.5h7.5l-.45 8H4.7zM3.5 4.5h9M6 4.5V2.8h4v1.7M6.5 7.5v4M9.5 7.5v4"/></svg>'
     };
     const state = {
@@ -394,17 +382,6 @@
       };
     }
 
-    const OUTLINE_ONLY_LAYERS = new Set(['queue1', 'queue2', 'queue3']);
-    function outlineStyle(color) {
-      return {
-        fill: color,
-        fillOpacity: 0,
-        stroke: [{ color: color, width: 2.5, opacity: 0.9 }],
-        interactive: true,
-        cursor: 'pointer'
-      };
-    }
-
     function renderDistrictSelect() {
       const names = [...new Set([...ALL_DISTRICTS, ...allRecords().map((item) => item.district)])].sort((a, b) => a.localeCompare(b, 'ru'));
       $('districtSelect').innerHTML = '<option value="ALL">Все районы</option>' + names.map((name) => `<option value="${escapeHtml(name)}">${escapeHtml(name)}</option>`).join('');
@@ -477,10 +454,7 @@
     }
 
     function isVisible(item) {
-      const layer = state.layers[item.layerKey];
-      if (!layer.enabled) return false;
-      if (layer.noDistrictFilter) return true;
-      return (state.district === 'ALL' || item.district === state.district) && (state.section === 'ALL' || item.section === state.section);
+      return state.layers[item.layerKey].enabled && (state.district === 'ALL' || item.district === state.district) && (state.section === 'ALL' || item.section === state.section);
     }
 
     function renderVisibleFeatures() {
@@ -498,16 +472,13 @@
     }
 
     function showDetails(item) {
-      const labels = {address:'Адрес', source_address:'Адрес-источник', container_count:'Количество контейнеров', purpose:'Назначение', ownership:'Собственник', 'Начальник участка':'Начальник участка', 'Телефон начальника участка':'Телефон начальника участка', status:'Статус привязки', storage:'Место складирования', passes:'Количество проходов', note:'Примечание', category:'Категория', area_m2:'Площадь, м²', wave:'Очередь уборки', queue_source:'Основание очереди', registry_id:'ID реестра', warning:'Предупреждение'};
-      const allowed = ['address','source_address','container_count','purpose','ownership','Начальник участка','Телефон начальника участка','status','storage','passes','note','category','area_m2','wave','queue_source','registry_id','warning'];
+      const labels = {address:'Адрес', source_address:'Адрес-источник', container_count:'Количество контейнеров', purpose:'Назначение', ownership:'Собственник', 'Начальник участка':'Начальник участка', 'Телефон начальника участка':'Телефон начальника участка', status:'Статус привязки', storage:'Место складирования', passes:'Количество проходов', note:'Примечание'};
+      const allowed = ['address','source_address','container_count','purpose','ownership','Начальник участка','Телефон начальника участка','status','storage','passes','note'];
       const extra = Object.entries(item.properties).filter(([key]) => allowed.includes(key)).map(([key,value]) => `<div><strong>${labels[key]}:</strong> ${escapeHtml(value)}</div>`).join('');
       const detail = item.layerKey === 'smm' && item.properties.detail
         ? `<a class="detail-btn" href="${escapeHtml(item.properties.detail)}">Подробно: схема маршрута и направление выброса</a>`
         : '';
-      const locationLines = state.layers[item.layerKey]?.noDistrictFilter
-        ? ''
-        : `<div>Район: <strong>${escapeHtml(item.district)}</strong></div><div>Участок: <strong>${escapeHtml(item.section)}</strong></div>`;
-      $('details').innerHTML = `<div><strong>${escapeHtml(item.name)}</strong></div>${locationLines}${extra}${detail}`;
+      $('details').innerHTML = `<div><strong>${escapeHtml(item.name)}</strong></div><div>Район: <strong>${escapeHtml(item.district)}</strong></div><div>Участок: <strong>${escapeHtml(item.section)}</strong></div>${extra}${detail}`;
     }
 
     async function createMapFeatures(records) {
@@ -569,7 +540,7 @@
           id: item.id,
           geometry: item.geometry,
           properties: { ...item.properties, district: item.district, section: item.section, name: item.name },
-          style: OUTLINE_ONLY_LAYERS.has(item.layerKey) ? outlineStyle(item.color) : featureStyle(item.color, item.layerKey === 'smm' ? 0.22 : 0.58),
+          style: featureStyle(item.color, item.layerKey === 'smm' ? 0.22 : 0.58),
           onClick: (_event, mapEvent) => showDetails(item, mapEvent?.coordinates)
         });
       });
