@@ -53,6 +53,7 @@
     .map-marker-mno { background: #e67e22; border-radius: 50%; }
     .map-marker-dp { background: #2e86de; border-radius: 3px; }
     .map-marker-sp { background: #27ae60; border-radius: 50%; }
+    .map-marker-smm_storage { background: #6a1b9a; border-radius: 3px; }
     .map-marker-small { width: 10px; height: 10px; border-width: 1px; }
     .map-marker-compact { width: 7px; height: 7px; border-width: 1px; }
     .map-marker-compact svg { display: none; }
@@ -148,6 +149,7 @@
     .map-marker-mno { color:#d96b16; }
     .map-marker-dp { color:#176fc1; }
     .map-marker-sp { color:#188b53; }
+    .map-marker-smm_storage { color:#6a1b9a; }
     .map-marker-urns { color:#7457a6; }
     .map-marker-urns svg { stroke-width:1.9; }
     .map-marker-small { width:13px; height:13px; }
@@ -283,6 +285,7 @@
       dp: { label: 'Детские площадки', file: 'dp.geojson', color: '#2e86de', enabled: false },
       sp: { label: 'Спортивные площадки', file: 'sp.geojson', color: '#27ae60', enabled: false },
       smm: { label: 'Маршруты СММ (зимняя уборка)', file: 'smm.geojson', color: '#c00000', enabled: false },
+      smm_storage: { label: 'Места хранения СММ (402 площадки)', file: 'odh-map/layers/sao_smm_storage_locations_wgs84.geojson', color: '#6a1b9a', enabled: false, lazy: true },
       urns: { label: URNS_LABEL, file: 'urns_sao_active_snapshot.geojson', kmlFile: 'urns_sao_active_snapshot.kml', color: '#7b61a8', enabled: false, lazy: true }
     };
     const MARKER_ICONS = {
@@ -290,6 +293,7 @@
       dp: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13.5h10M4.5 13.5V7h3l4 3v3.5M7.5 7V4.5M6 4.5h3M11.5 10V6.5"/></svg>',
       sp: '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="5.5"/><path d="m8 5.5 1.5 1.1-.6 1.8h-1.8l-.6-1.8zM4.6 6.4l1.9.2M11.4 6.4l-1.9.2M6.2 12l.7-2M9.8 12l-.7-2"/></svg>',
       smm: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 12.5h9M3.5 12.5V9h6v3.5M4.5 9V7h4v2M11 8.5l3-3M14 5.5h-2.2M14 5.5v2.2M5.5 10.5h3"/></svg>',
+      smm_storage: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 14h12M2.7 14V5.3l4.7-3.3 4.7 3.3V14M6 14v-4h4v4M4.7 6.7h1.3M10 6.7h1.3"/><path d="M2.7 8.7h2M11.3 8.7h2"/></svg>',
       urns: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.25 5.5h7.5l-.45 8H4.7zM3.5 4.5h9M6 4.5V2.8h4v1.7M6.5 7.5v4M9.5 7.5v4"/></svg>'
     };
     const state = {
