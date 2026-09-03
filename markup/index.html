@@ -189,6 +189,12 @@ kbd{font-family:inherit;background:var(--paper);border:1px solid var(--line);bor
 .route-endpoint-tri{width:0;height:0;border-left:8px solid transparent;border-right:8px solid transparent;border-bottom:14px solid #c00000;filter:drop-shadow(0 0 2px #fff) drop-shadow(0 0 2px #fff) drop-shadow(0 1px 2px rgba(16,38,54,.5));flex:none}
 .route-endpoint-label{font-size:10.5px;font-weight:700;letter-spacing:.03em;color:#17303b;background:#fff;padding:2px 6px;border-radius:5px;box-shadow:0 1px 3px rgba(16,38,54,.4)}
 .route-arrow{width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:11px solid currentColor;filter:drop-shadow(0 0 1.5px #fff) drop-shadow(0 0 1.5px #fff) drop-shadow(0 1px 2px rgba(16,38,54,.4))}
+.manual-arrow-head{width:0;height:0;border-left:8px solid transparent;border-right:8px solid transparent;border-bottom:16px solid #c00000;filter:drop-shadow(0 0 2px #fff) drop-shadow(0 0 2px #fff) drop-shadow(0 1px 2px rgba(16,38,54,.45))}
+.arrow-anchor-dot{width:12px;height:12px;border-radius:50%;border:2px solid #fff;box-shadow:0 1px 4px rgba(16,38,54,.5)}
+.arrow-palette{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:10px}
+.arrow-color-swatch{width:24px;height:24px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px var(--line);cursor:pointer;padding:0;transition:transform .12s,box-shadow .12s}
+.arrow-color-swatch:hover{transform:scale(1.1)}
+.arrow-color-swatch.selected{box-shadow:0 0 0 2px var(--ink),0 0 0 4px #fff}
 
 /* -- Toast -- */
 .toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(0);background:var(--ink);color:#fff;padding:13px 20px;border-radius:14px;font-size:13.5px;box-shadow:var(--shadow);z-index:3000;max-width:min(560px,86vw);text-align:center;opacity:1;transition:opacity .2s,transform .2s}
@@ -329,6 +335,16 @@ kbd{font-family:inherit;background:var(--paper);border:1px solid var(--line);bor
           </div>
 
           <div class="side-card">
+            <h3>Стрелки на карте: <span id="arrow-count">0</span></h3>
+            <div class="arrow-palette" id="arrow-palette"></div>
+            <div class="toolbar">
+              <button class="btn primary small" id="btn-draw-arrow" type="button"><span aria-hidden="true">➜</span> Стрелка</button>
+            </div>
+            <div class="lock-note">Кликните начало, затем конец стрелки. Esc - выйти из режима.</div>
+            <div class="route-list" id="arrow-list"></div>
+          </div>
+
+          <div class="side-card">
             <h3>Маршруты: <span id="route-count">0</span></h3>
             <div class="route-list" id="route-list"></div>
             <div class="divider"></div>
@@ -415,6 +431,16 @@ kbd{font-family:inherit;background:var(--paper);border:1px solid var(--line);bor
           </div>
 
           <div class="side-card">
+            <h3>Стрелки на карте: <span id="pref-arrow-count">0</span></h3>
+            <div class="arrow-palette" id="pref-arrow-palette"></div>
+            <div class="toolbar">
+              <button class="btn primary small" id="pref-btn-draw-arrow" type="button"><span aria-hidden="true">➜</span> Стрелка</button>
+            </div>
+            <div class="lock-note">Кликните начало, затем конец стрелки. Esc - выйти из режима.</div>
+            <div class="route-list" id="pref-arrow-list"></div>
+          </div>
+
+          <div class="side-card">
             <h3>Фото-метки</h3>
             <label class="switch-row">
               <span class="switch-label">Расставить фото-метки</span>
@@ -465,10 +491,12 @@ kbd{font-family:inherit;background:var(--paper);border:1px solid var(--line);bor
 const DISTRICTS = ['Аэропорт','Беговой','Бескудниковский','Войковский','Восточное Дегунино','Головинский','Дмитровский','Западное Дегунино','Коптево','Левобережный','Молжаниновский','Савеловский','Сокол','Тимирязевский','Ховрино','Хорошевский'];
 const PALETTE = ['#d81b60','#7b1fa2','#3949ab','#1e88e5','#00acc1','#00897b','#43a047','#7cb342','#c0ca33','#fdd835','#fb8c00','#f4511e','#e53935','#8d6e63','#5d4037','#455a64'];
 const ROUTE_COLORS = ['#e6194b','#3cb44b','#4363d8','#f58231','#911eb4','#42d4f4','#f032e6','#bfef45','#fabed4','#469990','#dcbeff','#9a6324','#800000','#000075','#666666'];
+const ARROW_COLORS = ['#c00000','#1565c0','#2e7d32','#ef6c00','#6a1b9a','#00838f','#000000'];
 const PREFECTURE_CODE = '';
 const LS = {
   locks: 'markup_locks',
   layers: 'markup_prefecture_layers',
+  manualArrowsPrefecture: 'markup_manual_arrows_prefecture',
   photos: 'markup_photo_markers',
   draft: d => 'markup_draft_' + d,
   settings: 'markup_settings'
@@ -499,6 +527,11 @@ const state = {
   routeCounter: 1,
   ptCounters: {},
   endpointMarkers: {},
+  manualArrows: [],
+  manualArrowFeatures: {},
+  arrowDrawing: false,
+  arrowFirstPoint: null,
+  manualArrowColor: ARROW_COLORS[0],
   districtMap: null, districtMapPromise: null, districtMapReady: false,
   prefMap: null, prefMapPromise: null, prefMapReady: false
 };
@@ -866,6 +899,7 @@ function undoVertex(){
   updatePreview();
 }
 function setDrawing(on, text){
+  if(on && state.arrowDrawing) stopArrowMode();
   state.drawing = on;
   const armedBtn = document.getElementById(state.mode === 'prefecture' ? 'pref-btn-draw' : 'btn-draw-route');
   if(armedBtn) armedBtn.classList.toggle('armed', on);
@@ -974,6 +1008,176 @@ function removeRouteDirectionArrows(id){
 function rebuildDirectionArrows(){
   state.routes.forEach(r => { removeRouteDirectionArrows(r.route_id); renderRouteDirectionArrows(r); });
 }
+
+/* ═══════════ РУЧНЫЕ СТРЕЛКИ (произвольная разметка направления) ═══════════ */
+function manualArrowStoreKey(){
+  return state.mode === 'prefecture' ? null : state.district;
+}
+function loadManualArrowsForContext(){
+  if(state.mode === 'prefecture'){
+    return lsGet(LS.manualArrowsPrefecture, []);
+  }
+  const draft = state.district ? getDraft(state.district) : null;
+  return (draft && Array.isArray(draft.manualArrows)) ? draft.manualArrows.map(a => Object.assign({}, a)) : [];
+}
+function saveManualArrows(){
+  if(state.mode === 'prefecture'){
+    lsSet(LS.manualArrowsPrefecture, state.manualArrows);
+    return;
+  }
+  if(!state.district) return;
+  const draft = getDraft(state.district) || {};
+  draft.manualArrows = state.manualArrows;
+  draft.saved_at = new Date().toISOString();
+  setDraft(state.district, draft);
+}
+function startArrowMode(){
+  if(state.drawing) setDrawing(false);
+  state.arrowDrawing = true;
+  state.arrowFirstPoint = null;
+  const btn = document.getElementById(state.mode === 'prefecture' ? 'pref-btn-draw-arrow' : 'btn-draw-arrow');
+  if(btn) btn.classList.add('armed');
+  hint('Стрелка: кликните начальную точку.');
+}
+function stopArrowMode(){
+  state.arrowDrawing = false;
+  state.arrowFirstPoint = null;
+  clearArrowPreview();
+  const btn = document.getElementById(state.mode === 'prefecture' ? 'pref-btn-draw-arrow' : 'btn-draw-arrow');
+  if(btn) btn.classList.remove('armed');
+  hint('Готов к работе.');
+}
+function clearArrowPreview(){
+  const map = curMap();
+  if(map && state._arrowPreviewDot){ try{ map.removeChild(state._arrowPreviewDot); }catch(e){} }
+  state._arrowPreviewDot = null;
+}
+function handleArrowMapClick(c){
+  const map = curMap(); if(!map) return;
+  const Y = window.ymaps3;
+  if(!state.arrowFirstPoint){
+    state.arrowFirstPoint = c;
+    const el = document.createElement('div');
+    el.className = 'arrow-anchor-dot';
+    el.style.background = state.manualArrowColor;
+    state._arrowPreviewDot = new Y.YMapMarker({ coordinates: c, zIndex: 2100 }, el);
+    map.addChild(state._arrowPreviewDot);
+    hint('Стрелка: кликните конечную точку (куда указывает стрелка). Esc - отмена.');
+    return;
+  }
+  const from = state.arrowFirstPoint;
+  const to = c;
+  clearArrowPreview();
+  state.arrowFirstPoint = null;
+  if(Math.abs(from[0] - to[0]) < 1e-9 && Math.abs(from[1] - to[1]) < 1e-9){
+    toast('Начальная и конечная точки совпадают - стрелка не добавлена');
+    hint('Стрелка: кликните начальную точку.');
+    return;
+  }
+  addManualArrow(from, to);
+  hint('Стрелка добавлена. Кликните начальную точку следующей, либо нажмите кнопку ещё раз, чтобы выйти.');
+}
+function addManualArrow(from, to){
+  const item = {
+    arrow_id: 'AR' + Date.now() + Math.floor(Math.random() * 1000),
+    from: from,
+    to: to,
+    color: state.manualArrowColor,
+    created_at: new Date().toISOString()
+  };
+  state.manualArrows.push(item);
+  renderManualArrow(item);
+  renderManualArrowList();
+  saveManualArrows();
+}
+function renderManualArrow(item){
+  const map = curMap(); if(!map) return;
+  const Y = window.ymaps3;
+  removeManualArrowFeature(item.arrow_id, map);
+  const shaft = new Y.YMapFeature({
+    geometry: { type: 'LineString', coordinates: [item.from, item.to] },
+    style: { stroke: [{ color: item.color, width: 3 }] },
+    zIndex: 2080
+  });
+  map.addChild(shaft);
+  const deg = Math.atan2(item.to[0] - item.from[0], item.to[1] - item.from[1]) * 180 / Math.PI;
+  const headEl = document.createElement('div');
+  headEl.className = 'manual-arrow-head';
+  headEl.style.borderBottomColor = item.color;
+  headEl.style.transform = 'rotate(' + deg + 'deg)';
+  const head = new Y.YMapMarker({ coordinates: item.to, zIndex: 2090 }, headEl);
+  map.addChild(head);
+  state.manualArrowFeatures[item.arrow_id] = { shaft: shaft, head: head };
+}
+function removeManualArrowFeature(id, map){
+  const m = map || curMap();
+  const f = state.manualArrowFeatures[id];
+  if(f && m){
+    try{ m.removeChild(f.shaft); }catch(e){}
+    try{ m.removeChild(f.head); }catch(e){}
+  }
+  delete state.manualArrowFeatures[id];
+}
+function deleteManualArrow(id){
+  removeManualArrowFeature(id);
+  state.manualArrows = state.manualArrows.filter(a => a.arrow_id !== id);
+  renderManualArrowList();
+  saveManualArrows();
+}
+function renderManualArrowPalette(){
+  const wrapId = state.mode === 'prefecture' ? 'pref-arrow-palette' : 'arrow-palette';
+  const wrap = document.getElementById(wrapId);
+  if(!wrap) return;
+  wrap.innerHTML = '';
+  ARROW_COLORS.forEach(color => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'arrow-color-swatch' + (color === state.manualArrowColor ? ' selected' : '');
+    b.style.background = color;
+    b.title = color;
+    b.onclick = () => { state.manualArrowColor = color; renderManualArrowPalette(); };
+    wrap.appendChild(b);
+  });
+}
+function renderManualArrowList(){
+  const wrap = document.getElementById(state.mode === 'prefecture' ? 'pref-arrow-list' : 'arrow-list');
+  if(!wrap) return;
+  const cnt = document.getElementById(state.mode === 'prefecture' ? 'pref-arrow-count' : 'arrow-count');
+  if(cnt) cnt.textContent = state.manualArrows.length;
+  wrap.innerHTML = '';
+  if(!state.manualArrows.length){
+    wrap.innerHTML = '<div class="lock-note">Стрелок пока нет. Нажмите "➜ Стрелка" и кликните начало, затем конец.</div>';
+    return;
+  }
+  state.manualArrows.forEach((a, idx) => {
+    const row = document.createElement('div');
+    row.className = 'route-row';
+    const head = document.createElement('div');
+    head.className = 'route-head';
+    const swatch = document.createElement('span');
+    swatch.className = 'swatch';
+    swatch.style.background = a.color;
+    const label = document.createElement('span');
+    label.className = 'route-label';
+    label.textContent = 'Стрелка ' + (idx + 1);
+    head.append(swatch, label);
+    const acts = document.createElement('div');
+    acts.className = 'route-actions';
+    const delBtn = document.createElement('button');
+    delBtn.className = 'btn small danger';
+    delBtn.textContent = 'Удалить';
+    delBtn.onclick = e => { e.stopPropagation(); deleteManualArrow(a.arrow_id); };
+    acts.appendChild(delBtn);
+    row.append(head, acts);
+    wrap.appendChild(row);
+  });
+}
+function loadManualArrowsIntoState(){
+  state.manualArrows = loadManualArrowsForContext();
+  state.manualArrows.forEach(a => renderManualArrow(a));
+  renderManualArrowList();
+  renderManualArrowPalette();
+}
 function finishRoute(){
   if(state.points.length < 2){ toast('Маршрут должен содержать минимум 2 точки'); return; }
   if(state.continueRouteId){
@@ -1025,7 +1229,7 @@ function continueRoute(id){
 }
 function autosave(){
   if(state.mode !== 'district' || !state.district) return;
-  setDraft(state.district, { routes: state.routes.map(r => Object.assign({}, r)), next_route_no: state.routeCounter, saved_at: new Date().toISOString() });
+  setDraft(state.district, { routes: state.routes.map(r => Object.assign({}, r)), next_route_no: state.routeCounter, manualArrows: state.manualArrows, saved_at: new Date().toISOString() });
 }
 function renderRouteList(){
   const wrap = document.getElementById(state.mode === 'prefecture' ? 'pref-route-list' : 'route-list');
@@ -1082,6 +1286,7 @@ function renderRouteList(){
 }
 function districtMapClick(obj, ev){
   if(obj && obj._routeId){ selectRoute(obj._routeId); return; }
+  if(state.arrowDrawing){ handleArrowMapClick(ev.coordinates); return; }
   if(!state.drawing) return;
   const c = ev.coordinates;
   if(!pointInDistrict(c[0], c[1], state.district)){
@@ -1092,6 +1297,7 @@ function districtMapClick(obj, ev){
 }
 function prefectureMapClick(obj, ev){
   if(obj && obj._routeId){ selectRoute(obj._routeId); return; }
+  if(state.arrowDrawing){ handleArrowMapClick(ev.coordinates); return; }
   const c = ev.coordinates;
   if(state.drawing){
     if(state.drawDistrict && !pointInDistrict(c[0], c[1], state.drawDistrict)){
@@ -1113,6 +1319,11 @@ function onWindowKeydown(e){
   const tag = e.target && e.target.tagName;
   if(tag === 'INPUT' || tag === 'SELECT' || tag === 'TEXTAREA') return;
   if(e.key === 'Escape'){
+    if(state.arrowDrawing){
+      stopArrowMode();
+      e.preventDefault();
+      return;
+    }
     if(state.drawing){
       if(state.points.length >= 2) finishRoute();
       else setDrawing(false);
@@ -1341,7 +1552,9 @@ function resetEditorState(mode, district){
     clearF(state.layerFeatures, map);
     clearF(state.districtFeatures, map);
     Object.keys(state.photoMarkerObjs).forEach(k => { const m = state.photoMarkerObjs[k]; try{ map.removeChild(m); }catch(e){} });
+    Object.keys(state.manualArrowFeatures).forEach(k => { removeManualArrowFeature(k, map); });
     if(state.drawing) clearPreview();
+    if(state.arrowDrawing) clearArrowPreview();
   }
   state.mode = mode;
   state.district = district || null;
@@ -1360,6 +1573,10 @@ function resetEditorState(mode, district){
   state.ptCounters = {};
   state.photoMarkerObjs = {};
   state.photoMode = false;
+  state.manualArrows = [];
+  state.manualArrowFeatures = {};
+  state.arrowDrawing = false;
+  state.arrowFirstPoint = null;
   const t = document.getElementById('photo-mode-toggle');
   if(t) t.checked = false;
   document.getElementById('photo-popup').hidden = true;
@@ -1388,6 +1605,7 @@ async function openDistrictEditor(district){
     renderRouteList();
     toast('Восстановлен черновик района: ' + state.routes.length + ' маршр. от ' + new Date(draft.saved_at).toLocaleString('ru-RU'));
   }
+  loadManualArrowsIntoState();
   updatePickerProgress();
 }
 function renderDistrictSidebar(){
@@ -1410,6 +1628,7 @@ async function openPrefectureEditor(){
   addPrefectureLayers();
   renderPrefectureLayerRoutes();
   renderPhotoMarkersOnMap();
+  loadManualArrowsIntoState();
   fitToBounds(state.prefMap, allDistrictsBbox());
 }
 function saveAndLockDistrict(){
@@ -1463,17 +1682,21 @@ function wireEvents(){
   by('btn-pref-exit').onclick = () => showScreen('screen-entry');
   by('btn-save-lock').onclick = saveAndLockDistrict;
   const drawStart = () => {
+    if(state.arrowDrawing) stopArrowMode();
     if(state.drawing){ clearPreview(); state.points = []; }
     state.continueRouteId = null;
     setDrawing(true);
     renderRouteList();
   };
+  const toggleArrowMode = () => { if(state.arrowDrawing) stopArrowMode(); else startArrowMode(); };
   by('btn-draw-route').onclick = drawStart;
   by('btn-undo-point').onclick = undoVertex;
   by('btn-finish-route').onclick = finishRoute;
+  by('btn-draw-arrow').onclick = toggleArrowMode;
   by('pref-btn-draw').onclick = drawStart;
   by('pref-btn-undo').onclick = undoVertex;
   by('pref-btn-finish').onclick = finishRoute;
+  by('pref-btn-draw-arrow').onclick = toggleArrowMode;
   by('pref-draw-district').onchange = e => { state.drawDistrict = e.target.value; };
   by('photo-mode-toggle').onchange = e => { state.photoMode = e.target.checked; toast(state.photoMode ? 'Режим фото-меток включён: кликайте по карте' : 'Режим фото-меток выключен'); };
   by('btn-export-prefecture').onclick = exportPrefecture;
