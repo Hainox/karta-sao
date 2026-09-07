@@ -55,6 +55,30 @@
     return [];
   }
 
+  function validateFeature(feature, index, boundary, errors, expected = {}) {
+    const number = index + 1;
+    const properties = feature && feature.properties;
+    const type = properties && TYPES[properties.change_type];
+    if (!feature || feature.type !== 'Feature' || !feature.geometry) {
+      errors.push(`Объект ${number}: повреждённая GeoJSON-структура.`);
+      return;
+    }
+    if (!type) errors.push(`Объект ${number}: неизвестный тип изменения.`);
+    if (!type || feature.geometry.type !== type.geometry) errors.push(`Объект ${number}: для выбранного типа нужна геометрия ${type ? type.geometry : 'Point или LineString'}.`);
+    if (!properties || !DISTRICTS.includes(properties.district)) errors.push(`Объект ${number}: укажите корректный район САО.`);
+    if (!properties || typeof properties.author !== 'string' || !properties.author.trim()) errors.push(`Объект ${number}: укажите исполнителя.`);
+    if (expected.district && (!properties || properties.district !== expected.district)) errors.push(`Объект ${number}: район должен совпадать с карточкой набора.`);
+    if (expected.author && (!properties || properties.author !== expected.author)) errors.push(`Объект ${number}: исполнитель должен совпадать с карточкой набора.`);
+    if (!properties || typeof properties.address !== 'string' || !properties.address.trim()) errors.push(`Объект ${number}: укажите адрес или ориентир.`);
+    if (properties && properties.change_type === 'queue' && !['1', '2', '3'].includes(String(properties.queue_priority))) errors.push(`Объект ${number}: очередь должна быть 1, 2 или 3.`);
+    const coordinates = coordinatesFor(feature.geometry);
+    if (feature.geometry.type === 'LineString' && coordinates.length < 2) errors.push(`Объект ${number}: линия должна содержать минимум две вершины.`);
+    coordinates.forEach((point, coordinateIndex) => {
+      if (!isCoordinate(point)) errors.push(`Объект ${number}, вершина ${coordinateIndex + 1}: некорректные координаты.`);
+      else if (!vertexInBoundary(point, boundary)) errors.push(`Объект ${number}, вершина ${coordinateIndex + 1}: находится за границей САО.`);
+    });
+  }
+
   function validate(changeSet, boundary) {
     const errors = [];
     if (!changeSet || changeSet.type !== 'FeatureCollection') errors.push('Нужен GeoJSON типа FeatureCollection.');
@@ -64,28 +88,19 @@
     if (!changeSet || !Array.isArray(changeSet.features)) return { valid: false, errors };
     if (changeSet.features.length === 0) errors.push('Нужно добавить хотя бы один объект.');
     if (changeSet.features.length > 500) errors.push('В одном наборе может быть не более 500 объектов.');
+    changeSet.features.forEach((feature, index) => validateFeature(feature, index, boundary, errors, { district: changeSet.district, author: changeSet.author }));
+    return { valid: errors.length === 0, errors };
+  }
 
-    changeSet.features.forEach((feature, index) => {
-      const number = index + 1;
-      const properties = feature && feature.properties;
-      const type = properties && TYPES[properties.change_type];
-      if (!feature || feature.type !== 'Feature' || !feature.geometry) {
-        errors.push(`Объект ${number}: повреждённая GeoJSON-структура.`);
-        return;
-      }
-      if (!type) errors.push(`Объект ${number}: неизвестный тип изменения.`);
-      if (!type || feature.geometry.type !== type.geometry) errors.push(`Объект ${number}: для выбранного типа нужна геометрия ${type ? type.geometry : 'Point или LineString'}.`);
-      if (!properties || properties.district !== changeSet.district) errors.push(`Объект ${number}: район должен совпадать с карточкой набора.`);
-      if (!properties || properties.author !== changeSet.author) errors.push(`Объект ${number}: исполнитель должен совпадать с карточкой набора.`);
-      if (!properties || typeof properties.address !== 'string' || !properties.address.trim()) errors.push(`Объект ${number}: укажите адрес или ориентир.`);
-      if (properties && properties.change_type === 'queue' && !['1', '2', '3'].includes(String(properties.queue_priority))) errors.push(`Объект ${number}: очередь должна быть 1, 2 или 3.`);
-      const coordinates = coordinatesFor(feature.geometry);
-      if (feature.geometry.type === 'LineString' && coordinates.length < 2) errors.push(`Объект ${number}: линия должна содержать минимум две вершины.`);
-      coordinates.forEach((point, coordinateIndex) => {
-        if (!isCoordinate(point)) errors.push(`Объект ${number}, вершина ${coordinateIndex + 1}: некорректные координаты.`);
-        else if (!vertexInBoundary(point, boundary)) errors.push(`Объект ${number}, вершина ${coordinateIndex + 1}: находится за границей САО.`);
-      });
-    });
+  function validateReviewBundle(bundle, boundary) {
+    const errors = [];
+    if (!bundle || bundle.type !== 'FeatureCollection') errors.push('Нужен GeoJSON типа FeatureCollection.');
+    if (!bundle || bundle.review_bundle_version !== 'district_review_bundle_v1') errors.push('Ожидается сводка формата district_review_bundle_v1.');
+    if (!bundle || !Array.isArray(bundle.sources) || bundle.sources.length === 0) errors.push('В сводке не указаны принятые файлы районов.');
+    if (!bundle || !Array.isArray(bundle.features)) return { valid: false, errors };
+    if (bundle.features.length === 0) errors.push('В сводке нет объектов.');
+    if (bundle.features.length > 8000) errors.push('В сводке может быть не более 8000 объектов.');
+    bundle.features.forEach((feature, index) => validateFeature(feature, index, boundary, errors));
     return { valid: errors.length === 0, errors };
   }
 
@@ -114,5 +129,5 @@
     };
   }
 
-  window.DistrictChanges = { VERSION, DISTRICTS, TYPES, labelFor, makeChangeSet, styleFor, validate, vertexInBoundary };
+  window.DistrictChanges = { VERSION, DISTRICTS, TYPES, labelFor, makeChangeSet, styleFor, validate, validateReviewBundle, vertexInBoundary };
 }());

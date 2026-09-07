@@ -32,7 +32,7 @@
         <div id="status" class="status">Загружаю границу САО…</div>
         <h2>Итог</h2><div class="summary"><div><b id="acceptedCount">0</b>принято файлов</div><div><b id="rejectedCount">0</b>отклонено</div><div><b id="featureCount">0</b>объектов</div></div>
         <h2>Результат проверки</h2><div id="fileList" class="file-list"><p class="small">Файлы ещё не загружены.</p></div>
-        <p class="small">Максимальный размер одного файла — 5 МБ. Единый файл имеет статус локальной сводки и предназначен для согласования или передачи в ГИС; он не является автоматической публикацией.</p>
+        <p class="small">Максимальный размер файла района — 5 МБ, сводки — 25 МБ. Единый файл имеет статус локальной сводки и предназначен для согласования или передачи в ГИС; он не является автоматической публикацией.</p>
       </aside>
       <div id="map" aria-label="Карта проверки районных правок"></div>
     </main>
@@ -42,6 +42,7 @@
   <script>
     (() => {
       const MAX_BYTES = 5 * 1024 * 1024;
+      const MAX_BUNDLE_BYTES = 25 * 1024 * 1024;
       const map = L.map('map', { zoomControl: true, attributionControl: true });
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '&copy; OpenStreetMap contributors' }).addTo(map);
       const acceptedGroup = L.featureGroup().addTo(map);
@@ -123,8 +124,10 @@
           sources: accepted.map(entry => ({ file_name: entry.name, district: entry.changeSet.district, author: entry.changeSet.author, created_at: entry.changeSet.created_at, features: entry.changeSet.features.length })),
           features: accepted.flatMap(entry => entry.changeSet.features.map(feature => ({ ...JSON.parse(JSON.stringify(feature)), properties: { ...feature.properties, source_file: entry.name, review_status: 'accepted_locally' } })))
         };
+        const file = new Blob([JSON.stringify(bundle, null, 2)], { type: 'application/geo+json' });
+        if (file.size > MAX_BUNDLE_BYTES) { setStatus('Сводка больше 25 МБ. Уменьшите число или детализацию объектов перед выгрузкой.', 'error'); return; }
         const filename = `svod-pravok-sao-${reviewedAt.slice(0, 10)}.geojson`;
-        const link = document.createElement('a'); link.href = URL.createObjectURL(new Blob([JSON.stringify(bundle, null, 2)], { type: 'application/geo+json' })); link.download = filename; link.click(); URL.revokeObjectURL(link.href);
+        const link = document.createElement('a'); link.href = URL.createObjectURL(file); link.download = filename; link.click(); URL.revokeObjectURL(link.href);
         setStatus(`Скачан «${filename}»: ${bundle.features.length} объектов из ${accepted.length} файлов. Его нужно утвердить до публикации.`, 'good');
       }
       async function initialize() {

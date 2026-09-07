@@ -3,11 +3,15 @@
   'use strict';
 
   const MAX_BYTES = 5 * 1024 * 1024;
+  const MAX_BUNDLE_BYTES = 25 * 1024 * 1024;
   const input = document.getElementById('district-overlay-input');
   const toggle = document.getElementById('district-overlay-toggle');
   const clear = document.getElementById('district-overlay-clear');
   const status = document.getElementById('district-overlay-status');
   if (!input || !toggle || !clear || !status) return;
+  const inputLabel = input.closest('label');
+  const inputLabelText = inputLabel && inputLabel.querySelector('span');
+  if (inputLabelText) inputLabelText.textContent = 'Наложить правки или сводку';
 
   const districtProposalOverlay = L.featureGroup();
   let boundary = null;
@@ -32,7 +36,7 @@
   function popup(feature) {
     const p = feature.properties || {};
     const type = p.change_type === 'queue' ? `${DistrictChanges.labelFor(p.change_type)} ${p.queue_priority}` : DistrictChanges.labelFor(p.change_type);
-    return `<b>${esc(type)}</b><br><b>Район:</b> ${esc(p.district)}<br><b>Адрес:</b> ${esc(p.address)}${p.comment ? `<br><b>Комментарий:</b> ${esc(p.comment)}` : ''}<br><span style="color:#5a6872">Предложение района — не опубликовано</span>`;
+    return `<b>${esc(type)}</b><br><b>Район:</b> ${esc(p.district)}<br><b>Адрес:</b> ${esc(p.address)}${p.source_file ? `<br><b>Источник:</b> ${esc(p.source_file)}` : ''}${p.comment ? `<br><b>Комментарий:</b> ${esc(p.comment)}` : ''}<br><span style="color:#5a6872">Предложение района — не опубликовано</span>`;
   }
 
   function addFeature(feature) {
@@ -59,27 +63,35 @@
     toggle.disabled = true;
     clear.disabled = true;
     toggle.textContent = 'Скрыть';
-    setStatus('Выберите GeoJSON-файл, подготовленный районом.');
+    setStatus('Выберите GeoJSON района или сводный файл из приёмки.');
   }
 
   async function loadDistrictOverlay(file) {
     if (!file) return;
-    if (file.size > MAX_BYTES) {
-      setStatus('Файл больше 5 МБ и не был наложен.', true);
+    if (file.size > MAX_BUNDLE_BYTES) {
+      setStatus('Файл больше 25 МБ и не был наложен.', true);
       return;
     }
     try {
       setStatus('Проверяю файл…');
       const changeSet = JSON.parse(await file.text());
-      const validation = DistrictChanges.validate(changeSet, await getBoundary());
+      const isReviewBundle = changeSet.review_bundle_version === 'district_review_bundle_v1';
+      if (!isReviewBundle && file.size > MAX_BYTES) throw new Error('Файл района больше 5 МБ. Для сводки из приёмки допустимо до 25 МБ.');
+      const validation = isReviewBundle ? DistrictChanges.validateReviewBundle(changeSet, await getBoundary()) : DistrictChanges.validate(changeSet, await getBoundary());
       if (!validation.valid) throw new Error(validation.errors.join('\n'));
       districtProposalOverlay.clearLayers();
       changeSet.features.forEach(addFeature);
       setVisible(true);
       toggle.disabled = false;
       clear.disabled = false;
-      const created = changeSet.created_at ? new Date(changeSet.created_at).toLocaleString('ru-RU') : 'дата не указана';
-      setStatus(`<b>Временное наложение:</b> ${esc(changeSet.district)} · ${esc(changeSet.author)} · ${esc(created)}<br>Объектов: ${changeSet.features.length}. На опубликованные слои и GitHub это не влияет.`);
+      if (isReviewBundle) {
+        const reviewed = changeSet.reviewed_at ? new Date(changeSet.reviewed_at).toLocaleString('ru-RU') : 'дата не указана';
+        const sources = Array.isArray(changeSet.sources) ? changeSet.sources.length : 0;
+        setStatus(`<b>Временное сводное наложение:</b> ${sources} файлов · ${esc(reviewed)}<br>Объектов: ${changeSet.features.length}. На опубликованные слои и GitHub это не влияет.`);
+      } else {
+        const created = changeSet.created_at ? new Date(changeSet.created_at).toLocaleString('ru-RU') : 'дата не указана';
+        setStatus(`<b>Временное наложение:</b> ${esc(changeSet.district)} · ${esc(changeSet.author)} · ${esc(created)}<br>Объектов: ${changeSet.features.length}. На опубликованные слои и GitHub это не влияет.`);
+      }
     } catch (error) {
       clearDistrictOverlay();
       setStatus(`Файл не принят: ${error.message}`, true);
@@ -92,4 +104,5 @@
   toggle.addEventListener('click', () => setVisible(!visible));
   clear.addEventListener('click', clearDistrictOverlay);
   window.clearDistrictOverlay = clearDistrictOverlay;
+  setStatus('Выберите GeoJSON района или сводный файл из приёмки.');
 }());

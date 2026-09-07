@@ -11,6 +11,7 @@ script = script_path.read_text(encoding="utf-8")
 required_script = {
     "format version": "district_change_set_v1",
     "validator": "function validate(changeSet, boundary)",
+    "review-bundle validator": "function validateReviewBundle(bundle, boundary)",
     "boundary check": "function vertexInBoundary",
     "visual styles": "function styleFor(feature)",
 }
@@ -43,6 +44,6 @@ if "Наложить правки района" not in index or "district-overla
 if not overlay_path.is_file():
     raise SystemExit("Missing district overlay script.")
 overlay = overlay_path.read_text(encoding="utf-8")
-for label in ("Временное наложение", "clearDistrictOverlay", "MAX_BYTES"):
+for label in ("Временное наложение", "clearDistrictOverlay", "MAX_BYTES", "MAX_BUNDLE_BYTES", "validateReviewBundle"):
     if label not in overlay:
         raise SystemExit(f"District overlay is missing: {label}")
