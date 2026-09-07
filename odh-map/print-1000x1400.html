@@ -17,7 +17,7 @@
     .print-header__title { font-family: "Arial Nova", Arial, sans-serif; font-size: 16.6mm; font-weight: 700; line-height: 1; white-space: nowrap; }
     .print-title { position: absolute; z-index: 400; top: 52mm; left: 24mm; width: 952mm; margin: 0; color: #000; text-align: center; font-family: Calibri, Arial, sans-serif; font-size: 20.9mm; font-weight: 700; line-height: 1.205; letter-spacing: -.32mm; }
     .print-title span { display: block; }
-    .map-key { position: absolute; z-index: 450; right: 26.19mm; bottom: 26.95mm; width: 254.97mm; height: 388.07mm; padding: 12mm 10mm; overflow: hidden; color: #000; background: #d6dce5; border: .80mm solid #000; font-family: "Arial Narrow", "Arial", sans-serif; }
+    .map-key { position: absolute; z-index: 450; left: 26.19mm; bottom: 26.95mm; width: 254.97mm; height: 388.07mm; padding: 12mm 10mm; overflow: hidden; color: #000; background: #fff; border: .80mm solid #000; font-family: "Arial Narrow", "Arial", sans-serif; }
     .map-key h2 { margin: 0 0 11mm; text-align: center; font-size: 15.5mm; line-height: 1; font-weight: 700; text-decoration: underline; }
     .legend-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 7mm; }
     .legend-section { min-width: 0; }
@@ -55,7 +55,7 @@
 </head>
 <body>
   <main class="print-sheet" aria-label="Схема уборки улиц Северного административного округа">
-    <canvas id="basemap" width="1800" height="2520" aria-label="Картографическая подложка САО"></canvas>
+    <canvas id="basemap" width="3600" height="5040" aria-label="Картографическая подложка САО"></canvas>
     <svg id="features" viewBox="0 0 1800 2520" aria-label="Маршруты и объекты САО" role="img"></svg>
     <div id="loading" class="loading">Загрузка слоёв карты…</div>
 
@@ -100,10 +100,12 @@
     (() => {
       const queueColors = { queue1: '#FF0000', queue2: '#0000FF', queue3: '#00B050' };
       const markerSymbols = { pgm: '▦', snow: '❄', dry_snow: '⌂', healthcare: '+', smm_storage: 'M', hydrants: 'Г' };
-      const WIDTH = 1800;
-      const HEIGHT = 2520;
+      const FEATURE_WIDTH = 1800;
+      const FEATURE_HEIGHT = 2520;
+      const RASTER_WIDTH = 3600;
+      const RASTER_HEIGHT = 5040;
       const TILE_SIZE = 256;
-      const TILE_ZOOM = 12;
+      const TILE_ZOOM = 13;
       const svg = document.getElementById('features');
       const canvas = document.getElementById('basemap');
       const context = canvas.getContext('2d');
@@ -135,7 +137,7 @@
         const padX = (maxX - minX) * .08;
         const padY = (maxY - minY) * .08;
         minX -= padX; maxX += padX; minY -= padY; maxY += padY;
-        const targetRatio = WIDTH / HEIGHT;
+        const targetRatio = FEATURE_WIDTH / FEATURE_HEIGHT;
         const ratio = (maxX - minX) / (maxY - minY);
         if (ratio > targetRatio) {
           const extra = ((maxX - minX) / targetRatio - (maxY - minY)) / 2;
@@ -147,11 +149,11 @@
         return { minX, maxX, minY, maxY };
       }
 
-      function project(coordinate, view) {
+      function project(coordinate, view, width = FEATURE_WIDTH, height = FEATURE_HEIGHT) {
         const point = worldPoint(coordinate);
         return [
-          (point.x - view.minX) / (view.maxX - view.minX) * WIDTH,
-          (point.y - view.minY) / (view.maxY - view.minY) * HEIGHT
+          (point.x - view.minX) / (view.maxX - view.minX) * width,
+          (point.y - view.minY) / (view.maxY - view.minY) * height
         ];
       }
 
@@ -167,7 +169,7 @@
 
       async function drawBaseMap(view) {
         context.fillStyle = '#dfe6e7';
-        context.fillRect(0, 0, WIDTH, HEIGHT);
+        context.fillRect(0, 0, RASTER_WIDTH, RASTER_HEIGHT);
         const left = Math.floor(view.minX / TILE_SIZE);
         const right = Math.floor(view.maxX / TILE_SIZE);
         const top = Math.floor(view.minY / TILE_SIZE);
@@ -182,10 +184,10 @@
         const tiles = await Promise.all(tasks);
         tiles.forEach(({ x, y, image }) => {
           if (!image) return;
-          const dx = (x * TILE_SIZE - view.minX) / (view.maxX - view.minX) * WIDTH;
-          const dy = (y * TILE_SIZE - view.minY) / (view.maxY - view.minY) * HEIGHT;
-          const dw = TILE_SIZE / (view.maxX - view.minX) * WIDTH;
-          const dh = TILE_SIZE / (view.maxY - view.minY) * HEIGHT;
+          const dx = (x * TILE_SIZE - view.minX) / (view.maxX - view.minX) * RASTER_WIDTH;
+          const dy = (y * TILE_SIZE - view.minY) / (view.maxY - view.minY) * RASTER_HEIGHT;
+          const dw = TILE_SIZE / (view.maxX - view.minX) * RASTER_WIDTH;
+          const dh = TILE_SIZE / (view.maxY - view.minY) * RASTER_HEIGHT;
           context.drawImage(image, dx, dy, dw, dh);
         });
       }

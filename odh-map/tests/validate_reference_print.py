@@ -7,8 +7,8 @@ index = (Path(__file__).resolve().parents[1] / "index.html").read_text(encoding=
 required_fragments = {
     "custom paper size": "@page { size: 1000mm 1400mm; margin: 0; }",
     "sheet size": "width: 1000mm; height: 1400mm",
-    "reference legend coordinates": "right: 26.19mm; bottom: 26.95mm; width: 254.97mm; height: 388.07mm",
-    "reference legend fill": "background: #d6dce5",
+    "lower-left legend coordinates": "left: 26.19mm; bottom: 26.95mm; width: 254.97mm; height: 388.07mm",
+    "print-safe legend fill": "background: #fff",
     "queue I color": "queue1: '#FF0000'",
     "queue II color": "queue2: '#0000FF'",
     "queue III color": "queue3: '#00B050'",
@@ -16,9 +16,10 @@ required_fragments = {
     "SAO queue II count": "II очередь — 318 позиций",
     "SAO queue III count": "III очередь — 272 позиции",
     "print page title": "СЕВЕРНЫЙ АДМИНИСТРАТИВНЫЙ ОКРУГ",
-    "single raster map layer": 'id="basemap"',
+    "high-resolution raster map layer": 'id="basemap" width="3600" height="5040"',
     "vector route layer": 'id="features"',
-    "route projection": "function project(coordinate, view)",
+    "route projection": "function project(coordinate, view, width = FEATURE_WIDTH, height = FEATURE_HEIGHT)",
+    "high-detail tiles": "const TILE_ZOOM = 13;",
 }
 
 missing = [description for description, fragment in required_fragments.items() if fragment not in page]
