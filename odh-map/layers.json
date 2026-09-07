@@ -9,21 +9,21 @@
     },
     {
       "key": "queue1",
-      "name": "ОДХ: 1-я очередь (97 позиций)",
+      "name": "ОДХ: 1-я очередь (98 позиций)",
       "color": "#d32f2f",
       "default": true,
       "url": "layers/sao_queue1_wgs84.geojson"
     },
     {
       "key": "queue2",
-      "name": "ОДХ: 2-я очередь (489 позиций)",
+      "name": "ОДХ: 2-я очередь (318 позиций)",
       "color": "#1565c0",
       "default": true,
       "url": "layers/sao_queue2_wgs84.geojson"
     },
     {
       "key": "queue3",
-      "name": "ОДХ: 3-я очередь (46 позиций)",
+      "name": "ОДХ: 3-я очередь (272 позиций)",
       "color": "#2e7d32",
       "default": true,
       "url": "layers/sao_queue3_wgs84.geojson"
