@@ -32,6 +32,9 @@ required_fragments = {
     "readable objects heading": "<h3>Объекты и места</h3>",
     "readable legend text": "font-size: 7.35mm",
     "readable legend source note": "font-size: 5.75mm",
+    "drag-to-pan interaction": "canvas.addEventListener('pointerdown'",
+    "wheel zoom interaction": "canvas.addEventListener('wheel'",
+    "map gesture hint": "Левая кнопка — перемещение · колесо — масштаб",
 }
 
 missing = [description for description, fragment in required_fragments.items() if fragment not in page]

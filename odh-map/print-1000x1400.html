@@ -11,7 +11,8 @@
     html, body { margin: 0; min-width: 1000mm; min-height: 1400mm; background: #77818a; }
     body { font-family: Arial, Helvetica, sans-serif; }
     .print-sheet { position: relative; width: 1000mm; height: 1400mm; overflow: hidden; background: #e5eaeb; }
-    #basemap { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; background: #dfe6e7; }
+    #basemap { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; background: #dfe6e7; cursor: grab; touch-action: none; }
+    #basemap.is-panning { cursor: grabbing; }
     #basemap[data-style="contrast"] { filter: saturate(.75) contrast(1.03); }
     #basemap[data-style="none"] { opacity: 0; }
     #features { position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
@@ -47,12 +48,13 @@
     .screen-actions, .view-actions { position: fixed; z-index: 1000; display: flex; gap: 8px; align-items: center; padding: 8px; border-radius: 7px; background: rgba(255,255,255,.94); box-shadow: 0 2px 12px rgba(0,0,0,.18); }
     .screen-actions { top: 16px; right: 16px; }
     .view-actions { top: 16px; left: 16px; }
+    .map-gesture-hint { position: fixed; z-index: 1000; top: 72px; left: 16px; padding: 7px 11px; border-radius: 5px; background: rgba(255,255,255,.92); color: #234; box-shadow: 0 2px 10px rgba(0,0,0,.12); font: 13px Arial, sans-serif; }
     .screen-actions button, .screen-actions a, .view-actions button, .view-actions select { padding: 9px 13px; border: 1px solid #345; border-radius: 5px; background: #fff; color: #123; font: 14px Arial, sans-serif; text-decoration: none; cursor: pointer; }
     .screen-actions button { background: #0d5394; color: #fff; border-color: #0d5394; }
     .loading { position: absolute; z-index: 700; left: 50%; top: 50%; transform: translate(-50%, -50%); padding: 5mm 8mm; background: rgba(255,255,255,.9); border: .5mm solid #6f7b83; font-size: 6mm; }
     @media print {
       html, body { width: 1000mm; height: 1400mm; min-width: 0; min-height: 0; background: transparent; }
-      .screen-actions, .view-actions { display: none; }
+      .screen-actions, .view-actions, .map-gesture-hint { display: none; }
       .print-sheet { break-after: page; }
     }
   </style>
@@ -110,6 +112,7 @@
       <option value="none">Без подложки</option>
     </select>
   </div>
+  <div class="map-gesture-hint">Левая кнопка — перемещение · колесо — масштаб</div>
 
   <script>
     (() => {
@@ -133,6 +136,11 @@
       let viewScale = 1;
       let basemapStyle = 'light';
       let rendering = false;
+      let panX = 0;
+      let panY = 0;
+      let dragState = null;
+      let renderQueued = false;
+      let renderFrame = null;
 
       function visitCoordinates(node, out) {
         if (Array.isArray(node) && typeof node[0] === 'number') out.push(node);
@@ -177,6 +185,11 @@
         const halfWidth = (view.maxX - view.minX) / (2 * scale);
         const halfHeight = (view.maxY - view.minY) / (2 * scale);
         return { minX: centerX - halfWidth, maxX: centerX + halfWidth, minY: centerY - halfHeight, maxY: centerY + halfHeight };
+      }
+
+      function activeView() {
+        const view = scaleView(baseView, viewScale);
+        return { minX: view.minX + panX, maxX: view.maxX + panX, minY: view.minY + panY, maxY: view.maxY + panY };
       }
 
       function project(coordinate, view, width = FEATURE_WIDTH, height = FEATURE_HEIGHT) {
@@ -308,7 +321,7 @@
         rendering = true;
         setViewControlsDisabled(true);
         try {
-          const view = scaleView(baseView, viewScale);
+          const view = activeView();
           svg.replaceChildren();
           await drawBaseMap(view);
           loadedLayers.filter(layer => layer.item.key !== 'boundary' && !pointKeys.has(layer.item.key)).forEach(layer => layer.geojson.features.forEach(feature => drawGeometry(feature.geometry, layer.item, view)));
@@ -318,12 +331,55 @@
         } finally {
           rendering = false;
           setViewControlsDisabled(false);
+          if (renderQueued) {
+            renderQueued = false;
+            requestMapRender();
+          }
         }
+      }
+
+      function requestMapRender() {
+        if (rendering) {
+          renderQueued = true;
+          return;
+        }
+        renderMap().catch(showMapError);
+      }
+
+      function scheduleMapRender() {
+        if (renderFrame) return;
+        renderFrame = requestAnimationFrame(() => {
+          renderFrame = null;
+          requestMapRender();
+        });
       }
 
       function updateScale(nextScale) {
         viewScale = Math.max(.72, Math.min(1.55, nextScale));
-        renderMap().catch(showMapError);
+        requestMapRender();
+      }
+
+      function zoomAtPointer(nextScale, clientX, clientY) {
+        const scale = Math.max(.72, Math.min(1.55, nextScale));
+        if (scale === viewScale) return;
+        const rectangle = canvas.getBoundingClientRect();
+        const ratioX = Math.max(0, Math.min(1, (clientX - rectangle.left) / rectangle.width));
+        const ratioY = Math.max(0, Math.min(1, (clientY - rectangle.top) / rectangle.height));
+        const previous = activeView();
+        const focusX = previous.minX + (previous.maxX - previous.minX) * ratioX;
+        const focusY = previous.minY + (previous.maxY - previous.minY) * ratioY;
+        viewScale = scale;
+        const scaledBase = scaleView(baseView, viewScale);
+        panX = focusX - ratioX * (scaledBase.maxX - scaledBase.minX) - scaledBase.minX;
+        panY = focusY - ratioY * (scaledBase.maxY - scaledBase.minY) - scaledBase.minY;
+        requestMapRender();
+      }
+
+      function resetView() {
+        viewScale = 1;
+        panX = 0;
+        panY = 0;
+        requestMapRender();
       }
 
       function showMapError(error) {
@@ -354,8 +410,41 @@
         document.getElementById('loading')?.remove();
       }
 
+      canvas.addEventListener('pointerdown', event => {
+        if (event.button !== 0 || rendering || !baseView) return;
+        dragState = { pointerId: event.pointerId, clientX: event.clientX, clientY: event.clientY, panX, panY };
+        canvas.setPointerCapture(event.pointerId);
+        canvas.classList.add('is-panning');
+        event.preventDefault();
+      });
+
+      canvas.addEventListener('pointermove', event => {
+        if (!dragState || event.pointerId !== dragState.pointerId) return;
+        const rectangle = canvas.getBoundingClientRect();
+        const scaled = scaleView(baseView, viewScale);
+        panX = dragState.panX - (event.clientX - dragState.clientX) / rectangle.width * (scaled.maxX - scaled.minX);
+        panY = dragState.panY - (event.clientY - dragState.clientY) / rectangle.height * (scaled.maxY - scaled.minY);
+        scheduleMapRender();
+      });
+
+      function endPan(event) {
+        if (!dragState || event.pointerId !== dragState.pointerId) return;
+        if (canvas.hasPointerCapture(event.pointerId)) canvas.releasePointerCapture(event.pointerId);
+        dragState = null;
+        canvas.classList.remove('is-panning');
+        requestMapRender();
+      }
+
+      canvas.addEventListener('pointerup', endPan);
+      canvas.addEventListener('pointercancel', endPan);
+      canvas.addEventListener('wheel', event => {
+        if (!baseView) return;
+        event.preventDefault();
+        zoomAtPointer(viewScale * (event.deltaY < 0 ? 1.12 : 1 / 1.12), event.clientX, event.clientY);
+      }, { passive: false });
+
       document.getElementById('zoom-out').addEventListener('click', () => updateScale(viewScale / 1.18));
-      document.getElementById('zoom-reset').addEventListener('click', () => updateScale(1));
+      document.getElementById('zoom-reset').addEventListener('click', resetView);
       document.getElementById('zoom-in').addEventListener('click', () => updateScale(viewScale * 1.18));
       document.getElementById('basemap-style').addEventListener('change', event => {
         basemapStyle = event.target.value;
