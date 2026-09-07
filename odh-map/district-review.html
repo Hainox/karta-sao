@@ -14,8 +14,8 @@
     h2 { margin:18px 0 9px; font-size:15px; } h2:first-child { margin-top:0; } .notice { margin:0 0 15px; padding:10px 12px; border-radius:9px; background:#edf7f5; color:#225d57; font-size:12px; }
     input, button { font:inherit; } input { width:100%; padding:9px 10px; border:1px solid #aebac0; border-radius:7px; color:var(--ink); background:#fff; } button { min-height:39px; padding:8px 10px; border:1px solid #7d8a91; border-radius:8px; color:var(--ink); background:#fff; cursor:pointer; } button:hover:not(:disabled) { border-color:var(--accent); color:var(--accent); } button.primary { color:#fff; border-color:var(--accent); background:var(--accent); } button:disabled { opacity:.5; cursor:not-allowed; }
     .actions { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:12px; } .status { margin-top:12px; padding:9px 10px; border-radius:7px; color:#33515c; background:#f2f5f6; font-size:12px; white-space:pre-line; } .status.error { color:#8c1919; background:#fff0f0; } .status.good { color:var(--good); background:#eaf8f3; }
-    .summary { display:grid; grid-template-columns:repeat(3,1fr); gap:7px; } .summary div { padding:8px; border:1px solid var(--line); border-radius:8px; text-align:center; font-size:11px; color:var(--muted); } .summary b { display:block; font-size:17px; color:var(--ink); }
-    .file-list { display:grid; gap:7px; margin-top:10px; } .file-card { padding:9px; border:1px solid var(--line); border-left:4px solid #80909a; border-radius:8px; background:#fafcfc; cursor:pointer; } .file-card.accepted { border-left-color:#0d827c; } .file-card.rejected { border-left-color:#b52929; background:#fff8f8; } .file-card b { display:block; font-size:12px; overflow-wrap:anywhere; } .file-card span { display:block; margin-top:3px; color:var(--muted); font-size:11px; white-space:pre-line; } .file-card.rejected span { color:#8c1919; }
+    .summary { display:grid; grid-template-columns:repeat(4,1fr); gap:7px; } .summary div { padding:8px; border:1px solid var(--line); border-radius:8px; text-align:center; font-size:11px; color:var(--muted); } .summary b { display:block; font-size:17px; color:var(--ink); }
+    .file-list { display:grid; gap:7px; margin-top:10px; } .file-card { padding:9px; border:1px solid var(--line); border-left:4px solid #80909a; border-radius:8px; background:#fafcfc; } .file-card.accepted { border-left-color:#0d827c; } .file-card.conflict { border-left-color:#bf6b00; background:#fffaf1; } .file-card.rejected { border-left-color:#b52929; background:#fff8f8; } .file-card b { display:block; font-size:12px; overflow-wrap:anywhere; } .file-card span { display:block; margin-top:3px; color:var(--muted); font-size:11px; white-space:pre-line; } .file-card.rejected span { color:#8c1919; } .file-card.conflict span { color:#8a5400; } .file-card button { min-height:29px; margin-top:7px; padding:3px 8px; font-size:11px; }
     .small { color:var(--muted); font-size:11px; } .boundary-note { padding:5px 7px; border-radius:4px; background:rgba(255,255,255,.92); font-size:11px; } .legend { display:grid; gap:5px; padding:8px; border-radius:6px; background:rgba(255,255,255,.94); font-size:11px; box-shadow:0 1px 5px rgba(0,0,0,.18); } .legend i { display:inline-block; width:16px; height:4px; margin-right:6px; vertical-align:middle; } .legend em { display:inline-block; width:10px; height:10px; margin:0 9px 0 3px; border:2px solid; border-radius:50%; vertical-align:middle; }
     @media (max-width:800px) { .workspace { grid-template-columns:1fr; } .sidebar { border-right:0; border-bottom:1px solid var(--line); } #map { min-height:65vh; } .topbar { align-items:flex-start; } }
   </style>
@@ -25,12 +25,12 @@
     <header class="topbar"><div><h1>Приёмка правок районов</h1><div class="subtitle">Проверка и сведение файлов перед утверждением. Публичную карту эта страница не изменяет.</div></div><div><a href="district-editor.html">Редактор района</a> · <a href="index.html">Утверждённая карта</a></div></header>
     <main class="workspace">
       <aside class="sidebar">
-        <p class="notice">Загрузите GeoJSON от районов. Каждый файл проверяется по формату, обязательным полям и границе САО. В единый набор попадут только принятые файлы.</p>
+        <p class="notice">Загрузите GeoJSON от районов. Каждый файл проверяется по формату, обязательным полям и границе САО. При двух вариантах одного района диспетчер должен выбрать актуальный; в единый набор попадут только выбранные файлы.</p>
         <h2>Файлы районов</h2>
         <input id="reviewFiles" type="file" multiple accept=".geojson,.json,application/geo+json,application/json" aria-label="Загрузить GeoJSON-файлы районов">
         <div class="actions"><button id="exportBundle" class="primary" type="button" disabled>Скачать единый GeoJSON</button><button id="clearReview" type="button" disabled>Очистить</button></div>
         <div id="status" class="status">Загружаю границу САО…</div>
-        <h2>Итог</h2><div class="summary"><div><b id="acceptedCount">0</b>принято файлов</div><div><b id="rejectedCount">0</b>отклонено</div><div><b id="featureCount">0</b>объектов</div></div>
+        <h2>Итог</h2><div class="summary"><div><b id="acceptedCount">0</b>выбрано</div><div><b id="conflictCount">0</b>конфликтов</div><div><b id="rejectedCount">0</b>отклонено</div><div><b id="featureCount">0</b>объектов</div></div>
         <h2>Результат проверки</h2><div id="fileList" class="file-list"><p class="small">Файлы ещё не загружены.</p></div>
         <p class="small">Максимальный размер файла района — 5 МБ, сводки — 25 МБ. Единый файл имеет статус локальной сводки и предназначен для согласования или передачи в ГИС; он не является автоматической публикацией.</p>
       </aside>
@@ -46,7 +46,7 @@
       const map = L.map('map', { zoomControl: true, attributionControl: true });
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '&copy; OpenStreetMap contributors' }).addTo(map);
       const acceptedGroup = L.featureGroup().addTo(map);
-      const fields = Object.fromEntries(['reviewFiles','exportBundle','clearReview','status','acceptedCount','rejectedCount','featureCount','fileList'].map(id => [id, document.getElementById(id)]));
+      const fields = Object.fromEntries(['reviewFiles','exportBundle','clearReview','status','acceptedCount','conflictCount','rejectedCount','featureCount','fileList'].map(id => [id, document.getElementById(id)]));
       const entries = [];
       let boundary = null;
 
@@ -55,22 +55,47 @@
       function formatDate(value) { const date = new Date(value); return Number.isNaN(date.valueOf()) ? 'дата не указана' : date.toLocaleString('ru-RU'); }
       function visualOptions(feature) { const style = DistrictChanges.styleFor(feature); return { color: style.color, weight: style.weight || 4, dashArray: style.dashArray || null, fillColor: '#fff', fillOpacity: .96, radius: 8 }; }
       function label(feature) { const p = feature.properties || {}; return p.change_type === 'queue' ? `${DistrictChanges.labelFor(p.change_type)} ${p.queue_priority}` : DistrictChanges.labelFor(p.change_type); }
+      function selectedEntries() { return entries.filter(entry => entry.valid && entry.selected); }
+      function conflictingDistricts() {
+        return [...new Set(entries.filter(entry => entry.valid && !entry.selected).map(entry => entry.changeSet.district))];
+      }
+      function syncMapLayers() {
+        acceptedGroup.clearLayers();
+        selectedEntries().forEach(entry => acceptedGroup.addLayer(entry.layers));
+      }
+      function reconcileDistrict(district) {
+        const candidates = entries.filter(entry => entry.valid && entry.changeSet.district === district);
+        if (candidates.length <= 1) candidates.forEach(entry => { entry.selected = true; });
+        else candidates.forEach(entry => { entry.selected = false; });
+      }
+      function selectEntry(entry) {
+        entries.filter(candidate => candidate.valid && candidate.changeSet.district === entry.changeSet.district).forEach(candidate => { candidate.selected = candidate === entry; });
+        syncMapLayers(); refresh();
+        setStatus(`Выбран актуальный файл района «${entry.changeSet.district}»: ${entry.name}. В сводку войдёт только он.`, 'good');
+      }
       function refresh() {
-        const approved = entries.filter(entry => entry.accepted);
-        const rejected = entries.length - approved.length;
+        const approved = selectedEntries();
+        const rejected = entries.filter(entry => !entry.valid).length;
+        const conflicts = conflictingDistricts();
         const features = approved.reduce((sum, entry) => sum + entry.changeSet.features.length, 0);
         fields.acceptedCount.textContent = approved.length;
         fields.rejectedCount.textContent = rejected;
+        fields.conflictCount.textContent = conflicts.length;
         fields.featureCount.textContent = features;
         fields.exportBundle.disabled = approved.length === 0;
         fields.clearReview.disabled = entries.length === 0;
         fields.fileList.innerHTML = entries.length ? '' : '<p class="small">Файлы ещё не загружены.</p>';
-        entries.forEach((entry, index) => {
-          const card = document.createElement('div'); card.className = `file-card ${entry.accepted ? 'accepted' : 'rejected'}`;
-          const details = entry.accepted ? `${entry.changeSet.district} · ${entry.changeSet.author}\n${entry.changeSet.features.length} объектов · ${formatDate(entry.changeSet.created_at)}` : entry.errors.join('\n');
+        entries.forEach(entry => {
+          const state = !entry.valid ? 'rejected' : entry.selected ? 'accepted' : 'conflict';
+          const card = document.createElement('div'); card.className = `file-card ${state}`;
+          const details = entry.valid ? `${entry.changeSet.district} · ${entry.changeSet.author}\n${entry.changeSet.features.length} объектов · ${formatDate(entry.changeSet.created_at)}${entry.selected ? '\nВыбран для сводки.' : '\nНужен выбор актуального варианта района.'}` : entry.errors.join('\n');
           card.innerHTML = `<b>${esc(entry.name)}</b><span>${esc(details)}</span>`;
-          if (entry.accepted) card.onclick = () => { const bounds = entry.layers.getBounds(); if (bounds.isValid()) map.fitBounds(bounds, { padding:[26,26], maxZoom:16 }); };
-          card.setAttribute('aria-label', entry.accepted ? `Принят: ${entry.name}. Показать на карте.` : `Отклонён: ${entry.name}.`);
+          if (entry.valid) {
+            const choose = document.createElement('button'); choose.type = 'button'; choose.textContent = entry.selected ? 'Выбрано для сводки' : 'Выбрать актуальным'; choose.disabled = entry.selected;
+            choose.onclick = () => selectEntry(entry); card.append(choose);
+            card.ondblclick = () => { const bounds = entry.layers.getBounds(); if (bounds.isValid()) map.fitBounds(bounds, { padding:[26,26], maxZoom:16 }); };
+          }
+          card.setAttribute('aria-label', entry.valid ? `${entry.selected ? 'Выбран' : 'Требуется выбрать'}: ${entry.name}.` : `Отклонён: ${entry.name}.`);
           fields.fileList.append(card);
         });
       }
@@ -82,16 +107,15 @@
           layer.bindPopup(`<b>${esc(label(feature))}</b><br><b>Район:</b> ${esc(p.district)}<br><b>Адрес:</b> ${esc(p.address)}<br><b>Файл:</b> ${esc(entry.name)}<br><span style="color:#176556">Принято для локальной сводки</span>`);
           entry.layers.addLayer(layer);
         });
-        entry.layers.addTo(acceptedGroup);
       }
       async function loadFile(file) {
-        const entry = { name: file.name, accepted: false, errors: [], changeSet: null, layers: null };
+        const entry = { name: file.name, valid: false, selected: false, errors: [], changeSet: null, layers: null };
         try {
           if (file.size > MAX_BYTES) throw new Error('Файл больше 5 МБ.');
           const changeSet = JSON.parse(await file.text());
           const validation = DistrictChanges.validate(changeSet, boundary);
           if (!validation.valid) throw new Error(validation.errors.join('\n'));
-          entry.changeSet = changeSet; entry.accepted = true; addEntryLayers(entry);
+          entry.changeSet = changeSet; entry.valid = true; addEntryLayers(entry);
         } catch (error) {
           entry.errors = String(error.message || error).split('\n').filter(Boolean).slice(0, 12);
           if (!entry.errors.length) entry.errors = ['Не удалось прочитать файл.'];
@@ -101,11 +125,19 @@
       async function loadFiles(files) {
         if (!boundary || !files.length) return;
         setStatus(`Проверяю файлов: ${files.length}…`);
-        for (const file of files) await loadFile(file);
+        const affectedDistricts = new Set();
+        for (const file of files) {
+          await loadFile(file);
+          const entry = entries.at(-1);
+          if (entry.valid) affectedDistricts.add(entry.changeSet.district);
+        }
+        affectedDistricts.forEach(reconcileDistrict);
+        syncMapLayers();
         refresh();
-        const approved = entries.filter(entry => entry.accepted).length;
-        const rejected = entries.filter(entry => !entry.accepted).length;
-        setStatus(`Проверка завершена: принято ${approved}, отклонено ${rejected}. Нажмите на принятый файл в списке, чтобы показать его на карте.`, rejected ? 'error' : 'good');
+        const approved = selectedEntries().length;
+        const rejected = entries.filter(entry => !entry.valid).length;
+        const conflicts = conflictingDistricts().length;
+        setStatus(`Проверка завершена: выбрано ${approved}, конфликтов районов ${conflicts}, отклонено ${rejected}. При конфликте выберите актуальный файл.`, rejected || conflicts ? 'error' : 'good');
         fields.reviewFiles.value = '';
       }
       function clearReview() {
@@ -113,7 +145,7 @@
         setStatus('Список и временное наложение очищены. Публичная карта не затрагивалась.', 'good');
       }
       function exportBundle() {
-        const accepted = entries.filter(entry => entry.accepted);
+        const accepted = selectedEntries();
         if (!accepted.length) return;
         const reviewedAt = new Date().toISOString();
         const bundle = {

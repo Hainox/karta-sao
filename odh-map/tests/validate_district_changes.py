@@ -33,7 +33,7 @@ review_path = root / "district-review.html"
 if not review_path.is_file():
     raise SystemExit("Missing district review page.")
 review = review_path.read_text(encoding="utf-8")
-for label in ("multiple", "district_review_bundle_v1", "Скачать единый GeoJSON", "DistrictChanges.validate", "accepted_locally"):
+for label in ("multiple", "district_review_bundle_v1", "Скачать единый GeoJSON", "DistrictChanges.validate", "accepted_locally", "reconcileDistrict", "Выбрать актуальным", "conflictCount"):
     if label not in review:
         raise SystemExit(f"District review is missing: {label}")
 
