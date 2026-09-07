@@ -16,7 +16,7 @@ def test_yard_and_print_pages_declare_shared_atlas_shell():
         markup = page(path)
         assert "Городской атлас САО" in markup
         assert "brand-mark" in markup
-        assert "@page{size:A3 landscape" in page("yards-print/index.html")
+        assert "@page{size:297mm 420mm;margin:10mm}" in page("yards-print/index.html")
 
 
 def test_hub_is_navigation_only_and_has_two_catalog_sections():
@@ -84,22 +84,21 @@ def test_healthcare_layer_has_only_officially_confirmed_points_and_expected_gp6_
     }
 
 
-def test_first_queue_is_fixed_at_97_and_excludes_cascade_duplicates():
-    """The 56 cascade matches are duplicate references, not extra first-queue objects."""
+def test_queue_manifest_matches_the_published_priority_counts():
+    """The public ОДХ print and interactive map use one consistent queue count."""
     layer_dir = Path("odh-map/layers")
     manifest = json.loads((Path("odh-map") / "layers.json").read_text(encoding="utf-8"))
     queue1 = next(layer for layer in manifest["layers"] if layer["key"] == "queue1")
-    assert "97" in queue1["name"]
-    assert "153" not in queue1["name"]
+    assert "98" in queue1["name"]
 
     data = json.loads((layer_dir / "sao_queue1_wgs84.geojson").read_text(encoding="utf-8"))
     queue_sources = {feature["properties"].get("queue_source") for feature in data["features"]}
     assert len(queue_sources) == 1
-    assert "97" in next(iter(queue_sources))
-    assert len({feature["properties"]["id"] for feature in data["features"]}) <= 97
+    assert "Очередность_уборки_округ.xlsx" in next(iter(queue_sources))
+    assert len({feature["properties"]["id"] for feature in data["features"]}) <= 98
 
-    assert "489" in next(layer for layer in manifest["layers"] if layer["key"] == "queue2")["name"]
-    assert "46" in next(layer for layer in manifest["layers"] if layer["key"] == "queue3")["name"]
+    assert "318" in next(layer for layer in manifest["layers"] if layer["key"] == "queue2")["name"]
+    assert "272" in next(layer for layer in manifest["layers"] if layer["key"] == "queue3")["name"]
 
 
 def test_smm_storage_locations_are_published_from_winter_register_inside_sao():

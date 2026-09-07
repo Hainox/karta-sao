@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Схема уборки улиц САО — печать 1000 × 1400 мм</title>
+  <style>
+    @page { size: 1000mm 1400mm; margin: 0; }
+    :root { color-scheme: light; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-width: 1000mm; min-height: 1400mm; background: #77818a; }
+    body { font-family: Arial, Helvetica, sans-serif; }
+    .print-sheet { position: relative; width: 1000mm; height: 1400mm; overflow: hidden; background: #e5eaeb; }
+    #basemap { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; background: #dfe6e7; filter: grayscale(.78) saturate(.45) contrast(.95) brightness(1.10); }
+    #features { position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+    .print-header { position: absolute; z-index: 400; left: 10mm; top: 10mm; width: 450.77mm; min-height: 33.10mm; padding: 7.7mm 5.9mm 4.5mm; background: #fff; color: #000; }
+    .print-header__title { font-family: "Arial Nova", Arial, sans-serif; font-size: 16.6mm; font-weight: 700; line-height: 1; white-space: nowrap; }
+    .print-title { position: absolute; z-index: 400; top: 52mm; left: 24mm; width: 952mm; margin: 0; color: #000; text-align: center; font-family: Calibri, Arial, sans-serif; font-size: 20.9mm; font-weight: 700; line-height: 1.205; letter-spacing: -.32mm; }
+    .print-title span { display: block; }
+    .map-key { position: absolute; z-index: 450; right: 26.19mm; bottom: 26.95mm; width: 254.97mm; height: 388.07mm; padding: 12mm 10mm; overflow: hidden; color: #000; background: #d6dce5; border: .80mm solid #000; font-family: "Arial Narrow", "Arial", sans-serif; }
+    .map-key h2 { margin: 0 0 11mm; text-align: center; font-size: 15.5mm; line-height: 1; font-weight: 700; text-decoration: underline; }
+    .legend-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 7mm; }
+    .legend-section { min-width: 0; }
+    .legend-section h3 { margin: 0 0 6mm; font-size: 7.25mm; line-height: 1.08; font-weight: 700; }
+    .legend-item { display: grid; grid-template-columns: 13mm 1fr; gap: 3.3mm; align-items: center; min-height: 21.6mm; margin: 0 0 3.1mm; font-size: 6.65mm; line-height: 1.06; }
+    .legend-item--queue { grid-template-columns: 22mm 1fr; }
+    .legend-symbol { position: relative; display: block; width: 13mm; height: 13mm; }
+    .legend-symbol::before { position: absolute; inset: 0; display: grid; place-items: center; border: .75mm solid #000; border-radius: 50%; background: #fff; color: #000; font-family: Arial, sans-serif; font-size: 7.2mm; font-weight: 700; content: attr(data-symbol); }
+    .legend-symbol--snow::before { border-radius: 2mm; color: #00a1d9; content: '❄'; }
+    .legend-symbol--dry::before { background: #9d6d39; color: #fff; content: '⌂'; }
+    .legend-symbol--pgm::before { border-color: #c76d00; color: #c76d00; content: '▦'; }
+    .legend-symbol--health::before { border-color: #ad1457; color: #ad1457; content: '+'; font-size: 11mm; }
+    .legend-symbol--smm::before { border-color: #6a1b9a; color: #6a1b9a; content: 'M'; }
+    .legend-symbol--hydrant::before { border-color: #37474f; color: #37474f; content: 'Г'; }
+    .legend-line { position: relative; display: block; width: 22mm; height: 13mm; }
+    .legend-line::after { position: absolute; top: 5.4mm; left: 0; width: 22mm; border-top: 2.35mm solid var(--line-color); content: ''; }
+    .legend-footnote { margin: 10mm 0 0; padding-top: 7mm; border-top: .35mm solid rgba(0,0,0,.4); font-size: 5.2mm; line-height: 1.22; }
+    .point-marker { width: 9.3mm; height: 9.3mm; display: grid; place-items: center; border: .7mm solid #111; border-radius: 50%; background: rgba(255,255,255,.94); color: #111; font: 700 5.5mm/1 Arial, sans-serif; box-shadow: 0 .4mm 1.2mm rgba(0,0,0,.32); }
+    .point-marker--pgm { border-color: #c76d00; color: #c76d00; }
+    .point-marker--snow { border-radius: 1.8mm; border-color: #00acc1; color: #00acc1; }
+    .point-marker--dry_snow { border-color: #6d4c41; background: #6d4c41; color: #fff; }
+    .point-marker--healthcare { border-color: #ad1457; color: #ad1457; font-size: 8mm; }
+    .point-marker--smm_storage { border-color: #6a1b9a; color: #6a1b9a; }
+    .point-marker--hydrants { border-color: #37474f; color: #37474f; }
+    .screen-actions { position: fixed; z-index: 1000; top: 16px; right: 16px; display: flex; gap: 8px; }
+    .screen-actions button, .screen-actions a { padding: 9px 13px; border: 1px solid #345; border-radius: 5px; background: #fff; color: #123; font: 14px Arial, sans-serif; text-decoration: none; cursor: pointer; }
+    .screen-actions button { background: #0d5394; color: #fff; border-color: #0d5394; }
+    .loading { position: absolute; z-index: 700; left: 50%; top: 50%; transform: translate(-50%, -50%); padding: 5mm 8mm; background: rgba(255,255,255,.9); border: .5mm solid #6f7b83; font-size: 6mm; }
+    @media print {
+      html, body { width: 1000mm; height: 1400mm; min-width: 0; min-height: 0; background: transparent; }
+      .screen-actions { display: none; }
+      .print-sheet { break-after: page; }
+    }
+  </style>
+</head>
+<body>
+  <main class="print-sheet" aria-label="Схема уборки улиц Северного административного округа">
+    <canvas id="basemap" width="1800" height="2520" aria-label="Картографическая подложка САО"></canvas>
+    <svg id="features" viewBox="0 0 1800 2520" aria-label="Маршруты и объекты САО" role="img"></svg>
+    <div id="loading" class="loading">Загрузка слоёв карты…</div>
+
+    <header class="print-header">
+      <div class="print-header__title">СЕВЕРНЫЙ АДМИНИСТРАТИВНЫЙ ОКРУГ</div>
+    </header>
+
+    <h1 class="print-title">
+      <span>СХЕМА</span>
+      <span>уборки улиц Северного административного округа города Москвы,</span>
+      <span>с указанием очередности</span>
+    </h1>
+
+    <aside class="map-key" aria-label="Обозначения">
+      <h2>Обозначения</h2>
+      <div class="legend-grid">
+        <section class="legend-section" aria-label="Объекты">
+          <div class="legend-item"><span class="legend-symbol legend-symbol--snow"></span><span>Места временного складирования снега — 24</span></div>
+          <div class="legend-item"><span class="legend-symbol legend-symbol--dry"></span><span>Сухие свалки снега — 3</span></div>
+          <div class="legend-item"><span class="legend-symbol legend-symbol--pgm"></span><span>Контейнеры ПГМ — 451</span></div>
+          <div class="legend-item"><span class="legend-symbol legend-symbol--health"></span><span>Учреждения здравоохранения — 20</span></div>
+          <div class="legend-item"><span class="legend-symbol legend-symbol--smm"></span><span>Места хранения СММ — 402</span></div>
+          <div class="legend-item"><span class="legend-symbol legend-symbol--hydrant"></span><span>Пожарные гидранты — 24</span></div>
+        </section>
+        <section class="legend-section" aria-label="Очередность уборки">
+          <h3>Очередность уборки улиц ОДХ</h3>
+          <div class="legend-item legend-item--queue"><span class="legend-line" style="--line-color:#FF0000"></span><span>I очередь — 98 позиций</span></div>
+          <div class="legend-item legend-item--queue"><span class="legend-line" style="--line-color:#0000FF"></span><span>II очередь — 318 позиций</span></div>
+          <div class="legend-item legend-item--queue"><span class="legend-line" style="--line-color:#00B050"></span><span>III очередь — 272 позиции</span></div>
+          <p class="legend-footnote">Схема подготовлена по опубликованным слоям САО. Данные маршрутов роторной уборки на лист не включены, так как не переданы в исходных данных.</p>
+        </section>
+      </div>
+    </aside>
+  </main>
+
+  <div class="screen-actions" aria-label="Действия с печатной схемой">
+    <a href="index.html">К интерактивной карте</a>
+    <button type="button" onclick="window.print()">Печать / PDF</button>
+  </div>
+
+  <script>
+    (() => {
+      const queueColors = { queue1: '#FF0000', queue2: '#0000FF', queue3: '#00B050' };
+      const markerSymbols = { pgm: '▦', snow: '❄', dry_snow: '⌂', healthcare: '+', smm_storage: 'M', hydrants: 'Г' };
+      const WIDTH = 1800;
+      const HEIGHT = 2520;
+      const TILE_SIZE = 256;
+      const TILE_ZOOM = 12;
+      const svg = document.getElementById('features');
+      const canvas = document.getElementById('basemap');
+      const context = canvas.getContext('2d');
+      const svgNs = 'http://www.w3.org/2000/svg';
+      const pointKeys = new Set(Object.keys(markerSymbols));
+
+      function visitCoordinates(node, out) {
+        if (Array.isArray(node) && typeof node[0] === 'number') out.push(node);
+        else if (Array.isArray(node)) node.forEach(child => visitCoordinates(child, out));
+      }
+
+      function worldPoint(coordinate, zoom = TILE_ZOOM) {
+        const [longitude, latitude] = coordinate;
+        const size = TILE_SIZE * (2 ** zoom);
+        const x = (longitude + 180) / 360 * size;
+        const radians = latitude * Math.PI / 180;
+        const y = (1 - Math.asinh(Math.tan(radians)) / Math.PI) / 2 * size;
+        return { x, y };
+      }
+
+      function makeView(boundaryGeojson) {
+        const coordinates = [];
+        boundaryGeojson.features.forEach(feature => visitCoordinates(feature.geometry.coordinates, coordinates));
+        const projected = coordinates.map(coordinate => worldPoint(coordinate));
+        let minX = Math.min(...projected.map(point => point.x));
+        let maxX = Math.max(...projected.map(point => point.x));
+        let minY = Math.min(...projected.map(point => point.y));
+        let maxY = Math.max(...projected.map(point => point.y));
+        const padX = (maxX - minX) * .08;
+        const padY = (maxY - minY) * .08;
+        minX -= padX; maxX += padX; minY -= padY; maxY += padY;
+        const targetRatio = WIDTH / HEIGHT;
+        const ratio = (maxX - minX) / (maxY - minY);
+        if (ratio > targetRatio) {
+          const extra = ((maxX - minX) / targetRatio - (maxY - minY)) / 2;
+          minY -= extra; maxY += extra;
+        } else {
+          const extra = ((maxY - minY) * targetRatio - (maxX - minX)) / 2;
+          minX -= extra; maxX += extra;
+        }
+        return { minX, maxX, minY, maxY };
+      }
+
+      function project(coordinate, view) {
+        const point = worldPoint(coordinate);
+        return [
+          (point.x - view.minX) / (view.maxX - view.minX) * WIDTH,
+          (point.y - view.minY) / (view.maxY - view.minY) * HEIGHT
+        ];
+      }
+
+      function loadImage(url) {
+        return new Promise(resolve => {
+          const image = new Image();
+          image.crossOrigin = 'anonymous';
+          image.onload = () => resolve(image);
+          image.onerror = () => resolve(null);
+          image.src = url;
+        });
+      }
+
+      async function drawBaseMap(view) {
+        context.fillStyle = '#dfe6e7';
+        context.fillRect(0, 0, WIDTH, HEIGHT);
+        const left = Math.floor(view.minX / TILE_SIZE);
+        const right = Math.floor(view.maxX / TILE_SIZE);
+        const top = Math.floor(view.minY / TILE_SIZE);
+        const bottom = Math.floor(view.maxY / TILE_SIZE);
+        const tasks = [];
+        for (let x = left; x <= right; x += 1) {
+          for (let y = top; y <= bottom; y += 1) {
+            const url = `https://tile.openstreetmap.org/${TILE_ZOOM}/${x}/${y}.png`;
+            tasks.push(loadImage(url).then(image => ({ x, y, image })));
+          }
+        }
+        const tiles = await Promise.all(tasks);
+        tiles.forEach(({ x, y, image }) => {
+          if (!image) return;
+          const dx = (x * TILE_SIZE - view.minX) / (view.maxX - view.minX) * WIDTH;
+          const dy = (y * TILE_SIZE - view.minY) / (view.maxY - view.minY) * HEIGHT;
+          const dw = TILE_SIZE / (view.maxX - view.minX) * WIDTH;
+          const dh = TILE_SIZE / (view.maxY - view.minY) * HEIGHT;
+          context.drawImage(image, dx, dy, dw, dh);
+        });
+      }
+
+      function element(name, attributes) {
+        const node = document.createElementNS(svgNs, name);
+        Object.entries(attributes).forEach(([key, value]) => node.setAttribute(key, value));
+        svg.appendChild(node);
+        return node;
+      }
+
+      function lineStyle(item) {
+        if (item.key === 'boundary') return { stroke: '#4a148c', width: 3.2, opacity: .95 };
+        if (queueColors[item.key]) return { stroke: queueColors[item.key], width: 3.6, opacity: .98 };
+        return { stroke: item.color || '#555', width: 1.7, opacity: .88 };
+      }
+
+      function drawLine(coordinates, item, view, closed = false) {
+        const points = coordinates.map(coordinate => project(coordinate, view).join(',')).join(' ');
+        const style = lineStyle(item);
+        element(closed ? 'polygon' : 'polyline', { points, fill: 'none', stroke: style.stroke, 'stroke-width': style.width, 'stroke-linecap': 'round', 'stroke-linejoin': 'round', opacity: style.opacity });
+      }
+
+      function drawPoint(coordinate, item, view) {
+        const [x, y] = project(coordinate, view);
+        const color = item.color || '#555';
+        element('circle', { cx: x, cy: y, r: 7.5, fill: '#fff', stroke: color, 'stroke-width': 2.2, opacity: .96 });
+        const label = element('text', { x, y: y + 3.7, 'text-anchor': 'middle', 'font-family': 'Arial, sans-serif', 'font-size': 8.5, 'font-weight': '700', fill: color });
+        label.textContent = markerSymbols[item.key] || '•';
+      }
+
+      function drawGeometry(geometry, item, view) {
+        if (!geometry) return;
+        if (geometry.type === 'Point') return drawPoint(geometry.coordinates, item, view);
+        if (geometry.type === 'MultiPoint') return geometry.coordinates.forEach(coordinate => drawPoint(coordinate, item, view));
+        if (geometry.type === 'LineString') return drawLine(geometry.coordinates, item, view);
+        if (geometry.type === 'MultiLineString') return geometry.coordinates.forEach(line => drawLine(line, item, view));
+        if (geometry.type === 'Polygon') return geometry.coordinates.forEach(ring => drawLine(ring, item, view, item.key === 'boundary'));
+        if (geometry.type === 'MultiPolygon') return geometry.coordinates.forEach(polygon => polygon.forEach(ring => drawLine(ring, item, view, item.key === 'boundary')));
+      }
+
+      async function loadMap() {
+        const manifest = await fetch('layers.json', { cache: 'no-store' }).then(response => {
+          if (!response.ok) throw new Error(`layers.json: ${response.status}`);
+          return response.json();
+        });
+        const layers = await Promise.all(manifest.layers.map(async item => ({
+          item,
+          geojson: await fetch(item.url, { cache: 'no-store' }).then(response => {
+            if (!response.ok) throw new Error(`${item.url}: ${response.status}`);
+            return response.json();
+          })
+        })));
+        const boundary = layers.find(layer => layer.item.key === 'boundary');
+        if (!boundary) throw new Error('Не найдена граница САО');
+        const view = makeView(boundary.geojson);
+        await drawBaseMap(view);
+        layers.filter(layer => layer.item.key !== 'boundary' && !pointKeys.has(layer.item.key)).forEach(layer => layer.geojson.features.forEach(feature => drawGeometry(feature.geometry, layer.item, view)));
+        boundary.geojson.features.forEach(feature => drawGeometry(feature.geometry, boundary.item, view));
+        layers.filter(layer => pointKeys.has(layer.item.key)).forEach(layer => layer.geojson.features.forEach(feature => drawGeometry(feature.geometry, layer.item, view)));
+        document.getElementById('loading').remove();
+      }
+
+      loadMap().catch(error => {
+        const loading = document.getElementById('loading');
+        loading.textContent = `Не удалось загрузить карту: ${error.message}`;
+        loading.style.color = '#a40000';
+        console.error(error);
+      });
+    })();
+  </script>
+</body>
+</html>
