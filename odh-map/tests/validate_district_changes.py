@@ -28,6 +28,14 @@ for label in ("localStorage", "Экспортировать правки", "Ро
     if label not in editor:
         raise SystemExit(f"District editor is missing: {label}")
 
+review_path = root / "district-review.html"
+if not review_path.is_file():
+    raise SystemExit("Missing district review page.")
+review = review_path.read_text(encoding="utf-8")
+for label in ("multiple", "district_review_bundle_v1", "Скачать единый GeoJSON", "DistrictChanges.validate", "accepted_locally"):
+    if label not in review:
+        raise SystemExit(f"District review is missing: {label}")
+
 index = (root / "index.html").read_text(encoding="utf-8")
 overlay_path = root / "district-overlay.js"
 if "Наложить правки района" not in index or "district-overlay.js" not in index:
