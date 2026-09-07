@@ -105,4 +105,16 @@
   clear.addEventListener('click', clearDistrictOverlay);
   window.clearDistrictOverlay = clearDistrictOverlay;
   setStatus('Выберите GeoJSON района или сводный файл из приёмки.');
+
+  // The SAO relation already contains Molzhaninovsky as a disconnected part.
+  // Older exports included a second copy for labelling, which doubled its outline.
+  if (typeof loadPromise !== 'undefined') {
+    loadPromise.then(() => {
+      const boundaryLayer = typeof groups !== 'undefined' && groups.boundary;
+      if (!boundaryLayer) return;
+      boundaryLayer.eachLayer(layer => {
+        if (layer.feature?.properties?.feature_kind !== 'boundary_sao') boundaryLayer.removeLayer(layer);
+      });
+    }).catch(() => {});
+  }
 }());

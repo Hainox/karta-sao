@@ -145,7 +145,7 @@
       async function initialize() {
         try {
           boundary = await fetch('layers/sao_boundary_wgs84.geojson', { cache: 'no-store' }).then(response => { if (!response.ok) throw new Error(`HTTP ${response.status}`); return response.json(); });
-          const layer = L.geoJSON(boundary, { style: { color:'#4a148c', weight:3, dashArray:'8 5', fillOpacity:0 } }).addTo(map);
+          const layer = L.geoJSON(boundary, { filter: feature => feature.properties?.feature_kind === 'boundary_sao', style: { color:'#4a148c', weight:3, dashArray:'8 5', fillOpacity:0 } }).addTo(map);
           map.fitBounds(layer.getBounds(), { padding:[24,24] });
           const boundaryNote = L.control({ position:'bottomleft' });
           boundaryNote.onAdd = () => { const div = L.DomUtil.create('div','boundary-note'); div.textContent = 'Фиолетовый контур — граница САО. За её пределами объекты не принимаются.'; return div; };

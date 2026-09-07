@@ -165,7 +165,7 @@
       async function initialize() {
         try {
           boundary = await fetch('layers/sao_boundary_wgs84.geojson', { cache:'no-store' }).then(response => { if (!response.ok) throw new Error(`HTTP ${response.status}`); return response.json(); });
-          const layer = L.geoJSON(boundary, { style: { color:'#4a148c', weight:3, dashArray:'8 5', fillOpacity:0 } }).addTo(map);
+          const layer = L.geoJSON(boundary, { filter: feature => feature.properties?.feature_kind === 'boundary_sao', style: { color:'#4a148c', weight:3, dashArray:'8 5', fillOpacity:0 } }).addTo(map);
           map.fitBounds(layer.getBounds(), { padding:[24,24] });
           const note = L.control({ position:'bottomleft' }); note.onAdd = () => { const div = L.DomUtil.create('div','boundary-note'); div.textContent = 'Фиолетовый контур — граница САО. Правки за его пределами отклоняются.'; return div; }; note.addTo(map);
           const legend = L.control({ position:'topright' }); legend.onAdd = () => { const div = L.DomUtil.create('div','legend'); div.innerHTML = '<b>Принятые правки</b><span><i style="background:#ff0000"></i>I очередь</span><span><i style="background:#0000ff"></i>II очередь</span><span><i style="background:#00b050"></i>III очередь</span><span><i style="background:#7030a0"></i>Роторная перекидка</span><span><em style="border-color:#00acc1"></em>Места и объекты</span>'; return div; }; legend.addTo(map);

@@ -326,7 +326,7 @@
           await drawBaseMap(view);
           loadedLayers.filter(layer => layer.item.key !== 'boundary' && !pointKeys.has(layer.item.key)).forEach(layer => layer.geojson.features.forEach(feature => drawGeometry(feature.geometry, layer.item, view)));
           const boundary = loadedLayers.find(layer => layer.item.key === 'boundary');
-          boundary.geojson.features.forEach(feature => drawGeometry(feature.geometry, boundary.item, view));
+          boundary.geojson.features.filter(feature => feature.properties?.feature_kind === 'boundary_sao').forEach(feature => drawGeometry(feature.geometry, boundary.item, view));
           loadedLayers.filter(layer => pointKeys.has(layer.item.key)).forEach(layer => drawPointLayer(layer.geojson.features, layer.item, view));
         } finally {
           rendering = false;

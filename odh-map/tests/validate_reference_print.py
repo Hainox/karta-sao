@@ -1,8 +1,11 @@
+import json
 from pathlib import Path
 
 
 page = (Path(__file__).resolve().parents[1] / "print-1000x1400.html").read_text(encoding="utf-8")
 index = (Path(__file__).resolve().parents[1] / "index.html").read_text(encoding="utf-8")
+boundary_path = Path(__file__).resolve().parents[1] / "layers" / "sao_boundary_wgs84.geojson"
+boundary = json.loads(boundary_path.read_text(encoding="utf-8"))
 
 required_fragments = {
     "custom paper size": "@page { size: 1000mm 1400mm; margin: 0; }",
@@ -43,5 +46,12 @@ if missing:
 
 if "print-1000x1400.html" not in index or "Печать 1000 × 1400 мм" not in index:
     raise SystemExit("The interactive page does not link to the reference print layout.")
+
+main_boundary = [feature for feature in boundary["features"] if feature.get("properties", {}).get("feature_kind") == "boundary_sao"]
+if len(main_boundary) != 1 or main_boundary[0].get("geometry", {}).get("type") != "MultiPolygon":
+    raise SystemExit("The SAO boundary must have one MultiPolygon source geometry.")
+
+if "feature.properties?.feature_kind === 'boundary_sao'" not in page:
+    raise SystemExit("The print layout renders an extra duplicate SAO boundary feature.")
 
 print("Reference print static checks passed.")
