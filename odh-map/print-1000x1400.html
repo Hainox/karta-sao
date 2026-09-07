@@ -19,24 +19,24 @@
     .print-header__title { font-family: "Arial Nova", Arial, sans-serif; font-size: 16.6mm; font-weight: 700; line-height: 1; white-space: nowrap; }
     .print-title { position: absolute; z-index: 400; top: 52mm; left: 24mm; width: 952mm; margin: 0; color: #000; text-align: center; font-family: Calibri, Arial, sans-serif; font-size: 20.9mm; font-weight: 700; line-height: 1.205; letter-spacing: -.32mm; }
     .print-title span { display: block; }
-    .map-key { position: absolute; z-index: 450; left: 26.19mm; bottom: 26.95mm; width: 254.97mm; height: 388.07mm; padding: 12mm 10mm; overflow: hidden; color: #000; background: #fff; border: .80mm solid #000; font-family: "Arial Narrow", "Arial", sans-serif; }
-    .map-key h2 { margin: 0 0 11mm; text-align: center; font-size: 15.5mm; line-height: 1; font-weight: 700; text-decoration: underline; }
-    .legend-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 7mm; }
+    .map-key { position: absolute; z-index: 450; left: 26.19mm; bottom: 26.95mm; width: 254.97mm; height: 388.07mm; padding: 12mm 10mm; overflow: hidden; color: #000; background: #fff; border: .80mm solid #000; font-family: Arial, Helvetica, sans-serif; }
+    .map-key h2 { margin: 0 0 12mm; text-align: center; font-size: 16.5mm; line-height: 1; font-weight: 800; letter-spacing: .12mm; text-decoration: underline; }
+    .legend-grid { display: grid; grid-template-columns: 1.08fr .92fr; gap: 8mm; }
     .legend-section { min-width: 0; }
-    .legend-section h3 { margin: 0 0 6mm; font-size: 7.25mm; line-height: 1.08; font-weight: 700; }
-    .legend-item { display: grid; grid-template-columns: 13mm 1fr; gap: 3.3mm; align-items: center; min-height: 21.6mm; margin: 0 0 3.1mm; font-size: 6.65mm; line-height: 1.06; }
-    .legend-item--queue { grid-template-columns: 22mm 1fr; }
-    .legend-symbol { position: relative; display: block; width: 13mm; height: 13mm; }
-    .legend-symbol::before { position: absolute; inset: 0; display: grid; place-items: center; border: .75mm solid #000; border-radius: 50%; background: #fff; color: #000; font-family: Arial, sans-serif; font-size: 7.2mm; font-weight: 700; content: attr(data-symbol); }
+    .legend-section h3 { margin: 0 0 7mm; font-size: 8.1mm; line-height: 1.14; font-weight: 800; letter-spacing: .03mm; }
+    .legend-item { display: grid; grid-template-columns: 14.5mm 1fr; gap: 4mm; align-items: center; min-height: 25.5mm; margin: 0 0 4mm; font-size: 7.35mm; line-height: 1.16; font-weight: 600; }
+    .legend-item--queue { grid-template-columns: 25mm 1fr; }
+    .legend-symbol { position: relative; display: block; width: 14.5mm; height: 14.5mm; }
+    .legend-symbol::before { position: absolute; inset: 0; display: grid; place-items: center; border: .85mm solid #000; border-radius: 50%; background: #fff; color: #000; font-family: Arial, sans-serif; font-size: 7.8mm; font-weight: 800; content: attr(data-symbol); }
     .legend-symbol--snow::before { border-radius: 2mm; color: #00a1d9; content: '❄'; }
     .legend-symbol--dry::before { background: #9d6d39; color: #fff; content: '⌂'; }
     .legend-symbol--pgm::before { border-color: #c76d00; color: #c76d00; content: '▦'; }
-    .legend-symbol--health::before { border-color: #ad1457; color: #ad1457; content: '+'; font-size: 11mm; }
+    .legend-symbol--health::before { border-color: #ad1457; color: #ad1457; content: '+'; font-size: 12mm; }
     .legend-symbol--smm::before { border-color: #6a1b9a; color: #6a1b9a; content: 'M'; }
     .legend-symbol--hydrant::before { border-color: #37474f; color: #37474f; content: 'Г'; }
-    .legend-line { position: relative; display: block; width: 22mm; height: 13mm; }
-    .legend-line::after { position: absolute; top: 5.4mm; left: 0; width: 22mm; border-top: 2.35mm solid var(--line-color); content: ''; }
-    .legend-footnote { margin: 10mm 0 0; padding-top: 7mm; border-top: .35mm solid rgba(0,0,0,.4); font-size: 5.2mm; line-height: 1.22; }
+    .legend-line { position: relative; display: block; width: 25mm; height: 14.5mm; }
+    .legend-line::after { position: absolute; top: 5.9mm; left: 0; width: 25mm; border-top: 2.7mm solid var(--line-color); content: ''; }
+    .legend-footnote { margin: 9mm 0 0; padding-top: 6mm; border-top: .45mm solid rgba(0,0,0,.55); font-size: 5.75mm; line-height: 1.3; }
     .point-marker { width: 9.3mm; height: 9.3mm; display: grid; place-items: center; border: .7mm solid #111; border-radius: 50%; background: rgba(255,255,255,.94); color: #111; font: 700 5.5mm/1 Arial, sans-serif; box-shadow: 0 .4mm 1.2mm rgba(0,0,0,.32); }
     .point-marker--pgm { border-color: #c76d00; color: #c76d00; }
     .point-marker--snow { border-radius: 1.8mm; border-color: #00acc1; color: #00acc1; }
@@ -77,6 +77,7 @@
       <h2>Обозначения</h2>
       <div class="legend-grid">
         <section class="legend-section" aria-label="Объекты">
+          <h3>Объекты и места</h3>
           <div class="legend-item"><span class="legend-symbol legend-symbol--snow"></span><span>Места временного складирования снега — 24</span></div>
           <div class="legend-item"><span class="legend-symbol legend-symbol--dry"></span><span>Сухие свалки снега — 3</span></div>
           <div class="legend-item"><span class="legend-symbol legend-symbol--pgm"></span><span>Контейнеры ПГМ — 451</span></div>
