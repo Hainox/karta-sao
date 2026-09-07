@@ -20,6 +20,11 @@ required_fragments = {
     "vector route layer": 'id="features"',
     "route projection": "function project(coordinate, view, width = FEATURE_WIDTH, height = FEATURE_HEIGHT)",
     "high-detail tiles": "const TILE_ZOOM = 13;",
+    "compact route strokes": "width: 2.05",
+    "point clustering": "function drawPointLayer(features, item, view)",
+    "zoom controls": 'id="zoom-in"',
+    "fit-to-area control": 'id="zoom-reset"',
+    "basemap selector": 'id="basemap-style"',
 }
 
 missing = [description for description, fragment in required_fragments.items() if fragment not in page]

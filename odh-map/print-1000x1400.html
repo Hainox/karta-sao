@@ -12,6 +12,8 @@
     body { font-family: Arial, Helvetica, sans-serif; }
     .print-sheet { position: relative; width: 1000mm; height: 1400mm; overflow: hidden; background: #e5eaeb; }
     #basemap { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; background: #dfe6e7; filter: grayscale(.78) saturate(.45) contrast(.95) brightness(1.10); }
+    #basemap[data-style="contrast"] { filter: grayscale(.32) saturate(.7) contrast(1.04) brightness(1.04); }
+    #basemap[data-style="none"] { opacity: 0; }
     #features { position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
     .print-header { position: absolute; z-index: 400; left: 10mm; top: 10mm; width: 450.77mm; min-height: 33.10mm; padding: 7.7mm 5.9mm 4.5mm; background: #fff; color: #000; }
     .print-header__title { font-family: "Arial Nova", Arial, sans-serif; font-size: 16.6mm; font-weight: 700; line-height: 1; white-space: nowrap; }
@@ -42,13 +44,15 @@
     .point-marker--healthcare { border-color: #ad1457; color: #ad1457; font-size: 8mm; }
     .point-marker--smm_storage { border-color: #6a1b9a; color: #6a1b9a; }
     .point-marker--hydrants { border-color: #37474f; color: #37474f; }
-    .screen-actions { position: fixed; z-index: 1000; top: 16px; right: 16px; display: flex; gap: 8px; }
-    .screen-actions button, .screen-actions a { padding: 9px 13px; border: 1px solid #345; border-radius: 5px; background: #fff; color: #123; font: 14px Arial, sans-serif; text-decoration: none; cursor: pointer; }
+    .screen-actions, .view-actions { position: fixed; z-index: 1000; display: flex; gap: 8px; align-items: center; padding: 8px; border-radius: 7px; background: rgba(255,255,255,.94); box-shadow: 0 2px 12px rgba(0,0,0,.18); }
+    .screen-actions { top: 16px; right: 16px; }
+    .view-actions { top: 16px; left: 16px; }
+    .screen-actions button, .screen-actions a, .view-actions button, .view-actions select { padding: 9px 13px; border: 1px solid #345; border-radius: 5px; background: #fff; color: #123; font: 14px Arial, sans-serif; text-decoration: none; cursor: pointer; }
     .screen-actions button { background: #0d5394; color: #fff; border-color: #0d5394; }
     .loading { position: absolute; z-index: 700; left: 50%; top: 50%; transform: translate(-50%, -50%); padding: 5mm 8mm; background: rgba(255,255,255,.9); border: .5mm solid #6f7b83; font-size: 6mm; }
     @media print {
       html, body { width: 1000mm; height: 1400mm; min-width: 0; min-height: 0; background: transparent; }
-      .screen-actions { display: none; }
+      .screen-actions, .view-actions { display: none; }
       .print-sheet { break-after: page; }
     }
   </style>
@@ -95,6 +99,16 @@
     <a href="index.html">К интерактивной карте</a>
     <button type="button" onclick="window.print()">Печать / PDF</button>
   </div>
+  <div class="view-actions" aria-label="Масштаб и подложка печатной схемы">
+    <button id="zoom-out" type="button" title="Уменьшить масштаб карты">−</button>
+    <button id="zoom-reset" type="button">Вся САО</button>
+    <button id="zoom-in" type="button" title="Увеличить масштаб карты">+</button>
+    <select id="basemap-style" aria-label="Стиль подложки">
+      <option value="light">Светлая подложка</option>
+      <option value="contrast">Контрастная подложка</option>
+      <option value="none">Без подложки</option>
+    </select>
+  </div>
 
   <script>
     (() => {
@@ -111,6 +125,11 @@
       const context = canvas.getContext('2d');
       const svgNs = 'http://www.w3.org/2000/svg';
       const pointKeys = new Set(Object.keys(markerSymbols));
+      const tileCache = new Map();
+      let loadedLayers = null;
+      let baseView = null;
+      let viewScale = 1;
+      let rendering = false;
 
       function visitCoordinates(node, out) {
         if (Array.isArray(node) && typeof node[0] === 'number') out.push(node);
@@ -149,6 +168,14 @@
         return { minX, maxX, minY, maxY };
       }
 
+      function scaleView(view, scale) {
+        const centerX = (view.minX + view.maxX) / 2;
+        const centerY = (view.minY + view.maxY) / 2;
+        const halfWidth = (view.maxX - view.minX) / (2 * scale);
+        const halfHeight = (view.maxY - view.minY) / (2 * scale);
+        return { minX: centerX - halfWidth, maxX: centerX + halfWidth, minY: centerY - halfHeight, maxY: centerY + halfHeight };
+      }
+
       function project(coordinate, view, width = FEATURE_WIDTH, height = FEATURE_HEIGHT) {
         const point = worldPoint(coordinate);
         return [
@@ -158,13 +185,16 @@
       }
 
       function loadImage(url) {
-        return new Promise(resolve => {
+        if (tileCache.has(url)) return tileCache.get(url);
+        const task = new Promise(resolve => {
           const image = new Image();
           image.crossOrigin = 'anonymous';
           image.onload = () => resolve(image);
           image.onerror = () => resolve(null);
           image.src = url;
         });
+        tileCache.set(url, task);
+        return task;
       }
 
       async function drawBaseMap(view) {
@@ -200,9 +230,9 @@
       }
 
       function lineStyle(item) {
-        if (item.key === 'boundary') return { stroke: '#4a148c', width: 3.2, opacity: .95 };
-        if (queueColors[item.key]) return { stroke: queueColors[item.key], width: 3.6, opacity: .98 };
-        return { stroke: item.color || '#555', width: 1.7, opacity: .88 };
+        if (item.key === 'boundary') return { stroke: '#4a148c', width: 2.35, opacity: .95 };
+        if (queueColors[item.key]) return { stroke: queueColors[item.key], width: 2.05, opacity: .98 };
+        return { stroke: item.color || '#555', width: 1.2, opacity: .88 };
       }
 
       function drawLine(coordinates, item, view, closed = false) {
@@ -211,12 +241,43 @@
         element(closed ? 'polygon' : 'polyline', { points, fill: 'none', stroke: style.stroke, 'stroke-width': style.width, 'stroke-linecap': 'round', 'stroke-linejoin': 'round', opacity: style.opacity });
       }
 
+      function drawPointAt(x, y, item, count = 1) {
+        const color = item.color || '#555';
+        element('circle', { cx: x, cy: y, r: count > 1 ? 5.2 : 4.45, fill: '#fff', stroke: color, 'stroke-width': 1.45, opacity: .97 });
+        const label = element('text', { x, y: y + 2.65, 'text-anchor': 'middle', 'font-family': 'Arial, sans-serif', 'font-size': 6.1, 'font-weight': '700', fill: color });
+        label.textContent = markerSymbols[item.key] || '•';
+        if (count > 1) {
+          element('circle', { cx: x + 4.4, cy: y - 4.4, r: 3.1, fill: color, stroke: '#fff', 'stroke-width': 1.1 });
+          const badge = element('text', { x: x + 4.4, y: y - 3.05, 'text-anchor': 'middle', 'font-family': 'Arial, sans-serif', 'font-size': count > 9 ? 3.6 : 4.2, 'font-weight': '700', fill: '#fff' });
+          badge.textContent = String(count);
+        }
+      }
+
       function drawPoint(coordinate, item, view) {
         const [x, y] = project(coordinate, view);
-        const color = item.color || '#555';
-        element('circle', { cx: x, cy: y, r: 7.5, fill: '#fff', stroke: color, 'stroke-width': 2.2, opacity: .96 });
-        const label = element('text', { x, y: y + 3.7, 'text-anchor': 'middle', 'font-family': 'Arial, sans-serif', 'font-size': 8.5, 'font-weight': '700', fill: color });
-        label.textContent = markerSymbols[item.key] || '•';
+        drawPointAt(x, y, item);
+      }
+
+      function pointCoordinates(geometry) {
+        if (!geometry) return [];
+        if (geometry.type === 'Point') return [geometry.coordinates];
+        if (geometry.type === 'MultiPoint') return geometry.coordinates;
+        return [];
+      }
+
+      function drawPointLayer(features, item, view) {
+        const distance = 15;
+        const clusters = [];
+        features.forEach(feature => pointCoordinates(feature.geometry).forEach(coordinate => {
+          const [x, y] = project(coordinate, view);
+          const cluster = clusters.find(candidate => Math.hypot(candidate.x - x, candidate.y - y) <= distance);
+          if (cluster) {
+            cluster.count += 1;
+            cluster.x += (x - cluster.x) / cluster.count;
+            cluster.y += (y - cluster.y) / cluster.count;
+          } else clusters.push({ x, y, count: 1 });
+        }));
+        clusters.forEach(cluster => drawPointAt(cluster.x, cluster.y, item, cluster.count));
       }
 
       function drawGeometry(geometry, item, view) {
@@ -227,6 +288,41 @@
         if (geometry.type === 'MultiLineString') return geometry.coordinates.forEach(line => drawLine(line, item, view));
         if (geometry.type === 'Polygon') return geometry.coordinates.forEach(ring => drawLine(ring, item, view, item.key === 'boundary'));
         if (geometry.type === 'MultiPolygon') return geometry.coordinates.forEach(polygon => polygon.forEach(ring => drawLine(ring, item, view, item.key === 'boundary')));
+      }
+
+      function setViewControlsDisabled(disabled) {
+        document.querySelectorAll('.view-actions button, .view-actions select').forEach(control => { control.disabled = disabled; });
+      }
+
+      async function renderMap() {
+        if (!loadedLayers || !baseView || rendering) return;
+        rendering = true;
+        setViewControlsDisabled(true);
+        try {
+          const view = scaleView(baseView, viewScale);
+          svg.replaceChildren();
+          await drawBaseMap(view);
+          loadedLayers.filter(layer => layer.item.key !== 'boundary' && !pointKeys.has(layer.item.key)).forEach(layer => layer.geojson.features.forEach(feature => drawGeometry(feature.geometry, layer.item, view)));
+          const boundary = loadedLayers.find(layer => layer.item.key === 'boundary');
+          boundary.geojson.features.forEach(feature => drawGeometry(feature.geometry, boundary.item, view));
+          loadedLayers.filter(layer => pointKeys.has(layer.item.key)).forEach(layer => drawPointLayer(layer.geojson.features, layer.item, view));
+        } finally {
+          rendering = false;
+          setViewControlsDisabled(false);
+        }
+      }
+
+      function updateScale(nextScale) {
+        viewScale = Math.max(.72, Math.min(1.55, nextScale));
+        renderMap().catch(showMapError);
+      }
+
+      function showMapError(error) {
+        const loading = document.getElementById('loading');
+        if (!loading) return;
+        loading.textContent = `Не удалось загрузить карту: ${error.message}`;
+        loading.style.color = '#a40000';
+        console.error(error);
       }
 
       async function loadMap() {
@@ -243,20 +339,17 @@
         })));
         const boundary = layers.find(layer => layer.item.key === 'boundary');
         if (!boundary) throw new Error('Не найдена граница САО');
-        const view = makeView(boundary.geojson);
-        await drawBaseMap(view);
-        layers.filter(layer => layer.item.key !== 'boundary' && !pointKeys.has(layer.item.key)).forEach(layer => layer.geojson.features.forEach(feature => drawGeometry(feature.geometry, layer.item, view)));
-        boundary.geojson.features.forEach(feature => drawGeometry(feature.geometry, boundary.item, view));
-        layers.filter(layer => pointKeys.has(layer.item.key)).forEach(layer => layer.geojson.features.forEach(feature => drawGeometry(feature.geometry, layer.item, view)));
-        document.getElementById('loading').remove();
+        loadedLayers = layers;
+        baseView = makeView(boundary.geojson);
+        await renderMap();
+        document.getElementById('loading')?.remove();
       }
 
-      loadMap().catch(error => {
-        const loading = document.getElementById('loading');
-        loading.textContent = `Не удалось загрузить карту: ${error.message}`;
-        loading.style.color = '#a40000';
-        console.error(error);
-      });
+      document.getElementById('zoom-out').addEventListener('click', () => updateScale(viewScale / 1.18));
+      document.getElementById('zoom-reset').addEventListener('click', () => updateScale(1));
+      document.getElementById('zoom-in').addEventListener('click', () => updateScale(viewScale * 1.18));
+      document.getElementById('basemap-style').addEventListener('change', event => { canvas.dataset.style = event.target.value; });
+      loadMap().catch(showMapError);
     })();
   </script>
 </body>
