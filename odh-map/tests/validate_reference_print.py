@@ -25,6 +25,10 @@ required_fragments = {
     "zoom controls": 'id="zoom-in"',
     "fit-to-area control": 'id="zoom-reset"',
     "basemap selector": 'id="basemap-style"',
+    "CARTO tile provider": "basemaps.cartocdn.com",
+    "CARTO Positron": "light_all",
+    "CARTO Voyager": "rastertiles/voyager",
+    "CARTO attribution": "© OpenStreetMap contributors © CARTO",
 }
 
 missing = [description for description, fragment in required_fragments.items() if fragment not in page]

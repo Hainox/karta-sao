@@ -11,8 +11,8 @@
     html, body { margin: 0; min-width: 1000mm; min-height: 1400mm; background: #77818a; }
     body { font-family: Arial, Helvetica, sans-serif; }
     .print-sheet { position: relative; width: 1000mm; height: 1400mm; overflow: hidden; background: #e5eaeb; }
-    #basemap { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; background: #dfe6e7; filter: grayscale(.78) saturate(.45) contrast(.95) brightness(1.10); }
-    #basemap[data-style="contrast"] { filter: grayscale(.32) saturate(.7) contrast(1.04) brightness(1.04); }
+    #basemap { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; background: #dfe6e7; }
+    #basemap[data-style="contrast"] { filter: saturate(.75) contrast(1.03); }
     #basemap[data-style="none"] { opacity: 0; }
     #features { position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
     .print-header { position: absolute; z-index: 400; left: 10mm; top: 10mm; width: 450.77mm; min-height: 33.10mm; padding: 7.7mm 5.9mm 4.5mm; background: #fff; color: #000; }
@@ -89,7 +89,7 @@
           <div class="legend-item legend-item--queue"><span class="legend-line" style="--line-color:#FF0000"></span><span>I очередь — 98 позиций</span></div>
           <div class="legend-item legend-item--queue"><span class="legend-line" style="--line-color:#0000FF"></span><span>II очередь — 318 позиций</span></div>
           <div class="legend-item legend-item--queue"><span class="legend-line" style="--line-color:#00B050"></span><span>III очередь — 272 позиции</span></div>
-          <p class="legend-footnote">Схема подготовлена по опубликованным слоям САО. Данные маршрутов роторной уборки на лист не включены, так как не переданы в исходных данных.</p>
+          <p class="legend-footnote">Схема подготовлена по опубликованным слоям САО. Данные маршрутов роторной уборки на лист не включены, так как не переданы в исходных данных. Подложка: © OpenStreetMap contributors © CARTO.</p>
         </section>
       </div>
     </aside>
@@ -104,8 +104,8 @@
     <button id="zoom-reset" type="button">Вся САО</button>
     <button id="zoom-in" type="button" title="Увеличить масштаб карты">+</button>
     <select id="basemap-style" aria-label="Стиль подложки">
-      <option value="light">Светлая подложка</option>
-      <option value="contrast">Контрастная подложка</option>
+      <option value="light">CARTO Positron</option>
+      <option value="contrast">CARTO Voyager</option>
       <option value="none">Без подложки</option>
     </select>
   </div>
@@ -120,6 +120,7 @@
       const RASTER_HEIGHT = 5040;
       const TILE_SIZE = 256;
       const TILE_ZOOM = 13;
+      const CARTO_BASEMAP_KEY = 'cb1_310p_1_d2460a3f4bb18c971a8bfdd7';
       const svg = document.getElementById('features');
       const canvas = document.getElementById('basemap');
       const context = canvas.getContext('2d');
@@ -129,6 +130,7 @@
       let loadedLayers = null;
       let baseView = null;
       let viewScale = 1;
+      let basemapStyle = 'light';
       let rendering = false;
 
       function visitCoordinates(node, out) {
@@ -197,9 +199,15 @@
         return task;
       }
 
+      function cartoTileUrl(x, y) {
+        const style = basemapStyle === 'contrast' ? 'rastertiles/voyager' : 'light_all';
+        return `https://basemaps.cartocdn.com/${style}/${TILE_ZOOM}/${x}/${y}@2x.png?key=${CARTO_BASEMAP_KEY}`;
+      }
+
       async function drawBaseMap(view) {
         context.fillStyle = '#dfe6e7';
         context.fillRect(0, 0, RASTER_WIDTH, RASTER_HEIGHT);
+        if (basemapStyle === 'none') return;
         const left = Math.floor(view.minX / TILE_SIZE);
         const right = Math.floor(view.maxX / TILE_SIZE);
         const top = Math.floor(view.minY / TILE_SIZE);
@@ -207,7 +215,7 @@
         const tasks = [];
         for (let x = left; x <= right; x += 1) {
           for (let y = top; y <= bottom; y += 1) {
-            const url = `https://tile.openstreetmap.org/${TILE_ZOOM}/${x}/${y}.png`;
+            const url = cartoTileUrl(x, y);
             tasks.push(loadImage(url).then(image => ({ x, y, image })));
           }
         }
@@ -348,7 +356,11 @@
       document.getElementById('zoom-out').addEventListener('click', () => updateScale(viewScale / 1.18));
       document.getElementById('zoom-reset').addEventListener('click', () => updateScale(1));
       document.getElementById('zoom-in').addEventListener('click', () => updateScale(viewScale * 1.18));
-      document.getElementById('basemap-style').addEventListener('change', event => { canvas.dataset.style = event.target.value; });
+      document.getElementById('basemap-style').addEventListener('change', event => {
+        basemapStyle = event.target.value;
+        canvas.dataset.style = basemapStyle;
+        renderMap().catch(showMapError);
+      });
       loadMap().catch(showMapError);
     })();
   </script>
