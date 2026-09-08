@@ -50,6 +50,12 @@ async function login(api, email, password) {
   return response.body.token;
 }
 
+function binaryParser(response, callback) {
+  const chunks = [];
+  response.on('data', (chunk) => chunks.push(chunk));
+  response.on('end', () => callback(null, Buffer.concat(chunks)));
+}
+
 test('валидирует зоны накопления роторного снега', () => {
   const polygon = [[37.1, 55.1], [37.2, 55.1], [37.2, 55.2], [37.1, 55.1]];
   const set = changeSet({ feature: { type: 'Feature', geometry: { type: 'Polygon', coordinates: [polygon] }, properties: { district: 'Аэропорт', author: 'Иванов И.И.', change_type: 'rotor_snow_storage_zone', address: 'Тестовая зона' } } });
@@ -64,6 +70,12 @@ test('авторизация, районные права, приёмка и в�
   const submitted = await api.post('/api/submissions').set('Authorization', `Bearer ${editor}`).send({ changeSet: changeSet(), originalFilename: 'airport.geojson' }).expect(201);
   await api.patch(`/api/submissions/${submitted.body.submission.id}`).set('Authorization', `Bearer ${editor}`).send({ status: 'approved' }).expect(403);
   const reviewer = await login(api, 'reviewer@example.test', reviewerPassword);
+  const archive = await api.get('/api/exports/review-archive.zip').set('Authorization', `Bearer ${reviewer}`).buffer(true).parse(binaryParser).expect(200);
+  assert.match(archive.headers['content-type'], /application\/zip/);
+  assert.match(archive.headers['content-disposition'], /pravki-sao-k-priemke/);
+  assert.equal(archive.body.subarray(0, 2).toString(), 'PK');
+  assert.match(archive.body.toString('utf8'), /manifest\.json/);
+  assert.match(archive.body.toString('utf8'), /районы\/Аэропорт\//);
   await api.patch(`/api/submissions/${submitted.body.submission.id}`).set('Authorization', `Bearer ${reviewer}`).send({ status: 'approved', comment: 'Проверено' }).expect(200);
   const exported = await api.get('/api/exports/approved.geojson').set('Authorization', `Bearer ${reviewer}`).expect(200);
   assert.equal(exported.body.review_status, 'approved');

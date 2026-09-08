@@ -17,6 +17,7 @@ API принимает GeoJSON районов, хранит их в PostgreSQL, 
 - `POST /api/submissions`
 - `GET /api/submissions?status=submitted`
 - `PATCH /api/submissions/:id` с `approved` или `rejected`
+- `GET /api/exports/review-archive.zip` — ZIP ожидающих наборов, разложенный по районам, с `manifest.json`
 - `GET /api/exports/approved.geojson`
 
 GitHub Pages исполняет только статические файлы. Для общей базы API должен быть размещён отдельно с PostgreSQL; адрес задаётся в HUD кабинетов.

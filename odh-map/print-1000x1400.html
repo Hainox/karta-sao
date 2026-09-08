@@ -15,11 +15,14 @@
     #basemap.is-panning { cursor: grabbing; }
     #basemap[data-style="contrast"] { filter: saturate(.75) contrast(1.03); }
     #basemap[data-style="none"] { opacity: 0; }
-    #features { position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+    #features { position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; overflow: hidden; pointer-events: none; }
     .print-header { position: absolute; z-index: 400; left: 10mm; top: 10mm; width: 450.77mm; min-height: 33.10mm; padding: 7.7mm 5.9mm 4.5mm; background: #fff; color: #000; }
     .print-header__title { font-family: "Arial Nova", Arial, sans-serif; font-size: 16.6mm; font-weight: 700; line-height: 1; white-space: nowrap; }
     .print-title { position: absolute; z-index: 400; top: 52mm; left: 24mm; width: 952mm; margin: 0; color: #000; text-align: center; font-family: Calibri, Arial, sans-serif; font-size: 20.9mm; font-weight: 700; line-height: 1.205; letter-spacing: -.32mm; }
     .print-title span { display: block; }
+    .print-inset { position: absolute; z-index: 410; top: 123mm; left: 24mm; width: 264mm; height: 190mm; overflow: hidden; border: .8mm solid #4a148c; background: rgba(255,255,255,.92); box-shadow: 0 .8mm 2.4mm rgba(0,0,0,.25); }
+    .print-inset strong { position: absolute; z-index: 2; top: 5mm; left: 6mm; padding: 2.4mm 3.4mm; background: rgba(255,255,255,.94); color: #111; font-size: 6.2mm; line-height: 1; }
+    #inset-features { position: absolute; inset: 0; width: 100%; height: 100%; overflow: hidden; pointer-events: none; }
     .map-key { position: absolute; z-index: 450; left: 26.19mm; bottom: 26.95mm; width: 254.97mm; height: 388.07mm; padding: 12mm 10mm; overflow: hidden; color: #000; background: #fff; border: .80mm solid #000; font-family: Arial, Helvetica, sans-serif; }
     .map-key h2 { margin: 0 0 12mm; text-align: center; font-size: 16.5mm; line-height: 1; font-weight: 800; letter-spacing: .12mm; text-decoration: underline; }
     .legend-grid { display: grid; grid-template-columns: 1.08fr .92fr; gap: 8mm; }
@@ -75,6 +78,11 @@
       <span>с указанием очередности</span>
     </h1>
 
+    <aside id="print-inset" class="print-inset" aria-label="Врезка Молжаниновского района" hidden>
+      <strong>Молжаниновский район</strong>
+      <svg id="inset-features" viewBox="0 0 528 380" role="img" aria-label="Маршруты Молжаниновского района"></svg>
+    </aside>
+
     <aside class="map-key" aria-label="Обозначения">
       <h2>Обозначения</h2>
       <div class="legend-grid">
@@ -126,6 +134,7 @@
       const TILE_ZOOM = 13;
       const CARTO_BASEMAP_KEY = 'cb1_310p_1_d2460a3f4bb18c971a8bfdd7';
       const svg = document.getElementById('features');
+      const insetSvg = document.getElementById('inset-features');
       const canvas = document.getElementById('basemap');
       const context = canvas.getContext('2d');
       const svgNs = 'http://www.w3.org/2000/svg';
@@ -133,6 +142,10 @@
       const tileCache = new Map();
       let loadedLayers = null;
       let baseView = null;
+      let insetView = null;
+      let mainBoundary = null;
+      let insetBoundary = null;
+      let targetSvg = svg;
       let viewScale = 1;
       let basemapStyle = 'light';
       let rendering = false;
@@ -179,6 +192,35 @@
         return { minX, maxX, minY, maxY };
       }
 
+      function polygonArea(polygon) {
+        const ring = polygon[0] || [];
+        return Math.abs(ring.reduce((total, point, index) => {
+          const next = ring[(index + 1) % ring.length] || point;
+          return total + point[0] * next[1] - next[0] * point[1];
+        }, 0) / 2);
+      }
+
+      function boundarySections(collection) {
+        const seen = new Set();
+        const polygons = [];
+        collection.features
+          .filter(feature => feature.properties?.feature_kind === 'boundary_sao')
+          .forEach(feature => {
+            const components = feature.geometry?.type === 'MultiPolygon' ? feature.geometry.coordinates : [feature.geometry?.coordinates];
+            components.filter(Boolean).forEach(coordinates => {
+              const key = JSON.stringify(coordinates);
+              if (seen.has(key)) return;
+              seen.add(key);
+              polygons.push({ type: 'Feature', properties: feature.properties, geometry: { type: 'Polygon', coordinates } });
+            });
+          });
+        polygons.sort((left, right) => polygonArea(right.geometry.coordinates) - polygonArea(left.geometry.coordinates));
+        return {
+          main: { type: 'FeatureCollection', features: polygons.slice(0, 1) },
+          inset: { type: 'FeatureCollection', features: polygons.slice(1) }
+        };
+      }
+
       function scaleView(view, scale) {
         const centerX = (view.minX + view.maxX) / 2;
         const centerY = (view.minY + view.maxY) / 2;
@@ -192,7 +234,7 @@
         return { minX: view.minX + panX, maxX: view.maxX + panX, minY: view.minY + panY, maxY: view.maxY + panY };
       }
 
-      function project(coordinate, view, width = FEATURE_WIDTH, height = FEATURE_HEIGHT) {
+      function project(coordinate, view, width = targetSvg.viewBox.baseVal.width || FEATURE_WIDTH, height = targetSvg.viewBox.baseVal.height || FEATURE_HEIGHT) {
         const point = worldPoint(coordinate);
         return [
           (point.x - view.minX) / (view.maxX - view.minX) * width,
@@ -247,7 +289,7 @@
       function element(name, attributes) {
         const node = document.createElementNS(svgNs, name);
         Object.entries(attributes).forEach(([key, value]) => node.setAttribute(key, value));
-        svg.appendChild(node);
+        targetSvg.appendChild(node);
         return node;
       }
 
@@ -312,6 +354,13 @@
         if (geometry.type === 'MultiPolygon') return geometry.coordinates.forEach(polygon => polygon.forEach(ring => drawLine(ring, item, view, item.key === 'boundary')));
       }
 
+      function drawVectors(view, boundaryGeojson) {
+        loadedLayers.filter(layer => layer.item.key !== 'boundary' && !pointKeys.has(layer.item.key)).forEach(layer => layer.geojson.features.forEach(feature => drawGeometry(feature.geometry, layer.item, view)));
+        const boundary = loadedLayers.find(layer => layer.item.key === 'boundary');
+        boundaryGeojson.features.forEach(feature => drawGeometry(feature.geometry, boundary.item, view));
+        loadedLayers.filter(layer => pointKeys.has(layer.item.key)).forEach(layer => drawPointLayer(layer.geojson.features, layer.item, view));
+      }
+
       function setViewControlsDisabled(disabled) {
         document.querySelectorAll('.view-actions button, .view-actions select').forEach(control => { control.disabled = disabled; });
       }
@@ -323,11 +372,15 @@
         try {
           const view = activeView();
           svg.replaceChildren();
+          targetSvg = svg;
           await drawBaseMap(view);
-          loadedLayers.filter(layer => layer.item.key !== 'boundary' && !pointKeys.has(layer.item.key)).forEach(layer => layer.geojson.features.forEach(feature => drawGeometry(feature.geometry, layer.item, view)));
-          const boundary = loadedLayers.find(layer => layer.item.key === 'boundary');
-          boundary.geojson.features.filter(feature => feature.properties?.feature_kind === 'boundary_sao').forEach(feature => drawGeometry(feature.geometry, boundary.item, view));
-          loadedLayers.filter(layer => pointKeys.has(layer.item.key)).forEach(layer => drawPointLayer(layer.geojson.features, layer.item, view));
+          drawVectors(view, mainBoundary);
+          if (insetView && insetBoundary.features.length) {
+            insetSvg.replaceChildren();
+            targetSvg = insetSvg;
+            drawVectors(insetView, insetBoundary);
+            targetSvg = svg;
+          }
         } finally {
           rendering = false;
           setViewControlsDisabled(false);
@@ -405,7 +458,14 @@
         const boundary = layers.find(layer => layer.item.key === 'boundary');
         if (!boundary) throw new Error('Не найдена граница САО');
         loadedLayers = layers;
-        baseView = makeView(boundary.geojson);
+        const sections = boundarySections(boundary.geojson);
+        mainBoundary = sections.main;
+        insetBoundary = sections.inset;
+        baseView = makeView(mainBoundary);
+        if (insetBoundary.features.length) {
+          insetView = makeView(insetBoundary);
+          document.getElementById('print-inset').hidden = false;
+        }
         await renderMap();
         document.getElementById('loading')?.remove();
       }

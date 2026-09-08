@@ -1,5 +1,6 @@
 import express from 'express';
 import { signToken, verifyPassword, verifyToken } from './lib/auth.js';
+import { streamReviewArchive } from './lib/review-archive.js';
 import { payloadHash, validateChangeSet } from './lib/validation.js';
 
 const REVIEW_ROLES = new Set(['reviewer', 'prefecture_admin']);
@@ -93,6 +94,18 @@ export function createApp({ repository, boundary, jwtSecret, allowedOrigins = []
         features: approved.flatMap((item) => item.change_set.features.map((feature) => ({ ...feature, properties: { ...feature.properties, submission_id: item.id, review_status: 'approved' } })))
       });
     } catch (error) { next(error); }
+  });
+
+  app.get('/api/exports/review-archive.zip', authenticate, requireReview, async (_request, response, next) => {
+    try {
+      const submitted = await repository.listSubmissions({ status: 'submitted' });
+      const date = new Date().toISOString().slice(0, 10);
+      response.status(200).type('application/zip').attachment(`pravki-sao-k-priemke-${date}.zip`);
+      await streamReviewArchive(response, submitted);
+    } catch (error) {
+      if (response.headersSent) response.destroy(error);
+      else next(error);
+    }
   });
 
   app.use((error, _request, response, _next) => {
