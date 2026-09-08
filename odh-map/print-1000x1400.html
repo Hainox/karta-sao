@@ -97,9 +97,9 @@
         </section>
         <section class="legend-section" aria-label="Очередность уборки">
           <h3>Очередность уборки улиц ОДХ</h3>
-          <div class="legend-item legend-item--queue"><span class="legend-line" style="--line-color:#FF0000"></span><span>I очередь — 98 позиций</span></div>
-          <div class="legend-item legend-item--queue"><span class="legend-line" style="--line-color:#0000FF"></span><span>II очередь — 318 позиций</span></div>
-          <div class="legend-item legend-item--queue"><span class="legend-line" style="--line-color:#00B050"></span><span>III очередь — 272 позиции</span></div>
+          <div class="legend-item legend-item--queue"><span class="legend-line" style="--line-color:#d32f2f"></span><span>I очередь — 98 позиций</span></div>
+          <div class="legend-item legend-item--queue"><span class="legend-line" style="--line-color:#1565c0"></span><span>II очередь — 318 позиций</span></div>
+          <div class="legend-item legend-item--queue"><span class="legend-line" style="--line-color:#2e7d32"></span><span>III очередь — 272 позиции</span></div>
           <p class="legend-footnote">Схема подготовлена по опубликованным слоям САО. Данные маршрутов роторной уборки на лист не включены, так как не переданы в исходных данных. Подложка: © OpenStreetMap contributors © CARTO.</p>
         </section>
       </div>
@@ -124,8 +124,11 @@
 
   <script>
     (() => {
-      const queueColors = { queue1: '#FF0000', queue2: '#0000FF', queue3: '#00B050' };
-      const markerSymbols = { pgm: '▦', snow: '❄', dry_snow: '⌂', healthcare: '+', smm_storage: 'M', hydrants: 'Г' };
+      // Keep the printable vector layer in lockstep with the interactive map.
+      // Colour and visual hierarchy come from layers.json; these keys only
+      // distinguish route and point treatment.
+      const queueKeys = new Set(['queue1', 'queue2', 'queue3']);
+      const markerSymbols = { pgm: '▦', snow: '❄', dry_snow: '⌂', healthcare: '+', healthcare_review: '+', smm_storage: 'M', hydrants: 'Г' };
       const FEATURE_WIDTH = 1800;
       const FEATURE_HEIGHT = 2520;
       const RASTER_WIDTH = 3600;
@@ -294,25 +297,27 @@
       }
 
       function lineStyle(item) {
-        if (item.key === 'boundary') return { stroke: '#4a148c', width: 2.35, opacity: .95 };
-        if (queueColors[item.key]) return { stroke: queueColors[item.key], width: 2.05, opacity: .98 };
-        return { stroke: item.color || '#555', width: 1.2, opacity: .88 };
+        if (item.key === 'boundary') return { stroke: item.color || '#4a148c', width: 4.5, opacity: 1, dashArray: '9 6' };
+        if (queueKeys.has(item.key)) return { stroke: item.color || '#555', width: 4, opacity: .92 };
+        return { stroke: item.color || '#555', width: 4, opacity: .92 };
       }
 
       function drawLine(coordinates, item, view, closed = false) {
         const points = coordinates.map(coordinate => project(coordinate, view).join(',')).join(' ');
         const style = lineStyle(item);
-        element(closed ? 'polygon' : 'polyline', { points, fill: 'none', stroke: style.stroke, 'stroke-width': style.width, 'stroke-linecap': 'round', 'stroke-linejoin': 'round', opacity: style.opacity });
+        const attributes = { points, fill: 'none', stroke: style.stroke, 'stroke-width': style.width, 'stroke-linecap': 'round', 'stroke-linejoin': 'round', opacity: style.opacity };
+        if (style.dashArray) attributes['stroke-dasharray'] = style.dashArray;
+        element(closed ? 'polygon' : 'polyline', attributes);
       }
 
       function drawPointAt(x, y, item, count = 1) {
         const color = item.color || '#555';
-        element('circle', { cx: x, cy: y, r: count > 1 ? 5.2 : 4.45, fill: '#fff', stroke: color, 'stroke-width': 1.45, opacity: .97 });
-        const label = element('text', { x, y: y + 2.65, 'text-anchor': 'middle', 'font-family': 'Arial, sans-serif', 'font-size': 6.1, 'font-weight': '700', fill: color });
+        element('circle', { cx: x, cy: y, r: count > 1 ? 9.6 : 8.2, fill: '#fff', stroke: color, 'stroke-width': 2.5, opacity: .98 });
+        const label = element('text', { x, y: y + 4.45, 'text-anchor': 'middle', 'font-family': 'Arial, sans-serif', 'font-size': 11.2, 'font-weight': '700', fill: color });
         label.textContent = markerSymbols[item.key] || '•';
         if (count > 1) {
-          element('circle', { cx: x + 4.4, cy: y - 4.4, r: 3.1, fill: color, stroke: '#fff', 'stroke-width': 1.1 });
-          const badge = element('text', { x: x + 4.4, y: y - 3.05, 'text-anchor': 'middle', 'font-family': 'Arial, sans-serif', 'font-size': count > 9 ? 3.6 : 4.2, 'font-weight': '700', fill: '#fff' });
+          element('circle', { cx: x + 8.2, cy: y - 8.2, r: 5.6, fill: color, stroke: '#fff', 'stroke-width': 1.8 });
+          const badge = element('text', { x: x + 8.2, y: y - 6.1, 'text-anchor': 'middle', 'font-family': 'Arial, sans-serif', 'font-size': count > 9 ? 6.1 : 7.2, 'font-weight': '700', fill: '#fff' });
           badge.textContent = String(count);
         }
       }
@@ -330,7 +335,7 @@
       }
 
       function drawPointLayer(features, item, view) {
-        const distance = 15;
+        const distance = 23;
         const clusters = [];
         features.forEach(feature => pointCoordinates(feature.geometry).forEach(coordinate => {
           const [x, y] = project(coordinate, view);
