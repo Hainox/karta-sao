@@ -3,179 +3,107 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Приёмка правок районов — карта ОДХ САО</title>
+  <title>Приёмка правок — ОДХ САО</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-  <style>
-    :root { --ink:#17212b; --muted:#5a6872; --line:#d9e1e4; --accent:#0d827c; --bg:#eef3f3; --danger:#a92020; --good:#176556; }
-    * { box-sizing:border-box; } body { margin:0; color:var(--ink); background:var(--bg); font:14px/1.4 Arial, Helvetica, sans-serif; }
-    .app { min-height:100vh; display:grid; grid-template-rows:auto 1fr; } .topbar { min-height:64px; display:flex; align-items:center; justify-content:space-between; gap:16px; padding:12px 20px; background:#fff; border-bottom:1px solid var(--line); }
-    h1 { margin:0; font-size:20px; } .subtitle { margin-top:3px; color:var(--muted); font-size:12px; } .topbar a { color:#075d9b; font-weight:700; text-decoration:none; }
-    .workspace { display:grid; grid-template-columns:410px minmax(0,1fr); min-height:0; } .sidebar { overflow:auto; padding:18px; background:#fff; border-right:1px solid var(--line); } #map { min-height:calc(100vh - 64px); }
-    h2 { margin:18px 0 9px; font-size:15px; } h2:first-child { margin-top:0; } .notice { margin:0 0 15px; padding:10px 12px; border-radius:9px; background:#edf7f5; color:#225d57; font-size:12px; }
-    input, button { font:inherit; } input { width:100%; padding:9px 10px; border:1px solid #aebac0; border-radius:7px; color:var(--ink); background:#fff; } button { min-height:39px; padding:8px 10px; border:1px solid #7d8a91; border-radius:8px; color:var(--ink); background:#fff; cursor:pointer; } button:hover:not(:disabled) { border-color:var(--accent); color:var(--accent); } button.primary { color:#fff; border-color:var(--accent); background:var(--accent); } button:disabled { opacity:.5; cursor:not-allowed; }
-    .actions { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:12px; } .status { margin-top:12px; padding:9px 10px; border-radius:7px; color:#33515c; background:#f2f5f6; font-size:12px; white-space:pre-line; } .status.error { color:#8c1919; background:#fff0f0; } .status.good { color:var(--good); background:#eaf8f3; }
-    .summary { display:grid; grid-template-columns:repeat(4,1fr); gap:7px; } .summary div { padding:8px; border:1px solid var(--line); border-radius:8px; text-align:center; font-size:11px; color:var(--muted); } .summary b { display:block; font-size:17px; color:var(--ink); }
-    .file-list { display:grid; gap:7px; margin-top:10px; } .file-card { padding:9px; border:1px solid var(--line); border-left:4px solid #80909a; border-radius:8px; background:#fafcfc; } .file-card.accepted { border-left-color:#0d827c; } .file-card.conflict { border-left-color:#bf6b00; background:#fffaf1; } .file-card.rejected { border-left-color:#b52929; background:#fff8f8; } .file-card b { display:block; font-size:12px; overflow-wrap:anywhere; } .file-card span { display:block; margin-top:3px; color:var(--muted); font-size:11px; white-space:pre-line; } .file-card.rejected span { color:#8c1919; } .file-card.conflict span { color:#8a5400; } .file-card button { min-height:29px; margin-top:7px; padding:3px 8px; font-size:11px; }
-    .small { color:var(--muted); font-size:11px; } .boundary-note { padding:5px 7px; border-radius:4px; background:rgba(255,255,255,.92); font-size:11px; } .legend { display:grid; gap:5px; padding:8px; border-radius:6px; background:rgba(255,255,255,.94); font-size:11px; box-shadow:0 1px 5px rgba(0,0,0,.18); } .legend i { display:inline-block; width:16px; height:4px; margin-right:6px; vertical-align:middle; } .legend em { display:inline-block; width:10px; height:10px; margin:0 9px 0 3px; border:2px solid; border-radius:50%; vertical-align:middle; }
-    @media (max-width:800px) { .workspace { grid-template-columns:1fr; } .sidebar { border-right:0; border-bottom:1px solid var(--line); } #map { min-height:65vh; } .topbar { align-items:flex-start; } }
-  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="operations-hud.css">
 </head>
 <body>
   <div class="app">
-    <header class="topbar"><div><h1>Приёмка правок районов</h1><div class="subtitle">Проверка и сведение файлов перед утверждением. Публичную карту эта страница не изменяет.</div></div><div><a href="district-editor.html">Редактор района</a> · <a href="index.html">Утверждённая карта</a></div></header>
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark"><i class="fa-solid fa-clipboard-check"></i></span><span>ОДХ САО<small>Рабочий контур · приёмка правок</small></span></div>
+      <nav class="topbar-actions" aria-label="Навигация"><a class="link-action" href="district-editor.html"><i class="fa-solid fa-pen-ruler"></i> Редактор</a><a class="primary-action" href="index.html"><i class="fa-solid fa-map"></i> Утверждённая карта</a></nav>
+    </header>
     <main class="workspace">
       <aside class="sidebar">
-        <p class="notice">Загрузите GeoJSON от районов. Каждый файл проверяется по формату, обязательным полям и границе САО. При двух вариантах одного района диспетчер должен выбрать актуальный; в единый набор попадут только выбранные файлы.</p>
-        <h2>Файлы районов</h2>
-        <input id="reviewFiles" type="file" multiple accept=".geojson,.json,application/geo+json,application/json" aria-label="Загрузить GeoJSON-файлы районов">
-        <div class="actions"><button id="exportBundle" class="primary" type="button" disabled>Скачать единый GeoJSON</button><button id="clearReview" type="button" disabled>Очистить</button></div>
+        <p class="eyebrow">Режим приёмки</p>
+        <p class="notice">Набор становится утверждённым только после решения приёмки. Локальный файл — резервный режим и не публикует карту.</p>
+        <section class="panel">
+          <h2>Единая база</h2>
+          <label for="apiBase">Адрес API</label><input id="apiBase" type="url" placeholder="https://api.example.ru">
+          <label for="apiEmail">E-mail</label><input id="apiEmail" type="email" autocomplete="username" placeholder="name@example.ru">
+          <label for="apiPassword">Пароль</label><input id="apiPassword" type="password" autocomplete="current-password">
+          <div class="actions"><button id="loginButton" class="control" type="button">Войти</button><button id="logoutButton" class="control" type="button">Выйти</button></div>
+          <button id="loadApiButton" class="control teal" type="button" style="width:100%;margin-top:8px"><i class="fa-solid fa-cloud-arrow-down"></i> Загрузить ожидающие</button>
+          <button id="exportApiButton" class="control" type="button" style="width:100%;margin-top:8px"><i class="fa-solid fa-file-arrow-down"></i> Выгрузить утверждённые</button>
+          <p id="sessionInfo" class="small">Подключение не настроено. Пароль в браузере не сохраняется.</p>
+        </section>
+        <section class="panel">
+          <h2>Локальная проверка файла</h2>
+          <input id="reviewFiles" type="file" multiple accept=".geojson,.json,application/geo+json,application/json" aria-label="Загрузить GeoJSON-файлы районов" disabled>
+          <div class="actions"><button id="exportBundle" class="control primary" type="button" disabled>Скачать сводку</button><button id="clearReview" class="control" type="button" disabled>Очистить</button></div>
+        </section>
+        <section class="panel">
+          <h2>Итог</h2><div class="summary"><div><b id="acceptedCount">0</b>выбрано</div><div><b id="conflictCount">0</b>конфликтов</div><div><b id="rejectedCount">0</b>отклонено</div><div><b id="featureCount">0</b>объектов</div></div>
+        </section>
+        <section class="panel"><h2>Наборы правок</h2><div id="fileList" class="file-list"><p class="small">Наборы ещё не загружены.</p></div></section>
         <div id="status" class="status">Загружаю границу САО…</div>
-        <h2>Итог</h2><div class="summary"><div><b id="acceptedCount">0</b>выбрано</div><div><b id="conflictCount">0</b>конфликтов</div><div><b id="rejectedCount">0</b>отклонено</div><div><b id="featureCount">0</b>объектов</div></div>
-        <h2>Результат проверки</h2><div id="fileList" class="file-list"><p class="small">Файлы ещё не загружены.</p></div>
-        <p class="small">Максимальный размер файла района — 5 МБ, сводки — 25 МБ. Единый файл имеет статус локальной сводки и предназначен для согласования или передачи в ГИС; он не является автоматической публикацией.</p>
       </aside>
       <div id="map" aria-label="Карта проверки районных правок"></div>
     </main>
   </div>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="district-changes.js"></script>
+  <script src="api-config.js"></script>
   <script>
     (() => {
-      const MAX_BYTES = 5 * 1024 * 1024;
-      const MAX_BUNDLE_BYTES = 25 * 1024 * 1024;
-      const map = L.map('map', { zoomControl: true, attributionControl: true });
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '&copy; OpenStreetMap contributors' }).addTo(map);
-      const acceptedGroup = L.featureGroup().addTo(map);
-      const fields = Object.fromEntries(['reviewFiles','exportBundle','clearReview','status','acceptedCount','conflictCount','rejectedCount','featureCount','fileList'].map(id => [id, document.getElementById(id)]));
-      const entries = [];
-      let boundary = null;
-
-      function esc(value) { return String(value ?? '').replace(/[&<>"']/g, character => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[character])); }
+      const MAX_BYTES = 5 * 1024 * 1024; const MAX_BUNDLE_BYTES = 25 * 1024 * 1024;
+      const map = L.map('map', { zoomControl:true, attributionControl:true });
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom:19, attribution:'© OpenStreetMap contributors' }).addTo(map);
+      const acceptedGroup = L.featureGroup().addTo(map); const entries = []; let boundary = null;
+      const ids = ['reviewFiles','exportBundle','clearReview','status','acceptedCount','conflictCount','rejectedCount','featureCount','fileList','apiBase','apiEmail','apiPassword','sessionInfo','loadApiButton','exportApiButton']; const fields = Object.fromEntries(ids.map((id) => [id, document.getElementById(id)])); fields.apiBase.value = ODHApi.base();
+      const esc = (value) => String(value ?? '').replace(/[&<>"']/g, (character) => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[character]));
       function setStatus(text, kind = '') { fields.status.textContent = text; fields.status.className = `status ${kind}`; }
       function formatDate(value) { const date = new Date(value); return Number.isNaN(date.valueOf()) ? 'дата не указана' : date.toLocaleString('ru-RU'); }
-      function visualOptions(feature) { const style = DistrictChanges.styleFor(feature); return { color: style.color, weight: style.weight || 4, dashArray: style.dashArray || null, fillColor: '#fff', fillOpacity: .96, radius: 8 }; }
-      function label(feature) { const p = feature.properties || {}; return p.change_type === 'queue' ? `${DistrictChanges.labelFor(p.change_type)} ${p.queue_priority}` : DistrictChanges.labelFor(p.change_type); }
-      function selectedEntries() { return entries.filter(entry => entry.valid && entry.selected); }
-      function conflictingDistricts() {
-        return [...new Set(entries.filter(entry => entry.valid && !entry.selected).map(entry => entry.changeSet.district))];
-      }
-      function syncMapLayers() {
-        acceptedGroup.clearLayers();
-        selectedEntries().forEach(entry => acceptedGroup.addLayer(entry.layers));
-      }
-      function reconcileDistrict(district) {
-        const candidates = entries.filter(entry => entry.valid && entry.changeSet.district === district);
-        if (candidates.length <= 1) candidates.forEach(entry => { entry.selected = true; });
-        else candidates.forEach(entry => { entry.selected = false; });
-      }
-      function selectEntry(entry) {
-        entries.filter(candidate => candidate.valid && candidate.changeSet.district === entry.changeSet.district).forEach(candidate => { candidate.selected = candidate === entry; });
-        syncMapLayers(); refresh();
-        setStatus(`Выбран актуальный файл района «${entry.changeSet.district}»: ${entry.name}. В сводку войдёт только он.`, 'good');
-      }
-      function refresh() {
-        const approved = selectedEntries();
-        const rejected = entries.filter(entry => !entry.valid).length;
-        const conflicts = conflictingDistricts();
-        const features = approved.reduce((sum, entry) => sum + entry.changeSet.features.length, 0);
-        fields.acceptedCount.textContent = approved.length;
-        fields.rejectedCount.textContent = rejected;
-        fields.conflictCount.textContent = conflicts.length;
-        fields.featureCount.textContent = features;
-        fields.exportBundle.disabled = approved.length === 0;
-        fields.clearReview.disabled = entries.length === 0;
-        fields.fileList.innerHTML = entries.length ? '' : '<p class="small">Файлы ещё не загружены.</p>';
-        entries.forEach(entry => {
-          const state = !entry.valid ? 'rejected' : entry.selected ? 'accepted' : 'conflict';
-          const card = document.createElement('div'); card.className = `file-card ${state}`;
-          const details = entry.valid ? `${entry.changeSet.district} · ${entry.changeSet.author}\n${entry.changeSet.features.length} объектов · ${formatDate(entry.changeSet.created_at)}${entry.selected ? '\nВыбран для сводки.' : '\nНужен выбор актуального варианта района.'}` : entry.errors.join('\n');
-          card.innerHTML = `<b>${esc(entry.name)}</b><span>${esc(details)}</span>`;
-          if (entry.valid) {
-            const choose = document.createElement('button'); choose.type = 'button'; choose.textContent = entry.selected ? 'Выбрано для сводки' : 'Выбрать актуальным'; choose.disabled = entry.selected;
-            choose.onclick = () => selectEntry(entry); card.append(choose);
-            card.ondblclick = () => { const bounds = entry.layers.getBounds(); if (bounds.isValid()) map.fitBounds(bounds, { padding:[26,26], maxZoom:16 }); };
-          }
-          card.setAttribute('aria-label', entry.valid ? `${entry.selected ? 'Выбран' : 'Требуется выбрать'}: ${entry.name}.` : `Отклонён: ${entry.name}.`);
-          fields.fileList.append(card);
-        });
-      }
+      function visualOptions(feature) { const style = DistrictChanges.styleFor(feature); return { color:style.color, weight:style.weight || 4, dashArray:style.dashArray || null, fillColor:style.color, fillOpacity:style.fillOpacity ?? .35, radius:8 }; }
+      function label(feature) { const p = feature.properties || {}; return p.change_type === 'queue' ? `Очередь ${p.queue_priority}` : DistrictChanges.labelFor(p.change_type); }
+      function routeIcon(feature) { const side = feature.properties.nozzle_direction || 'both'; const icon = side === 'left' ? 'fa-arrow-left' : side === 'right' ? 'fa-arrow-right' : 'fa-arrows-left-right'; return L.divIcon({ className:'', html:`<span class="route-flow ${side}"><i class="fa-solid ${icon}"></i></span>`, iconSize:[26,26], iconAnchor:[13,13] }); }
+      function selectedEntries() { return entries.filter((entry) => entry.valid && entry.selected); }
+      function conflicts() { return [...new Set(entries.filter((entry) => entry.valid && !entry.selected).map((entry) => entry.changeSet.district))]; }
+      function syncMapLayers() { acceptedGroup.clearLayers(); selectedEntries().forEach((entry) => acceptedGroup.addLayer(entry.layers)); }
+      function reconcileDistrict(district) { const candidates = entries.filter((entry) => entry.valid && entry.changeSet.district === district); if (candidates.length <= 1) candidates.forEach((entry) => { entry.selected = true; }); else candidates.forEach((entry) => { entry.selected = false; }); }
       function addEntryLayers(entry) {
-        entry.layers = L.featureGroup();
-        entry.changeSet.features.forEach(feature => {
-          const layer = L.geoJSON(feature, { style: () => visualOptions(feature), pointToLayer: (_, latlng) => L.circleMarker(latlng, visualOptions(feature)) });
-          const p = feature.properties || {};
-          layer.bindPopup(`<b>${esc(label(feature))}</b><br><b>Район:</b> ${esc(p.district)}<br><b>Адрес:</b> ${esc(p.address)}<br><b>Файл:</b> ${esc(entry.name)}<br><span style="color:#176556">Принято для локальной сводки</span>`);
-          entry.layers.addLayer(layer);
+        entry.layers = L.featureGroup(); entry.changeSet.features.forEach((feature) => { const layer = L.geoJSON(feature, { style:() => visualOptions(feature), pointToLayer:(_, latlng) => L.circleMarker(latlng, visualOptions(feature)) }); const p = feature.properties || {}; layer.bindPopup(`<b>${esc(label(feature))}</b><br><b>Район:</b> ${esc(p.district)}<br><b>Адрес:</b> ${esc(p.address)}<br><b>Набор:</b> ${esc(entry.name)}`); entry.layers.addLayer(layer); if (DistrictChanges.ROUTE_TYPES.has(p.change_type)) { const coords = feature.geometry.coordinates; const middle = coords[Math.floor(coords.length / 2)]; L.marker([middle[1], middle[0]], { icon:routeIcon(feature), interactive:false }).addTo(entry.layers); } });
+      }
+      function selectEntry(entry) { entries.filter((candidate) => candidate.valid && candidate.changeSet.district === entry.changeSet.district).forEach((candidate) => { candidate.selected = candidate === entry; }); syncMapLayers(); refresh(); setStatus(`Выбран актуальный набор района «${entry.changeSet.district}».`, 'good'); }
+      function cardButton(text, className, handler) { const button = document.createElement('button'); button.type = 'button'; button.className = className; button.textContent = text; button.onclick = handler; return button; }
+      function refresh() {
+        const accepted = selectedEntries(); const rejected = entries.filter((entry) => !entry.valid || entry.remoteStatus === 'rejected').length; const conflictCount = conflicts().length; const features = accepted.reduce((sum, entry) => sum + entry.changeSet.features.length, 0);
+        fields.acceptedCount.textContent = accepted.length; fields.rejectedCount.textContent = rejected; fields.conflictCount.textContent = conflictCount; fields.featureCount.textContent = features; fields.exportBundle.disabled = !accepted.length; fields.clearReview.disabled = !entries.length; fields.fileList.replaceChildren();
+        if (!entries.length) { const empty = document.createElement('p'); empty.className = 'small'; empty.textContent = 'Наборы ещё не загружены.'; fields.fileList.append(empty); return; }
+        entries.forEach((entry) => {
+          const state = !entry.valid || entry.remoteStatus === 'rejected' ? 'rejected' : entry.selected ? 'accepted' : 'conflict'; const card = document.createElement('div'); card.className = `file-card ${state}`;
+          const title = document.createElement('b'); title.textContent = entry.name; const info = document.createElement('span'); const source = entry.remote ? 'Единая база' : 'Локальный файл';
+          info.textContent = entry.valid ? `${source} · ${entry.changeSet.district} · ${entry.changeSet.author}\n${entry.changeSet.features.length} объектов · ${formatDate(entry.changeSet.created_at || entry.submittedAt)}${entry.remoteStatus ? `\nСтатус: ${entry.remoteStatus}.` : entry.selected ? '\nВыбран для сводки.' : '\nНужен выбор актуального варианта района.'}` : entry.errors.join('\n');
+          const actions = document.createElement('div'); actions.className = 'card-actions';
+          if (entry.valid && !entry.remote && !entry.selected) actions.append(cardButton('Выбрать актуальным', '', () => selectEntry(entry)));
+          if (entry.valid && entry.remote && entry.remoteStatus === 'submitted') { actions.append(cardButton('Утвердить', '', () => review(entry, 'approved'))); actions.append(cardButton('Отклонить', 'danger', () => review(entry, 'rejected'))); }
+          card.append(title, info, actions); card.ondblclick = () => { const bounds = entry.layers?.getBounds(); if (bounds?.isValid()) map.fitBounds(bounds, { padding:[26,26], maxZoom:16 }); }; fields.fileList.append(card);
         });
       }
       async function loadFile(file) {
-        const entry = { name: file.name, valid: false, selected: false, errors: [], changeSet: null, layers: null };
-        try {
-          if (file.size > MAX_BYTES) throw new Error('Файл больше 5 МБ.');
-          const changeSet = JSON.parse(await file.text());
-          const validation = DistrictChanges.validate(changeSet, boundary);
-          if (!validation.valid) throw new Error(validation.errors.join('\n'));
-          entry.changeSet = changeSet; entry.valid = true; addEntryLayers(entry);
-        } catch (error) {
-          entry.errors = String(error.message || error).split('\n').filter(Boolean).slice(0, 12);
-          if (!entry.errors.length) entry.errors = ['Не удалось прочитать файл.'];
-        }
+        const entry = { name:file.name, valid:false, selected:false, errors:[], changeSet:null, layers:null, remote:false };
+        try { if (file.size > MAX_BYTES) throw new Error('Файл больше 5 МБ.'); const changeSet = DistrictChanges.upgradeChangeSet(JSON.parse(await file.text())); const validation = DistrictChanges.validate(changeSet, boundary); if (!validation.valid) throw new Error(validation.errors.join('\n')); entry.changeSet = changeSet; entry.valid = true; addEntryLayers(entry); }
+        catch (error) { entry.errors = String(error.message || error).split('\n').filter(Boolean).slice(0, 12); if (!entry.errors.length) entry.errors = ['Не удалось прочитать файл.']; }
         entries.push(entry);
       }
-      async function loadFiles(files) {
-        if (!boundary || !files.length) return;
-        setStatus(`Проверяю файлов: ${files.length}…`);
-        const affectedDistricts = new Set();
-        for (const file of files) {
-          await loadFile(file);
-          const entry = entries.at(-1);
-          if (entry.valid) affectedDistricts.add(entry.changeSet.district);
-        }
-        affectedDistricts.forEach(reconcileDistrict);
-        syncMapLayers();
-        refresh();
-        const approved = selectedEntries().length;
-        const rejected = entries.filter(entry => !entry.valid).length;
-        const conflicts = conflictingDistricts().length;
-        setStatus(`Проверка завершена: выбрано ${approved}, конфликтов районов ${conflicts}, отклонено ${rejected}. При конфликте выберите актуальный файл.`, rejected || conflicts ? 'error' : 'good');
-        fields.reviewFiles.value = '';
+      async function loadFiles(files) { if (!boundary || !files.length) return; setStatus(`Проверяю файлов: ${files.length}…`); const districts = new Set(); for (const file of files) { await loadFile(file); const entry = entries.at(-1); if (entry.valid) districts.add(entry.changeSet.district); } districts.forEach(reconcileDistrict); syncMapLayers(); refresh(); setStatus(`Проверка завершена: выбрано ${selectedEntries().length}, конфликтов ${conflicts().length}.`, conflicts().length ? 'error' : 'good'); fields.reviewFiles.value = ''; }
+      function clearReview() { entries.splice(0); acceptedGroup.clearLayers(); refresh(); setStatus('Список и временное наложение очищены. Публичная карта не затронута.', 'good'); }
+      function downloadJson(payload, filename) { const link = document.createElement('a'); link.href = URL.createObjectURL(new Blob([JSON.stringify(payload, null, 2)], { type:'application/geo+json' })); link.download = filename; link.click(); setTimeout(() => URL.revokeObjectURL(link.href), 0); }
+      function exportBundle() { const accepted = selectedEntries(); if (!accepted.length) return; const reviewedAt = new Date().toISOString(); const bundle = { type:'FeatureCollection', review_bundle_version:DistrictChanges.REVIEW_VERSION, reviewed_at:reviewedAt, review_status:'local_review', sources:accepted.map((entry) => ({ file_name:entry.name, district:entry.changeSet.district, author:entry.changeSet.author, created_at:entry.changeSet.created_at, features:entry.changeSet.features.length })), features:accepted.flatMap((entry) => entry.changeSet.features.map((feature) => ({ ...JSON.parse(JSON.stringify(feature)), properties:{ ...feature.properties, source_file:entry.name, review_status:'accepted_locally' } }))) }; const bytes = new Blob([JSON.stringify(bundle)]).size; if (bytes > MAX_BUNDLE_BYTES) return setStatus('Сводка больше 25 МБ. Уменьшите набор перед выгрузкой.', 'error'); downloadJson(bundle, `svod-pravok-sao-${reviewedAt.slice(0,10)}.geojson`); setStatus(`Скачана локальная сводка: ${bundle.features.length} объектов.`, 'good'); }
+      function refreshSession() { const user = ODHApi.user(); fields.apiBase.value = ODHApi.base(); fields.sessionInfo.textContent = user ? `Выполнен вход: ${user.email} · ${user.role}` : (ODHApi.base() ? 'API задан, вход не выполнен.' : 'Подключение не настроено. Пароль в браузере не сохраняется.'); }
+      async function login() { try { ODHApi.setBase(fields.apiBase.value); const user = await ODHApi.login(fields.apiEmail.value.trim(), fields.apiPassword.value); fields.apiPassword.value = ''; refreshSession(); setStatus(`Вход выполнен: ${user.role}.`, 'good'); } catch (error) { setStatus(error.message, 'error'); } }
+      async function loadApi() {
+        if (!ODHApi.user()) return setStatus('Сначала укажите API и войдите под ролью приёмки.', 'error');
+        try { const response = await ODHApi.request('/api/submissions?status=submitted'); const data = await response.json(); const existing = new Set(entries.filter((entry) => entry.remote).map((entry) => entry.id)); let added = 0; for (const item of data.submissions) { if (existing.has(item.id)) continue; const validation = DistrictChanges.validate(item.change_set, boundary); const entry = { id:item.id, name:item.original_filename || `Набор ${item.id}`, valid:validation.valid, selected:validation.valid, errors:validation.errors, changeSet:item.change_set, layers:null, remote:true, remoteStatus:item.status, submittedAt:item.submitted_at }; if (entry.valid) addEntryLayers(entry); entries.push(entry); added++; } syncMapLayers(); refresh(); setStatus(`Из единой базы загружено: ${added}.`, 'good'); } catch (error) { setStatus(error.message, 'error'); }
       }
-      function clearReview() {
-        entries.splice(0, entries.length); acceptedGroup.clearLayers(); refresh();
-        setStatus('Список и временное наложение очищены. Публичная карта не затрагивалась.', 'good');
-      }
-      function exportBundle() {
-        const accepted = selectedEntries();
-        if (!accepted.length) return;
-        const reviewedAt = new Date().toISOString();
-        const bundle = {
-          type: 'FeatureCollection',
-          review_bundle_version: 'district_review_bundle_v1',
-          reviewed_at: reviewedAt,
-          review_status: 'local_review',
-          sources: accepted.map(entry => ({ file_name: entry.name, district: entry.changeSet.district, author: entry.changeSet.author, created_at: entry.changeSet.created_at, features: entry.changeSet.features.length })),
-          features: accepted.flatMap(entry => entry.changeSet.features.map(feature => ({ ...JSON.parse(JSON.stringify(feature)), properties: { ...feature.properties, source_file: entry.name, review_status: 'accepted_locally' } })))
-        };
-        const file = new Blob([JSON.stringify(bundle, null, 2)], { type: 'application/geo+json' });
-        if (file.size > MAX_BUNDLE_BYTES) { setStatus('Сводка больше 25 МБ. Уменьшите число или детализацию объектов перед выгрузкой.', 'error'); return; }
-        const filename = `svod-pravok-sao-${reviewedAt.slice(0, 10)}.geojson`;
-        const link = document.createElement('a'); link.href = URL.createObjectURL(file); link.download = filename; link.click(); URL.revokeObjectURL(link.href);
-        setStatus(`Скачан «${filename}»: ${bundle.features.length} объектов из ${accepted.length} файлов. Его нужно утвердить до публикации.`, 'good');
-      }
-      async function initialize() {
-        try {
-          boundary = await fetch('layers/sao_boundary_wgs84.geojson', { cache:'no-store' }).then(response => { if (!response.ok) throw new Error(`HTTP ${response.status}`); return response.json(); });
-          const layer = L.geoJSON(boundary, { filter: feature => feature.properties?.feature_kind === 'boundary_sao', style: { color:'#4a148c', weight:3, dashArray:'8 5', fillOpacity:0 } }).addTo(map);
-          map.fitBounds(layer.getBounds(), { padding:[24,24] });
-          const note = L.control({ position:'bottomleft' }); note.onAdd = () => { const div = L.DomUtil.create('div','boundary-note'); div.textContent = 'Фиолетовый контур — граница САО. Правки за его пределами отклоняются.'; return div; }; note.addTo(map);
-          const legend = L.control({ position:'topright' }); legend.onAdd = () => { const div = L.DomUtil.create('div','legend'); div.innerHTML = '<b>Принятые правки</b><span><i style="background:#ff0000"></i>I очередь</span><span><i style="background:#0000ff"></i>II очередь</span><span><i style="background:#00b050"></i>III очередь</span><span><i style="background:#7030a0"></i>Роторная перекидка</span><span><em style="border-color:#00acc1"></em>Места и объекты</span>'; return div; }; legend.addTo(map);
-          setStatus('Граница САО загружена. Выберите один или несколько файлов районов.', 'good');
-        } catch (error) { setStatus(`Не удалось загрузить границу САО: ${error.message}`, 'error'); }
-      }
-      fields.reviewFiles.addEventListener('change', () => loadFiles([...fields.reviewFiles.files]));
-      fields.clearReview.addEventListener('click', clearReview);
-      fields.exportBundle.addEventListener('click', exportBundle);
-      initialize();
+      async function review(entry, status) { const comment = prompt(status === 'approved' ? 'Комментарий к утверждению (необязательно):' : 'Причина отклонения:') ?? null; if (comment === null) return; try { await ODHApi.request(`/api/submissions/${encodeURIComponent(entry.id)}`, { method:'PATCH', body:JSON.stringify({ status, comment }) }); entry.remoteStatus = status; if (status === 'rejected') entry.selected = false; syncMapLayers(); refresh(); setStatus(status === 'approved' ? 'Набор утверждён.' : 'Набор отклонён.', 'good'); } catch (error) { setStatus(error.message, 'error'); } }
+      async function exportApproved() { if (!ODHApi.user()) return setStatus('Сначала войдите в API.', 'error'); try { const response = await ODHApi.request('/api/exports/approved.geojson'); const data = await response.json(); downloadJson(data, `svod-pravok-sao-${new Date().toISOString().slice(0,10)}.geojson`); setStatus(`Скачана утверждённая выгрузка: ${data.features.length} объектов.`, 'good'); } catch (error) { setStatus(error.message, 'error'); } }
+      async function initialize() { try { boundary = await fetch('layers/sao_boundary_wgs84.geojson', { cache:'no-store' }).then((response) => { if (!response.ok) throw new Error(`HTTP ${response.status}`); return response.json(); }); const layer = L.geoJSON(boundary, { filter:(feature) => feature.properties?.feature_kind === 'boundary_sao', style:{ color:'#9b78c9', weight:3, dashArray:'8 5', fillOpacity:0 } }).addTo(map); map.fitBounds(layer.getBounds(), { padding:[24,24] }); const note = L.control({ position:'bottomleft' }); note.onAdd = () => { const div = L.DomUtil.create('div','boundary-note'); div.textContent = 'Контур САО: правки за его пределами отклоняются.'; return div; }; note.addTo(map); const legend = L.control({ position:'topright' }); legend.onAdd = () => { const div = L.DomUtil.create('div','legend'); div.innerHTML = '<b>Утверждённые правки</b><span><i style="background:#ff4e64"></i>I очередь</span><span><i style="background:#51a8ff"></i>II очередь</span><span><i style="background:#46dca1"></i>III очередь</span><span><i style="background:#b98cff"></i>Роторная перекидка</span><span><em style="border-color:#34d6d0"></em>Зона роторного снега</span>'; return div; }; legend.addTo(map); fields.reviewFiles.disabled = false; refreshSession(); setStatus('Граница САО загружена. Подключите API или выберите GeoJSON-файлы.', 'good'); } catch (error) { setStatus(`Не удалось загрузить границу САО: ${error.message}`, 'error'); } }
+      fields.reviewFiles.addEventListener('change', () => loadFiles([...fields.reviewFiles.files])); fields.clearReview.onclick = clearReview; fields.exportBundle.onclick = exportBundle; fields.loadApiButton.onclick = loadApi; fields.exportApiButton.onclick = exportApproved; document.getElementById('loginButton').onclick = login; document.getElementById('logoutButton').onclick = () => { ODHApi.clearSession(); refreshSession(); setStatus('Сеанс завершён.', 'good'); }; initialize();
     })();
   </script>
 </body>

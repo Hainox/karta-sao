@@ -5,4 +5,8 @@ publish/
 __pycache__/
 .freebuff/
 node_modules/
+.env
+api/.env
+odh-map/test-results/
+odh-map/playwright-report/
 work/mo_source.geojson

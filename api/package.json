@@ -1,0 +1,19 @@
+{
+  "name": "odh-sao-exchange-api",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "node --test test/*.test.js",
+    "create-user": "node scripts/create-user.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "pg": "^8.16.3"
+  },
+  "devDependencies": {
+    "supertest": "^7.1.4"
+  }
+}
