@@ -44,7 +44,7 @@ missing = [description for description, fragment in required_fragments.items() i
 if missing:
     raise SystemExit("Missing reference-print requirements: " + ", ".join(missing))
 
-if "print-1000x1400.html" not in index or "Печать 1000 × 1400 мм" not in index:
+if "print-1000x1400.html" not in index or "Печать / PDF" not in index:
     raise SystemExit("The interactive page does not link to the reference print layout.")
 
 main_boundary = [feature for feature in boundary["features"] if feature.get("properties", {}).get("feature_kind") == "boundary_sao"]
