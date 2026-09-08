@@ -361,6 +361,35 @@
         height: 100%;
         background: #e7efec;
       }
+      .district-inset {
+        position: absolute;
+        z-index: 610;
+        top: 18px;
+        left: 96px;
+        width: 224px;
+        height: 222px;
+        overflow: hidden;
+        border: 1px solid #c9d7df;
+        border-radius: 10px;
+        background: #fff;
+        box-shadow: 0 5px 16px rgba(20, 47, 72, 0.14);
+      }
+      .district-inset strong {
+        position: absolute;
+        z-index: 1000;
+        top: 10px;
+        left: 10px;
+        padding: 4px 8px;
+        border-radius: 6px;
+        background: rgba(255, 255, 255, 0.92);
+        color: var(--ink);
+        font-size: 11px;
+        pointer-events: none;
+      }
+      #district-inset-map {
+        width: 100%;
+        height: 100%;
+      }
       .map-chip {
         position: absolute;
         z-index: 600;
@@ -561,6 +590,9 @@
         .map-legend {
           display: none;
         }
+        .district-inset {
+          display: none;
+        }
         .object-drawer {
           right: 12px;
           bottom: 12px;
@@ -741,6 +773,13 @@
         </aside>
         <section class="map-stage" aria-label="Интерактивная карта САО">
           <div id="map"></div>
+          <aside
+            class="district-inset"
+            aria-label="Врезка Молжаниновского района"
+          >
+            <strong>Молжаниновский район</strong>
+            <div id="district-inset-map"></div>
+          </aside>
           <button id="fit-boundary" class="map-chip" type="button">
             <i class="fa-solid fa-expand"></i>На всю территорию САО
           </button>
@@ -779,16 +818,34 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/leaflet-polylinedecorator@1.6.0/dist/leaflet.polylineDecorator.min.js"></script>
     <script>
+      const CARTO_TILE_URL =
+        "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png?key=cb1_310p_1_d2460a3f4bb18c971a8bfdd7";
+      const CARTO_ATTRIBUTION =
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attributions">CARTO</a>';
       const map = L.map("map", {
         zoomControl: true,
-        attributionControl: false,
+        zoomSnap: 0.25,
         preferCanvas: true,
       });
-      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        subdomains: "abc",
-        maxZoom: 19,
-        attribution: "© OpenStreetMap contributors",
+      L.tileLayer(CARTO_TILE_URL, {
+        attribution: CARTO_ATTRIBUTION,
+        subdomains: "abcd",
+        maxZoom: 20,
       }).addTo(map);
+      const insetMap = L.map("district-inset-map", {
+        attributionControl: false,
+        dragging: false,
+        keyboard: false,
+        scrollWheelZoom: false,
+        doubleClickZoom: false,
+        boxZoom: false,
+        touchZoom: false,
+        zoomControl: false,
+        zoomSnap: 0.25,
+      });
+      L.tileLayer(CARTO_TILE_URL, { subdomains: "abcd", maxZoom: 20 }).addTo(
+        insetMap,
+      );
       const groups = {},
         searchIndex = [],
         pointKeys = new Set([
@@ -803,6 +860,35 @@
       let boundaryBounds = null,
         overlayLayer = null,
         directionVisible = true;
+
+      function componentArea(component) {
+        const ring = component[0] || [];
+        return Math.abs(
+          ring.reduce((area, point, index) => {
+            const next = ring[(index + 1) % ring.length] || point;
+            return area + point[0] * next[1] - next[0] * point[1];
+          }, 0) / 2,
+        );
+      }
+      function boundaryParts(collection) {
+        const feature = collection.features?.find(
+          (item) => item.properties?.feature_kind === "boundary_sao",
+        );
+        if (!feature || feature.geometry?.type !== "MultiPolygon") return null;
+        const components = [...feature.geometry.coordinates].sort(
+          (left, right) => componentArea(right) - componentArea(left),
+        );
+        if (components.length < 2) return null;
+        const createFeature = (coordinates) => ({
+          type: "Feature",
+          properties: feature.properties,
+          geometry: { type: "Polygon", coordinates },
+        });
+        return {
+          main: createFeature(components[0]),
+          inset: createFeature(components[1]),
+        };
+      }
       const iconByKey = {
         pgm: "fa-border-all",
         snow: "fa-snowflake",
@@ -959,8 +1045,23 @@
         groups[item.key] = root;
         if (item.default) root.addTo(map);
         if (item.key === "boundary") {
-          const bounds = geo.getBounds();
+          const parts = boundaryParts(filtered);
+          const bounds = L.geoJSON(parts?.main || filtered).getBounds();
           if (bounds.isValid()) boundaryBounds = bounds;
+          if (parts) {
+            const insetBoundary = L.geoJSON(parts.inset, {
+              style: { color: item.color, weight: 2.5, fillOpacity: 0 },
+            }).addTo(insetMap);
+            insetMap.fitBounds(insetBoundary.getBounds(), {
+              padding: [16, 16],
+              animate: false,
+            });
+          }
+        }
+        if (["queue1", "queue2", "queue3"].includes(item.key)) {
+          L.geoJSON(filtered, {
+            style: { color: item.color, weight: 2.3, opacity: 0.92 },
+          }).addTo(insetMap);
         }
       }
       async function loadMap() {
@@ -996,8 +1097,9 @@
         }
       }
       function fitBoundary() {
-        if (boundaryBounds)
-          map.fitBounds(boundaryBounds, { padding: [32, 32] });
+        if (!boundaryBounds) return;
+        map.invalidateSize({ pan: false });
+        map.fitBounds(boundaryBounds, { padding: [24, 24], animate: false });
       }
       function applyLayerVisibility(key, visible) {
         const layer = groups[key];

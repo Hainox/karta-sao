@@ -17,6 +17,9 @@ required_fragments = {
     "SAO-only boundary filter": "feature.properties?.feature_kind === \"boundary_sao\"",
     "published queue total": "queue1: 98, queue2: 318, queue3: 272",
     "map pan and wheel support": 'L.map("map"',
+    "CARTO base layer": "basemaps.cartocdn.com/rastertiles/voyager",
+    "Molzhaninovsky inset": 'id="district-inset-map"',
+    "main-SAO fit": "function boundaryParts(collection)",
 }
 
 missing = [name for name, fragment in required_fragments.items() if fragment not in page]
