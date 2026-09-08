@@ -55,4 +55,11 @@ if len(main_boundary) != 1 or main_boundary[0].get("geometry", {}).get("type") !
 if "feature.properties?.feature_kind === 'boundary_sao'" not in page:
     raise SystemExit("The print layout renders an extra duplicate SAO boundary feature.")
 
+for obsolete_fragment in ("print-inset", "inset-features", "boundarySections(", "insetBoundary", "insetView"):
+    if obsolete_fragment in page:
+        raise SystemExit(f"The print layout must keep the full SAO boundary on one map, without an inset: {obsolete_fragment}")
+
+if "features: boundary.geojson.features.filter(feature => feature.properties?.feature_kind === 'boundary_sao')" not in page:
+    raise SystemExit("The print layout must calculate its view from the complete SAO boundary.")
+
 print("Reference print static checks passed.")

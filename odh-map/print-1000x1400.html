@@ -20,9 +20,6 @@
     .print-header__title { font-family: "Arial Nova", Arial, sans-serif; font-size: 16.6mm; font-weight: 700; line-height: 1; white-space: nowrap; }
     .print-title { position: absolute; z-index: 400; top: 52mm; left: 24mm; width: 952mm; margin: 0; color: #000; text-align: center; font-family: Calibri, Arial, sans-serif; font-size: 20.9mm; font-weight: 700; line-height: 1.205; letter-spacing: -.32mm; }
     .print-title span { display: block; }
-    .print-inset { position: absolute; z-index: 410; top: 123mm; left: 24mm; width: 264mm; height: 190mm; overflow: hidden; border: .8mm solid #4a148c; background: rgba(255,255,255,.92); box-shadow: 0 .8mm 2.4mm rgba(0,0,0,.25); }
-    .print-inset strong { position: absolute; z-index: 2; top: 5mm; left: 6mm; padding: 2.4mm 3.4mm; background: rgba(255,255,255,.94); color: #111; font-size: 6.2mm; line-height: 1; }
-    #inset-features { position: absolute; inset: 0; width: 100%; height: 100%; overflow: hidden; pointer-events: none; }
     .map-key { position: absolute; z-index: 450; left: 26.19mm; bottom: 26.95mm; width: 254.97mm; height: 388.07mm; padding: 12mm 10mm; overflow: hidden; color: #000; background: #fff; border: .80mm solid #000; font-family: Arial, Helvetica, sans-serif; }
     .map-key h2 { margin: 0 0 12mm; text-align: center; font-size: 16.5mm; line-height: 1; font-weight: 800; letter-spacing: .12mm; text-decoration: underline; }
     .legend-grid { display: grid; grid-template-columns: 1.08fr .92fr; gap: 8mm; }
@@ -78,11 +75,6 @@
       <span>с указанием очередности</span>
     </h1>
 
-    <aside id="print-inset" class="print-inset" aria-label="Врезка Молжаниновского района" hidden>
-      <strong>Молжаниновский район</strong>
-      <svg id="inset-features" viewBox="0 0 528 380" role="img" aria-label="Маршруты Молжаниновского района"></svg>
-    </aside>
-
     <aside class="map-key" aria-label="Обозначения">
       <h2>Обозначения</h2>
       <div class="legend-grid">
@@ -137,7 +129,6 @@
       const TILE_ZOOM = 13;
       const CARTO_BASEMAP_KEY = 'cb1_310p_1_d2460a3f4bb18c971a8bfdd7';
       const svg = document.getElementById('features');
-      const insetSvg = document.getElementById('inset-features');
       const canvas = document.getElementById('basemap');
       const context = canvas.getContext('2d');
       const svgNs = 'http://www.w3.org/2000/svg';
@@ -145,9 +136,7 @@
       const tileCache = new Map();
       let loadedLayers = null;
       let baseView = null;
-      let insetView = null;
       let mainBoundary = null;
-      let insetBoundary = null;
       let targetSvg = svg;
       let viewScale = 1;
       let basemapStyle = 'light';
@@ -193,35 +182,6 @@
           minX -= extra; maxX += extra;
         }
         return { minX, maxX, minY, maxY };
-      }
-
-      function polygonArea(polygon) {
-        const ring = polygon[0] || [];
-        return Math.abs(ring.reduce((total, point, index) => {
-          const next = ring[(index + 1) % ring.length] || point;
-          return total + point[0] * next[1] - next[0] * point[1];
-        }, 0) / 2);
-      }
-
-      function boundarySections(collection) {
-        const seen = new Set();
-        const polygons = [];
-        collection.features
-          .filter(feature => feature.properties?.feature_kind === 'boundary_sao')
-          .forEach(feature => {
-            const components = feature.geometry?.type === 'MultiPolygon' ? feature.geometry.coordinates : [feature.geometry?.coordinates];
-            components.filter(Boolean).forEach(coordinates => {
-              const key = JSON.stringify(coordinates);
-              if (seen.has(key)) return;
-              seen.add(key);
-              polygons.push({ type: 'Feature', properties: feature.properties, geometry: { type: 'Polygon', coordinates } });
-            });
-          });
-        polygons.sort((left, right) => polygonArea(right.geometry.coordinates) - polygonArea(left.geometry.coordinates));
-        return {
-          main: { type: 'FeatureCollection', features: polygons.slice(0, 1) },
-          inset: { type: 'FeatureCollection', features: polygons.slice(1) }
-        };
       }
 
       function scaleView(view, scale) {
@@ -380,12 +340,6 @@
           targetSvg = svg;
           await drawBaseMap(view);
           drawVectors(view, mainBoundary);
-          if (insetView && insetBoundary.features.length) {
-            insetSvg.replaceChildren();
-            targetSvg = insetSvg;
-            drawVectors(insetView, insetBoundary);
-            targetSvg = svg;
-          }
         } finally {
           rendering = false;
           setViewControlsDisabled(false);
@@ -463,14 +417,12 @@
         const boundary = layers.find(layer => layer.item.key === 'boundary');
         if (!boundary) throw new Error('Не найдена граница САО');
         loadedLayers = layers;
-        const sections = boundarySections(boundary.geojson);
-        mainBoundary = sections.main;
-        insetBoundary = sections.inset;
+        mainBoundary = {
+          type: 'FeatureCollection',
+          features: boundary.geojson.features.filter(feature => feature.properties?.feature_kind === 'boundary_sao')
+        };
+        if (!mainBoundary.features.length) throw new Error('Не найдена геометрия границы САО');
         baseView = makeView(mainBoundary);
-        if (insetBoundary.features.length) {
-          insetView = makeView(insetBoundary);
-          document.getElementById('print-inset').hidden = false;
-        }
         await renderMap();
         document.getElementById('loading')?.remove();
       }
