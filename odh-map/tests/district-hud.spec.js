@@ -10,6 +10,8 @@ test('редактор показывает полный набор средст
   await expect(page.getByRole('button', { name: /Установить начало/ })).toBeVisible();
   await expect(page.getByRole('button', { name: /Установить конец/ })).toBeVisible();
   await expect(page.getByLabel('Направление сопла')).toBeVisible();
+  await page.locator('#district').selectOption('Войковский');
+  await expect(page.locator('.district-highlight')).not.toHaveCount(0);
   await page.locator('#changeType').selectOption('rotor_snow_storage_zone');
   await expect(page.getByRole('button', { name: /Нарисовать зону/ })).toBeVisible();
   await expect(page.locator('#routeWrap')).toBeHidden();

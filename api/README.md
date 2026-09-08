@@ -29,3 +29,8 @@ GitHub Pages исполняет только статические файлы. 
 
 API намеренно опубликован только на `127.0.0.1:8787`; для production нужны HTTPS
 reverse proxy, резервное копирование PostgreSQL и отдельный секрет.
+
+Для сервера с уже работающим Docker reverse proxy используйте
+`docker-compose.production.yml`: API не открывает отдельный порт и получает
+alias `odh-sao-api` во внешней proxy-сети. Шаблон location для HTTPS-пути
+`/odh-api/` находится в `../deploy/nginx/odh-api-location.conf`.

@@ -1,0 +1,39 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-odh_sao}
+      POSTGRES_USER: ${POSTGRES_USER:-odh_sao}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    volumes:
+      - odh_sao_postgres:/var/lib/postgresql/data
+  api:
+    build:
+      context: .
+      dockerfile: api/Dockerfile
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      PORT: 8787
+      DATABASE_URL: postgresql://${POSTGRES_USER:-odh_sao}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-odh_sao}
+      JWT_SECRET: ${JWT_SECRET:?Set JWT_SECRET in .env}
+      ALLOWED_ORIGINS: ${ALLOWED_ORIGINS:-https://hainox.github.io}
+    networks:
+      default: {}
+      edge:
+        aliases:
+          - odh-sao-api
+volumes:
+  odh_sao_postgres:
+networks:
+  edge:
+    name: ${EDGE_NETWORK:-jirajura_default}
+    external: true
