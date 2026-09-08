@@ -55,7 +55,8 @@ export function createApp({ repository, boundary, jwtSecret, allowedOrigins = []
       const { changeSet, originalFilename = 'pravki.geojson' } = request.body || {};
       const validation = validateChangeSet(changeSet, boundary);
       if (!validation.valid) return response.status(422).json({ error: 'Набор не прошёл проверку.', details: validation.errors });
-      if (request.user.role === 'district_editor' && request.user.district && request.user.district !== changeSet.district) return response.status(403).json({ error: 'Редактор может отправлять только свой район.' });
+      if (request.user.role === 'district_editor' && !request.user.district) return response.status(403).json({ error: 'Учётной записи редактора не назначен район.' });
+      if (request.user.role === 'district_editor' && request.user.district !== changeSet.district) return response.status(403).json({ error: 'Редактор может отправлять только свой район.' });
       const submission = await repository.createSubmission({ changeSet, createdBy: request.user.sub, originalFilename: String(originalFilename).slice(0, 180), payloadSha256: payloadHash(changeSet) });
       response.status(201).json({ submission: { id: submission.id, district: submission.district, status: submission.status, submitted_at: submission.submitted_at } });
     } catch (error) { next(error); }

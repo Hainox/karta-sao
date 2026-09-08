@@ -7,6 +7,7 @@ const options = Object.fromEntries(process.argv.slice(2).map((value, index, arra
 const { email, password, role, district } = options;
 if (!process.env.DATABASE_URL) throw new Error('DATABASE_URL не задан.');
 if (!email || !password || !['district_editor', 'reviewer', 'prefecture_admin'].includes(role)) throw new Error('Используйте --email --password --role. Роль: district_editor, reviewer или prefecture_admin.');
+if (role === 'district_editor' && !district) throw new Error('Для district_editor обязательно укажите --district.');
 if (district && !DISTRICTS.has(district)) throw new Error('Неизвестный район САО.');
 const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 try {

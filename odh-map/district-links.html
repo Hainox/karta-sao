@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Районные ссылки — ОДХ САО</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="operations-hud.css">
+  <style>
+    .directory { min-height:calc(100vh - 76px); padding:30px; background:#eef4f4; }
+    .directory-inner { width:min(1080px, 100%); margin:0 auto; }
+    .directory-heading { margin:0 0 18px; color:var(--navy); font-size:28px; letter-spacing:-.04em; }
+    .directory-lede { max-width:760px; margin:0 0 22px; color:#45637a; font-size:14px; line-height:1.6; }
+    .district-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(245px, 1fr)); gap:12px; }
+    .district-link-card { padding:15px; border:1px solid var(--line); border-radius:12px; background:#fff; box-shadow:0 3px 10px rgba(18,50,83,.05); }
+    .district-link-card h2 { margin:0 0 6px; color:var(--navy); font-size:14px; }
+    .district-link-card p { min-height:34px; margin:0 0 11px; color:var(--muted); font-size:10px; line-height:1.45; }
+    .district-link-card .actions { margin-top:0; }
+    .copy-status { min-height:18px; margin:12px 0 0; color:#176556; font-size:12px; font-weight:700; }
+    @media (max-width:720px) { .directory { padding:20px 15px; } .directory-heading { font-size:24px; } }
+  </style>
+</head>
+<body>
+  <div class="app" style="height:auto;min-height:100vh">
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark"><i class="fa-solid fa-link"></i></span><span>ОДХ САО<small>Рабочий контур · районные ссылки</small></span></div>
+      <nav class="topbar-actions" aria-label="Навигация"><a class="link-action" href="district-editor.html"><i class="fa-solid fa-pen-ruler"></i> Редактор</a><a class="primary-action" href="district-review.html"><i class="fa-solid fa-clipboard-check"></i> Приёмка</a></nav>
+    </header>
+    <main class="directory">
+      <div class="directory-inner">
+        <p class="eyebrow">Рассылка районам</p>
+        <h1 class="directory-heading">Отдельный вход для каждого района</h1>
+        <p class="directory-lede">Скопируйте ссылку и передайте её ответственному исполнителю. Район будет выбран и зафиксирован в редакторе. Ссылка не заменяет вход: отправка доступна только учётной записи, которой этот район назначен в API.</p>
+        <div id="districtGrid" class="district-grid" aria-live="polite"></div>
+        <p id="copyStatus" class="copy-status" role="status"></p>
+      </div>
+    </main>
+  </div>
+  <script src="district-changes.js"></script>
+  <script>
+    (() => {
+      const grid = document.getElementById('districtGrid');
+      const status = document.getElementById('copyStatus');
+      function districtUrl(district) { const url = new URL('district-editor.html', window.location.href); url.searchParams.set('district', district); return url.href; }
+      async function copyLink(district) {
+        const value = districtUrl(district);
+        try { await navigator.clipboard.writeText(value); status.textContent = `Ссылка для района «${district}» скопирована.`; }
+        catch (_) { window.prompt(`Скопируйте ссылку для района «${district}»:`, value); }
+      }
+      DistrictChanges.DISTRICTS.forEach((district) => {
+        const card = document.createElement('article'); card.className = 'district-link-card';
+        const title = document.createElement('h2'); title.textContent = district;
+        const note = document.createElement('p'); note.textContent = 'В редакторе откроется только этот район. Для отправки нужна закреплённая учётная запись.';
+        const actions = document.createElement('div'); actions.className = 'actions';
+        const open = document.createElement('a'); open.className = 'link-action'; open.href = districtUrl(district); open.textContent = 'Открыть'; open.setAttribute('aria-label', `Открыть редактор: ${district}`);
+        const copy = document.createElement('button'); copy.className = 'control teal'; copy.type = 'button'; copy.textContent = 'Скопировать'; copy.onclick = () => copyLink(district);
+        actions.append(open, copy); card.append(title, note, actions); grid.append(card);
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -16,7 +16,7 @@
   <div class="app">
     <header class="topbar">
       <div class="brand"><span class="brand-mark"><i class="fa-solid fa-snowplow"></i></span><span>ОДХ САО<small>Рабочий контур · правки района</small></span></div>
-      <nav class="topbar-actions" aria-label="Навигация"><a class="link-action" href="index.html"><i class="fa-solid fa-map"></i> Утверждённая карта</a><a class="primary-action" href="district-review.html"><i class="fa-solid fa-clipboard-check"></i> Приёмка</a></nav>
+      <nav class="topbar-actions" aria-label="Навигация"><a class="link-action" href="district-links.html"><i class="fa-solid fa-link"></i> Районные ссылки</a><a class="link-action" href="index.html"><i class="fa-solid fa-map"></i> Утверждённая карта</a><a class="primary-action" href="district-review.html"><i class="fa-solid fa-clipboard-check"></i> Приёмка</a></nav>
     </header>
     <main class="workspace">
       <aside class="sidebar">
@@ -79,6 +79,10 @@
       const fields = Object.fromEntries(ids.map((id) => [id, document.getElementById(id)]));
       DistrictChanges.DISTRICTS.forEach((name) => fields.district.add(new Option(name, name)));
       Object.entries(DistrictChanges.TYPES).forEach(([key, type]) => fields.changeType.add(new Option(type.label, key)));
+      const linkedDistrictValue = new URLSearchParams(window.location.search).get('district');
+      const linkedDistrict = DistrictChanges.DISTRICTS.includes(linkedDistrictValue) ? linkedDistrictValue : null;
+      const invalidLinkedDistrict = linkedDistrictValue && !linkedDistrict;
+      if (linkedDistrict) { fields.district.value = linkedDistrict; fields.district.disabled = true; }
       fields.changeType.value = 'queue'; fields.apiBase.value = ODHApi.base();
       const esc = (value) => String(value ?? '').replace(/[&<>"']/g, (character) => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[character]));
       const metadata = () => ({ district:fields.district.value, author:fields.author.value });
@@ -103,6 +107,18 @@
         }).addTo(selectedDistrictGroup);
         const bounds = layer.getBounds();
         if (fit && bounds.isValid()) map.fitBounds(bounds, { padding:[42,42], maxZoom:14 });
+      }
+      function applyDistrictScope({ announce = false } = {}) {
+        const user = ODHApi.user();
+        const assignedDistrict = user?.role === 'district_editor' ? user.district : null;
+        const scopedDistrict = assignedDistrict || linkedDistrict;
+        if (scopedDistrict) {
+          fields.district.value = scopedDistrict;
+          fields.district.disabled = true;
+          updateDistrictHighlight({ fit:true });
+          if (announce && linkedDistrict && assignedDistrict && linkedDistrict !== assignedDistrict) message(`Ссылка района «${linkedDistrict}» не совпадает с вашей учётной записью. Открыт закреплённый район «${assignedDistrict}».`, 'error');
+          else if (announce) message(`Редактор закреплён за районом «${scopedDistrict}». Смена района заблокирована.`, 'good');
+        } else fields.district.disabled = false;
       }
       function updateDrawingControl() {
         const type = selectedType(); const route = type.kind === 'line';
@@ -161,7 +177,9 @@
       function restoreDraft() {
         try {
           const saved = JSON.parse(localStorage.getItem(SAVE_KEY) || localStorage.getItem(LEGACY_KEY) || 'null'); if (!saved) return;
-          const upgraded = DistrictChanges.upgradeChangeSet(saved); fields.district.value = upgraded.district || ''; fields.author.value = upgraded.author || ''; draftFeatures = Array.isArray(upgraded.features) ? upgraded.features : [];
+          const upgraded = DistrictChanges.upgradeChangeSet(saved);
+          if (fields.district.value && upgraded.district && fields.district.value !== upgraded.district) return;
+          fields.district.value = upgraded.district || fields.district.value || ''; fields.author.value = upgraded.author || ''; draftFeatures = Array.isArray(upgraded.features) ? upgraded.features : [];
           persist(); message(`Восстановлен локальный черновик: ${draftFeatures.length} объектов.`, 'good');
         } catch (_) { localStorage.removeItem(SAVE_KEY); }
       }
@@ -172,9 +190,9 @@
       }
       function download(data, filename) { const link = document.createElement('a'); link.href = URL.createObjectURL(new Blob([JSON.stringify(data, null, 2)], { type:'application/geo+json' })); link.download = filename; link.click(); setTimeout(() => URL.revokeObjectURL(link.href), 0); }
       function exportFile() { const set = DistrictChanges.makeChangeSet(metadata(), draftFeatures); const check = DistrictChanges.validate(set, boundary); if (!check.valid) return message(check.errors.join('\n'), 'error'); const name = `pravki-${set.district.replaceAll(' ', '-')}-${set.created_at.slice(0,10)}.geojson`; download(set, name); persist(); message(`Скачан «${name}».`, 'good'); }
-      function refreshSession() { const user = ODHApi.user(); fields.apiBase.value = ODHApi.base(); fields.sessionInfo.textContent = user ? `Выполнен вход: ${user.email} · ${user.role}${user.district ? ` · ${user.district}` : ''}` : (ODHApi.base() ? 'API задан, вход не выполнен.' : 'Подключение не настроено. Пароль в браузере не сохраняется.'); }
-      async function login() { try { ODHApi.setBase(fields.apiBase.value); const user = await ODHApi.login(fields.apiEmail.value.trim(), fields.apiPassword.value); fields.apiPassword.value = ''; refreshSession(); message(`Вход выполнен: ${user.role}.`, 'good'); } catch (error) { message(error.message, 'error'); } }
-      async function submit() { const set = DistrictChanges.makeChangeSet(metadata(), draftFeatures); const check = DistrictChanges.validate(set, boundary); if (!check.valid) return message(check.errors.join('\n'), 'error'); if (!ODHApi.user()) return message('Сначала укажите API и войдите под учётной записью редактора.', 'error'); try { const filename = `pravki-${set.district.replaceAll(' ', '-')}-${set.created_at.slice(0,10)}.geojson`; const response = await ODHApi.request('/api/submissions', { method:'POST', body:JSON.stringify({ changeSet:set, originalFilename:filename }) }); const data = await response.json(); message(`Набор отправлен на приёмку: № ${data.submission.id}.`, 'good'); } catch (error) { message(error.message, 'error'); } }
+      function refreshSession() { const user = ODHApi.user(); fields.apiBase.value = ODHApi.base(); fields.sessionInfo.textContent = user ? `Выполнен вход: ${user.email} · ${user.role}${user.district ? ` · ${user.district}` : ''}` : (linkedDistrict ? `Открыта ссылка района «${linkedDistrict}». Войдите под закреплённой учётной записью.` : (ODHApi.base() ? 'API задан, вход не выполнен.' : 'Подключение не настроено. Пароль в браузере не сохраняется.')); }
+      async function login() { try { ODHApi.setBase(fields.apiBase.value); const user = await ODHApi.login(fields.apiEmail.value.trim(), fields.apiPassword.value); fields.apiPassword.value = ''; refreshSession(); applyDistrictScope({ announce:true }); } catch (error) { message(error.message, 'error'); } }
+      async function submit() { const set = DistrictChanges.makeChangeSet(metadata(), draftFeatures); const check = DistrictChanges.validate(set, boundary); if (!check.valid) return message(check.errors.join('\n'), 'error'); const user = ODHApi.user(); if (!user) return message('Сначала укажите API и войдите под учётной записью редактора.', 'error'); if (user.role === 'district_editor' && !user.district) return message('Учётной записи не назначен район. Обратитесь к администратору.', 'error'); if (user.role === 'district_editor' && user.district !== set.district) return message(`Учётная запись закреплена за районом «${user.district}». Отправка этого набора заблокирована.`, 'error'); try { const filename = `pravki-${set.district.replaceAll(' ', '-')}-${set.created_at.slice(0,10)}.geojson`; const response = await ODHApi.request('/api/submissions', { method:'POST', body:JSON.stringify({ changeSet:set, originalFilename:filename }) }); const data = await response.json(); message(`Набор отправлен на приёмку: № ${data.submission.id}.`, 'good'); } catch (error) { message(error.message, 'error'); } }
       async function initialize() {
         try {
           boundary = await fetch('layers/sao_boundary_wgs84.geojson', { cache:'no-store' }).then((response) => { if (!response.ok) throw new Error(`HTTP ${response.status}`); return response.json(); });
@@ -182,12 +200,12 @@
           const layer = L.geoJSON(boundary, { filter:(feature) => feature.properties?.feature_kind === 'boundary_sao', style:{ color:'#9b78c9', weight:3, dashArray:'8 5', fillOpacity:0 } }).addTo(map);
           map.fitBounds(layer.getBounds(), { padding:[24,24] });
           const note = L.control({ position:'bottomleft' }); note.onAdd = () => { const div = L.DomUtil.create('div','boundary-note'); div.textContent = 'Фиолетовый контур — САО; янтарная заливка — выбранный район.'; return div; }; note.addTo(map);
-          restoreDraft(); renderDraft(); refreshEndpoints(); updateDrawingControl(); refreshSession(); updateDistrictHighlight({ fit:Boolean(fields.district.value) }); fields.drawButton.disabled = false; fields.importInput.disabled = false; message('Границы САО и районов загружены. Выберите район — он выделится на карте.', 'good');
+          restoreDraft(); renderDraft(); refreshEndpoints(); updateDrawingControl(); refreshSession(); applyDistrictScope(); updateDistrictHighlight({ fit:Boolean(fields.district.value) }); fields.drawButton.disabled = false; fields.importInput.disabled = false; message(invalidLinkedDistrict ? 'В ссылке указан неизвестный район. Выберите район вручную.' : (linkedDistrict ? `Открыта ссылка района «${linkedDistrict}». Войдите под закреплённой учётной записью.` : 'Границы САО и районов загружены. Выберите район — он выделится на карте.'), 'good');
         } catch (error) { message(`Не удалось загрузить границы: ${error.message}`, 'error'); }
       }
       map.on('click', (event) => { if (!pickMode) return; const point = [event.latlng.lng, event.latlng.lat]; if (!DistrictChanges.vertexInBoundary(point, boundary)) return message('Точка за границей САО. Выберите точку внутри контура.', 'error'); if (pickMode === 'start') routeStart = point; else routeEnd = point; pickMode = null; map.getContainer().style.cursor = ''; refreshEndpoints(); message('Точка маршрута установлена.', 'good'); });
       map.on('draw:created', (event) => { let geometry = event.layer.toGeoJSON().geometry; if (isRoute()) { geometry.coordinates[0] = [...routeStart]; geometry.coordinates[geometry.coordinates.length - 1] = [...routeEnd]; } const feature = makeFeature(geometry); const check = DistrictChanges.validate(DistrictChanges.makeChangeSet(metadata(), [...draftFeatures, feature]), boundary); if (!check.valid) return message(check.errors.join('\n'), 'error'); draftFeatures.push(feature); persist(); renderDraft(); message(`Добавлено: ${featureSummary(feature)}.`, 'good'); });
-      fields.changeType.onchange = updateDrawingControl; fields.district.onchange = () => { updateDistrictHighlight(); persist(); }; fields.drawButton.onclick = startDraw; fields.setStart.onclick = () => setPickMode('start'); fields.setEnd.onclick = () => setPickMode('end'); fields.importInput.onchange = () => importFile(fields.importInput.files[0]); document.getElementById('exportButton').onclick = exportFile; document.getElementById('saveButton').onclick = () => { persist(); message('Черновик сохранён только в этом браузере.', 'good'); }; document.getElementById('submitButton').onclick = submit; document.getElementById('loginButton').onclick = login; document.getElementById('logoutButton').onclick = () => { ODHApi.clearSession(); refreshSession(); message('Сеанс завершён.', 'good'); }; document.getElementById('undoButton').onclick = () => { if (draftFeatures.length) { draftFeatures.pop(); persist(); renderDraft(); message('Последний объект удалён.', 'good'); } }; document.getElementById('clearButton').onclick = () => { if (draftFeatures.length && confirm('Удалить все объекты черновика?')) { draftFeatures = []; persist(); renderDraft(); message('Черновик очищен.', 'good'); } };
+      fields.changeType.onchange = updateDrawingControl; fields.district.onchange = () => { updateDistrictHighlight(); persist(); }; fields.drawButton.onclick = startDraw; fields.setStart.onclick = () => setPickMode('start'); fields.setEnd.onclick = () => setPickMode('end'); fields.importInput.onchange = () => importFile(fields.importInput.files[0]); document.getElementById('exportButton').onclick = exportFile; document.getElementById('saveButton').onclick = () => { persist(); message('Черновик сохранён только в этом браузере.', 'good'); }; document.getElementById('submitButton').onclick = submit; document.getElementById('loginButton').onclick = login; document.getElementById('logoutButton').onclick = () => { ODHApi.clearSession(); refreshSession(); applyDistrictScope(); message('Сеанс завершён.', 'good'); }; document.getElementById('undoButton').onclick = () => { if (draftFeatures.length) { draftFeatures.pop(); persist(); renderDraft(); message('Последний объект удалён.', 'good'); } }; document.getElementById('clearButton').onclick = () => { if (draftFeatures.length && confirm('Удалить все объекты черновика?')) { draftFeatures = []; persist(); renderDraft(); message('Черновик очищен.', 'good'); } };
       initialize();
     })();
   </script>

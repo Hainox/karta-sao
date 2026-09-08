@@ -26,6 +26,7 @@ async function fixture() {
   const reviewerPassword = 'reviewer-password-123';
   const users = [
     { id: 'editor-1', email: 'editor@example.test', password_hash: await hashPassword(editorPassword), role: 'district_editor', district: 'Аэропорт' },
+    { id: 'unassigned-editor-1', email: 'unassigned@example.test', password_hash: await hashPassword(editorPassword), role: 'district_editor', district: null },
     { id: 'reviewer-1', email: 'reviewer@example.test', password_hash: await hashPassword(reviewerPassword), role: 'reviewer', district: null }
   ];
   const submissions = [];
@@ -67,6 +68,8 @@ test('авторизация, районные права, приёмка и в�
   await api.get('/api/me').expect(401);
   const editor = await login(api, 'editor@example.test', editorPassword);
   await api.post('/api/submissions').set('Authorization', `Bearer ${editor}`).send({ changeSet: changeSet({ district: 'Беговой' }) }).expect(403);
+  const unassigned = await login(api, 'unassigned@example.test', editorPassword);
+  await api.post('/api/submissions').set('Authorization', `Bearer ${unassigned}`).send({ changeSet: changeSet() }).expect(403);
   const submitted = await api.post('/api/submissions').set('Authorization', `Bearer ${editor}`).send({ changeSet: changeSet(), originalFilename: 'airport.geojson' }).expect(201);
   await api.patch(`/api/submissions/${submitted.body.submission.id}`).set('Authorization', `Bearer ${editor}`).send({ status: 'approved' }).expect(403);
   const reviewer = await login(api, 'reviewer@example.test', reviewerPassword);
