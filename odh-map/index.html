@@ -433,6 +433,13 @@
         color: var(--ink);
         font-size: 12px;
       }
+      .map-legend .lod-note {
+        grid-column: 1/-1;
+        margin-top: -2px;
+        color: var(--muted);
+        font-size: 10px;
+        line-height: 1.35;
+      }
       .legend-item {
         display: flex;
         align-items: center;
@@ -784,7 +791,9 @@
             <i class="fa-solid fa-expand"></i>На всю территорию САО
           </button>
           <div class="map-legend">
-            <strong>Направление движения и форсунок</strong
+            <strong>Маршруты и направления</strong
+            ><span id="lod-note" class="lod-note" role="status" aria-live="polite"
+              >Загрузка маршрутов…</span
             ><span class="legend-item"
               ><i class="fa-solid fa-arrow-right legend-arrow"></i>Направление
               маршрута</span
@@ -847,7 +856,9 @@
         insetMap,
       );
       const groups = {},
+        layerItems = {},
         searchIndex = [],
+        queueKeys = ["queue1", "queue2", "queue3"],
         pointKeys = new Set([
           "pgm",
           "snow",
@@ -978,8 +989,60 @@
         if (geometry?.type === "MultiLineString") return geometry.coordinates;
         return [];
       }
+      function routeDetailLevel(zoom = map.getZoom()) {
+        if (zoom < 12.75) return "overview";
+        if (zoom < 14) return "context";
+        return "detail";
+      }
+      function styleForLayer(item) {
+        if (!queueKeys.includes(item.key)) {
+          return {
+            color: item.color,
+            weight: item.key === "boundary" ? 4.5 : 4,
+            opacity: item.key === "boundary" ? 1 : 0.92,
+            fillColor: item.color,
+            fillOpacity: 0,
+            dashArray: item.key === "boundary" ? "9 6" : null,
+            lineCap: "round",
+            lineJoin: "round",
+          };
+        }
+        const detailLevel = routeDetailLevel();
+        if (detailLevel === "overview") {
+          // The second queue has the most routes. Hiding it at district scale
+          // leaves a readable priority overview without changing the layer choice.
+          return {
+            color: item.color,
+            weight: item.key === "queue2" ? 0 : 1.5,
+            opacity: item.key === "queue2" ? 0 : 0.58,
+            lineCap: "round",
+            lineJoin: "round",
+          };
+        }
+        if (detailLevel === "context") {
+          return {
+            color: item.color,
+            weight: 2,
+            opacity: 0.62,
+            lineCap: "round",
+            lineJoin: "round",
+          };
+        }
+        return {
+          color: item.color,
+          weight: 4,
+          opacity: 0.92,
+          lineCap: "round",
+          lineJoin: "round",
+        };
+      }
       function createDecorators(feature, color) {
-        if (!window.L.polylineDecorator || !directionVisible) return [];
+        if (
+          !window.L.polylineDecorator ||
+          !directionVisible ||
+          routeDetailLevel() !== "detail"
+        )
+          return [];
         return lineCoordinates(feature.geometry)
           .filter((coords) => coords.length > 1)
           .map((coords) =>
@@ -1015,16 +1078,7 @@
         };
         const root = L.layerGroup();
         const geo = L.geoJSON(filtered, {
-          style: () => ({
-            color: item.color,
-            weight: item.key === "boundary" ? 4.5 : 4,
-            opacity: item.key === "boundary" ? 1 : 0.92,
-            fillColor: item.color,
-            fillOpacity: 0,
-            dashArray: item.key === "boundary" ? "9 6" : null,
-            lineCap: "round",
-            lineJoin: "round",
-          }),
+          style: () => styleForLayer(item),
           pointToLayer: pointKeys.has(item.key)
             ? (_, latlng) => markerFor(item.key, item.color, latlng)
             : undefined,
@@ -1035,7 +1089,7 @@
               properties: feature.properties || {},
               text: JSON.stringify(feature.properties || {}).toLowerCase(),
             });
-            if (["queue1", "queue2", "queue3"].includes(item.key))
+            if (queueKeys.includes(item.key))
               createDecorators(feature, item.color).forEach((decorator) =>
                 root.addLayer(decorator),
               );
@@ -1043,6 +1097,7 @@
         });
         root.addLayer(geo);
         groups[item.key] = root;
+        layerItems[item.key] = item;
         if (item.default) root.addTo(map);
         if (item.key === "boundary") {
           const parts = boundaryParts(filtered);
@@ -1058,7 +1113,7 @@
             });
           }
         }
-        if (["queue1", "queue2", "queue3"].includes(item.key)) {
+        if (queueKeys.includes(item.key)) {
           L.geoJSON(filtered, {
             style: { color: item.color, weight: 2.3, opacity: 0.92 },
           }).addTo(insetMap);
@@ -1092,6 +1147,7 @@
           document.getElementById("queue-one-count").textContent =
             queuePositions.queue1;
           fitBoundary();
+          syncRouteDetail();
         } catch (error) {
           toast(`Не удалось загрузить слои: ${error.message}`);
         }
@@ -1108,7 +1164,7 @@
         else map.removeLayer(layer);
       }
       function refreshDirections() {
-        ["queue1", "queue2", "queue3"].forEach((key) => {
+        queueKeys.forEach((key) => {
           const root = groups[key];
           if (!root) return;
           root
@@ -1126,6 +1182,23 @@
                 );
             });
         });
+      }
+      function syncRouteDetail() {
+        const detailLevel = routeDetailLevel();
+        queueKeys.forEach((key) => {
+          const geo = groups[key]
+            ?.getLayers()
+            .find((child) => child instanceof L.GeoJSON);
+          if (geo) geo.setStyle(() => styleForLayer(layerItems[key]));
+        });
+        const note = document.getElementById("lod-note");
+        note.textContent =
+          detailLevel === "overview"
+            ? "Сводный вид: II очередь скрыта. Приблизьте карту для всех маршрутов."
+            : detailLevel === "context"
+              ? "Контурный вид: маршруты облегчены; стрелки появятся при приближении."
+              : "Детальный вид: все маршруты, направления и форсунки показаны полностью.";
+        refreshDirections();
       }
       function search() {
         const query = document
@@ -1221,6 +1294,7 @@
           directionVisible = event.target.checked;
           refreshDirections();
         });
+      map.on("zoomend", syncRouteDetail);
       document
         .getElementById("layers-toggle")
         .addEventListener("click", (event) => {

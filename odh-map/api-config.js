@@ -4,9 +4,10 @@
   const BASE_KEY = 'odh-map-api-base-v1';
   const TOKEN_KEY = 'odh-map-api-token-v1';
   const USER_KEY = 'odh-map-api-user-v1';
+  const DEFAULT_BASE = 'https://obhod-sao.ru/odh-api';
   const normaliseBase = (value) => String(value || '').trim().replace(/\/+$/, '');
-  function base() { return normaliseBase(localStorage.getItem(BASE_KEY)); }
-  function setBase(value) { const next = normaliseBase(value); if (next) localStorage.setItem(BASE_KEY, next); else localStorage.removeItem(BASE_KEY); return next; }
+  function base() { return normaliseBase(localStorage.getItem(BASE_KEY) || DEFAULT_BASE); }
+  function setBase(value) { const next = normaliseBase(value || DEFAULT_BASE); if (next === DEFAULT_BASE) localStorage.removeItem(BASE_KEY); else localStorage.setItem(BASE_KEY, next); return next; }
   function user() { try { return JSON.parse(sessionStorage.getItem(USER_KEY) || 'null'); } catch (_) { return null; } }
   function token() { return sessionStorage.getItem(TOKEN_KEY) || ''; }
   function clearSession() { sessionStorage.removeItem(TOKEN_KEY); sessionStorage.removeItem(USER_KEY); }
