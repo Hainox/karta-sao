@@ -1,9 +1,11 @@
 import express from 'express';
 import { signToken, verifyPassword, verifyToken } from './lib/auth.js';
+import { safePhotoFilename, validatePhotoMarker, validatePhotoNote, validatePhotoUpload } from './lib/photo-markers.js';
 import { streamReviewArchive } from './lib/review-archive.js';
 import { payloadHash, validateChangeSet } from './lib/validation.js';
 
 const REVIEW_ROLES = new Set(['reviewer', 'prefecture_admin']);
+const PHOTO_MIME_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
 
 export function createApp({ repository, boundary, jwtSecret, allowedOrigins = [] }) {
   if (!jwtSecret || jwtSecret.length < 32) throw new Error('JWT_SECRET должен содержать минимум 32 символа.');
@@ -15,8 +17,8 @@ export function createApp({ repository, boundary, jwtSecret, allowedOrigins = []
     if (!origin || allowedOrigins.includes(origin)) {
       if (origin) response.setHeader('Access-Control-Allow-Origin', origin);
       response.setHeader('Vary', 'Origin');
-      response.setHeader('Access-Control-Allow-Headers', 'Authorization, Content-Type');
-      response.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, OPTIONS');
+      response.setHeader('Access-Control-Allow-Headers', 'Authorization, Content-Type, X-Photo-Filename');
+      response.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, PUT, DELETE, OPTIONS');
       if (request.method === 'OPTIONS') return response.sendStatus(204);
       return next();
     }
@@ -32,6 +34,9 @@ export function createApp({ repository, boundary, jwtSecret, allowedOrigins = []
   };
   const requireReview = (request, response, next) => REVIEW_ROLES.has(request.user.role)
     ? next() : response.status(403).json({ error: 'Требуется роль приёмки или префектуры.' });
+  const requirePrefecture = (request, response, next) => request.user.role === 'prefecture_admin'
+    ? next() : response.status(403).json({ error: 'Фото-метками управляет только роль префектуры.' });
+  const photoParser = express.raw({ type: PHOTO_MIME_TYPES, limit: '5mb' });
 
   app.get('/api/health', async (_request, response, next) => {
     try { response.json({ ok: true, service: 'odh-sao-exchange-api' }); } catch (error) { next(error); }
@@ -48,6 +53,64 @@ export function createApp({ repository, boundary, jwtSecret, allowedOrigins = []
   });
 
   app.get('/api/me', authenticate, (request, response) => response.json({ user: request.user }));
+
+  app.get('/api/photo-markers', authenticate, requirePrefecture, async (_request, response, next) => {
+    try { response.json({ photoMarkers: await repository.listPhotoMarkers() }); } catch (error) { next(error); }
+  });
+
+  app.post('/api/photo-markers', authenticate, requirePrefecture, async (request, response, next) => {
+    try {
+      const validation = validatePhotoMarker(request.body, boundary);
+      if (!validation.valid) return response.status(422).json({ error: 'Фото-метка не прошла проверку.', details: validation.errors });
+      const photoMarker = await repository.createPhotoMarker({ ...validation.value, createdBy: request.user.sub });
+      response.status(201).json({ photoMarker });
+    } catch (error) { next(error); }
+  });
+
+  app.patch('/api/photo-markers/:id', authenticate, requirePrefecture, async (request, response, next) => {
+    try {
+      const validation = validatePhotoNote(request.body?.note);
+      if (!validation.valid) return response.status(400).json({ error: validation.error });
+      const photoMarker = await repository.updatePhotoMarkerNote({ id: request.params.id, note: validation.value, actorId: request.user.sub });
+      if (!photoMarker) return response.status(404).json({ error: 'Фото-метка не найдена.' });
+      response.json({ photoMarker });
+    } catch (error) { next(error); }
+  });
+
+  app.put('/api/photo-markers/:id/photo', authenticate, requirePrefecture, photoParser, async (request, response, next) => {
+    try {
+      const validation = validatePhotoUpload(request.body, request.get('content-type'));
+      if (!validation.valid) return response.status(422).json({ error: validation.error });
+      const photoMarker = await repository.setPhotoMarkerPhoto({ id: request.params.id, bytes: request.body, mimeType: validation.mimeType, filename: safePhotoFilename(request.get('x-photo-filename')), actorId: request.user.sub });
+      if (!photoMarker) return response.status(404).json({ error: 'Фото-метка не найдена.' });
+      response.json({ photoMarker });
+    } catch (error) { next(error); }
+  });
+
+  app.get('/api/photo-markers/:id/photo', authenticate, requirePrefecture, async (request, response, next) => {
+    try {
+      const photo = await repository.getPhotoMarkerPhoto(request.params.id);
+      if (!photo?.photo_bytes) return response.status(404).json({ error: 'У этой фото-метки нет прикреплённого фото.' });
+      response.setHeader('Cache-Control', 'private, no-store');
+      response.type(photo.photo_mime_type).send(photo.photo_bytes);
+    } catch (error) { next(error); }
+  });
+
+  app.delete('/api/photo-markers/:id/photo', authenticate, requirePrefecture, async (request, response, next) => {
+    try {
+      const photoMarker = await repository.deletePhotoMarkerPhoto({ id: request.params.id, actorId: request.user.sub });
+      if (!photoMarker) return response.status(404).json({ error: 'Фото или фото-метка не найдены.' });
+      response.json({ photoMarker });
+    } catch (error) { next(error); }
+  });
+
+  app.delete('/api/photo-markers/:id', authenticate, requirePrefecture, async (request, response, next) => {
+    try {
+      const photoMarker = await repository.deletePhotoMarker({ id: request.params.id, actorId: request.user.sub });
+      if (!photoMarker) return response.status(404).json({ error: 'Фото-метка не найдена.' });
+      response.status(204).end();
+    } catch (error) { next(error); }
+  });
 
   app.post('/api/submissions', authenticate, async (request, response, next) => {
     try {

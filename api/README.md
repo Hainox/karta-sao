@@ -9,7 +9,7 @@ API принимает GeoJSON районов, хранит их в PostgreSQL, 
 3. Запустите `npm start`. Миграция создаст таблицы автоматически.
 4. Создайте учётные записи через `npm run create-user -- --email editor@example.org --password <пароль> --role district_editor --district Аэропорт`.
 
-Роли: `district_editor` отправляет только закреплённый район; `reviewer` принимает или отклоняет наборы; `prefecture_admin` также выгружает сводку.
+Роли: `district_editor` отправляет только закреплённый район; `reviewer` принимает или отклоняет наборы; `prefecture_admin` также выгружает сводку и единолично управляет фото-метками.
 
 ## Районные ссылки
 
@@ -23,6 +23,11 @@ API принимает GeoJSON районов, хранит их в PostgreSQL, 
 - `PATCH /api/submissions/:id` с `approved` или `rejected`
 - `GET /api/exports/review-archive.zip` — ZIP ожидающих наборов, разложенный по районам, с `manifest.json`
 - `GET /api/exports/approved.geojson`
+- `GET`, `POST`, `PATCH`, `DELETE /api/photo-markers` — фото-метки, только `prefecture_admin`
+- `PUT`, `GET`, `DELETE /api/photo-markers/:id/photo` — один JPEG/PNG/WebP до 5 МБ у фото-метки, только `prefecture_admin`
+
+Фото и координаты хранятся в PostgreSQL. В браузере не сохраняются; удаление
+фото не удаляет метку, а удаление метки удаляет и её прикреплённый снимок.
 
 GitHub Pages исполняет только статические файлы. Для общей базы API должен быть размещён отдельно с PostgreSQL; адрес задаётся в HUD кабинетов.
 

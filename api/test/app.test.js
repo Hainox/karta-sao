@@ -24,12 +24,15 @@ function changeSet({ district = 'Аэропорт', author = 'Иванов И.И
 async function fixture() {
   const editorPassword = 'editor-password-123';
   const reviewerPassword = 'reviewer-password-123';
+  const prefecturePassword = 'prefecture-password-123';
   const users = [
     { id: 'editor-1', email: 'editor@example.test', password_hash: await hashPassword(editorPassword), role: 'district_editor', district: 'Аэропорт' },
     { id: 'unassigned-editor-1', email: 'unassigned@example.test', password_hash: await hashPassword(editorPassword), role: 'district_editor', district: null },
-    { id: 'reviewer-1', email: 'reviewer@example.test', password_hash: await hashPassword(reviewerPassword), role: 'reviewer', district: null }
+    { id: 'reviewer-1', email: 'reviewer@example.test', password_hash: await hashPassword(reviewerPassword), role: 'reviewer', district: null },
+    { id: 'prefecture-1', email: 'prefecture@example.test', password_hash: await hashPassword(prefecturePassword), role: 'prefecture_admin', district: null }
   ];
   const submissions = [];
+  const photoMarkers = [];
   const repository = {
     async findUserByEmail(email) { return users.find((user) => user.email === email) || null; },
     async createSubmission(input) {
@@ -41,9 +44,21 @@ async function fixture() {
       const item = submissions.find((candidate) => candidate.id === id);
       if (!item) return null;
       Object.assign(item, { status, reviewed_by: reviewerId, review_comment: comment, reviewed_at: '2026-09-08T10:02:00.000Z' }); return item;
-    }
+    },
+    async listPhotoMarkers() { return photoMarkers.map(({ photo_bytes, ...marker }) => ({ ...marker, has_photo: Boolean(photo_bytes) })); },
+    async createPhotoMarker({ longitude, latitude, note, legacySourceId, createdBy }) {
+      const existing = legacySourceId && photoMarkers.find((marker) => marker.legacy_source_id === legacySourceId);
+      if (existing) return { ...existing, has_photo: Boolean(existing.photo_bytes), imported: true };
+      const marker = { id: `photo-marker-${photoMarkers.length + 1}`, longitude, latitude, note, legacy_source_id: legacySourceId, created_by: createdBy, photo_bytes: null, photo_mime_type: null, photo_filename: null, photo_size: null, created_at: '2026-09-08T10:03:00.000Z', updated_at: '2026-09-08T10:03:00.000Z' };
+      photoMarkers.push(marker); return { ...marker, has_photo: false };
+    },
+    async updatePhotoMarkerNote({ id, note }) { const marker = photoMarkers.find((candidate) => candidate.id === id); if (!marker) return null; marker.note = note; return { ...marker, has_photo: Boolean(marker.photo_bytes) }; },
+    async setPhotoMarkerPhoto({ id, bytes, mimeType, filename }) { const marker = photoMarkers.find((candidate) => candidate.id === id); if (!marker) return null; Object.assign(marker, { photo_bytes: bytes, photo_mime_type: mimeType, photo_filename: filename, photo_size: bytes.length }); return { ...marker, has_photo: true }; },
+    async getPhotoMarkerPhoto(id) { const marker = photoMarkers.find((candidate) => candidate.id === id); return marker ? { photo_bytes: marker.photo_bytes, photo_mime_type: marker.photo_mime_type, photo_filename: marker.photo_filename } : null; },
+    async deletePhotoMarkerPhoto({ id }) { const marker = photoMarkers.find((candidate) => candidate.id === id); if (!marker?.photo_bytes) return null; Object.assign(marker, { photo_bytes: null, photo_mime_type: null, photo_filename: null, photo_size: null }); return { ...marker, has_photo: false }; },
+    async deletePhotoMarker({ id }) { const index = photoMarkers.findIndex((candidate) => candidate.id === id); if (index < 0) return null; return photoMarkers.splice(index, 1)[0]; }
   };
-  return { api: request(createApp({ repository, boundary, jwtSecret: SECRET, allowedOrigins: ['https://map.example.test'] })), editorPassword, reviewerPassword };
+  return { api: request(createApp({ repository, boundary, jwtSecret: SECRET, allowedOrigins: ['https://map.example.test'] })), editorPassword, reviewerPassword, prefecturePassword };
 }
 
 async function login(api, email, password) {
@@ -92,4 +107,26 @@ test('отклоняет неверный маршрут до сохранени
   const invalid = changeSet({ feature: { type: 'Feature', geometry: { type: 'LineString', coordinates: [[37.1, 55.1], [39, 57]] }, properties: { district: 'Аэропорт', author: 'Иванов И.И.', change_type: 'queue', queue_priority: '1', address: 'За границей' } } });
   const response = await api.post('/api/submissions').set('Authorization', `Bearer ${editor}`).send({ changeSet: invalid }).expect(422);
   assert.match(response.body.details.join('\n'), /вне границы САО/);
+});
+
+test('фото-метки и снимки доступны только префектуре и удаляются полностью', async () => {
+  const { api, reviewerPassword, prefecturePassword } = await fixture();
+  const reviewer = await login(api, 'reviewer@example.test', reviewerPassword);
+  await api.get('/api/photo-markers').set('Authorization', `Bearer ${reviewer}`).expect(403);
+  const prefecture = await login(api, 'prefecture@example.test', prefecturePassword);
+  await api.post('/api/photo-markers').set('Authorization', `Bearer ${prefecture}`).send({ longitude: 39, latitude: 57 }).expect(422);
+  const created = await api.post('/api/photo-markers').set('Authorization', `Bearer ${prefecture}`).send({ longitude: 37.2, latitude: 55.2, note: 'До уборки' }).expect(201);
+  const markerId = created.body.photoMarker.id;
+  await api.patch(`/api/photo-markers/${markerId}`).set('Authorization', `Bearer ${prefecture}`).send({ note: 'После уборки' }).expect(200);
+  const jpeg = Buffer.from([0xff, 0xd8, 0xff, 0xd9]);
+  const uploaded = await api.put(`/api/photo-markers/${markerId}/photo`).set('Authorization', `Bearer ${prefecture}`).set('Content-Type', 'image/jpeg').set('X-Photo-Filename', 'inspection.jpg').send(jpeg).expect(200);
+  assert.equal(uploaded.body.photoMarker.has_photo, true);
+  const downloaded = await api.get(`/api/photo-markers/${markerId}/photo`).set('Authorization', `Bearer ${prefecture}`).buffer(true).parse(binaryParser).expect(200);
+  assert.match(downloaded.headers['content-type'], /image\/jpeg/);
+  assert.deepEqual(downloaded.body, jpeg);
+  await api.delete(`/api/photo-markers/${markerId}/photo`).set('Authorization', `Bearer ${prefecture}`).expect(200);
+  await api.get(`/api/photo-markers/${markerId}/photo`).set('Authorization', `Bearer ${prefecture}`).expect(404);
+  await api.delete(`/api/photo-markers/${markerId}`).set('Authorization', `Bearer ${prefecture}`).expect(204);
+  const listed = await api.get('/api/photo-markers').set('Authorization', `Bearer ${prefecture}`).expect(200);
+  assert.equal(listed.body.photoMarkers.length, 0);
 });

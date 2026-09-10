@@ -44,3 +44,17 @@ test('приёмка показывает API-поток и локальный �
   await expect(page.getByText('Граница САО загружена. Подключите API или выберите GeoJSON-файлы.')).toBeVisible();
   expect(errors).toEqual([]);
 });
+
+test('фото-метки появляются только в контуре префектуры', async ({ page }) => {
+  await page.addInitScript(() => {
+    sessionStorage.setItem('odh-map-api-token-v1', 'test-token');
+    sessionStorage.setItem('odh-map-api-user-v1', JSON.stringify({ id: 'prefecture-1', email: 'prefecture@example.test', role: 'prefecture_admin', district: null }));
+  });
+  await page.route('**/api/photo-markers', async (route) => {
+    await route.fulfill({ contentType: 'application/json', body: JSON.stringify({ photoMarkers: [] }) });
+  });
+  await page.goto(`${baseURL}district-review.html`);
+  await expect(page.getByRole('heading', { name: 'Фото-метки префектуры' })).toBeVisible();
+  await expect(page.getByRole('button', { name: /Расставить фото-метки/ })).toBeVisible();
+  await expect(page.getByText('Создавать, менять и удалять фото-метки может только учётная запись префектуры.')).toBeVisible();
+});

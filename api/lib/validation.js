@@ -49,6 +49,10 @@ function containsPoint(point, boundary) {
   });
 }
 
+export function isPointWithinBoundary(point, boundary) {
+  return containsPoint(point, boundary);
+}
+
 function geometryCoordinates(geometry) {
   if (geometry?.type === 'Point') return [geometry.coordinates];
   if (geometry?.type === 'LineString') return geometry.coordinates || [];
