@@ -19,6 +19,29 @@ test('редактор показывает полный набор средст
   expect(errors).toEqual([]);
 });
 
+test('районная ссылка подставляет логин и не даёт менять адрес базы', async ({ page }) => {
+  await page.goto(`${baseURL}district-editor.html?district=%D0%90%D1%8D%D1%80%D0%BE%D0%BF%D0%BE%D1%80%D1%82`);
+  await expect(page.locator('#apiEmail')).toHaveValue('Аэропорт');
+  await expect(page.locator('#apiBase')).toHaveAttribute('readonly', '');
+});
+
+test('маршрут сохраняется по явной кнопке завершения', async ({ page }) => {
+  await page.goto(`${baseURL}district-editor.html`);
+  await page.locator('#district').selectOption('Аэропорт');
+  await page.locator('#author').fill('Иванов И.И.');
+  await page.locator('#address').fill('Тестовый проезд');
+  const map = page.locator('#map');
+  await page.locator('#setStart').click();
+  await map.click({ position: { x: 420, y: 360 } });
+  await page.locator('#setEnd').click();
+  await map.click({ position: { x: 450, y: 390 } });
+  await page.locator('#drawButton').click();
+  await expect(page.getByRole('button', { name: /Завершить маршрут/ })).toBeVisible();
+  await page.locator('#drawButton').click();
+  await expect(page.getByText('Очередь 1 · Тестовый проезд', { exact: true })).toBeVisible();
+  await expect(page.locator('.route-travel-arrow')).toHaveCount(2);
+});
+
 test('редактор импортирует маршрут v2 и разворачивает его направление', async ({ page }) => {
   const route = {
     type: 'FeatureCollection', change_set_version: 'district_change_set_v2', district: 'Аэропорт', author: 'Иванов И.И.', features: [{

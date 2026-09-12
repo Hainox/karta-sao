@@ -22,7 +22,7 @@ function changeSet({ district = 'Аэропорт', author = 'Иванов И.И
 }
 
 async function fixture() {
-  const editorPassword = 'editor-password-123';
+  const editorPassword = '12345678';
   const reviewerPassword = 'reviewer-password-123';
   const prefecturePassword = 'prefecture-password-123';
   const users = [

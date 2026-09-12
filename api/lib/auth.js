@@ -4,7 +4,7 @@ const base64url = (value) => Buffer.from(value).toString('base64url');
 const unbase64url = (value) => Buffer.from(value, 'base64url').toString('utf8');
 
 export async function hashPassword(password) {
-  if (typeof password !== 'string' || password.length < 12) throw new Error('Пароль должен содержать минимум 12 символов.');
+  if (typeof password !== 'string' || password.length < 8) throw new Error('Пароль должен содержать минимум 8 символов.');
   const salt = crypto.randomBytes(16).toString('hex');
   const derived = await new Promise((resolve, reject) => crypto.scrypt(password, salt, 64, (error, key) => error ? reject(error) : resolve(key)));
   return `${salt}:${Buffer.from(derived).toString('hex')}`;

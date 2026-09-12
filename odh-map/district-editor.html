@@ -30,7 +30,7 @@
               <li>Проверьте район и своё имя. После входа район фиксируется и подсвечивается янтарным цветом.</li>
               <li>Выберите, что требуется отметить: маршрут очереди, роторную перекидку, зону складирования снега или точку.</li>
               <li>Для маршрута нажмите <b>«Установить начало»</b>, щёлкните карту; затем так же укажите <b>конец</b>.</li>
-              <li>Введите понятный адрес, нажмите <b>«Нарисовать маршрут»</b>, щёлкайте вдоль дороги и завершите линию двойным щелчком.</li>
+              <li>Введите понятный адрес, нажмите <b>«Нарисовать маршрут»</b>, щёлкайте только на поворотах дороги и завершите отдельной кнопкой. Начало и конец добавятся автоматически — маршрут не пропадёт.</li>
               <li>Проверьте объект в списке. Ошиблись — удалите только этот объект или разверните направление маршрута.</li>
               <li>Нажмите <b>«Проверить перед отправкой»</b>. Если всё зелёное — отправьте набор на приёмку.</li>
             </ol>
@@ -51,6 +51,7 @@
             <label>Начало и конец маршрута</label>
             <div class="actions"><button id="setStart" class="control large-action" type="button"><i class="fa-solid fa-play"></i> 1. Установить начало</button><button id="setEnd" class="control large-action" type="button"><i class="fa-solid fa-flag-checkered"></i> 2. Установить конец</button></div>
             <button id="cancelPointButton" class="control help-toggle" type="button" hidden>Отменить выбор точки на карте</button>
+            <button id="cancelRouteButton" class="control help-toggle" type="button" hidden>Отменить рисование маршрута</button>
             <div id="startInfo" class="endpoint">Начало не задано.</div><div id="endInfo" class="endpoint">Конец не задан.</div>
             <label for="nozzle">Направление сопла</label><select id="nozzle"><option value="both">В обе стороны</option><option value="left">Слева по ходу</option><option value="right">Справа по ходу</option></select>
           </div>
@@ -72,8 +73,9 @@
         </section>
         <section class="panel">
           <h2>Подключение к API</h2>
-          <label for="apiBase">Адрес API</label><input id="apiBase" type="url" placeholder="https://api.example.ru">
-          <label for="apiEmail">E-mail</label><input id="apiEmail" type="email" autocomplete="username" placeholder="name@example.ru">
+          <label for="apiBase">Адрес единой базы</label><input id="apiBase" type="url" readonly aria-readonly="true">
+          <p class="small">Адрес уже настроен. Его менять не нужно.</p>
+          <label for="apiEmail">Логин района</label><input id="apiEmail" type="text" autocomplete="username" placeholder="Название района">
           <label for="apiPassword">Пароль</label><input id="apiPassword" type="password" autocomplete="current-password">
           <div class="actions"><button id="loginButton" class="control" type="button">Войти</button><button id="logoutButton" class="control" type="button">Выйти</button></div>
           <p id="sessionInfo" class="small">Подключение не настроено. Пароль в браузере не сохраняется.</p>
@@ -95,8 +97,8 @@
       map.attributionControl.setPrefix(false);
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom:19, attribution:'© OpenStreetMap contributors' }).addTo(map);
       const draftGroup = L.featureGroup().addTo(map); const endpointGroup = L.featureGroup().addTo(map); const selectedDistrictGroup = L.featureGroup().addTo(map);
-      let boundary = null; let districtBoundaries = null; let draftFeatures = []; let routeStart = null; let routeEnd = null; let pickMode = null;
-      const ids = ['district','author','changeType','priority','address','comment','status','featureList','drawButton','priorityWrap','routeWrap','nozzle','setStart','setEnd','cancelPointButton','startInfo','endInfo','importInput','apiBase','apiEmail','apiPassword','sessionInfo','submitButton','checkButton','workflowCheck','toggleHelpButton','helpPanel'];
+      let boundary = null; let districtBoundaries = null; let draftFeatures = []; let routeStart = null; let routeEnd = null; let pickMode = null; let routeDrawing = null;
+      const ids = ['district','author','changeType','priority','address','comment','status','featureList','drawButton','priorityWrap','routeWrap','nozzle','setStart','setEnd','cancelPointButton','cancelRouteButton','startInfo','endInfo','importInput','apiBase','apiEmail','apiPassword','sessionInfo','submitButton','checkButton','workflowCheck','toggleHelpButton','helpPanel'];
       const fields = Object.fromEntries(ids.map((id) => [id, document.getElementById(id)]));
       DistrictChanges.DISTRICTS.forEach((name) => fields.district.add(new Option(name, name)));
       Object.entries(DistrictChanges.TYPES).forEach(([key, type]) => fields.changeType.add(new Option(type.label, key)));
@@ -136,6 +138,7 @@
         if (scopedDistrict) {
           fields.district.value = scopedDistrict;
           fields.district.disabled = true;
+          if (!user) fields.apiEmail.value = scopedDistrict;
           updateDistrictHighlight({ fit:true });
           if (announce && linkedDistrict && assignedDistrict && linkedDistrict !== assignedDistrict) message(`Ссылка района «${linkedDistrict}» не совпадает с вашей учётной записью. Открыт закреплённый район «${assignedDistrict}».`, 'error');
           else if (announce) message(`Редактор закреплён за районом «${scopedDistrict}». Смена района заблокирована.`, 'good');
@@ -144,7 +147,9 @@
       function updateDrawingControl() {
         const type = selectedType(); const route = type.kind === 'line';
         fields.priorityWrap.classList.toggle('hidden', fields.changeType.value !== 'queue'); fields.routeWrap.classList.toggle('hidden', !route);
-        fields.drawButton.innerHTML = `<i class="fa-solid ${type.kind === 'line' ? 'fa-route' : type.kind === 'polygon' ? 'fa-draw-polygon' : 'fa-location-dot'}"></i> 3. ${type.kind === 'line' ? 'Нарисовать маршрут' : type.kind === 'polygon' ? 'Нарисовать зону' : 'Поставить точку'}`;
+        const finishingRoute = Boolean(routeDrawing);
+        fields.drawButton.classList.toggle('teal', finishingRoute);
+        fields.drawButton.innerHTML = finishingRoute ? '<i class="fa-solid fa-check"></i> 3. Завершить маршрут' : `<i class="fa-solid ${type.kind === 'line' ? 'fa-route' : type.kind === 'polygon' ? 'fa-draw-polygon' : 'fa-location-dot'}"></i> 3. ${type.kind === 'line' ? 'Нарисовать маршрут' : type.kind === 'polygon' ? 'Нарисовать зону' : 'Поставить точку'}`;
       }
       function styleOptions(feature) { const style = DistrictChanges.styleFor(feature); return { color:style.color, weight:style.weight || 4, dashArray:style.dashArray || null, fillColor:style.color, fillOpacity:style.fillOpacity ?? .7, radius:7 }; }
       function routeIcon(feature) {
@@ -202,6 +207,28 @@
         if (DistrictChanges.ROUTE_TYPES.has(properties.change_type)) Object.assign(properties, { route_start:[...routeStart], route_end:[...routeEnd], route_direction:'start_to_end', nozzle_direction:fields.nozzle.value });
         return { type:'Feature', geometry, properties };
       }
+      const samePoint = (first, second) => Array.isArray(first) && Array.isArray(second) && first[0] === second[0] && first[1] === second[1];
+      function cancelRouteDrawing({ announce = true } = {}) {
+        if (!routeDrawing) return;
+        map.removeLayer(routeDrawing.preview); routeDrawing = null; fields.cancelRouteButton.hidden = true; updateDrawingControl();
+        if (announce) message('Рисование маршрута отменено. Начало и конец сохранены — можно начать снова.', 'good');
+      }
+      function beginRouteDrawing() {
+        const color = DistrictChanges.styleFor({ properties:{ change_type:fields.changeType.value, queue_priority:fields.priority.value } }).color;
+        routeDrawing = { points:[[...routeStart]], preview:L.polyline([[routeStart[1], routeStart[0]]], { color, weight:5, dashArray:'8 8', opacity:.9 }).addTo(map) };
+        fields.cancelRouteButton.hidden = false; updateDrawingControl();
+        message('Маршрут начат. Щёлкайте только на поворотах дороги. Когда поворотов больше нет, нажмите «Завершить маршрут» — указанная точка конца добавится сама.', 'good');
+      }
+      function finishRouteDrawing() {
+        if (!routeDrawing) return;
+        const points = routeDrawing.points.map((point) => [...point]);
+        if (!samePoint(points.at(-1), routeEnd)) points.push([...routeEnd]);
+        const feature = makeFeature({ type:'LineString', coordinates:points });
+        const check = DistrictChanges.validate(DistrictChanges.makeChangeSet(metadata(), [...draftFeatures, feature]), boundary);
+        if (!check.valid) return message(`Маршрут ещё не сохранён: ${check.errors.join(' ')}`, 'error');
+        map.removeLayer(routeDrawing.preview); routeDrawing = null; fields.cancelRouteButton.hidden = true; draftFeatures.push(feature); persist(); renderDraft(); updateDrawingControl();
+        message(`Добавлено: ${featureSummary(feature)}.`, 'good');
+      }
       function startDraw() {
         const base = validateCurrent(false); if (!base.valid) return message(base.errors.join('\n'), 'error');
         if (!fields.address.value.trim()) return message('Перед рисованием укажите адрес или ориентир.', 'error');
@@ -209,7 +236,7 @@
         if (type.kind === 'line' && (!routeStart || !routeEnd)) return message('Для маршрута сначала укажите начало и конец на карте.', 'error');
         if (!L.Draw) return message('Инструмент рисования не загрузился. Проверьте подключение к интернету.', 'error');
         const color = DistrictChanges.styleFor({ properties:{ change_type:fields.changeType.value, queue_priority:fields.priority.value } }).color;
-        if (type.kind === 'line') new L.Draw.Polyline(map, { shapeOptions:{ color, weight:5 } }).enable();
+        if (type.kind === 'line') beginRouteDrawing();
         else if (type.kind === 'polygon') new L.Draw.Polygon(map, { shapeOptions:{ color, weight:3, fillOpacity:.22 } }).enable();
         else new L.Draw.Marker(map).enable();
       }
@@ -244,9 +271,9 @@
           restoreDraft(); renderDraft(); refreshEndpoints(); updateDrawingControl(); refreshSession(); applyDistrictScope(); updateDistrictHighlight({ fit:Boolean(fields.district.value) }); fields.drawButton.disabled = false; fields.importInput.disabled = false; message(invalidLinkedDistrict ? 'В ссылке указан неизвестный район. Выберите район вручную.' : (linkedDistrict ? `Открыта ссылка района «${linkedDistrict}». Войдите под закреплённой учётной записью.` : 'Границы САО и районов загружены. Выберите район — он выделится на карте.'), 'good');
         } catch (error) { message(`Не удалось загрузить границы: ${error.message}`, 'error'); }
       }
-      map.on('click', (event) => { if (!pickMode) return; const point = [event.latlng.lng, event.latlng.lat]; if (!DistrictChanges.vertexInBoundary(point, boundary)) return message('Точка за границей САО. Выберите точку внутри контура.', 'error'); if (pickMode === 'start') routeStart = point; else routeEnd = point; pickMode = null; fields.cancelPointButton.hidden = true; map.getContainer().style.cursor = ''; refreshEndpoints(); message('Точка маршрута установлена. Теперь укажите вторую точку или начинайте рисовать.', 'good'); });
-      map.on('draw:created', (event) => { let geometry = event.layer.toGeoJSON().geometry; if (isRoute()) { geometry.coordinates[0] = [...routeStart]; geometry.coordinates[geometry.coordinates.length - 1] = [...routeEnd]; } const feature = makeFeature(geometry); const check = DistrictChanges.validate(DistrictChanges.makeChangeSet(metadata(), [...draftFeatures, feature]), boundary); if (!check.valid) return message(check.errors.join('\n'), 'error'); draftFeatures.push(feature); persist(); renderDraft(); message(`Добавлено: ${featureSummary(feature)}.`, 'good'); });
-      fields.changeType.onchange = updateDrawingControl; fields.district.onchange = () => { updateDistrictHighlight(); persist(); updateWorkflowCheck(); }; fields.drawButton.onclick = startDraw; fields.setStart.onclick = () => setPickMode('start'); fields.setEnd.onclick = () => setPickMode('end'); fields.cancelPointButton.onclick = cancelPickMode; fields.importInput.onchange = () => importFile(fields.importInput.files[0]); document.getElementById('exportButton').onclick = exportFile; document.getElementById('saveButton').onclick = () => { persist(); message('Черновик сохранён только в этом браузере.', 'good'); }; fields.checkButton.onclick = () => updateWorkflowCheck({ announce:true }); fields.toggleHelpButton.onclick = () => { const hidden = !fields.helpPanel.hidden; fields.helpPanel.hidden = hidden; fields.toggleHelpButton.textContent = hidden ? 'Показать подробную инструкцию' : 'Свернуть подробную инструкцию'; fields.toggleHelpButton.setAttribute('aria-expanded', String(!hidden)); }; document.getElementById('submitButton').onclick = submit; document.getElementById('loginButton').onclick = login; document.getElementById('logoutButton').onclick = () => { ODHApi.clearSession(); refreshSession(); applyDistrictScope(); updateWorkflowCheck(); message('Сеанс завершён.', 'good'); }; document.getElementById('undoButton').onclick = () => { if (draftFeatures.length) { draftFeatures.pop(); persist(); renderDraft(); message('Последний объект удалён.', 'good'); } }; document.getElementById('clearButton').onclick = () => { if (draftFeatures.length && confirm('Удалить все объекты черновика?')) { draftFeatures = []; persist(); renderDraft(); message('Черновик очищен.', 'good'); } };
+      map.on('click', (event) => { const point = [event.latlng.lng, event.latlng.lat]; if (routeDrawing) { if (!DistrictChanges.vertexInBoundary(point, boundary)) return message('Поворот вне границы САО. Выберите точку внутри контура.', 'error'); if (!samePoint(routeDrawing.points.at(-1), point) && !samePoint(routeEnd, point)) routeDrawing.points.push(point); routeDrawing.preview.setLatLngs(routeDrawing.points.map(([lng, lat]) => [lat, lng])); return message(`Поворотов маршрута: ${routeDrawing.points.length - 1}. Нажмите «Завершить маршрут», когда всё готово.`, 'good'); } if (!pickMode) return; if (!DistrictChanges.vertexInBoundary(point, boundary)) return message('Точка за границей САО. Выберите точку внутри контура.', 'error'); if (pickMode === 'start') routeStart = point; else routeEnd = point; pickMode = null; fields.cancelPointButton.hidden = true; map.getContainer().style.cursor = ''; refreshEndpoints(); message('Точка маршрута установлена. Теперь укажите вторую точку или начинайте рисовать.', 'good'); });
+      map.on('draw:created', (event) => { const feature = makeFeature(event.layer.toGeoJSON().geometry); const check = DistrictChanges.validate(DistrictChanges.makeChangeSet(metadata(), [...draftFeatures, feature]), boundary); if (!check.valid) return message(check.errors.join('\n'), 'error'); draftFeatures.push(feature); persist(); renderDraft(); message(`Добавлено: ${featureSummary(feature)}.`, 'good'); });
+      fields.changeType.onchange = () => { cancelRouteDrawing({ announce:false }); updateDrawingControl(); }; fields.district.onchange = () => { if (!ODHApi.user() && fields.district.value) fields.apiEmail.value = fields.district.value; updateDistrictHighlight(); persist(); updateWorkflowCheck(); }; fields.drawButton.onclick = () => routeDrawing ? finishRouteDrawing() : startDraw(); fields.setStart.onclick = () => setPickMode('start'); fields.setEnd.onclick = () => setPickMode('end'); fields.cancelPointButton.onclick = cancelPickMode; fields.cancelRouteButton.onclick = () => cancelRouteDrawing(); fields.importInput.onchange = () => importFile(fields.importInput.files[0]); document.getElementById('exportButton').onclick = exportFile; document.getElementById('saveButton').onclick = () => { persist(); message('Черновик сохранён только в этом браузере.', 'good'); }; fields.checkButton.onclick = () => updateWorkflowCheck({ announce:true }); fields.toggleHelpButton.onclick = () => { const hidden = !fields.helpPanel.hidden; fields.helpPanel.hidden = hidden; fields.toggleHelpButton.textContent = hidden ? 'Показать подробную инструкцию' : 'Свернуть подробную инструкцию'; fields.toggleHelpButton.setAttribute('aria-expanded', String(!hidden)); }; document.getElementById('submitButton').onclick = submit; document.getElementById('loginButton').onclick = login; document.getElementById('logoutButton').onclick = () => { ODHApi.clearSession(); refreshSession(); applyDistrictScope(); updateWorkflowCheck(); message('Сеанс завершён.', 'good'); }; document.getElementById('undoButton').onclick = () => { if (draftFeatures.length) { draftFeatures.pop(); persist(); renderDraft(); message('Последний объект удалён.', 'good'); } }; document.getElementById('clearButton').onclick = () => { if (draftFeatures.length && confirm('Удалить все объекты черновика?')) { cancelRouteDrawing({ announce:false }); draftFeatures = []; persist(); renderDraft(); message('Черновик очищен.', 'good'); } };
       initialize();
     })();
   </script>
