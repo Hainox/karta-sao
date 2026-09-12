@@ -105,7 +105,7 @@
       const linkedDistrictValue = new URLSearchParams(window.location.search).get('district');
       const linkedDistrict = DistrictChanges.DISTRICTS.includes(linkedDistrictValue) ? linkedDistrictValue : null;
       const invalidLinkedDistrict = linkedDistrictValue && !linkedDistrict;
-      if (linkedDistrict) { fields.district.value = linkedDistrict; fields.district.disabled = true; }
+      if (linkedDistrict) { fields.district.value = linkedDistrict; fields.district.disabled = true; fields.apiEmail.value = linkedDistrict; }
       fields.changeType.value = 'queue'; fields.apiBase.value = ODHApi.base();
       const esc = (value) => String(value ?? '').replace(/[&<>"']/g, (character) => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[character]));
       const metadata = () => ({ district:fields.district.value, author:fields.author.value });
