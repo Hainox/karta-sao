@@ -104,3 +104,13 @@ test('каталог ведёт район к правильному рабоч�
   await expect(start).toHaveAttribute('href', '../odh-map/district-links.html');
   await expect(page.getByText('Только после зелёной проверки нажимайте «Отправить на приёмку».')).toBeVisible();
 });
+
+test('памятка префектуры объясняет приёмку и доступна из рабочего контура', async ({ page }) => {
+  await page.goto(`${baseURL}district-review.html`);
+  await expect(page.getByRole('link', { name: /Памятка префектуры/ })).toHaveAttribute('href', 'prefecture-guide.html');
+
+  await page.goto(`${baseURL}prefecture-guide.html`);
+  await expect(page.getByRole('heading', { name: 'Памятка префектуры: как принимать карты и помогать районам' })).toBeVisible();
+  await expect(page.getByText('Загрузить ожидающие', { exact: true }).first()).toBeVisible();
+  await expect(page.getByText('Публичная карта сама от этого не меняется', { exact: false })).toBeVisible();
+});

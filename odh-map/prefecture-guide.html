@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Памятка префектуры — ОДХ САО</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" referrerpolicy="no-referrer">
+  <style>
+    :root { --navy:#06345f; --blue:#075ea8; --teal:#008d8b; --ink:#17324d; --muted:#587086; --line:#cfdae5; --paper:#f4f8fb; --green:#087b50; --red:#b62e3d; --amber:#a76708; }
+    * { box-sizing:border-box; }
+    body { margin:0; color:var(--ink); background:var(--paper); font-family:Manrope,Arial,sans-serif; font-size:17px; line-height:1.65; }
+    a { color:inherit; }
+    .topbar { min-height:76px; display:flex; align-items:center; justify-content:space-between; gap:22px; padding:12px max(22px,calc((100% - 1200px)/2)); background:#fff; border-bottom:1px solid var(--line); }
+    .brand { display:flex; gap:10px; align-items:center; color:var(--navy); font-weight:800; font-size:20px; line-height:1.15; text-decoration:none; }
+    .brand-mark { width:42px; height:42px; display:grid; place-items:center; border-radius:10px; color:#fff; background:var(--navy); }
+    .brand small { display:block; margin-top:4px; color:#60778c; font-size:11px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; }
+    .nav { display:flex; align-items:center; flex-wrap:wrap; justify-content:flex-end; gap:9px; }
+    .nav a, .print { min-height:46px; display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:9px 13px; border:1px solid #aebfce; border-radius:8px; background:#fff; color:var(--navy); font:700 14px Manrope,Arial,sans-serif; text-decoration:none; cursor:pointer; }
+    .nav a:hover, .nav a:focus-visible, .print:hover, .print:focus-visible { outline:3px solid #91c9ed; outline-offset:2px; background:#eaf5fc; }
+    .nav .primary { border-color:var(--navy); background:var(--navy); color:#fff; }
+    main { width:min(1120px,calc(100% - 32px)); margin:30px auto 60px; }
+    .hero { padding:32px; border-radius:18px; color:#fff; background:linear-gradient(120deg,#06345f,#096e9f); box-shadow:0 12px 30px #073a5c28; }
+    h1 { margin:0 0 10px; font-size:clamp(28px,4.6vw,42px); line-height:1.2; }
+    h2 { margin:0; color:var(--navy); font-size:clamp(22px,3vw,30px); line-height:1.25; }
+    h3 { margin:0 0 8px; color:var(--navy); font-size:20px; line-height:1.3; }
+    .hero p { max-width:860px; margin:0; font-size:19px; }
+    .notice { margin:18px 0 0; padding:16px 18px; border-left:6px solid #f1b630; border-radius:8px; color:#573c05; background:#fff8df; font-weight:700; }
+    .section { margin-top:24px; padding:27px; border:1px solid var(--line); border-radius:16px; background:#fff; box-shadow:0 3px 10px #123d5b0b; }
+    .lead { margin:10px 0 0; color:#314d67; }
+    .grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; margin-top:20px; }
+    .card { padding:18px; border:1px solid #cbdbe7; border-radius:12px; background:#f8fbfd; }
+    .icon { color:var(--blue); font-size:25px; }
+    .badge { display:inline-flex; align-items:center; justify-content:center; width:32px; height:32px; margin-right:9px; border-radius:50%; color:#fff; background:var(--blue); font-weight:800; }
+    .steps { counter-reset:step; padding:0; margin:20px 0 0; list-style:none; }
+    .steps li { position:relative; min-height:68px; margin:0 0 13px; padding:15px 16px 15px 70px; border:1px solid #cddce7; border-radius:12px; background:#fff; }
+    .steps li::before { content:counter(step); counter-increment:step; position:absolute; left:17px; top:16px; width:35px; height:35px; display:grid; place-items:center; border-radius:50%; color:#fff; background:var(--blue); font-weight:800; }
+    .steps strong { color:var(--navy); }
+    .checklist { padding:0; list-style:none; columns:2; column-gap:22px; }
+    .checklist li { break-inside:avoid; margin:8px 0; padding-left:29px; position:relative; }
+    .checklist li::before { content:'✓'; position:absolute; left:0; color:var(--green); font-size:22px; font-weight:800; }
+    .decision { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:18px; }
+    .decision > div { padding:18px; border-radius:12px; }
+    .ok { border:1px solid #a7d8c0; background:#edfbf3; } .back { border:1px solid #efbdc3; background:#fff2f3; }
+    .ok h3 { color:var(--green); } .back h3 { color:var(--red); }
+    table { width:100%; border-collapse:collapse; margin-top:18px; font-size:16px; }
+    th,td { padding:13px; vertical-align:top; text-align:left; border:1px solid #cbd8e3; }
+    th { color:#fff; background:var(--navy); }
+    tr:nth-child(even) td { background:#f7fafc; }
+    .callout { margin-top:18px; padding:17px 19px; border-left:6px solid var(--teal); border-radius:8px; background:#eaf9f8; }
+    .route-key { display:flex; flex-wrap:wrap; gap:10px; margin:18px 0 0; }
+    .route-key span { padding:7px 10px; border-radius:20px; color:#fff; font-weight:800; font-size:14px; }
+    .start { background:#087b50; } .end { background:#b62e3d; } .travel { background:#06345f; } .nozzle { background:#7651a5; }
+    .answer { margin-top:18px; padding:17px 19px; border-radius:10px; background:#eaf3fb; }
+    .answer strong { color:var(--navy); }
+    footer { margin-top:24px; text-align:center; color:#60778c; font-size:14px; }
+    @media (max-width:780px) { .topbar { align-items:flex-start; flex-direction:column; padding:14px 16px; } .nav { justify-content:flex-start; } main { width:min(100% - 20px,1120px); margin-top:14px; } .hero,.section { padding:20px; } .grid,.decision { grid-template-columns:1fr; } .checklist { columns:1; } table { font-size:14px; } th,td { padding:10px; } }
+    @media print { body { background:#fff; font-size:12pt; } .topbar { border:0; padding:0; } .nav { display:none; } main { width:100%; margin:12px 0; } .hero { box-shadow:none; } .section { break-inside:avoid; box-shadow:none; } .notice { break-inside:avoid; } }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="district-review.html"><span class="brand-mark"><i class="fa-solid fa-clipboard-check"></i></span><span>ОДХ САО<small>Рабочий контур · префектура</small></span></a>
+    <nav class="nav" aria-label="Навигация памятки">
+      <a href="district-links.html"><i class="fa-solid fa-link"></i> Районные ссылки</a>
+      <a class="primary" href="district-review.html"><i class="fa-solid fa-clipboard-check"></i> Открыть приёмку</a>
+      <button class="print" type="button" onclick="window.print()"><i class="fa-solid fa-print"></i> Распечатать памятку</button>
+    </nav>
+  </header>
+  <main>
+    <section class="hero">
+      <h1>Памятка префектуры: как принимать карты и помогать районам</h1>
+      <p>Откройте эту страницу перед началом работы. Здесь описан простой порядок: принять данные района, проверить их на карте, вернуть на исправление или утвердить, а затем выгрузить общий результат.</p>
+    </section>
+    <p class="notice"><i class="fa-solid fa-circle-info"></i> Приёмка меняет только статус работы в единой базе. Кнопка «Выгрузить утверждённые» скачивает согласованный GeoJSON. Публичная карта сама от этого не меняется: её обновляют отдельным согласованным действием.</p>
+
+    <section class="section">
+      <h2>1. Кто за что отвечает</h2>
+      <p class="lead">У каждой роли — свой участок. Если вы сомневаетесь, не утверждайте работу сразу: верните её району с понятным замечанием.</p>
+      <div class="grid">
+        <article class="card"><p class="icon"><i class="fa-solid fa-pen-ruler"></i></p><h3>Район</h3><p>Наносит объекты на своей карте, указывает исполнителя и комментарий, отправляет работу на приёмку.</p></article>
+        <article class="card"><p class="icon"><i class="fa-solid fa-clipboard-check"></i></p><h3>Приёмка</h3><p>Проверяет объекты, маршруты и направления. Утверждает корректное или возвращает с точной причиной.</p></article>
+        <article class="card"><p class="icon"><i class="fa-solid fa-building"></i></p><h3>Префектура</h3><p>Помогает районам начать работу, следит за сроками, собирает общий архив и утверждённую выгрузку.</p></article>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>2. Ежедневный порядок работы</h2>
+      <ol class="steps">
+        <li><strong>Откройте «Приёмку» и войдите.</strong> Используйте учётную запись сотрудника приёмки или префектуры. Не передавайте пароль в общих чатах.</li>
+        <li><strong>Нажмите «Загрузить ожидающие».</strong> На экране появятся карточки работ, которые районы отправили на проверку. Если карточек нет, сначала уточните у районов, отправили ли они работу кнопкой «Отправить на приёмку».</li>
+        <li><strong>Откройте карточку и посмотрите на карту.</strong> Сверьте район, тип объекта, адрес или ориентир, исполнителя и комментарий. Увеличивайте карту кнопкой «+», если нужен детальный просмотр.</li>
+        <li><strong>Проверьте направление.</strong> Для маршрута видны начало, конец и тёмно-синие стрелки движения. Для роторной уборки дополнительно видны фиолетовые стрелки сопла. Если смысл стрелок неясен — верните работу на исправление.</li>
+        <li><strong>Примите решение.</strong> Нажмите «Утвердить», если всё верно. Нажмите «Отклонить», если есть ошибка, и напишите конкретно, что исправить.</li>
+        <li><strong>Соберите результат.</strong> После решений нажмите «Выгрузить утверждённые» для одного общего GeoJSON. Для разборов и контроля используйте «Скачать архив для приёмки».</li>
+      </ol>
+    </section>
+
+    <section class="section">
+      <h2>3. Чек-лист одной работы</h2>
+      <p class="lead">Проверяйте по порядку. Достаточно одного неверного пункта, чтобы вернуть работу — так район быстрее поймёт, что исправлять.</p>
+      <ul class="checklist">
+        <li>Указан правильный район и исполнитель.</li>
+        <li>Выбран правильный тип: маршрут, роторная уборка или другой объект.</li>
+        <li>Адрес либо ориентир понятен и соответствует месту на карте.</li>
+        <li>Точка, линия или зона находится в нужном месте и не захватывает чужую территорию.</li>
+        <li>Для маршрута видны начало, конец и направление движения.</li>
+        <li>Для роторной уборки указано направление сопла, если оно требуется.</li>
+        <li>Нет явного дубля уже принятого объекта или конфликта с другой работой.</li>
+        <li>Комментарий объясняет особенность: ограничение, причина правки или ориентир.</li>
+      </ul>
+      <div class="route-key" aria-label="Обозначения направления на карте"><span class="start">Начало маршрута</span><span class="end">Конец маршрута</span><span class="travel">Стрелки движения</span><span class="nozzle">Стрелки сопла</span></div>
+      <div class="decision">
+        <div class="ok"><h3><i class="fa-solid fa-circle-check"></i> Когда утверждать</h3><p>Все пункты чек-листа понятны, объект расположен верно, а направления однозначно читаются.</p></div>
+        <div class="back"><h3><i class="fa-solid fa-arrow-rotate-left"></i> Когда возвращать</h3><p>Не угадывайте за район. Верните работу, если неясны место, границы, маршрут, направление сопла, тип объекта или исполнитель.</p></div>
+      </div>
+      <div class="callout"><strong>Как писать замечание:</strong> «Роторная зона у дома 12: стрелки сопла направлены в проезжую часть. Укажите направление к тротуару и повторно отправьте». Не пишите просто «исправить» — район не поймёт, что делать.</div>
+    </section>
+
+    <section class="section">
+      <h2>4. Как префектуре помогать районам</h2>
+      <ol class="steps">
+        <li><strong>Отправьте районному ответственному его персональную ссылку.</strong> Откройте «Районные ссылки», скопируйте строку нужного района и отправьте её в личное сообщение. В этой ссылке уже указан район и подставлен логин.</li>
+        <li><strong>Передайте пароль отдельно.</strong> Пароль — не для общего чата и не для пересылки в группе. Получатель должен быть назначенным сотрудником района.</li>
+        <li><strong>Дайте районному сотруднику одну задачу за раз.</strong> Сначала создать один объект и сохранить в черновик, затем проверить его на карте, после — отправить на приёмку. Не требуйте сразу большую карту без первой пробной работы.</li>
+        <li><strong>Для маршрута напомните четыре действия.</strong> Выбрать «Маршрут» → задать начало → задать конец → нажать «Нарисовать маршрут» и поставить только поворотные точки → «Завершить маршрут». Конец добавляется автоматически.</li>
+        <li><strong>Просите не скриншот, а отправку через систему.</strong> Скриншот помогает объяснить проблему, но не заменяет объект в единой базе. На приёмку попадает только отправленная работа.</li>
+      </ol>
+      <div class="answer"><strong>Что сказать району, если он волнуется:</strong> «Вы можете спокойно сохранить черновик или скачать GeoJSON на компьютер. Отправляйте только после кнопки “Проверить перед отправкой”. Если вернули работу — исправьте замечание и отправьте заново».</div>
+    </section>
+
+    <section class="section">
+      <h2>5. Что означают кнопки в приёмке</h2>
+      <table>
+        <thead><tr><th>Кнопка</th><th>Что делает</th><th>Когда нажимать</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Загрузить ожидающие</strong></td><td>Показывает новые отправленные работы районов.</td><td>В начале работы и после напоминания району об отправке.</td></tr>
+          <tr><td><strong>Утвердить</strong></td><td>Фиксирует, что работа проверена и принята.</td><td>Только после полного чек-листа.</td></tr>
+          <tr><td><strong>Отклонить</strong></td><td>Возвращает работу району на корректировку.</td><td>Когда есть конкретная ошибка или неясность.</td></tr>
+          <tr><td><strong>Скачать архив для приёмки</strong></td><td>Скачивает комплект работ для внутреннего разбора и передачи.</td><td>Когда нужен архив по текущим поступлениям.</td></tr>
+          <tr><td><strong>Выгрузить утверждённые</strong></td><td>Скачивает один GeoJSON со всеми утверждёнными объектами.</td><td>После приёмки, чтобы передать согласованный результат.</td></tr>
+          <tr><td><strong>Очистить</strong></td><td>Очищает только экранный список или локальный резервный режим.</td><td>Не используйте вместо решения по работам; сначала завершите приёмку.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section">
+      <h2>6. Если что-то не получается</h2>
+      <table>
+        <thead><tr><th>Ситуация</th><th>Что делать сотруднику префектуры</th></tr></thead>
+        <tbody>
+          <tr><td>Район не может войти</td><td>Попросите открыть именно персональную районную ссылку, проверить логин района и пароль. Если не помогло — зафиксируйте название района и текст ошибки, передайте администратору.</td></tr>
+          <tr><td>Кнопка отправки говорит «пока отправлять рано»</td><td>Район не заполнил обязательное поле или не добавил объект. Пусть нажмёт «Проверить перед отправкой» и исправит подсказки на экране.</td></tr>
+          <tr><td>Маршрут нарисован не так</td><td>Пусть район не ставит двойной щелчок в конце. Нужно отменить построение, задать начало и конец заново, поставить только повороты и завершить явной кнопкой.</td></tr>
+          <tr><td>После «Загрузить ожидающие» пусто</td><td>Уточните у района: отправил ли он работу на приёмку и под тем ли районом вошёл. Затем загрузите список ещё раз.</td></tr>
+          <tr><td>Появилась ошибка соединения</td><td>Сделайте снимок экрана с ошибкой, запишите время и район. Не удаляйте черновики и не повторяйте действия много раз — передайте информацию администратору.</td></tr>
+          <tr><td>Работа уже отклонена</td><td>Откройте замечание, перешлите его ответственному району без сокращений. После исправления район направляет новую работу на приёмку.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section">
+      <h2>7. Что считать готовым результатом</h2>
+      <p>Для руководителя и смежных подразделений результат — это: утверждённый GeoJSON, архив для приёмки при необходимости и список возвращённых районам замечаний. Сохраните эти файлы в согласованной папке с датой выгрузки.</p>
+      <p class="notice">Не публикуйте выгрузку и не заменяйте ею карту без отдельного решения. Приёмка подтверждает содержание работ районов; публикация на общей карте — следующий, отдельный этап.</p>
+    </section>
+    <footer>ОДХ САО · памятка для работников префектуры · можно открыть на телефоне или распечатать</footer>
+  </main>
+</body>
+</html>
