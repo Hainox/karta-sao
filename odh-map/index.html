@@ -616,8 +616,8 @@
           ><span>Карта маршрутов ОДХ САО</span>
         </div>
         <nav class="topbar-actions" aria-label="Действия карты">
-          <a class="link-action" href="district-editor.html"
-            ><i class="fa-solid fa-pen-ruler"></i>Подготовить правки района</a
+          <a class="link-action" href="district-links.html"
+            ><i class="fa-solid fa-pen-ruler"></i>Районам: начать разметку</a
           ><a class="primary-action" href="print-1000x1400.html"
             ><i class="fa-solid fa-print"></i>Печать / PDF</a
           >
@@ -836,6 +836,7 @@
         zoomSnap: 0.25,
         preferCanvas: true,
       });
+      map.attributionControl.setPrefix(false);
       L.tileLayer(CARTO_TILE_URL, {
         attribution: CARTO_ATTRIBUTION,
         subdomains: "abcd",

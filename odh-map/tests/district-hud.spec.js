@@ -7,6 +7,7 @@ test('редактор показывает полный набор средст
   page.on('pageerror', (error) => errors.push(error.message));
   await page.goto(`${baseURL}district-editor.html`);
   await expect(page.getByRole('heading', { name: 'Карточка набора' })).toBeVisible();
+  await expect(page.locator('.leaflet-control-attribution')).not.toContainText('Leaflet');
   await expect(page.getByRole('button', { name: /Установить начало/ })).toBeVisible();
   await expect(page.getByRole('button', { name: /Установить конец/ })).toBeVisible();
   await expect(page.getByLabel('Направление сопла')).toBeVisible();
@@ -30,6 +31,11 @@ test('редактор импортирует маршрут v2 и развор�
   await page.locator('#importInput').setInputFiles({ name: 'route.geojson', mimeType: 'application/geo+json', buffer: Buffer.from(JSON.stringify(route)) });
   await expect(page.getByText('Очередь 1 · Тестовый маршрут')).toBeVisible();
   await expect(page.getByText('Сопло: слева. Без комментария')).toBeVisible();
+  await expect(page.getByRole('button', { name: /Проверить перед отправкой/ })).toBeVisible();
+  await expect(page.locator('.route-endpoint.start')).toHaveCount(1);
+  await expect(page.locator('.route-endpoint.end')).toHaveCount(1);
+  await expect(page.locator('.route-travel-arrow')).toHaveCount(2);
+  await expect(page.locator('.route-nozzle-arrow.left')).toHaveCount(1);
   await page.getByRole('button', { name: 'Развернуть направление' }).click();
   await expect(page.getByText('Сопло: справа. Без комментария')).toBeVisible();
 });
@@ -38,10 +44,19 @@ test('приёмка показывает API-поток и локальный �
   const errors = [];
   page.on('pageerror', (error) => errors.push(error.message));
   await page.goto(`${baseURL}district-review.html`);
+  await expect(page.locator('.leaflet-control-attribution')).not.toContainText('Leaflet');
   await expect(page.getByRole('button', { name: /Загрузить ожидающие/ })).toBeVisible();
   await expect(page.getByRole('button', { name: /Выгрузить утверждённые/ })).toBeVisible();
+  await expect(page.getByText('Порядок приёмки')).toBeVisible();
+  await expect(page.getByText('Тёмно-синие стрелки показывают ход техники.')).toBeVisible();
   await expect(page.getByText('Локальная проверка файла')).toBeVisible();
   await expect(page.getByText('Граница САО загружена. Подключите API или выберите GeoJSON-файлы.')).toBeVisible();
+  const route = { type: 'FeatureCollection', change_set_version: 'district_change_set_v2', district: 'Аэропорт', author: 'Иванов И.И.', features: [{ type: 'Feature', geometry: { type: 'LineString', coordinates: [[37.53, 55.82], [37.54, 55.83]] }, properties: { district: 'Аэропорт', author: 'Иванов И.И.', change_type: 'rotor_transfer', address: 'Тестовая перекидка', route_start: [37.53, 55.82], route_end: [37.54, 55.83], route_direction: 'start_to_end', nozzle_direction: 'both' } }] };
+  await page.locator('#reviewFiles').setInputFiles({ name: 'rotor.geojson', mimeType: 'application/geo+json', buffer: Buffer.from(JSON.stringify(route)) });
+  await expect(page.locator('.route-endpoint.start')).toHaveCount(1);
+  await expect(page.locator('.route-endpoint.end')).toHaveCount(1);
+  await expect(page.locator('.route-travel-arrow')).toHaveCount(2);
+  await expect(page.locator('.route-nozzle-arrow')).toHaveCount(2);
   expect(errors).toEqual([]);
 });
 
@@ -57,4 +72,12 @@ test('фото-метки появляются только в контуре п
   await expect(page.getByRole('heading', { name: 'Фото-метки префектуры' })).toBeVisible();
   await expect(page.getByRole('button', { name: /Расставить фото-метки/ })).toBeVisible();
   await expect(page.getByText('Создавать, менять и удалять фото-метки может только учётная запись префектуры.')).toBeVisible();
+});
+
+test('каталог ведёт район к правильному рабочему контуру', async ({ page }) => {
+  await page.goto('http://127.0.0.1:8766/hub/');
+  await expect(page.getByRole('heading', { name: 'Нужно расчерчивать — начните здесь' })).toBeVisible();
+  const start = page.getByRole('link', { name: /Открыть ссылку своего района/ });
+  await expect(start).toHaveAttribute('href', '../odh-map/district-links.html');
+  await expect(page.getByText('Только после зелёной проверки нажимайте «Отправить на приёмку».')).toBeVisible();
 });

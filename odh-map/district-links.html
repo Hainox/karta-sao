@@ -12,15 +12,17 @@
   <style>
     .directory { min-height:calc(100vh - 76px); padding:30px; background:#eef4f4; }
     .directory-inner { width:min(1080px, 100%); margin:0 auto; }
-    .directory-heading { margin:0 0 18px; color:var(--navy); font-size:28px; letter-spacing:-.04em; }
-    .directory-lede { max-width:760px; margin:0 0 22px; color:#45637a; font-size:14px; line-height:1.6; }
+    .directory-heading { margin:0 0 12px; color:var(--navy); font-size:30px; letter-spacing:-.04em; }
+    .directory-lede { max-width:860px; margin:0 0 20px; color:#45637a; font-size:16px; line-height:1.65; }
+    .directory-guide { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; margin:0 0 24px; padding:15px; border:2px solid #b9dcd8; border-radius:12px; background:#f3fbfa; }.directory-guide div { padding:10px; border-radius:8px; background:#fff; color:#264f62; font-size:14px; line-height:1.45; }.directory-guide b { display:block; margin-bottom:4px; color:#078f90; font-size:15px; }
     .district-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(245px, 1fr)); gap:12px; }
     .district-link-card { padding:15px; border:1px solid var(--line); border-radius:12px; background:#fff; box-shadow:0 3px 10px rgba(18,50,83,.05); }
-    .district-link-card h2 { margin:0 0 6px; color:var(--navy); font-size:14px; }
-    .district-link-card p { min-height:34px; margin:0 0 11px; color:var(--muted); font-size:10px; line-height:1.45; }
+    .district-link-card h2 { margin:0 0 6px; color:var(--navy); font-size:17px; }
+    .district-link-card p { min-height:42px; margin:0 0 11px; color:var(--muted); font-size:13px; line-height:1.5; }
+    .district-link-card .link-action,.district-link-card .control { min-height:42px; font-size:13px; }
     .district-link-card .actions { margin-top:0; }
     .copy-status { min-height:18px; margin:12px 0 0; color:#176556; font-size:12px; font-weight:700; }
-    @media (max-width:720px) { .directory { padding:20px 15px; } .directory-heading { font-size:24px; } }
+    @media (max-width:720px) { .directory { padding:20px 15px; } .directory-heading { font-size:25px; } .directory-guide { grid-template-columns:1fr; } }
   </style>
 </head>
 <body>
@@ -34,6 +36,11 @@
         <p class="eyebrow">Рассылка районам</p>
         <h1 class="directory-heading">Отдельный вход для каждого района</h1>
         <p class="directory-lede">Скопируйте ссылку и передайте её ответственному исполнителю. Район будет выбран и зафиксирован в редакторе. Ссылка не заменяет вход: отправка доступна только учётной записи, которой этот район назначен в API.</p>
+        <div class="directory-guide" aria-label="Как работать со ссылкой района">
+          <div><b>1. Откройте район</b>Нажмите «Открыть редактор района». Яркая янтарная граница на карте покажет, где можно работать.</div>
+          <div><b>2. Войдите</b>Используйте выданные префектурой e-mail и пароль. Пароль в браузере не сохраняется.</div>
+          <div><b>3. Нанесите и отправьте</b>Следуйте большой пошаговой инструкции слева от карты. Перед отправкой обязательно нажмите «Проверить».</div>
+        </div>
         <div id="districtGrid" class="district-grid" aria-live="polite"></div>
         <p id="copyStatus" class="copy-status" role="status"></p>
       </div>
@@ -53,10 +60,10 @@
       DistrictChanges.DISTRICTS.forEach((district) => {
         const card = document.createElement('article'); card.className = 'district-link-card';
         const title = document.createElement('h2'); title.textContent = district;
-        const note = document.createElement('p'); note.textContent = 'В редакторе откроется только этот район. Для отправки нужна закреплённая учётная запись.';
+        const note = document.createElement('p'); note.textContent = 'В редакторе откроется только этот район. Наносите маршруты, роторные перекидки, зоны снега и точки. Для отправки нужна закреплённая учётная запись.';
         const actions = document.createElement('div'); actions.className = 'actions';
-        const open = document.createElement('a'); open.className = 'link-action'; open.href = districtUrl(district); open.textContent = 'Открыть'; open.setAttribute('aria-label', `Открыть редактор: ${district}`);
-        const copy = document.createElement('button'); copy.className = 'control teal'; copy.type = 'button'; copy.textContent = 'Скопировать'; copy.onclick = () => copyLink(district);
+        const open = document.createElement('a'); open.className = 'link-action'; open.href = districtUrl(district); open.textContent = 'Открыть редактор района'; open.setAttribute('aria-label', `Открыть редактор: ${district}`);
+        const copy = document.createElement('button'); copy.className = 'control teal'; copy.type = 'button'; copy.textContent = 'Скопировать ссылку'; copy.onclick = () => copyLink(district);
         actions.append(open, copy); card.append(title, note, actions); grid.append(card);
       });
     })();

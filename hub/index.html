@@ -13,26 +13,27 @@
     .brand { display:flex; align-items:center; gap:10px; }
     .brand-mark { display:grid; place-items:center; flex:0 0 42px; width:42px; height:42px; overflow:hidden; border-radius:10px; }
     .brand-mark img { display:block; width:42px; height:42px; object-fit:contain; mix-blend-mode:multiply; }
-    .brand strong { display:block; font-size:16px; line-height:1.1; }
-    .brand small, .topbar-meta { color:var(--muted); font-size:10px; letter-spacing:.08em; text-transform:uppercase; }
+    .brand strong { display:block; font-size:18px; line-height:1.1; }
+    .brand small, .topbar-meta { color:var(--muted); font-size:12px; letter-spacing:.06em; text-transform:uppercase; }
     .brand small { display:block; margin-top:3px; }
     .topbar-meta { white-space:nowrap; }
     .catalog { width:min(100% - 32px, 1040px); margin:28px auto; padding:28px; background:rgba(255,255,255,.97); border:1px solid var(--line); border-radius:18px; box-shadow:var(--shadow); }
     .eyebrow { margin:0; color:var(--accent); font-size:11px; font-weight:800; letter-spacing:.09em; text-transform:uppercase; }
     h1 { margin:8px 0; font-size:clamp(25px,4vw,34px); line-height:1.1; }
-    .intro { max-width:700px; margin:0; color:var(--muted); font-size:14px; line-height:1.55; }
+    .intro { max-width:780px; margin:0; color:var(--muted); font-size:16px; line-height:1.6; }
     .catalog-section { margin-top:28px; }
-    .catalog-section h2 { margin:0 0 12px; font-size:18px; }
+    .catalog-section h2 { margin:0 0 12px; font-size:21px; }
     .map-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
-    .map-card { display:flex; flex-direction:column; min-height:178px; padding:18px; border:1px solid var(--line); border-radius:14px; background:var(--panel); color:inherit; text-decoration:none; transition:border-color .15s, transform .15s, box-shadow .15s; }
+    .map-card { display:flex; flex-direction:column; min-height:190px; padding:20px; border:1px solid var(--line); border-radius:14px; background:var(--panel); color:inherit; text-decoration:none; transition:border-color .15s, transform .15s, box-shadow .15s; }
     .map-card:hover, .map-card:focus-visible { border-color:var(--accent); box-shadow:0 8px 22px rgba(16,38,54,.1); transform:translateY(-2px); outline:none; }
     .card-top { display:flex; align-items:center; gap:10px; }
     .card-icon { display:grid; place-items:center; flex:0 0 34px; width:34px; height:34px; border-radius:9px; background:var(--ink); color:#f5c86a; font-size:11px; font-weight:800; }
-    .map-card h3 { margin:0; font-size:15px; line-height:1.25; }
-    .map-card p { margin:11px 0 0; color:var(--muted); font-size:12px; line-height:1.45; }
-    .data-scope { margin-top:auto; padding-top:13px; color:#47706b; font-size:10px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; }
-    .direct-link { margin-top:7px; color:var(--accent); font-size:12px; font-weight:800; }
-    @media (max-width:780px) { .topbar { min-height:54px; padding:8px 14px; } .topbar-meta { display:none; } .catalog { width:min(100% - 24px, 1040px); margin:12px auto 24px; padding:20px; } .map-list { grid-template-columns:1fr; } }
+    .map-card h3 { margin:0; font-size:18px; line-height:1.25; }
+    .map-card p { margin:11px 0 0; color:var(--muted); font-size:15px; line-height:1.5; }
+    .data-scope { margin-top:auto; padding-top:13px; color:#47706b; font-size:12px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; }
+    .direct-link { margin-top:9px; color:var(--accent); font-size:15px; font-weight:800; }
+    .start-here { display:grid; grid-template-columns:1.15fr 1fr; gap:22px; margin-top:24px; padding:24px; border:3px solid var(--accent); border-radius:16px; background:linear-gradient(135deg,#f0fbf8,#fff); }.start-here h2 { margin:0 0 8px; color:#075f5a; font-size:25px; }.start-here p { margin:0; color:#315d59; font-size:16px; line-height:1.6; }.start-steps { display:grid; gap:10px; align-content:start; }.start-step { display:flex; gap:10px; align-items:flex-start; padding:11px; border-radius:10px; background:#fff; color:#254e4a; font-size:15px; line-height:1.45; }.step-number { display:grid; place-items:center; flex:0 0 32px; width:32px; height:32px; border-radius:50%; background:var(--accent); color:#fff; font-weight:800; }.start-button { display:inline-flex; align-items:center; justify-content:center; min-height:52px; margin-top:16px; padding:0 18px; border-radius:10px; background:var(--accent); color:#fff; font-size:17px; font-weight:800; text-decoration:none; }.start-button:hover,.start-button:focus-visible { background:#096b66; outline:3px solid #aee2dc; outline-offset:3px; }
+    @media (max-width:780px) { .topbar { min-height:54px; padding:8px 14px; } .topbar-meta { display:none; } .catalog { width:min(100% - 24px, 1040px); margin:12px auto 24px; padding:20px; } .map-list,.start-here { grid-template-columns:1fr; } }
   </style>
 </head>
 <body>
@@ -46,9 +47,29 @@
       <h1>Карты и печатные формы САО</h1>
       <p class="intro">Откройте рабочую карту для анализа данных или отдельную форму для подготовки листа A3 и сохранения в PDF.</p>
 
+      <section class="start-here" aria-labelledby="start-here-heading">
+        <div>
+          <p class="eyebrow">Для районов · главное действие</p>
+          <h2 id="start-here-heading">Нужно расчерчивать — начните здесь</h2>
+          <p>Эта кнопка откроет отдельную ссылку вашего района. В редакторе можно спокойно отметить все необходимые маршруты, роторные перекидки, зоны складирования снега и точки. Публичная карта при этом не меняется сама по себе: сначала обязательна проверка префектуры.</p>
+          <a class="start-button" href="../odh-map/district-links.html">Открыть ссылку своего района →</a>
+        </div>
+        <div class="start-steps" aria-label="Три шага работы района">
+          <div class="start-step"><span class="step-number">1</span><span><b>Откройте свой район.</b><br>Выберите название района в списке и перейдите по ссылке.</span></div>
+          <div class="start-step"><span class="step-number">2</span><span><b>Войдите и начните разметку.</b><br>На карте крупно показан порядок действий: начало, конец, линия, проверка.</span></div>
+          <div class="start-step"><span class="step-number">3</span><span><b>Проверьте и отправьте.</b><br>Только после зелёной проверки нажимайте «Отправить на приёмку».</span></div>
+        </div>
+      </section>
+
       <section class="catalog-section" aria-labelledby="interactive-heading">
         <h2 id="interactive-heading">Рабочие карты</h2>
         <div class="map-list">
+          <a class="map-card" href="../odh-map/district-links.html">
+            <span class="card-top"><span class="card-icon">СТ</span><span><h3>Районам: разметить необходимые объекты</h3></span></span>
+            <p>Правильный старт для исполнителя района: получить ссылку, войти и нанести маршруты, роторные перекидки, зоны и точки.</p>
+            <span class="data-scope">Рабочая разметка · сначала проверка, затем приёмка</span>
+            <span class="direct-link">Открыть список районов →</span>
+          </a>
           <a class="map-card" href="../">
             <span class="card-top"><span class="card-icon">ДВ</span><span><h3>Дворы и участки САО</h3></span></span>
             <p>Районы, участки, места накопления отходов, детские и спортивные площадки.</p>
