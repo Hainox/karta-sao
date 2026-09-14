@@ -160,7 +160,10 @@ def build(out_path, smm_path, routes_path, smm_dir, coa_path):
         route = route_by_variant.get(variant, {}).get("route_direction", {})
         nozzle = route_by_variant.get(variant, {}).get("nozzle_direction", {})
         svg_name = Path(yard["properties"].get("scheme", f"dt{variant[-1]}.svg").split("?")[0]).name
-        svg_b64 = base64.b64encode((Path(smm_dir) / svg_name).read_bytes()).decode("ascii")
+        # SVGs are text files; normalize checkout line endings so the embedded
+        # data URI is identical on Windows and Linux.
+        svg_bytes = (Path(smm_dir) / svg_name).read_text(encoding="utf-8").encode("utf-8")
+        svg_b64 = base64.b64encode(svg_bytes).decode("ascii")
         cards.append(card(code, yard, route, nozzle, svg_b64))
 
     html = f"""<!doctype html>
