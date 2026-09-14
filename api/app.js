@@ -129,6 +129,7 @@ export function createApp({ repository, boundary, jwtSecret, allowedOrigins = []
     try {
       const status = request.query.status;
       if (status && !['submitted', 'approved', 'rejected'].includes(status)) return response.status(400).json({ error: 'Неизвестный статус.' });
+      if (request.user.role === 'district_editor' && !request.user.district) return response.status(403).json({ error: 'Учётной записи редактора не назначен район.' });
       const district = REVIEW_ROLES.has(request.user.role) ? request.query.district : request.user.district;
       const submissions = await repository.listSubmissions({ status, district });
       response.json({ submissions });

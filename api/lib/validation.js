@@ -18,6 +18,8 @@ export const TYPES = {
 };
 
 const ROUTE_TYPES = new Set(['queue', 'rotor_transfer']);
+const SEGMENT_EPSILON = 1e-12;
+export const MAX_GEOMETRY_VERTICES = 2000;
 
 function coordinate(value) {
   return Array.isArray(value) && value.length >= 2 && Number.isFinite(value[0]) && Number.isFinite(value[1]) &&
@@ -40,13 +42,94 @@ function pointInRing(point, ring) {
   return inside;
 }
 
+function polygonCoordinates(geometry) {
+  if (geometry?.type === 'Polygon') return [geometry.coordinates];
+  if (geometry?.type === 'MultiPolygon') return Array.isArray(geometry.coordinates) ? geometry.coordinates : [];
+  return [];
+}
+
+function boundaryPolygons(boundary) {
+  const features = boundary?.features || [];
+  const saoBoundary = features.find((feature) => feature?.properties?.feature_kind === 'boundary_sao');
+  return (saoBoundary ? [saoBoundary] : features).flatMap((feature) => polygonCoordinates(feature?.geometry));
+}
+
+function boundarySegments(polygons) {
+  const segments = [];
+  for (const polygon of polygons) {
+    for (const ring of polygon || []) {
+      if (!Array.isArray(ring)) continue;
+      for (let index = 1; index < ring.length; index++) {
+        const start = ring[index - 1];
+        const end = ring[index];
+        if (!coordinate(start) || !coordinate(end)) continue;
+        segments.push({
+          start,
+          end,
+          minX: Math.min(start[0], end[0]),
+          maxX: Math.max(start[0], end[0]),
+          minY: Math.min(start[1], end[1]),
+          maxY: Math.max(start[1], end[1])
+        });
+      }
+    }
+  }
+  return segments;
+}
+
+function orientation(first, second, third) {
+  return (second[0] - first[0]) * (third[1] - first[1]) - (second[1] - first[1]) * (third[0] - first[0]);
+}
+
+function onSegment(first, second, point) {
+  return Math.abs(orientation(first, second, point)) <= SEGMENT_EPSILON &&
+    point[0] >= Math.min(first[0], second[0]) - SEGMENT_EPSILON && point[0] <= Math.max(first[0], second[0]) + SEGMENT_EPSILON &&
+    point[1] >= Math.min(first[1], second[1]) - SEGMENT_EPSILON && point[1] <= Math.max(first[1], second[1]) + SEGMENT_EPSILON;
+}
+
+function segmentsIntersect(firstStart, firstEnd, secondStart, secondEnd) {
+  const first = orientation(firstStart, firstEnd, secondStart);
+  const second = orientation(firstStart, firstEnd, secondEnd);
+  const third = orientation(secondStart, secondEnd, firstStart);
+  const fourth = orientation(secondStart, secondEnd, firstEnd);
+  if ((first > SEGMENT_EPSILON && second < -SEGMENT_EPSILON || first < -SEGMENT_EPSILON && second > SEGMENT_EPSILON) &&
+    (third > SEGMENT_EPSILON && fourth < -SEGMENT_EPSILON || third < -SEGMENT_EPSILON && fourth > SEGMENT_EPSILON)) return true;
+  return Math.abs(first) <= SEGMENT_EPSILON && onSegment(firstStart, firstEnd, secondStart) ||
+    Math.abs(second) <= SEGMENT_EPSILON && onSegment(firstStart, firstEnd, secondEnd) ||
+    Math.abs(third) <= SEGMENT_EPSILON && onSegment(secondStart, secondEnd, firstStart) ||
+    Math.abs(fourth) <= SEGMENT_EPSILON && onSegment(secondStart, secondEnd, firstEnd);
+}
+
+function segmentWithinBoundary(start, end, segments) {
+  if (!coordinate(start) || !coordinate(end)) return false;
+  for (const boundarySegment of segments) {
+    if (Math.max(start[0], end[0]) < boundarySegment.minX - SEGMENT_EPSILON ||
+      Math.min(start[0], end[0]) > boundarySegment.maxX + SEGMENT_EPSILON ||
+      Math.max(start[1], end[1]) < boundarySegment.minY - SEGMENT_EPSILON ||
+      Math.min(start[1], end[1]) > boundarySegment.maxY + SEGMENT_EPSILON) continue;
+    if (segmentsIntersect(start, end, boundarySegment.start, boundarySegment.end)) return false;
+  }
+  return true;
+}
+
+function polygonContainsPoint(point, rings) {
+  return Array.isArray(rings) && Array.isArray(rings[0]) && pointInRing(point, rings[0]) &&
+    !rings.slice(1).some((ring) => Array.isArray(ring) && pointInRing(point, ring));
+}
+
+function polygonContainsBoundaryHole(geometry, polygons) {
+  return polygons.some((polygon) => (polygon || []).slice(1).some((ring) =>
+    Array.isArray(ring) && ring.length && polygonContainsPoint(ring[0], geometry.coordinates)));
+}
+
 function containsPoint(point, boundary) {
   if (!coordinate(point) || !boundary?.features) return false;
-  return boundary.features.some(({ geometry }) => {
-    if (!geometry) return false;
-    const polygons = geometry.type === 'Polygon' ? [geometry.coordinates] : geometry.type === 'MultiPolygon' ? geometry.coordinates : [];
-    return polygons.some((polygon) => pointInRing(point, polygon[0]) && !polygon.slice(1).some((ring) => pointInRing(point, ring)));
-  });
+  return boundaryPolygons(boundary).some((polygon) => polygonInBoundary(point, polygon));
+}
+
+function polygonInBoundary(point, polygon) {
+  return Array.isArray(polygon) && Array.isArray(polygon[0]) && pointInRing(point, polygon[0]) &&
+    !polygon.slice(1).some((ring) => Array.isArray(ring) && pointInRing(point, ring));
 }
 
 export function isPointWithinBoundary(point, boundary) {
@@ -55,9 +138,48 @@ export function isPointWithinBoundary(point, boundary) {
 
 function geometryCoordinates(geometry) {
   if (geometry?.type === 'Point') return [geometry.coordinates];
-  if (geometry?.type === 'LineString') return geometry.coordinates || [];
-  if (geometry?.type === 'Polygon') return (geometry.coordinates || []).flat();
+  if (geometry?.type === 'LineString') return Array.isArray(geometry.coordinates) ? geometry.coordinates : [];
+  if (geometry?.type === 'Polygon') return Array.isArray(geometry.coordinates) ? geometry.coordinates.flatMap((ring) => Array.isArray(ring) ? ring : [ring]) : [];
   return [];
+}
+
+function geometrySegments(geometry) {
+  const rings = geometry?.type === 'LineString' ? [geometry.coordinates] : geometry?.type === 'Polygon' ? geometry.coordinates : [];
+  return (Array.isArray(rings) ? rings : []).flatMap((ring) => {
+    if (!Array.isArray(ring)) return [];
+    return ring.slice(1).map((end, index) => [ring[index], end]);
+  });
+}
+
+function ringsAreClosedAndValid(rings) {
+  return Array.isArray(rings) && rings.length > 0 && rings.every((ring) =>
+    Array.isArray(ring) && ring.length >= 4 && JSON.stringify(ring[0]) === JSON.stringify(ring.at(-1)));
+}
+
+function countGeometryVertices(geometry, limit) {
+  const coordinates = geometry?.coordinates;
+  if (!Array.isArray(coordinates)) return 0;
+  if (coordinates.length > MAX_GEOMETRY_VERTICES) return MAX_GEOMETRY_VERTICES + 1;
+  let count = 0;
+  const isPosition = (value) => value.length >= 2 && typeof value[0] === 'number' && typeof value[1] === 'number';
+  if (isPosition(coordinates)) return 1;
+  const stack = [{ value: coordinates, index: 0 }];
+  while (stack.length) {
+    const frame = stack.at(-1);
+    if (frame.index >= frame.value.length) {
+      stack.pop();
+      continue;
+    }
+    const child = frame.value[frame.index++];
+    if (!Array.isArray(child)) continue;
+    if (child.length > MAX_GEOMETRY_VERTICES) return MAX_GEOMETRY_VERTICES + 1;
+    if (isPosition(child)) {
+      if (++count > limit) return count;
+    } else {
+      stack.push({ value: child, index: 0 });
+    }
+  }
+  return count;
 }
 
 export function validateChangeSet(changeSet, boundary) {
@@ -69,7 +191,19 @@ export function validateChangeSet(changeSet, boundary) {
   if (!Array.isArray(changeSet?.features) || !changeSet.features.length) errors.push('Нужно добавить хотя бы один объект.');
   if (changeSet?.features?.length > 500) errors.push('В одном наборе не более 500 объектов.');
 
-  for (const [index, feature] of (changeSet?.features || []).entries()) {
+  const features = Array.isArray(changeSet?.features) ? changeSet.features : [];
+  let vertexCount = 0;
+  for (const feature of features) {
+    vertexCount += countGeometryVertices(feature?.geometry, MAX_GEOMETRY_VERTICES - vertexCount);
+    if (vertexCount > MAX_GEOMETRY_VERTICES) {
+      errors.push(`В наборе не более ${MAX_GEOMETRY_VERTICES} координатных точек суммарно.`);
+      return { valid: false, errors };
+    }
+  }
+
+  const polygons = boundaryPolygons(boundary);
+  const edges = boundarySegments(polygons);
+  for (const [index, feature] of features.entries()) {
     const number = index + 1;
     const properties = feature?.properties || {};
     const expectedGeometry = TYPES[properties.change_type];
@@ -79,19 +213,22 @@ export function validateChangeSet(changeSet, boundary) {
     if (typeof properties.address !== 'string' || !properties.address.trim()) errors.push(`Объект ${number}: укажите адрес или ориентир.`);
     if (properties.change_type === 'queue' && !['1', '2', '3'].includes(String(properties.queue_priority))) errors.push(`Объект ${number}: очередь должна быть 1, 2 или 3.`);
     if (ROUTE_TYPES.has(properties.change_type) && feature.geometry.type === 'LineString') {
-      const points = feature.geometry.coordinates || [];
+      const points = Array.isArray(feature.geometry.coordinates) ? feature.geometry.coordinates : [];
       if (!sameCoordinate(properties.route_start, points[0]) || !sameCoordinate(properties.route_end, points.at(-1))) errors.push(`Объект ${number}: начало и конец маршрута должны быть явно заданы.`);
       if (properties.route_direction !== 'start_to_end') errors.push(`Объект ${number}: направление маршрута повреждено.`);
       if (!['left', 'right', 'both'].includes(properties.nozzle_direction)) errors.push(`Объект ${number}: направление сопла — left, right или both.`);
     }
-    if (feature.geometry.type === 'LineString' && feature.geometry.coordinates.length < 2) errors.push(`Объект ${number}: маршрут должен содержать минимум две точки.`);
+    if (feature.geometry.type === 'LineString' && (!Array.isArray(feature.geometry.coordinates) || feature.geometry.coordinates.length < 2)) errors.push(`Объект ${number}: маршрут должен содержать минимум две точки.`);
     if (feature.geometry.type === 'Polygon') {
-      const ring = feature.geometry.coordinates?.[0] || [];
-      if (ring.length < 4 || JSON.stringify(ring[0]) !== JSON.stringify(ring.at(-1))) errors.push(`Объект ${number}: зона должна быть замкнутым полигоном.`);
+      if (!ringsAreClosedAndValid(feature.geometry.coordinates)) errors.push(`Объект ${number}: все кольца зоны должны быть замкнутыми полигонами.`);
     }
     for (const [coordinateIndex, point] of geometryCoordinates(feature.geometry).entries()) {
       if (!coordinate(point) || !containsPoint(point, boundary)) errors.push(`Объект ${number}, координата ${coordinateIndex + 1}: вне границы САО.`);
     }
+    for (const [segmentIndex, [start, end]] of geometrySegments(feature.geometry).entries()) {
+      if (!segmentWithinBoundary(start, end, edges)) errors.push(`Объект ${number}, сторона ${segmentIndex + 1}: пересекает границу САО.`);
+    }
+    if (feature.geometry.type === 'Polygon' && polygonContainsBoundaryHole(feature.geometry, polygons)) errors.push(`Объект ${number}: зона пересекает исключённую область САО.`);
   }
   return { valid: errors.length === 0, errors };
 }

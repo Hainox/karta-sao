@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import { readFile } from 'node:fs/promises';
 
 const baseURL = 'http://127.0.0.1:8766/odh-map/';
 
@@ -37,9 +38,143 @@ test('маршрут сохраняется по явной кнопке зав�
   await map.click({ position: { x: 450, y: 390 } });
   await page.locator('#drawButton').click();
   await expect(page.getByRole('button', { name: /Завершить маршрут/ })).toBeVisible();
+  const previewLine = page.locator('#map .leaflet-overlay-pane path[stroke="#ff4e64"]');
+  await expect(previewLine).toHaveCount(1);
+  expect(await previewLine.getAttribute('stroke-dasharray')).toBeNull();
   await page.locator('#drawButton').click();
   await expect(page.getByText('Очередь 1 · Тестовый проезд', { exact: true })).toBeVisible();
   await expect(page.locator('.route-travel-arrow')).toHaveCount(2);
+  await expect(page.locator('#status')).toContainText('Добавлено: Очередь 1');
+  const draftLine = page.locator('#map .leaflet-overlay-pane path[stroke="#ff4e64"]');
+  await expect(draftLine).toHaveCount(1);
+  expect(await draftLine.getAttribute('stroke-dasharray')).toBeNull();
+  const draft = await page.evaluate(() => JSON.parse(localStorage.getItem('odh-map-district-change-draft-v2')));
+  expect(draft.features).toHaveLength(1);
+  expect(draft.features[0].geometry.coordinates).toHaveLength(2);
+  await page.reload();
+  await expect(page.getByText('Очередь 1 · Тестовый проезд', { exact: true })).toBeVisible();
+
+  const [download] = await Promise.all([
+    page.waitForEvent('download'),
+    page.locator('#exportButton').click()
+  ]);
+  const exported = JSON.parse(await readFile(await download.path(), 'utf8'));
+  expect(exported.features).toHaveLength(1);
+  expect(exported.features[0].geometry.type).toBe('LineString');
+
+  await page.goto(`${baseURL}district-review.html`);
+  await page.locator('#reviewFiles').setInputFiles({
+    name: download.suggestedFilename(),
+    mimeType: 'application/geo+json',
+    buffer: Buffer.from(JSON.stringify(exported))
+  });
+  await expect(page.locator('.route-endpoint.start')).toHaveCount(1);
+  await expect(page.locator('.route-endpoint.end')).toHaveCount(1);
+  await expect(page.locator('.route-travel-arrow')).toHaveCount(2);
+});
+
+test('маршрут завершается и отображается, даже если браузер запрещает локальное сохранение', async ({ page }) => {
+  await page.addInitScript(() => {
+    const originalSetItem = Storage.prototype.setItem;
+    Storage.prototype.setItem = function (key, value) {
+      if (key === 'odh-map-district-change-draft-v2') throw new DOMException('Storage is unavailable', 'QuotaExceededError');
+      return originalSetItem.call(this, key, value);
+    };
+  });
+  await page.goto(`${baseURL}district-editor.html`);
+  await page.locator('#district').selectOption('Аэропорт');
+  await page.locator('#author').fill('Тестовый исполнитель');
+  await page.locator('#address').fill('Синтетический тестовый проезд');
+  const map = page.locator('#map');
+  await page.locator('#setStart').click();
+  await map.click({ position: { x: 420, y: 360 } });
+  await page.locator('#setEnd').click();
+  await map.click({ position: { x: 450, y: 390 } });
+  await page.locator('#drawButton').click();
+  await expect(page.getByRole('button', { name: /Завершить маршрут/ })).toBeVisible();
+  await page.locator('#drawButton').click();
+  await expect(page.getByText('Очередь 1 · Синтетический тестовый проезд', { exact: true })).toBeVisible();
+  await expect(page.getByRole('button', { name: /Нарисовать маршрут/ })).toBeVisible();
+  await expect(page.locator('#status')).toContainText('локальное сохранение не сработало');
+  await page.locator('#saveButton').click();
+  await expect(page.locator('#status')).toContainText('Браузер не сохранил черновик');
+});
+
+test('редактор открывается с пустым черновиком, если чтение localStorage запрещено', async ({ page }) => {
+  const errors = [];
+  page.on('pageerror', (error) => errors.push(error.message));
+  await page.addInitScript(() => {
+    const originalGetItem = Storage.prototype.getItem;
+    Storage.prototype.getItem = function (key) {
+      if (key === 'odh-map-district-change-draft-v2' || key === 'odh-map-district-change-draft-v1') throw new DOMException('Storage is unavailable', 'SecurityError');
+      return originalGetItem.call(this, key);
+    };
+  });
+  await page.goto(`${baseURL}district-editor.html`);
+  await expect(page.getByRole('heading', { name: 'Карточка набора' })).toBeVisible();
+  await expect(page.locator('#featureList')).toContainText('Пока ничего не добавлено.');
+  await expect(page.locator('#drawButton')).toBeEnabled();
+  expect(errors).toEqual([]);
+});
+
+test('повреждённый черновик не мешает запуску, если localStorage не даёт его удалить', async ({ page }) => {
+  const errors = [];
+  page.on('pageerror', (error) => errors.push(error.message));
+  await page.addInitScript(() => {
+    const key = 'odh-map-district-change-draft-v2';
+    const originalSetItem = Storage.prototype.setItem;
+    const originalRemoveItem = Storage.prototype.removeItem;
+    originalSetItem.call(localStorage, key, '{invalid json');
+    Storage.prototype.removeItem = function (itemKey) {
+      if (itemKey === key) throw new DOMException('Storage is unavailable', 'SecurityError');
+      return originalRemoveItem.call(this, itemKey);
+    };
+  });
+  await page.goto(`${baseURL}district-editor.html`);
+  await expect(page.getByRole('heading', { name: 'Карточка набора' })).toBeVisible();
+  await expect(page.locator('#featureList')).toContainText('Пока ничего не добавлено.');
+  await expect(page.locator('#drawButton')).toBeEnabled();
+  expect(errors).toEqual([]);
+});
+
+test('точечный объект остаётся в черновике и сообщает об отказе localStorage', async ({ page }) => {
+  await page.addInitScript(() => {
+    const originalSetItem = Storage.prototype.setItem;
+    Storage.prototype.setItem = function (key, value) {
+      if (key === 'odh-map-district-change-draft-v2') throw new DOMException('Storage is unavailable', 'QuotaExceededError');
+      return originalSetItem.call(this, key, value);
+    };
+  });
+  await page.goto(`${baseURL}district-editor.html`);
+  await page.locator('#district').selectOption('Аэропорт');
+  await page.locator('#author').fill('Тестовый исполнитель');
+  await page.locator('#address').fill('Синтетическая точка для теста');
+  await page.locator('#changeType').selectOption('temporary_snow_storage');
+  await page.locator('#drawButton').click();
+  await page.locator('#map').click({ position: { x: 420, y: 360 } });
+  await expect(page.getByText('Временное складирование снега · Синтетическая точка для теста', { exact: true })).toBeVisible();
+  await expect(page.locator('#status')).toContainText('Браузер не сохранил черновик');
+  await expect(page.locator('#drawButton')).toBeEnabled();
+});
+
+test('совпавшие начало и конец не сбрасывают рисование до добавления поворота', async ({ page }) => {
+  await page.goto(`${baseURL}district-editor.html`);
+  await page.locator('#district').selectOption('Аэропорт');
+  await page.locator('#author').fill('Тестовый исполнитель');
+  await page.locator('#address').fill('Синтетический замкнутый маршрут');
+  const map = page.locator('#map');
+  await page.locator('#setStart').click();
+  await map.click({ position: { x: 420, y: 360 } });
+  await page.locator('#setEnd').click();
+  await map.click({ position: { x: 420, y: 360 } });
+  await page.locator('#drawButton').click();
+  await page.locator('#drawButton').click();
+  await expect(page.locator('#status')).toContainText('Начало и конец совпадают');
+  await expect(page.getByRole('button', { name: /Завершить маршрут/ })).toBeVisible();
+
+  await map.click({ position: { x: 435, y: 375 } });
+  await page.locator('#drawButton').click();
+  await expect(page.getByText('Очередь 1 · Синтетический замкнутый маршрут', { exact: true })).toBeVisible();
 });
 
 test('редактор импортирует маршрут v2 и разворачивает его направление', async ({ page }) => {
@@ -106,10 +241,10 @@ test('каталог ведёт район к правильному рабоч�
 });
 
 test('памятка префектуры объясняет приёмку и доступна из рабочего контура', async ({ page }) => {
-  await page.goto(`${baseURL}district-review.html`);
+  await page.goto(`${baseURL}district-review.html`, { waitUntil:'domcontentloaded' });
   await expect(page.getByRole('link', { name: /Памятка префектуры/ })).toHaveAttribute('href', 'prefecture-guide.html');
 
-  await page.goto(`${baseURL}prefecture-guide.html`);
+  await page.goto(`${baseURL}prefecture-guide.html`, { waitUntil:'domcontentloaded' });
   await expect(page.getByRole('heading', { name: 'Памятка префектуры: как принимать карты и помогать районам' })).toBeVisible();
   await expect(page.getByText('Загрузить ожидающие', { exact: true }).first()).toBeVisible();
   await expect(page.getByText('Публичная карта сама от этого не меняется', { exact: false })).toBeVisible();
