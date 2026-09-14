@@ -48,15 +48,17 @@ def test_odh_point_symbols_stay_within_sao_boundary_and_dry_snow_dumps_are_publi
     }
 
 
-def test_odh_point_symbols_use_the_same_zoom_scale_as_the_main_atlas():
-    """ОДХ markers use the main atlas sizes: 9, 13 and 18 px by zoom."""
+def test_odh_point_symbols_are_centered_and_route_detail_tracks_zoom():
+    """ОДХ point icons have a stable centered hitbox while route detail follows zoom."""
     markup = page("odh-map/index.html")
-    assert "iconSize:[18,18]" in markup
-    assert "iconAnchor:[9,9]" in markup
-    assert ".odh-symbol-compact" in markup
-    assert ".odh-symbol-small" in markup
-    assert "function syncSymbolScale" in markup
-    assert "zoomend" in markup
+    assert ".point-icon" in markup
+    assert "iconSize: [24, 24]" in markup
+    assert "iconAnchor: [12, 12]" in markup
+    assert 'function routeDetailLevel(zoom = map.getZoom())' in markup
+    assert 'if (zoom < 12.75) return "overview"' in markup
+    assert 'if (zoom < 14) return "context"' in markup
+    assert 'map.on("zoomend", syncRouteDetail)' in markup
+    assert "refreshDirections();" in markup
 
 
 def test_healthcare_layer_has_only_officially_confirmed_points_and_expected_gp6_branches():
@@ -175,6 +177,7 @@ def test_smm_print_a3_form_is_self_contained_and_in_sync_with_generator():
             cwd=repo,
             capture_output=True,
             text=True,
+            encoding="utf-8",
             env={**os.environ, "PYTHONUTF8": "1"},
         )
         assert out.read_text(encoding="utf-8") == markup
@@ -213,6 +216,37 @@ def test_root_map_exposes_smm_variants_and_direction_overlays():
     assert variants == {"dt1", "dt2", "dt3", "dt4", "dt5"}
     assert any(feature["properties"]["feature_kind"] == "route_direction" for feature in data["features"])
     assert any(feature["properties"]["feature_kind"] == "nozzle_direction" for feature in data["features"])
+
+
+def test_root_map_filters_urn_clusters_and_smm_directions_with_selected_area():
+    """District/section filters apply to clustered urns and every SMM route overlay."""
+    markup = page("index.html")
+    assert "state.urnsClusterer.update({ features: records.filter(isVisible)" in markup
+    assert "function isSmmVariantVisible(variantId)" in markup
+    assert "state.smmRouteItems.filter((item) => isSmmVariantVisible(item.variantId))" in markup
+    assert "function routeArrowPositions(coordinates" in markup
+    assert "route-vector movement route-vector-line" in markup
+
+    routes = json.loads(Path("smm_routes.geojson").read_text(encoding="utf-8"))
+    outlines = {
+        feature["properties"]["variant_id"]: feature["properties"]
+        for feature in routes["features"]
+        if feature["properties"].get("feature_kind") == "variant_outline"
+    }
+    directions = [
+        feature for feature in routes["features"]
+        if feature["properties"].get("feature_kind") in {"route_direction", "nozzle_direction"}
+    ]
+    assert len(outlines) == 5
+    assert all(outlines[feature["properties"]["variant_id"]].get("district") for feature in directions)
+
+
+def test_dt2_map_card_uses_the_same_address_as_its_published_geometry():
+    """The SMM selector and quick-zoom metadata must name the corrected ASU address."""
+    markup = page("smm/index.html")
+    assert "ул. Дубнинская, д. 30Б · Восточное Дегунино" in markup
+    assert "addr:'ул. Дубнинская, д. 30Б'" in markup
+    assert "addr:'ул. Дубнинская, д. 30'" not in markup
 
 
 def test_dt1_dt2_reference_routes_stay_in_inner_yard_not_external_perimeter():
@@ -258,7 +292,8 @@ def test_reference_routes_for_dt1_dt2_are_labeled_as_diagrams_not_gps():
             and feature["properties"].get("feature_kind") == "nozzle_direction"
         )
         assert route["properties"]["source"] == "reference_scheme"
-        assert "приложенным схемам" in route["properties"]["status"].lower()
+        assert "по приложенной схеме" in route["properties"]["status"].lower()
+        assert route["properties"]["route_origin"] == "inner_yard_reference"
         assert nozzle["properties"]["source"] == "reference_scheme"
 
 
@@ -298,8 +333,8 @@ def test_smm_routes_overlay_skips_malformed_nozzle_measurements():
         path.unlink(missing_ok=True)
 
 
-def test_smm_routes_overlay_uses_gps_tracks_when_present():
-    """GPX/nozzle tracks must replace schematic anchors; variants without tracks keep them."""
+def test_smm_routes_overlay_uses_tracks_with_explicit_provenance():
+    """A declared GPS track replaces schematic anchors; GPX alone does not imply GPS."""
     import shutil
     import tempfile
 
@@ -318,7 +353,11 @@ def test_smm_routes_overlay_uses_gps_tracks_when_present():
             encoding="utf-8",
         )
         (tracks / "dt1.nozzle.json").write_text(
-            json.dumps({"points": [[37.5123, 55.7942, 20], [37.5125, 55.7942, 25], [37.5127, 55.7942, 15]]}),
+            json.dumps({
+                "route_source_kind": "gps",
+                "nozzle_source_kind": "measurement",
+                "points": [[37.5123, 55.7942, 20], [37.5125, 55.7942, 25], [37.5127, 55.7942, 15]],
+            }),
             encoding="utf-8",
         )
         out = work_dir / "smm_routes.geojson"
@@ -328,6 +367,7 @@ def test_smm_routes_overlay_uses_gps_tracks_when_present():
             cwd=Path(__file__).resolve().parents[1],
             capture_output=True,
             text=True,
+            encoding="utf-8",
             env={**os.environ, "PYTHONUTF8": "1"},
         )
 
@@ -345,7 +385,8 @@ def test_smm_routes_overlay_uses_gps_tracks_when_present():
             f for f in data["features"]
             if f["properties"]["variant_id"] == "dt1" and f["properties"]["feature_kind"] == "nozzle_direction"
         )
-        assert nozzle["properties"]["source"] == "json"
+        assert nozzle["properties"]["source"] == "measurement"
+        assert nozzle["properties"]["nozzle_origin"] == "measurement"
         assert abs(nozzle["properties"]["bearing"] - 20) < 2.0
         assert nozzle["properties"]["nozzle_track"] == [[37.5123, 55.7942, 20], [37.5125, 55.7942, 25], [37.5127, 55.7942, 15]]
 

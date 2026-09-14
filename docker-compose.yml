@@ -23,7 +23,11 @@ services:
         condition: service_healthy
     environment:
       PORT: 8787
-      DATABASE_URL: postgresql://${POSTGRES_USER:-odh_sao}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-odh_sao}
+      PGHOST: postgres
+      PGPORT: 5432
+      PGDATABASE: ${POSTGRES_DB:-odh_sao}
+      PGUSER: ${POSTGRES_USER:-odh_sao}
+      PGPASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
       JWT_SECRET: ${JWT_SECRET:?Set JWT_SECRET in .env}
       ALLOWED_ORIGINS: ${ALLOWED_ORIGINS:-https://hainox.github.io,http://127.0.0.1:8766}
     ports:

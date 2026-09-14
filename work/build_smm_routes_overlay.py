@@ -5,19 +5,17 @@
   - route_direction  — направление движения по маршруту;
   - nozzle_direction — направление выброса снега.
 
-Источники направлений, в порядке приоритета:
-  1. Реальные GPS-треки из work/smm_tracks/ (если есть) или проектные линии
-     из приложенных схем в том же техническом формате GPX:
-       dt1.gpx ... dt5.gpx          — трек движения машины: из него строится
-                                      геометрия LineString; статус источника
-                                      определяется метаданными, а азимут
-                                      вычисляется по сегментам;
-       dt1.nozzle.json ... — замеры направлений выброса: точки с азимутами
-                                      ({"points": [[lng, lat, bearing], ...]}
-                                      или FeatureCollection с bearing).
-  2. Иначе — схематичный якорь на контуре из smm.geojson (прежнее поведение):
-     азимут и семантика берутся из утверждённых схем smm/dt*.svg и паспортных
-     описаний (work/smm-karta-sao). Для вариантов, где направление выброса
+Источники направлений:
+  - Файлы dt1.gpx ... dt5.gpx хранят линии движения в GPX. GPX — только формат:
+    фактическим GPS-треком линия считается при явной маркировке
+    route_source_kind=gps/gnss (либо source_kind для старых файлов). Проектные линии маркируются как
+    inner_yard_reference, reference_scheme или yard_route.
+  - Файлы dt1.nozzle.json ... хранят точки с азимутами. Полевыми замерами они
+    считаются только при явной маркировке nozzle_source_kind=measurement
+    (либо source_kind для старых файлов).
+  - Если GPX отсутствует — используется схематичный якорь на контуре smm.geojson:
+    азимут и семантика берутся из схем smm/dt*.svg и паспортных
+    описаний (work/smm-karta-sao). Для вариантов, где направление выброса
      не утверждено (ДТ-4, ДТ-5), bearing = null.
 
 Форматы треков подробно описаны в work/smm_tracks/README.md. Треки
@@ -152,17 +150,77 @@ def circular_mean(degrees):
     return (math.degrees(math.atan2(ys, xs)) + 360.0) % 360.0
 
 
-def load_gpx_track(path):
-    """Читает GPX 1.1: все точки <trkpt> из всех trkseg как [lng, lat]."""
+def route_direction_summary(bearings, multidirectional_threshold=0.8):
+    """Return one bearing only when segment headings share a clear direction."""
+    if not bearings:
+        return None, "unknown"
+
+    xs = sum(math.cos(math.radians(value)) for value in bearings)
+    ys = sum(math.sin(math.radians(value)) for value in bearings)
+    concentration = math.hypot(xs, ys) / len(bearings)
+    if concentration < multidirectional_threshold:
+        return None, "multidirectional"
+    return round(circular_mean(bearings), 1), "single_direction"
+
+
+def load_gpx_segments(path):
+    """Read GPX 1.1 while retaining each <trkseg> as a separate line."""
     root = ET.parse(path).getroot()
-    points = []
-    for trkpt in root.iter():
-        if trkpt.tag.rsplit("}", 1)[-1] != "trkpt":
+    segments = []
+    for segment in root.iter():
+        if segment.tag.rsplit("}", 1)[-1] != "trkseg":
             continue
-        lat = float(trkpt.attrib.get("lat"))
-        lon = float(trkpt.attrib.get("lon"))
-        points.append([lon, lat])
-    return points
+        points = []
+        for trkpt in segment:
+            if trkpt.tag.rsplit("}", 1)[-1] != "trkpt":
+                continue
+            lat = float(trkpt.attrib.get("lat"))
+            lon = float(trkpt.attrib.get("lon"))
+            points.append([lon, lat])
+        if points:
+            segments.append(points)
+    return segments
+
+
+def provenance_origin(metadata, dimension):
+    """Read semantic provenance; a GPX or JSON file alone is not evidence."""
+    metadata = metadata if isinstance(metadata, dict) else {}
+    specific_key = f"{dimension}_source_kind"
+    source_kind = metadata.get(specific_key, metadata.get("source_kind"))
+    aliases = {
+        "reference_scheme": "reference_scheme",
+        "inner_yard_reference": "inner_yard_reference",
+        "gps": "gps",
+        "gnss": "gps",
+        "yard_route": "yard_route",
+        "project_route": "yard_route",
+        "measurement": "measurement",
+        "measured": "measurement",
+    }
+    if source_kind in aliases:
+        origin = aliases[source_kind]
+        if dimension == "route" and origin == "measurement":
+            return "unverified"
+        return origin
+
+    note = str(metadata.get("source_note", "")).strip().lower()
+    if note.startswith("презентационный") or note.startswith("маршрут внутри двора"):
+        return "yard_route"
+    if note.startswith("проектная схема"):
+        return "reference_scheme"
+    return "unverified"
+
+
+def source_label(origin, file_format):
+    if origin in {"inner_yard_reference", "reference_scheme"}:
+        return "reference_scheme"
+    if origin == "yard_route":
+        return "yard_route"
+    if origin == "measurement":
+        return "measurement"
+    if origin == "gps":
+        return file_format
+    return "unverified"
 
 
 def load_nozzle_points(path):
@@ -240,61 +298,74 @@ def build(src_path, out_path, tracks_dir):
         route_file = tracks_dir / f"{variant_id}.gpx"
         nozzle_file = tracks_dir / f"{variant_id}.nozzle.json"
         usage = {"route": "schematic", "nozzle": "schematic"}
-        route_points = load_gpx_track(route_file) if route_file.exists() else []
-        # Файл GPX используется и как технический контейнер проектной линии.
-        # Настоящим GNSS-треком он считается только при явной маркировке.
-        route_origin = "gps"
-        source_kind = "gpx"
+        route_segments = load_gpx_segments(route_file) if route_file.exists() else []
+        route_segments = [segment for segment in route_segments if len(segment) >= 2]
         source_note = ""
+        nozzle_metadata = {}
         if nozzle_file.exists():
             try:
                 nozzle_meta = json.loads(nozzle_file.read_text(encoding="utf-8"))
                 if isinstance(nozzle_meta, dict):
+                    nozzle_metadata = nozzle_meta
                     source_note = str(nozzle_meta.get("source_note", ""))
-                    if nozzle_meta.get("source_kind") in {"reference_scheme", "inner_yard_reference"}:
-                        route_origin = "reference_scheme"
-                        source_kind = "reference_scheme"
-                        if nozzle_meta.get("source_kind") == "inner_yard_reference":
-                            route_origin = "inner_yard_reference"
-                    elif source_note.startswith("Презентационный"):
-                        route_origin = "yard_route"
-                        source_kind = "yard_route"
-            except Exception:
-                route_origin = "yard_route"
-                source_kind = "yard_route"
+            except (OSError, json.JSONDecodeError):
+                nozzle_metadata = {}
 
-        if len(route_points) >= 2:
+        route_origin = provenance_origin(nozzle_metadata, "route")
+        nozzle_origin = provenance_origin(nozzle_metadata, "nozzle")
+
+        if route_segments:
             usage["route"] = "gpx"
-            bearings = [b for b in (segment_bearing(a, b) for a, b in zip(route_points, route_points[1:])) if b is not None]
-            line = decimate(route_points, ROUTE_LINE_CAP)
-            features.append({
-                "type": "Feature",
-                "id": f"smm-route-{variant_id}",
-                "properties": {
-                    "variant_id": variant_id,
-                    "feature_kind": "route_direction",
-                    "arrow_type": "movement",
-                    "bearing": round(circular_mean(bearings) if bearings else float("nan"), 1),
-                    "source": source_kind,
-                    "route_origin": route_origin,
-                    "track_file": route_file.name,
-                    "track_points": len(route_points),
-                    "name": f"{code}: направление движения по маршруту",
-                    "status": (
-                        f"Внутридворовая проектная схема по приложенным схемам ({len(route_points)} точек): требует полевой сверки"
-                        if route_origin == "inner_yard_reference" else
-                        f"Проектная схема по приложенным схемам ({len(route_points)} точек): требует полевой сверки"
-                        if route_origin == "reference_scheme" else
-                        f"Маршрут внутри двора из схемы ({len(route_points)} точек): уборка двора"
-                        if route_origin == "yard_route" else
-                        f"GPS-трек ({len(route_points)} точек): фактический маршрут"
-                    ),
-                },
-                "geometry": {
-                    "type": "LineString",
-                    "coordinates": [[round(pt[0], 6), round(pt[1], 6)] for pt in line],
-                },
-            })
+            route_points = [point for segment in route_segments for point in segment]
+            bearings = [
+                bearing
+                for segment in route_segments
+                for bearing in (segment_bearing(a, b) for a, b in zip(segment, segment[1:]))
+                if bearing is not None
+            ]
+            route_bearing, movement_mode = route_direction_summary(bearings)
+            direction_note = (
+                "; маршрут многовекторный, единый азимут не применяется"
+                if movement_mode == "multidirectional" else ""
+            )
+            if route_origin == "inner_yard_reference":
+                route_status = f"Внутридворовая проектная линия по приложенной схеме ({len(route_points)} точек): требует полевой сверки{direction_note}"
+            elif route_origin == "reference_scheme":
+                route_status = f"Проектная линия по приложенной схеме ({len(route_points)} точек): требует полевой сверки{direction_note}"
+            elif route_origin == "yard_route":
+                route_status = f"Проектный маршрут внутри двора ({len(route_points)} точек): требует полевой сверки{direction_note}"
+            elif route_origin == "gps":
+                route_status = f"GPS-трек ({len(route_points)} точек): фактический маршрут{direction_note}"
+            else:
+                route_status = f"Линия GPX ({len(route_points)} точек): источник не указан, требуется проверка{direction_note}"
+
+            for segment_index, segment in enumerate(route_segments, start=1):
+                line = decimate(segment, ROUTE_LINE_CAP)
+                suffix = f"-segment-{segment_index}" if len(route_segments) > 1 else ""
+                features.append({
+                    "type": "Feature",
+                    "id": f"smm-route-{variant_id}{suffix}",
+                    "properties": {
+                        "variant_id": variant_id,
+                        "feature_kind": "route_direction",
+                        "arrow_type": "movement",
+                        "bearing": route_bearing,
+                        "movement_mode": movement_mode,
+                        "source": source_label(route_origin, "gpx"),
+                        "route_origin": route_origin,
+                        "source_note": source_note,
+                        "track_file": route_file.name,
+                        "track_points": len(route_points),
+                        "track_segments": len(route_segments),
+                        "track_segment": segment_index,
+                        "name": f"{code}: направление движения по маршруту",
+                        "status": route_status,
+                    },
+                    "geometry": {
+                        "type": "LineString",
+                        "coordinates": [[round(pt[0], 6), round(pt[1], 6)] for pt in line],
+                    },
+                })
         else:
             features.append({
                 "type": "Feature",
@@ -304,6 +375,7 @@ def build(src_path, out_path, tracks_dir):
                     "feature_kind": "route_direction",
                     "arrow_type": "movement",
                     "bearing": cfg["route_bearing"],
+                    "movement_mode": "single_direction" if cfg["route_bearing"] is not None else "unknown",
                     "name": f"{code}: направление движения по маршруту",
                     "status": VECTOR_STATUS,
                 },
@@ -320,6 +392,18 @@ def build(src_path, out_path, tracks_dir):
             bearings = [pt[2] for pt in nozzle_points]
             track = decimate(nozzle_points, NOZZLE_TRACK_CAP)
             first = nozzle_points[0]
+            if nozzle_origin == "inner_yard_reference":
+                nozzle_status = f"Направления сопла по внутридворовой схеме ({len(nozzle_points)} точек): требуют полевой сверки"
+            elif nozzle_origin == "reference_scheme":
+                nozzle_status = f"Направления сопла по приложенной схеме ({len(nozzle_points)} точек): требуют полевой сверки"
+            elif nozzle_origin == "yard_route":
+                nozzle_status = f"Проектные направления выброса по схеме ({len(nozzle_points)} точек): требуют полевой сверки"
+            elif nozzle_origin == "measurement":
+                nozzle_status = f"Замер направлений выброса: {len(nozzle_points)} точек"
+            elif nozzle_origin == "gps":
+                nozzle_status = f"Направления сопла по данным GNSS ({len(nozzle_points)} точек)"
+            else:
+                nozzle_status = f"Направления выброса из JSON ({len(nozzle_points)} точек): источник не указан, требуется проверка"
             features.append({
                 "type": "Feature",
                 "id": f"smm-nozzle-{variant_id}",
@@ -328,21 +412,15 @@ def build(src_path, out_path, tracks_dir):
                     "feature_kind": "nozzle_direction",
                     "arrow_type": "nozzle",
                     "bearing": round(circular_mean(bearings), 1),
-                    "source": source_kind if route_origin in {"reference_scheme", "inner_yard_reference"} else "json",
+                    "source": source_label(nozzle_origin, "json"),
                     "route_origin": route_origin,
+                    "nozzle_origin": nozzle_origin,
+                    "source_note": source_note,
                     "track_file": nozzle_file.name,
                     "nozzle_track": [[round(p[0], 6), round(p[1], 6), round(p[2], 1)] for p in track],
                     "name": f"{code}: направление выброса снега",
                     "note": cfg["nozzle_note"],
-                    "status": (
-                        f"Направления сопла по внутридворовой схеме ({len(nozzle_points)} точек): требуют полевой сверки"
-                        if route_origin == "inner_yard_reference" else
-                        f"Направления сопла по приложенным схемам ({len(nozzle_points)} точек): требуют полевой сверки"
-                        if route_origin == "reference_scheme" else
-                        f"Векторы выброса внутри двора ({len(nozzle_points)} точек): уборка двора"
-                        if route_origin == "yard_route" else
-                        f"Замер направлений выброса: {len(nozzle_points)} точек"
-                    ),
+                    "status": nozzle_status,
                 },
                 "geometry": {
                     "type": "Point",
@@ -380,9 +458,9 @@ def build(src_path, out_path, tracks_dir):
         "metadata": {
             "title": "Маршруты СММ — быстрые переходы и направления",
             "description": "Слой-оверлей к слою «Маршруты СММ» общей карты: кнопки быстрого приближения к пяти эталонным дворам и векторы направления движения и выброса снега.",
-            "source": "Контуры: АСУ ОДС (smm.geojson). Направления: реальные GNSS-треки только при явной маркировке; проектные линии из приложенных схем могут храниться в GPX как техническом формате. Схемы smm/dt*.svg и паспортные описания — вспомогательные источники.",
-            "bearing_convention": "Азимут, градусов: 0 = север, по часовой стрелке. bearing = null — направление не утверждено.",
-            "track_note": "route_origin=inner_yard_reference — проектная внутридворовая линия по чертежу, не GPS и требует полевой сверки; route_origin=gps — фактический маршрут. nozzle_direction с source=json — замеры или проектные направления выброса в nozzle_track. Без линий оверлей остаётся схематичным.",
+            "source": "Контуры: источник указан отдельно для каждого двора в smm.geojson. Источник маршрута и направлений сопла определяется метаданными; GPX/JSON — только формат файла, не подтверждение полевого замера.",
+        "bearing_convention": "Азимут, градусов: 0 = север, по часовой стрелке. bearing = null вместе с movement_mode=multidirectional — единый азимут не применяется; в остальных случаях null означает, что направление не подтверждено.",
+            "track_note": "route_origin=gps устанавливается только при явном source_kind=gps/gnss; route_origin=inner_yard_reference/reference_scheme/yard_route обозначает проектную линию и требует полевой сверки; unverified — источник не указан. nozzle_origin=measurement устанавливается только при явной маркировке замера. movement_mode=multidirectional означает, что единого азимута маршрута нет; направление движения читается по линиям и стрелкам схемы.",
             "track_usage": track_usage,
             "generated_at": "2026-08-27",
             "feature_count": len(features),

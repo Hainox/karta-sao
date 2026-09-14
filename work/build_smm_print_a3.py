@@ -4,13 +4,14 @@
 base64-данными, поэтому файл можно печатать/сохранять в PDF даже без сети.
 
 Источники:
-  - smm.geojson            — контуры и факты дворов (АСУ ОДС, тип 38);
+  - smm.geojson            — контуры и факты дворов; источник контура указан
+                              в статусе геометрии каждого двора;
   - smm_routes.geojson     — направление движения и выброса по каждому
-                             варианту (GPS-треки или схематичные якоря);
+                             варианту с явной квалификацией источника;
   - smm/dt1..dt5.svg       — инженерные схемы маршрутов.
 
 Печать: A3, альбомная, @page{size:A3 landscape;margin:8mm}. На каждый двор —
-карточка со схемой, адресом, векторами движения/выброса и статусом.
+карточка со схемой, адресом, векторами движения/выброса и статусом геометрии.
 
 Запуск: python work/build_smm_print_a3.py
 Выход:  smm/print-a3.html (детерминированный — можно сверять в тестах).
@@ -42,6 +43,18 @@ def cardinal(bearing):
     return CARDINALS.get(round(bearing / 45) * 45 % 360, f"{round(bearing)}°")
 
 
+def provenance_label(origin, fallback=""):
+    labels = {
+        "inner_yard_reference": "ПРОЕКТНАЯ СХЕМА",
+        "reference_scheme": "ПРОЕКТНАЯ СХЕМА",
+        "yard_route": "ПРОЕКТНЫЙ МАРШРУТ",
+        "gps": "GPS",
+        "measurement": "ЗАМЕР",
+        "unverified": "ИСТОЧНИК НЕ УКАЗАН",
+    }
+    return labels.get(origin, fallback.upper() if fallback else "")
+
+
 def card(code, yard, route, nozzle, svg_b64):
     properties = yard["properties"]
     name = properties["name"]
@@ -51,19 +64,42 @@ def card(code, yard, route, nozzle, svg_b64):
     storage = properties.get("storage", "")
     passes_ = properties.get("passes", "")
     status = properties.get("status", "")
+    geometry_status = properties.get("geometry_status", "")
 
-    route_bearing = route["properties"].get("bearing")
-    route_src = route["properties"].get("source")
-    route_status = route["properties"].get("status")
-    nozzle_bearing = nozzle["properties"].get("bearing")
-    nozzle_src = nozzle["properties"].get("source")
-    nozzle_status = nozzle["properties"].get("status")
-    nozzle_note = nozzle["properties"].get("note", "")
+    route_properties = route.get("properties", {})
+    nozzle_properties = nozzle.get("properties", {})
+    route_bearing = route_properties.get("bearing")
+    route_origin = route_properties.get("route_origin", "unverified")
+    route_status = route_properties.get("status")
+    movement_mode = route_properties.get("movement_mode", "unknown")
+    nozzle_bearing = nozzle_properties.get("bearing")
+    nozzle_origin = nozzle_properties.get("nozzle_origin", nozzle_properties.get("route_origin", "unverified"))
+    nozzle_status = nozzle_properties.get("status")
+    nozzle_note = nozzle_properties.get("note", "")
 
-    route_pill = f'<span class="pill">{route_src.upper()}</span>' if route_src else ""
-    nozzle_pill = f'<span class="pill">{nozzle_src.upper()}</span>' if nozzle_src else ""
-    route_text = f"{route_bearing}° · {cardinal(route_bearing)}" if route_bearing is not None else "—"
+    route_label = provenance_label(route_origin, route_properties.get("source", ""))
+    nozzle_label = provenance_label(nozzle_origin, nozzle_properties.get("source", ""))
+    route_pill = f'<span class="pill">{route_label}</span>' if route_label else ""
+    nozzle_pill = f'<span class="pill">{nozzle_label}</span>' if nozzle_label else ""
+    if movement_mode == "multidirectional":
+        route_text = "Многовекторный маршрут"
+    elif route_bearing is not None:
+        route_text = f"{route_bearing}° · {cardinal(route_bearing)}"
+    else:
+        route_text = "единый азимут не задан"
     nozzle_text = f"{nozzle_bearing}° · {cardinal(nozzle_bearing)}" if nozzle_bearing is not None else "уточняется после осмотра"
+    movement_arrow = (
+        f'<span class="arrow movement" style="--rot:{route_bearing}deg"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v12M4 6l4-5 4 5"/></svg></span>'
+        if route_bearing is not None else
+        '<span class="arrow movement neutral" aria-hidden="true">↔</span>'
+        if movement_mode == "multidirectional" else
+        '<span class="arrow movement neutral" aria-hidden="true">—</span>'
+    )
+    nozzle_arrow = (
+        f'<span class="arrow nozzle" style="--rot:{nozzle_bearing}deg"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5 12 13H4z"/></svg></span>'
+        if nozzle_bearing is not None else
+        '<span class="arrow nozzle neutral" aria-hidden="true">—</span>'
+    )
 
     return f"""
     <section class="card">
@@ -74,11 +110,11 @@ def card(code, yard, route, nozzle, svg_b64):
         </div>
         <span class="vecs">
           <span class="vec" title="Направление движения по маршруту">
-            <span class="arrow movement" style="--rot:{route_bearing or 0}deg"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v12M4 6l4-5 4 5"/></svg></span>
+            {movement_arrow}
             <span class="vec-body"><b>Движение</b>{route_text} {route_pill}</span>
           </span>
           <span class="vec" title="Направление выброса снега">
-            <span class="arrow nozzle" style="--rot:{nozzle_bearing or 0}deg"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5 12 13H4z"/></svg></span>
+            {nozzle_arrow}
             <span class="vec-body"><b>Выброс</b>{nozzle_text} {nozzle_pill}</span>
           </span>
         </span>
@@ -90,6 +126,7 @@ def card(code, yard, route, nozzle, svg_b64):
         <span><b>Складирование:</b> {storage}</span>
         <span><b>Проходы:</b> {passes_}</span>
         <span><b>Статус:</b> {status}</span>
+        {f'<span><b>Геометрия:</b> {geometry_status}</span>' if geometry_status else ''}
         {f'<span><b>Маршрут:</b> {route_status}</span>' if route_status else ''}
         {f'<span><b>Выброс:</b> {nozzle_status}</span>' if nozzle_status else ''}
         {f'<span class="note-strip">{nozzle_note}</span>' if nozzle_note else ''}
@@ -159,6 +196,7 @@ def build(out_path, smm_path, routes_path, smm_dir, coa_path):
   .arrow svg {{ width:15px; height:15px; fill:currentColor; stroke:none; }}
   .arrow.movement {{ background:var(--red); }}
   .arrow.nozzle {{ background:var(--orange); }}
+  .arrow.neutral {{ background:#687982; font-size:14px; font-weight:700; transform:none; }}
   .vec-body {{ font-size:11px; line-height:1.35; }}
   .vec-body b {{ display:block; color:#54636b; font-size:9px; letter-spacing:.08em; text-transform:uppercase; }}
   .pill {{ display:inline-block; margin-left:4px; padding:1px 6px; border-radius:20px; background:#eef2f4; color:#4a5a63; font-size:9px; font-weight:800; }}
@@ -209,7 +247,7 @@ def build(out_path, smm_path, routes_path, smm_dir, coa_path):
     <section class="legend">
       <h2>Легенда</h2>
       <p>Толстая красная линия — осевая линия прохода СММ; красная стрелка — направление движения; оранжевая стрелка — направление выброса снега; синие тонкие стрелки — вектор струи в характерных точках, синие точки — расчётные точки приземления; голубая штриховка Н-1…Н-5 — назначенные места складирования; красный пунктирный круг — приствольный круг (1,5 м), светло-зелёный круг — проекция кроны.</p>
-      <p>Контуры: АСУ ОДС (тип 38, МСК-77 → WGS84), редакция {retrieved}. Направления: GPS-треки и замеры при наличии, иначе — схематично (утверждаются после натурного осмотра).</p>
+      <p>Контуры ДТ-1–ДТ-3: АСУ ОДС, тип 38, МСК-77 → WGS84, редакция {retrieved}. Контуры ДТ-4–ДТ-5: OpenStreetMap, предварительная привязка — требуется натурная сверка. Источник маршрута и направлений сопла указан в карточке; формат GPX/JSON сам по себе не подтверждает GPS-трек или полевой замер.</p>
     </section>
   </div>
   <script>

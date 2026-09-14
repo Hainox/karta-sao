@@ -4,9 +4,9 @@
   "metadata": {
     "title": "Маршруты СММ — быстрые переходы и направления",
     "description": "Слой-оверлей к слою «Маршруты СММ» общей карты: кнопки быстрого приближения к пяти эталонным дворам и векторы направления движения и выброса снега.",
-    "source": "Контуры: АСУ ОДС (smm.geojson). Направления: реальные GNSS-треки только при явной маркировке; проектные линии из приложенных схем могут храниться в GPX как техническом формате. Схемы smm/dt*.svg и паспортные описания — вспомогательные источники.",
-    "bearing_convention": "Азимут, градусов: 0 = север, по часовой стрелке. bearing = null — направление не утверждено.",
-    "track_note": "route_origin=inner_yard_reference — проектная внутридворовая линия по чертежу, не GPS и требует полевой сверки; route_origin=gps — фактический маршрут. nozzle_direction с source=json — замеры или проектные направления выброса в nozzle_track. Без линий оверлей остаётся схематичным.",
+    "source": "Контуры: источник указан отдельно для каждого двора в smm.geojson. Источник маршрута и направлений сопла определяется метаданными; GPX/JSON — только формат файла, не подтверждение полевого замера.",
+    "bearing_convention": "Азимут, градусов: 0 = север, по часовой стрелке. bearing = null вместе с movement_mode=multidirectional — единый азимут не применяется; в остальных случаях null означает, что направление не подтверждено.",
+    "track_note": "route_origin=gps устанавливается только при явном source_kind=gps/gnss; route_origin=inner_yard_reference/reference_scheme/yard_route обозначает проектную линию и требует полевой сверки; unverified — источник не указан. nozzle_origin=measurement устанавливается только при явной маркировке замера. movement_mode=multidirectional означает, что единого азимута маршрута нет; направление движения читается по линиям и стрелкам схемы.",
     "track_usage": {
       "dt1": {
         "route": "gpx",
@@ -434,13 +434,17 @@
         "variant_id": "dt1",
         "feature_kind": "route_direction",
         "arrow_type": "movement",
-        "bearing": 53.9,
+        "bearing": null,
+        "movement_mode": "multidirectional",
         "source": "reference_scheme",
         "route_origin": "inner_yard_reference",
+        "source_note": "Проектная схема по приложенным чертежам; маршрут только по внутренним внутридворовым проездам, обязательна полевая сверка.",
         "track_file": "dt1.gpx",
         "track_points": 11,
+        "track_segments": 1,
+        "track_segment": 1,
         "name": "ДТ-1: направление движения по маршруту",
-        "status": "Внутридворовая проектная схема по приложенным схемам (11 точек): требует полевой сверки"
+        "status": "Внутридворовая проектная линия по приложенной схеме (11 точек): требует полевой сверки; маршрут многовекторный, единый азимут не применяется"
       },
       "geometry": {
         "type": "LineString",
@@ -502,6 +506,8 @@
         "bearing": 135.0,
         "source": "reference_scheme",
         "route_origin": "inner_yard_reference",
+        "nozzle_origin": "inner_yard_reference",
+        "source_note": "Проектная схема по приложенным чертежам; маршрут только по внутренним внутридворовым проездам, обязательна полевая сверка.",
         "track_file": "dt1.nozzle.json",
         "nozzle_track": [
           [
@@ -2520,13 +2526,17 @@
         "variant_id": "dt2",
         "feature_kind": "route_direction",
         "arrow_type": "movement",
-        "bearing": 5.8,
+        "bearing": null,
+        "movement_mode": "multidirectional",
         "source": "reference_scheme",
         "route_origin": "inner_yard_reference",
+        "source_note": "Проектная схема по приложенным чертежам; маршрут только по внутренним внутридворовым проездам, обязательна полевая сверка.",
         "track_file": "dt2.gpx",
         "track_points": 11,
+        "track_segments": 1,
+        "track_segment": 1,
         "name": "ДТ-2: направление движения по маршруту",
-        "status": "Внутридворовая проектная схема по приложенным схемам (11 точек): требует полевой сверки"
+        "status": "Внутридворовая проектная линия по приложенной схеме (11 точек): требует полевой сверки; маршрут многовекторный, единый азимут не применяется"
       },
       "geometry": {
         "type": "LineString",
@@ -2588,6 +2598,8 @@
         "bearing": 108.4,
         "source": "reference_scheme",
         "route_origin": "inner_yard_reference",
+        "nozzle_origin": "inner_yard_reference",
+        "source_note": "Проектная схема по приложенным чертежам; маршрут только по внутренним внутридворовым проездам, обязательна полевая сверка.",
         "track_file": "dt2.nozzle.json",
         "nozzle_track": [
           [
@@ -3274,13 +3286,17 @@
         "variant_id": "dt3",
         "feature_kind": "route_direction",
         "arrow_type": "movement",
-        "bearing": 118.6,
+        "bearing": null,
+        "movement_mode": "multidirectional",
         "source": "reference_scheme",
         "route_origin": "inner_yard_reference",
+        "source_note": "Проектная схема по приложенному чертежу; внутридворовая гребёнка между корпусами, без выхода на внешнюю улицу, обязательна полевая сверка.",
         "track_file": "dt3.gpx",
         "track_points": 29,
+        "track_segments": 1,
+        "track_segment": 1,
         "name": "ДТ-3: направление движения по маршруту",
-        "status": "Внутридворовая проектная схема по приложенным схемам (29 точек): требует полевой сверки"
+        "status": "Внутридворовая проектная линия по приложенной схеме (29 точек): требует полевой сверки; маршрут многовекторный, единый азимут не применяется"
       },
       "geometry": {
         "type": "LineString",
@@ -3414,6 +3430,8 @@
         "bearing": 45.0,
         "source": "reference_scheme",
         "route_origin": "inner_yard_reference",
+        "nozzle_origin": "inner_yard_reference",
+        "source_note": "Проектная схема по приложенному чертежу; внутридворовая гребёнка между корпусами, без выхода на внешнюю улицу, обязательна полевая сверка.",
         "track_file": "dt3.nozzle.json",
         "nozzle_track": [
           [
@@ -3532,13 +3550,17 @@
         "variant_id": "dt4",
         "feature_kind": "route_direction",
         "arrow_type": "movement",
-        "bearing": 0.0,
-        "source": "gpx",
-        "route_origin": "gps",
+        "bearing": null,
+        "movement_mode": "multidirectional",
+        "source": "yard_route",
+        "route_origin": "yard_route",
+        "source_note": "Маршрут внутри двора: параллельные проходы уборки, без выхода на проезжую часть.",
         "track_file": "dt4.gpx",
         "track_points": 17,
+        "track_segments": 1,
+        "track_segment": 1,
         "name": "ДТ-4: направление движения по маршруту",
-        "status": "GPS-трек (17 точек): фактический маршрут"
+        "status": "Проектный маршрут внутри двора (17 точек): требует полевой сверки; маршрут многовекторный, единый азимут не применяется"
       },
       "geometry": {
         "type": "LineString",
@@ -3622,8 +3644,10 @@
         "feature_kind": "nozzle_direction",
         "arrow_type": "nozzle",
         "bearing": 275.4,
-        "source": "json",
-        "route_origin": "gps",
+        "source": "yard_route",
+        "route_origin": "yard_route",
+        "nozzle_origin": "yard_route",
+        "source_note": "Маршрут внутри двора: параллельные проходы уборки, без выхода на проезжую часть.",
         "track_file": "dt4.nozzle.json",
         "nozzle_track": [
           [
@@ -3714,7 +3738,7 @@
         ],
         "name": "ДТ-4: направление выброса снега",
         "note": "определяется после натурного осмотра",
-        "status": "Замер направлений выброса: 17 точек"
+        "status": "Проектные направления выброса по схеме (17 точек): требуют полевой сверки"
       },
       "geometry": {
         "type": "Point",
@@ -3797,13 +3821,17 @@
         "variant_id": "dt5",
         "feature_kind": "route_direction",
         "arrow_type": "movement",
-        "bearing": 14.8,
-        "source": "gpx",
-        "route_origin": "gps",
+        "bearing": null,
+        "movement_mode": "multidirectional",
+        "source": "yard_route",
+        "route_origin": "yard_route",
+        "source_note": "Маршрут внутри двора: параллельные проходы уборки, без выхода на проезжую часть.",
         "track_file": "dt5.gpx",
         "track_points": 5,
+        "track_segments": 1,
+        "track_segment": 1,
         "name": "ДТ-5: направление движения по маршруту",
-        "status": "GPS-трек (5 точек): фактический маршрут"
+        "status": "Проектный маршрут внутри двора (5 точек): требует полевой сверки; маршрут многовекторный, единый азимут не применяется"
       },
       "geometry": {
         "type": "LineString",
@@ -3839,8 +3867,10 @@
         "feature_kind": "nozzle_direction",
         "arrow_type": "nozzle",
         "bearing": 258.4,
-        "source": "json",
-        "route_origin": "gps",
+        "source": "yard_route",
+        "route_origin": "yard_route",
+        "nozzle_origin": "yard_route",
+        "source_note": "Маршрут внутри двора: параллельные проходы уборки, без выхода на проезжую часть.",
         "track_file": "dt5.nozzle.json",
         "nozzle_track": [
           [
@@ -3871,7 +3901,7 @@
         ],
         "name": "ДТ-5: направление выброса снега",
         "note": "определяется после натурного осмотра",
-        "status": "Замер направлений выброса: 5 точек"
+        "status": "Проектные направления выброса по схеме (5 точек): требуют полевой сверки"
       },
       "geometry": {
         "type": "Point",

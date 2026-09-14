@@ -463,8 +463,11 @@
       const regularRecords = records.filter((item) => item.layerKey !== 'urns');
       regularRecords.forEach((item) => { if (item.feature?.parent) state.map.removeChild(item.feature); });
       regularRecords.filter(isVisible).forEach((item) => state.map.addChild(item.feature));
-      if (state.urnsClusterer?.parent) state.map.removeChild(state.urnsClusterer);
-      if (state.layers.urns?.enabled && state.urnsClusterer) state.map.addChild(state.urnsClusterer);
+      if (state.urnsClusterer) {
+        state.urnsClusterer.update({ features: records.filter(isVisible).filter((item) => item.layerKey === 'urns').map((item) => item.clusterFeature) });
+        if (!state.layers.urns?.enabled && state.urnsClusterer.parent) state.map.removeChild(state.urnsClusterer);
+        if (state.layers.urns?.enabled && !state.urnsClusterer.parent) state.map.addChild(state.urnsClusterer);
+      }
       renderSmmRouteMarkers();
       const visible = regularRecords.filter(isVisible).length + (state.layers.urns?.enabled ? records.filter((item) => item.layerKey === 'urns' && isVisible(item)).length : 0);
       const enabled = Object.values(state.layers).filter((layer) => layer.enabled).map((layer) => `${layer.label}: ${layer.records.length}`).join(' · ');
@@ -513,9 +516,12 @@
           });
           return new YMapMarker({ coordinates }, clusterElement);
         };
+        records.forEach((item) => {
+          item.clusterFeature = { type: 'Feature', id: item.id, properties: item.properties, geometry: item.geometry };
+        });
         state.urnsClusterer = new YMapClusterer({
           method: clusterByGrid({ gridSize: 80 }),
-          features: records.map((item) => ({ type: 'Feature', id: item.id, properties: item.properties, geometry: item.geometry })),
+          features: records.filter(isVisible).map((item) => item.clusterFeature),
           marker,
           cluster
         });
@@ -572,6 +578,56 @@
 
     function variantFeature(variantId) {
       return (state.smmRoutes?.features || []).find((feature) => feature.properties?.variant_id === variantId);
+    }
+
+    function isSmmVariantVisible(variantId) {
+      const properties = variantFeature(variantId)?.properties;
+      return state.layers.smm.enabled && properties &&
+        (state.district === 'ALL' || properties.district === state.district) &&
+        (state.section === 'ALL' || properties.section === state.section);
+    }
+
+    function segmentBearing(start, end) {
+      const radians = Math.PI / 180;
+      const latitude1 = start[1] * radians;
+      const latitude2 = end[1] * radians;
+      const longitudeDelta = (end[0] - start[0]) * radians;
+      return (Math.atan2(
+        Math.sin(longitudeDelta) * Math.cos(latitude2),
+        Math.cos(latitude1) * Math.sin(latitude2) - Math.sin(latitude1) * Math.cos(latitude2) * Math.cos(longitudeDelta)
+      ) / radians + 360) % 360;
+    }
+
+    function routeArrowPositions(coordinates, spacingMeters = 85) {
+      const radians = Math.PI / 180;
+      const distanceMeters = (start, end) => {
+        const latitudeDelta = (end[1] - start[1]) * radians;
+        const longitudeDelta = (end[0] - start[0]) * radians;
+        const haversine = Math.sin(latitudeDelta / 2) ** 2 + Math.cos(start[1] * radians) * Math.cos(end[1] * radians) * Math.sin(longitudeDelta / 2) ** 2;
+        return 12742000 * Math.asin(Math.sqrt(haversine));
+      };
+      const segmentLengths = coordinates.slice(1).map((coordinate, index) => distanceMeters(coordinates[index], coordinate));
+      const totalLength = segmentLengths.reduce((sum, length) => sum + length, 0);
+      if (!totalLength) return [];
+      const interval = Math.min(spacingMeters, totalLength);
+      const arrows = [];
+      let nextArrowAt = interval / 2;
+      let traveled = 0;
+      for (let index = 1; index < coordinates.length; index++) {
+        const start = coordinates[index - 1];
+        const end = coordinates[index];
+        const segmentLength = segmentLengths[index - 1];
+        while (segmentLength > 0 && nextArrowAt <= traveled + segmentLength) {
+          const fraction = (nextArrowAt - traveled) / segmentLength;
+          arrows.push({
+            coordinates: [start[0] + (end[0] - start[0]) * fraction, start[1] + (end[1] - start[1]) * fraction],
+            bearing: segmentBearing(start, end)
+          });
+          nextArrowAt += interval;
+        }
+        traveled += segmentLength;
+      }
+      return arrows;
     }
 
     function boundsOfGeometry(geometry) {
@@ -632,13 +688,23 @@
         if (kind !== 'route_direction' && kind !== 'nozzle_direction') return;
         const variantId = feature.properties.variant_id;
         if (feature.geometry?.type === 'LineString') {
-          state.smmRouteItems.push({ marker: new YMapFeature({
+          state.smmRouteItems.push({ variantId, marker: new YMapFeature({
             id: feature.id,
             geometry: feature.geometry,
             properties: feature.properties,
             style: { stroke: [{ color: '#c00000', width: 5, opacity: 0.9 }], interactive: true, cursor: 'pointer' },
             onClick: () => zoomToSmmVariant(variantId)
           }) });
+          routeArrowPositions(feature.geometry.coordinates).forEach(({ coordinates, bearing }) => {
+            const arrow = document.createElement('button');
+            arrow.type = 'button';
+            arrow.className = 'route-vector movement route-vector-line';
+            arrow.style.setProperty('--bearing', `${bearing}deg`);
+            arrow.innerHTML = ROUTE_VECTOR_MARKUP;
+            arrow.title = `${variantFeature(variantId)?.properties?.name || variantId} — направление по линии маршрута, ${Math.round(bearing)}°`;
+            arrow.addEventListener('click', () => zoomToSmmVariant(variantId));
+            state.smmRouteItems.push({ variantId, marker: new YMapMarker({ coordinates }, arrow) });
+          });
           return;
         }
         const bearing = Number(feature.properties.bearing);
@@ -658,7 +724,7 @@
             marker.innerHTML = NOZZLE_MEASURE_MARKUP;
             marker.title = `${variantFeature(variantId)?.properties?.name || variantId} — замер выброса №${index + 1}: ${Math.round(measureNumber)}°`;
             marker.addEventListener('click', () => zoomToSmmVariant(variantId));
-            state.smmRouteItems.push({ marker: new YMapMarker({ coordinates: [longitude, latitude] }, marker) });
+            state.smmRouteItems.push({ variantId, marker: new YMapMarker({ coordinates: [longitude, latitude] }, marker) });
           });
           return;
         }
@@ -669,7 +735,7 @@
         marker.innerHTML = kind === 'nozzle_direction' ? NOZZLE_VECTOR_MARKUP : ROUTE_VECTOR_MARKUP;
         marker.title = `${variantFeature(variantId)?.properties?.name || variantId} — ${kind === 'nozzle_direction' ? 'направление выброса' : 'направление движения'}, ${Math.round(bearing)}°`;
         marker.addEventListener('click', () => zoomToSmmVariant(variantId));
-        state.smmRouteItems.push({ marker: new YMapMarker({ coordinates: feature.geometry.coordinates }, marker) });
+        state.smmRouteItems.push({ variantId, marker: new YMapMarker({ coordinates: feature.geometry.coordinates }, marker) });
       });
       renderSmmRouteMarkers();
     }
@@ -677,7 +743,7 @@
     function renderSmmRouteMarkers() {
       if (!state.map) return;
       state.smmRouteItems.forEach((item) => { if (item.marker.parent) state.map.removeChild(item.marker); });
-      if (state.layers.smm.enabled) state.smmRouteItems.forEach((item) => state.map.addChild(item.marker));
+      state.smmRouteItems.filter((item) => isSmmVariantVisible(item.variantId)).forEach((item) => state.map.addChild(item.marker));
     }
 
     async function loadSmmRoutesOverlay() {
@@ -687,7 +753,7 @@
         state.smmRoutes = await response.json();
         renderSmmVariantPanel();
         await createSmmRouteMarkers();
-        const gpsRoutes = (state.smmRoutes.features || []).filter((feature) => feature.properties?.source === 'gpx').length;
+        const gpsRoutes = (state.smmRoutes.features || []).filter((feature) => feature.properties?.route_origin === 'gps').length;
         $('status').textContent = `Готово. Загружено объектов: ${allRecords().length}. Включайте нужные слои. Быстрые переходы СММ — активны${gpsRoutes ? `; GPS-треков маршрутов: ${gpsRoutes}` : ''}.`;
       } catch (error) {
         $('smmVariants').hidden = true;

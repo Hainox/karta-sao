@@ -152,6 +152,10 @@
     let datasets = [];
     let map;
     let mapLayers = [];
+    let pointLayers = [];
+    let filteredFeatureCount = 0;
+    let dataReady = false;
+    let isRendering = false;
 
     function textForFilters(filters) { return `${filters.district || "Все районы"} · ${filters.section || "все участки"}`; }
     function updateUrl() {
@@ -174,22 +178,24 @@
     function pointStyle(feature, latlng, color) { return L.circleMarker(latlng, { radius:4, color:"#fff", weight:1, fillColor:color, fillOpacity:.95 }); }
     function popup(feature) { const p = feature.properties || {}; return `<strong>${p.name || "Объект"}</strong><br>${p.district || ""}${p.section ? ` · ${p.section}` : ""}`; }
     function render() {
+      isRendering = true;
       const filters = { district:districtSelect.value, section:sectionSelect.value };
       const showDetail = !!(filters.district || filters.section);
       mapLayers.forEach(layer => map.removeLayer(layer)); mapLayers = [];
+      pointLayers = [];
       const bounds = [];
-      let visible = 0;
+      filteredFeatureCount = 0;
       datasets.forEach((data, index) => {
         if (index > 0 && !showDetail) return;
         const source = SOURCES[index];
         const filtered = { type:"FeatureCollection", features:data.features.filter(feature => matchesPrintFilter(feature.properties || {}, filters)) };
-        visible += filtered.features.length;
+        filteredFeatureCount += filtered.features.length;
         const layer = L.geoJSON(filtered, {
           style: source.style,
           pointToLayer: source.pointColor ? (feature, latlng) => pointStyle(feature, latlng, source.pointColor) : undefined,
           onEachFeature: (feature, child) => child.bindPopup(popup(feature))
         }).addTo(map);
-        if (source.pointColor) declutterPoints(layer, 13);
+        if (source.pointColor) pointLayers.push(layer);
         mapLayers.push(layer);
         if (filtered.features.length) bounds.push(layer.getBounds());
       });
@@ -201,10 +207,9 @@
       } else if (boundaryBounds) {
         map.fitBounds(boundaryBounds, { padding:[10,10] });
       }
-      const hiddenNote = showDetail ? "" : " (МНО, площадки — при выборе района/участка)";
-      activeFilters.innerHTML = `<strong>${textForFilters(filters)}</strong><br>Показано объектов: ${visible.toLocaleString("ru-RU")}${hiddenNote}`;
+      isRendering = false;
       mapCaption.textContent = textForFilters(filters);
-      status.textContent = `На карте: ${visible.toLocaleString("ru-RU")} объектов`;
+      updateVisibleCount();
     }
     function onFilterChange(changedDistrict) {
       if (changedDistrict) updateSectionOptions();
@@ -219,6 +224,7 @@
           try { return await response.json(); } catch { throw new Error(`${source.url}: не удалось прочитать GeoJSON`); }
         }));
         datasets = responses;
+        dataReady = true;
         const initial = parsePrintFilters(location.search);
         const districts = new Set();
         datasets.forEach(data => data.features.forEach(feature => { if (feature.properties?.district) districts.add(feature.properties.district); }));
@@ -232,15 +238,47 @@
       }
     }
     let boundaryBounds = null;
+    function updateVisibleCount() {
+      if (!dataReady) return;
+      const pointCount = pointLayers.reduce((count, layer) => {
+        let markers = 0;
+        layer.eachLayer(item => { if (item.getLatLng) markers += 1; });
+        return count + markers - declutterPoints(layer, 13);
+      }, 0);
+      const visible = filteredFeatureCount - pointCount;
+      const filters = { district:districtSelect.value, section:sectionSelect.value };
+      const hiddenNote = filters.district || filters.section ? "" : " (МНО, площадки — при выборе района/участка)";
+      activeFilters.innerHTML = `<strong>${textForFilters(filters)}</strong><br>Показано объектов: ${visible.toLocaleString("ru-RU")}${hiddenNote}`;
+      status.textContent = `На карте: ${visible.toLocaleString("ru-RU")} объектов`;
+    }
     function declutterPoints(layer, minPx) {
       const items = []; layer.eachLayer(l => { if (l.getLatLng) items.push(l); });
-      if (items.length < 2) return;
-      const kept = [];
+      items.forEach(item => { if (!map.hasLayer(item)) item.addTo(map); });
+      const buckets = new Map();
+      const minDistanceSquared = minPx * minPx;
+      let visible = 0;
       items.forEach(l => {
         const pt = map.latLngToLayerPoint(l.getLatLng());
-        const clash = kept.some(k => { const d = map.latLngToLayerPoint(k.getLatLng()); return Math.hypot(d.x - pt.x, d.y - pt.y) < minPx; });
-        if (clash) { map.removeLayer(l); } else { kept.push(l); }
+        const cellX = Math.floor(pt.x / minPx);
+        const cellY = Math.floor(pt.y / minPx);
+        let clash = false;
+        for (let x = cellX - 1; x <= cellX + 1 && !clash; x += 1) {
+          for (let y = cellY - 1; y <= cellY + 1 && !clash; y += 1) {
+            const bucket = buckets.get(`${x}:${y}`) || [];
+            clash = bucket.some(other => (other.x - pt.x) ** 2 + (other.y - pt.y) ** 2 < minDistanceSquared);
+          }
+        }
+        if (clash) {
+          map.removeLayer(l);
+        } else {
+          const key = `${cellX}:${cellY}`;
+          const bucket = buckets.get(key) || [];
+          bucket.push(pt);
+          buckets.set(key, bucket);
+          visible += 1;
+        }
       });
+      return visible;
     }
     async function loadBoundary() {
       try {
@@ -253,6 +291,7 @@
     function initializeMap() {
       if (!window.L) { errorPanel.textContent = "Не удалось загрузить карту Leaflet."; errorPanel.style.display = "block"; return; }
       map = L.map("map", { zoomControl:true }).setView([55.84, 37.54], 11);
+      map.on("zoomend", () => { if (!isRendering) updateVisibleCount(); });
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom:19, attribution:"&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors" }).addTo(map);
       loadBoundary();
       loadData();

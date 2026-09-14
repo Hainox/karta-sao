@@ -7,7 +7,7 @@ API принимает GeoJSON районов, хранит их в PostgreSQL, 
 1. В папке `api` выполните `npm install`.
 2. Скопируйте `.env.example` в `.env`, задайте `DATABASE_URL` и секрет `JWT_SECRET` длиной от 32 символов.
 3. Запустите `npm start`. Миграция создаст таблицы автоматически.
-4. Создайте учётные записи через `npm run create-user -- --email editor@example.org --password <пароль> --role district_editor --district Аэропорт`.
+4. Создайте учётные записи через `npm run create-user -- --email editor@example.org --role district_editor --district Аэропорт`. Скрипт дважды запросит пароль в скрытом режиме; он не передаётся через историю команд или список процессов.
 
 Роли: `district_editor` отправляет только закреплённый район; `reviewer` принимает или отклоняет наборы; `prefecture_admin` также выгружает сводку и единолично управляет фото-метками.
 

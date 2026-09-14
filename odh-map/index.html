@@ -1250,13 +1250,25 @@
             overlayLayer = L.geoJSON(
               { type: "FeatureCollection", features },
               {
-                style: {
-                  color: "#078f90",
-                  weight: 5,
-                  dashArray: "8 6",
-                  opacity: 0.95,
-                  fillColor: "#078f90",
-                  fillOpacity: 0.18,
+                style: (feature) => {
+                  const changeType = feature.properties?.change_type;
+                  const isRoute = ["queue", "rotor_transfer"].includes(changeType);
+                  const isLine = ["LineString", "MultiLineString"].includes(
+                    feature.geometry?.type,
+                  );
+                  return {
+                    color: "#078f90",
+                    weight: 5,
+                    dashArray:
+                      changeType === "rotor_transfer"
+                        ? "4 9"
+                        : isRoute || isLine
+                          ? null
+                          : "8 6",
+                    opacity: 0.95,
+                    fillColor: "#078f90",
+                    fillOpacity: 0.18,
+                  };
                 },
                 pointToLayer: (_, latlng) =>
                   L.circleMarker(latlng, {

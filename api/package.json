@@ -4,11 +4,11 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node --watch server.js",
+    "start": "node --env-file=.env server.js",
+    "dev": "node --env-file=.env --watch server.js",
     "test": "node --test test/*.test.js",
-    "create-user": "node scripts/create-user.js",
-    "provision-district-demo-users": "node scripts/ensure-district-demo-users.js"
+    "create-user": "node --env-file=.env scripts/create-user.js",
+    "provision-district-demo-users": "node --env-file=.env scripts/ensure-district-demo-users.js"
   },
   "dependencies": {
     "archiver": "^7.0.1",

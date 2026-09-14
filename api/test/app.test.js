@@ -1,9 +1,13 @@
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
 import test from 'node:test';
+import { inflateRawSync } from 'node:zlib';
 import request from 'supertest';
 import { createApp } from '../app.js';
 import { hashPassword } from '../lib/auth.js';
-import { validateChangeSet } from '../lib/validation.js';
+import { MAX_GEOMETRY_VERTICES, payloadHash, validateChangeSet } from '../lib/validation.js';
+
+const publishedBoundary = JSON.parse(fs.readFileSync(new URL('../../odh-map/layers/sao_boundary_wgs84.geojson', import.meta.url), 'utf8'));
 
 const SECRET = 'test-secret-that-is-longer-than-thirty-two-characters';
 const boundary = {
@@ -72,10 +76,81 @@ function binaryParser(response, callback) {
   response.on('end', () => callback(null, Buffer.concat(chunks)));
 }
 
+function unzipEntry(zip, expectedName) {
+  let endOffset = -1;
+  for (let offset = zip.length - 22; offset >= Math.max(0, zip.length - 65557); offset--) {
+    if (zip.readUInt32LE(offset) === 0x06054b50) { endOffset = offset; break; }
+  }
+  assert.notEqual(endOffset, -1, 'ZIP end record exists');
+  let offset = zip.readUInt32LE(endOffset + 16);
+  const entryCount = zip.readUInt16LE(endOffset + 10);
+  for (let index = 0; index < entryCount; index++) {
+    assert.equal(zip.readUInt32LE(offset), 0x02014b50, 'central directory entry exists');
+    const method = zip.readUInt16LE(offset + 10);
+    const compressedSize = zip.readUInt32LE(offset + 20);
+    const nameLength = zip.readUInt16LE(offset + 28);
+    const extraLength = zip.readUInt16LE(offset + 30);
+    const commentLength = zip.readUInt16LE(offset + 32);
+    const localOffset = zip.readUInt32LE(offset + 42);
+    const name = zip.subarray(offset + 46, offset + 46 + nameLength).toString('utf8');
+    if (name === expectedName) {
+      const localNameLength = zip.readUInt16LE(localOffset + 26);
+      const localExtraLength = zip.readUInt16LE(localOffset + 28);
+      const dataOffset = localOffset + 30 + localNameLength + localExtraLength;
+      const compressed = zip.subarray(dataOffset, dataOffset + compressedSize);
+      return method === 8 ? inflateRawSync(compressed) : compressed;
+    }
+    offset += 46 + nameLength + extraLength + commentLength;
+  }
+  assert.fail(`ZIP entry not found: ${expectedName}`);
+}
+
 test('валидирует зоны накопления роторного снега', () => {
   const polygon = [[37.1, 55.1], [37.2, 55.1], [37.2, 55.2], [37.1, 55.1]];
   const set = changeSet({ feature: { type: 'Feature', geometry: { type: 'Polygon', coordinates: [polygon] }, properties: { district: 'Аэропорт', author: 'Иванов И.И.', change_type: 'rotor_snow_storage_zone', address: 'Тестовая зона' } } });
   assert.deepEqual(validateChangeSet(set, boundary), { valid: true, errors: [] });
+});
+
+test('отклоняет маршрут, у которого обе точки внутри САО, а сегмент выходит за границу', () => {
+  const start = [37.3568222107043, 55.932847832297185];
+  const end = [37.378520597289246, 55.9181242255081];
+  const set = changeSet({ feature: {
+    type: 'Feature', geometry: { type: 'LineString', coordinates: [start, end] },
+    properties: { district: 'Молжаниновский', author: 'Иванов И.И.', change_type: 'queue', queue_priority: '1', address: 'Тестовый маршрут', nozzle_direction: 'both', route_start: start, route_end: end, route_direction: 'start_to_end' }
+  } });
+  set.district = 'Молжаниновский';
+  assert.equal(validateChangeSet(set, publishedBoundary).valid, false);
+});
+
+test('отклоняет чрезмерно детальную геометрию до проверки границ', () => {
+  const unreadBoundary = { get features() { throw new Error('Проверка границ не должна запускаться для oversized geometry.'); } };
+  const oversizedCoordinates = [
+    Array.from({ length: MAX_GEOMETRY_VERTICES + 1 }, () => [37.1, 55.1]),
+    Array(MAX_GEOMETRY_VERTICES + 1).fill(1)
+  ];
+
+  for (const coordinates of oversizedCoordinates) {
+    const set = changeSet({ feature: {
+      type: 'Feature', geometry: { type: 'LineString', coordinates },
+      properties: { district: 'Аэропорт', author: 'Иванов И.И.', change_type: 'queue', queue_priority: '1', address: 'Тестовый маршрут', nozzle_direction: 'both', route_start: coordinates[0], route_end: coordinates.at(-1), route_direction: 'start_to_end' }
+    } });
+    const result = validateChangeSet(set, unreadBoundary);
+
+    assert.equal(result.valid, false);
+    assert.match(result.errors.join('\n'), new RegExp(`не более ${MAX_GEOMETRY_VERTICES} координатных точек`));
+  }
+});
+
+test('отклоняет полигон, стороны которого выходят за границу САО', () => {
+  const start = [37.3568222107043, 55.932847832297185];
+  const end = [37.378520597289246, 55.9181242255081];
+  const third = [37.357, 55.932];
+  const set = changeSet({ feature: {
+    type: 'Feature', geometry: { type: 'Polygon', coordinates: [[start, end, third, start]] },
+    properties: { district: 'Молжаниновский', author: 'Иванов И.И.', change_type: 'rotor_snow_storage_zone', address: 'Тестовая зона' }
+  } });
+  set.district = 'Молжаниновский';
+  assert.equal(validateChangeSet(set, publishedBoundary).valid, false);
 });
 
 test('авторизация, районные права, приёмка и выгрузка работают по API', async () => {
@@ -86,6 +161,7 @@ test('авторизация, районные права, приёмка и в�
   const unassigned = await login(api, 'unassigned@example.test', editorPassword);
   await api.post('/api/submissions').set('Authorization', `Bearer ${unassigned}`).send({ changeSet: changeSet() }).expect(403);
   const submitted = await api.post('/api/submissions').set('Authorization', `Bearer ${editor}`).send({ changeSet: changeSet(), originalFilename: 'airport.geojson' }).expect(201);
+  await api.get('/api/submissions').set('Authorization', `Bearer ${unassigned}`).expect(403);
   await api.patch(`/api/submissions/${submitted.body.submission.id}`).set('Authorization', `Bearer ${editor}`).send({ status: 'approved' }).expect(403);
   const reviewer = await login(api, 'reviewer@example.test', reviewerPassword);
   const archive = await api.get('/api/exports/review-archive.zip').set('Authorization', `Bearer ${reviewer}`).buffer(true).parse(binaryParser).expect(200);
@@ -94,6 +170,8 @@ test('авторизация, районные права, приёмка и в�
   assert.equal(archive.body.subarray(0, 2).toString(), 'PK');
   assert.match(archive.body.toString('utf8'), /manifest\.json/);
   assert.match(archive.body.toString('utf8'), /районы\/Аэропорт\//);
+  const manifest = JSON.parse(unzipEntry(archive.body, 'manifest.json').toString('utf8'));
+  assert.equal(manifest.files[0].payload_sha256, payloadHash(changeSet()));
   await api.patch(`/api/submissions/${submitted.body.submission.id}`).set('Authorization', `Bearer ${reviewer}`).send({ status: 'approved', comment: 'Проверено' }).expect(200);
   const exported = await api.get('/api/exports/approved.geojson').set('Authorization', `Bearer ${reviewer}`).expect(200);
   assert.equal(exported.body.review_status, 'approved');
@@ -107,6 +185,17 @@ test('отклоняет неверный маршрут до сохранени
   const invalid = changeSet({ feature: { type: 'Feature', geometry: { type: 'LineString', coordinates: [[37.1, 55.1], [39, 57]] }, properties: { district: 'Аэропорт', author: 'Иванов И.И.', change_type: 'queue', queue_priority: '1', address: 'За границей' } } });
   const response = await api.post('/api/submissions').set('Authorization', `Bearer ${editor}`).send({ changeSet: invalid }).expect(422);
   assert.match(response.body.details.join('\n'), /вне границы САО/);
+});
+
+test('возвращает ошибку проверки для повреждённых координат вместо HTTP 500', async () => {
+  const { api, editorPassword } = await fixture();
+  const editor = await login(api, 'editor@example.test', editorPassword);
+  const invalid = changeSet({ feature: {
+    type: 'Feature', geometry: { type: 'LineString', coordinates: null },
+    properties: { district: 'Аэропорт', author: 'Иванов И.И.', change_type: 'queue', queue_priority: '1', address: 'Тестовый маршрут', route_start: [37.1, 55.1], route_end: [37.2, 55.2], route_direction: 'start_to_end', nozzle_direction: 'both' }
+  } });
+  const response = await api.post('/api/submissions').set('Authorization', `Bearer ${editor}`).send({ changeSet: invalid }).expect(422);
+  assert.match(response.body.details.join('\n'), /минимум две точки/);
 });
 
 test('фото-метки и снимки доступны только префектуре и удаляются полностью', async () => {
