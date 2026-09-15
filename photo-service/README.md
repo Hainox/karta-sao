@@ -1,40 +1,78 @@
-# Локальный каркас фотослужбы САО
+# Отдельная фотослужба САО
 
-Срез содержит отдельное Node-приложение, отдельную PostgreSQL и GET /healthz, который выполняет SELECT 1 именно в новой базе. Есть также чистый helper для расчёта утверждённых норм и процентных диапазонов; он пока не подключён к отчётной выборке или интерфейсу. Отдельные Compose project, Compose network и named volume не связаны с существующей ODH-службой. Пароль передаётся через переменную PHOTO_SERVICE_DB_PASSWORD; не копируйте старые секреты.
+Изолированный Node.js 24 + PostgreSQL сервис для фотофиксации остановок, ПП и входов. Он не использует старую ODH/JiraJura БД, сеть, тома, секреты или `/api/health`.
 
-Это пока не API загрузки фото и не готовая БД фотослужбы: таблиц объектов, пользователей и фотографий ещё нет. Успешный /healthz подтверждает только доступность процесса и PostgreSQL этого локального Compose-проекта. Retention, удаление файлов, резервирование и production-доступы не реализованы. Отчётные helpers (`summarizeCoverage` и группировка по типам) и гео-helper минимальной дистанции пока не подключены к API и принимают только уже подготовленные записи.
+## Контракт
 
-## Зависимости
+- Нормы подтверждённых фото: остановка 1, ПП 2, вход 1.
+- GPS обязателен для отправки. Без координат сервер отвечает `gps_required`.
+- 0–15 м — `within_radius`; >15–20 м — `within_tolerance`; >20 м — `risk`. Для нескольких точек берётся ближайшая зарегистрированная точка; это приближение, а не проверка контура.
+- При отсутствии/точности GPS выше 5 м фото остаётся на ручной проверке. Геолокация телефона не является криптографическим доказательством.
+- JPEG/PNG/WebP до 20 МБ. Имя хранения генерируется UUID; исходное имя сохраняется только как метаданные.
+- Excel — полный реестр с фотографиями и метаданными; PDF — краткая сводка.
 
-- Node.js 24.x и npm; для контейнерного запуска нужен Docker Engine с Docker Compose.
-- Runtime-зависимость pg 8.23.0 закреплена в package.json и package-lock.json.
-- Сервер на локальной машине запускается только с полным набором PHOTO_SERVICE_DB_* переменных; DATABASE_URL старой службы не читается.
+## Локальный изолированный запуск
 
-## Запуск локального тестового контура
+```powershell
+Copy-Item .env.example .env
+# задать в .env случайный PHOTO_SERVICE_DB_PASSWORD; старый пароль не использовать
+$env:PHOTO_SERVICE_DB_PASSWORD = 'local-only-random-value'
+docker compose -p sao-photo-service-local up --build -d
+docker compose -p sao-photo-service-local run --rm photo-service node scripts/migrate.js
+Invoke-RestMethod http://127.0.0.1:8788/healthz
+docker compose -p sao-photo-service-local run --rm photo-service node scripts/import-object-maps.js --dry-run
+```
 
-В PowerShell перейдите в каталог photo-service и скопируйте шаблон окружения:
+Для Compose с внешней proxy-сетью заранее создать её только в тестовом окружении:
 
-    Copy-Item .env.example .env
+```powershell
+docker network create sao-photo-service-edge
+```
 
-Откройте .env и задайте уникальный случайный PHOTO_SERVICE_DB_PASSWORD. Этот файл игнорируется Git; не используйте пароль старого API. Затем выполните:
+Остановка теста с сохранением томов: `docker compose -p sao-photo-service-local down`. Временный smoke должен завершаться `down -v`.
 
-    docker compose up --build -d
-    Invoke-RestMethod http://127.0.0.1:8788/healthz
-    docker compose ps
+## Команды
 
-Ожидаемый ответ health endpoint укажет service sao-photo-service, status ok и database connected. Любой другой ответ не доказывает готовность принимать фото.
+```powershell
+npm ci --ignore-scripts --no-audit --no-fund
+npm test
+npm run migrate
+npm run create-user -- --email user@example.invalid --display-name "Имя" --role district_editor --district "Аэропорт"
+npm run import-maps -- --dry-run
+npm run import-maps -- --apply
+```
 
-Остановить контейнеры, сохранив локальный тестовый том:
+Пароль вводится скрыто и не передаётся в аргументах. Для префектуры используется `--role prefecture_admin` без `--district`. Реальные production-учётки создавать только после отдельной проверки хоста и резервной копии.
 
-    docker compose down
+Импорт по умолчанию выполняется в dry-run. Для контейнера, где исходные карты смонтированы отдельно, использовать `--source-root=/sources`.
 
-Backup/restore пока не предусмотрены, поэтому не складывайте в этот локальный том реальные пользовательские фото или данные. Это только изолированная заготовка для проверки соединения.
+## HTTP API
 
-## Тесты
+- `GET /healthz` — только доступность этой PostgreSQL; не legacy health.
+- `POST /auth/login`, `POST /auth/logout`, `GET /auth/me` — индивидуальная сессия в httpOnly cookie.
+- `GET /objects/resolve?datasetId=...&sourceId=...` — авторизованный поиск ключа.
+- `GET /photos?datasetId=...&sourceId=...` — галерея в пределах роли.
+- `POST /photos` — multipart `file`, `datasetId`, `sourceId`, `performer`, обязательные `gpsLat`/`gpsLon`; заголовок `Idempotency-Key` обязателен.
+- `GET /photos/:id/content` — защищённая выдача файла.
+- `PATCH /photos/:id/review` и `DELETE /photos/:id` — только `prefecture_admin`; эталонные фото удалить нельзя.
+- `GET /reports/summary`, `/reports/export.xlsx`, `/reports/export.pdf` — отчёт в пределах роли. Нераспределённые объекты видны префектуре отдельной группой и не приписываются району.
 
-Из этого каталога запустите:
+## Production rollout
 
-    npm ci
-    npm test
+Целевой каталог: `/opt/sao-photo-service`; Compose project: `sao-photo-service`; приватные volumes: `sao-photo-service_photo-service-postgres-data` и `sao-photo-service_photo-service-media`; отдельная сеть `sao-photo-service-edge` используется только для связи API с reverse-proxy. PostgreSQL остаётся только в Compose default network.
 
-Unit-тесты используют Node test runner и не требуют PostgreSQL. Они покрывают проверку конфигурации/health, границы 33%/66%, раздельные counters по остановкам, ПП и входам, минимальную дистанцию до зарегистрированных точек и риск за 15 м. Compose smoke test с отдельной временной PostgreSQL проверяет реальное соединение; его результат не означает production-развёртывание.
+До первого включения:
+
+1. Сохранить старую конфигурацию reverse-proxy и отдельный backup новой службы.
+2. Создать внешнюю сеть `docker network create sao-photo-service-edge`.
+3. Применить `node scripts/migrate.js`, затем `node scripts/import-object-maps.js --apply` с источниками карт.
+4. Создать индивидуальные учётки через `create-user.js`; общий пароль запрещён.
+5. Запустить `/opt/sao-photo-service/photo-service/scripts/backup.sh`, проверить `SHA256SUMS`, затем выполнить тестовый restore в отдельном Compose project.
+6. Подключить `deploy/nginx/sao-photo-location.conf` в TLS server старого proxy и добавить proxy-контейнеру только сеть `sao-photo-service-edge`; старые ODH/JiraJura services не менять.
+7. Проверить health, login, upload с GPS, повтор по тому же `Idempotency-Key`, review, выдачу фото, summary, Excel и PDF. При ошибках вернуть предыдущий proxy template и остановить только новый Compose project.
+
+Backup-скрипт не выполняет автоматическую очистку. При свободном media ниже 20% `monitor.sh` завершится с alert; удаление неэталонных файлов — отдельная подтверждённая операция.
+
+## Проверки
+
+`npm test` покрывает конфигурацию, health, нормы/пороги, geo tolerance, auth, multipart magic-byte и storage traversal. CI выполняет тесты, `npm audit --audit-level=high --omit=dev`, подписи npm и Docker build. Moderate advisory ExcelJS/uuid требует отдельного security review; `npm audit fix --force` не применять вслепую.

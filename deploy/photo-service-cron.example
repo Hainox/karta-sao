@@ -1,0 +1,4 @@
+# Install on the production host only after validating paths and permissions.
+# Keep this schedule separate from the legacy ODH/JiraJura backup jobs.
+15 2 * * * root PHOTO_SERVICE_COMPOSE_DIR=/opt/sao-photo-service PHOTO_SERVICE_BACKUP_DIR=/var/backups/sao-photo-service /opt/sao-photo-service/photo-service/scripts/backup.sh >> /var/log/sao-photo-service-backup.log 2>&1
+*/5 * * * * root PHOTO_SERVICE_COMPOSE_DIR=/opt/sao-photo-service /opt/sao-photo-service/photo-service/scripts/monitor.sh >> /var/log/sao-photo-service-monitor.log 2>&1

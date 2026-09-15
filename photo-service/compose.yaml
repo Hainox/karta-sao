@@ -38,6 +38,11 @@ services:
       - "127.0.0.1:${PHOTO_SERVICE_HOST_PORT:-8788}:8788"
     volumes:
       - photo-service-media:/var/lib/sao-photo-service/media
+    networks:
+      default: {}
+      edge:
+        aliases:
+          - sao-photo-service-api
     healthcheck:
       test:
         - CMD
@@ -60,3 +65,8 @@ services:
 volumes:
   photo-service-postgres-data:
   photo-service-media:
+
+networks:
+  edge:
+    name: sao-photo-service-edge
+    external: true

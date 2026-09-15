@@ -1,0 +1,39 @@
+name: SAO photo service quality
+
+on:
+  push:
+    paths:
+      - 'photo-service/**'
+      - 'object-maps/**'
+      - 'deploy/nginx/sao-photo-location.conf'
+      - '.github/workflows/photo-service.yml'
+  pull_request:
+    paths:
+      - 'photo-service/**'
+      - 'object-maps/**'
+      - 'deploy/nginx/sao-photo-location.conf'
+      - '.github/workflows/photo-service.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: photo-service
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: photo-service/package-lock.json
+      - run: npm ci --ignore-scripts
+      - run: npm test
+      - run: npm audit --audit-level=high --omit=dev
+      - run: npm audit signatures
+      - run: node --check server.js
+      - run: node scripts/import-object-maps.js --dry-run
+      - run: docker build --no-cache -t sao-photo-service:ci .
