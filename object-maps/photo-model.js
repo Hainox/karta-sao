@@ -274,18 +274,28 @@ export function groupLabel(dataset) {
  * Convert the district polygons for the map.
  *
  * GeoJSON stores [longitude, latitude] while Yandex Maps expects [latitude, longitude],
- * so the swap happens here and the drawing code stays trivial and testable.
+ * so the swap happens here and the drawing code stays trivial and testable. A district
+ * cut by a water mask arrives as a MultiPolygon, so every part becomes its own shape.
  */
 export function districtBoundaries(geojson, districts) {
   if (!geojson || !Array.isArray(geojson.features)) return [];
   const wanted = Array.isArray(districts) && districts.length ? new Set(districts) : null;
-  return geojson.features
-    .filter((feature) => feature?.geometry?.type === 'Polygon' && feature?.properties?.district)
-    .filter((feature) => !wanted || wanted.has(feature.properties.district))
-    .map((feature) => ({
-      district: feature.properties.district,
-      rings: feature.geometry.coordinates.map((ring) => ring.map(([longitude, latitude]) => [latitude, longitude])),
-    }));
+  const boundaries = [];
+  for (const feature of geojson.features) {
+    const district = feature?.properties?.district;
+    if (!district || (wanted && !wanted.has(district))) continue;
+    const type = feature?.geometry?.type;
+    const polygons = type === 'Polygon' ? [feature.geometry.coordinates]
+      : type === 'MultiPolygon' ? feature.geometry.coordinates
+        : [];
+    for (const rings of polygons) {
+      boundaries.push({
+        district,
+        rings: rings.map((ring) => ring.map(([longitude, latitude]) => [latitude, longitude])),
+      });
+    }
+  }
+  return boundaries;
 }
 
 export function boundaryNote(districts, totalDistricts) {

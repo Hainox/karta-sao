@@ -238,6 +238,48 @@ test('a district account gets only its own boundary', () => {
   assert.equal(boundaries[0].district, 'Аэропорт');
 });
 
+test('a district split by a water mask is drawn as several parts', () => {
+  const split = {
+    type: 'FeatureCollection',
+    features: [{
+      type: 'Feature',
+      properties: { district: 'Левобережный' },
+      geometry: {
+        type: 'MultiPolygon',
+        coordinates: [
+          [[[37.46, 55.85], [37.47, 55.85], [37.47, 55.86], [37.46, 55.85]]],
+          [[[37.48, 55.87], [37.49, 55.87], [37.49, 55.88], [37.48, 55.87]]],
+        ],
+      },
+    }],
+  };
+  const boundaries = districtBoundaries(split);
+  assert.equal(boundaries.length, 2);
+  assert.equal(boundaries[0].district, 'Левобережный');
+  assert.deepEqual(boundaries[0].rings[0][0], [55.85, 37.46]);
+  assert.deepEqual(boundaries[1].rings[0][0], [55.87, 37.48]);
+});
+
+test('a polygon with a water hole keeps its rings for the map', () => {
+  const holed = {
+    type: 'FeatureCollection',
+    features: [{
+      type: 'Feature',
+      properties: { district: 'Левобережный' },
+      geometry: {
+        type: 'Polygon',
+        coordinates: [
+          [[[37.46, 55.85], [37.50, 55.85], [37.50, 55.89], [37.46, 55.85]]],
+          [[[37.47, 55.86], [37.48, 55.86], [37.48, 55.87], [37.47, 55.86]]],
+        ],
+      },
+    }],
+  };
+  const boundaries = districtBoundaries(holed);
+  assert.equal(boundaries.length, 1);
+  assert.equal(boundaries[0].rings.length, 2);
+});
+
 test('a missing geojson does not break the map', () => {
   assert.deepEqual(districtBoundaries(null), []);
   assert.deepEqual(districtBoundaries({}), []);

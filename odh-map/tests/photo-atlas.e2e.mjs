@@ -283,6 +283,12 @@ try {
   check('у префектуры есть блок выгрузок', await admin.locator('#paExports').isVisible(), '');
   check('префектура видит все границы районов', /Показаны границы всех 16 районов/.test(await admin.locator('#paBoundaryNote').innerText()), await admin.locator('#paBoundaryNote').innerText());
 
+  // Левобережный разрезан водохранилищем на две части — проверяем, что MultiPolygon рисуется.
+  await admin.selectOption('#paDistrictFilter', 'Левобережный');
+  await admin.waitForFunction(() => /Левобережный/.test(document.getElementById('paBoundaryNote').innerText), null, { timeout: 30000 });
+  check('район, разрезанный водой, показывается без ошибок', /Показана граница района: Левобережный/.test(await admin.locator('#paBoundaryNote').innerText()), await admin.locator('#paBoundaryNote').innerText());
+  await admin.selectOption('#paDistrictFilter', '');
+
   const exportCheck = await step('export-xlsx', () => admin.evaluate(async (api) => {
     const response = await fetch(`${api}/reports/export.xlsx`, { credentials: 'include' });
     const buffer = await response.arrayBuffer();
