@@ -1,32 +1,43 @@
+param(
+    [Parameter(Mandatory = $true)][string]$Path,
+    [string]$Sheet = '',
+    [string]$Pdf = ''
+)
 $ErrorActionPreference = 'Stop'
-$source = 'C:\Users\dmitr\Desktop\Untitled spreadsheet.xlsx'
-$pdf = "$env:TEMP\hovrino.pdf"
-Remove-Item $pdf -Force -ErrorAction SilentlyContinue
-
 $excel = New-Object -ComObject Excel.Application
 $excel.Visible = $false
 $excel.DisplayAlerts = $false
 $excel.ScreenUpdating = $false
 try {
-    Write-Output "открываю книгу..."
-    $book = $excel.Workbooks.Open($source, 0, $true)
+    Write-Output "открываю: $Path"
+    $book = $excel.Workbooks.Open($Path, 0, $true)
     Write-Output ("листов: {0}" -f $book.Worksheets.Count)
     $names = @()
-    foreach ($sheet in $book.Worksheets) { $names += $sheet.Name }
+    foreach ($item in $book.Worksheets) { $names += $item.Name }
     Write-Output ("перечень: {0}" -f ($names -join ', '))
 
-    $sheet = $book.Worksheets.Item('Ховрино')
-    $used = $sheet.UsedRange
-    Write-Output ("лист Ховрино: строк {0}, колонок {1}" -f $used.Rows.Count, $used.Columns.Count)
-    $pictures = $sheet.Shapes.Count
-    Write-Output ("объектов на листе: {0}" -f $pictures)
+    $total = 0
+    foreach ($item in $book.Worksheets) {
+        if ($item.Shapes.Count -gt 0) { $total += $item.Shapes.Count }
+    }
+    Write-Output ("всего объектов на листах: {0}" -f $total)
 
-    $sheet.PageSetup.Orientation = 2
-    $sheet.PageSetup.Zoom = $false
-    $sheet.PageSetup.FitToPagesWide = 1
-    $sheet.PageSetup.FitToPagesTall = 4
-    $sheet.ExportAsFixedFormat(0, $pdf)
-    Write-Output ("PDF: {0} ({1:N0} КБ)" -f $pdf, ((Get-Item $pdf).Length / 1KB))
+    if ($Sheet) {
+        $target = $book.Worksheets.Item($Sheet)
+        $used = $target.UsedRange
+        Write-Output ("лист «{0}»: строк {1}, колонок {2}, объектов {3}" -f $Sheet, $used.Rows.Count, $used.Columns.Count, $target.Shapes.Count)
+    }
+
+    if ($Pdf) {
+        Remove-Item $Pdf -Force -ErrorAction SilentlyContinue
+        $page = $book.Worksheets.Item($Sheet)
+        $page.PageSetup.Orientation = 2
+        $page.PageSetup.Zoom = $false
+        $page.PageSetup.FitToPagesWide = 1
+        $page.PageSetup.FitToPagesTall = 4
+        $page.ExportAsFixedFormat(0, $Pdf)
+        Write-Output ("PDF: {0} ({1:N0} КБ)" -f $Pdf, ((Get-Item $Pdf).Length / 1KB))
+    }
     $book.Close($false)
 } finally {
     $excel.Quit()
