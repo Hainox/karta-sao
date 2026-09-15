@@ -8,9 +8,9 @@
 
 - Ветка: `photo-service-centralization`.
 - Переданная базовая точка: `841ce4f`.
-- Последний коммит реализации: `0121096 ops: prepare isolated photo service rollout`.
-- История перед ним: `d833c24`, `ddc6c7d`, `795bf33`; база ветки — `841ce4f`.
-- После обновления этого checkpoint-файла сделать отдельный checkpoint-коммит; не делать reset и не переключать ветку вслепую.
+- Последний коммит: `b75dbf1 docs: record production verification and cron`.
+- Последний feature/rollout-коммит: `0121096 ops: prepare isolated photo service rollout`; история перед ним: `d833c24`, `ddc6c7d`, `795bf33`; база ветки — `841ce4f`.
+- Рабочая копия чистая; не делать reset и не переключать ветку вслепую.
 - Секреты, `.env`, пароли и ключи в репозиторий не добавлялись.
 
 ## Утверждённые решения пользователя
@@ -84,5 +84,7 @@
    `git clone sao-photo-service-transfer.bundle karta-sao-photo-service`
 
    После клонирования создать новую рабочую копию и проверить ветку/HEAD по разделу выше.
+
+Финальный bundle после последнего коммита: `C:\Users\dmitr\Documents\Codex\2026-08-26\new-chat\work\sao-photo-service-transfer.bundle`. Перед переносом сверить SHA-256 из handoff-сообщения; bundle содержит полную историю и refs.
 
 Не считать наличие старой БД, старого `/api/health` или локального smoke доказательством готовности новой фотослужбы принимать реальные файлы.
