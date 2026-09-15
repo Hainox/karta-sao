@@ -10,7 +10,7 @@
 - `smm/` — пять типовых дворовых планировок и схемы уборки;
 - `yards-print/` — печать карты дворов в форматах A3 и A1.
 
-Основные слои карты ОДХ опубликованы в `odh-map/layers/`. Корневые `areas.geojson`, `mno.geojson`, `dp.geojson`, `sp.geojson`, `smm.geojson` и снимок `urns_sao_active_snapshot.geojson` используются картой дворов.
+Основные слои карты ОДХ опубликованы в `odh-map/layers/`. Корневые `areas.geojson`, `mno.geojson`, `dp.geojson`, `sp.geojson` и снимок `urns_sao_active_snapshot.geojson` используются картой дворов. `smm.geojson` и `smm_routes.geojson` — исходные данные секции `smm/`; на корневой карте слой маршрутов СММ снят.
 
 ## Исходники и проверки
 

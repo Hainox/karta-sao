@@ -204,29 +204,28 @@ def test_smm_detail_drawer_has_complete_dt4_dt5_cards_and_single_navigation_entr
         assert required_text in markup
 
 
-def test_root_map_exposes_smm_variants_and_direction_overlays():
-    """Switching on SMM must reveal five quick-zoom variants and their route/nozzle vectors."""
+def test_root_map_no_longer_carries_the_smm_layer():
+    """Слой «Маршруты СММ» убран с корневой карты по требованию заказчика и не должен вернуться."""
     markup = page("index.html")
-    assert 'id="smmVariants"' in markup
-    assert 'function zoomToSmmVariant' in markup
-    assert 'smm_routes' in markup
+    assert 'id="smmVariants"' not in markup
+    assert "function zoomToSmmVariant" not in markup
+    assert "function isSmmVariantVisible(variantId)" not in markup
+    assert "function routeArrowPositions(coordinates" not in markup
+    assert "smm_routes.geojson" not in markup
+    assert "Маршруты СММ" not in markup
+    # Соседний слой остаётся: это объекты ОДХ, а не маршруты.
+    assert "Места хранения СММ" in markup
 
-    data = json.loads(Path("smm_routes.geojson").read_text(encoding="utf-8"))
-    variants = {feature["properties"]["variant_id"] for feature in data["features"]}
-    assert variants == {"dt1", "dt2", "dt3", "dt4", "dt5"}
-    assert any(feature["properties"]["feature_kind"] == "route_direction" for feature in data["features"])
-    assert any(feature["properties"]["feature_kind"] == "nozzle_direction" for feature in data["features"])
 
-
-def test_root_map_filters_urn_clusters_and_smm_directions_with_selected_area():
-    """District/section filters apply to clustered urns and every SMM route overlay."""
+def test_root_map_filters_urn_clusters_with_selected_area():
+    """Выбор района и участка фильтрует кластеры урн на корневой карте."""
     markup = page("index.html")
     assert "state.urnsClusterer.update({ features: records.filter(isVisible)" in markup
-    assert "function isSmmVariantVisible(variantId)" in markup
-    assert "state.smmRouteItems.filter((item) => isSmmVariantVisible(item.variantId))" in markup
-    assert "function routeArrowPositions(coordinates" in markup
-    assert "route-vector movement route-vector-line" in markup
+    assert "state.layers.urns?.enabled" in markup
 
+
+def test_smm_routes_overlay_keeps_five_outlines_and_district_on_every_direction():
+    """Данные секции СММ остаются полными: пять контуров и район у каждого направления."""
     routes = json.loads(Path("smm_routes.geojson").read_text(encoding="utf-8"))
     outlines = {
         feature["properties"]["variant_id"]: feature["properties"]
@@ -390,12 +389,8 @@ def test_smm_routes_overlay_uses_tracks_with_explicit_provenance():
         assert abs(nozzle["properties"]["bearing"] - 20) < 2.0
         assert nozzle["properties"]["nozzle_track"] == [[37.5123, 55.7942, 20], [37.5125, 55.7942, 25], [37.5127, 55.7942, 15]]
 
-        markup = page("index.html")
-        assert "nozzle-measure" in markup
-        assert "feature.properties.nozzle_track" in markup
-        assert "замер выброса №" in markup
-        assert "measure.length < 3" in markup
-        assert "Number.isFinite(longitude)" in markup
+        # Отрисовка этих маркеров жила на корневой карте; слой снят, поэтому проверяется
+        # только контракт самих данных — их полноту стережёт отдельный тест.
 
         schematic = next(
             f for f in data["features"]
