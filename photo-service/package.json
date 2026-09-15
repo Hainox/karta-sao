@@ -8,9 +8,18 @@
   },
   "scripts": {
     "start": "node server.js",
-    "test": "node --test test/*.test.js"
+    "test": "node --test test/*.test.js",
+    "migrate": "node scripts/migrate.js",
+    "create-user": "node scripts/create-user.js",
+    "import-maps": "node scripts/import-object-maps.js"
   },
   "dependencies": {
+    "busboy": "1.6.0",
+    "exceljs": "4.4.0",
+    "pdfkit": "0.20.2",
     "pg": "8.23.0"
+  },
+  "overrides": {
+    "uuid": "11.1.0"
   }
 }

@@ -32,7 +32,21 @@ test('marks a fix beyond the approved 15 metre radius as a risk', () => {
 
   assert.equal(result.risk, true);
   assert.equal(result.radiusMeters, 15);
+  assert.equal(result.toleranceMeters, 5);
+  assert.equal(result.effectiveRadiusMeters, 20);
   assert.ok(result.distanceMeters > 15);
+});
+
+test('keeps a fix in the approved five metre GPS tolerance as a visible tolerance state', () => {
+  const result = assessDistanceRisk(
+    { latitude: 55.75, longitude: 37.61 },
+    [{ latitude: 55.75015, longitude: 37.61 }],
+  );
+
+  assert.equal(result.status, 'within_tolerance');
+  assert.equal(result.risk, false);
+  assert.equal(result.nominalRadiusExceeded, true);
+  assert.ok(result.distanceMeters > 15 && result.distanceMeters <= 20);
 });
 
 test('returns manual review when GPS or registered points are missing', () => {
@@ -54,5 +68,9 @@ test('rejects invalid coordinates and a non-positive radius', () => {
   assert.throws(
     () => assessDistanceRisk({ latitude: 55, longitude: 37 }, [{ latitude: 55, longitude: 37 }], 0),
     /radiusMeters/,
+  );
+  assert.throws(
+    () => assessDistanceRisk({ latitude: 55, longitude: 37 }, [{ latitude: 55, longitude: 37 }], 15, -1),
+    /toleranceMeters/,
   );
 });

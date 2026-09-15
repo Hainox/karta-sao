@@ -18,7 +18,9 @@
     .brand-mark{width:40px;height:40px;border:1px solid rgba(255,255,255,.28);border-radius:13px;display:grid;place-items:center;color:#b7e2cd;font-size:20px;background:rgba(255,255,255,.07)}
     h1{font-size:18px;line-height:1.15;margin:0 0 5px;font-weight:700;letter-spacing:.01em}
     .subtitle{font-size:12px;color:#c5d8d1}
-    .top-actions{display:flex;align-items:center;gap:12px}
+    .top-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:flex-end}
+    .photo-login{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+    .photo-login input{width:150px;padding:8px;border-radius:8px;border:1px solid #8ba99b}
     .local-tag{font-size:11px;color:#cde3d9;border:1px solid rgba(205,227,217,.35);padding:7px 10px;border-radius:999px;white-space:nowrap}
     .export-btn{border:0;border-radius:10px;background:#d5eadc;color:#143d33;padding:11px 14px;font-weight:700}
     .export-btn:hover{background:#e5f4e9}
@@ -136,7 +138,7 @@
         </div>
       </div>
       <div class="top-actions">
-        <span class="local-tag">Фото хранятся в этом браузере</span>
+        <form class="photo-login" id="photoLogin"><input id="loginEmail" type="email" placeholder="Логин" autocomplete="username" aria-label="Логин"><input id="loginPassword" type="password" placeholder="Пароль" autocomplete="current-password" aria-label="Пароль"><button class="export-btn" type="submit">Войти</button></form><span class="local-tag" id="loginState">Серверная фотослужба</span>
         <button class="export-btn" id="exportCsv" type="button">Скачать CSV для Яндекса</button>
       </div>
     </header>
@@ -189,8 +191,8 @@
       <div id="alternateLink"></div>
       <div class="section-title">Добавить фотофиксацию</div>
       <form class="photo-form" id="photoForm">
-        <label for="photoInput">Фотография (JPEG, PNG, WEBP, HEIC/HEIF) — 1 на объект</label>
-        <input class="photo-input" id="photoInput" type="file" accept="image/*,.heic,.heif" capture="environment">
+        <label for="photoInput">Фотография (JPEG, PNG или WEBP) — 1 на объект</label>
+        <input class="photo-input" id="photoInput" type="file" accept="image/jpeg,image/png,image/webp" capture="environment">
         <img class="preview" id="photoPreview" alt="Предпросмотр выбранной фотографии">
         <div class="photo-limit-note" id="photoLimitNote" role="status" aria-live="polite"></div>
         <label for="performer">Исполнитель</label>
@@ -202,7 +204,7 @@
           <button class="save-btn" id="savePhoto" type="submit" disabled>Сохранить фото</button>
         </div>
         <div class="gps-note" id="gpsNote">GPS необязателен; браузер спросит разрешение только после нажатия кнопки.</div>
-        <div class="storage-note">Фото и заметки остаются в локальном хранилище этого браузера; общего облачного доступа нет.</div>
+        <div class="storage-note">Фото отправляются в защищённую фотослужбу. Без GPS или при плохой точности фиксация попадёт на ручную проверку.</div>
       </form>
       <div class="section-title">Сохранённые фото</div>
       <div class="gallery" id="gallery"></div>
@@ -244,60 +246,25 @@
       return String(value == null ? "" : value);
     }
 
-    function openDb() {
-      if (state.db) return Promise.resolve(state.db);
-      return new Promise((resolve, reject) => {
-        if (!("indexedDB" in window)) {
-          reject(new Error("В этом браузере недоступно локальное хранилище фото."));
-          return;
-        }
-        const request = indexedDB.open("object-photo-fixations-v1", 1);
-        request.onupgradeneeded = () => {
-          const db = request.result;
-          if (!db.objectStoreNames.contains("photos")) {
-            const store = db.createObjectStore("photos", {keyPath:"key"});
-            store.createIndex("objectKey", "objectKey", {unique:false});
-          }
-        };
-        request.onsuccess = () => { state.db = request.result; resolve(state.db); };
-        request.onerror = () => reject(request.error || new Error("Не удалось открыть локальную базу фото."));
-      });
+    const PHOTO_API_BASE = window.SAO_PHOTO_API_BASE || "https://obhod-sao.ru/photo-api";
+    async function photoApi(path, options) {
+      const response = await fetch(PHOTO_API_BASE + path, {credentials:"include", ...options});
+      const type = response.headers.get("content-type") || "";
+      const body = type.includes("json") ? await response.json() : null;
+      if (!response.ok) throw new Error(body?.message || body?.error || "Сервис фото недоступен");
+      return body;
     }
-
-    function getAllPhotoKeys() {
-      return openDb().then(db => new Promise((resolve, reject) => {
-        const request = db.transaction("photos", "readonly").objectStore("photos").getAllKeys();
-        request.onsuccess = () => resolve(request.result || []);
-        request.onerror = () => reject(request.error);
-      }));
-    }
-
-    function getPhotos(key) {
-      return openDb().then(db => new Promise((resolve, reject) => {
-        const request = db.transaction("photos", "readonly").objectStore("photos").index("objectKey").getAll(key);
-        request.onsuccess = () => resolve(request.result || []);
-        request.onerror = () => reject(request.error);
-      }));
-    }
-
-    function savePhotoRecord(record) {
-      return openDb().then(db => new Promise((resolve, reject) => {
-        const transaction = db.transaction("photos", "readwrite");
-        transaction.objectStore("photos").put(record);
-        transaction.oncomplete = () => resolve();
-        transaction.onerror = () => reject(transaction.error || new Error("Не удалось сохранить фото."));
-        transaction.onabort = () => reject(transaction.error || new Error("Сохранение фото отменено."));
-      }));
+    function getPhotos(sourceId) {
+      return photoApi("/photos?datasetId=" + encodeURIComponent(DATA.datasetId) + "&sourceId=" + encodeURIComponent(sourceId)).then(body => body.photos || []);
     }
 
     async function loadPhotoCounts() {
       try {
-        const keys = await getAllPhotoKeys();
-        for (const key of keys) {
-          const parts = String(key).split("|");
-          if (parts[0] === DATA.datasetId && parts.length >= 3) {
-            state.photoCounts.set(parts[1], (state.photoCounts.get(parts[1]) || 0) + 1);
-          }
+        const body = await photoApi("/reports/summary");
+        state.photoCounts.clear();
+        for (const object of body.objects || []) {
+          const count = (object.confirmedPhotos || 0) + (object.pendingReviewPhotos || 0);
+          for (const sourceId of object.sourceIds || []) state.photoCounts.set(sourceId, count);
         }
         state.storageReady = true;
         updatePhotoCount();
@@ -305,7 +272,7 @@
         updateMapAndList();
       } catch (error) {
         state.storageReady = false;
-        showToast(error.message || "Фото будут недоступны в этом браузере.", true);
+        showToast("Войдите в фотослужбу, чтобы видеть и отправлять фото: " + (error.message || "сервис недоступен"), true);
       }
     }
 
@@ -346,7 +313,7 @@
         ? "Загружено " + count + " из " + PHOTO_LIMIT + ". Можно добавить ещё " + remaining + "."
         : "Достигнут лимит: " + PHOTO_LIMIT + " фото на объект.";
       if (state.file && isHeicPhoto({filename:state.file.name, mimeType:state.file.type})) note.textContent += " HEIC/HEIF принят; предпросмотр зависит от браузера.";
-      button.disabled = !state.storageReady || !state.file || remaining === 0;
+      button.disabled = !state.storageReady || !state.file || !state.gps || remaining === 0;
     }
 
     function fillGroups() {
@@ -500,7 +467,7 @@
         return;
       }
       try {
-        const photos = await getPhotos(objectKey(record.id));
+        const photos = await getPhotos(record.id);
         if (!photos.length) {
           gallery.textContent = "Для объекта ещё нет фото.";
           return;
@@ -509,24 +476,15 @@
         for (const photo of photos) {
           const card = document.createElement("article");
           card.className = "photo-card";
-          const url = URL.createObjectURL(photo.photo);
-          state.galleryUrls.push(url);
-          let preview;
-          if (isHeicPhoto(photo)) {
-            preview = document.createElement("div");
-            preview.className = "photo-preview-placeholder";
-            preview.setAttribute("role", "img");
-            preview.setAttribute("aria-label", "Файл HEIC или HEIF; скачайте оригинал для просмотра");
-            preview.textContent = "HEIC / HEIF\nПредпросмотр зависит от браузера";
-          } else {
-            preview = document.createElement("img");
-            preview.src = url;
-            preview.alt = "Фотофиксация объекта";
-          }
+          const url = PHOTO_API_BASE + "/photos/" + encodeURIComponent(photo.id) + "/content";
+          const preview = document.createElement("img");
+          preview.src = url;
+          preview.alt = "Фотофиксация объекта";
           const caption = document.createElement("div");
           caption.className = "photo-caption";
-          const when = new Date(photo.createdAt).toLocaleString("ru-RU");
-          caption.textContent = [when, photo.performer, photo.comment, photo.gps ? ("GPS " + Number(photo.gps.lat).toFixed(6) + ", " + Number(photo.gps.lon).toFixed(6)) : ""].filter(Boolean).join("\n");
+          const when = new Date(photo.capturedAt || photo.uploadedAt).toLocaleString("ru-RU");
+          const gpsText = photo.gpsLatitude == null ? "GPS требует проверки" : ("GPS " + Number(photo.gpsLatitude).toFixed(6) + ", " + Number(photo.gpsLongitude).toFixed(6) + " · " + (photo.geoStatus || "проверка"));
+          caption.textContent = [when, photo.performer, photo.reviewStatus, gpsText, photo.comment].filter(Boolean).join("\n");
           const download = document.createElement("a");
           download.className = "download-photo";
           download.href = url;
@@ -552,7 +510,7 @@
       state.previewUrl = null;
       el("photoPreview").removeAttribute("src");
       el("photoPreview").style.display = "none";
-      el("gpsNote").textContent = "GPS необязателен; браузер спросит разрешение только после нажатия кнопки.";
+      el("gpsNote").textContent = "GPS обязателен для отправки; нажмите «Добавить GPS» и разрешите доступ.";
       updatePhotoLimitStatus();
     }
 
@@ -614,71 +572,34 @@
       })).catch(() => file);
     }
 
-    function saveCurrentPhoto(event) {
+    async function saveCurrentPhoto(event) {
       event.preventDefault();
-      if (!state.selected || !state.file) {
-        showToast("Выберите фотографию.", true);
-        return;
-      }
-      if (!state.storageReady) {
-        showToast("Локальное хранилище фото недоступно.", true);
-        return;
-      }
-      if (selectedPhotoCount(state.selected) >= PHOTO_LIMIT) {
-        showToast("Для объекта разрешено не более " + PHOTO_LIMIT + " фото.", true);
-        updatePhotoLimitStatus();
-        return;
-      }
+      if (!state.selected || !state.file) { showToast("Выберите фотографию.", true); return; }
+      if (!state.storageReady) { showToast("Войдите в фотослужбу перед отправкой.", true); return; }
       const objectId = state.selected.id;
       const file = state.file;
-      const performer = el("performer").value.trim();
-      const comment = el("comment").value.trim();
-      const gps = state.gps;
       const button = el("savePhoto");
       button.disabled = true;
-      button.textContent = "Сохраняем…";
-      getPhotos(objectKey(objectId)).then(existing => {
-        if (existing.length >= PHOTO_LIMIT) {
-          state.photoCounts.set(objectId, existing.length);
-          updatePhotoCount();
-          updateMapAndList();
-          throw new Error("Для объекта разрешено не более " + PHOTO_LIMIT + " фото.");
-        }
-        return compressImage(file).then(blob => ({blob, count:existing.length + 1}));
-      }).then(({blob, count}) => {
-        const randomId = (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : String(Date.now()) + "-" + Math.random().toString(16).slice(2);
-        const record = {
-          key:DATA.datasetId + "|" + objectId + "|" + randomId,
-          objectKey:objectKey(objectId),
-          datasetId:DATA.datasetId,
-          objectId:objectId,
-          createdAt:new Date().toISOString(),
-          filename:file.name || "photo.jpg",
-          mimeType:blob.type || file.type || "image/jpeg",
-          photo:blob,
-          performer,
-          comment,
-          gps
-        };
-        return savePhotoRecord(record).then(() => count);
-      }).then(count => {
-        state.photoCounts.set(objectId, count);
-        updatePhotoCount();
-        updateMapAndList();
-        button.textContent = "Сохранить фото";
-        showToast("Фото сохранено в этом браузере.");
-        if (state.selected && state.selected.id === objectId) {
-          resetPhotoForm();
-          renderGallery(state.selected);
-        } else {
-          button.disabled = true;
-        }
-      }).catch(error => {
-        button.textContent = "Сохранить фото";
-        if (state.selected && state.selected.id === objectId) updatePhotoLimitStatus();
-        else button.disabled = true;
-        showToast(error.message && error.message.startsWith("Для объекта разрешено") ? error.message : "Не удалось сохранить фото: " + (error.message || "ошибка хранилища"), true);
-      });
+      button.textContent = "Отправляем…";
+      try {
+        const existing = await getPhotos(objectId);
+        if (existing.length >= PHOTO_LIMIT) throw new Error("Для объекта разрешено не более " + PHOTO_LIMIT + " фото.");
+        const blob = await compressImage(file);
+        const form = new FormData();
+        form.append("file", blob, file.name || "photo.jpg");
+        form.append("datasetId", DATA.datasetId);
+        form.append("sourceId", objectId);
+        form.append("performer", el("performer").value.trim());
+        form.append("comment", el("comment").value.trim());
+        if (state.gps) { form.append("gpsLat", state.gps.lat); form.append("gpsLon", state.gps.lon); form.append("gpsAccuracyM", state.gps.accuracy); form.append("capturedAt", state.gps.capturedAt); }
+        await photoApi("/photos", {method:"POST", headers:{"Idempotency-Key":(crypto.randomUUID ? crypto.randomUUID() : String(Date.now()) + Math.random())}, body:form});
+        await loadPhotoCounts();
+        resetPhotoForm();
+        await renderGallery(state.selected);
+        showToast("Фото отправлено на сервер. Оно будет учтено после проверки.");
+      } catch (error) {
+        showToast("Не удалось отправить фото: " + (error.message || "ошибка сервиса"), true);
+      } finally { button.textContent = "Сохранить фото"; updatePhotoLimitStatus(); }
     }
 
     function csvField(value) {
@@ -721,6 +642,25 @@
       showToast("CSV создан: " + lines.length.toLocaleString("ru-RU") + " меток. Загрузите CSV через «К импорту» в Конструкторе.");
     }
 
+    function setLoggedIn(user) {
+      el("loginEmail").style.display = "none";
+      el("loginPassword").style.display = "none";
+      el("photoLogin").querySelector("button").textContent = "Выйти";
+      el("loginState").textContent = (user.displayName || user.email) + (user.district ? " · " + user.district : " · префектура");
+    }
+    async function initPhotoLogin() {
+      const form = el("photoLogin");
+      form.addEventListener("submit", async event => {
+        event.preventDefault();
+        const button = form.querySelector("button");
+        if (button.textContent === "Выйти") { await photoApi("/auth/logout", {method:"POST"}).catch(() => {}); location.reload(); return; }
+        button.disabled = true;
+        try { const body = await photoApi("/auth/login", {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({email:el("loginEmail").value, password:el("loginPassword").value})}); setLoggedIn(body.user); el("loginPassword").value = ""; await loadPhotoCounts(); }
+        catch (error) { showToast("Вход не выполнен: " + (error.message || "проверьте логин и пароль"), true); }
+        finally { button.disabled = false; }
+      });
+      try { const body = await photoApi("/auth/me"); setLoggedIn(body.user); await loadPhotoCounts(); } catch { /* anonymous view keeps upload controls disabled */ }
+    }
     function initEvents() {
       fillGroups();
       let debounce = null;
@@ -790,6 +730,7 @@
             capturedAt:new Date().toISOString()
           };
           el("gpsNote").textContent = "GPS: " + state.gps.lat.toFixed(6) + ", " + state.gps.lon.toFixed(6) + " · точность около " + Math.round(state.gps.accuracy) + " м.";
+          updatePhotoLimitStatus();
         }, error => {
           el("gpsNote").textContent = "GPS не получен: " + (error.message || "разрешение не предоставлено");
         }, {enableHighAccuracy:true,timeout:12000,maximumAge:0});
@@ -799,7 +740,7 @@
     initEvents();
     if (window.ymaps) ymaps.ready(initMap);
     else el("mapStatus").textContent = "\u041D\u0435 \u0437\u0430\u0433\u0440\u0443\u0437\u0438\u043B\u0441\u044F API \u042F\u043D\u0434\u0435\u043A\u0441 \u041A\u0430\u0440\u0442. \u041F\u0440\u043E\u0432\u0435\u0440\u044C\u0442\u0435 \u0438\u043D\u0442\u0435\u0440\u043D\u0435\u0442 \u0438 \u043E\u0433\u0440\u0430\u043D\u0438\u0447\u0435\u043D\u0438\u044F API-\u043A\u043B\u044E\u0447\u0430.";
-    loadPhotoCounts();
+    initPhotoLogin();
   })();
   </script>
 </body>

@@ -26,11 +26,18 @@ services:
       PHOTO_SERVICE_DB_NAME: sao_photo_service
       PHOTO_SERVICE_DB_USER: sao_photo_service
       PHOTO_SERVICE_DB_PASSWORD: ${PHOTO_SERVICE_DB_PASSWORD:?Set a unique local PHOTO_SERVICE_DB_PASSWORD}
+      PHOTO_SERVICE_MEDIA_ROOT: /var/lib/sao-photo-service/media
+      PHOTO_SERVICE_ALLOWED_ORIGINS: ${PHOTO_SERVICE_ALLOWED_ORIGINS:-https://hainox.github.io}
+      PHOTO_SERVICE_BASE_PATH: ${PHOTO_SERVICE_BASE_PATH:-}
+      PHOTO_SERVICE_COOKIE_SECURE: ${PHOTO_SERVICE_COOKIE_SECURE:-false}
+      PHOTO_SERVICE_COOKIE_PATH: ${PHOTO_SERVICE_COOKIE_PATH:-/photo-api}
     depends_on:
       database:
         condition: service_healthy
     ports:
       - "127.0.0.1:${PHOTO_SERVICE_HOST_PORT:-8788}:8788"
+    volumes:
+      - photo-service-media:/var/lib/sao-photo-service/media
     healthcheck:
       test:
         - CMD
@@ -52,3 +59,4 @@ services:
 
 volumes:
   photo-service-postgres-data:
+  photo-service-media:

@@ -7,7 +7,10 @@ COPY package.json package-lock.json ./
 RUN npm ci --omit=dev --ignore-scripts
 
 COPY --chown=node:node src ./src
+COPY --chown=node:node migrations ./migrations
+COPY --chown=node:node scripts ./scripts
 COPY --chown=node:node server.js ./server.js
+RUN mkdir -p /var/lib/sao-photo-service/media && chown -R node:node /var/lib/sao-photo-service
 USER node
 
 EXPOSE 8788

@@ -1,5 +1,6 @@
 const EARTH_RADIUS_METERS = 6_371_008.8;
 const DEFAULT_RADIUS_METERS = 15;
+const DEFAULT_TOLERANCE_METERS = 5;
 
 function coordinate(point, name) {
   if (point === null || typeof point !== 'object' || Array.isArray(point)) {
@@ -39,9 +40,17 @@ export function haversineDistanceMeters(firstPoint, secondPoint) {
  * GPS accuracy policy is intentionally not inferred here; callers must keep
  * fixes without acceptable accuracy in manual review.
  */
-export function assessDistanceRisk(position, referencePoints, radiusMeters = DEFAULT_RADIUS_METERS) {
+export function assessDistanceRisk(
+  position,
+  referencePoints,
+  radiusMeters = DEFAULT_RADIUS_METERS,
+  toleranceMeters = DEFAULT_TOLERANCE_METERS,
+) {
   if (!Number.isFinite(radiusMeters) || radiusMeters <= 0) {
     throw new TypeError('radiusMeters must be a positive finite number');
+  }
+  if (!Number.isFinite(toleranceMeters) || toleranceMeters < 0) {
+    throw new TypeError('toleranceMeters must be a non-negative finite number');
   }
   if (position === null || position === undefined) {
     return { status: 'review', reason: 'missing_gps' };
@@ -61,12 +70,19 @@ export function assessDistanceRisk(position, referencePoints, radiusMeters = DEF
     }
   });
 
-  const risk = nearestDistance > radiusMeters;
+  const effectiveRadiusMeters = radiusMeters + toleranceMeters;
+  const risk = nearestDistance > effectiveRadiusMeters;
+  const status = nearestDistance <= radiusMeters
+    ? 'within_radius'
+    : (risk ? 'risk' : 'within_tolerance');
   return {
-    status: risk ? 'risk' : 'within_radius',
+    status,
     risk,
     distanceMeters: nearestDistance,
     radiusMeters,
+    toleranceMeters,
+    effectiveRadiusMeters,
+    nominalRadiusExceeded: nearestDistance > radiusMeters,
     referencePointIndex: nearestIndex,
     approximation: 'nearest_registered_point',
   };
