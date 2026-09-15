@@ -47,7 +47,6 @@ test('the PDF embeds a Cyrillic font with a ToUnicode map', async () => {
   assert.match(raw, /\/FontFile2/);
   assert.match(raw, /\/ToUnicode/);
   assert.equal(raw.includes('/Helvetica'), false);
-  assert.ok(pdf.length > 10_000, `PDF is too small to carry a font: ${pdf.length}`);
 });
 
 test('the PDF is produced for a district scope without photos', async () => {

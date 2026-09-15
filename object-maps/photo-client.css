@@ -26,7 +26,8 @@ html, body {
   margin: 0;
   background: var(--paper);
   color: var(--ink);
-  font: 16px/1.5 "Segoe UI", Arial, sans-serif;
+  /* Корпоративный шрифт атласа; на машинах без него подставляется системный. */
+  font: 16px/1.5 "Century Gothic", "Century Gothic Pro", "Questrial", "Segoe UI", Arial, sans-serif;
 }
 
 button, input, select, textarea { font: inherit; color: inherit; }
@@ -180,6 +181,36 @@ button { cursor: pointer; }
 .pa-metric dd { margin: 3px 0 0; font-size: 18px; font-weight: 700; }
 
 .pa-unassigned { padding: 11px 12px; border: 1px dashed #cbbfa2; border-radius: 10px; background: #fdfaf1; font-size: 13px; line-height: 1.5; }
+
+/* Компактная доска округа: префектура видит, кто отстаёт, и проваливается в район. */
+.pa-dashboard { display: grid; gap: 8px; padding-top: 12px; border-top: 1px solid var(--line); }
+.pa-dashboard-title { margin: 0; font-size: 12px; text-transform: uppercase; letter-spacing: .07em; color: #54685f; }
+.pa-board { display: grid; gap: 3px; }
+
+.pa-board-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 68px 48px;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 5px 7px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: transparent;
+  text-align: left;
+  color: inherit;
+}
+button.pa-board-row:hover { background: #f2f7f3; border-color: #dfeae2; }
+.pa-board-row[data-scope="unassigned"] { border: 1px dashed #e2d6bb; background: #fdfaf1; }
+
+.pa-board-name { display: block; font-size: 12px; font-weight: 600; overflow-wrap: anywhere; }
+.pa-board-note { display: block; color: var(--muted); font-size: 10px; }
+.pa-board-bar { display: block; height: 8px; border-radius: 999px; background: #e6ebe7; overflow: hidden; }
+.pa-board-bar > span { display: block; height: 100%; border-radius: 999px; background: #7a8c86; }
+.pa-board-bar[data-band="low"] > span { background: #b3382b; }
+.pa-board-bar[data-band="middle"] > span { background: #b8791a; }
+.pa-board-bar[data-band="high"] > span { background: #1c7a55; }
+.pa-board-value { font-size: 11px; font-weight: 700; text-align: right; white-space: nowrap; }
 
 .pa-filters { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .pa-filters > div:first-child { grid-column: 1 / -1; }

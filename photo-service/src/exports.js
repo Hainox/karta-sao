@@ -1,19 +1,36 @@
 import ExcelJS from 'exceljs';
 import PDFDocument from 'pdfkit';
 import { reportPayload } from './reports.js';
-import { completionMix, summarizeByDistrict, uploadDynamics } from './report.js';
+import { completionMix, uploadDynamics } from './report.js';
 import { objectTypeLabel, percentLabel, statusBandLabel, OBJECT_TYPES } from './labels.js';
 import {
   CHART_COLORS, bandColor, drawBarRow, drawBandChip, drawColumns, drawGauge, drawStackedBar, section,
 } from './pdf-charts.js';
 import { readFile } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { mediaRoot } from './storage.js';
 
 // PDFKit's built-in Helvetica cannot encode Cyrillic: the text is written with a
 // WinAnsi mapping and no ToUnicode table, so the report renders and copies as
 // garbage. A bundled TTF with Cyrillic fixes both reading and copy-paste.
-const PDF_FONT_PATH = fileURLToPath(new URL('../assets/fonts/PT_Sans-Web-Regular.ttf', import.meta.url));
+//
+// Корпоративный шрифт — Century Gothic, но он коммерческий и в публичный
+// репозиторий не попадает. В комплекте лежит свободный геометрический аналог,
+// а свой файл подключается переменной окружения: PHOTO_SERVICE_PDF_FONT.
+const BUNDLED_PDF_FONT = fileURLToPath(new URL('../assets/fonts/Jost-Regular.ttf', import.meta.url));
+
+function resolvePdfFont(environment) {
+  const custom = String(environment.PHOTO_SERVICE_PDF_FONT || '').trim();
+  if (!custom) return BUNDLED_PDF_FONT;
+  if (!existsSync(custom)) {
+    console.warn(`PHOTO_SERVICE_PDF_FONT not found (${custom}); using the bundled font`);
+    return BUNDLED_PDF_FONT;
+  }
+  return custom;
+}
+
+const PDF_FONT_PATH = resolvePdfFont(process.env);
 export const PDF_FONT_NAME = 'report-body';
 const MARGIN = 42;
 const DYNAMICS_DAYS = 14;
@@ -46,7 +63,7 @@ export async function buildExcel(rows) {
     rules: [{ type: 'dataBar', minLength: 0, maxLength: 100, cfvo: [{ type: 'num', value: 0 }, { type: 'num', value: 100 }], color: { argb: 'FF1C7A55' } }],
   });
 
-  const districts = summarizeByDistrict(rows);
+  const districts = payload.byDistrict;
   if (districts.length > 1) {
     const districtsSheet = workbook.addWorksheet('Районы');
     districtsSheet.columns = [
@@ -154,7 +171,7 @@ export async function buildExcel(rows) {
 export function buildPdf(rows) {
   const payload = reportPayload(rows);
   const overall = payload.overall;
-  const districts = summarizeByDistrict(rows);
+  const districts = payload.byDistrict;
   const dynamics = uploadDynamics(rows, { days: DYNAMICS_DAYS });
   const mix = completionMix(overall);
 

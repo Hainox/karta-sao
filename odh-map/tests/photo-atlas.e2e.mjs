@@ -175,6 +175,7 @@ try {
   check('в службе ровно одна фиксация после повторной отправки', stored.photos.length === 1, JSON.stringify(stored.photos.map((photo) => photo.id)));
   check('клиент приложил миниатюру для отчёта', uploadBodies[0]?.thumbnail === true, JSON.stringify(uploadBodies));
   check('у района нет ссылки скачивания фото', (await page.locator('#paGallery .download-photo, #paGallery a.pa-btn').count()) === 0, '');
+  check('у района нет доски округа', await page.locator('#paDashboard').isHidden(), '');
 
   await page.screenshot({ path: join(SHOTS, 'desktop-dialog.png') });
   await page.keyboard.press('Escape');
@@ -270,6 +271,23 @@ try {
   // Unassigned objects stay out of the SAO denominator and are reported separately.
   check('сводка САО считает только назначенные объекты', /Всего объектов\n11\s?268/.test(adminSummary), adminSummary.replace(/\n/g, ' | '));
   check('сумма назначенных и нераспределённых совпадает с импортом', /Без района: 7 объектов/.test(adminSummary), '');
+
+  /* ------------------------------------------- дашборд округа у префектуры */
+  const board = admin.locator('#paDistrictBoard .pa-board-row');
+  check('префектура видит доску районов', await admin.locator('#paDashboard').isVisible(), '');
+  check('на доске все районы и строка без района', (await board.count()) === 17, String(await board.count()));
+  check('«Без района» замыкает доску', /Без района/.test(await board.last().innerText()), await board.last().innerText().then((text) => text.replace(/\n/g, ' | ')));
+  const firstBoardRow = await board.first().innerText();
+  check('в строке района есть доля и процент', /из \d+ объектов/.test(firstBoardRow) && /%/.test(firstBoardRow), firstBoardRow.replace(/\n/g, ' | '));
+  check('у «Без района» нет кнопки перехода', (await admin.locator('#paDistrictBoard div.pa-board-row').count()) === 1, '');
+
+  const firstBoardDistrict = firstBoardRow.split('\n')[0];
+  await board.first().click();
+  await admin.waitForFunction((name) => document.getElementById('paDistrictFilter').value === name, firstBoardDistrict, { timeout: 30000 });
+  check('клик по району на доске фильтрует панель', (await admin.locator('#paDistrictFilter').inputValue()) === firstBoardDistrict, firstBoardDistrict);
+  check('доска остаётся видимой внутри одного района', await admin.locator('#paDashboard').isVisible(), '');
+  await admin.selectOption('#paDistrictFilter', '');
+  await admin.waitForFunction(() => /Всего объектов\n11\s?268/.test(document.getElementById('paSummary').innerText), null, { timeout: 30000 });
 
   await admin.selectOption('#paDistrictFilter', 'Аэропорт');
   await admin.waitForFunction(() => /Всего объектов\n952/.test(document.getElementById('paSummary').innerText), null, { timeout: 30000 });

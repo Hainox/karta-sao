@@ -44,6 +44,7 @@ const state = {
   lastFocused: null,
   dataCache: new Map(),
   referencePoints: new Map(),
+  boardAll: [],
 };
 
 const element = (id) => document.getElementById(id);
@@ -257,6 +258,7 @@ async function refreshCoverage() {
   try {
     state.summary = await apiJson(`/reports/summary${query}`);
     state.coverage = buildCoverageIndex(state.summary);
+    if (!district) state.boardAll = state.summary.byDistrict || [];
     fillDistrictFilter();
   } catch (error) {
     state.coverage = new Map();
@@ -282,10 +284,75 @@ function fillDistrictFilter() {
 
 function renderAll() {
   renderSummary();
+  renderDashboard();
   renderList();
   renderMapObjects();
   renderBoundaries();
   renderQueue();
+}
+
+/**
+ * Доска округа нужна префектуре: район и так видит только себя. Когда префектура
+ * проваливается в один район, показываем сохранённый срез по всему округу.
+ */
+function boardDistricts() {
+  if (!canExport(state.user)) return [];
+  if (requestedDistrict()) return state.boardAll?.length ? state.boardAll : (state.summary?.byDistrict || []);
+  return state.summary?.byDistrict || [];
+}
+
+function boardRow(district) {
+  const unassigned = !district.district;
+  const row = document.createElement(unassigned ? 'div' : 'button');
+  if (!unassigned) row.type = 'button';
+  row.className = 'pa-board-row';
+  row.setAttribute('role', 'listitem');
+  if (unassigned) row.dataset.scope = 'unassigned';
+
+  const caption = document.createElement('span');
+  const name = document.createElement('span');
+  name.className = 'pa-board-name';
+  name.textContent = district.district || 'Без района';
+  const note = document.createElement('span');
+  note.className = 'pa-board-note';
+  note.textContent = `${district.completedObjects} из ${district.totalObjects} объектов`;
+  caption.append(name, note);
+
+  const bar = document.createElement('span');
+  bar.className = 'pa-board-bar';
+  bar.dataset.band = district.statusBand || 'none';
+  const fill = document.createElement('span');
+  fill.style.width = `${Math.max(0, Math.min(100, district.completionPercent || 0))}%`;
+  bar.appendChild(fill);
+
+  const value = document.createElement('span');
+  value.className = 'pa-board-value';
+  value.textContent = completionLabel({ overall: district });
+
+  row.append(caption, bar, value);
+  if (!unassigned) {
+    row.title = `Показать только ${district.district}`;
+    row.addEventListener('click', () => {
+      element('paDistrictFilter').value = district.district;
+      invalidateQueue();
+      refreshCoverage();
+    });
+  }
+  return row;
+}
+
+function renderDashboard() {
+  const board = element('paDashboard');
+  const list = element('paDistrictBoard');
+  const districts = boardDistricts();
+  if (districts.length <= 1) {
+    board.hidden = true;
+    list.replaceChildren();
+    return;
+  }
+  board.hidden = false;
+  list.replaceChildren();
+  for (const district of districts) list.appendChild(boardRow(district));
 }
 
 function renderSummary() {
@@ -1157,6 +1224,10 @@ function shell() {
           <button type="button" class="pa-btn pa-panel-close" id="paPanelClose">Закрыть</button>
         </div>
         <div class="pa-summary" id="paSummary"></div>
+        <section class="pa-dashboard" id="paDashboard" aria-labelledby="paDashboardTitle" hidden>
+          <h2 class="pa-dashboard-title" id="paDashboardTitle">Районы округа</h2>
+          <div class="pa-board" id="paDistrictBoard" role="list"></div>
+        </section>
         <div class="pa-filters">
           <div>
             <label class="pa-label" for="paSearch">Поиск по адресу, району и атрибутам</label>

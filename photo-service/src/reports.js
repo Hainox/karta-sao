@@ -1,4 +1,4 @@
-import { summarizeCoverageByType, summarizeCoverage } from './report.js';
+import { summarizeCoverageByType, summarizeCoverage, summarizeByDistrict } from './report.js';
 
 const TYPES = new Set(['stop', 'pp', 'entrance']);
 
@@ -57,6 +57,9 @@ export function reportPayload(rows) {
     sourceVersions,
     overall: summarizeCoverage(records),
     byType: summarizeCoverageByType(records),
+    // Разрез по районам считается здесь же: боковой дашборд префектуры и отчёты
+    // показывают одни и те же числа, а не две независимые реализации.
+    byDistrict: summarizeByDistrict(rows),
     unassigned: summarizeCoverage(unassignedRows.map((row) => ({
       objectType: row.object_type,
       confirmedPhotos: row.confirmedPhotos,
