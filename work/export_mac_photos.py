@@ -164,7 +164,7 @@ def main():
                     'Категория': {'ДТ': 'ДТ', 'МКД': 'МКД', 'ОДХ': 'ОДХ', 'ОО': 'ОО'}.get(record['Категория'], record['Категория']),
                     'Адрес': record['Адрес'],
                     'Нарушение': record['Нарушение'],
-                    'Файл': '; '.join(saved),
+                    'Файл': ' | '.join(saved),
                     'Документ': document_path.name
                 })
         print(f'{district:<24} нарушений {len(records):>4}, фото {sum(1 for r in rows if r["Район"] == district):>4}')
