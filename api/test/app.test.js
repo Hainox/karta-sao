@@ -158,7 +158,7 @@ test('отклоняет полигон, стороны которого вых�
 });
 
 test('авторизация, районные права, приёмка и выгрузка работают по API', async () => {
-  const { api, editorPassword, reviewerPassword } = await fixture();
+  const { api, editorPassword, prefecturePassword } = await fixture();
   await api.get('/api/me').expect(401);
   const editor = await login(api, 'editor@example.test', editorPassword);
   await api.post('/api/submissions').set('Authorization', `Bearer ${editor}`).send({ changeSet: changeSet({ district: 'Беговой' }) }).expect(403);
@@ -167,8 +167,8 @@ test('авторизация, районные права, приёмка и в�
   const submitted = await api.post('/api/submissions').set('Authorization', `Bearer ${editor}`).send({ changeSet: changeSet(), originalFilename: 'airport.geojson' }).expect(201);
   await api.get('/api/submissions').set('Authorization', `Bearer ${unassigned}`).expect(403);
   await api.patch(`/api/submissions/${submitted.body.submission.id}`).set('Authorization', `Bearer ${editor}`).send({ status: 'approved' }).expect(403);
-  const reviewer = await login(api, 'reviewer@example.test', reviewerPassword);
-  const archive = await api.get('/api/exports/review-archive.zip').set('Authorization', `Bearer ${reviewer}`).buffer(true).parse(binaryParser).expect(200);
+  const prefecture = await login(api, 'prefecture@example.test', prefecturePassword);
+  const archive = await api.get('/api/exports/review-archive.zip').set('Authorization', `Bearer ${prefecture}`).buffer(true).parse(binaryParser).expect(200);
   assert.match(archive.headers['content-type'], /application\/zip/);
   assert.match(archive.headers['content-disposition'], /pravki-sao-k-priemke/);
   assert.equal(archive.body.subarray(0, 2).toString(), 'PK');
@@ -176,8 +176,8 @@ test('авторизация, районные права, приёмка и в�
   assert.match(archive.body.toString('utf8'), /районы\/Аэропорт\//);
   const manifest = JSON.parse(unzipEntry(archive.body, 'manifest.json').toString('utf8'));
   assert.equal(manifest.files[0].payload_sha256, payloadHash(changeSet()));
-  await api.patch(`/api/submissions/${submitted.body.submission.id}`).set('Authorization', `Bearer ${reviewer}`).send({ status: 'approved', comment: 'Проверено' }).expect(200);
-  const exported = await api.get('/api/exports/approved.geojson').set('Authorization', `Bearer ${reviewer}`).expect(200);
+  await api.patch(`/api/submissions/${submitted.body.submission.id}`).set('Authorization', `Bearer ${prefecture}`).send({ status: 'approved', comment: 'Проверено' }).expect(200);
+  const exported = await api.get('/api/exports/approved.geojson').set('Authorization', `Bearer ${prefecture}`).expect(200);
   assert.equal(exported.body.review_status, 'approved');
   assert.equal(exported.body.sources.length, 1);
   assert.equal(exported.body.features[0].properties.review_status, 'approved');
@@ -203,10 +203,10 @@ test('возвращает ошибку проверки для повреждё
 });
 
 test('некорректный идентификатор набора отвечает 404, а не HTTP 500', async () => {
-  const { api, reviewerPassword } = await fixture();
-  const reviewer = await login(api, 'reviewer@example.test', reviewerPassword);
-  await api.patch('/api/submissions/undefined').set('Authorization', `Bearer ${reviewer}`).send({ status: 'approved' }).expect(404);
-  await api.patch('/api/submissions/00000000-0000-4000-8000-000000000000').set('Authorization', `Bearer ${reviewer}`).send({ status: 'approved' }).expect(404);
+  const { api, prefecturePassword } = await fixture();
+  const prefecture = await login(api, 'prefecture@example.test', prefecturePassword);
+  await api.patch('/api/submissions/undefined').set('Authorization', `Bearer ${prefecture}`).send({ status: 'approved' }).expect(404);
+  await api.patch('/api/submissions/00000000-0000-4000-8000-000000000000').set('Authorization', `Bearer ${prefecture}`).send({ status: 'approved' }).expect(404);
 });
 
 test('фото-метки и снимки доступны только префектуре и удаляются полностью', async () => {
@@ -229,4 +229,45 @@ test('фото-метки и снимки доступны только преф
   await api.delete(`/api/photo-markers/${markerId}`).set('Authorization', `Bearer ${prefecture}`).expect(204);
   const listed = await api.get('/api/photo-markers').set('Authorization', `Bearer ${prefecture}`).expect(200);
   assert.equal(listed.body.photoMarkers.length, 0);
+});
+
+test('район не допущен к приёмке и выгрузкам, видит только статус своих наборов', async () => {
+  const { api, editorPassword, prefecturePassword } = await fixture();
+  const editor = await login(api, 'editor@example.test', editorPassword);
+  await api.post('/api/submissions').set('Authorization', `Bearer ${editor}`).send({ changeSet: changeSet(), originalFilename: 'airport.geojson' }).expect(201);
+
+  // Общий список наборов району закрыт в любом виде: ни свой, ни чужой, ни через параметр.
+  await api.get('/api/submissions').set('Authorization', `Bearer ${editor}`).expect(403);
+  await api.get('/api/submissions?district=Беговой').set('Authorization', `Bearer ${editor}`).expect(403);
+  await api.get('/api/submissions?status=submitted').set('Authorization', `Bearer ${editor}`).expect(403);
+  // Никаких выгрузок и фото-меток.
+  await api.get('/api/exports/review-archive.zip').set('Authorization', `Bearer ${editor}`).expect(403);
+  await api.get('/api/exports/approved.geojson').set('Authorization', `Bearer ${editor}`).expect(403);
+  await api.get('/api/photo-markers').set('Authorization', `Bearer ${editor}`).expect(403);
+
+  // Но статус своих наборов район видит — и только своего района.
+  const mine = await api.get('/api/my-submissions').set('Authorization', `Bearer ${editor}`).expect(200);
+  assert.equal(mine.body.district, 'Аэропорт');
+  assert.equal(mine.body.submissions.length, 1);
+  assert.equal(mine.body.submissions[0].status, 'submitted');
+  assert.equal(mine.body.submissions[0].district, 'Аэропорт');
+  assert.equal(mine.body.submissions[0].features, 1);
+
+  // Префектура работает с приёмкой и выгрузками, но не с районной ручкой статуса.
+  const prefecture = await login(api, 'prefecture@example.test', prefecturePassword);
+  const own = await api.get('/api/submissions').set('Authorization', `Bearer ${prefecture}`).expect(200);
+  assert.equal(own.body.submissions.length, 1);
+  const other = await api.get('/api/submissions?district=Беговой').set('Authorization', `Bearer ${prefecture}`).expect(200);
+  assert.equal(other.body.submissions.length, 0);
+  await api.get('/api/my-submissions').set('Authorization', `Bearer ${prefecture}`).expect(403);
+});
+
+test('упразднённая роль reviewer больше не имеет доступа ни к приёмке, ни к выгрузкам', async () => {
+  const { api, reviewerPassword } = await fixture();
+  const legacy = await login(api, 'reviewer@example.test', reviewerPassword);
+  await api.get('/api/submissions').set('Authorization', `Bearer ${legacy}`).expect(403);
+  await api.patch(`/api/submissions/${fakeId('5b', 1)}`).set('Authorization', `Bearer ${legacy}`).send({ status: 'approved' }).expect(403);
+  await api.get('/api/exports/review-archive.zip').set('Authorization', `Bearer ${legacy}`).expect(403);
+  await api.get('/api/exports/approved.geojson').set('Authorization', `Bearer ${legacy}`).expect(403);
+  await api.get('/api/photo-markers').set('Authorization', `Bearer ${legacy}`).expect(403);
 });

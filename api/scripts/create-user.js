@@ -10,7 +10,7 @@ if (args.includes('--password')) throw new Error('Пароль вводится 
 const options = Object.fromEntries(args.map((value, index, values) => value.startsWith('--') ? [value.slice(2), values[index + 1]] : null).filter(Boolean));
 const { email, role, district } = options;
 const poolOptions = databasePoolOptions();
-if (!email || !['district_editor', 'reviewer', 'prefecture_admin'].includes(role)) throw new Error('Используйте --email и --role. Роль: district_editor, reviewer или prefecture_admin.');
+if (!email || !['district_editor', 'prefecture_admin'].includes(role)) throw new Error('Используйте --email и --role. Роль: district_editor или prefecture_admin.');
 if (role === 'district_editor' && !district) throw new Error('Для district_editor обязательно укажите --district.');
 if (district && !DISTRICTS.has(district)) throw new Error('Неизвестный район САО.');
 const password = await readHiddenInput('Пароль: ');

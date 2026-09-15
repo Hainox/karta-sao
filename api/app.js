@@ -4,7 +4,8 @@ import { safePhotoFilename, validatePhotoMarker, validatePhotoNote, validatePhot
 import { streamReviewArchive } from './lib/review-archive.js';
 import { payloadHash, validateChangeSet } from './lib/validation.js';
 
-const REVIEW_ROLES = new Set(['reviewer', 'prefecture_admin']);
+const PREFECTURE_ROLE = 'prefecture_admin';
+const DISTRICT_ROLE = 'district_editor';
 const PHOTO_MIME_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
 
 export function createApp({ repository, boundary, jwtSecret, allowedOrigins = [], notifier = null }) {
@@ -35,10 +36,9 @@ export function createApp({ repository, boundary, jwtSecret, allowedOrigins = []
   const UUID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
   const requireUuid = (request, response, next) => UUID_PATTERN.test(request.params.id || '')
     ? next() : response.status(404).json({ error: 'Объект не найден.' });
-  const requireReview = (request, response, next) => REVIEW_ROLES.has(request.user.role)
-    ? next() : response.status(403).json({ error: 'Требуется роль приёмки или префектуры.' });
-  const requirePrefecture = (request, response, next) => request.user.role === 'prefecture_admin'
-    ? next() : response.status(403).json({ error: 'Фото-метками управляет только роль префектуры.' });
+  // Приёмка, выгрузки и фото-метки — только роль префектуры. Второй роли приёмки нет.
+  const requirePrefecture = (request, response, next) => request.user.role === PREFECTURE_ROLE
+    ? next() : response.status(403).json({ error: 'Требуется роль префектуры.' });
   const photoParser = express.raw({ type: PHOTO_MIME_TYPES, limit: '5mb' });
 
   app.get('/api/health', async (_request, response, next) => {
@@ -117,12 +117,12 @@ export function createApp({ repository, boundary, jwtSecret, allowedOrigins = []
 
   app.post('/api/submissions', authenticate, async (request, response, next) => {
     try {
-      if (!['district_editor', 'reviewer', 'prefecture_admin'].includes(request.user.role)) return response.status(403).json({ error: 'Нет права отправлять наборы.' });
+      if (![DISTRICT_ROLE, PREFECTURE_ROLE].includes(request.user.role)) return response.status(403).json({ error: 'Нет права отправлять наборы.' });
       const { changeSet, originalFilename = 'pravki.geojson' } = request.body || {};
       const validation = validateChangeSet(changeSet, boundary);
       if (!validation.valid) return response.status(422).json({ error: 'Набор не прошёл проверку.', details: validation.errors });
-      if (request.user.role === 'district_editor' && !request.user.district) return response.status(403).json({ error: 'Учётной записи редактора не назначен район.' });
-      if (request.user.role === 'district_editor' && request.user.district !== changeSet.district) return response.status(403).json({ error: 'Редактор может отправлять только свой район.' });
+      if (request.user.role === DISTRICT_ROLE && !request.user.district) return response.status(403).json({ error: 'Учётной записи редактора не назначен район.' });
+      if (request.user.role === DISTRICT_ROLE && request.user.district !== changeSet.district) return response.status(403).json({ error: 'Редактор может отправлять только свой район.' });
       const submission = await repository.createSubmission({ changeSet, createdBy: request.user.sub, originalFilename: String(originalFilename).slice(0, 180), payloadSha256: payloadHash(changeSet) });
       // Префектуре уходит одно сообщение с кнопками: решать по набору можно прямо из Telegram.
       notifier?.action({
@@ -136,18 +136,37 @@ export function createApp({ repository, boundary, jwtSecret, allowedOrigins = []
     } catch (error) { next(error); }
   });
 
-  app.get('/api/submissions', authenticate, async (request, response, next) => {
+  app.get('/api/submissions', authenticate, requirePrefecture, async (request, response, next) => {
     try {
       const status = request.query.status;
       if (status && !['submitted', 'approved', 'rejected'].includes(status)) return response.status(400).json({ error: 'Неизвестный статус.' });
-      if (request.user.role === 'district_editor' && !request.user.district) return response.status(403).json({ error: 'Учётной записи редактора не назначен район.' });
-      const district = REVIEW_ROLES.has(request.user.role) ? request.query.district : request.user.district;
-      const submissions = await repository.listSubmissions({ status, district });
+      const submissions = await repository.listSubmissions({ status, district: request.query.district });
       response.json({ submissions });
     } catch (error) { next(error); }
   });
 
-  app.patch('/api/submissions/:id', authenticate, requireUuid, requireReview, async (request, response, next) => {
+  // Район видит только статус своих наборов: чужой район недоступен, выгрузок нет.
+  app.get('/api/my-submissions', authenticate, async (request, response, next) => {
+    try {
+      if (request.user.role !== DISTRICT_ROLE) return response.status(403).json({ error: 'Ручка доступна только учётной записи района.' });
+      if (!request.user.district) return response.status(403).json({ error: 'Учётной записи редактора не назначен район.' });
+      const submissions = await repository.listSubmissions({ district: request.user.district });
+      response.json({
+        district: request.user.district,
+        submissions: submissions.map((item) => ({
+          id: item.id,
+          district: item.district,
+          status: item.status,
+          submitted_at: item.submitted_at,
+          reviewed_at: item.reviewed_at ?? null,
+          review_comment: item.review_comment ?? null,
+          features: Array.isArray(item.change_set?.features) ? item.change_set.features.length : 0
+        }))
+      });
+    } catch (error) { next(error); }
+  });
+
+  app.patch('/api/submissions/:id', authenticate, requireUuid, requirePrefecture, async (request, response, next) => {
     try {
       const { status, comment = '' } = request.body || {};
       if (!['approved', 'rejected'].includes(status)) return response.status(400).json({ error: 'Допустимы только approved или rejected.' });
@@ -158,7 +177,7 @@ export function createApp({ repository, boundary, jwtSecret, allowedOrigins = []
     } catch (error) { next(error); }
   });
 
-  app.get('/api/exports/approved.geojson', authenticate, requireReview, async (_request, response, next) => {
+  app.get('/api/exports/approved.geojson', authenticate, requirePrefecture, async (_request, response, next) => {
     try {
       const approved = await repository.listSubmissions({ status: 'approved' });
       response.type('application/geo+json').attachment(`svod-pravok-sao-${new Date().toISOString().slice(0, 10)}.geojson`).json({
@@ -172,7 +191,7 @@ export function createApp({ repository, boundary, jwtSecret, allowedOrigins = []
     } catch (error) { next(error); }
   });
 
-  app.get('/api/exports/review-archive.zip', authenticate, requireReview, async (_request, response, next) => {
+  app.get('/api/exports/review-archive.zip', authenticate, requirePrefecture, async (_request, response, next) => {
     try {
       const submitted = await repository.listSubmissions({ status: 'submitted' });
       const date = new Date().toISOString().slice(0, 10);
