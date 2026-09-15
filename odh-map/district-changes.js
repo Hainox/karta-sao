@@ -12,8 +12,10 @@
   const TYPES = {
     queue: { label: 'Очередность уборки', geometry: 'LineString', kind: 'line' },
     rotor_transfer: { label: 'Роторная перекидка', geometry: 'LineString', kind: 'line' },
-    dkm_route: { label: 'Маршрут ДКМ', geometry: 'LineString', kind: 'line' },
-    tu_route: { label: 'Маршрут ТУ', geometry: 'LineString', kind: 'line' },
+    dkm_route: { label: 'Маршрут ДКМ — ОДХ', geometry: 'LineString', kind: 'line' },
+    tu_route: { label: 'Маршрут ТУ — ОДХ', geometry: 'LineString', kind: 'line' },
+    dkm_route_yards: { label: 'Маршрут ДКМ — дворы', geometry: 'LineString', kind: 'line' },
+    tu_route_yards: { label: 'Маршрут ТУ — дворы', geometry: 'LineString', kind: 'line' },
     rotor_snow_storage_zone: { label: 'Зона складирования роторного снега', geometry: 'Polygon', kind: 'polygon' },
     temporary_snow_storage: { label: 'Временное складирование снега', geometry: 'Point', kind: 'point' },
     dry_snow_dump: { label: 'Сухая свалка снега', geometry: 'Point', kind: 'point' },
@@ -21,7 +23,7 @@
     smm_storage: { label: 'Место хранения СММ', geometry: 'Point', kind: 'point' },
     other: { label: 'Другой объект', geometry: 'Point', kind: 'point' }
   };
-  const ROUTE_TYPES = new Set(['queue', 'rotor_transfer', 'dkm_route', 'tu_route']);
+  const ROUTE_TYPES = new Set(['queue', 'rotor_transfer', 'dkm_route', 'tu_route', 'dkm_route_yards', 'tu_route_yards']);
   const MAX_GEOMETRY_VERTICES = 2000;
   const SEGMENT_EPSILON = 1e-12;
 
@@ -208,6 +210,8 @@
     if (properties.change_type === 'rotor_transfer') return { color: '#b98cff', dashArray: '4 9', weight: 5 };
     if (properties.change_type === 'dkm_route') return { color: '#ff7a45', weight: 5 };
     if (properties.change_type === 'tu_route') return { color: '#2ec4b6', weight: 5 };
+    if (properties.change_type === 'dkm_route_yards') return { color: '#ff7a45', dashArray: '7 6', weight: 5 };
+    if (properties.change_type === 'tu_route_yards') return { color: '#2ec4b6', dashArray: '7 6', weight: 5 };
     if (properties.change_type === 'rotor_snow_storage_zone') return { color: '#34d6d0', weight: 3, fillOpacity: .22 };
     return { color: ({ temporary_snow_storage: '#26c6da', dry_snow_dump: '#b58a67', pgm: '#ffb34d', smm_storage: '#b98cff', other: '#8fa4b8' })[properties.change_type] || '#8fa4b8', weight: 3 };
   }

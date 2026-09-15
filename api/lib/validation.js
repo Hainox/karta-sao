@@ -11,6 +11,8 @@ export const TYPES = {
   rotor_transfer: 'LineString',
   dkm_route: 'LineString',
   tu_route: 'LineString',
+  dkm_route_yards: 'LineString',
+  tu_route_yards: 'LineString',
   temporary_snow_storage: 'Point',
   rotor_snow_storage_zone: 'Polygon',
   dry_snow_dump: 'Point',
@@ -19,7 +21,7 @@ export const TYPES = {
   other: 'Point'
 };
 
-const ROUTE_TYPES = new Set(['queue', 'rotor_transfer', 'dkm_route', 'tu_route']);
+const ROUTE_TYPES = new Set(['queue', 'rotor_transfer', 'dkm_route', 'tu_route', 'dkm_route_yards', 'tu_route_yards']);
 const SEGMENT_EPSILON = 1e-12;
 export const MAX_GEOMETRY_VERTICES = 2000;
 
