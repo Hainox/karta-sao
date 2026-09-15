@@ -1,6 +1,17 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { summarizeCoverage, summarizeCoverageByType } from '../src/report.js';
+import { completionMix, summarizeByDistrict, summarizeCoverage, summarizeCoverageByType, uploadDynamics } from '../src/report.js';
+
+function row(district, objectType, confirmed, { pending = 0, geoRisk = false, uploadedAt = [] } = {}) {
+  return {
+    district,
+    object_type: objectType,
+    confirmedPhotos: confirmed,
+    pendingReviewPhotos: pending,
+    geoRisk,
+    photos: uploadedAt.map((stamp, index) => ({ id: `${district}-${objectType}-${index}`, uploadedAt: stamp })),
+  };
+}
 
 test('aggregates approved completion and photo counters by object type', () => {
   const report = summarizeCoverage([
@@ -93,4 +104,61 @@ test('rejects malformed coverage records without accepting unknown object types'
     () => summarizeCoverage([{ objectType: 'stop', confirmedPhotos: 1.5, pendingReviewPhotos: 0 }]),
     /confirmedPhotos/,
   );
+});
+
+/* ------------------------------------------------- данные для диаграмм */
+
+test('per-district coverage sorts by completion and keeps the unassigned group apart', () => {
+  const districts = summarizeByDistrict([
+    row('Сокол', 'stop', 1),
+    row('Аэропорт', 'stop', 0),
+    row('Аэропорт', 'stop', 0),
+    row(null, 'pp', 0),
+  ]);
+  assert.deepEqual(districts.map((entry) => entry.district), ['Сокол', 'Аэропорт', null]);
+  assert.equal(districts[0].completionPercent, 100);
+  assert.equal(districts[1].totalObjects, 2);
+  assert.equal(districts[1].statusBand, 'low');
+  assert.equal(districts[2].totalObjects, 1);
+});
+
+test('dynamics counts uploads per UTC day and keeps a running total', () => {
+  const now = new Date('2026-09-15T12:00:00Z');
+  const series = uploadDynamics([
+    row('Сокол', 'stop', 1, { uploadedAt: ['2026-09-14T09:00:00Z'] }),
+    row('Сокол', 'stop', 1, { uploadedAt: ['2026-09-15T09:00:00Z', '2026-09-15T18:00:00Z'] }),
+    row('Сокол', 'stop', 1, { uploadedAt: ['2026-08-01T09:00:00Z'] }),
+  ], { days: 3, now });
+
+  assert.equal(series.length, 3);
+  assert.deepEqual(series.map((point) => point.date), ['2026-09-13', '2026-09-14', '2026-09-15']);
+  assert.deepEqual(series.map((point) => point.uploaded), [0, 1, 2]);
+  // Фотографии до окна входят в накопленный итог, но не в дневные столбцы.
+  assert.deepEqual(series.map((point) => point.cumulative), [1, 2, 4]);
+});
+
+test('dynamics survives rows without photos and broken timestamps', () => {
+  const series = uploadDynamics([
+    row('Сокол', 'stop', 0),
+    { ...row('Сокол', 'entrance', 0), photos: [{ id: 'x', uploadedAt: 'не дата' }] },
+  ], { days: 2, now: new Date('2026-09-15T00:00:00Z') });
+  assert.deepEqual(series.map((point) => point.uploaded), [0, 0]);
+  assert.deepEqual(series.map((point) => point.cumulative), [0, 0]);
+});
+
+test('completion mix splits states without double counting', () => {
+  const mix = completionMix({ totalObjects: 10, completedObjects: 4, partialObjects: 3 });
+  assert.deepEqual(mix, [
+    { key: 'done', label: 'Выполнено', value: 4 },
+    { key: 'partial', label: 'Частично', value: 3 },
+    { key: 'empty', label: 'Без фото', value: 3 },
+  ]);
+  assert.equal(mix.reduce((sum, part) => sum + part.value, 0), 10);
+});
+
+test('completion mix handles an empty scope and rejects bad input', () => {
+  assert.deepEqual(completionMix({ totalObjects: 0, completedObjects: 0, partialObjects: 0 }).map((part) => part.value), [0, 0, 0]);
+  assert.throws(() => completionMix(null), /summary is required/);
+  assert.throws(() => uploadDynamics([], { days: 0 }), /days/);
+  assert.throws(() => summarizeByDistrict(null), /Report rows/);
 });

@@ -122,3 +122,88 @@ export function summarizeCoverageByType(records) {
     entrance: summarizeCoverage(grouped.entrance),
   };
 }
+
+function coverageRecord(row) {
+  return {
+    objectType: row.object_type,
+    confirmedPhotos: row.confirmedPhotos,
+    pendingReviewPhotos: row.pendingReviewPhotos,
+    geoRisk: row.geoRisk,
+  };
+}
+
+/**
+ * Coverage per district for the prefecture report, so the same numbers that fill
+ * the tables also drive the chart. Rows without a district stay in their own
+ * group instead of being attached to a district.
+ */
+export function summarizeByDistrict(rows) {
+  if (!Array.isArray(rows)) throw new TypeError('Report rows must be an array');
+  const grouped = new Map();
+  for (const row of rows) {
+    const district = row.district || null;
+    if (!grouped.has(district)) grouped.set(district, []);
+    grouped.get(district).push(coverageRecord(row));
+  }
+  return [...grouped.entries()]
+    .map(([district, records]) => ({ district, ...summarizeCoverage(records) }))
+    .sort((left, right) => {
+      // «Без района» — не район: он всегда последний, как и в SQL-выборке отчёта.
+      if ((left.district === null) !== (right.district === null)) return left.district === null ? 1 : -1;
+      return (right.completionPercent ?? -1) - (left.completionPercent ?? -1)
+        || String(left.district ?? '').localeCompare(String(right.district ?? ''), 'ru');
+    });
+}
+
+/**
+ * Photos uploaded per calendar day (UTC) over the trailing window, with the
+ * running total that starts from everything uploaded before the window.
+ */
+export function uploadDynamics(rows, { days = 14, now = new Date() } = {}) {
+  if (!Array.isArray(rows)) throw new TypeError('Report rows must be an array');
+  if (!Number.isSafeInteger(days) || days < 1) throw new TypeError('days must be a positive integer');
+
+  const perDay = new Map();
+  for (const row of rows) {
+    for (const photo of row.photos || []) {
+      if (!photo.uploadedAt) continue;
+      const stamp = new Date(photo.uploadedAt);
+      if (Number.isNaN(stamp.getTime())) continue;
+      const key = stamp.toISOString().slice(0, 10);
+      perDay.set(key, (perDay.get(key) || 0) + 1);
+    }
+  }
+
+  const dayMs = 24 * 60 * 60 * 1000;
+  const today = new Date(now);
+  const series = [];
+  for (let offset = days - 1; offset >= 0; offset -= 1) {
+    const date = new Date(today.getTime() - offset * dayMs).toISOString().slice(0, 10);
+    series.push({ date, uploaded: perDay.get(date) || 0 });
+  }
+
+  const first = series[0].date;
+  let cumulative = 0;
+  for (const [date, count] of perDay) if (date < first) cumulative += count;
+  for (const point of series) {
+    cumulative += point.uploaded;
+    point.cumulative = cumulative;
+  }
+  return series;
+}
+
+/**
+ * Split the object states for the stacked bar: a completed object is not counted
+ * as partial, and pending stays visible on its own.
+ */
+export function completionMix(summary) {
+  if (!summary || typeof summary !== 'object') throw new TypeError('summary is required');
+  const completed = summary.completedObjects ?? 0;
+  const partial = summary.partialObjects ?? 0;
+  const total = summary.totalObjects ?? 0;
+  return [
+    { key: 'done', label: 'Выполнено', value: completed },
+    { key: 'partial', label: 'Частично', value: partial },
+    { key: 'empty', label: 'Без фото', value: Math.max(0, total - completed - partial) },
+  ];
+}

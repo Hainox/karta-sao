@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { buildPdf, objectTypeLabel, percentLabel, statusBandLabel } from '../src/exports.js';
+import { buildExcel, buildPdf } from '../src/exports.js';
+import { objectTypeLabel, percentLabel, statusBandLabel } from '../src/labels.js';
 
 function reportRow(objectType, district, confirmed, pending = 0) {
   return {
