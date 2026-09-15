@@ -48,6 +48,7 @@
     .ok { border:1px solid #a7d8c0; background:#edfbf3; } .back { border:1px solid #efbdc3; background:#fff2f3; }
     .ok h3 { color:var(--green); } .back h3 { color:var(--red); }
     table { width:100%; border-collapse:collapse; margin-top:18px; font-size:16px; }
+    .table-scroll { max-width:100%; }
     th,td { padding:13px; vertical-align:top; text-align:left; border:1px solid #cbd8e3; }
     th { color:#fff; background:var(--navy); }
     tr:nth-child(even) td { background:#f7fafc; }
@@ -58,7 +59,7 @@
     .answer { margin-top:18px; padding:17px 19px; border-radius:10px; background:#eaf3fb; }
     .answer strong { color:var(--navy); }
     footer { margin-top:24px; text-align:center; color:#60778c; font-size:14px; }
-    @media (max-width:780px) { .topbar { align-items:flex-start; flex-direction:column; padding:14px 16px; } .nav { justify-content:flex-start; } main { width:min(100% - 20px,1120px); margin-top:14px; } .hero,.section { padding:20px; } .grid,.decision { grid-template-columns:1fr; } .checklist { columns:1; } table { font-size:14px; } th,td { padding:10px; } }
+    @media (max-width:780px) { .topbar { align-items:flex-start; flex-direction:column; padding:14px 16px; } .nav { justify-content:flex-start; } main { width:min(100% - 20px,1120px); margin-top:14px; } .hero,.section { padding:20px; } .grid,.decision { grid-template-columns:1fr; } .checklist { columns:1; } table { font-size:14px; } th,td { padding:10px; } .table-scroll { overflow-x:auto; } }
     @media print { body { background:#fff; font-size:12pt; } .topbar { border:0; padding:0; } .nav { display:none; } main { width:100%; margin:12px 0; } .hero { box-shadow:none; } .section { break-inside:avoid; box-shadow:none; } .notice { break-inside:avoid; } }
   </style>
 </head>
@@ -135,6 +136,7 @@
 
     <section class="section">
       <h2>5. Что означают кнопки в приёмке</h2>
+      <div class="table-scroll">
       <table>
         <thead><tr><th>Кнопка</th><th>Что делает</th><th>Когда нажимать</th></tr></thead>
         <tbody>
@@ -146,10 +148,12 @@
           <tr><td><strong>Очистить</strong></td><td>Очищает только экранный список или локальный резервный режим.</td><td>Не используйте вместо решения по работам; сначала завершите приёмку.</td></tr>
         </tbody>
       </table>
+      </div>
     </section>
 
     <section class="section">
       <h2>6. Если что-то не получается</h2>
+      <div class="table-scroll">
       <table>
         <thead><tr><th>Ситуация</th><th>Что делать сотруднику префектуры</th></tr></thead>
         <tbody>
@@ -161,6 +165,7 @@
           <tr><td>Работа уже отклонена</td><td>Откройте замечание, перешлите его ответственному району без сокращений. После исправления район направляет новую работу на приёмку.</td></tr>
         </tbody>
       </table>
+      </div>
     </section>
 
     <section class="section">
