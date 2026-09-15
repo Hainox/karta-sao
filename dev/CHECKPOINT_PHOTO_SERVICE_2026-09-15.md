@@ -49,11 +49,12 @@
 - `sao-photo-service` database/app работают в отдельном Compose-проекте; app подключён к `sao-photo-service-edge`, PostgreSQL остаётся только в `sao-photo-service_default`.
 - Production backup проверен: `/var/backups/sao-photo-service/20260915T055418Z` (`database.dump`, `media.tar.gz`, `SHA256SUMS`).
 - Reverse-proxy подключён обратимо; `nginx -t` успешен; публичный `GET https://obhod-sao.ru/photo-api/healthz` вернул HTTP 200 `database=connected`.
-- GitHub Pages пока показывает опубликованную версию до push; после checkpoint-коммита нужно отправить `photo-service-centralization` в `origin/main` и дождаться Pages workflow.
+- Отдельный `/etc/cron.d/sao-photo-service` установлен: backup ежедневно в 02:15 UTC, monitor каждые 5 минут; ручной monitor прошёл, media free 44%.
+- Коммит `a2a4a34` fast-forward отправлен в `origin/main`; Pages, quality и regression workflows завершились `success`. Три публичные карты отдают `PHOTO_API_BASE` после cache-bust.
 
 ## Непроверено / осталось
 
-- Реальные индивидуальные аккаунты не созданы: выполнить `docker compose -p sao-photo-service run --rm photo-service node scripts/create-user.js --email ... --display-name ... --role ...` с интерактивным скрытым вводом пароля (не передавать пароль аргументом).
+- Реальные индивидуальные аккаунты не созданы (`users=0`): выполнить `docker compose -p sao-photo-service run --rm photo-service node scripts/create-user.js --email ... --display-name ... --role ...` с интерактивным скрытым вводом пароля (не передавать пароль аргументом).
 - Ручная проверка ПК 1280×800 и телефона 390×844 ещё не проведена в production после обновления Pages.
 - `npm audit --omit=dev` сообщает 2 moderate advisory через декларацию `exceljs -> uuid <11.1.1`; в lock установлен `uuid 11.1.0` override. `npm audit fix --force` не применять вслепую: он предлагает breaking downgrade ExcelJS. Перед production нужен security verdict/альтернативный экспортный пакет.
 - Нужно отдельно проверить производительность полного Excel с большим числом фотографий и отсутствие OOM.

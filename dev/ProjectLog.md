@@ -64,3 +64,6 @@
 - Публичный smoke успешен: `https://obhod-sao.ru/photo-api/healthz` → HTTP 200; unauthenticated `/photo-api/auth/me` → HTTP 401. Старый `https://obhod-sao.ru/odh-api/api/health` → HTTP 200.
 - Сохранены rollback-копии `/opt/jirajura/docker-compose.prod.yml.pre-sao-photo-20260915T055433Z` и `/opt/jirajura/deploy/nginx/active.conf.template.pre-sao-photo-20260915T055433Z`.
 - Реальные индивидуальные учётки ещё не заведены: их создаёт администратор на сервере через скрытый ввод пароля после проверки списка районов. Пока аккаунты не созданы, отправка фото пользователями не начнётся.
+- Установлен отдельный `/etc/cron.d/sao-photo-service` (ежедневный backup в 02:15 UTC и monitor каждые 5 минут); ручной monitor прошёл, свободно 44% media.
+- Production SQL-проверка подтвердила `entrance=10035`, `pp=428`, `stop=812`, `users=0`, `photos=0`; пустые users/photos ожидаемы до создания районных учёток и первой фиксации.
+- Коммит `a2a4a34` fast-forward отправлен в `origin/main`; Pages, SAO photo-service quality и SMM/atlas regression workflows завершились `success`. Публичные три карты после cache-bust отдают `PHOTO_API_BASE`.
