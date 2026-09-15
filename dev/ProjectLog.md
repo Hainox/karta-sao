@@ -54,3 +54,13 @@
 - Полный локальный integration smoke на одноразовых томах: migration + import 11 275 объектов, индивидуальная prefecture account, `gps_required` без GPS, upload 201, idempotent повтор 200, review confirmed 200, summary 11 268 assigned + 7 unassigned, XLSX 410 731 bytes, PDF 1 933 bytes. Временные ресурсы удалены.
 - `npm test` — 34/34; `npm audit --audit-level=high --omit=dev` не блокируется critical/high, но остаётся два moderate advisory в ExcelJS/uuid metadata; установлен uuid 11.1.0 override, breaking downgrade не применялся. Этот риск помечен для post-deploy security review.
 - Перед production остались только операционные действия: передача версии на хост, создание отдельной `.env`/секрета и backup-каталога, миграция/import, proxy include с конфигурационным backup, smoke/rollback и ручное создание согласованных индивидуальных аккаунтов. Секреты в репозитории и логи не добавлять.
+
+## 2026-09-15 — production rollout completed for service edge
+
+- Версия `0121096` передана в отдельный каталог `/opt/sao-photo-service`; production `.env` создан с режимом `600`, секреты в Git и чате не раскрывались.
+- Поднят отдельный Compose-проект `sao-photo-service`: PostgreSQL и media volumes принадлежат только ему; приложение здорово, `/healthz` возвращает `database=connected`. Импорт применён: 11 275 report objects (812 stop, 428 PP, 10 035 entrance), 7 объектов остаются unassigned по утверждённой модели.
+- Перед proxy-изменением создан и проверен backup `/var/backups/sao-photo-service/20260915T055418Z` (database dump и media archive, `sha256sum -c` успешно).
+- Существующий Nginx proxy получил только новый read-only include/mount и подключение к внешней `sao-photo-service-edge`; старая `jirajura_default`, старые сервисы, БД, тома и секреты не переиспользовались. `nginx -t` успешен.
+- Публичный smoke успешен: `https://obhod-sao.ru/photo-api/healthz` → HTTP 200; unauthenticated `/photo-api/auth/me` → HTTP 401. Старый `https://obhod-sao.ru/odh-api/api/health` → HTTP 200.
+- Сохранены rollback-копии `/opt/jirajura/docker-compose.prod.yml.pre-sao-photo-20260915T055433Z` и `/opt/jirajura/deploy/nginx/active.conf.template.pre-sao-photo-20260915T055433Z`.
+- Реальные индивидуальные учётки ещё не заведены: их создаёт администратор на сервере через скрытый ввод пароля после проверки списка районов. Пока аккаунты не созданы, отправка фото пользователями не начнётся.

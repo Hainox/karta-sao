@@ -8,9 +8,9 @@
 
 - Ветка: `photo-service-centralization`.
 - Переданная базовая точка: `841ce4f`.
-- Последний коммит реализации: `ddc6c7d feat: implement isolated photo service foundation`.
-- Предыдущий локальный коммит: `795bf33 feat: bootstrap isolated photo service helpers`.
-- После добавления этого checkpoint-файла сделать отдельный checkpoint-коммит; не делать reset и не переключать ветку вслепую.
+- Последний коммит реализации: `0121096 ops: prepare isolated photo service rollout`.
+- История перед ним: `d833c24`, `ddc6c7d`, `795bf33`; база ветки — `841ce4f`.
+- После обновления этого checkpoint-файла сделать отдельный checkpoint-коммит; не делать reset и не переключать ветку вслепую.
 - Секреты, `.env`, пароли и ключи в репозиторий не добавлялись.
 
 ## Утверждённые решения пользователя
@@ -43,12 +43,18 @@
 - Локальный изолированный Docker smoke: миграция 001 применена; новый `/healthz` вернул HTTP 200 `database=connected`; приложение работало от UID 1000 и имело writable отдельный media volume; временные контейнеры, сеть и тома удалены.
 - Import dry-run: 812 строк остановок, 2235 строк ПП, 10035 входов; 812 stop, 428 reportable PP (427 назначенных пар + 1 unassigned), 10035 entrance; 7 unassigned (6 остановок и один PP).
 
+## Production checkpoint
+
+- Production-каталог: `/opt/sao-photo-service`; host `obhod-sao.ru` (`PREFASAO`); версия `0121096`.
+- `sao-photo-service` database/app работают в отдельном Compose-проекте; app подключён к `sao-photo-service-edge`, PostgreSQL остаётся только в `sao-photo-service_default`.
+- Production backup проверен: `/var/backups/sao-photo-service/20260915T055418Z` (`database.dump`, `media.tar.gz`, `SHA256SUMS`).
+- Reverse-proxy подключён обратимо; `nginx -t` успешен; публичный `GET https://obhod-sao.ru/photo-api/healthz` вернул HTTP 200 `database=connected`.
+- GitHub Pages пока показывает опубликованную версию до push; после checkpoint-коммита нужно отправить `photo-service-centralization` в `origin/main` и дождаться Pages workflow.
+
 ## Непроверено / осталось
 
-- Production не развёрнут, SSH/push не выполнялись. Нет подтверждённого host/user/key и выделенного production-контура новой службы.
-- Не сделаны production backup/restore scripts и rehearsal, внешняя backup target/SLA, мониторинг/алерты и обратимый nginx/proxy rollout.
-- Реальная PostgreSQL загрузка объектов и upload/review/export E2E ещё не прогонялись на тестовой БД с fixture-данными.
-- Ручная проверка ПК 1280×800 и телефона 390×844 ещё не проведена.
+- Реальные индивидуальные аккаунты не созданы: выполнить `docker compose -p sao-photo-service run --rm photo-service node scripts/create-user.js --email ... --display-name ... --role ...` с интерактивным скрытым вводом пароля (не передавать пароль аргументом).
+- Ручная проверка ПК 1280×800 и телефона 390×844 ещё не проведена в production после обновления Pages.
 - `npm audit --omit=dev` сообщает 2 moderate advisory через декларацию `exceljs -> uuid <11.1.1`; в lock установлен `uuid 11.1.0` override. `npm audit fix --force` не применять вслепую: он предлагает breaking downgrade ExcelJS. Перед production нужен security verdict/альтернативный экспортный пакет.
 - Нужно отдельно проверить производительность полного Excel с большим числом фотографий и отсутствие OOM.
 - После получения решения по outliers/семантическому ключу подъезда повторить import и зафиксировать source version.
