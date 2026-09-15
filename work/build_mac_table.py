@@ -1,7 +1,8 @@
 """Собирает таблицу «Об устранении нарушений от ГБУ МАЦ» по образцу эталона.
 
-На вход идёт сводка из build_mac_report.py, на выход — книга Excel с теми же
-колонками, что в эталонной таблице.
+Структура повторяет эталон: заголовок, две строки шапки с объединёнными
+группами ДТ, МКД, ОДХ и ОО, строка нумерации колонок, строки районов и итог.
+Второй блок — та же таблица без заполненного округа.
 
     python work/build_mac_table.py <сводка.csv> <куда положить xlsx> [--месяц АВГУСТ]
 """
@@ -10,151 +11,132 @@ import sys
 from pathlib import Path
 
 from openpyxl import Workbook
-from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
+from openpyxl.styles import Alignment, Border, Font, Side
 from openpyxl.utils import get_column_letter
 
-THIN = Side(style='thin', color='9AA5AE')
+THIN = Side(style='thin', color='000000')
 BORDER = Border(left=THIN, right=THIN, top=THIN, bottom=THIN)
-HEADER_FILL = PatternFill('solid', fgColor='DDE7F0')
-TOTAL_FILL = PatternFill('solid', fgColor='EFEFEF')
+FONT = 'Arial'
 CENTER = Alignment(horizontal='center', vertical='center', wrap_text=True)
-LEFT = Alignment(horizontal='left', vertical='center')
+LEFT = Alignment(horizontal='left', vertical='center', wrap_text=False)
 
-HEADERS = [
-    ('A', '№ п/п', None),
-    ('B', 'Округ', None),
-    ('C', 'Район', None),
-    ('D', 'Всего нарушений\nза текущий период', None),
-    ('E', 'Из них по ДТ', 'Всего'),
-    ('F', 'Из них по ДТ', 'Устранено'),
-    ('G', 'Из них по МКД', 'Всего'),
-    ('H', 'Из них по МКД', 'Устранено'),
-    ('I', 'Из них по ОДХ', 'Всего'),
-    ('J', 'Из них по ОДХ', 'Устранено'),
-    ('K', 'Из них по ОО', 'Всего'),
-    ('L', 'Из них по ОО', 'Устранено'),
-    ('M', 'Всего нарушений\nустранено', None),
-    ('N', 'Возвращено\nна доработку', None),
-    ('O', '% устраненных\nнарушений', None),
-    ('P', 'Остается\nна контроле', None)
-]
+GROUPS = [(5, 6), (7, 8), (9, 10), (11, 12)]
+SINGLE_COLUMNS = [1, 2, 3, 4, 13, 14, 15, 16]
+
+HEADERS = {
+    1: '№ п/п',
+    2: 'Округ',
+    3: 'Район',
+    4: 'Всего нарушений\nза текущий период',
+    5: 'Из них по ДТ',
+    7: 'Из них по МКД',
+    9: 'Из них по ОДХ',
+    11: 'Из них по ОО',
+    13: 'Всего нарушений\nустранено',
+    14: 'Возвращено\nна доработку',
+    15: '% устраненных\nнарушений',
+    16: 'Остается\nна контроле'
+}
+
+SUBMIT = {5: 'Всего', 6: 'Устранено', 7: 'Всего', 8: 'Устранено',
+          9: 'Всего', 10: 'Устранено', 11: 'Всего', 12: 'Устранено'}
 
 
 def read_summary(path):
     with Path(path).open(encoding='utf-8-sig', newline='') as handle:
         rows = list(csv.DictReader(handle, delimiter=';'))
-    total = [row for row in rows if row['Район'] == 'Итого']
     districts = [row for row in rows if row['Район'] != 'Итого']
-    return districts, (total[0] if total else None)
+    return districts
 
 
-def build(districts, total, month):
-    workbook = Workbook()
-    sheet = workbook.active
-    sheet.title = 'Устранение нарушений'
-
-    sheet.merge_cells('A1:P1')
-    title = sheet['A1']
-    title.value = f'Об устранении нарушений от ГБУ «МАЦ» — {month.upper()}'
-    title.font = Font(bold=True, size=13)
+def write_header(sheet, title_row, districts_with_okrug, title_text):
+    """Пишет заголовок, шапку в две строки, нумерацию колонок и строки районов."""
+    header_row = title_row + 1
+    sheet.merge_cells(start_row=title_row, start_column=1, end_row=title_row, end_column=16)
+    title = sheet.cell(row=title_row, column=1, value=title_text)
+    title.font = Font(name=FONT, bold=True, size=11)
     title.alignment = CENTER
 
-    for column, header, sub in HEADERS:
-        cell = sheet[f'{column}2']
-        cell.value = header
-        cell.font = Font(bold=True)
+    for column, text in HEADERS.items():
+        cell = sheet.cell(row=header_row, column=column, value=text)
+        cell.font = Font(name=FONT, bold=True, size=10)
         cell.alignment = CENTER
-        cell.fill = HEADER_FILL
         cell.border = BORDER
-        if sub:
-            sheet[f'{column}3'] = sub
-        sheet[f'{column}3'].font = Font(bold=True)
-        sheet[f'{column}3'].alignment = CENTER
-        sheet[f'{column}3'].border = BORDER
-        sheet[f'{column}3'].fill = HEADER_FILL
+    for column, text in SUBMIT.items():
+        cell = sheet.cell(row=header_row + 1, column=column, value=text)
+        cell.font = Font(name=FONT, bold=True, size=10)
+        cell.alignment = CENTER
+        cell.border = BORDER
+    for column in SINGLE_COLUMNS:
+        sheet.merge_cells(start_row=header_row, start_column=column, end_row=header_row + 1, end_column=column)
+        sheet.cell(row=header_row + 1, column=column).border = BORDER
+    for first, second in GROUPS:
+        sheet.merge_cells(start_row=header_row, start_column=first, end_row=header_row, end_column=second)
 
-    for index in range(1, 17):
-        column = get_column_letter(index)
-        sheet[f'{column}4'] = index
-        sheet[f'{column}4'].alignment = CENTER
-        sheet[f'{column}4'].border = BORDER
-        sheet[f'{column}4'].font = Font(size=9, color='708090')
+    number_row = header_row + 2
+    for column in range(1, 17):
+        cell = sheet.cell(row=number_row, column=column, value=column)
+        cell.font = Font(name=FONT, size=9)
+        cell.alignment = CENTER
+        cell.border = BORDER
 
-    first_row = 5
-    for offset, district in enumerate(districts):
-        row = first_row + offset
-        sheet[f'A{row}'] = offset + 1
-        sheet[f'B{row}'] = 'САО'
-        sheet[f'C{row}'] = district['Район']
-        sheet[f'D{row}'] = int(district['Всего'])
-        sheet[f'E{row}'] = int(district['ДТ'])
-        sheet[f'G{row}'] = int(district['МКД'])
-        sheet[f'I{row}'] = int(district['ОДХ'])
-        sheet[f'K{row}'] = int(district['ОО'])
-        sheet[f'M{row}'] = f'=SUM(F{row},H{row},J{row},L{row})'
-        sheet[f'O{row}'] = f'=IFERROR(M{row}/D{row},0)'
-        sheet[f'P{row}'] = f'=D{row}-M{row}'
-        for column in 'ABCDEFGHIJKLMNOP':
-            cell = sheet[f'{column}{row}']
+    first_data = number_row + 1
+    for offset, district in enumerate(districts_with_okrug):
+        row = first_data + offset
+        sheet.cell(row=row, column=1, value=offset + 1)
+        sheet.cell(row=row, column=2, value='САО' if district['Округ'] else None)
+        sheet.cell(row=row, column=3, value=district['Район'])
+        sheet.cell(row=row, column=4, value=district['Всего'])
+        sheet.cell(row=row, column=5, value=district['ДТ'])
+        sheet.cell(row=row, column=7, value=district['МКД'])
+        sheet.cell(row=row, column=9, value=district['ОДХ'])
+        sheet.cell(row=row, column=11, value=district['ОО'])
+        sheet.cell(row=row, column=15, value=f'=IFERROR(M{row}/D{row},0)')
+        sheet.cell(row=row, column=16, value=f'=D{row}-M{row}')
+        for column in range(1, 17):
+            cell = sheet.cell(row=row, column=column)
+            cell.font = Font(name=FONT, size=10)
             cell.border = BORDER
-            cell.alignment = LEFT if column in ('B', 'C') else CENTER
-        sheet[f'O{row}'].number_format = '0%'
+            cell.alignment = LEFT if column == 3 else CENTER
+        sheet.cell(row=row, column=15).number_format = '0%'
 
-    total_row = first_row + len(districts)
-    sheet[f'C{total_row}'] = 'Итого:'
-    for column in ('D', 'E', 'G', 'I', 'K', 'M', 'N'):
-        sheet[f'{column}{total_row}'] = f'=SUM({column}{first_row}:{column}{total_row - 1})'
-    sheet[f'O{total_row}'] = f'=IFERROR(M{total_row}/D{total_row},0)'
-    sheet[f'P{total_row}'] = f'=D{total_row}-M{total_row}'
-    for column in 'ABCDEFGHIJKLMNOP':
-        cell = sheet[f'{column}{total_row}']
-        cell.font = Font(bold=True)
-        cell.fill = TOTAL_FILL
+    total_row = first_data + len(districts_with_okrug)
+    sheet.cell(row=total_row, column=3, value='Итого:')
+    for column in (4, 5, 7, 9, 11, 13, 14):
+        letter = get_column_letter(column)
+        sheet.cell(row=total_row, column=column, value=f'=SUM({letter}{first_data}:{letter}{total_row - 1})')
+    sheet.cell(row=total_row, column=15, value=f'=IFERROR(M{total_row}/D{total_row},0)')
+    sheet.cell(row=total_row, column=16, value=f'=D{total_row}-M{total_row}')
+    for column in range(1, 17):
+        cell = sheet.cell(row=total_row, column=column)
+        cell.font = Font(name=FONT, bold=True, size=10)
         cell.border = BORDER
-        cell.alignment = LEFT if column == 'C' else CENTER
-    sheet[f'O{total_row}'].number_format = '0%'
+        cell.alignment = LEFT if column == 3 else CENTER
+    sheet.cell(row=total_row, column=15).number_format = '0%'
+    return total_row
 
-    sheet.column_dimensions['A'].width = 7
-    sheet.column_dimensions['B'].width = 8
-    sheet.column_dimensions['C'].width = 22
-    for column in 'DEFGHIJKL':
-        sheet.column_dimensions[column].width = 10
-    sheet.column_dimensions['M'].width = 12
-    sheet.column_dimensions['N'].width = 12
-    sheet.column_dimensions['O'].width = 12
-    sheet.column_dimensions['P'].width = 12
-    sheet.row_dimensions[2].height = 42
-    sheet.freeze_panes = 'D5'
 
-    notes = workbook.create_sheet('Откуда данные')
-    notes.column_dimensions['A'].width = 118
-    lines = [
-        ('Источник', True),
-        ('Приложения районов «<Район> август приложение устранения.docx» — 17 файлов из архива САО (17).zip.', False),
-        ('В каждом приложении четыре таблицы фотофиксации:', False),
-        ('• дворовые территории и внутриквартальные проезды — колонки ДТ;', False),
-        ('• многоквартирные дома — колонки МКД;', False),
-        ('• объекты дорожного хозяйства — колонки ОДХ;', False),
-        ('• объекты озеленения — колонки ОО.', False),
-        ('', False),
-        ('Как считалось', True),
-        ('Одно нарушение — одна строка «Адрес: … Нарушение: …» в таблице приложения.', False),
-        ('Число строк сверено с числом фотографий в документе: в 14 приложениях из 17 совпало точно,', False),
-        ('в трёх фотографий меньше, чем строк (Войковский 188 против 189, Сокол 124 против 125,', False),
-        ('Хорошевский 313 против 320) — считается по строкам, то есть по факту зафиксированных нарушений.', False),
-        ('', False),
-        ('Чего в архиве нет', True),
-        ('Устранённых нарушений в приложениях нет: в тексте документов ни разу не встречается «устран».', False),
-        ('Поэтому колонки «Устранено», «Возвращено на доработку», «%» и «Остается на контроле» оставлены', False),
-        ('пустыми и считаются формулами: заполните четыре колонки «Устранено» — итог, процент', False),
-        ('и остаток на контроле посчитаются сами.', False),
-        ('', False),
-        ('Если данные об устранении придут из реестра МАЦ, пришлите их тем же файлом — подставлю.', True),
-    ]
-    for index, (line, bold) in enumerate(lines, start=1):
-        cell = notes[f'A{index}']
-        cell.value = line
-        cell.font = Font(bold=bold)
+def build(districts, month):
+    workbook = Workbook()
+    sheet = workbook.active
+    sheet.title = month.capitalize()
+
+    first = [{**district, 'Округ': True} for district in districts]
+    second = [{**district, 'Округ': False} for district in districts]
+
+    title = f'Об устранении нарушений от ГБУ «МАЦ» — {month.upper()}'
+    first_total = write_header(sheet, 1, first, title)
+    second_title = first_total + 2
+    write_header(sheet, second_title, second, 'Об устранении нарушений от ГБУ «МАЦ»')
+
+    widths = {1: 7, 2: 9, 3: 24, 4: 15}
+    for column in range(5, 17):
+        widths[column] = 12
+    for column, width in widths.items():
+        sheet.column_dimensions[get_column_letter(column)].width = width
+    sheet.row_dimensions[1].height = 20
+    sheet.row_dimensions[2].height = 34
+    sheet.freeze_panes = 'A5'
     return workbook
 
 
@@ -164,13 +146,11 @@ def main():
     month = 'август'
     if '--месяц' in sys.argv:
         month = sys.argv[sys.argv.index('--месяц') + 1]
-    districts, total = read_summary(source)
-    workbook = build(districts, total, month)
+    districts = read_summary(source)
+    workbook = build(districts, month)
     workbook.save(target)
     print(f'таблица собрана: {target}')
-    print(f'районов: {len(districts)}, нарушений всего: {sum(int(row["Всего"]) for row in districts)}')
-    if total:
-        print(f'по категориям — ДТ {total["ДТ"]}, МКД {total["МКД"]}, ОДХ {total["ОДХ"]}, ОО {total["ОО"]}')
+    print(f'районов: {len(districts)}, нарушений: {sum(int(row["Всего"]) for row in districts)}')
 
 
 if __name__ == '__main__':
