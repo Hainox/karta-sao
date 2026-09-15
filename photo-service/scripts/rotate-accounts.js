@@ -13,9 +13,15 @@ import { randomInt } from 'node:crypto';
 import { photoServiceDatabaseConfig } from '../src/config.js';
 import { hashPassword } from '../src/auth.js';
 
-function option(name, fallback) {
+function argument(name) {
   const index = process.argv.indexOf(`--${name}`);
-  return index >= 0 ? process.argv[index + 1] : fallback;
+  if (index < 0) return undefined;
+  const value = process.argv[index + 1];
+  if (!value || value.startsWith('--')) {
+    console.error(`--${name} requires a value`);
+    process.exit(2);
+  }
+  return value;
 }
 
 // Без похожих символов: 0/O, 1/l/I исключены, чтобы пароль можно было продиктовать.
@@ -31,8 +37,8 @@ function randomPassword() {
   return groups.join('-');
 }
 
-const out = option('--out');
-const publicUrl = (option('--public-url', process.env.PHOTO_SERVICE_PUBLIC_URL || 'https://obhod-sao.ru/photo-api')).replace(/\/$/, '');
+const out = argument('out');
+const publicUrl = (argument('public-url') || process.env.PHOTO_SERVICE_PUBLIC_URL || 'https://obhod-sao.ru/photo-api').replace(/\/$/, '');
 
 const pool = new Pool({ ...photoServiceDatabaseConfig(process.env), max: 2 });
 let rotated = 0;
