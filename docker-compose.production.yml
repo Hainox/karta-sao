@@ -30,14 +30,46 @@ services:
       PGPASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
       JWT_SECRET: ${JWT_SECRET:?Set JWT_SECRET in .env}
       ALLOWED_ORIGINS: ${ALLOWED_ORIGINS:-https://hainox.github.io}
+      NOTIFY_URL: ${NOTIFY_URL:-http://notify:8790}
+      NOTIFY_SECRET: ${NOTIFY_SECRET:-}
     networks:
       default: {}
       edge:
         aliases:
           - odh-sao-api
+  notify:
+    build:
+      context: .
+      dockerfile: notify/Dockerfile
+    restart: unless-stopped
+    depends_on:
+      - api
+    environment:
+      TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN:?Set TELEGRAM_BOT_TOKEN from @BotFather in .env}
+      TELEGRAM_CHAT_IDS: ${TELEGRAM_CHAT_IDS:?Set TELEGRAM_CHAT_IDS in .env}
+      NOTIFY_SECRET: ${NOTIFY_SECRET:?Set NOTIFY_SECRET in .env}
+      NOTIFY_PORT: 8790
+      NOTIFY_DATA_DIR: /srv/notify/data
+      ODH_API_URL: ${ODH_API_URL:-http://api:8787}
+      ODH_PREFECTURE_LOGIN: ${ODH_PREFECTURE_LOGIN:-}
+      ODH_PREFECTURE_PASSWORD: ${ODH_PREFECTURE_PASSWORD:-}
+    volumes:
+      - notify_data:/srv/notify/data
+    networks:
+      default: {}
+      edge:
+        aliases:
+          - sao-notify
+      photoservice:
+        aliases:
+          - sao-notify
 volumes:
   odh_sao_postgres:
+  notify_data:
 networks:
   edge:
     name: ${EDGE_NETWORK:-jirajura_default}
+    external: true
+  photoservice:
+    name: ${PHOTO_SERVICE_EDGE_NETWORK:-sao-photo-service-edge}
     external: true

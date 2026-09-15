@@ -13,9 +13,11 @@ import { createLoginThrottle } from './src/login-throttle.js';
 import { buildExcel, buildPdf } from './src/exports.js';
 import { loadReportRows, reportPayload } from './src/reports.js';
 import { mediaRoot, readMedia, removeMedia, writeMedia } from './src/storage.js';
+import { createNotifyClient } from './src/notify.js';
 
 const port = Number(process.env.PHOTO_SERVICE_PORT || 8788);
 const basePath = (process.env.PHOTO_SERVICE_BASE_PATH || '').replace(/\/$/, '');
+const notifier = createNotifyClient({ url: process.env.NOTIFY_URL, secret: process.env.NOTIFY_SECRET });
 const cookiePolicy = photoServiceCookiePolicy({
   PHOTO_SERVICE_COOKIE_SAMESITE: process.env.PHOTO_SERVICE_COOKIE_SAMESITE,
   PHOTO_SERVICE_COOKIE_SECURE: process.env.PHOTO_SERVICE_COOKIE_SECURE,
@@ -197,6 +199,12 @@ async function handleUpload(request, response, user) {
     if (thumbnail) await removeMedia(thumbnail.storageKey, mediaRoot(process.env)).catch(() => {});
     throw error;
   } finally { client.release(); }
+  notifier.event({
+    kind: 'client',
+    service: 'photo-service',
+    title: 'Новое фото от района',
+    fields: { Район: object.district, Объект: object.object_key, Исполнитель: parsed.fields.performer.trim(), GPS: geo.status, 'Удаление, м': geo.distanceMeters ?? '—' }
+  });
   return sendJson(response, 201, { photoId, geoStatus: geo.status, distanceMeters: geo.distanceMeters ?? null, reviewStatus: 'pending_review', thumbnail: Boolean(thumbnail) }, request);
 }
 
@@ -208,6 +216,13 @@ async function handleReview(request, response, user, photoId) {
   const result = await pool.query(`UPDATE photos SET review_status = $1, review_reason = $2, is_reference = $3, reviewed_by = $4, reviewed_at = now() WHERE id = $5 RETURNING id, object_key, review_status, is_reference`, [body.status, typeof body.reason === 'string' ? body.reason.slice(0, 1000) : null, body.isReference === true, user.id, photoId]);
   if (!result.rowCount) return sendError(response, request, 404, 'photo_not_found');
   await pool.query('INSERT INTO audit_log (actor_user_id, action, object_key, photo_id, metadata) VALUES ($1,$2,$3,$4,$5)', [user.id, `photo_${body.status}`, result.rows[0].object_key, photoId, JSON.stringify({ isReference: body.isReference === true })]);
+  notifier.event({
+    kind: 'client',
+    service: 'photo-service',
+    title: body.status === 'confirmed' ? 'Префектура подтвердила фото' : 'Префектура отклонила фото',
+    level: body.status === 'confirmed' ? 'info' : 'warning',
+    fields: { Объект: result.rows[0].object_key, Решение: body.status, Причина: body.reason || '—' }
+  });
   return sendJson(response, 200, result.rows[0], request);
 }
 
@@ -306,6 +321,14 @@ async function handler(request, response) {
   } catch (error) {
     if (error.code === '23505') return sendError(response, request, 409, 'conflict');
     console.error('request failed:', error.message);
+    notifier.event({
+      kind: 'error',
+      level: 'critical',
+      service: 'photo-service',
+      title: 'Сбой обработки запроса',
+      text: error.message,
+      fields: { Адрес: `${request.method} ${request.url}` }
+    });
     return sendError(response, request, error.statusCode || 500, error.code || 'internal_error');
   }
 }

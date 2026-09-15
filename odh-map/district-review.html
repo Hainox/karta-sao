@@ -81,7 +81,7 @@
       const MAX_BYTES = 5 * 1024 * 1024; const MAX_BUNDLE_BYTES = 25 * 1024 * 1024;
       const map = L.map('map', { zoomControl:true, attributionControl:true });
       map.attributionControl.setPrefix(false);
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom:19, attribution:'© OpenStreetMap contributors' }).addTo(map);
+      L.tileLayer('https://core-renderer-tiles.maps.yandex.net/tiles?l=map&x={x}&y={y}&z={z}&scale=1&lang=ru_RU&projection=web_mercator', { maxZoom:19, attribution:'© <a href="https://yandex.ru/maps/">Яндекс</a>' }).addTo(map);
       const acceptedGroup = L.featureGroup().addTo(map); const photoMarkerGroup = L.featureGroup().addTo(map); const entries = []; const photoMarkerLayers = new Map(); let boundary = null; let photoMarkers = []; let photoMode = false;
       const ids = ['reviewFiles','exportBundle','clearReview','status','acceptedCount','conflictCount','rejectedCount','featureCount','fileList','apiBase','apiEmail','apiPassword','sessionInfo','loadApiButton','exportReviewArchiveButton','exportApiButton','photoMarkersPanel','photoModeButton','photoMarkersInfo','photoMarkerList','photoFileInput','importLegacyPhotoMarkersButton']; const fields = Object.fromEntries(ids.map((id) => [id, document.getElementById(id)])); fields.apiBase.value = ODHApi.base();
       const esc = (value) => String(value ?? '').replace(/[&<>"']/g, (character) => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[character]));

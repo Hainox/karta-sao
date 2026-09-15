@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+import { expect, test } from './fixtures.js';
 import { readFile } from 'node:fs/promises';
 
 const baseURL = 'http://127.0.0.1:8766/odh-map/';

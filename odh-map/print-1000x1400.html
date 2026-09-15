@@ -94,7 +94,7 @@
           <div class="legend-item legend-item--queue"><span class="legend-line" style="--line-color:#d32f2f"></span><span>I очередь — 98 позиций</span></div>
           <div class="legend-item legend-item--queue"><span class="legend-line" style="--line-color:#1565c0"></span><span>II очередь — 318 позиций</span></div>
           <div class="legend-item legend-item--queue"><span class="legend-line" style="--line-color:#2e7d32"></span><span>III очередь — 272 позиции</span></div>
-          <p class="legend-footnote">Схема подготовлена по опубликованным слоям САО. Данные маршрутов роторной уборки на лист не включены, так как не переданы в исходных данных. Подложка: © OpenStreetMap contributors © CARTO.</p>
+          <p class="legend-footnote">Схема подготовлена по опубликованным слоям САО. Данные маршрутов роторной уборки на лист не включены, так как не переданы в исходных данных. Подложка: © Яндекс.</p>
         </section>
       </div>
     </aside>
@@ -109,8 +109,8 @@
     <button id="zoom-reset" type="button">Вся САО</button>
     <button id="zoom-in" type="button" title="Увеличить масштаб карты">+</button>
     <select id="basemap-style" aria-label="Стиль подложки">
-      <option value="light">CARTO Positron</option>
-      <option value="contrast">CARTO Voyager</option>
+      <option value="map">Яндекс.Карта</option>
+      <option value="satellite">Яндекс.Спутник</option>
       <option value="none">Без подложки</option>
     </select>
   </div>
@@ -129,7 +129,6 @@
       const RASTER_HEIGHT = 5040;
       const TILE_SIZE = 256;
       const TILE_ZOOM = 13;
-      const CARTO_BASEMAP_KEY = 'cb1_310p_1_d2460a3f4bb18c971a8bfdd7';
       const svg = document.getElementById('features');
       const canvas = document.getElementById('basemap');
       const context = canvas.getContext('2d');
@@ -141,7 +140,7 @@
       let mainBoundary = null;
       let targetSvg = svg;
       let viewScale = 1;
-      let basemapStyle = 'light';
+      let basemapStyle = 'map';
       let rendering = false;
       let panX = 0;
       let panY = 0;
@@ -220,9 +219,9 @@
         return task;
       }
 
-      function cartoTileUrl(x, y) {
-        const style = basemapStyle === 'contrast' ? 'rastertiles/voyager' : 'light_all';
-        return `https://basemaps.cartocdn.com/${style}/${TILE_ZOOM}/${x}/${y}@2x.png?key=${CARTO_BASEMAP_KEY}`;
+      function basemapTileUrl(x, y) {
+        const layer = basemapStyle === 'satellite' ? 'sat' : 'map';
+        return `https://core-renderer-tiles.maps.yandex.net/tiles?l=${layer}&x=${x}&y=${y}&z=${TILE_ZOOM}&scale=2&lang=ru_RU&projection=web_mercator`;
       }
 
       async function drawBaseMap(view) {
@@ -236,7 +235,7 @@
         const tasks = [];
         for (let x = left; x <= right; x += 1) {
           for (let y = top; y <= bottom; y += 1) {
-            const url = cartoTileUrl(x, y);
+            const url = basemapTileUrl(x, y);
             tasks.push(loadImage(url).then(image => ({ x, y, image })));
           }
         }

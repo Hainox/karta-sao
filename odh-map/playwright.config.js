@@ -2,7 +2,10 @@ import { defineConfig } from '@playwright/test';
 
 export default defineConfig({
   testDir: './tests',
-  timeout: 30_000,
+  // Страницы подгружают Leaflet и шрифты с внешних CDN: сами проверки занимают
+  // около секунды, а запас нужен на случай медленного ответа чужого сервера.
+  timeout: 60_000,
+  expect: { timeout: 10_000 },
   use: { browserName: 'chromium', channel: 'msedge', headless: true },
   webServer: {
     command: 'node tests/static-server.mjs',

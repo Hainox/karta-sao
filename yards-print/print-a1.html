@@ -292,7 +292,7 @@
       if (!window.L) { errorPanel.textContent = "Не удалось загрузить карту Leaflet."; errorPanel.style.display = "block"; return; }
       map = L.map("map", { zoomControl:true }).setView([55.84, 37.54], 11);
       map.on("zoomend", () => { if (!isRendering) updateVisibleCount(); });
-      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom:19, attribution:"&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors" }).addTo(map);
+      L.tileLayer("https://core-renderer-tiles.maps.yandex.net/tiles?l=map&x={x}&y={y}&z={z}&scale=1&lang=ru_RU&projection=web_mercator", { maxZoom:19, attribution:"&copy; <a href=\"https://yandex.ru/maps/\">Яндекс</a>" }).addTo(map);
       loadBoundary();
       loadData();
     }

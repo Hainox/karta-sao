@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+import { expect, test } from './fixtures.js';
 
 test('GeoJSON overlay renders cleaning routes solid and rotor transfers dotted', async ({ page }) => {
   await page.goto('http://127.0.0.1:8766/odh-map/');

@@ -7,7 +7,7 @@ import { payloadHash, validateChangeSet } from './lib/validation.js';
 const REVIEW_ROLES = new Set(['reviewer', 'prefecture_admin']);
 const PHOTO_MIME_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
 
-export function createApp({ repository, boundary, jwtSecret, allowedOrigins = [] }) {
+export function createApp({ repository, boundary, jwtSecret, allowedOrigins = [], notifier = null }) {
   if (!jwtSecret || jwtSecret.length < 32) throw new Error('JWT_SECRET должен содержать минимум 32 символа.');
   const app = express();
   app.disable('x-powered-by');
@@ -124,6 +124,14 @@ export function createApp({ repository, boundary, jwtSecret, allowedOrigins = []
       if (request.user.role === 'district_editor' && !request.user.district) return response.status(403).json({ error: 'Учётной записи редактора не назначен район.' });
       if (request.user.role === 'district_editor' && request.user.district !== changeSet.district) return response.status(403).json({ error: 'Редактор может отправлять только свой район.' });
       const submission = await repository.createSubmission({ changeSet, createdBy: request.user.sub, originalFilename: String(originalFilename).slice(0, 180), payloadSha256: payloadHash(changeSet) });
+      // Префектуре уходит одно сообщение с кнопками: решать по набору можно прямо из Telegram.
+      notifier?.action({
+        name: 'submission.approve',
+        title: `Набор правок на приёмку: ${submission.district}`,
+        details: `Объектов: ${changeSet.features?.length || 0}. Исполнитель: ${changeSet.author || 'не указан'}.`,
+        confirmText: 'Утвердить',
+        payload: { service: 'odh', submissionId: submission.id, district: submission.district }
+      });
       response.status(201).json({ submission: { id: submission.id, district: submission.district, status: submission.status, submitted_at: submission.submitted_at } });
     } catch (error) { next(error); }
   });

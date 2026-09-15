@@ -1,0 +1,15 @@
+{
+  "name": "sao-notify",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Telegram-бот: отчёты о работе, события сервисов, вопросы с выбором ответа и подтверждение действий.",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "node --test test/*.test.js",
+    "notify": "node bin/notify.js"
+  }
+}
