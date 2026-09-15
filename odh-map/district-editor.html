@@ -42,7 +42,7 @@
         </section>
         <section class="panel">
           <h2>Карточка набора</h2>
-          <label for="district">Район САО</label><select id="district"><option value="">Выберите район</option></select>
+          <label for="district">Балансодержатель</label><select id="district"><option value="">Выберите балансодержателя</option></select>
           <label for="author">Исполнитель</label><input id="author" autocomplete="name" placeholder="Фамилия, имя, подразделение">
         </section>
         <section class="panel">
@@ -102,7 +102,9 @@
       let boundary = null; let districtBoundaries = null; let draftFeatures = []; let routeStart = null; let routeEnd = null; let pickMode = null; let routeDrawing = null;
       const ids = ['district','author','changeType','priority','address','comment','status','featureList','drawButton','priorityWrap','routeWrap','nozzle','setStart','setEnd','cancelPointButton','cancelRouteButton','startInfo','endInfo','importInput','apiBase','apiEmail','apiPassword','sessionInfo','submitButton','checkButton','workflowCheck','toggleHelpButton','helpPanel'];
       const fields = Object.fromEntries(ids.map((id) => [id, document.getElementById(id)]));
-      DistrictChanges.DISTRICTS.forEach((name) => fields.district.add(new Option(name, name)));
+      // Подпись в списке — «Жилищник «Район»», а значение остаётся именем района:
+      // оно уходит в наборы, валидацию, базу и учётные записи.
+      DistrictChanges.DISTRICTS.forEach((name) => fields.district.add(new Option(`Жилищник «${name}»`, name)));
       Object.entries(DistrictChanges.TYPES).forEach(([key, type]) => fields.changeType.add(new Option(type.label, key)));
       const linkedDistrictValue = new URLSearchParams(window.location.search).get('district');
       const linkedDistrict = DistrictChanges.DISTRICTS.includes(linkedDistrictValue) ? linkedDistrictValue : null;
