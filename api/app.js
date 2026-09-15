@@ -32,6 +32,9 @@ export function createApp({ repository, boundary, jwtSecret, allowedOrigins = []
       next();
     } catch (error) { response.status(401).json({ error: error.message }); }
   };
+  const UUID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+  const requireUuid = (request, response, next) => UUID_PATTERN.test(request.params.id || '')
+    ? next() : response.status(404).json({ error: 'Объект не найден.' });
   const requireReview = (request, response, next) => REVIEW_ROLES.has(request.user.role)
     ? next() : response.status(403).json({ error: 'Требуется роль приёмки или префектуры.' });
   const requirePrefecture = (request, response, next) => request.user.role === 'prefecture_admin'
@@ -67,7 +70,7 @@ export function createApp({ repository, boundary, jwtSecret, allowedOrigins = []
     } catch (error) { next(error); }
   });
 
-  app.patch('/api/photo-markers/:id', authenticate, requirePrefecture, async (request, response, next) => {
+  app.patch('/api/photo-markers/:id', authenticate, requireUuid, requirePrefecture, async (request, response, next) => {
     try {
       const validation = validatePhotoNote(request.body?.note);
       if (!validation.valid) return response.status(400).json({ error: validation.error });
@@ -77,7 +80,7 @@ export function createApp({ repository, boundary, jwtSecret, allowedOrigins = []
     } catch (error) { next(error); }
   });
 
-  app.put('/api/photo-markers/:id/photo', authenticate, requirePrefecture, photoParser, async (request, response, next) => {
+  app.put('/api/photo-markers/:id/photo', authenticate, requireUuid, requirePrefecture, photoParser, async (request, response, next) => {
     try {
       const validation = validatePhotoUpload(request.body, request.get('content-type'));
       if (!validation.valid) return response.status(422).json({ error: validation.error });
@@ -87,7 +90,7 @@ export function createApp({ repository, boundary, jwtSecret, allowedOrigins = []
     } catch (error) { next(error); }
   });
 
-  app.get('/api/photo-markers/:id/photo', authenticate, requirePrefecture, async (request, response, next) => {
+  app.get('/api/photo-markers/:id/photo', authenticate, requireUuid, requirePrefecture, async (request, response, next) => {
     try {
       const photo = await repository.getPhotoMarkerPhoto(request.params.id);
       if (!photo?.photo_bytes) return response.status(404).json({ error: 'У этой фото-метки нет прикреплённого фото.' });
@@ -96,7 +99,7 @@ export function createApp({ repository, boundary, jwtSecret, allowedOrigins = []
     } catch (error) { next(error); }
   });
 
-  app.delete('/api/photo-markers/:id/photo', authenticate, requirePrefecture, async (request, response, next) => {
+  app.delete('/api/photo-markers/:id/photo', authenticate, requireUuid, requirePrefecture, async (request, response, next) => {
     try {
       const photoMarker = await repository.deletePhotoMarkerPhoto({ id: request.params.id, actorId: request.user.sub });
       if (!photoMarker) return response.status(404).json({ error: 'Фото или фото-метка не найдены.' });
@@ -104,7 +107,7 @@ export function createApp({ repository, boundary, jwtSecret, allowedOrigins = []
     } catch (error) { next(error); }
   });
 
-  app.delete('/api/photo-markers/:id', authenticate, requirePrefecture, async (request, response, next) => {
+  app.delete('/api/photo-markers/:id', authenticate, requireUuid, requirePrefecture, async (request, response, next) => {
     try {
       const photoMarker = await repository.deletePhotoMarker({ id: request.params.id, actorId: request.user.sub });
       if (!photoMarker) return response.status(404).json({ error: 'Фото-метка не найдена.' });
@@ -136,7 +139,7 @@ export function createApp({ repository, boundary, jwtSecret, allowedOrigins = []
     } catch (error) { next(error); }
   });
 
-  app.patch('/api/submissions/:id', authenticate, requireReview, async (request, response, next) => {
+  app.patch('/api/submissions/:id', authenticate, requireUuid, requireReview, async (request, response, next) => {
     try {
       const { status, comment = '' } = request.body || {};
       if (!['approved', 'rejected'].includes(status)) return response.status(400).json({ error: 'Допустимы только approved или rejected.' });

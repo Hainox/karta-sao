@@ -17,7 +17,9 @@ required_fragments = {
     "SAO-only boundary filter": "feature.properties?.feature_kind === \"boundary_sao\"",
     "published queue total": "queue1: 98, queue2: 318, queue3: 272",
     "map pan and wheel support": 'L.map("map"',
-    "CARTO base layer": "basemaps.cartocdn.com/rastertiles/voyager",
+    "Yandex base layer": "core-renderer-tiles.maps.yandex.net",
+    "web mercator projection for the base layer": "projection=web_mercator",
+    "CARTO fallback layer": "basemaps.cartocdn.com/rastertiles/voyager",
     "Molzhaninovsky inset": 'id="district-inset-map"',
     "main-SAO fit": "function boundaryParts(collection)",
 }

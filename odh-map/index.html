@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="ru">
   <head>
+    <link rel="icon" href="../favicon.ico" sizes="any">
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Карта маршрутов ОДХ САО</title>
@@ -412,6 +414,17 @@
         border-color: var(--teal);
         color: var(--teal);
       }
+      .basemap-chip {
+        top: 70px;
+        cursor: pointer;
+      }
+      .basemap-chip select {
+        border: 0;
+        background: transparent;
+        color: inherit;
+        font: inherit;
+        cursor: pointer;
+      }
       .map-legend {
         position: absolute;
         z-index: 600;
@@ -790,6 +803,13 @@
           <button id="fit-boundary" class="map-chip" type="button">
             <i class="fa-solid fa-expand"></i>На всю территорию САО
           </button>
+          <label class="map-chip basemap-chip" for="basemap-select">
+            <i class="fa-solid fa-layer-group"></i>Подложка
+            <select id="basemap-select" aria-label="Подложка карты">
+              <option value="yandex">Яндекс</option>
+              <option value="carto">CARTO</option>
+            </select>
+          </label>
           <div class="map-legend">
             <strong>Маршруты и направления</strong
             ><span id="lod-note" class="lod-note" role="status" aria-live="polite"
@@ -827,21 +847,39 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/leaflet-polylinedecorator@1.6.0/dist/leaflet.polylineDecorator.min.js"></script>
     <script>
-      const CARTO_TILE_URL =
-        "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png?key=cb1_310p_1_d2460a3f4bb18c971a8bfdd7";
-      const CARTO_ATTRIBUTION =
-        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attributions">CARTO</a>';
+      const BASEMAPS = {
+        yandex: {
+          label: "Яндекс",
+          url: "https://core-renderer-tiles.maps.yandex.net/tiles?l=map&x={x}&y={y}&z={z}&scale=1&lang=ru_RU&projection=web_mercator",
+          attribution:
+            '&copy; <a href="https://yandex.ru/maps/">Яндекс</a>',
+          maxZoom: 20,
+        },
+        carto: {
+          label: "CARTO",
+          url: "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png?key=cb1_310p_1_d2460a3f4bb18c971a8bfdd7",
+          attribution:
+            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attributions">CARTO</a>',
+          subdomains: "abcd",
+          maxZoom: 20,
+        },
+      };
+      const BASEMAP_STORAGE_KEY = "odh-map-basemap-v1";
+      const DEFAULT_BASEMAP = "yandex";
+      function storedBasemap() {
+        try {
+          const saved = localStorage.getItem(BASEMAP_STORAGE_KEY);
+          return BASEMAPS[saved] ? saved : DEFAULT_BASEMAP;
+        } catch (_) {
+          return DEFAULT_BASEMAP;
+        }
+      }
       const map = L.map("map", {
         zoomControl: true,
         zoomSnap: 0.25,
         preferCanvas: true,
       });
       map.attributionControl.setPrefix(false);
-      L.tileLayer(CARTO_TILE_URL, {
-        attribution: CARTO_ATTRIBUTION,
-        subdomains: "abcd",
-        maxZoom: 20,
-      }).addTo(map);
       const insetMap = L.map("district-inset-map", {
         attributionControl: false,
         dragging: false,
@@ -853,9 +891,28 @@
         zoomControl: false,
         zoomSnap: 0.25,
       });
-      L.tileLayer(CARTO_TILE_URL, { subdomains: "abcd", maxZoom: 20 }).addTo(
-        insetMap,
-      );
+      let basemapName = storedBasemap();
+      function applyBasemap(name) {
+        const config = BASEMAPS[name];
+        if (!config) return;
+        for (const target of [map, insetMap]) {
+          if (target.basemapLayer) target.removeLayer(target.basemapLayer);
+          const options = {
+            attribution: config.attribution,
+            maxZoom: config.maxZoom,
+          };
+          if (config.subdomains) options.subdomains = config.subdomains;
+          target.basemapLayer = L.tileLayer(config.url, options);
+          target.basemapLayer.addTo(target);
+        }
+        basemapName = name;
+        try {
+          localStorage.setItem(BASEMAP_STORAGE_KEY, name);
+        } catch (_) {
+          /* подложка работает и без сохранения выбора */
+        }
+      }
+      applyBasemap(basemapName);
       const groups = {},
         layerItems = {},
         searchIndex = [],
@@ -1321,6 +1378,11 @@
       document
         .getElementById("fit-boundary")
         .addEventListener("click", fitBoundary);
+      const basemapSelect = document.getElementById("basemap-select");
+      basemapSelect.value = basemapName;
+      basemapSelect.addEventListener("change", (event) =>
+        applyBasemap(event.target.value),
+      );
       document
         .getElementById("drawer-close")
         .addEventListener("click", () =>

@@ -10,6 +10,10 @@ import { MAX_GEOMETRY_VERTICES, payloadHash, validateChangeSet } from '../lib/va
 const publishedBoundary = JSON.parse(fs.readFileSync(new URL('../../odh-map/layers/sao_boundary_wgs84.geojson', import.meta.url), 'utf8'));
 
 const SECRET = 'test-secret-that-is-longer-than-thirty-two-characters';
+// В базе идентификаторы — uuid, поэтому заглушка повторяет тот же формат.
+function fakeId(prefix, index) {
+  return `${prefix}000000-0000-4000-8000-${String(index).padStart(12, '0')}`;
+}
 const boundary = {
   type: 'FeatureCollection',
   features: [{ type: 'Feature', geometry: { type: 'Polygon', coordinates: [[[37, 55], [38, 55], [38, 56], [37, 56], [37, 55]]] }, properties: {} }]
@@ -40,7 +44,7 @@ async function fixture() {
   const repository = {
     async findUserByEmail(email) { return users.find((user) => user.email === email) || null; },
     async createSubmission(input) {
-      const item = { id: `submission-${submissions.length + 1}`, district: input.changeSet.district, author: input.changeSet.author, created_by: input.createdBy, original_filename: input.originalFilename, payload_sha256: input.payloadSha256, change_set: input.changeSet, status: 'submitted', submitted_at: '2026-09-08T10:01:00.000Z' };
+      const item = { id: fakeId('5b', submissions.length + 1), district: input.changeSet.district, author: input.changeSet.author, created_by: input.createdBy, original_filename: input.originalFilename, payload_sha256: input.payloadSha256, change_set: input.changeSet, status: 'submitted', submitted_at: '2026-09-08T10:01:00.000Z' };
       submissions.push(item); return item;
     },
     async listSubmissions({ status, district } = {}) { return submissions.filter((item) => (!status || item.status === status) && (!district || item.district === district)); },
@@ -53,7 +57,7 @@ async function fixture() {
     async createPhotoMarker({ longitude, latitude, note, legacySourceId, createdBy }) {
       const existing = legacySourceId && photoMarkers.find((marker) => marker.legacy_source_id === legacySourceId);
       if (existing) return { ...existing, has_photo: Boolean(existing.photo_bytes), imported: true };
-      const marker = { id: `photo-marker-${photoMarkers.length + 1}`, longitude, latitude, note, legacy_source_id: legacySourceId, created_by: createdBy, photo_bytes: null, photo_mime_type: null, photo_filename: null, photo_size: null, created_at: '2026-09-08T10:03:00.000Z', updated_at: '2026-09-08T10:03:00.000Z' };
+      const marker = { id: fakeId('f0', photoMarkers.length + 1), longitude, latitude, note, legacy_source_id: legacySourceId, created_by: createdBy, photo_bytes: null, photo_mime_type: null, photo_filename: null, photo_size: null, created_at: '2026-09-08T10:03:00.000Z', updated_at: '2026-09-08T10:03:00.000Z' };
       photoMarkers.push(marker); return { ...marker, has_photo: false };
     },
     async updatePhotoMarkerNote({ id, note }) { const marker = photoMarkers.find((candidate) => candidate.id === id); if (!marker) return null; marker.note = note; return { ...marker, has_photo: Boolean(marker.photo_bytes) }; },
@@ -196,6 +200,13 @@ test('возвращает ошибку проверки для повреждё
   } });
   const response = await api.post('/api/submissions').set('Authorization', `Bearer ${editor}`).send({ changeSet: invalid }).expect(422);
   assert.match(response.body.details.join('\n'), /минимум две точки/);
+});
+
+test('некорректный идентификатор набора отвечает 404, а не HTTP 500', async () => {
+  const { api, reviewerPassword } = await fixture();
+  const reviewer = await login(api, 'reviewer@example.test', reviewerPassword);
+  await api.patch('/api/submissions/undefined').set('Authorization', `Bearer ${reviewer}`).send({ status: 'approved' }).expect(404);
+  await api.patch('/api/submissions/00000000-0000-4000-8000-000000000000').set('Authorization', `Bearer ${reviewer}`).send({ status: 'approved' }).expect(404);
 });
 
 test('фото-метки и снимки доступны только префектуре и удаляются полностью', async () => {

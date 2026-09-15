@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="ru">
 <head>
+    <link rel="icon" href="../favicon.ico" sizes="any">
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Правки района — ОДХ САО</title>
@@ -182,6 +184,9 @@
         try { localStorage.setItem(SAVE_KEY, JSON.stringify({ ...metadata(), features:draftFeatures })); return true; }
         catch (_) { return false; }
       }
+      function forgetDraft() {
+        try { localStorage.removeItem(SAVE_KEY); localStorage.removeItem(LEGACY_KEY); } catch (_) { /* черновик недоступен — очищать нечего */ }
+      }
       function validateCurrent(includeEmpty = true) { const set = DistrictChanges.makeChangeSet(metadata(), draftFeatures); return !includeEmpty && !set.features.length ? { valid:true, errors:[] } : DistrictChanges.validate(set, boundary); }
       function updateWorkflowCheck({ announce = false } = {}) {
         if (!boundary) return;
@@ -271,7 +276,7 @@
       function exportFile() { const set = DistrictChanges.makeChangeSet(metadata(), draftFeatures); const check = DistrictChanges.validate(set, boundary); if (!check.valid) return message(check.errors.join('\n'), 'error'); const name = `pravki-${set.district.replaceAll(' ', '-')}-${set.created_at.slice(0,10)}.geojson`; download(set, name); persist(); message(`Скачан «${name}».`, 'good'); }
       function refreshSession() { const user = ODHApi.user(); fields.apiBase.value = ODHApi.base(); fields.sessionInfo.textContent = user ? `Выполнен вход: ${user.email} · ${user.role}${user.district ? ` · ${user.district}` : ''}` : (linkedDistrict ? `Открыта ссылка района «${linkedDistrict}». Войдите под закреплённой учётной записью.` : (ODHApi.base() ? 'API задан, вход не выполнен.' : 'Подключение не настроено. Пароль в браузере не сохраняется.')); }
       async function login() { try { ODHApi.setBase(fields.apiBase.value); const user = await ODHApi.login(fields.apiEmail.value.trim(), fields.apiPassword.value); fields.apiPassword.value = ''; refreshSession(); applyDistrictScope({ announce:true }); updateWorkflowCheck(); } catch (error) { message(error.message, 'error'); } }
-      async function submit() { const set = DistrictChanges.makeChangeSet(metadata(), draftFeatures); const check = DistrictChanges.validate(set, boundary); if (!check.valid) return message(check.errors.join('\n'), 'error'); const user = ODHApi.user(); if (!user) return message('Сначала укажите API и войдите под учётной записью редактора.', 'error'); if (user.role === 'district_editor' && !user.district) return message('Учётной записи не назначен район. Обратитесь к администратору.', 'error'); if (user.role === 'district_editor' && user.district !== set.district) return message(`Учётная запись закреплена за районом «${user.district}». Отправка этого набора заблокирована.`, 'error'); try { const filename = `pravki-${set.district.replaceAll(' ', '-')}-${set.created_at.slice(0,10)}.geojson`; const response = await ODHApi.request('/api/submissions', { method:'POST', body:JSON.stringify({ changeSet:set, originalFilename:filename }) }); const data = await response.json(); message(`Набор отправлен на приёмку: № ${data.submission.id}.`, 'good'); } catch (error) { message(error.message, 'error'); } }
+      async function submit() { const set = DistrictChanges.makeChangeSet(metadata(), draftFeatures); const check = DistrictChanges.validate(set, boundary); if (!check.valid) return message(check.errors.join('\n'), 'error'); const user = ODHApi.user(); if (!user) return message('Сначала укажите API и войдите под учётной записью редактора.', 'error'); if (user.role === 'district_editor' && !user.district) return message('Учётной записи не назначен район. Обратитесь к администратору.', 'error'); if (user.role === 'district_editor' && user.district !== set.district) return message(`Учётная запись закреплена за районом «${user.district}». Отправка этого набора заблокирована.`, 'error'); try { const filename = `pravki-${set.district.replaceAll(' ', '-')}-${set.created_at.slice(0,10)}.geojson`; const response = await ODHApi.request('/api/submissions', { method:'POST', body:JSON.stringify({ changeSet:set, originalFilename:filename }) }); const data = await response.json(); draftFeatures = []; forgetDraft(); renderDraft(); message(`Набор отправлен на приёмку: № ${data.submission.id}. Черновик очищен, чтобы те же объекты не ушли повторно.`, 'good'); } catch (error) { message(error.message, 'error'); } }
       async function initialize() {
         try {
           boundary = await fetch('layers/sao_boundary_wgs84.geojson', { cache:'no-store' }).then((response) => { if (!response.ok) throw new Error(`HTTP ${response.status}`); return response.json(); });

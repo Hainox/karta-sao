@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Городской атлас САО">
+  <rect width="64" height="64" rx="14" fill="#13293d"/>
+  <path d="M14 22h14l6 6h16v22H14z" fill="none" stroke="#3fb6a8" stroke-width="4" stroke-linejoin="round"/>
+  <circle cx="40" cy="24" r="11" fill="#ffffff"/>
+  <path d="M40 33c-4.6-5.5-7-8.9-7-11.9a7 7 0 0 1 14 0c0 3-2.4 6.4-7 11.9z" fill="#13293d"/>
+  <circle cx="40" cy="21" r="2.6" fill="#ffffff"/>
+</svg>

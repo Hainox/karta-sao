@@ -218,6 +218,34 @@ test('приёмка показывает API-поток и локальный �
   expect(errors).toEqual([]);
 });
 
+test('отправленный набор очищает черновик, чтобы не ушёл повторно', async ({ page }) => {
+  await page.addInitScript(() => {
+    sessionStorage.setItem('odh-map-api-token-v1', 'test-token');
+    sessionStorage.setItem('odh-map-api-user-v1', JSON.stringify({ id: 'editor-1', email: 'аэропорт', role: 'district_editor', district: 'Аэропорт' }));
+  });
+  const submissions = [];
+  await page.route('**/api/submissions', async (route) => {
+    submissions.push(route.request().postDataJSON());
+    await route.fulfill({ status: 201, contentType: 'application/json', body: JSON.stringify({ submission: { id: 'test-submission', district: 'Аэропорт', status: 'submitted' } }) });
+  });
+  await page.goto(`${baseURL}district-editor.html`);
+  await expect(page.locator('#district')).toHaveValue('Аэропорт');
+  await page.locator('#author').fill('Иванов И.И.');
+  await page.locator('#address').fill('Тестовый проезд');
+  const map = page.locator('#map');
+  await page.locator('#setStart').click();
+  await map.click({ position: { x: 420, y: 360 } });
+  await page.locator('#setEnd').click();
+  await map.click({ position: { x: 450, y: 390 } });
+  await page.locator('#drawButton').click();
+  await page.locator('#drawButton').click();
+  await page.locator('#submitButton').click();
+  await expect(page.locator('#status')).toContainText('Набор отправлен на приёмку');
+  expect(submissions).toHaveLength(1);
+  await expect(page.locator('#featureList')).toContainText('Пока ничего не добавлено');
+  expect(await page.evaluate(() => localStorage.getItem('odh-map-district-change-draft-v2'))).toBeNull();
+});
+
 test('фото-метки появляются только в контуре префектуры', async ({ page }) => {
   await page.addInitScript(() => {
     sessionStorage.setItem('odh-map-api-token-v1', 'test-token');
