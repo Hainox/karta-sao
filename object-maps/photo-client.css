@@ -18,6 +18,9 @@
 
 * { box-sizing: border-box; }
 
+/* An author `display` rule beats the browser default for [hidden], so it is stated once here. */
+[hidden] { display: none !important; }
+
 html, body {
   min-height: 100%;
   margin: 0;
@@ -215,7 +218,12 @@ button { cursor: pointer; }
 
 .pa-map-panel { position: relative; min-height: 420px; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; background: #e7ece7; }
 #paMap { position: absolute; inset: 0; }
-.pa-map-status, .pa-legend {
+
+/* The register drawer button and its close control only exist on narrow screens. */
+.pa-panel-toggle, .pa-panel-close, .pa-side-head { display: none; }
+.pa-panel-backdrop { display: none; }
+
+.pa-map-status, .pa-legend, .pa-boundary {
   position: absolute;
   z-index: 500;
   margin: 0;
@@ -227,6 +235,8 @@ button { cursor: pointer; }
   color: #3b544c;
 }
 .pa-map-status { top: 12px; left: 12px; }
+/* The district outline in force is stated in words, not only drawn on the map. */
+.pa-boundary { top: 12px; right: 12px; }
 .pa-legend { bottom: 22px; left: 12px; max-width: 340px; line-height: 1.6; }
 .pa-key { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 5px; }
 
@@ -318,10 +328,47 @@ button { cursor: pointer; }
 .pa-toast[data-visible="true"] { display: block; }
 .pa-toast[data-kind="error"] { background: #8c3b2b; }
 
+/* Narrow screens: the map is the working contour and fills the screen. The register
+   becomes a drawer, so reaching the map never requires scrolling past the list. */
 @media (max-width: 1100px) {
-  .pa-register { grid-template-columns: 1fr; }
-  .pa-side { max-height: none; }
-  .pa-map-panel { min-height: 380px; }
+  .pa-register { grid-template-columns: 1fr; grid-template-rows: minmax(320px, 1fr); padding: 10px; }
+  .pa-map-panel { min-height: 320px; }
+  .pa-map-status, .pa-legend { display: none; }
+  .pa-boundary { left: 12px; right: 12px; top: 12px; }
+
+  .pa-panel-toggle {
+    display: inline-flex;
+    position: absolute;
+    z-index: 600;
+    right: 14px;
+    bottom: 18px;
+    min-height: 52px;
+    box-shadow: 0 8px 22px rgba(16, 38, 54, .22);
+  }
+  .pa-panel-close { display: inline-flex; }
+
+  .pa-panel-backdrop[data-open="true"] {
+    display: block;
+    position: fixed;
+    z-index: 1300;
+    inset: 0;
+    background: rgba(12, 32, 27, .45);
+  }
+
+  .pa-side {
+    position: fixed;
+    z-index: 1400;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: auto;
+    display: none;
+    max-height: 88vh;
+    border-radius: 16px 16px 0 0;
+    box-shadow: 0 -16px 44px rgba(21, 49, 43, .3);
+  }
+  .pa-side[data-open="true"] { display: flex; }
+  .pa-side-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
 }
 
 @media (max-width: 620px) {

@@ -1,9 +1,10 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import {
-  bandNote, bandText, buildCoverageIndex, buildQueue, completionLabel, coverageFor, filterRecords,
-  formatAccuracy, formatCoordinates, formatDateTime, formatMeters, geoStatusText,
-  normalizePhoto, photoDetailRows, photoRequirement, reportSummaryRows, reviewStatusText,
+  assessDistanceRisk, bandNote, bandText, boundaryNote, buildCoverageIndex, buildQueue, canExport,
+  completionLabel, coverageFor, districtBoundaries, filterRecords, formatAccuracy, formatCoordinates,
+  formatDateTime, formatMeters, geoStatusText, gpsDistanceLabel, haversineDistanceMeters, normalizePhoto,
+  photoDetailRows, photoRequirement, reportSummaryRows, reviewStatusText, scopedDistricts,
 } from './photo-model.js';
 
 const serverRow = {
@@ -204,4 +205,126 @@ test('an empty scope is reported as having no data instead of zero percent', () 
 
 test('a non-object photo row is rejected instead of silently rendered', () => {
   assert.throws(() => normalizePhoto(null), /photo row must be an object/);
+});
+
+const GEOJSON = {
+  type: 'FeatureCollection',
+  features: [
+    {
+      type: 'Feature',
+      properties: { district: 'Аэропорт' },
+      geometry: { type: 'Polygon', coordinates: [[[37.5, 55.8], [37.6, 55.8], [37.6, 55.9], [37.5, 55.8]]] },
+    },
+    {
+      type: 'Feature',
+      properties: { district: 'Сокол' },
+      geometry: { type: 'Polygon', coordinates: [[[37.4, 55.7], [37.45, 55.7], [37.45, 55.75], [37.4, 55.7]]] },
+    },
+    { type: 'Feature', properties: { district: 'Без геометрии' }, geometry: null },
+  ],
+};
+
+test('district boundaries swap GeoJSON lon/lat into map lat/lon pairs', () => {
+  const boundaries = districtBoundaries(GEOJSON);
+  assert.equal(boundaries.length, 2);
+  assert.equal(boundaries[0].district, 'Аэропорт');
+  assert.deepEqual(boundaries[0].rings[0][0], [55.8, 37.5]);
+  assert.equal(boundaries[0].rings.length, 1);
+});
+
+test('a district account gets only its own boundary', () => {
+  const boundaries = districtBoundaries(GEOJSON, ['Аэропорт']);
+  assert.equal(boundaries.length, 1);
+  assert.equal(boundaries[0].district, 'Аэропорт');
+});
+
+test('a missing geojson does not break the map', () => {
+  assert.deepEqual(districtBoundaries(null), []);
+  assert.deepEqual(districtBoundaries({}), []);
+  assert.deepEqual(districtBoundaries({ features: [] }), []);
+});
+
+test('the boundary note names what is on screen', () => {
+  assert.equal(boundaryNote(['Аэропорт'], 16), 'Показана граница района: Аэропорт.');
+  assert.equal(boundaryNote(['Аэропорт', 'Сокол'], 16), 'Показаны границы районов: Аэропорт, Сокол.');
+  assert.equal(boundaryNote(['A', 'B'], 2), 'Показаны границы всех 2 районов.');
+  assert.equal(boundaryNote([], 16), 'Границы районов не показаны.');
+});
+
+test('a district account is scoped to its own district and cannot export', () => {
+  const districtUser = { role: 'district_editor', district: 'Сокол' };
+  const prefectureUser = { role: 'prefecture_admin', district: null };
+  assert.deepEqual(scopedDistricts(districtUser, '', ['Сокол', 'Аэропорт']), ['Сокол']);
+  assert.deepEqual(scopedDistricts(districtUser, 'Аэропорт', ['Сокол', 'Аэропорт']), ['Сокол']);
+  // A district account stays on its own district even when the boundary file is missing.
+  assert.deepEqual(scopedDistricts(districtUser, '', []), ['Сокол']);
+  assert.deepEqual(scopedDistricts({ role: 'district_editor', district: null }, '', ['Сокол']), []);
+  assert.deepEqual(scopedDistricts(prefectureUser, '', ['Сокол', 'Аэропорт']), ['Сокол', 'Аэропорт']);
+  assert.deepEqual(scopedDistricts(prefectureUser, 'Аэропорт', ['Сокол', 'Аэропорт']), ['Аэропорт']);
+  assert.deepEqual(scopedDistricts(null, '', ['Сокол']), ['Сокол']);
+
+  assert.equal(canExport(districtUser), false);
+  assert.equal(canExport(prefectureUser), true);
+  assert.equal(canExport(null), false);
+});
+
+/* --------------------------------------------------------------- geo check */
+
+test('the distance uses the same haversine as the service', () => {
+  const metres = haversineDistanceMeters({ latitude: 55.8, longitude: 37.5 }, { latitude: 55.8009, longitude: 37.5 });
+  assert.ok(Math.abs(metres - 100) < 1, `expected about 100 m, got ${metres}`);
+  assert.equal(haversineDistanceMeters({ latitude: 55.8, longitude: 37.5 }, { latitude: 55.8, longitude: 37.5 }), 0);
+});
+
+test('the client verdict matches the service verdict for the same fix', async () => {
+  const { assessDistanceRisk: serverAssess } = await import('../photo-service/src/geo.js');
+  const points = [{ latitude: 55.8, longitude: 37.5 }, { latitude: 55.801, longitude: 37.501 }];
+  const fixes = [
+    { latitude: 55.8, longitude: 37.5 },
+    { latitude: 55.80008, longitude: 37.5 },
+    { latitude: 55.80014, longitude: 37.5 },
+    { latitude: 55.8005, longitude: 37.5 },
+  ];
+  for (const fix of fixes) {
+    const mine = assessDistanceRisk(fix, points);
+    const theirs = serverAssess(fix, points);
+    assert.equal(mine.status, theirs.status, JSON.stringify(fix));
+    assert.ok(Math.abs(mine.distanceMeters - theirs.distanceMeters) < 0.001, JSON.stringify(fix));
+  }
+});
+
+test('a fix is classified inside the radius, inside the tolerance, or as a risk', () => {
+  const point = [{ latitude: 55.8, longitude: 37.5 }];
+  const near = assessDistanceRisk({ latitude: 55.80009, longitude: 37.5 }, point);
+  assert.equal(near.status, 'within_radius');
+  assert.equal(near.risk, false);
+  const tolerated = assessDistanceRisk({ latitude: 55.80014, longitude: 37.5 }, point);
+  assert.equal(tolerated.status, 'within_tolerance');
+  assert.equal(tolerated.risk, false);
+  const risky = assessDistanceRisk({ latitude: 55.8005, longitude: 37.5 }, point);
+  assert.equal(risky.status, 'risk');
+  assert.equal(risky.risk, true);
+  assert.equal(risky.effectiveRadiusMeters, 20);
+});
+
+test('a missing fix or missing points falls back to manual review', () => {
+  assert.equal(assessDistanceRisk(null, [{ latitude: 55.8, longitude: 37.5 }]).status, 'review');
+  assert.equal(assessDistanceRisk({ latitude: 55.8, longitude: 37.5 }, []).status, 'review');
+  assert.equal(assessDistanceRisk({ latitude: 55.8, longitude: 37.5 }, [{ latitude: 'x', longitude: null }]).status, 'review');
+});
+
+test('the GPS note states the distance and the verdict in words', () => {
+  const point = [{ latitude: 55.8, longitude: 37.5 }];
+  const close = gpsDistanceLabel({ latitude: 55.80009, longitude: 37.5 }, point);
+  assert.match(close, /^До объекта 10(,0)? м — в радиусе 15 м\.$/);
+  const far = gpsDistanceLabel({ latitude: 55.8005, longitude: 37.5 }, point);
+  assert.match(far, /^До объекта 55,6 м — риск: дальше 20 м\.$/);
+  assert.equal(gpsDistanceLabel({ latitude: 55.8, longitude: 37.5 }, []), 'Расстояние до объекта не определено: нет зарегистрированных точек.');
+});
+
+test('a multi-point object is measured against its nearest registered point', () => {
+  const points = [{ latitude: 55.8, longitude: 37.5 }, { latitude: 55.9, longitude: 37.6 }];
+  const assessment = assessDistanceRisk({ latitude: 55.9001, longitude: 37.6 }, points);
+  assert.equal(assessment.status, 'within_radius');
+  assert.ok(assessment.distanceMeters < 15);
 });

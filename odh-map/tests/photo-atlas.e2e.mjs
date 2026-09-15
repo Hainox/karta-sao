@@ -79,8 +79,28 @@ try {
 
   // A district account is scoped to its own district, so unassigned objects must not leak in.
   check('роль района не видит объекты без района', !/Без района/.test(summaryText), summaryText.replace(/\n/g, ' | '));
+  check('форма входа скрыта после входа', await page.locator('#paLoginForm').isHidden(), '');
+  check('панель очереди не показана в режиме ведомости', await page.locator('#paQueuePanel').isHidden(), '');
   const districtScoped = await page.locator('#paListCount').innerText();
   check('реестр роли района ограничен своим районом', !/из 812/.test(districtScoped), districtScoped);
+
+  /* -------------------------------------------- district: upload only, no exports */
+  check('у района нет блока выгрузок', await page.locator('#paExports').isHidden(), '');
+  check('у района нет кнопки Excel', await page.locator('#paExportXlsx').isHidden(), '');
+  check('у района нет кнопки PDF', await page.locator('#paExportPdf').isHidden(), '');
+  check('у района нет кнопки CSV', await page.locator('#paExportCsv').isHidden(), '');
+  check('на карте показана граница своего района', /Показана граница района: Аэропорт/.test(await page.locator('#paBoundaryNote').innerText()), await page.locator('#paBoundaryNote').innerText());
+
+  const districtExport = await step('district-export', () => page.evaluate(async (api) => {
+    const results = {};
+    for (const path of ['/reports/export.xlsx', '/reports/export.pdf']) {
+      const response = await fetch(`${api}${path}`, { credentials: 'include' });
+      results[path] = { status: response.status, body: (await response.text()).slice(0, 80) };
+    }
+    return results;
+  }, API));
+  check('сервер отклоняет выгрузки для района', districtExport['/reports/export.xlsx'].status === 403 && districtExport['/reports/export.pdf'].status === 403, JSON.stringify(districtExport));
+  check('сервер отвечает причиной отказа', /prefecture_role_required/.test(districtExport['/reports/export.xlsx'].body), districtExport['/reports/export.xlsx'].body);
 
   const rows = page.locator('.pa-row');
   const rowCount = await rows.count();
@@ -105,8 +125,10 @@ try {
   /* ------------------------------- upload, lost response, retry, no duplicate */
   await page.setInputFiles('#paFile', { name: 'check.jpg', mimeType: 'image/jpeg', buffer: JPEG });
   await page.click('#paGpsButton');
-  await page.waitForFunction(() => /GPS -?\d/.test(document.getElementById('paGpsNote').textContent), null, { timeout: 20000 });
+  // The distance is resolved after the fix arrives, so wait for that line.
+  await page.waitForFunction(() => /До объекта/.test(document.getElementById('paGpsNote').textContent), null, { timeout: 20000 });
   check('GPS получен и показан с точностью', /точность около 4 м/.test(await page.locator('#paGpsNote').innerText()), await page.locator('#paGpsNote').innerText());
+  check('GPS показывает расстояние до объекта и вердикт', /До объекта [\d\u00a0\s,]+ м — в радиусе 15 м\./.test(await page.locator('#paGpsNote').innerText()), await page.locator('#paGpsNote').innerText());
 
   check('отправка заблокирована, пока не указан исполнитель', await page.locator('#paSave').isDisabled(), '');
   check('интерфейс объясняет, чего не хватает', /укажите исполнителя/.test(await page.locator('#paLimitNote').innerText()), await page.locator('#paLimitNote').innerText());
@@ -152,22 +174,8 @@ try {
   }, API));
   check('в службе ровно одна фиксация после повторной отправки', stored.photos.length === 1, JSON.stringify(stored.photos.map((photo) => photo.id)));
   check('клиент приложил миниатюру для отчёта', uploadBodies[0]?.thumbnail === true, JSON.stringify(uploadBodies));
+  check('у района нет ссылки скачивания фото', (await page.locator('#paGallery .download-photo, #paGallery a.pa-btn').count()) === 0, '');
 
-  const exportCheck = await step('export-xlsx', () => page.evaluate(async (api) => {
-    const response = await fetch(`${api}/reports/export.xlsx`, { credentials: 'include' });
-    const buffer = await response.arrayBuffer();
-    const head = new Uint8Array(buffer).subarray(0, 2);
-    return { status: response.status, bytes: buffer.byteLength, zip: head[0] === 0x50 && head[1] === 0x4b };
-  }, API));
-  check('Excel-выгрузка отдаётся как рабочий xlsx', exportCheck.status === 200 && exportCheck.zip && exportCheck.bytes > 5000, JSON.stringify(exportCheck));
-
-  const pdfCheck = await step('export-pdf', () => page.evaluate(async (api) => {
-    const response = await fetch(`${api}/reports/export.pdf`, { credentials: 'include' });
-    const buffer = await response.arrayBuffer();
-    const head = new TextDecoder().decode(new Uint8Array(buffer).subarray(0, 5));
-    return { status: response.status, bytes: buffer.byteLength, pdf: head === '%PDF-' };
-  }, API));
-  check('PDF-сводка отдаётся как рабочий pdf', pdfCheck.status === 200 && pdfCheck.pdf, JSON.stringify(pdfCheck));
   await page.screenshot({ path: join(SHOTS, 'desktop-dialog.png') });
   await page.keyboard.press('Escape');
 
@@ -188,6 +196,28 @@ try {
   await phone.goto(`${STATIC}/object-maps/`, { waitUntil: 'domcontentloaded' });
   await phone.waitForSelector('.pa-dataset');
   await login(phone);
+  // Sign-in resolves before the summary and the boundary redraw finish.
+  await phone.waitForFunction(() => /%|нет данных/.test(document.getElementById('paSummary').innerText), null, { timeout: 30000 });
+
+  /* ------------------------------- mobile: карта первой, список по кнопке */
+  const mapBox = await phone.locator('#paMap').boundingBox();
+  const viewport = phone.viewportSize();
+  check('карта видна без прокрутки', mapBox !== null && mapBox.y < viewport.height && mapBox.height > 300, JSON.stringify(mapBox));
+  check('страница не выше экрана', await phone.evaluate(() => document.documentElement.scrollHeight <= window.innerHeight + 2), await phone.evaluate(() => `${document.documentElement.scrollHeight} vs ${window.innerHeight}`));
+  check('список скрыт и не мешает карте', await phone.locator('#paSide').isHidden(), '');
+  check('кнопка вызова списка видна', await phone.locator('#paPanelToggle').isVisible(), '');
+  check('на карте видна граница района', /Показана граница района/.test(await phone.locator('#paBoundaryNote').innerText()), await phone.locator('#paBoundaryNote').innerText());
+
+  await phone.click('#paPanelToggle');
+  await phone.waitForFunction(() => document.getElementById('paSide').dataset.open === 'true');
+  check('кнопка открывает список поверх карты', await phone.locator('#paSide').isVisible(), '');
+  check('в списке есть поиск и фильтры', await phone.locator('#paSearch').isVisible() && await phone.locator('#paStatusFilter').isVisible(), '');
+  check('у района в списке нет выгрузок', await phone.locator('#paExports').isHidden(), '');
+  await phone.click('#paPanelClose');
+  await phone.waitForFunction(() => document.getElementById('paSide').dataset.open === 'false');
+  check('кнопка закрывает список', await phone.locator('#paSide').isHidden(), '');
+  check('карта снова доступна после закрытия списка', await phone.locator('#paPanelToggle').isVisible(), '');
+
   await phone.click('#paQueueTab');
   await phone.waitForSelector('#paQueuePanel:not([hidden])');
   await phone.waitForFunction(() => document.querySelectorAll('#paQueueCard .pa-queue-title').length > 0, null, { timeout: 30000 });
@@ -245,6 +275,29 @@ try {
   await admin.waitForFunction(() => /Всего объектов\n952/.test(document.getElementById('paSummary').innerText), null, { timeout: 30000 });
   check('выбор района пересчитывает сводку', /Всего объектов\n952/.test(await admin.locator('#paSummary').innerText()), '');
   check('по умолчанию фильтр не приписывает объекты району', await admin.locator('#paDistrictFilter').inputValue() === 'Аэропорт', '');
+  check('у префектуры показана граница выбранного района', /Показана граница района: Аэропорт/.test(await admin.locator('#paBoundaryNote').innerText()), await admin.locator('#paBoundaryNote').innerText());
+
+  /* ------------------------------------------------ prefecture: exports work */
+  await admin.selectOption('#paDistrictFilter', '');
+  await admin.waitForFunction(() => /Всего объектов\n11\s?268/.test(document.getElementById('paSummary').innerText), null, { timeout: 30000 });
+  check('у префектуры есть блок выгрузок', await admin.locator('#paExports').isVisible(), '');
+  check('префектура видит все границы районов', /Показаны границы всех 16 районов/.test(await admin.locator('#paBoundaryNote').innerText()), await admin.locator('#paBoundaryNote').innerText());
+
+  const exportCheck = await step('export-xlsx', () => admin.evaluate(async (api) => {
+    const response = await fetch(`${api}/reports/export.xlsx`, { credentials: 'include' });
+    const buffer = await response.arrayBuffer();
+    const head = new Uint8Array(buffer).subarray(0, 2);
+    return { status: response.status, bytes: buffer.byteLength, zip: head[0] === 0x50 && head[1] === 0x4b };
+  }, API));
+  check('Excel-выгрузка отдаётся префектуре как рабочий xlsx', exportCheck.status === 200 && exportCheck.zip && exportCheck.bytes > 5000, JSON.stringify(exportCheck));
+
+  const pdfCheck = await step('export-pdf', () => admin.evaluate(async (api) => {
+    const response = await fetch(`${api}/reports/export.pdf`, { credentials: 'include' });
+    const buffer = await response.arrayBuffer();
+    const head = new TextDecoder().decode(new Uint8Array(buffer).subarray(0, 5));
+    return { status: response.status, bytes: buffer.byteLength, pdf: head === '%PDF-' };
+  }, API));
+  check('PDF-сводка отдаётся префектуре как рабочий pdf', pdfCheck.status === 200 && pdfCheck.pdf, JSON.stringify(pdfCheck));
 
   await desktop.close();
   await mobile.close();

@@ -99,6 +99,13 @@ function clientKey(request) {
   return request.socket.remoteAddress || 'unknown';
 }
 
+// District accounts only upload photos: exports, review and delete stay with the prefecture.
+function requirePrefecture(response, request, user) {
+  if (user.role === 'prefecture_admin') return true;
+  sendError(response, request, 403, 'prefecture_role_required');
+  return false;
+}
+
 function validCoordinateFields(fields) {
   const values = ['gpsLat', 'gpsLon', 'gpsAccuracyM'].map((key) => fields[key]);
   if (values.every((value) => value === undefined || value === '')) return null;
@@ -194,7 +201,7 @@ async function handleUpload(request, response, user) {
 }
 
 async function handleReview(request, response, user, photoId) {
-  if (user.role !== 'prefecture_admin') return sendError(response, request, 403, 'prefecture_role_required');
+  if (!requirePrefecture(response, request, user)) return;
   let body;
   try { body = await readJson(request); } catch (error) { return sendError(response, request, 400, error.code); }
   if (!['confirmed', 'rejected'].includes(body.status)) return sendError(response, request, 400, 'invalid_review_status');
@@ -205,7 +212,7 @@ async function handleReview(request, response, user, photoId) {
 }
 
 async function handleDelete(request, response, user, photoId) {
-  if (user.role !== 'prefecture_admin') return sendError(response, request, 403, 'prefecture_role_required');
+  if (!requirePrefecture(response, request, user)) return;
   const result = await pool.query('SELECT id, object_key, storage_key, thumbnail_key, is_reference FROM photos WHERE id = $1', [photoId]);
   if (!result.rowCount) return sendError(response, request, 404, 'photo_not_found');
   if (result.rows[0].is_reference) return sendError(response, request, 409, 'reference_photo_cannot_be_deleted');
@@ -278,6 +285,7 @@ async function handler(request, response) {
       return sendJson(response, 200, reportPayload(rows), request);
     }
     if (pathname === '/reports/export.xlsx' && request.method === 'GET') {
+      if (!requirePrefecture(response, request, user)) return;
       const url = new URL(request.url, 'http://photo-service.local');
       const rows = await loadReportRows(pool, user, url.searchParams.get('district') || undefined);
       const buffer = await buildExcel(rows);
@@ -286,6 +294,7 @@ async function handler(request, response) {
       return;
     }
     if (pathname === '/reports/export.pdf' && request.method === 'GET') {
+      if (!requirePrefecture(response, request, user)) return;
       const url = new URL(request.url, 'http://photo-service.local');
       const rows = await loadReportRows(pool, user, url.searchParams.get('district') || undefined);
       const buffer = await buildPdf(rows);

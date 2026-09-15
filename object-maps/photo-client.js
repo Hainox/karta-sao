@@ -1,7 +1,8 @@
 import {
-  bandNote, bandText, buildCoverageIndex, buildQueue, completionLabel, coverageFor, filterRecords,
-  formatCoordinates, formatMeters, geoStatusText, groupLabel, groupValues, photoDetailRows,
-  photoRequirement, reportSummaryRows, statusText,
+  assessDistanceRisk, bandNote, bandText, boundaryNote, buildCoverageIndex, buildQueue, canExport,
+  completionLabel, coverageFor, districtBoundaries, filterRecords, formatCoordinates, formatMeters,
+  geoStatusText, gpsDistanceLabel, groupLabel, groupValues, photoDetailRows, photoRequirement,
+  reportSummaryRows, scopedDistricts, statusText,
 } from './photo-model.js';
 
 const API_FALLBACK = 'https://obhod-sao.ru/photo-api';
@@ -35,10 +36,14 @@ const state = {
   objectUrls: [],
   map: null,
   pointLayer: null,
+  boundaryLayer: null,
+  boundarySignature: '',
+  districts: null,
   mapReady: false,
   indexById: new Map(),
   lastFocused: null,
   dataCache: new Map(),
+  referencePoints: new Map(),
 };
 
 const element = (id) => document.getElementById(id);
@@ -174,6 +179,17 @@ async function loadManifest() {
   state.manifest = await response.json();
 }
 
+// District polygons come from the atlas file next to object-maps/.
+async function loadDistrictBoundaries() {
+  try {
+    const response = await fetch('../districts.geojson', { cache: 'force-cache' });
+    if (!response.ok) return null;
+    return await response.json();
+  } catch {
+    return null;
+  }
+}
+
 async function loadDataset(entry) {
   const response = await fetch(`data/${entry.file}`, { cache: 'force-cache' });
   if (!response.ok) throw new Error(`Не удалось загрузить набор «${entry.title}».`);
@@ -236,7 +252,7 @@ async function refreshCoverage() {
     renderAll();
     return;
   }
-  const district = state.user.role === 'district_editor' ? '' : element('paDistrictFilter').value;
+  const district = requestedDistrict();
   const query = district ? `?district=${encodeURIComponent(district)}` : '';
   try {
     state.summary = await apiJson(`/reports/summary${query}`);
@@ -268,6 +284,7 @@ function renderAll() {
   renderSummary();
   renderList();
   renderMapObjects();
+  renderBoundaries();
   renderQueue();
 }
 
@@ -320,18 +337,11 @@ function renderSummary() {
   }
 }
 
-// A district account is scoped server side, so its own district is applied to the
-// local dataset too; otherwise the map and the register would show other districts.
-function scopedDistrict() {
-  if (state.user?.role === 'district_editor') return state.user.district || '';
-  return element('paDistrictFilter').value;
-}
-
 function currentRecords() {
   return filterRecords(state.dataset?.records || [], {
     query: element('paSearch').value,
     group: element('paGroupFilter').value,
-    district: scopedDistrict(),
+    district: scopeDistrict(),
     status: element('paStatusFilter').value,
     coverageIndex: state.coverage,
     objectType: state.entry.objectType,
@@ -403,6 +413,69 @@ function renderLegend() {
 
 /* --------------------------------------------------------------------- map */
 
+function allDistrictNames() {
+  return (state.districts?.features || []).map((feature) => feature.properties.district).filter(Boolean);
+}
+
+// The district the register and the map are scoped to: a district account is always
+// pinned to its own district, the prefecture follows its filter.
+function scopeDistrict() {
+  if (state.user?.role === 'district_editor') return state.user.district || '';
+  return element('paDistrictFilter').value;
+}
+
+// What the client asks the server for. A district account is scoped server side, so it
+// sends no district at all and cannot widen its own scope.
+function requestedDistrict() {
+  return state.user?.role === 'district_editor' ? '' : element('paDistrictFilter').value;
+}
+
+function drawnDistricts() {
+  return scopedDistricts(state.user, element('paDistrictFilter').value, allDistrictNames());
+}
+
+/**
+ * Draw the boundary of the district in scope. A district account only ever sees its
+ * own polygon, so the map itself cannot reveal neighbouring districts.
+ */
+function renderBoundaries({ fit = false } = {}) {
+  const note = element('paBoundaryNote');
+  const wanted = drawnDistricts();
+  note.textContent = boundaryNote(wanted, allDistrictNames().length);
+  if (!state.map || !state.districts) return;
+
+  const signature = wanted.join('|');
+  if (signature !== state.boundarySignature) {
+    state.boundarySignature = signature;
+    if (state.boundaryLayer) { state.map.geoObjects.remove(state.boundaryLayer); state.boundaryLayer = null; }
+    const boundaries = districtBoundaries(state.districts, wanted);
+    if (boundaries.length) {
+      const collection = new ymaps.GeoObjectCollection();
+      for (const boundary of boundaries) {
+        collection.add(new ymaps.GeoObject({
+          geometry: { type: 'Polygon', coordinates: boundary.rings },
+          properties: { hintContent: boundary.district },
+        }, {
+          fillColor: 'rgba(12, 107, 83, 0.04)',
+          strokeColor: '#0c6b53',
+          strokeWidth: 2,
+          strokeStyle: 'solid',
+          // Silent so the outline never swallows a click meant for a marker.
+          interactivityModel: 'default#silent',
+        }));
+      }
+      state.boundaryLayer = collection;
+      state.map.geoObjects.add(collection);
+    }
+    fit = true;
+  }
+
+  if (fit && state.boundaryLayer) {
+    const bounds = state.boundaryLayer.getBounds();
+    if (bounds) state.map.setBounds(bounds, { checkZoomRange: true, zoomMargin: 24 });
+  }
+}
+
 function buildMap() {
   renderLegend();
   const status = element('paMapStatus');
@@ -433,6 +506,7 @@ function buildMap() {
   state.pointLayer.removeAll();
   state.pointLayer.add({ type: 'FeatureCollection', features });
   renderMapObjects();
+  renderBoundaries({ fit: true });
 }
 
 function renderMapObjects() {
@@ -523,6 +597,7 @@ function updateUploadButton() {
 async function openRecord(record, trigger) {
   state.selected = record;
   state.lastFocused = trigger || document.activeElement;
+  setPanelOpen(false);
   const coverage = coverageFor(state.coverage, record, state.entry.objectType);
   element('paDialogTitle').textContent = record.label;
   element('paDialogSubtitle').textContent = `${record.group || '—'} · ${record.id}`;
@@ -572,6 +647,7 @@ async function renderGallery(record) {
   const gallery = element('paGallery');
   gallery.replaceChildren();
   releaseObjectUrls();
+  const storedDownloads = new Map();
   if (!state.user) {
     gallery.textContent = 'Войдите, чтобы увидеть фотографии объекта.';
     return;
@@ -607,10 +683,14 @@ async function renderGallery(record) {
 
     const actions = document.createElement('div');
     actions.className = 'pa-photo-actions';
-    const download = document.createElement('a');
-    download.className = 'pa-btn';
-    download.textContent = 'Скачать фото';
-    actions.appendChild(download);
+    // Downloading a photo file is an export, so only the prefecture gets the link.
+    if (canExport(state.user)) {
+      const download = document.createElement('a');
+      download.className = 'pa-btn';
+      download.textContent = 'Скачать фото';
+      actions.appendChild(download);
+      storedDownloads.set(raw.id, download);
+    }
     const reference = document.createElement('label');
     reference.className = 'pa-reference';
     const referenceBox = document.createElement('input');
@@ -636,8 +716,11 @@ async function renderGallery(record) {
 
     loadPhotoUrl(raw.id).then((url) => {
       image.src = url;
-      download.href = url;
-      download.download = raw.original_filename || raw.originalFilename || 'photo.jpg';
+      const download = storedDownloads.get(raw.id);
+      if (download) {
+        download.href = url;
+        download.download = raw.original_filename || raw.originalFilename || 'photo.jpg';
+      }
     }).catch(() => {
       image.alt = 'Файл фотографии недоступен';
       image.style.background = '#f1f3ef';
@@ -763,24 +846,54 @@ function pickFile(event, options) {
   updateUploadButton();
 }
 
-function requestGps(noteId, onDone) {
+// A reportable object can own several registered points (a PP groups coordinate rows),
+// so the distance must be measured to the nearest one exactly like the service does.
+async function referencePointsFor(record) {
+  if (state.referencePoints.has(record.id)) return state.referencePoints.get(record.id);
+  let points = [{ latitude: Number(record.lat), longitude: Number(record.lon) }];
+  try {
+    const body = await apiJson(`/objects/resolve?datasetId=${encodeURIComponent(state.entry.datasetId)}&sourceId=${encodeURIComponent(record.id)}`);
+    for (const object of body.objects || []) {
+      const resolved = (object.reference_points || [])
+        .map((point) => ({ latitude: Number(point.latitude), longitude: Number(point.longitude) }))
+        .filter((point) => Number.isFinite(point.latitude) && Number.isFinite(point.longitude));
+      if (resolved.length) points = resolved;
+    }
+  } catch {
+    // Anonymous or offline: the map point of this row is still a fair estimate.
+  }
+  state.referencePoints.set(record.id, points);
+  return points;
+}
+
+function requestGps(noteId, record) {
   const note = element(noteId);
   if (!navigator.geolocation) {
     note.textContent = 'Этот браузер не умеет определять координаты.';
     return;
   }
   note.textContent = 'Определяем координаты…';
-  navigator.geolocation.getCurrentPosition((position) => {
+  navigator.geolocation.getCurrentPosition(async (position) => {
     state.gps = {
       lat: position.coords.latitude,
       lon: position.coords.longitude,
       accuracy: position.coords.accuracy,
       capturedAt: new Date().toISOString(),
     };
-    note.textContent = `GPS ${formatCoordinates(state.gps.lat, state.gps.lon)} · точность около ${Math.round(state.gps.accuracy)} м`
-      + (state.gps.accuracy > 5 ? ' · точность хуже 5 м, фиксация уйдёт на ручную проверку.' : '');
+    const accuracyNote = state.gps.accuracy > 5
+      ? ' · точность хуже 5 м, фиксация уйдёт на ручную проверку'
+      : '';
+    note.textContent = `GPS ${formatCoordinates(state.gps.lat, state.gps.lon)} · точность около ${Math.round(state.gps.accuracy)} м${accuracyNote}.`;
+    const target = record || state.selected;
+    if (target && state.entry) {
+      const points = await referencePointsFor(target);
+      const distance = gpsDistanceLabel({ latitude: state.gps.lat, longitude: state.gps.lon }, points);
+      note.textContent += ` ${distance}`;
+      if (assessDistanceRisk({ latitude: state.gps.lat, longitude: state.gps.lon }, points).risk) {
+        note.textContent += ' Фиксация всё равно отправится, но будет помечена как риск.';
+      }
+    }
     updateUploadButton();
-    onDone?.();
   }, (error) => {
     state.gps = null;
     note.textContent = `GPS не получен: ${error.message || 'разрешение не выдано'}. Без координат отправка запрещена.`;
@@ -917,13 +1030,16 @@ function renderQueue() {
 /* ----------------------------------------------------------------- exports */
 
 function renderExports() {
-  const disabled = !state.user;
-  element('paExportXlsx').disabled = disabled;
-  element('paExportPdf').disabled = disabled;
+  // Exports are a prefecture tool: a district account only uploads photos.
+  element('paExports').hidden = !canExport(state.user);
 }
 
 async function downloadReport(kind) {
-  const district = state.user?.role === 'district_editor' ? '' : element('paDistrictFilter').value;
+  if (!canExport(state.user)) {
+    showToast('Выгрузки доступны только префектуре.', 'error');
+    return;
+  }
+  const district = requestedDistrict();
   const query = district ? `?district=${encodeURIComponent(district)}` : '';
   const path = kind === 'xlsx' ? `/reports/export.xlsx${query}` : `/reports/export.pdf${query}`;
   try {
@@ -946,6 +1062,10 @@ async function downloadReport(kind) {
 }
 
 function downloadCsv() {
+  if (!canExport(state.user)) {
+    showToast('Выгрузки доступны только префектуре.', 'error');
+    return;
+  }
   const byId = new Map(state.dataset.records.map((record) => [record.id, record]));
   const escape = (value) => `"${String(value == null ? '' : value).replace(/\r\n|\r|\n/g, ' ').replace(/"/g, '""')}"`;
   const lines = state.dataset.exportGroups.map((ids) => {
@@ -978,8 +1098,17 @@ function downloadCsv() {
 
 /* ---------------------------------------------------------------- scenarios */
 
+// On narrow screens the register is a drawer over the map, so the map stays the
+// working contour and never sits below a long list.
+function setPanelOpen(open) {
+  element('paSide').dataset.open = open ? 'true' : 'false';
+  element('paPanelBackdrop').dataset.open = open ? 'true' : 'false';
+  element('paPanelToggle').setAttribute('aria-expanded', String(open));
+}
+
 function setScenario(name) {
   state.scenario = name;
+  setPanelOpen(false);
   try { sessionStorage.setItem(SCENARIO_KEY, name); } catch { /* ignore */ }
   const queue = name === 'queue';
   element('paQueuePanel').hidden = !queue;
@@ -1022,7 +1151,11 @@ function shell() {
 
   <main class="pa-main">
     <section class="pa-register" id="paRegisterPanel" role="tabpanel" aria-labelledby="paRegisterTab">
-      <aside class="pa-side" aria-label="Сводка, фильтры и список объектов">
+      <aside class="pa-side" id="paSide" aria-label="Сводка, фильтры и список объектов">
+        <div class="pa-side-head">
+          <strong>Список и фильтры</strong>
+          <button type="button" class="pa-btn pa-panel-close" id="paPanelClose">Закрыть</button>
+        </div>
         <div class="pa-summary" id="paSummary"></div>
         <div class="pa-filters">
           <div>
@@ -1050,7 +1183,7 @@ function shell() {
             </select>
           </div>
         </div>
-        <div class="pa-exports">
+        <div class="pa-exports" id="paExports" hidden>
           <button type="button" class="pa-btn" id="paExportXlsx">Excel: полный реестр</button>
           <button type="button" class="pa-btn" id="paExportPdf">PDF: краткая сводка</button>
           <button type="button" class="pa-btn" id="paExportCsv">CSV для Яндекса</button>
@@ -1061,9 +1194,13 @@ function shell() {
       <section class="pa-map-panel" aria-label="Интерактивная карта">
         <div id="paMap" role="application" aria-label="Карта объектов"></div>
         <p class="pa-map-status" id="paMapStatus">Загрузка карты…</p>
+        <p class="pa-boundary" id="paBoundaryNote">Границы районов не показаны.</p>
         <p class="pa-legend" id="paLegend"></p>
+        <button type="button" class="pa-btn pa-panel-toggle" id="paPanelToggle" aria-expanded="false" aria-controls="paSide">Список и фильтры</button>
       </section>
     </section>
+
+    <div class="pa-panel-backdrop" id="paPanelBackdrop" data-open="false"></div>
 
     <section class="pa-queue" id="paQueuePanel" role="tabpanel" aria-labelledby="paQueueTab" hidden>
       <div class="pa-queue-head">
@@ -1127,6 +1264,12 @@ function bindEvents() {
   element('paLogoutButton').addEventListener('click', submitLogout);
   element('paRegisterTab').addEventListener('click', () => setScenario('register'));
   element('paQueueTab').addEventListener('click', () => setScenario('queue'));
+  element('paPanelToggle').addEventListener('click', () => setPanelOpen(true));
+  element('paPanelClose').addEventListener('click', () => setPanelOpen(false));
+  element('paPanelBackdrop').addEventListener('click', () => setPanelOpen(false));
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && element('paSide').dataset.open === 'true') setPanelOpen(false);
+  });
   element('paSearch').addEventListener('input', debounce(() => { invalidateQueue(); renderList(); renderMapObjects(); renderQueue(); }, 220));
   element('paGroupFilter').addEventListener('change', () => { invalidateQueue(); renderList(); renderMapObjects(); renderQueue(); });
   element('paStatusFilter').addEventListener('change', () => { invalidateQueue(); renderList(); renderMapObjects(); renderQueue(); });
@@ -1143,7 +1286,7 @@ function bindEvents() {
     if (event.target === element('paDialog')) closeRecord();
   });
   element('paFile').addEventListener('change', (event) => pickFile(event, { previewId: 'paPreview', stateId: null }));
-  element('paGpsButton').addEventListener('click', () => requestGps('paGpsNote'));
+  element('paGpsButton').addEventListener('click', () => requestGps('paGpsNote', state.selected));
   element('paUploadForm').addEventListener('submit', async (event) => {
     event.preventDefault();
     if (!state.selected) return;
@@ -1153,7 +1296,7 @@ function bindEvents() {
   });
   element('paPerformer').addEventListener('change', (event) => writePerformer(event.target.value.trim()));
   element('paQueueFile').addEventListener('change', (event) => pickFile(event, { previewId: 'paPreview', stateId: 'paQueueGpsNote' }));
-  element('paQueueGps').addEventListener('click', () => requestGps('paQueueGpsNote'));
+  element('paQueueGps').addEventListener('click', () => requestGps('paQueueGpsNote', queueRecord()));
   element('paPerformer').addEventListener('input', updateUploadButton);
   element('paQueuePerformer').addEventListener('input', updateUploadButton);
   element('paQueuePerformer').addEventListener('change', (event) => writePerformer(event.target.value.trim()));
@@ -1195,6 +1338,7 @@ export async function startPhotoApp(options = {}) {
     element('paListCount').textContent = 'Набор данных недоступен.';
     return;
   }
+  state.districts = await loadDistrictBoundaries();
   const params = new URLSearchParams(location.search);
   let scenario = options.scenario || params.get('scenario');
   if (!scenario) { try { scenario = sessionStorage.getItem(SCENARIO_KEY); } catch { scenario = null; } }

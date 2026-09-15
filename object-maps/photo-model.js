@@ -269,3 +269,94 @@ export function completionLabel(payload) {
 export function groupLabel(dataset) {
   return dataset.groupLabel || 'Группа';
 }
+
+/**
+ * Convert the district polygons for the map.
+ *
+ * GeoJSON stores [longitude, latitude] while Yandex Maps expects [latitude, longitude],
+ * so the swap happens here and the drawing code stays trivial and testable.
+ */
+export function districtBoundaries(geojson, districts) {
+  if (!geojson || !Array.isArray(geojson.features)) return [];
+  const wanted = Array.isArray(districts) && districts.length ? new Set(districts) : null;
+  return geojson.features
+    .filter((feature) => feature?.geometry?.type === 'Polygon' && feature?.properties?.district)
+    .filter((feature) => !wanted || wanted.has(feature.properties.district))
+    .map((feature) => ({
+      district: feature.properties.district,
+      rings: feature.geometry.coordinates.map((ring) => ring.map(([longitude, latitude]) => [latitude, longitude])),
+    }));
+}
+
+export function boundaryNote(districts, totalDistricts) {
+  if (!districts || districts.length === 0) return 'Границы районов не показаны.';
+  if (districts.length === 1) return `Показана граница района: ${districts[0]}.`;
+  if (districts.length === totalDistricts) return `Показаны границы всех ${totalDistricts} районов.`;
+  return `Показаны границы районов: ${districts.join(', ')}.`;
+}
+
+// A district account may only work with its own district.
+export function scopedDistricts(user, selectedDistrict, allDistricts) {
+  if (user?.role === 'district_editor') return user.district ? [user.district] : [];
+  if (selectedDistrict) return [selectedDistrict];
+  return allDistricts;
+}
+
+export function canExport(user) {
+  return user?.role === 'prefecture_admin';
+}
+
+/* --------------------------------------------------------------- geo check */
+
+const EARTH_RADIUS_METERS = 6_371_008.8;
+export const NOMINAL_RADIUS_METERS = 15;
+export const GPS_TOLERANCE_METERS = 5;
+
+export function haversineDistanceMeters(first, second) {
+  const toRadians = (degrees) => degrees * Math.PI / 180;
+  const latitudeDelta = toRadians(second.latitude - first.latitude);
+  const longitudeDelta = toRadians(second.longitude - first.longitude);
+  const firstLatitude = toRadians(first.latitude);
+  const secondLatitude = toRadians(second.latitude);
+  const haversine = Math.sin(latitudeDelta / 2) ** 2
+    + Math.cos(firstLatitude) * Math.cos(secondLatitude) * Math.sin(longitudeDelta / 2) ** 2;
+  return EARTH_RADIUS_METERS * 2 * Math.atan2(Math.sqrt(haversine), Math.sqrt(1 - haversine));
+}
+
+/**
+ * The same verdict the service computes on upload, so the distance shown before
+ * sending matches the geo status stored afterwards. Only the nearest registered
+ * point is used; this is an approximation and not polygon containment.
+ */
+export function assessDistanceRisk(position, referencePoints, radiusMeters = NOMINAL_RADIUS_METERS, toleranceMeters = GPS_TOLERANCE_METERS) {
+  if (position === null || position === undefined) return { status: 'review', reason: 'missing_gps' };
+  if (!Array.isArray(referencePoints) || referencePoints.length === 0) return { status: 'review', reason: 'missing_reference_points' };
+
+  let nearestDistance = Number.POSITIVE_INFINITY;
+  for (const referencePoint of referencePoints) {
+    if (!Number.isFinite(referencePoint?.latitude) || !Number.isFinite(referencePoint?.longitude)) continue;
+    const distance = haversineDistanceMeters(position, referencePoint);
+    if (distance < nearestDistance) nearestDistance = distance;
+  }
+  if (!Number.isFinite(nearestDistance)) return { status: 'review', reason: 'missing_reference_points' };
+
+  const effectiveRadiusMeters = radiusMeters + toleranceMeters;
+  const risk = nearestDistance > effectiveRadiusMeters;
+  return {
+    status: nearestDistance <= radiusMeters ? 'within_radius' : (risk ? 'risk' : 'within_tolerance'),
+    risk,
+    distanceMeters: nearestDistance,
+    radiusMeters,
+    toleranceMeters,
+    effectiveRadiusMeters,
+  };
+}
+
+// Shown next to the GPS fix so a worker sees the distance before pressing send.
+export function gpsDistanceLabel(position, referencePoints) {
+  const assessment = assessDistanceRisk(position, referencePoints);
+  if (!Number.isFinite(assessment.distanceMeters)) {
+    return 'Расстояние до объекта не определено: нет зарегистрированных точек.';
+  }
+  return `До объекта ${formatMeters(assessment.distanceMeters)} — ${geoStatusText(assessment.status).toLowerCase()}.`;
+}
