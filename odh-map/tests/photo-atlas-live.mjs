@@ -44,11 +44,23 @@ try {
   check('реестр объектов заполнен', /Показано/.test(listCount), listCount);
   check('роль района ограничена своим районом', !/из 812/.test(listCount), listCount);
 
+  /* ---------------------- district: только загрузка, без выгрузок */
+  check('у района нет блока выгрузок', await page.locator('#paExports').isHidden(), '');
+  check('форма входа скрыта после входа', await page.locator('#paLoginForm').isHidden(), '');
+  check('на карте показана граница района', /Показана граница района:/.test(await page.locator('#paBoundaryNote').innerText()), await page.locator('#paBoundaryNote').innerText());
+
+  const districtExport = await page.evaluate(async (api) => {
+    const response = await fetch(`${api}/reports/export.xlsx`, { credentials: 'include' });
+    return { status: response.status, body: (await response.text()).slice(0, 60) };
+  }, API);
+  check('сервер отклоняет выгрузку для района', districtExport.status === 403 && /prefecture_role_required/.test(districtExport.body), JSON.stringify(districtExport));
+
   await page.locator('.pa-row').first().click();
   await page.waitForSelector('#paDialog[open]');
   await page.waitForFunction(() => document.getElementById('paGallery').textContent.trim().length > 0, null, { timeout: 30000 });
   check('карточка объекта открывается', (await page.locator('#paDialogData').innerText()).length > 20);
   check('галерея пустого объекта без ошибки', /нет фотографий/.test(await page.locator('#paGallery').innerText()), await page.locator('#paGallery').innerText());
+  check('у района нет ссылки скачивания фото', (await page.locator('#paGallery a.pa-btn').count()) === 0, '');
   await page.keyboard.press('Escape');
   check('Esc закрывает карточку', await page.locator('#paDialog').evaluate((node) => !node.open));
 
@@ -65,6 +77,28 @@ try {
   check('нет ошибок страницы', relevantErrors.length === 0, relevantErrors.join(' | '));
 
   await context.close();
+
+  /* ------------------------------------------------------- prefecture */
+  if (process.env.PHOTO_PREFECTURE_LOGIN && process.env.PHOTO_PREFECTURE_PASSWORD) {
+    const adminContext = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+    const admin = await adminContext.newPage();
+    const adminErrors = [];
+    admin.on('pageerror', (error) => adminErrors.push(String(error)));
+    admin.goto(`${STATIC}/object-maps/`, { waitUntil: 'domcontentloaded' }).catch(() => {});
+    await admin.waitForSelector('.pa-dataset');
+    await admin.fill('#paLoginInput', process.env.PHOTO_PREFECTURE_LOGIN);
+    await admin.fill('#paPasswordInput', process.env.PHOTO_PREFECTURE_PASSWORD);
+    await admin.click('#paLoginButton');
+    await admin.waitForFunction(() => /%|нет данных/.test(document.getElementById('paSummary').innerText), null, { timeout: 60000 });
+    check('вход префектуры на живом домене', true, await admin.locator('#paSessionState').innerText());
+    check('у префектуры есть блок выгрузок', await admin.locator('#paExports').isVisible(), '');
+    check('префектура видит все границы районов', /Показаны границы всех 16 районов/.test(await admin.locator('#paBoundaryNote').innerText()), await admin.locator('#paBoundaryNote').innerText());
+    const adminSummary = await admin.locator('#paSummary').innerText();
+    check('префектура видит нераспределённые объекты', /Без района: 7 объектов/.test(adminSummary), '');
+    check('в консоли префектуры нет ошибок страницы', adminErrors.length === 0, adminErrors.join(' | '));
+    await adminContext.close();
+  }
+
   const failed = results.filter((entry) => !entry.ok);
   console.log(`\nlive checks: ${results.length}, failed: ${failed.length}`);
   if (failed.length) process.exitCode = 1;
