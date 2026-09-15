@@ -9,7 +9,7 @@ API принимает GeoJSON районов, хранит их в PostgreSQL, 
 3. Запустите `npm start`. Миграция создаст таблицы автоматически.
 4. Создайте учётные записи через `npm run create-user -- --email editor@example.org --role district_editor --district Аэропорт`. Скрипт дважды запросит пароль в скрытом режиме; он не передаётся через историю команд или список процессов.
 
-Роли: `district_editor` отправляет только закреплённый район; `reviewer` принимает или отклоняет наборы; `prefecture_admin` также выгружает сводку и единолично управляет фото-метками.
+Роли: `district_editor` отправляет только закреплённый район и видит статус своих наборов; `prefecture_admin` принимает или отклоняет наборы, выгружает сводку и единолично управляет фото-метками. Отдельной роли приёмки нет — всё это делает префектура.
 
 ## Районные ссылки
 
@@ -19,7 +19,8 @@ API принимает GeoJSON районов, хранит их в PostgreSQL, 
 
 - `POST /api/auth/login`
 - `POST /api/submissions`
-- `GET /api/submissions?status=submitted`
+- `GET /api/submissions?status=submitted` — только префектура
+- `GET /api/my-submissions` — статус своих наборов, только для учётной записи района
 - `PATCH /api/submissions/:id` с `approved` или `rejected`
 - `GET /api/exports/review-archive.zip` — ZIP ожидающих наборов, разложенный по районам, с `manifest.json`
 - `GET /api/exports/approved.geojson`
