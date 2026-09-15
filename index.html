@@ -80,6 +80,8 @@
     .brand strong { display:block; font-size:15px; line-height:1.1; }
     .brand small { display:block; margin-top:3px; color:var(--muted); font-size:10px; letter-spacing:.08em; text-transform:uppercase; }
     .topbar-meta { display:flex; align-items:center; gap:8px; color:#5a6a73; font-size:11px; }
+    .atlas-link { color:var(--accent); font-size:12px; font-weight:700; text-decoration:none; }
+    .atlas-link:hover { text-decoration:underline; }
     .live-dot, .status-dot { display:inline-block; width:7px; height:7px; border-radius:50%; background:#27a875; box-shadow:0 0 0 4px rgba(39,168,117,.13); }
     .workspace { position:relative; display:grid; grid-template-columns:350px minmax(0,1fr); flex:1; min-height:0; }
     .sidebar { z-index:4; max-height:calc(100vh - 62px); overflow:auto; padding:22px 18px 26px; background:var(--panel); border-right:1px solid rgba(16,38,54,.12); box-shadow:var(--shadow); }
@@ -172,7 +174,7 @@
   <div class="app">
     <header class="topbar">
       <div class="brand"><span class="brand-mark" aria-label="Герб САО"><img src="sao-coa.png" alt="Герб Северного административного округа Москвы"></span><span><strong>Городской атлас САО</strong><small>Районы · участки · объекты</small></span></div>
-      <div class="topbar-meta"><span class="live-dot"></span><span>Данные доступны онлайн</span></div>
+      <div class="topbar-meta"><a class="atlas-link" href="hub/">← Городской атлас САО</a><span class="live-dot"></span><span>Данные доступны онлайн</span></div>
     </header>
     <main class="workspace">
       <aside class="sidebar">
