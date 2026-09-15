@@ -61,20 +61,29 @@ export function parseCookies(header) {
   return cookies;
 }
 
-export function sessionCookie(token, { secure = true, path = '/photo-api' } = {}) {
-  const attributes = [
-    `photo_session=${encodeURIComponent(token)}`,
-    `Path=${path || '/'}`,
-    'HttpOnly',
-    'SameSite=Lax',
-    `Max-Age=${MAX_SESSION_AGE_SECONDS}`,
-  ];
-  if (secure) attributes.push('Secure');
+// Browsers silently drop a SameSite=None cookie without Secure, so the two attributes travel together.
+function cookieScope({ path = '/photo-api', secure = true, sameSite = 'Lax' } = {}) {
+  const attributes = [`Path=${path || '/'}`, 'HttpOnly', `SameSite=${sameSite}`];
+  if (secure || sameSite === 'None') attributes.push('Secure');
+  return attributes;
+}
+
+export function sessionCookie(token, options = {}) {
+  const attributes = [`photo_session=${encodeURIComponent(token)}`, ...cookieScope(options)];
+  attributes.push(`Max-Age=${MAX_SESSION_AGE_SECONDS}`);
   return attributes.join('; ');
 }
 
-export function expiredSessionCookie(path = '/photo-api') {
-  return `photo_session=; Path=${path || '/'}; HttpOnly; SameSite=Lax; Max-Age=0`;
+export function expiredSessionCookie(options = {}) {
+  return ['photo_session=', ...cookieScope(options), 'Max-Age=0'].join('; ');
+}
+
+// Fallback for browsers that block third-party cookies: the atlas is served from a
+// different origin than the photo service, so the session can also arrive as a bearer token.
+export function bearerToken(header) {
+  if (typeof header !== 'string') return '';
+  const match = /^Bearer[ ]+([A-Za-z0-9._~+/=-]+)$/i.exec(header.trim());
+  return match ? match[1] : '';
 }
 
 export { MAX_SESSION_AGE_SECONDS };

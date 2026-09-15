@@ -20,6 +20,16 @@ docker compose -p sao-photo-service run --rm photo-service node scripts/migrate.
 docker compose -p sao-photo-service run --rm -v /opt/sao-photo-service:/sources:ro photo-service node scripts/import-object-maps.js --apply --source-root=/sources
 ```
 
+The source root must contain `object-maps/data/manifest.json`, `object-maps/data/*.json` and `districts.geojson`; the import verifies the SHA-256 of every dataset against the manifest and aborts on a mismatch. Each applied import is recorded in `import_runs` with the source version, hashes and the explicit list of objects without a district.
+
+Production `.env` must set the cross-site session and the exact allowed origins, otherwise the atlas on GitHub Pages cannot keep a session:
+
+```sh
+PHOTO_SERVICE_COOKIE_SAMESITE=none
+PHOTO_SERVICE_COOKIE_PATH=/photo-api
+PHOTO_SERVICE_ALLOWED_ORIGINS=https://hainox.github.io,https://obhod-sao.ru
+```
+
 Create accounts only through the hidden-input CLI, one account at a time. Never put a password in a command argument or repository file.
 
 ## Backup and restore
@@ -49,11 +59,14 @@ Install `deploy/photo-service-cron.example` with executable scripts (`chmod 750 
 ## Smoke checklist
 
 - `/photo-api/healthz` returns `service=sao-photo-service`, `database=connected`.
-- Invalid credentials are rejected; successful login returns an httpOnly secure cookie.
+- Invalid credentials are rejected; successful login returns an httpOnly `SameSite=None; Secure` cookie and a bearer token for browsers that block third-party cookies.
+- Login from the atlas origin (`https://hainox.github.io`) keeps the session; a successful sign-in does not count towards the failed-attempt limit.
 - District account cannot read another district or unassigned objects.
 - Photo without GPS is rejected with `gps_required`.
 - JPEG/PNG/WebP magic bytes are checked; HEIC, spoofed MIME and files over 20 MB are rejected.
-- Repeating an upload with the same `Idempotency-Key` does not create a second photo.
+- Repeating an upload with the same `Idempotency-Key` does not create a second photo and returns the stored geo verdict.
+- Upload without a `thumbnail` part still works; the response reports `thumbnail: false`.
 - Prefecture can review a pending photo; summary counts confirmed photos only.
-- Excel contains object rows, photo metadata and embedded images; PDF contains short summary and risks.
+- Excel contains object rows, photo metadata and embedded previews; PDF contains the short summary and risks. Both print the report date and the dataset version.
+- Photo content and both exports are reachable from the atlas origin (CORS headers present).
 - Existing `/odh-api/` routes and `jirajura` health remain unchanged.

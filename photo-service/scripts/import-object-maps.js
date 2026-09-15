@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -13,11 +14,22 @@ async function jsonFile(relativePath) {
   return JSON.parse(await readFile(new URL(relativePath, root), 'utf8'));
 }
 
-async function mapFile(relativePath) {
-  const text = await readFile(new URL(relativePath, root), 'utf8');
-  const match = text.match(/<script id="map-data"[^>]*>([\s\S]*?)<\/script>/);
-  if (!match) throw new Error(`map-data script missing in ${relativePath}`);
-  return JSON.parse(match[1]);
+// The datasets live in object-maps/data and the manifest pins their SHA-256, so an
+// import can prove which revision of the source it loaded instead of guessing.
+async function loadDatasets() {
+  const manifest = await jsonFile('object-maps/data/manifest.json');
+  const datasets = {};
+  const hashes = {};
+  for (const entry of manifest.datasets) {
+    const bytes = await readFile(new URL(`object-maps/data/${entry.file}`, root));
+    const sha256 = createHash('sha256').update(bytes).digest('hex');
+    if (entry.sha256 && entry.sha256 !== sha256) {
+      throw new Error(`dataset ${entry.file} does not match the manifest hash: expected ${entry.sha256}, got ${sha256}`);
+    }
+    hashes[entry.file] = sha256;
+    datasets[entry.key] = JSON.parse(bytes.toString('utf8'));
+  }
+  return { manifest, datasets, hashes };
 }
 
 function pointInRing(point, ring) {
@@ -45,7 +57,7 @@ function districtForPoint(latitude, longitude, features) {
   return null;
 }
 
-function baseObject(datasetId, objectType, reportKey, district, record, sourceIds, referencePoints) {
+function baseObject(datasetId, objectType, reportKey, district, record, sourceIds, referencePoints, sourceVersion) {
   return {
     objectKey: `${datasetId}|${objectType}|${reportKey}`,
     datasetId,
@@ -56,18 +68,18 @@ function baseObject(datasetId, objectType, reportKey, district, record, sourceId
     label: record.label || reportKey,
     referencePoints,
     properties: record.properties || {},
-    sourceVersion: 'embedded-map-2026-09-15',
+    sourceVersion,
   };
 }
 
-function importStops(dataset, districts) {
+function importStops(dataset, districts, sourceVersion) {
   return dataset.records.map((record) => {
     const district = districtForPoint(record.lat, record.lon, districts);
-    return baseObject(dataset.datasetId, 'stop', record.id, district, record, [record.id], [{ latitude: record.lat, longitude: record.lon }]);
+    return baseObject(dataset.datasetId, 'stop', record.id, district, record, [record.id], [{ latitude: record.lat, longitude: record.lon }], sourceVersion);
   });
 }
 
-function importPp(dataset, districts) {
+function importPp(dataset, districts, sourceVersion) {
   const groups = new Map();
   for (const record of dataset.records) {
     const odhId = String(record.properties?.odh_id ?? record.id);
@@ -83,28 +95,70 @@ function importPp(dataset, districts) {
   return [...groups.values()].map((group) => {
     const first = group.records[0];
     return baseObject(dataset.datasetId, 'pp', `${group.odhId}|${group.district || 'unassigned'}`, group.district, first,
-      group.records.map((record) => record.id), group.records.map((record) => ({ latitude: record.lat, longitude: record.lon })));
+      group.records.map((record) => record.id), group.records.map((record) => ({ latitude: record.lat, longitude: record.lon })), sourceVersion);
   });
 }
 
-function importEntrances(dataset, districts) {
+function importEntrances(dataset, districts, sourceVersion) {
   return dataset.records.map((record) => {
     const district = record.properties?.Район || districtForPoint(record.lat, record.lon, districts);
     const unom = String(record.properties?.УНОМ ?? record.id);
     const entrance = String(record.properties?.['№ подъезда'] ?? record.id);
-    return baseObject(dataset.datasetId, 'entrance', `${unom}|${entrance}|${district || 'unassigned'}`, district, record, [record.id], [{ latitude: record.lat, longitude: record.lon }]);
+    return baseObject(dataset.datasetId, 'entrance', `${unom}|${entrance}|${district || 'unassigned'}`, district, record, [record.id], [{ latitude: record.lat, longitude: record.lon }], sourceVersion);
   });
 }
 
-const [stops, pp, entrances, districts] = await Promise.all([
-  mapFile('object-maps/stops.html'),
-  mapFile('object-maps/pp.html'),
-  mapFile('object-maps/entrances.html'),
-  jsonFile('districts.geojson'),
-]);
-const objects = [...importStops(stops, districts.features), ...importPp(pp, districts.features), ...importEntrances(entrances, districts.features)];
+const { manifest, datasets, hashes } = await loadDatasets();
+const districts = await jsonFile('districts.geojson');
+const sourceVersion = manifest.sourceVersion;
+
+const objects = [
+  ...importStops(datasets.stops, districts.features, sourceVersion),
+  ...importPp(datasets.pp, districts.features, sourceVersion),
+  ...importEntrances(datasets.entrances, districts.features, sourceVersion),
+];
 const byType = Object.groupBy(objects, (object) => object.objectType);
-console.log(JSON.stringify({ sourceRows: { stops: stops.records.length, pp: pp.records.length, entrances: entrances.records.length }, reportObjects: { stops: byType.stop.length, pp: byType.pp.length, entrances: byType.entrance.length }, unassigned: objects.filter((object) => object.district === null).length, mode: dryRun ? 'dry-run' : 'apply' }, null, 2));
+const unassigned = objects.filter((object) => object.district === null);
+
+// Borderline source rows must stay visible in the diagnostics instead of being
+// silently assigned to a district, so every unassigned object is listed explicitly.
+const datasetKeyByType = { stop: 'stops', pp: 'pp', entrance: 'entrances' };
+const sourceRowByType = new Map(Object.entries(datasetKeyByType).map(([type, key]) => [
+  type,
+  new Map(datasets[key].records.map((record, index) => [record.id, record.sourceRow ?? index + 1])),
+]));
+const unassignedObjects = unassigned.map((object) => ({
+  objectKey: object.objectKey,
+  objectType: object.objectType,
+  label: object.label,
+  sourceIds: object.sourceIds,
+  sourceRows: object.sourceIds
+    .map((sourceId) => sourceRowByType.get(object.objectType)?.get(sourceId))
+    .filter((row) => Number.isInteger(row)),
+}));
+
+const sourceRows = {
+  stops: datasets.stops.records.length,
+  pp: datasets.pp.records.length,
+  entrances: datasets.entrances.records.length,
+};
+const reportObjects = {
+  stops: (byType.stop || []).length,
+  pp: (byType.pp || []).length,
+  entrances: (byType.entrance || []).length,
+};
+
+console.log(JSON.stringify({
+  sourceVersion,
+  sourceDate: manifest.sourceDate,
+  datasetHashes: hashes,
+  sourceRows,
+  reportObjects,
+  unassigned: unassigned.length,
+  unassignedObjects,
+  mode: dryRun ? 'dry-run' : 'apply',
+}, null, 2));
+
 if (dryRun) process.exit(0);
 
 const pool = new Pool({ ...photoServiceDatabaseConfig(process.env), max: 2 });
@@ -122,6 +176,11 @@ try {
       [object.objectKey, object.datasetId, object.objectType, object.reportKey, object.sourceIds, object.district, object.label, JSON.stringify(object.referencePoints), JSON.stringify(object.properties), object.sourceVersion],
     );
   }
+  await client.query(
+    `INSERT INTO import_runs (source_version, source_date, dataset_hashes, source_rows, report_objects, unassigned_count, unassigned_objects, mode)
+     VALUES ($1,$2,$3,$4,$5,$6,$7,'apply')`,
+    [sourceVersion, manifest.sourceDate || null, JSON.stringify(hashes), JSON.stringify(sourceRows), JSON.stringify(reportObjects), unassigned.length, JSON.stringify(unassignedObjects)],
+  );
   await client.query('COMMIT');
 } catch (error) {
   await client.query('ROLLBACK');
@@ -130,4 +189,4 @@ try {
   client.release();
   await pool.end();
 }
-console.log(`Imported ${objects.length} report objects`);
+console.log(`Imported ${objects.length} report objects from ${sourceVersion}`);

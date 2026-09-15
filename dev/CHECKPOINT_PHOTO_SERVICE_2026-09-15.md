@@ -1,91 +1,66 @@
 # Checkpoint: SAO photo service
 
-Дата: 2026-09-15  
-Рабочая копия: `C:\Users\dmitr\Documents\Codex\2026-08-26\new-chat\work\karta-sao-photo-service`  
+Дата: 2026-09-15 (обновлено после перевода трёх карт на отдельную страницу атласа)
+Рабочая копия: `C:\Users\dmitr\Documents\Codex\2026-08-26\new-chat\work\karta-sao-photo-service`
 Исходную папку `C:\Users\dmitr\Documents\Codex\2026-08-26\new-chat\work\karta-sao` не изменять.
 
 ## Состояние Git
 
 - Ветка: `photo-service-centralization`.
-- Переданная базовая точка: `841ce4f`.
-- Последний коммит: `b75dbf1 docs: record production verification and cron`.
-- Последний feature/rollout-коммит: `0121096 ops: prepare isolated photo service rollout`; история перед ним: `d833c24`, `ddc6c7d`, `795bf33`; база ветки — `841ce4f`.
-- Рабочая копия чистая; не делать reset и не переключать ветку вслепую.
+- Переданная базовая точка: `841ce4f`; последний зафиксированный коммит: `12b452d`.
+- Последние коммиты: `12b452d`, `ea94888`, `b75dbf1`, `a2a4a34`, `0121096`.
+- Изменения этой сессии **не закоммичены**. Перед переносом сделать `git status --short` и закоммитить.
 - Секреты, `.env`, пароли и ключи в репозиторий не добавлялись.
 
 ## Утверждённые решения пользователя
 
-- Пользователь изменил модель: одна общая `district_editor`-учётка на каждый из 16 районов, логин — название района; общий пароль `12345678` в новую службу не переносить.
-- Минимум пароля остаётся 12 символов. Запрошенный шаблон `SaoFoto1`…`SaoFoto16` короче порога, поэтому 16 production users пока не созданы до утверждения 12+ варианта.
-- Роли: районная учётка видит только свой район; префектурная — сводку САО и unassigned.
-- GPS обязателен для отправки фото. Без широты и долготы сервер отвечает `gps_required`.
-- Геоконтроль: номинальный радиус 15 м, допуск ±5 м; до 15 м `within_radius`, 15–20 м `within_tolerance`, свыше 20 м `risk`. Для нескольких точек используется ближайшая зарегистрированная точка; это приближение, не проверка контура.
-- Нормы подтверждённых фото: остановка 1, ПП 2, вход 1.
-- Статусы выполнения: красный `<33%`, жёлтый `33–<66%`, зелёный `≥66%`.
-- Выгрузка: полный Excel с объектами, метаданными и фотографиями; краткий PDF со сводкой.
-- Эталонные фотографии бессрочны; прочие удаляются только вручную при нехватке места после отдельной проверки.
+- Одна общая `district_editor`-учётка на каждый из 16 районов, логин — название района. Общий пароль `12345678` в новую службу не переносится.
+- Минимум пароля — 12 символов. Пользователь выбрал шаблон `SaoFoto01-2026` … `SaoFoto16-2026` (15 символов), production users ещё не созданы.
+- Роли: районная учётка видит только свой район; префектурная — сводку САО и объекты без района.
+- GPS обязателен для отправки; без широты и долготы сервер отвечает `gps_required`.
+- Геоконтроль: номинальный радиус 15 м, допуск ±5 м; до 15 м `within_radius`, 15–20 м `within_tolerance`, свыше 20 м `risk`.
+- Нормы подтверждённых фото: остановка 1, ПП 2, вход 1. Пороги: красный `<33%`, жёлтый `33–<66%`, зелёный `≥66%`.
+- Выгрузка: полный Excel со сводкой и реестром, краткий PDF. **В Excel встраивается миниатюра 320 px, а не оригинал** (см. ниже).
+- Сессия: cookie `SameSite=None` плюс запасной bearer-токен, потому что атлас на GitHub Pages, а служба на `obhod-sao.ru`.
+- Три карты объектов — одна страница атласа со всеми тремя наборами; старые адреса сохраняются.
 
-## Что уже сделано
+## Что сделано в этой сессии
 
-1. `photo-service/` — отдельное Node.js 24 приложение с PostgreSQL, Compose project/network/volumes и namespaced `PHOTO_SERVICE_DB_*`. Старые БД, сеть, тома, секреты и `/api/health` не используются.
-2. `migrations/001_initial.sql` — пользователи, сессии, объекты, фотографии, идемпотентность, аудит.
-3. Серверные маршруты: `/healthz`, `/auth/login`, `/auth/logout`, `/auth/me`, `/objects/resolve`, `/photos` GET/POST, выдача `/photos/:id/content`, review/delete, `/reports/summary`, `/reports/export.xlsx`, `/reports/export.pdf`.
-4. Пароли хешируются scrypt; сессия — случайный opaque token в httpOnly cookie; login rate limit — локальный для процесса.
-5. Upload: multipart, JPEG/PNG/WebP, magic-byte проверка, лимит 20 МБ, безопасный UUID storage key, отдельный media volume, `Idempotency-Key`, GPS и raw distance в PostgreSQL.
-6. `scripts/import-object-maps.js --dry-run` читает встроенные наборы трёх карт и `districts.geojson`; ПП группируется по `odh_id + district`, координаты сохраняются как reference points. Поддержан `--apply` и `--source-root=...`.
-7. Три standalone-карты переведены с IndexedDB на API фотослужбы: вход, серверные счётчики/галерея, обязательный GPS перед отправкой, повторяемая отправка. CSV для Яндекс-карт сохранён.
-8. `dev/BuildSpec.md`, `dev/Data-Audit.md`, `dev/ProjectLog.md`, `tasks/plan.md` сохранены в рабочей копии. `dev/Vision.md` в базе отсутствует; это зафиксировано, не выдумывалось.
+1. `object-maps/` — отдельная страница атласа: переключатель наборов, ПК-режим «Ведомость по району», телефонный режим «Маршрутная очередь». `stops.html`, `pp.html`, `entrances.html` — тонкие оболочки на том же клиенте.
+2. Наборы вынесены в `object-maps/data/*.json` + `manifest.json` с версией и SHA-256 каждого файла.
+3. Общий клиент: `object-maps/photo-client.js`, `photo-client.css`, чистая логика в `photo-model.js`.
+4. `hub/index.html`: три карточки фотофиксации заменены одной, ведущей на `../object-maps/`.
+5. Сессия: `PHOTO_SERVICE_COOKIE_SAMESITE` (production — `none`, принудительно `Secure`), запасной `Authorization: Bearer`, CORS на выдаче фото и обеих выгрузках.
+6. Повторная отправка не создаёт дубль: `Idempotency-Key` стабилен для пары «объект + файл».
+7. Ограничение входа считает только неудачные попытки (`src/login-throttle.js`).
+8. Миграции `002_import_runs.sql` (журнал импортов и перечень объектов без района) и `003_photo_thumbnail.sql` (миниатюра).
+9. Импорт читает JSON-наборы, сверяет хеши с манифестом и перечисляет все нераспределённые объекты построчно.
+10. Миниатюра 320 px: клиент делает её при отправке, сервер хранит рядом с оригиналом, Excel встраивает только её.
+11. Override `uuid` поднят до 11.1.1 — `npm audit --omit=dev` показывает 0 уязвимостей.
 
 ## Подтверждённые проверки
 
-- `npm test`: 34/34.
-- Inline JavaScript всех трёх карт разобран без синтаксических ошибок.
-- `npm audit signatures`: 132 пакета и 4 attestations проверены.
-- Локальный изолированный Docker smoke: миграция 001 применена; новый `/healthz` вернул HTTP 200 `database=connected`; приложение работало от UID 1000 и имело writable отдельный media volume; временные контейнеры, сеть и тома удалены.
-- Import dry-run: 812 строк остановок, 2235 строк ПП, 10035 входов; 812 stop, 428 reportable PP (427 назначенных пар + 1 unassigned), 10035 entrance; 7 unassigned (6 остановок и один PP).
-
-## Production checkpoint
-
-- Production-каталог: `/opt/sao-photo-service`; host `obhod-sao.ru` (`PREFASAO`); версия `0121096`.
-- `sao-photo-service` database/app работают в отдельном Compose-проекте; app подключён к `sao-photo-service-edge`, PostgreSQL остаётся только в `sao-photo-service_default`.
-- Production backup проверен: `/var/backups/sao-photo-service/20260915T055418Z` (`database.dump`, `media.tar.gz`, `SHA256SUMS`).
-- Reverse-proxy подключён обратимо; `nginx -t` успешен; публичный `GET https://obhod-sao.ru/photo-api/healthz` вернул HTTP 200 `database=connected`.
-- Отдельный `/etc/cron.d/sao-photo-service` установлен: backup ежедневно в 02:15 UTC, monitor каждые 5 минут; ручной monitor прошёл, media free 44%.
-- Коммит `a2a4a34` fast-forward отправлен в `origin/main`; Pages, quality и regression workflows завершились `success`. Три публичные карты отдают `PHOTO_API_BASE` после cache-bust.
+- `npm test` в `photo-service` — 49/49; `npm test` в `object-maps` — 15/15.
+- Изолированный стенд (отдельный Compose project, миграции 001–003, импорт 11 275 объектов, две тестовые учётки): браузерная проверка `odh-map/tests/photo-atlas.e2e.mjs` — 44 проверки, три прогона подряд без падений, виды 1280×800 и 390×844.
+- Клиентская проверка охватывает вход, сводку, реестр, обязательный GPS и исполнителя, повтор без дубля, подпись фото с точностью и дистанцией, выгрузки Excel и PDF, ограничения роли района, мобильную очередь и единственную карточку в атласе.
+- Импорт dry-run: 812 остановок, 2 235 координат ПП, 10 035 входов → 812 stop, 428 PP, 10 035 entrance, 7 объектов без района с номерами строк 37, 556, 557, 583, 586, 688, 173, 174.
+- Нагрузка Excel: 11 701 объект с миниатюрой — 130 МБ, 13 с, пик RSS 1,1 ГБ; район (730 объектов, 2 фото) — 16 МБ, 1,5 с. Полноразмерные оригиналы давали 872 МБ и 3,9 ГБ.
 
 ## Непроверено / осталось
 
-- Районные аккаунты не созданы (`users=0`): после утверждения 12+ паролей выполнить для каждого района `docker compose -p sao-photo-service run --rm photo-service node scripts/create-user.js --login "Название района" --display-name "Название района" --role district_editor --district "Название района"` со скрытым вводом (пароль не передавать аргументом).
-- Ручная проверка ПК 1280×800 и телефона 390×844 ещё не проведена в production после обновления Pages.
-- `npm audit --omit=dev` сообщает 2 moderate advisory через декларацию `exceljs -> uuid <11.1.1`; в lock установлен `uuid 11.1.0` override. `npm audit fix --force` не применять вслепую: он предлагает breaking downgrade ExcelJS. Перед production нужен security verdict/альтернативный экспортный пакет.
-- Нужно отдельно проверить производительность полного Excel с большим числом фотографий и отсутствие OOM.
-- После получения решения по outliers/семантическому ключу подъезда повторить import и зафиксировать source version.
+- **Production не выкатывался.** Нужны: доставка версии в `/opt/sao-photo-service`, миграции 002–003, `.env` с `PHOTO_SERVICE_COOKIE_SAMESITE=none` и `PHOTO_SERVICE_ALLOWED_ORIGINS`, повторный импорт (`--source-root` должен содержать `object-maps/data/`), backup и smoke.
+- **16 районных учёток не созданы.** Пользователь утвердил шаблон `SaoFoto01-2026`…`SaoFoto16-2026`; создавать на сервере скрытым вводом, по одной.
+- **Ручная проверка глазами не выполнена.** Чек-лист: `dev/MANUAL-CHECK-photo-atlas.md`.
+- Миниатюры сохранены только для новых фиксаций; у уже загруженных фото колонка `thumbnail_key` пустая, и Excel для них возьмёт оригинал.
+- Открыт вопрос знаменателя: нераспределённые объекты показываются отдельной строкой и в знаменатель САО не входят (11268 назначенных + 7 отдельно).
+- Браузеры, полностью блокирующие сторонние cookie (Safari/ITP), работают только через bearer-токен; полноценная проверка требует реального домена.
 
 ## Как продолжить на другом устройстве
 
-1. Перенести этот репозиторий или Git bundle вместе с этим файлом. Не переносить `photo-service/.env`, реальные media и `node_modules`.
-2. Перейти в рабочую копию и выполнить:
+1. Перенести репозиторий или Git bundle вместе с этим файлом. Не переносить `photo-service/.env`, реальные media и `node_modules`.
+2. `git status --short --branch`, затем `git log -3 --oneline`.
+3. `npm --prefix photo-service ci --ignore-scripts --no-audit --no-fund` и `npm --prefix photo-service test`.
+4. `npm --prefix object-maps test`.
+5. Перед любым production-действием прочитать `dev/BuildSpec.md`, затем `dev/ProjectLog.md`, затем этот checkpoint и `dev/MANUAL-CHECK-photo-atlas.md`.
 
-   `git status --short --branch`
-
-   `git log -3 --oneline`
-
-   `npm --prefix photo-service ci --ignore-scripts --no-audit --no-fund`
-
-   `npm --prefix photo-service test`
-
-3. Перед любым production-действием прочитать `dev/BuildSpec.md`, затем `dev/ProjectLog.md`, затем этот checkpoint. Проверить выделенные production path/network/volumes/secrets/backups; старый ODH Compose не переиспользовать.
-4. Создать локальную учётку только после `npm run migrate`; пароль вводить скрыто через `npm run create-user -- --email ... --display-name ... --role ...` без передачи пароля в аргументах.
-5. Для переноса без удалённого Git можно создать bundle на исходном устройстве:
-
-   `git bundle create ..\sao-photo-service-transfer.bundle --all`
-
-   На другом устройстве:
-
-   `git clone sao-photo-service-transfer.bundle karta-sao-photo-service`
-
-   После клонирования создать новую рабочую копию и проверить ветку/HEAD по разделу выше.
-
-Финальный bundle после последнего коммита: `C:\Users\dmitr\Documents\Codex\2026-08-26\new-chat\work\sao-photo-service-transfer.bundle`. Перед переносом сверить SHA-256 из handoff-сообщения; bundle содержит полную историю и refs.
-
-Не считать наличие старой БД, старого `/api/health` или локального smoke доказательством готовности новой фотослужбы принимать реальные файлы.
+Не считать наличие старой БД, старого `/api/health` или локального стенда доказательством готовности службы принимать реальные файлы.

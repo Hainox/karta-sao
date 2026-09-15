@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { randomBytes } from 'node:crypto';
 import test from 'node:test';
-import { photoServiceDatabaseConfig } from '../src/config.js';
+import { photoServiceCookiePolicy, photoServiceDatabaseConfig } from '../src/config.js';
 
 function validEnvironment() {
   return {
@@ -43,5 +43,29 @@ test('rejects an invalid PostgreSQL port without exposing environment values', (
       assert.equal(error.message.includes('not-a-port'), false);
       return true;
     },
+  );
+});
+
+test('cookie policy defaults to a same-origin lax session', () => {
+  assert.deepEqual(photoServiceCookiePolicy({}), { path: '/photo-api', sameSite: 'Lax', secure: true });
+  assert.deepEqual(
+    photoServiceCookiePolicy({ PHOTO_SERVICE_COOKIE_SECURE: 'false' }),
+    { path: '/photo-api', sameSite: 'Lax', secure: false },
+  );
+});
+
+test('cross-site cookie policy forces Secure even when the environment disables it', () => {
+  const policy = photoServiceCookiePolicy({
+    PHOTO_SERVICE_COOKIE_SAMESITE: 'none',
+    PHOTO_SERVICE_COOKIE_SECURE: 'false',
+    PHOTO_SERVICE_COOKIE_PATH: '/photo-api',
+  });
+  assert.deepEqual(policy, { path: '/photo-api', sameSite: 'None', secure: true });
+});
+
+test('cookie policy rejects an unknown SameSite value instead of guessing', () => {
+  assert.throws(
+    () => photoServiceCookiePolicy({ PHOTO_SERVICE_COOKIE_SAMESITE: 'cross-site' }),
+    /PHOTO_SERVICE_COOKIE_SAMESITE/,
   );
 });

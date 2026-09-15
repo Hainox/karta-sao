@@ -12,12 +12,12 @@ export async function loadReportRows(pool, user, requestedDistrict) {
   const scope = scopeClause(user, requestedDistrict);
   const result = await pool.query(`
     SELECT o.object_key, o.dataset_id, o.object_type, o.report_key, o.source_ids, o.district,
-           o.label, o.reference_points, o.properties,
+           o.label, o.reference_points, o.properties, o.source_version,
            count(p.id) FILTER (WHERE p.review_status = 'confirmed')::int AS confirmed_photos,
            count(p.id) FILTER (WHERE p.review_status = 'pending_review')::int AS pending_review_photos,
            coalesce(bool_or(p.geo_status = 'risk'), false) AS geo_risk,
            json_agg(json_build_object(
-             'id', p.id, 'storageKey', p.storage_key, 'mimeType', p.mime_type,
+             'id', p.id, 'storageKey', p.storage_key, 'thumbnailKey', p.thumbnail_key, 'mimeType', p.mime_type,
              'originalFilename', p.original_filename, 'byteSize', p.byte_size,
              'performer', p.performer, 'comment', p.comment, 'capturedAt', p.captured_at,
              'uploadedAt', p.uploaded_at, 'gpsLatitude', p.gps_latitude,
@@ -50,7 +50,11 @@ export function reportPayload(rows) {
     pendingReviewPhotos: row.pendingReviewPhotos,
     geoRisk: row.geoRisk,
   }));
+  // Distinct source revisions are surfaced so a report cannot silently mix datasets.
+  const sourceVersions = [...new Set(rows.map((row) => row.source_version).filter(Boolean))].sort();
   return {
+    generatedAt: new Date().toISOString(),
+    sourceVersions,
     overall: summarizeCoverage(records),
     byType: summarizeCoverageByType(records),
     unassigned: summarizeCoverage(unassignedRows.map((row) => ({
@@ -68,6 +72,7 @@ export function reportPayload(rows) {
       district: row.district,
       label: row.label,
       referencePoints: row.reference_points,
+      sourceVersion: row.source_version,
       confirmedPhotos: row.confirmedPhotos,
       pendingReviewPhotos: row.pendingReviewPhotos,
       geoRisk: row.geoRisk,

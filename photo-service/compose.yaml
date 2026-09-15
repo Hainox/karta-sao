@@ -31,6 +31,7 @@ services:
       PHOTO_SERVICE_BASE_PATH: ${PHOTO_SERVICE_BASE_PATH:-}
       PHOTO_SERVICE_COOKIE_SECURE: ${PHOTO_SERVICE_COOKIE_SECURE:-false}
       PHOTO_SERVICE_COOKIE_PATH: ${PHOTO_SERVICE_COOKIE_PATH:-/photo-api}
+      PHOTO_SERVICE_COOKIE_SAMESITE: ${PHOTO_SERVICE_COOKIE_SAMESITE:-lax}
     depends_on:
       database:
         condition: service_healthy

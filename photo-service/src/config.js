@@ -14,6 +14,24 @@ function requiredValue(environment, name) {
   return value;
 }
 
+const COOKIE_SAME_SITE = Object.freeze({ lax: 'Lax', strict: 'Strict', none: 'None' });
+
+// The atlas lives on GitHub Pages while the API lives on obhod-sao.ru, so the production
+// deployment needs SameSite=None. Local development and same-origin hosting keep Lax.
+export function photoServiceCookiePolicy(environment = {}) {
+  const requested = String(environment.PHOTO_SERVICE_COOKIE_SAMESITE ?? '').trim().toLowerCase() || 'lax';
+  const sameSite = COOKIE_SAME_SITE[requested];
+  if (!sameSite) {
+    throw new Error('PHOTO_SERVICE_COOKIE_SAMESITE must be one of lax, strict, none');
+  }
+  const path = String(environment.PHOTO_SERVICE_COOKIE_PATH ?? '').trim();
+  return Object.freeze({
+    path: path || '/photo-api',
+    sameSite,
+    secure: sameSite === 'None' ? true : environment.PHOTO_SERVICE_COOKIE_SECURE !== 'false',
+  });
+}
+
 export function photoServiceDatabaseConfig(environment) {
   const settings = Object.fromEntries(
     REQUIRED_SETTINGS.map((name) => [name, requiredValue(environment, name)]),

@@ -1,0 +1,39 @@
+{
+  "sourceVersion": "embedded-map-2026-09-15",
+  "sourceDate": "2026-09-15",
+  "datasets": [
+    {
+      "key": "stops",
+      "datasetId": "sao_stops",
+      "objectType": "stop",
+      "title": "Остановки САО",
+      "file": "stops.json",
+      "photoLimit": 1,
+      "subtitle": "Точки остановок · фотофиксация и исходные атрибуты",
+      "records": 812,
+      "sha256": "dfcd861c652abf2b15bb5a8b3a14c25e51b0bd975202a45cdaa8f0b6fb7a66b8"
+    },
+    {
+      "key": "pp",
+      "datasetId": "odh_pp_coordinates",
+      "objectType": "pp",
+      "title": "Координаты ПП",
+      "file": "pp.json",
+      "photoLimit": 2,
+      "subtitle": "Исходные координатные записи · без реконструкции линий или полигонов",
+      "records": 2235,
+      "sha256": "5e15b1dcd7ad8a7224f8cf333ea1e39e525eb62c942db6ce361d0f064c2e00f3"
+    },
+    {
+      "key": "entrances",
+      "datasetId": "injob_entrances",
+      "objectType": "entrance",
+      "title": "Подъезды InJob",
+      "file": "entrances.json",
+      "photoLimit": 1,
+      "subtitle": "Фотофиксация подъездов · поиск по адресу, району и номеру подъезда",
+      "records": 10035,
+      "sha256": "87ed1e98a8b1ea582aa245f313defffb7668ab1f1cf4d79dc28b0f42348a1697"
+    }
+  ]
+}

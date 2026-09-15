@@ -4,10 +4,6 @@ import { reportPayload } from './reports.js';
 import { readFile } from 'node:fs/promises';
 import { mediaRoot } from './storage.js';
 
-function extension(mime) {
-  return mime === 'image/png' ? 'png' : mime === 'image/webp' ? 'webp' : 'jpeg';
-}
-
 export async function buildExcel(rows) {
   const payload = reportPayload(rows);
   const workbook = new ExcelJS.Workbook();
@@ -16,6 +12,8 @@ export async function buildExcel(rows) {
   const summary = workbook.addWorksheet('Сводка');
   summary.columns = [{ header: 'Показатель', key: 'metric', width: 36 }, { header: 'Значение', key: 'value', width: 18 }];
   summary.addRows([
+    ['Сформирован', new Date().toLocaleString('ru-RU')],
+    ['Версия набора объектов', payload.sourceVersions.join(', ') || 'не указана'],
     ['Объектов', payload.overall.totalObjects],
     ['С фото', payload.overall.objectsWithPhoto],
     ['Без фото', payload.overall.objectsWithoutPhoto],
@@ -54,8 +52,13 @@ export async function buildExcel(rows) {
         filename: photo.originalFilename });
       excelRow.height = 100;
       try {
-        const buffer = await readFile(`${mediaRoot()}/${photo.storageKey}`);
-        const imageId = workbook.addImage({ buffer, extension: extension(photo.mimeType) });
+        // Only the small preview is embedded: the full set of originals produces a
+        // workbook of several hundred megabytes. The original stays on the server.
+        // The extension comes from the stored key because a preview is always JPEG
+        // even when the original was uploaded as PNG or WebP.
+        const key = photo.thumbnailKey || photo.storageKey;
+        const buffer = await readFile(`${mediaRoot()}/${key}`);
+        const imageId = workbook.addImage({ buffer, extension: key.endsWith('.png') ? 'png' : key.endsWith('.webp') ? 'webp' : 'jpeg' });
         photos.addImage(imageId, { tl: { col: 9, row: rowNumber - 1 }, ext: { width: 150, height: 90 } });
       } catch {
         // Metadata remains exportable when a media file is unavailable; the row is still visible for audit.
@@ -76,6 +79,7 @@ export function buildPdf(rows) {
     doc.on('error', reject);
     doc.fontSize(18).text('Краткий отчёт фотофиксации САО');
     doc.moveDown(0.5).fontSize(11).text(`Сформирован: ${new Date().toLocaleString('ru-RU')}`);
+    doc.text(`Версия набора объектов: ${payload.sourceVersions.join(', ') || 'не указана'}`);
     doc.moveDown().fontSize(13).text(`Всего объектов: ${payload.overall.totalObjects}`);
     doc.fontSize(11).text(`С фото: ${payload.overall.objectsWithPhoto}`);
     doc.text(`Без фото: ${payload.overall.objectsWithoutPhoto}`);

@@ -2,37 +2,46 @@ import { createHash, randomUUID } from 'node:crypto';
 import { createServer } from 'node:http';
 import { Pool } from 'pg';
 import { assessDistanceRisk } from './src/geo.js';
-import { photoServiceDatabaseConfig } from './src/config.js';
+import { photoServiceCookiePolicy, photoServiceDatabaseConfig } from './src/config.js';
 import { createHealthHandler } from './src/health.js';
 import {
-  createSessionToken, expiredSessionCookie, hashSessionToken,
+  bearerToken, createSessionToken, expiredSessionCookie, hashSessionToken,
   MAX_SESSION_AGE_SECONDS, normalizeLogin, parseCookies, sessionCookie, verifyPassword,
 } from './src/auth.js';
 import { parseMultipart } from './src/multipart.js';
+import { createLoginThrottle } from './src/login-throttle.js';
 import { buildExcel, buildPdf } from './src/exports.js';
 import { loadReportRows, reportPayload } from './src/reports.js';
 import { mediaRoot, readMedia, removeMedia, writeMedia } from './src/storage.js';
 
 const port = Number(process.env.PHOTO_SERVICE_PORT || 8788);
 const basePath = (process.env.PHOTO_SERVICE_BASE_PATH || '').replace(/\/$/, '');
-const cookieSecure = process.env.PHOTO_SERVICE_COOKIE_SECURE !== 'false';
-const cookiePath = process.env.PHOTO_SERVICE_COOKIE_PATH || (basePath || '/photo-api');
+const cookiePolicy = photoServiceCookiePolicy({
+  PHOTO_SERVICE_COOKIE_SAMESITE: process.env.PHOTO_SERVICE_COOKIE_SAMESITE,
+  PHOTO_SERVICE_COOKIE_SECURE: process.env.PHOTO_SERVICE_COOKIE_SECURE,
+  PHOTO_SERVICE_COOKIE_PATH: process.env.PHOTO_SERVICE_COOKIE_PATH || (basePath || '/photo-api'),
+});
 const allowedOrigins = new Set((process.env.PHOTO_SERVICE_ALLOWED_ORIGINS || '').split(',').map((value) => value.trim()).filter(Boolean));
 const pool = new Pool({ ...photoServiceDatabaseConfig(process.env), max: 8, idleTimeoutMillis: 30000 });
-const loginAttempts = new Map();
+const loginThrottle = createLoginThrottle();
+
+function corsHeaders(request) {
+  const origin = request?.headers?.origin;
+  if (!origin || !allowedOrigins.has(origin)) return {};
+  return {
+    'Access-Control-Allow-Origin': origin,
+    'Access-Control-Allow-Credentials': 'true',
+    Vary: 'Origin',
+  };
+}
 
 function sendJson(response, statusCode, body, request) {
-  const origin = request?.headers?.origin;
   const headers = {
     'Cache-Control': 'no-store', 'Content-Type': 'application/json; charset=utf-8',
     'X-Content-Type-Options': 'nosniff', 'X-Frame-Options': 'DENY', 'Referrer-Policy': 'no-referrer',
     'Content-Security-Policy': "default-src 'none'; frame-ancestors 'none'",
+    ...corsHeaders(request),
   };
-  if (origin && allowedOrigins.has(origin)) {
-    headers['Access-Control-Allow-Origin'] = origin;
-    headers['Access-Control-Allow-Credentials'] = 'true';
-    headers.Vary = 'Origin';
-  }
   response.writeHead(statusCode, headers);
   response.end(JSON.stringify(body));
 }
@@ -70,8 +79,12 @@ async function readJson(request, limit = 1024 * 1024) {
   }
 }
 
+function sessionToken(request) {
+  return parseCookies(request.headers.cookie).photo_session || bearerToken(request.headers.authorization);
+}
+
 async function currentUser(request) {
-  const token = parseCookies(request.headers.cookie).photo_session;
+  const token = sessionToken(request);
   if (!token) return null;
   const result = await pool.query(
     `SELECT u.id, u.email, u.display_name, u.role, u.district
@@ -82,14 +95,8 @@ async function currentUser(request) {
   return result.rows[0] || null;
 }
 
-function loginAllowed(request) {
-  const key = request.socket.remoteAddress || 'unknown';
-  const now = Date.now();
-  const current = loginAttempts.get(key) || { count: 0, started: now };
-  if (now - current.started > 15 * 60 * 1000) { current.count = 0; current.started = now; }
-  current.count += 1;
-  loginAttempts.set(key, current);
-  return current.count <= 10;
+function clientKey(request) {
+  return request.socket.remoteAddress || 'unknown';
 }
 
 function validCoordinateFields(fields) {
@@ -103,17 +110,24 @@ function validCoordinateFields(fields) {
 }
 
 async function handleLogin(request, response) {
-  if (!loginAllowed(request)) return sendError(response, request, 429, 'too_many_login_attempts');
+  const key = clientKey(request);
+  if (!loginThrottle.allowed(key)) return sendError(response, request, 429, 'too_many_login_attempts');
   let body;
   try { body = await readJson(request); } catch (error) { return sendError(response, request, 400, error.code || 'invalid_json'); }
   const login = normalizeLogin(body.login ?? body.email);
   const result = await pool.query('SELECT * FROM users WHERE email = $1 AND active = true', [login]);
   const user = result.rows[0];
-  if (!user || !(await verifyPassword(body.password, user.password_hash))) return sendError(response, request, 401, 'invalid_credentials');
+  if (!user || !(await verifyPassword(body.password, user.password_hash))) {
+    loginThrottle.recordFailure(key);
+    return sendError(response, request, 401, 'invalid_credentials');
+  }
+  loginThrottle.clear(key);
   const token = createSessionToken();
   await pool.query(`INSERT INTO sessions (token_hash, user_id, expires_at) VALUES ($1, $2, now() + ($3 * interval '1 second'))`, [hashSessionToken(token), user.id, MAX_SESSION_AGE_SECONDS]);
-  response.setHeader('Set-Cookie', sessionCookie(token, { secure: cookieSecure, path: cookiePath }));
-  return sendJson(response, 200, { user: { id: user.id, email: user.email, displayName: user.display_name, role: user.role, district: user.district } }, request);
+  response.setHeader('Set-Cookie', sessionCookie(token, cookiePolicy));
+  // The token is also returned so the atlas can fall back to an explicit header on
+  // browsers that refuse third-party cookies; the httpOnly cookie stays the primary path.
+  return sendJson(response, 200, { token, user: { id: user.id, email: user.email, displayName: user.display_name, role: user.role, district: user.district } }, request);
 }
 
 async function handleUpload(request, response, user) {
@@ -135,6 +149,7 @@ async function handleUpload(request, response, user) {
   if (gps.accuracy === null) geo = { ...geo, status: 'review', reason: 'gps_accuracy_missing' };
   else if (gps.accuracy > 5) geo = { ...geo, status: 'review', reason: 'gps_accuracy_above_5m' };
   const media = await writeMedia(parsed.file.buffer, parsed.file.mimeType, mediaRoot(process.env));
+  const thumbnail = parsed.thumbnail ? await writeMedia(parsed.thumbnail.buffer, parsed.thumbnail.mimeType, mediaRoot(process.env)) : null;
   const photoId = randomUUID();
   const requestHash = createHash('sha256').update(JSON.stringify({ datasetId, sourceId, fields: parsed.fields, sha256: media.sha256 })).digest('hex');
   const client = await pool.connect();
@@ -142,17 +157,27 @@ async function handleUpload(request, response, user) {
     await client.query('BEGIN');
     const existing = await client.query('SELECT photo_id, request_hash FROM idempotency_keys WHERE idempotency_key = $1 AND user_id = $2 FOR UPDATE', [idempotencyKey, user.id]);
     if (existing.rowCount) {
+      // A replayed upload returns the stored verdict so the client shows the same
+      // geo/review state it would have shown for the original response.
+      const stored = await client.query('SELECT geo_status, distance_m, review_status FROM photos WHERE id = $1', [existing.rows[0].photo_id]);
       await client.query('ROLLBACK');
       await removeMedia(media.storageKey, mediaRoot(process.env));
+      if (thumbnail) await removeMedia(thumbnail.storageKey, mediaRoot(process.env));
       if (existing.rows[0].request_hash !== requestHash) return sendError(response, request, 409, 'idempotency_key_reused');
-      return sendJson(response, 200, { photoId: existing.rows[0].photo_id, duplicate: true }, request);
+      return sendJson(response, 200, {
+        photoId: existing.rows[0].photo_id,
+        duplicate: true,
+        geoStatus: stored.rows[0]?.geo_status ?? null,
+        distanceM: stored.rows[0]?.distance_m ?? null,
+        reviewStatus: stored.rows[0]?.review_status ?? null,
+      }, request);
     }
     await client.query(
-      `INSERT INTO photos (id, object_key, storage_key, original_filename, mime_type, byte_size, sha256,
+      `INSERT INTO photos (id, object_key, storage_key, thumbnail_key, original_filename, mime_type, byte_size, sha256,
         performer, comment, captured_at, gps_latitude, gps_longitude, gps_accuracy_m, distance_m, geo_status,
         review_status, review_reason, uploaded_by)
-       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,'pending_review',$16,$17)`,
-      [photoId, object.object_key, media.storageKey, parsed.file.filename, parsed.file.mimeType, parsed.file.buffer.length, media.sha256,
+       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,'pending_review',$17,$18)`,
+      [photoId, object.object_key, media.storageKey, thumbnail?.storageKey ?? null, parsed.file.filename, parsed.file.mimeType, parsed.file.buffer.length, media.sha256,
         parsed.fields.performer.trim(), (parsed.fields.comment || '').slice(0, 2000), parsed.fields.capturedAt || null,
         gps?.latitude ?? null, gps?.longitude ?? null, gps?.accuracy ?? null, geo.distanceMeters ?? null, geo.status, geo.reason || null, user.id],
     );
@@ -162,9 +187,10 @@ async function handleUpload(request, response, user) {
   } catch (error) {
     await client.query('ROLLBACK').catch(() => {});
     await removeMedia(media.storageKey, mediaRoot(process.env)).catch(() => {});
+    if (thumbnail) await removeMedia(thumbnail.storageKey, mediaRoot(process.env)).catch(() => {});
     throw error;
   } finally { client.release(); }
-  return sendJson(response, 201, { photoId, geoStatus: geo.status, distanceMeters: geo.distanceMeters ?? null, reviewStatus: 'pending_review' }, request);
+  return sendJson(response, 201, { photoId, geoStatus: geo.status, distanceMeters: geo.distanceMeters ?? null, reviewStatus: 'pending_review', thumbnail: Boolean(thumbnail) }, request);
 }
 
 async function handleReview(request, response, user, photoId) {
@@ -180,11 +206,12 @@ async function handleReview(request, response, user, photoId) {
 
 async function handleDelete(request, response, user, photoId) {
   if (user.role !== 'prefecture_admin') return sendError(response, request, 403, 'prefecture_role_required');
-  const result = await pool.query('SELECT id, object_key, storage_key, is_reference FROM photos WHERE id = $1', [photoId]);
+  const result = await pool.query('SELECT id, object_key, storage_key, thumbnail_key, is_reference FROM photos WHERE id = $1', [photoId]);
   if (!result.rowCount) return sendError(response, request, 404, 'photo_not_found');
   if (result.rows[0].is_reference) return sendError(response, request, 409, 'reference_photo_cannot_be_deleted');
   await pool.query('DELETE FROM photos WHERE id = $1', [photoId]);
   await removeMedia(result.rows[0].storage_key, mediaRoot(process.env));
+  if (result.rows[0].thumbnail_key) await removeMedia(result.rows[0].thumbnail_key, mediaRoot(process.env));
   await pool.query('INSERT INTO audit_log (actor_user_id, action, object_key, photo_id) VALUES ($1,$2,$3,$4)', [user.id, 'photo_deleted', result.rows[0].object_key, photoId]);
   response.writeHead(204);
   response.end();
@@ -193,7 +220,7 @@ async function handleDelete(request, response, user, photoId) {
 async function handler(request, response) {
   if (request.method === 'OPTIONS') {
     if (!originAllowed(request)) return sendError(response, request, 403, 'origin_not_allowed');
-    response.writeHead(204, { 'Access-Control-Allow-Origin': request.headers.origin || '*', 'Access-Control-Allow-Credentials': 'true', 'Access-Control-Allow-Headers': 'Content-Type, Idempotency-Key', 'Access-Control-Allow-Methods': 'GET,POST,PATCH,DELETE,OPTIONS', Vary: 'Origin' });
+    response.writeHead(204, { 'Access-Control-Allow-Origin': request.headers.origin || '*', 'Access-Control-Allow-Credentials': 'true', 'Access-Control-Allow-Headers': 'Content-Type, Idempotency-Key, Authorization', 'Access-Control-Allow-Methods': 'GET,POST,PATCH,DELETE,OPTIONS', Vary: 'Origin' });
     response.end();
     return;
   }
@@ -202,9 +229,9 @@ async function handler(request, response) {
   try {
     if (pathname === '/auth/login' && request.method === 'POST') return handleLogin(request, response);
     if (pathname === '/auth/logout' && request.method === 'POST') {
-      const token = parseCookies(request.headers.cookie).photo_session;
+      const token = sessionToken(request);
       if (token) await pool.query('DELETE FROM sessions WHERE token_hash = $1', [hashSessionToken(token)]);
-      response.setHeader('Set-Cookie', expiredSessionCookie(cookiePath));
+      response.setHeader('Set-Cookie', expiredSessionCookie(cookiePolicy));
       return sendJson(response, 200, { ok: true }, request);
     }
     const user = await currentUser(request);
@@ -230,7 +257,9 @@ async function handler(request, response) {
     if (contentMatch && request.method === 'GET') {
       const result = await pool.query(`SELECT p.storage_key, p.mime_type, o.district FROM photos p JOIN objects o ON o.object_key = p.object_key WHERE p.id = $1 AND p.review_status <> 'rejected'`, [contentMatch[1]]);
       if (!result.rowCount || (user.role === 'district_editor' && result.rows[0].district !== user.district)) return sendError(response, request, 404, 'photo_not_found');
-      response.writeHead(200, { 'Content-Type': result.rows[0].mime_type, 'Cache-Control': 'private, max-age=300', 'X-Content-Type-Options': 'nosniff' });
+      // The atlas reads photo bytes through an authorised fetch, so the media response
+      // needs the same CORS headers as the JSON endpoints.
+      response.writeHead(200, { 'Content-Type': result.rows[0].mime_type, 'Cache-Control': 'private, max-age=300', 'X-Content-Type-Options': 'nosniff', ...corsHeaders(request) });
       readMedia(result.rows[0].storage_key, mediaRoot(process.env)).on('error', () => { if (!response.headersSent) sendError(response, request, 404, 'media_not_found'); else response.destroy(); }).pipe(response);
       return;
     }
@@ -252,7 +281,7 @@ async function handler(request, response) {
       const url = new URL(request.url, 'http://photo-service.local');
       const rows = await loadReportRows(pool, user, url.searchParams.get('district') || undefined);
       const buffer = await buildExcel(rows);
-      response.writeHead(200, { 'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'Content-Disposition': 'attachment; filename="sao-photo-report.xlsx"', 'Cache-Control': 'no-store' });
+      response.writeHead(200, { 'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'Content-Disposition': 'attachment; filename="sao-photo-report.xlsx"', 'Cache-Control': 'no-store', ...corsHeaders(request) });
       response.end(buffer);
       return;
     }
@@ -260,7 +289,7 @@ async function handler(request, response) {
       const url = new URL(request.url, 'http://photo-service.local');
       const rows = await loadReportRows(pool, user, url.searchParams.get('district') || undefined);
       const buffer = await buildPdf(rows);
-      response.writeHead(200, { 'Content-Type': 'application/pdf', 'Content-Disposition': 'attachment; filename="sao-photo-summary.pdf"', 'Cache-Control': 'no-store' });
+      response.writeHead(200, { 'Content-Type': 'application/pdf', 'Content-Disposition': 'attachment; filename="sao-photo-summary.pdf"', 'Cache-Control': 'no-store', ...corsHeaders(request) });
       response.end(buffer);
       return;
     }
