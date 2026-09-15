@@ -5,9 +5,14 @@ const scrypt = promisify(scryptCallback);
 const KEY_LENGTH = 64;
 const MAX_SESSION_AGE_SECONDS = 8 * 60 * 60;
 
+export function normalizeLogin(login) {
+  if (typeof login !== 'string') return '';
+  return login.trim().toLowerCase();
+}
+
+// Backwards-compatible name for older API clients that still send `email`.
 export function normalizeEmail(email) {
-  if (typeof email !== 'string') return '';
-  return email.trim().toLowerCase();
+  return normalizeLogin(email);
 }
 
 export async function hashPassword(password) {

@@ -1,6 +1,12 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { hashPassword, hashSessionToken, parseCookies, sessionCookie, verifyPassword } from '../src/auth.js';
+import { hashPassword, hashSessionToken, normalizeLogin, parseCookies, sessionCookie, verifyPassword } from '../src/auth.js';
+
+test('district names are accepted as normalized logins', () => {
+  assert.equal(normalizeLogin('  Аэропорт '), 'аэропорт');
+  assert.equal(normalizeLogin(''), '');
+  assert.equal(normalizeLogin(null), '');
+});
 
 test('passwords use a salted scrypt encoding and verify without exposing the password', async () => {
   const encoded = await hashPassword('long-enough-test-password');

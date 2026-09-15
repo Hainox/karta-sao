@@ -1,7 +1,7 @@
 import { randomUUID } from 'node:crypto';
 import { Pool } from 'pg';
 import { photoServiceDatabaseConfig } from '../src/config.js';
-import { hashPassword, normalizeEmail } from '../src/auth.js';
+import { hashPassword, normalizeLogin } from '../src/auth.js';
 
 function option(name) {
   const index = process.argv.indexOf(`--${name}`);
@@ -41,13 +41,13 @@ async function readHidden(prompt) {
   });
 }
 
-const email = normalizeEmail(option('email'));
+const login = normalizeLogin(option('login') ?? option('email'));
 const displayName = option('display-name');
 const role = option('role');
 const district = option('district') || null;
-if (!email || !displayName || !['district_editor', 'prefecture_admin'].includes(role)
+if (!login || !displayName || !['district_editor', 'prefecture_admin'].includes(role)
   || (role === 'district_editor' && !district) || (role === 'prefecture_admin' && district)) {
-  console.error('Usage: node scripts/create-user.js --email EMAIL --display-name NAME --role district_editor|prefecture_admin [--district DISTRICT]');
+  console.error('Usage: node scripts/create-user.js --login LOGIN --display-name NAME --role district_editor|prefecture_admin [--district DISTRICT]');
   process.exit(2);
 }
 const password = await readHidden('Password (12+ chars, input hidden): ');
@@ -62,9 +62,9 @@ try {
   await pool.query(
     `INSERT INTO users (id, email, display_name, role, district, password_hash)
      VALUES ($1, $2, $3, $4, $5, $6)`,
-    [randomUUID(), email, displayName.trim(), role, district?.trim() || null, hash],
+    [randomUUID(), login, displayName.trim(), role, district?.trim() || null, hash],
   );
-  console.log(`Created ${role} account ${email}`);
+  console.log(`Created ${role} account ${login}`);
 } catch (error) {
   if (error.code === '23505') {
     console.error('An account with this email already exists');

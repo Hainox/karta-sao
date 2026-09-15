@@ -37,19 +37,19 @@ docker network create sao-photo-service-edge
 npm ci --ignore-scripts --no-audit --no-fund
 npm test
 npm run migrate
-npm run create-user -- --email user@example.invalid --display-name "Имя" --role district_editor --district "Аэропорт"
+npm run create-user -- --login "Аэропорт" --display-name "Аэропорт" --role district_editor --district "Аэропорт"
 npm run import-maps -- --dry-run
 npm run import-maps -- --apply
 ```
 
-Пароль вводится скрыто и не передаётся в аргументах. Для префектуры используется `--role prefecture_admin` без `--district`. Реальные production-учётки создавать только после отдельной проверки хоста и резервной копии.
+Пароль вводится скрыто и не передаётся в аргументах; минимальная длина — 12 символов. Для совместимости старых клиентов `--email` и JSON-поле `email` принимаются как алиасы логина. Для префектуры используется `--role prefecture_admin` без `--district`. Реальные production-учётки создавать только после отдельной проверки хоста и резервной копии.
 
 Импорт по умолчанию выполняется в dry-run. Для контейнера, где исходные карты смонтированы отдельно, использовать `--source-root=/sources`.
 
 ## HTTP API
 
 - `GET /healthz` — только доступность этой PostgreSQL; не legacy health.
-- `POST /auth/login`, `POST /auth/logout`, `GET /auth/me` — индивидуальная сессия в httpOnly cookie.
+- `POST /auth/login`, `POST /auth/logout`, `GET /auth/me` — сессия в httpOnly cookie; логин может быть названием района, JSON принимает `login` (старый алиас `email`).
 - `GET /objects/resolve?datasetId=...&sourceId=...` — авторизованный поиск ключа.
 - `GET /photos?datasetId=...&sourceId=...` — галерея в пределах роли.
 - `POST /photos` — multipart `file`, `datasetId`, `sourceId`, `performer`, обязательные `gpsLat`/`gpsLon`; заголовок `Idempotency-Key` обязателен.
@@ -66,7 +66,7 @@ npm run import-maps -- --apply
 1. Сохранить старую конфигурацию reverse-proxy и отдельный backup новой службы.
 2. Создать внешнюю сеть `docker network create sao-photo-service-edge`.
 3. Применить `node scripts/migrate.js`, затем `node scripts/import-object-maps.js --apply` с источниками карт.
-4. Создать индивидуальные учётки через `create-user.js`; общий пароль запрещён.
+4. Создать согласованные районные учётки через `create-user.js`; логин — название района, пароль вводится скрыто и должен иметь минимум 12 символов. Общие пароли короче этого порога запрещены.
 5. Запустить `/opt/sao-photo-service/photo-service/scripts/backup.sh`, проверить `SHA256SUMS`, затем выполнить тестовый restore в отдельном Compose project.
 6. Подключить `deploy/nginx/sao-photo-location.conf` в TLS server старого proxy и добавить proxy-контейнеру только сеть `sao-photo-service-edge`; старые ODH/JiraJura services не менять.
 7. Проверить health, login, upload с GPS, повтор по тому же `Idempotency-Key`, review, выдачу фото, summary, Excel и PDF. При ошибках вернуть предыдущий proxy template и остановить только новый Compose project.

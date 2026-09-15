@@ -116,7 +116,7 @@
         </div>
       </div>
       <div class="top-actions">
-        <form class="photo-login" id="photoLogin"><input id="loginEmail" type="email" placeholder="Логин" autocomplete="username" aria-label="Логин"><input id="loginPassword" type="password" placeholder="Пароль" autocomplete="current-password" aria-label="Пароль"><button class="export-btn" type="submit">Войти</button></form><span class="local-tag" id="loginState">Серверная фотослужба</span>
+        <form class="photo-login" id="photoLogin"><input id="loginEmail" type="text" placeholder="Название района" autocomplete="username" aria-label="Название района"><input id="loginPassword" type="password" placeholder="Пароль" autocomplete="current-password" aria-label="Пароль"><button class="export-btn" type="submit">Войти</button></form><span class="local-tag" id="loginState">Серверная фотослужба</span>
         <button class="export-btn" id="exportCsv" type="button">Скачать CSV для Яндекса</button>
       </div>
     </header>
@@ -633,7 +633,7 @@
         const button = form.querySelector("button");
         if (button.textContent === "Выйти") { await photoApi("/auth/logout", {method:"POST"}).catch(() => {}); location.reload(); return; }
         button.disabled = true;
-        try { const body = await photoApi("/auth/login", {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({email:el("loginEmail").value, password:el("loginPassword").value})}); setLoggedIn(body.user); el("loginPassword").value = ""; await loadPhotoCounts(); }
+        try { const body = await photoApi("/auth/login", {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({login:el("loginEmail").value, password:el("loginPassword").value})}); setLoggedIn(body.user); el("loginPassword").value = ""; await loadPhotoCounts(); }
         catch (error) { showToast("Вход не выполнен: " + (error.message || "проверьте логин и пароль"), true); }
         finally { button.disabled = false; }
       });

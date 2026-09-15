@@ -6,7 +6,7 @@ import { photoServiceDatabaseConfig } from './src/config.js';
 import { createHealthHandler } from './src/health.js';
 import {
   createSessionToken, expiredSessionCookie, hashSessionToken,
-  MAX_SESSION_AGE_SECONDS, normalizeEmail, parseCookies, sessionCookie, verifyPassword,
+  MAX_SESSION_AGE_SECONDS, normalizeLogin, parseCookies, sessionCookie, verifyPassword,
 } from './src/auth.js';
 import { parseMultipart } from './src/multipart.js';
 import { buildExcel, buildPdf } from './src/exports.js';
@@ -106,8 +106,8 @@ async function handleLogin(request, response) {
   if (!loginAllowed(request)) return sendError(response, request, 429, 'too_many_login_attempts');
   let body;
   try { body = await readJson(request); } catch (error) { return sendError(response, request, 400, error.code || 'invalid_json'); }
-  const email = normalizeEmail(body.email);
-  const result = await pool.query('SELECT * FROM users WHERE email = $1 AND active = true', [email]);
+  const login = normalizeLogin(body.login ?? body.email);
+  const result = await pool.query('SELECT * FROM users WHERE email = $1 AND active = true', [login]);
   const user = result.rows[0];
   if (!user || !(await verifyPassword(body.password, user.password_hash))) return sendError(response, request, 401, 'invalid_credentials');
   const token = createSessionToken();
