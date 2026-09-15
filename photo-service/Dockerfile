@@ -7,6 +7,7 @@ COPY package.json package-lock.json ./
 RUN npm ci --omit=dev --ignore-scripts
 
 COPY --chown=node:node src ./src
+COPY --chown=node:node assets ./assets
 COPY --chown=node:node migrations ./migrations
 COPY --chown=node:node scripts ./scripts
 COPY --chown=node:node server.js ./server.js

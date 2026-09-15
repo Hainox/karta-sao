@@ -2,7 +2,31 @@ import ExcelJS from 'exceljs';
 import PDFDocument from 'pdfkit';
 import { reportPayload } from './reports.js';
 import { readFile } from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
 import { mediaRoot } from './storage.js';
+
+// PDFKit's built-in Helvetica cannot encode Cyrillic: the text is written with a
+// WinAnsi mapping and no ToUnicode table, so the report renders and copies as
+// garbage. A bundled TTF with Cyrillic fixes both reading and copy-paste.
+const PDF_FONT_PATH = fileURLToPath(new URL('../assets/fonts/PT_Sans-Web-Regular.ttf', import.meta.url));
+export const PDF_FONT_NAME = 'report-body';
+
+const OBJECT_TYPE_LABELS = Object.freeze({ stop: 'Остановки', pp: 'ПП', entrance: 'Подъезды' });
+const STATUS_BAND_LABELS = Object.freeze({ low: 'Красный', middle: 'Жёлтый', high: 'Зелёный' });
+
+export function objectTypeLabel(type) {
+  return OBJECT_TYPE_LABELS[type] || String(type);
+}
+
+// The band is a colour word in the report; the raw code stays internal.
+export function statusBandLabel(band) {
+  return STATUS_BAND_LABELS[band] || 'нет данных';
+}
+
+export function percentLabel(value) {
+  if (value === null || value === undefined || Number.isNaN(Number(value))) return 'нет данных';
+  return `${Number(value).toFixed(1).replace('.', ',')} %`;
+}
 
 export async function buildExcel(rows) {
   const payload = reportPayload(rows);
@@ -20,8 +44,8 @@ export async function buildExcel(rows) {
     ['Завершено', payload.overall.completedObjects],
     ['На проверке', payload.overall.pendingReviewObjects],
     ['Риски GPS', payload.overall.geoRiskObjects],
-    ['Выполнение, %', payload.overall.completionPercent ?? '—'],
-    ['Статус', payload.overall.statusBand ?? '—'],
+    ['Выполнение', percentLabel(payload.overall.completionPercent)],
+    ['Статус', statusBandLabel(payload.overall.statusBand)],
   ]);
   const objects = workbook.addWorksheet('Объекты');
   objects.columns = [
@@ -31,7 +55,7 @@ export async function buildExcel(rows) {
     { header: 'GPS-риск', key: 'geoRisk', width: 12 },
   ];
   for (const row of payload.objects) {
-    objects.addRow({ district: row.district || 'Без района', objectType: row.objectType, label: row.label,
+    objects.addRow({ district: row.district || 'Без района', objectType: objectTypeLabel(row.objectType), label: row.label,
       objectKey: row.objectKey, confirmed: row.confirmedPhotos, pending: row.pendingReviewPhotos,
       geoRisk: row.geoRisk ? 'Да' : 'Нет' });
   }
@@ -46,7 +70,7 @@ export async function buildExcel(rows) {
   let rowNumber = 2;
   for (const object of payload.objects) {
     for (const photo of object.photos) {
-      const excelRow = photos.addRow({ district: object.district || 'Без района', objectType: object.objectType,
+      const excelRow = photos.addRow({ district: object.district || 'Без района', objectType: objectTypeLabel(object.objectType),
         label: object.label, reviewStatus: photo.reviewStatus, geoStatus: photo.geoStatus,
         distanceM: photo.distanceM ?? '—', performer: photo.performer, comment: photo.comment,
         filename: photo.originalFilename });
@@ -77,6 +101,9 @@ export function buildPdf(rows) {
     doc.on('data', (chunk) => chunks.push(chunk));
     doc.on('end', () => resolve(Buffer.concat(chunks)));
     doc.on('error', reject);
+    // Without a Cyrillic font the whole report is unreadable and copies as garbage.
+    doc.registerFont(PDF_FONT_NAME, PDF_FONT_PATH);
+    doc.font(PDF_FONT_NAME);
     doc.fontSize(18).text('Краткий отчёт фотофиксации САО');
     doc.moveDown(0.5).fontSize(11).text(`Сформирован: ${new Date().toLocaleString('ru-RU')}`);
     doc.text(`Версия набора объектов: ${payload.sourceVersions.join(', ') || 'не указана'}`);
@@ -85,14 +112,17 @@ export function buildPdf(rows) {
     doc.text(`Без фото: ${payload.overall.objectsWithoutPhoto}`);
     doc.text(`Завершено по норме: ${payload.overall.completedObjects}`);
     doc.text(`На ручной проверке: ${payload.overall.pendingReviewObjects}`);
-    doc.text(`GPS-риск (>20 м): ${payload.overall.geoRiskObjects}`);
-    doc.text(`Выполнение: ${payload.overall.completionPercent ?? '—'}%`);
-    doc.text(`Статус: ${payload.overall.statusBand ?? '—'}`);
+    doc.text(`GPS-риск, дальше 20 м: ${payload.overall.geoRiskObjects}`);
+    doc.text(`Выполнение: ${percentLabel(payload.overall.completionPercent)}`);
+    doc.text(`Статус: ${statusBandLabel(payload.overall.statusBand)}`);
     doc.moveDown().fontSize(13).text('По типам объектов');
     for (const [type, summary] of Object.entries(payload.byType)) {
-      doc.fontSize(11).text(`${type}: ${summary.completedObjects}/${summary.totalObjects}, ${summary.completionPercent ?? '—'}%, статус ${summary.statusBand ?? '—'}`);
+      doc.fontSize(11).text(
+        `${objectTypeLabel(type)}: ${summary.completedObjects} из ${summary.totalObjects}, `
+        + `${percentLabel(summary.completionPercent)}, статус ${statusBandLabel(summary.statusBand)}`,
+      );
     }
-    doc.moveDown().fontSize(9).fillColor('#555').text('PDF содержит краткую сводку. Полный перечень объектов, метаданные и фотографии — в Excel-выгрузке.');
+    doc.moveDown().fontSize(9).fillColor('#555').text('PDF содержит краткую сводку. Полный перечень объектов, метаданные и фотографии есть в Excel-выгрузке.');
     doc.end();
   });
 }
