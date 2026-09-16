@@ -66,6 +66,19 @@
           <h2>Итог</h2><div class="summary"><div><b id="acceptedCount">0</b>выбрано</div><div><b id="conflictCount">0</b>конфликтов</div><div><b id="rejectedCount">0</b>отклонено</div><div><b id="featureCount">0</b>объектов</div></div>
         </section>
         <section class="panel"><h2>Наборы правок</h2><div id="fileList" class="file-list"><p class="small">Наборы ещё не загружены.</p></div></section>
+        <section class="panel">
+          <h2>Обозначения объектов</h2>
+          <p class="small">Подпись на карте — код объекта и его номер в наборе, например «РП №4». Режим подписей переключается.</p>
+          <div id="labelsToggle" class="labels-toggle-wrap"></div>
+          <div id="typeLegend" class="type-legend"></div>
+        </section>
+        <section class="panel">
+          <h2>Объекты набора</h2>
+          <p class="small">Список объектов выбранных наборов. Клик по строке подводит карту к объекту и открывает его карточку.</p>
+          <label for="objectFilter">Тип объекта</label><select id="objectFilter"><option value="all">Все типы</option></select>
+          <p id="objectJournalCount" class="small">Показано 0 из 0</p>
+          <div id="objectJournal" class="object-journal"><p class="small">Выберите набор — ниже появится список его объектов.</p></div>
+        </section>
         <div id="status" class="status">Загружаю границу САО…</div>
       </aside>
       <div id="map" aria-label="Карта проверки районных правок"></div>
@@ -74,6 +87,7 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="district-changes.js"></script>
   <script src="route-visuals.js"></script>
+  <script src="object-labels.js"></script>
   <script src="api-config.js"></script>
   <input id="photoFileInput" type="file" accept="image/jpeg,image/png,image/webp" hidden>
   <script>
@@ -83,12 +97,11 @@
       map.attributionControl.setPrefix(false);
       L.tileLayer('https://core-renderer-tiles.maps.yandex.net/tiles?l=map&x={x}&y={y}&z={z}&scale=1&lang=ru_RU&projection=web_mercator', { maxZoom:19, attribution:'© <a href="https://yandex.ru/maps/">Яндекс</a>' }).addTo(map);
       const acceptedGroup = L.featureGroup().addTo(map); const photoMarkerGroup = L.featureGroup().addTo(map); const entries = []; const photoMarkerLayers = new Map(); let boundary = null; let photoMarkers = []; let photoMode = false;
-      const ids = ['reviewFiles','exportBundle','clearReview','status','acceptedCount','conflictCount','rejectedCount','featureCount','fileList','apiBase','apiEmail','apiPassword','sessionInfo','loadApiButton','exportReviewArchiveButton','exportApiButton','photoMarkersPanel','photoModeButton','photoMarkersInfo','photoMarkerList','photoFileInput','importLegacyPhotoMarkersButton']; const fields = Object.fromEntries(ids.map((id) => [id, document.getElementById(id)])); fields.apiBase.value = ODHApi.base();
-      const esc = (value) => String(value ?? '').replace(/[&<>"']/g, (character) => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[character]));
+      const ids = ['reviewFiles','exportBundle','clearReview','status','acceptedCount','conflictCount','rejectedCount','featureCount','fileList','apiBase','apiEmail','apiPassword','sessionInfo','loadApiButton','exportReviewArchiveButton','exportApiButton','photoMarkersPanel','photoModeButton','photoMarkersInfo','photoMarkerList','photoFileInput','importLegacyPhotoMarkersButton','labelsToggle','typeLegend','objectJournal','objectJournalCount','objectFilter']; const fields = Object.fromEntries(ids.map((id) => [id, document.getElementById(id)])); fields.apiBase.value = ODHApi.base();
+      let objectFilter = 'all';
       function setStatus(text, kind = '') { fields.status.textContent = text; fields.status.className = `status ${kind}`; }
       function formatDate(value) { const date = new Date(value); return Number.isNaN(date.valueOf()) ? 'дата не указана' : date.toLocaleString('ru-RU'); }
       function visualOptions(feature) { const style = DistrictChanges.styleFor(feature); return { color:style.color, weight:style.weight || 4, dashArray:style.dashArray || null, fillColor:style.color, fillOpacity:style.fillOpacity ?? .35, radius:8 }; }
-      function label(feature) { const p = feature.properties || {}; return p.change_type === 'queue' ? `Очередь ${p.queue_priority}` : DistrictChanges.labelFor(p.change_type); }
       function isPrefecture() { return ODHApi.user()?.role === 'prefecture_admin'; }
       function isReviewer() { return ODHApi.user()?.role === 'prefecture_admin'; }
       function requireReviewer() { const user = ODHApi.user(); if (!user) { setStatus('Сначала войдите под учётной записью приёмки.', 'error'); return false; } if (!isReviewer()) { setStatus(`Роль «${user.role}» не имеет доступа к приёмке: раздел открыт только префектуре.`, 'error'); return false; } return true; }
@@ -96,10 +109,89 @@
       function markerLabel(marker) { return `Фото-метка · ${formatDate(marker.created_at)}`; }
       function selectedEntries() { return entries.filter((entry) => entry.valid && entry.selected); }
       function conflicts() { return [...new Set(entries.filter((entry) => entry.valid && !entry.selected).map((entry) => entry.changeSet.district))]; }
-      function syncMapLayers() { acceptedGroup.clearLayers(); selectedEntries().forEach((entry) => acceptedGroup.addLayer(entry.layers)); }
+      function syncMapLayers() { acceptedGroup.clearLayers(); selectedEntries().forEach((entry) => acceptedGroup.addLayer(entry.layers)); ODHObjectLabels.refresh(); }
       function reconcileDistrict(district) { const candidates = entries.filter((entry) => entry.valid && entry.changeSet.district === district); if (candidates.length <= 1) candidates.forEach((entry) => { entry.selected = true; }); else candidates.forEach((entry) => { entry.selected = false; }); }
       function addEntryLayers(entry) {
-        entry.layers = L.featureGroup(); entry.changeSet.features.forEach((feature) => { const layer = L.geoJSON(feature, { style:() => visualOptions(feature), pointToLayer:(_, latlng) => L.circleMarker(latlng, visualOptions(feature)) }); const p = feature.properties || {}; layer.bindPopup(`<b>${esc(label(feature))}</b><br><b>Район:</b> ${esc(p.district)}<br><b>Адрес:</b> ${esc(p.address)}<br><b>Набор:</b> ${esc(entry.name)}${DistrictChanges.ROUTE_TYPES.has(p.change_type) ? '<br><b>Направление:</b> от зелёной метки «НАЧАЛО» к красной «КОНЕЦ»' : ''}`); entry.layers.addLayer(layer); if (DistrictChanges.ROUTE_TYPES.has(p.change_type)) ODHRouteVisuals.addTo(entry.layers, feature); });
+        entry.layers = L.featureGroup(); entry.layersByFeature = new Map();
+        entry.changeSet.features.forEach((feature, index) => {
+          const layer = L.geoJSON(feature, { style:() => visualOptions(feature), pointToLayer:(_, latlng) => L.circleMarker(latlng, visualOptions(feature)) });
+          entry.layers.addLayer(layer); entry.layersByFeature.set(feature, layer);
+          // Подпись и карточка объекта — общие с редактором района, поэтому префектура
+          // видит ровно то же обозначение, что нарисовал район.
+          ODHObjectLabels.attach(layer, feature, {
+            index,
+            district:entry.changeSet.district,
+            balanceHolder:`Жилищник «${entry.changeSet.district}»`,
+            author:entry.changeSet.author,
+            setName:entry.name,
+            submittedAt:entry.submittedAt ? formatDate(entry.submittedAt) : '',
+            status:entry.remoteStatus || (entry.remote ? 'submitted' : 'proposed')
+          }, { group:entry.layers });
+        });
+      }
+      function focusObject(entry, feature) {
+        const layer = entry.layersByFeature?.get(feature);
+        if (!layer || !acceptedGroup.hasLayer(entry.layers)) return setStatus('Сначала выберите этот набор района — объект должен быть показан на карте.', 'error');
+        const bounds = layer.getBounds();
+        if (bounds.isValid()) map.fitBounds(bounds, { padding:[46,46], maxZoom:17 });
+        ODHObjectLabels.openPopup(layer);
+      }
+      function matchesObjectFilter(feature) {
+        return objectFilter === 'all' || feature.properties?.change_type === objectFilter;
+      }
+      function objectRow(entry, feature, index) {
+        const row = document.createElement('button'); row.type = 'button'; row.className = 'object-row';
+        const badge = document.createElement('span'); badge.className = 'object-badge';
+        badge.style.setProperty('--object-color', DistrictChanges.styleFor(feature).color);
+        badge.textContent = DistrictChanges.badgeFor(feature, index);
+        const text = document.createElement('span'); text.className = 'object-row-text'; text.textContent = DistrictChanges.describeFor(feature);
+        const facts = DistrictChanges.routeFactsFor(feature);
+        const note = document.createElement('em'); note.className = 'small';
+        note.textContent = facts ? `Сопло: ${facts.nozzle}` : (feature.properties?.comment || '');
+        row.append(badge, text, note);
+        row.onclick = () => focusObject(entry, feature);
+        return row;
+      }
+      function renderObjectFilter() {
+        const present = new Set();
+        selectedEntries().forEach((entry) => entry.changeSet.features.forEach((feature) => present.add(feature.properties.change_type)));
+        const previous = objectFilter;
+        fields.objectFilter.replaceChildren(new Option('Все типы', 'all'));
+        Object.entries(DistrictChanges.TYPES).forEach(([key, type]) => { if (present.has(key)) fields.objectFilter.add(new Option(type.label, key)); });
+        objectFilter = previous === 'all' || present.has(previous) ? previous : 'all';
+        fields.objectFilter.value = objectFilter;
+      }
+      function renderObjectJournal() {
+        const accepted = selectedEntries();
+        fields.objectJournal.replaceChildren();
+        if (!accepted.length) { const empty = document.createElement('p'); empty.className = 'small'; empty.textContent = 'Выберите набор — ниже появится список его объектов с номерами и адресами.'; fields.objectJournal.append(empty); fields.objectJournalCount.textContent = 'Показано 0 из 0'; return; }
+        let shown = 0; let total = 0;
+        for (const entry of accepted) {
+          const head = document.createElement('p'); head.className = 'object-group-head';
+          head.textContent = `${entry.changeSet.district} · ${entry.name}`; fields.objectJournal.append(head);
+          const groups = { route: [], zone: [], point: [] };
+          entry.changeSet.features.forEach((feature, index) => groups[DistrictChanges.groupOf(feature)].push({ feature, index }));
+          for (const [key, groupLabel] of Object.entries(DistrictChanges.GROUP_LABELS)) {
+            const all = groups[key]; if (!all.length) continue;
+            total += all.length;
+            const visible = all.filter(({ feature }) => matchesObjectFilter(feature));
+            if (!visible.length) continue;
+            const subhead = document.createElement('p'); subhead.className = 'object-subhead';
+            subhead.textContent = `${groupLabel} — ${visible.length} из ${all.length}`; fields.objectJournal.append(subhead);
+            visible.forEach(({ feature, index }) => { fields.objectJournal.append(objectRow(entry, feature, index)); shown += 1; });
+          }
+        }
+        fields.objectJournalCount.textContent = `Показано ${shown} из ${total}`;
+      }
+      function refreshObjectPanels() { renderObjectFilter(); renderObjectJournal(); }
+      function labelsModeMessage(mode) { return mode === ODHObjectLabels.MODE_HOVER ? 'Подписи показываются при наведении на объект.' : 'Подписи показаны у всех объектов на карте.'; }
+      function renderLabelsToggle() { ODHObjectLabels.renderToggle(fields.labelsToggle, (mode) => setStatus(labelsModeMessage(mode), 'good')); }
+      // Плотные наборы сразу открываются в режиме «по наведению», иначе подписи
+      // перекрывают друг друга и карта перестаёт читаться.
+      function applyLabelsMode() {
+        const total = entries.filter((entry) => entry.valid).reduce((sum, entry) => sum + entry.changeSet.features.length, 0);
+        ODHObjectLabels.setMode(ODHObjectLabels.modeForCount(total));
+        renderLabelsToggle();
       }
       function selectEntry(entry) { entries.filter((candidate) => candidate.valid && candidate.changeSet.district === entry.changeSet.district).forEach((candidate) => { candidate.selected = candidate === entry; }); syncMapLayers(); refresh(); setStatus(`Выбран актуальный набор района «${entry.changeSet.district}».`, 'good'); }
       function cardButton(text, className, handler) { const button = document.createElement('button'); button.type = 'button'; button.className = className; button.textContent = text; button.onclick = handler; return button; }
@@ -133,11 +225,14 @@
       function refresh() {
         const accepted = selectedEntries(); const rejected = entries.filter((entry) => !entry.valid || entry.remoteStatus === 'rejected').length; const conflictCount = conflicts().length; const features = accepted.reduce((sum, entry) => sum + entry.changeSet.features.length, 0);
         fields.acceptedCount.textContent = accepted.length; fields.rejectedCount.textContent = rejected; fields.conflictCount.textContent = conflictCount; fields.featureCount.textContent = features; fields.exportBundle.disabled = !accepted.length; fields.clearReview.disabled = !entries.length; fields.fileList.replaceChildren();
+        refreshObjectPanels();
         if (!entries.length) { const empty = document.createElement('p'); empty.className = 'small'; empty.textContent = 'Наборы ещё не загружены.'; fields.fileList.append(empty); return; }
         entries.forEach((entry) => {
           const state = !entry.valid || entry.remoteStatus === 'rejected' ? 'rejected' : entry.selected ? 'accepted' : 'conflict'; const card = document.createElement('div'); card.className = `file-card ${state}`;
           const title = document.createElement('b'); title.textContent = entry.name; const info = document.createElement('span'); const source = entry.remote ? 'Единая база' : 'Локальный файл';
-          info.textContent = entry.valid ? `${source} · ${entry.changeSet.district} · ${entry.changeSet.author}\n${entry.changeSet.features.length} объектов · ${formatDate(entry.changeSet.created_at || entry.submittedAt)}${entry.remoteStatus ? `\nСтатус: ${entry.remoteStatus}.` : entry.selected ? '\nВыбран для сводки.' : '\nНужен выбор актуального варианта района.'}` : entry.errors.join('\n');
+          const counts = entry.valid ? DistrictChanges.groupCounts(entry.changeSet.features) : null;
+          const breakdown = counts ? Object.entries(DistrictChanges.GROUP_LABELS).filter(([key]) => counts[key]).map(([key, name]) => `${name}: ${counts[key]}`).join(' · ') : '';
+          info.textContent = entry.valid ? `${source} · ${entry.changeSet.district} · ${entry.changeSet.author}\nБалансодержатель: Жилищник «${entry.changeSet.district}»\n${entry.changeSet.features.length} объектов${breakdown ? ` (${breakdown})` : ''} · ${formatDate(entry.changeSet.created_at || entry.submittedAt)}${entry.remoteStatus ? `\nСтатус: ${entry.remoteStatus}.` : entry.selected ? '\nВыбран для сводки.' : '\nНужен выбор актуального варианта района.'}` : entry.errors.join('\n');
           const actions = document.createElement('div'); actions.className = 'card-actions';
           if (entry.valid && !entry.remote && !entry.selected) actions.append(cardButton('Выбрать актуальным', '', () => selectEntry(entry)));
           if (entry.valid && entry.remote && entry.remoteStatus === 'submitted') { actions.append(cardButton('Утвердить', '', () => review(entry, 'approved'))); actions.append(cardButton('Отклонить', 'danger', () => review(entry, 'rejected'))); }
@@ -150,8 +245,8 @@
         catch (error) { entry.errors = String(error.message || error).split('\n').filter(Boolean).slice(0, 12); if (!entry.errors.length) entry.errors = ['Не удалось прочитать файл.']; }
         entries.push(entry);
       }
-      async function loadFiles(files) { if (!boundary || !files.length) return; setStatus(`Проверяю файлов: ${files.length}…`); const districts = new Set(); for (const file of files) { await loadFile(file); const entry = entries.at(-1); if (entry.valid) districts.add(entry.changeSet.district); } districts.forEach(reconcileDistrict); syncMapLayers(); refresh(); setStatus(`Проверка завершена: выбрано ${selectedEntries().length}, конфликтов ${conflicts().length}.`, conflicts().length ? 'error' : 'good'); fields.reviewFiles.value = ''; }
-      function clearReview() { entries.splice(0); acceptedGroup.clearLayers(); refresh(); setStatus('Список и временное наложение очищены. Публичная карта не затронута.', 'good'); }
+      async function loadFiles(files) { if (!boundary || !files.length) return; setStatus(`Проверяю файлов: ${files.length}…`); const districts = new Set(); for (const file of files) { await loadFile(file); const entry = entries.at(-1); if (entry.valid) districts.add(entry.changeSet.district); } districts.forEach(reconcileDistrict); syncMapLayers(); applyLabelsMode(); refresh(); setStatus(`Проверка завершена: выбрано ${selectedEntries().length}, конфликтов ${conflicts().length}.`, conflicts().length ? 'error' : 'good'); fields.reviewFiles.value = ''; }
+      function clearReview() { entries.splice(0); acceptedGroup.clearLayers(); ODHObjectLabels.clear(); refresh(); setStatus('Список и временное наложение очищены. Публичная карта не затронута.', 'good'); }
       function downloadJson(payload, filename) { const link = document.createElement('a'); link.href = URL.createObjectURL(new Blob([JSON.stringify(payload, null, 2)], { type:'application/geo+json' })); link.download = filename; link.click(); setTimeout(() => URL.revokeObjectURL(link.href), 0); }
       function downloadBlob(blob, filename) { const link = document.createElement('a'); link.href = URL.createObjectURL(blob); link.download = filename; link.click(); setTimeout(() => URL.revokeObjectURL(link.href), 0); }
       function exportBundle() { const accepted = selectedEntries(); if (!accepted.length) return; const reviewedAt = new Date().toISOString(); const bundle = { type:'FeatureCollection', review_bundle_version:DistrictChanges.REVIEW_VERSION, reviewed_at:reviewedAt, review_status:'local_review', sources:accepted.map((entry) => ({ file_name:entry.name, district:entry.changeSet.district, author:entry.changeSet.author, created_at:entry.changeSet.created_at, features:entry.changeSet.features.length })), features:accepted.flatMap((entry) => entry.changeSet.features.map((feature) => ({ ...JSON.parse(JSON.stringify(feature)), properties:{ ...feature.properties, source_file:entry.name, review_status:'accepted_locally' } }))) }; const bytes = new Blob([JSON.stringify(bundle)]).size; if (bytes > MAX_BUNDLE_BYTES) return setStatus('Сводка больше 25 МБ. Уменьшите набор перед выгрузкой.', 'error'); downloadJson(bundle, `svod-pravok-sao-${reviewedAt.slice(0,10)}.geojson`); setStatus(`Скачана локальная сводка: ${bundle.features.length} объектов.`, 'good'); }
@@ -159,13 +254,16 @@
       async function login() { try { ODHApi.setBase(fields.apiBase.value); const user = await ODHApi.login(fields.apiEmail.value.trim(), fields.apiPassword.value); fields.apiPassword.value = ''; refreshSession(); setStatus(`Вход выполнен: ${user.role}.`, 'good'); } catch (error) { setStatus(error.message, 'error'); } }
       async function loadApi() {
         if (!requireReviewer()) return;
-        try { const response = await ODHApi.request('/api/submissions?status=submitted'); const data = await response.json(); const existing = new Set(entries.filter((entry) => entry.remote).map((entry) => entry.id)); let added = 0; for (const item of data.submissions) { if (existing.has(item.id)) continue; const validation = DistrictChanges.validate(item.change_set, boundary); const entry = { id:item.id, name:item.original_filename || `Набор ${item.id}`, valid:validation.valid, selected:validation.valid, errors:validation.errors, changeSet:item.change_set, layers:null, remote:true, remoteStatus:item.status, submittedAt:item.submitted_at }; if (entry.valid) addEntryLayers(entry); entries.push(entry); added++; } syncMapLayers(); refresh(); setStatus(`Из единой базы загружено: ${added}.`, 'good'); } catch (error) { setStatus(error.message, 'error'); }
+        try { const response = await ODHApi.request('/api/submissions?status=submitted'); const data = await response.json(); const existing = new Set(entries.filter((entry) => entry.remote).map((entry) => entry.id)); let added = 0; for (const item of data.submissions) { if (existing.has(item.id)) continue; const validation = DistrictChanges.validate(item.change_set, boundary); const entry = { id:item.id, name:item.original_filename || `Набор ${item.id}`, valid:validation.valid, selected:validation.valid, errors:validation.errors, changeSet:item.change_set, layers:null, remote:true, remoteStatus:item.status, submittedAt:item.submitted_at }; if (entry.valid) addEntryLayers(entry); entries.push(entry); added++; } syncMapLayers(); applyLabelsMode(); refresh(); setStatus(`Из единой базы загружено: ${added}.`, 'good'); } catch (error) { setStatus(error.message, 'error'); }
       }
       async function review(entry, status) { const comment = prompt(status === 'approved' ? 'Комментарий к утверждению (необязательно):' : 'Причина отклонения:') ?? null; if (comment === null) return; try { await ODHApi.request(`/api/submissions/${encodeURIComponent(entry.id)}`, { method:'PATCH', body:JSON.stringify({ status, comment }) }); entry.remoteStatus = status; if (status === 'rejected') entry.selected = false; syncMapLayers(); refresh(); setStatus(status === 'approved' ? 'Набор утверждён.' : 'Набор отклонён.', 'good'); } catch (error) { setStatus(error.message, 'error'); } }
       async function exportReviewArchive() { if (!requireReviewer()) return; try { const response = await ODHApi.request('/api/exports/review-archive.zip'); downloadBlob(await response.blob(), `pravki-sao-k-priemke-${new Date().toISOString().slice(0,10)}.zip`); setStatus('Скачан архив ожидающих правок по районам.', 'good'); } catch (error) { setStatus(error.message, 'error'); } }
       async function exportApproved() { if (!requireReviewer()) return; try { const response = await ODHApi.request('/api/exports/approved.geojson'); const data = await response.json(); downloadJson(data, `svod-pravok-sao-${new Date().toISOString().slice(0,10)}.geojson`); setStatus(`Скачана утверждённая выгрузка: ${data.features.length} объектов.`, 'good'); } catch (error) { setStatus(error.message, 'error'); } }
-      async function initialize() { try { boundary = await fetch('layers/sao_boundary_wgs84.geojson', { cache:'no-store' }).then((response) => { if (!response.ok) throw new Error(`HTTP ${response.status}`); return response.json(); }); const layer = L.geoJSON(boundary, { filter:(feature) => feature.properties?.feature_kind === 'boundary_sao', style:{ color:'#9b78c9', weight:3, dashArray:'8 5', fillOpacity:0 } }).addTo(map); map.fitBounds(layer.getBounds(), { padding:[24,24] }); const note = L.control({ position:'bottomleft' }); note.onAdd = () => { const div = L.DomUtil.create('div','boundary-note'); div.textContent = 'Контур САО: правки за его пределами отклоняются.'; return div; }; note.addTo(map); const legend = L.control({ position:'topright' }); legend.onAdd = () => { const div = L.DomUtil.create('div','legend'); div.innerHTML = '<b>Обозначения на карте</b><span><i style="background:#ff4e64"></i>I очередь</span><span><i style="background:#51a8ff"></i>II очередь</span><span><i style="background:#46dca1"></i>III очередь</span><span><i style="background:#b98cff"></i>Роторная перекидка</span><span><em style="border-color:#34d6d0"></em>Зона роторного снега</span><span><b style="color:#082b55;font-size:18px">➜</b> движение техники</span><span><b style="color:#078f90;font-size:18px">➜</b> направление сопла</span>'; return div; }; legend.addTo(map); fields.reviewFiles.disabled = false; refreshSession(); setStatus('Граница САО загружена. Подключите API или выберите GeoJSON-файлы.', 'good'); } catch (error) { setStatus(`Не удалось загрузить границу САО: ${error.message}`, 'error'); } }
+      async function initialize() { try { boundary = await fetch('layers/sao_boundary_wgs84.geojson', { cache:'no-store' }).then((response) => { if (!response.ok) throw new Error(`HTTP ${response.status}`); return response.json(); }); const layer = L.geoJSON(boundary, { filter:(feature) => feature.properties?.feature_kind === 'boundary_sao', style:{ color:'#9b78c9', weight:3, dashArray:'8 5', fillOpacity:0 } }).addTo(map); map.fitBounds(layer.getBounds(), { padding:[24,24] }); const note = L.control({ position:'bottomleft' }); note.onAdd = () => { const div = L.DomUtil.create('div','boundary-note'); div.textContent = 'Контур САО: правки за его пределами отклоняются.'; return div; }; note.addTo(map); const legend = L.control({ position:'topright' }); legend.onAdd = () => { const div = L.DomUtil.create('div','legend'); div.innerHTML = '<b>Обозначения на карте</b><span><b style="color:#082b55;font-size:18px">➜</b> движение техники</span><span><b style="color:#078f90;font-size:18px">➜</b> направление сопла</span><span><i class="route-key start">НАЧ.</i> начало маршрута</span><span><i class="route-key end">КОН.</i> конец маршрута</span>'; return div; }; legend.addTo(map);
+          ODHObjectLabels.renderToggle(fields.labelsToggle, (mode) => setStatus(labelsModeMessage(mode), 'good'));
+          ODHObjectLabels.renderLegend(fields.typeLegend); fields.reviewFiles.disabled = false; refreshSession(); setStatus('Граница САО загружена. Подключите API или выберите GeoJSON-файлы.', 'good'); } catch (error) { setStatus(`Не удалось загрузить границу САО: ${error.message}`, 'error'); } }
       map.on('click', (event) => { if (photoMode) createPhotoMarker(event.latlng); });
+      fields.objectFilter.onchange = () => { objectFilter = fields.objectFilter.value; renderObjectJournal(); };
       fields.reviewFiles.addEventListener('change', () => loadFiles([...fields.reviewFiles.files])); fields.clearReview.onclick = clearReview; fields.exportBundle.onclick = exportBundle; fields.loadApiButton.onclick = loadApi; fields.exportReviewArchiveButton.onclick = exportReviewArchive; fields.exportApiButton.onclick = exportApproved; fields.photoModeButton.onclick = () => { if (!isPrefecture()) return setStatus('Фото-метки может расставлять только учётная запись префектуры.', 'error'); photoMode = !photoMode; updatePhotoModeButton(); fields.photoMarkersInfo.textContent = photoMode ? 'Режим включён: кликните по карте, чтобы поставить метку.' : `Фото-меток в единой базе: ${photoMarkers.length}.`; }; fields.importLegacyPhotoMarkersButton.onclick = importLegacyPhotoMarkers; fields.photoFileInput.addEventListener('change', async () => { const file = fields.photoFileInput.files[0]; const markerId = fields.photoFileInput.dataset.markerId; fields.photoFileInput.value = ''; delete fields.photoFileInput.dataset.markerId; if (!file || !markerId) return; if (!['image/jpeg','image/png','image/webp'].includes(file.type) || file.size > 5 * 1024 * 1024) return setStatus('Выберите JPEG, PNG или WebP не больше 5 МБ.', 'error'); try { const response = await ODHApi.request(`/api/photo-markers/${encodeURIComponent(markerId)}/photo`, { method:'PUT', headers:{ 'Content-Type':file.type, 'X-Photo-Filename':encodeURIComponent(file.name) }, body:file }); await replacePhotoMarker((await response.json()).photoMarker); setStatus('Фото прикреплено к метке.', 'good'); } catch (error) { setStatus(error.message, 'error'); } }); document.getElementById('loginButton').onclick = login; document.getElementById('logoutButton').onclick = () => { ODHApi.clearSession(); refreshSession(); setStatus('Сеанс завершён.', 'good'); }; initialize();
     })();
   </script>

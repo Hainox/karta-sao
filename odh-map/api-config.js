@@ -17,7 +17,14 @@
     if (options.body && !headers.has('Content-Type')) headers.set('Content-Type', 'application/json');
     if (token()) headers.set('Authorization', `Bearer ${token()}`);
     const response = await fetch(`${base()}${path}`, { ...options, headers });
-    if (!response.ok) { const body = await response.json().catch(() => ({})); throw new Error(body.error || `API вернул HTTP ${response.status}.`); }
+    if (!response.ok) {
+      const body = await response.json().catch(() => ({}));
+      // Отказ проверки приходит со списком причин. Без них район видит только
+      // «Набор не прошёл проверку» и не понимает, какой объект исправлять.
+      const details = Array.isArray(body.details) ? body.details.filter(Boolean) : [];
+      const reason = body.error || `API вернул HTTP ${response.status}.`;
+      throw new Error(details.length ? `${reason}\n${details.join('\n')}` : reason);
+    }
     return response;
   }
   async function login(email, password) {

@@ -65,3 +65,31 @@ test('client validation rejects more than 2,000 coordinate points before reading
   expect(result.valid).toBe(false);
   expect(result.errors).toContain('В наборе не более 2000 координатных точек суммарно.');
 });
+
+test('сообщение об ошибке называет объект по номеру и типу, а не по позиции в файле', async ({ page }) => {
+  await page.goto(`${baseURL}district-editor.html`);
+  const result = await page.evaluate(() => {
+    const coordinates = [[1, 1], [2, 2]];
+    const changeSet = {
+      type: 'FeatureCollection',
+      change_set_version: 'district_change_set_v2',
+      district: 'Аэропорт',
+      author: 'Тест',
+      features: [{
+        type: 'Feature',
+        properties: {
+          change_type: 'dkm_route_yards', district: 'Аэропорт', author: 'Тест',
+          address: 'Дмитровское шоссе, у д. 90', object_no: 7,
+          route_start: coordinates[0], route_end: coordinates[1],
+          route_direction: 'start_to_end', nozzle_direction: 'both'
+        },
+        geometry: { type: 'LineString', coordinates }
+      }]
+    };
+    // Граница не нужна: проверка типа идёт раньше обхода контура.
+    return DistrictChanges.validate(changeSet, { features: [] });
+  });
+
+  expect(result.valid).toBe(false);
+  expect(result.errors).toContain('Объект 7 (Дмитровское шоссе, у д. 90): тип «dkm_route_yards» больше не поддерживается. Удалите объект и нарисуйте его заново.');
+});

@@ -66,6 +66,12 @@
           <div class="actions"><button id="undoButton" class="control" type="button">Удалить последний</button><button id="clearButton" class="control" type="button">Очистить всё</button></div>
         </section>
         <section class="panel">
+          <h2>Обозначения объектов</h2>
+          <p class="small">Подпись на карте показывает код объекта и его номер в наборе, например «ОЧ-II №3».</p>
+          <div id="labelsToggle" class="labels-toggle-wrap"></div>
+          <div id="typeLegend" class="type-legend"></div>
+        </section>
+        <section class="panel">
           <h2>Обмен и отправка</h2>
           <label for="importInput">Продолжить из GeoJSON</label><input id="importInput" type="file" accept=".geojson,.json,application/geo+json,application/json" disabled>
           <div class="actions"><button id="exportButton" class="control primary" type="button"><i class="fa-solid fa-file-arrow-down"></i> Скачать GeoJSON</button><button id="saveButton" class="control" type="button">Сохранить здесь</button></div>
@@ -97,6 +103,7 @@
   <script src="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.js"></script>
   <script src="district-changes.js"></script>
   <script src="route-visuals.js"></script>
+  <script src="object-labels.js"></script>
   <script src="api-config.js"></script>
   <script>
     (() => {
@@ -106,6 +113,7 @@
       L.tileLayer('https://core-renderer-tiles.maps.yandex.net/tiles?l=map&x={x}&y={y}&z={z}&scale=1&lang=ru_RU&projection=web_mercator', { maxZoom:19, attribution:'© <a href="https://yandex.ru/maps/">Яндекс</a>' }).addTo(map);
       const draftGroup = L.featureGroup().addTo(map); const endpointGroup = L.featureGroup().addTo(map); const selectedDistrictGroup = L.featureGroup().addTo(map);
       let boundary = null; let districtBoundaries = null; let draftFeatures = []; let routeStart = null; let routeEnd = null; let pickMode = null; let routeDrawing = null;
+      const featureLayers = new Map();
       const ids = ['district','author','changeType','priority','address','comment','status','featureList','drawButton','priorityWrap','routeWrap','nozzle','setStart','setEnd','cancelPointButton','cancelRouteButton','startInfo','endInfo','importInput','apiBase','apiEmail','apiPassword','sessionInfo','submitButton','checkButton','workflowCheck','toggleHelpButton','helpPanel','mySubmissionsButton','mySubmissions'];
       const fields = Object.fromEntries(ids.map((id) => [id, document.getElementById(id)]));
       // Подпись в списке — «Жилищник «Район»», а значение остаётся именем района:
@@ -161,7 +169,7 @@
         fields.drawButton.classList.toggle('teal', finishingRoute);
         fields.drawButton.innerHTML = finishingRoute ? '<i class="fa-solid fa-check"></i> 3. Завершить маршрут' : `<i class="fa-solid ${type.kind === 'line' ? 'fa-route' : type.kind === 'polygon' ? 'fa-draw-polygon' : 'fa-location-dot'}"></i> 3. ${type.kind === 'line' ? 'Нарисовать маршрут' : type.kind === 'polygon' ? 'Нарисовать зону' : 'Поставить точку'}`;
       }
-      function styleOptions(feature) { const style = DistrictChanges.styleFor(feature); const dashArray = feature.properties?.change_type === 'rotor_transfer' ? style.dashArray || '4 9' : null; return { color:style.color, weight:style.weight || 4, dashArray, fillColor:style.color, fillOpacity:style.fillOpacity ?? .7, radius:7 }; }
+      function styleOptions(feature) { const style = DistrictChanges.styleFor(feature); return { color:style.color, weight:style.weight || 4, dashArray:style.dashArray || null, fillColor:style.color, fillOpacity:style.fillOpacity ?? .7, radius:7 }; }
       function routeIcon(feature) {
         const direction = feature.properties.nozzle_direction || 'both'; const icon = direction === 'left' ? 'fa-arrow-left' : direction === 'right' ? 'fa-arrow-right' : 'fa-arrows-left-right';
         return L.divIcon({ className:'', html:`<span class="route-flow ${direction}"><i class="fa-solid ${icon}"></i></span>`, iconSize:[26,26], iconAnchor:[13,13] });
@@ -169,23 +177,44 @@
       function featureSummary(feature) { const p = feature.properties; return `${p.change_type === 'queue' ? `Очередь ${p.queue_priority}` : DistrictChanges.labelFor(p.change_type)} · ${p.address}`; }
       function addFeatureLayer(feature) {
         const layer = L.geoJSON(feature, { style:() => styleOptions(feature), pointToLayer:(_, latlng) => L.circleMarker(latlng, styleOptions(feature)) });
-        const p = feature.properties; layer.bindPopup(`<b>${esc(featureSummary(feature))}</b><br>${esc(p.comment || 'Без комментария')}`); layer.addTo(draftGroup);
-        if (DistrictChanges.ROUTE_TYPES.has(p.change_type)) ODHRouteVisuals.addTo(draftGroup, feature);
+        layer.addTo(draftGroup);
+        const p = feature.properties;
+        ODHObjectLabels.attach(layer, feature, {
+          index:draftFeatures.indexOf(feature),
+          district:p.district,
+          balanceHolder:`Жилищник «${p.district}»`,
+          author:p.author,
+          status:'draft'
+        }, { group:draftGroup });
+        featureLayers.set(feature, layer);
+        return layer;
+      }
+      function showOnMap(feature) {
+        const layer = featureLayers.get(feature);
+        if (!layer) return;
+        const bounds = layer.getBounds();
+        if (bounds.isValid()) map.fitBounds(bounds, { padding:[46,46], maxZoom:17 });
+        ODHObjectLabels.openPopup(layer);
       }
       function cardButton(text, className, handler) { const button = document.createElement('button'); button.type = 'button'; button.className = className; button.textContent = text; button.onclick = handler; return button; }
       function renderDraft() {
-        draftGroup.clearLayers(); draftFeatures.forEach(addFeatureLayer); fields.featureList.replaceChildren();
+        draftGroup.clearLayers(); ODHObjectLabels.clear(); featureLayers.clear();
+        draftFeatures.forEach(addFeatureLayer); ODHObjectLabels.refresh(); fields.featureList.replaceChildren();
         if (!draftFeatures.length) { const empty = document.createElement('p'); empty.className = 'small'; empty.textContent = 'Пока ничего не добавлено.'; fields.featureList.append(empty); updateWorkflowCheck(); return; }
         draftFeatures.forEach((feature, index) => {
           const card = document.createElement('div'); card.className = `feature-card ${DistrictChanges.ROUTE_TYPES.has(feature.properties.change_type) ? 'route' : ''}`;
+          // Бейдж и название — отдельные элементы: текст <b> остаётся прежним,
+          // на него опираются существующие проверки.
+          const badge = document.createElement('span'); badge.className = 'object-badge'; badge.style.setProperty('--object-color', DistrictChanges.styleFor(feature).color); badge.textContent = DistrictChanges.badgeFor(feature, index);
           const title = document.createElement('b'); title.textContent = featureSummary(feature); const info = document.createElement('span');
           const p = feature.properties; info.textContent = DistrictChanges.ROUTE_TYPES.has(p.change_type) ? `Сопло: ${({ left:'слева', right:'справа', both:'в обе стороны' })[p.nozzle_direction]}. ${p.comment || 'Без комментария'}` : (p.comment || 'Без комментария');
           const actions = document.createElement('div'); actions.className = 'card-actions';
+          actions.append(cardButton('Показать на карте', '', () => showOnMap(feature)));
           if (DistrictChanges.ROUTE_TYPES.has(p.change_type)) actions.append(cardButton('Развернуть направление', '', () => {
             feature.geometry.coordinates.reverse(); [p.route_start, p.route_end] = [p.route_end, p.route_start]; if (p.nozzle_direction === 'left') p.nozzle_direction = 'right'; else if (p.nozzle_direction === 'right') p.nozzle_direction = 'left'; persist(); renderDraft(); message('Направление маршрута развёрнуто.', 'good');
           }));
           actions.append(cardButton('Удалить', 'danger', () => { draftFeatures.splice(index, 1); persist(); renderDraft(); message('Объект удалён.', 'good'); }));
-          card.append(title, info, actions); fields.featureList.append(card);
+          card.append(badge, title, info, actions); fields.featureList.append(card);
         }); updateWorkflowCheck();
       }
       function persist() {
@@ -221,7 +250,10 @@
         const properties = { ...metadata(), change_type:fields.changeType.value, address:fields.address.value.trim(), comment:fields.comment.value.trim() };
         if (properties.change_type === 'queue') properties.queue_priority = fields.priority.value;
         if (DistrictChanges.ROUTE_TYPES.has(properties.change_type)) Object.assign(properties, { route_start:[...routeStart], route_end:[...routeEnd], route_direction:'start_to_end', nozzle_direction:fields.nozzle.value });
-        return { type:'Feature', geometry, properties };
+        const feature = { type:'Feature', geometry, properties };
+        // Номер внутри набора: по нему объект называют на карте и в списках.
+        DistrictChanges.assignObjectNo(feature, draftFeatures);
+        return feature;
       }
       const samePoint = (first, second) => Array.isArray(first) && Array.isArray(second) && first[0] === second[0] && first[1] === second[1];
       function cancelRouteDrawing({ announce = true } = {}) {
@@ -261,6 +293,9 @@
       }
       function setPickMode(mode) { pickMode = mode; fields.cancelPointButton.hidden = false; map.getContainer().style.cursor = 'crosshair'; message(`Щёлкните по карте: ${mode === 'start' ? 'начало' : 'конец'} маршрута. Если передумали — нажмите «Отменить выбор точки».`, 'good'); }
       function cancelPickMode() { pickMode = null; fields.cancelPointButton.hidden = true; map.getContainer().style.cursor = ''; message('Выбор точки отменён. Установленные начало и конец не изменены.', 'good'); }
+      // Старые черновики и импортированные файлы не знают номеров объектов —
+      // проставляем недостающие, уже присвоенные не трогаем.
+      function normalizeNumbers() { draftFeatures.forEach((feature) => DistrictChanges.assignObjectNo(feature, draftFeatures)); }
       function restoreDraft() {
         let raw;
         try {
@@ -272,12 +307,13 @@
           const upgraded = DistrictChanges.upgradeChangeSet(saved);
           if (fields.district.value && upgraded.district && fields.district.value !== upgraded.district) return;
           fields.district.value = upgraded.district || fields.district.value || ''; fields.author.value = upgraded.author || ''; draftFeatures = Array.isArray(upgraded.features) ? upgraded.features : [];
+          normalizeNumbers();
           persist(); message(`Восстановлен локальный черновик: ${draftFeatures.length} объектов.`, 'good');
         } catch (_) { try { localStorage.removeItem(SAVE_KEY); } catch (_) {} }
       }
       async function importFile(file) {
         if (!file) return; if (file.size > MAX_BYTES) return message('Файл больше 5 МБ.', 'error');
-        try { const set = DistrictChanges.upgradeChangeSet(JSON.parse(await file.text())); const check = DistrictChanges.validate(set, boundary); if (!check.valid) throw new Error(check.errors.join('\n')); fields.district.value = set.district; fields.author.value = set.author; draftFeatures = set.features; persist(); renderDraft(); updateDistrictHighlight(); message(`Импортировано: ${draftFeatures.length} объектов.`, 'good'); }
+        try { const set = DistrictChanges.upgradeChangeSet(JSON.parse(await file.text())); const check = DistrictChanges.validate(set, boundary); if (!check.valid) throw new Error(check.errors.join('\n')); fields.district.value = set.district; fields.author.value = set.author; draftFeatures = set.features; normalizeNumbers(); persist(); renderDraft(); updateDistrictHighlight(); message(`Импортировано: ${draftFeatures.length} объектов.`, 'good'); }
         catch (error) { message(`Файл не принят:\n${error.message}`, 'error'); }
       }
       function download(data, filename) { const link = document.createElement('a'); link.href = URL.createObjectURL(new Blob([JSON.stringify(data, null, 2)], { type:'application/geo+json' })); link.download = filename; link.click(); setTimeout(() => URL.revokeObjectURL(link.href), 0); }
@@ -314,7 +350,10 @@
           const layer = L.geoJSON(boundary, { filter:(feature) => feature.properties?.feature_kind === 'boundary_sao', style:{ color:'#9b78c9', weight:3, dashArray:'8 5', fillOpacity:0 } }).addTo(map);
           map.fitBounds(layer.getBounds(), { padding:[24,24] });
           const note = L.control({ position:'bottomleft' }); note.onAdd = () => { const div = L.DomUtil.create('div','boundary-note'); div.textContent = 'Фиолетовый контур — САО; янтарная заливка — выбранный район.'; return div; }; note.addTo(map);
-          restoreDraft(); renderDraft(); refreshEndpoints(); updateDrawingControl(); refreshSession(); applyDistrictScope(); updateDistrictHighlight({ fit:Boolean(fields.district.value) }); fields.drawButton.disabled = false; fields.importInput.disabled = false; message(invalidLinkedDistrict ? 'В ссылке указан неизвестный район. Выберите район вручную.' : (linkedDistrict ? `Открыта ссылка района «${linkedDistrict}». Войдите под закреплённой учётной записью.` : 'Границы САО и районов загружены. Выберите район — он выделится на карте.'), 'good');
+          restoreDraft(); renderDraft(); refreshEndpoints(); updateDrawingControl(); refreshSession(); applyDistrictScope(); updateDistrictHighlight({ fit:Boolean(fields.district.value) });
+          ODHObjectLabels.setMode(ODHObjectLabels.modeForCount(draftFeatures.length));
+          ODHObjectLabels.renderToggle(document.getElementById('labelsToggle'), (mode) => message(mode === ODHObjectLabels.MODE_HOVER ? 'Подписи показываются при наведении на объект.' : 'Подписи показаны у всех объектов на карте.', 'good'));
+          ODHObjectLabels.renderLegend(document.getElementById('typeLegend')); fields.drawButton.disabled = false; fields.importInput.disabled = false; message(invalidLinkedDistrict ? 'В ссылке указан неизвестный район. Выберите район вручную.' : (linkedDistrict ? `Открыта ссылка района «${linkedDistrict}». Войдите под закреплённой учётной записью.` : 'Границы САО и районов загружены. Выберите район — он выделится на карте.'), 'good');
         } catch (error) { message(`Не удалось загрузить границы: ${error.message}`, 'error'); }
       }
       map.on('click', (event) => { const point = [event.latlng.lng, event.latlng.lat]; if (routeDrawing) { if (!DistrictChanges.vertexInBoundary(point, boundary)) return message('Поворот вне границы САО. Выберите точку внутри контура.', 'error'); if (!samePoint(routeDrawing.points.at(-1), point) && !samePoint(routeEnd, point)) routeDrawing.points.push(point); routeDrawing.preview.setLatLngs(routeDrawing.points.map(([lng, lat]) => [lat, lng])); return message(`Поворотов маршрута: ${routeDrawing.points.length - 1}. Нажмите «Завершить маршрут», когда всё готово.`, 'good'); } if (!pickMode) return; if (!DistrictChanges.vertexInBoundary(point, boundary)) return message('Точка за границей САО. Выберите точку внутри контура.', 'error'); if (pickMode === 'start') routeStart = point; else routeEnd = point; pickMode = null; fields.cancelPointButton.hidden = true; map.getContainer().style.cursor = ''; refreshEndpoints(); message('Точка маршрута установлена. Теперь укажите вторую точку или начинайте рисовать.', 'good'); });

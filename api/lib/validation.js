@@ -11,7 +11,6 @@ export const TYPES = {
   rotor_transfer: 'LineString',
   dkm_route: 'LineString',
   tu_route: 'LineString',
-  dkm_route_yards: 'LineString',
   tu_route_yards: 'LineString',
   temporary_snow_storage: 'Point',
   rotor_snow_storage_zone: 'Polygon',
@@ -21,7 +20,7 @@ export const TYPES = {
   other: 'Point'
 };
 
-const ROUTE_TYPES = new Set(['queue', 'rotor_transfer', 'dkm_route', 'tu_route', 'dkm_route_yards', 'tu_route_yards']);
+const ROUTE_TYPES = new Set(['queue', 'rotor_transfer', 'dkm_route', 'tu_route', 'tu_route_yards']);
 const SEGMENT_EPSILON = 1e-12;
 export const MAX_GEOMETRY_VERTICES = 2000;
 
@@ -208,11 +207,15 @@ export function validateChangeSet(changeSet, boundary) {
   const polygons = boundaryPolygons(boundary);
   const edges = boundarySegments(polygons);
   for (const [index, feature] of features.entries()) {
-    const number = index + 1;
     const properties = feature?.properties || {};
     const expectedGeometry = TYPES[properties.change_type];
+    // Номер объекта: собственный номер из набора, если он есть, иначе позиция в файле.
+    const number = Number.isSafeInteger(properties.object_no) && properties.object_no > 0 ? properties.object_no : index + 1;
     if (!feature || feature.type !== 'Feature' || !feature.geometry) { errors.push(`Объект ${number}: повреждён.`); continue; }
-    if (!expectedGeometry || feature.geometry.type !== expectedGeometry) errors.push(`Объект ${number}: неверная геометрия для выбранного типа.`);
+    // Тип могли убрать из словаря после того, как объект нарисовали: район должен
+    // увидеть причину, а не общее «неверная геометрия».
+    if (!expectedGeometry) errors.push(`Объект ${number}: тип «${properties.change_type ?? 'не указан'}» не поддерживается.`);
+    else if (feature.geometry.type !== expectedGeometry) errors.push(`Объект ${number}: неверная геометрия для выбранного типа.`);
     if (properties.district !== changeSet.district || properties.author !== changeSet.author) errors.push(`Объект ${number}: карточка объекта не совпадает с набором.`);
     if (typeof properties.address !== 'string' || !properties.address.trim()) errors.push(`Объект ${number}: укажите адрес или ориентир.`);
     if (properties.change_type === 'queue' && !['1', '2', '3'].includes(String(properties.queue_priority))) errors.push(`Объект ${number}: очередь должна быть 1, 2 или 3.`);

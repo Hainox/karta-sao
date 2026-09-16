@@ -1311,7 +1311,7 @@
               {
                 style: (feature) => {
                   const changeType = feature.properties?.change_type;
-                  const isRoute = ["queue", "rotor_transfer", "dkm_route", "tu_route", "dkm_route_yards", "tu_route_yards"].includes(changeType);
+                  const isRoute = ["queue", "rotor_transfer", "dkm_route", "tu_route", "tu_route_yards"].includes(changeType);
                   const isLine = ["LineString", "MultiLineString"].includes(
                     feature.geometry?.type,
                   );

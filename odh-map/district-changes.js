@@ -9,21 +9,71 @@
     'Головинский', 'Дмитровский', 'Западное Дегунино', 'Коптево', 'Левобережный',
     'Молжаниновский', 'Савеловский', 'Сокол', 'Тимирязевский', 'Ховрино', 'Хорошевский'
   ];
+  // Единый словарь типов. Отсюда выводятся цвет, штрих, короткий код, категория
+  // и назначение — легенда, подписи на карте и карточка объекта на обеих сторонах
+  // (район и префектура) строятся из одного источника, а не из трёх копий.
   const TYPES = {
-    queue: { label: 'Очередность уборки', geometry: 'LineString', kind: 'line' },
-    rotor_transfer: { label: 'Роторная перекидка', geometry: 'LineString', kind: 'line' },
-    dkm_route: { label: 'Маршрут ДКМ — ОДХ', geometry: 'LineString', kind: 'line' },
-    tu_route: { label: 'Маршрут ТУ — ОДХ', geometry: 'LineString', kind: 'line' },
-    dkm_route_yards: { label: 'Маршрут ДКМ — дворы', geometry: 'LineString', kind: 'line' },
-    tu_route_yards: { label: 'Маршрут ТУ — дворы', geometry: 'LineString', kind: 'line' },
-    rotor_snow_storage_zone: { label: 'Зона складирования роторного снега', geometry: 'Polygon', kind: 'polygon' },
-    temporary_snow_storage: { label: 'Временное складирование снега', geometry: 'Point', kind: 'point' },
-    dry_snow_dump: { label: 'Сухая свалка снега', geometry: 'Point', kind: 'point' },
-    pgm: { label: 'Контейнеры ПГМ', geometry: 'Point', kind: 'point' },
-    smm_storage: { label: 'Место хранения СММ', geometry: 'Point', kind: 'point' },
-    other: { label: 'Другой объект', geometry: 'Point', kind: 'point' }
+    queue: {
+      label: 'Очередность уборки', geometry: 'LineString', kind: 'line', group: 'route',
+      short: 'ОЧ', shortByPriority: { '1': 'ОЧ-I', '2': 'ОЧ-II', '3': 'ОЧ-III' },
+      priorityNames: { '1': 'I очередь', '2': 'II очередь', '3': 'III очередь' },
+      color: '#bec8d8', colors: { '1': '#ff4e64', '2': '#51a8ff', '3': '#46dca1' }, weight: 5,
+      purpose: 'В какой очереди убирают эту улицу'
+    },
+    rotor_transfer: {
+      label: 'Роторная перекидка', geometry: 'LineString', kind: 'line', group: 'route',
+      short: 'РП', color: '#b98cff', dashArray: '4 9', weight: 5,
+      purpose: 'Куда ротор перебрасывает снег'
+    },
+    dkm_route: {
+      label: 'Маршрут ДКМ — ОДХ', geometry: 'LineString', kind: 'line', group: 'route',
+      short: 'ДКМ', color: '#ff7a45', weight: 5,
+      purpose: 'Проезд дорожной коммунальной машины по дорогам'
+    },
+    tu_route: {
+      label: 'Маршрут ТУ — ОДХ', geometry: 'LineString', kind: 'line', group: 'route',
+      short: 'ТУ', color: '#2ec4b6', weight: 5,
+      purpose: 'Проезд трактора-щётки по дорогам'
+    },
+    tu_route_yards: {
+      label: 'Маршрут ТУ — дворы', geometry: 'LineString', kind: 'line', group: 'route',
+      short: 'ТУ-дв', color: '#2ec4b6', dashArray: '7 6', weight: 5,
+      purpose: 'Проезд трактора-щётки внутри дворов'
+    },
+    rotor_snow_storage_zone: {
+      label: 'Зона складирования роторного снега', geometry: 'Polygon', kind: 'polygon', group: 'zone',
+      short: 'Зона', color: '#34d6d0', weight: 3, fillOpacity: .22,
+      purpose: 'Площадка, куда складывают снег ротором'
+    },
+    temporary_snow_storage: {
+      label: 'Временное складирование снега', geometry: 'Point', kind: 'point', group: 'point',
+      short: 'Снег', color: '#26c6da', weight: 3,
+      purpose: 'Точка временного складирования снега'
+    },
+    dry_snow_dump: {
+      label: 'Сухая свалка снега', geometry: 'Point', kind: 'point', group: 'point',
+      short: 'Свалка', color: '#b58a67', weight: 3,
+      purpose: 'Место вывоза и складирования сухого снега'
+    },
+    pgm: {
+      label: 'Контейнеры ПГМ', geometry: 'Point', kind: 'point', group: 'point',
+      short: 'ПГМ', color: '#ffb34d', weight: 3,
+      purpose: 'Контейнерная площадка ПГМ'
+    },
+    smm_storage: {
+      label: 'Место хранения СММ', geometry: 'Point', kind: 'point', group: 'point',
+      short: 'СММ', color: '#b98cff', weight: 3,
+      purpose: 'Где хранится средства малой механизации'
+    },
+    other: {
+      label: 'Другой объект', geometry: 'Point', kind: 'point', group: 'point',
+      short: 'Объект', color: '#8fa4b8', weight: 3,
+      purpose: 'Другой объект разметки'
+    }
   };
-  const ROUTE_TYPES = new Set(['queue', 'rotor_transfer', 'dkm_route', 'tu_route', 'dkm_route_yards', 'tu_route_yards']);
+  const ROUTE_TYPES = new Set(['queue', 'rotor_transfer', 'dkm_route', 'tu_route', 'tu_route_yards']);
+  const GROUP_LABELS = { route: 'Маршруты', zone: 'Зоны', point: 'Точки' };
+  const ROMAN = { '1': 'I', '2': 'II', '3': 'III' };
   const MAX_GEOMETRY_VERTICES = 2000;
   const SEGMENT_EPSILON = 1e-12;
 
@@ -143,33 +193,53 @@
     });
     return upgraded;
   }
+  /**
+   * Имя объекта в сообщении об ошибке. В наборах с номерами (новые черновики)
+   * показываем номер, тип и адрес — по ним объект находят на карте. Для старых
+   * наборов без номеров остаётся порядковый номер в файле.
+   */
+  function objectLabel(feature, index) {
+    const number = numberOf(feature, index);
+    const properties = feature?.properties || {};
+    if (!Number.isSafeInteger(properties.object_no) || properties.object_no < 1) return `Объект ${number}`;
+    const type = TYPES[properties.change_type];
+    const parts = [];
+    if (type) parts.push(type.label);
+    const priority = type?.priorityNames?.[String(properties.queue_priority)];
+    if (priority) parts.push(priority);
+    const address = typeof properties.address === 'string' ? properties.address.trim() : '';
+    if (address) parts.push(address);
+    return parts.length ? `Объект ${number} (${parts.join(' · ')})` : `Объект ${number}`;
+  }
   function validateFeature(feature, index, boundary, errors, expected = {}, polygons = boundaryPolygons(boundary), edges = boundarySegments(polygons)) {
-    const number = index + 1; const properties = feature?.properties; const type = properties && TYPES[properties.change_type];
-    if (!feature || feature.type !== 'Feature' || !feature.geometry) { errors.push(`Объект ${number}: повреждённая GeoJSON-структура.`); return; }
-    if (!type) errors.push(`Объект ${number}: неизвестный тип изменения.`);
-    if (!type || feature.geometry.type !== type.geometry) errors.push(`Объект ${number}: для выбранного типа нужна геометрия ${type ? type.geometry : 'Point, LineString или Polygon'}.`);
-    if (!DISTRICTS.includes(properties?.district)) errors.push(`Объект ${number}: укажите корректный район САО.`);
-    if (typeof properties?.author !== 'string' || !properties.author.trim()) errors.push(`Объект ${number}: укажите исполнителя.`);
-    if (expected.district && properties?.district !== expected.district) errors.push(`Объект ${number}: район должен совпадать с карточкой набора.`);
-    if (expected.author && properties?.author !== expected.author) errors.push(`Объект ${number}: исполнитель должен совпадать с карточкой набора.`);
-    if (typeof properties?.address !== 'string' || !properties.address.trim()) errors.push(`Объект ${number}: укажите адрес или ориентир.`);
-    if (properties?.change_type === 'queue' && !['1', '2', '3'].includes(String(properties.queue_priority))) errors.push(`Объект ${number}: очередь должна быть 1, 2 или 3.`);
+    const properties = feature?.properties; const type = properties && TYPES[properties.change_type]; const label = objectLabel(feature, index);
+    if (!feature || feature.type !== 'Feature' || !feature.geometry) { errors.push(`${label}: повреждённая GeoJSON-структура.`); return; }
+    // Тип могли убрать из словаря после того, как объект нарисовали: говорим об этом
+    // прямо, иначе район видит только «неизвестный тип» и не понимает, что делать.
+    if (!type) errors.push(`${label}: тип «${properties?.change_type ?? 'не указан'}» больше не поддерживается. Удалите объект и нарисуйте его заново.`);
+    else if (feature.geometry.type !== type.geometry) errors.push(`${label}: для выбранного типа нужна геометрия ${type.geometry}.`);
+    if (!DISTRICTS.includes(properties?.district)) errors.push(`${label}: укажите корректный район САО.`);
+    if (typeof properties?.author !== 'string' || !properties.author.trim()) errors.push(`${label}: укажите исполнителя.`);
+    if (expected.district && properties?.district !== expected.district) errors.push(`${label}: район должен совпадать с карточкой набора.`);
+    if (expected.author && properties?.author !== expected.author) errors.push(`${label}: исполнитель должен совпадать с карточкой набора.`);
+    if (typeof properties?.address !== 'string' || !properties.address.trim()) errors.push(`${label}: укажите адрес или ориентир.`);
+    if (properties?.change_type === 'queue' && !['1', '2', '3'].includes(String(properties.queue_priority))) errors.push(`${label}: очередь должна быть 1, 2 или 3.`);
     const coordinates = coordinatesFor(feature.geometry);
-    if (feature.geometry.type === 'LineString' && coordinates.length < 2) errors.push(`Объект ${number}: маршрут должен содержать минимум две вершины.`);
-    if (feature.geometry.type === 'Polygon' && !ringsAreClosedAndValid(feature.geometry.coordinates)) errors.push(`Объект ${number}: все кольца зоны должны быть замкнутыми полигонами.`);
+    if (feature.geometry.type === 'LineString' && coordinates.length < 2) errors.push(`${label}: маршрут должен содержать минимум две вершины.`);
+    if (feature.geometry.type === 'Polygon' && !ringsAreClosedAndValid(feature.geometry.coordinates)) errors.push(`${label}: все кольца зоны должны быть замкнутыми полигонами.`);
     if (ROUTE_TYPES.has(properties?.change_type) && feature.geometry.type === 'LineString') {
-      if (!sameCoordinate(properties.route_start, coordinates[0]) || !sameCoordinate(properties.route_end, coordinates.at(-1))) errors.push(`Объект ${number}: начало и конец маршрута должны быть явно заданы.`);
-      if (properties.route_direction !== 'start_to_end') errors.push(`Объект ${number}: направление маршрута повреждено.`);
-      if (!['left', 'right', 'both'].includes(properties.nozzle_direction)) errors.push(`Объект ${number}: направление сопла — left, right или both.`);
+      if (!sameCoordinate(properties.route_start, coordinates[0]) || !sameCoordinate(properties.route_end, coordinates.at(-1))) errors.push(`${label}: начало и конец маршрута должны быть явно заданы.`);
+      if (properties.route_direction !== 'start_to_end') errors.push(`${label}: направление маршрута повреждено.`);
+      if (!['left', 'right', 'both'].includes(properties.nozzle_direction)) errors.push(`${label}: направление сопла — left, right или both.`);
     }
     coordinates.forEach((point, coordinateIndex) => {
-      if (!isCoordinate(point)) errors.push(`Объект ${number}, вершина ${coordinateIndex + 1}: некорректные координаты.`);
-      else if (!pointWithinBoundary(point, polygons)) errors.push(`Объект ${number}, вершина ${coordinateIndex + 1}: находится за границей САО.`);
+      if (!isCoordinate(point)) errors.push(`${label}, вершина ${coordinateIndex + 1}: некорректные координаты.`);
+      else if (!pointWithinBoundary(point, polygons)) errors.push(`${label}, вершина ${coordinateIndex + 1}: находится за границей САО.`);
     });
     geometrySegments(feature.geometry).forEach(([start, end], segmentIndex) => {
-      if (!segmentWithinBoundary(start, end, edges)) errors.push(`Объект ${number}, сторона ${segmentIndex + 1}: пересекает границу САО.`);
+      if (!segmentWithinBoundary(start, end, edges)) errors.push(`${label}, сторона ${segmentIndex + 1}: пересекает границу САО.`);
     });
-    if (feature.geometry.type === 'Polygon' && polygonContainsBoundaryHole(feature.geometry, polygons)) errors.push(`Объект ${number}: зона пересекает исключённую область САО.`);
+    if (feature.geometry.type === 'Polygon' && polygonContainsBoundaryHole(feature.geometry, polygons)) errors.push(`${label}: зона пересекает исключённую область САО.`);
   }
   function validate(changeSet, boundary) {
     const errors = [];
@@ -204,20 +274,91 @@
     bundle.features.forEach((feature, index) => validateFeature(feature, index, boundary, errors, {}, polygons, edges));
     return { valid: !errors.length, errors };
   }
+  // Стиль выводится из словаря типов, а не из второй копии цветов.
   function styleFor(feature) {
-    const properties = feature.properties || {};
-    if (properties.change_type === 'queue') return { color: ({ '1': '#ff4e64', '2': '#51a8ff', '3': '#46dca1' })[String(properties.queue_priority)] || '#bec8d8', weight: 5 };
-    if (properties.change_type === 'rotor_transfer') return { color: '#b98cff', dashArray: '4 9', weight: 5 };
-    if (properties.change_type === 'dkm_route') return { color: '#ff7a45', weight: 5 };
-    if (properties.change_type === 'tu_route') return { color: '#2ec4b6', weight: 5 };
-    if (properties.change_type === 'dkm_route_yards') return { color: '#ff7a45', dashArray: '7 6', weight: 5 };
-    if (properties.change_type === 'tu_route_yards') return { color: '#2ec4b6', dashArray: '7 6', weight: 5 };
-    if (properties.change_type === 'rotor_snow_storage_zone') return { color: '#34d6d0', weight: 3, fillOpacity: .22 };
-    return { color: ({ temporary_snow_storage: '#26c6da', dry_snow_dump: '#b58a67', pgm: '#ffb34d', smm_storage: '#b98cff', other: '#8fa4b8' })[properties.change_type] || '#8fa4b8', weight: 3 };
+    const properties = feature?.properties || {};
+    const type = TYPES[properties.change_type];
+    if (!type) return { color: '#8fa4b8', weight: 3 };
+    const color = type.colors ? (type.colors[String(properties.queue_priority)] || type.color) : type.color;
+    const style = { color, weight: type.weight };
+    if (type.dashArray) style.dashArray = type.dashArray;
+    if (type.fillOpacity !== undefined) style.fillOpacity = type.fillOpacity;
+    return style;
   }
   function labelFor(type) { return TYPES[type]?.label || 'Неизвестный объект'; }
+  function typeOf(feature) { return TYPES[feature?.properties?.change_type] || null; }
+  function groupOf(feature) { return typeOf(feature)?.group || 'point'; }
+
+  // Номер объекта внутри набора. Присваивается один раз при создании и больше не
+  // пересчитывается, чтобы ссылка «№7» не съезжала после удаления соседа.
+  function numberOf(feature, index) {
+    const value = feature?.properties?.object_no;
+    if (Number.isSafeInteger(value) && value > 0) return value;
+    return Number.isSafeInteger(index) && index >= 0 ? index + 1 : null;
+  }
+  function nextObjectNo(features) {
+    let highest = 0;
+    for (const feature of features || []) {
+      const value = feature?.properties?.object_no;
+      if (Number.isSafeInteger(value) && value > highest) highest = value;
+    }
+    return highest + 1;
+  }
+  function assignObjectNo(feature, features) {
+    if (!feature || !feature.properties) return null;
+    if (!Number.isSafeInteger(feature.properties.object_no) || feature.properties.object_no < 1) {
+      feature.properties.object_no = nextObjectNo(features);
+    }
+    return feature.properties.object_no;
+  }
+
+  /** Короткий код объекта: «ОЧ-II», «РП», «ТУ-дв», «Зона». */
+  function shortFor(feature) {
+    const properties = feature?.properties || {};
+    const type = TYPES[properties.change_type];
+    if (!type) return 'Объект';
+    return type.shortByPriority?.[String(properties.queue_priority)] || type.short;
+  }
+
+  /** Бейдж для карты и списков: «ОЧ-II №3». */
+  function badgeFor(feature, index) {
+    const code = shortFor(feature);
+    const number = numberOf(feature, index);
+    return number === null ? code : `${code} №${number}`;
+  }
+
+  /** Очеловеченная строка: тип, очередь и адрес. */
+  function describeFor(feature) {
+    const properties = feature?.properties || {};
+    const type = TYPES[properties.change_type];
+    if (!type) return 'Неизвестный объект';
+    const priority = type.priorityNames?.[String(properties.queue_priority)];
+    const suffix = priority ? ` · ${priority}` : '';
+    const address = typeof properties.address === 'string' && properties.address.trim() ? ` · ${properties.address.trim()}` : '';
+    return `${type.label}${suffix}${address}`;
+  }
+
+  /** Направление и сопло — только для маршрутов; для остальных null. */
+  function routeFactsFor(feature) {
+    const properties = feature?.properties || {};
+    if (!ROUTE_TYPES.has(properties.change_type)) return null;
+    const nozzle = { left: 'влево по ходу', right: 'вправо по ходу', both: 'в обе стороны' }[properties.nozzle_direction] || 'не указано';
+    return { nozzle, direction: 'от «НАЧАЛО» к «КОНЕЦ»' };
+  }
+
+  /** Разбивка набора по категориям: { route: 12, zone: 2, point: 5 }. */
+  function groupCounts(features) {
+    const counts = { route: 0, zone: 0, point: 0 };
+    for (const feature of features || []) counts[groupOf(feature)] += 1;
+    return counts;
+  }
   function makeChangeSet(metadata, features) {
     return { type: 'FeatureCollection', change_set_version: VERSION, district: metadata.district, author: metadata.author.trim(), created_at: metadata.created_at || new Date().toISOString(), submission_status: 'draft', features: clone(features) };
   }
-  window.DistrictChanges = { VERSION, REVIEW_VERSION, DISTRICTS, TYPES, ROUTE_TYPES, labelFor, makeChangeSet, styleFor, validate, validateReviewBundle, vertexInBoundary, upgradeChangeSet };
+  window.DistrictChanges = {
+    VERSION, REVIEW_VERSION, DISTRICTS, TYPES, ROUTE_TYPES, GROUP_LABELS, ROMAN,
+    labelFor, typeOf, groupOf, shortFor, badgeFor, describeFor, routeFactsFor, groupCounts,
+    numberOf, nextObjectNo, assignObjectNo,
+    makeChangeSet, styleFor, validate, validateReviewBundle, vertexInBoundary, upgradeChangeSet
+  };
 }());

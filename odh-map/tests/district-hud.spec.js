@@ -246,6 +246,40 @@ test('отправленный набор очищает черновик, чт�
   expect(await page.evaluate(() => localStorage.getItem('odh-map-district-change-draft-v2'))).toBeNull();
 });
 
+test('отказ сервера показывает причины, а черновик остаётся на месте', async ({ page }) => {
+  await page.addInitScript(() => {
+    sessionStorage.setItem('odh-map-api-token-v1', 'test-token');
+    sessionStorage.setItem('odh-map-api-user-v1', JSON.stringify({ id: 'editor-1', email: 'аэропорт', role: 'district_editor', district: 'Аэропорт' }));
+  });
+  await page.route('**/api/submissions', async (route) => {
+    await route.fulfill({
+      status: 422,
+      contentType: 'application/json',
+      body: JSON.stringify({
+        error: 'Набор не прошёл проверку.',
+        details: ['Объект 7 (Маршрут ДКМ — ОДХ · Дмитровское шоссе, у д. 90): начало и конец маршрута должны быть явно заданы.']
+      })
+    });
+  });
+  await page.goto(`${baseURL}district-editor.html`);
+  await expect(page.locator('#district')).toHaveValue('Аэропорт');
+  await page.locator('#author').fill('Иванов И.И.');
+  await page.locator('#address').fill('Тестовый проезд');
+  const map = page.locator('#map');
+  await page.locator('#setStart').click();
+  await map.click({ position: { x: 420, y: 360 } });
+  await page.locator('#setEnd').click();
+  await map.click({ position: { x: 450, y: 390 } });
+  await page.locator('#drawButton').click();
+  await page.locator('#drawButton').click();
+  await page.locator('#submitButton').click();
+
+  const status = page.locator('#status');
+  await expect(status).toContainText('Набор не прошёл проверку');
+  await expect(status).toContainText('Объект 7 (Маршрут ДКМ — ОДХ');
+  await expect(page.locator('#featureList')).toContainText('Тестовый проезд');
+});
+
 test('фото-метки появляются только в контуре префектуры', async ({ page }) => {
   await page.addInitScript(() => {
     sessionStorage.setItem('odh-map-api-token-v1', 'test-token');
@@ -276,4 +310,90 @@ test('памятка префектуры объясняет приёмку и �
   await expect(page.getByRole('heading', { name: 'Памятка префектуры: как принимать карты и помогать районам' })).toBeVisible();
   await expect(page.getByText('Загрузить ожидающие', { exact: true }).first()).toBeVisible();
   await expect(page.getByText('Публичная карта сама от этого не меняется', { exact: false })).toBeVisible();
+});
+
+test('район видит подпись объекта с номером, режим подписей и легенду типов', async ({ page }) => {
+  await page.goto(`${baseURL}district-editor.html`);
+  await page.locator('#district').selectOption('Аэропорт');
+  await page.locator('#author').fill('Иванов И.И.');
+  await page.locator('#address').fill('Тестовый проезд');
+  const map = page.locator('#map');
+  await page.locator('#setStart').click();
+  await map.click({ position: { x: 420, y: 360 } });
+  await page.locator('#setEnd').click();
+  await map.click({ position: { x: 450, y: 390 } });
+  await page.locator('#drawButton').click();
+  await page.locator('#drawButton').click();
+
+  // Номер объекта и его подпись: по ним объект называют и район, и префектура.
+  await expect(page.locator('#featureList .object-badge')).toHaveText('ОЧ-I №1');
+  const label = page.locator('#map .object-label');
+  await expect(label).toHaveCount(1);
+  await expect(label).toContainText('ОЧ-I №1');
+  await expect(label).toContainText('Тестовый проезд');
+
+  const toggle = page.locator('#labelsToggle button.labels-toggle');
+  await expect(toggle).toHaveText('Подписи: все');
+  await toggle.click();
+  await expect(toggle).toHaveText('Подписи: по наведению');
+  await expect(toggle).toHaveAttribute('data-mode', 'hover');
+  await expect(label).toHaveCount(0);
+  await toggle.click();
+  await expect(toggle).toHaveAttribute('data-mode', 'all');
+  await expect(label).toHaveCount(1);
+
+  const legend = page.locator('#typeLegend');
+  await expect(legend).toContainText('Очередность уборки');
+  await expect(legend).toContainText('Роторная перекидка');
+  await expect(legend).toContainText('Проезд дорожной коммунальной машины по дорогам');
+
+  await page.getByRole('button', { name: 'Показать на карте' }).click();
+  const popup = page.locator('.leaflet-popup-content');
+  await expect(popup).toContainText('Очередность уборки');
+  await expect(popup).toContainText('Балансодержатель');
+  await expect(popup).toContainText('Жилищник «Аэропорт»');
+
+  const draft = await page.evaluate(() => JSON.parse(localStorage.getItem('odh-map-district-change-draft-v2')));
+  expect(draft.features[0].properties.object_no).toBe(1);
+});
+
+test('приёмка видит номера объектов и по клику подводит карту к объекту', async ({ page }) => {
+  await page.goto(`${baseURL}district-editor.html`);
+  await page.locator('#district').selectOption('Аэропорт');
+  await page.locator('#author').fill('Иванов И.И.');
+  await page.locator('#address').fill('Тестовый проезд');
+  const map = page.locator('#map');
+  await page.locator('#setStart').click();
+  await map.click({ position: { x: 420, y: 360 } });
+  await page.locator('#setEnd').click();
+  await map.click({ position: { x: 450, y: 390 } });
+  await page.locator('#drawButton').click();
+  await page.locator('#drawButton').click();
+
+  const [download] = await Promise.all([
+    page.waitForEvent('download'),
+    page.locator('#exportButton').click()
+  ]);
+  const exported = JSON.parse(await readFile(await download.path(), 'utf8'));
+
+  await page.goto(`${baseURL}district-review.html`);
+  await page.locator('#reviewFiles').setInputFiles({
+    name: download.suggestedFilename(),
+    mimeType: 'application/geo+json',
+    buffer: Buffer.from(JSON.stringify(exported))
+  });
+
+  // Журнал объектов закрывает главный разрыв: раньше префектура видела только линии.
+  await expect(page.locator('#objectJournal .object-row')).toHaveCount(1);
+  await expect(page.locator('#objectJournal .object-row .object-badge')).toHaveText('ОЧ-I №1');
+  await expect(page.locator('#objectJournal')).toContainText('Очередность уборки');
+  await expect(page.locator('#objectJournalCount')).toHaveText('Показано 1 из 1');
+  await expect(page.locator('#fileList')).toContainText('Балансодержатель: Жилищник «Аэропорт»');
+  await expect(page.locator('#map .object-label')).toContainText('ОЧ-I №1');
+
+  await page.locator('#objectJournal .object-row').click();
+  const popup = page.locator('.leaflet-popup-content');
+  await expect(popup).toContainText('Очередность уборки');
+  await expect(popup).toContainText('Исполнитель');
+  await expect(popup).toContainText('Иванов И.И.');
 });
