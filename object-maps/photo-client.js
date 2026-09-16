@@ -1117,7 +1117,9 @@ async function downloadReport(kind) {
   }
   const district = requestedDistrict();
   const query = district ? `?district=${encodeURIComponent(district)}` : '';
-  const path = kind === 'xlsx' ? `/reports/export.xlsx${query}` : `/reports/export.pdf${query}`;
+  const path = kind === 'xlsx' ? `/reports/export.xlsx${query}`
+    : kind === 'headquarters' ? `/reports/export-headquarters.xlsx${query}`
+    : `/reports/export.pdf${query}`;
   try {
     showToast('Готовим выгрузку…');
     const response = await api(path);
@@ -1126,7 +1128,9 @@ async function downloadReport(kind) {
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = kind === 'xlsx' ? 'sao-photo-report.xlsx' : 'sao-photo-summary.pdf';
+    link.download = kind === 'xlsx' ? 'sao-photo-report.xlsx'
+      : kind === 'headquarters' ? 'sao-photo-headquarters.xlsx'
+      : 'sao-photo-summary.pdf';
     document.body.appendChild(link);
     link.click();
     link.remove();
@@ -1265,6 +1269,7 @@ function shell() {
         </div>
         <div class="pa-exports" id="paExports" hidden>
           <button type="button" class="pa-btn" id="paExportXlsx">Excel: полный реестр</button>
+          <button type="button" class="pa-btn" id="paExportHeadquarters">Excel: таблица на штаб</button>
           <button type="button" class="pa-btn" id="paExportPdf">PDF: краткая сводка</button>
           <button type="button" class="pa-btn" id="paExportCsv">CSV для Яндекса</button>
         </div>
@@ -1355,6 +1360,7 @@ function bindEvents() {
   element('paStatusFilter').addEventListener('change', () => { invalidateQueue(); renderList(); renderMapObjects(); renderQueue(); });
   element('paDistrictFilter').addEventListener('change', () => { invalidateQueue(); refreshCoverage(); });
   element('paExportXlsx').addEventListener('click', () => downloadReport('xlsx'));
+  element('paExportHeadquarters').addEventListener('click', () => downloadReport('headquarters'));
   element('paExportPdf').addEventListener('click', () => downloadReport('pdf'));
   element('paExportCsv').addEventListener('click', downloadCsv);
   element('paDialog').addEventListener('close', () => {

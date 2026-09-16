@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import ExcelJS from 'exceljs';
-import { buildExcel, buildPdf } from '../src/exports.js';
+import { buildExcel, buildHeadquartersExcel, buildPdf } from '../src/exports.js';
 import { objectTypeLabel, percentLabel, statusBandLabel } from '../src/labels.js';
 
 function photo(overrides = {}) {
@@ -157,4 +157,14 @@ test('лист «На штаб» даёт процент выполнения п
   assert.equal(sheet.getCell('L7').value, 4);
   assert.equal(sheet.getCell('M7').value, 3);
   assert.equal(sheet.getCell('N7').value, 75);
+});
+
+
+test('отдельная выгрузка малой таблицы несёт только лист «На штаб»', async () => {
+  const rows = [{ ...reportRow('stop', 'Аэропорт', 1), object_key: 'stop-1' }];
+
+  const workbook = new ExcelJS.Workbook();
+  await workbook.xlsx.load(await buildHeadquartersExcel(rows));
+
+  assert.deepEqual(workbook.worksheets.map((sheet) => sheet.name), ['На штаб']);
 });
