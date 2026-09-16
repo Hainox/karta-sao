@@ -30,7 +30,7 @@ export async function loadReportRows(pool, user, requestedDistrict) {
              'performer', p.performer, 'comment', p.comment, 'capturedAt', p.captured_at,
              'uploadedAt', p.uploaded_at, 'gpsLatitude', p.gps_latitude,
              'gpsLongitude', p.gps_longitude, 'gpsAccuracyM', p.gps_accuracy_m,
-             'distanceM', p.distance_m, 'geoStatus', p.geo_status,
+             'distanceM', p.distance_m, 'geoStatus', p.geo_status, 'sourceId', p.source_id,
              'reviewStatus', p.review_status, 'reviewReason', p.review_reason,
              'isReference', p.is_reference
            ) ORDER BY p.uploaded_at) FILTER (WHERE p.id IS NOT NULL) AS photos

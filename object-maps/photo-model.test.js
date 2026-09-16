@@ -4,7 +4,7 @@ import {
   accuracyVerdict, assessDistanceRisk, bandNote, bandText, boundaryNote, buildCoverageIndex, buildQueue, canExport,
   completionLabel, coverageFor, districtBoundaries, filterRecords, formatAccuracy, formatCoordinates,
   formatDateTime, formatMeters, geoStatusText, gpsDistanceLabel, haversineDistanceMeters, normalizePhoto,
-  photoDetailRows, photoRequirement, reportSummaryRows, reviewStatusText, scopedDistricts,
+  photoDetailRows, POINT_PHOTO_REQUIREMENT, reportSummaryRows, reviewStatusText, scopedDistricts,
 } from './photo-model.js';
 
 const serverRow = {
@@ -78,52 +78,64 @@ test('translates review and geo statuses into explicit Russian text', () => {
   assert.equal(geoStatusText(''), 'Проверка не выполнялась');
 });
 
-test('uses the approved 1 / 2 / 1 photo requirements', () => {
-  assert.equal(photoRequirement('stop'), 1);
-  assert.equal(photoRequirement('pp'), 2);
-  assert.equal(photoRequirement('entrance'), 1);
-  assert.throws(() => photoRequirement('unknown'), /unknown object type/);
+test('норма — одно фото на точку', () => {
+  assert.equal(POINT_PHOTO_REQUIREMENT, 1);
 });
 
-test('one reportable object covers every coordinate row of a multi-point PP', () => {
+test('снимок одной точки не подтягивается на соседние точки того же объекта', () => {
   const index = buildCoverageIndex({
     objects: [{
       objectKey: 'odh_pp_coordinates|pp|10002217|Аэропорт', objectType: 'pp', district: 'Аэропорт',
-      sourceIds: ['pp:1', 'pp:2', 'pp:3'], confirmedPhotos: 1, pendingReviewPhotos: 1, geoRisk: true,
+      sourceIds: ['pp:1', 'pp:2', 'pp:3'], geoRisk: true,
+      photos: [
+        { sourceId: 'pp:1', reviewStatus: 'confirmed' },
+        { sourceId: 'pp:1', reviewStatus: 'pending_review' },
+      ],
     }],
   });
-  for (const id of ['pp:1', 'pp:2', 'pp:3']) {
-    const coverage = coverageFor(index, { id }, 'pp');
-    assert.equal(coverage.required, 2);
-    assert.equal(coverage.confirmed, 1);
-    assert.equal(coverage.pending, 1);
-    assert.equal(coverage.complete, false);
-    assert.equal(coverage.statusKey, 'partial');
-    assert.equal(coverage.geoRisk, true);
+
+  const own = coverageFor(index, { id: 'pp:1' }, 'pp');
+  assert.equal(own.required, 1);
+  assert.equal(own.confirmed, 1);
+  assert.equal(own.pending, 1);
+  assert.equal(own.complete, true);
+  assert.equal(own.geoRisk, true);
+
+  // У соседних точек того же ID снимков нет — каждая точка закрывается сама.
+  for (const id of ['pp:2', 'pp:3']) {
+    const neighbour = coverageFor(index, { id }, 'pp');
+    assert.equal(neighbour.confirmed, 0);
+    assert.equal(neighbour.pending, 0);
+    assert.equal(neighbour.withPhoto, false);
+    assert.equal(neighbour.statusKey, 'empty');
+    assert.equal(neighbour.geoRisk, true);
   }
 });
 
-test('classifies an object as done, partial, pending, or empty', () => {
+test('classifies a point as done, pending, or empty', () => {
   const index = buildCoverageIndex({
     objects: [
-      { objectKey: 'done', objectType: 'stop', district: 'Сокол', sourceIds: ['stop:done'], confirmedPhotos: 1, pendingReviewPhotos: 0 },
-      { objectKey: 'partial', objectType: 'pp', district: 'Сокол', sourceIds: ['pp:partial'], confirmedPhotos: 1, pendingReviewPhotos: 0 },
-      { objectKey: 'pending', objectType: 'stop', district: 'Сокол', sourceIds: ['stop:pending'], confirmedPhotos: 0, pendingReviewPhotos: 1 },
+      { objectKey: 'done', objectType: 'stop', district: 'Сокол', sourceIds: ['stop:done'], photos: [{ sourceId: 'stop:done', reviewStatus: 'confirmed' }] },
+      { objectKey: 'pending', objectType: 'stop', district: 'Сокол', sourceIds: ['stop:pending'], photos: [{ sourceId: 'stop:pending', reviewStatus: 'pending_review' }] },
+      { objectKey: 'rejected', objectType: 'stop', district: 'Сокол', sourceIds: ['stop:rejected'], photos: [{ sourceId: 'stop:rejected', reviewStatus: 'rejected' }] },
     ],
   });
   assert.equal(coverageFor(index, { id: 'stop:done' }, 'stop').statusKey, 'done');
   assert.equal(coverageFor(index, { id: 'stop:done' }, 'stop').remaining, 0);
-  assert.equal(coverageFor(index, { id: 'pp:partial' }, 'pp').statusKey, 'partial');
-  assert.equal(coverageFor(index, { id: 'pp:partial' }, 'pp').remaining, 1);
   assert.equal(coverageFor(index, { id: 'stop:pending' }, 'stop').statusKey, 'pending');
   assert.equal(coverageFor(index, { id: 'stop:pending' }, 'stop').withPhoto, true);
   assert.equal(coverageFor(index, { id: 'stop:none' }, 'stop').statusKey, 'empty');
   assert.equal(coverageFor(index, { id: 'stop:none' }, 'stop').statusLabel, 'Без фото');
+  // Отклонённый кадр точку не закрывает.
+  assert.equal(coverageFor(index, { id: 'stop:rejected' }, 'stop').withPhoto, false);
 });
 
-test('a completed object still reports its separate pending counter', () => {
+test('точка с подтверждённым снимком всё равно показывает снимок на проверке', () => {
   const index = buildCoverageIndex({
-    objects: [{ objectKey: 'a', objectType: 'stop', district: 'Сокол', sourceIds: ['stop:a'], confirmedPhotos: 2, pendingReviewPhotos: 1 }],
+    objects: [{
+      objectKey: 'a', objectType: 'stop', district: 'Сокол', sourceIds: ['stop:a'],
+      photos: [{ sourceId: 'stop:a', reviewStatus: 'confirmed' }, { sourceId: 'stop:a', reviewStatus: 'pending_review' }],
+    }],
   });
   const coverage = coverageFor(index, { id: 'stop:a' }, 'stop');
   assert.equal(coverage.statusKey, 'done');
@@ -136,7 +148,7 @@ test('filters by district, group, free text and photo status', () => {
     { id: 'stop:2', label: 'Сокол, 5', group: 'Сокол', searchKey: 'сокол 5' },
   ];
   const index = buildCoverageIndex({
-    objects: [{ objectKey: 'a', objectType: 'stop', district: 'Сокол', sourceIds: ['stop:2'], confirmedPhotos: 1, pendingReviewPhotos: 0 }],
+    objects: [{ objectKey: 'a', objectType: 'stop', district: 'Сокол', sourceIds: ['stop:2'], photos: [{ sourceId: 'stop:2', reviewStatus: 'confirmed' }] }],
   });
   const options = { coverageIndex: index, objectType: 'stop' };
   assert.equal(filterRecords(records, { ...options, status: 'with' }).length, 1);
@@ -155,7 +167,7 @@ test('the route queue skips completed objects and keeps group order', () => {
     { id: 'stop:3', label: 'В', group: 'Сокол' },
   ];
   const index = buildCoverageIndex({
-    objects: [{ objectKey: 'a', objectType: 'stop', district: 'Сокол', sourceIds: ['stop:1'], confirmedPhotos: 1, pendingReviewPhotos: 0 }],
+    objects: [{ objectKey: 'a', objectType: 'stop', district: 'Сокол', sourceIds: ['stop:1'], photos: [{ sourceId: 'stop:1', reviewStatus: 'confirmed' }] }],
   });
   const queue = buildQueue(records, { coverageIndex: index, objectType: 'stop' });
   assert.deepEqual(queue.map((record) => record.id), ['stop:2', 'stop:3']);

@@ -1,7 +1,29 @@
-export function createTelegram({ token, fetchImpl = fetch, apiBase = 'https://api.telegram.org' }) {
+// Связь с Telegram бывает недоступна нестабильно: часть попыток обрывается по
+// таймауту. Ответ самой службы приходит как «Telegram <method>: …» — такие
+// ошибки не повторяем, а сетевые сбои пробуем ещё несколько раз.
+const RETRY_ATTEMPTS = 4;
+const RETRY_DELAY_MS = 1500;
+
+export function createTelegram({ token, fetchImpl = fetch, apiBase = 'https://api.telegram.org', sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms)) }) {
   if (!token) throw new Error('Токен бота не задан.');
 
-  const call = async (method, payload = {}) => {
+  const isNetworkError = (error) => !/^Telegram /.test(String(error?.message || ''));
+
+  const withRetry = async (operation) => {
+    let lastError;
+    for (let attempt = 1; attempt <= RETRY_ATTEMPTS; attempt += 1) {
+      try {
+        return await operation();
+      } catch (error) {
+        lastError = error;
+        if (!isNetworkError(error) || attempt === RETRY_ATTEMPTS) throw error;
+        await sleep(RETRY_DELAY_MS * attempt);
+      }
+    }
+    throw lastError;
+  };
+
+  const call = async (method, payload = {}) => withRetry(async () => {
     const response = await fetchImpl(`${apiBase}/bot${token}/${method}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -12,9 +34,9 @@ export function createTelegram({ token, fetchImpl = fetch, apiBase = 'https://ap
       throw new Error(`Telegram ${method}: ${body?.description || `HTTP ${response.status}`}`);
     }
     return body.result;
-  };
+  });
 
-  const sendPhoto = async (chatId, { buffer, filename = 'photo.png', caption }) => {
+  const sendPhoto = async (chatId, { buffer, filename = 'photo.png', caption }) => withRetry(async () => {
     // Фотография отправляется multipart-запросом, а не JSON: так Telegram
     // получает файл целиком, без ограничений на длину строки.
     const form = new FormData();
@@ -30,7 +52,7 @@ export function createTelegram({ token, fetchImpl = fetch, apiBase = 'https://ap
       throw new Error(`Telegram sendPhoto: ${body?.description || `HTTP ${response.status}`}`);
     }
     return body.result;
-  };
+  });
 
   return {
     call,

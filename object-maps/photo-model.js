@@ -1,7 +1,9 @@
 // Pure helpers for the photo atlas client. No DOM and no network here so the
 // mapping between the dataset records and the photo service can be unit tested.
 
-export const PHOTO_REQUIREMENTS = Object.freeze({ stop: 1, pp: 2, entrance: 1 });
+// Район снимает конкретную точку, поэтому норма — одно фото на точку.
+// У объекта с одним ID точек может быть несколько, и каждая закрывается сама.
+export const POINT_PHOTO_REQUIREMENT = 1;
 
 const REVIEW_TEXT = Object.freeze({
   pending_review: 'На проверке',
@@ -135,11 +137,6 @@ export function formatCoordinates(latitude, longitude) {
   return `${latitude.toFixed(6)}, ${longitude.toFixed(6)}`;
 }
 
-export function photoRequirement(objectType) {
-  const required = PHOTO_REQUIREMENTS[objectType];
-  if (!required) throw new Error(`unknown object type ${objectType}`);
-  return required;
-}
 
 // One row per displayed property so the caption is asserted in tests instead of guessed.
 export function photoDetailRows(photo) {
@@ -158,8 +155,11 @@ export function photoDetailRows(photo) {
   ];
 }
 
-// Index the report payload by every source id so a multi-point object keeps one
-// reportable status for all of its coordinate rows.
+/**
+ * Index the report payload by every source id. Photos are counted per point:
+ * a snapshot taken at one coordinate row of a multi-point object must not look
+ * like a snapshot of its neighbours, even though they share the object id.
+ */
 export function buildCoverageIndex(summaryPayload) {
   const index = new Map();
   if (!summaryPayload || !Array.isArray(summaryPayload.objects)) return index;
@@ -169,18 +169,28 @@ export function buildCoverageIndex(summaryPayload) {
       objectType: object.objectType,
       district: object.district ?? null,
       label: object.label || '',
-      confirmedPhotos: Number(object.confirmedPhotos) || 0,
-      pendingReviewPhotos: Number(object.pendingReviewPhotos) || 0,
       geoRisk: object.geoRisk === true,
     };
-    for (const sourceId of object.sourceIds || []) index.set(sourceId, entry);
+    const perPoint = new Map();
+    for (const photo of object.photos || []) {
+      const sourceId = photo?.sourceId;
+      if (!sourceId) continue;
+      const counts = perPoint.get(sourceId) || { confirmed: 0, pending: 0 };
+      if (photo.reviewStatus === 'confirmed') counts.confirmed += 1;
+      else if (photo.reviewStatus !== 'rejected') counts.pending += 1;
+      perPoint.set(sourceId, counts);
+    }
+    for (const sourceId of object.sourceIds || []) {
+      const counts = perPoint.get(sourceId) || { confirmed: 0, pending: 0 };
+      index.set(sourceId, { ...entry, confirmedPhotos: counts.confirmed, pendingReviewPhotos: counts.pending });
+    }
   }
   return index;
 }
 
 export function coverageFor(coverageIndex, record, objectType) {
   const entry = coverageIndex.get(record.id) || null;
-  const required = photoRequirement(objectType);
+  const required = POINT_PHOTO_REQUIREMENT;
   const confirmed = entry ? entry.confirmedPhotos : 0;
   const pending = entry ? entry.pendingReviewPhotos : 0;
   const complete = confirmed >= required;

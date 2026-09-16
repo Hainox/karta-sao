@@ -271,7 +271,9 @@ async function handler(request, response) {
       const objectResult = await pool.query('SELECT object_key, district FROM objects WHERE dataset_id = $1 AND $2 = ANY(source_ids) LIMIT 1', [datasetId, sourceId]);
       const object = objectResult.rows[0];
       if (!object || (user.role === 'district_editor' && object.district !== user.district)) return sendError(response, request, 404, 'object_not_found');
-      const result = await pool.query(`SELECT id, storage_key, mime_type, original_filename, byte_size, performer, comment, captured_at, uploaded_at, gps_latitude, gps_longitude, gps_accuracy_m, distance_m, geo_status, review_status, review_reason, is_reference FROM photos WHERE object_key = $1 AND review_status <> 'rejected' ORDER BY uploaded_at`, [object.object_key]);
+      // Снимок принадлежит конкретной точке: у объекта с тем же ID могут быть
+      // другие точки, и чужие кадры на них показывать нельзя.
+      const result = await pool.query(`SELECT id, storage_key, mime_type, original_filename, byte_size, performer, comment, captured_at, uploaded_at, gps_latitude, gps_longitude, gps_accuracy_m, distance_m, geo_status, review_status, review_reason, is_reference, source_id FROM photos WHERE object_key = $1 AND source_id = $2 AND review_status <> 'rejected' ORDER BY uploaded_at`, [object.object_key, sourceId]);
       return sendJson(response, 200, { objectKey: object.object_key, photos: result.rows }, request);
     }
     if (pathname === '/photos' && request.method === 'POST') return handleUpload(request, response, user);

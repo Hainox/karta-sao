@@ -20,7 +20,11 @@ function marks(item) {
 }
 
 export function emptyHeadquartersCounts() {
-  return { plan: { stop: 0, pp: 0, entrance: 0 }, fact: { stop: 0, pp: 0, entrance: 0 } };
+  return {
+    plan: { stop: 0, pp: 0, entrance: 0 },
+    objects: { stop: 0, pp: 0, entrance: 0 },
+    fact: { stop: 0, pp: 0, entrance: 0 },
+  };
 }
 
 export function headquartersCounts(items) {
@@ -28,6 +32,8 @@ export function headquartersCounts(items) {
   for (const item of items) {
     const value = marks(item);
     counts.plan[item.objectType] += value.plan;
+    // Объект считается по ID, точек у него может быть много.
+    counts.objects[item.objectType] += 1;
     counts.fact[item.objectType] += value.fact;
   }
   return counts;
@@ -36,9 +42,14 @@ export function headquartersCounts(items) {
 export function addHeadquartersCounts(target, counts) {
   for (const kind of OBJECT_TYPES) {
     target.plan[kind] += counts.plan[kind];
+    target.objects[kind] += counts.objects[kind];
     target.fact[kind] += counts.fact[kind];
   }
   return target;
+}
+
+export function headquartersObjectsTotal(counts) {
+  return counts.objects.stop + counts.objects.pp + counts.objects.entrance;
 }
 
 export function headquartersPlanTotal(counts) {
@@ -59,14 +70,21 @@ export function headquartersOverallPercent(counts) {
   return headquartersPercent(headquartersFactTotal(counts), headquartersPlanTotal(counts));
 }
 
+// Порядок колонок каждой категории: точек для отработки, объектов по ID,
+// закрытых отметок и процент по точкам.
 export function headquartersValues(counts) {
   const values = [];
   for (const kind of OBJECT_TYPES) {
-    values.push(counts.plan[kind], counts.fact[kind], headquartersPercent(counts.fact[kind], counts.plan[kind]));
+    values.push(
+      counts.plan[kind],
+      counts.objects[kind],
+      counts.fact[kind],
+      headquartersPercent(counts.fact[kind], counts.plan[kind]),
+    );
   }
   const plan = headquartersPlanTotal(counts);
   const fact = headquartersFactTotal(counts);
-  values.push(plan, fact, headquartersPercent(fact, plan));
+  values.push(plan, headquartersObjectsTotal(counts), fact, headquartersPercent(fact, plan));
   return values;
 }
 
