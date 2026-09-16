@@ -9,12 +9,12 @@ const REVIEW_TEXT = Object.freeze({
   rejected: 'Отклонено',
 });
 
-// The approved geo policy is a nominal 15 m radius with a ±5 m tolerance:
-// up to 15 m is inside, 15-20 m is inside the tolerance, beyond 20 m is a risk.
+// Geo policy: nominal 15 m radius with a ±15 m spread, so the zone boundary is
+// 30 m: up to 15 m is inside, 15-30 m is inside the tolerance, beyond 30 m is a risk.
 const GEO_TEXT = Object.freeze({
   within_radius: 'В радиусе 15 м',
-  within_tolerance: 'В допуске 15–20 м',
-  risk: 'Риск: дальше 20 м',
+  within_tolerance: 'В допуске 15–30 м',
+  risk: 'Риск: дальше 30 м',
   review: 'Нужна ручная проверка',
 });
 
@@ -337,7 +337,9 @@ export function canExport(user) {
 
 const EARTH_RADIUS_METERS = 6_371_008.8;
 export const NOMINAL_RADIUS_METERS = 15;
-export const GPS_TOLERANCE_METERS = 5;
+// Разброс ±15 м: граница зоны 30 м. Должно совпадать с сервером
+// (DEFAULT_TOLERANCE_METERS в photo-service/src/geo.js).
+export const GPS_TOLERANCE_METERS = 15;
 
 export function haversineDistanceMeters(first, second) {
   const toRadians = (degrees) => degrees * Math.PI / 180;

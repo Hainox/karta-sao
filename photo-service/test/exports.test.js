@@ -118,7 +118,8 @@ test('сводная отчётность несёт отдельный лист
   assert.ok(categories.includes('Недостоверная геопривязка'));
 
   const overflowRow = categories.indexOf('Превышение зоны') + 2;
-  assert.equal(riskSheet.getCell(`N${overflowRow}`).value, 14.4);
+  // 34.4 м при границе зоны 30 м — превышение 4.4 м.
+  assert.equal(riskSheet.getCell(`N${overflowRow}`).value, 4.4);
   assert.equal(riskSheet.getCell(`E${overflowRow}`).value, 'Жилищник «Ховрино»');
   assert.equal(riskSheet.getCell(`G${overflowRow}`).value, '10002217');
   assert.equal(riskSheet.getCell(`P${overflowRow}`).value, 'Риск');

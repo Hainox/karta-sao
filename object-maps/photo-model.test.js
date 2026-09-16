@@ -73,8 +73,8 @@ test('formats missing values as text instead of throwing', () => {
 test('translates review and geo statuses into explicit Russian text', () => {
   assert.equal(reviewStatusText('confirmed'), 'Подтверждено');
   assert.equal(reviewStatusText('weird'), 'Статус не указан');
-  assert.equal(geoStatusText('risk'), 'Риск: дальше 20 м');
-  assert.equal(geoStatusText('within_tolerance'), 'В допуске 15–20 м');
+  assert.equal(geoStatusText('risk'), 'Риск: дальше 30 м');
+  assert.equal(geoStatusText('within_tolerance'), 'В допуске 15–30 м');
   assert.equal(geoStatusText(''), 'Проверка не выполнялась');
 });
 
@@ -346,7 +346,7 @@ test('a fix is classified inside the radius, inside the tolerance, or as a risk'
   const risky = assessDistanceRisk({ latitude: 55.8005, longitude: 37.5 }, point);
   assert.equal(risky.status, 'risk');
   assert.equal(risky.risk, true);
-  assert.equal(risky.effectiveRadiusMeters, 20);
+  assert.equal(risky.effectiveRadiusMeters, 30);
 });
 
 test('a missing fix or missing points falls back to manual review', () => {
@@ -360,7 +360,7 @@ test('the GPS note states the distance and the verdict in words', () => {
   const close = gpsDistanceLabel({ latitude: 55.80009, longitude: 37.5 }, point);
   assert.match(close, /^До объекта 10(,0)? м — в радиусе 15 м\.$/);
   const far = gpsDistanceLabel({ latitude: 55.8005, longitude: 37.5 }, point);
-  assert.match(far, /^До объекта 55,6 м — риск: дальше 20 м\.$/);
+  assert.match(far, /^До объекта 55,6 м — риск: дальше 30 м\.$/);
   assert.equal(gpsDistanceLabel({ latitude: 55.8, longitude: 37.5 }, []), 'Расстояние до объекта не определено: нет зарегистрированных точек.');
 });
 
