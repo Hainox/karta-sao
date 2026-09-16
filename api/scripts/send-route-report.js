@@ -5,6 +5,7 @@ import { databasePoolOptions } from '../lib/database-config.js';
 import { notifyClientFromEnv } from '../lib/notify.js';
 import { createRepository } from '../lib/repository.js';
 import { routeReport, routeReportCsv, routeReportCsvName, routeReportSummary } from '../lib/route-report.js';
+import { DISTRICTS } from '../lib/validation.js';
 
 // Разовый отчёт по отрисовке маршрутов ОДХ. Без --out уходит в Telegram
 // сообщением и CSV-файлом, с --out рядом сохраняется только выгрузка. Сводку
@@ -15,7 +16,7 @@ const outPath = outIndex === -1 ? null : resolve(args[outIndex + 1] || 'odh-rout
 
 const pool = new Pool({ ...databasePoolOptions(), max: 2 });
 try {
-  const report = routeReport(await createRepository(pool).routeReportRows());
+  const report = routeReport(await createRepository(pool).routeReportRows(), { districtNames: [...DISTRICTS] });
   const csv = routeReportCsv(report);
   const filename = routeReportCsvName(report);
   const text = routeReportSummary(report);

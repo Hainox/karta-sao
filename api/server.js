@@ -7,6 +7,7 @@ import { databasePoolOptions } from './lib/database-config.js';
 import { notifyClientFromEnv } from './lib/notify.js';
 import { createRepository, migrate } from './lib/repository.js';
 import { routeReport, routeReportCsv, routeReportCsvName, routeReportSummary } from './lib/route-report.js';
+import { DISTRICTS } from './lib/validation.js';
 
 const root = path.dirname(fileURLToPath(import.meta.url));
 const jwtSecret = process.env.JWT_SECRET;
@@ -31,7 +32,7 @@ app.listen(port, () => console.log(`ODH SAO exchange API listens on ${port}${not
  */
 async function sendRouteReport() {
   try {
-    const report = routeReport(await repository.routeReportRows());
+    const report = routeReport(await repository.routeReportRows(), { districtNames: [...DISTRICTS] });
     const text = routeReportSummary(report);
     const filename = routeReportCsvName(report);
     await notifier.event({

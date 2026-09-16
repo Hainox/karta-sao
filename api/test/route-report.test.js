@@ -68,6 +68,18 @@ test('относит районы без маршрутов к отстающи�
   assert.deepEqual(report.lagging, ['Беговой', 'Сокол']);
 });
 
+test('районы без единой отправки тоже попадают в отчёт и в отстающие', () => {
+  const report = routeReport([row('Аэропорт', 'submitted', 'queue', 1)], {
+    generatedAt: GENERATED_AT,
+    districtNames: ['Аэропорт', 'Беговой', 'Сокол']
+  });
+
+  // Иначе пустой список «без маршрутов» читался бы как «работа начата всеми».
+  assert.deepEqual(report.districts.map((item) => item.district), ['Аэропорт', 'Беговой', 'Сокол']);
+  assert.deepEqual(report.lagging, ['Беговой', 'Сокол']);
+  assert.equal(report.totals.routes, 1);
+});
+
 test('каждому району ставит время последней отправки', () => {
   const report = routeReport([
     row('Аэропорт', 'submitted', 'queue', 1, '2026-09-16T08:00:00.000Z'),

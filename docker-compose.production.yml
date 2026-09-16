@@ -23,6 +23,8 @@ services:
         condition: service_healthy
     environment:
       PORT: 8787
+      # Отчёты и рассылки печатают дату и время по московскому времени.
+      TZ: ${TZ:-Europe/Moscow}
       PGHOST: postgres
       PGPORT: 5432
       PGDATABASE: ${POSTGRES_DB:-odh_sao}
@@ -32,6 +34,8 @@ services:
       ALLOWED_ORIGINS: ${ALLOWED_ORIGINS:-https://hainox.github.io}
       NOTIFY_URL: ${NOTIFY_URL:-http://notify:8790}
       NOTIFY_SECRET: ${NOTIFY_SECRET:-}
+      # Отчёт о состоянии отрисовки маршрутов ОДХ в Telegram раз в 3 часа.
+      ODH_ROUTE_REPORT_ENABLED: ${ODH_ROUTE_REPORT_ENABLED:-false}
     networks:
       default: {}
       edge:

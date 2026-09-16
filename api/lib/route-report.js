@@ -74,12 +74,19 @@ function emptyDistrict(district) {
  *     totals: { routes, zones, points, submitted, approved, rejected, lastSubmittedAt },
  *     lagging: string[]               // районы без единого маршрута — с них спрос
  *   }
+ * districtNames — полный список районов округа: районы без отправок попадут в
+ * отчёт нулевыми строками и окажутся в lagging.
  * districts отсортирован по убыванию routes, затем по названию (русская локаль).
  * submitted/approved/rejected считают только маршруты; зоны и точки — отдельно.
  * lastSubmittedAt в итогах — самая поздняя отправка по САО.
  */
-export function routeReport(rows, { generatedAt = new Date() } = {}) {
+export function routeReport(rows, { generatedAt = new Date(), districtNames = [] } = {}) {
   const byDistrict = new Map();
+  // Районы, которые ещё ничего не отправили, тоже обязаны попасть в отчёт: иначе
+  // пустой список «без маршрутов» читался бы как «работа начата всеми».
+  for (const name of Array.isArray(districtNames) ? districtNames : []) {
+    if (!byDistrict.has(name)) byDistrict.set(name, emptyDistrict(name));
+  }
   for (const row of Array.isArray(rows) ? rows : []) {
     const district = row.district;
     if (!byDistrict.has(district)) byDistrict.set(district, emptyDistrict(district));
