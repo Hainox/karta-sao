@@ -78,13 +78,61 @@ function frameTable(worksheet, lastRow, columnCount) {
   }
 }
 
+/* -------------------------------------------------------------- светофор */
+
+// Столбцы «%» на листе «На штаб»: после каждой категории и в итоге.
+const PERCENT_COLUMNS = Object.freeze([5, 8, 11, 14]);
+
+// Пороги те же, что у полосы статуса (<33 %, 33–<66 %, ≥66 %), цвета — те же,
+// что в PDF-сводке. Заливка бледная: смысл несёт число, цвет только помогает глазу.
+const BAND_STYLES = Object.freeze({
+  low: { fill: 'FFF7E4E0', font: 'FFB3382B' },
+  middle: { fill: 'FFFBEEDA', font: 'FFB8791A' },
+  high: { fill: 'FFE3F0EA', font: 'FF1C7A55' },
+});
+
+function percentBandRules(letter, firstRow) {
+  const cell = `$${letter}${firstRow}`;
+  return [
+    { when: `${cell}>=66`, band: 'high' },
+    { when: `AND(${cell}>=33,${cell}<66)`, band: 'middle' },
+    { when: `${cell}<33`, band: 'low' },
+  ].map(({ when, band }) => ({
+    type: 'expression',
+    // Пустая ячейка процента остаётся без цвета: у строки без данных его просто нет.
+    formulae: [`AND(ISNUMBER(${cell}),${when})`],
+    style: {
+      // Цвет стоит и в fgColor, и в bgColor: у правил условного форматирования
+      // Excel читает заливку по-разному, а так светофор виден в любом случае.
+      fill: {
+        type: 'pattern',
+        pattern: 'solid',
+        fgColor: { argb: BAND_STYLES[band].fill },
+        bgColor: { argb: BAND_STYLES[band].fill },
+      },
+      font: { bold: true, color: { argb: BAND_STYLES[band].font } },
+    },
+  }));
+}
+
+function paintPercentBands(worksheet, firstRow, lastRow) {
+  if (lastRow < firstRow) return;
+  for (const column of PERCENT_COLUMNS) {
+    const letter = worksheet.getColumn(column).letter;
+    worksheet.addConditionalFormatting({
+      ref: `${letter}${firstRow}:${letter}${lastRow}`,
+      rules: percentBandRules(letter, firstRow),
+    });
+  }
+}
+
 /**
  * Лист «На штаб»: короткая форма ОУИФР с процентом по каждой категории.
  * Используется и в общей книге, и в отдельной выгрузке.
  */
 function addHeadquartersSheet(workbook, payload) {
     /* --------------------------------------------------------------- «На штаб» */
-    // Короткая форма ОУИФР для штаба: те же объекты, но по типам и с процентом
+    // Короткая форма ОУИФР для штаба: те же отметки, но по типам и с процентом
     // выполнения в каждой категории. Отдельный лист, чтобы «Обзор» не разрастался.
     const headquarters = workbook.addWorksheet('На штаб');
     [32, 13, 10, 10, 9, 10, 10, 9, 10, 10, 9, 10, 10, 9].forEach((width, index) => {
@@ -126,12 +174,21 @@ function addHeadquartersSheet(workbook, payload) {
       });
     }
 
+    // Единица учёта — отметка, то есть конкретная точка на карте, а не уникальный
+    // объект: у одного пешеходного перехода точек может быть несколько десятков,
+    // и район снимает каждую. Поэтому и план, и факт считаются в отметках.
+    const headquartersMarks = (item) => {
+      const plan = Math.max(0, Number(item.sourcePointCount) || 0);
+      const covered = Math.max(0, Number(item.coveredPoints) || 0);
+      return { plan, fact: Math.min(covered, plan) };
+    };
     const headquartersCounts = (items) => {
       const plan = { stop: 0, pp: 0, entrance: 0 };
       const fact = { stop: 0, pp: 0, entrance: 0 };
       for (const item of items) {
-        plan[item.objectType] += 1;
-        if ((item.confirmedPhotos || 0) + (item.pendingReviewPhotos || 0) > 0) fact[item.objectType] += 1;
+        const marks = headquartersMarks(item);
+        plan[item.objectType] += marks.plan;
+        fact[item.objectType] += marks.fact;
       }
       return { plan, fact };
     };
@@ -149,7 +206,7 @@ function addHeadquartersSheet(workbook, payload) {
     const addHeadquartersRow = (values, options = {}) => {
       const row = headquarters.addRow(values);
       if (options.bold) row.font = { bold: true };
-      for (const column of [5, 8, 11, 14]) row.getCell(column).numFmt = '0.0"%"';
+      for (const column of PERCENT_COLUMNS) row.getCell(column).numFmt = '0.0"%"';
       for (let column = 3; column <= values.length; column += 1) row.getCell(column).alignment = { horizontal: 'center' };
       if (options.fill) {
         for (let column = 1; column <= values.length; column += 1) row.getCell(column).fill = options.fill;
@@ -161,6 +218,7 @@ function addHeadquartersSheet(workbook, payload) {
     const headquartersTotal = { plan: { stop: 0, pp: 0, entrance: 0 }, fact: { stop: 0, pp: 0, entrance: 0 } };
     const headquartersDistricts = [...new Set(headquartersObjects.map((item) => item.district).filter(Boolean))]
       .sort((left, right) => left.localeCompare(right, 'ru'));
+    const districtsFirstRow = headquarters.rowCount + 1;
     for (const district of headquartersDistricts) {
       const counts = headquartersCounts(headquartersObjects.filter((item) => item.district === district));
       for (const kind of OBJECT_TYPES) {
@@ -172,6 +230,7 @@ function addHeadquartersSheet(workbook, payload) {
     const headquartersUnassigned = headquartersCounts(headquartersObjects.filter((item) => !item.district));
     addHeadquartersRow(['Не распределено по районам', '—', ...headquartersValues(headquartersUnassigned)]);
     addHeadquartersRow(['ИТОГО по САО', '16 районов', ...headquartersValues(headquartersTotal)], { bold: true, fill: TOTAL_FILL });
+    paintPercentBands(headquarters, districtsFirstRow, headquarters.rowCount);
 
     // Тот же объём работ со стороны владельца объекта.
     const headquartersHolders = new Map();
@@ -202,7 +261,7 @@ function addHeadquartersSheet(workbook, payload) {
     const holdersTitleRow = headquarters.rowCount + 1;
     headquarters.mergeCells(holdersTitleRow, 1, holdersTitleRow, 14);
     const holdersTitle = headquarters.getCell(holdersTitleRow, 1);
-    holdersTitle.value = 'ТЕ ЖЕ ОБЪЕКТЫ ПО БАЛАНСОДЕРЖАТЕЛЯМ';
+    holdersTitle.value = 'ТЕ ЖЕ ОТМЕТКИ ПО БАЛАНСОДЕРЖАТЕЛЯМ';
     holdersTitle.font = { bold: true, size: 11, color: { argb: 'FF1F3B57' } };
     holdersTitle.fill = SECTION_FILL;
     const holdersHeaderRow = holdersTitleRow + 1;
@@ -223,6 +282,7 @@ function addHeadquartersSheet(workbook, payload) {
       });
     }
     const holdersTotal = { plan: { stop: 0, pp: 0, entrance: 0 }, fact: { stop: 0, pp: 0, entrance: 0 } };
+    const holdersFirstRow = holdersHeaderRow + 1;
     for (const holder of orderedHolders) {
       const counts = headquartersCounts(headquartersHolders.get(holder));
       for (const kind of OBJECT_TYPES) {
@@ -232,11 +292,12 @@ function addHeadquartersSheet(workbook, payload) {
       addHeadquartersRow([holderLabel(holder), 'весь САО', ...headquartersValues(counts)]);
     }
     addHeadquartersRow(['ИТОГО по САО', 'все объекты САО', ...headquartersValues(holdersTotal)], { bold: true, fill: TOTAL_FILL });
+    paintPercentBands(headquarters, holdersFirstRow, headquarters.rowCount);
 
     const headquartersNoteRow = headquarters.rowCount + 2;
     headquarters.mergeCells(headquartersNoteRow, 1, headquartersNoteRow, 14);
     const headquartersNote = headquarters.getCell(headquartersNoteRow, 1);
-    headquartersNote.value = 'Факт — объекты, по которым район уже загрузил хотя бы одно фото (охват); снимки находятся на проверке префектуры, подтверждённых приёмкой пока нет. Процент считается по каждой категории отдельно.';
+    headquartersNote.value = 'План и факт считаются в отметках — конкретных точках на карте: у одного перехода их может быть несколько десятков. Факт — отметки, по которым район уже загрузил хотя бы одно фото; снимки находятся на проверке префектуры, подтверждённых приёмкой пока нет. Процент считается по каждой категории отдельно.';
     headquartersNote.font = { size: 8, color: { argb: 'FF708089' } };
 }
 

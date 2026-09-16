@@ -32,6 +32,24 @@ PHOTO_SERVICE_ALLOWED_ORIGINS=https://hainox.github.io,https://obhod-sao.ru
 
 Create accounts only through the hidden-input CLI, one account at a time. Never put a password in a command argument or repository file.
 
+## Updating an installed service
+
+Reports count source points (`photos.source_id`), so the database must know the point of every photo before the new code starts. The migration and the one-off binding are separate steps; skipping the migration makes the whole report query fail, skipping the binding leaves the point-based coverage at zero for photos uploaded earlier.
+
+```sh
+cd /opt/sao-photo-service/photo-service
+git pull
+docker compose -p sao-photo-service build photo-service
+docker compose -p sao-photo-service run --rm photo-service node scripts/migrate.js
+docker compose -p sao-photo-service run --rm photo-service node scripts/backfill-photo-source-id.js
+docker compose -p sao-photo-service run --rm photo-service node scripts/backfill-photo-source-id.js --apply
+docker compose -p sao-photo-service up -d photo-service
+```
+
+The binding command is a dry run by default: it prints how many photos it would bind and how many it would skip (no GPS, no registered points). Photos without GPS keep no point and stay on manual review.
+
+After the update, the sheet «На штаб» in the Excel export shows the plan in marks: 812 stops, 2 235 pedestrian-crossing points, 10 035 entrances.
+
 ## Backup and restore
 
 Daily backup is separate from the legacy jobs:

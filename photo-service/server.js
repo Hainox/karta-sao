@@ -188,11 +188,11 @@ async function handleUpload(request, response, user) {
     await client.query(
       `INSERT INTO photos (id, object_key, storage_key, thumbnail_key, original_filename, mime_type, byte_size, sha256,
         performer, comment, captured_at, gps_latitude, gps_longitude, gps_accuracy_m, distance_m, geo_status,
-        review_status, review_reason, uploaded_by)
-       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,'pending_review',$17,$18)`,
+        review_status, review_reason, uploaded_by, source_id)
+       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,'pending_review',$17,$18,$19)`,
       [photoId, object.object_key, media.storageKey, thumbnail?.storageKey ?? null, parsed.file.filename, parsed.file.mimeType, parsed.file.buffer.length, media.sha256,
         parsed.fields.performer.trim(), (parsed.fields.comment || '').slice(0, 2000), parsed.fields.capturedAt || null,
-        gps?.latitude ?? null, gps?.longitude ?? null, gps?.accuracy ?? null, geo.distanceMeters ?? null, geo.status, geo.reason || null, user.id],
+        gps?.latitude ?? null, gps?.longitude ?? null, gps?.accuracy ?? null, geo.distanceMeters ?? null, geo.status, geo.reason || null, user.id, sourceId],
     );
     await client.query('INSERT INTO idempotency_keys (idempotency_key, user_id, request_hash, photo_id) VALUES ($1,$2,$3,$4)', [idempotencyKey, user.id, requestHash, photoId]);
     await client.query('INSERT INTO audit_log (actor_user_id, action, object_key, photo_id) VALUES ($1,$2,$3,$4)', [user.id, 'photo_uploaded', object.object_key, photoId]);

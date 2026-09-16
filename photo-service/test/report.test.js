@@ -29,6 +29,9 @@ test('aggregates approved completion and photo counters by object type', () => {
     partialObjects: 1,
     pendingReviewObjects: 1,
     geoRiskObjects: 0,
+    totalPoints: 0,
+    coveredPoints: 0,
+    pointsWithoutPhoto: 0,
     completionPercent: 25,
     statusBand: 'low',
   });
@@ -73,9 +76,26 @@ test('does not calculate a percentage for an empty scope', () => {
     partialObjects: 0,
     pendingReviewObjects: 0,
     geoRiskObjects: 0,
+    totalPoints: 0,
+    coveredPoints: 0,
+    pointsWithoutPhoto: 0,
     completionPercent: null,
     statusBand: null,
   });
+});
+
+test('считает отметки точек источника отдельно от уникальных объектов', () => {
+  const report = summarizeCoverage([
+    { objectType: 'pp', confirmedPhotos: 1, pendingReviewPhotos: 0, sourcePointCount: 43, coveredPoints: 2 },
+    { objectType: 'stop', confirmedPhotos: 0, pendingReviewPhotos: 0, sourcePointCount: 1, coveredPoints: 0 },
+    // Больше закрытых точек, чем объявлено в наборе, факт не удваивает.
+    { objectType: 'pp', confirmedPhotos: 1, pendingReviewPhotos: 0, sourcePointCount: 2, coveredPoints: 5 },
+  ]);
+
+  assert.equal(report.totalObjects, 3);
+  assert.equal(report.totalPoints, 46);
+  assert.equal(report.coveredPoints, 4);
+  assert.equal(report.pointsWithoutPhoto, 42);
 });
 
 test('splits a scoped report into stop, pp, and entrance summaries', () => {

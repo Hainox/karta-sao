@@ -24,11 +24,20 @@ function validateRecord(record) {
     throw new TypeError('geoRisk must be a boolean');
   }
 
+  const sourcePointCount = Number.isSafeInteger(record.sourcePointCount) && record.sourcePointCount > 0
+    ? record.sourcePointCount
+    : 0;
+  const coveredPoints = Number.isSafeInteger(record.coveredPoints) && record.coveredPoints > 0
+    ? Math.min(record.coveredPoints, sourcePointCount || record.coveredPoints)
+    : 0;
+
   return {
     requiredPhotos: PHOTO_REQUIREMENTS[record.objectType],
     confirmedPhotos,
     pendingReviewPhotos,
     geoRisk: record.geoRisk === true,
+    sourcePointCount,
+    coveredPoints,
   };
 }
 
@@ -54,6 +63,9 @@ export function summarizeCoverage(records) {
     partialObjects: 0,
     pendingReviewObjects: 0,
     geoRiskObjects: 0,
+    totalPoints: 0,
+    coveredPoints: 0,
+    pointsWithoutPhoto: 0,
   };
 
   for (const record of records) {
@@ -62,6 +74,8 @@ export function summarizeCoverage(records) {
       confirmedPhotos,
       pendingReviewPhotos,
       geoRisk,
+      sourcePointCount,
+      coveredPoints,
     } = validateRecord(record);
     const hasPhoto = confirmedPhotos + pendingReviewPhotos > 0;
     const complete = confirmedPhotos >= requiredPhotos;
@@ -85,6 +99,11 @@ export function summarizeCoverage(records) {
     if (geoRisk) {
       summary.geoRiskObjects += 1;
     }
+
+    // Точки источника: единица работы района — конкретная точка на карте.
+    summary.totalPoints += sourcePointCount;
+    summary.coveredPoints += coveredPoints;
+    summary.pointsWithoutPhoto += Math.max(0, sourcePointCount - coveredPoints);
   }
 
   const progress = completionProgress(summary.completedObjects, summary.totalObjects);

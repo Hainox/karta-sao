@@ -17,6 +17,10 @@ export async function loadReportRows(pool, user, requestedDistrict) {
            -- у остановок «Балансодержатель», у ПП «Баланс», у подъездов своего нет.
            coalesce(nullif(o.properties->>'Балансодержатель', ''), nullif(o.properties->>'Баланс', '')) AS balance_holder,
            nullif(o.properties->>'ID объекта ОДХ', '') AS odh_id,
+           -- Единица учёта — точка источника: у одного перехода их может быть много.
+           coalesce(array_length(o.source_ids, 1), 0) AS source_point_count,
+           count(DISTINCT p.source_id)::int AS covered_points,
+           count(p.id) FILTER (WHERE p.source_id IS NULL)::int AS unbound_photos,
            count(p.id) FILTER (WHERE p.review_status = 'confirmed')::int AS confirmed_photos,
            count(p.id) FILTER (WHERE p.review_status = 'pending_review')::int AS pending_review_photos,
            coalesce(bool_or(p.geo_status = 'risk'), false) AS geo_risk,
@@ -40,6 +44,9 @@ export async function loadReportRows(pool, user, requestedDistrict) {
     ...row,
     confirmedPhotos: Number(row.confirmed_photos),
     pendingReviewPhotos: Number(row.pending_review_photos),
+    sourcePointCount: Number(row.source_point_count) || 0,
+    coveredPoints: Number(row.covered_points) || 0,
+    unboundPhotos: Number(row.unbound_photos) || 0,
     geoRisk: row.geo_risk === true,
     photos: Array.isArray(row.photos) ? row.photos : [],
   }));
@@ -53,6 +60,8 @@ export function reportPayload(rows) {
     confirmedPhotos: row.confirmedPhotos,
     pendingReviewPhotos: row.pendingReviewPhotos,
     geoRisk: row.geoRisk,
+    sourcePointCount: row.sourcePointCount,
+    coveredPoints: row.coveredPoints,
   }));
   // Distinct source revisions are surfaced so a report cannot silently mix datasets.
   const sourceVersions = [...new Set(rows.map((row) => row.source_version).filter(Boolean))].sort();
@@ -69,6 +78,8 @@ export function reportPayload(rows) {
       confirmedPhotos: row.confirmedPhotos,
       pendingReviewPhotos: row.pendingReviewPhotos,
       geoRisk: row.geoRisk,
+      sourcePointCount: row.sourcePointCount,
+      coveredPoints: row.coveredPoints,
     }))),
     objects: rows.map((row) => ({
       objectKey: row.object_key,
@@ -85,6 +96,9 @@ export function reportPayload(rows) {
       confirmedPhotos: row.confirmedPhotos,
       pendingReviewPhotos: row.pendingReviewPhotos,
       geoRisk: row.geoRisk,
+      sourcePointCount: row.sourcePointCount,
+      coveredPoints: row.coveredPoints,
+      unboundPhotos: row.unboundPhotos,
       photos: row.photos,
     })),
   };
