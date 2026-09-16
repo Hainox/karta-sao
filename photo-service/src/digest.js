@@ -98,7 +98,7 @@ export function renderHeadquartersImage(board, { generatedAt = new Date() } = {}
   ensureFont();
 
   const rows = board.sorted;
-  const commentLines = headquartersComment(board.lagging);
+  const commentLines = headquartersComment(board);
   const width = PADDING * 2 + COLUMN_WIDTHS.reduce((sum, value) => sum + value, 0);
   const height = TITLE_HEIGHT + GROUP_HEIGHT + SUBHEADER_HEIGHT
     + rows.length * ROW_HEIGHT + TOTAL_HEIGHT + COMMENT_HEIGHT + commentLines.length * COMMENT_HEIGHT + PADDING;

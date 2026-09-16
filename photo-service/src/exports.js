@@ -272,10 +272,11 @@ function addHeadquartersSheet(workbook, payload) {
     ...board,
     names: board.sorted.map((item) => item.name),
     counts: board.sorted.map((item) => item.counts),
-    formula: `SORT(B3:N${firstTotalRow - 1},12,0)`,
+    // 13-я колонка диапазона — «Итого, %»: та же сортировка, что и у значений ниже.
+    formula: `SORT(B3:N${firstTotalRow - 1},13,0)`,
   });
 
-  const afterComment = writeHeadquartersComment(sheet, secondTotalRow + 2, headquartersComment(board.lagging));
+  const afterComment = writeHeadquartersComment(sheet, secondTotalRow + 2, headquartersComment(board));
 
   const noteRow = afterComment + 1;
   sheet.mergeCells(noteRow, 1, noteRow, 14);

@@ -14,27 +14,32 @@ const payload = {
     row('entrance', 'Аэропорт', 20, 20),
     row('stop', 'Сокол', 7, 0),
     row('stop', 'Сокол', 100, 60, 'АвД САО'),
+    // Переходы ДЭУ штаб ведёт на АвД: район их снимает, объём работ — владельцу.
+    row('pp', 'Аэропорт', 300, 300, 'ДЭУ 1'),
     row('pp', null, 3, 0),
   ],
 };
 
-test('модель листа: «АвД САО», объекты без района и порядок по «Итого: факт»', () => {
+test('модель листа: «АвД САО» с ДЭУ и объектами без района, порядок по «Итого %»', () => {
   const board = headquartersBoard(payload);
 
   // Районы по алфавиту, «АвД САО» — последней строкой.
   assert.deepEqual(board.names, ['Аэропорт', 'Сокол', 'АвД САО']);
-  // Во второй таблице — по убыванию «Итого: факт».
+  // Во второй таблице — по убыванию процента «Итого»: у АвД 360 из 403 — 89 %,
+  // у Аэропорта 24 из 35 — 69 %, у Сокола ни одной закрытой отметки.
   assert.deepEqual(board.sorted.map((item) => item.name), ['АвД САО', 'Аэропорт', 'Сокол']);
 
-  // АвД: своя остановка плюс переход без района; Соколу его остановка не считается.
+  // АвД: своя остановка, переход ДЭУ и переход без района; Соколу его остановка не считается.
   const autodor = board.counts[2];
   assert.equal(autodor.plan.stop, 100);
-  assert.equal(autodor.plan.pp, 3);
+  assert.equal(autodor.plan.pp, 303);
   assert.equal(board.counts[1].plan.stop, 7);
   assert.deepEqual(board.lagging, ['Сокол']);
 
+  // Всего 384 отметки из 445 — 86 %.
   assert.equal(board.total.plan.stop, 117);
-  assert.equal(board.percent, Math.round((84 / 145) * 100));
+  assert.equal(board.total.plan.pp, 308);
+  assert.equal(board.percent, Math.round((384 / 445) * 100));
 });
 
 test('картинка сводки: PNG с таблицей и подписью-комментарием', () => {

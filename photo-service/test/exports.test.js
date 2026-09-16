@@ -211,9 +211,9 @@ test('лист «На штаб»: вторая таблица собираетс
   assert.equal(sheet.getCell('C10').value, 'Автобусные остановки');
   assert.equal(sheet.getCell('C11').value, 'План');
 
-  // Числа второй таблицы отсортированы по «Итого: факт» и собраны формулой.
+  // Числа второй таблицы отсортированы по «Итого, %» и собраны формулой.
   const anchor = sheet.getCell('B12').value;
-  assert.equal(anchor.formula, 'SORT(B3:N5,12,0)');
+  assert.equal(anchor.formula, 'SORT(B3:N5,13,0)');
   assert.equal(anchor.ref, 'B12:N14');
   assert.equal(sheet.getCell('B12').result ?? anchor.result, 'Беговой');
   assert.equal(sheet.getCell('B13').value, 'Войковский');
@@ -225,13 +225,16 @@ test('лист «На штаб»: вторая таблица собираетс
   assert.equal(sheet.getCell('L15').value, 3);
   assert.equal(sheet.getCell('M15').value, 1);
 
-  // Комментарий для рассылки: районы без единой закрытой отметки.
+  // Комментарий для рассылки собирается по числам этой выгрузки.
   assert.equal(sheet.getCell('A17').value, 'Комментарий для рассылки (готов к отправке):');
   assert.equal(sheet.getCell('A18').value, 'Коллеги, добрый день!');
-  assert.equal(sheet.getCell('A19').value, 'Слабая динамика по оцифровке объектов!');
-  assert.equal(sheet.getCell('A20').value, 'Следующим районам срочно приступить к данной задаче:');
+  assert.equal(sheet.getCell('A19').value, 'Оцифровка объектов САО: 1 из 3 отметок — 33 %.');
+  assert.equal(sheet.getCell('A20').value, 'Слабая динамика по оцифровке объектов! Следующим районам срочно приступить к данной задаче:');
   assert.equal(sheet.getCell('A21').value, 'Войковский');
   assert.equal(sheet.getCell('A22').value, 'Головинский');
+  assert.equal(sheet.getCell('A23').value, 'Больше всего закрыто: Беговой — 100 %.');
+  assert.equal(sheet.getCell('A24').value, 'По категориям: остановки 33 %.');
+  assert.equal(sheet.getCell('A25').value, 'Слабее всего — остановки (33 %).');
 });
 
 test('проценты «На штаб» подсвечены светофором: ноль, до 33, до 66, от 66', async () => {
