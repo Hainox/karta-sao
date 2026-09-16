@@ -128,18 +128,40 @@ test('rejects malformed coverage records without accepting unknown object types'
 
 /* ------------------------------------------------- данные для диаграмм */
 
-test('per-district coverage sorts by completion and keeps the unassigned group apart', () => {
+test('районный разрез сортирует по выполнению и замыкает строкой «АвД САО»', () => {
   const districts = summarizeByDistrict([
     row('Сокол', 'stop', 1),
     row('Аэропорт', 'stop', 0),
     row('Аэропорт', 'stop', 0),
+    // Объект без района приписать конкретному району нельзя — он идёт в «АвД САО».
     row(null, 'pp', 0),
   ]);
-  assert.deepEqual(districts.map((entry) => entry.district), ['Сокол', 'Аэропорт', null]);
+  assert.deepEqual(districts.map((entry) => entry.district), ['Сокол', 'Аэропорт', 'АвД САО']);
   assert.equal(districts[0].completionPercent, 100);
   assert.equal(districts[1].totalObjects, 2);
   assert.equal(districts[1].statusBand, 'low');
   assert.equal(districts[2].totalObjects, 1);
+});
+
+test('объекты «АвД САО», «ДЭУ» и объекты без района считаются за строку «АвД САО»', () => {
+  const districts = summarizeByDistrict([
+    // Объект стоит в Коптеве, но балансодержатель — «АвД САО».
+    { ...row('Коптево', 'stop', 0), balance_holder: 'АвД САО' },
+    // Балансодержатель «ДЭУ N» — тот же владелец.
+    { ...row('Сокол', 'stop', 0), balance_holder: 'ДЭУ 2' },
+    // Объект без района не приписывается району, где стоит.
+    row(null, 'entrance', 0),
+    // Обычный районный объект остаётся за своим районом.
+    row('Аэропорт', 'pp', 1),
+  ]);
+
+  const byName = Object.fromEntries(districts.map((entry) => [entry.district, entry]));
+  assert.deepEqual(Object.keys(byName).sort(), ['АвД САО', 'Аэропорт']);
+  assert.equal(byName['АвД САО'].totalObjects, 3);
+  assert.equal(byName['Аэропорт'].totalObjects, 1);
+  // В разрезе нет пустого района, а «АвД САО» всегда последняя строкой.
+  assert.ok(districts.every((entry) => entry.district));
+  assert.equal(districts[districts.length - 1].district, 'АвД САО');
 });
 
 test('dynamics counts uploads per UTC day and keeps a running total', () => {

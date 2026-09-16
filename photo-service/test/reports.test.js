@@ -35,14 +35,17 @@ test('the summary payload carries the per-district board for the prefecture', ()
   assert.equal(first.completionPercent, 100);
   assert.equal(second.district, 'Аэропорт');
   assert.equal(second.totalObjects, 2);
-  // «Без района» замыкает доску и не смешивается с районами.
-  assert.equal(third.district, null);
+  // Объекты «АвД САО», «ДЭУ» и объекты без района собираются строкой
+  // «АвД САО» — она замыкает доску и не смешивается с районами.
+  assert.equal(third.district, 'АвД САО');
   assert.equal(third.totalObjects, 1);
 });
 
 test('the board keeps the same arithmetic as the overall summary', () => {
-  const rows = [row('Сокол', 'stop', 1), row('Сокол', 'stop', 0), row('Аэропорт', 'stop', 0)];
+  // Объект без района тоже входит в сводку САО: он учтён в строке «АвД САО».
+  const rows = [row('Сокол', 'stop', 1), row('Сокол', 'stop', 0), row('Аэропорт', 'stop', 0), row(null, 'stop', 0)];
   const payload = reportPayload(rows);
+  assert.equal(payload.unassigned.totalObjects, 1);
   const boardTotal = payload.byDistrict.reduce((sum, district) => sum + district.totalObjects, 0);
   assert.equal(boardTotal, payload.overall.totalObjects);
   const boardCompleted = payload.byDistrict.reduce((sum, district) => sum + district.completedObjects, 0);

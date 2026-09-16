@@ -1,10 +1,12 @@
 import { createCanvas, GlobalFonts } from '@napi-rs/canvas';
 import { fileURLToPath } from 'node:url';
-import { HEADQUARTERS_DIRECTION, headquartersComment, headquartersValues } from './headquarters.js';
+import { headquartersComment, headquartersValues } from './headquarters.js';
 
 // Картинка для Telegram: вторая таблица листа «На штаб» — районы по убыванию
-// «Итого: факт». Рисуется тем же шрифтом, что и PDF-сводка: в образе лежит
-// свободный аналог корпоративного Century Gothic.
+// «Итого: факт». В само вложение идёт только таблица: комментарий уходит текстом
+// поста, иначе он дублируется и на картинке, и в подписи. Рисуется тем же
+// шрифтом, что и PDF-сводка: в образе лежит свободный аналог корпоративного
+// Century Gothic.
 const FONT_PATH = fileURLToPath(new URL('../assets/fonts/Jost-Regular.ttf', import.meta.url));
 const FONT_FAMILY = 'Jost';
 let fontRegistered = false;
@@ -18,12 +20,10 @@ function ensureFont() {
 
 const COLUMN_WIDTHS = Object.freeze([36, 190, ...Array(12).fill(94)]);
 const PADDING = 16;
-const TITLE_HEIGHT = 42;
 const GROUP_HEIGHT = 30;
 const SUBHEADER_HEIGHT = 26;
 const ROW_HEIGHT = 25;
 const TOTAL_HEIGHT = 28;
-const COMMENT_HEIGHT = 22;
 
 // Группы шапки: номера колонок (с нуля) и заливка из эталона заказчика.
 // Jost не содержит знака «№» (единственный пропущенный символ), поэтому он
@@ -53,7 +53,6 @@ const PERCENT_COLUMNS = Object.freeze([4, 7, 10, 13]);
 const PLAN_COLUMNS = Object.freeze([2, 5, 8, 11]);
 
 const INK = '#000000';
-const MUTED = '#708089';
 const GRID = '#000000';
 
 /** Полоса светофора для процента; без плана полосы нет — ячейку не красим. */
@@ -102,15 +101,14 @@ function drawNumero(ctx, centerX, y, size) {
 // увидеть выгрузку в чате. Переопределяется переменной NOTIFY_MENTION.
 export const DIGEST_MENTION = process.env.NOTIFY_MENTION ?? '@TomGruz200';
 
-/** Картинка со второй таблицей и текстом комментария. */
+/** Картинка со второй таблицей листа «На штаб» и подписью-комментарием. */
 export function renderHeadquartersImage(board, { generatedAt = new Date(), mention = DIGEST_MENTION } = {}) {
   ensureFont();
 
   const rows = board.sorted;
   const commentLines = headquartersComment(board, { generatedAt });
   const width = PADDING * 2 + COLUMN_WIDTHS.reduce((sum, value) => sum + value, 0);
-  const height = TITLE_HEIGHT + GROUP_HEIGHT + SUBHEADER_HEIGHT
-    + rows.length * ROW_HEIGHT + TOTAL_HEIGHT + COMMENT_HEIGHT + commentLines.length * COMMENT_HEIGHT + PADDING;
+  const height = PADDING + GROUP_HEIGHT + SUBHEADER_HEIGHT + rows.length * ROW_HEIGHT + TOTAL_HEIGHT;
 
   const canvas = createCanvas(width, height);
   const ctx = canvas.getContext('2d');
@@ -138,15 +136,7 @@ export function renderHeadquartersImage(board, { generatedAt = new Date(), menti
 
   let y = PADDING / 2;
 
-  // Заголовок картинки.
-  text(HEADQUARTERS_DIRECTION, PADDING, y + TITLE_HEIGHT / 2, width - PADDING * 2, { size: 18, align: 'left' });
-  text(
-    'районы по убыванию «Итого, %»',
-    PADDING, y + TITLE_HEIGHT / 2, width - PADDING * 2, { size: 12, color: MUTED, align: 'right' },
-  );
-  y += TITLE_HEIGHT;
-
-  // Шапка: строка групп и строка «План / Факт / %».
+  // Шапка: строка групп и строка «Объекты / Факт / %».
   for (const group of HEADER_GROUPS) {
     const x = cellOffset(group.from);
     const w = COLUMN_WIDTHS.slice(group.from, group.to + 1).reduce((sum, value) => sum + value, 0);
@@ -159,7 +149,9 @@ export function renderHeadquartersImage(board, { generatedAt = new Date(), menti
     const group = HEADER_GROUPS.find((item) => column >= item.from && column <= item.to);
     const x = cellOffset(column);
     stroke(x, y, COLUMN_WIDTHS[column], SUBHEADER_HEIGHT, group.fill);
-    const label = column < 2 ? [NUMERO, 'Район'][column] : SUBHEADER_LABELS[(column - 2) % 4];
+    // Подпись берётся по смещению внутри своей группы: иначе тройка «Объекты /
+    // Факт / %» сдвигается на каждой следующей группе и выдаёт undefined.
+    const label = column < 2 ? [NUMERO, 'Район'][column] : SUBHEADER_LABELS[column - group.from];
     if (label === NUMERO) drawNumero(ctx, x + COLUMN_WIDTHS[column] / 2, y + SUBHEADER_HEIGHT / 2, 11);
     else text(label, x, y + SUBHEADER_HEIGHT / 2, COLUMN_WIDTHS[column], { size: 11 });
   }
@@ -196,18 +188,8 @@ export function renderHeadquartersImage(board, { generatedAt = new Date(), menti
   });
   y += TOTAL_HEIGHT;
 
-  // Комментарий для рассылки.
-  y += COMMENT_HEIGHT / 2;
-  commentLines.forEach((line, index) => {
-    text(line, PADDING, y + COMMENT_HEIGHT / 2, width - PADDING * 2, {
-      size: index === 0 ? 13 : 14,
-      color: index === 0 ? MUTED : INK,
-      align: 'left',
-    });
-    y += COMMENT_HEIGHT;
-  });
-
-  // Упоминание идёт последней строкой: фиксированная шапка комментария не меняется.
+  // Упоминание идёт последней строкой подписи: фиксированная шапка комментария
+  // не меняется, а в само вложение попадает только таблица.
   const caption = [...commentLines, ...(mention ? ['', mention] : [])].join('\n');
 
   return { png: canvas.toBuffer('image/png'), caption };

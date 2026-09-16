@@ -53,8 +53,9 @@ test('report labels are Russian words, not internal codes', () => {
   assert.equal(statusBandLabel('high'), 'Зелёный');
   assert.equal(statusBandLabel(null), 'нет данных');
 
-  assert.equal(percentLabel(33.3333333), '33,3 %');
-  assert.equal(percentLabel(0), '0,0 %');
+  assert.equal(percentLabel(33.3333333), '33 %');
+  assert.equal(percentLabel(0), '0 %');
+  assert.equal(percentLabel(66.6), '67 %');
   assert.equal(percentLabel(null), 'нет данных');
 });
 
@@ -105,7 +106,7 @@ test('сводная отчётность несёт отдельный лист
 
   assert.deepEqual(
     workbook.worksheets.map((sheet) => sheet.name),
-    ['Обзор', 'На штаб', 'Районы', 'Динамика', 'Риск', 'Объекты', 'Фотографии'],
+    ['Обзор', 'На штаб', 'Районы', 'Динамика', 'Риск', 'Топы', 'Объекты', 'Фотографии'],
   );
 
   const riskSheet = workbook.getWorksheet('Риск');
@@ -289,4 +290,72 @@ test('отдельная выгрузка малой таблицы несёт �
   await workbook.xlsx.load(await buildHeadquartersExcel(rows));
 
   assert.deepEqual(workbook.worksheets.map((sheet) => sheet.name), ['На штаб']);
+});
+
+test('лист «Топы»: районы по рискам и исполнители внутри района', async () => {
+  const overflow = (id, performer) => photo({ id, sha256: `hash-${id}`, performer, geoStatus: 'review', distanceM: 40 });
+
+  const hovrino = reportRow('entrance', 'Ховрино', 0);
+  hovrino.object_key = 'tops-hovrino';
+  hovrino.balance_holder = 'Жилищник «Ховрино»';
+  hovrino.photos = [overflow('h1', 'Иванов И.И.'), overflow('h2', 'Иванов И.И.'), overflow('h3', 'Петров П.П.')];
+
+  // Объект стоит в Коптеве, но владелец — «АвД САО»: риск считается за АвД.
+  const autodor = reportRow('entrance', 'Коптево', 0);
+  autodor.object_key = 'tops-autodor';
+  autodor.balance_holder = 'АвД САО';
+  autodor.photos = [overflow('a1', 'Сидоров С.С.')];
+
+  // Объект без района приписать конкретному району нельзя — он тоже идёт АвД.
+  const unassigned = reportRow('entrance', null, 0);
+  unassigned.object_key = 'tops-null';
+  unassigned.balance_holder = 'ДЭУ 2';
+  unassigned.photos = [overflow('d1', 'Морозов С.С.')];
+
+  const workbook = new ExcelJS.Workbook();
+  await workbook.xlsx.load(await buildExcel([hovrino, autodor, unassigned]));
+  const sheet = workbook.getWorksheet('Топы');
+
+  // Блок 1 — районы по числу нарушений, ниже ИТОГО.
+  assert.equal(sheet.getCell('A1').value, 'Топ районов по рискам');
+  assert.equal(sheet.getCell('A2').value, '№');
+  assert.equal(sheet.getCell('B2').value, 'Район');
+  assert.equal(sheet.getCell('C2').value, 'Нарушений');
+  assert.equal(sheet.getCell('A3').value, 1);
+  assert.equal(sheet.getCell('B3').value, 'Ховрино');
+  assert.equal(sheet.getCell('C3').value, 3);
+  assert.equal(sheet.getCell('A4').value, 2);
+  assert.equal(sheet.getCell('B4').value, 'АвД САО');
+  assert.equal(sheet.getCell('C4').value, 2);
+  assert.equal(sheet.getCell('A5').value, 'ИТОГО');
+  assert.equal(sheet.getCell('C5').value, 5);
+
+  // Блок 2 — исполнители по районам, у каждого района своя шапка.
+  assert.equal(sheet.getCell('A7').value, 'Топ исполнителей по районам');
+  assert.equal(sheet.getCell('B8').value, 'Исполнитель');
+  assert.equal(sheet.getCell('A9').value, 'Ховрино');
+  assert.equal(sheet.getCell('B10').value, 'Иванов И.И.');
+  assert.equal(sheet.getCell('C10').value, 2);
+  assert.equal(sheet.getCell('B11').value, 'Петров П.П.');
+  assert.equal(sheet.getCell('C11').value, 1);
+  assert.equal(sheet.getCell('A12').value, 'АвД САО');
+  assert.equal(sheet.getCell('B13').value, 'Морозов С.С.');
+  assert.equal(sheet.getCell('B14').value, 'Сидоров С.С.');
+
+  // Примечание внизу объясняет учёт района по балансодержателю.
+  assert.match(String(sheet.getCell('A16').value), /балансодержателю/);
+  assert.match(String(sheet.getCell('A16').value), /АвД САО/);
+});
+
+test('лист «Топы» без рисков пишет одну строку', async () => {
+  const clean = reportRow('stop', 'Аэропорт', 1);
+  clean.object_key = 'clean-1';
+  clean.photos = [photo({ id: 'p-clean', sha256: 'hash-clean' })];
+
+  const workbook = new ExcelJS.Workbook();
+  await workbook.xlsx.load(await buildExcel([clean]));
+
+  const sheet = workbook.getWorksheet('Топы');
+  assert.equal(sheet.getCell('A1').value, 'Риски не выявлены');
+  assert.equal(sheet.rowCount, 1);
 });

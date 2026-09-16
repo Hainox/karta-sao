@@ -11,9 +11,11 @@ export function statusBandLabel(band) {
   return STATUS_BAND_LABELS[band] || 'нет данных';
 }
 
+// Проценты в отчётах — целые: десятые доли не показываем. «нет данных» остаётся
+// для пустого значения, чтобы отсутствие процента было видно словом, а не нулём.
 export function percentLabel(value) {
   if (value === null || value === undefined || Number.isNaN(Number(value))) return 'нет данных';
-  return `${Number(value).toFixed(1).replace('.', ',')} %`;
+  return `${Math.round(Number(value))} %`;
 }
 
 export const OBJECT_TYPES = Object.freeze(Object.keys(OBJECT_TYPE_LABELS));

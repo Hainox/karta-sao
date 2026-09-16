@@ -14,6 +14,7 @@ import { clientAddress } from './src/client-address.js';
 import { buildExcel, buildHeadquartersExcel, buildPdf } from './src/exports.js';
 import { buildHeadquartersPdf } from './src/pdf-headquarters.js';
 import { loadReportRows, reportPayload } from './src/reports.js';
+import { collectRisks, riskTops } from './src/risks.js';
 import { mediaRoot, readMedia, removeMedia, writeMedia } from './src/storage.js';
 import { HOLDER_SELECT_SQL, objectAllowedFor } from './src/scope.js';
 import { createNotifyClient } from './src/notify.js';
@@ -305,7 +306,9 @@ async function handler(request, response) {
     if (pathname === '/reports/summary' && request.method === 'GET') {
       const url = new URL(request.url, 'http://photo-service.local');
       const rows = await loadReportRows(pool, user, url.searchParams.get('district') || undefined);
-      return sendJson(response, 200, reportPayload(rows), request);
+      const payload = reportPayload(rows);
+      // Топы по нарушениям для дашборда: те же числа, что и на листе «Топы».
+      return sendJson(response, 200, { ...payload, riskTops: riskTops(collectRisks(payload.objects)) }, request);
     }
     if (pathname === '/reports/export.xlsx' && request.method === 'GET') {
       if (!requirePrefecture(response, request, user)) return;

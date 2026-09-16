@@ -58,16 +58,19 @@ export async function loadReportRows(pool, user, requestedDistrict) {
 }
 
 export function reportPayload(rows) {
-  const assignedRows = rows.filter((row) => row.district !== null && row.district !== undefined && row.district !== '');
-  const unassignedRows = rows.filter((row) => !assignedRows.includes(row));
-  const records = assignedRows.map((row) => ({
+  const unassignedRows = rows.filter((row) => row.district === null || row.district === undefined || row.district === '');
+  // Сводка САО считается по всему набору: объекты без района больше не выпадают
+  // из неё, а учтены в строке «АвД САО» вместе с объектами владельца и «ДЭУ» —
+  // иначе ИТОГО районов не сходилось бы с общим числом объектов.
+  const coverageOf = (row) => ({
     objectType: row.object_type,
     confirmedPhotos: row.confirmedPhotos,
     pendingReviewPhotos: row.pendingReviewPhotos,
     geoRisk: row.geoRisk,
     sourcePointCount: row.sourcePointCount,
     coveredPoints: row.coveredPoints,
-  }));
+  });
+  const records = rows.map(coverageOf);
   // Distinct source revisions are surfaced so a report cannot silently mix datasets.
   const sourceVersions = [...new Set(rows.map((row) => row.source_version).filter(Boolean))].sort();
   return {
@@ -78,14 +81,7 @@ export function reportPayload(rows) {
     // Разрез по районам считается здесь же: боковой дашборд префектуры и отчёты
     // показывают одни и те же числа, а не две независимые реализации.
     byDistrict: summarizeByDistrict(rows),
-    unassigned: summarizeCoverage(unassignedRows.map((row) => ({
-      objectType: row.object_type,
-      confirmedPhotos: row.confirmedPhotos,
-      pendingReviewPhotos: row.pendingReviewPhotos,
-      geoRisk: row.geoRisk,
-      sourcePointCount: row.sourcePointCount,
-      coveredPoints: row.coveredPoints,
-    }))),
+    unassigned: summarizeCoverage(unassignedRows.map(coverageOf)),
     objects: rows.map((row) => ({
       objectKey: row.object_key,
       datasetId: row.dataset_id,

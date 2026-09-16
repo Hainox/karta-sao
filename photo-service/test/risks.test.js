@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { balanceHolderOf, collectRisks, odhIdOf, summarizeRisks, ZONE_LIMIT_METERS } from '../src/risks.js';
+import { balanceHolderOf, collectRisks, odhIdOf, riskTops, summarizeRisks, ZONE_LIMIT_METERS } from '../src/risks.js';
 
 // Каждому фото по умолчанию достаётся свой отпечаток: совпадение должно
 // задаваться явно, иначе модуль справедливо сочтёт снимки дублями.
@@ -131,4 +131,57 @@ test('риски сортируются от свежих к старым, св�
   const summary = summarizeRisks(risks);
   assert.equal(summary.total, 2);
   assert.deepEqual(summary.byKind, [{ kind: 'zone_overflow', kindLabel: 'Превышение зоны', count: 2 }]);
+});
+
+test('топы риска: районы по числу нарушений, внутри — исполнители по убыванию', () => {
+  const risks = [
+    // Ховрино: три нарушения у двух исполнителей.
+    { district: 'Ховрино', balanceHolder: 'Жилищник «Ховрино»', performer: 'Иванов И.И.' },
+    { district: 'Ховрино', balanceHolder: 'Жилищник «Ховрино»', performer: 'Иванов И.И.' },
+    { district: 'Ховрино', balanceHolder: 'Жилищник «Ховрино»', performer: 'Петров П.П.' },
+    // Владелец «АвД САО» и объект без района считаются за строку «АвД САО».
+    { district: 'Коптево', balanceHolder: 'АвД САО', performer: 'Сидоров С.С.' },
+    { district: null, balanceHolder: 'ДЭУ 2', performer: 'Морозов С.С.' },
+  ];
+
+  const tops = riskTops(risks);
+
+  assert.equal(tops.total, 5);
+  assert.equal(tops.performerLimit, 5);
+  assert.deepEqual(tops.districts.map((entry) => entry.district), ['Ховрино', 'АвД САО']);
+  assert.deepEqual(tops.districts.map((entry) => entry.count), [3, 2]);
+  assert.deepEqual(tops.districts[0].performers, [
+    { performer: 'Иванов И.И.', count: 2 },
+    { performer: 'Петров П.П.', count: 1 },
+  ]);
+  // Внутри АвД у исполнителей равное число нарушений — порядок по имени.
+  assert.deepEqual(tops.districts[1].performers, [
+    { performer: 'Морозов С.С.', count: 1 },
+    { performer: 'Сидоров С.С.', count: 1 },
+  ]);
+});
+
+test('топы риска: предел исполнителей на район и подпись для записи без имени', () => {
+  const risks = [];
+  for (const performer of ['А', 'Б', 'В', 'Г', 'Д', 'Е']) {
+    risks.push({ district: 'Сокол', balanceHolder: 'Жилищник «Сокол»', performer });
+  }
+  // Имя исполнителя не заполнено: запись не теряется, а идёт отдельной подписью.
+  risks.push({ district: 'Сокол', balanceHolder: 'Жилищник «Сокол»', performer: null });
+  risks.push({ district: 'Сокол', balanceHolder: 'Жилищник «Сокол»', performer: null });
+
+  const tops = riskTops(risks, { performerLimit: 3 });
+
+  assert.equal(tops.performerLimit, 3);
+  assert.equal(tops.total, 8);
+  assert.equal(tops.districts[0].performers.length, 3);
+  assert.deepEqual(tops.districts[0].performers, [
+    { performer: 'Исполнитель не указан', count: 2 },
+    { performer: 'А', count: 1 },
+    { performer: 'Б', count: 1 },
+  ]);
+});
+
+test('топы риска без нарушений пусты', () => {
+  assert.deepEqual(riskTops([]), { total: 0, districts: [], performerLimit: 5 });
 });

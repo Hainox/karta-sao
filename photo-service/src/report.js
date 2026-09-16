@@ -1,4 +1,5 @@
 import { completionProgress, PHOTO_REQUIREMENTS } from './completion.js';
+import { AUTODOR_HOLDER, reportingDistrict } from './scope.js';
 
 const OBJECT_TYPES = new Set(Object.keys(PHOTO_REQUIREMENTS));
 
@@ -152,25 +153,29 @@ function coverageRecord(row) {
 }
 
 /**
- * Coverage per district for the prefecture report, so the same numbers that fill
- * the tables also drive the chart. Rows without a district stay in their own
- * group instead of being attached to a district.
+ * Охват по районам для отчёта: те же числа, что и в таблицах, идут на график.
+ * Район строки определяется правилом отчётности `reportingDistrict`: объекты
+ * владельца «АвД САО», балансодержателей «ДЭУ N» и объекты без района считаются
+ * за строку «АвД САО», а не за район, где стоят. Поэтому в разрезе района
+ * «Без района» не остаётся, а строка «АвД САО» всегда последняя.
  */
 export function summarizeByDistrict(rows) {
   if (!Array.isArray(rows)) throw new TypeError('Report rows must be an array');
   const grouped = new Map();
   for (const row of rows) {
-    const district = row.district || null;
+    const district = reportingDistrict(row);
     if (!grouped.has(district)) grouped.set(district, []);
     grouped.get(district).push(coverageRecord(row));
   }
   return [...grouped.entries()]
     .map(([district, records]) => ({ district, ...summarizeCoverage(records) }))
     .sort((left, right) => {
-      // «Без района» — не район: он всегда последний, как и в SQL-выборке отчёта.
-      if ((left.district === null) !== (right.district === null)) return left.district === null ? 1 : -1;
+      // «АвД САО» — не район: объём владельца всегда последней строкой.
+      if ((left.district === AUTODOR_HOLDER) !== (right.district === AUTODOR_HOLDER)) {
+        return left.district === AUTODOR_HOLDER ? 1 : -1;
+      }
       return (right.completionPercent ?? -1) - (left.completionPercent ?? -1)
-        || String(left.district ?? '').localeCompare(String(right.district ?? ''), 'ru');
+        || left.district.localeCompare(right.district, 'ru');
     });
 }
 

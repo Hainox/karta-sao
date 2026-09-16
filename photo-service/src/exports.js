@@ -4,7 +4,8 @@ import { reportPayload } from './reports.js';
 import { completionMix, uploadDynamics } from './report.js';
 import { objectTypeLabel, percentLabel, statusBandLabel, OBJECT_TYPES } from './labels.js';
 import { HEADQUARTERS_NOTE, headquartersBoard, headquartersComment, headquartersValues } from './headquarters.js';
-import { collectRisks, summarizeRisks } from './risks.js';
+import { collectRisks, riskTops, summarizeRisks } from './risks.js';
+import { reportingDistrict } from './scope.js';
 import {
   CHART_COLORS, bandColor, drawBarRow, drawBandChip, drawColumns, drawGauge, drawStackedBar, section,
 } from './pdf-charts.js';
@@ -54,8 +55,8 @@ const PERCENT_BAR = (argb) => ({
   cfvo: [{ type: 'num', value: 0 }, { type: 'num', value: 100 }], color: { argb },
 });
 
-function styleHeaderRow(worksheet, columnCount) {
-  const row = worksheet.getRow(1);
+function styleHeaderRow(worksheet, columnCount, rowIndex = 1) {
+  const row = worksheet.getRow(rowIndex);
   row.height = 30;
   for (let index = 1; index <= columnCount; index += 1) {
     const cell = row.getCell(index);
@@ -295,6 +296,111 @@ export async function buildHeadquartersExcel(rows) {
   return workbook.xlsx.writeBuffer();
 }
 
+/* ------------------------------------------------------------------ «Топы» */
+
+const TOPS_COLUMN_COUNT = 3;
+const TOPS_WIDTHS = Object.freeze([6, 36, 14]);
+// Рамка той же толщины, что и у остальных листов: полная сетка на строку данных.
+const TOPS_BORDER = Object.freeze({ top: THIN_BORDER, left: THIN_BORDER, bottom: THIN_BORDER, right: THIN_BORDER });
+const TOPS_NOTE = 'Район считается по балансодержателю: объекты «АвД САО», «ДЭУ» и объекты без района учтены в строке «АвД САО».';
+
+function topsTitleRow(sheet, row, title) {
+  sheet.mergeCells(row, 1, row, TOPS_COLUMN_COUNT);
+  const cell = sheet.getCell(row, 1);
+  cell.value = title;
+  cell.font = SECTION_FONT;
+  cell.fill = SECTION_FILL;
+  cell.alignment = TO_LEFT;
+  sheet.getRow(row).height = 22;
+}
+
+function topsDataRow(sheet, row, values, fill) {
+  values.forEach((value, offset) => {
+    const cell = sheet.getCell(row, offset + 1);
+    cell.value = value;
+    cell.border = TOPS_BORDER;
+    cell.alignment = CENTERED;
+    cell.font = { size: 11 };
+    if (fill) cell.fill = fill;
+  });
+}
+
+/**
+ * Лист «Топы»: районы по числу рисков и исполнители внутри каждого района.
+ * Район считается по тому же правилу, что и строка «АвД САО» штабной таблицы.
+ */
+function addTopsSheet(workbook, risks) {
+  const sheet = workbook.addWorksheet('Топы');
+  TOPS_WIDTHS.forEach((width, index) => { sheet.getColumn(index + 1).width = width; });
+  const tops = riskTops(risks);
+  let row = 1;
+
+  if (!tops.total) {
+    sheet.mergeCells(row, 1, row, TOPS_COLUMN_COUNT);
+    const cell = sheet.getCell(row, 1);
+    cell.value = 'Риски не выявлены';
+    cell.font = SECTION_FONT;
+    cell.fill = SECTION_FILL;
+    cell.alignment = TO_LEFT;
+    sheet.views = [{ state: 'frozen', ySplit: 1 }];
+    return sheet;
+  }
+
+  // Блок 1 — районы по числу рисков, от худшего к лучшему.
+  topsTitleRow(sheet, row, 'Топ районов по рискам');
+  row += 1;
+  styleHeaderRow(sheet, TOPS_COLUMN_COUNT, row);
+  ['№', 'Район', 'Нарушений'].forEach((title, offset) => { sheet.getCell(row, offset + 1).value = title; });
+  row += 1;
+  tops.districts.forEach((entry, index) => {
+    topsDataRow(sheet, row, [index + 1, entry.district, entry.count], index % 2 === 1 ? ZEBRA_FILL : null);
+    row += 1;
+  });
+  sheet.mergeCells(row, 1, row, 2);
+  sheet.getCell(row, 1).value = 'ИТОГО';
+  for (let column = 1; column <= TOPS_COLUMN_COUNT; column += 1) {
+    const cell = sheet.getCell(row, column);
+    cell.fill = TOTAL_FILL;
+    cell.border = TOPS_BORDER;
+    cell.alignment = CENTERED;
+    cell.font = { size: 11, bold: true };
+  }
+  sheet.getCell(row, 3).value = tops.total;
+  row += 2; // Пустая строка между блоками.
+
+  // Блок 2 — исполнители по районам: у каждого района своя шапка.
+  topsTitleRow(sheet, row, 'Топ исполнителей по районам');
+  row += 1;
+  styleHeaderRow(sheet, TOPS_COLUMN_COUNT, row);
+  ['№', 'Исполнитель', 'Нарушений'].forEach((title, offset) => { sheet.getCell(row, offset + 1).value = title; });
+  row += 1;
+  for (const entry of tops.districts) {
+    sheet.mergeCells(row, 1, row, TOPS_COLUMN_COUNT);
+    const header = sheet.getCell(row, 1);
+    header.value = entry.district;
+    header.font = { size: 11, bold: true, color: { argb: HEADQUARTERS_INK } };
+    header.fill = SECTION_FILL;
+    header.alignment = TO_LEFT;
+    sheet.getRow(row).height = 18;
+    row += 1;
+    entry.performers.forEach((performer, index) => {
+      topsDataRow(sheet, row, [index + 1, performer.performer, performer.count], index % 2 === 1 ? ZEBRA_FILL : null);
+      row += 1;
+    });
+  }
+
+  row += 1;
+  sheet.mergeCells(row, 1, row, TOPS_COLUMN_COUNT);
+  const note = sheet.getCell(row, 1);
+  note.value = TOPS_NOTE;
+  note.alignment = TO_LEFT;
+  note.font = { size: 8, color: { argb: HEADQUARTERS_MUTED } };
+
+  frameTable(sheet, row, TOPS_COLUMN_COUNT);
+  sheet.views = [{ state: 'frozen', ySplit: 1 }];
+  return sheet;
+}
+
 export async function buildExcel(rows) {
   const payload = reportPayload(rows);
   const workbook = new ExcelJS.Workbook();
@@ -310,7 +416,7 @@ export async function buildExcel(rows) {
   overview.getCell('A1').value = 'Сводная отчётность по фотофиксации САО';
   overview.getCell('A1').font = { bold: true, size: 16, color: { argb: 'FF1F3B57' } };
   overview.mergeCells('A2:C2');
-  overview.getCell('A2').value = `Сформирован: ${new Date().toLocaleString('ru-RU')}   ·   Версия набора объектов: ${payload.sourceVersions.join(', ') || 'не указана'}`;
+  overview.getCell('A2').value = `Сформирован: ${new Date().toLocaleString('ru-RU')} (МСК)   ·   Версия набора объектов: ${payload.sourceVersions.join(', ') || 'не указана'}`;
   overview.getCell('A2').font = { size: 9, color: { argb: 'FF708089' } };
 
   let overviewRow = 4;
@@ -340,7 +446,7 @@ export async function buildExcel(rows) {
   metricRow('С фото', overall.objectsWithPhoto);
   metricRow('Без фото', overall.objectsWithoutPhoto);
   coverageRow = overviewRow;
-  metricRow('Охват', coveragePercent === null ? '—' : Number(coveragePercent.toFixed(1)), 'Доля объектов, по которым есть хотя бы одно фото');
+  metricRow('Охват', coveragePercent === null ? '—' : Math.round(coveragePercent), 'Доля объектов, по которым есть хотя бы одно фото');
   metricRow('Выполнено', overall.completedObjects, `Выполнение: ${percentLabel(overall.completionPercent)}`);
   metricRow('На проверке', overall.pendingReviewObjects);
 
@@ -358,7 +464,9 @@ export async function buildExcel(rows) {
   const districts = payload.byDistrict;
   const risksByDistrict = new Map();
   for (const risk of risks) {
-    const key = risk.district || null;
+    // Риск относится к району по тому же правилу, что и строка отчёта: объекты
+    // владельца, «ДЭУ» и объекты без района считаются за «АвД САО».
+    const key = reportingDistrict(risk);
     risksByDistrict.set(key, (risksByDistrict.get(key) || 0) + 1);
   }
   if (districts.length > 1) {
@@ -376,12 +484,12 @@ export async function buildExcel(rows) {
     let totals = { total: 0, withPhoto: 0, completed: 0, pending: 0, empty: 0, risks: 0 };
     for (const district of districts) {
       const parts = Object.fromEntries(completionMix(district).map((part) => [part.key, part.value]));
-      const districtRisks = risksByDistrict.get(district.district || null) || 0;
+      const districtRisks = risksByDistrict.get(district.district) || 0;
       districtsSheet.addRow({
         district: district.district || 'Без района',
         total: district.totalObjects,
         withPhoto: district.objectsWithPhoto,
-        coverage: district.totalObjects ? Number(((district.objectsWithPhoto / district.totalObjects) * 100).toFixed(1)) : null,
+        coverage: district.totalObjects ? Math.round((district.objectsWithPhoto / district.totalObjects) * 100) : null,
         completed: district.completedObjects,
         pending: district.pendingReviewObjects,
         empty: parts.empty,
@@ -399,7 +507,7 @@ export async function buildExcel(rows) {
     const totalRow = districtsSheet.addRow({
       district: 'ИТОГО',
       ...totals,
-      coverage: totals.total ? Number(((totals.withPhoto / totals.total) * 100).toFixed(1)) : null,
+      coverage: totals.total ? Math.round((totals.withPhoto / totals.total) * 100) : null,
     });
     totalRow.font = { bold: true };
     for (let column = 1; column <= 8; column += 1) totalRow.getCell(column).fill = TOTAL_FILL;
@@ -499,6 +607,9 @@ export async function buildExcel(rows) {
   riskSheet.views = [{ state: 'frozen', ySplit: 1 }];
   riskSheet.autoFilter = { from: 'A1', to: 'P1' };
 
+  // Топы по нарушениям: районы и исполнители внутри района.
+  addTopsSheet(workbook, risks);
+
   const objects = workbook.addWorksheet('Объекты');
   const risksByObject = new Map();
   for (const risk of risks) {
@@ -568,6 +679,9 @@ export function buildPdf(rows) {
   const districts = payload.byDistrict;
   const dynamics = uploadDynamics(rows, { days: DYNAMICS_DAYS });
   const mix = completionMix(overall);
+  // Топы по нарушениям — те же числа, что и на листе «Топы».
+  const risks = collectRisks(payload.objects);
+  const tops = riskTops(risks);
 
   return new Promise((resolve, reject) => {
     const doc = new PDFDocument({ size: 'A4', margin: MARGIN, info: { Title: 'Краткий отчёт фотофиксации САО' } });
@@ -586,7 +700,7 @@ export function buildPdf(rows) {
     doc.fillColor(CHART_COLORS.ink).fontSize(18).text('Краткий отчёт фотофиксации САО', left, y);
     y = doc.y + 3;
     doc.fillColor(CHART_COLORS.muted).fontSize(8.5)
-      .text(`Сформирован: ${new Date().toLocaleString('ru-RU')}   ·   Версия набора объектов: ${payload.sourceVersions.join(', ') || 'не указана'}`, left, y);
+      .text(`Сформирован: ${new Date().toLocaleString('ru-RU')} (МСК)   ·   Версия набора объектов: ${payload.sourceVersions.join(', ') || 'не указана'}`, left, y);
     y = doc.y + 18;
 
     /* ------------------------------------------------------------ выполнение */
@@ -602,6 +716,9 @@ export function buildPdf(rows) {
 
     doc.fillColor(CHART_COLORS.muted).fontSize(9)
       .text(`С фото: ${overall.objectsWithPhoto}   ·   Без фото: ${overall.objectsWithoutPhoto}   ·   На проверке: ${overall.pendingReviewObjects}   ·   Риск GPS: ${overall.geoRiskObjects}`, left, y);
+    // Вторая строка — единица учёта: отметка, то есть конкретная точка на карте.
+    doc.fillColor(CHART_COLORS.muted).fontSize(9)
+      .text(`Отметки: ${overall.coveredPoints.toLocaleString('ru-RU')} из ${overall.totalPoints.toLocaleString('ru-RU')} отработано`, left, doc.y + 1);
     y = doc.y + 22;
 
     /* ------------------------------------------------------ состояние объектов */
@@ -653,7 +770,73 @@ export function buildPdf(rows) {
       }
       y += 10;
       doc.fillColor(CHART_COLORS.muted).fontSize(8)
-        .text('Районы отсортированы по выполнению. Объекты без района показаны отдельной строкой и не приписаны ни одному району.', left, y, { width });
+        .text('Районы отсортированы по выполнению. Объекты с балансодержателем «АвД САО», «ДЭУ» и объекты без района учтены в строке «АвД САО».', left, y, { width });
+    }
+
+    /* -------------------------------------------------------- топы по рискам */
+    if (y > doc.page.height - 150) {
+      doc.addPage();
+      y = MARGIN;
+    }
+    y = section(doc, y + 8, 'Топ районов по рискам');
+    if (!tops.total) {
+      doc.fillColor(CHART_COLORS.muted).fontSize(9).text('Риски не выявлены.', left, y);
+      y = doc.y + 12;
+    } else {
+      const worst = Math.max(1, ...tops.districts.map((entry) => entry.count));
+      for (const entry of tops.districts) {
+        if (y > doc.page.height - 60) {
+          doc.addPage();
+          y = MARGIN;
+        }
+        y = drawBarRow(doc, {
+          x: left, y, labelWidth: 130, trackWidth: width - 230,
+          label: entry.district,
+          percent: (entry.count / worst) * 100,
+          band: 'low',
+          value: String(entry.count),
+          note: entry.count === 1 ? 'нарушение' : 'нарушений',
+        });
+      }
+      doc.fillColor(CHART_COLORS.muted).fontSize(8)
+        .text(`Всего нарушений: ${tops.total}. Полосы показаны относительно самого проблемного района.`, left, y + 4, { width });
+      y = doc.y + 16;
+    }
+
+    /* --------------------------------------------------- топы исполнителей */
+    if (y > doc.page.height - 130) {
+      doc.addPage();
+      y = MARGIN;
+    }
+    y = section(doc, y + 8, 'Топ исполнителей по районам');
+    if (!tops.total) {
+      doc.fillColor(CHART_COLORS.muted).fontSize(9).text('Риски не выявлены.', left, y);
+      y = doc.y + 12;
+    } else {
+      for (const entry of tops.districts) {
+        if (y > doc.page.height - 90) {
+          doc.addPage();
+          y = MARGIN;
+        }
+        doc.fillColor(CHART_COLORS.ink).fontSize(10).text(`${entry.district} · ${entry.count} нарушений`, left, y);
+        y = doc.y + 4;
+        for (const performer of entry.performers) {
+          if (y > doc.page.height - 50) {
+            doc.addPage();
+            y = MARGIN;
+          }
+          y = drawBarRow(doc, {
+            x: left + 12, y, labelWidth: 160, trackWidth: width - 272,
+            label: performer.performer,
+            percent: (performer.count / entry.count) * 100,
+            band: 'low',
+            value: String(performer.count),
+          });
+        }
+        y += 8;
+      }
+      doc.fillColor(CHART_COLORS.muted).fontSize(8)
+        .text(`На каждый район показано до ${tops.performerLimit} исполнителей с наибольшим числом нарушений.`, left, y, { width });
     }
 
     doc.end();

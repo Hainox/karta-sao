@@ -9,6 +9,8 @@
  * проверяется тестами без поднятия службы.
  */
 
+import { reportingDistrict } from './scope.js';
+
 /**
  * Граница зоны: номинальный радиус 15 м плюс разброс ±15 м.
  * Должна совпадать с DEFAULT_RADIUS_METERS + DEFAULT_TOLERANCE_METERS в geo.js.
