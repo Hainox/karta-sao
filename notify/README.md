@@ -13,6 +13,7 @@
 | ✅ Подтверждение действия | действие выполняется после нажатия кнопки | «Утвердить набор правок: Аэропорт» |
 | 🔥 Ошибка | сбои сервисов | «Сбой обработки запроса: …» |
 | 📷 Сводка картинкой | ежечасная сводка оцифровки САО | таблица районов с подписью-комментарием и упоминанием ответственного |
+| 📎 Файл-выгрузка | периодический отчёт-файл | отчёт по отрисовке маршрутов ОДХ вложением с подписью |
 
 Ответы и решения попадают в журнал: `data/journal.jsonl`.
 
@@ -72,6 +73,7 @@ node bin/notify.js status
 ```http
 POST /event    { "kind": "client", "title": "…", "text": "…", "fields": { "Район": "Аэропорт" } }
 POST /photo    { "photo": "<base64 PNG>", "caption": "…", "filename": "digest.png" }
+POST /document { "file": "<base64>", "filename": "routes.geojson", "caption": "…" }
 POST /ask      { "question": "…", "options": [ { "text": "Да", "value": "yes" } ] }
 POST /action   { "name": "submission.approve", "title": "…", "payload": { "submissionId": "…" } }
 GET  /pending  — что ждёт ответа

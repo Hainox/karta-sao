@@ -4,6 +4,22 @@
 const RETRY_ATTEMPTS = 4;
 const RETRY_DELAY_MS = 1500;
 
+// Расширение задаёт MIME-тип выгрузки: Telegram отдаёт файл получателю с тем
+// типом, что мы прислали, иначе csv/geojson приезжали бы безтиповым потоком.
+const DOCUMENT_MIME = {
+  csv: 'text/csv',
+  xlsx: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+  json: 'application/json',
+  geojson: 'application/geo+json',
+  txt: 'text/plain',
+  zip: 'application/zip'
+};
+
+function documentMime(filename = '') {
+  const extension = String(filename).split('.').pop()?.toLowerCase();
+  return DOCUMENT_MIME[extension] || 'application/octet-stream';
+}
+
 export function createTelegram({ token, fetchImpl = fetch, apiBase = 'https://api.telegram.org', sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms)) }) {
   if (!token) throw new Error('Токен бота не задан.');
 
@@ -54,9 +70,28 @@ export function createTelegram({ token, fetchImpl = fetch, apiBase = 'https://ap
     return body.result;
   });
 
+  const sendDocument = async (chatId, { buffer, filename = 'document.bin', caption }) => withRetry(async () => {
+    // Выгрузка-отчёт уходит multipart-запросом, как и фотография: так Telegram
+    // получает готовый файл, а не строку base64 в теле запроса.
+    const form = new FormData();
+    form.append('chat_id', String(chatId));
+    if (caption) {
+      form.append('caption', String(caption).slice(0, 1024));
+      form.append('parse_mode', 'HTML');
+    }
+    form.append('document', new Blob([buffer], { type: documentMime(filename) }), filename);
+    const response = await fetchImpl(`${apiBase}/bot${token}/sendDocument`, { method: 'POST', body: form });
+    const body = await response.json().catch(() => null);
+    if (!response.ok || !body?.ok) {
+      throw new Error(`Telegram sendDocument: ${body?.description || `HTTP ${response.status}`}`);
+    }
+    return body.result;
+  });
+
   return {
     call,
     sendPhoto,
+    sendDocument,
     sendMessage: (chatId, text, options = {}) =>
       call('sendMessage', {
         chat_id: chatId,

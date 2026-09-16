@@ -21,6 +21,11 @@ function fakeTelegram() {
       sent.push({ chatId, photo: buffer, caption, filename, messageId: counter });
       return { message_id: counter };
     },
+    async sendDocument(chatId, { buffer, caption, filename }) {
+      counter += 1;
+      sent.push({ chatId, document: buffer, caption, filename, messageId: counter });
+      return { message_id: counter };
+    },
     async editMessageText(chatId, messageId, text) {
       sent.push({ chatId, messageId, text, edited: true });
     }
@@ -78,6 +83,24 @@ test('отправляет картинку сводки с подписью в 
 test('картинка без файла отклоняется', async () => {
   const { notifier } = await fixture();
   await assert.rejects(() => notifier.photo({ caption: 'Пусто' }), /Нужна картинка/);
+});
+
+test('отправляет файл-выгрузку в разрешённые чаты и пишет его в журнал', async () => {
+  const { notifier, telegram, store } = await fixture(['111', '222']);
+  const csv = Buffer.from('район;маршрут', 'utf8');
+  const result = await notifier.document({ file: csv.toString('base64'), caption: 'Отчёт по маршрутам ОДХ', filename: 'routes.csv' });
+  assert.equal(result.delivered.length, 2);
+  assert.deepEqual(telegram.sent.map((item) => item.chatId), ['111', '222']);
+  assert.equal(telegram.sent[0].document.toString('utf8'), csv.toString('utf8'));
+  assert.equal(telegram.sent[0].filename, 'routes.csv');
+  assert.equal(telegram.sent[0].caption, 'Отчёт по маршрутам ОДХ');
+  const journal = await store.readJournal(5);
+  assert.equal(journal.filter((entry) => entry.type === 'document').length, 1);
+});
+
+test('файл без содержимого отклоняется', async () => {
+  const { notifier } = await fixture();
+  await assert.rejects(() => notifier.document({ filename: 'routes.csv' }), /Нужен файл/);
 });
 
 test('запрашивает подтверждение действия', async () => {

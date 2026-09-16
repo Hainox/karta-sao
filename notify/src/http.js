@@ -3,6 +3,8 @@ import { createServer } from 'node:http';
 const MAX_BODY = 64 * 1024;
 // Картинка сводки приходит в base64 и весит больше обычного события.
 const MAX_PHOTO_BODY = 8 * 1024 * 1024;
+// Выгрузка отчёта в base64: файл может быть крупным архивом, поэтому лимит выше.
+const MAX_DOCUMENT_BODY = 32 * 1024 * 1024;
 
 async function readBody(request, limit = MAX_BODY) {
   const chunks = [];
@@ -73,6 +75,13 @@ export function createHttpServer({ config, notifier, store }) {
         const body = await readBody(request, MAX_PHOTO_BODY);
         if (!body.photo) return send(400, { error: 'Нужна картинка в поле photo (base64).' });
         const result = await notifier.photo(body);
+        return send(202, { delivered: result.delivered.length });
+      }
+
+      if (request.method === 'POST' && url.pathname === '/document') {
+        const body = await readBody(request, MAX_DOCUMENT_BODY);
+        if (!body.file) return send(400, { error: 'Нужен файл в поле file (base64).' });
+        const result = await notifier.document(body);
         return send(202, { delivered: result.delivered.length });
       }
 

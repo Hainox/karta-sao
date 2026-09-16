@@ -20,6 +20,10 @@ async function fixture({ secret = 'top-secret' } = {}) {
     async sendPhoto(chatId, { buffer, caption, filename }) {
       sent.push({ chatId, photo: buffer, caption, filename });
       return { message_id: sent.length };
+    },
+    async sendDocument(chatId, { buffer, caption, filename }) {
+      sent.push({ chatId, document: buffer, caption, filename });
+      return { message_id: sent.length };
     }
   };
   const config = { allowedChatIds: ['111'], answerTimeoutSeconds: 3600, secret, journalLimit: 50 };
@@ -79,6 +83,32 @@ test('картинка без файла отклоняется', async (t) => {
   const { base, server } = await fixture();
   t.after(() => server.close());
   const result = await post(base, '/photo', { caption: 'Пусто' }, 'top-secret');
+  assert.equal(result.status, 400);
+});
+
+test('файл-выгрузка уходит в чат отдельным маршрутом', async (t) => {
+  const { base, sent, server } = await fixture();
+  t.after(() => server.close());
+  const file = Buffer.from('район;маршрут', 'utf8').toString('base64');
+  const result = await post(base, '/document', { file, filename: 'routes.csv', caption: 'Отчёт по маршрутам ОДХ' }, 'top-secret');
+  assert.equal(result.status, 202);
+  assert.equal(result.body.delivered, 1);
+  assert.equal(sent[0].filename, 'routes.csv');
+  assert.equal(sent[0].caption, 'Отчёт по маршрутам ОДХ');
+  assert.equal(sent[0].document.toString('utf8'), 'район;маршрут');
+});
+
+test('файл-выгрузка без секрета не принимается', async (t) => {
+  const { base, server } = await fixture();
+  t.after(() => server.close());
+  const result = await post(base, '/document', { file: Buffer.from('x').toString('base64') }, 'wrong-secret');
+  assert.equal(result.status, 401);
+});
+
+test('выгрузка без файла отклоняется', async (t) => {
+  const { base, server } = await fixture();
+  t.after(() => server.close());
+  const result = await post(base, '/document', { filename: 'routes.csv' }, 'top-secret');
   assert.equal(result.status, 400);
 });
 

@@ -28,6 +28,19 @@ export function createNotifier({ config, telegram, store }) {
       return { record, delivered };
     },
 
+    /** Файл-выгрузка: отчёт по отрисовке маршрутов ОДХ уходит документом в тот же чат. */
+    async document({ file, filename, caption, chatIds } = {}) {
+      if (!file) throw new Error('Нужен файл в поле file (base64).');
+      const buffer = Buffer.from(String(file), 'base64');
+      const record = await store.appendJournal({ direction: 'out', type: 'document', filename, caption, bytes: buffer.length });
+      const delivered = [];
+      for (const chatId of recipients(chatIds)) {
+        const message = await telegram.sendDocument(chatId, { buffer, filename, caption });
+        delivered.push({ chatId, messageId: message?.message_id });
+      }
+      return { record, delivered };
+    },
+
     async ask({ question, details, options, timeoutSeconds, chatIds }, { action } = {}) {
       if (!question) throw new Error('Вопрос не может быть пустым.');
       const list = (options || []).filter(Boolean);
