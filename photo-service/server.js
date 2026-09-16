@@ -10,6 +10,7 @@ import {
 } from './src/auth.js';
 import { parseMultipart } from './src/multipart.js';
 import { createLoginThrottle } from './src/login-throttle.js';
+import { clientAddress } from './src/client-address.js';
 import { buildExcel, buildPdf } from './src/exports.js';
 import { loadReportRows, reportPayload } from './src/reports.js';
 import { mediaRoot, readMedia, removeMedia, writeMedia } from './src/storage.js';
@@ -98,7 +99,7 @@ async function currentUser(request) {
 }
 
 function clientKey(request) {
-  return request.socket.remoteAddress || 'unknown';
+  return clientAddress(request.headers, request.socket.remoteAddress);
 }
 
 // District accounts only upload photos: exports, review and delete stay with the prefecture.
