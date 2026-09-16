@@ -43,6 +43,12 @@ const SUBHEADER_LABELS = Object.freeze(['План', 'Факт', '%']);
 const BAND_COLORS = Object.freeze({
   zero: '#EA9999', low: '#F4CCCC', middle: '#FFF2CC', high: '#D9EAD3',
 });
+
+// Цвет числа на светофоре: на телефоне бледные заливки почти не читаются,
+// поэтому сам процент написан насыщенным цветом той же полосы.
+const BAND_TEXT = Object.freeze({
+  zero: '#B3382B', low: '#B3382B', middle: '#B8791A', high: '#1C7A55',
+});
 const PERCENT_COLUMNS = Object.freeze([4, 7, 10, 13]);
 const PLAN_COLUMNS = Object.freeze([2, 5, 8, 11]);
 
@@ -50,12 +56,13 @@ const INK = '#000000';
 const MUTED = '#708089';
 const GRID = '#000000';
 
-function bandColor(percent, plan) {
+/** Полоса светофора для процента; без плана полосы нет — ячейку не красим. */
+function bandOf(percent, plan) {
   if (plan <= 0) return null;
-  if (percent <= 0) return BAND_COLORS.zero;
-  if (percent < 33) return BAND_COLORS.low;
-  if (percent < 66) return BAND_COLORS.middle;
-  return BAND_COLORS.high;
+  if (percent <= 0) return 'zero';
+  if (percent < 33) return 'low';
+  if (percent < 66) return 'middle';
+  return 'high';
 }
 
 function cellOffset(index) {
@@ -155,10 +162,10 @@ export function renderHeadquartersImage(board, { generatedAt = new Date() } = {}
     values.forEach((value, column) => {
       const x = cellOffset(column);
       const percentIndex = PERCENT_COLUMNS.indexOf(column);
-      const fill = percentIndex === -1 ? null : bandColor(value, values[PLAN_COLUMNS[percentIndex]]);
-      stroke(x, y, COLUMN_WIDTHS[column], ROW_HEIGHT, fill);
+      const band = percentIndex === -1 ? null : bandOf(value, values[PLAN_COLUMNS[percentIndex]]);
+      stroke(x, y, COLUMN_WIDTHS[column], ROW_HEIGHT, band ? BAND_COLORS[band] : null);
       if (column === 1) text(value, x, y + ROW_HEIGHT / 2, COLUMN_WIDTHS[column], { size: 13 });
-      else if (percentIndex !== -1) text(`${value}%`, x, y + ROW_HEIGHT / 2, COLUMN_WIDTHS[column], { size: 13 });
+      else if (percentIndex !== -1) text(`${value}%`, x, y + ROW_HEIGHT / 2, COLUMN_WIDTHS[column], { size: 13, color: band ? BAND_TEXT[band] : INK });
       else text(column === 0 ? value : countText(value), x, y + ROW_HEIGHT / 2, COLUMN_WIDTHS[column], { size: 13 });
     });
     y += ROW_HEIGHT;
@@ -173,10 +180,10 @@ export function renderHeadquartersImage(board, { generatedAt = new Date() } = {}
     const column = index + 2;
     const x = cellOffset(column);
     const percentIndex = PERCENT_COLUMNS.indexOf(column);
-    const fill = percentIndex === -1 ? null : bandColor(value, totalValues[PLAN_COLUMNS[percentIndex] - 2]);
-    stroke(x, y, COLUMN_WIDTHS[column], TOTAL_HEIGHT, fill);
-    const text60 = percentIndex !== -1 ? `${value}%` : countText(value);
-    text(text60, x, y + TOTAL_HEIGHT / 2, COLUMN_WIDTHS[column], { size: 13 });
+    const band = percentIndex === -1 ? null : bandOf(value, totalValues[PLAN_COLUMNS[percentIndex] - 2]);
+    stroke(x, y, COLUMN_WIDTHS[column], TOTAL_HEIGHT, band ? BAND_COLORS[band] : null);
+    const label = percentIndex !== -1 ? `${value}%` : countText(value);
+    text(label, x, y + TOTAL_HEIGHT / 2, COLUMN_WIDTHS[column], { size: 13, color: band ? BAND_TEXT[band] : INK });
   });
   y += TOTAL_HEIGHT;
 

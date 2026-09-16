@@ -118,6 +118,19 @@ const BAND_FILLS = Object.freeze({
   zero: 'FFEA9999', low: 'FFF4CCCC', middle: 'FFFFF2CC', high: 'FFD9EAD3',
 });
 
+/**
+ * Заливка ячейки процента: та же градация, что в правилах условного
+ * форматирования, но записанная сразу в ячейку. Цвета видно и там, где правила
+ * не пересчитываются, а сами правила продолжают работать при правках данных.
+ */
+function percentBandFill(percent, plan) {
+  if (plan <= 0) return 'FFFFFFFF';
+  if (percent <= 0) return BAND_FILLS.zero;
+  if (percent < 33) return BAND_FILLS.low;
+  if (percent < 66) return BAND_FILLS.middle;
+  return BAND_FILLS.high;
+}
+
 function percentBandRules(letter, firstRow, planLetter) {
   const cell = `$${letter}${firstRow}`;
   const plan = `$${planLetter}${firstRow}`;
@@ -179,11 +192,12 @@ function writeHeadquartersTable(sheet, headerRow, { names, counts, total, formul
 
   names.forEach((name, index) => {
     const row = firstDataRow + index;
-    [index + 1, name, ...headquartersValues(counts[index])].forEach((value, offset) => {
+    const values = [index + 1, name, ...headquartersValues(counts[index])];
+    values.forEach((value, offset) => {
       const column = offset + 1;
       const cell = sheet.getCell(row, column);
       cell.value = value;
-      cell.fill = solidFill('FFFFFFFF');
+      cell.fill = solidFill(PERCENT_COLUMNS.includes(column) ? percentBandFill(value, values[column - 3]) : 'FFFFFFFF');
       cell.border = CELL_BORDER;
       cell.alignment = CENTERED;
       cell.font = { name: HEADQUARTERS_FONT, size: 11, bold: PERCENT_COLUMNS.includes(column) };
@@ -191,12 +205,13 @@ function writeHeadquartersTable(sheet, headerRow, { names, counts, total, formul
     });
   });
 
+  const totalValues = headquartersValues(total);
   sheet.mergeCells(totalRow, 1, totalRow, 2);
   sheet.getCell(totalRow, 1).value = 'ИТОГО по САО';
   for (let column = 1; column <= 14; column += 1) {
     const cell = sheet.getCell(totalRow, column);
-    if (column > 2) cell.value = headquartersValues(total)[column - 3];
-    cell.fill = solidFill('FFFFFFFF');
+    if (column > 2) cell.value = totalValues[column - 3];
+    cell.fill = solidFill(PERCENT_COLUMNS.includes(column) ? percentBandFill(totalValues[column - 3], totalValues[column - 5]) : 'FFFFFFFF');
     cell.border = CELL_BORDER;
     cell.alignment = CENTERED;
     cell.font = { name: HEADQUARTERS_FONT, size: 11, bold: true };

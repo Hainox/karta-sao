@@ -189,6 +189,10 @@ test('лист «На штаб»: отметки по категориям, ст
   assert.equal(sheet.getCell('N6').value, 29);
   // У Сокола остановок нет: процент показывается нулём, а не пустой ячейкой.
   assert.equal(sheet.getCell('E4').value, 0);
+  // Светофор записан и в сами ячейки: у АвД 0 % при плане 2 — тёмно-красный,
+  // а где плана нет, ячейка остаётся белой.
+  assert.equal(sheet.getCell('E5').fill.fgColor.argb, 'FFEA9999');
+  assert.equal(sheet.getCell('E4').fill.fgColor.argb, 'FFFFFFFF');
 });
 
 test('лист «На штаб»: вторая таблица собирается формулой SORT, ниже — комментарий', async () => {
