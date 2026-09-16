@@ -28,3 +28,14 @@ export function objectAllowedFor(user, object) {
   if (isAutodorAccount(user.district)) return !object?.district || isAutodorHolder(object?.balance_holder);
   return object?.district === user.district;
 }
+
+/**
+ * Район, к которому объект относится в отчётности. Одно правило на штабную
+ * таблицу, выгрузки и дашборд: объекты владельца «АвД САО», балансодержателей
+ * «ДЭУ N» и объекты без района считаются за АвД, а не за районом, где стоят.
+ */
+export function reportingDistrict(object) {
+  const district = String(object?.district ?? '').trim();
+  if (!district || isAutodorHolder(object?.balanceHolder ?? object?.balance_holder)) return AUTODOR_HOLDER;
+  return district;
+}

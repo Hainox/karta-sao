@@ -75,6 +75,11 @@ function countText(value) {
   return Number(value).toLocaleString('ru-RU');
 }
 
+// Пустого процента у вида без плана нет: в таблице стоит прочерк, а не «null%».
+function percentText(value) {
+  return value === null || value === undefined ? '—' : `${value}%`;
+}
+
 /** Знак «№» (U+2116), которого нет в шрифте: «N», маленькая «o» и подчёркивание. */
 function drawNumero(ctx, centerX, y, size) {
   const full = `${size}px "${FONT_FAMILY}"`;
@@ -93,8 +98,12 @@ function drawNumero(ctx, centerX, y, size) {
   ctx.fillRect(left + nWidth * 0.98, y + size * 0.24, oWidth * 0.85, Math.max(1, Math.round(size * 0.07)));
 }
 
+// Кого упомянуть в подписи сводки: руководитель направления должен точно
+// увидеть выгрузку в чате. Переопределяется переменной NOTIFY_MENTION.
+export const DIGEST_MENTION = process.env.NOTIFY_MENTION ?? '@TomGruz200';
+
 /** Картинка со второй таблицей и текстом комментария. */
-export function renderHeadquartersImage(board, { generatedAt = new Date() } = {}) {
+export function renderHeadquartersImage(board, { generatedAt = new Date(), mention = DIGEST_MENTION } = {}) {
   ensureFont();
 
   const rows = board.sorted;
@@ -165,7 +174,7 @@ export function renderHeadquartersImage(board, { generatedAt = new Date() } = {}
       const band = percentIndex === -1 ? null : bandOf(value, values[PLAN_COLUMNS[percentIndex]]);
       stroke(x, y, COLUMN_WIDTHS[column], ROW_HEIGHT, band ? BAND_COLORS[band] : null);
       if (column === 1) text(value, x, y + ROW_HEIGHT / 2, COLUMN_WIDTHS[column], { size: 13 });
-      else if (percentIndex !== -1) text(`${value}%`, x, y + ROW_HEIGHT / 2, COLUMN_WIDTHS[column], { size: 13, color: band ? BAND_TEXT[band] : INK });
+      else if (percentIndex !== -1) text(percentText(value), x, y + ROW_HEIGHT / 2, COLUMN_WIDTHS[column], { size: 13, color: band ? BAND_TEXT[band] : INK });
       else text(column === 0 ? value : countText(value), x, y + ROW_HEIGHT / 2, COLUMN_WIDTHS[column], { size: 13 });
     });
     y += ROW_HEIGHT;
@@ -182,7 +191,7 @@ export function renderHeadquartersImage(board, { generatedAt = new Date() } = {}
     const percentIndex = PERCENT_COLUMNS.indexOf(column);
     const band = percentIndex === -1 ? null : bandOf(value, totalValues[PLAN_COLUMNS[percentIndex] - 2]);
     stroke(x, y, COLUMN_WIDTHS[column], TOTAL_HEIGHT, band ? BAND_COLORS[band] : null);
-    const label = percentIndex !== -1 ? `${value}%` : countText(value);
+    const label = percentIndex !== -1 ? percentText(value) : countText(value);
     text(label, x, y + TOTAL_HEIGHT / 2, COLUMN_WIDTHS[column], { size: 13, color: band ? BAND_TEXT[band] : INK });
   });
   y += TOTAL_HEIGHT;
@@ -198,5 +207,8 @@ export function renderHeadquartersImage(board, { generatedAt = new Date() } = {}
     y += COMMENT_HEIGHT;
   });
 
-  return { png: canvas.toBuffer('image/png'), caption: commentLines.join('\n') };
+  // Упоминание идёт последней строкой: фиксированная шапка комментария не меняется.
+  const caption = [...commentLines, ...(mention ? ['', mention] : [])].join('\n');
+
+  return { png: canvas.toBuffer('image/png'), caption };
 }

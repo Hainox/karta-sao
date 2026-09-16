@@ -12,6 +12,7 @@ import { parseMultipart } from './src/multipart.js';
 import { createLoginThrottle } from './src/login-throttle.js';
 import { clientAddress } from './src/client-address.js';
 import { buildExcel, buildHeadquartersExcel, buildPdf } from './src/exports.js';
+import { buildHeadquartersPdf } from './src/pdf-headquarters.js';
 import { loadReportRows, reportPayload } from './src/reports.js';
 import { mediaRoot, readMedia, removeMedia, writeMedia } from './src/storage.js';
 import { HOLDER_SELECT_SQL, objectAllowedFor } from './src/scope.js';
@@ -321,6 +322,15 @@ async function handler(request, response) {
       const rows = await loadReportRows(pool, user, url.searchParams.get('district') || undefined);
       const buffer = await buildHeadquartersExcel(rows);
       response.writeHead(200, { 'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'Content-Disposition': 'attachment; filename="sao-photo-headquarters.xlsx"', 'Cache-Control': 'no-store', ...corsHeaders(request) });
+      response.end(buffer);
+      return;
+    }
+    if (pathname === '/reports/export-headquarters.pdf' && request.method === 'GET') {
+      if (!requirePrefecture(response, request, user)) return;
+      const url = new URL(request.url, 'http://photo-service.local');
+      const rows = await loadReportRows(pool, user, url.searchParams.get('district') || undefined);
+      const buffer = await buildHeadquartersPdf(rows);
+      response.writeHead(200, { 'Content-Type': 'application/pdf', 'Content-Disposition': 'attachment; filename="sao-photo-headquarters.pdf"', 'Cache-Control': 'no-store', ...corsHeaders(request) });
       response.end(buffer);
       return;
     }

@@ -38,6 +38,8 @@ services:
       NOTIFY_SECRET: ${NOTIFY_SECRET:-}
       # Ежечасная сводка штаба картинкой в Telegram.
       PHOTO_SERVICE_DIGEST_ENABLED: ${PHOTO_SERVICE_DIGEST_ENABLED:-false}
+      # Кого упомянуть в подписи сводки, чтобы выгрузку точно увидели.
+      NOTIFY_MENTION: ${NOTIFY_MENTION:-@TomGruz200}
     depends_on:
       database:
         condition: service_healthy

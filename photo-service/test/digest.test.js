@@ -58,3 +58,25 @@ test('картинка сводки: PNG с таблицей и подписью
   assert.match(caption, /Больше всего закрыто: АвД САО — 89 %/);
   assert.match(caption, /Слабее всего — /);
 });
+
+test('подпись сводки заканчивается упоминанием ответственного', () => {
+  const board = headquartersBoard(payload);
+  const { caption } = renderHeadquartersImage(board, {
+    generatedAt: new Date('2026-09-16T18:00:00Z'),
+    mention: '@TomGruz200',
+  });
+  const lines = caption.split('\n');
+
+  // Упоминание идёт последней строкой отдельным абзацем: фиксированная шапка
+  // комментария остаётся первой строкой подписи.
+  assert.equal(lines[lines.length - 1], '@TomGruz200');
+  assert.equal(lines[lines.length - 2], '');
+  assert.match(lines[0], /^Направление — «Оцифровка объектов САО» — /);
+
+  // Без упоминания подпись остаётся прежней — это настройка, а не часть текста.
+  const { caption: without } = renderHeadquartersImage(board, {
+    generatedAt: new Date('2026-09-16T18:00:00Z'),
+    mention: null,
+  });
+  assert.ok(!without.includes('@TomGruz200'));
+});

@@ -1120,6 +1120,7 @@ async function downloadReport(kind) {
   const query = district ? `?district=${encodeURIComponent(district)}` : '';
   const path = kind === 'xlsx' ? `/reports/export.xlsx${query}`
     : kind === 'headquarters' ? `/reports/export-headquarters.xlsx${query}`
+    : kind === 'headquarters-pdf' ? `/reports/export-headquarters.pdf${query}`
     : `/reports/export.pdf${query}`;
   try {
     showToast('Готовим выгрузку…');
@@ -1131,6 +1132,7 @@ async function downloadReport(kind) {
     link.href = url;
     link.download = kind === 'xlsx' ? 'sao-photo-report.xlsx'
       : kind === 'headquarters' ? 'sao-photo-headquarters.xlsx'
+      : kind === 'headquarters-pdf' ? 'sao-photo-headquarters.pdf'
       : 'sao-photo-summary.pdf';
     document.body.appendChild(link);
     link.click();
@@ -1271,6 +1273,7 @@ function shell() {
         <div class="pa-exports" id="paExports" hidden>
           <button type="button" class="pa-btn" id="paExportXlsx">Excel: полный реестр</button>
           <button type="button" class="pa-btn" id="paExportHeadquarters">Excel: таблица на штаб</button>
+          <button type="button" class="pa-btn" id="paExportHeadquartersPdf">PDF: таблица на штаб</button>
           <button type="button" class="pa-btn" id="paExportPdf">PDF: краткая сводка</button>
           <button type="button" class="pa-btn" id="paExportCsv">CSV для Яндекса</button>
         </div>
@@ -1362,6 +1365,7 @@ function bindEvents() {
   element('paDistrictFilter').addEventListener('change', () => { invalidateQueue(); refreshCoverage(); });
   element('paExportXlsx').addEventListener('click', () => downloadReport('xlsx'));
   element('paExportHeadquarters').addEventListener('click', () => downloadReport('headquarters'));
+  element('paExportHeadquartersPdf').addEventListener('click', () => downloadReport('headquarters-pdf'));
   element('paExportPdf').addEventListener('click', () => downloadReport('pdf'));
   element('paExportCsv').addEventListener('click', downloadCsv);
   element('paDialog').addEventListener('close', () => {

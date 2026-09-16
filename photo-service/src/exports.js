@@ -3,7 +3,7 @@ import PDFDocument from 'pdfkit';
 import { reportPayload } from './reports.js';
 import { completionMix, uploadDynamics } from './report.js';
 import { objectTypeLabel, percentLabel, statusBandLabel, OBJECT_TYPES } from './labels.js';
-import { headquartersBoard, headquartersComment, headquartersValues } from './headquarters.js';
+import { HEADQUARTERS_NOTE, headquartersBoard, headquartersComment, headquartersValues } from './headquarters.js';
 import { collectRisks, summarizeRisks } from './risks.js';
 import {
   CHART_COLORS, bandColor, drawBarRow, drawBandChip, drawColumns, drawGauge, drawStackedBar, section,
@@ -32,7 +32,7 @@ function resolvePdfFont(environment) {
   return custom;
 }
 
-const PDF_FONT_PATH = resolvePdfFont(process.env);
+export const PDF_FONT_PATH = resolvePdfFont(process.env);
 export const PDF_FONT_NAME = 'report-body';
 const MARGIN = 42;
 const DYNAMICS_DAYS = 14;
@@ -284,7 +284,7 @@ function addHeadquartersSheet(workbook, payload) {
   const noteRow = afterComment + 1;
   sheet.mergeCells(noteRow, 1, noteRow, HEADQUARTERS_COLUMN_COUNT);
   const note = sheet.getCell(noteRow, 1);
-  note.value = 'Колонка «Объекты» — отметки, которые нужно отработать: столько же показывает страница фотофиксации, у одного адреса точек может быть несколько. Объекты с балансодержателем «АвД САО», «ДЭУ» и объекты без района учтены в строке «АвД САО». Процент считается по отметкам каждой категории отдельно.';
+  note.value = HEADQUARTERS_NOTE;
   note.alignment = TO_LEFT;
   note.font = { name: HEADQUARTERS_FONT, size: 8, color: { argb: HEADQUARTERS_MUTED } };
 }

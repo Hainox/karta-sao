@@ -1,5 +1,5 @@
 import { OBJECT_TYPES } from './labels.js';
-import { AUTODOR_HOLDER, isAutodorHolder } from './scope.js';
+import { AUTODOR_HOLDER, reportingDistrict } from './scope.js';
 
 // Штаб считает работу по владельцу объекта: «АвД САО» ведёт свои объекты отдельно
 // от района, который их снимает. Туда же идут объекты с балансодержателем «ДЭУ»
@@ -76,7 +76,7 @@ export function headquartersValues(counts) {
 export function headquartersBoard(payload) {
   const grouped = new Map();
   for (const item of payload.objects) {
-    const key = isAutodorHolder(item.balanceHolder) || !item.district ? AUTODOR_HOLDER : item.district;
+    const key = reportingDistrict(item);
     if (!grouped.has(key)) grouped.set(key, []);
     grouped.get(key).push(item);
   }
@@ -117,6 +117,10 @@ function countText(value) {
 
 // Название работы — в первой строке комментария, одинаковой для всех выгрузок.
 export const HEADQUARTERS_DIRECTION = 'Оцифровка объектов САО';
+
+// Примечание под таблицей: одно и то же в Excel и в PDF. Объясняет единицу
+// учёта — отметку — и правило строки «АвД САО», иначе числа читаются неверно.
+export const HEADQUARTERS_NOTE = 'Колонка «Объекты» — отметки, которые нужно отработать: столько же показывает страница фотофиксации, у одного адреса точек может быть несколько. Объекты с балансодержателем «АвД САО», «ДЭУ» и объекты без района учтены в строке «АвД САО». Процент считается по отметкам каждой категории отдельно.';
 
 /**
  * Комментарий к выгрузке: сначала фиксированная строка «Направление — проект —

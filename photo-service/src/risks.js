@@ -182,3 +182,34 @@ export function summarizeRisks(risks) {
     byKind: [...byKind.values()].sort((left, right) => right.count - left.count),
   };
 }
+
+/**
+ * Топы по нарушениям для выгрузок и дашборда: районы по числу рисков и
+ * исполнители внутри каждого района. Район считается по тому же правилу, что и
+ * в штабной таблице, — объекты владельца, «ДЭУ» и объекты без района попадают
+ * в строку «АвД САО», а не в район, где стоят.
+ */
+export function riskTops(risks, { performerLimit = 5 } = {}) {
+  const districts = new Map();
+  for (const risk of risks || []) {
+    const district = reportingDistrict(risk);
+    if (!districts.has(district)) districts.set(district, { district, count: 0, performers: new Map() });
+    const entry = districts.get(district);
+    entry.count += 1;
+    const performer = text(risk.performer) || 'Исполнитель не указан';
+    entry.performers.set(performer, (entry.performers.get(performer) || 0) + 1);
+  }
+
+  const ordered = [...districts.values()]
+    .sort((left, right) => right.count - left.count || left.district.localeCompare(right.district, 'ru'))
+    .map((entry) => ({
+      district: entry.district,
+      count: entry.count,
+      performers: [...entry.performers.entries()]
+        .map(([performer, count]) => ({ performer, count }))
+        .sort((left, right) => right.count - left.count || left.performer.localeCompare(right.performer, 'ru'))
+        .slice(0, performerLimit),
+    }));
+
+  return { total: (risks || []).length, districts: ordered, performerLimit };
+}
