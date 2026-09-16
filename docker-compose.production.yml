@@ -41,6 +41,10 @@ services:
     build:
       context: .
       dockerfile: notify/Dockerfile
+    # DNS отдаёт для api.telegram.org только IPv6, а исходящего IPv6 у хоста нет,
+    # и разрешённый по IPv4 адрес тоже недоступен. Закрепляем проверенный рабочий.
+    extra_hosts:
+      - "api.telegram.org:149.154.167.220"
     restart: unless-stopped
     depends_on:
       - api
