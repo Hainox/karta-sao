@@ -27,7 +27,10 @@ export function createNotifyClient({ url, secret, fetchImpl = fetch, logger = co
     enabled: Boolean(base),
     event: (payload) => post('/event', payload),
     action: (payload) => post('/action', payload),
-    ask: (payload) => post('/ask', payload)
+    ask: (payload) => post('/ask', payload),
+    // Картинка с подписью: сводка для штаба уходит фотографией.
+    photo: ({ caption, png, filename = 'sao-photo-digest.png' }) =>
+      post('/photo', { caption, filename, photo: Buffer.from(png).toString('base64') })
   };
 }
 

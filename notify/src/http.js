@@ -1,13 +1,15 @@
 import { createServer } from 'node:http';
 
 const MAX_BODY = 64 * 1024;
+// Картинка сводки приходит в base64 и весит больше обычного события.
+const MAX_PHOTO_BODY = 8 * 1024 * 1024;
 
-async function readBody(request) {
+async function readBody(request, limit = MAX_BODY) {
   const chunks = [];
   let size = 0;
   for await (const chunk of request) {
     size += chunk.length;
-    if (size > MAX_BODY) throw Object.assign(new Error('Слишком большое тело запроса.'), { status: 413 });
+    if (size > limit) throw Object.assign(new Error('Слишком большое тело запроса.'), { status: 413 });
     chunks.push(chunk);
   }
   if (!chunks.length) return {};
@@ -65,6 +67,13 @@ export function createHttpServer({ config, notifier, store }) {
         if (!body.title && !body.text) return send(400, { error: 'Нужны title или text.' });
         const result = await notifier.publish(body);
         return send(202, { delivered: result.delivered.length, id: result.record.id });
+      }
+
+      if (request.method === 'POST' && url.pathname === '/photo') {
+        const body = await readBody(request, MAX_PHOTO_BODY);
+        if (!body.photo) return send(400, { error: 'Нужна картинка в поле photo (base64).' });
+        const result = await notifier.photo(body);
+        return send(202, { delivered: result.delivered.length });
       }
 
       if (request.method === 'POST' && url.pathname === '/ask') {

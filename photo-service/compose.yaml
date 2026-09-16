@@ -34,6 +34,8 @@ services:
       PHOTO_SERVICE_COOKIE_SAMESITE: ${PHOTO_SERVICE_COOKIE_SAMESITE:-lax}
       NOTIFY_URL: ${NOTIFY_URL:-http://sao-notify:8790}
       NOTIFY_SECRET: ${NOTIFY_SECRET:-}
+      # Ежечасная сводка штаба картинкой в Telegram.
+      PHOTO_SERVICE_DIGEST_ENABLED: ${PHOTO_SERVICE_DIGEST_ENABLED:-false}
     depends_on:
       database:
         condition: service_healthy

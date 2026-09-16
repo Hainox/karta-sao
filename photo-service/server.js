@@ -351,6 +351,48 @@ const server = createServer((request, response) => pathOf(request) === '/healthz
 await new Promise((resolve, reject) => { server.once('error', reject); server.listen(port, '0.0.0.0', resolve); });
 console.log(`SAO photo service listening on port ${port}`);
 
+/**
+ * Ежечасная сводка для штаба: картинка второй таблицы листа «На штаб» и текст
+ * комментария уходят фотографией в тот же чат, что и остальные оповещения.
+ * Отрисовка подключается лениво: сбой картинки не должен трогать API.
+ */
+async function sendHourlyDigest() {
+  try {
+    const rows = await loadReportRows(pool, { role: 'prefecture_admin' }, undefined);
+    const [{ headquartersBoard }, { renderHeadquartersImage }] = await Promise.all([
+      import('./src/headquarters.js'),
+      import('./src/digest.js'),
+    ]);
+    const board = headquartersBoard(reportPayload(rows));
+    const { png, caption } = renderHeadquartersImage(board, { generatedAt: new Date() });
+    const result = await notifier.photo({ caption, png });
+    console.log(`Сводка штаба: ${board.percent} % выполнения, доставлено ${result?.delivered ?? 0}`);
+  } catch (error) {
+    console.error('digest failed:', error.message);
+    notifier.event({
+      kind: 'error',
+      level: 'warning',
+      service: 'photo-service',
+      title: 'Сводка штаба не отправлена',
+      text: error.message
+    });
+  }
+}
+
+// Запуск ровно в начале каждого часа, 24 часа в сутки.
+function scheduleHourlyDigest() {
+  const hourMs = 60 * 60 * 1000;
+  setTimeout(async () => {
+    await sendHourlyDigest();
+    scheduleHourlyDigest();
+  }, hourMs - (Date.now() % hourMs));
+}
+
+if (String(process.env.PHOTO_SERVICE_DIGEST_ENABLED || '').toLowerCase() === 'true') {
+  scheduleHourlyDigest();
+  console.log('Ежечасная сводка для штаба включена');
+}
+
 let stopping = false;
 async function shutdown() {
   if (stopping) return;

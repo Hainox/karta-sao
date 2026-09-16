@@ -16,6 +16,11 @@ function fakeTelegram() {
       sent.push({ chatId, text, options, messageId: counter });
       return { message_id: counter };
     },
+    async sendPhoto(chatId, { buffer, caption, filename }) {
+      counter += 1;
+      sent.push({ chatId, photo: buffer, caption, filename, messageId: counter });
+      return { message_id: counter };
+    },
     async editMessageText(chatId, messageId, text) {
       sent.push({ chatId, messageId, text, edited: true });
     }
@@ -55,6 +60,24 @@ test('требует варианты ответа и текст вопроса'
   const { notifier } = await fixture();
   await assert.rejects(() => notifier.ask({ question: '', options: [{ text: 'Да', value: 'yes' }] }), /Вопрос не может быть пустым/);
   await assert.rejects(() => notifier.ask({ question: 'Текст', options: [] }), /хотя бы один вариант/);
+});
+
+test('отправляет картинку сводки с подписью в разрешённые чаты', async () => {
+  const { notifier, telegram, store } = await fixture(['111', '222']);
+  const png = Buffer.from('%PDF-нет, это PNG', 'utf8');
+  const result = await notifier.photo({ photo: png.toString('base64'), caption: 'Коллеги, добрый день!', filename: 'digest.png' });
+  assert.equal(result.delivered.length, 2);
+  assert.deepEqual(telegram.sent.map((item) => item.chatId), ['111', '222']);
+  assert.equal(telegram.sent[0].photo.toString('utf8'), png.toString('utf8'));
+  assert.equal(telegram.sent[0].caption, 'Коллеги, добрый день!');
+  assert.equal(telegram.sent[0].filename, 'digest.png');
+  const journal = await store.readJournal(5);
+  assert.equal(journal.filter((entry) => entry.type === 'photo').length, 1);
+});
+
+test('картинка без файла отклоняется', async () => {
+  const { notifier } = await fixture();
+  await assert.rejects(() => notifier.photo({ caption: 'Пусто' }), /Нужна картинка/);
 });
 
 test('запрашивает подтверждение действия', async () => {

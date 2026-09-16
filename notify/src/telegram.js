@@ -14,8 +14,27 @@ export function createTelegram({ token, fetchImpl = fetch, apiBase = 'https://ap
     return body.result;
   };
 
+  const sendPhoto = async (chatId, { buffer, filename = 'photo.png', caption }) => {
+    // Фотография отправляется multipart-запросом, а не JSON: так Telegram
+    // получает файл целиком, без ограничений на длину строки.
+    const form = new FormData();
+    form.append('chat_id', String(chatId));
+    if (caption) {
+      form.append('caption', String(caption).slice(0, 1024));
+      form.append('parse_mode', 'HTML');
+    }
+    form.append('photo', new Blob([buffer], { type: 'image/png' }), filename);
+    const response = await fetchImpl(`${apiBase}/bot${token}/sendPhoto`, { method: 'POST', body: form });
+    const body = await response.json().catch(() => null);
+    if (!response.ok || !body?.ok) {
+      throw new Error(`Telegram sendPhoto: ${body?.description || `HTTP ${response.status}`}`);
+    }
+    return body.result;
+  };
+
   return {
     call,
+    sendPhoto,
     sendMessage: (chatId, text, options = {}) =>
       call('sendMessage', {
         chat_id: chatId,

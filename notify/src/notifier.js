@@ -15,6 +15,19 @@ export function createNotifier({ config, telegram, store }) {
       return { record, delivered };
     },
 
+    /** Картинка с подписью: сводка штаба уходит фотографией в тот же чат. */
+    async photo({ photo, caption, filename, chatIds } = {}) {
+      if (!photo) throw new Error('Нужна картинка в поле photo (base64).');
+      const buffer = Buffer.from(String(photo), 'base64');
+      const record = await store.appendJournal({ direction: 'out', type: 'photo', caption, bytes: buffer.length });
+      const delivered = [];
+      for (const chatId of recipients(chatIds)) {
+        const message = await telegram.sendPhoto(chatId, { buffer, filename, caption });
+        delivered.push({ chatId, messageId: message?.message_id });
+      }
+      return { record, delivered };
+    },
+
     async ask({ question, details, options, timeoutSeconds, chatIds }, { action } = {}) {
       if (!question) throw new Error('Вопрос не может быть пустым.');
       const list = (options || []).filter(Boolean);

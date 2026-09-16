@@ -3,6 +3,7 @@ import PDFDocument from 'pdfkit';
 import { reportPayload } from './reports.js';
 import { completionMix, uploadDynamics } from './report.js';
 import { objectTypeLabel, percentLabel, statusBandLabel, OBJECT_TYPES } from './labels.js';
+import { headquartersBoard, headquartersComment, headquartersValues } from './headquarters.js';
 import { collectRisks, summarizeRisks } from './risks.js';
 import {
   CHART_COLORS, bandColor, drawBarRow, drawBandChip, drawColumns, drawGauge, drawStackedBar, section,
@@ -101,7 +102,6 @@ const PERCENT_PLAN_COLUMNS = Object.freeze({ 5: 3, 8: 6, 11: 9, 14: 12 });
 const HEADQUARTERS_FONT = 'Century Gothic';
 const HEADQUARTERS_INK = 'FF1F3B57';
 const HEADQUARTERS_MUTED = 'FF708089';
-const AUTODOR_HOLDER = 'АвД САО';
 
 const CENTERED = Object.freeze({ horizontal: 'center', vertical: 'middle' });
 const TO_LEFT = Object.freeze({ horizontal: 'left', vertical: 'middle' });
@@ -144,57 +144,6 @@ function paintPercentBands(worksheet, firstRow, lastRow) {
       rules: percentBandRules(letter, firstRow, planLetter),
     });
   }
-}
-
-// Единица учёта — отметка, то есть конкретная точка на карте, а не уникальный
-// объект: у одного перехода точек может быть несколько десятков, и снимается каждая.
-function headquartersMarks(item) {
-  const plan = Math.max(0, Number(item.sourcePointCount) || 0);
-  const covered = Math.max(0, Number(item.coveredPoints) || 0);
-  return { plan, fact: Math.min(covered, plan) };
-}
-
-function emptyHeadquartersCounts() {
-  return { plan: { stop: 0, pp: 0, entrance: 0 }, fact: { stop: 0, pp: 0, entrance: 0 } };
-}
-
-function headquartersCounts(items) {
-  const counts = emptyHeadquartersCounts();
-  for (const item of items) {
-    const marks = headquartersMarks(item);
-    counts.plan[item.objectType] += marks.plan;
-    counts.fact[item.objectType] += marks.fact;
-  }
-  return counts;
-}
-
-function addHeadquartersCounts(target, counts) {
-  for (const kind of OBJECT_TYPES) {
-    target.plan[kind] += counts.plan[kind];
-    target.fact[kind] += counts.fact[kind];
-  }
-  return target;
-}
-
-function headquartersFactTotal(counts) {
-  return counts.fact.stop + counts.fact.pp + counts.fact.entrance;
-}
-
-// Процент есть всегда и целым числом: без плана это ноль, а не пустая ячейка —
-// иначе в таблице «пропадают» числа. Десятые доли не показываем.
-function headquartersPercent(fact, plan) {
-  return plan ? Math.round((fact / plan) * 100) : 0;
-}
-
-function headquartersValues(counts) {
-  const values = [];
-  for (const kind of OBJECT_TYPES) {
-    values.push(counts.plan[kind], counts.fact[kind], headquartersPercent(counts.fact[kind], counts.plan[kind]));
-  }
-  const plan = counts.plan.stop + counts.plan.pp + counts.plan.entrance;
-  const fact = headquartersFactTotal(counts);
-  values.push(plan, fact, headquartersPercent(fact, plan));
-  return values;
 }
 
 /** Шапка таблицы: строка групп и строка «План / Факт / %». */
@@ -270,21 +219,8 @@ function writeHeadquartersTable(sheet, headerRow, { names, counts, total, formul
   return totalRow;
 }
 
-/** Готовый текст для рассылки: районы, где не закрыто ни одной отметки. */
-function writeHeadquartersComment(sheet, firstRow, lagging) {
-  const lines = lagging.length
-    ? [
-      'Комментарий для рассылки (готов к отправке):',
-      'Коллеги, добрый день!',
-      'Слабая динамика по оцифровке объектов!',
-      'Следующим районам срочно приступить к данной задаче:',
-      ...lagging,
-    ]
-    : [
-      'Комментарий для рассылки (готов к отправке):',
-      'Коллеги, добрый день!',
-      'Оцифровка объектов идёт во всех районах, отстающих нет.',
-    ];
+/** Готовый текст для рассылки: строки из headquartersComment. */
+function writeHeadquartersComment(sheet, firstRow, lines) {
   lines.forEach((line, offset) => {
     const row = firstRow + offset;
     sheet.mergeCells(row, 1, row, 14);
@@ -312,41 +248,19 @@ function addHeadquartersSheet(workbook, payload) {
   const sheet = workbook.addWorksheet('На штаб');
   HEADQUARTERS_WIDTHS.forEach((width, index) => { sheet.getColumn(index + 1).width = width; });
 
-  // Объекты с балансодержателем «АвД САО» идут в счёт АвД, хотя снимают их районы:
-  // штабу нужен объём работ владельца, а не место съёмки. Туда же попадают объекты
-  // без района — приписать их конкретному району нельзя.
-  const grouped = new Map();
-  for (const item of payload.objects) {
-    const holder = (item.balanceHolder || '').trim();
-    const key = holder === AUTODOR_HOLDER || !item.district ? AUTODOR_HOLDER : item.district;
-    if (!grouped.has(key)) grouped.set(key, []);
-    grouped.get(key).push(item);
-  }
-  const districts = [...grouped.keys()]
-    .filter((name) => name !== AUTODOR_HOLDER)
-    .sort((left, right) => left.localeCompare(right, 'ru'));
-  const names = grouped.has(AUTODOR_HOLDER) ? [...districts, AUTODOR_HOLDER] : districts;
-  const counts = names.map((name) => headquartersCounts(grouped.get(name)));
-  const total = counts.reduce(addHeadquartersCounts, emptyHeadquartersCounts());
-
-  const firstTotalRow = writeHeadquartersTable(sheet, 1, { names, counts, total });
+  const board = headquartersBoard(payload);
+  const firstTotalRow = writeHeadquartersTable(sheet, 1, board);
 
   // Вторая таблица — те же числа, отсортированные по «Итого: факт»: в первой
   // ячейке стоит формула SORT, поэтому блок пересобирается при правках данных.
-  const sorted = names
-    .map((name, index) => ({ name, counts: counts[index] }))
-    .sort((left, right) => headquartersFactTotal(right.counts) - headquartersFactTotal(left.counts)
-      || left.name.localeCompare(right.name, 'ru'));
   const secondTotalRow = writeHeadquartersTable(sheet, firstTotalRow + 4, {
-    names: sorted.map((item) => item.name),
-    counts: sorted.map((item) => item.counts),
-    total,
+    ...board,
+    names: board.sorted.map((item) => item.name),
+    counts: board.sorted.map((item) => item.counts),
     formula: `SORT(B3:N${firstTotalRow - 1},12,0)`,
   });
 
-  // Районы, где не закрыто ни одной отметки: их штаб просит приступить к работе.
-  const lagging = names.filter((name, index) => headquartersFactTotal(counts[index]) === 0);
-  const afterComment = writeHeadquartersComment(sheet, secondTotalRow + 2, lagging);
+  const afterComment = writeHeadquartersComment(sheet, secondTotalRow + 2, headquartersComment(board.lagging));
 
   const noteRow = afterComment + 1;
   sheet.mergeCells(noteRow, 1, noteRow, 14);

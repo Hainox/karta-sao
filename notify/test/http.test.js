@@ -16,6 +16,10 @@ async function fixture({ secret = 'top-secret' } = {}) {
     async sendMessage(chatId, text, options) {
       sent.push({ chatId, text, options });
       return { message_id: sent.length };
+    },
+    async sendPhoto(chatId, { buffer, caption, filename }) {
+      sent.push({ chatId, photo: buffer, caption, filename });
+      return { message_id: sent.length };
     }
   };
   const config = { allowedChatIds: ['111'], answerTimeoutSeconds: 3600, secret, journalLimit: 50 };
@@ -58,6 +62,24 @@ test('с секретом событие уходит в чат и в журна
   assert.equal(result.body.delivered, 1);
   assert.match(sent[0].text, /Работа пользователя/);
   assert.equal((await store.readJournal(5)).filter((entry) => entry.type === 'event').length, 1);
+});
+
+test('картинка сводки уходит в чат отдельным маршрутом', async (t) => {
+  const { base, sent, server } = await fixture();
+  t.after(() => server.close());
+  const photo = Buffer.from('PNG-данные').toString('base64');
+  const result = await post(base, '/photo', { photo, caption: 'Слабая динамика по оцифровке объектов!' }, 'top-secret');
+  assert.equal(result.status, 202);
+  assert.equal(result.body.delivered, 1);
+  assert.equal(sent[0].caption, 'Слабая динамика по оцифровке объектов!');
+  assert.equal(sent[0].photo.toString('utf8'), 'PNG-данные');
+});
+
+test('картинка без файла отклоняется', async (t) => {
+  const { base, server } = await fixture();
+  t.after(() => server.close());
+  const result = await post(base, '/photo', { caption: 'Пусто' }, 'top-secret');
+  assert.equal(result.status, 400);
 });
 
 test('событие без текста отклоняется', async (t) => {
