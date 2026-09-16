@@ -1,7 +1,7 @@
 import {
   accuracyVerdict, assessDistanceRisk, bandNote, bandText, boundaryNote, buildCoverageIndex, buildQueue, canExport,
   completionLabel, coverageFor, districtBoundaries, filterRecords, formatCoordinates, formatMeters,
-  geoStatusText, gpsDistanceLabel, groupLabel, groupValues, photoDetailRows, photoRequirement,
+  geoStatusText, gpsDistanceLabel, groupLabel, groupValues, photoDetailRows,
   reportSummaryRows, scopedDistricts, statusText,
 } from './photo-model.js';
 

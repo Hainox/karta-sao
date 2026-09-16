@@ -219,6 +219,23 @@ test('a non-object photo row is rejected instead of silently rendered', () => {
   assert.throws(() => normalizePhoto(null), /photo row must be an object/);
 });
 
+test('клиент импортирует из модели только те имена, что она экспортирует', async () => {
+  const { readFile } = await import('node:fs/promises');
+  const client = await readFile(new URL('./photo-client.js', import.meta.url), 'utf8');
+  const model = await readFile(new URL('./photo-model.js', import.meta.url), 'utf8');
+
+  const imported = client.match(/import \{([\s\S]*?)\} from '\.\/photo-model\.js'/);
+  assert.ok(imported, 'клиент должен импортировать модель');
+  const names = imported[1].split(',').map((name) => name.trim()).filter(Boolean);
+  assert.ok(names.length > 0);
+
+  // Отсутствующее имя ломает весь модуль: страница остаётся пустой.
+  const exported = new Set(
+    [...model.matchAll(/export (?:async )?function (\w+)|export const (\w+)/g)].map((match) => match[1] || match[2]),
+  );
+  for (const name of names) assert.ok(exported.has(name), `модель не экспортирует ${name}`);
+});
+
 const GEOJSON = {
   type: 'FeatureCollection',
   features: [
