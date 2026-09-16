@@ -201,7 +201,8 @@ button { cursor: pointer; }
   color: inherit;
 }
 button.pa-board-row:hover { background: #f2f7f3; border-color: #dfeae2; }
-.pa-board-row[data-scope="unassigned"] { border: 1px dashed #e2d6bb; background: #fdfaf1; }
+/* Строка «АвД САО» замыкает доску как объём владельца, а не как ещё один район. */
+.pa-board-row[data-scope="owner"] { border-top: 1px solid var(--line); border-radius: 0; }
 
 .pa-board-name { display: block; font-size: 12px; font-weight: 600; overflow-wrap: anywhere; }
 .pa-board-note { display: block; color: var(--muted); font-size: 10px; }
@@ -211,6 +212,26 @@ button.pa-board-row:hover { background: #f2f7f3; border-color: #dfeae2; }
 .pa-board-bar[data-band="middle"] > span { background: #b8791a; }
 .pa-board-bar[data-band="high"] > span { background: #1c7a55; }
 .pa-board-value { font-size: 11px; font-weight: 700; text-align: right; white-space: nowrap; }
+
+/* Дашборд рисков: топ районов по нарушениям и исполнители внутри района.
+   Полосы, подписи и числа — те же, что на доске округа, поэтому список читается так же. */
+.pa-risk-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+.pa-risk-total { color: var(--muted); font-size: 11px; font-weight: 700; }
+.pa-risk-list { display: grid; gap: 3px; }
+.pa-risk-row {
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr) 60px 44px;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 7px;
+  border-radius: 8px;
+}
+.pa-risk-row:nth-child(odd) { background: #f6f8f5; }
+.pa-risk-rank { color: var(--muted); font-size: 11px; font-weight: 700; text-align: right; font-variant-numeric: tabular-nums; }
+.pa-risk-performers { display: grid; gap: 10px; margin-top: 8px; }
+.pa-risk-group { display: grid; gap: 2px; }
+.pa-risk-group-name { font-size: 12px; font-weight: 700; color: #41584f; }
+.pa-risk-perf { display: grid; grid-template-columns: minmax(0, 1fr) 44px; align-items: center; gap: 8px; padding: 3px 7px; }
 
 .pa-filters { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .pa-filters > div:first-child { grid-column: 1 / -1; }

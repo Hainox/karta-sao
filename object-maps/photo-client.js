@@ -2,7 +2,7 @@ import {
   accountScope, accuracyVerdict, assessDistanceRisk, bandNote, bandText, boundaryNote, buildCoverageIndex,
   buildQueue, canExport, coverageBand, coverageFor, coverageLabel, coveragePercent, districtBoundaries,
   filterRecords, formatCoordinates, formatMeters, geoStatusText, gpsDistanceLabel, groupLabel, groupValues,
-  photoDetailRows, reportSummaryRows, scopedDistricts, statusText,
+  isAutodorAccount, photoDetailRows, reportSummaryRows, riskTopRows, scopedDistricts, statusText,
 } from './photo-model.js';
 
 const API_FALLBACK = 'https://obhod-sao.ru/photo-api';
@@ -285,6 +285,7 @@ function fillDistrictFilter() {
 function renderAll() {
   renderSummary();
   renderDashboard();
+  renderRiskTops();
   renderList();
   renderMapObjects();
   renderBoundaries();
@@ -302,19 +303,23 @@ function boardDistricts() {
 }
 
 function boardRow(district) {
-  const unassigned = !district.district;
-  const row = document.createElement(unassigned ? 'div' : 'button');
-  if (!unassigned) row.type = 'button';
+  // Строка «АвД САО» — это объём владельца, а не один район: его объекты и объекты
+  // «ДЭУ» стоят по всему округу, поэтому такой строкой панель не фильтруется. Она
+  // идёт последней, как её отдаёт сервер, и остаётся справочной, как строка «Без
+  // района» раньше. Остальные строки — обычные районы с переходом в фильтр.
+  const owner = isAutodorAccount(district.district);
+  const row = document.createElement(owner ? 'div' : 'button');
+  if (!owner) row.type = 'button';
   row.className = 'pa-board-row';
   row.setAttribute('role', 'listitem');
-  if (unassigned) row.dataset.scope = 'unassigned';
+  if (owner) row.dataset.scope = 'owner';
 
   const caption = document.createElement('span');
   const name = document.createElement('span');
   name.className = 'pa-board-name';
-  name.textContent = district.district || 'Без района';
-  // Считаем охват: сколько объектов района уже с фото. Подтверждения приёмки
-  // могут прийти позже, но работа района видна сразу — как и в штабной таблице.
+  name.textContent = district.district;
+  // Считаем охват: сколько объектов строки уже с фото. Подтверждения приёмки
+  // могут прийти позже, но работа видна сразу — как и в штабной таблице.
   const percent = coveragePercent(district);
   const note = document.createElement('span');
   note.className = 'pa-board-note';
@@ -333,7 +338,7 @@ function boardRow(district) {
   value.textContent = `${percent} %`;
 
   row.append(caption, bar, value);
-  if (!unassigned) {
+  if (!owner) {
     row.title = `Показать только ${district.district}`;
     row.addEventListener('click', () => {
       element('paDistrictFilter').value = district.district;
@@ -356,6 +361,92 @@ function renderDashboard() {
   board.hidden = false;
   list.replaceChildren();
   for (const district of districts) list.appendChild(boardRow(district));
+}
+
+/**
+ * Дашборд рисков: топ районов по числу нарушений и исполнители внутри района.
+ * Данные приходят в сводке отдельным полем `riskTops`, поэтому блок показываем
+ * всем, у кого есть сводка: район видит свой срез, префектура — весь округ.
+ * Пустой блок — одна строка «Риски не выявлены», а не пустая сетка.
+ */
+function renderRiskTops() {
+  const section = element('paRisk');
+  if (!state.summary) {
+    section.hidden = true;
+    return;
+  }
+  const risks = riskTopRows(state.summary);
+  section.hidden = false;
+  element('paRiskTotal').textContent = `Всего нарушений: ${risks.totalLabel}`;
+
+  const districts = element('paRiskDistricts');
+  districts.replaceChildren();
+  const performersBlock = element('paRiskPerformersBlock');
+  const performers = element('paRiskPerformers');
+  performers.replaceChildren();
+  element('paRiskNote').hidden = risks.empty;
+
+  if (risks.empty) {
+    performersBlock.hidden = true;
+    const note = document.createElement('p');
+    note.className = 'pa-note';
+    note.textContent = 'Риски не выявлены';
+    districts.appendChild(note);
+    return;
+  }
+  performersBlock.hidden = false;
+
+  for (const entry of risks.districts) {
+    const row = document.createElement('div');
+    row.className = 'pa-risk-row';
+    row.setAttribute('role', 'listitem');
+
+    const rank = document.createElement('span');
+    rank.className = 'pa-risk-rank';
+    rank.textContent = String(entry.rank);
+
+    const caption = document.createElement('span');
+    const name = document.createElement('span');
+    name.className = 'pa-board-name';
+    name.textContent = entry.district;
+    const note = document.createElement('span');
+    note.className = 'pa-board-note';
+    note.textContent = `${entry.sharePercent} % от всех нарушений`;
+    caption.append(name, note);
+
+    const bar = document.createElement('span');
+    bar.className = 'pa-board-bar';
+    const fill = document.createElement('span');
+    fill.style.width = `${Math.max(0, Math.min(100, entry.barPercent))}%`;
+    bar.appendChild(fill);
+
+    const value = document.createElement('span');
+    value.className = 'pa-board-value';
+    value.textContent = entry.countLabel;
+
+    row.append(rank, caption, bar, value);
+    districts.appendChild(row);
+
+    const group = document.createElement('div');
+    group.className = 'pa-risk-group';
+    const title = document.createElement('span');
+    title.className = 'pa-risk-group-name';
+    title.textContent = entry.district;
+    group.appendChild(title);
+    for (const performer of entry.performers) {
+      const line = document.createElement('div');
+      line.className = 'pa-risk-perf';
+      const who = document.createElement('span');
+      who.className = 'pa-board-name';
+      who.textContent = performer.performer;
+      const count = document.createElement('span');
+      count.className = 'pa-board-value';
+      count.textContent = performer.countLabel;
+      line.append(who, count);
+      group.appendChild(line);
+    }
+    performers.appendChild(group);
+  }
 }
 
 function renderSummary() {
@@ -400,10 +491,10 @@ function renderSummary() {
   if (state.summary.unassigned && state.summary.unassigned.totalObjects > 0 && !element('paDistrictFilter').value) {
     const note = document.createElement('p');
     note.className = 'pa-unassigned';
-    note.textContent = `Без района: ${state.summary.unassigned.totalObjects} объектов `
+    note.textContent = `Объектов без района: ${state.summary.unassigned.totalObjects} `
       + `(${String(state.summary.unassigned.objectsWithoutPhoto)} без фото, `
-      + `${String(state.summary.unassigned.objectsWithPhoto)} с фото). `
-      + 'Эти объекты входят в сводку САО отдельной строкой и не приписаны ни одному району.';
+      + `${String(state.summary.unassigned.objectsWithPhoto)} с фото) — `
+      + 'они учтены в строке «АвД САО» вместе с объектами владельца и «ДЭУ».';
     box.appendChild(note);
   }
 }
@@ -1243,6 +1334,18 @@ function shell() {
         <section class="pa-dashboard" id="paDashboard" aria-labelledby="paDashboardTitle" hidden>
           <h2 class="pa-dashboard-title" id="paDashboardTitle">Районы округа</h2>
           <div class="pa-board" id="paDistrictBoard" role="list"></div>
+        </section>
+        <section class="pa-dashboard" id="paRisk" aria-labelledby="paRiskTitle" hidden>
+          <div class="pa-risk-head">
+            <h2 class="pa-dashboard-title" id="paRiskTitle">Топ районов по рискам</h2>
+            <span class="pa-risk-total" id="paRiskTotal"></span>
+          </div>
+          <div class="pa-risk-list" id="paRiskDistricts" role="list"></div>
+          <div id="paRiskPerformersBlock" hidden>
+            <h2 class="pa-dashboard-title" id="paRiskPerformersTitle">Топ исполнителей по районам</h2>
+            <div class="pa-risk-performers" id="paRiskPerformers"></div>
+          </div>
+          <p class="pa-note" id="paRiskNote" hidden>Район считается по балансодержателю: объекты «АвД САО», «ДЭУ» и объекты без района учтены в строке «АвД САО».</p>
         </section>
         <div class="pa-filters">
           <div>

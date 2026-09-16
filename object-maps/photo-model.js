@@ -305,6 +305,63 @@ export function reportSummaryRows(payload) {
   return rows;
 }
 
+// Предел исполнителей на район. Совпадает с серверным значением по умолчанию
+// (performerLimit в riskTops), но применяется и здесь.
+const RISK_PERFORMER_LIMIT = 5;
+
+/**
+ * Разбирает блок рисков сводки в структуру для дашборда: топ районов по числу
+ * нарушений и внутри каждого района — топ исполнителей. Числа нормализуются и
+ * форматируются здесь же, чтобы разметка только расставляла готовые подписи.
+ *
+ * Сервер отдаёт `riskTops` уже отсортированным по убыванию нарушений и обрезанным
+ * до `performerLimit`; порядок сохраняется, предел применяется повторно на случай
+ * усечённого или кэшированного ответа. Пустой, отсутствующий или нулевой блок даёт
+ * `empty: true` — клиент показывает одну строку «Риски не выявлены».
+ */
+export function riskTopRows(summary) {
+  const tops = summary?.riskTops;
+  const total = numberOrNull(tops?.total) ?? 0;
+  const limit = Number.isSafeInteger(tops?.performerLimit) && tops.performerLimit > 0
+    ? tops.performerLimit
+    : RISK_PERFORMER_LIMIT;
+  const districts = (Array.isArray(tops?.districts) ? tops.districts : [])
+    .filter((entry) => entry && String(entry.district ?? '').trim())
+    .map((entry) => {
+      const count = numberOrNull(entry.count) ?? 0;
+      const performers = (Array.isArray(entry.performers) ? entry.performers : [])
+        .filter((performer) => performer && String(performer.performer ?? '').trim())
+        .slice(0, limit)
+        .map((performer) => {
+          const performerCount = numberOrNull(performer.count) ?? 0;
+          return {
+            performer: performer.performer,
+            count: performerCount,
+            countLabel: performerCount.toLocaleString('ru-RU'),
+          };
+        });
+      return { district: entry.district, count, performers };
+    });
+  // Список уже по убыванию, поэтому лидер — первая строка: от него считаем полосу.
+  const topCount = districts.length ? districts[0].count : 0;
+  return {
+    total,
+    totalLabel: total.toLocaleString('ru-RU'),
+    performerLimit: limit,
+    empty: total === 0 || districts.length === 0,
+    districts: districts.map((entry, index) => ({
+      rank: index + 1,
+      district: entry.district,
+      count: entry.count,
+      countLabel: entry.count.toLocaleString('ru-RU'),
+      sharePercent: total > 0 ? Math.round((entry.count / total) * 100) : 0,
+      // Полоса — доля от лидера: так лидер занимает всю ширину, а хвост виден.
+      barPercent: topCount > 0 ? Math.round((entry.count / topCount) * 100) : 0,
+      performers: entry.performers,
+    })),
+  };
+}
+
 
 // The dataset payload carries the group label under a dataset-specific name.
 export function groupLabel(dataset) {

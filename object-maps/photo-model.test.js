@@ -4,7 +4,7 @@ import {
   accountScope, accuracyVerdict, assessDistanceRisk, bandNote, bandText, boundaryNote, buildCoverageIndex, buildQueue, canExport,
   coverageFor, coverageLabel, coveragePercent, districtBoundaries, filterRecords, formatAccuracy, formatCoordinates,
   formatDateTime, formatMeters, geoStatusText, gpsDistanceLabel, haversineDistanceMeters, normalizePhoto,
-  photoDetailRows, POINT_PHOTO_REQUIREMENT, reportSummaryRows, reviewStatusText, scopedDistricts,
+  photoDetailRows, POINT_PHOTO_REQUIREMENT, reportSummaryRows, reviewStatusText, riskTopRows, scopedDistricts,
 } from './photo-model.js';
 
 const serverRow = {
@@ -216,6 +216,87 @@ test('an empty scope is reported as having no data instead of zero percent', () 
   assert.equal(byKey['Охват'], 'нет данных');
   assert.equal(bandText(null), 'Нет данных');
   assert.equal(bandNote(null), 'Недостаточно данных для оценки');
+});
+
+test('топы риска: порядок районов и исполнителей сохраняется', () => {
+  const rows = riskTopRows({
+    riskTops: {
+      total: 5,
+      performerLimit: 5,
+      districts: [
+        { district: 'Ховрино', count: 3, performers: [
+          { performer: 'Иванов И.И.', count: 2 },
+          { performer: 'Петров П.П.', count: 1 },
+        ] },
+        { district: 'АвД САО', count: 2, performers: [
+          { performer: 'Морозов С.С.', count: 1 },
+          { performer: 'Сидоров С.С.', count: 1 },
+        ] },
+      ],
+    },
+  });
+
+  assert.equal(rows.total, 5);
+  assert.equal(rows.empty, false);
+  assert.deepEqual(rows.districts.map((entry) => entry.district), ['Ховрино', 'АвД САО']);
+  assert.deepEqual(rows.districts.map((entry) => entry.rank), [1, 2]);
+  assert.deepEqual(rows.districts.map((entry) => entry.count), [3, 2]);
+  assert.deepEqual(rows.districts[0].performers.map((entry) => entry.performer), ['Иванов И.И.', 'Петров П.П.']);
+  // Полоса лидера занимает всю ширину, хвост — долю от него; доля считается от всех нарушений.
+  assert.deepEqual(rows.districts.map((entry) => entry.barPercent), [100, 67]);
+  assert.deepEqual(rows.districts.map((entry) => entry.sharePercent), [60, 40]);
+});
+
+test('топы риска: предел исполнителей применяется к каждому району', () => {
+  const performers = ['А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ж'].map((performer) => ({ performer, count: 1 }));
+
+  const rows = riskTopRows({ riskTops: { total: 7, performerLimit: 5, districts: [{ district: 'Сокол', count: 7, performers }] } });
+  assert.equal(rows.performerLimit, 5);
+  assert.equal(rows.districts[0].performers.length, 5);
+
+  // Поле отсутствует — берётся серверное значение по умолчанию, список всё равно обрезан.
+  const fallback = riskTopRows({ riskTops: { total: 7, districts: [{ district: 'Сокол', count: 7, performers }] } });
+  assert.equal(fallback.performerLimit, 5);
+  assert.equal(fallback.districts[0].performers.length, 5);
+});
+
+test('топы риска: пустой и отсутствующий блок помечены как пустые', () => {
+  for (const input of [null, undefined, {}, { riskTops: null }, { riskTops: { total: 0, districts: [] } }]) {
+    const rows = riskTopRows(input);
+    assert.equal(rows.empty, true, JSON.stringify(input));
+    assert.deepEqual(rows.districts, []);
+    assert.equal(rows.total, 0);
+    assert.equal(rows.totalLabel, '0');
+  }
+
+  // Нарушения посчитаны, но районов нет — показываем ту же пустую строку, а не сломанную сетку.
+  assert.equal(riskTopRows({ riskTops: { total: 3, districts: [] } }).empty, true);
+});
+
+test('топы риска: числа нормализуются и форматируются по-русски', () => {
+  const rows = riskTopRows({
+    riskTops: {
+      total: '1234',
+      performerLimit: '5',
+      districts: [
+        { district: 'Аэропорт', count: '900', performers: [{ performer: 'Иванов И.', count: '700' }] },
+        { district: 'Коптево', count: 300, performers: [{ performer: '', count: '5' }] },
+        { district: '', count: 34, performers: [] },
+      ],
+    },
+  });
+
+  assert.equal(rows.total, 1234);
+  assert.equal(rows.totalLabel, (1234).toLocaleString('ru-RU'));
+  // Запись без названия района пропускается, а не рисуется пустой строкой.
+  assert.equal(rows.districts.length, 2);
+  assert.equal(rows.districts[0].countLabel, (900).toLocaleString('ru-RU'));
+  assert.equal(rows.districts[0].performers[0].countLabel, (700).toLocaleString('ru-RU'));
+  // Исполнитель без имени не создаёт пустую строку.
+  assert.deepEqual(rows.districts[1].performers, []);
+  // Доли считаются от всех нарушений и от лидера соответственно.
+  assert.equal(rows.districts[0].sharePercent, Math.round((900 / 1234) * 100));
+  assert.equal(rows.districts[1].barPercent, Math.round((300 / 900) * 100));
 });
 
 test('a non-object photo row is rejected instead of silently rendered', () => {

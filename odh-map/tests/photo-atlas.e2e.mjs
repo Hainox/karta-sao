@@ -78,7 +78,7 @@ try {
   check('версия набора видна в шапке', (await page.locator('#paSubtitle').innerText()).includes('embedded-map-2026-09-15'), await page.locator('#paSubtitle').innerText());
 
   // A district account is scoped to its own district, so unassigned objects must not leak in.
-  check('роль района не видит объекты без района', !/Без района/.test(summaryText), summaryText.replace(/\n/g, ' | '));
+  check('роль района не видит объекты без района', !/Объектов без района/.test(summaryText), summaryText.replace(/\n/g, ' | '));
   check('форма входа скрыта после входа', await page.locator('#paLoginForm').isHidden(), '');
   check('панель очереди не показана в режиме ведомости', await page.locator('#paQueuePanel').isHidden(), '');
   const districtScoped = await page.locator('#paListCount').innerText();
@@ -266,20 +266,20 @@ try {
   await admin.waitForFunction(() => /%|нет данных/.test(document.getElementById('paSummary').textContent), null, { timeout: 30000 });
 
   const adminSummary = await admin.locator('#paSummary').innerText();
-  check('префектура видит нераспределённые объекты отдельной строкой', /Без района: 7 объектов/.test(adminSummary), adminSummary.replace(/\n/g, ' | '));
+  check('префектура видит объекты без района отдельной пометкой', /Объектов без района: 7/.test(adminSummary), adminSummary.replace(/\n/g, ' | '));
   check('префектуре доступен выбор района', await admin.locator('#paDistrictFilter').isEnabled(), '');
-  // Unassigned objects stay out of the SAO denominator and are reported separately.
-  check('сводка САО считает только назначенные объекты', /Всего объектов\n11\s?268/.test(adminSummary), adminSummary.replace(/\n/g, ' | '));
-  check('сумма назначенных и нераспределённых совпадает с импортом', /Без района: 7 объектов/.test(adminSummary), '');
+  // Объекты без района входят в сводку САО: они учтены в строке «АвД САО».
+  check('сводка САО считает весь набор объектов', /Всего объектов\n11\s?275/.test(adminSummary), adminSummary.replace(/\n/g, ' | '));
+  check('пометка объясняет, где учтены объекты без района', /учтены в строке «АвД САО»/.test(adminSummary), '');
 
   /* ------------------------------------------- дашборд округа у префектуры */
   const board = admin.locator('#paDistrictBoard .pa-board-row');
   check('префектура видит доску районов', await admin.locator('#paDashboard').isVisible(), '');
-  check('на доске все районы и строка без района', (await board.count()) === 17, String(await board.count()));
-  check('«Без района» замыкает доску', /Без района/.test(await board.last().innerText()), await board.last().innerText().then((text) => text.replace(/\n/g, ' | ')));
+  check('на доске все районы и строка АвД', (await board.count()) === 18, String(await board.count()));
+  check('«АвД САО» замыкает доску', /АвД САО/.test(await board.last().innerText()), await board.last().innerText().then((text) => text.replace(/\n/g, ' | ')));
   const firstBoardRow = await board.first().innerText();
   check('в строке района есть доля и процент', /из \d+ объектов/.test(firstBoardRow) && /%/.test(firstBoardRow), firstBoardRow.replace(/\n/g, ' | '));
-  check('у «Без района» нет кнопки перехода', (await admin.locator('#paDistrictBoard div.pa-board-row').count()) === 1, '');
+  check('у «АвД САО» нет кнопки перехода', (await admin.locator('#paDistrictBoard div.pa-board-row').count()) === 1, '');
 
   const firstBoardDistrict = firstBoardRow.split('\n')[0];
   await board.first().click();
