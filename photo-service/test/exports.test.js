@@ -131,97 +131,134 @@ test('сводная отчётность несёт отдельный лист
   assert.equal(riskSheet.rowCount - 1, 4);
 });
 
-test('лист «На штаб» даёт процент выполнения по каждому типу объектов', async () => {
-  const rows = [
-    { ...reportRow('stop', 'Аэропорт', 1), object_key: 'stop-1' },
-    { ...reportRow('stop', 'Аэропорт', 0), object_key: 'stop-2' },
-    { ...reportRow('pp', 'Аэропорт', 1), object_key: 'pp-1' },
-    { ...reportRow('entrance', 'Ховрино', 1), object_key: 'entrance-1' },
-  ];
-
-  const workbook = new ExcelJS.Workbook();
-  await workbook.xlsx.load(await buildExcel(rows));
-  const sheet = workbook.getWorksheet('На штаб');
-
-  // У каждой категории свои План, Факт и процент.
-  assert.equal(sheet.getCell('C3').value, 'План');
-  assert.equal(sheet.getCell('E3').value, '%');
-
-  // Аэропорт: две отметки остановок, фото на одной — 50 %; переход с фото — 100 %.
-  assert.equal(sheet.getCell('A4').value, 'Жилищник «Аэропорт»');
-  assert.equal(sheet.getCell('C4').value, 2);
-  assert.equal(sheet.getCell('D4').value, 1);
-  assert.equal(sheet.getCell('E4').value, 50);
-  assert.equal(sheet.getCell('F4').value, 1);
-  assert.equal(sheet.getCell('H4').value, 100);
-
-  // ИТОГО: четыре отметки, фото у трёх — 75 %.
-  assert.equal(sheet.getCell('A7').value, 'ИТОГО по САО');
-  assert.equal(sheet.getCell('L7').value, 4);
-  assert.equal(sheet.getCell('M7').value, 3);
-  assert.equal(sheet.getCell('N7').value, 75);
-});
-
-test('лист «На штаб» считает отметки точек, а не уникальные объекты', async () => {
+test('лист «На штаб»: отметки по категориям, строка «АвД САО» и ИТОГО', async () => {
   // Один переход ОДХ — десятки координатных записей, и снимается каждая.
-  const crossing = { ...reportRow('pp', 'Коптево', 2), object_key: 'pp-crossing' };
-  crossing.sourcePointCount = 43;
-  crossing.coveredPoints = 2;
+  const crossing = { ...reportRow('pp', 'Аэропорт', 1, 0, 3), object_key: 'a-pp' };
+  crossing.coveredPoints = 1;
 
-  const untouched = { ...reportRow('pp', 'Коптево', 0), object_key: 'pp-untouched' };
-  untouched.sourcePointCount = 5;
-  untouched.coveredPoints = 0;
-
-  const stop = { ...reportRow('stop', 'Коптево', 1), object_key: 'stop-1' };
-
-  const workbook = new ExcelJS.Workbook();
-  await workbook.xlsx.load(await buildExcel([crossing, untouched, stop]));
-  const sheet = workbook.getWorksheet('На штаб');
-
-  // ПП Коптево: 48 отметок в плане, 2 закрыто — 4,2 %.
-  assert.equal(sheet.getCell('A4').value, 'Жилищник «Коптево»');
-  assert.equal(sheet.getCell('F4').value, 48);
-  assert.equal(sheet.getCell('G4').value, 2);
-  assert.equal(sheet.getCell('H4').value, 4.2);
-
-  // Остановка Коптево: одна отметка, она же с фото.
-  assert.equal(sheet.getCell('C4').value, 1);
-  assert.equal(sheet.getCell('D4').value, 1);
-  assert.equal(sheet.getCell('E4').value, 100);
-
-  // ИТОГО по САО: 49 отметок, 3 закрыто — 6,1 %, а не 3 объекта.
-  assert.equal(sheet.getCell('L6').value, 49);
-  assert.equal(sheet.getCell('M6').value, 3);
-  assert.equal(sheet.getCell('N6').value, 6.1);
-});
-
-
-test('проценты «На штаб» подсвечены светофором по порогам 33 % и 66 %', async () => {
   const rows = [
-    { ...reportRow('stop', 'Коптево', 1), object_key: 'stop-1' },
-    { ...reportRow('stop', 'Коптево', 0), object_key: 'stop-2' },
+    { ...reportRow('stop', 'Аэропорт', 1), object_key: 'a-stop' },
+    crossing,
+    // Остановка стоит в Коптеве, но балансодержатель — «АвД САО»: счёт идёт АвД.
+    { ...reportRow('stop', 'Коптево', 0), object_key: 'k-stop', balance_holder: 'АвД САО' },
+    { ...reportRow('entrance', 'Сокол', 0), object_key: 's-entrance' },
   ];
 
   const workbook = new ExcelJS.Workbook();
   await workbook.xlsx.load(await buildExcel(rows));
   const sheet = workbook.getWorksheet('На штаб');
 
-  // Светофор стоит на всех четырёх столбцах «%»: три категории и итог.
+  // Шапка: номер, район, три категории и итог; в каждой категории План, Факт, %.
+  assert.equal(sheet.getCell('A1').value, '№');
+  assert.equal(sheet.getCell('B1').value, 'Район');
+  assert.equal(sheet.getCell('C1').value, 'Автобусные остановки');
+  assert.equal(sheet.getCell('F1').value, 'Пеш.переход');
+  assert.equal(sheet.getCell('I1').value, 'Подъезды (Вх. гр.)');
+  assert.equal(sheet.getCell('L1').value, 'Итого');
+  assert.equal(sheet.getCell('C2').value, 'План');
+  assert.equal(sheet.getCell('E2').value, '%');
+  assert.equal(sheet.getCell('N2').value, '%');
+
+  // Районы по алфавиту, «АвД САО» — последней строкой перед ИТОГО.
+  assert.equal(sheet.getCell('A3').value, 1);
+  assert.equal(sheet.getCell('B3').value, 'Аэропорт');
+  assert.equal(sheet.getCell('B4').value, 'Сокол');
+  assert.equal(sheet.getCell('A5').value, 3);
+  assert.equal(sheet.getCell('B5').value, 'АвД САО');
+
+  // Аэропорт: остановка закрыта, переход — одна отметка из трёх.
+  assert.equal(sheet.getCell('C3').value, 1);
+  assert.equal(sheet.getCell('D3').value, 1);
+  assert.equal(sheet.getCell('E3').value, 100);
+  assert.equal(sheet.getCell('F3').value, 3);
+  assert.equal(sheet.getCell('G3').value, 1);
+  assert.equal(sheet.getCell('H3').value, 33.3);
+
+  // У Сокола остановок нет, а остановка Коптева считается строке «АвД САО».
+  assert.equal(sheet.getCell('C4').value, 0);
+  assert.equal(sheet.getCell('C5').value, 1);
+  assert.equal(sheet.getCell('D5').value, 0);
+
+  // ИТОГО по САО: шесть отметок, закрыто две — 33,3 %.
+  assert.equal(sheet.getCell('A6').value, 'ИТОГО по САО');
+  assert.equal(sheet.getCell('L6').value, 6);
+  assert.equal(sheet.getCell('M6').value, 2);
+  assert.equal(sheet.getCell('N6').value, 33.3);
+});
+
+test('лист «На штаб»: вторая таблица собирается формулой SORT, ниже — комментарий', async () => {
+  const rows = [
+    { ...reportRow('stop', 'Беговой', 1), object_key: 'b-stop' },
+    { ...reportRow('stop', 'Войковский', 0), object_key: 'v-stop' },
+    { ...reportRow('stop', 'Головинский', 0), object_key: 'g-stop' },
+  ];
+
+  const workbook = new ExcelJS.Workbook();
+  await workbook.xlsx.load(await buildExcel(rows));
+  const sheet = workbook.getWorksheet('На штаб');
+
+  // Вторая таблица идёт через три пустые строки, с той же шапкой.
+  assert.equal(sheet.getCell('A10').value, '№');
+  assert.equal(sheet.getCell('C10').value, 'Автобусные остановки');
+  assert.equal(sheet.getCell('C11').value, 'План');
+
+  // Числа второй таблицы отсортированы по «Итого: факт» и собраны формулой.
+  const anchor = sheet.getCell('B12').value;
+  assert.equal(anchor.formula, 'SORT(B3:N5,12,0)');
+  assert.equal(anchor.ref, 'B12:N14');
+  assert.equal(sheet.getCell('B12').result ?? anchor.result, 'Беговой');
+  assert.equal(sheet.getCell('B13').value, 'Войковский');
+  assert.equal(sheet.getCell('B14').value, 'Головинский');
+  assert.equal(sheet.getCell('M12').value, 1);
+
+  // ИТОГО второй таблицы повторяет первую.
+  assert.equal(sheet.getCell('A15').value, 'ИТОГО по САО');
+  assert.equal(sheet.getCell('L15').value, 3);
+  assert.equal(sheet.getCell('M15').value, 1);
+
+  // Комментарий для рассылки: районы без единой закрытой отметки.
+  assert.equal(sheet.getCell('A17').value, 'Комментарий для рассылки (готов к отправке):');
+  assert.equal(sheet.getCell('A18').value, 'Коллеги, добрый день!');
+  assert.equal(sheet.getCell('A19').value, 'Слабая динамика по оцифровке объектов!');
+  assert.equal(sheet.getCell('A20').value, 'Следующим районам срочно приступить к данной задаче:');
+  assert.equal(sheet.getCell('A21').value, 'Войковский');
+  assert.equal(sheet.getCell('A22').value, 'Головинский');
+});
+
+test('проценты «На штаб» подсвечены светофором: ноль, до 33, до 66, от 66', async () => {
+  const rows = [
+    { ...reportRow('stop', 'Беговой', 1), object_key: 'b-stop' },
+    { ...reportRow('stop', 'Сокол', 0), object_key: 's-stop' },
+  ];
+
+  const workbook = new ExcelJS.Workbook();
+  await workbook.xlsx.load(await buildExcel(rows));
+  const sheet = workbook.getWorksheet('На штаб');
+
+  // Светофор стоит на всех четырёх столбцах «%» в обеих таблицах.
   const refs = sheet.conditionalFormattings.map((block) => block.ref);
   for (const column of ['E', 'H', 'K', 'N']) {
-    // Район, «Не распределено по районам» и строка ИТОГО.
-    assert.ok(refs.includes(`${column}4:${column}6`), `${column}: ${refs.join(', ')}`);
+    assert.ok(refs.includes(`${column}3:${column}5`), `${column}: ${refs.join(', ')}`);
+    assert.ok(refs.includes(`${column}11:${column}13`), `${column}: ${refs.join(', ')}`);
   }
 
-  const [districtBlock] = sheet.conditionalFormattings;
-  assert.deepEqual(districtBlock.rules.map((rule) => rule.formulae[0]), [
-    'AND(ISNUMBER($E4),$E4>=66)',
-    'AND(ISNUMBER($E4),AND($E4>=33,$E4<66))',
-    'AND(ISNUMBER($E4),$E4<33)',
+  const [firstBlock] = sheet.conditionalFormattings;
+  assert.deepEqual(firstBlock.rules.map((rule) => rule.formulae[0]), [
+    'AND(ISNUMBER($E3),$E3<=0)',
+    'AND(ISNUMBER($E3),AND($E3>0,$E3<33))',
+    'AND(ISNUMBER($E3),AND($E3>=33,$E3<66))',
+    'AND(ISNUMBER($E3),$E3>=66)',
   ]);
-  assert.deepEqual(districtBlock.rules.map((rule) => rule.style.font.color.argb), [
-    'FF1C7A55', 'FFB8791A', 'FFB3382B',
+  assert.deepEqual(firstBlock.rules.map((rule) => rule.style.fill.fgColor.argb), [
+    'FFEA9999', 'FFF4CCCC', 'FFFFF2CC', 'FFD9EAD3',
   ]);
+
+  // Табличные ячейки выровнены по центру и середине, рамка со всех сторон.
+  const cell = sheet.getCell('C3');
+  assert.equal(cell.alignment.horizontal, 'center');
+  assert.equal(cell.alignment.vertical, 'middle');
+  for (const side of ['top', 'left', 'bottom', 'right']) assert.equal(cell.border[side].style, 'thin');
+  assert.equal(sheet.getCell('B3').alignment.horizontal, 'center');
 });
 
 test('отдельная выгрузка малой таблицы несёт только лист «На штаб»', async () => {
