@@ -106,6 +106,23 @@ export function formatAccuracy(value) {
   return `точность около ${Math.round(meters)} м`;
 }
 
+/**
+ * Точность, после которой позиция не считается спутниковой. Браузер без доступа
+ * к спутникам отдаёт точку по сети: одна координата на весь город и точность в
+ * сотни километров. Такую фиксацию принимает сервис, но подтвердить место она
+ * не может, поэтому клиент её не отправляет.
+ *
+ * Порог совпадает с серверным (UNUSABLE_ACCURACY_METERS в photo-service/src/geo.js).
+ */
+export const UNUSABLE_ACCURACY_METERS = 500;
+
+export function accuracyVerdict(accuracyMeters) {
+  const meters = numberOrNull(accuracyMeters);
+  if (meters === null) return 'unknown';
+  if (meters > UNUSABLE_ACCURACY_METERS) return 'unusable';
+  return meters > 5 ? 'review' : 'ok';
+}
+
 export function formatDateTime(value) {
   if (!value) return 'время не указано';
   const date = new Date(value);

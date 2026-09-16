@@ -12,7 +12,16 @@
 /** Порог зоны: номинальный радиус 15 м плюс допуск 5 м. */
 export const ZONE_LIMIT_METERS = 20;
 
+/**
+ * Точность, после которой фиксация не считается привязанной к месту.
+ * Браузер без спутников отдаёт позицию по IP: точка одна на весь город, а
+ * точность измеряется сотнями километров. Такую фиксацию нельзя ни принять,
+ * ни считать нарушением зоны — она отдельная категория.
+ */
+export const ACCURACY_LIMIT_METERS = 100;
+
 export const RISK_KINDS = {
+  unreliable_geo: 'Недостоверная геопривязка',
   zone_overflow: 'Превышение зоны',
   duplicate_photo: 'Дубль фото на разных объектах',
 };
@@ -108,16 +117,27 @@ export function collectRisks(objects, { zoneLimitMeters = ZONE_LIMIT_METERS } = 
     }
   }
 
-  // 1. Превышение зоны: датчик ушёл дальше 20 м от объекта.
+  // 1. Геопривязка. Сначала проверяется достоверность самой точки: если точность
+  //    прибора измеряется сотнями метров, расстояние до объекта ничего не
+  //    доказывает, и такая фиксация идёт отдельной категорией, а не «превышением».
   for (const object of objects || []) {
     for (const photo of object?.photos || []) {
-      if (photo?.geoStatus !== 'risk') continue;
       const record = baseRecord(object, photo);
+      const accuracy = photo?.gpsAccuracyM;
+      const unreliable = !Number.isFinite(accuracy) || accuracy > ACCURACY_LIMIT_METERS;
+      const distance = Number.isFinite(photo?.distanceM) ? photo.distanceM : null;
+
+      if (unreliable) {
+        record.kind = 'unreliable_geo';
+        record.kindLabel = RISK_KINDS.unreliable_geo;
+        record.overMeters = null;
+        risks.push(record);
+        continue;
+      }
+      if (distance === null || distance <= zoneLimitMeters) continue;
       record.kind = 'zone_overflow';
       record.kindLabel = RISK_KINDS.zone_overflow;
-      record.overMeters = Number.isFinite(photo.distanceM)
-        ? Math.round((photo.distanceM - zoneLimitMeters) * 10) / 10
-        : null;
+      record.overMeters = Math.round((distance - zoneLimitMeters) * 10) / 10;
       risks.push(record);
     }
   }

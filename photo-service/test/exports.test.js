@@ -77,7 +77,8 @@ test('сводная отчётность несёт отдельный лист
   overflow.object_key = 'object-1';
   overflow.balance_holder = 'Жилищник «Ховрино»';
   overflow.odh_id = '10002217';
-  overflow.photos = [photo({ id: 'p-overflow', sha256: 'hash-overflow', geoStatus: 'risk', distanceM: 34.4 })];
+  // Статус не важен: нарушение определяется расстоянием до объекта.
+  overflow.photos = [photo({ id: 'p-overflow', sha256: 'hash-overflow', geoStatus: 'review', distanceM: 34.4 })];
 
   const duplicateA = reportRow('entrance', 'Ховрино', 0);
   duplicateA.object_key = 'object-2';
@@ -91,8 +92,13 @@ test('сводная отчётность несёт отдельный лист
   clean.object_key = 'object-4';
   clean.photos = [photo({ id: 'p-clean', sha256: 'hash-clean' })];
 
+  // Позиция, полученная по IP: одна точка на город, точность в сотни километров.
+  const unreliable = reportRow('stop', 'Аэропорт', 0);
+  unreliable.object_key = 'object-5';
+  unreliable.photos = [photo({ id: 'p-unreliable', sha256: 'hash-unreliable', gpsAccuracyM: 1586473.47, distanceM: 5000 })];
+
   const workbook = new ExcelJS.Workbook();
-  await workbook.xlsx.load(await buildExcel([overflow, duplicateA, duplicateB, clean]));
+  await workbook.xlsx.load(await buildExcel([overflow, duplicateA, duplicateB, clean, unreliable]));
 
   assert.deepEqual(
     workbook.worksheets.map((sheet) => sheet.name),
@@ -103,12 +109,13 @@ test('сводная отчётность несёт отдельный лист
   assert.equal(riskSheet.getCell('A1').value, '№');
   assert.equal(riskSheet.getCell('C1').value, 'Категория');
   assert.equal(riskSheet.getCell('O1').value, 'Фото');
-  // Шапка, одно превышение зоны и по одной строке на каждый объект дубля.
-  assert.equal(riskSheet.rowCount, 4);
+  // Шапка, превышение зоны, две строки дубля и недостоверная геопривязка.
+  assert.equal(riskSheet.rowCount, 5);
 
-  const categories = [2, 3, 4].map((row) => riskSheet.getCell(`C${row}`).value);
+  const categories = [2, 3, 4, 5].map((row) => riskSheet.getCell(`C${row}`).value);
   assert.ok(categories.includes('Превышение зоны'));
   assert.ok(categories.includes('Дубль фото на разных объектах'));
+  assert.ok(categories.includes('Недостоверная геопривязка'));
 
   const overflowRow = categories.indexOf('Превышение зоны') + 2;
   assert.equal(riskSheet.getCell(`N${overflowRow}`).value, 14.4);
@@ -117,5 +124,5 @@ test('сводная отчётность несёт отдельный лист
   assert.equal(riskSheet.getCell(`P${overflowRow}`).value, 'Риск');
 
   // Обычная фиксация в риски не попадает.
-  assert.equal(riskSheet.rowCount - 1, 3);
+  assert.equal(riskSheet.rowCount - 1, 4);
 });

@@ -51,9 +51,10 @@ test('идентификатор объекта ОДХ читается из с�
   assert.equal(odhIdOf(object({ properties: {} })), null);
 });
 
-test('превышение зоны попадает в риски и считает метры сверх порога', () => {
-  const risky = object({ photos: [photo({ id: 'p-risk', geoStatus: 'risk', distanceM: ZONE_LIMIT_METERS + 14.4 })] });
-  const fine = object({ objectKey: 'other', photos: [photo({ id: 'p-ok', geoStatus: 'within_tolerance', distanceM: 17 })] });
+test('превышение зоны считается по расстоянию, а не по статусу', () => {
+  // Статус здесь «в допуске», но датчик стоит дальше порога: нарушение есть.
+  const risky = object({ photos: [photo({ id: 'p-risk', geoStatus: 'review', distanceM: ZONE_LIMIT_METERS + 14.4 })] });
+  const fine = object({ objectKey: 'other', photos: [photo({ id: 'p-ok', geoStatus: 'review', distanceM: 17 })] });
 
   const risks = collectRisks([risky, fine]);
 
@@ -64,6 +65,32 @@ test('превышение зоны попадает в риски и счита
   assert.equal(risks[0].statusLabel, 'Риск');
   assert.deepEqual(risks[0].photoIds, ['p-risk']);
   assert.equal(risks[0].balanceHolder, 'Жилищник «Ховрино»');
+});
+
+test('недостоверная точность GPS — отдельная категория, а не превышение зоны', () => {
+  // Позиция по IP: одна точка на город и точность в сотни километров.
+  const byIp = object({ photos: [photo({ id: 'p-ip', gpsAccuracyM: 1586473.47, distanceM: 5000 })] });
+  const silent = object({ objectKey: 'object-2', photos: [photo({ id: 'p-silent', gpsAccuracyM: null, distanceM: 30 })] });
+
+  const risks = collectRisks([byIp, silent]);
+
+  assert.equal(risks.length, 2);
+  assert.ok(risks.every((risk) => risk.kind === 'unreliable_geo'));
+  assert.equal(risks[0].kindLabel, 'Недостоверная геопривязка');
+  // Расстояние здесь ничего не доказывает, поэтому превышение не считается.
+  assert.equal(risks[0].overMeters, null);
+});
+
+test('граница достоверности проходит по 100 метрам', () => {
+  // Ровно 100 м — позиция ещё пригодна, и нарушение определяется расстоянием.
+  const atLimit = object({ photos: [photo({ id: 'p-limit', gpsAccuracyM: 100, distanceM: 5000 })] });
+  assert.equal(collectRisks([atLimit])[0].kind, 'zone_overflow');
+
+  const above = object({ objectKey: 'object-2', photos: [photo({ id: 'p-above', gpsAccuracyM: 101, distanceM: 5000 })] });
+  assert.equal(collectRisks([above])[0].kind, 'unreliable_geo');
+
+  const fine = object({ objectKey: 'object-3', photos: [photo({ id: 'p-fine', gpsAccuracyM: 99, distanceM: 5 })] });
+  assert.deepEqual(collectRisks([fine]), []);
 });
 
 test('точный дубль файла на разных объектах — риск, на одном объекте — нет', () => {
@@ -91,11 +118,11 @@ test('обычные фиксации рисков не создают', () => {
 test('риски сортируются от свежих к старым, сводка считает категории', () => {
   const old = object({
     objectKey: 'object-old',
-    photos: [photo({ id: 'p-old', geoStatus: 'risk', uploadedAt: '2026-09-14T08:00:00.000Z' })],
+    photos: [photo({ id: 'p-old', distanceM: 120, uploadedAt: '2026-09-14T08:00:00.000Z' })],
   });
   const fresh = object({
     objectKey: 'object-fresh',
-    photos: [photo({ id: 'p-new', geoStatus: 'risk', uploadedAt: '2026-09-15T18:00:00.000Z' })],
+    photos: [photo({ id: 'p-new', distanceM: 120, uploadedAt: '2026-09-15T18:00:00.000Z' })],
   });
 
   const risks = collectRisks([old, fresh]);

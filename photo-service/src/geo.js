@@ -2,6 +2,18 @@ const EARTH_RADIUS_METERS = 6_371_008.8;
 const DEFAULT_RADIUS_METERS = 15;
 const DEFAULT_TOLERANCE_METERS = 5;
 
+/**
+ * Точность, после которой позиция не считается спутниковой. Когда браузер не
+ * получает спутники, он отдаёт точку по сети: одна координата на весь город и
+ * точность в сотни километров. Такое нельзя ни принять, ни считать нарушением
+ * зоны — расстояние до объекта в этом случае ничего не доказывает.
+ */
+export const UNUSABLE_ACCURACY_METERS = 500;
+
+export function isUnusableAccuracy(accuracyMeters) {
+  return Number.isFinite(accuracyMeters) && accuracyMeters > UNUSABLE_ACCURACY_METERS;
+}
+
 function coordinate(point, name) {
   if (point === null || typeof point !== 'object' || Array.isArray(point)) {
     throw new TypeError(name + ' must be a coordinate object');

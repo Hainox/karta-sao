@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { assessDistanceRisk, haversineDistanceMeters } from '../src/geo.js';
+import { assessDistanceRisk, haversineDistanceMeters, isUnusableAccuracy } from '../src/geo.js';
 
 test('calculates a zero distance for identical coordinates', () => {
   assert.equal(haversineDistanceMeters(
@@ -73,4 +73,17 @@ test('rejects invalid coordinates and a non-positive radius', () => {
     () => assessDistanceRisk({ latitude: 55, longitude: 37 }, [{ latitude: 55, longitude: 37 }], 15, -1),
     /toleranceMeters/,
   );
+});
+
+test('позиция, определённая по сети, признаётся непригодной', () => {
+  // Браузер без спутников отдаёт точку по IP: такую фиксацию принимать нельзя.
+  assert.equal(isUnusableAccuracy(1586473.47), true);
+  assert.equal(isUnusableAccuracy(501), true);
+  // Ровно 500 м — ещё граница пригодности, а не отказ.
+  assert.equal(isUnusableAccuracy(500), false);
+  assert.equal(isUnusableAccuracy(12), false);
+  // Отсутствие точности — не отказ: фиксация уйдёт на ручную проверку.
+  assert.equal(isUnusableAccuracy(null), false);
+  assert.equal(isUnusableAccuracy(undefined), false);
+  assert.equal(isUnusableAccuracy(Number.NaN), false);
 });

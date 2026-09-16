@@ -1,5 +1,5 @@
 import {
-  assessDistanceRisk, bandNote, bandText, boundaryNote, buildCoverageIndex, buildQueue, canExport,
+  accuracyVerdict, assessDistanceRisk, bandNote, bandText, boundaryNote, buildCoverageIndex, buildQueue, canExport,
   completionLabel, coverageFor, districtBoundaries, filterRecords, formatCoordinates, formatMeters,
   geoStatusText, gpsDistanceLabel, groupLabel, groupValues, photoDetailRows, photoRequirement,
   reportSummaryRows, scopedDistricts, statusText,
@@ -941,6 +941,14 @@ function requestGps(noteId, record) {
   }
   note.textContent = 'Определяем координаты…';
   navigator.geolocation.getCurrentPosition(async (position) => {
+    // Точка по сети вместо спутника: одна координата на город, точность в сотни
+    // километров. Отправлять нельзя — такая фиксация не подтверждает место.
+    if (accuracyVerdict(position.coords.accuracy) === 'unusable') {
+      state.gps = null;
+      note.textContent = `Координаты определены приблизительно по сети, а не по спутнику: точность около ${Math.round(position.coords.accuracy / 1000)} км. Включите геолокацию и повторите — такая фиксация место не подтверждает.`;
+      updateUploadButton();
+      return;
+    }
     state.gps = {
       lat: position.coords.latitude,
       lon: position.coords.longitude,
@@ -970,6 +978,7 @@ function requestGps(noteId, record) {
 
 async function sendPhoto(record, performerNode, commentNode) {
   if (!state.file || !state.gps) { showToast('Нужны фотография и координаты GPS.', 'error'); return false; }
+  if (accuracyVerdict(state.gps.accuracy) === 'unusable') { showToast('Координаты слишком неточные: включите геолокацию и определите их заново.', 'error'); return false; }
   const performer = performerNode.value.trim();
   if (!performer) { showToast('Укажите исполнителя.', 'error'); performerNode.focus(); return false; }
   setSendState('sending', 'Отправляется… не закрывайте страницу.');

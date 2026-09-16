@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import {
-  assessDistanceRisk, bandNote, bandText, boundaryNote, buildCoverageIndex, buildQueue, canExport,
+  accuracyVerdict, assessDistanceRisk, bandNote, bandText, boundaryNote, buildCoverageIndex, buildQueue, canExport,
   completionLabel, coverageFor, districtBoundaries, filterRecords, formatAccuracy, formatCoordinates,
   formatDateTime, formatMeters, geoStatusText, gpsDistanceLabel, haversineDistanceMeters, normalizePhoto,
   photoDetailRows, photoRequirement, reportSummaryRows, reviewStatusText, scopedDistricts,
@@ -369,4 +369,16 @@ test('a multi-point object is measured against its nearest registered point', ()
   const assessment = assessDistanceRisk({ latitude: 55.9001, longitude: 37.6 }, points);
   assert.equal(assessment.status, 'within_radius');
   assert.ok(assessment.distanceMeters < 15);
+});
+
+test('позиция, полученная по сети, не отправляется как координаты объекта', () => {
+  // Браузер без спутников отдаёт одну точку на город: такую фиксацию не шлём.
+  assert.equal(accuracyVerdict(1586473.47), 'unusable');
+  assert.equal(accuracyVerdict(501), 'unusable');
+  // Ровно 500 м — граница пригодности.
+  assert.equal(accuracyVerdict(500), 'review');
+  assert.equal(accuracyVerdict(12), 'review');
+  assert.equal(accuracyVerdict(3), 'ok');
+  // Точность не сообщена: отправлять можно, но решение о пригодности за сервисом.
+  assert.equal(accuracyVerdict(null), 'unknown');
 });

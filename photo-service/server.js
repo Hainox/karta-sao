@@ -1,7 +1,7 @@
 import { createHash, randomUUID } from 'node:crypto';
 import { createServer } from 'node:http';
 import { Pool } from 'pg';
-import { assessDistanceRisk } from './src/geo.js';
+import { assessDistanceRisk, isUnusableAccuracy } from './src/geo.js';
 import { photoServiceCookiePolicy, photoServiceDatabaseConfig } from './src/config.js';
 import { createHealthHandler } from './src/health.js';
 import {
@@ -150,6 +150,9 @@ async function handleUpload(request, response, user) {
   let gps;
   try { gps = validCoordinateFields(parsed.fields); } catch (error) { return sendError(response, request, 400, error.code); }
   if (!gps) return sendError(response, request, 400, 'gps_required');
+  // Позиция по сети вместо спутника: одна точка на город и точность в сотни
+  // километров. Принять такую фиксацию нельзя — она не подтверждает место.
+  if (isUnusableAccuracy(gps.accuracy)) return sendError(response, request, 400, 'gps_accuracy_unusable');
   const objectResult = await pool.query('SELECT object_key, reference_points, district FROM objects WHERE dataset_id = $1 AND $2 = ANY(source_ids) LIMIT 1', [datasetId, sourceId]);
   const object = objectResult.rows[0];
   if (!object) return sendError(response, request, 404, 'object_not_found');
