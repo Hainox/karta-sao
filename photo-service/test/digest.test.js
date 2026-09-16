@@ -50,8 +50,11 @@ test('картинка сводки: PNG с таблицей и подписью
   assert.ok(png.length > 10000, `картинка слишком маленькая: ${png.length} байт`);
   assert.equal(png.readUInt32BE(16), 1386);
 
+  assert.match(caption, /^Направление — «Оцифровка объектов САО» — /);
   assert.match(caption, /Коллеги, добрый день!/);
+  assert.match(caption, /Оцифровка объектов САО: 384 из 445 отметок — 86 %\./);
   assert.match(caption, /Слабая динамика по оцифровке объектов!/);
   assert.match(caption, /Сокол/);
-  assert.equal(caption.includes('Комментарий для рассылки'), false);
+  assert.match(caption, /Больше всего закрыто: АвД САО — 89 %/);
+  assert.match(caption, /Слабее всего — /);
 });

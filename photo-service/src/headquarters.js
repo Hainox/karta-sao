@@ -117,12 +117,16 @@ function countText(value) {
   return Number(value).toLocaleString('ru-RU');
 }
 
+// Название работы — в первой строке комментария, одинаковой для всех выгрузок.
+export const HEADQUARTERS_DIRECTION = 'Оцифровка объектов САО';
+
 /**
- * Комментарий к выгрузке: не шаблон, а разбор текущих чисел — общий процент,
- * кто не начал, кто впереди и какая категория отстаёт сильнее остальных.
- * Строки одинаковой формы нужны, чтобы текст читался и в письме, и в картинке.
+ * Комментарий к выгрузке: сначала фиксированная строка «Направление — проект —
+ * дата и время», затем разбор текущих чисел — общий процент, кто не начал, кто
+ * впереди и какая категория отстаёт сильнее остальных. Строки одинаковой формы
+ * нужны, чтобы текст читался и в письме, и в картинке.
  */
-export function headquartersComment(board) {
+export function headquartersComment(board, { generatedAt = new Date() } = {}) {
   const plan = headquartersPlanTotal(board.total);
   const fact = headquartersFactTotal(board.total);
   const percent = headquartersOverallPercent(board.total);
@@ -139,9 +143,10 @@ export function headquartersComment(board) {
     .sort((left, right) => left.percent - right.percent);
 
   const lines = [
-    'Комментарий для рассылки (готов к отправке):',
+    `Направление — «${HEADQUARTERS_DIRECTION}» — ${generatedAt.toLocaleString('ru-RU')}`,
+    '',
     'Коллеги, добрый день!',
-    `Оцифровка объектов САО: ${countText(fact)} из ${countText(plan)} отметок — ${percent} %.`,
+    `${HEADQUARTERS_DIRECTION}: ${countText(fact)} из ${countText(plan)} отметок — ${percent} %.`,
   ];
 
   if (board.lagging.length) {

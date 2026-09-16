@@ -1,6 +1,6 @@
 import { createCanvas, GlobalFonts } from '@napi-rs/canvas';
 import { fileURLToPath } from 'node:url';
-import { headquartersComment, headquartersValues } from './headquarters.js';
+import { HEADQUARTERS_DIRECTION, headquartersComment, headquartersValues } from './headquarters.js';
 
 // Картинка для Telegram: вторая таблица листа «На штаб» — районы по убыванию
 // «Итого: факт». Рисуется тем же шрифтом, что и PDF-сводка: в образе лежит
@@ -98,7 +98,7 @@ export function renderHeadquartersImage(board, { generatedAt = new Date() } = {}
   ensureFont();
 
   const rows = board.sorted;
-  const commentLines = headquartersComment(board);
+  const commentLines = headquartersComment(board, { generatedAt });
   const width = PADDING * 2 + COLUMN_WIDTHS.reduce((sum, value) => sum + value, 0);
   const height = TITLE_HEIGHT + GROUP_HEIGHT + SUBHEADER_HEIGHT
     + rows.length * ROW_HEIGHT + TOTAL_HEIGHT + COMMENT_HEIGHT + commentLines.length * COMMENT_HEIGHT + PADDING;
@@ -130,9 +130,9 @@ export function renderHeadquartersImage(board, { generatedAt = new Date() } = {}
   let y = PADDING / 2;
 
   // Заголовок картинки.
-  text('Оцифровка объектов САО', PADDING, y + TITLE_HEIGHT / 2, width - PADDING * 2, { size: 18, align: 'left' });
+  text(HEADQUARTERS_DIRECTION, PADDING, y + TITLE_HEIGHT / 2, width - PADDING * 2, { size: 18, align: 'left' });
   text(
-    `${generatedAt.toLocaleString('ru-RU')} · районы по убыванию «Итого: факт»`,
+    'районы по убыванию «Итого, %»',
     PADDING, y + TITLE_HEIGHT / 2, width - PADDING * 2, { size: 12, color: MUTED, align: 'right' },
   );
   y += TITLE_HEIGHT;
@@ -198,5 +198,5 @@ export function renderHeadquartersImage(board, { generatedAt = new Date() } = {}
     y += COMMENT_HEIGHT;
   });
 
-  return { png: canvas.toBuffer('image/png'), caption: commentLines.slice(1).join('\n') };
+  return { png: canvas.toBuffer('image/png'), caption: commentLines.join('\n') };
 }

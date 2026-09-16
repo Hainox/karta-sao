@@ -225,16 +225,17 @@ test('лист «На штаб»: вторая таблица собираетс
   assert.equal(sheet.getCell('L15').value, 3);
   assert.equal(sheet.getCell('M15').value, 1);
 
-  // Комментарий для рассылки собирается по числам этой выгрузки.
-  assert.equal(sheet.getCell('A17').value, 'Комментарий для рассылки (готов к отправке):');
-  assert.equal(sheet.getCell('A18').value, 'Коллеги, добрый день!');
-  assert.equal(sheet.getCell('A19').value, 'Оцифровка объектов САО: 1 из 3 отметок — 33 %.');
-  assert.equal(sheet.getCell('A20').value, 'Слабая динамика по оцифровке объектов! Следующим районам срочно приступить к данной задаче:');
-  assert.equal(sheet.getCell('A21').value, 'Войковский');
-  assert.equal(sheet.getCell('A22').value, 'Головинский');
-  assert.equal(sheet.getCell('A23').value, 'Больше всего закрыто: Беговой — 100 %.');
-  assert.equal(sheet.getCell('A24').value, 'По категориям: остановки 33 %.');
-  assert.equal(sheet.getCell('A25').value, 'Слабее всего — остановки (33 %).');
+  // Комментарий начинается фиксированной строкой, дальше — разбор этой выгрузки.
+  assert.match(String(sheet.getCell('A17').value), /^Направление — «Оцифровка объектов САО» — \d{2}\.\d{2}\.\d{4}, \d{2}:\d{2}(:\d{2})?$/);
+  assert.equal(sheet.getCell('A18').value ?? '', '');
+  assert.equal(sheet.getCell('A19').value, 'Коллеги, добрый день!');
+  assert.equal(sheet.getCell('A20').value, 'Оцифровка объектов САО: 1 из 3 отметок — 33 %.');
+  assert.equal(sheet.getCell('A21').value, 'Слабая динамика по оцифровке объектов! Следующим районам срочно приступить к данной задаче:');
+  assert.equal(sheet.getCell('A22').value, 'Войковский');
+  assert.equal(sheet.getCell('A23').value, 'Головинский');
+  assert.equal(sheet.getCell('A24').value, 'Больше всего закрыто: Беговой — 100 %.');
+  assert.equal(sheet.getCell('A25').value, 'По категориям: остановки 33 %.');
+  assert.equal(sheet.getCell('A26').value, 'Слабее всего — остановки (33 %).');
 });
 
 test('проценты «На штаб» подсвечены светофором: ноль, до 33, до 66, от 66', async () => {
