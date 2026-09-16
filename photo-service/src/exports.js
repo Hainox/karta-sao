@@ -92,8 +92,11 @@ const HEADQUARTERS_COLUMNS = Object.freeze([
 ]);
 const HEADQUARTERS_WIDTHS = Object.freeze([4.71, 25.43, 14.43, 14.43, 14.43, 14.43, 14.43, 14.43, 14.43, 14.43, 14.43, 14.43, 14.43, 14.43]);
 
-// Столбцы «%»: после каждой категории и в итоге.
+// Столбцы «%»: после каждой категории и в итоге, рядом с ними — столбец «План».
+// Процент показывается всегда (нулевой план даёт 0,0 %), но светофор такие
+// ячейки не красит: где объектов этого вида нет, оценивать нечего.
 const PERCENT_COLUMNS = Object.freeze([5, 8, 11, 14]);
+const PERCENT_PLAN_COLUMNS = Object.freeze({ 5: 3, 8: 6, 11: 9, 14: 12 });
 
 const HEADQUARTERS_FONT = 'Century Gothic';
 const HEADQUARTERS_INK = 'FF1F3B57';
@@ -115,8 +118,9 @@ const BAND_FILLS = Object.freeze({
   zero: 'FFEA9999', low: 'FFF4CCCC', middle: 'FFFFF2CC', high: 'FFD9EAD3',
 });
 
-function percentBandRules(letter, firstRow) {
+function percentBandRules(letter, firstRow, planLetter) {
   const cell = `$${letter}${firstRow}`;
+  const plan = `$${planLetter}${firstRow}`;
   return [
     { when: `${cell}<=0`, band: 'zero' },
     { when: `AND(${cell}>0,${cell}<33)`, band: 'low' },
@@ -124,8 +128,8 @@ function percentBandRules(letter, firstRow) {
     { when: `${cell}>=66`, band: 'high' },
   ].map(({ when, band }) => ({
     type: 'expression',
-    // Пустая ячейка процента остаётся без цвета: у строки без данных его просто нет.
-    formulae: [`AND(ISNUMBER(${cell}),${when})`],
+    // Без плана красить нечего: у строки пустой категории цвета нет.
+    formulae: [`AND(${plan}>0,ISNUMBER(${cell}),${when})`],
     style: { fill: solidFill(BAND_FILLS[band]) },
   }));
 }
@@ -134,9 +138,10 @@ function paintPercentBands(worksheet, firstRow, lastRow) {
   if (lastRow < firstRow) return;
   for (const column of PERCENT_COLUMNS) {
     const letter = worksheet.getColumn(column).letter;
+    const planLetter = worksheet.getColumn(PERCENT_PLAN_COLUMNS[column]).letter;
     worksheet.addConditionalFormatting({
       ref: `${letter}${firstRow}:${letter}${lastRow}`,
-      rules: percentBandRules(letter, firstRow),
+      rules: percentBandRules(letter, firstRow, planLetter),
     });
   }
 }
@@ -175,8 +180,10 @@ function headquartersFactTotal(counts) {
   return counts.fact.stop + counts.fact.pp + counts.fact.entrance;
 }
 
+// Процент есть всегда и целым числом: без плана это ноль, а не пустая ячейка —
+// иначе в таблице «пропадают» числа. Десятые доли не показываем.
 function headquartersPercent(fact, plan) {
-  return plan ? Number(((fact / plan) * 100).toFixed(1)) : null;
+  return plan ? Math.round((fact / plan) * 100) : 0;
 }
 
 function headquartersValues(counts) {
@@ -231,7 +238,7 @@ function writeHeadquartersTable(sheet, headerRow, { names, counts, total, formul
       cell.border = CELL_BORDER;
       cell.alignment = CENTERED;
       cell.font = { name: HEADQUARTERS_FONT, size: 11, bold: PERCENT_COLUMNS.includes(column) };
-      cell.numFmt = PERCENT_COLUMNS.includes(column) ? '0.0"%"' : '0';
+      cell.numFmt = PERCENT_COLUMNS.includes(column) ? '0"%"' : '0';
     });
   });
 
@@ -244,7 +251,7 @@ function writeHeadquartersTable(sheet, headerRow, { names, counts, total, formul
     cell.border = CELL_BORDER;
     cell.alignment = CENTERED;
     cell.font = { name: HEADQUARTERS_FONT, size: 11, bold: true };
-    if (PERCENT_COLUMNS.includes(column)) cell.numFmt = '0.0"%"';
+    if (PERCENT_COLUMNS.includes(column)) cell.numFmt = '0"%"';
     else if (column > 2) cell.numFmt = '0';
   }
 
@@ -306,12 +313,12 @@ function addHeadquartersSheet(workbook, payload) {
   HEADQUARTERS_WIDTHS.forEach((width, index) => { sheet.getColumn(index + 1).width = width; });
 
   // Объекты с балансодержателем «АвД САО» идут в счёт АвД, хотя снимают их районы:
-  // штабу нужен объём работ владельца, а не место съёмки.
+  // штабу нужен объём работ владельца, а не место съёмки. Туда же попадают объекты
+  // без района — приписать их конкретному району нельзя.
   const grouped = new Map();
   for (const item of payload.objects) {
     const holder = (item.balanceHolder || '').trim();
-    const key = holder === AUTODOR_HOLDER ? AUTODOR_HOLDER : item.district;
-    if (!key) continue;
+    const key = holder === AUTODOR_HOLDER || !item.district ? AUTODOR_HOLDER : item.district;
     if (!grouped.has(key)) grouped.set(key, []);
     grouped.get(key).push(item);
   }
@@ -344,7 +351,7 @@ function addHeadquartersSheet(workbook, payload) {
   const noteRow = afterComment + 1;
   sheet.mergeCells(noteRow, 1, noteRow, 14);
   const note = sheet.getCell(noteRow, 1);
-  note.value = 'План и факт считаются в отметках — конкретных точках на карте. Объекты с балансодержателем «АвД САО» учтены в строке «АвД САО», а не в районе, где стоят. Процент считается по каждой категории отдельно.';
+  note.value = 'План и факт считаются в отметках — конкретных точках на карте. Объекты с балансодержателем «АвД САО» и объекты без района учтены в строке «АвД САО». Процент считается по каждой категории отдельно.';
   note.alignment = TO_LEFT;
   note.font = { name: HEADQUARTERS_FONT, size: 8, color: { argb: HEADQUARTERS_MUTED } };
 }

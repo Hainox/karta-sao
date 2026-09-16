@@ -142,6 +142,8 @@ test('лист «На штаб»: отметки по категориям, ст
     // Остановка стоит в Коптеве, но балансодержатель — «АвД САО»: счёт идёт АвД.
     { ...reportRow('stop', 'Коптево', 0), object_key: 'k-stop', balance_holder: 'АвД САО' },
     { ...reportRow('entrance', 'Сокол', 0), object_key: 's-entrance' },
+    // Объект без района приписать конкретному району нельзя — он тоже идёт АвД.
+    { ...reportRow('stop', null, 0), object_key: 'n-stop' },
   ];
 
   const workbook = new ExcelJS.Workbook();
@@ -172,18 +174,21 @@ test('лист «На штаб»: отметки по категориям, ст
   assert.equal(sheet.getCell('E3').value, 100);
   assert.equal(sheet.getCell('F3').value, 3);
   assert.equal(sheet.getCell('G3').value, 1);
-  assert.equal(sheet.getCell('H3').value, 33.3);
+  // Проценты округляются до целого: 1 из 3 — это 33 %.
+  assert.equal(sheet.getCell('H3').value, 33);
 
-  // У Сокола остановок нет, а остановка Коптева считается строке «АвД САО».
+  // У Сокола остановок нет, а остановки Коптева и объекта без района — у АвД.
   assert.equal(sheet.getCell('C4').value, 0);
-  assert.equal(sheet.getCell('C5').value, 1);
+  assert.equal(sheet.getCell('C5').value, 2);
   assert.equal(sheet.getCell('D5').value, 0);
 
-  // ИТОГО по САО: шесть отметок, закрыто две — 33,3 %.
+  // ИТОГО по САО: семь отметок, закрыто две — 29 %.
   assert.equal(sheet.getCell('A6').value, 'ИТОГО по САО');
-  assert.equal(sheet.getCell('L6').value, 6);
+  assert.equal(sheet.getCell('L6').value, 7);
   assert.equal(sheet.getCell('M6').value, 2);
-  assert.equal(sheet.getCell('N6').value, 33.3);
+  assert.equal(sheet.getCell('N6').value, 29);
+  // У Сокола остановок нет: процент показывается нулём, а не пустой ячейкой.
+  assert.equal(sheet.getCell('E4').value, 0);
 });
 
 test('лист «На штаб»: вторая таблица собирается формулой SORT, ниже — комментарий', async () => {
@@ -244,10 +249,10 @@ test('проценты «На штаб» подсвечены светофоро
 
   const [firstBlock] = sheet.conditionalFormattings;
   assert.deepEqual(firstBlock.rules.map((rule) => rule.formulae[0]), [
-    'AND(ISNUMBER($E3),$E3<=0)',
-    'AND(ISNUMBER($E3),AND($E3>0,$E3<33))',
-    'AND(ISNUMBER($E3),AND($E3>=33,$E3<66))',
-    'AND(ISNUMBER($E3),$E3>=66)',
+    'AND($C3>0,ISNUMBER($E3),$E3<=0)',
+    'AND($C3>0,ISNUMBER($E3),AND($E3>0,$E3<33))',
+    'AND($C3>0,ISNUMBER($E3),AND($E3>=33,$E3<66))',
+    'AND($C3>0,ISNUMBER($E3),$E3>=66)',
   ]);
   assert.deepEqual(firstBlock.rules.map((rule) => rule.style.fill.fgColor.argb), [
     'FFEA9999', 'FFF4CCCC', 'FFFFF2CC', 'FFD9EAD3',
