@@ -27,7 +27,9 @@ export function createNotifyClient({ url, secret, fetchImpl = fetch, logger = co
     enabled: Boolean(base),
     event: (payload) => post('/event', payload),
     action: (payload) => post('/action', payload),
-    ask: (payload) => post('/ask', payload)
+    ask: (payload) => post('/ask', payload),
+    // Выгрузка-отчёт уходит файлом в тот же чат: содержимое в base64, поле file.
+    document: ({ file, filename, caption }) => post('/document', { file, filename, caption })
   };
 }
 

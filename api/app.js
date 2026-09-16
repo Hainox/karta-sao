@@ -2,6 +2,7 @@ import express from 'express';
 import { signToken, verifyPassword, verifyToken } from './lib/auth.js';
 import { safePhotoFilename, validatePhotoMarker, validatePhotoNote, validatePhotoUpload } from './lib/photo-markers.js';
 import { streamReviewArchive } from './lib/review-archive.js';
+import { routeReport, routeReportCsv, routeReportCsvName } from './lib/route-report.js';
 import { payloadHash, validateChangeSet } from './lib/validation.js';
 
 const PREFECTURE_ROLE = 'prefecture_admin';
@@ -201,6 +202,23 @@ export function createApp({ repository, boundary, jwtSecret, allowedOrigins = []
       if (response.headersSent) response.destroy(error);
       else next(error);
     }
+  });
+
+  // Отчёт о состоянии отрисовки маршрутов ОДХ — та же выборка, что уходит
+  // выгрузкой: сначала JSON для кабинета, затем CSV-файл. Доступ только у
+  // префектуры, как и у остальных выгрузок.
+  app.get('/api/reports/routes', authenticate, requirePrefecture, async (_request, response, next) => {
+    try {
+      const report = routeReport(await repository.routeReportRows());
+      response.json({ ...report, csvName: routeReportCsvName(report) });
+    } catch (error) { next(error); }
+  });
+
+  app.get('/api/reports/routes.csv', authenticate, requirePrefecture, async (_request, response, next) => {
+    try {
+      const report = routeReport(await repository.routeReportRows());
+      response.type('text/csv; charset=utf-8').attachment(routeReportCsvName(report)).send(routeReportCsv(report));
+    } catch (error) { next(error); }
   });
 
   app.use((error, _request, response, _next) => {

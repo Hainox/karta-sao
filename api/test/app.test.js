@@ -48,6 +48,13 @@ async function fixture() {
       submissions.push(item); return item;
     },
     async listSubmissions({ status, district } = {}) { return submissions.filter((item) => (!status || item.status === status) && (!district || item.district === district)); },
+    // Отчёт по маршрутам приходит уже сгруппированным: две строки одного района.
+    async routeReportRows() {
+      return [
+        { district: 'Аэропорт', status: 'submitted', change_type: 'queue', count: 2, lastSubmittedAt: '2026-09-08T10:01:00.000Z' },
+        { district: 'Аэропорт', status: 'approved', change_type: 'rotor_snow_storage_zone', count: 1, lastSubmittedAt: '2026-09-08T10:01:00.000Z' }
+      ];
+    },
     async reviewSubmission({ id, status, reviewerId, comment }) {
       const item = submissions.find((candidate) => candidate.id === id);
       if (!item) return null;
@@ -260,6 +267,35 @@ test('район не допущен к приёмке и выгрузкам, в
   const other = await api.get('/api/submissions?district=Беговой').set('Authorization', `Bearer ${prefecture}`).expect(200);
   assert.equal(other.body.submissions.length, 0);
   await api.get('/api/my-submissions').set('Authorization', `Bearer ${prefecture}`).expect(403);
+});
+
+test('отчёт по маршрутам доступен префектуре и закрыт району', async () => {
+  const { api, editorPassword, prefecturePassword } = await fixture();
+  const editor = await login(api, 'editor@example.test', editorPassword);
+  await api.get('/api/reports/routes').set('Authorization', `Bearer ${editor}`).expect(403);
+
+  const prefecture = await login(api, 'prefecture@example.test', prefecturePassword);
+  const report = await api.get('/api/reports/routes').set('Authorization', `Bearer ${prefecture}`).expect(200);
+  assert.match(report.headers['content-type'], /application\/json/);
+  assert.equal(report.body.districts[0].district, 'Аэропорт');
+  assert.equal(report.body.districts[0].routes, 2);
+  assert.equal(report.body.districts[0].zones, 1);
+  assert.equal(report.body.totals.routes, 2);
+  assert.match(report.body.csvName, /^odh-routes-\d{4}-\d{2}-\d{2}\.csv$/);
+});
+
+test('CSV отчёта по маршрутам начинается с BOM и тоже закрыт району', async () => {
+  const { api, editorPassword, prefecturePassword } = await fixture();
+  const editor = await login(api, 'editor@example.test', editorPassword);
+  await api.get('/api/reports/routes.csv').set('Authorization', `Bearer ${editor}`).expect(403);
+
+  const prefecture = await login(api, 'prefecture@example.test', prefecturePassword);
+  const csv = await api.get('/api/reports/routes.csv').set('Authorization', `Bearer ${prefecture}`).buffer(true).parse(binaryParser).expect(200);
+  assert.match(csv.headers['content-type'], /text\/csv/);
+  assert.match(csv.headers['content-type'], /charset=utf-8/);
+  assert.match(csv.headers['content-disposition'], /odh-routes-\d{4}-\d{2}-\d{2}\.csv/);
+  assert.equal(csv.body.subarray(0, 3).toString('hex'), 'efbbbf', 'файл начинается с BOM');
+  assert.match(csv.body.toString('utf8'), /Район;Маршрутов;Зон;Точек;На приёмке;Утверждено;Отклонено;Последняя отправка/);
 });
 
 test('упразднённая роль reviewer больше не имеет доступа ни к приёмке, ни к выгрузкам', async () => {

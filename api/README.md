@@ -24,11 +24,35 @@ API принимает GeoJSON районов, хранит их в PostgreSQL, 
 - `PATCH /api/submissions/:id` с `approved` или `rejected`
 - `GET /api/exports/review-archive.zip` — ZIP ожидающих наборов, разложенный по районам, с `manifest.json`
 - `GET /api/exports/approved.geojson`
+- `GET /api/reports/routes` — отчёт о состоянии отрисовки маршрутов ОДХ, только префектура
+- `GET /api/reports/routes.csv` — CSV-выгрузка того же среза, только префектура
 - `GET`, `POST`, `PATCH`, `DELETE /api/photo-markers` — фото-метки, только `prefecture_admin`
 - `PUT`, `GET`, `DELETE /api/photo-markers/:id/photo` — один JPEG/PNG/WebP до 5 МБ у фото-метки, только `prefecture_admin`
 
 Фото и координаты хранятся в PostgreSQL. В браузере не сохраняются; удаление
 фото не удаляет метку, а удаление метки удаляет и её прикреплённый снимок.
+
+## Отчёт по отрисовке маршрутов ОДХ
+
+При `ODH_ROUTE_REPORT_ENABLED=true` API каждые три часа (в 00:00, 03:00, 06:00 …)
+собирает сводку о состоянии отрисовки маршрутов на карте ОДХ и отправляет её в
+тот же чат, что и остальные оповещения: сообщение с итогами и CSV-выгрузку
+`odh-routes-<дата>.csv`. Флаг по умолчанию выключен. Сбой отчёта не затрагивает
+API — ошибка уходит отдельным оповещением.
+
+Маршрут — линейный объект (`LineString`) одного из пяти типов маршрутов из
+`odh-map/district-changes.js` (`queue`, `rotor_transfer`, `dkm_route`, `tu_route`,
+`tu_route_yards`). Район набора — тот, что его нарисовал; перепривязки к АвД нет.
+Колонки выгрузки: `Район;Маршрутов;Зон;Точек;На приёмке;Утверждено;Отклонено;
+Последняя отправка`, в конце строка `ИТОГО`. Районы без единого маршрута попадают
+в «отстающие» — по ним и ведётся работа.
+
+Руками ту же сводку можно собрать и отправить так:
+
+```sh
+node --env-file=.env scripts/send-route-report.js                   # отправить в Telegram
+node --env-file=.env scripts/send-route-report.js --out routes.csv # только сохранить CSV
+```
 
 GitHub Pages исполняет только статические файлы. Для общей базы API должен быть размещён отдельно с PostgreSQL; адрес задаётся в HUD кабинетов.
 

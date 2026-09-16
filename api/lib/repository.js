@@ -70,6 +70,31 @@ export function createRepository(pool) {
         return rows[0];
       });
     },
+    // Отчёт по отрисовке маршрутов: разворачиваем change_set каждого набора в
+    // отдельные объекты (jsonb_array_elements) и считаем их по району, статусу
+    // приёмки и типу объекта. Тип читается из properties->>'change_type', а к
+    // каждой строке приклеен max(submitted_at) района: по нему видно, кто давно
+    // не присылал правки. Разбор объектов на маршрут/зону/точку делает
+    // route-report.js — здесь только агрегация, ровно под его форму строк.
+    async routeReportRows() {
+      const { rows } = await pool.query(`
+        WITH features AS (
+          SELECT s.district, s.status, s.submitted_at,
+                 feature -> 'properties' ->> 'change_type' AS change_type
+            FROM submissions s
+            CROSS JOIN LATERAL jsonb_array_elements(COALESCE(s.change_set -> 'features', '[]'::jsonb)) AS feature
+        ),
+        district_last AS (
+          SELECT district, max(submitted_at) AS last_submitted_at FROM submissions GROUP BY district
+        )
+        SELECT features.district, features.status, features.change_type,
+               count(*)::int AS count, district_last.last_submitted_at AS "lastSubmittedAt"
+          FROM features JOIN district_last USING (district)
+         GROUP BY features.district, features.status, features.change_type, district_last.last_submitted_at
+         ORDER BY features.district, features.status, features.change_type
+      `);
+      return rows;
+    },
     async listPhotoMarkers() {
       const { rows } = await pool.query(
         'SELECT id, longitude, latitude, note, photo_filename, photo_mime_type, photo_size, photo_bytes IS NOT NULL AS has_photo, legacy_source_id, created_at, updated_at FROM photo_markers ORDER BY created_at ASC'
