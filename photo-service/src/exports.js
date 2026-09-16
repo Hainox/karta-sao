@@ -81,29 +81,25 @@ function frameTable(worksheet, lastRow, columnCount) {
 
 /* -------------------------------------------------------- лист «На штаб» */
 
-// Раскладка по эталону заказчика: номер, район, три категории и итог,
-// в каждой категории «План», «Факт», «%».
-// В каждой категории четыре колонки: отметки, которые нужно отработать
-// («как на сайте размечено»), объекты по ID, закрытые отметки и процент.
+// Раскладка по эталону заказчика: номер, район, три категории и итог.
+// В каждой категории три колонки: «Объекты» — отметки, которые нужно отработать
+// (столько же показывает страница фотофиксации), «Факт» и «%» по отметкам.
 const HEADQUARTERS_COLUMNS = Object.freeze([
   { start: 1, end: 1, title: '№', fill: 'FFD9D9D9' },
   { start: 2, end: 2, title: 'Район', fill: 'FFD9D9D9' },
-  { start: 3, end: 6, title: 'Автобусные остановки', fill: 'FFC9DAF8' },
-  { start: 7, end: 10, title: 'Пеш.переход', fill: 'FFD9EAD3' },
-  { start: 11, end: 14, title: 'Подъезды (Вх. гр.)', fill: 'FFF9CB9C' },
-  { start: 15, end: 18, title: 'Итого', fill: 'FFD9D9D9' },
+  { start: 3, end: 5, title: 'Автобусные остановки', fill: 'FFC9DAF8' },
+  { start: 6, end: 8, title: 'Пеш.переход', fill: 'FFD9EAD3' },
+  { start: 9, end: 11, title: 'Подъезды (Вх. гр.)', fill: 'FFF9CB9C' },
+  { start: 12, end: 14, title: 'Итого', fill: 'FFD9D9D9' },
 ]);
-const HEADQUARTERS_COLUMN_COUNT = 18;
-const HEADQUARTERS_WIDTHS = Object.freeze([
-  4.71, 25.43, 14.43, 14.43, 14.43, 14.43, 14.43, 14.43,
-  14.43, 14.43, 14.43, 14.43, 14.43, 14.43, 14.43, 14.43, 14.43, 14.43,
-]);
+const HEADQUARTERS_COLUMN_COUNT = 14;
+const HEADQUARTERS_WIDTHS = Object.freeze([4.71, 25.43, 14.43, 14.43, 14.43, 14.43, 14.43, 14.43, 14.43, 14.43, 14.43, 14.43, 14.43, 14.43]);
 
-// Столбцы «%»: после каждой категории и в итоге, за три столбца до них — отметки.
+// Столбцы «%»: после каждой категории и в итоге, за два столбца до них — объекты.
 // Процент показывается всегда (нулевой план даёт 0 %), но светофор такие ячейки
 // не красит: где объектов этого вида нет, оценивать нечего.
-const PERCENT_COLUMNS = Object.freeze([6, 10, 14, 18]);
-const PERCENT_PLAN_COLUMNS = Object.freeze({ 6: 3, 10: 7, 14: 11, 18: 15 });
+const PERCENT_COLUMNS = Object.freeze([5, 8, 11, 14]);
+const PERCENT_PLAN_COLUMNS = Object.freeze({ 5: 3, 8: 6, 11: 9, 14: 12 });
 
 const HEADQUARTERS_FONT = 'Century Gothic';
 const HEADQUARTERS_INK = 'FF1F3B57';
@@ -181,7 +177,7 @@ function writeHeadquartersHeader(sheet, headerRow) {
       }
     }
     if (column.start === column.end) continue;
-    ['Точек', 'Объектов', 'Факт', '%'].forEach((label, offset) => {
+    ['Объекты', 'Факт', '%'].forEach((label, offset) => {
       sheet.getCell(headerRow + 1, column.start + offset).value = label;
     });
   }
@@ -203,7 +199,7 @@ function writeHeadquartersTable(sheet, headerRow, { names, counts, total, formul
       const column = offset + 1;
       const cell = sheet.getCell(row, column);
       cell.value = value;
-      cell.fill = solidFill(PERCENT_COLUMNS.includes(column) ? percentBandFill(value, values[column - 4]) : 'FFFFFFFF');
+      cell.fill = solidFill(PERCENT_COLUMNS.includes(column) ? percentBandFill(value, values[column - 3]) : 'FFFFFFFF');
       cell.border = CELL_BORDER;
       cell.alignment = CENTERED;
       cell.font = { name: HEADQUARTERS_FONT, size: 11, bold: PERCENT_COLUMNS.includes(column) };
@@ -217,7 +213,7 @@ function writeHeadquartersTable(sheet, headerRow, { names, counts, total, formul
   for (let column = 1; column <= HEADQUARTERS_COLUMN_COUNT; column += 1) {
     const cell = sheet.getCell(totalRow, column);
     if (column > 2) cell.value = totalValues[column - 3];
-    cell.fill = solidFill(PERCENT_COLUMNS.includes(column) ? percentBandFill(totalValues[column - 3], totalValues[column - 6]) : 'FFFFFFFF');
+    cell.fill = solidFill(PERCENT_COLUMNS.includes(column) ? percentBandFill(totalValues[column - 3], totalValues[column - 5]) : 'FFFFFFFF');
     cell.border = CELL_BORDER;
     cell.alignment = CENTERED;
     cell.font = { name: HEADQUARTERS_FONT, size: 11, bold: true };
@@ -279,8 +275,8 @@ function addHeadquartersSheet(workbook, payload) {
     ...board,
     names: board.sorted.map((item) => item.name),
     counts: board.sorted.map((item) => item.counts),
-    // 17-я колонка диапазона — «Итого, %»: та же сортировка, что и у значений ниже.
-    formula: `SORT(B3:R${firstTotalRow - 1},17,0)`,
+    // 13-я колонка диапазона — «Итого, %»: та же сортировка, что и у значений ниже.
+    formula: `SORT(B3:N${firstTotalRow - 1},13,0)`,
   });
 
   const afterComment = writeHeadquartersComment(sheet, secondTotalRow + 2, headquartersComment(board));
@@ -288,7 +284,7 @@ function addHeadquartersSheet(workbook, payload) {
   const noteRow = afterComment + 1;
   sheet.mergeCells(noteRow, 1, noteRow, HEADQUARTERS_COLUMN_COUNT);
   const note = sheet.getCell(noteRow, 1);
-  note.value = 'Отметки — конкретные точки на карте, которые нужно отработать: столько же показывает страница фотофиксации. Объекты считаются по ID, отметок у одного объекта может быть много. Объекты с балансодержателем «АвД САО» и объекты без района учтены в строке «АвД САО». Процент считается по отметкам каждой категории отдельно.';
+  note.value = 'Колонка «Объекты» — отметки, которые нужно отработать: столько же показывает страница фотофиксации, у одного адреса точек может быть несколько. Объекты с балансодержателем «АвД САО», «ДЭУ» и объекты без района учтены в строке «АвД САО». Процент считается по отметкам каждой категории отдельно.';
   note.alignment = TO_LEFT;
   note.font = { name: HEADQUARTERS_FONT, size: 8, color: { argb: HEADQUARTERS_MUTED } };
 }

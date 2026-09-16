@@ -16,7 +16,7 @@ function ensureFont() {
   }
 }
 
-const COLUMN_WIDTHS = Object.freeze([36, 190, ...Array(16).fill(94)]);
+const COLUMN_WIDTHS = Object.freeze([36, 190, ...Array(12).fill(94)]);
 const PADDING = 16;
 const TITLE_HEIGHT = 42;
 const GROUP_HEIGHT = 30;
@@ -33,12 +33,12 @@ const NUMERO = '№';
 const HEADER_GROUPS = Object.freeze([
   { from: 0, to: 0, title: NUMERO, fill: '#D9D9D9' },
   { from: 1, to: 1, title: 'Район', fill: '#D9D9D9' },
-  { from: 2, to: 5, title: 'Автобусные остановки', fill: '#C9DAF8' },
-  { from: 6, to: 9, title: 'Пеш.переход', fill: '#D9EAD3' },
-  { from: 10, to: 13, title: 'Подъезды (Вх. гр.)', fill: '#F9CB9C' },
-  { from: 14, to: 17, title: 'Итого', fill: '#D9D9D9' },
+  { from: 2, to: 4, title: 'Автобусные остановки', fill: '#C9DAF8' },
+  { from: 5, to: 7, title: 'Пеш.переход', fill: '#D9EAD3' },
+  { from: 8, to: 10, title: 'Подъезды (Вх. гр.)', fill: '#F9CB9C' },
+  { from: 11, to: 13, title: 'Итого', fill: '#D9D9D9' },
 ]);
-const SUBHEADER_LABELS = Object.freeze(['Точек', 'Объектов', 'Факт', '%']);
+const SUBHEADER_LABELS = Object.freeze(['Объекты', 'Факт', '%']);
 
 const BAND_COLORS = Object.freeze({
   zero: '#EA9999', low: '#F4CCCC', middle: '#FFF2CC', high: '#D9EAD3',
@@ -49,8 +49,8 @@ const BAND_COLORS = Object.freeze({
 const BAND_TEXT = Object.freeze({
   zero: '#B3382B', low: '#B3382B', middle: '#B8791A', high: '#1C7A55',
 });
-const PERCENT_COLUMNS = Object.freeze([5, 9, 13, 17]);
-const PLAN_COLUMNS = Object.freeze([2, 6, 10, 14]);
+const PERCENT_COLUMNS = Object.freeze([4, 7, 10, 13]);
+const PLAN_COLUMNS = Object.freeze([2, 5, 8, 11]);
 
 const INK = '#000000';
 const MUTED = '#708089';

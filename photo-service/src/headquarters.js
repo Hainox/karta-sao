@@ -1,15 +1,11 @@
 import { OBJECT_TYPES } from './labels.js';
+import { AUTODOR_HOLDER, isAutodorHolder } from './scope.js';
 
 // Штаб считает работу по владельцу объекта: «АвД САО» ведёт свои объекты отдельно
 // от района, который их снимает. Туда же идут объекты с балансодержателем «ДЭУ»
 // (в источнике ПП это ДЭУ 1, ДЭУ 2, ДЭУ 3) и объекты без района — приписать их
-// конкретному району нельзя.
-export const AUTODOR_HOLDER = 'АвД САО';
-
-export function isAutodorHolder(holder) {
-  const value = String(holder || '').trim();
-  return value === AUTODOR_HOLDER || /^ДЭУ(\s|$)/i.test(value);
-}
+// конкретному району нельзя. Правило одно на выгрузку, картинку и учётку АвД.
+export { AUTODOR_HOLDER };
 
 // Единица учёта — отметка, то есть конкретная точка на карте, а не уникальный
 // объект: у одного перехода точек может быть несколько десятков, и снимается каждая.
@@ -20,11 +16,7 @@ function marks(item) {
 }
 
 export function emptyHeadquartersCounts() {
-  return {
-    plan: { stop: 0, pp: 0, entrance: 0 },
-    objects: { stop: 0, pp: 0, entrance: 0 },
-    fact: { stop: 0, pp: 0, entrance: 0 },
-  };
+  return { plan: { stop: 0, pp: 0, entrance: 0 }, fact: { stop: 0, pp: 0, entrance: 0 } };
 }
 
 export function headquartersCounts(items) {
@@ -32,8 +24,6 @@ export function headquartersCounts(items) {
   for (const item of items) {
     const value = marks(item);
     counts.plan[item.objectType] += value.plan;
-    // Объект считается по ID, точек у него может быть много.
-    counts.objects[item.objectType] += 1;
     counts.fact[item.objectType] += value.fact;
   }
   return counts;
@@ -42,14 +32,9 @@ export function headquartersCounts(items) {
 export function addHeadquartersCounts(target, counts) {
   for (const kind of OBJECT_TYPES) {
     target.plan[kind] += counts.plan[kind];
-    target.objects[kind] += counts.objects[kind];
     target.fact[kind] += counts.fact[kind];
   }
   return target;
-}
-
-export function headquartersObjectsTotal(counts) {
-  return counts.objects.stop + counts.objects.pp + counts.objects.entrance;
 }
 
 export function headquartersPlanTotal(counts) {
@@ -70,21 +55,16 @@ export function headquartersOverallPercent(counts) {
   return headquartersPercent(headquartersFactTotal(counts), headquartersPlanTotal(counts));
 }
 
-// Порядок колонок каждой категории: точек для отработки, объектов по ID,
-// закрытых отметок и процент по точкам.
+// Порядок колонок каждой категории: объекты (отметки, которые нужно отработать),
+// закрытые отметки и процент по ним.
 export function headquartersValues(counts) {
   const values = [];
   for (const kind of OBJECT_TYPES) {
-    values.push(
-      counts.plan[kind],
-      counts.objects[kind],
-      counts.fact[kind],
-      headquartersPercent(counts.fact[kind], counts.plan[kind]),
-    );
+    values.push(counts.plan[kind], counts.fact[kind], headquartersPercent(counts.fact[kind], counts.plan[kind]));
   }
   const plan = headquartersPlanTotal(counts);
   const fact = headquartersFactTotal(counts);
-  values.push(plan, headquartersObjectsTotal(counts), fact, headquartersPercent(fact, plan));
+  values.push(plan, fact, headquartersPercent(fact, plan));
   return values;
 }
 

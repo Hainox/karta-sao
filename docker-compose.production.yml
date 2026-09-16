@@ -49,6 +49,8 @@ services:
     depends_on:
       - api
     environment:
+      # Отчёты и журнал живут по московскому времени.
+      TZ: ${TZ:-Europe/Moscow}
       TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN:?Set TELEGRAM_BOT_TOKEN from @BotFather in .env}
       TELEGRAM_CHAT_IDS: ${TELEGRAM_CHAT_IDS:?Set TELEGRAM_CHAT_IDS in .env}
       NOTIFY_SECRET: ${NOTIFY_SECRET:?Set NOTIFY_SECRET in .env}

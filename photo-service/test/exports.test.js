@@ -150,19 +150,18 @@ test('лист «На штаб»: отметки по категориям, ст
   await workbook.xlsx.load(await buildExcel(rows));
   const sheet = workbook.getWorksheet('На штаб');
 
-  // Шапка: номер, район, три категории и итог; в каждой категории четыре столбца —
-  // отметки, объекты по ID, закрытые отметки и процент.
+  // Шапка: номер, район, три категории и итог; в каждой категории три столбца —
+  // объекты (отметки к отработке), закрытые отметки и процент.
   assert.equal(sheet.getCell('A1').value, '№');
   assert.equal(sheet.getCell('B1').value, 'Район');
   assert.equal(sheet.getCell('C1').value, 'Автобусные остановки');
-  assert.equal(sheet.getCell('G1').value, 'Пеш.переход');
-  assert.equal(sheet.getCell('K1').value, 'Подъезды (Вх. гр.)');
-  assert.equal(sheet.getCell('O1').value, 'Итого');
-  ['C', 'G', 'K', 'O'].forEach((column) => {
-    assert.equal(sheet.getCell(`${column}2`).value, 'Точек');
-    assert.equal(sheet.getCell(`${String.fromCharCode(column.charCodeAt(0) + 1)}2`).value, 'Объектов');
-    assert.equal(sheet.getCell(`${String.fromCharCode(column.charCodeAt(0) + 2)}2`).value, 'Факт');
-    assert.equal(sheet.getCell(`${String.fromCharCode(column.charCodeAt(0) + 3)}2`).value, '%');
+  assert.equal(sheet.getCell('F1').value, 'Пеш.переход');
+  assert.equal(sheet.getCell('I1').value, 'Подъезды (Вх. гр.)');
+  assert.equal(sheet.getCell('L1').value, 'Итого');
+  ['C', 'F', 'I', 'L'].forEach((column) => {
+    assert.equal(sheet.getCell(`${column}2`).value, 'Объекты');
+    assert.equal(sheet.getCell(`${String.fromCharCode(column.charCodeAt(0) + 1)}2`).value, 'Факт');
+    assert.equal(sheet.getCell(`${String.fromCharCode(column.charCodeAt(0) + 2)}2`).value, '%');
   });
 
   // Районы по алфавиту, «АвД САО» — последней строкой перед ИТОГО.
@@ -175,36 +174,33 @@ test('лист «На штаб»: отметки по категориям, ст
   // Аэропорт: остановка закрыта, переход — одна отметка из трёх.
   assert.equal(sheet.getCell('C3').value, 1);
   assert.equal(sheet.getCell('D3').value, 1);
-  assert.equal(sheet.getCell('E3').value, 1);
-  assert.equal(sheet.getCell('F3').value, 100);
-  assert.equal(sheet.getCell('G3').value, 3);
-  assert.equal(sheet.getCell('H3').value, 1);
-  assert.equal(sheet.getCell('I3').value, 1);
+  assert.equal(sheet.getCell('E3').value, 100);
+  assert.equal(sheet.getCell('F3').value, 3);
+  assert.equal(sheet.getCell('G3').value, 1);
   // Проценты округляются до целого: 1 из 3 — это 33 %.
-  assert.equal(sheet.getCell('J3').value, 33);
-  assert.equal(sheet.getCell('O3').value, 4);
-  assert.equal(sheet.getCell('P3').value, 2);
-  assert.equal(sheet.getCell('R3').value, 50);
+  assert.equal(sheet.getCell('H3').value, 33);
+  assert.equal(sheet.getCell('L3').value, 4);
+  assert.equal(sheet.getCell('M3').value, 2);
+  assert.equal(sheet.getCell('N3').value, 50);
 
   // У Сокола остановок нет, а остановки Коптева и объекта без района — у АвД.
   assert.equal(sheet.getCell('C4').value, 0);
-  assert.equal(sheet.getCell('K4').value, 1);
+  assert.equal(sheet.getCell('I4').value, 1);
   assert.equal(sheet.getCell('C5').value, 2);
-  assert.equal(sheet.getCell('D5').value, 2);
+  assert.equal(sheet.getCell('D5').value, 0);
   assert.equal(sheet.getCell('E5').value, 0);
 
-  // ИТОГО по САО: семь отметок у пяти объектов, закрыто две — 29 %.
+  // ИТОГО по САО: семь отметок, закрыто две — 29 %.
   assert.equal(sheet.getCell('A6').value, 'ИТОГО по САО');
-  assert.equal(sheet.getCell('O6').value, 7);
-  assert.equal(sheet.getCell('P6').value, 5);
-  assert.equal(sheet.getCell('Q6').value, 2);
-  assert.equal(sheet.getCell('R6').value, 29);
+  assert.equal(sheet.getCell('L6').value, 7);
+  assert.equal(sheet.getCell('M6').value, 2);
+  assert.equal(sheet.getCell('N6').value, 29);
   // У Сокола остановок нет: процент показывается нулём, а не пустой ячейкой.
-  assert.equal(sheet.getCell('F4').value, 0);
+  assert.equal(sheet.getCell('E4').value, 0);
   // Светофор записан и в сами ячейки: у АвД 0 % при плане 2 — тёмно-красный,
   // а где плана нет, ячейка остаётся белой.
-  assert.equal(sheet.getCell('F5').fill.fgColor.argb, 'FFEA9999');
-  assert.equal(sheet.getCell('F4').fill.fgColor.argb, 'FFFFFFFF');
+  assert.equal(sheet.getCell('E5').fill.fgColor.argb, 'FFEA9999');
+  assert.equal(sheet.getCell('E4').fill.fgColor.argb, 'FFFFFFFF');
 });
 
 test('лист «На штаб»: вторая таблица собирается формулой SORT, ниже — комментарий', async () => {
@@ -221,21 +217,21 @@ test('лист «На штаб»: вторая таблица собираетс
   // Вторая таблица идёт через три пустые строки, с той же шапкой.
   assert.equal(sheet.getCell('A10').value, '№');
   assert.equal(sheet.getCell('C10').value, 'Автобусные остановки');
-  assert.equal(sheet.getCell('C11').value, 'Точек');
+  assert.equal(sheet.getCell('C11').value, 'Объекты');
 
   // Числа второй таблицы отсортированы по «Итого, %» и собраны формулой.
   const anchor = sheet.getCell('B12').value;
-  assert.equal(anchor.formula, 'SORT(B3:R5,17,0)');
-  assert.equal(anchor.ref, 'B12:R14');
+  assert.equal(anchor.formula, 'SORT(B3:N5,13,0)');
+  assert.equal(anchor.ref, 'B12:N14');
   assert.equal(sheet.getCell('B12').result ?? anchor.result, 'Беговой');
   assert.equal(sheet.getCell('B13').value, 'Войковский');
   assert.equal(sheet.getCell('B14').value, 'Головинский');
-  assert.equal(sheet.getCell('Q12').value, 1);
+  assert.equal(sheet.getCell('M12').value, 1);
 
   // ИТОГО второй таблицы повторяет первую.
   assert.equal(sheet.getCell('A15').value, 'ИТОГО по САО');
-  assert.equal(sheet.getCell('O15').value, 3);
-  assert.equal(sheet.getCell('Q15').value, 1);
+  assert.equal(sheet.getCell('L15').value, 3);
+  assert.equal(sheet.getCell('M15').value, 1);
 
   // Комментарий начинается фиксированной строкой, дальше — разбор этой выгрузки.
   assert.match(String(sheet.getCell('A17').value), /^Направление — «Оцифровка объектов САО» — \d{2}\.\d{2}\.\d{4}, \d{2}:\d{2}(:\d{2})?$/);
@@ -262,17 +258,17 @@ test('проценты «На штаб» подсвечены светофоро
 
   // Светофор стоит на всех четырёх столбцах «%» в обеих таблицах.
   const refs = sheet.conditionalFormattings.map((block) => block.ref);
-  for (const column of ['F', 'J', 'N', 'R']) {
+  for (const column of ['E', 'H', 'K', 'N']) {
     assert.ok(refs.includes(`${column}3:${column}5`), `${column}: ${refs.join(', ')}`);
     assert.ok(refs.includes(`${column}11:${column}13`), `${column}: ${refs.join(', ')}`);
   }
 
   const [firstBlock] = sheet.conditionalFormattings;
   assert.deepEqual(firstBlock.rules.map((rule) => rule.formulae[0]), [
-    'AND($C3>0,ISNUMBER($F3),$F3<=0)',
-    'AND($C3>0,ISNUMBER($F3),AND($F3>0,$F3<33))',
-    'AND($C3>0,ISNUMBER($F3),AND($F3>=33,$F3<66))',
-    'AND($C3>0,ISNUMBER($F3),$F3>=66)',
+    'AND($C3>0,ISNUMBER($E3),$E3<=0)',
+    'AND($C3>0,ISNUMBER($E3),AND($E3>0,$E3<33))',
+    'AND($C3>0,ISNUMBER($E3),AND($E3>=33,$E3<66))',
+    'AND($C3>0,ISNUMBER($E3),$E3>=66)',
   ]);
   assert.deepEqual(firstBlock.rules.map((rule) => rule.style.fill.fgColor.argb), [
     'FFEA9999', 'FFF4CCCC', 'FFFFF2CC', 'FFD9EAD3',

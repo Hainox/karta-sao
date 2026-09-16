@@ -1,8 +1,8 @@
 import {
-  accuracyVerdict, assessDistanceRisk, bandNote, bandText, boundaryNote, buildCoverageIndex, buildQueue, canExport,
-  completionLabel, coverageFor, districtBoundaries, filterRecords, formatCoordinates, formatMeters,
-  geoStatusText, gpsDistanceLabel, groupLabel, groupValues, photoDetailRows,
-  reportSummaryRows, scopedDistricts, statusText,
+  accountScope, accuracyVerdict, assessDistanceRisk, bandNote, bandText, boundaryNote, buildCoverageIndex,
+  buildQueue, canExport, coverageBand, coverageFor, coverageLabel, coveragePercent, districtBoundaries,
+  filterRecords, formatCoordinates, formatMeters, geoStatusText, gpsDistanceLabel, groupLabel, groupValues,
+  photoDetailRows, reportSummaryRows, scopedDistricts, statusText,
 } from './photo-model.js';
 
 const API_FALLBACK = 'https://obhod-sao.ru/photo-api';
@@ -313,21 +313,24 @@ function boardRow(district) {
   const name = document.createElement('span');
   name.className = 'pa-board-name';
   name.textContent = district.district || 'Без района';
+  // Считаем охват: сколько объектов района уже с фото. Подтверждения приёмки
+  // могут прийти позже, но работа района видна сразу — как и в штабной таблице.
+  const percent = coveragePercent(district);
   const note = document.createElement('span');
   note.className = 'pa-board-note';
-  note.textContent = `${district.completedObjects} из ${district.totalObjects} объектов`;
+  note.textContent = `${district.objectsWithPhoto} из ${district.totalObjects} объектов с фото`;
   caption.append(name, note);
 
   const bar = document.createElement('span');
   bar.className = 'pa-board-bar';
-  bar.dataset.band = district.statusBand || 'none';
+  bar.dataset.band = coverageBand(percent);
   const fill = document.createElement('span');
-  fill.style.width = `${Math.max(0, Math.min(100, district.completionPercent || 0))}%`;
+  fill.style.width = `${Math.max(0, Math.min(100, percent))}%`;
   bar.appendChild(fill);
 
   const value = document.createElement('span');
   value.className = 'pa-board-value';
-  value.textContent = completionLabel({ overall: district });
+  value.textContent = `${percent} %`;
 
   row.append(caption, bar, value);
   if (!unassigned) {
@@ -371,11 +374,12 @@ function renderSummary() {
   head.className = 'pa-summary-head';
   const value = document.createElement('span');
   value.className = 'pa-summary-value';
-  value.textContent = completionLabel(state.summary);
+  value.textContent = coverageLabel(state.summary.overall);
+  const overviewBand = coverageBand(coveragePercent(state.summary.overall));
   const band = document.createElement('span');
   band.className = 'pa-summary-band';
-  band.dataset.band = state.summary.overall?.statusBand || 'none';
-  band.textContent = `${bandText(state.summary.overall?.statusBand)} — ${bandNote(state.summary.overall?.statusBand)}`;
+  band.dataset.band = overviewBand;
+  band.textContent = `${bandText(overviewBand)} — ${bandNote(overviewBand)}`;
   head.append(value, band);
   box.appendChild(head);
 
@@ -398,17 +402,21 @@ function renderSummary() {
     note.className = 'pa-unassigned';
     note.textContent = `Без района: ${state.summary.unassigned.totalObjects} объектов `
       + `(${String(state.summary.unassigned.objectsWithoutPhoto)} без фото, `
-      + `${String(state.summary.unassigned.completedObjects)} выполнено). `
+      + `${String(state.summary.unassigned.objectsWithPhoto)} с фото). `
       + 'Эти объекты входят в сводку САО отдельной строкой и не приписаны ни одному району.';
     box.appendChild(note);
   }
 }
 
 function currentRecords() {
+  const scope = accountScope(state.user, state.summary);
   return filterRecords(state.dataset?.records || [], {
     query: element('paSearch').value,
     group: element('paGroupFilter').value,
-    district: scopeDistrict(),
+    // Учётная запись района ограничена своим районом, АвД — списком своих
+    // объектов из сводки, префектура идёт за фильтром на экране.
+    district: state.user?.role === 'district_editor' ? scope.district : element('paDistrictFilter').value,
+    objectKeys: scope.objectKeys,
     status: element('paStatusFilter').value,
     coverageIndex: state.coverage,
     objectType: state.entry.objectType,
@@ -482,13 +490,6 @@ function renderLegend() {
 
 function allDistrictNames() {
   return (state.districts?.features || []).map((feature) => feature.properties.district).filter(Boolean);
-}
-
-// The district the register and the map are scoped to: a district account is always
-// pinned to its own district, the prefecture follows its filter.
-function scopeDistrict() {
-  if (state.user?.role === 'district_editor') return state.user.district || '';
-  return element('paDistrictFilter').value;
 }
 
 // What the client asks the server for. A district account is scoped server side, so it

@@ -32,6 +32,8 @@ services:
       PHOTO_SERVICE_COOKIE_SECURE: ${PHOTO_SERVICE_COOKIE_SECURE:-false}
       PHOTO_SERVICE_COOKIE_PATH: ${PHOTO_SERVICE_COOKIE_PATH:-/photo-api}
       PHOTO_SERVICE_COOKIE_SAMESITE: ${PHOTO_SERVICE_COOKIE_SAMESITE:-lax}
+      # Отчёты печатают дату формирования по московскому времени.
+      TZ: ${TZ:-Europe/Moscow}
       NOTIFY_URL: ${NOTIFY_URL:-http://sao-notify:8790}
       NOTIFY_SECRET: ${NOTIFY_SECRET:-}
       # Ежечасная сводка штаба картинкой в Telegram.

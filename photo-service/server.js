@@ -14,6 +14,7 @@ import { clientAddress } from './src/client-address.js';
 import { buildExcel, buildHeadquartersExcel, buildPdf } from './src/exports.js';
 import { loadReportRows, reportPayload } from './src/reports.js';
 import { mediaRoot, readMedia, removeMedia, writeMedia } from './src/storage.js';
+import { HOLDER_SELECT_SQL, objectAllowedFor } from './src/scope.js';
 import { createNotifyClient } from './src/notify.js';
 
 const port = Number(process.env.PHOTO_SERVICE_PORT || 8788);
@@ -154,10 +155,10 @@ async function handleUpload(request, response, user) {
   // Позиция по сети вместо спутника: одна точка на город и точность в сотни
   // километров. Принять такую фиксацию нельзя — она не подтверждает место.
   if (isUnusableAccuracy(gps.accuracy)) return sendError(response, request, 400, 'gps_accuracy_unusable');
-  const objectResult = await pool.query('SELECT object_key, reference_points, district FROM objects WHERE dataset_id = $1 AND $2 = ANY(source_ids) LIMIT 1', [datasetId, sourceId]);
+  const objectResult = await pool.query(`SELECT object_key, reference_points, district, ${HOLDER_SELECT_SQL} FROM objects o WHERE dataset_id = $1 AND $2 = ANY(source_ids) LIMIT 1`, [datasetId, sourceId]);
   const object = objectResult.rows[0];
   if (!object) return sendError(response, request, 404, 'object_not_found');
-  if (user.role === 'district_editor' && object.district !== user.district) return sendError(response, request, 403, 'object_out_of_scope');
+  if (!objectAllowedFor(user, object)) return sendError(response, request, 403, 'object_out_of_scope');
   let geo = assessDistanceRisk(gps, object.reference_points || []);
   if (gps.accuracy === null) geo = { ...geo, status: 'review', reason: 'gps_accuracy_missing' };
   else if (gps.accuracy > 5) geo = { ...geo, status: 'review', reason: 'gps_accuracy_above_5m' };
@@ -268,9 +269,9 @@ async function handler(request, response) {
       const datasetId = url.searchParams.get('datasetId');
       const sourceId = url.searchParams.get('sourceId');
       if (!datasetId || !sourceId) return sendError(response, request, 400, 'dataset_source_required');
-      const objectResult = await pool.query('SELECT object_key, district FROM objects WHERE dataset_id = $1 AND $2 = ANY(source_ids) LIMIT 1', [datasetId, sourceId]);
+      const objectResult = await pool.query(`SELECT object_key, district, ${HOLDER_SELECT_SQL} FROM objects o WHERE dataset_id = $1 AND $2 = ANY(source_ids) LIMIT 1`, [datasetId, sourceId]);
       const object = objectResult.rows[0];
-      if (!object || (user.role === 'district_editor' && object.district !== user.district)) return sendError(response, request, 404, 'object_not_found');
+      if (!object || !objectAllowedFor(user, object)) return sendError(response, request, 404, 'object_not_found');
       // Снимок принадлежит конкретной точке: у объекта с тем же ID могут быть
       // другие точки, и чужие кадры на них показывать нельзя.
       const result = await pool.query(`SELECT id, storage_key, mime_type, original_filename, byte_size, performer, comment, captured_at, uploaded_at, gps_latitude, gps_longitude, gps_accuracy_m, distance_m, geo_status, review_status, review_reason, is_reference, source_id FROM photos WHERE object_key = $1 AND source_id = $2 AND review_status <> 'rejected' ORDER BY uploaded_at`, [object.object_key, sourceId]);

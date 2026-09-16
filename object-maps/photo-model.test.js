@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import {
-  accuracyVerdict, assessDistanceRisk, bandNote, bandText, boundaryNote, buildCoverageIndex, buildQueue, canExport,
-  completionLabel, coverageFor, districtBoundaries, filterRecords, formatAccuracy, formatCoordinates,
+  accountScope, accuracyVerdict, assessDistanceRisk, bandNote, bandText, boundaryNote, buildCoverageIndex, buildQueue, canExport,
+  coverageFor, coverageLabel, coveragePercent, districtBoundaries, filterRecords, formatAccuracy, formatCoordinates,
   formatDateTime, formatMeters, geoStatusText, gpsDistanceLabel, haversineDistanceMeters, normalizePhoto,
   photoDetailRows, POINT_PHOTO_REQUIREMENT, reportSummaryRows, reviewStatusText, scopedDistricts,
 } from './photo-model.js';
@@ -181,9 +181,10 @@ test('the on-screen summary always carries a number and a band word', () => {
     },
   });
   const byKey = Object.fromEntries(rows.map((row) => [row.key, row.value]));
-  assert.equal(byKey['Выполнение'], '34,0 %');
+  // Главный показатель — охват: сколько объектов уже с фото.
+  assert.equal(byKey['Охват'], '40 %');
   assert.equal(byKey['Статус'], 'Жёлтый — выполнение от 33 % до 66 %');
-  assert.equal(byKey['Частично заполнено'], '6');
+  assert.equal(byKey['Подтверждено приёмкой'], '34');
   assert.equal(byKey['Риск геопревышения'], '2');
 });
 
@@ -195,10 +196,12 @@ test('the summary is read from the nested overall section, not the payload root'
     unassigned: { totalObjects: 2, objectsWithoutPhoto: 2, completedObjects: 0 },
     objects: [],
   };
-  assert.equal(reportSummaryRows(payload).length, 9);
-  assert.equal(completionLabel(payload), '50,0 %');
-  assert.equal(completionLabel({ overall: { completionPercent: null } }), 'нет данных');
-  assert.equal(completionLabel({}), 'нет данных');
+  assert.equal(reportSummaryRows(payload).length, 8);
+  // Объекты есть, фото пока нет — это ноль процентов, а не «нет данных».
+  assert.equal(coverageLabel(payload.overall), '0 %');
+  assert.equal(coveragePercent(payload.overall), 0);
+  assert.equal(coverageLabel({ totalObjects: 0 }), 'нет данных');
+  assert.equal(coverageLabel({ totalObjects: 10, objectsWithPhoto: 5 }), '50 %');
   assert.deepEqual(reportSummaryRows({ unassigned: { totalObjects: 3 } }), []);
 });
 
@@ -210,7 +213,7 @@ test('an empty scope is reported as having no data instead of zero percent', () 
     },
   });
   const byKey = Object.fromEntries(rows.map((row) => [row.key, row.value]));
-  assert.equal(byKey['Выполнение'], 'нет данных');
+  assert.equal(byKey['Охват'], 'нет данных');
   assert.equal(bandText(null), 'Нет данных');
   assert.equal(bandNote(null), 'Недостаточно данных для оценки');
 });
@@ -320,6 +323,40 @@ test('the boundary note names what is on screen', () => {
   assert.equal(boundaryNote(['Аэропорт', 'Сокол'], 16), 'Показаны границы районов: Аэропорт, Сокол.');
   assert.equal(boundaryNote(['A', 'B'], 2), 'Показаны границы всех 2 районов.');
   assert.equal(boundaryNote([], 16), 'Границы районов не показаны.');
+});
+
+test('учётка АвД видит свои объекты во всех районах, а районная — только свой', () => {
+  const summary = {
+    objects: [
+      { objectKey: 'a', objectType: 'stop', district: 'Аэропорт' },
+      { objectKey: 'b', objectType: 'pp', district: 'Коптево' },
+    ],
+  };
+  const autodor = { role: 'district_editor', district: 'АвД САО' };
+  const scope = accountScope(autodor, summary);
+  assert.equal(scope.district, '');
+  assert.deepEqual([...scope.objectKeys].sort(), ['a', 'b']);
+  // Границы показываем все: объекты владельца стоят в разных районах.
+  assert.deepEqual(scopedDistricts(autodor, '', ['Аэропорт', 'Коптево']), ['Аэропорт', 'Коптево']);
+
+  const records = [
+    { id: 'stop:1', label: 'Свой', group: 'Аэропорт', searchKey: 'свой' },
+    { id: 'stop:2', label: 'Чужой', group: 'Сокол', searchKey: 'чужой' },
+  ];
+  const index = buildCoverageIndex({
+    objects: [
+      { objectKey: 'a', objectType: 'stop', district: 'Аэропорт', sourceIds: ['stop:1'], photos: [] },
+      { objectKey: 'c', objectType: 'stop', district: 'Сокол', sourceIds: ['stop:2'], photos: [] },
+    ],
+  });
+  const shown = filterRecords(records, { ...scope, coverageIndex: index, objectType: 'stop' });
+  assert.deepEqual(shown.map((record) => record.id), ['stop:1']);
+
+  // Районная учётка остаётся в своём районе.
+  const airport = accountScope({ role: 'district_editor', district: 'Аэропорт' }, summary);
+  assert.equal(airport.district, 'Аэропорт');
+  assert.equal(airport.objectKeys, null);
+  assert.deepEqual(scopedDistricts({ role: 'district_editor', district: 'Аэропорт' }, '', ['Аэропорт', 'Коптево']), ['Аэропорт']);
 });
 
 test('a district account is scoped to its own district and cannot export', () => {

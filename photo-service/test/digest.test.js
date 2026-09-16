@@ -48,7 +48,7 @@ test('картинка сводки: PNG с таблицей и подписью
 
   assert.equal(png.subarray(0, 8).toString('latin1'), '\u0089PNG\r\n\u001a\n');
   assert.ok(png.length > 10000, `картинка слишком маленькая: ${png.length} байт`);
-  assert.equal(png.readUInt32BE(16), 1762);
+  assert.equal(png.readUInt32BE(16), 1386);
 
   assert.match(caption, /^Направление — «Оцифровка объектов САО» — /);
   assert.match(caption, /Коллеги, добрый день!/);

@@ -1,9 +1,14 @@
 import { summarizeCoverageByType, summarizeCoverage, summarizeByDistrict } from './report.js';
+import { AUTODOR_OBJECT_SQL, isAutodorAccount } from './scope.js';
 
 const TYPES = new Set(['stop', 'pp', 'entrance']);
 
 function scopeClause(user, requestedDistrict) {
-  if (user.role === 'district_editor') return { sql: 'o.district = $1', params: [user.district] };
+  // Учётка АвД ведёт объекты владельца по всему округу, а не по одному району.
+  if (user.role === 'district_editor') {
+    if (isAutodorAccount(user.district)) return { sql: AUTODOR_OBJECT_SQL, params: [] };
+    return { sql: 'o.district = $1', params: [user.district] };
+  }
   if (requestedDistrict && requestedDistrict !== 'all') return { sql: 'o.district = $1', params: [requestedDistrict] };
   return { sql: 'TRUE', params: [] };
 }

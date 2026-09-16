@@ -229,12 +229,14 @@ export function recordMatches(record, query, searchKeyFallback) {
  * `district` is only offered to a prefecture role; a district role is scoped server side.
  */
 export function filterRecords(records, options = {}) {
-  const { query = '', group = '', district = '', status = 'all' } = options;
+  const { query = '', group = '', district = '', status = 'all', objectKeys = null } = options;
   const { coverageIndex, objectType } = options;
   return records.filter((record) => {
     if (!recordMatches(record, query)) return false;
     if (group && record.group !== group) return false;
     const coverage = coverageFor(coverageIndex, record, objectType);
+    // Учётка АвД ведёт объекты по всему округу: их список приходит из сводки.
+    if (objectKeys && !objectKeys.has(coverage.objectKey)) return false;
     if (district && coverage.district !== district) return false;
     if (status === 'without' && coverage.withPhoto) return false;
     if (status === 'with' && !coverage.withPhoto) return false;
@@ -262,35 +264,47 @@ export function buildQueue(records, options = {}) {
     });
 }
 
+/**
+ * Охват — доля объектов, по которым район уже загрузил хотя бы одно фото.
+ * Именно по нему видно работу районов: подтверждений приёмки может не быть
+ * неделями, а снимки уже лежат на проверке. В штабной таблице тот же счёт.
+ */
+export function coveragePercent(summary) {
+  const total = Number(summary?.totalObjects) || 0;
+  if (!total) return 0;
+  return Math.round(((Number(summary.objectsWithPhoto) || 0) / total) * 100);
+}
+
+export function coverageBand(percent) {
+  if (percent < 33) return 'low';
+  if (percent < 66) return 'middle';
+  return 'high';
+}
+
+export function coverageLabel(summary) {
+  if (!Number(summary?.totalObjects)) return 'нет данных';
+  return `${coveragePercent(summary)} %`;
+}
+
 // /reports/summary nests the SAO-wide counters under `overall`, so the rows are read
 // from that object instead of the payload root.
 export function reportSummaryRows(payload) {
   const summary = payload?.overall;
   if (!summary) return [];
+  const band = coverageBand(coveragePercent(summary));
   const rows = [
     { key: 'Всего объектов', value: String(summary.totalObjects ?? 0) },
     { key: 'С фото', value: String(summary.objectsWithPhoto ?? 0) },
     { key: 'Без фото', value: String(summary.objectsWithoutPhoto ?? 0) },
-    { key: 'Выполнено по норме', value: String(summary.completedObjects ?? 0) },
-    { key: 'Частично заполнено', value: String(summary.partialObjects ?? 0) },
+    { key: 'Охват', value: coverageLabel(summary) },
     { key: 'На проверке', value: String(summary.pendingReviewObjects ?? 0) },
+    { key: 'Подтверждено приёмкой', value: String(summary.completedObjects ?? 0) },
     { key: 'Риск геопревышения', value: String(summary.geoRiskObjects ?? 0) },
-    {
-      key: 'Выполнение',
-      value: summary.completionPercent === null || summary.completionPercent === undefined
-        ? 'нет данных'
-        : `${summary.completionPercent.toFixed(1).replace('.', ',')} %`,
-    },
-    { key: 'Статус', value: `${bandText(summary.statusBand)} — ${bandNote(summary.statusBand)}` },
+    { key: 'Статус', value: `${bandText(band)} — ${bandNote(band)}` },
   ];
   return rows;
 }
 
-export function completionLabel(payload) {
-  const percent = payload?.overall?.completionPercent;
-  if (percent === null || percent === undefined) return 'нет данных';
-  return `${percent.toFixed(1).replace('.', ',')} %`;
-}
 
 // The dataset payload carries the group label under a dataset-specific name.
 export function groupLabel(dataset) {
@@ -334,9 +348,34 @@ export function boundaryNote(districts, totalDistricts) {
 
 // A district account may only work with its own district.
 export function scopedDistricts(user, selectedDistrict, allDistricts) {
-  if (user?.role === 'district_editor') return user.district ? [user.district] : [];
+  if (user?.role === 'district_editor') {
+    // Учётка владельца работает по всему округу, поэтому ей показываем все границы.
+    if (isAutodorAccount(user.district)) return allDistricts || [];
+    return user.district ? [user.district] : [];
+  }
   if (selectedDistrict) return [selectedDistrict];
   return allDistricts;
+}
+
+/** Название учётки владельца: она ведёт свои объекты во всех районах. */
+export const AUTODOR_ACCOUNT = 'АвД САО';
+
+export function isAutodorAccount(district) {
+  return String(district ?? '').trim().toLowerCase() === AUTODOR_ACCOUNT.toLowerCase();
+}
+
+/**
+ * Границы выборки для учётки. Районная учётка ходит по своему району, а учётка
+ * АвД — по списку своих объектов из сводки: её объекты стоят в разных районах,
+ * и фильтр по району показал бы пустой список.
+ */
+export function accountScope(user, summary) {
+  if (user?.role !== 'district_editor') return { district: '', objectKeys: null };
+  if (isAutodorAccount(user.district)) {
+    const objectKeys = new Set((summary?.objects || []).map((object) => object.objectKey).filter(Boolean));
+    return { district: '', objectKeys };
+  }
+  return { district: user.district || '', objectKeys: null };
 }
 
 export function canExport(user) {
