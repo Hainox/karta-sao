@@ -13,12 +13,16 @@ export async function loadReportRows(pool, user, requestedDistrict) {
   const result = await pool.query(`
     SELECT o.object_key, o.dataset_id, o.object_type, o.report_key, o.source_ids, o.district,
            o.label, o.reference_points, o.properties, o.source_version,
+           -- Балансодержатель и ОДХ лежат в свойствах под разными именами по наборам:
+           -- у остановок «Балансодержатель», у ПП «Баланс», у подъездов своего нет.
+           coalesce(nullif(o.properties->>'Балансодержатель', ''), nullif(o.properties->>'Баланс', '')) AS balance_holder,
+           nullif(o.properties->>'ID объекта ОДХ', '') AS odh_id,
            count(p.id) FILTER (WHERE p.review_status = 'confirmed')::int AS confirmed_photos,
            count(p.id) FILTER (WHERE p.review_status = 'pending_review')::int AS pending_review_photos,
            coalesce(bool_or(p.geo_status = 'risk'), false) AS geo_risk,
            json_agg(json_build_object(
              'id', p.id, 'storageKey', p.storage_key, 'thumbnailKey', p.thumbnail_key, 'mimeType', p.mime_type,
-             'originalFilename', p.original_filename, 'byteSize', p.byte_size,
+             'originalFilename', p.original_filename, 'byteSize', p.byte_size, 'sha256', p.sha256,
              'performer', p.performer, 'comment', p.comment, 'capturedAt', p.captured_at,
              'uploadedAt', p.uploaded_at, 'gpsLatitude', p.gps_latitude,
              'gpsLongitude', p.gps_longitude, 'gpsAccuracyM', p.gps_accuracy_m,
@@ -74,6 +78,8 @@ export function reportPayload(rows) {
       sourceIds: row.source_ids,
       district: row.district,
       label: row.label,
+      balanceHolder: row.balance_holder || null,
+      odhId: row.odh_id || null,
       referencePoints: row.reference_points,
       sourceVersion: row.source_version,
       confirmedPhotos: row.confirmedPhotos,
