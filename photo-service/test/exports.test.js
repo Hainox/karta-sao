@@ -102,7 +102,7 @@ test('сводная отчётность несёт отдельный лист
 
   assert.deepEqual(
     workbook.worksheets.map((sheet) => sheet.name),
-    ['Обзор', 'Районы', 'Динамика', 'Риск', 'Объекты', 'Фотографии'],
+    ['Обзор', 'На штаб', 'Районы', 'Динамика', 'Риск', 'Объекты', 'Фотографии'],
   );
 
   const riskSheet = workbook.getWorksheet('Риск');
@@ -126,4 +126,35 @@ test('сводная отчётность несёт отдельный лист
 
   // Обычная фиксация в риски не попадает.
   assert.equal(riskSheet.rowCount - 1, 4);
+});
+
+test('лист «На штаб» даёт процент выполнения по каждому типу объектов', async () => {
+  const rows = [
+    { ...reportRow('stop', 'Аэропорт', 1), object_key: 'stop-1' },
+    { ...reportRow('stop', 'Аэропорт', 0), object_key: 'stop-2' },
+    { ...reportRow('pp', 'Аэропорт', 1), object_key: 'pp-1' },
+    { ...reportRow('entrance', 'Ховрино', 1), object_key: 'entrance-1' },
+  ];
+
+  const workbook = new ExcelJS.Workbook();
+  await workbook.xlsx.load(await buildExcel(rows));
+  const sheet = workbook.getWorksheet('На штаб');
+
+  // У каждой категории свои План, Факт и процент.
+  assert.equal(sheet.getCell('C3').value, 'План');
+  assert.equal(sheet.getCell('E3').value, '%');
+
+  // Аэропорт: две остановки, фото на одной — 50 %; переход с фото — 100 %.
+  assert.equal(sheet.getCell('A4').value, 'Жилищник «Аэропорт»');
+  assert.equal(sheet.getCell('C4').value, 2);
+  assert.equal(sheet.getCell('D4').value, 1);
+  assert.equal(sheet.getCell('E4').value, 50);
+  assert.equal(sheet.getCell('F4').value, 1);
+  assert.equal(sheet.getCell('H4').value, 100);
+
+  // ИТОГО: четыре объекта, фото у трёх — 75 %.
+  assert.equal(sheet.getCell('A7').value, 'ИТОГО по САО');
+  assert.equal(sheet.getCell('L7').value, 4);
+  assert.equal(sheet.getCell('M7').value, 3);
+  assert.equal(sheet.getCell('N7').value, 75);
 });

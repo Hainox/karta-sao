@@ -134,6 +134,162 @@ export async function buildExcel(rows) {
 
   if (coverageRow) {
     overview.addConditionalFormatting({ ref: `B${coverageRow}:B${coverageRow}`, rules: [PERCENT_BAR('FF1C7A55')] });
+  /* --------------------------------------------------------------- «На штаб» */
+  // Короткая форма ОУИФР для штаба: те же объекты, но по типам и с процентом
+  // выполнения в каждой категории. Отдельный лист, чтобы «Обзор» не разрастался.
+  const headquarters = workbook.addWorksheet('На штаб');
+  [32, 13, 10, 10, 9, 10, 10, 9, 10, 10, 9, 10, 10, 9].forEach((width, index) => {
+    headquarters.getColumn(index + 1).width = width;
+  });
+  headquarters.mergeCells('A1:N1');
+  headquarters.getCell('A1').value = 'ОУИФР — сводка по типам объектов';
+  headquarters.getCell('A1').font = { bold: true, size: 14, color: { argb: 'FF1F3B57' } };
+  headquarters.getRow(1).height = 26;
+
+  // Бледные цвета категорий: помогают глазу, но смысл несёт название, а не цвет.
+  const solid = (argb) => ({ type: 'pattern', pattern: 'solid', fgColor: { argb } });
+  const CATEGORY_FILLS = {
+    stop: solid('FFD8E4F0'), pp: solid('FFFDEBD0'), entrance: solid('FFDDEFE0'), total: solid('FFE8E8EA'),
+  };
+  const HEADQUARTERS_GROUPS = [
+    [1, 1, 'Балансодержатель', null], [2, 2, 'Адрес', null], [3, 5, 'Автобусные остановки', 'stop'],
+    [6, 8, 'Пеш.переход', 'pp'], [9, 11, 'Подъезды (Вх. гр.)', 'entrance'], [12, 14, 'Итого', 'total'],
+  ];
+  for (const [start, finish, title, category] of HEADQUARTERS_GROUPS) {
+    if (start !== finish) headquarters.mergeCells(2, start, 2, finish);
+    else headquarters.mergeCells(2, start, 3, start);
+    headquarters.getCell(2, start).value = title;
+    for (let column = start; column <= finish; column += 1) {
+      const cell = headquarters.getCell(2, column);
+      cell.font = { bold: true, size: 10, color: { argb: 'FF1F3B57' } };
+      cell.fill = category ? CATEGORY_FILLS[category] : SECTION_FILL;
+      cell.alignment = { horizontal: 'center', vertical: 'middle' };
+    }
+  }
+  for (const [start, , , category] of HEADQUARTERS_GROUPS) {
+    if (!category) continue;
+    ['План', 'Факт', '%'].forEach((label, offset) => {
+      const cell = headquarters.getCell(3, start + offset);
+      cell.value = label;
+      cell.font = { bold: true, size: 9 };
+      cell.fill = CATEGORY_FILLS[category];
+      cell.alignment = { horizontal: 'center' };
+    });
+  }
+
+  const headquartersCounts = (items) => {
+    const plan = { stop: 0, pp: 0, entrance: 0 };
+    const fact = { stop: 0, pp: 0, entrance: 0 };
+    for (const item of items) {
+      plan[item.objectType] += 1;
+      if ((item.confirmedPhotos || 0) + (item.pendingReviewPhotos || 0) > 0) fact[item.objectType] += 1;
+    }
+    return { plan, fact };
+  };
+  const headquartersPercent = (fact, plan) => (plan ? Number(((fact / plan) * 100).toFixed(1)) : null);
+  const headquartersValues = (counts) => {
+    const values = [];
+    for (const kind of OBJECT_TYPES) {
+      values.push(counts.plan[kind], counts.fact[kind], headquartersPercent(counts.fact[kind], counts.plan[kind]));
+    }
+    const plan = counts.plan.stop + counts.plan.pp + counts.plan.entrance;
+    const fact = counts.fact.stop + counts.fact.pp + counts.fact.entrance;
+    values.push(plan, fact, headquartersPercent(fact, plan));
+    return values;
+  };
+  const addHeadquartersRow = (values, options = {}) => {
+    const row = headquarters.addRow(values);
+    if (options.bold) row.font = { bold: true };
+    for (const column of [5, 8, 11, 14]) row.getCell(column).numFmt = '0.0"%"';
+    for (let column = 3; column <= values.length; column += 1) row.getCell(column).alignment = { horizontal: 'center' };
+    if (options.fill) {
+      for (let column = 1; column <= values.length; column += 1) row.getCell(column).fill = options.fill;
+    }
+    return row;
+  };
+
+  const headquartersObjects = payload.objects;
+  const headquartersTotal = { plan: { stop: 0, pp: 0, entrance: 0 }, fact: { stop: 0, pp: 0, entrance: 0 } };
+  const headquartersDistricts = [...new Set(headquartersObjects.map((item) => item.district).filter(Boolean))]
+    .sort((left, right) => left.localeCompare(right, 'ru'));
+  for (const district of headquartersDistricts) {
+    const counts = headquartersCounts(headquartersObjects.filter((item) => item.district === district));
+    for (const kind of OBJECT_TYPES) {
+      headquartersTotal.plan[kind] += counts.plan[kind];
+      headquartersTotal.fact[kind] += counts.fact[kind];
+    }
+    addHeadquartersRow([`Жилищник «${district}»`, 'весь район', ...headquartersValues(counts)]);
+  }
+  const headquartersUnassigned = headquartersCounts(headquartersObjects.filter((item) => !item.district));
+  addHeadquartersRow(['Не распределено по районам', '—', ...headquartersValues(headquartersUnassigned)]);
+  addHeadquartersRow(['ИТОГО по САО', '16 районов', ...headquartersValues(headquartersTotal)], { bold: true, fill: TOTAL_FILL });
+
+  // Тот же объём работ со стороны владельца объекта.
+  const headquartersHolders = new Map();
+  for (const item of headquartersObjects) {
+    const key = (item.balanceHolder || '').trim() || null;
+    if (!headquartersHolders.has(key)) headquartersHolders.set(key, []);
+    headquartersHolders.get(key).push(item);
+  }
+  const holderRank = (holder) => {
+    if (holder === null) return 3;
+    const counts = headquartersCounts(headquartersHolders.get(holder));
+    if (counts.plan.stop) return 0;
+    return counts.plan.pp ? 1 : 2;
+  };
+  const holderLabel = (holder) => {
+    if (holder === null) return 'Без балансодержателя в источнике (подъезды)';
+    return holder === '#N/A' ? 'Не указан в источнике (#N/A)' : holder;
+  };
+  const orderedHolders = [...headquartersHolders.keys()].sort((left, right) => {
+    const byRank = holderRank(left) - holderRank(right);
+    if (byRank !== 0) return byRank;
+    if (left === 'АвД САО') return -1;
+    if (right === 'АвД САО') return 1;
+    return String(left || '').localeCompare(String(right || ''), 'ru');
+  });
+
+  headquarters.addRow([]);
+  const holdersTitleRow = headquarters.rowCount + 1;
+  headquarters.mergeCells(holdersTitleRow, 1, holdersTitleRow, 14);
+  const holdersTitle = headquarters.getCell(holdersTitleRow, 1);
+  holdersTitle.value = 'ТЕ ЖЕ ОБЪЕКТЫ ПО БАЛАНСОДЕРЖАТЕЛЯМ';
+  holdersTitle.font = { bold: true, size: 11, color: { argb: 'FF1F3B57' } };
+  holdersTitle.fill = SECTION_FILL;
+  const holdersHeaderRow = holdersTitleRow + 1;
+  ['Балансодержатель', 'Адрес'].forEach((label, offset) => {
+    const cell = headquarters.getCell(holdersHeaderRow, offset + 1);
+    cell.value = label;
+    cell.font = { bold: true, size: 9 };
+    cell.fill = SECTION_FILL;
+  });
+  for (const [start, , , category] of HEADQUARTERS_GROUPS) {
+    if (!category) continue;
+    ['План', 'Факт', '%'].forEach((label, offset) => {
+      const cell = headquarters.getCell(holdersHeaderRow, start + offset);
+      cell.value = label;
+      cell.font = { bold: true, size: 9 };
+      cell.fill = CATEGORY_FILLS[category];
+      cell.alignment = { horizontal: 'center' };
+    });
+  }
+  const holdersTotal = { plan: { stop: 0, pp: 0, entrance: 0 }, fact: { stop: 0, pp: 0, entrance: 0 } };
+  for (const holder of orderedHolders) {
+    const counts = headquartersCounts(headquartersHolders.get(holder));
+    for (const kind of OBJECT_TYPES) {
+      holdersTotal.plan[kind] += counts.plan[kind];
+      holdersTotal.fact[kind] += counts.fact[kind];
+    }
+    addHeadquartersRow([holderLabel(holder), 'весь САО', ...headquartersValues(counts)]);
+  }
+  addHeadquartersRow(['ИТОГО по САО', 'все объекты САО', ...headquartersValues(holdersTotal)], { bold: true, fill: TOTAL_FILL });
+
+  const headquartersNoteRow = headquarters.rowCount + 2;
+  headquarters.mergeCells(headquartersNoteRow, 1, headquartersNoteRow, 14);
+  const headquartersNote = headquarters.getCell(headquartersNoteRow, 1);
+  headquartersNote.value = 'Факт — объекты, по которым район уже загрузил хотя бы одно фото (охват); снимки находятся на проверке префектуры, подтверждённых приёмкой пока нет. Процент считается по каждой категории отдельно.';
+  headquartersNote.font = { size: 8, color: { argb: 'FF708089' } };
+
   }
 
   const districts = payload.byDistrict;
