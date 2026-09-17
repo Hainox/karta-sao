@@ -641,7 +641,7 @@
   function collectBase(submissions) {
     const byDistrict = new Map();
     const blank = (name) => ({
-      district: name, types: {}, kinds: kindsBlank(), total: 0,
+      district: name, types: {}, kinds: kindsBlank(), objects: [], total: 0,
       submitted: 0, approved: 0, rejected: 0, lastSubmittedAt: null
     });
     const ensure = (name) => {
@@ -652,10 +652,12 @@
     for (const submission of Array.isArray(submissions) ? submissions : []) {
       const item = ensure(String((submission && submission.district) || '').trim() || AUTODOR_HOLDER);
       const changeSet = (submission && submission.change_set) || {};
-      for (const feature of changeSet.features || []) {
+      for (const [index, feature] of (changeSet.features || []).entries()) {
         const key = (feature && feature.properties && feature.properties.change_type) || 'other';
         item.types[key] = (item.types[key] || 0) + 1;
         item.total += 1;
+        // Строки объектов нужны порайонной выгрузке: лист района собирается из них.
+        item.objects.push(objectRow(feature, submission, index));
         const kind = groupOfType(key);
         item.kinds[kind].plan += 1;
         if (submission.status === 'submitted') item.submitted += 1;
@@ -942,6 +944,216 @@
     return workbook;
   }
 
+  /** Кое-что для людей: состояние набора словами, а не кодом. */
+  const STATUS_WORDS = Object.freeze({
+    submitted: 'на приёмке', approved: 'утверждён', rejected: 'отклонён'
+  });
+
+  /** Первая позиция геометрии: у маршрута — начало, у точки — сама точка, у зоны — угол. */
+  function firstPosition(coordinates) {
+    if (!Array.isArray(coordinates)) return null;
+    if (typeof coordinates[0] === 'number') return coordinates.length >= 2 ? coordinates : null;
+    for (const child of coordinates) {
+      const found = firstPosition(child);
+      if (found) return found;
+    }
+    return null;
+  }
+
+  /**
+   * Строка объекта для порайонной выгрузки. Обозначение и тип берём из общего
+   * словаря district-changes.js: то же, что район видит в редакторе, а префектура
+   * в приёмке, — иначе в выгрузке были бы свои имена.
+   */
+  function objectRow(feature, submission, index) {
+    const dictionary = window.DistrictChanges;
+    const properties = (feature && feature.properties) || {};
+    const type = dictionary && dictionary.TYPES ? dictionary.TYPES[properties.change_type] : null;
+    const facts = dictionary ? dictionary.routeFactsFor(feature) : null;
+    const position = firstPosition([properties.route_start, (feature && feature.geometry && feature.geometry.coordinates)]);
+    const coordinates = position && Number.isFinite(Number(position[0])) && Number.isFinite(Number(position[1]))
+      ? `${Number(position[1]).toFixed(5)}, ${Number(position[0]).toFixed(5)}`
+      : '';
+    return {
+      district: String((submission && submission.district) || '').trim() || AUTODOR_HOLDER,
+      badge: dictionary ? dictionary.badgeFor(feature, index) : String(index + 1),
+      type: (type && type.label) || properties.change_type || 'Объект',
+      queue: (type && type.priorityNames && type.priorityNames[String(properties.queue_priority)]) || '',
+      address: String(properties.address || '').trim(),
+      author: String(properties.author || (submission && submission.author) || '').trim(),
+      direction: facts ? facts.direction : '',
+      nozzle: facts ? facts.nozzle : '',
+      comment: String(properties.comment || '').replace(/\s+/g, ' ').trim(),
+      status: STATUS_WORDS[submission && submission.status] || '',
+      submittedAt: formatSubmittedAt(submission && submission.submitted_at),
+      coordinates
+    };
+  }
+
+  const DISTRICT_OBJECT_COLUMNS = Object.freeze([
+    ['№', 5], ['Обозначение', 14], ['Тип', 30], ['Очередь', 12],
+    ['Адрес / описание', 46], ['Координаты', 22], ['Направление', 22], ['Сопло', 18],
+    ['Исполнитель', 22], ['Комментарий', 36], ['Состояние', 14], ['Отправлено', 18]
+  ]);
+
+  const SUMMARY_COLUMNS = Object.freeze([
+    ['№', 5], ['Район', 24], ['Всего', 9], ['Маршруты', 12], ['Зоны', 8], ['Точки', 8],
+    ['На приёмке', 13], ['Утверждено', 13], ['Отклонено', 12], ['Последняя отправка', 21]
+  ]);
+
+  const HEADER_FILL = 'FFD9D9D9';
+
+  function writeSheetTitle(sheet, count, text) {
+    sheet.mergeCells(1, 1, 1, count);
+    const cell = sheet.getCell(1, 1);
+    cell.value = text;
+    cell.font = { name: HEADQUARTERS_FONT, size: 12, bold: true, color: { argb: HEADQUARTERS_INK } };
+    cell.alignment = TO_LEFT;
+    sheet.getRow(1).height = 22;
+  }
+
+  function writeSheetHeader(sheet, row, columns) {
+    columns.forEach(([title], offset) => {
+      const cell = sheet.getCell(row, offset + 1);
+      cell.value = title;
+      cell.fill = solidFill(HEADER_FILL);
+      cell.border = CELL_BORDER;
+      cell.alignment = CENTERED;
+      cell.font = { name: HEADQUARTERS_FONT, bold: true, size: 10 };
+    });
+  }
+
+  /** Имя листа: Excel не терпит длинных имён и запрещённых символов, повтор — падение книги. */
+  function uniqueSheetName(workbook, name) {
+    const base = safeSheetName(name);
+    const taken = (candidate) => workbook.worksheets
+      .some((sheet) => sheet.name.toLowerCase() === candidate.toLowerCase());
+    let candidate = base;
+    for (let suffix = 2; taken(candidate); suffix += 1) {
+      const tail = ` (${suffix})`;
+      candidate = `${base.slice(0, 31 - tail.length).trim()}${tail}`;
+    }
+    return candidate;
+  }
+
+  function safeSheetName(value) {
+    return String(value || 'Район')
+      .replace(/[[\]:*?/\\]/g, ' ')
+      .replace(/^'+|'+$/g, '')
+      .trim()
+      .slice(0, 31) || 'Район';
+  }
+
+  /** Сводка по районам: тот же разрез, что в CSV службы, плюс «Всего». */
+  function addRoutesSummarySheet(workbook, base) {
+    const sheet = workbook.addWorksheet('Сводка по районам');
+    SUMMARY_COLUMNS.forEach(([, width], index) => { sheet.getColumn(index + 1).width = width; });
+    writeSheetTitle(sheet, SUMMARY_COLUMNS.length, 'Маршруты районов: сводка по районам');
+    writeSheetHeader(sheet, 2, SUMMARY_COLUMNS);
+
+    // Порядок как в выгрузке службы: сначала те, кто больше нарисовал.
+    const rows = [...base.districts].sort((left, right) =>
+      right.kinds.route.plan - left.kinds.route.plan
+      || right.total - left.total
+      || left.district.localeCompare(right.district, 'ru'));
+
+    rows.forEach((item, index) => {
+      [index + 1, item.district, item.total, item.kinds.route.plan, item.kinds.zone.plan, item.kinds.point.plan,
+        item.submitted, item.approved, item.rejected, formatSubmittedAt(item.lastSubmittedAt)
+      ].forEach((value, offset) => {
+        const cell = sheet.getCell(index + 3, offset + 1);
+        cell.value = value;
+        cell.border = CELL_BORDER;
+        cell.alignment = offset === 1 ? TO_LEFT : CENTERED;
+        cell.font = { name: HEADQUARTERS_FONT, size: 10 };
+        if (offset > 1 && offset < 9) cell.numFmt = '0';
+      });
+    });
+
+    // Итог считаем из строк, а не берём из модели: книга должна сходиться сама с собой.
+    const totals = rows.reduce((acc, item) => ({
+      total: acc.total + item.total,
+      route: acc.route + item.kinds.route.plan,
+      zone: acc.zone + item.kinds.zone.plan,
+      point: acc.point + item.kinds.point.plan,
+      submitted: acc.submitted + item.submitted,
+      approved: acc.approved + item.approved,
+      rejected: acc.rejected + item.rejected,
+      lastSubmittedAt: laterOf(acc.lastSubmittedAt, item.lastSubmittedAt)
+    }), { total: 0, route: 0, zone: 0, point: 0, submitted: 0, approved: 0, rejected: 0, lastSubmittedAt: null });
+
+    const totalRow = rows.length + 3;
+    sheet.mergeCells(totalRow, 1, totalRow, 2);
+    sheet.getCell(totalRow, 1).value = 'ИТОГО по САО';
+    [totals.total, totals.route, totals.zone, totals.point,
+      totals.submitted, totals.approved, totals.rejected, formatSubmittedAt(totals.lastSubmittedAt)
+    ].forEach((value, offset) => {
+      const cell = sheet.getCell(totalRow, offset + 3);
+      cell.value = value;
+      if (offset < 7) cell.numFmt = '0';
+    });
+    for (let column = 1; column <= SUMMARY_COLUMNS.length; column += 1) {
+      const cell = sheet.getCell(totalRow, column);
+      cell.border = CELL_BORDER;
+      cell.fill = solidFill('FFEFEFEF');
+      cell.alignment = column === 2 ? TO_LEFT : CENTERED;
+      cell.font = { name: HEADQUARTERS_FONT, size: 10, bold: true };
+    }
+
+    writeNote(sheet, totalRow + 2, SUMMARY_COLUMNS.length, '«Всего» — объекты, которые район нарисовал и отправил в единую базу; «Маршруты», «Зоны» и «Точки» — их разбивка по видам. «На приёмке», «Утверждено» и «Отклонено» считают все объекты наборов района. Лист на каждый район с объектами идёт дальше в этой книге.');
+    sheet.views = [{ state: 'frozen', ySplit: 2 }];
+    return sheet;
+  }
+
+  /** Лист района: его объекты целиком — такой лист можно отдать району как есть. */
+  function addDistrictObjectsSheet(workbook, district, objects) {
+    const sheet = workbook.addWorksheet(uniqueSheetName(workbook, district));
+    DISTRICT_OBJECT_COLUMNS.forEach(([, width], index) => { sheet.getColumn(index + 1).width = width; });
+    const counts = objects.reduce((acc, row) => ({
+      ...acc,
+      [row.type]: (acc[row.type] || 0) + 1
+    }), {});
+    const summary = Object.entries(counts).map(([type, count]) => `${type} — ${count}`).join(', ');
+    writeSheetTitle(sheet, DISTRICT_OBJECT_COLUMNS.length, `${district} · объектов ${objects.length}${summary ? `: ${summary}` : ''}`);
+    writeSheetHeader(sheet, 2, DISTRICT_OBJECT_COLUMNS);
+
+    objects.forEach((row, index) => {
+      const values = [
+        index + 1, row.badge, row.type, row.queue, row.address, row.coordinates,
+        row.direction, row.nozzle, row.author, row.comment, row.status, row.submittedAt
+      ];
+      values.forEach((value, offset) => {
+        const cell = sheet.getCell(index + 3, offset + 1);
+        cell.value = value;
+        cell.border = CELL_BORDER;
+        cell.alignment = offset === 1 ? CENTERED : TO_LEFT;
+        cell.font = { name: HEADQUARTERS_FONT, size: 10 };
+      });
+    });
+
+    writeNote(sheet, objects.length + 4, DISTRICT_OBJECT_COLUMNS.length, '«Обозначение» — код и номер объекта, как на карте и в приёмке. «Состояние» — решение приёмки по набору, в который входит объект.');
+    sheet.views = [{ state: 'frozen', ySplit: 2 }];
+    return sheet;
+  }
+
+  /**
+   * Книга «маршруты по районам»: сначала сводка, дальше лист на каждый район с
+   * объектами. Районы без объектов листов не получают: отдавать пустой лист нечего,
+   * а в сводке они видны нулями.
+   */
+  function buildRoutesDistrictsWorkbook(base, ExcelJS) {
+    const workbook = new ExcelJS.Workbook();
+    workbook.creator = 'Карта ОДХ САО';
+    workbook.created = new Date();
+    addRoutesSummarySheet(workbook, base);
+    for (const item of base.districts) {
+      if (!item.objects || !item.objects.length) continue;
+      addDistrictObjectsSheet(workbook, item.district, item.objects);
+    }
+    return workbook;
+  }
+
+
   /** Лист «Обзор»: что лежит на карте и на чём основаны числа. */
   function addOverviewSheet(workbook, model) {
     const sheet = workbook.addWorksheet('Обзор');
@@ -1149,6 +1361,7 @@ ${baseBlock}
     headquartersColumns, blockValues, headquartersComment,
     baseColumns, typeLabel, groupOfType, collectBase, baseRowValues, baseLaggingText, baseNote, baseSummary,
     ROUTE_GROUPS, ROUTE_DIRECTION, ROUTE_NOTE, addRouteBoardSheet, buildRoutesHeadquarters,
+    objectRow, firstPosition, buildRoutesDistrictsWorkbook, addRoutesSummarySheet, addDistrictObjectsSheet,
     buildWorkbook, headquartersHtml, downloadBlob, downloadText, printHeadquarters
   };
 }());

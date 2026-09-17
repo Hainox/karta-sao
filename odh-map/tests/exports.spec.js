@@ -37,14 +37,25 @@ const MAP_EXPORT_BUTTONS = ['#export-register', '#export-headquarters', '#export
 // Стаб единой базы: наборы районов с объектами разных типов. Проверяем на них
 // разбор по типам — отдельно маршруты уборки и роторные перекидки, остальное в
 // «Прочие объекты». Времена в ответе — ISO, показываются в московских.
-function features(...types) {
-  return types.map((type) => ({ type: 'Feature', properties: { change_type: type } }));
+// Фикстура набора: у объектов те же поля, что у настоящих — обозначение, адрес,
+// очередь, автор. Тип можно задать строкой или объектом с дополнениями.
+function features(...specs) {
+  return specs.map((spec, index) => {
+    const extra = typeof spec === 'string' ? {} : spec;
+    const type = typeof spec === 'string' ? spec : spec.change_type;
+    return { type: 'Feature', properties: { object_no: index + 1, ...extra, change_type: type } };
+  });
 }
 
 const FAKE_SUBMISSIONS = [
   {
-    district: 'Аэропорт', status: 'submitted', submitted_at: '2026-09-17T06:30:00.000Z',
-    change_set: { features: features('queue', 'queue', 'queue', 'rotor_transfer') }
+    district: 'Аэропорт', author: 'Иванов И.И.', status: 'submitted', submitted_at: '2026-09-17T06:30:00.000Z',
+    change_set: {
+      features: features(
+        { change_type: 'queue', queue_priority: '1', address: 'Тестовая улица' },
+        'queue', 'queue', 'rotor_transfer'
+      )
+    }
   },
   {
     district: 'Головинский', status: 'approved', submitted_at: '2026-09-16T09:00:00.000Z',
@@ -355,6 +366,79 @@ test('лист «маршруты на штаб» повторяет форму 
   expect(board.comment.join('\n')).toContain('Приёмка: на приёмке 4, утверждено 4, отклонено 1');
   expect(board.comment.join('\n')).toContain('По категориям: маршруты 29 %');
   expect(String(board.note)).toContain('сколько объектов района нарисовали');
+});
+
+test('выгрузка по районам: сводка и лист на каждый район с объектами', async ({ page }) => {
+  await openMap(page);
+  await connectBase(page);
+
+  const book = await page.evaluate(async () => {
+    const payload = await window.ODHApi.request('/api/submissions').then((response) => response.json());
+    const base = window.ODHExports.collectBase(payload.submissions);
+    const workbook = window.ODHExports.buildRoutesDistrictsWorkbook(base, window.ExcelJS);
+    const summary = workbook.getWorksheet('Сводка по районам');
+    const district = workbook.getWorksheet('Аэропорт');
+    const values = (sheet, row, columns) => Array.from({ length: columns }, (_, index) => sheet.getCell(row, index + 1).value);
+    let totalRow = 0;
+    summary.eachRow((row, index) => {
+      if (String(row.getCell(1).value || '').startsWith('ИТОГО')) totalRow = index;
+    });
+    return {
+      sheets: workbook.worksheets.map((sheet) => sheet.name),
+      summaryTitle: summary.getCell(1, 1).value,
+      summaryHeader: values(summary, 2, 10),
+      summaryFirst: values(summary, 3, 10),
+      summaryTotal: values(summary, totalRow, 10),
+      districtTitle: district.getCell(1, 1).value,
+      districtHeader: values(district, 2, 12),
+      districtFirst: values(district, 3, 12),
+      districtNote: (() => {
+        let note = null;
+        district.eachRow((row) => {
+          const value = String(row.getCell(1).value || '');
+          if (value.startsWith('«Обозначение»')) note = value;
+        });
+        return note;
+      })()
+    };
+  });
+
+  // Лист района получают только те районы, у кого есть объекты: пустой лист отдавать нечего.
+  expect(book.sheets).toEqual(['Сводка по районам', 'Аэропорт', 'Головинский', 'Дмитровский']);
+  expect(book.summaryTitle).toBe('Маршруты районов: сводка по районам');
+  expect(book.summaryHeader).toEqual([
+    '№', 'Район', 'Всего', 'Маршруты', 'Зоны', 'Точки', 'На приёмке', 'Утверждено', 'Отклонено', 'Последняя отправка'
+  ]);
+  // Сводка идёт в порядке выгрузки службы: сначала те, кто больше нарисовал.
+  expect(book.summaryFirst).toEqual([1, 'Аэропорт', 4, 4, 0, 0, 4, 0, 0, '17.09.2026 09:30']);
+  expect(book.summaryTotal[0]).toBe('ИТОГО по САО');
+  expect(book.summaryTotal.slice(2)).toEqual([9, 7, 1, 1, 4, 4, 1, '17.09.2026 09:30']);
+
+  // Лист района самодостаточен: заголовок с составом и строка на каждый объект.
+  expect(book.districtTitle).toBe('Аэропорт · объектов 4: Очередность уборки — 3, Роторная перекидка — 1');
+  expect(book.districtHeader).toEqual([
+    '№', 'Обозначение', 'Тип', 'Очередь', 'Адрес / описание', 'Координаты', 'Направление',
+    'Сопло', 'Исполнитель', 'Комментарий', 'Состояние', 'Отправлено'
+  ]);
+  expect(book.districtFirst.slice(1, 6)).toEqual(['ОЧ-I №1', 'Очередность уборки', 'I очередь', 'Тестовая улица', '']);
+  expect(book.districtFirst[10]).toBe('на приёмке');
+  expect(book.districtNote).toContain('«Обозначение» — код и номер объекта, как на карте и в приёмке');
+});
+
+test('кнопка «маршруты по районам» отдаёт книгу, а не пустой файл', async ({ page }) => {
+  await openMap(page);
+  await connectBase(page);
+  await expect(page.locator('#export-routes-districts')).toBeEnabled();
+
+  const [download] = await Promise.all([
+    page.waitForEvent('download'),
+    page.locator('#export-routes-districts').click()
+  ]);
+
+  expect(download.suggestedFilename()).toMatch(/^odh-routes-po-raionam-\d{4}-\d{2}-\d{2}\.xlsx$/);
+  const bytes = readFileSync(await download.path());
+  expect(bytes.subarray(0, 2).toString('latin1')).toBe('PK');
+  expect(bytes.length).toBeGreaterThan(8_000);
 });
 
 test('кнопка «маршруты на штаб» отдаёт книгу, а не пустой файл', async ({ page }) => {

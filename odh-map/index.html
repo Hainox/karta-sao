@@ -911,6 +911,14 @@
                 <i class="fa-solid fa-table-list"></i>Excel: маршруты на штаб
               </button>
               <button
+                id="export-routes-districts"
+                class="outline-button"
+                type="button"
+                disabled
+              >
+                <i class="fa-solid fa-folder-tree"></i>Excel: маршруты по районам
+              </button>
+              <button
                 id="export-objects-csv"
                 class="outline-button"
                 type="button"
@@ -1576,6 +1584,7 @@
         });
         document.getElementById("export-routes-csv").disabled = !isPrefecture();
         document.getElementById("export-routes-board").disabled = !baseModel;
+        document.getElementById("export-routes-districts").disabled = !baseModel;
         document.getElementById("routes-load").disabled = !isPrefecture();
         document.getElementById("export-note").textContent = ready
           ? EXPORT_NOTE_READY
@@ -1705,6 +1714,35 @@
           toast(`Не удалось выгрузить: ${error.message}`);
         }
       }
+      async function exportRoutesDistricts() {
+        // Сводка плюс лист на каждый район: такой лист можно отдать району как есть.
+        if (!baseModel) {
+          toast("Сначала загрузите объекты районов.");
+          return;
+        }
+        if (!window.ExcelJS) {
+          toast(
+            "Не загрузилась библиотека Excel: проверьте сеть и обновите страницу.",
+          );
+          return;
+        }
+        try {
+          toast("Готовим выгрузку по районам…");
+          const buffer = await ODHExports.buildRoutesDistrictsWorkbook(
+            baseModel,
+            window.ExcelJS,
+          ).xlsx.writeBuffer();
+          ODHExports.downloadBlob(
+            new Blob([buffer], {
+              type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            }),
+            `odh-routes-po-raionam-${ODHExports.moscowDate()}.xlsx`,
+          );
+          toast("Выгрузка готова.");
+        } catch (error) {
+          toast(`Не удалось выгрузить: ${error.message}`);
+        }
+      }
       function exportObjectsCsv() {
         try {
           const model = exportModel();
@@ -1751,6 +1789,9 @@
       document
         .getElementById("export-routes-board")
         .addEventListener("click", exportRoutesBoard);
+      document
+        .getElementById("export-routes-districts")
+        .addEventListener("click", exportRoutesDistricts);
       document
         .getElementById("export-objects-csv")
         .addEventListener("click", exportObjectsCsv);
