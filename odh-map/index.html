@@ -365,6 +365,25 @@
         color: var(--muted);
         cursor: default;
       }
+      .api-row {
+        display: grid;
+        gap: 8px;
+        margin-top: 9px;
+      }
+      .api-row input {
+        min-height: 38px;
+        padding: 0 10px;
+        border: 1px solid #adc0d0;
+        border-radius: 8px;
+        background: #fff;
+        color: var(--navy);
+        font: inherit;
+        font-size: 12px;
+      }
+      .api-row input:focus {
+        outline: 2px solid var(--teal);
+        outline-offset: 1px;
+      }
       .map-stage {
         position: relative;
         min-width: 0;
@@ -803,6 +822,58 @@
           </section>
           <section class="section">
             <h2 class="section-title">
+              Маршруты районов <i class="fa-solid fa-route"></i>
+            </h2>
+            <p class="file-note">
+              Отрисовка районов живёт в единой базе: сколько маршрутов, зон и
+              точек нарисовали и что принято. Вход — только учётной записью
+              префектуры; пароль в браузере не сохраняется.
+            </p>
+            <div class="api-row">
+              <input
+                id="routes-api-base"
+                type="url"
+                placeholder="https://obhod-sao.ru/odh-api"
+                aria-label="Адрес API"
+              />
+              <input
+                id="routes-api-email"
+                type="email"
+                autocomplete="username"
+                placeholder="E-mail префектуры"
+                aria-label="E-mail"
+              />
+              <input
+                id="routes-api-password"
+                type="password"
+                autocomplete="current-password"
+                placeholder="Пароль"
+                aria-label="Пароль"
+              />
+            </div>
+            <div class="upload-row">
+              <button
+                id="routes-login"
+                class="outline-button"
+                type="button"
+              >
+                <i class="fa-solid fa-right-to-bracket"></i>Войти
+              </button>
+              <button
+                id="routes-load"
+                class="outline-button"
+                type="button"
+                disabled
+              >
+                <i class="fa-solid fa-cloud-arrow-down"></i>Загрузить
+              </button>
+            </div>
+            <p id="routes-note" class="file-note">
+              Подключение не настроено.
+            </p>
+          </section>
+          <section class="section">
+            <h2 class="section-title">
               Выгрузки <i class="fa-solid fa-file-arrow-down"></i>
             </h2>
             <div class="export-actions">
@@ -831,12 +902,20 @@
                 <i class="fa-regular fa-file-pdf"></i>PDF: таблица на штаб
               </button>
               <button
+                id="export-objects-csv"
+                class="outline-button"
+                type="button"
+                disabled
+              >
+                <i class="fa-regular fa-file-lines"></i>CSV: объекты ОДХ по районам
+              </button>
+              <button
                 id="export-routes-csv"
                 class="outline-button"
                 type="button"
                 disabled
               >
-                <i class="fa-regular fa-file-lines"></i>CSV: отчёт по маршрутам
+                <i class="fa-solid fa-route"></i>CSV: маршруты районов (сервис)
               </button>
             </div>
             <p id="export-note" class="file-note">
@@ -905,6 +984,7 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/leaflet-polylinedecorator@1.6.0/dist/leaflet.polylineDecorator.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js"></script>
+    <script src="api-config.js"></script>
     <script src="exports.js"></script>
     <script>
       const BASEMAPS = {
@@ -1467,18 +1547,92 @@
         "export-register",
         "export-headquarters",
         "export-headquarters-pdf",
-        "export-routes-csv",
+        "export-objects-csv",
       ];
       const EXPORT_NOTE_READY =
         "Файлы собираются в браузере из загруженных слоёв: числа те же, что на карте.";
+      // Срез единой базы. Пока его не загрузили, выгрузка честно помечает блок
+      // маршрутов как незагруженный, а не показывает нули — иначе «нет данных»
+      // читалось бы как «маршрутов нет».
+      let routesReport = null;
+
+      function isPrefecture() {
+        return ODHApi.user()?.role === "prefecture_admin";
+      }
       function updateExportState() {
         const ready = Object.keys(layerData).length > 0;
         EXPORT_BUTTONS.forEach((id) => {
           document.getElementById(id).disabled = !ready;
         });
+        document.getElementById("export-routes-csv").disabled = !routesReport;
+        document.getElementById("routes-load").disabled = !isPrefecture();
         document.getElementById("export-note").textContent = ready
           ? EXPORT_NOTE_READY
           : "Кнопки станут доступны после загрузки слоёв карты.";
+      }
+      /** Модель выгрузки: слои карты плюс маршруты, если их загрузили. */
+      function exportModel() {
+        const model = ODHExports.collect(layerData);
+        if (routesReport) model.routes = routesReport;
+        return model;
+      }
+      function refreshRoutesSession() {
+        const user = ODHApi.user();
+        document.getElementById("routes-api-base").value = ODHApi.base();
+        let note = "Вход не выполнен. Пароль в браузере не сохраняется.";
+        if (routesReport) note = ODHExports.routesSummary(routesReport);
+        else if (user) note = `Вход выполнен: ${user.email} · ${user.role}. Нажмите «Загрузить».`;
+        document.getElementById("routes-note").textContent = note;
+        updateExportState();
+      }
+      async function routesLogin() {
+        const base = document.getElementById("routes-api-base").value;
+        const email = document.getElementById("routes-api-email").value.trim();
+        const password = document.getElementById("routes-api-password").value;
+        try {
+          ODHApi.setBase(base);
+          const user = await ODHApi.login(email, password);
+          document.getElementById("routes-api-password").value = "";
+          routesReport = null;
+          refreshRoutesSession();
+          toast(`Вход выполнен: ${user.role}.`);
+        } catch (error) {
+          toast(`Вход не выполнен: ${error.message}`);
+        }
+      }
+      async function loadRoutes() {
+        if (!isPrefecture()) {
+          toast("Срез маршрутов доступен только префектуре.");
+          return;
+        }
+        try {
+          toast("Запрашиваем маршруты…");
+          const response = await ODHApi.request("/api/reports/routes");
+          routesReport = await response.json();
+          refreshRoutesSession();
+          toast("Маршруты загружены: их увидят выгрузки.");
+        } catch (error) {
+          toast(`Не удалось загрузить маршруты: ${error.message}`);
+        }
+      }
+      async function exportRoutesCsv() {
+        if (!isPrefecture()) {
+          toast("Отчёт по маршрутам доступен только префектуре.");
+          return;
+        }
+        try {
+          toast("Готовим выгрузку…");
+          const response = await ODHApi.request("/api/reports/routes.csv");
+          // Имя берём из ответа службы: у неё оно с датой отчёта, и тот же файл
+          // приходит в Telegram — имена не должны расходиться.
+          ODHExports.downloadBlob(
+            await response.blob(),
+            routesReport?.csvName || `odh-routes-${ODHExports.moscowDate()}.csv`,
+          );
+          toast("Выгрузка готова.");
+        } catch (error) {
+          toast(`Не удалось выгрузить: ${error.message}`);
+        }
       }
       async function exportExcel(kind, filename) {
         // Книгу собирает ExcelJS с CDN: без него выгрузка невозможна, но карта
@@ -1491,9 +1645,8 @@
         }
         try {
           toast("Готовим выгрузку…");
-          const model = ODHExports.collect(layerData);
           const buffer = await ODHExports.buildWorkbook(
-            model,
+            exportModel(),
             window.ExcelJS,
             kind,
           ).xlsx.writeBuffer();
@@ -1508,12 +1661,12 @@
           toast(`Не удалось выгрузить: ${error.message}`);
         }
       }
-      function exportRoutesCsv() {
+      function exportObjectsCsv() {
         try {
-          const model = ODHExports.collect(layerData);
+          const model = exportModel();
           ODHExports.downloadText(
-            ODHExports.routesCsv(model),
-            ODHExports.routesCsvName(model),
+            ODHExports.objectsCsv(model),
+            ODHExports.objectsCsvName(model),
           );
           toast("Выгрузка готова.");
         } catch (error) {
@@ -1522,9 +1675,7 @@
       }
       function exportHeadquartersPdf() {
         try {
-          const opened = ODHExports.printHeadquarters(
-            ODHExports.collect(layerData),
-          );
+          const opened = ODHExports.printHeadquarters(exportModel());
           toast(
             opened
               ? "Печатная форма открыта: сохраните PDF."
@@ -1534,6 +1685,12 @@
           toast(`Не удалось собрать форму: ${error.message}`);
         }
       }
+      document
+        .getElementById("routes-login")
+        .addEventListener("click", routesLogin);
+      document
+        .getElementById("routes-load")
+        .addEventListener("click", loadRoutes);
       document
         .getElementById("export-register")
         .addEventListener("click", () =>
@@ -1548,8 +1705,12 @@
         .getElementById("export-headquarters-pdf")
         .addEventListener("click", exportHeadquartersPdf);
       document
+        .getElementById("export-objects-csv")
+        .addEventListener("click", exportObjectsCsv);
+      document
         .getElementById("export-routes-csv")
         .addEventListener("click", exportRoutesCsv);
+      refreshRoutesSession();
       loadMap();
     </script>
   </body>

@@ -112,6 +112,17 @@
   const HEADQUARTERS_DIRECTION = 'Готовность слоёв карты ОДХ';
   const HEADQUARTERS_NOTE = 'Колонка «Объекты» — точки на карте, которые нужно отработать: у одного объекта ОДХ бывает несколько геометрических частей. Колонка «Факт» — точки, подтверждённые официальным источником, а не просто показанные на карте. Объекты с балансодержателем «АвД САО», «ДЭУ» и объекты без района учтены в строке «АвД САО». Процент считается по точкам каждой категории отдельно.';
 
+  // Срез единой базы: то, что районы нарисовали в редакторе и отправили. Это не
+  // то же самое, что слои карты, поэтому блок идёт отдельной таблицей внутри
+  // сводки на штаб, а не подмешивается в категории выше.
+  const ROUTES_TITLE = 'Маршруты районов (единая база)';
+  const ROUTES_COLUMNS = Object.freeze([
+    '№', 'Район', 'Маршрутов', 'Точек', 'Зон', 'На приёмке', 'Утверждено', 'Отклонено', 'Последняя отправка'
+  ]);
+  const ROUTES_LAST_COLUMN = 9;
+  const ROUTES_NOTE = 'Маршруты, зоны и точки — столько объектов районы нарисовали и отправили в единую базу. «На приёмке», «Утверждено» и «Отклонено» считают только маршруты: зоны и точки идут отдельными колонками, поэтому их сумма не равна числу маршрутов.';
+  const ROUTES_EMPTY = 'Данные единой базы не загружены: подключитесь к сервису ОДХ и повторите выгрузку.';
+
   // Светофор процентов: бледные заливки, смысл несёт число. Пороги те же, что у
   // полосы статуса в других выгрузках заказчика. Отдельный цвет у точного нуля.
   const BAND_FILLS = Object.freeze({
@@ -306,7 +317,7 @@
     return Number(value || 0).toLocaleString('ru-RU');
   }
 
-  /* --------------------------------------------------------- CSV по маршрутам */
+  /* ------------------------------------------------------- CSV по объектам ОДХ */
 
   /**
    * CSV-выгрузка по районам: UTF-8 с BOM, разделитель «;», строка «ИТОГО» в
@@ -315,8 +326,11 @@
    *
    * Срез только по ОДХ: отчёт называется «по маршрутам», и подмешивать в него
    * контейнеры, площадки СММ и гидранты нельзя — числа перестают читаться.
+   * Имя файла отличается от `odh-routes-<дата>.csv`: под этим именем служба
+   * отдаёт свой отчёт о приёмке маршрутов, и два разных файла не могут
+   * называться одинаково.
    */
-  function routesCsv(model) {
+  function objectsCsv(model) {
     const header = ['Район', 'Объектов', 'Точек', 'I очередь', 'II очередь', 'III очередь', 'Площадь, м²'];
     const line = (values) => values.join(';');
     const queues = model.slices
@@ -365,8 +379,8 @@
     return ids.size;
   }
 
-  function routesCsvName(model) {
-    return `odh-routes-${moscowDate(model.generatedAt)}.csv`;
+  function objectsCsvName(model) {
+    return `sao-odh-objekty-${moscowDate(model.generatedAt)}.csv`;
   }
 
   /* ------------------------------------------------------------------- Excel */
@@ -553,6 +567,109 @@
     return lines;
   }
 
+  /** Отметка времени в московском времени; пусто, если отправок не было. */
+  function formatSubmittedAt(value) {
+    if (!value) return '';
+    const date = new Date(value);
+    if (Number.isNaN(date.valueOf())) return '';
+    return moscowMoment(date).replace(',', '');
+  }
+
+  /** Строка про районы без маршрутов: одна формулировка на книгу и печатную форму. */
+  function routesLaggingText(report) {
+    const lagging = (report && report.lagging) || [];
+    return lagging.length
+      ? `Без маршрутов (${lagging.length}): ${lagging.join(', ')}.`
+      : 'Маршруты рисуют все районы округа.';
+  }
+
+  /** Плоский ряд значений строки блока маршрутов: [числа..., отметка времени]. */
+  function routesRowValues(item) {
+    return [
+      item.routes, item.points, item.zones,
+      item.submitted, item.approved, item.rejected, formatSubmittedAt(item.lastSubmittedAt)
+    ];
+  }
+
+  /** Короткая сводка по маршрутам для сайдбара карты: одна фраза, без таблицы. */
+  function routesSummary(report) {
+    if (!report) return '';
+    const totals = report.totals || {};
+    const lagging = report.lagging || [];
+    return [
+      `маршрутов ${countText(totals.routes)}, точек ${countText(totals.points)}, зон ${countText(totals.zones)}`,
+      `на приёмке ${countText(totals.submitted)}, утверждено ${countText(totals.approved)}, отклонено ${countText(totals.rejected)}`,
+      lagging.length ? `без маршрутов: ${lagging.join(', ')}` : 'маршруты рисуют все районы'
+    ].join(' · ');
+  }
+
+  /**
+   * Компактный блок «Маршруты районов» внутри сводки на штаб. Районы идут в
+   * порядке службы — по убыванию маршрутов, — потому что этот срез читают сверху
+   * вниз: сначала те, у кого работа идёт.
+   */
+  function writeRoutesTable(sheet, startRow, report) {
+    const count = ROUTES_COLUMNS.length;
+    sheet.mergeCells(startRow, 1, startRow, count);
+    const title = sheet.getCell(startRow, 1);
+    title.value = ROUTES_TITLE;
+    title.font = { name: HEADQUARTERS_FONT, size: 12, bold: true, color: { argb: HEADQUARTERS_INK } };
+    title.alignment = TO_LEFT;
+    sheet.getRow(startRow).height = 22;
+
+    if (!report) {
+      // Пустой блок не оставляем: без пометки читалось бы как «маршрутов нет».
+      writeNote(sheet, startRow + 1, count, ROUTES_EMPTY, { size: 10 });
+      return startRow + 3;
+    }
+
+    const headerRow = startRow + 1;
+    ROUTES_COLUMNS.forEach((label, offset) => {
+      const cell = sheet.getCell(headerRow, offset + 1);
+      cell.value = label;
+      cell.fill = solidFill('FFD9D9D9');
+      cell.border = CELL_BORDER;
+      cell.alignment = CENTERED;
+      cell.font = { name: HEADQUARTERS_FONT, bold: true, size: 10 };
+    });
+
+    const districts = report.districts || [];
+    districts.forEach((item, index) => {
+      const values = [index + 1, item.district, ...routesRowValues(item)];
+      values.forEach((value, offset) => {
+        const cell = sheet.getCell(headerRow + 1 + index, offset + 1);
+        const column = offset + 1;
+        cell.value = value === null || value === undefined ? '' : value;
+        cell.border = CELL_BORDER;
+        cell.alignment = column === 2 ? TO_LEFT : CENTERED;
+        cell.font = { name: HEADQUARTERS_FONT, size: 10 };
+        if (column > 2 && column < ROUTES_LAST_COLUMN) cell.numFmt = '0';
+      });
+    });
+
+    const totalRow = headerRow + 1 + districts.length;
+    const totals = report.totals || {};
+    sheet.mergeCells(totalRow, 1, totalRow, 2);
+    sheet.getCell(totalRow, 1).value = 'ИТОГО';
+    routesRowValues(totals).forEach((value, offset) => {
+      const cell = sheet.getCell(totalRow, offset + 3);
+      cell.value = value === null || value === undefined ? '' : value;
+      if (offset < ROUTES_LAST_COLUMN - 3) cell.numFmt = '0';
+    });
+    for (let column = 1; column <= count; column += 1) {
+      const cell = sheet.getCell(totalRow, column);
+      cell.border = CELL_BORDER;
+      cell.fill = solidFill('FFEFEFEF');
+      cell.alignment = column === 2 ? TO_LEFT : CENTERED;
+      cell.font = { name: HEADQUARTERS_FONT, size: 10, bold: true };
+    }
+
+    const laggingRow = totalRow + 1;
+    writeNote(sheet, laggingRow, count, routesLaggingText(report), { size: 10 });
+    writeNote(sheet, laggingRow + 1, count, ROUTES_NOTE);
+    return laggingRow + 3;
+  }
+
   /** Лист «На штаб»: справочник районов сверху, таблица по проценту снизу. */
   function addHeadquartersSheet(workbook, model) {
     const sheet = workbook.addWorksheet('На штаб');
@@ -564,13 +681,21 @@
     const firstTotalRow = writeHeadquartersTable(sheet, 1, model, model.districts);
     const secondTotalRow = writeHeadquartersTable(sheet, firstTotalRow + 4, model, model.sorted, { formula: true });
 
+    // Колонка «Последняя отправка» в блоке маршрутов шире остальных: в неё должна
+    // влезть отметка «дд.мм.гггг чч:мм» целиком, без переноса.
+    if (ROUTES_LAST_COLUMN <= count) sheet.getColumn(ROUTES_LAST_COLUMN).width = 21;
+
+    // Маршруты районов идут до комментария: их читают вместе с таблицей, а
+    // комментарий и примечание закрывают лист.
+    const afterRoutes = writeRoutesTable(sheet, secondTotalRow + 3, model.routes || null);
+
     const comment = headquartersComment(model);
-    comment.forEach((line, offset) => writeNote(sheet, secondTotalRow + 2 + offset, count, line, {
+    comment.forEach((line, offset) => writeNote(sheet, afterRoutes + offset, count, line, {
       size: offset === 0 ? 11 : 10,
       bold: offset === 0,
       ink: offset === 0 ? HEADQUARTERS_INK : 'FF000000'
     }));
-    writeNote(sheet, secondTotalRow + comment.length + 3, count, HEADQUARTERS_NOTE);
+    writeNote(sheet, afterRoutes + comment.length + 1, count, HEADQUARTERS_NOTE);
     return sheet;
   }
 
@@ -718,6 +843,21 @@
   <tr>${subHead}</tr>
 </thead><tbody>${rows.map(rowHtml).join('')}${totalRow}</tbody></table>`;
 
+    // Блок маршрутов — тот же, что на листе «На штаб»: срез единой базы, а не
+    // слоёв карты, поэтому у него своя маленькая таблица под основной.
+    const routes = model.routes || null;
+    const routesCells = (values) => values.map((value) => `<td>${escapeHtml(value)}</td>`).join('');
+    const routesHead = ROUTES_COLUMNS.map((label) => `<th>${escapeHtml(label)}</th>`).join('');
+    const routesBody = routes
+      ? (routes.districts || []).map((item, index) =>
+        `<tr><td class="num">${index + 1}</td><td class="name">${escapeHtml(item.district)}</td>${routesCells(routesRowValues(item))}</tr>`).join('')
+        + `<tr class="total"><td colspan="2">ИТОГО</td>${routesCells(routesRowValues(routes.totals || {}))}</tr>`
+      : `<tr><td colspan="${ROUTES_COLUMNS.length}">${escapeHtml(ROUTES_EMPTY)}</td></tr>`;
+    const routesBlock = `<section><h2>${escapeHtml(ROUTES_TITLE)}</h2>
+<table><thead><tr>${routesHead}</tr></thead><tbody>${routesBody}</tbody></table>
+<p class="note">${escapeHtml(routesLaggingText(routes))}</p>
+<p class="note">${escapeHtml(ROUTES_NOTE)}</p></section>`;
+
     return `<!doctype html><html lang="ru"><head><meta charset="utf-8">
 <title>На штаб — ${escapeHtml(HEADQUARTERS_DIRECTION)}</title>
 <style>
@@ -736,9 +876,10 @@
   @media print { body { margin: 8mm; } h2 + table, section { break-inside: avoid; } }
 </style></head><body>
 <h1>${escapeHtml(HEADQUARTERS_DIRECTION)}</h1>
-<p class="meta">${escapeHtml(moscowMoment(model.generatedAt))} (МСК) · источник — опубликованные слои карты ОДХ</p>
+<p class="meta">${escapeHtml(moscowMoment(model.generatedAt))} (МСК) · карта — опубликованные слои ОДХ${routes ? ' · маршруты — единая база (сервис ОДХ)' : ''}</p>
 ${table(model.districts)}
 <section><h2>То же по проценту «Итого» — в штаб</h2>${table(model.sorted)}</section>
+${routesBlock}
 <section><h2>Комментарий к выгрузке</h2><pre>${escapeHtml(headquartersComment(model).join('\n'))}</pre></section>
 <p class="note">${escapeHtml(HEADQUARTERS_NOTE)}</p>
 </body></html>`;
@@ -758,9 +899,11 @@ ${table(model.districts)}
   window.ODHExports = {
     AUTODOR_HOLDER, DISTRICT_NAMES, LAYERS, GROUPS,
     HEADQUARTERS_NOTE, HEADQUARTERS_DIRECTION,
+    ROUTES_TITLE, ROUTES_COLUMNS, ROUTES_NOTE, ROUTES_EMPTY, ROUTES_LAST_COLUMN,
     districtOf, countOf, sliceLayer, collect, percent, percentBandFill,
-    routesCsv, routesCsvName, objectCountOf, moscowMoment, moscowDate,
+    objectsCsv, objectsCsvName, objectCountOf, moscowMoment, moscowDate, formatSubmittedAt,
     headquartersColumns, blockValues, headquartersComment,
+    routesSummary, routesLaggingText, routesRowValues,
     buildWorkbook, headquartersHtml, downloadBlob, downloadText, printHeadquarters
   };
 }());
