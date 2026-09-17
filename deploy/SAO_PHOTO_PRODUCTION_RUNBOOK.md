@@ -48,6 +48,23 @@ docker compose -p sao-photo-service up -d photo-service
 
 The binding command is a dry run by default: it prints how many photos it would bind and how many it would skip (no GPS, no registered points). Photos without GPS keep no point and stay on manual review.
 
+### Shipping the files on a machine where the checkout is not the source of truth
+
+`/opt` is not a git checkout: files are copied over. Build the release archive with `git archive`, not with an archive of the working copy — on Windows `core.autocrlf=true` puts CRLF into the working copy, and a working-copy archive then writes CRLF into production, including into `Dockerfile`. `git archive` takes the index (always LF), and the rules in `.gitattributes` keep it that way:
+
+```sh
+git archive --format=tar.gz -o /tmp/ps.tgz HEAD photo-service/src photo-service/server.js photo-service/scripts photo-service/README.md
+git archive --format=tar.gz -o /tmp/odh.tgz HEAD api notify
+```
+
+Then unpack over the target directory (`/opt/sao-photo-service/photo-service`, `/opt/odh-sao`), rebuild and recreate. Before the first extraction make a copy of what is being replaced — that copy is the only rollback for a directory that git does not track.
+
+After unpacking, confirm no CR reached the server:
+
+```sh
+grep -rl $'\r' /opt/sao-photo-service/photo-service/src /opt/odh-sao/api | head
+```
+
 After the update, the sheet «На штаб» in the Excel export shows the plan in marks: 812 stops, 2 235 pedestrian-crossing points, 10 035 entrances.
 
 ## Backup and restore

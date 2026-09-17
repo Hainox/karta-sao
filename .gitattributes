@@ -1,0 +1,14 @@
+# Переводы строк для пакетов, которые выкладываются на сервер.
+#
+# Боевая копия в /opt лежит с LF, а на Windows git с core.autocrlf=true отдаёт
+# в рабочую копию CRLF. Архив, собранный из рабочей копии, приносил CRLF в прод:
+# так как прод не под git, это засоряло сравнение с бэкапом, а в Dockerfile
+# CRLF — уже реальный риск для сборки.
+#
+# Здесь задан LF: рабочая копия и `git archive` (архив для выкладки) отдают те же
+# байты, что лежат на сервере.
+photo-service/** text=auto eol=lf
+api/** text=auto eol=lf
+notify/** text=auto eol=lf
+object-maps/** text=auto eol=lf
+odh-map/** text=auto eol=lf
