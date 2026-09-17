@@ -16,6 +16,9 @@
       document.head.appendChild(script);
     });
   </script>
+  <!-- Книгу собирает ExcelJS, выгрузку по районам и участкам — sao-exports.js. -->
+  <script src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js"></script>
+  <script src="sao-exports.js"></script>
   <style>
     :root { color-scheme: light; font-family: Arial, sans-serif; }
     * { box-sizing: border-box; }
@@ -174,7 +177,7 @@
         <div id="layerControls" class="layers"></div>
 
         <div id="status" class="status"><span class="status-dot"></span><span>Загрузка карты…</span></div>
-        <div class="panel-actions"><a class="printbtn atlas-object-maps-link" href="hub/#object-photo-maps">Остановки · ПП · подъезды</a> <a class="printbtn" href="yards-print/">Печать / PDF A3</a><label class="file-label" for="geojsonInput"><span>＋</span> Загрузить GeoJSON</label><input id="geojsonInput" type="file" accept=".geojson,.json,application/geo+json,application/json" /></div>
+        <div class="panel-actions"><a class="printbtn atlas-object-maps-link" href="hub/#object-photo-maps">Остановки · ПП · подъезды</a> <a class="printbtn" href="yards-print/">Печать / PDF A3</a><button id="exportButton" class="printbtn" type="button">Выгрузка в Excel: районы и участки</button><label class="file-label" for="geojsonInput"><span>＋</span> Загрузить GeoJSON</label><input id="geojsonInput" type="file" accept=".geojson,.json,application/geo+json,application/json" /></div>
 
         <section class="details-block"><div class="section-head"><h2>Карточка объекта</h2><span class="hint">по клику</span></div><div id="details" class="details">Выберите объект на карте — здесь появятся его данные.</div></section>
         <section class="legend-block"><details class="yard-legend"><summary>Легенда участков <span>показать</span></summary><div id="legend" class="legend"></div></details></section>
@@ -537,7 +540,14 @@
       if (layerKey === 'urns' && state.urnsClusterer?.parent && state.map) state.map.removeChild(state.urnsClusterer);
       if (layerKey === 'urns') state.urnsClusterer = null;
       state.layers[layerKey].records = normalized;
-      await createMapFeatures(normalized);
+      // Рисуем, только когда карта уже есть: данные важны и без неё.
+      if (state.map) {
+        try {
+          await createMapFeatures(normalized);
+        } catch (error) {
+          state.layers[layerKey].error = error.message;
+        }
+      }
       renderDistrictSelect(); renderSectionSelect(); renderLayerControls(); renderLegend(); renderVisibleFeatures();
       fitToData(allRecords());
       $('status').textContent = `Загружено: ${state.layers[layerKey].label} — ${normalized.length} объектов (${sourceName}).`;
@@ -583,51 +593,73 @@
       ]
     };
 
+    /**
+     * Данные читаем отдельно от карты: подложка приходит из внешнего сервиса, и
+     * если он недоступен, отчёт, фильтры и выгрузка всё равно должны работать.
+     */
+    async function loadAllLayers() {
+      renderLayerControls();
+      for (const [layerKey, layer] of Object.entries(state.layers)) {
+        if (layer.lazy) continue;
+        try {
+          const response = await fetch(`./${layer.file}`, { cache: 'no-store' });
+          if (!response.ok) throw new Error(`${layer.file}: HTTP ${response.status}`);
+          await loadGeoJSON(await response.json(), layer.file, layerKey);
+        } catch (error) {
+          layer.error = error.message;
+          if (layerKey === 'areas') {
+            layer.error = null;
+            await loadGeoJSON(DEMO_GEOJSON, 'встроенный демонстрационный набор', 'areas');
+            $('status').textContent = `Не удалось загрузить areas.geojson: ${error.message}. Показан встроенный пример.`;
+          }
+          renderLayerControls();
+        }
+      }
+      renderLayerControls();
+    }
+
+    async function createMap() {
+      const ymaps3 = await window.ymaps3Ready;
+      await ymaps3.ready;
+      ymaps3.import.registerCdn('https://cdn.jsdelivr.net/npm/{package}', ['@yandex/ymaps3-clusterer@0.0']);
+      const { YMap, YMapDefaultSchemeLayer, YMapDefaultFeaturesLayer, YMapListener } = ymaps3;
+      state.map = new YMap($('map'), {
+        location: { center: [37.50, 55.84], zoom: 11 },
+        showScaleInCopyrights: true,
+        theme: 'light'
+      }, [new YMapDefaultSchemeLayer({}), new YMapDefaultFeaturesLayer({})]);
+      if (YMapListener) state.map.addChild(new YMapListener({ onUpdate: (event) => {
+        if (Number.isFinite(event.location?.zoom)) updateMarkerScale(event.location.zoom);
+      } }));
+
+      // Слои, прочитанные до карты, показываем теперь, когда есть куда рисовать.
+      for (const layer of Object.values(state.layers)) {
+        if (layer.records.length) await createMapFeatures(layer.records);
+      }
+      renderVisibleFeatures();
+      fitToData(allRecords());
+      // YMap can report a 0-height container on first layout pass (race with the
+      // surrounding flex/grid layout), which makes this first fitToData() collapse
+      // the view to zoom 2 (whole world). Re-fit once the container has settled.
+      requestAnimationFrame(() => requestAnimationFrame(() => fitToData(allRecords())));
+      setTimeout(() => fitToData(allRecords()), 500);
+    }
+
     async function init() {
       try {
-        const ymaps3 = await window.ymaps3Ready;
-        await ymaps3.ready;
-        ymaps3.import.registerCdn('https://cdn.jsdelivr.net/npm/{package}', ['@yandex/ymaps3-clusterer@0.0']);
-        const { YMap, YMapDefaultSchemeLayer, YMapDefaultFeaturesLayer, YMapListener } = ymaps3;
-        state.map = new YMap($('map'), {
-          location: { center: [37.50, 55.84], zoom: 11 },
-          showScaleInCopyrights: true,
-          theme: 'light'
-        }, [new YMapDefaultSchemeLayer({}), new YMapDefaultFeaturesLayer({})]);
-        if (YMapListener) state.map.addChild(new YMapListener({ onUpdate: (event) => {
-          if (Number.isFinite(event.location?.zoom)) updateMarkerScale(event.location.zoom);
-        } }));
-
-        renderLayerControls();
-        const sources = { areas: DEMO_GEOJSON, mno: null, dp: null, sp: null, urns: null };
-        for (const [layerKey, layer] of Object.entries(state.layers)) {
-          if (layer.lazy) continue;
-          try {
-            const response = await fetch(`./${layer.file}`, { cache: 'no-store' });
-            if (!response.ok) throw new Error(`${layer.file}: HTTP ${response.status}`);
-            sources[layerKey] = await response.json();
-            await loadGeoJSON(sources[layerKey], layer.file, layerKey);
-          } catch (error) {
-            layer.error = error.message;
-            if (layerKey === 'areas') {
-              layer.error = null;
-              await loadGeoJSON(DEMO_GEOJSON, 'встроенный демонстрационный набор', 'areas');
-              $('status').textContent = `Не удалось загрузить areas.geojson: ${error.message}. Показан встроенный пример.`;
-            }
-            renderLayerControls();
-          }
-        }
-        renderLayerControls();
-        fitToData(allRecords());
-        // YMap can report a 0-height container on first layout pass (race with the
-        // surrounding flex/grid layout), which makes this first fitToData() collapse
-        // the view to zoom 2 (whole world). Re-fit once the container has settled.
-        requestAnimationFrame(() => requestAnimationFrame(() => fitToData(allRecords())));
-        setTimeout(() => fitToData(allRecords()), 500);
-        $('status').textContent = `Готово. Загружено объектов: ${allRecords().length}. Включайте нужные слои.`;
+        await loadAllLayers();
       } catch (error) {
         $('status').className = 'status error';
-        $('status').textContent = `Ошибка запуска карты: ${error.message}`;
+        $('status').textContent = `Данные не загрузились: ${error.message}`;
+        return;
+      }
+      try {
+        await createMap();
+        $('status').textContent = `Готово. Загружено объектов: ${allRecords().length}. Включайте нужные слои.`;
+      } catch (error) {
+        // Карта — внешний сервис: без неё данные, фильтры и выгрузка работают.
+        $('status').className = 'status error';
+        $('status').textContent = `Карта не поднялась: ${error.message} Данные загружены — фильтры, карточки и выгрузка в Excel работают.`;
       }
     }
 
@@ -653,6 +685,47 @@
       }
       event.target.value = '';
     });
+
+    /**
+     * Слой читаем прямо в записи, без отрисовки: книге нужны данные, а не маркеры.
+     * Так выгрузка не зависит от того, какие слои человек включил на карте.
+     */
+    async function ensureLayerRecords(key) {
+      const layer = state.layers[key];
+      if (layer.records.length) return;
+      const response = await fetch(`./${layer.file}`, { cache: 'no-store' });
+      if (!response.ok) throw new Error(`${layer.file}: HTTP ${response.status}`);
+      const data = await response.json();
+      layer.records = extractFeatures(data).map((item, index) => normalizeFeature(item, index, key)).filter(Boolean);
+    }
+
+    /** Выгрузка объектов по районам и участкам: сводки плюс лист на каждый район. */
+    async function exportObjects() {
+      const button = $('exportButton');
+      if (!window.ExcelJS || !window.SaoExports) {
+        $('status').className = 'status error';
+        $('status').textContent = 'Книгу собирает ExcelJS: библиотека не загрузилась, проверьте связь.';
+        return;
+      }
+      button.disabled = true;
+      try {
+        $('status').className = 'status';
+        $('status').textContent = 'Готовим выгрузку: читаем слои…';
+        for (const key of Object.keys(state.layers)) await ensureLayerRecords(key);
+        $('status').textContent = 'Считаем участки и собираем книгу…';
+        const model = window.SaoExports.collect(allRecords());
+        const workbook = window.SaoExports.buildWorkbook(model, window.ExcelJS);
+        const buffer = await workbook.xlsx.writeBuffer();
+        window.SaoExports.download(buffer, `sao-objekty-po-rayonam-i-uchastkam-${window.SaoExports.todayStamp()}.xlsx`);
+        $('status').textContent = `Выгрузка готова: ${model.overall.total} объектов, районов ${model.districts.length}, листов ${workbook.worksheets.length}.`;
+      } catch (error) {
+        $('status').className = 'status error';
+        $('status').textContent = `Выгрузка не собралась: ${error.message}`;
+      } finally {
+        button.disabled = false;
+      }
+    }
+    $('exportButton').addEventListener('click', exportObjects);
 
     init();
   </script>
