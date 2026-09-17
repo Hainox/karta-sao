@@ -92,6 +92,7 @@ try {
     await admin.waitForFunction(() => /%|нет данных/.test(document.getElementById('paSummary').innerText), null, { timeout: 60000 });
     check('вход префектуры на живом домене', true, await admin.locator('#paSessionState').innerText());
     check('у префектуры есть блок выгрузок', await admin.locator('#paExports').isVisible(), '');
+    check('у префектуры есть кнопка архива фото', await admin.locator('#paExportPhotos').isVisible(), 'Выгрузка фотографий архивом');
     check('префектура видит все границы районов', /Показаны границы всех 16 районов/.test(await admin.locator('#paBoundaryNote').innerText()), await admin.locator('#paBoundaryNote').innerText());
     const adminSummary = await admin.locator('#paSummary').innerText();
     check('префектура видит нераспределённые объекты', /Без района: 7 объектов/.test(adminSummary), '');

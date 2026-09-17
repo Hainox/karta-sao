@@ -14,6 +14,7 @@ import { clientAddress } from './src/client-address.js';
 import { buildDistrictsExcel, buildExcel, buildHeadquartersExcel, buildPdf } from './src/exports.js';
 import { buildHeadquartersPdf } from './src/pdf-headquarters.js';
 import { loadReportRows, reportPayload } from './src/reports.js';
+import { streamPhotoArchive } from './src/photos-archive.js';
 import { collectRisks, riskTops } from './src/risks.js';
 import { mediaRoot, readMedia, removeMedia, writeMedia } from './src/storage.js';
 import { HOLDER_SELECT_SQL, objectAllowedFor } from './src/scope.js';
@@ -344,6 +345,27 @@ async function handler(request, response) {
       const buffer = await buildDistrictsExcel(rows);
       response.writeHead(200, { 'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'Content-Disposition': 'attachment; filename="sao-photo-districts.xlsx"', 'Cache-Control': 'no-store', ...corsHeaders(request) });
       response.end(buffer);
+      return;
+    }
+    if (pathname === '/reports/photos.zip' && request.method === 'GET') {
+      if (!requirePrefecture(response, request, user)) return;
+      const url = new URL(request.url, 'http://photo-service.local');
+      const district = url.searchParams.get('district') || undefined;
+      const rows = await loadReportRows(pool, user, district);
+      response.writeHead(200, {
+        'Content-Type': 'application/zip',
+        'Content-Disposition': `attachment; filename="sao-photo-${new Date().toISOString().slice(0, 10)}.zip"`,
+        'Cache-Control': 'no-store',
+        ...corsHeaders(request)
+      });
+      try {
+        // Архив уходит потоком: тысяч снимков в памяти не удержать.
+        await streamPhotoArchive(response, rows, { district: district || null });
+      } catch (error) {
+        // Заголовки уже отправлены — сказать клиенту нечего, поэтому обрываем поток.
+        console.error('photo archive failed:', error.message);
+        response.destroy();
+      }
       return;
     }
     if (pathname === '/reports/export.pdf' && request.method === 'GET') {

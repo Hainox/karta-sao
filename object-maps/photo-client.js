@@ -1213,9 +1213,11 @@ async function downloadReport(kind) {
     : kind === 'headquarters' ? `/reports/export-headquarters.xlsx${query}`
     : kind === 'headquarters-pdf' ? `/reports/export-headquarters.pdf${query}`
     : kind === 'districts' ? `/reports/export-districts.xlsx${query}`
+    : kind === 'photos' ? `/reports/photos.zip${query}`
     : `/reports/export.pdf${query}`;
   try {
-    showToast('Готовим выгрузку…');
+    // Архив снимков собирается потоком и весит много: предупреждаем заранее.
+    showToast(kind === 'photos' ? 'Собираем архив фотографий…' : 'Готовим выгрузку…');
     const response = await api(path);
     if (!response.ok) throw new Error(`Сервис ответил ${response.status}`);
     const blob = await response.blob();
@@ -1226,6 +1228,7 @@ async function downloadReport(kind) {
       : kind === 'headquarters' ? 'sao-photo-headquarters.xlsx'
       : kind === 'headquarters-pdf' ? 'sao-photo-headquarters.pdf'
       : kind === 'districts' ? 'sao-photo-districts.xlsx'
+      : kind === 'photos' ? `sao-photo-${new Date().toISOString().slice(0, 10)}.zip`
       : 'sao-photo-summary.pdf';
     document.body.appendChild(link);
     link.click();
@@ -1382,6 +1385,7 @@ function shell() {
           <button type="button" class="pa-btn" id="paExportHeadquartersPdf">PDF: таблица на штаб</button>
           <button type="button" class="pa-btn" id="paExportPdf">PDF: краткая сводка</button>
           <button type="button" class="pa-btn" id="paExportCsv">CSV для Яндекса</button>
+          <button type="button" class="pa-btn" id="paExportPhotos">Архив фото (ZIP)</button>
         </div>
         <p class="pa-list-head" id="paListCount" role="status">Загружаем объекты…</p>
         <div class="pa-list" id="paList" role="list"></div>
@@ -1475,6 +1479,7 @@ function bindEvents() {
   element('paExportHeadquartersPdf').addEventListener('click', () => downloadReport('headquarters-pdf'));
   element('paExportPdf').addEventListener('click', () => downloadReport('pdf'));
   element('paExportCsv').addEventListener('click', downloadCsv);
+  element('paExportPhotos').addEventListener('click', () => downloadReport('photos'));
   element('paDialog').addEventListener('close', () => {
     releaseObjectUrls();
     state.selected = null;

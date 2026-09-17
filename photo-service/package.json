@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@napi-rs/canvas": "^0.1.80",
+    "archiver": "7.0.1",
     "busboy": "1.6.0",
     "exceljs": "4.4.0",
     "pdfkit": "0.20.2",

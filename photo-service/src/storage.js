@@ -18,19 +18,23 @@ export async function writeMedia(buffer, mimeType, root = mediaRoot()) {
   return { storageKey, sha256: createHash('sha256').update(buffer).digest('hex'), path: target };
 }
 
-export function readMedia(storageKey, root = mediaRoot()) {
-  if (typeof storageKey !== 'string' || !/^[0-9a-f-]{36}\.(jpg|png|webp)$/.test(storageKey)) {
+const STORAGE_KEY = /^[0-9a-f-]{36}\.(jpg|png|webp)$/;
+
+/** Путь к файлу в медиахранилище. Ключ проверяется: обход каталога недопустим. */
+export function mediaPath(storageKey, root = mediaRoot()) {
+  if (typeof storageKey !== 'string' || !STORAGE_KEY.test(storageKey)) {
     throw new Error('invalid_storage_key');
   }
-  return createReadStream(join(root, storageKey));
+  return join(root, storageKey);
+}
+
+export function readMedia(storageKey, root = mediaRoot()) {
+  return createReadStream(mediaPath(storageKey, root));
 }
 
 export async function removeMedia(storageKey, root = mediaRoot()) {
-  if (typeof storageKey !== 'string' || !/^[0-9a-f-]{36}\.(jpg|png|webp)$/.test(storageKey)) {
-    throw new Error('invalid_storage_key');
-  }
   try {
-    await unlink(join(root, storageKey));
+    await unlink(mediaPath(storageKey, root));
   } catch (error) {
     if (error.code !== 'ENOENT') throw error;
   }
