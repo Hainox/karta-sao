@@ -130,6 +130,7 @@ test('выгрузки становятся доступны после загр
   // До входа в единую базу срез объектов районов закрыт: и загрузка, и выгрузка.
   await expect(page.locator('#routes-load')).toBeDisabled();
   await expect(page.locator('#export-routes-csv')).toBeDisabled();
+  await expect(page.locator('#export-routes-board')).toBeDisabled();
   await expect(page.locator('#routes-note')).toContainText('Вход не выполнен');
 });
 
@@ -282,6 +283,94 @@ test('загруженные объекты районов попадают в �
   expect(block.note).toContain('Временное складирование снега — 1');
   expect(block.note).toContain('Зона складирования роторного снега — 1');
   expect(block.note).toContain('считают только маршруты');
+});
+
+test('лист «маршруты на штаб» повторяет форму выгрузки фотофиксации', async ({ page }) => {
+  await openMap(page);
+  await connectBase(page);
+
+  const board = await page.evaluate(async () => {
+    const payload = await window.ODHApi.request('/api/submissions').then((response) => response.json());
+    const base = window.ODHExports.collectBase(payload.submissions);
+    const sheet = window.ODHExports.buildRoutesHeadquarters(base, window.ExcelJS).getWorksheet('На штаб');
+    const values = (row) => Array.from({ length: 14 }, (_, index) => sheet.getCell(row, index + 1).value);
+    let totalRow = 0;
+    let commentRow = 0;
+    sheet.eachRow((row, index) => {
+      const first = String(row.getCell(1).value || '');
+      if (first.startsWith('ИТОГО')) totalRow = index;
+      if (first.startsWith('Направление —')) commentRow = index;
+    });
+    const comment = [];
+    // Окно с запасом: в комментарий попадает ещё список районов без объектов.
+    for (let row = commentRow; row < commentRow + 60; row += 1) {
+      const line = sheet.getCell(row, 1).value;
+      // Пустая строка после заголовка — часть формы, а не конец блока.
+      if (line === null || line === undefined) break;
+      comment.push(String(line));
+    }
+    return {
+      sheets: window.ODHExports.buildRoutesHeadquarters(base, window.ExcelJS).worksheets.map((item) => item.name),
+      groups: base.board.groups.map((group) => ({ title: group.title, plan: group.plan, fact: group.fact, percent: group.percent })),
+      overall: base.board.overall,
+      states: base.board.states,
+      header: [1, 3, 6, 9, 12].map((column) => sheet.getCell(1, column).value),
+      subHeader: ['Объекты', 'Факт', '%'].map((_, offset) => sheet.getCell(2, 3 + offset).value),
+      first: values(3),
+      totalLabel: sheet.getCell(totalRow, 1).value,
+      totalValues: values(totalRow).slice(2),
+      percentFormat: sheet.getCell(3, 5).numFmt,
+      percentFill: sheet.getCell(3, 5).fill?.fgColor?.argb,
+      comment,
+      note: sheet.getCell(commentRow + comment.length, 1).value
+        || sheet.getCell(commentRow + comment.length + 1, 1).value
+    };
+  });
+
+  // Книга — один лист, как и отдельная выгрузка «на штаб» у фотофиксации.
+  expect(board.sheets).toEqual(['На штаб']);
+  expect(board.header).toEqual(['№', 'Маршруты', 'Зоны', 'Точки', 'Итого']);
+  expect(board.subHeader).toEqual(['Объекты', 'Факт', '%']);
+  expect(board.groups).toEqual([
+    { title: 'Маршруты', plan: 7, fact: 2, percent: 29 },
+    { title: 'Зоны', plan: 1, fact: 1, percent: 100 },
+    { title: 'Точки', plan: 1, fact: 1, percent: 100 }
+  ]);
+  expect(board.overall).toEqual({ plan: 9, fact: 4, percent: 44 });
+  expect(board.states).toEqual({ submitted: 4, approved: 4, rejected: 1 });
+
+  // Верхняя таблица — устойчивый справочник: районы по алфавиту.
+  expect(board.first).toEqual([1, 'Аэропорт', 4, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0]);
+  expect(board.totalLabel).toBe('ИТОГО по САО');
+  expect(board.totalValues).toEqual([7, 2, 29, 1, 1, 100, 1, 1, 100, 9, 4, 44]);
+
+  // Проценты — целые, со светофором; ячейка «Маршруты: %» у Аэропорта красная (0 %).
+  expect(board.percentFormat).toBe('0"%"');
+  expect(['FFEA9999', 'FFF4CCCC', 'FFFFF2CC', 'FFD9EAD3']).toContain(board.percentFill);
+
+  // Комментарий по форме штабной рассылки: направление, числа, состояния приёмки.
+  expect(board.comment[0]).toMatch(/^Направление — «Приёмка маршрутов ОДХ» — .+ \(МСК\)$/);
+  expect(board.comment[3]).toBe('Приёмка маршрутов ОДХ: 4 из 9 объектов — 44 %.');
+  expect(board.comment.join('\n')).toContain('Слабая динамика по отрисовке маршрутов!');
+  expect(board.comment.join('\n')).toContain('Приёмка: на приёмке 4, утверждено 4, отклонено 1');
+  expect(board.comment.join('\n')).toContain('По категориям: маршруты 29 %');
+  expect(String(board.note)).toContain('сколько объектов района нарисовали');
+});
+
+test('кнопка «маршруты на штаб» отдаёт книгу, а не пустой файл', async ({ page }) => {
+  await openMap(page);
+  await connectBase(page);
+  await expect(page.locator('#export-routes-board')).toBeEnabled();
+
+  const [download] = await Promise.all([
+    page.waitForEvent('download'),
+    page.locator('#export-routes-board').click()
+  ]);
+
+  expect(download.suggestedFilename()).toMatch(/^odh-routes-na-shtab-\d{4}-\d{2}-\d{2}\.xlsx$/);
+  const bytes = readFileSync(await download.path());
+  expect(bytes.subarray(0, 2).toString('latin1')).toBe('PK');
+  expect(bytes.length).toBeGreaterThan(8_000);
 });
 
 test('CSV отчёта по маршрутам скачивается из сервиса с BOM и шапкой службы', async ({ page }) => {

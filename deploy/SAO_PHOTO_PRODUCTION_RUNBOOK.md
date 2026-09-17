@@ -53,8 +53,16 @@ The binding command is a dry run by default: it prints how many photos it would 
 `/opt` is not a git checkout: files are copied over. Build the release archive with `git archive`, not with an archive of the working copy — on Windows `core.autocrlf=true` puts CRLF into the working copy, and a working-copy archive then writes CRLF into production, including into `Dockerfile`. `git archive` takes the index (always LF), and the rules in `.gitattributes` keep it that way:
 
 ```sh
-git archive --format=tar.gz -o /tmp/ps.tgz HEAD photo-service/src photo-service/server.js photo-service/scripts photo-service/README.md
+git archive --format=tar.gz -o /tmp/ps.tgz HEAD photo-service/src photo-service/server.js photo-service/scripts photo-service/README.md photo-service/package.json photo-service/package-lock.json
 git archive --format=tar.gz -o /tmp/odh.tgz HEAD api notify
+```
+
+The manifests are part of the release: the image builds with `npm ci`, so a new
+dependency that is absent from `package-lock.json` fails the build. Unpack with
+`--strip-components=1` into the target directory:
+
+```sh
+cd /opt/sao-photo-service/photo-service && tar -xzf /tmp/ps.tgz --strip-components=1
 ```
 
 Then unpack over the target directory (`/opt/sao-photo-service/photo-service`, `/opt/odh-sao`), rebuild and recreate. Before the first extraction make a copy of what is being replaced — that copy is the only rollback for a directory that git does not track.

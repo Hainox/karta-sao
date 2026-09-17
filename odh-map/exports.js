@@ -145,6 +145,26 @@
     return (types && types[key] && types[key].label) || key;
   }
 
+  /** Вид объекта по общему словарю: маршрут, зона или точка. */
+  function groupOfType(key) {
+    const types = window.DistrictChanges && window.DistrictChanges.TYPES;
+    return (types && types[key] && types[key].group) || 'point';
+  }
+
+  // Тот же лист «На штаб», что у фотофиксации, но для отчёта по маршрутам: три
+  // вида объектов в блоках и «Итого». «Объекты» — сколько районы нарисовали и
+  // отправили, «Факт» — сколько из этого утверждено приёмкой.
+  const ROUTE_GROUPS = Object.freeze([
+    { key: 'route', title: 'Маршруты', commentTitle: 'маршруты' },
+    { key: 'zone', title: 'Зоны', commentTitle: 'зоны' },
+    { key: 'point', title: 'Точки', commentTitle: 'точки' }
+  ]);
+  const ROUTE_DIRECTION = 'Приёмка маршрутов ОДХ';
+
+  /** Пустые счётчики по видам: план и факт для каждого блока листа «На штаб». */
+  const kindsBlank = () => Object.fromEntries(ROUTE_GROUPS.map((group) => [group.key, { plan: 0, fact: 0 }]));
+  const ROUTE_NOTE = 'Колонка «Объекты» — сколько объектов района нарисовали в редакторе и отправили в единую базу, независимо от решения приёмки. Колонка «Факт» — сколько из них утверждено; процент считается по объектам каждого вида отдельно. Зоны и точки приёмка не разбирает построчно: в сводке службы «На приёмке», «Утверждено» и «Отклонено» считают только маршруты, поэтому здесь числа по ним идут отдельными колонками, а состояния приёмки названы в комментарии.';
+
   // Светофор процентов: бледные заливки, смысл несёт число. Пороги те же, что у
   // полосы статуса в других выгрузках заказчика. Отдельный цвет у точного нуля.
   const BAND_FILLS = Object.freeze({
@@ -562,25 +582,32 @@
    */
   function headquartersComment(model, options) {
     const settings = options || {};
+    const direction = settings.direction || model.direction || HEADQUARTERS_DIRECTION;
+    const unit = settings.unit || 'точек';
     const leaders = model.sorted.filter((item) => item.overall.fact > 0).slice(0, 3);
     const categories = [...model.groups].sort((left, right) => left.percent - right.percent);
     const lines = [
-      `Направление — «${HEADQUARTERS_DIRECTION}» — ${moscowMoment(settings.generatedAt || model.generatedAt)} (МСК)`,
+      `Направление — «${direction}» — ${moscowMoment(settings.generatedAt || model.generatedAt)} (МСК)`,
       '',
       'Коллеги, добрый день!',
-      `${HEADQUARTERS_DIRECTION}: ${countText(model.overall.fact)} из ${countText(model.overall.plan)} точек — ${model.overall.percent} %.`
+      `${direction}: ${countText(model.overall.fact)} из ${countText(model.overall.plan)} ${unit} — ${model.overall.percent} %.`
     ];
 
     if (model.lagging.length) {
-      lines.push('Слабая динамика по подтверждению слоёв! Следующим районам срочно приступить к данной задаче:');
+      lines.push(settings.laggingText || 'Слабая динамика по подтверждению слоёв! Следующим районам срочно приступить к данной задаче:');
       lines.push(...model.lagging);
     } else {
-      lines.push('Подтверждённые данные есть по всем районам, отстающих нет.');
+      lines.push(settings.noneText || 'Подтверждённые данные есть по всем районам, отстающих нет.');
     }
 
     if (leaders.length) {
-      lines.push(`Больше всего подтверждено: ${leaders.map((item) => `${item.name} — ${item.overall.percent} %`).join(', ')}.`);
+      const label = settings.leadersText || 'Больше всего подтверждено';
+      lines.push(`${label}: ${leaders.map((item) => `${item.name} — ${item.overall.percent} %`).join(', ')}.`);
     }
+
+    // Строка про приёмку нужна отчёту по маршрутам: в сетку эталона состояния не
+    // помещаются, а штабу они нужны.
+    for (const line of settings.extraLines || []) lines.push(line);
 
     if (categories.length) {
       lines.push(`По категориям: ${categories.map((group) => `${group.commentTitle} ${group.percent} %`).join(', ')}.`);
@@ -614,7 +641,8 @@
   function collectBase(submissions) {
     const byDistrict = new Map();
     const blank = (name) => ({
-      district: name, types: {}, total: 0, submitted: 0, approved: 0, rejected: 0, lastSubmittedAt: null
+      district: name, types: {}, kinds: kindsBlank(), total: 0,
+      submitted: 0, approved: 0, rejected: 0, lastSubmittedAt: null
     });
     const ensure = (name) => {
       if (!byDistrict.has(name)) byDistrict.set(name, blank(name));
@@ -628,9 +656,13 @@
         const key = (feature && feature.properties && feature.properties.change_type) || 'other';
         item.types[key] = (item.types[key] || 0) + 1;
         item.total += 1;
+        const kind = groupOfType(key);
+        item.kinds[kind].plan += 1;
         if (submission.status === 'submitted') item.submitted += 1;
-        else if (submission.status === 'approved') item.approved += 1;
-        else if (submission.status === 'rejected') item.rejected += 1;
+        else if (submission.status === 'approved') {
+          item.approved += 1;
+          item.kinds[kind].fact += 1;
+        } else if (submission.status === 'rejected') item.rejected += 1;
       }
       item.lastSubmittedAt = laterOf(item.lastSubmittedAt, submission && submission.submitted_at);
     }
@@ -648,6 +680,10 @@
       .map((item) => {
         for (const [key, value] of Object.entries(item.types)) {
           totals.types[key] = (totals.types[key] || 0) + value;
+        }
+        for (const group of ROUTE_GROUPS) {
+          totals.kinds[group.key].plan += item.kinds[group.key].plan;
+          totals.kinds[group.key].fact += item.kinds[group.key].fact;
         }
         totals.total += item.total;
         totals.submitted += item.submitted;
@@ -669,6 +705,41 @@
       .map(([key, count]) => ({ key, label: typeLabel(key), count }))
       .sort((left, right) => right.count - left.count || left.label.localeCompare(right.label, 'ru'));
 
+    // Тот же срез, но в форме листа «На штаб»: сверху устойчивый справочник
+    // (районы по алфавиту, «АвД САО» последней строкой), снизу — по «Итого: %».
+    const stable = names
+      .map((name) => byDistrict.get(name) || blank(name))
+      .sort((left, right) => (left.district === AUTODOR_HOLDER ? 1
+        : right.district === AUTODOR_HOLDER ? -1
+          : left.district.localeCompare(right.district, 'ru')))
+      .map((item) => ({
+        name: item.district,
+        counts: ROUTE_GROUPS.reduce((acc, group) => ({ ...acc, [group.key]: item.kinds[group.key] }), {}),
+        overall: overallOfKinds(item.kinds)
+      }));
+
+    const board = {
+      generatedAt: new Date().toISOString(),
+      direction: ROUTE_DIRECTION,
+      note: ROUTE_NOTE,
+      states: { submitted: totals.submitted, approved: totals.approved, rejected: totals.rejected },
+      groups: ROUTE_GROUPS.map((group) => ({
+        ...group,
+        plan: totals.kinds[group.key].plan,
+        fact: totals.kinds[group.key].fact,
+        percent: percent(totals.kinds[group.key].fact, totals.kinds[group.key].plan)
+      })),
+      districts: stable,
+      total: totals.kinds,
+      overall: overallOfKinds(totals.kinds),
+      // Порядок должен быть устойчивым, чтобы строки не «гуляли» между выгрузками.
+      sorted: [...stable].sort((left, right) =>
+        right.overall.percent - left.overall.percent
+        || right.overall.fact - left.overall.fact
+        || left.name.localeCompare(right.name, 'ru')),
+      lagging: stable.filter((item) => item.overall.plan === 0).map((item) => item.name)
+    };
+
     return {
       generatedAt: new Date().toISOString(),
       districts,
@@ -676,8 +747,16 @@
       otherBreakdown,
       totalPriority: PRIORITY_TYPES
         .map((type) => ({ key: type.key, title: type.title, count: totals.types[type.key] || 0 })),
-      lagging: districts.filter((item) => item.total === 0).map((item) => item.district)
+      lagging: districts.filter((item) => item.total === 0).map((item) => item.district),
+      board
     };
+  }
+
+  /** «Итого» строки и всего округа: план, факт и процент по всем видам. */
+  function overallOfKinds(kinds) {
+    const plan = ROUTE_GROUPS.reduce((sum, group) => sum + kinds[group.key].plan, 0);
+    const fact = ROUTE_GROUPS.reduce((sum, group) => sum + kinds[group.key].fact, 0);
+    return { plan, fact, percent: percent(fact, plan) };
   }
 
   /** Ряд значений строки блока: приоритетные типы, прочие, всего и приёмка. */
@@ -815,6 +894,52 @@
     }));
     writeNote(sheet, afterBase + comment.length + 1, count, HEADQUARTERS_NOTE);
     return sheet;
+  }
+
+  /**
+   * Лист «На штаб» для отчёта по маршрутам: та же форма, что у фотофиксации —
+   * сверху справочник районов, снизу та же таблица по «Итого: %», ниже
+   * комментарий и примечание. Числа берёт общая модель, поэтому лист, письмо и
+   * печатная форма не расходятся.
+   */
+  function addRouteBoardSheet(workbook, board) {
+    const sheet = workbook.addWorksheet('На штаб');
+    const { count } = headquartersColumns(board);
+    sheet.getColumn(1).width = 4.71;
+    sheet.getColumn(2).width = 25.43;
+    for (let column = 3; column <= count; column += 1) sheet.getColumn(column).width = 14.43;
+
+    const firstTotalRow = writeHeadquartersTable(sheet, 1, board, board.districts);
+    const secondTotalRow = writeHeadquartersTable(sheet, firstTotalRow + 4, board, board.sorted, { formula: true });
+
+    const states = board.states || { submitted: 0, approved: 0, rejected: 0 };
+    const comment = headquartersComment(board, {
+      unit: 'объектов',
+      laggingText: 'Слабая динамика по отрисовке маршрутов! Следующим районам срочно приступить к данной задаче:',
+      noneText: 'Объекты прислали все районы округа, отстающих нет.',
+      leadersText: 'Больше всего нарисовали',
+      // Состояния приёмки в сетку эталона не помещаются, а штабу они нужны.
+      extraLines: [
+        `Приёмка: на приёмке ${countText(states.submitted)}, утверждено ${countText(states.approved)}, `
+        + `отклонено ${countText(states.rejected)} — считаются все объекты наборов.`
+      ]
+    });
+    comment.forEach((line, offset) => writeNote(sheet, secondTotalRow + 2 + offset, count, line, {
+      size: offset === 0 ? 11 : 10,
+      bold: offset === 0,
+      ink: offset === 0 ? HEADQUARTERS_INK : 'FF000000'
+    }));
+    writeNote(sheet, secondTotalRow + comment.length + 3, count, board.note || ROUTE_NOTE);
+    return sheet;
+  }
+
+  /** Книга «маршруты на штаб»: один лист, та же форма, что у фотофиксации. */
+  function buildRoutesHeadquarters(base, ExcelJS) {
+    const workbook = new ExcelJS.Workbook();
+    workbook.creator = 'Карта ОДХ САО';
+    workbook.created = new Date();
+    addRouteBoardSheet(workbook, base.board);
+    return workbook;
   }
 
   /** Лист «Обзор»: что лежит на карте и на чём основаны числа. */
@@ -1022,7 +1147,8 @@ ${baseBlock}
     districtOf, countOf, sliceLayer, collect, percent, percentBandFill,
     objectsCsv, objectsCsvName, objectCountOf, moscowMoment, moscowDate, formatSubmittedAt,
     headquartersColumns, blockValues, headquartersComment,
-    baseColumns, typeLabel, collectBase, baseRowValues, baseLaggingText, baseNote, baseSummary,
+    baseColumns, typeLabel, groupOfType, collectBase, baseRowValues, baseLaggingText, baseNote, baseSummary,
+    ROUTE_GROUPS, ROUTE_DIRECTION, ROUTE_NOTE, addRouteBoardSheet, buildRoutesHeadquarters,
     buildWorkbook, headquartersHtml, downloadBlob, downloadText, printHeadquarters
   };
 }());

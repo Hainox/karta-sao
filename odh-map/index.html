@@ -903,6 +903,14 @@
                 <i class="fa-regular fa-file-pdf"></i>PDF: таблица на штаб
               </button>
               <button
+                id="export-routes-board"
+                class="outline-button"
+                type="button"
+                disabled
+              >
+                <i class="fa-solid fa-table-list"></i>Excel: маршруты на штаб
+              </button>
+              <button
                 id="export-objects-csv"
                 class="outline-button"
                 type="button"
@@ -1567,6 +1575,7 @@
           document.getElementById(id).disabled = !ready;
         });
         document.getElementById("export-routes-csv").disabled = !isPrefecture();
+        document.getElementById("export-routes-board").disabled = !baseModel;
         document.getElementById("routes-load").disabled = !isPrefecture();
         document.getElementById("export-note").textContent = ready
           ? EXPORT_NOTE_READY
@@ -1666,6 +1675,36 @@
           toast(`Не удалось выгрузить: ${error.message}`);
         }
       }
+      async function exportRoutesBoard() {
+        // Лист «На штаб» по маршрутам собирается из загруженных наборов районов:
+        // без них таблица была бы пустой, а не честно помеченной.
+        if (!baseModel) {
+          toast("Сначала загрузите объекты районов.");
+          return;
+        }
+        if (!window.ExcelJS) {
+          toast(
+            "Не загрузилась библиотека Excel: проверьте сеть и обновите страницу.",
+          );
+          return;
+        }
+        try {
+          toast("Готовим таблицу на штаб…");
+          const buffer = await ODHExports.buildRoutesHeadquarters(
+            baseModel,
+            window.ExcelJS,
+          ).xlsx.writeBuffer();
+          ODHExports.downloadBlob(
+            new Blob([buffer], {
+              type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            }),
+            `odh-routes-na-shtab-${ODHExports.moscowDate()}.xlsx`,
+          );
+          toast("Выгрузка готова.");
+        } catch (error) {
+          toast(`Не удалось выгрузить: ${error.message}`);
+        }
+      }
       function exportObjectsCsv() {
         try {
           const model = exportModel();
@@ -1709,6 +1748,9 @@
       document
         .getElementById("export-headquarters-pdf")
         .addEventListener("click", exportHeadquartersPdf);
+      document
+        .getElementById("export-routes-board")
+        .addEventListener("click", exportRoutesBoard);
       document
         .getElementById("export-objects-csv")
         .addEventListener("click", exportObjectsCsv);
