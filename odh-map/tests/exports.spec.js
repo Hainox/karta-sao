@@ -1,7 +1,7 @@
 // Проверки выгрузок с карты ОДХ: файлы собираются в браузере из тех же слоёв,
 // что нарисованы на карте, поэтому числа берём не из фикстур, а из настоящих
-// слоёв и сверяем с тем, что опубликовано в README карты. Срез маршрутов,
-// наоборот, приходит из сервиса ОДХ — его подменяем стабом.
+// слоёв и сверяем с тем, что опубликовано в README карты. Объекты районов,
+// наоборот, приходят из сервиса ОДХ — его подменяем стабом.
 import { readFileSync, existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -34,21 +34,29 @@ const test = base.extend({
 
 const MAP_EXPORT_BUTTONS = ['#export-register', '#export-headquarters', '#export-headquarters-pdf', '#export-objects-csv'];
 
-// Стаб единой базы: срез маршрутов и файл-выгрузка в том же формате, что отдаёт
-// служба. Времена — московские, как их печатает api/lib/route-report.js.
-const FAKE_REPORT = {
-  generatedAt: '2026-09-17T06:30:00.000Z',
-  districts: [
-    { district: 'Аэропорт', routes: 5, zones: 1, points: 4, submitted: 2, approved: 2, rejected: 1, lastSubmittedAt: '2026-09-17T06:30:00.000Z' },
-    { district: 'Головинский', routes: 3, zones: 0, points: 9, submitted: 0, approved: 3, rejected: 0, lastSubmittedAt: '2026-09-16T09:00:00.000Z' },
-    { district: 'Дмитровский', routes: 0, zones: 0, points: 0, submitted: 0, approved: 0, rejected: 0, lastSubmittedAt: null }
-  ],
-  totals: { routes: 8, zones: 1, points: 13, submitted: 2, approved: 5, rejected: 1, lastSubmittedAt: '2026-09-17T06:30:00.000Z' },
-  lagging: ['Дмитровский'],
-  csvName: 'odh-routes-2026-09-17.csv'
-};
+// Стаб единой базы: наборы районов с объектами разных типов. Проверяем на них
+// разбор по типам — отдельно маршруты уборки и роторные перекидки, остальное в
+// «Прочие объекты». Времена в ответе — ISO, показываются в московских.
+function features(...types) {
+  return types.map((type) => ({ type: 'Feature', properties: { change_type: type } }));
+}
+
+const FAKE_SUBMISSIONS = [
+  {
+    district: 'Аэропорт', status: 'submitted', submitted_at: '2026-09-17T06:30:00.000Z',
+    change_set: { features: features('queue', 'queue', 'queue', 'rotor_transfer') }
+  },
+  {
+    district: 'Головинский', status: 'approved', submitted_at: '2026-09-16T09:00:00.000Z',
+    change_set: { features: features('queue', 'queue', 'rotor_snow_storage_zone', 'temporary_snow_storage') }
+  },
+  {
+    district: 'Дмитровский', status: 'rejected', submitted_at: '2026-09-15T12:20:00.000Z',
+    change_set: { features: features('queue') }
+  }
+];
 const FAKE_CSV = '\uFEFFРайон;Маршрутов;Зон;Точек;На приёмке;Утверждено;Отклонено;Последняя отправка\r\n'
-  + 'Аэропорт;5;1;4;2;2;1;17.09.2026 09:30\r\nИТОГО;8;1;13;2;5;1;17.09.2026 09:30\r\n';
+  + 'Аэропорт;4;1;0;4;0;0;17.09.2026 09:30\r\nИТОГО;9;1;2;4;4;1;17.09.2026 09:30\r\n';
 
 const testApi = 'https://api.test/odh';
 
@@ -83,8 +91,13 @@ async function stubApi(page) {
         body: Buffer.from(FAKE_CSV, 'utf8')
       });
     }
-    if (url.endsWith('/api/reports/routes')) {
-      return route.fulfill({ status: 200, headers: CORS, contentType: 'application/json', body: JSON.stringify(FAKE_REPORT) });
+    if (url.endsWith('/api/submissions')) {
+      return route.fulfill({
+        status: 200,
+        headers: CORS,
+        contentType: 'application/json',
+        body: JSON.stringify({ submissions: FAKE_SUBMISSIONS })
+      });
     }
     return route.fulfill({ status: 404, headers: CORS, contentType: 'application/json', body: '{}' });
   });
@@ -95,8 +108,8 @@ async function openMap(page) {
   await expect(page.locator('#export-register')).toBeEnabled();
 }
 
-/** Вход префектуры и загрузка маршрутов ровно теми же шагами, что делает человек. */
-async function connectRoutes(page) {
+/** Вход префектуры и загрузка объектов ровно теми же шагами, что делает человек. */
+async function connectBase(page) {
   await stubApi(page);
   await page.locator('#routes-api-base').fill(testApi);
   await page.locator('#routes-api-email').fill('префектура');
@@ -104,7 +117,7 @@ async function connectRoutes(page) {
   await page.locator('#routes-login').click();
   await expect(page.locator('#routes-note')).toContainText('Вход выполнен: префектура · prefecture_admin');
   await page.locator('#routes-load').click();
-  await expect(page.locator('#routes-note')).toContainText('маршрутов 8');
+  await expect(page.locator('#routes-note')).toContainText('объектов 9');
 }
 
 test('выгрузки становятся доступны после загрузки слоёв карты', async ({ page }) => {
@@ -114,7 +127,7 @@ test('выгрузки становятся доступны после загр
   await expect(page.locator('#export-register')).toContainText('Excel: полный реестр');
   await expect(page.locator('#export-objects-csv')).toContainText('CSV: объекты ОДХ по районам');
 
-  // До входа в единую базу срез маршрутов закрыт: и загрузка, и его выгрузка.
+  // До входа в единую базу срез объектов районов закрыт: и загрузка, и выгрузка.
   await expect(page.locator('#routes-load')).toBeDisabled();
   await expect(page.locator('#export-routes-csv')).toBeDisabled();
   await expect(page.locator('#routes-note')).toContainText('Вход не выполнен');
@@ -166,9 +179,9 @@ test('книга реестра содержит листы слоёв и таб
     const model = window.ODHExports.collect(layerData);
     const workbook = window.ODHExports.buildWorkbook(model, window.ExcelJS, 'register');
     const sheet = workbook.getWorksheet('На штаб');
-    let routesTitleRow = 0;
+    let baseRow = 0;
     sheet.eachRow((row, index) => {
-      if (String(row.getCell(1).value || '').startsWith('Маршруты районов')) routesTitleRow = index;
+      if (String(row.getCell(1).value || '').startsWith('Объекты районов')) baseRow = index;
     });
     return {
       sheets: workbook.worksheets.map((worksheet) => worksheet.name),
@@ -180,8 +193,8 @@ test('книга реестра содержит листы слоёв и таб
       percentFill: sheet.getCell(3, 14).fill?.fgColor?.argb,
       percentFormat: sheet.getCell(3, 14).numFmt,
       columnCount: window.ODHExports.headquartersColumns(model).count,
-      routesTitle: routesTitleRow ? sheet.getCell(routesTitleRow, 1).value : null,
-      routesEmpty: routesTitleRow ? sheet.getCell(routesTitleRow + 1, 1).value : null
+      baseTitle: baseRow ? sheet.getCell(baseRow, 1).value : null,
+      baseEmpty: baseRow ? sheet.getCell(baseRow + 1, 1).value : null
     };
   });
 
@@ -214,63 +227,79 @@ test('книга реестра содержит листы слоёв и таб
   expect(info.percentFormat).toBe('0"%"');
   expect(['FFEA9999', 'FFF4CCCC', 'FFFFF2CC', 'FFD9EAD3']).toContain(info.percentFill);
 
-  // Блок маршрутов на месте и без сервиса: пустой блок читался бы как «маршрутов нет».
-  expect(info.routesTitle).toBe('Маршруты районов (единая база)');
-  expect(info.routesEmpty).toBe('Данные единой базы не загружены: подключитесь к сервису ОДХ и повторите выгрузку.');
+  // Блок объектов районов на месте и без сервиса: пустой блок читался бы как
+  // «районы ничего не прислали».
+  expect(info.baseTitle).toBe('Объекты районов в единой базе');
+  expect(info.baseEmpty).toBe('Данные единой базы не загружены: подключитесь к сервису ОДХ и повторите выгрузку.');
 });
 
-test('загруженные маршруты попадают в книгу отдельным блоком с приёмкой', async ({ page }) => {
+test('загруженные объекты районов попадают в книгу с разбивкой по типам', async ({ page }) => {
   await openMap(page);
-  await connectRoutes(page);
+  await connectBase(page);
 
   const block = await page.evaluate(() => {
     const model = window.exportModel();
     const sheet = window.ODHExports.buildWorkbook(model, window.ExcelJS, 'headquarters').getWorksheet('На штаб');
     let titleRow = 0;
     sheet.eachRow((row, index) => {
-      if (String(row.getCell(1).value || '').startsWith('Маршруты районов')) titleRow = index;
+      if (String(row.getCell(1).value || '').startsWith('Объекты районов')) titleRow = index;
     });
-    const values = (row) => [1, 2, 3, 4, 5, 6, 7, 8, 9].map((column) => sheet.getCell(row, column).value);
+    const columns = window.ODHExports.baseColumns().length;
+    const values = (row) => Array.from({ length: columns }, (_, index) => sheet.getCell(row, index + 1).value);
     const first = titleRow + 2;
-    const total = first + model.routes.districts.length;
+    const total = first + model.base.districts.length;
     return {
       title: sheet.getCell(titleRow, 1).value,
       header: values(titleRow + 1),
       first: values(first),
       second: values(first + 1),
-      // «ИТОГО» занимает слитые первые две колонки, поэтому числа читаем с третьей.
+      third: values(first + 2),
       totalLabel: sheet.getCell(total, 1).value,
-      totalNumbers: [3, 4, 5, 6, 7, 8, 9].map((column) => sheet.getCell(total, column).value),
+      totalNumbers: values(total).slice(2),
       lagging: sheet.getCell(total + 1, 1).value,
-      note: sheet.getCell(total + 2, 1).value
+      note: sheet.getCell(total + 2, 1).value,
+      laggingCount: model.base.lagging.length
     };
   });
 
-  expect(block.title).toBe('Маршруты районов (единая база)');
-  expect(block.header).toEqual(['№', 'Район', 'Маршрутов', 'Точек', 'Зон', 'На приёмке', 'Утверждено', 'Отклонено', 'Последняя отправка']);
-  expect(block.first).toEqual([1, 'Аэропорт', 5, 4, 1, 2, 2, 1, '17.09.2026 09:30']);
-  // Пустая отправка остаётся пустой: прочерк читался бы как ноль.
-  expect(block.second).toEqual([2, 'Головинский', 3, 9, 0, 0, 3, 0, '16.09.2026 12:00']);
+  expect(block.title).toBe('Объекты районов в единой базе');
+  expect(block.header).toEqual([
+    '№', 'Район', 'Маршруты уборки', 'Роторные перекидки', 'Прочие объекты',
+    'Всего', 'На приёмке', 'Утверждено', 'Отклонено', 'Последняя отправка'
+  ]);
+  // Строки идут по убыванию: сначала те, кто больше прислал.
+  expect(block.first).toEqual([1, 'Аэропорт', 3, 1, 0, 4, 4, 0, 0, '17.09.2026 09:30']);
+  expect(block.second).toEqual([2, 'Головинский', 2, 0, 2, 4, 0, 4, 0, '16.09.2026 12:00']);
+  expect(block.third).toEqual([3, 'Дмитровский', 1, 0, 0, 1, 0, 0, 1, '15.09.2026 15:20']);
   expect(block.totalLabel).toBe('ИТОГО');
-  expect(block.totalNumbers).toEqual([8, 13, 1, 2, 5, 1, '17.09.2026 09:30']);
-  expect(block.lagging).toBe('Без маршрутов (1): Дмитровский.');
+  expect(block.totalNumbers).toEqual([6, 1, 2, 9, 4, 4, 1, '17.09.2026 09:30']);
+
+  // Тринадцать районов ничего не прислали — они обязаны быть в списке: иначе
+  // пропущенная строка читалась бы как «район не учли».
+  expect(block.laggingCount).toBe(13);
+  expect(block.lagging).toMatch(/^Без объектов \(13\): Беговой/);
+  // Состав «Прочих объектов» перечислен: свёрнутая колонка без расшифровки — загадка.
+  expect(block.note).toContain('Временное складирование снега — 1');
+  expect(block.note).toContain('Зона складирования роторного снега — 1');
   expect(block.note).toContain('считают только маршруты');
 });
 
-test('CSV отчёта по маршрутам скачивается из сервиса с тем же именем и BOM', async ({ page }) => {
+test('CSV отчёта по маршрутам скачивается из сервиса с BOM и шапкой службы', async ({ page }) => {
   await openMap(page);
-  await connectRoutes(page);
+  await connectBase(page);
+  // Файл службы доступен префектуре сразу, независимо от загрузки наборов.
+  await expect(page.locator('#export-routes-csv')).toBeEnabled();
 
   const [download] = await Promise.all([
     page.waitForEvent('download'),
     page.locator('#export-routes-csv').click()
   ]);
 
-  expect(download.suggestedFilename()).toBe('odh-routes-2026-09-17.csv');
+  expect(download.suggestedFilename()).toMatch(/^odh-routes-\d{4}-\d{2}-\d{2}\.csv$/);
   const csv = readFileSync(await download.path(), 'utf8');
   expect(csv.charCodeAt(0)).toBe(0xfeff);
   expect(csv.split('\r\n')[0].slice(1)).toBe('Район;Маршрутов;Зон;Точек;На приёмке;Утверждено;Отклонено;Последняя отправка');
-  expect(csv).toContain('ИТОГО;8;1;13;2;5;1;');
+  expect(csv).toContain('ИТОГО;9;1;2;4;4;1;');
 });
 
 test('кнопка Excel отдаёт настоящую книгу, а не пустой файл', async ({ page }) => {
@@ -287,7 +316,7 @@ test('кнопка Excel отдаёт настоящую книгу, а не п�
   expect(bytes.length).toBeGreaterThan(20_000);
 });
 
-test('без сервиса печатная форма помечает маршруты как незагруженные', async ({ page }) => {
+test('без сервиса печатная форма помечает объекты районов как незагруженные', async ({ page }) => {
   await openMap(page);
   const [popup] = await Promise.all([
     page.waitForEvent('popup'),
@@ -295,13 +324,13 @@ test('без сервиса печатная форма помечает мар�
   ]);
   await popup.waitForLoadState('domcontentloaded');
 
-  await expect(popup.getByText('Маршруты районов (единая база)')).toBeVisible();
+  await expect(popup.getByText('Объекты районов в единой базе')).toBeVisible();
   await expect(popup.getByText('Данные единой базы не загружены: подключитесь к сервису ОДХ и повторите выгрузку.')).toBeVisible();
 });
 
-test('печатная форма несёт и таблицу на штаб, и маршруты районов', async ({ page }) => {
+test('печатная форма несёт и таблицу на штаб, и объекты районов', async ({ page }) => {
   await openMap(page);
-  await connectRoutes(page);
+  await connectBase(page);
 
   const [popup] = await Promise.all([
     page.waitForEvent('popup'),
@@ -312,13 +341,15 @@ test('печатная форма несёт и таблицу на штаб, и
   await expect(popup.locator('h1')).toHaveText('Готовность слоёв карты ОДХ');
   await expect(popup.locator('h2')).toHaveText([
     'То же по проценту «Итого» — в штаб',
-    'Маршруты районов (единая база)',
+    'Объекты районов в единой базе',
     'Комментарий к выгрузке'
   ]);
   await expect(popup.locator('table')).toHaveCount(3);
   await expect(popup.locator('tr.total td').first()).toHaveText('ИТОГО по САО');
-  await expect(popup.locator('p.meta')).toContainText('маршруты — единая база (сервис ОДХ)');
-  await expect(popup.getByText('Без маршрутов (1): Дмитровский.')).toBeVisible();
+  await expect(popup.locator('p.meta')).toContainText('объекты районов — единая база (сервис ОДХ)');
+  await expect(popup.getByText('Маршруты уборки')).toBeVisible();
+  await expect(popup.getByText('Роторные перекидки')).toBeVisible();
+  await expect(popup.getByText(/^Без объектов \(13\): Беговой/)).toBeVisible();
   await expect(popup.locator('pre')).toContainText('Направление — «Готовность слоёв карты ОДХ»');
   await expect(popup.getByText('Колонка «Объекты» — точки на карте')).toBeVisible();
 });

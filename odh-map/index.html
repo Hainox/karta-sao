@@ -822,12 +822,13 @@
           </section>
           <section class="section">
             <h2 class="section-title">
-              Маршруты районов <i class="fa-solid fa-route"></i>
+              Объекты районов <i class="fa-solid fa-route"></i>
             </h2>
             <p class="file-note">
-              Отрисовка районов живёт в единой базе: сколько маршрутов, зон и
-              точек нарисовали и что принято. Вход — только учётной записью
-              префектуры; пароль в браузере не сохраняется.
+              Сколько объектов какого типа районы нарисовали и отправили в единую
+              базу и что из этого принято. Отдельно считаются маршруты уборки и
+              роторные перекидки. Вход — только учётной записью префектуры; пароль
+              в браузере не сохраняется.
             </p>
             <div class="api-row">
               <input
@@ -985,6 +986,7 @@
     <script src="https://cdn.jsdelivr.net/npm/leaflet-polylinedecorator@1.6.0/dist/leaflet.polylineDecorator.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js"></script>
     <script src="api-config.js"></script>
+    <script src="district-changes.js"></script>
     <script src="exports.js"></script>
     <script>
       const BASEMAPS = {
@@ -1552,9 +1554,9 @@
       const EXPORT_NOTE_READY =
         "Файлы собираются в браузере из загруженных слоёв: числа те же, что на карте.";
       // Срез единой базы. Пока его не загрузили, выгрузка честно помечает блок
-      // маршрутов как незагруженный, а не показывает нули — иначе «нет данных»
-      // читалось бы как «маршрутов нет».
-      let routesReport = null;
+      // объектов районов как незагруженный, а не показывает нули — иначе «нет
+      // данных» читалось бы как «районы ничего не прислали».
+      let baseModel = null;
 
       function isPrefecture() {
         return ODHApi.user()?.role === "prefecture_admin";
@@ -1564,23 +1566,23 @@
         EXPORT_BUTTONS.forEach((id) => {
           document.getElementById(id).disabled = !ready;
         });
-        document.getElementById("export-routes-csv").disabled = !routesReport;
+        document.getElementById("export-routes-csv").disabled = !isPrefecture();
         document.getElementById("routes-load").disabled = !isPrefecture();
         document.getElementById("export-note").textContent = ready
           ? EXPORT_NOTE_READY
           : "Кнопки станут доступны после загрузки слоёв карты.";
       }
-      /** Модель выгрузки: слои карты плюс маршруты, если их загрузили. */
+      /** Модель выгрузки: слои карты плюс объекты районов, если их загрузили. */
       function exportModel() {
         const model = ODHExports.collect(layerData);
-        if (routesReport) model.routes = routesReport;
+        if (baseModel) model.base = baseModel;
         return model;
       }
       function refreshRoutesSession() {
         const user = ODHApi.user();
         document.getElementById("routes-api-base").value = ODHApi.base();
         let note = "Вход не выполнен. Пароль в браузере не сохраняется.";
-        if (routesReport) note = ODHExports.routesSummary(routesReport);
+        if (baseModel) note = ODHExports.baseSummary(baseModel);
         else if (user) note = `Вход выполнен: ${user.email} · ${user.role}. Нажмите «Загрузить».`;
         document.getElementById("routes-note").textContent = note;
         updateExportState();
@@ -1593,7 +1595,7 @@
           ODHApi.setBase(base);
           const user = await ODHApi.login(email, password);
           document.getElementById("routes-api-password").value = "";
-          routesReport = null;
+          baseModel = null;
           refreshRoutesSession();
           toast(`Вход выполнен: ${user.role}.`);
         } catch (error) {
@@ -1602,17 +1604,20 @@
       }
       async function loadRoutes() {
         if (!isPrefecture()) {
-          toast("Срез маршрутов доступен только префектуре.");
+          toast("Срез единой базы доступен только префектуре.");
           return;
         }
         try {
-          toast("Запрашиваем маршруты…");
-          const response = await ODHApi.request("/api/reports/routes");
-          routesReport = await response.json();
+          toast("Запрашиваем объекты районов…");
+          // Наборы приходят целиком, с объектами: пересчитываем их по типам в
+          // браузере, чтобы видеть маршруты уборки и роторные перекидки отдельно.
+          const response = await ODHApi.request("/api/submissions");
+          const payload = await response.json();
+          baseModel = ODHExports.collectBase(payload.submissions);
           refreshRoutesSession();
-          toast("Маршруты загружены: их увидят выгрузки.");
+          toast("Объекты районов загружены: их увидят выгрузки.");
         } catch (error) {
-          toast(`Не удалось загрузить маршруты: ${error.message}`);
+          toast(`Не удалось загрузить объекты районов: ${error.message}`);
         }
       }
       async function exportRoutesCsv() {
@@ -1623,11 +1628,11 @@
         try {
           toast("Готовим выгрузку…");
           const response = await ODHApi.request("/api/reports/routes.csv");
-          // Имя берём из ответа службы: у неё оно с датой отчёта, и тот же файл
-          // приходит в Telegram — имена не должны расходиться.
+          // Имя собираем сами: заголовок Content-Disposition браузеру с чужого
+          // домена не виден, а имя у файла службы — с датой отчёта.
           ODHExports.downloadBlob(
             await response.blob(),
-            routesReport?.csvName || `odh-routes-${ODHExports.moscowDate()}.csv`,
+            `odh-routes-${ODHExports.moscowDate()}.csv`,
           );
           toast("Выгрузка готова.");
         } catch (error) {

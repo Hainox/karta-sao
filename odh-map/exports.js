@@ -115,13 +115,35 @@
   // Срез единой базы: то, что районы нарисовали в редакторе и отправили. Это не
   // то же самое, что слои карты, поэтому блок идёт отдельной таблицей внутри
   // сводки на штаб, а не подмешивается в категории выше.
-  const ROUTES_TITLE = 'Маршруты районов (единая база)';
-  const ROUTES_COLUMNS = Object.freeze([
-    '№', 'Район', 'Маршрутов', 'Точек', 'Зон', 'На приёмке', 'Утверждено', 'Отклонено', 'Последняя отправка'
+  //
+  // Заказчику сейчас нужен приоритет — маршруты уборки и роторные перекидки,
+  // поэтому они считаются отдельными колонками. Остальные девять типов держать
+  // на листе незачем: они сворачиваются в «Прочие объекты», а их состав
+  // перечисляется в примечании, чтобы строка читалась без пояснений.
+  const BASE_TITLE = 'Объекты районов в единой базе';
+  const PRIORITY_TYPES = Object.freeze([
+    { key: 'queue', title: 'Маршруты уборки' },
+    { key: 'rotor_transfer', title: 'Роторные перекидки' }
   ]);
-  const ROUTES_LAST_COLUMN = 9;
-  const ROUTES_NOTE = 'Маршруты, зоны и точки — столько объектов районы нарисовали и отправили в единую базу. «На приёмке», «Утверждено» и «Отклонено» считают только маршруты: зоны и точки идут отдельными колонками, поэтому их сумма не равна числу маршрутов.';
-  const ROUTES_EMPTY = 'Данные единой базы не загружены: подключитесь к сервису ОДХ и повторите выгрузку.';
+  const BASE_EMPTY = 'Данные единой базы не загружены: подключитесь к сервису ОДХ и повторите выгрузку.';
+
+  /** Шапка блока: одна на лист, письмо и печатную форму. */
+  function baseColumns() {
+    return [
+      '№', 'Район', ...PRIORITY_TYPES.map((type) => type.title), 'Прочие объекты',
+      'Всего', 'На приёмке', 'Утверждено', 'Отклонено', 'Последняя отправка'
+    ];
+  }
+
+  /**
+   * Название типа берём из district-changes.js — одного словаря на редактор
+   * района, приёмку и эту выгрузку. Ключ оставляем запасным вариантом: если район
+   * пришлёт тип, которого ещё нет в словаре, строка не пропадёт.
+   */
+  function typeLabel(key) {
+    const types = window.DistrictChanges && window.DistrictChanges.TYPES;
+    return (types && types[key] && types[key].label) || key;
+  }
 
   // Светофор процентов: бледные заливки, смысл несёт число. Пороги те же, что у
   // полосы статуса в других выгрузках заказчика. Отдельный цвет у точного нуля.
@@ -575,56 +597,153 @@
     return moscowMoment(date).replace(',', '');
   }
 
-  /** Строка про районы без маршрутов: одна формулировка на книгу и печатную форму. */
-  function routesLaggingText(report) {
-    const lagging = (report && report.lagging) || [];
-    return lagging.length
-      ? `Без маршрутов (${lagging.length}): ${lagging.join(', ')}.`
-      : 'Маршруты рисуют все районы округа.';
+  /** Более поздняя из двух отметок времени; пусто, если их нет. */
+  function laterOf(left, right) {
+    const leftMs = left ? new Date(left).valueOf() : Number.NaN;
+    const rightMs = right ? new Date(right).valueOf() : Number.NaN;
+    if (Number.isNaN(leftMs)) return Number.isNaN(rightMs) ? null : new Date(rightMs).toISOString();
+    if (Number.isNaN(rightMs)) return new Date(leftMs).toISOString();
+    return new Date(Math.max(leftMs, rightMs)).toISOString();
   }
 
-  /** Плоский ряд значений строки блока маршрутов: [числа..., отметка времени]. */
-  function routesRowValues(item) {
+  /**
+   * Разбор наборов районов: сколько объектов каждого типа район прислал и в каком
+   * они состоянии. Считаются все объекты всех наборов — так же, как в сводке
+   * службы, поэтому «Всего» сходится с суммой её маршрутов, зон и точек.
+   */
+  function collectBase(submissions) {
+    const byDistrict = new Map();
+    const blank = (name) => ({
+      district: name, types: {}, total: 0, submitted: 0, approved: 0, rejected: 0, lastSubmittedAt: null
+    });
+    const ensure = (name) => {
+      if (!byDistrict.has(name)) byDistrict.set(name, blank(name));
+      return byDistrict.get(name);
+    };
+
+    for (const submission of Array.isArray(submissions) ? submissions : []) {
+      const item = ensure(String((submission && submission.district) || '').trim() || AUTODOR_HOLDER);
+      const changeSet = (submission && submission.change_set) || {};
+      for (const feature of changeSet.features || []) {
+        const key = (feature && feature.properties && feature.properties.change_type) || 'other';
+        item.types[key] = (item.types[key] || 0) + 1;
+        item.total += 1;
+        if (submission.status === 'submitted') item.submitted += 1;
+        else if (submission.status === 'approved') item.approved += 1;
+        else if (submission.status === 'rejected') item.rejected += 1;
+      }
+      item.lastSubmittedAt = laterOf(item.lastSubmittedAt, submission && submission.submitted_at);
+    }
+
+    // Район без отправок тоже обязан попасть в отчёт: пропущенная строка читалась
+    // бы как «район не учли», а не как «район ещё не начинал».
+    const names = [...DISTRICT_NAMES];
+    for (const name of byDistrict.keys()) {
+      if (!names.includes(name)) names.push(name);
+    }
+
+    const totals = blank('ИТОГО');
+    const districts = names
+      .map((name) => byDistrict.get(name) || blank(name))
+      .map((item) => {
+        for (const [key, value] of Object.entries(item.types)) {
+          totals.types[key] = (totals.types[key] || 0) + value;
+        }
+        totals.total += item.total;
+        totals.submitted += item.submitted;
+        totals.approved += item.approved;
+        totals.rejected += item.rejected;
+        totals.lastSubmittedAt = laterOf(totals.lastSubmittedAt, item.lastSubmittedAt);
+        const priority = PRIORITY_TYPES
+          .reduce((sum, type) => sum + (item.types[type.key] || 0), 0);
+        return { ...item, priority, other: item.total - priority };
+      })
+      // Строки читают сверху вниз: сначала те, кто больше прислал.
+      .sort((left, right) => right.total - left.total || left.district.localeCompare(right.district, 'ru'));
+
+    totals.priority = PRIORITY_TYPES.reduce((sum, type) => sum + (totals.types[type.key] || 0), 0);
+    totals.other = totals.total - totals.priority;
+
+    const otherBreakdown = Object.entries(totals.types)
+      .filter(([key]) => !PRIORITY_TYPES.some((type) => type.key === key))
+      .map(([key, count]) => ({ key, label: typeLabel(key), count }))
+      .sort((left, right) => right.count - left.count || left.label.localeCompare(right.label, 'ru'));
+
+    return {
+      generatedAt: new Date().toISOString(),
+      districts,
+      totals,
+      otherBreakdown,
+      totalPriority: PRIORITY_TYPES
+        .map((type) => ({ key: type.key, title: type.title, count: totals.types[type.key] || 0 })),
+      lagging: districts.filter((item) => item.total === 0).map((item) => item.district)
+    };
+  }
+
+  /** Ряд значений строки блока: приоритетные типы, прочие, всего и приёмка. */
+  function baseRowValues(item) {
     return [
-      item.routes, item.points, item.zones,
-      item.submitted, item.approved, item.rejected, formatSubmittedAt(item.lastSubmittedAt)
+      ...PRIORITY_TYPES.map((type) => item.types[type.key] || 0),
+      item.other, item.total, item.submitted, item.approved, item.rejected,
+      formatSubmittedAt(item.lastSubmittedAt)
     ];
   }
 
-  /** Короткая сводка по маршрутам для сайдбара карты: одна фраза, без таблицы. */
-  function routesSummary(report) {
-    if (!report) return '';
-    const totals = report.totals || {};
-    const lagging = report.lagging || [];
+  /** Строка про районы без объектов: одна формулировка на книгу и печатную форму. */
+  function baseLaggingText(model) {
+    const lagging = (model && model.lagging) || [];
+    return lagging.length
+      ? `Без объектов (${lagging.length}): ${lagging.join(', ')}.`
+      : 'Объекты прислали все районы округа.';
+  }
+
+  /**
+   * Примечание под блоком. Объясняет состав «Прочих объектов» и главное
+   * расхождение: здесь приёмка считает все объекты набора, а в сводке службы —
+   * только маршруты, поэтому числа в этих колонках больше.
+   */
+  function baseNote(model) {
+    const others = model.otherBreakdown.length
+      ? model.otherBreakdown.map((entry) => `${entry.label} — ${entry.count}`).join(', ')
+      : 'такие объекты районы не присылали';
+    return `«Всего» — все объекты, которые районы нарисовали и отправили; столько же в сумме показывают «Маршрутов», «Зон» и «Точек» в сводке службы. В «Прочие объекты» вошло: ${others}. Колонки приёмки считают все объекты набора, а в сводке службы «На приёмке», «Утверждено» и «Отклонено» считают только маршруты — поэтому здесь числа больше.`;
+  }
+
+  /** Короткая сводка для сайдбара карты: одна фраза, без таблицы. */
+  function baseSummary(model) {
+    if (!model) return '';
+    const types = model.totalPriority
+      .map((entry) => `${entry.title.toLowerCase()} ${countText(entry.count)}`)
+      .join(', ');
     return [
-      `маршрутов ${countText(totals.routes)}, точек ${countText(totals.points)}, зон ${countText(totals.zones)}`,
-      `на приёмке ${countText(totals.submitted)}, утверждено ${countText(totals.approved)}, отклонено ${countText(totals.rejected)}`,
-      lagging.length ? `без маршрутов: ${lagging.join(', ')}` : 'маршруты рисуют все районы'
+      `объектов ${countText(model.totals.total)}: ${types}, прочие ${countText(model.totals.other)}`,
+      `на приёмке ${countText(model.totals.submitted)}, утверждено ${countText(model.totals.approved)}, отклонено ${countText(model.totals.rejected)}`,
+      model.lagging.length ? `без объектов: ${model.lagging.join(', ')}` : 'объекты прислали все районы'
     ].join(' · ');
   }
 
   /**
-   * Компактный блок «Маршруты районов» внутри сводки на штаб. Районы идут в
-   * порядке службы — по убыванию маршрутов, — потому что этот срез читают сверху
-   * вниз: сначала те, у кого работа идёт.
+   * Блок «Объекты районов в единой базе» внутри сводки на штаб: сколько объектов
+   * какого типа прислал район и что из присланного принято.
    */
-  function writeRoutesTable(sheet, startRow, report) {
-    const count = ROUTES_COLUMNS.length;
+  function writeBaseTable(sheet, startRow, model) {
+    const columns = baseColumns();
+    const count = columns.length;
     sheet.mergeCells(startRow, 1, startRow, count);
     const title = sheet.getCell(startRow, 1);
-    title.value = ROUTES_TITLE;
+    title.value = BASE_TITLE;
     title.font = { name: HEADQUARTERS_FONT, size: 12, bold: true, color: { argb: HEADQUARTERS_INK } };
     title.alignment = TO_LEFT;
     sheet.getRow(startRow).height = 22;
 
-    if (!report) {
-      // Пустой блок не оставляем: без пометки читалось бы как «маршрутов нет».
-      writeNote(sheet, startRow + 1, count, ROUTES_EMPTY, { size: 10 });
+    if (!model) {
+      // Пустой блок не оставляем: без пометки читалось бы как «объектов нет».
+      writeNote(sheet, startRow + 1, count, BASE_EMPTY, { size: 10 });
       return startRow + 3;
     }
 
     const headerRow = startRow + 1;
-    ROUTES_COLUMNS.forEach((label, offset) => {
+    columns.forEach((label, offset) => {
       const cell = sheet.getCell(headerRow, offset + 1);
       cell.value = label;
       cell.fill = solidFill('FFD9D9D9');
@@ -633,28 +752,26 @@
       cell.font = { name: HEADQUARTERS_FONT, bold: true, size: 10 };
     });
 
-    const districts = report.districts || [];
-    districts.forEach((item, index) => {
-      const values = [index + 1, item.district, ...routesRowValues(item)];
-      values.forEach((value, offset) => {
-        const cell = sheet.getCell(headerRow + 1 + index, offset + 1);
+    model.districts.forEach((item, index) => {
+      [index + 1, item.district, ...baseRowValues(item)].forEach((value, offset) => {
         const column = offset + 1;
+        const cell = sheet.getCell(headerRow + 1 + index, column);
         cell.value = value === null || value === undefined ? '' : value;
         cell.border = CELL_BORDER;
         cell.alignment = column === 2 ? TO_LEFT : CENTERED;
         cell.font = { name: HEADQUARTERS_FONT, size: 10 };
-        if (column > 2 && column < ROUTES_LAST_COLUMN) cell.numFmt = '0';
+        if (column > 2 && column < count) cell.numFmt = '0';
       });
     });
 
-    const totalRow = headerRow + 1 + districts.length;
-    const totals = report.totals || {};
+    const totalRow = headerRow + 1 + model.districts.length;
+    const totalValues = baseRowValues(model.totals);
     sheet.mergeCells(totalRow, 1, totalRow, 2);
     sheet.getCell(totalRow, 1).value = 'ИТОГО';
-    routesRowValues(totals).forEach((value, offset) => {
+    totalValues.forEach((value, offset) => {
       const cell = sheet.getCell(totalRow, offset + 3);
       cell.value = value === null || value === undefined ? '' : value;
-      if (offset < ROUTES_LAST_COLUMN - 3) cell.numFmt = '0';
+      if (offset < totalValues.length - 1) cell.numFmt = '0';
     });
     for (let column = 1; column <= count; column += 1) {
       const cell = sheet.getCell(totalRow, column);
@@ -665,8 +782,8 @@
     }
 
     const laggingRow = totalRow + 1;
-    writeNote(sheet, laggingRow, count, routesLaggingText(report), { size: 10 });
-    writeNote(sheet, laggingRow + 1, count, ROUTES_NOTE);
+    writeNote(sheet, laggingRow, count, baseLaggingText(model), { size: 10 });
+    writeNote(sheet, laggingRow + 1, count, baseNote(model));
     return laggingRow + 3;
   }
 
@@ -681,21 +798,22 @@
     const firstTotalRow = writeHeadquartersTable(sheet, 1, model, model.districts);
     const secondTotalRow = writeHeadquartersTable(sheet, firstTotalRow + 4, model, model.sorted, { formula: true });
 
-    // Колонка «Последняя отправка» в блоке маршрутов шире остальных: в неё должна
-    // влезть отметка «дд.мм.гггг чч:мм» целиком, без переноса.
-    if (ROUTES_LAST_COLUMN <= count) sheet.getColumn(ROUTES_LAST_COLUMN).width = 21;
+    // Колонка «Последняя отправка» в блоке единой базы шире остальных: в неё
+    // должна влезть отметка «дд.мм.гггг чч:мм» целиком, без переноса.
+    const lastBaseColumn = baseColumns().length;
+    if (lastBaseColumn <= count) sheet.getColumn(lastBaseColumn).width = 21;
 
-    // Маршруты районов идут до комментария: их читают вместе с таблицей, а
+    // Объекты районов идут до комментария: их читают вместе с таблицей, а
     // комментарий и примечание закрывают лист.
-    const afterRoutes = writeRoutesTable(sheet, secondTotalRow + 3, model.routes || null);
+    const afterBase = writeBaseTable(sheet, secondTotalRow + 3, model.base || null);
 
     const comment = headquartersComment(model);
-    comment.forEach((line, offset) => writeNote(sheet, afterRoutes + offset, count, line, {
+    comment.forEach((line, offset) => writeNote(sheet, afterBase + offset, count, line, {
       size: offset === 0 ? 11 : 10,
       bold: offset === 0,
       ink: offset === 0 ? HEADQUARTERS_INK : 'FF000000'
     }));
-    writeNote(sheet, afterRoutes + comment.length + 1, count, HEADQUARTERS_NOTE);
+    writeNote(sheet, afterBase + comment.length + 1, count, HEADQUARTERS_NOTE);
     return sheet;
   }
 
@@ -843,20 +961,21 @@
   <tr>${subHead}</tr>
 </thead><tbody>${rows.map(rowHtml).join('')}${totalRow}</tbody></table>`;
 
-    // Блок маршрутов — тот же, что на листе «На штаб»: срез единой базы, а не
-    // слоёв карты, поэтому у него своя маленькая таблица под основной.
-    const routes = model.routes || null;
-    const routesCells = (values) => values.map((value) => `<td>${escapeHtml(value)}</td>`).join('');
-    const routesHead = ROUTES_COLUMNS.map((label) => `<th>${escapeHtml(label)}</th>`).join('');
-    const routesBody = routes
-      ? (routes.districts || []).map((item, index) =>
-        `<tr><td class="num">${index + 1}</td><td class="name">${escapeHtml(item.district)}</td>${routesCells(routesRowValues(item))}</tr>`).join('')
-        + `<tr class="total"><td colspan="2">ИТОГО</td>${routesCells(routesRowValues(routes.totals || {}))}</tr>`
-      : `<tr><td colspan="${ROUTES_COLUMNS.length}">${escapeHtml(ROUTES_EMPTY)}</td></tr>`;
-    const routesBlock = `<section><h2>${escapeHtml(ROUTES_TITLE)}</h2>
-<table><thead><tr>${routesHead}</tr></thead><tbody>${routesBody}</tbody></table>
-<p class="note">${escapeHtml(routesLaggingText(routes))}</p>
-<p class="note">${escapeHtml(ROUTES_NOTE)}</p></section>`;
+    // Блок единой базы — тот же, что на листе «На штаб»: это срез сервиса, а не
+    // слоёв карты, поэтому у него своя таблица под основной.
+    const base = model.base || null;
+    const baseHead = baseColumns().map((label) => `<th>${escapeHtml(label)}</th>`).join('');
+    const baseCells = (values) => values.map((value) => `<td>${escapeHtml(value)}</td>`).join('');
+    const baseBody = base
+      ? base.districts.map((item, index) =>
+        `<tr><td class="num">${index + 1}</td><td class="name">${escapeHtml(item.district)}</td>${baseCells(baseRowValues(item))}</tr>`).join('')
+        + `<tr class="total"><td colspan="2">ИТОГО</td>${baseCells(baseRowValues(base.totals))}</tr>`
+      : `<tr><td colspan="${baseColumns().length}">${escapeHtml(BASE_EMPTY)}</td></tr>`;
+    const baseNotes = base
+      ? `<p class="note">${escapeHtml(baseLaggingText(base))}</p><p class="note">${escapeHtml(baseNote(base))}</p>`
+      : '';
+    const baseBlock = `<section><h2>${escapeHtml(BASE_TITLE)}</h2>
+<table><thead><tr>${baseHead}</tr></thead><tbody>${baseBody}</tbody></table>${baseNotes}</section>`;
 
     return `<!doctype html><html lang="ru"><head><meta charset="utf-8">
 <title>На штаб — ${escapeHtml(HEADQUARTERS_DIRECTION)}</title>
@@ -876,10 +995,10 @@
   @media print { body { margin: 8mm; } h2 + table, section { break-inside: avoid; } }
 </style></head><body>
 <h1>${escapeHtml(HEADQUARTERS_DIRECTION)}</h1>
-<p class="meta">${escapeHtml(moscowMoment(model.generatedAt))} (МСК) · карта — опубликованные слои ОДХ${routes ? ' · маршруты — единая база (сервис ОДХ)' : ''}</p>
+<p class="meta">${escapeHtml(moscowMoment(model.generatedAt))} (МСК) · карта — опубликованные слои ОДХ${base ? ' · объекты районов — единая база (сервис ОДХ)' : ''}</p>
 ${table(model.districts)}
 <section><h2>То же по проценту «Итого» — в штаб</h2>${table(model.sorted)}</section>
-${routesBlock}
+${baseBlock}
 <section><h2>Комментарий к выгрузке</h2><pre>${escapeHtml(headquartersComment(model).join('\n'))}</pre></section>
 <p class="note">${escapeHtml(HEADQUARTERS_NOTE)}</p>
 </body></html>`;
@@ -899,11 +1018,11 @@ ${routesBlock}
   window.ODHExports = {
     AUTODOR_HOLDER, DISTRICT_NAMES, LAYERS, GROUPS,
     HEADQUARTERS_NOTE, HEADQUARTERS_DIRECTION,
-    ROUTES_TITLE, ROUTES_COLUMNS, ROUTES_NOTE, ROUTES_EMPTY, ROUTES_LAST_COLUMN,
+    BASE_TITLE, BASE_EMPTY, PRIORITY_TYPES,
     districtOf, countOf, sliceLayer, collect, percent, percentBandFill,
     objectsCsv, objectsCsvName, objectCountOf, moscowMoment, moscowDate, formatSubmittedAt,
     headquartersColumns, blockValues, headquartersComment,
-    routesSummary, routesLaggingText, routesRowValues,
+    baseColumns, typeLabel, collectBase, baseRowValues, baseLaggingText, baseNote, baseSummary,
     buildWorkbook, headquartersHtml, downloadBlob, downloadText, printHeadquarters
   };
 }());
