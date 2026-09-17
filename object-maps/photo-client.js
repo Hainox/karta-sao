@@ -1257,6 +1257,7 @@ async function downloadPhotoArchive() {
       // Ход сборки показываем в строке состояния панели: она есть всегда.
       element('paListCount').textContent = job.total
         ? `Собираем архив: ${job.photos.toLocaleString('ru-RU')} из ${job.total.toLocaleString('ru-RU')} снимков`
+          + `, ${(job.bytes / 1024 / 1024).toFixed(0)} МБ`
         : 'Собираем архив фотографий…';
     }
     if (job.status !== 'ready') throw new Error(job.error || 'архив не собрался');

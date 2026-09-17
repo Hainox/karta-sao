@@ -161,6 +161,30 @@ test('имя архива подходит для ссылки и не повт�
   assert.notEqual(first, archiveName('2026-09-17T09:00:00.000Z'));
 });
 
+test('ход сборки показывает, сколько снимков уже упаковано', async () => {
+  const root = await mkdtemp(join(tmpdir(), 'sao-photo-media-'));
+  const dir = await mkdtemp(join(tmpdir(), 'sao-photo-export-'));
+  try {
+    for (const key of [KEY_A, KEY_B]) await writeFile(join(root, key), Buffer.from([1, 2, 3]));
+    const seen = [];
+    await writePhotoArchive(rows(), { root, dir, onProgress: (progress) => seen.push({ ...progress }) });
+
+    // Первый отчёт приходит сразу и говорит, сколько снимков предстоит упаковать:
+    // иначе строка состояния выглядела бы как «0 из 0».
+    assert.equal(seen[0].total, 2);
+    assert.equal(seen[0].photos, 0);
+    for (const progress of seen) {
+      assert.equal(progress.total, 2, 'общее число снимков не меняется по ходу сборки');
+      assert.ok(progress.photos <= progress.total, 'упаковано не больше, чем всего');
+      assert.ok(progress.bytes >= 0);
+    }
+    assert.ok(seen[seen.length - 1].bytes > 0, 'к концу сборки байты записаны');
+  } finally {
+    await rm(root, { recursive: true, force: true });
+    await rm(dir, { recursive: true, force: true });
+  }
+});
+
 test('задача сборки отдаёт статус, а готовый файл — по билету', async () => {
   const root = await mkdtemp(join(tmpdir(), 'sao-photo-media-'));
   const dir = await mkdtemp(join(tmpdir(), 'sao-photo-export-'));

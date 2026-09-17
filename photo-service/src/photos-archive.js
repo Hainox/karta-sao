@@ -196,15 +196,25 @@ export async function writePhotoArchive(rows, options = {}) {
   });
 
   archive.pipe(output);
+  // Ход сборки берём у самого архиватора: он считает уже обработанные записи и
+  // записанные байты. Своя очередь не годится — она наполняется одним махом, и
+  // «упаковано 6270 из 6270» висело бы всё время сборки. Опись и папки идут
+  // первыми, поэтому из счётчика записей их вычитаем: снаружи речь о снимках.
+  const leading = 1 + manifest.folders.length;
+  if (onProgress) {
+    archive.on('progress', (progress) => onProgress({
+      photos: Math.max(0, Math.min(present.length, progress.entries.processed - leading)),
+      total: present.length,
+      // Байты берём у выходного потока: снимки добавляются потоками, и счётчик
+      // архиватора по файлам их не видит.
+      bytes: output.bytesWritten
+    }));
+    // Первый отчёт отдаём сразу: столько снимков предстоит упаковать.
+    onProgress({ photos: 0, total: present.length, bytes: 0 });
+  }
   archive.append(JSON.stringify(manifest, null, 2), { name: 'manifest.json' });
   for (const folder of manifest.folders) archive.append('', { name: `${folder}/` });
-  let queued = 0;
-  for (const entry of present) {
-    archive.append(readMedia(entry.storageKey, root), { name: entry.path });
-    queued += 1;
-    // Пишем в отчёт уже записанное на диск: размер не врёт, в отличие от очереди.
-    if (onProgress) onProgress({ photos: queued, total: present.length, bytes: output.bytesWritten });
-  }
+  for (const entry of present) archive.append(readMedia(entry.storageKey, root), { name: entry.path });
   await archive.finalize();
   await done;
 
