@@ -38,6 +38,9 @@ services:
       NOTIFY_SECRET: ${NOTIFY_SECRET:-}
       # Ежечасная сводка штаба картинкой в Telegram.
       PHOTO_SERVICE_DIGEST_ENABLED: ${PHOTO_SERVICE_DIGEST_ENABLED:-false}
+      # Единый отчёт по продуктивности округа за день: картинка дня, текст и книга.
+      PHOTO_SERVICE_DAILY_DIGEST_ENABLED: ${PHOTO_SERVICE_DAILY_DIGEST_ENABLED:-false}
+      PHOTO_SERVICE_DAILY_DIGEST_AT: ${PHOTO_SERVICE_DAILY_DIGEST_AT:-19:00}
       # Кого упомянуть в подписи сводки, чтобы выгрузку точно увидели.
       NOTIFY_MENTION: ${NOTIFY_MENTION:-@TomGruz200}
     depends_on:
