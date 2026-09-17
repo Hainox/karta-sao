@@ -1212,6 +1212,7 @@ async function downloadReport(kind) {
   const path = kind === 'xlsx' ? `/reports/export.xlsx${query}`
     : kind === 'headquarters' ? `/reports/export-headquarters.xlsx${query}`
     : kind === 'headquarters-pdf' ? `/reports/export-headquarters.pdf${query}`
+    : kind === 'districts' ? `/reports/export-districts.xlsx${query}`
     : `/reports/export.pdf${query}`;
   try {
     showToast('Готовим выгрузку…');
@@ -1224,6 +1225,7 @@ async function downloadReport(kind) {
     link.download = kind === 'xlsx' ? 'sao-photo-report.xlsx'
       : kind === 'headquarters' ? 'sao-photo-headquarters.xlsx'
       : kind === 'headquarters-pdf' ? 'sao-photo-headquarters.pdf'
+      : kind === 'districts' ? 'sao-photo-districts.xlsx'
       : 'sao-photo-summary.pdf';
     document.body.appendChild(link);
     link.click();
@@ -1375,6 +1377,7 @@ function shell() {
         </div>
         <div class="pa-exports" id="paExports" hidden>
           <button type="button" class="pa-btn" id="paExportXlsx">Excel: полный реестр</button>
+          <button type="button" class="pa-btn" id="paExportDistricts">Excel: по районам</button>
           <button type="button" class="pa-btn" id="paExportHeadquarters">Excel: таблица на штаб</button>
           <button type="button" class="pa-btn" id="paExportHeadquartersPdf">PDF: таблица на штаб</button>
           <button type="button" class="pa-btn" id="paExportPdf">PDF: краткая сводка</button>
@@ -1467,6 +1470,7 @@ function bindEvents() {
   element('paStatusFilter').addEventListener('change', () => { invalidateQueue(); renderList(); renderMapObjects(); renderQueue(); });
   element('paDistrictFilter').addEventListener('change', () => { invalidateQueue(); refreshCoverage(); });
   element('paExportXlsx').addEventListener('click', () => downloadReport('xlsx'));
+  element('paExportDistricts').addEventListener('click', () => downloadReport('districts'));
   element('paExportHeadquarters').addEventListener('click', () => downloadReport('headquarters'));
   element('paExportHeadquartersPdf').addEventListener('click', () => downloadReport('headquarters-pdf'));
   element('paExportPdf').addEventListener('click', () => downloadReport('pdf'));

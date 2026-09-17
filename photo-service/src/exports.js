@@ -673,6 +673,271 @@ export async function buildExcel(rows) {
   return workbook.xlsx.writeBuffer();
 }
 
+/* ------------------------------------------------- выгрузка по районам */
+
+// Имя листа Excel ограничено 31 символом и не терпит []:*?/\ — названия районов
+// проходят как есть, проверка нужна на случай правок в источнике.
+function districtSheetName(name) {
+  return String(name).replace(/[[\]:*?/\\]/g, ' ').slice(0, 31).trim() || 'Район';
+}
+
+/** Объекты набора, сгруппированные по району отчётности (с учётом строки «АвД САО»). */
+function objectsByReportingDistrict(objects) {
+  const grouped = new Map();
+  for (const object of objects) {
+    const key = reportingDistrict(object);
+    if (!grouped.has(key)) grouped.set(key, []);
+    grouped.get(key).push(object);
+  }
+  return grouped;
+}
+
+/**
+ * Сводный лист «Сводка по районам»: объекты, отметки и процент по каждому району.
+ * Отметки берутся из штабной модели, поэтому числа совпадают с листом «На штаб»,
+ * картинкой для Telegram и PDF, а строки отсортированы от лучших к худшим.
+ */
+function addDistrictSummarySheet(workbook, payload, board, risksByDistrict) {
+  const sheet = workbook.addWorksheet('Сводка по районам');
+  sheet.columns = [
+    { header: '№', key: 'index', width: 6 },
+    { header: 'Район', key: 'district', width: 24 },
+    { header: 'Объектов', key: 'objects', width: 12 },
+    { header: 'Отметок к отработке', key: 'plan', width: 18 },
+    { header: 'Закрыто отметок', key: 'fact', width: 17 },
+    { header: '%', key: 'percent', width: 8 },
+    { header: 'С фото', key: 'withPhoto', width: 11 },
+    { header: 'Охват, %', key: 'coverage', width: 11 },
+    { header: 'На проверке', key: 'pending', width: 13 },
+    { header: 'Рисков', key: 'risks', width: 11 },
+  ];
+
+  const grouped = objectsByReportingDistrict(payload.objects);
+  const rows = board.names
+    .map((name, index) => {
+      const objects = grouped.get(name) || [];
+      const withPhoto = objects.filter((object) => object.confirmedPhotos + object.pendingReviewPhotos > 0).length;
+      return {
+        district: name,
+        objects: objects.length,
+        plan: headquartersValues(board.counts[index])[9],
+        fact: headquartersValues(board.counts[index])[10],
+        percent: headquartersValues(board.counts[index])[11],
+        withPhoto,
+        coverage: objects.length ? Math.round((withPhoto / objects.length) * 100) : null,
+        pending: objects.filter((object) => object.pendingReviewPhotos > 0).length,
+        risks: risksByDistrict.get(name) || 0,
+      };
+    })
+    .sort((left, right) => right.percent - left.percent || left.district.localeCompare(right.district, 'ru'));
+
+  rows.forEach((row, index) => sheet.addRow({ index: index + 1, ...row }));
+
+  const totalValues = headquartersValues(board.total);
+  const totalRow = sheet.addRow({
+    index: '',
+    district: 'ИТОГО по САО',
+    objects: payload.objects.length,
+    plan: totalValues[9],
+    fact: totalValues[10],
+    percent: totalValues[11],
+    withPhoto: payload.objects.filter((object) => object.confirmedPhotos + object.pendingReviewPhotos > 0).length,
+    coverage: payload.objects.length
+      ? Math.round((payload.objects.filter((object) => object.confirmedPhotos + object.pendingReviewPhotos > 0).length / payload.objects.length) * 100)
+      : null,
+    pending: payload.objects.filter((object) => object.pendingReviewPhotos > 0).length,
+    risks: rows.reduce((sum, row) => sum + row.risks, 0),
+  });
+  totalRow.font = { bold: true };
+  for (let column = 1; column <= 10; column += 1) totalRow.getCell(column).fill = TOTAL_FILL;
+
+  styleHeaderRow(sheet, 10);
+  shadeRows(sheet, sheet.rowCount - 1, 10);
+  frameTable(sheet, sheet.rowCount, 10);
+  sheet.views = [{ state: 'frozen', ySplit: 1 }];
+  sheet.autoFilter = { from: 'A1', to: 'J1' };
+  const lastDistrict = sheet.rowCount - 1;
+  sheet.addConditionalFormatting({ ref: `F2:F${lastDistrict}`, rules: [PERCENT_BAR('FF1C7A55')] });
+  sheet.addConditionalFormatting({ ref: `H2:H${lastDistrict}`, rules: [PERCENT_BAR('FF7FB89F')] });
+  sheet.addConditionalFormatting({
+    ref: `J2:J${lastDistrict}`,
+    rules: [{ type: 'cellIs', operator: 'greaterThan', formulae: [0], style: { fill: RISK_FILL, font: { color: { argb: 'FF9E2B25' }, bold: true } } }],
+  });
+  return sheet;
+}
+
+/**
+ * Лист района: сначала объекты района, ниже — его фотографии с превью.
+ * Лист самодостаточен, поэтому его можно отдать району целиком.
+ */
+async function addDistrictSheet(workbook, { district, objects, risksByObject }) {
+  const sheet = workbook.addWorksheet(districtSheetName(district));
+  const marks = headquartersCountsFor(objects);
+  const percent = headquartersOverallPercentFor(marks);
+  const withPhoto = objects.filter((object) => object.confirmedPhotos + object.pendingReviewPhotos > 0).length;
+
+  sheet.mergeCells('A1:L1');
+  const title = sheet.getCell('A1');
+  title.value = `${district} — объектов ${objects.length}, отметок ${marks.plan}, закрыто ${marks.fact} — ${percent} % (с фото ${withPhoto})`;
+  title.font = SECTION_FONT;
+  title.fill = SECTION_FILL;
+  title.alignment = TO_LEFT;
+  sheet.getRow(1).height = 22;
+
+  const objectColumns = [
+    { header: '№', key: 'index', width: 6 },
+    { header: 'Тип', key: 'objectType', width: 14 },
+    { header: 'Объект', key: 'label', width: 42 },
+    { header: 'Балансодержатель', key: 'balanceHolder', width: 26 },
+    { header: 'Ключ', key: 'objectKey', width: 38 },
+    { header: 'Отметок', key: 'points', width: 11 },
+    { header: 'Закрыто', key: 'covered', width: 11 },
+    { header: '%', key: 'percent', width: 8 },
+    { header: 'Подтверждено', key: 'confirmed', width: 13 },
+    { header: 'На проверке', key: 'pending', width: 12 },
+    { header: 'GPS‑риск', key: 'geoRisk', width: 10 },
+    { header: 'Рисков', key: 'risks', width: 10 },
+  ];
+  objectColumns.forEach((column, index) => { sheet.getColumn(index + 1).width = column.width; });
+
+  sheet.getRow(2).values = objectColumns.map((column) => column.header);
+  styleHeaderRow(sheet, objectColumns.length, 2);
+
+  let row = 3;
+  objects.forEach((object, index) => {
+    const plan = Math.max(0, Number(object.sourcePointCount) || 0);
+    const covered = Math.min(Math.max(0, Number(object.coveredPoints) || 0), plan);
+    const excelRow = sheet.getRow(row);
+    excelRow.values = [
+      index + 1,
+      objectTypeLabel(object.objectType),
+      object.label,
+      object.balanceHolder || '—',
+      object.objectKey,
+      plan,
+      covered,
+      plan ? Math.round((covered / plan) * 100) : 0,
+      object.confirmedPhotos,
+      object.pendingReviewPhotos,
+      object.geoRisk ? 'Да' : 'Нет',
+      risksByObject.get(object.objectKey) || 0,
+    ];
+    for (let column = 1; column <= objectColumns.length; column += 1) {
+      const cell = excelRow.getCell(column);
+      cell.border = { top: THIN_BORDER, left: THIN_BORDER, bottom: THIN_BORDER, right: THIN_BORDER };
+      cell.alignment = column === 3 || column === 4 || column === 5 ? TO_LEFT : CENTERED;
+    }
+    if (index % 2 === 1) for (let column = 1; column <= objectColumns.length; column += 1) excelRow.getCell(column).fill = ZEBRA_FILL;
+    row += 1;
+  });
+  const objectLastRow = row - 1;
+  if (objectLastRow >= 3) {
+    sheet.addConditionalFormatting({ ref: `H3:H${objectLastRow}`, rules: [PERCENT_BAR('FF1C7A55')] });
+  }
+
+  // Фотографии района: тот же порядок колонок, что на общем листе «Фотографии».
+  row += 1;
+  sheet.mergeCells(row, 1, row, 10);
+  const photoTitle = sheet.getCell(row, 1);
+  photoTitle.value = `Фотографии района «${district}»`;
+  photoTitle.font = SECTION_FONT;
+  photoTitle.fill = SECTION_FILL;
+  photoTitle.alignment = TO_LEFT;
+  sheet.getRow(row).height = 22;
+  row += 1;
+
+  const photoColumns = [
+    { header: '№', width: 6 }, { header: 'Тип', width: 14 }, { header: 'Объект', width: 38 },
+    { header: 'Статус проверки', width: 20 }, { header: 'GPS', width: 18 }, { header: 'Дистанция, м', width: 14 },
+    { header: 'Исполнитель', width: 24 }, { header: 'Комментарий', width: 42 }, { header: 'Имя файла', width: 30 },
+    { header: 'Превью', width: 22 },
+  ];
+  sheet.getRow(row).values = photoColumns.map((column) => column.header);
+  styleHeaderRow(sheet, photoColumns.length, row);
+  row += 1;
+
+  let photoNumber = 0;
+  for (const object of objects) {
+    for (const photo of object.photos || []) {
+      photoNumber += 1;
+      const excelRow = sheet.getRow(row);
+      excelRow.values = [
+        photoNumber, objectTypeLabel(object.objectType), object.label,
+        photo.reviewStatus, photo.geoStatus, photo.distanceM ?? '—',
+        photo.performer, photo.comment, photo.originalFilename,
+      ];
+      excelRow.height = 78;
+      for (let column = 1; column <= 9; column += 1) {
+        excelRow.getCell(column).border = { top: THIN_BORDER, left: THIN_BORDER, bottom: THIN_BORDER, right: THIN_BORDER };
+      }
+      try {
+        // Встраивается только превью: оригиналы делают книгу несоразмерно тяжёлой.
+        const key = photo.thumbnailKey || photo.storageKey;
+        const buffer = await readFile(`${mediaRoot()}/${key}`);
+        const imageId = workbook.addImage({ buffer, extension: key.endsWith('.png') ? 'png' : key.endsWith('.webp') ? 'webp' : 'jpeg' });
+        sheet.addImage(imageId, { tl: { col: 9, row: row - 1 }, ext: { width: 150, height: 90 } });
+      } catch {
+        // Метаданные остаются в строке, даже если файл недоступен.
+      }
+      row += 1;
+    }
+  }
+
+  sheet.views = [{ state: 'frozen', ySplit: 2 }];
+  return sheet;
+}
+
+/** Отметки и процент района — тем же счётом, что на листе «На штаб». */
+function headquartersCountsFor(objects) {
+  let plan = 0;
+  let fact = 0;
+  for (const object of objects) {
+    const objectPlan = Math.max(0, Number(object.sourcePointCount) || 0);
+    plan += objectPlan;
+    fact += Math.min(Math.max(0, Number(object.coveredPoints) || 0), objectPlan);
+  }
+  return { plan, fact };
+}
+
+function headquartersOverallPercentFor(marks) {
+  return marks.plan ? Math.round((marks.fact / marks.plan) * 100) : 0;
+}
+
+/**
+ * «Единая выгрузка по районам»: сводка по районам, эталонный лист «На штаб»,
+ * топы по нарушениям и по отдельному листу на каждый район — объекты района и его
+ * фотографии. Отдаётся району целиком либо используется для сверки районов между
+ * собой: числа те же, что на остальных листах и в сводке для Telegram.
+ */
+export async function buildDistrictsExcel(rows) {
+  const payload = reportPayload(rows);
+  const board = headquartersBoard(payload);
+  const risks = collectRisks(payload.objects);
+
+  const risksByDistrict = new Map();
+  const risksByObject = new Map();
+  for (const risk of risks) {
+    const district = reportingDistrict(risk);
+    risksByDistrict.set(district, (risksByDistrict.get(district) || 0) + 1);
+    if (risk.objectKey) risksByObject.set(risk.objectKey, (risksByObject.get(risk.objectKey) || 0) + 1);
+  }
+
+  const workbook = new ExcelJS.Workbook();
+  workbook.creator = 'SAO photo service';
+  workbook.created = new Date();
+
+  addDistrictSummarySheet(workbook, payload, board, risksByDistrict);
+  addHeadquartersSheet(workbook, payload);
+  addTopsSheet(workbook, risks);
+
+  const grouped = objectsByReportingDistrict(payload.objects);
+  for (const district of board.names) {
+    await addDistrictSheet(workbook, { district, objects: grouped.get(district) || [], risksByObject });
+  }
+
+  return workbook.xlsx.writeBuffer();
+}
+
 export function buildPdf(rows) {
   const payload = reportPayload(rows);
   const overall = payload.overall;

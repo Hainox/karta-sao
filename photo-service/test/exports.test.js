@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import ExcelJS from 'exceljs';
-import { buildExcel, buildHeadquartersExcel, buildPdf } from '../src/exports.js';
+import { buildDistrictsExcel, buildExcel, buildHeadquartersExcel, buildPdf } from '../src/exports.js';
 import { objectTypeLabel, percentLabel, statusBandLabel } from '../src/labels.js';
 
 function photo(overrides = {}) {
@@ -290,6 +290,54 @@ test('отдельная выгрузка малой таблицы несёт �
   await workbook.xlsx.load(await buildHeadquartersExcel(rows));
 
   assert.deepEqual(workbook.worksheets.map((sheet) => sheet.name), ['На штаб']);
+});
+
+test('единая выгрузка по районам: сводка, эталонный лист и лист на каждый район', async () => {
+  // Покрытие задаётся по отметкам явно: 9 из 26, 11 из 31, 60 из 100 и ноль из 43.
+  const rows = [
+    { ...reportRow('stop', 'Головинский', 1, 0, 26), object_key: 'g-stop', coveredPoints: 9 },
+    { ...reportRow('pp', 'Головинский', 1, 0, 31), object_key: 'g-pp', coveredPoints: 11 },
+    { ...reportRow('stop', 'Аэропорт', 0, 0, 43), object_key: 'a-stop', coveredPoints: 0 },
+    // Объект владельца: считается АвД, а не району, где стоит.
+    { ...reportRow('stop', 'Коптево', 1, 0, 100), object_key: 'k-stop', balance_holder: 'АвД САО', coveredPoints: 60 },
+  ];
+
+  const workbook = new ExcelJS.Workbook();
+  await workbook.xlsx.load(await buildDistrictsExcel(rows));
+  const names = workbook.worksheets.map((sheet) => sheet.name);
+
+  // Сверху три сводных листа, дальше — по листу на район.
+  assert.deepEqual(names.slice(0, 3), ['Сводка по районам', 'На штаб', 'Топы']);
+  assert.ok(names.includes('Головинский') && names.includes('Аэропорт') && names.includes('АвД САО'), names.join(', '));
+
+  const summary = workbook.getWorksheet('Сводка по районам');
+  assert.equal(summary.getCell('B1').value, 'Район');
+  assert.equal(summary.getCell('D1').value, 'Отметок к отработке');
+  // Районы идут от лучших к худшим: АвД 60 %, Головинский 35 %, Аэропорт 0 %.
+  assert.equal(summary.getCell('B2').value, 'АвД САО');
+  assert.equal(summary.getCell('B3').value, 'Головинский');
+  assert.equal(summary.getCell('B4').value, 'Аэропорт');
+  // Отметки и процент совпадают со штабной моделью.
+  assert.equal(summary.getCell('D3').value, 57);
+  assert.equal(summary.getCell('E3').value, 20);
+  assert.equal(summary.getCell('F3').value, 35);
+  // Строка ИТОГО замыкает сводку и повторяет штабной итог.
+  const totalRow = summary.rowCount;
+  assert.equal(summary.getCell(`B${totalRow}`).value, 'ИТОГО по САО');
+  assert.equal(summary.getCell(`D${totalRow}`).value, 200);
+  assert.equal(summary.getCell(`E${totalRow}`).value, 80);
+
+  // Лист района: шапка района, объекты района и блок фотографий района.
+  const district = workbook.getWorksheet('Головинский');
+  assert.match(String(district.getCell('A1').value), /^Головинский — объектов 2, отметок 57, закрыто 20 — 35 %/);
+  assert.equal(district.getCell('C2').value, 'Объект');
+  assert.equal(district.getCell('F2').value, 'Отметок');
+  assert.equal(district.getCell('F3').value, 26);
+  assert.equal(district.getCell('G3').value, 9);
+  // Объект владельца в район не попал: он на листе «АвД САО».
+  assert.equal(district.getCell('F5').value, null);
+  const autodor = workbook.getWorksheet('АвД САО');
+  assert.equal(autodor.getCell('E3').value, 'k-stop');
 });
 
 test('лист «Топы»: районы по рискам и исполнители внутри района', async () => {
