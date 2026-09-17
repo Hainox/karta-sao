@@ -169,10 +169,15 @@ export function createApp({ repository, boundary, jwtSecret, allowedOrigins = []
 
   app.patch('/api/submissions/:id', authenticate, requireUuid, requirePrefecture, async (request, response, next) => {
     try {
-      const { status, comment = '' } = request.body || {};
+      const { status, comment } = request.body || {};
       if (!['approved', 'rejected'].includes(status)) return response.status(400).json({ error: 'Допустимы только approved или rejected.' });
-      if (typeof comment !== 'string' || comment.length > 2000) return response.status(400).json({ error: 'Комментарий слишком длинный.' });
-      const submission = await repository.reviewSubmission({ id: request.params.id, status, reviewerId: request.user.sub, comment: comment.trim() });
+      // Пустой комментарий приходит как null или отсутствует — это не ошибка.
+      // Тип и длину проверяем порознь, иначе число в комментарии получало бы
+      // неверное объяснение «слишком длинный».
+      const reviewComment = comment == null ? '' : comment;
+      if (typeof reviewComment !== 'string') return response.status(400).json({ error: 'Комментарий должен быть строкой.' });
+      if (reviewComment.length > 2000) return response.status(400).json({ error: 'Комментарий слишком длинный.' });
+      const submission = await repository.reviewSubmission({ id: request.params.id, status, reviewerId: request.user.sub, comment: reviewComment.trim() });
       if (!submission) return response.status(404).json({ error: 'Набор не найден.' });
       response.json({ submission: { id: submission.id, status: submission.status, reviewed_at: submission.reviewed_at } });
     } catch (error) { next(error); }
@@ -222,6 +227,18 @@ export function createApp({ repository, boundary, jwtSecret, allowedOrigins = []
   });
 
   app.use((error, _request, response, _next) => {
+    // Сбой разбора тела — ошибка клиента, а не сервера: body-parser помечает её
+    // статусом 400 (повреждённый JSON) или 413 (тело больше 6 МБ). Раньше любой
+    // такой отказ превращался в 500 и клиент не понимал, что чинить.
+    const status = Number(error?.status || error?.statusCode || 0);
+    if (status >= 400 && status < 500) {
+      const message = status === 413
+        ? 'Тело запроса слишком большое.'
+        : error?.type === 'entity.parse.failed'
+          ? 'Тело запроса не является корректным JSON.'
+          : 'Некорректный запрос.';
+      return response.status(status).json({ error: message });
+    }
     console.error(error);
     response.status(500).json({ error: 'Внутренняя ошибка API.' });
   });

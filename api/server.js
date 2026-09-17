@@ -7,6 +7,7 @@ import { databasePoolOptions } from './lib/database-config.js';
 import { notifyClientFromEnv } from './lib/notify.js';
 import { createRepository, migrate } from './lib/repository.js';
 import { routeReport, routeReportCsv, routeReportCsvName, routeReportSummary } from './lib/route-report.js';
+import { routeReportEnabled, startRouteReportSchedule } from './lib/route-report-schedule.js';
 import { DISTRICTS } from './lib/validation.js';
 
 const root = path.dirname(fileURLToPath(import.meta.url));
@@ -61,15 +62,9 @@ async function sendRouteReport() {
 }
 
 // Запуск ровно в 00:00, 03:00, 06:00 … — каждые три часа, круглосуточно.
-function scheduleRouteReport() {
-  const intervalMs = 3 * 60 * 60 * 1000;
-  setTimeout(async () => {
-    await sendRouteReport();
-    scheduleRouteReport();
-  }, intervalMs - (Date.now() % intervalMs));
-}
-
-if (String(process.env.ODH_ROUTE_REPORT_ENABLED || '').toLowerCase() === 'true') {
-  scheduleRouteReport();
+// Арифметика расписания и флаг включения живут в route-report-schedule.js:
+// их можно проверить тестом без базы и без HTTP-сервера.
+startRouteReportSchedule(sendRouteReport);
+if (routeReportEnabled()) {
   console.log('Отчёт по отрисовке маршрутов ОДХ включён (каждые 3 часа)');
 }

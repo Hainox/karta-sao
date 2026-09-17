@@ -70,6 +70,17 @@ test('formats missing values as text instead of throwing', () => {
   assert.equal(formatCoordinates(null, null), 'GPS отсутствует');
 });
 
+test('координаты без значения читаются текстом, а не падают и не «NaN»', () => {
+  // Пустое поле строки набора раньше валило отрисовку списка и очереди:
+  // undefined.toFixed бросал TypeError, а NaN печатался как «NaN, NaN».
+  assert.equal(formatCoordinates(undefined, undefined), 'GPS отсутствует');
+  assert.equal(formatCoordinates(null, undefined), 'GPS отсутствует');
+  assert.equal(formatCoordinates(55.8, undefined), 'GPS отсутствует');
+  assert.equal(formatCoordinates(NaN, 37.5), 'GPS отсутствует');
+  // Координата, записанная текстом, читается числом — как и остальные поля отчёта.
+  assert.equal(formatCoordinates('55.8', '37.5'), '55.800000, 37.500000');
+});
+
 test('translates review and geo statuses into explicit Russian text', () => {
   assert.equal(reviewStatusText('confirmed'), 'Подтверждено');
   assert.equal(reviewStatusText('weird'), 'Статус не указан');

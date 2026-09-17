@@ -56,7 +56,15 @@ export function parseCookies(header) {
     if (separator < 1) continue;
     const key = part.slice(0, separator).trim();
     const value = part.slice(separator + 1).trim();
-    if (key) cookies[key] = decodeURIComponent(value);
+    if (!key) continue;
+    // Clipboard порезал значение или в него попал знак процента: разборка
+    // сессии не должна валить запрос пятисоткой, поэтому такая пара просто
+    // читается как есть, а не проходит через decodeURIComponent.
+    try {
+      cookies[key] = decodeURIComponent(value);
+    } catch {
+      cookies[key] = value;
+    }
   }
   return cookies;
 }

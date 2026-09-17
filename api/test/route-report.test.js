@@ -142,3 +142,29 @@ test('пустой список наборов не ломает отчёт', ()
   assert.ok(routeReportCsv(report).startsWith('\uFEFF'));
   assert.match(routeReportSummary(report).split('\n')[0], /^Направление — /);
 });
+
+test('район с отправками, но без маршрутов: статусы нулевые, район в отстающих', () => {
+  // У района есть только зоны и точки. Маршрутов нет, поэтому счёт по статусам
+  // маршрутов нулевой, но время отправки и сами зоны/точки видны, а район обязан
+  // попасть в «без маршрутов» — иначе пустая работа выглядела бы как сделанная.
+  const report = routeReport([
+    row('Беговой', 'submitted', 'rotor_snow_storage_zone', 2),
+    row('Беговой', 'approved', 'pgm', 3)
+  ], { generatedAt: GENERATED_AT });
+
+  const begovoy = report.districts[0];
+  assert.equal(begovoy.routes, 0);
+  assert.equal(begovoy.zones, 2);
+  assert.equal(begovoy.points, 3);
+  assert.equal(begovoy.submitted, 0, 'статусы считают только маршруты');
+  assert.equal(begovoy.approved, 0);
+  assert.equal(begovoy.lastSubmittedAt, '2026-09-16T10:30:00.000Z', 'отправка района всё равно видна');
+  assert.deepEqual(report.lagging, ['Беговой']);
+  assert.deepEqual(report.totals, { routes: 0, zones: 2, points: 3, submitted: 0, approved: 0, rejected: 0, lastSubmittedAt: '2026-09-16T10:30:00.000Z' });
+
+  // CSV остаётся корректным: шапка, строка района без маршрутов и ИТОГО.
+  const lines = routeReportCsv(report).replace(/^\uFEFF/, '').trimEnd().split('\r\n');
+  assert.equal(lines.length, 3);
+  assert.match(lines[1], /^Беговой;0;2;3;0;0;0;/);
+  assert.match(lines[2], /^ИТОГО;0;2;3;0;0;0;/);
+});

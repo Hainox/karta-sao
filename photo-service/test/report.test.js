@@ -98,6 +98,37 @@ test('считает отметки точек источника отдельн
   assert.equal(report.pointsWithoutPhoto, 42);
 });
 
+test('без точек источника закрытых отметок нет: «5 из 0» не печатается', () => {
+  // Объект объявил ноль отметок, но кадры к нему есть: закрытых отметок не
+  // может быть больше плана, иначе PDF пишет «Отметки: 5 из 0 отработано».
+  const report = summarizeCoverage([
+    { objectType: 'pp', confirmedPhotos: 1, pendingReviewPhotos: 0, sourcePointCount: 0, coveredPoints: 5 },
+  ]);
+
+  assert.equal(report.totalPoints, 0);
+  assert.equal(report.coveredPoints, 0);
+  assert.equal(report.pointsWithoutPhoto, 0);
+});
+
+test('отметки сводки совпадают со штабной моделью, включая пустой план', async () => {
+  const { headquartersCounts, headquartersFactTotal, headquartersPlanTotal } = await import('../src/headquarters.js');
+  const records = [
+    { objectType: 'stop', confirmedPhotos: 1, pendingReviewPhotos: 0, sourcePointCount: 43, coveredPoints: 9 },
+    // Больше закрытых отметок, чем объявлено: обе модели обрезают факт планом.
+    { objectType: 'pp', confirmedPhotos: 1, pendingReviewPhotos: 0, sourcePointCount: 2, coveredPoints: 5 },
+    { objectType: 'entrance', confirmedPhotos: 0, pendingReviewPhotos: 0, sourcePointCount: 0, coveredPoints: 4 },
+  ];
+
+  const report = summarizeCoverage(records);
+  const counts = headquartersCounts(records);
+
+  // Одна единица учёта — отметка: сводка САО, лист «На штаб», картинка и PDF
+  // считают план и факт одинаково, иначе артефакты расходятся в числах.
+  assert.equal(report.totalPoints, headquartersPlanTotal(counts));
+  assert.equal(report.coveredPoints, headquartersFactTotal(counts));
+  assert.equal(report.coveredPoints, 11);
+});
+
 test('splits a scoped report into stop, pp, and entrance summaries', () => {
   const byType = summarizeCoverageByType([
     { objectType: 'stop', confirmedPhotos: 1, pendingReviewPhotos: 0 },

@@ -340,6 +340,58 @@ test('единая выгрузка по районам: сводка, этал�
   assert.equal(autodor.getCell('E3').value, 'k-stop');
 });
 
+test('единая выгрузка по районам: совпавшие имена листов разводятся, а не роняют файл', async () => {
+  // Имя листа обрезается до 31 символа, поэтому два длинных названия с общим
+  // началом раньше давали повторы и вся выгрузка падала с «Worksheet name already exists».
+  const longA = 'Очень длинное название района номер один АА';
+  const longB = 'Очень длинное название района номер один ББ';
+  const rows = [
+    { ...reportRow('stop', longA, 1), object_key: 'long-a' },
+    { ...reportRow('stop', longB, 0), object_key: 'long-b' },
+  ];
+
+  const workbook = new ExcelJS.Workbook();
+  await workbook.xlsx.load(await buildDistrictsExcel(rows));
+  const names = workbook.worksheets.map((sheet) => sheet.name);
+
+  // Три сводных листа и по листу на каждый район.
+  assert.equal(names.length, 5);
+  const districtSheets = names.slice(3);
+  assert.equal(new Set(districtSheets).size, 2);
+  assert.ok(districtSheets.every((name) => name.length <= 31), districtSheets.join(' | '));
+  // Оба района на месте, и объекты попадают каждый на свой лист.
+  assert.equal(workbook.getWorksheet(districtSheets[0]).getCell('E3').value, 'long-a');
+  assert.equal(workbook.getWorksheet(districtSheets[1]).getCell('E3').value, 'long-b');
+});
+
+test('район с именем служебного листа не роняет выгрузку', async () => {
+  const workbook = new ExcelJS.Workbook();
+  await workbook.xlsx.load(await buildDistrictsExcel([{ ...reportRow('stop', 'На штаб', 1), object_key: 'clash' }]));
+
+  const names = workbook.worksheets.map((sheet) => sheet.name);
+  assert.deepEqual(names, ['Сводка по районам', 'На штаб', 'Топы', 'На штаб (2)']);
+  // Эталонный лист остаётся нетронутым, а район получает свой.
+  assert.equal(workbook.getWorksheet('На штаб').getCell('C3').value, 1);
+  assert.equal(workbook.getWorksheet('На штаб (2)').getCell('E3').value, 'clash');
+});
+
+test('пустая выборка: книга открывается без перевёрнутого диапазона формулы', async () => {
+  const workbook = new ExcelJS.Workbook();
+  await workbook.xlsx.load(await buildHeadquartersExcel([]));
+  const sheet = workbook.getWorksheet('На штаб');
+
+  // Раньше здесь стояла живая формула SORT(B3:N2,13,0) с диапазоном B9:N8
+  // наизнанку: сортировать было нечего, но файл открывался с ошибкой.
+  let formulas = 0;
+  sheet.eachRow((row) => row.eachCell((cell) => {
+    if (cell.value && typeof cell.value === 'object' && cell.value.formula) formulas += 1;
+  }));
+  assert.equal(formulas, 0);
+  assert.equal(sheet.getCell('A3').value, 'ИТОГО по САО');
+  assert.equal(sheet.getCell('L3').value, 0);
+  assert.equal(sheet.getCell('M3').value, 0);
+});
+
 test('лист «Топы»: районы по рискам и исполнители внутри района', async () => {
   const overflow = (id, performer) => photo({ id, sha256: `hash-${id}`, performer, geoStatus: 'review', distanceM: 40 });
 

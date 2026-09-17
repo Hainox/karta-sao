@@ -287,8 +287,11 @@ async function handler(request, response) {
     if (deleteMatch && request.method === 'DELETE') return handleDelete(request, response, user, deleteMatch[1]);
     const contentMatch = pathname.match(/^\/photos\/([0-9a-f-]{36})\/content$/);
     if (contentMatch && request.method === 'GET') {
-      const result = await pool.query(`SELECT p.storage_key, p.mime_type, o.district FROM photos p JOIN objects o ON o.object_key = p.object_key WHERE p.id = $1 AND p.review_status <> 'rejected'`, [contentMatch[1]]);
-      if (!result.rowCount || (user.role === 'district_editor' && result.rows[0].district !== user.district)) return sendError(response, request, 404, 'photo_not_found');
+      // Доступ считается тем же правилом, что и на остальных объектных ручках:
+      // учётке АвД принадлежат её объекты, объекты «ДЭУ» и объекты без района,
+      // поэтому сравнение одного района отдавало ей 404 на каждом своём кадре.
+      const result = await pool.query(`SELECT p.storage_key, p.mime_type, o.district, ${HOLDER_SELECT_SQL} FROM photos p JOIN objects o ON o.object_key = p.object_key WHERE p.id = $1 AND p.review_status <> 'rejected'`, [contentMatch[1]]);
+      if (!result.rowCount || !objectAllowedFor(user, result.rows[0])) return sendError(response, request, 404, 'photo_not_found');
       // The atlas reads photo bytes through an authorised fetch, so the media response
       // needs the same CORS headers as the JSON endpoints.
       response.writeHead(200, { 'Content-Type': result.rows[0].mime_type, 'Cache-Control': 'private, max-age=300', 'X-Content-Type-Options': 'nosniff', ...corsHeaders(request) });
@@ -300,8 +303,16 @@ async function handler(request, response) {
       const datasetId = url.searchParams.get('datasetId');
       const sourceId = url.searchParams.get('sourceId');
       if (!datasetId || !sourceId) return sendError(response, request, 400, 'dataset_source_required');
-      const result = await pool.query('SELECT object_key, dataset_id, object_type, report_key, district, label, reference_points FROM objects WHERE dataset_id = $1 AND $2 = ANY(source_ids)', [datasetId, sourceId]);
-      const rows = user.role === 'district_editor' ? result.rows.filter((row) => row.district === user.district) : result.rows;
+      const result = await pool.query(`SELECT o.object_key, o.dataset_id, o.object_type, o.report_key, o.district, o.label, o.reference_points, ${HOLDER_SELECT_SQL} FROM objects o WHERE o.dataset_id = $1 AND $2 = ANY(o.source_ids)`, [datasetId, sourceId]);
+      // Тот же доступ, что и на загрузке: учётка АвД работает со своими
+      // объектами во всех районах, и без балансодержателя она не получала
+      // зарегистрированных точек, а расстояние считалось по одной точке карты.
+      const rows = result.rows
+        .filter((row) => objectAllowedFor(user, row))
+        .map((row) => ({
+          object_key: row.object_key, dataset_id: row.dataset_id, object_type: row.object_type,
+          report_key: row.report_key, district: row.district, label: row.label, reference_points: row.reference_points,
+        }));
       return sendJson(response, 200, { objects: rows }, request);
     }
     if (pathname === '/reports/summary' && request.method === 'GET') {

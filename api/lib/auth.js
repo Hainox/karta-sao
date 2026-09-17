@@ -11,6 +11,10 @@ export async function hashPassword(password) {
 }
 
 export async function verifyPassword(password, storedHash) {
+  // Тип пароля проверяем до scrypt: он принимает только строку или буфер, а тело
+  // запроса — произвольный JSON. Иначе вход с числом/объектом в поле пароля
+  // падал бы с 500 вместо честного «неверный e-mail или пароль».
+  if (typeof password !== 'string') return false;
   const [salt, expected] = String(storedHash || '').split(':');
   if (!salt || !expected) return false;
   const derived = await new Promise((resolve, reject) => crypto.scrypt(password, salt, 64, (error, key) => error ? reject(error) : resolve(key)));

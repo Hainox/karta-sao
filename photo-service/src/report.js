@@ -28,8 +28,11 @@ function validateRecord(record) {
   const sourcePointCount = Number.isSafeInteger(record.sourcePointCount) && record.sourcePointCount > 0
     ? record.sourcePointCount
     : 0;
+  // Закрытых отметок не может быть больше, чем отметок в наборе: без точек
+  // источника это ноль, а не число из фотографий. Тот же счёт, что в
+  // headquarters.js (fact = min(отработано, план)), иначе «Отметки: 5 из 0».
   const coveredPoints = Number.isSafeInteger(record.coveredPoints) && record.coveredPoints > 0
-    ? Math.min(record.coveredPoints, sourcePointCount || record.coveredPoints)
+    ? Math.min(record.coveredPoints, sourcePointCount)
     : 0;
 
   return {
@@ -149,6 +152,11 @@ function coverageRecord(row) {
     confirmedPhotos: row.confirmedPhotos,
     pendingReviewPhotos: row.pendingReviewPhotos,
     geoRisk: row.geoRisk,
+    // Отметки переносятся и в районный разрез: иначе сумма по районам давала бы
+    // нули, а сводка САО — реальные числа, и «Отметки» из района не сошлись бы
+    // со сводкой. Поля те же, что собирает reportPayload для общей сводки.
+    sourcePointCount: row.sourcePointCount,
+    coveredPoints: row.coveredPoints,
   };
 }
 

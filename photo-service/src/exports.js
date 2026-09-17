@@ -222,7 +222,10 @@ function writeHeadquartersTable(sheet, headerRow, { names, counts, total, formul
     else if (column > 2) cell.numFmt = '0';
   }
 
-  if (formula) {
+  // Формулу ставим только когда есть что сортировать: на пустой выборке
+  // диапазон схлопывается в перевёрнутый (B3:N2) и книга открывается с ошибкой,
+  // поэтому пустая доска остаётся без живого блока.
+  if (formula && names.length) {
     // Значения под формулой остаются на месте: файл открывается и там, где
     // динамических массивов нет, а Excel пересчитает блок сам.
     const lastColumn = sheet.getColumn(HEADQUARTERS_COLUMN_COUNT).letter;
@@ -676,9 +679,23 @@ export async function buildExcel(rows) {
 /* ------------------------------------------------- выгрузка по районам */
 
 // Имя листа Excel ограничено 31 символом и не терпит []:*?/\ — названия районов
-// проходят как есть, проверка нужна на случай правок в источнике.
+// проходят как есть, проверка нужна на случай правок в источнике. Кавычку по
+// краям Excel тоже не принимает, а длинное имя обрезается: два названия,
+// совпавшие после обрезки, разведём отдельно — иначе падает вся выгрузка.
 function districtSheetName(name) {
-  return String(name).replace(/[[\]:*?/\\]/g, ' ').slice(0, 31).trim() || 'Район';
+  return String(name).replace(/[[\]:*?/\\]/g, ' ').replace(/^'+|'+$/g, '').slice(0, 31).trim() || 'Район';
+}
+
+/** Свободное имя листа: ExcelJS падает на повторе, а сравнение у него без регистра. */
+function uniqueSheetName(workbook, name) {
+  const taken = (candidate) => workbook.worksheets
+    .some((sheet) => sheet.name.toLowerCase() === candidate.toLowerCase());
+  let candidate = name;
+  for (let suffix = 2; taken(candidate); suffix += 1) {
+    const tail = ` (${suffix})`;
+    candidate = name.slice(0, 31 - tail.length).trim() + tail;
+  }
+  return candidate;
 }
 
 /** Объекты набора, сгруппированные по району отчётности (с учётом строки «АвД САО»). */
@@ -769,9 +786,11 @@ function addDistrictSummarySheet(workbook, payload, board, risksByDistrict) {
 /**
  * Лист района: сначала объекты района, ниже — его фотографии с превью.
  * Лист самодостаточен, поэтому его можно отдать району целиком.
+ * Имя листа приходит готовым: длинные названия обрезаны и разведены с уже
+ * занятыми, иначе повтор имени обрывает выгрузку целиком.
  */
-async function addDistrictSheet(workbook, { district, objects, risksByObject }) {
-  const sheet = workbook.addWorksheet(districtSheetName(district));
+async function addDistrictSheet(workbook, { district, sheetName, objects, risksByObject }) {
+  const sheet = workbook.addWorksheet(sheetName ?? districtSheetName(district));
   const marks = headquartersCountsFor(objects);
   const percent = headquartersOverallPercentFor(marks);
   const withPhoto = objects.filter((object) => object.confirmedPhotos + object.pendingReviewPhotos > 0).length;
@@ -932,7 +951,12 @@ export async function buildDistrictsExcel(rows) {
 
   const grouped = objectsByReportingDistrict(payload.objects);
   for (const district of board.names) {
-    await addDistrictSheet(workbook, { district, objects: grouped.get(district) || [], risksByObject });
+    await addDistrictSheet(workbook, {
+      district,
+      sheetName: uniqueSheetName(workbook, districtSheetName(district)),
+      objects: grouped.get(district) || [],
+      risksByObject,
+    });
   }
 
   return workbook.xlsx.writeBuffer();

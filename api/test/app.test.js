@@ -307,3 +307,163 @@ test('упразднённая роль reviewer больше не имеет д
   await api.get('/api/exports/approved.geojson').set('Authorization', `Bearer ${legacy}`).expect(403);
   await api.get('/api/photo-markers').set('Authorization', `Bearer ${legacy}`).expect(403);
 });
+
+test('вход без пароля или с неверным типом пароля отвечает 401, а не HTTP 500', async () => {
+  const { api, editorPassword } = await fixture();
+
+  // scrypt принимает только строку: тело запроса произвольное, поэтому тип
+  // проверяется до хеширования, а не падает с 500 внутри фреймворка.
+  await api.post('/api/auth/login').send({ email: 'editor@example.test' }).expect(401);
+  await api.post('/api/auth/login').send({ email: 'editor@example.test', password: 12345678 }).expect(401);
+  await api.post('/api/auth/login').send({ email: 'editor@example.test', password: null }).expect(401);
+  await api.post('/api/auth/login').send({ email: 'editor@example.test', password: { any: 'object' } }).expect(401);
+  // Верный пароль по-прежнему пускает.
+  await login(api, 'editor@example.test', editorPassword);
+});
+
+test('повреждённый JSON и слишком большое тело отвечают 400 и 413, а не HTTP 500', async () => {
+  const { api, editorPassword } = await fixture();
+  const editor = await login(api, 'editor@example.test', editorPassword);
+
+  const broken = await api.post('/api/submissions').set('Authorization', `Bearer ${editor}`)
+    .set('Content-Type', 'application/json').send('{not json').expect(400);
+  assert.match(broken.body.error, /корректным JSON/);
+
+  // Лимит тела — 6 МБ из express.json; превышение — ошибка клиента (413).
+  const oversized = await api.post('/api/submissions').set('Authorization', `Bearer ${editor}`)
+    .send({ changeSet: changeSet(), originalFilename: 'x'.repeat(7 * 1024 * 1024) }).expect(413);
+  assert.match(oversized.body.error, /слишком большое/);
+});
+
+test('пустой комментарий приёмки принимается, а неверный тип получает понятную ошибку', async () => {
+  const { api, editorPassword, prefecturePassword } = await fixture();
+  const editor = await login(api, 'editor@example.test', editorPassword);
+  const submitted = await api.post('/api/submissions').set('Authorization', `Bearer ${editor}`)
+    .send({ changeSet: changeSet(), originalFilename: 'airport.geojson' }).expect(201);
+  const prefecture = await login(api, 'prefecture@example.test', prefecturePassword);
+
+  // null — это «без комментария», а не «слишком длинный».
+  await api.patch(`/api/submissions/${submitted.body.submission.id}`).set('Authorization', `Bearer ${prefecture}`)
+    .send({ status: 'approved', comment: null }).expect(200);
+
+  const wrongType = await api.patch(`/api/submissions/${submitted.body.submission.id}`).set('Authorization', `Bearer ${prefecture}`)
+    .send({ status: 'approved', comment: 12345 }).expect(400);
+  assert.match(wrongType.body.error, /должен быть строкой/);
+});
+
+test('повреждённый набор правок отвечает 4xx и не оседает в базе', async () => {
+  const { api, editorPassword, prefecturePassword } = await fixture();
+  const editor = await login(api, 'editor@example.test', editorPassword);
+  const prefecture = await login(api, 'prefecture@example.test', prefecturePassword);
+
+  const base = { type: 'FeatureCollection', change_set_version: 'district_change_set_v2', district: 'Аэропорт', author: 'Иванов И.И.' };
+  const props = (over = {}) => ({
+    district: 'Аэропорт', author: 'Иванов И.И.', change_type: 'queue', queue_priority: '1', address: 'Тестовый маршрут',
+    nozzle_direction: 'both', route_start: [37.1, 55.1], route_end: [37.2, 55.2], route_direction: 'start_to_end', ...over
+  });
+  const longRoute = Array.from({ length: MAX_GEOMETRY_VERTICES + 1 }, (_, index) => [37.1 + index / 1e6, 55.1]);
+  const cases = [
+    ['changeSet = null', { changeSet: null }],
+    ['changeSet — массив', { changeSet: [] }],
+    ['changeSet — строка', { changeSet: 'FeatureCollection' }],
+    ['нет features', { changeSet: { ...base } }],
+    ['features из не-объектов', { changeSet: { ...base, features: [null, 0, 'x', {}, { type: 'Feature' }] } }],
+    ['объект без properties', { changeSet: { ...base, features: [{ type: 'Feature', geometry: { type: 'LineString', coordinates: [[37.1, 55.1], [37.2, 55.2]] } }] } }],
+    ['неизвестный change_type', { changeSet: { ...base, features: [{ type: 'Feature', geometry: { type: 'LineString', coordinates: [[37.1, 55.1], [37.2, 55.2]] }, properties: props({ change_type: 'alien_type' }) }] } }],
+    ['координаты вне САО', { changeSet: { ...base, features: [{ type: 'Feature', geometry: { type: 'Point', coordinates: [0, 0] }, properties: { district: 'Аэропорт', author: 'Иванов И.И.', change_type: 'pgm', address: 'вне округа' } }] } }],
+    ['объектов больше 500', { changeSet: { ...base, features: Array.from({ length: 501 }, () => ({ type: 'Feature', geometry: { type: 'LineString', coordinates: [[37.1, 55.1], [37.2, 55.2]] }, properties: props() })) } }],
+    ['вершин больше предела', { changeSet: { ...base, features: [{ type: 'Feature', geometry: { type: 'LineString', coordinates: longRoute }, properties: props({ route_start: longRoute[0], route_end: longRoute.at(-1) }) }] } }]
+  ];
+
+  for (const [label, payload] of cases) {
+    const response = await api.post('/api/submissions').set('Authorization', `Bearer ${editor}`).send(payload);
+    assert.ok(response.status >= 400 && response.status < 500, `${label}: ожидали 4xx, получили ${response.status}`);
+  }
+
+  // Ни один повреждённый набор не сохранился: в списке пусто.
+  const stored = await api.get('/api/submissions').set('Authorization', `Bearer ${prefecture}`).expect(200);
+  assert.equal(stored.body.submissions.length, 0, 'повреждённые наборы не осели в базе');
+});
+
+test('районный редактор не читает чужие районы и не действует вне своего', async () => {
+  const { api, editorPassword, prefecturePassword } = await fixture();
+  const editor = await login(api, 'editor@example.test', editorPassword);
+  const prefecture = await login(api, 'prefecture@example.test', prefecturePassword);
+
+  // 1. Все привилегированные ручки закрыты для района — включая отчёты и выгрузки.
+  const forbidden = [
+    ['get', '/api/submissions'],
+    ['get', '/api/submissions?district=Беговой'],
+    ['get', '/api/submissions?status=approved'],
+    ['patch', `/api/submissions/${fakeId('5b', 1)}`],
+    ['get', '/api/exports/approved.geojson'],
+    ['get', '/api/exports/review-archive.zip'],
+    ['get', '/api/reports/routes'],
+    ['get', '/api/reports/routes.csv'],
+    ['get', '/api/photo-markers'],
+    ['post', '/api/photo-markers'],
+    ['patch', `/api/photo-markers/${fakeId('f0', 1)}`],
+    ['put', `/api/photo-markers/${fakeId('f0', 1)}/photo`],
+    ['get', `/api/photo-markers/${fakeId('f0', 1)}/photo`],
+    ['delete', `/api/photo-markers/${fakeId('f0', 1)}/photo`],
+    ['delete', `/api/photo-markers/${fakeId('f0', 1)}`]
+  ];
+  for (const [method, url] of forbidden) {
+    let call = api[method](url).set('Authorization', `Bearer ${editor}`);
+    if (method !== 'get') call = call.send({ status: 'approved', note: 'n', longitude: 37.5, latitude: 55.5 });
+    const response = await call;
+    assert.equal(response.status, 403, `${method.toUpperCase()} ${url} должен быть закрыт району`);
+  }
+
+  // 2. Действие вне своего района отбито, в своём — принято.
+  await api.post('/api/submissions').set('Authorization', `Bearer ${editor}`).send({ changeSet: changeSet({ district: 'Беговой' }) }).expect(403);
+  await api.post('/api/submissions').set('Authorization', `Bearer ${editor}`).send({ changeSet: changeSet() }).expect(201);
+
+  // 3. Чужой район, отправленный префектурой, районному редактору не виден.
+  await api.post('/api/submissions').set('Authorization', `Bearer ${prefecture}`).send({ changeSet: changeSet({ district: 'Беговой', author: 'Петров П.П.' }) }).expect(201);
+  const mine = await api.get('/api/my-submissions').set('Authorization', `Bearer ${editor}`).expect(200);
+  assert.equal(mine.body.district, 'Аэропорт');
+  assert.deepEqual(mine.body.submissions.map((item) => item.district), ['Аэропорт']);
+});
+
+test('ни одна ручка не отвечает 5xx на повреждённое тело запроса', async () => {
+  const { api, editorPassword, prefecturePassword } = await fixture();
+  const editor = await login(api, 'editor@example.test', editorPassword);
+  const prefecture = await login(api, 'prefecture@example.test', prefecturePassword);
+
+  // Тела — как их может прислать сломанный клиент: null, пусто, не тот тип, чужие поля.
+  const bodies = [
+    undefined, null, {}, { changeSet: null }, { changeSet: {} },
+    { changeSet: { type: 'FeatureCollection', change_set_version: 'district_change_set_v2', district: 'Аэропорт', author: 'A', features: [null, 0, 'x', {}, { type: 'Feature' }] } },
+    { status: 'approved' }, { status: 'nope' }, { status: 'approved', comment: null },
+    { note: 5 }, { note: 'x'.repeat(3000) }, { longitude: 'a', latitude: 'b' },
+    { longitude: 37.2, latitude: 55.2, note: 'n' }, { email: 'editor@example.test' }, { password: 5 }
+  ];
+  const endpoints = [
+    ['post', '/api/submissions', editor],
+    ['post', '/api/submissions', prefecture],
+    ['patch', `/api/submissions/${fakeId('5b', 1)}`, prefecture],
+    ['patch', '/api/submissions/not-a-uuid', prefecture],
+    ['get', '/api/submissions', prefecture],
+    ['get', '/api/submissions?status=bad', prefecture],
+    ['get', '/api/my-submissions', editor],
+    ['post', '/api/photo-markers', prefecture],
+    ['patch', `/api/photo-markers/${fakeId('f0', 1)}`, prefecture],
+    ['put', `/api/photo-markers/${fakeId('f0', 1)}/photo`, prefecture],
+    ['get', '/api/exports/approved.geojson', prefecture],
+    ['get', '/api/exports/review-archive.zip', prefecture],
+    ['get', '/api/reports/routes', prefecture],
+    ['get', '/api/reports/routes.csv', prefecture],
+    ['post', '/api/auth/login', null]
+  ];
+
+  for (const [method, url, token] of endpoints) {
+    for (const body of bodies) {
+      let call = api[method](url);
+      if (token) call = call.set('Authorization', `Bearer ${token}`);
+      if (method !== 'get' && body !== undefined) call = call.send(body);
+      const response = await call;
+      assert.ok(response.status < 500, `${method.toUpperCase()} ${url} с телом ${JSON.stringify(body)?.slice(0, 40)} ответил ${response.status}`);
+    }
+  }
+});

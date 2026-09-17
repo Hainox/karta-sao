@@ -9,8 +9,8 @@
 // остальное (включая неизвестный тип) попадает в точки. Своя копия нужна
 // потому, что district-changes.js — браузерный IIFE над window и как чистый
 // ES-модуль не грузится.
-const ROUTE_TYPES = new Set(['queue', 'rotor_transfer', 'dkm_route', 'tu_route', 'tu_route_yards']);
-const ZONE_TYPES = new Set(['rotor_snow_storage_zone']);
+export const ROUTE_TYPES = new Set(['queue', 'rotor_transfer', 'dkm_route', 'tu_route', 'tu_route_yards']);
+export const ZONE_TYPES = new Set(['rotor_snow_storage_zone']);
 
 // Заголовок выгрузки: понятные русские названия без сокращений — файл открывают
 // в Excel и читают без пояснений.
@@ -20,7 +20,7 @@ const CSV_HEADER = ['Район', 'Маршрутов', 'Зон', 'Точек', 
 const REPORT_DIRECTION = 'Отрисовка маршрутов ОДХ';
 
 /** Группа объекта по типу: 'route' (маршрут), 'zone' (зона) или 'point' (точка). */
-function groupOf(changeType) {
+export function groupOf(changeType) {
   if (ROUTE_TYPES.has(changeType)) return 'route';
   if (ZONE_TYPES.has(changeType)) return 'zone';
   return 'point';

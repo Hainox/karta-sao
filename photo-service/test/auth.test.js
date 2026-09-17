@@ -51,3 +51,16 @@ test('bearer tokens are read only from a well-formed Authorization header', () =
   assert.equal(bearerToken('Bearer token with spaces'), '');
   assert.equal(bearerToken(undefined), '');
 });
+
+test('битое значение cookie не роняет разбор сессии', () => {
+  // Одинокий или обрезанный знак процента раньше бросал URIError из
+  // decodeURIComponent: любой запрос с такой cookie отвечал 500 и слал
+  // критичное оповещение вместо обычного 401.
+  assert.equal(parseCookies('photo_session=%').photo_session, '%');
+  assert.equal(parseCookies('photo_session=%E0%A4%A').photo_session, '%E0%A4%A');
+
+  // Соседние пары при этом читаются, как и раньше.
+  const cookies = parseCookies('a=%ZZ; photo_session=ok');
+  assert.equal(cookies.a, '%ZZ');
+  assert.equal(cookies.photo_session, 'ok');
+});

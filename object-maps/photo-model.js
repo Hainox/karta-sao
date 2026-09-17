@@ -132,9 +132,14 @@ export function formatDateTime(value) {
   return date.toLocaleString('ru-RU', { dateStyle: 'short', timeStyle: 'short' });
 }
 
+// Координата без значения — это текст «GPS отсутствует», а не «Invalid Date» и не
+// падение на undefined: строка набора приходит из таблицы, и её поля могут быть
+// пустыми или заданы текстом.
 export function formatCoordinates(latitude, longitude) {
-  if (latitude === null || longitude === null) return 'GPS отсутствует';
-  return `${latitude.toFixed(6)}, ${longitude.toFixed(6)}`;
+  const lat = numberOrNull(latitude);
+  const lon = numberOrNull(longitude);
+  if (lat === null || lon === null) return 'GPS отсутствует';
+  return `${lat.toFixed(6)}, ${lon.toFixed(6)}`;
 }
 
 
