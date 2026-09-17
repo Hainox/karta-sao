@@ -48,6 +48,15 @@ async function fixture() {
       submissions.push(item); return item;
     },
     async listSubmissions({ status, district } = {}) { return submissions.filter((item) => (!status || item.status === status) && (!district || item.district === district)); },
+    // Счётчик приёмки служба отдаёт готовыми числами, поэтому и подделка — числа.
+    async submissionStats() {
+      return {
+        sets: { total: 3, submitted: 1, approved: 1, rejected: 1 },
+        objects: { total: 9, submitted: 4, approved: 4, rejected: 1 },
+        lastDistrict: 'Аэропорт',
+        lastSubmittedAt: '2026-09-08T10:01:00.000Z'
+      };
+    },
     // Отчёт по маршрутам приходит уже сгруппированным: две строки одного района.
     async routeReportRows() {
       return [
@@ -267,6 +276,24 @@ test('район не допущен к приёмке и выгрузкам, в
   const other = await api.get('/api/submissions?district=Беговой').set('Authorization', `Bearer ${prefecture}`).expect(200);
   assert.equal(other.body.submissions.length, 0);
   await api.get('/api/my-submissions').set('Authorization', `Bearer ${prefecture}`).expect(403);
+});
+
+test('счётчик приёмки отдаётся одними числами и закрыт району', async () => {
+  const { api, editorPassword, prefecturePassword } = await fixture();
+  const editor = await login(api, 'editor@example.test', editorPassword);
+  await api.get('/api/submissions/stats').set('Authorization', `Bearer ${editor}`).expect(403);
+
+  const prefecture = await login(api, 'prefecture@example.test', prefecturePassword);
+  const stats = await api.get('/api/submissions/stats').set('Authorization', `Bearer ${prefecture}`).expect(200);
+
+  assert.deepEqual(stats.body.sets, { total: 3, submitted: 1, approved: 1, rejected: 1 });
+  assert.deepEqual(stats.body.objects, { total: 9, submitted: 4, approved: 4, rejected: 1 });
+  assert.equal(stats.body.lastDistrict, 'Аэропорт');
+  assert.equal(stats.body.lastSubmittedAt, '2026-09-08T10:01:00.000Z');
+  assert.ok(stats.body.checkedAt, 'время снятия счётчика');
+  // Наборов в ответе нет: иначе ручка тянула бы change_set каждого набора, а её
+  // опрашивают каждые полминуты.
+  assert.equal(stats.body.submissions, undefined);
 });
 
 test('отчёт по маршрутам доступен префектуре и закрыт району', async () => {

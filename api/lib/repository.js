@@ -95,6 +95,56 @@ export function createRepository(pool) {
       `);
       return rows;
     },
+    // Счётчик приёмки в прямом эфире: только числа, без наборов. Полная выдача
+    // тянет change_set каждого набора, а счётчик опрашивает службу каждые
+    // полминуты, поэтому объекты считаем длиной массива features, не разворачивая
+    // его в строки. Набор считается по своему статусу, объекты — по статусу
+    // набора: приёмка решает набор целиком, построчных решений в базе нет.
+    async submissionStats() {
+      const { rows } = await pool.query(`
+        WITH counted AS (
+          SELECT
+            count(*)::int AS sets_total,
+            count(*) FILTER (WHERE status = 'submitted')::int AS sets_submitted,
+            count(*) FILTER (WHERE status = 'approved')::int AS sets_approved,
+            count(*) FILTER (WHERE status = 'rejected')::int AS sets_rejected,
+            coalesce(sum(feature_count), 0)::int AS objects_total,
+            coalesce(sum(feature_count) FILTER (WHERE status = 'submitted'), 0)::int AS objects_submitted,
+            coalesce(sum(feature_count) FILTER (WHERE status = 'approved'), 0)::int AS objects_approved,
+            coalesce(sum(feature_count) FILTER (WHERE status = 'rejected'), 0)::int AS objects_rejected
+          FROM submissions
+          CROSS JOIN LATERAL (
+            SELECT CASE
+              WHEN jsonb_typeof(change_set -> 'features') = 'array'
+              THEN jsonb_array_length(change_set -> 'features')
+              ELSE 0
+            END AS feature_count
+          ) AS counted_features
+        ),
+        last AS (
+          SELECT district, submitted_at FROM submissions ORDER BY submitted_at DESC NULLS LAST LIMIT 1
+        )
+        SELECT counted.*, last.district AS last_district, last.submitted_at AS last_submitted_at
+          FROM counted LEFT JOIN last ON TRUE
+      `);
+      const row = rows[0] || {};
+      return {
+        sets: {
+          total: row.sets_total || 0,
+          submitted: row.sets_submitted || 0,
+          approved: row.sets_approved || 0,
+          rejected: row.sets_rejected || 0
+        },
+        objects: {
+          total: row.objects_total || 0,
+          submitted: row.objects_submitted || 0,
+          approved: row.objects_approved || 0,
+          rejected: row.objects_rejected || 0
+        },
+        lastDistrict: row.last_district || null,
+        lastSubmittedAt: row.last_submitted_at || null
+      };
+    },
     async listPhotoMarkers() {
       const { rows } = await pool.query(
         'SELECT id, longitude, latitude, note, photo_filename, photo_mime_type, photo_size, photo_bytes IS NOT NULL AS has_photo, legacy_source_id, created_at, updated_at FROM photo_markers ORDER BY created_at ASC'

@@ -1683,6 +1683,9 @@
           document.getElementById("routes-api-password").value = "";
           baseModel = null;
           refreshRoutesSession();
+          // Таблица объектов нужна выгрузкам на штаб, поэтому грузим её сразу после
+          // входа; дальше счётчик приёмки живёт на лёгких числах, без наборов.
+          if (isPrefecture()) loadRoutes();
           toast(`Вход выполнен: ${user.role}.`);
         } catch (error) {
           toast(`Вход не выполнен: ${error.message}`);
@@ -1702,13 +1705,12 @@
           toast(`Не удалось загрузить объекты районов: ${error.message}`);
         }
       }
-      /** Наборы приходят целиком, с объектами: из них собираем и таблицы, и счётчик. */
+      /** Наборы приходят целиком, с объектами: из них собирается таблица объектов. */
       async function fetchBase() {
         const payload = await ODHApi.request("/api/submissions").then((response) =>
           response.json(),
         );
         baseModel = ODHExports.collectBase(payload.submissions);
-        reviewState = ODHExports.reviewCounter(payload.submissions);
       }
       function stopReviewLive() {
         if (reviewTimer) clearInterval(reviewTimer);
@@ -1726,12 +1728,18 @@
         }
         refreshReviewLive();
       }
+      /**
+       * Счётчик считает служба и отдаёт одними числами: полный список наборов тянет
+       * объекты каждого, а здесь запрос идёт каждые полминуты. Наборы для таблицы
+       * грузятся отдельно — по кнопке «Загрузить» и при входе.
+       */
       async function refreshReviewLive() {
         try {
-          await fetchBase();
+          const stats = await ODHApi.request("/api/submissions/stats").then((response) =>
+            response.json(),
+          );
+          reviewState = stats;
           renderReviewCounter(reviewState);
-          document.getElementById("routes-note").textContent =
-            ODHExports.baseSummary(baseModel);
         } catch (error) {
           document.getElementById("review-updated").textContent =
             `Обновление не прошло: ${error.message}`;
@@ -1765,9 +1773,15 @@
         const last = state.lastDistrict
           ? `${state.lastDistrict}, ${ODHExports.formatSubmittedAt(state.lastSubmittedAt)}`
           : "нет";
+        // Разобранным считаем всё, что приёмка уже решила: и утверждённое, и отклонённое.
+        const judgedPercent = ODHExports.percent(
+          state.objects.approved + state.objects.rejected,
+          state.objects.total,
+        );
+        const approvedPercent = ODHExports.percent(state.objects.approved, state.objects.total);
         document.getElementById("review-updated").textContent =
-          `Приёмка разобрала ${state.judgedPercent} % объектов, утверждено `
-          + `${state.approvedPercent} % · последняя отправка: ${last} · обновлено `
+          `Приёмка разобрала ${judgedPercent} % объектов, утверждено `
+          + `${approvedPercent} % · последняя отправка: ${last} · обновлено `
           + `${ODHExports.moscowMomentSeconds(state.checkedAt)} (МСК)`;
       }
       async function exportRoutesCsv() {

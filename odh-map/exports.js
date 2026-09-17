@@ -1165,50 +1165,6 @@
   }
 
 
-  /**
-   * Счётчик приёмки: сколько наборов и объектов в каком состоянии и когда район
-   * присылал последний раз. Набор считается по своему статусу, а объекты — по
-   * статусу набора, в который они входят: построчно приёмка решает набор, а не
-   * отдельный объект.
-   */
-  function reviewCounter(submissions) {
-    const sets = { total: 0, submitted: 0, approved: 0, rejected: 0 };
-    const objects = { total: 0, submitted: 0, approved: 0, rejected: 0 };
-    let lastSubmittedAt = null;
-    let lastMs = null;
-    let lastDistrict = null;
-
-    for (const submission of Array.isArray(submissions) ? submissions : []) {
-      const status = submission && submission.status;
-      const known = Object.prototype.hasOwnProperty.call(sets, status) && status !== 'total';
-      const count = ((submission && submission.change_set && submission.change_set.features) || []).length;
-      sets.total += 1;
-      objects.total += count;
-      if (known) {
-        sets[status] += 1;
-        objects[status] += count;
-      }
-      const momentMs = submission && submission.submitted_at ? new Date(submission.submitted_at).valueOf() : Number.NaN;
-      if (Number.isFinite(momentMs) && (lastMs === null || momentMs > lastMs)) {
-        lastMs = momentMs;
-        lastSubmittedAt = new Date(momentMs).toISOString();
-        lastDistrict = String(submission.district || '').trim() || AUTODOR_HOLDER;
-      }
-    }
-
-    const judged = objects.approved + objects.rejected;
-    return {
-      sets,
-      objects,
-      lastSubmittedAt,
-      lastDistrict,
-      checkedAt: new Date().toISOString(),
-      // Доля решённых объектов: сколько приёмка уже разобрала из присланного.
-      judgedPercent: percent(judged, objects.total),
-      approvedPercent: percent(objects.approved, objects.total)
-    };
-  }
-
   /** Лист «Обзор»: что лежит на карте и на чём основаны числа. */
   function addOverviewSheet(workbook, model) {
     const sheet = workbook.addWorksheet('Обзор');
@@ -1417,7 +1373,6 @@ ${baseBlock}
     baseColumns, typeLabel, groupOfType, collectBase, baseRowValues, baseLaggingText, baseNote, baseSummary,
     ROUTE_GROUPS, ROUTE_DIRECTION, ROUTE_NOTE, addRouteBoardSheet, buildRoutesHeadquarters,
     objectRow, firstPosition, buildRoutesDistrictsWorkbook, addRoutesSummarySheet, addDistrictObjectsSheet,
-    reviewCounter,
     buildWorkbook, headquartersHtml, downloadBlob, downloadText, printHeadquarters
   };
 }());

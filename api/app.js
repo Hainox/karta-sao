@@ -137,6 +137,15 @@ export function createApp({ repository, boundary, jwtSecret, allowedOrigins = []
     } catch (error) { next(error); }
   });
 
+  // Счётчик приёмки в прямом эфире: одни числа, без наборов. Полная выдача тянет
+  // change_set каждого набора, а счётчик опрашивается каждые полминуты.
+  app.get('/api/submissions/stats', authenticate, requirePrefecture, async (_request, response, next) => {
+    try {
+      const stats = await repository.submissionStats();
+      response.json({ ...stats, checkedAt: new Date().toISOString() });
+    } catch (error) { next(error); }
+  });
+
   app.get('/api/submissions', authenticate, requirePrefecture, async (request, response, next) => {
     try {
       const status = request.query.status;

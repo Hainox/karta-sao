@@ -66,6 +66,15 @@ const FAKE_SUBMISSIONS = [
     change_set: { features: features('queue') }
   }
 ];
+// Счётчик приёмки служба отдаёт готовыми числами: те же цифры, что давали наборы
+// выше, чтобы проверка ловила отображение, а не пересчёт.
+const FAKE_STATS = {
+  sets: { total: 3, submitted: 1, approved: 1, rejected: 1 },
+  objects: { total: 9, submitted: 4, approved: 4, rejected: 1 },
+  lastDistrict: 'Аэропорт',
+  lastSubmittedAt: '2026-09-17T06:30:00.000Z',
+  checkedAt: '2026-09-17T09:00:00.000Z'
+};
 const FAKE_CSV = '\uFEFFРайон;Маршрутов;Зон;Точек;На приёмке;Утверждено;Отклонено;Последняя отправка\r\n'
   + 'Аэропорт;4;1;0;4;0;0;17.09.2026 09:30\r\nИТОГО;9;1;2;4;4;1;17.09.2026 09:30\r\n';
 
@@ -100,6 +109,14 @@ async function stubApi(page) {
         headers: CORS,
         contentType: 'text/csv; charset=utf-8',
         body: Buffer.from(FAKE_CSV, 'utf8')
+      });
+    }
+    if (url.endsWith('/api/submissions/stats')) {
+      return route.fulfill({
+        status: 200,
+        headers: CORS,
+        contentType: 'application/json',
+        body: JSON.stringify(FAKE_STATS)
       });
     }
     if (url.endsWith('/api/submissions')) {
