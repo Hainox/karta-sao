@@ -352,6 +352,19 @@
         font-size: 11px;
         line-height: 1.45;
       }
+      .export-actions {
+        display: grid;
+        gap: 9px;
+        margin-top: 9px;
+      }
+      .export-actions .outline-button {
+        justify-content: flex-start;
+      }
+      .export-actions .outline-button:disabled {
+        border-color: var(--line);
+        color: var(--muted);
+        cursor: default;
+      }
       .map-stage {
         position: relative;
         min-width: 0;
@@ -788,6 +801,49 @@
               опубликованную карту.
             </p>
           </section>
+          <section class="section">
+            <h2 class="section-title">
+              Выгрузки <i class="fa-solid fa-file-arrow-down"></i>
+            </h2>
+            <div class="export-actions">
+              <button
+                id="export-register"
+                class="outline-button"
+                type="button"
+                disabled
+              >
+                <i class="fa-regular fa-file-excel"></i>Excel: полный реестр
+              </button>
+              <button
+                id="export-headquarters"
+                class="outline-button"
+                type="button"
+                disabled
+              >
+                <i class="fa-regular fa-file-excel"></i>Excel: таблица на штаб
+              </button>
+              <button
+                id="export-headquarters-pdf"
+                class="outline-button"
+                type="button"
+                disabled
+              >
+                <i class="fa-regular fa-file-pdf"></i>PDF: таблица на штаб
+              </button>
+              <button
+                id="export-routes-csv"
+                class="outline-button"
+                type="button"
+                disabled
+              >
+                <i class="fa-regular fa-file-lines"></i>CSV: отчёт по маршрутам
+              </button>
+            </div>
+            <p id="export-note" class="file-note">
+              Файлы собираются в браузере из загруженных слоёв: числа те же, что на
+              карте.
+            </p>
+          </section>
           <p class="file-note">
             Данные отображаются только для Северного административного округа.
             Фиолетовый контур — рабочая граница САО.
@@ -848,6 +904,8 @@
     </main>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/leaflet-polylinedecorator@1.6.0/dist/leaflet.polylineDecorator.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js"></script>
+    <script src="exports.js"></script>
     <script>
       const BASEMAPS = {
         yandex: {
@@ -917,6 +975,7 @@
       applyBasemap(basemapName);
       const groups = {},
         layerItems = {},
+        layerData = {},
         searchIndex = [],
         queueKeys = ["queue1", "queue2", "queue3"],
         pointKeys = new Set([
@@ -1136,6 +1195,7 @@
               feature.properties?.feature_kind === "boundary_sao",
           ),
         };
+        layerData[item.key] = filtered;
         const root = L.layerGroup();
         const geo = L.geoJSON(filtered, {
           style: () => styleForLayer(item),
@@ -1208,6 +1268,7 @@
             queuePositions.queue1;
           fitBoundary();
           syncRouteDetail();
+          updateExportState();
         } catch (error) {
           toast(`Не удалось загрузить слои: ${error.message}`);
         }
@@ -1402,6 +1463,93 @@
         document.getElementById("overlay-note").textContent =
           "Файл района показывается только в этом окне и не меняет опубликованную карту.";
       });
+      const EXPORT_BUTTONS = [
+        "export-register",
+        "export-headquarters",
+        "export-headquarters-pdf",
+        "export-routes-csv",
+      ];
+      const EXPORT_NOTE_READY =
+        "Файлы собираются в браузере из загруженных слоёв: числа те же, что на карте.";
+      function updateExportState() {
+        const ready = Object.keys(layerData).length > 0;
+        EXPORT_BUTTONS.forEach((id) => {
+          document.getElementById(id).disabled = !ready;
+        });
+        document.getElementById("export-note").textContent = ready
+          ? EXPORT_NOTE_READY
+          : "Кнопки станут доступны после загрузки слоёв карты.";
+      }
+      async function exportExcel(kind, filename) {
+        // Книгу собирает ExcelJS с CDN: без него выгрузка невозможна, но карта
+        // остаётся рабочей — поэтому отдельное понятное сообщение, а не падение.
+        if (!window.ExcelJS) {
+          toast(
+            "Не загрузилась библиотека Excel: проверьте сеть и обновите страницу.",
+          );
+          return;
+        }
+        try {
+          toast("Готовим выгрузку…");
+          const model = ODHExports.collect(layerData);
+          const buffer = await ODHExports.buildWorkbook(
+            model,
+            window.ExcelJS,
+            kind,
+          ).xlsx.writeBuffer();
+          ODHExports.downloadBlob(
+            new Blob([buffer], {
+              type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            }),
+            filename,
+          );
+          toast("Выгрузка готова.");
+        } catch (error) {
+          toast(`Не удалось выгрузить: ${error.message}`);
+        }
+      }
+      function exportRoutesCsv() {
+        try {
+          const model = ODHExports.collect(layerData);
+          ODHExports.downloadText(
+            ODHExports.routesCsv(model),
+            ODHExports.routesCsvName(model),
+          );
+          toast("Выгрузка готова.");
+        } catch (error) {
+          toast(`Не удалось выгрузить: ${error.message}`);
+        }
+      }
+      function exportHeadquartersPdf() {
+        try {
+          const opened = ODHExports.printHeadquarters(
+            ODHExports.collect(layerData),
+          );
+          toast(
+            opened
+              ? "Печатная форма открыта: сохраните PDF."
+              : "Разрешите всплывающие окна, чтобы открыть печатную форму.",
+          );
+        } catch (error) {
+          toast(`Не удалось собрать форму: ${error.message}`);
+        }
+      }
+      document
+        .getElementById("export-register")
+        .addEventListener("click", () =>
+          exportExcel("register", "sao-odh-register.xlsx"),
+        );
+      document
+        .getElementById("export-headquarters")
+        .addEventListener("click", () =>
+          exportExcel("headquarters", "sao-odh-headquarters.xlsx"),
+        );
+      document
+        .getElementById("export-headquarters-pdf")
+        .addEventListener("click", exportHeadquartersPdf);
+      document
+        .getElementById("export-routes-csv")
+        .addEventListener("click", exportRoutesCsv);
       loadMap();
     </script>
   </body>
