@@ -1,5 +1,8 @@
 import { createHash, randomUUID } from 'node:crypto';
+import { createReadStream } from 'node:fs';
+import { stat } from 'node:fs/promises';
 import { createServer } from 'node:http';
+import { join } from 'node:path';
 import { Pool } from 'pg';
 import { assessDistanceRisk, isUnusableAccuracy } from './src/geo.js';
 import { photoServiceCookiePolicy, photoServiceDatabaseConfig } from './src/config.js';
@@ -14,7 +17,10 @@ import { clientAddress } from './src/client-address.js';
 import { buildDistrictsExcel, buildExcel, buildHeadquartersExcel, buildPdf } from './src/exports.js';
 import { buildHeadquartersPdf } from './src/pdf-headquarters.js';
 import { loadReportRows, reportPayload } from './src/reports.js';
-import { streamPhotoArchive } from './src/photos-archive.js';
+import {
+  ARCHIVE_FILE_PATTERN, archiveDir, photoArchiveByTicket, photoArchiveJob,
+  prunePhotoArchiveFiles, startPhotoArchiveJob
+} from './src/photos-archive.js';
 import { collectRisks, riskTops } from './src/risks.js';
 import { mediaRoot, readMedia, removeMedia, writeMedia } from './src/storage.js';
 import { HOLDER_SELECT_SQL, objectAllowedFor } from './src/scope.js';
@@ -62,6 +68,45 @@ function pathOf(request) {
   if (basePath && raw.startsWith(`${basePath}/`)) return raw.slice(basePath.length) || '/';
   if (basePath && raw === basePath) return '/';
   return raw;
+}
+
+/**
+ * Отдаёт готовый архив файлом. Размер известен заранее, поэтому браузер показывает
+ * прогресс, а докачка по Range позволяет добрать гигабайты после обрыва связи.
+ */
+async function serveArchiveFile(request, response, name) {
+  if (!ARCHIVE_FILE_PATTERN.test(name)) return sendError(response, request, 400, 'invalid_archive_name');
+  const target = join(archiveDir(process.env), name);
+  let size = 0;
+  try {
+    size = (await stat(target)).size;
+  } catch {
+    return sendError(response, request, 404, 'archive_not_found');
+  }
+  const headers = {
+    'Content-Type': 'application/zip',
+    'Content-Disposition': `attachment; filename="${name}"`,
+    'Accept-Ranges': 'bytes',
+    'Cache-Control': 'private, no-store',
+    ...corsHeaders(request)
+  };
+  const range = /^bytes=(\d*)-(\d*)$/.exec(String(request.headers.range || ''));
+  const start = range && range[1] ? Number(range[1]) : 0;
+  const end = range && range[2] ? Math.min(Number(range[2]), size - 1) : size - 1;
+  if (range && (start >= size || start > end)) {
+    response.writeHead(416, { ...headers, 'Content-Range': `bytes */${size}` });
+    return response.end();
+  }
+  if (range) {
+    response.writeHead(206, {
+      ...headers,
+      'Content-Range': `bytes ${start}-${end}/${size}`,
+      'Content-Length': end - start + 1
+    });
+    return createReadStream(target, { start, end }).on('error', () => response.destroy()).pipe(response);
+  }
+  response.writeHead(200, { ...headers, 'Content-Length': size });
+  return createReadStream(target).on('error', () => response.destroy()).pipe(response);
 }
 
 function originAllowed(request) {
@@ -264,6 +309,15 @@ async function handler(request, response) {
       response.setHeader('Set-Cookie', expiredSessionCookie(cookiePolicy));
       return sendJson(response, 200, { ok: true }, request);
     }
+    // Готовый архив по билету: ссылку открывает браузер, а cookie с чужого сайта
+    // может не дойти. Поэтому здесь только билет, выданный вместе с задачей сборки.
+    const archiveFileMatch = pathname.match(/^\/reports\/photos\.zip\/file\/([A-Za-z0-9._-]{1,80})$/);
+    if (archiveFileMatch && request.method === 'GET') {
+      const url = new URL(request.url, 'http://photo-service.local');
+      const job = photoArchiveByTicket(url.searchParams.get('ticket'));
+      if (!job || job.name !== archiveFileMatch[1]) return sendError(response, request, 404, 'archive_not_found');
+      return serveArchiveFile(request, response, archiveFileMatch[1]);
+    }
     const user = await currentUser(request);
     if (!user) return sendError(response, request, 401, 'authentication_required');
     if (pathname === '/auth/me' && request.method === 'GET') return sendJson(response, 200, { user: { id: user.id, email: user.email, displayName: user.display_name, role: user.role, district: user.district } }, request);
@@ -358,26 +412,42 @@ async function handler(request, response) {
       response.end(buffer);
       return;
     }
-    if (pathname === '/reports/photos.zip' && request.method === 'GET') {
+    // Архив собирается в файл в фоне: двухгигабайтная сборка не должна ждать в
+    // запросе, её оборвёт прокси. Ссылку на готовый файл клиент получает ниже.
+    if (pathname === '/reports/photos.zip/prepare' && request.method === 'POST') {
       if (!requirePrefecture(response, request, user)) return;
       const url = new URL(request.url, 'http://photo-service.local');
       const district = url.searchParams.get('district') || undefined;
       const rows = await loadReportRows(pool, user, district);
-      response.writeHead(200, {
-        'Content-Type': 'application/zip',
-        'Content-Disposition': `attachment; filename="sao-photo-${new Date().toISOString().slice(0, 10)}.zip"`,
-        'Cache-Control': 'no-store',
-        ...corsHeaders(request)
+      // Старые файлы убираем до сборки: иначе диск заполнится гигабайтами.
+      await prunePhotoArchiveFiles(archiveDir(process.env));
+      const job = startPhotoArchiveJob({
+        rows,
+        district: district || null,
+        dir: archiveDir(process.env)
       });
-      try {
-        // Архив уходит потоком: тысяч снимков в памяти не удержать.
-        await streamPhotoArchive(response, rows, { district: district || null });
-      } catch (error) {
-        // Заголовки уже отправлены — сказать клиенту нечего, поэтому обрываем поток.
-        console.error('photo archive failed:', error.message);
-        response.destroy();
-      }
-      return;
+      return sendJson(response, 202, { id: job.id, status: job.status, total: job.total }, request);
+    }
+    const archiveJobMatch = pathname.match(/^\/reports\/photos\.zip\/prepare\/([0-9a-f-]{36})$/);
+    if (archiveJobMatch && request.method === 'GET') {
+      if (!requirePrefecture(response, request, user)) return;
+      const job = photoArchiveJob(archiveJobMatch[1]);
+      if (!job) return sendError(response, request, 404, 'archive_job_not_found');
+      return sendJson(response, 200, {
+        id: job.id,
+        status: job.status,
+        district: job.district,
+        photos: job.photos,
+        total: job.total,
+        bytes: job.bytes,
+        skipped: job.skipped,
+        name: job.name,
+        error: job.error,
+        startedAt: job.startedAt,
+        finishedAt: job.finishedAt,
+        // Билет нужен для ссылки на файл: браузер скачивает её навигацией.
+        ticket: job.status === 'ready' ? job.ticket : null
+      }, request);
     }
     if (pathname === '/reports/export.pdf' && request.method === 'GET') {
       if (!requirePrefecture(response, request, user)) return;

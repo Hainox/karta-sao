@@ -1,15 +1,16 @@
 // Проверки выгрузки фотографий архивом: раскладка по районам и видам, имена
-// файлов по объекту и координатам и опись. Сборка списка — чистые функции,
-// поэтому проверяются точными строками; поток проверяется на временном
-// медиахранилище, чтобы не поднимать базу.
+// файлов по объекту и координатам, опись, сборка файла и очередь задач. Раскладка
+// и имена — чистые функции, поэтому проверяются точными строками; сборка идёт на
+// временном медиахранилище, чтобы не поднимать базу.
 import assert from 'node:assert/strict';
-import { mkdtemp, rm, writeFile } from 'node:fs/promises';
+import { mkdtemp, readFile, readdir, rm, utimes, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { Writable } from 'node:stream';
 import test from 'node:test';
 import {
-  archiveFolders, photoArchiveEntries, photoArchiveManifest, photoFileName, safeSegment, streamPhotoArchive
+  ARCHIVE_FILE_PATTERN, archiveFolders, archiveName, photoArchiveByTicket, photoArchiveEntries,
+  photoArchiveJob, photoArchiveManifest, photoFileName, prunePhotoArchiveFiles, safeSegment,
+  startPhotoArchiveJob, writePhotoArchive
 } from '../src/photos-archive.js';
 
 const KEY_A = '11111111-1111-1111-1111-111111111111.jpg';
@@ -101,46 +102,107 @@ test('опись перечисляет папки и файлы и считае
   assert.equal(manifest.files[0].label, 'ПП «Ленинградский проспект, 1»');
 });
 
-test('архив уходит потоком и содержит опись, папки и файлы', async () => {
-  const root = await mkdtemp(join(tmpdir(), 'sao-photo-archive-'));
+test('архив собирается в файл: папки вида, имена и опись внутри', async () => {
+  const root = await mkdtemp(join(tmpdir(), 'sao-photo-media-'));
+  const dir = await mkdtemp(join(tmpdir(), 'sao-photo-export-'));
   try {
-    for (const key of [KEY_A, KEY_B, KEY_C]) await writeFile(join(root, key), Buffer.from([1, 2, 3]));
-    const chunks = [];
-    const response = new Writable({ write(chunk, _encoding, callback) { chunks.push(chunk); callback(); } });
+    for (const key of [KEY_A, KEY_B]) await writeFile(join(root, key), Buffer.from([1, 2, 3]));
 
-    const result = await streamPhotoArchive(response, rows(), { root, exportedAt: '2026-09-17T09:00:00.000Z' });
-    const buffer = Buffer.concat(chunks);
-    const text = buffer.toString('utf8');
+    const result = await writePhotoArchive(rows(), { root, dir, exportedAt: '2026-09-17T09:00:00.000Z' });
 
-    assert.equal(buffer.subarray(0, 2).toString('latin1'), 'PK');
-    assert.equal(result.photos, 3);
-    assert.equal(result.skipped, 1); // у подъезда файла на диске нет
-    // Имена в архиве лежат без сжатия, поэтому структуру видно прямо в байтах.
+    assert.match(result.name, ARCHIVE_FILE_PATTERN);
+    assert.equal(result.photos, 2);
+    assert.equal(result.skipped, 2); // у остановки и подъезда файлов на диске нет
+    assert.ok(result.bytes > 0);
+
+    // Имена в zip лежат без сжатия, поэтому структуру видно прямо в байтах файла.
+    const text = (await readFile(join(dir, result.name))).toString('utf8');
     assert.ok(text.includes('manifest.json'), 'опись внутри архива');
     assert.ok(text.includes('Аэропорт/ПП/'), 'папка вида');
-    assert.ok(text.includes('Аэропорт/ПП/ПП «Ленинградский проспект, 1» 55.79123, 37.51234.jpg'), 'имя объекта и координаты');
-    assert.ok(!text.includes('без координат'), 'кадр без файла в архив не попал');
+    assert.ok(text.includes('ПП «Ленинградский проспект, 1» 55.79123, 37.51234.jpg'), 'имя объекта и координаты');
+    // Оба кадра этого объекта лежат на диске — значит, оба и в архиве.
+    assert.ok(text.includes('ПП «Ленинградский проспект, 1» 55.79123, 37.51234 (2).png'), 'повтор не потерян');
+    // Кадров без файла на диске двое — они посчитаны пропущенными, а не собраны.
+    assert.equal(result.photos + result.skipped, photoArchiveEntries(rows()).length);
   } finally {
     await rm(root, { recursive: true, force: true });
+    await rm(dir, { recursive: true, force: true });
   }
 });
 
-test('пропавший файл не роняет архив, а считается пропущенным', async () => {
-  const root = await mkdtemp(join(tmpdir(), 'sao-photo-archive-'));
+test('готовые архивы чистятся, посторонние файлы не трогаем', async () => {
+  const dir = await mkdtemp(join(tmpdir(), 'sao-photo-export-'));
   try {
-    // На диске лежит только первый кадр: второй пропал после выборки.
-    await writeFile(join(root, KEY_A), Buffer.from([1, 2, 3]));
+    const names = [];
+    for (let index = 0; index < 4; index += 1) {
+      const name = `sao-photo-2026-09-17-0000000${index}.zip`;
+      await writeFile(join(dir, name), Buffer.from([index]));
+      // Разное время правки: по нему и решаем, что старше.
+      const stamp = new Date(Date.UTC(2026, 8, 17, 10, index));
+      await utimes(join(dir, name), stamp, stamp);
+      names.push(name);
+    }
+    await writeFile(join(dir, 'не-архив.txt'), 'посторонний файл');
+
+    const removed = await prunePhotoArchiveFiles(dir, 2);
+
+    assert.equal(removed, 2);
+    const left = (await readdir(dir)).filter((name) => ARCHIVE_FILE_PATTERN.test(name)).sort();
+    assert.deepEqual(left, [names[2], names[3]].sort());
+    assert.ok((await readdir(dir)).includes('не-архив.txt'), 'посторонний файл остался');
+  } finally {
+    await rm(dir, { recursive: true, force: true });
+  }
+});
+
+test('имя архива подходит для ссылки и не повторяется', () => {
+  const first = archiveName('2026-09-17T09:00:00.000Z');
+  assert.match(first, ARCHIVE_FILE_PATTERN);
+  assert.notEqual(first, archiveName('2026-09-17T09:00:00.000Z'));
+});
+
+test('задача сборки отдаёт статус, а готовый файл — по билету', async () => {
+  const root = await mkdtemp(join(tmpdir(), 'sao-photo-media-'));
+  const dir = await mkdtemp(join(tmpdir(), 'sao-photo-export-'));
+  try {
+    await writeFile(join(root, KEY_A), Buffer.from([1]));
     const [pp] = rows();
-    const chunks = [];
-    const response = new Writable({ write(chunk, _encoding, callback) { chunks.push(chunk); callback(); } });
 
-    const result = await streamPhotoArchive(response, [pp], { root });
-    const text = Buffer.concat(chunks).toString('utf8');
+    const job = startPhotoArchiveJob({ rows: [pp], root, dir });
+    assert.equal(job.status, 'building');
+    assert.match(job.id, /^[0-9a-f-]{36}$/);
+    await job.done;
 
-    assert.equal(result.photos, 1);
-    assert.equal(result.skipped, 1);
-    assert.ok(text.includes('ПП «Ленинградский проспект, 1» 55.79123, 37.51234.jpg'), 'кадр с диска в архиве');
-    assert.ok(!text.includes('55.79123, 37.51234 (2).png'), 'пропавший кадр в архив не добавлен');
+    assert.equal(job.status, 'ready');
+    assert.equal(job.photos, 1);
+    assert.match(job.name, ARCHIVE_FILE_PATTERN);
+    assert.ok(job.ticket);
+    assert.equal(photoArchiveJob(job.id), job);
+    // Ссылку открывает браузер, поэтому доступ к готовому файлу даёт билет.
+    assert.equal(photoArchiveByTicket(job.ticket), job);
+    assert.equal(photoArchiveByTicket('чужой-билет'), null);
+    assert.equal(photoArchiveByTicket(''), null);
+    assert.equal(photoArchiveJob('нет-такой-задачи'), null);
+  } finally {
+    await rm(root, { recursive: true, force: true });
+    await rm(dir, { recursive: true, force: true });
+  }
+});
+
+test('сбой сборки остаётся в задаче, а не роняет сервис', async () => {
+  const root = await mkdtemp(join(tmpdir(), 'sao-photo-media-'));
+  try {
+    const [pp] = rows();
+    // Каталог выгрузки — это файл, а не папка: сборка обязана упасть, но тихо.
+    const dir = join(root, 'занято');
+    await writeFile(dir, 'не папка');
+
+    const job = startPhotoArchiveJob({ rows: [pp], root, dir });
+    await job.done;
+
+    assert.equal(job.status, 'failed');
+    assert.ok(job.error);
+    assert.equal(job.name, null);
   } finally {
     await rm(root, { recursive: true, force: true });
   }

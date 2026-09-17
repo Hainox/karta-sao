@@ -1207,17 +1207,16 @@ async function downloadReport(kind) {
     showToast('Выгрузки доступны только префектуре.', 'error');
     return;
   }
+  if (kind === 'photos') return downloadPhotoArchive();
   const district = requestedDistrict();
   const query = district ? `?district=${encodeURIComponent(district)}` : '';
   const path = kind === 'xlsx' ? `/reports/export.xlsx${query}`
     : kind === 'headquarters' ? `/reports/export-headquarters.xlsx${query}`
     : kind === 'headquarters-pdf' ? `/reports/export-headquarters.pdf${query}`
     : kind === 'districts' ? `/reports/export-districts.xlsx${query}`
-    : kind === 'photos' ? `/reports/photos.zip${query}`
     : `/reports/export.pdf${query}`;
   try {
-    // Архив снимков собирается потоком и весит много: предупреждаем заранее.
-    showToast(kind === 'photos' ? 'Собираем архив фотографий…' : 'Готовим выгрузку…');
+    showToast('Готовим выгрузку…');
     const response = await api(path);
     if (!response.ok) throw new Error(`Сервис ответил ${response.status}`);
     const blob = await response.blob();
@@ -1228,7 +1227,6 @@ async function downloadReport(kind) {
       : kind === 'headquarters' ? 'sao-photo-headquarters.xlsx'
       : kind === 'headquarters-pdf' ? 'sao-photo-headquarters.pdf'
       : kind === 'districts' ? 'sao-photo-districts.xlsx'
-      : kind === 'photos' ? `sao-photo-${new Date().toISOString().slice(0, 10)}.zip`
       : 'sao-photo-summary.pdf';
     document.body.appendChild(link);
     link.click();
@@ -1237,6 +1235,39 @@ async function downloadReport(kind) {
     showToast('Выгрузка готова.');
   } catch (error) {
     showToast(`Не удалось выгрузить отчёт: ${error.message}`, 'error');
+  }
+}
+
+/**
+ * Архив фотографий собирается на сервере в файл, а не отдаётся потоком в ответ:
+ * выгрузка всего округа весит гигабайты, и браузер такой ответ в память не возьмёт.
+ * Поэтому сначала задача сборки, затем обычная ссылка на готовый файл — её открывает
+ * браузер, показывает прогресс и умеет докачать после обрыва связи. Ссылка несёт
+ * билет: cookie с чужого сайта при скачивании навигацией может не дойти.
+ */
+async function downloadPhotoArchive() {
+  const district = requestedDistrict();
+  const query = district ? `?district=${encodeURIComponent(district)}` : '';
+  try {
+    showToast('Собираем архив фотографий… это может занять несколько минут.');
+    let job = await apiJson(`/reports/photos.zip/prepare${query}`, { method: 'POST' });
+    while (job.status === 'building') {
+      await new Promise((resolve) => setTimeout(resolve, 3000));
+      job = await apiJson(`/reports/photos.zip/prepare/${job.id}`);
+      // Ход сборки показываем в строке состояния панели: она есть всегда.
+      element('paListCount').textContent = job.total
+        ? `Собираем архив: ${job.photos.toLocaleString('ru-RU')} из ${job.total.toLocaleString('ru-RU')} снимков`
+        : 'Собираем архив фотографий…';
+    }
+    if (job.status !== 'ready') throw new Error(job.error || 'архив не собрался');
+    const link = document.createElement('a');
+    link.href = `${apiBase()}/reports/photos.zip/file/${encodeURIComponent(job.name)}?ticket=${encodeURIComponent(job.ticket)}`;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    showToast(`Архив готов: ${job.photos.toLocaleString('ru-RU')} снимков, ${(job.bytes / 1024 / 1024).toFixed(0)} МБ.`);
+  } catch (error) {
+    showToast(`Не удалось собрать архив: ${error.message}`, 'error');
   }
 }
 
