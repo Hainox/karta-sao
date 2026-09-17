@@ -388,7 +388,8 @@ test('счётчик приёмки появляется после входа �
   ]);
   await expect(page.locator('#review-updated')).toContainText('Приёмка разобрала 56 % объектов, утверждено 44 %');
   await expect(page.locator('#review-updated')).toContainText('последняя отправка: Аэропорт, 17.09.2026 09:30');
-  await expect(page.locator('#review-updated')).toContainText('(МСК)');
+  // Время с секундами: иначе обновление внутри одной минуты выглядит как замерший блок.
+  await expect(page.locator('#review-updated')).toContainText(/\d{2}\.\d{2}\.\d{4}, \d{2}:\d{2}:\d{2} \(МСК\)/);
 });
 
 test('выгрузка по районам: сводка и лист на каждый район с объектами', async ({ page }) => {

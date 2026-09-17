@@ -349,6 +349,17 @@
     });
   }
 
+  /**
+   * Отметка времени с секундами: счётчик приёмки обновляется каждые полминуты, и
+   * без секунд две трети обновлений выглядели бы как замерший блок.
+   */
+  function moscowMomentSeconds(value) {
+    return new Date(value ? value : Date.now()).toLocaleString('ru-RU', {
+      timeZone: 'Europe/Moscow', day: '2-digit', month: '2-digit', year: 'numeric',
+      hour: '2-digit', minute: '2-digit', second: '2-digit'
+    });
+  }
+
   function moscowDate(value) {
     return new Intl.DateTimeFormat('en-CA', {
       timeZone: 'Europe/Moscow', year: 'numeric', month: '2-digit', day: '2-digit'
@@ -1401,7 +1412,7 @@ ${baseBlock}
     HEADQUARTERS_NOTE, HEADQUARTERS_DIRECTION,
     BASE_TITLE, BASE_EMPTY, PRIORITY_TYPES,
     districtOf, countOf, sliceLayer, collect, percent, percentBandFill,
-    objectsCsv, objectsCsvName, objectCountOf, moscowMoment, moscowDate, formatSubmittedAt,
+    objectsCsv, objectsCsvName, objectCountOf, moscowMoment, moscowDate, moscowMomentSeconds, formatSubmittedAt,
     headquartersColumns, blockValues, headquartersComment,
     baseColumns, typeLabel, groupOfType, collectBase, baseRowValues, baseLaggingText, baseNote, baseSummary,
     ROUTE_GROUPS, ROUTE_DIRECTION, ROUTE_NOTE, addRouteBoardSheet, buildRoutesHeadquarters,

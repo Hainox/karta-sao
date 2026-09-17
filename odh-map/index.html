@@ -1768,7 +1768,7 @@
         document.getElementById("review-updated").textContent =
           `Приёмка разобрала ${state.judgedPercent} % объектов, утверждено `
           + `${state.approvedPercent} % · последняя отправка: ${last} · обновлено `
-          + `${ODHExports.moscowMoment(state.checkedAt)} (МСК)`;
+          + `${ODHExports.moscowMomentSeconds(state.checkedAt)} (МСК)`;
       }
       async function exportRoutesCsv() {
         if (!isPrefecture()) {
