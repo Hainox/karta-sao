@@ -76,6 +76,14 @@
       "color": "#37474f",
       "default": false,
       "url": "layers/sao_fire_hydrants_address_centroids_wgs84.geojson"
+    },
+    {
+      "key": "yards",
+      "name": "Дворы и участки САО (2 294 участка)",
+      "color": "#0d827c",
+      "default": false,
+      "lazy": true,
+      "url": "../areas.geojson"
     }
   ]
 }

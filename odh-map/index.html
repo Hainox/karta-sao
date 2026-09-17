@@ -243,6 +243,33 @@
         font-size: 13px;
         font-weight: 800;
       }
+      .group-switch {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        cursor: pointer;
+      }
+      .group-switch input {
+        accent-color: var(--navy);
+        width: 15px;
+        height: 15px;
+        margin: 0 4px 0 0;
+      }
+      .layer-hint {
+        margin: 0 0 6px;
+        color: #7b8fa6;
+        font-size: 11px;
+        line-height: 1.45;
+      }
+      .type-count {
+        margin-left: auto;
+        padding: 1px 7px;
+        border-radius: 9px;
+        background: #eef4f6;
+        color: #4a6b8a;
+        font-size: 11px;
+        font-weight: 700;
+      }
       .layer-row {
         display: flex;
         align-items: center;
@@ -755,6 +782,10 @@
                 <span class="dot"></span
                 ><span>Готово: <strong id="layer-count">—</strong> слоёв</span>
               </div>
+              <div class="status-card">
+                <span class="dot"></span
+                ><span>На карте сейчас: <strong id="layer-shown">0</strong></span>
+              </div>
             </div>
           </section>
           <section class="section">
@@ -767,7 +798,11 @@
             <div id="layers-panel" class="layers">
               <div class="layer-group">
                 <div class="layer-group-title">
-                  <i class="fa-solid fa-route"></i>Маршруты уборки
+                  <label class="group-switch"
+                    ><input checked type="checkbox" data-group="odh" /><i
+                      class="fa-solid fa-route"
+                    ></i>ОДХ и объекты</label
+                  >
                 </div>
                 <label class="layer-row"
                   ><input checked type="checkbox" data-key="queue1" /><span
@@ -795,11 +830,6 @@
                       type="checkbox"
                       checked /><span></span></span
                 ></label>
-              </div>
-              <div class="layer-group">
-                <div class="layer-group-title">
-                  <i class="fa-solid fa-location-dot"></i>Объекты ОДХ
-                </div>
                 <label class="layer-row"
                   ><input type="checkbox" data-key="pgm" /><span
                     class="symbol"
@@ -824,13 +854,7 @@
                     style="--swatch: #37474f"
                     ><i class="fa-solid fa-faucet-drip"></i></span
                   >Пожарные гидранты</label
-                >
-              </div>
-              <div class="layer-group">
-                <div class="layer-group-title">
-                  <i class="fa-regular fa-snowflake"></i>Снегоприёмные пункты
-                </div>
-                <label class="layer-row"
+                ><label class="layer-row"
                   ><input type="checkbox" data-key="snow" /><span
                     class="symbol"
                     style="--swatch: #00acc1"
@@ -842,6 +866,107 @@
                     style="--swatch: #6d4c41"
                     ><i class="fa-solid fa-mound"></i></span
                   >Сухие свалки снега</label
+                >
+              </div>
+              <div class="layer-group">
+                <div class="layer-group-title">
+                  <i class="fa-solid fa-draw-polygon"></i>Дворы
+                </div>
+                <label class="layer-row"
+                  ><input type="checkbox" data-key="yards" /><span
+                    class="symbol"
+                    style="--swatch: #0d827c"
+                    ><i class="fa-solid fa-draw-polygon"></i></span
+                  >Дворы и участки САО (2 294)</label
+                >
+              </div>
+              <div class="layer-group">
+                <div class="layer-group-title">
+                  <i class="fa-solid fa-route"></i>Маршруты районов
+                </div>
+                <p class="layer-hint" id="district-types-hint">
+                  Появятся после входа префектуры и загрузки объектов районов.
+                </p>
+                <label class="layer-row"
+                  ><input
+                    disabled
+                    checked
+                    type="checkbox"
+                    data-district-type="queue" /><span
+                    class="swatch"
+                    style="--swatch: #ff4e64"
+                  ></span
+                  >Маршруты уборки<span class="type-count" data-type-count="queue"></span></label
+                ><label class="layer-row"
+                  ><input
+                    disabled
+                    checked
+                    type="checkbox"
+                    data-district-type="rotor_transfer" /><span
+                    class="swatch"
+                    style="--swatch: #b98cff; border-top-style: dashed"
+                  ></span
+                  >Роторные перекидки<span
+                    class="type-count"
+                    data-type-count="rotor_transfer"
+                  ></span></label
+                ><label class="layer-row"
+                  ><input
+                    disabled
+                    checked
+                    type="checkbox"
+                    data-district-type="dkm_route" /><span
+                    class="swatch"
+                    style="--swatch: #ff7a45"
+                  ></span
+                  >Маршруты ДКМ — ОДХ<span
+                    class="type-count"
+                    data-type-count="dkm_route"
+                  ></span></label
+                ><label class="layer-row"
+                  ><input
+                    disabled
+                    checked
+                    type="checkbox"
+                    data-district-type="tu_route" /><span
+                    class="swatch"
+                    style="--swatch: #2ec4b6"
+                  ></span
+                  >Маршруты ТУ — ОДХ<span
+                    class="type-count"
+                    data-type-count="tu_route"
+                  ></span></label
+                ><label class="layer-row"
+                  ><input
+                    disabled
+                    checked
+                    type="checkbox"
+                    data-district-type="tu_route_yards" /><span
+                    class="swatch"
+                    style="--swatch: #2ec4b6; border-top-style: dashed"
+                  ></span
+                  >Маршруты ТУ — дворы<span
+                    class="type-count"
+                    data-type-count="tu_route_yards"
+                  ></span></label
+                >
+              </div>
+              <div class="layer-group">
+                <div class="layer-group-title">
+                  <i class="fa-solid fa-location-dot"></i>Зоны и точки районов
+                </div>
+                <label class="layer-row"
+                  ><input
+                    disabled
+                    type="checkbox"
+                    data-district-type="other" /><span
+                    class="symbol"
+                    style="--swatch: #8fa4b8"
+                    ><i class="fa-solid fa-shapes"></i></span
+                  >Зоны, площадки и другие объекты<span
+                    class="type-count"
+                    data-type-count="other"
+                  ></span></label
                 >
               </div>
             </div>
@@ -1149,6 +1274,9 @@
       let boundaryBounds = null,
         overlayLayer = null,
         directionVisible = true;
+      // Слои, которые грузятся по требованию: дворы весят десять мегабайт, и
+      // держать их в общей загрузке карты незачем.
+      const lazyLayers = new Map();
 
       function componentArea(component) {
         const ring = component[0] || [];
@@ -1207,6 +1335,23 @@
         district: "Район",
         facility_type: "Тип учреждения",
         smm_units: "Количество СММ",
+        change_type: "Тип объекта",
+        queue_priority: "Очередь",
+        author: "Автор разметки",
+        comment: "Комментарий",
+        submission_status: "Статус набора",
+        submission_district: "Район набора",
+      };
+      // Коды в карточке показываем словами: «на приёмке» вместо «submitted».
+      const SUBMISSION_STATUS_LABELS = {
+        submitted: "на приёмке",
+        approved: "утверждён",
+        rejected: "отклонён",
+      };
+      const VALUE_LABELS = {
+        change_type: (value) => DistrictChanges.TYPES[value]?.label || value,
+        submission_status: (value) =>
+          SUBMISSION_STATUS_LABELS[value] || value,
       };
       const esc = (value) =>
         String(value ?? "").replace(
@@ -1252,12 +1397,14 @@
           )
           .slice(0, 7);
         document.getElementById("drawer-title").textContent =
-          properties?.name || "Объект";
+          properties?.name || properties?.address || "Объект";
         document.getElementById("drawer-body").innerHTML =
           usable
             .map(
               ([key, value]) =>
-                `<dt>${esc(labels[key])}</dt><dd>${esc(value)}</dd>`,
+                `<dt>${esc(labels[key])}</dt><dd>${esc(
+                  VALUE_LABELS[key] ? VALUE_LABELS[key](value) : value,
+                )}</dd>`,
             )
             .join("") || "<dt>Сведения</dt><dd>Нет дополнительных данных</dd>";
         document.getElementById("drawer").classList.add("open");
@@ -1345,6 +1492,19 @@
             ),
           );
       }
+      // Дворы — полигоны участков: заливка цветом участка, как на коренной карте,
+      // чтобы соседние дворы различались между собой.
+      function yardsStyle(feature, item) {
+        const color = feature?.properties?.color || item.color;
+        return {
+          color,
+          weight: 1,
+          opacity: 0.9,
+          fillColor: color,
+          fillOpacity: 0.3,
+          lineJoin: "round",
+        };
+      }
       function addLayer(item, geojson) {
         const filtered = {
           ...geojson,
@@ -1357,7 +1517,8 @@
         layerData[item.key] = filtered;
         const root = L.layerGroup();
         const geo = L.geoJSON(filtered, {
-          style: () => styleForLayer(item),
+          style: (feature) =>
+            item.key === "yards" ? yardsStyle(feature, item) : styleForLayer(item),
           pointToLayer: pointKeys.has(item.key)
             ? (_, latlng) => markerFor(item.key, item.color, latlng)
             : undefined,
@@ -1407,15 +1568,20 @@
             return r.json();
           });
           await Promise.all(
-            manifest.layers.map(async (item) =>
+            manifest.layers.map(async (item) => {
+              // Ленивый слой в общую загрузку не берём: его тянет галочка в панели.
+              if (item.lazy) {
+                lazyLayers.set(item.key, item);
+                return;
+              }
               addLayer(
                 item,
                 await fetch(item.url, { cache: "no-store" }).then((r) => {
                   if (!r.ok) throw Error(`HTTP ${r.status}`);
                   return r.json();
                 }),
-              ),
-            ),
+              );
+            }),
           );
           document.getElementById("layer-count").textContent =
             manifest.layers.length;
@@ -1427,6 +1593,7 @@
             queuePositions.queue1;
           fitBoundary();
           syncRouteDetail();
+          syncLayerStatus();
           updateExportState();
         } catch (error) {
           toast(`Не удалось загрузить слои: ${error.message}`);
@@ -1439,9 +1606,168 @@
       }
       function applyLayerVisibility(key, visible) {
         const layer = groups[key];
-        if (!layer) return;
-        if (visible) layer.addTo(map);
-        else map.removeLayer(layer);
+        if (layer) {
+          if (visible) layer.addTo(map);
+          else map.removeLayer(layer);
+          syncLayerStatus();
+          return;
+        }
+        // Дворы весят десять мегабайт: грузим при первом включении галочки, а не
+        // при открытии карты, чтобы ожидание не оплачивал каждый посетитель.
+        if (visible && lazyLayers.has(key)) loadLazyLayer(key);
+      }
+      async function loadLazyLayer(key) {
+        const item = lazyLayers.get(key);
+        if (!item) return;
+        try {
+          toast(`Загружаем слой «${item.name}»…`);
+          const geojson = await fetch(item.url, { cache: "force-cache" }).then(
+            (response) => {
+              if (!response.ok) throw Error(`HTTP ${response.status}`);
+              return response.json();
+            },
+          );
+          addLayer(item, geojson);
+          applyLayerVisibility(key, true);
+        } catch (error) {
+          toast(`Слой не загрузился: ${error.message}`);
+        }
+      }
+      /**
+       * Объекты районов на карте. Маршруты разведены по типам — тип можно скрыть
+       * отдельно; зоны и точки идут одним слоем, чтобы панель осталась читаемой.
+       */
+      const DISTRICT_SWITCH_TYPES = {
+        queue: ["queue"],
+        rotor_transfer: ["rotor_transfer"],
+        dkm_route: ["dkm_route"],
+        tu_route: ["tu_route"],
+        tu_route_yards: ["tu_route_yards"],
+        other: [
+          "rotor_snow_storage_zone",
+          "temporary_snow_storage",
+          "dry_snow_dump",
+          "pgm",
+          "smm_storage",
+          "other",
+        ],
+      };
+      const districtGroups = {};
+      let districtObjectCount = 0;
+      function districtSwitchFor(type) {
+        return Object.keys(DISTRICT_SWITCH_TYPES).find((key) =>
+          DISTRICT_SWITCH_TYPES[key].includes(type),
+        );
+      }
+      /**
+       * «На карте сейчас» считаем по самим слоям, а не по галочкам: число честно
+       * говорит, что нарисовано, и по нему видно, что переключатель сработал.
+       */
+      function syncLayerStatus() {
+        const countOf = (layerMap) =>
+          Object.keys(layerMap).filter((key) => map.hasLayer(layerMap[key]))
+            .length;
+        document.getElementById("layer-shown").textContent = String(
+          countOf(groups) + countOf(districtGroups),
+        );
+      }
+      function applyDistrictTypeVisibility(switchKey, visible) {
+        const group = districtGroups[switchKey];
+        if (!group) return;
+        if (visible) group.addTo(map);
+        else map.removeLayer(group);
+        refreshDistrictHint();
+        syncLayerStatus();
+      }
+      function clearDistrictObjects() {
+        Object.values(districtGroups).forEach((group) => map.removeLayer(group));
+        Object.keys(districtGroups).forEach((key) => delete districtGroups[key]);
+        districtObjectCount = 0;
+      }
+      /** Сколько типов реально на карте — тоже по слоям, а не по галочкам. */
+      function refreshDistrictHint() {
+        const boxes = Array.from(
+          document.querySelectorAll("[data-district-type]"),
+        );
+        const hint = document.getElementById("district-types-hint");
+        if (!districtObjectCount) {
+          hint.textContent = "Объектов районов пока нет.";
+          return;
+        }
+        const shown = boxes.filter(
+          (box) =>
+            districtGroups[box.dataset.districtType] &&
+            map.hasLayer(districtGroups[box.dataset.districtType]),
+        ).length;
+        hint.textContent =
+          `Объектов районов: ${districtObjectCount}. ` +
+          `На карте типов: ${shown} из ${boxes.length}.`;
+      }
+      function resetDistrictTypeBoxes() {
+        districtObjectCount = 0;
+        document.querySelectorAll("[data-district-type]").forEach((control) => {
+          control.disabled = true;
+          const badge = control
+            .closest(".layer-row")
+            ?.querySelector("[data-type-count]");
+          if (badge) badge.textContent = "";
+        });
+        document.getElementById("district-types-hint").textContent =
+          "Появятся после входа префектуры и загрузки объектов районов.";
+        syncLayerStatus();
+      }
+      /**
+       * Рисуем объекты районов теми же цветами и штрихами, что в редакторе района и
+       * в приёмке: словарь типов один на все контуры, поэтому один и тот же объект
+       * выглядит одинаково у района, у приёмки и на этой карте.
+       */
+      function drawDistrictObjects(submissions) {
+        clearDistrictObjects();
+        for (const submission of Array.isArray(submissions) ? submissions : []) {
+          for (const feature of submission?.change_set?.features || []) {
+            const type = feature?.properties?.change_type;
+            const switchKey = DistrictChanges.TYPES[type]
+              ? districtSwitchFor(type)
+              : null;
+            if (!switchKey) continue;
+            if (!districtGroups[switchKey]) {
+              districtGroups[switchKey] = L.layerGroup();
+            }
+            L.geoJSON(feature, {
+              style: () => DistrictChanges.styleFor(feature),
+              pointToLayer: (_, latlng) =>
+                L.circleMarker(latlng, {
+                  ...DistrictChanges.styleFor(feature),
+                  radius: 6,
+                  fillOpacity: 0.9,
+                }),
+              onEachFeature: (_, layer) =>
+                layer.on("click", () =>
+                  openDrawer({
+                    ...feature.properties,
+                    submission_status: submission.status,
+                    submission_district: submission.district,
+                  }),
+                ),
+            }).eachLayer((child) => districtGroups[switchKey].addLayer(child));
+            districtObjectCount += 1;
+          }
+        }
+        document.querySelectorAll("[data-district-type]").forEach((control) => {
+          const switchKey = control.dataset.districtType;
+          const group = districtGroups[switchKey];
+          // Счётчик у строки показывает, сколько объектов прислали районы.
+          const badge = control
+            .closest(".layer-row")
+            ?.querySelector("[data-type-count]");
+          if (badge) badge.textContent = group ? String(group.getLayers().length) : "0";
+          control.disabled = districtObjectCount === 0;
+          if (districtObjectCount) {
+            applyDistrictTypeVisibility(switchKey, control.checked);
+          }
+        });
+        refreshDistrictHint();
+        syncLayerStatus();
       }
       function refreshDirections() {
         queueKeys.forEach((key) => {
@@ -1580,6 +1906,29 @@
             applyLayerVisibility(control.dataset.key, control.checked),
           ),
         );
+      // Галочка в заголовке группы включает и выключает все её слои разом: так
+      // ОДХ убираются одним движением, когда смотришь дворы.
+      document.querySelectorAll("[data-group]").forEach((control) =>
+        control.addEventListener("change", () => {
+          control
+            .closest(".layer-group")
+            .querySelectorAll("[data-key]")
+            .forEach((child) => {
+              if (child.checked === control.checked) return;
+              child.checked = control.checked;
+              child.dispatchEvent(new Event("change"));
+            });
+        }),
+      );
+      // Типы объектов районов: маршруты разведены по типам, каждый скрывается сам.
+      document.querySelectorAll("[data-district-type]").forEach((control) =>
+        control.addEventListener("change", () =>
+          applyDistrictTypeVisibility(
+            control.dataset.districtType,
+            control.checked,
+          ),
+        ),
+      );
       document
         .getElementById("direction-toggle")
         .addEventListener("change", (event) => {
@@ -1711,11 +2060,16 @@
           response.json(),
         );
         baseModel = ODHExports.collectBase(payload.submissions);
+        // Объекты районов показываем на карте: маршруты — по типам.
+        drawDistrictObjects(payload.submissions);
       }
       function stopReviewLive() {
         if (reviewTimer) clearInterval(reviewTimer);
         reviewTimer = null;
         document.getElementById("review-live").hidden = true;
+        // Выход из префектуры убирает с карты и объекты районов.
+        clearDistrictObjects();
+        resetDistrictTypeBoxes();
       }
       /** Счётчик обновляется сам: приёмка идёт, пока страница открыта. */
       function startReviewLive() {

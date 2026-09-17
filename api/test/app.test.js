@@ -269,6 +269,19 @@ test('район не допущен к приёмке и выгрузкам, в
   assert.equal(mine.body.submissions[0].district, 'Аэропорт');
   assert.equal(mine.body.submissions[0].features, 1);
 
+  // Набор на доработке район открывает заново — с объектами; по остальным
+  // статусам объектов в ответе нет, хватает счётчика.
+  const prefectureForReject = await login(api, 'prefecture@example.test', prefecturePassword);
+  const submittedId = mine.body.submissions[0].id;
+  assert.equal(mine.body.submissions[0].change_set, undefined);
+  await api.patch(`/api/submissions/${submittedId}`).set('Authorization', `Bearer ${prefectureForReject}`)
+    .send({ status: 'rejected', comment: 'Уточните направление сопла' }).expect(200);
+  const returned = await api.get('/api/my-submissions').set('Authorization', `Bearer ${editor}`).expect(200);
+  assert.equal(returned.body.submissions[0].status, 'rejected');
+  assert.equal(returned.body.submissions[0].review_comment, 'Уточните направление сопла');
+  assert.equal(returned.body.submissions[0].change_set.features.length, 1);
+  assert.equal(returned.body.submissions[0].change_set.district, 'Аэропорт');
+
   // Префектура работает с приёмкой и выгрузками, но не с районной ручкой статуса.
   const prefecture = await login(api, 'prefecture@example.test', prefecturePassword);
   const own = await api.get('/api/submissions').set('Authorization', `Bearer ${prefecture}`).expect(200);

@@ -198,6 +198,43 @@ test('редактор импортирует маршрут v2 и развор�
   await expect(page.getByText('Сопло: справа. Без комментария')).toBeVisible();
 });
 
+test('возвращённый набор открывается в черновике для исправления', async ({ page }) => {
+  await page.addInitScript(() => {
+    sessionStorage.setItem('odh-map-api-token-v1', 'test-token');
+    sessionStorage.setItem('odh-map-api-user-v1', JSON.stringify({ id: 'editor-1', email: 'аэропорт', role: 'district_editor', district: 'Аэропорт' }));
+  });
+  const returned = {
+    type: 'FeatureCollection', change_set_version: 'district_change_set_v2', district: 'Аэропорт', author: 'Иванов И.И.',
+    features: [{
+      type: 'Feature', geometry: { type: 'LineString', coordinates: [[37.53, 55.82], [37.54, 55.83]] },
+      properties: { district: 'Аэропорт', author: 'Иванов И.И.', change_type: 'queue', queue_priority: '1', address: 'Возвращённый маршрут', route_start: [37.53, 55.82], route_end: [37.54, 55.83], route_direction: 'start_to_end', nozzle_direction: 'left' }
+    }]
+  };
+  await page.route('**/api/my-submissions', (route) => route.fulfill({
+    status: 200,
+    contentType: 'application/json',
+    // Отклонённый набор приходит с объектами, набор на приёмке — без них: править
+    // можно только возвращённый.
+    body: JSON.stringify({ district: 'Аэропорт', submissions: [
+      { id: 'returned-1', district: 'Аэропорт', status: 'rejected', submitted_at: '2026-09-16T10:00:00.000Z', review_comment: 'Уточните направление сопла', features: 1, change_set: returned },
+      { id: 'waiting-1', district: 'Аэропорт', status: 'submitted', submitted_at: '2026-09-17T10:00:00.000Z', review_comment: null, features: 1 }
+    ] })
+  }));
+  await page.goto(`${baseURL}district-editor.html`);
+  await page.locator('#mySubmissionsButton').click();
+  await expect(page.getByText('Комментарий приёмки: Уточните направление сопла')).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Продолжить редактирование' })).toHaveCount(1);
+
+  await page.getByRole('button', { name: 'Продолжить редактирование' }).click();
+  await expect(page.getByText('Возвращённый набор открыт в черновике. Объектов: 1. Исправьте и отправьте снова.')).toBeVisible();
+  await expect(page.getByText('Очередь 1 · Возвращённый маршрут')).toBeVisible();
+
+  // Возвращённый набор лёг в черновик: правки не потеряются при перезагрузке.
+  const draft = await page.evaluate(() => JSON.parse(localStorage.getItem('odh-map-district-change-draft-v2')));
+  expect(draft.features).toHaveLength(1);
+  expect(draft.features[0].properties.address).toBe('Возвращённый маршрут');
+});
+
 test('приёмка показывает API-поток и локальный резервный режим', async ({ page }) => {
   const errors = [];
   page.on('pageerror', (error) => errors.push(error.message));

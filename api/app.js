@@ -163,15 +163,21 @@ export function createApp({ repository, boundary, jwtSecret, allowedOrigins = []
       const submissions = await repository.listSubmissions({ district: request.user.district });
       response.json({
         district: request.user.district,
-        submissions: submissions.map((item) => ({
-          id: item.id,
-          district: item.district,
-          status: item.status,
-          submitted_at: item.submitted_at,
-          reviewed_at: item.reviewed_at ?? null,
-          review_comment: item.review_comment ?? null,
-          features: Array.isArray(item.change_set?.features) ? item.change_set.features.length : 0
-        }))
+        submissions: submissions.map((item) => {
+          const row = {
+            id: item.id,
+            district: item.district,
+            status: item.status,
+            submitted_at: item.submitted_at,
+            reviewed_at: item.reviewed_at ?? null,
+            review_comment: item.review_comment ?? null,
+            features: Array.isArray(item.change_set?.features) ? item.change_set.features.length : 0
+          };
+          // Набор на доработке район открывает заново, иначе исправлять нечего:
+          // по остальным статусам хватает счётчика объектов.
+          if (item.status === 'rejected') row.change_set = item.change_set ?? null;
+          return row;
+        })
       });
     } catch (error) { next(error); }
   });

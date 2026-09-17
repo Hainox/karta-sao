@@ -322,6 +322,30 @@
       async function login() { try { ODHApi.setBase(fields.apiBase.value); const user = await ODHApi.login(fields.apiEmail.value.trim(), fields.apiPassword.value); fields.apiPassword.value = ''; refreshSession(); applyDistrictScope({ announce:true }); updateWorkflowCheck(); } catch (error) { message(error.message, 'error'); } }
       async function submit() { const set = DistrictChanges.makeChangeSet(metadata(), draftFeatures); const check = DistrictChanges.validate(set, boundary); if (!check.valid) return message(check.errors.join('\n'), 'error'); const user = ODHApi.user(); if (!user) return message('Сначала укажите API и войдите под учётной записью редактора.', 'error'); if (user.role === 'district_editor' && !user.district) return message('Учётной записи не назначен район. Обратитесь к администратору.', 'error'); if (user.role === 'district_editor' && user.district !== set.district) return message(`Учётная запись закреплена за районом «${user.district}». Отправка этого набора заблокирована.`, 'error'); try { const filename = `pravki-${set.district.replaceAll(' ', '-')}-${set.created_at.slice(0,10)}.geojson`; const response = await ODHApi.request('/api/submissions', { method:'POST', body:JSON.stringify({ changeSet:set, originalFilename:filename }) }); const data = await response.json(); draftFeatures = []; forgetDraft(); renderDraft(); message(`Набор отправлен на приёмку: № ${data.submission.id}. Черновик очищен, чтобы те же объекты не ушли повторно.`, 'good'); loadMySubmissions(); } catch (error) { message(error.message, 'error'); } }
       const SUBMISSION_STATUS = { submitted: 'на приёмке', approved: 'утверждён', rejected: 'отклонён' };
+      // Возвращённые наборы держим под рукой: объекты из них возвращаются в черновик.
+      let returnedSets = new Map();
+      /**
+       * Возвращённый набор открываем заново: те же объекты ложатся в черновик, как
+       * при импорте файла, поэтому район правит их, а не рисует с нуля.
+       */
+      function editReturned(id) {
+        const changeSet = returnedSets.get(id);
+        if (!changeSet) return message('Набор не найден: обновите список отправок.', 'error');
+        try {
+          const set = DistrictChanges.upgradeChangeSet(changeSet);
+          const check = DistrictChanges.validate(set, boundary);
+          if (!check.valid) throw new Error(check.errors.join('\n'));
+          fields.district.value = set.district;
+          fields.author.value = set.author;
+          draftFeatures = set.features;
+          normalizeNumbers();
+          persist();
+          renderDraft();
+          updateDistrictHighlight();
+          ODHObjectLabels.setMode(ODHObjectLabels.modeForCount(draftFeatures.length));
+          message(`Возвращённый набор открыт в черновике. Объектов: ${draftFeatures.length}. Исправьте и отправьте снова.`, 'good');
+        } catch (error) { message(`Набор не удалось открыть:\n${error.message}`, 'error'); }
+      }
       async function loadMySubmissions() {
         const user = ODHApi.user();
         if (!user) return message('Сначала войдите под учётной записью района.', 'error');
@@ -331,12 +355,16 @@
           const response = await ODHApi.request('/api/my-submissions');
           const data = await response.json();
           const items = data.submissions || [];
+          returnedSets = new Map(items.filter((item) => item.status === 'rejected' && item.change_set).map((item) => [item.id, item.change_set]));
           if (!items.length) { fields.mySubmissions.innerHTML = `<p>Отправок пока нет. Балансодержатель: ${esc(data.district || user.district || '')}.</p>`; return; }
           fields.mySubmissions.innerHTML = items.map((item) => {
             const status = SUBMISSION_STATUS[item.status] || item.status;
             const when = item.submitted_at ? new Date(item.submitted_at).toLocaleString('ru-RU') : 'дата не указана';
             const comment = item.review_comment ? `<div class="small">Комментарий приёмки: ${esc(item.review_comment)}</div>` : '';
-            return `<div class="feature-card"><b>${esc(status)}</b><div class="small">Объектов: ${Number(item.features) || 0}. Отправлен: ${esc(when)}.</div>${comment}</div>`;
+            const fix = returnedSets.has(item.id)
+              ? `<button type="button" class="ghost" data-returned="${esc(item.id)}">Продолжить редактирование</button>`
+              : '';
+            return `<div class="feature-card"><b>${esc(status)}</b><div class="small">Объектов: ${Number(item.features) || 0}. Отправлен: ${esc(when)}.</div>${comment}${fix}</div>`;
           }).join('');
         } catch (error) {
           fields.mySubmissions.textContent = `Не удалось получить статус: ${error.message}`;
@@ -358,7 +386,7 @@
       }
       map.on('click', (event) => { const point = [event.latlng.lng, event.latlng.lat]; if (routeDrawing) { if (!DistrictChanges.vertexInBoundary(point, boundary)) return message('Поворот вне границы САО. Выберите точку внутри контура.', 'error'); if (!samePoint(routeDrawing.points.at(-1), point) && !samePoint(routeEnd, point)) routeDrawing.points.push(point); routeDrawing.preview.setLatLngs(routeDrawing.points.map(([lng, lat]) => [lat, lng])); return message(`Поворотов маршрута: ${routeDrawing.points.length - 1}. Нажмите «Завершить маршрут», когда всё готово.`, 'good'); } if (!pickMode) return; if (!DistrictChanges.vertexInBoundary(point, boundary)) return message('Точка за границей САО. Выберите точку внутри контура.', 'error'); if (pickMode === 'start') routeStart = point; else routeEnd = point; pickMode = null; fields.cancelPointButton.hidden = true; map.getContainer().style.cursor = ''; refreshEndpoints(); message('Точка маршрута установлена. Теперь укажите вторую точку или начинайте рисовать.', 'good'); });
       map.on('draw:created', (event) => { const feature = makeFeature(event.layer.toGeoJSON().geometry); const check = DistrictChanges.validate(DistrictChanges.makeChangeSet(metadata(), [...draftFeatures, feature]), boundary); if (!check.valid) return message(check.errors.join('\n'), 'error'); draftFeatures.push(feature); const persisted = persist(); renderDraft(); message(persisted ? `Добавлено: ${featureSummary(feature)}.` : `Добавлено: ${featureSummary(feature)}. Браузер не сохранил черновик — скачайте GeoJSON, чтобы сохранить копию.`, persisted ? 'good' : 'error'); });
-      fields.changeType.onchange = () => { cancelRouteDrawing({ announce:false }); updateDrawingControl(); }; fields.district.onchange = () => { if (!ODHApi.user() && fields.district.value) fields.apiEmail.value = fields.district.value; updateDistrictHighlight(); persist(); updateWorkflowCheck(); }; fields.drawButton.onclick = () => routeDrawing ? finishRouteDrawing() : startDraw(); fields.setStart.onclick = () => setPickMode('start'); fields.setEnd.onclick = () => setPickMode('end'); fields.cancelPointButton.onclick = cancelPickMode; fields.cancelRouteButton.onclick = () => cancelRouteDrawing(); fields.importInput.onchange = () => importFile(fields.importInput.files[0]); document.getElementById('exportButton').onclick = exportFile; document.getElementById('saveButton').onclick = () => { const saved = persist(); message(saved ? 'Черновик сохранён только в этом браузере.' : 'Браузер не сохранил черновик. Скачайте GeoJSON, чтобы сохранить копию.', saved ? 'good' : 'error'); }; fields.checkButton.onclick = () => updateWorkflowCheck({ announce:true }); fields.toggleHelpButton.onclick = () => { const hidden = !fields.helpPanel.hidden; fields.helpPanel.hidden = hidden; fields.toggleHelpButton.textContent = hidden ? 'Показать подробную инструкцию' : 'Свернуть подробную инструкцию'; fields.toggleHelpButton.setAttribute('aria-expanded', String(!hidden)); }; document.getElementById('submitButton').onclick = submit; document.getElementById('mySubmissionsButton').onclick = loadMySubmissions; document.getElementById('loginButton').onclick = login; document.getElementById('logoutButton').onclick = () => { ODHApi.clearSession(); refreshSession(); applyDistrictScope(); updateWorkflowCheck(); message('Сеанс завершён.', 'good'); }; document.getElementById('undoButton').onclick = () => { if (draftFeatures.length) { draftFeatures.pop(); persist(); renderDraft(); message('Последний объект удалён.', 'good'); } }; document.getElementById('clearButton').onclick = () => { if (draftFeatures.length && confirm('Удалить все объекты черновика?')) { cancelRouteDrawing({ announce:false }); draftFeatures = []; persist(); renderDraft(); message('Черновик очищен.', 'good'); } };
+      fields.changeType.onchange = () => { cancelRouteDrawing({ announce:false }); updateDrawingControl(); }; fields.district.onchange = () => { if (!ODHApi.user() && fields.district.value) fields.apiEmail.value = fields.district.value; updateDistrictHighlight(); persist(); updateWorkflowCheck(); }; fields.drawButton.onclick = () => routeDrawing ? finishRouteDrawing() : startDraw(); fields.setStart.onclick = () => setPickMode('start'); fields.setEnd.onclick = () => setPickMode('end'); fields.cancelPointButton.onclick = cancelPickMode; fields.cancelRouteButton.onclick = () => cancelRouteDrawing(); fields.importInput.onchange = () => importFile(fields.importInput.files[0]); document.getElementById('exportButton').onclick = exportFile; document.getElementById('saveButton').onclick = () => { const saved = persist(); message(saved ? 'Черновик сохранён только в этом браузере.' : 'Браузер не сохранил черновик. Скачайте GeoJSON, чтобы сохранить копию.', saved ? 'good' : 'error'); }; fields.checkButton.onclick = () => updateWorkflowCheck({ announce:true }); fields.toggleHelpButton.onclick = () => { const hidden = !fields.helpPanel.hidden; fields.helpPanel.hidden = hidden; fields.toggleHelpButton.textContent = hidden ? 'Показать подробную инструкцию' : 'Свернуть подробную инструкцию'; fields.toggleHelpButton.setAttribute('aria-expanded', String(!hidden)); }; document.getElementById('submitButton').onclick = submit; document.getElementById('mySubmissionsButton').onclick = loadMySubmissions; fields.mySubmissions.addEventListener('click', (event) => { const id = event.target?.dataset?.returned; if (id) editReturned(id); }); document.getElementById('loginButton').onclick = login; document.getElementById('logoutButton').onclick = () => { ODHApi.clearSession(); refreshSession(); applyDistrictScope(); updateWorkflowCheck(); message('Сеанс завершён.', 'good'); }; document.getElementById('undoButton').onclick = () => { if (draftFeatures.length) { draftFeatures.pop(); persist(); renderDraft(); message('Последний объект удалён.', 'good'); } }; document.getElementById('clearButton').onclick = () => { if (draftFeatures.length && confirm('Удалить все объекты черновика?')) { cancelRouteDrawing({ announce:false }); draftFeatures = []; persist(); renderDraft(); message('Черновик очищен.', 'good'); } };
       initialize();
     })();
   </script>
