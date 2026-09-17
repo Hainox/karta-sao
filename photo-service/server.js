@@ -4,7 +4,7 @@ import { stat } from 'node:fs/promises';
 import { createServer } from 'node:http';
 import { join } from 'node:path';
 import { Pool } from 'pg';
-import { assessDistanceRisk, isUnusableAccuracy } from './src/geo.js';
+import { assessDistanceRisk, isUnusableAccuracy, photoGeoVerdict } from './src/geo.js';
 import { photoServiceCookiePolicy, photoServiceDatabaseConfig } from './src/config.js';
 import { createHealthHandler } from './src/health.js';
 import {
@@ -12,6 +12,7 @@ import {
   MAX_SESSION_AGE_SECONDS, normalizeLogin, parseCookies, sessionCookie, verifyPassword,
 } from './src/auth.js';
 import { parseMultipart } from './src/multipart.js';
+import { firstMissingUploadField } from './src/upload-fields.js';
 import { createLoginThrottle } from './src/login-throttle.js';
 import { clientAddress } from './src/client-address.js';
 import { buildDistrictsExcel, buildExcel, buildHeadquartersExcel, buildPdf } from './src/exports.js';
@@ -21,9 +22,10 @@ import {
   ARCHIVE_FILE_PATTERN, archiveDir, photoArchiveByTicket, photoArchiveJob,
   prunePhotoArchiveFiles, startPhotoArchiveJob
 } from './src/photos-archive.js';
-import { collectRisks, riskTops } from './src/risks.js';
+import { collectChecks, summarizeChecks } from './src/checks.js';
 import { mediaRoot, readMedia, removeMedia, writeMedia } from './src/storage.js';
 import { HOLDER_SELECT_SQL, objectAllowedFor } from './src/scope.js';
+import { photoWithdrawVerdict, WITHDRAW_MESSAGES } from './src/withdraw.js';
 import { createNotifyClient } from './src/notify.js';
 
 const port = Number(process.env.PHOTO_SERVICE_PORT || 8788);
@@ -170,7 +172,8 @@ function validCoordinateFields(fields) {
 
 async function handleLogin(request, response) {
   const key = clientKey(request);
-  if (!loginThrottle.allowed(key)) return sendError(response, request, 429, 'too_many_login_attempts');
+  // Текст важен не меньше кода: район видел «Вход не выполнен: invalid_credentials».
+  if (!loginThrottle.allowed(key)) return sendError(response, request, 429, 'too_many_login_attempts', 'Слишком много неудачных попыток — повторите через 15 минут.');
   let body;
   try { body = await readJson(request); } catch (error) { return sendError(response, request, 400, error.code || 'invalid_json'); }
   const login = normalizeLogin(body.login ?? body.email);
@@ -178,7 +181,7 @@ async function handleLogin(request, response) {
   const user = result.rows[0];
   if (!user || !(await verifyPassword(body.password, user.password_hash))) {
     loginThrottle.recordFailure(key);
-    return sendError(response, request, 401, 'invalid_credentials');
+    return sendError(response, request, 401, 'invalid_credentials', 'Неверный логин или пароль. Логин — название района.');
   }
   loginThrottle.clear(key);
   const token = createSessionToken();
@@ -196,20 +199,20 @@ async function handleUpload(request, response, user) {
   try { parsed = await parseMultipart(request); } catch (error) { return sendError(response, request, 400, error.code || 'invalid_multipart'); }
   const sourceId = parsed.fields.sourceId?.trim();
   const datasetId = parsed.fields.datasetId?.trim();
-  if (!datasetId || !sourceId || !parsed.fields.performer?.trim()) return sendError(response, request, 400, 'dataset_source_performer_required');
-  let gps;
+  const missingField = firstMissingUploadField({ datasetId, sourceId, performer: parsed.fields.performer });
+  if (missingField) return sendError(response, request, 400, missingField.code, missingField.message);
+  let gps = null;
   try { gps = validCoordinateFields(parsed.fields); } catch (error) { return sendError(response, request, 400, error.code); }
-  if (!gps) return sendError(response, request, 400, 'gps_required');
-  // Позиция по сети вместо спутника: одна точка на город и точность в сотни
-  // километров. Принять такую фиксацию нельзя — она не подтверждает место.
-  if (isUnusableAccuracy(gps.accuracy)) return sendError(response, request, 400, 'gps_accuracy_unusable');
+  // GPS больше не обязателен: без координат фиксация просто уходит на ручную
+  // проверку. Позицию по сети (точность в сотни километров) не сохраняем — она
+  // не подтверждает место, но и не мешает отправить фото.
+  if (gps && isUnusableAccuracy(gps.accuracy)) gps = null;
   const objectResult = await pool.query(`SELECT object_key, reference_points, district, ${HOLDER_SELECT_SQL} FROM objects o WHERE dataset_id = $1 AND $2 = ANY(source_ids) LIMIT 1`, [datasetId, sourceId]);
   const object = objectResult.rows[0];
   if (!object) return sendError(response, request, 404, 'object_not_found');
   if (!objectAllowedFor(user, object)) return sendError(response, request, 403, 'object_out_of_scope');
-  let geo = assessDistanceRisk(gps, object.reference_points || []);
-  if (gps.accuracy === null) geo = { ...geo, status: 'review', reason: 'gps_accuracy_missing' };
-  else if (gps.accuracy > 5) geo = { ...geo, status: 'review', reason: 'gps_accuracy_above_5m' };
+  // Расстояние остаётся справочной величиной, статусом «риск» больше не помечается.
+  const geo = photoGeoVerdict(assessDistanceRisk(gps, object.reference_points || []), gps?.accuracy ?? null);
   const media = await writeMedia(parsed.file.buffer, parsed.file.mimeType, mediaRoot(process.env));
   const thumbnail = parsed.thumbnail ? await writeMedia(parsed.thumbnail.buffer, parsed.thumbnail.mimeType, mediaRoot(process.env)) : null;
   const photoId = randomUUID();
@@ -241,7 +244,7 @@ async function handleUpload(request, response, user) {
        VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,'pending_review',$17,$18,$19)`,
       [photoId, object.object_key, media.storageKey, thumbnail?.storageKey ?? null, parsed.file.filename, parsed.file.mimeType, parsed.file.buffer.length, media.sha256,
         parsed.fields.performer.trim(), (parsed.fields.comment || '').slice(0, 2000), parsed.fields.capturedAt || null,
-        gps?.latitude ?? null, gps?.longitude ?? null, gps?.accuracy ?? null, geo.distanceMeters ?? null, geo.status, geo.reason || null, user.id, sourceId],
+        gps?.latitude ?? null, gps?.longitude ?? null, gps?.accuracy ?? null, geo.distanceMeters ?? null, geo.status, geo.reviewReason, user.id, sourceId],
     );
     await client.query('INSERT INTO idempotency_keys (idempotency_key, user_id, request_hash, photo_id) VALUES ($1,$2,$3,$4)', [idempotencyKey, user.id, requestHash, photoId]);
     await client.query('INSERT INTO audit_log (actor_user_id, action, object_key, photo_id) VALUES ($1,$2,$3,$4)', [user.id, 'photo_uploaded', object.object_key, photoId]);
@@ -292,6 +295,49 @@ async function handleDelete(request, response, user, photoId) {
   response.end();
 }
 
+/**
+ * Отзыв ошибочно загруженного фото.
+ *
+ * Район не может удалять кадры — удаление остаётся за префектурой. Но самый
+ * частый вопрос районов звучит как «как удалить фото, которое загрузили не туда»,
+ * поэтому до подтверждения приёмкой район отзывает свой кадр мягко: он остаётся
+ * в базе для разбора и исчезает из галереи, счётчиков и выгрузок. После
+ * подтверждения отзыв запрещён — иначе подтверждённая работа пропадала бы молча.
+ */
+async function handleWithdraw(request, response, user, photoId) {
+  const result = await pool.query(
+    `SELECT p.id, p.object_key, p.source_id, p.review_status, p.uploaded_by, o.district, ${HOLDER_SELECT_SQL}
+       FROM photos p JOIN objects o ON o.object_key = p.object_key
+      WHERE p.id = $1`,
+    [photoId],
+  );
+  const photo = result.rows[0];
+  const verdict = photoWithdrawVerdict(photo, { canWithdraw: Boolean(photo) && objectAllowedFor(user, photo) });
+  if (!verdict.ok) return sendError(response, request, verdict.status, verdict.code, verdict.message);
+  if (!verdict.already) {
+    const updated = await pool.query(
+      `UPDATE photos SET review_status = 'withdrawn', review_reason = 'withdrawn_by_district',
+              withdrawn_at = now(), withdrawn_by = $2
+        WHERE id = $1 AND review_status = 'pending_review'
+        RETURNING id`,
+      [photoId, user.id],
+    );
+    // Между проверкой и обновлением приёмка могла подтвердить кадр.
+    if (!updated.rowCount) {
+      return sendError(response, request, 409, 'photo_not_pending', WITHDRAW_MESSAGES.photo_not_pending);
+    }
+    await pool.query('INSERT INTO audit_log (actor_user_id, action, object_key, photo_id) VALUES ($1,$2,$3,$4)', [user.id, 'photo_withdrawn', photo.object_key, photoId]);
+    notifier.event({
+      kind: 'client',
+      service: 'photo-service',
+      title: 'Район отозвал фото',
+      level: 'warning',
+      fields: { Район: photo.district, Объект: photo.object_key, Точка: photo.source_id || '—' },
+    });
+  }
+  return sendJson(response, 200, { photoId, reviewStatus: 'withdrawn' }, request);
+}
+
 async function handler(request, response) {
   if (request.method === 'OPTIONS') {
     if (!originAllowed(request)) return sendError(response, request, 403, 'origin_not_allowed');
@@ -331,12 +377,14 @@ async function handler(request, response) {
       if (!object || !objectAllowedFor(user, object)) return sendError(response, request, 404, 'object_not_found');
       // Снимок принадлежит конкретной точке: у объекта с тем же ID могут быть
       // другие точки, и чужие кадры на них показывать нельзя.
-      const result = await pool.query(`SELECT id, storage_key, mime_type, original_filename, byte_size, performer, comment, captured_at, uploaded_at, gps_latitude, gps_longitude, gps_accuracy_m, distance_m, geo_status, review_status, review_reason, is_reference, source_id FROM photos WHERE object_key = $1 AND source_id = $2 AND review_status <> 'rejected' ORDER BY uploaded_at`, [object.object_key, sourceId]);
+      const result = await pool.query(`SELECT id, storage_key, mime_type, original_filename, byte_size, performer, comment, captured_at, uploaded_at, gps_latitude, gps_longitude, gps_accuracy_m, distance_m, geo_status, review_status, review_reason, is_reference, source_id FROM photos WHERE object_key = $1 AND source_id = $2 AND review_status NOT IN ('rejected', 'withdrawn') ORDER BY uploaded_at`, [object.object_key, sourceId]);
       return sendJson(response, 200, { objectKey: object.object_key, photos: result.rows }, request);
     }
     if (pathname === '/photos' && request.method === 'POST') return handleUpload(request, response, user);
     const reviewMatch = pathname.match(/^\/photos\/([0-9a-f-]{36})\/review$/);
     if (reviewMatch && request.method === 'PATCH') return handleReview(request, response, user, reviewMatch[1]);
+    const withdrawMatch = pathname.match(/^\/photos\/([0-9a-f-]{36})\/withdraw$/);
+    if (withdrawMatch && request.method === 'POST') return handleWithdraw(request, response, user, withdrawMatch[1]);
     const deleteMatch = pathname.match(/^\/photos\/([0-9a-f-]{36})$/);
     if (deleteMatch && request.method === 'DELETE') return handleDelete(request, response, user, deleteMatch[1]);
     const contentMatch = pathname.match(/^\/photos\/([0-9a-f-]{36})\/content$/);
@@ -344,7 +392,7 @@ async function handler(request, response) {
       // Доступ считается тем же правилом, что и на остальных объектных ручках:
       // учётке АвД принадлежат её объекты, объекты «ДЭУ» и объекты без района,
       // поэтому сравнение одного района отдавало ей 404 на каждом своём кадре.
-      const result = await pool.query(`SELECT p.storage_key, p.mime_type, o.district, ${HOLDER_SELECT_SQL} FROM photos p JOIN objects o ON o.object_key = p.object_key WHERE p.id = $1 AND p.review_status <> 'rejected'`, [contentMatch[1]]);
+      const result = await pool.query(`SELECT p.storage_key, p.mime_type, o.district, ${HOLDER_SELECT_SQL} FROM photos p JOIN objects o ON o.object_key = p.object_key WHERE p.id = $1 AND p.review_status NOT IN ('rejected', 'withdrawn')`, [contentMatch[1]]);
       if (!result.rowCount || !objectAllowedFor(user, result.rows[0])) return sendError(response, request, 404, 'photo_not_found');
       // The atlas reads photo bytes through an authorised fetch, so the media response
       // needs the same CORS headers as the JSON endpoints.
@@ -373,8 +421,9 @@ async function handler(request, response) {
       const url = new URL(request.url, 'http://photo-service.local');
       const rows = await loadReportRows(pool, user, url.searchParams.get('district') || undefined);
       const payload = reportPayload(rows);
-      // Топы по нарушениям для дашборда: те же числа, что и на листе «Топы».
-      return sendJson(response, 200, { ...payload, riskTops: riskTops(collectRisks(payload.objects)) }, request);
+      // Проверки (дубли фото на разных объектах) отдаём отдельным блоком: риски
+      // по GPS убраны как необъективный показатель, проверки к ним не относятся.
+      return sendJson(response, 200, { ...payload, checks: summarizeChecks(collectChecks(payload.objects)) }, request);
     }
     if (pathname === '/reports/export.xlsx' && request.method === 'GET') {
       if (!requirePrefecture(response, request, user)) return;
@@ -458,6 +507,36 @@ async function handler(request, response) {
       response.end(buffer);
       return;
     }
+    // Единый отчёт по продуктивности округа за день: JSON для интерфейса,
+    // Excel с диаграммой и PDF с векторными графиками — одним набором чисел.
+    if (pathname === '/reports/daily' && request.method === 'GET') {
+      if (!requirePrefecture(response, request, user)) return;
+      return sendJson(response, 200, await dailyReportFor(user, request), request);
+    }
+    if (pathname === '/reports/daily.xlsx' && request.method === 'GET') {
+      if (!requirePrefecture(response, request, user)) return;
+      const [{ buildDailyExcel }, report] = await Promise.all([import('./src/daily-excel.js'), dailyReportFor(user, request)]);
+      const buffer = await buildDailyExcel(report, { generatedAt: new Date() });
+      response.writeHead(200, {
+        'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        'Content-Disposition': `attachment; filename="sao-photo-day-${report.date}.xlsx"`,
+        'Cache-Control': 'no-store', ...corsHeaders(request),
+      });
+      response.end(buffer);
+      return;
+    }
+    if (pathname === '/reports/daily.pdf' && request.method === 'GET') {
+      if (!requirePrefecture(response, request, user)) return;
+      const [{ buildDailyPdf }, report] = await Promise.all([import('./src/daily-pdf.js'), dailyReportFor(user, request)]);
+      const buffer = await buildDailyPdf(report, { generatedAt: new Date() });
+      response.writeHead(200, {
+        'Content-Type': 'application/pdf',
+        'Content-Disposition': `attachment; filename="sao-photo-day-${report.date}.pdf"`,
+        'Cache-Control': 'no-store', ...corsHeaders(request),
+      });
+      response.end(buffer);
+      return;
+    }
     return sendError(response, request, 404, 'not_found');
   } catch (error) {
     if (error.code === '23505') return sendError(response, request, 409, 'conflict');
@@ -519,6 +598,71 @@ function scheduleHourlyDigest() {
 if (String(process.env.PHOTO_SERVICE_DIGEST_ENABLED || '').toLowerCase() === 'true') {
   scheduleHourlyDigest();
   console.log('Ежечасная сводка для штаба включена');
+}
+
+// Окно дневной динамики: две недели — рабочий горизонт округа.
+const DAILY_DYNAMICS_DAYS = 14;
+const DAILY_DIGEST_AT = process.env.PHOTO_SERVICE_DAILY_DIGEST_AT || '19:00';
+
+/** Числа дня считает один модуль: JSON, Excel, PDF и рассылка берут их оттуда. */
+async function dailyReportFor(user, request) {
+  const url = new URL(request.url, 'http://photo-service.local');
+  const requested = Number(url.searchParams.get('days'));
+  const days = Number.isSafeInteger(requested) && requested >= 2 ? Math.min(90, requested) : DAILY_DYNAMICS_DAYS;
+  const rows = await loadReportRows(pool, user, url.searchParams.get('district') || undefined);
+  const { dailyReport } = await import('./src/daily.js');
+  return dailyReport(rows, { days });
+}
+
+/**
+ * Дневная рассылка: картинка динамики с текстом дня и книга Excel документом.
+ * Сбой рассылки не трогает API — как и у ежечасной сводки.
+ */
+async function sendDailyDigest() {
+  try {
+    const rows = await loadReportRows(pool, { role: 'prefecture_admin' }, undefined);
+    const [{ dailyReport, dailyComment }, { buildDailyExcel }, { renderDailyChartImage }] = await Promise.all([
+      import('./src/daily.js'),
+      import('./src/daily-excel.js'),
+      import('./src/daily-chart.js'),
+    ]);
+    const generatedAt = new Date();
+    const report = dailyReport(rows, { days: DAILY_DYNAMICS_DAYS });
+    const png = renderDailyChartImage(report);
+    const caption = dailyComment(report, { generatedAt }).join('\n');
+    await notifier.photo({ caption, png, filename: `sao-photo-day-${report.date}.png` });
+    const book = await buildDailyExcel(report, { generatedAt });
+    await notifier.document({
+      caption: `Единый отчёт по продуктивности округа за ${report.date} — файл с листами «День», «Динамика», «Районы дня», «Топы дня».`,
+      file: book,
+      filename: `sao-photo-day-${report.date}.xlsx`,
+    });
+    console.log(`Отчёт за день ${report.date}: загружено ${report.overall.uploaded}, подтверждено ${report.overall.closed}`);
+  } catch (error) {
+    console.error('daily digest failed:', error.message);
+    notifier.event({
+      kind: 'error',
+      level: 'warning',
+      service: 'photo-service',
+      title: 'Дневной отчёт не отправлен',
+      text: error.message,
+    });
+  }
+}
+
+// Запуск в заданное время по московским суткам, затем каждые сутки.
+async function scheduleDailyDigest() {
+  const { msUntilDailyRun } = await import('./src/daily.js');
+  const wait = msUntilDailyRun(new Date(), DAILY_DIGEST_AT);
+  setTimeout(async () => {
+    await sendDailyDigest();
+    scheduleDailyDigest();
+  }, wait);
+}
+
+if (String(process.env.PHOTO_SERVICE_DAILY_DIGEST_ENABLED || '').toLowerCase() === 'true') {
+  scheduleDailyDigest();
+  console.log(`Дневной отчёт по продуктивности включён: ${DAILY_DIGEST_AT} МСК`);
 }
 
 let stopping = false;

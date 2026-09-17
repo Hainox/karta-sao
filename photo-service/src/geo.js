@@ -16,6 +16,19 @@ export function isUnusableAccuracy(accuracyMeters) {
   return Number.isFinite(accuracyMeters) && accuracyMeters > UNUSABLE_ACCURACY_METERS;
 }
 
+/**
+ * Точность, после которой фиксация уходит на ручную проверку. Порог общий с
+ * клиентом (`accuracyVerdict` в object-maps/photo-model.js).
+ */
+export const ACCURACY_REVIEW_METERS = 5;
+
+/** Признак точности: ok / review / unusable / unknown — те же слова, что на клиенте. */
+export function accuracyFlag(accuracyMeters) {
+  if (!Number.isFinite(accuracyMeters) || accuracyMeters < 0) return 'unknown';
+  if (isUnusableAccuracy(accuracyMeters)) return 'unusable';
+  return accuracyMeters > ACCURACY_REVIEW_METERS ? 'review' : 'ok';
+}
+
 function coordinate(point, name) {
   if (point === null || typeof point !== 'object' || Array.isArray(point)) {
     throw new TypeError(name + ' must be a coordinate object');
@@ -99,5 +112,38 @@ export function assessDistanceRisk(
     nominalRadiusExceeded: nearestDistance > radiusMeters,
     referencePointIndex: nearestIndex,
     approximation: 'nearest_registered_point',
+  };
+}
+
+/**
+ * Итог фиксации: расстояние до ближайшей зарегистрированной точки остаётся
+ * справочной величиной, но статусом «риск» не помечается.
+ *
+ * GPS — не объективный показатель: часть районов снимает в плотной застройке,
+ * где координаты уходят на 30+ метров, а часть работает без геолокации вовсе.
+ * Поэтому фиксация без координат и фиксация далеко от точки одинаково уходят на
+ * ручную проверку, а не запрещаются и не красятся «риском».
+ */
+export function photoGeoVerdict(distanceAssessment, accuracyMeters) {
+  if (!distanceAssessment || typeof distanceAssessment !== 'object') {
+    throw new TypeError('distanceAssessment must be the result of assessDistanceRisk');
+  }
+  const accuracy = accuracyFlag(accuracyMeters);
+  const distanceReason = distanceAssessment.reason || null;
+  const status = distanceAssessment.status === 'risk' ? 'review' : distanceAssessment.status;
+  const reviewReason = distanceAssessment.risk
+    ? 'far_from_registered_point'
+    : (distanceReason === 'missing_gps' || distanceReason === 'missing_reference_points')
+      ? distanceReason
+      : accuracy === 'unknown'
+        ? 'gps_accuracy_missing'
+        : accuracy === 'review'
+          ? 'gps_accuracy_above_5m'
+          : distanceReason;
+  return {
+    status,
+    distanceMeters: distanceAssessment.distanceMeters,
+    accuracy,
+    reviewReason,
   };
 }

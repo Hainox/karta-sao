@@ -1,10 +1,10 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import {
-  accountScope, accuracyVerdict, assessDistanceRisk, bandNote, bandText, boundaryNote, buildCoverageIndex, buildQueue, canExport,
+  accountScope, accuracyVerdict, ACCURACY_REVIEW_METERS, assessDistanceRisk, bandNote, bandText, boundaryNote, buildCoverageIndex, buildQueue, canExport,
   coverageFor, coverageLabel, coveragePercent, districtBoundaries, filterRecords, formatAccuracy, formatCoordinates,
   formatDateTime, formatMeters, geoStatusText, gpsDistanceLabel, haversineDistanceMeters, normalizePhoto,
-  photoDetailRows, POINT_PHOTO_REQUIREMENT, reportSummaryRows, reviewStatusText, riskTopRows, scopedDistricts,
+  photoDetailRows, POINT_PHOTO_REQUIREMENT, reportSummaryRows, reviewStatusText, scopedDistricts,
 } from './photo-model.js';
 
 const serverRow = {
@@ -84,7 +84,7 @@ test('координаты без значения читаются тексто
 test('translates review and geo statuses into explicit Russian text', () => {
   assert.equal(reviewStatusText('confirmed'), 'Подтверждено');
   assert.equal(reviewStatusText('weird'), 'Статус не указан');
-  assert.equal(geoStatusText('risk'), 'Риск: дальше 30 м');
+  assert.equal(geoStatusText('risk'), 'Нужна ручная проверка');
   assert.equal(geoStatusText('within_tolerance'), 'В допуске 15–30 м');
   assert.equal(geoStatusText(''), 'Проверка не выполнялась');
 });
@@ -97,8 +97,7 @@ test('снимок одной точки не подтягивается на с
   const index = buildCoverageIndex({
     objects: [{
       objectKey: 'odh_pp_coordinates|pp|10002217|Аэропорт', objectType: 'pp', district: 'Аэропорт',
-      sourceIds: ['pp:1', 'pp:2', 'pp:3'], geoRisk: true,
-      photos: [
+      sourceIds: ['pp:1', 'pp:2', 'pp:3'],       photos: [
         { sourceId: 'pp:1', reviewStatus: 'confirmed' },
         { sourceId: 'pp:1', reviewStatus: 'pending_review' },
       ],
@@ -110,7 +109,6 @@ test('снимок одной точки не подтягивается на с
   assert.equal(own.confirmed, 1);
   assert.equal(own.pending, 1);
   assert.equal(own.complete, true);
-  assert.equal(own.geoRisk, true);
 
   // У соседних точек того же ID снимков нет — каждая точка закрывается сама.
   for (const id of ['pp:2', 'pp:3']) {
@@ -119,7 +117,6 @@ test('снимок одной точки не подтягивается на с
     assert.equal(neighbour.pending, 0);
     assert.equal(neighbour.withPhoto, false);
     assert.equal(neighbour.statusKey, 'empty');
-    assert.equal(neighbour.geoRisk, true);
   }
 });
 
@@ -171,6 +168,17 @@ test('filters by district, group, free text and photo status', () => {
   assert.equal(filterRecords(records, { ...options, status: 'pending' }).length, 0);
 });
 
+test('фильтр по району не зависит от регистра и «ё» в названии', () => {
+  const records = [{ id: 'stop:1', label: 'Коровинское шоссе', group: 'ДЭУ 2' }];
+  const index = buildCoverageIndex({
+    objects: [{ objectKey: 'a', objectType: 'stop', district: 'Молжаниновский', sourceIds: ['stop:1'], photos: [] }],
+  });
+  const options = { coverageIndex: index, objectType: 'stop' };
+  assert.equal(filterRecords(records, { ...options, district: 'молжаниновский' }).length, 1);
+  assert.equal(filterRecords(records, { ...options, district: ' Молжаниновский ' }).length, 1);
+  assert.equal(filterRecords(records, { ...options, district: 'Коптево' }).length, 0);
+});
+
 test('the route queue skips completed objects and keeps group order', () => {
   const records = [
     { id: 'stop:1', label: 'Б', group: 'Ясенево' },
@@ -188,7 +196,7 @@ test('the on-screen summary always carries a number and a band word', () => {
   const rows = reportSummaryRows({
     overall: {
       totalObjects: 100, objectsWithPhoto: 40, objectsWithoutPhoto: 60, completedObjects: 34,
-      partialObjects: 6, pendingReviewObjects: 3, geoRiskObjects: 2, completionPercent: 34, statusBand: 'middle',
+      partialObjects: 6, pendingReviewObjects: 3, completionPercent: 34, statusBand: 'middle',
     },
   });
   const byKey = Object.fromEntries(rows.map((row) => [row.key, row.value]));
@@ -196,7 +204,6 @@ test('the on-screen summary always carries a number and a band word', () => {
   assert.equal(byKey['Охват'], '40 %');
   assert.equal(byKey['Статус'], 'Жёлтый — выполнение от 33 % до 66 %');
   assert.equal(byKey['Подтверждено приёмкой'], '34');
-  assert.equal(byKey['Риск геопревышения'], '2');
 });
 
 test('the summary is read from the nested overall section, not the payload root', () => {
@@ -207,7 +214,7 @@ test('the summary is read from the nested overall section, not the payload root'
     unassigned: { totalObjects: 2, objectsWithoutPhoto: 2, completedObjects: 0 },
     objects: [],
   };
-  assert.equal(reportSummaryRows(payload).length, 8);
+  assert.equal(reportSummaryRows(payload).length, 7);
   // Объекты есть, фото пока нет — это ноль процентов, а не «нет данных».
   assert.equal(coverageLabel(payload.overall), '0 %');
   assert.equal(coveragePercent(payload.overall), 0);
@@ -220,94 +227,13 @@ test('an empty scope is reported as having no data instead of zero percent', () 
   const rows = reportSummaryRows({
     overall: {
       totalObjects: 0, objectsWithPhoto: 0, objectsWithoutPhoto: 0, completedObjects: 0,
-      partialObjects: 0, pendingReviewObjects: 0, geoRiskObjects: 0, completionPercent: null, statusBand: null,
+      partialObjects: 0, pendingReviewObjects: 0, completionPercent: null, statusBand: null,
     },
   });
   const byKey = Object.fromEntries(rows.map((row) => [row.key, row.value]));
   assert.equal(byKey['Охват'], 'нет данных');
   assert.equal(bandText(null), 'Нет данных');
   assert.equal(bandNote(null), 'Недостаточно данных для оценки');
-});
-
-test('топы риска: порядок районов и исполнителей сохраняется', () => {
-  const rows = riskTopRows({
-    riskTops: {
-      total: 5,
-      performerLimit: 5,
-      districts: [
-        { district: 'Ховрино', count: 3, performers: [
-          { performer: 'Иванов И.И.', count: 2 },
-          { performer: 'Петров П.П.', count: 1 },
-        ] },
-        { district: 'АвД САО', count: 2, performers: [
-          { performer: 'Морозов С.С.', count: 1 },
-          { performer: 'Сидоров С.С.', count: 1 },
-        ] },
-      ],
-    },
-  });
-
-  assert.equal(rows.total, 5);
-  assert.equal(rows.empty, false);
-  assert.deepEqual(rows.districts.map((entry) => entry.district), ['Ховрино', 'АвД САО']);
-  assert.deepEqual(rows.districts.map((entry) => entry.rank), [1, 2]);
-  assert.deepEqual(rows.districts.map((entry) => entry.count), [3, 2]);
-  assert.deepEqual(rows.districts[0].performers.map((entry) => entry.performer), ['Иванов И.И.', 'Петров П.П.']);
-  // Полоса лидера занимает всю ширину, хвост — долю от него; доля считается от всех нарушений.
-  assert.deepEqual(rows.districts.map((entry) => entry.barPercent), [100, 67]);
-  assert.deepEqual(rows.districts.map((entry) => entry.sharePercent), [60, 40]);
-});
-
-test('топы риска: предел исполнителей применяется к каждому району', () => {
-  const performers = ['А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ж'].map((performer) => ({ performer, count: 1 }));
-
-  const rows = riskTopRows({ riskTops: { total: 7, performerLimit: 5, districts: [{ district: 'Сокол', count: 7, performers }] } });
-  assert.equal(rows.performerLimit, 5);
-  assert.equal(rows.districts[0].performers.length, 5);
-
-  // Поле отсутствует — берётся серверное значение по умолчанию, список всё равно обрезан.
-  const fallback = riskTopRows({ riskTops: { total: 7, districts: [{ district: 'Сокол', count: 7, performers }] } });
-  assert.equal(fallback.performerLimit, 5);
-  assert.equal(fallback.districts[0].performers.length, 5);
-});
-
-test('топы риска: пустой и отсутствующий блок помечены как пустые', () => {
-  for (const input of [null, undefined, {}, { riskTops: null }, { riskTops: { total: 0, districts: [] } }]) {
-    const rows = riskTopRows(input);
-    assert.equal(rows.empty, true, JSON.stringify(input));
-    assert.deepEqual(rows.districts, []);
-    assert.equal(rows.total, 0);
-    assert.equal(rows.totalLabel, '0');
-  }
-
-  // Нарушения посчитаны, но районов нет — показываем ту же пустую строку, а не сломанную сетку.
-  assert.equal(riskTopRows({ riskTops: { total: 3, districts: [] } }).empty, true);
-});
-
-test('топы риска: числа нормализуются и форматируются по-русски', () => {
-  const rows = riskTopRows({
-    riskTops: {
-      total: '1234',
-      performerLimit: '5',
-      districts: [
-        { district: 'Аэропорт', count: '900', performers: [{ performer: 'Иванов И.', count: '700' }] },
-        { district: 'Коптево', count: 300, performers: [{ performer: '', count: '5' }] },
-        { district: '', count: 34, performers: [] },
-      ],
-    },
-  });
-
-  assert.equal(rows.total, 1234);
-  assert.equal(rows.totalLabel, (1234).toLocaleString('ru-RU'));
-  // Запись без названия района пропускается, а не рисуется пустой строкой.
-  assert.equal(rows.districts.length, 2);
-  assert.equal(rows.districts[0].countLabel, (900).toLocaleString('ru-RU'));
-  assert.equal(rows.districts[0].performers[0].countLabel, (700).toLocaleString('ru-RU'));
-  // Исполнитель без имени не создаёт пустую строку.
-  assert.deepEqual(rows.districts[1].performers, []);
-  // Доли считаются от всех нарушений и от лидера соответственно.
-  assert.equal(rows.districts[0].sharePercent, Math.round((900 / 1234) * 100));
-  assert.equal(rows.districts[1].barPercent, Math.round((300 / 900) * 100));
 });
 
 test('a non-object photo row is rejected instead of silently rendered', () => {
@@ -518,7 +444,8 @@ test('the GPS note states the distance and the verdict in words', () => {
   const close = gpsDistanceLabel({ latitude: 55.80009, longitude: 37.5 }, point);
   assert.match(close, /^До объекта 10(,0)? м — в радиусе 15 м\.$/);
   const far = gpsDistanceLabel({ latitude: 55.8005, longitude: 37.5 }, point);
-  assert.match(far, /^До объекта 55,6 м — риск: дальше 30 м\.$/);
+  // Далёкая точка больше не помечается риском: она уходит на ручную проверку.
+  assert.match(far, /^До объекта 55,6 м — нужна ручная проверка\.$/);
   assert.equal(gpsDistanceLabel({ latitude: 55.8, longitude: 37.5 }, []), 'Расстояние до объекта не определено: нет зарегистрированных точек.');
 });
 
@@ -539,4 +466,12 @@ test('позиция, полученная по сети, не отправля�
   assert.equal(accuracyVerdict(3), 'ok');
   // Точность не сообщена: отправлять можно, но решение о пригодности за сервисом.
   assert.equal(accuracyVerdict(null), 'unknown');
+});
+
+test('шкала точности клиента совпадает с серверной', async () => {
+  const { ACCURACY_REVIEW_METERS: serverReview, accuracyFlag } = await import('../photo-service/src/geo.js');
+  assert.equal(ACCURACY_REVIEW_METERS, serverReview);
+  for (const meters of [null, undefined, Number.NaN, -1, 0, 4.9, 5, 5.1, 12, 500, 501, 1586473]) {
+    assert.equal(accuracyVerdict(meters), accuracyFlag(meters), String(meters));
+  }
 });

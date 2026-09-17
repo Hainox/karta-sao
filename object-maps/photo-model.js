@@ -9,14 +9,13 @@ const REVIEW_TEXT = Object.freeze({
   pending_review: 'На проверке',
   confirmed: 'Подтверждено',
   rejected: 'Отклонено',
+  withdrawn: 'Отозвано районом',
 });
 
-// Geo policy: nominal 15 m radius with a ±15 m spread, so the zone boundary is
-// 30 m: up to 15 m is inside, 15-30 m is inside the tolerance, beyond 30 m is a risk.
 const GEO_TEXT = Object.freeze({
   within_radius: 'В радиусе 15 м',
   within_tolerance: 'В допуске 15–30 м',
-  risk: 'Риск: дальше 30 м',
+  risk: 'Нужна ручная проверка',
   review: 'Нужна ручная проверка',
 });
 
@@ -118,11 +117,19 @@ export function formatAccuracy(value) {
  */
 export const UNUSABLE_ACCURACY_METERS = 500;
 
+/**
+ * Порог, после которого фиксация уходит на ручную проверку. Он же на сервере
+ * (`ACCURACY_REVIEW_METERS` в photo-service/src/geo.js) — совпадение проверяется
+ * тестом, потому что от него зависит, что район увидит перед отправкой.
+ */
+export const ACCURACY_REVIEW_METERS = 5;
+
 export function accuracyVerdict(accuracyMeters) {
   const meters = numberOrNull(accuracyMeters);
-  if (meters === null) return 'unknown';
+  // Отрицательная точность — мусор из браузера, а не «хороший замер».
+  if (meters === null || meters < 0) return 'unknown';
   if (meters > UNUSABLE_ACCURACY_METERS) return 'unusable';
-  return meters > 5 ? 'review' : 'ok';
+  return meters > ACCURACY_REVIEW_METERS ? 'review' : 'ok';
 }
 
 export function formatDateTime(value) {
@@ -174,7 +181,6 @@ export function buildCoverageIndex(summaryPayload) {
       objectType: object.objectType,
       district: object.district ?? null,
       label: object.label || '',
-      geoRisk: object.geoRisk === true,
     };
     const perPoint = new Map();
     for (const photo of object.photos || []) {
@@ -206,7 +212,6 @@ export function coverageFor(coverageIndex, record, objectType) {
     pending,
     withPhoto: confirmed + pending > 0,
     complete,
-    geoRisk: entry ? entry.geoRisk : false,
     remaining: Math.max(0, required - confirmed),
     statusKey,
     statusLabel: statusText(statusKey),
@@ -242,13 +247,12 @@ export function filterRecords(records, options = {}) {
     const coverage = coverageFor(coverageIndex, record, objectType);
     // Учётка АвД ведёт объекты по всему округу: их список приходит из сводки.
     if (objectKeys && !objectKeys.has(coverage.objectKey)) return false;
-    if (district && coverage.district !== district) return false;
+    if (district && !sameDistrict(coverage.district, district)) return false;
     if (status === 'without' && coverage.withPhoto) return false;
     if (status === 'with' && !coverage.withPhoto) return false;
     if (status === 'done' && !coverage.complete) return false;
     if (status === 'partial' && coverage.statusKey !== 'partial') return false;
     if (status === 'pending' && coverage.pending === 0) return false;
-    if (status === 'risk' && !coverage.geoRisk) return false;
     return true;
   });
 }
@@ -304,69 +308,10 @@ export function reportSummaryRows(payload) {
     { key: 'Охват', value: coverageLabel(summary) },
     { key: 'На проверке', value: String(summary.pendingReviewObjects ?? 0) },
     { key: 'Подтверждено приёмкой', value: String(summary.completedObjects ?? 0) },
-    { key: 'Риск геопревышения', value: String(summary.geoRiskObjects ?? 0) },
     { key: 'Статус', value: `${bandText(band)} — ${bandNote(band)}` },
   ];
   return rows;
 }
-
-// Предел исполнителей на район. Совпадает с серверным значением по умолчанию
-// (performerLimit в riskTops), но применяется и здесь.
-const RISK_PERFORMER_LIMIT = 5;
-
-/**
- * Разбирает блок рисков сводки в структуру для дашборда: топ районов по числу
- * нарушений и внутри каждого района — топ исполнителей. Числа нормализуются и
- * форматируются здесь же, чтобы разметка только расставляла готовые подписи.
- *
- * Сервер отдаёт `riskTops` уже отсортированным по убыванию нарушений и обрезанным
- * до `performerLimit`; порядок сохраняется, предел применяется повторно на случай
- * усечённого или кэшированного ответа. Пустой, отсутствующий или нулевой блок даёт
- * `empty: true` — клиент показывает одну строку «Риски не выявлены».
- */
-export function riskTopRows(summary) {
-  const tops = summary?.riskTops;
-  const total = numberOrNull(tops?.total) ?? 0;
-  const limit = Number.isSafeInteger(tops?.performerLimit) && tops.performerLimit > 0
-    ? tops.performerLimit
-    : RISK_PERFORMER_LIMIT;
-  const districts = (Array.isArray(tops?.districts) ? tops.districts : [])
-    .filter((entry) => entry && String(entry.district ?? '').trim())
-    .map((entry) => {
-      const count = numberOrNull(entry.count) ?? 0;
-      const performers = (Array.isArray(entry.performers) ? entry.performers : [])
-        .filter((performer) => performer && String(performer.performer ?? '').trim())
-        .slice(0, limit)
-        .map((performer) => {
-          const performerCount = numberOrNull(performer.count) ?? 0;
-          return {
-            performer: performer.performer,
-            count: performerCount,
-            countLabel: performerCount.toLocaleString('ru-RU'),
-          };
-        });
-      return { district: entry.district, count, performers };
-    });
-  // Список уже по убыванию, поэтому лидер — первая строка: от него считаем полосу.
-  const topCount = districts.length ? districts[0].count : 0;
-  return {
-    total,
-    totalLabel: total.toLocaleString('ru-RU'),
-    performerLimit: limit,
-    empty: total === 0 || districts.length === 0,
-    districts: districts.map((entry, index) => ({
-      rank: index + 1,
-      district: entry.district,
-      count: entry.count,
-      countLabel: entry.count.toLocaleString('ru-RU'),
-      sharePercent: total > 0 ? Math.round((entry.count / total) * 100) : 0,
-      // Полоса — доля от лидера: так лидер занимает всю ширину, а хвост виден.
-      barPercent: topCount > 0 ? Math.round((entry.count / topCount) * 100) : 0,
-      performers: entry.performers,
-    })),
-  };
-}
-
 
 // The dataset payload carries the group label under a dataset-specific name.
 export function groupLabel(dataset) {
@@ -424,6 +369,21 @@ export const AUTODOR_ACCOUNT = 'АвД САО';
 
 export function isAutodorAccount(district) {
   return String(district ?? '').trim().toLowerCase() === AUTODOR_ACCOUNT.toLowerCase();
+}
+
+/**
+ * Сравнение район подписи объекта с районом учётки. Район учётки вводит
+ * администратор, а район объекта приходит из границ: расхождение в регистре или
+ * в «ё» не должно давать пустой список у района, который вошёл успешно.
+ */
+export function normalizeDistrict(value) {
+  return String(value ?? '').trim().toLowerCase().replace(/ё/g, 'е');
+}
+
+export function sameDistrict(left, right) {
+  const first = normalizeDistrict(left);
+  const second = normalizeDistrict(right);
+  return Boolean(first) && first === second;
 }
 
 /**

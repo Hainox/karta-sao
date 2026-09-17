@@ -74,7 +74,7 @@ try {
 
   const summaryText = await page.locator('#paSummary').innerText();
   check('сводка показывает процент и текстовую полосу', /%/.test(summaryText) && /(Красный|Жёлтый|Зелёный)/.test(summaryText), summaryText.replace(/\n/g, ' | '));
-  check('сводка показывает отдельные счётчики', /На проверке/.test(summaryText) && /Риск геопревышения/.test(summaryText), '');
+  check('сводка показывает отдельные счётчики', /На проверке/.test(summaryText) && /Охват/.test(summaryText), '');
   check('версия набора видна в шапке', (await page.locator('#paSubtitle').innerText()).includes('embedded-map-2026-09-15'), await page.locator('#paSubtitle').innerText());
 
   // A district account is scoped to its own district, so unassigned objects must not leak in.

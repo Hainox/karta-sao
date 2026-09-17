@@ -4,6 +4,8 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { Pool } from 'pg';
 import { photoServiceDatabaseConfig } from '../src/config.js';
+import { districtResolver } from '../src/districts.js';
+import { groupPpRecords, ppReportKey } from '../src/pp-objects.js';
 
 const sourceRootOption = process.argv.find((value) => value.startsWith('--source-root='));
 const root = sourceRootOption ? pathToFileURL(resolve(sourceRootOption.slice('--source-root='.length)) + '/') : new URL('../../', import.meta.url);
@@ -32,31 +34,6 @@ async function loadDatasets() {
   return { manifest, datasets, hashes };
 }
 
-function pointInRing(point, ring) {
-  let inside = false;
-  for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
-    const [xi, yi] = ring[i];
-    const [xj, yj] = ring[j];
-    const intersects = ((yi > point[1]) !== (yj > point[1]))
-      && point[0] < ((xj - xi) * (point[1] - yi)) / (yj - yi) + xi;
-    if (intersects) inside = !inside;
-  }
-  return inside;
-}
-
-function districtForPoint(latitude, longitude, features) {
-  const point = [longitude, latitude];
-  for (const feature of features) {
-    const polygons = feature.geometry.type === 'Polygon' ? [feature.geometry.coordinates] : feature.geometry.coordinates;
-    for (const polygon of polygons) {
-      if (pointInRing(point, polygon[0]) && polygon.slice(1).every((hole) => !pointInRing(point, hole))) {
-        return feature.properties.district;
-      }
-    }
-  }
-  return null;
-}
-
 function baseObject(datasetId, objectType, reportKey, district, record, sourceIds, referencePoints, sourceVersion) {
   return {
     objectKey: `${datasetId}|${objectType}|${reportKey}`,
@@ -80,21 +57,11 @@ function importStops(dataset, districts, sourceVersion) {
 }
 
 function importPp(dataset, districts, sourceVersion) {
-  const groups = new Map();
-  for (const record of dataset.records) {
-    const odhId = String(record.properties?.odh_id ?? record.id);
-    const district = districtForPoint(record.lat, record.lon, districts);
-    const groupKey = `${odhId}|${district || 'unassigned'}`;
-    let group = groups.get(groupKey);
-    if (!group) {
-      group = { odhId, district, records: [] };
-      groups.set(groupKey, group);
-    }
-    group.records.push(record);
-  }
-  return [...groups.values()].map((group) => {
+  // Один odh_id — один объект: район выбирается по большинству его точек, иначе
+  // пограничная точка рождала второй объект и район показывал лишний ПП.
+  return groupPpRecords(dataset.records, districtResolver(districts)).map((group) => {
     const first = group.records[0];
-    return baseObject(dataset.datasetId, 'pp', `${group.odhId}|${group.district || 'unassigned'}`, group.district, first,
+    return baseObject(dataset.datasetId, 'pp', ppReportKey(group.odhId, group.district), group.district, first,
       group.records.map((record) => record.id), group.records.map((record) => ({ latitude: record.lat, longitude: record.lon })), sourceVersion);
   });
 }

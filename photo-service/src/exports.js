@@ -4,7 +4,7 @@ import { reportPayload } from './reports.js';
 import { completionMix, uploadDynamics } from './report.js';
 import { objectTypeLabel, percentLabel, statusBandLabel, OBJECT_TYPES } from './labels.js';
 import { HEADQUARTERS_NOTE, headquartersBoard, headquartersComment, headquartersValues } from './headquarters.js';
-import { collectRisks, riskTops, summarizeRisks } from './risks.js';
+import { checksByDistrict, checksByObject, collectChecks, summarizeChecks } from './checks.js';
 import { reportingDistrict } from './scope.js';
 import {
   CHART_COLORS, bandColor, drawBarRow, drawBandChip, drawColumns, drawGauge, drawStackedBar, section,
@@ -329,19 +329,48 @@ function topsDataRow(sheet, row, values, fill) {
 }
 
 /**
- * Лист «Топы»: районы по числу рисков и исполнители внутри каждого района.
- * Район считается по тому же правилу, что и строка «АвД САО» штабной таблицы.
+ * Свод проверок по районам и исполнителям. Риски по GPS убраны как необъективный
+ * показатель, поэтому в своде остались только найденные дубли файлов. Район
+ * считается по тому же правилу, что и строка «АвД САО» штабной таблицы.
  */
-function addTopsSheet(workbook, risks) {
-  const sheet = workbook.addWorksheet('Топы');
+function topsFromChecks(checks) {
+  const districts = new Map();
+  for (const check of checks || []) {
+    const district = reportingDistrict(check);
+    if (!districts.has(district)) districts.set(district, { district, count: 0, performers: new Map() });
+    const entry = districts.get(district);
+    entry.count += 1;
+    const performer = String(check.performer || '').trim() || 'Исполнитель не указан';
+    entry.performers.set(performer, (entry.performers.get(performer) || 0) + 1);
+  }
+  return {
+    total: (checks || []).length,
+    districts: [...districts.values()]
+      .sort((left, right) => right.count - left.count || left.district.localeCompare(right.district, 'ru'))
+      .map((entry) => ({
+        district: entry.district,
+        count: entry.count,
+        performers: [...entry.performers.entries()]
+          .map(([performer, count]) => ({ performer, count }))
+          .sort((left, right) => right.count - left.count || left.performer.localeCompare(right.performer, 'ru'))
+          .slice(0, 5),
+      })),
+  };
+}
+
+/**
+ * Лист «Дубли»: районы по числу найденных дублей и исполнители внутри района.
+ */
+function addTopsSheet(workbook, checks) {
+  const sheet = workbook.addWorksheet('Дубли');
   TOPS_WIDTHS.forEach((width, index) => { sheet.getColumn(index + 1).width = width; });
-  const tops = riskTops(risks);
+  const tops = topsFromChecks(checks);
   let row = 1;
 
   if (!tops.total) {
     sheet.mergeCells(row, 1, row, TOPS_COLUMN_COUNT);
     const cell = sheet.getCell(row, 1);
-    cell.value = 'Риски не выявлены';
+    cell.value = 'Дублей фото на разных объектах не найдено';
     cell.font = SECTION_FONT;
     cell.fill = SECTION_FILL;
     cell.alignment = TO_LEFT;
@@ -349,11 +378,11 @@ function addTopsSheet(workbook, risks) {
     return sheet;
   }
 
-  // Блок 1 — районы по числу рисков, от худшего к лучшему.
-  topsTitleRow(sheet, row, 'Топ районов по рискам');
+  // Блок 1 — районы по числу найденных дублей, от худшего к лучшему.
+  topsTitleRow(sheet, row, 'Дубли по районам');
   row += 1;
   styleHeaderRow(sheet, TOPS_COLUMN_COUNT, row);
-  ['№', 'Район', 'Нарушений'].forEach((title, offset) => { sheet.getCell(row, offset + 1).value = title; });
+  ['№', 'Район', 'Дублей'].forEach((title, offset) => { sheet.getCell(row, offset + 1).value = title; });
   row += 1;
   tops.districts.forEach((entry, index) => {
     topsDataRow(sheet, row, [index + 1, entry.district, entry.count], index % 2 === 1 ? ZEBRA_FILL : null);
@@ -372,10 +401,10 @@ function addTopsSheet(workbook, risks) {
   row += 2; // Пустая строка между блоками.
 
   // Блок 2 — исполнители по районам: у каждого района своя шапка.
-  topsTitleRow(sheet, row, 'Топ исполнителей по районам');
+  topsTitleRow(sheet, row, 'Исполнители по районам');
   row += 1;
   styleHeaderRow(sheet, TOPS_COLUMN_COUNT, row);
-  ['№', 'Исполнитель', 'Нарушений'].forEach((title, offset) => { sheet.getCell(row, offset + 1).value = title; });
+  ['№', 'Исполнитель', 'Дублей'].forEach((title, offset) => { sheet.getCell(row, offset + 1).value = title; });
   row += 1;
   for (const entry of tops.districts) {
     sheet.mergeCells(row, 1, row, TOPS_COLUMN_COUNT);
@@ -409,8 +438,8 @@ export async function buildExcel(rows) {
   const workbook = new ExcelJS.Workbook();
   workbook.creator = 'SAO photo service';
   workbook.created = new Date();
-  const risks = collectRisks(payload.objects);
-  const riskSummary = summarizeRisks(risks);
+  const checks = collectChecks(payload.objects);
+  const checkSummary = summarizeChecks(checks);
   const overall = payload.overall;
 
   const overview = workbook.addWorksheet('Обзор');
@@ -453,10 +482,11 @@ export async function buildExcel(rows) {
   metricRow('Выполнено', overall.completedObjects, `Выполнение: ${percentLabel(overall.completionPercent)}`);
   metricRow('На проверке', overall.pendingReviewObjects);
 
-  sectionRow('РИСК');
-  metricRow('Выявлено всего', riskSummary.total, 'Статус присваивается автоматически по категории');
-  for (const kind of riskSummary.byKind) metricRow(kind.kindLabel, kind.count);
-  if (!riskSummary.total) metricRow('Рисков нет', 0, 'Ни одна фиксация не попала в категории риска');
+  sectionRow('ПРОВЕРКИ');
+  // GPS-риски убраны: показатель признан необъективным. Здесь остаётся только
+  // проверка, которая к GPS не относится, — дубль файла на разных объектах.
+  metricRow('Дублей фото на разных объектах', checkSummary.total, 'Один и тот же файл прикреплён более чем к одному объекту');
+  if (!checkSummary.total) metricRow('Дублей не найдено', 0, 'Каждый файл прикреплён к одному объекту');
 
   if (coverageRow) {
     overview.addConditionalFormatting({ ref: `B${coverageRow}:B${coverageRow}`, rules: [PERCENT_BAR('FF1C7A55')] });
@@ -465,13 +495,7 @@ export async function buildExcel(rows) {
   }
 
   const districts = payload.byDistrict;
-  const risksByDistrict = new Map();
-  for (const risk of risks) {
-    // Риск относится к району по тому же правилу, что и строка отчёта: объекты
-    // владельца, «ДЭУ» и объекты без района считаются за «АвД САО».
-    const key = reportingDistrict(risk);
-    risksByDistrict.set(key, (risksByDistrict.get(key) || 0) + 1);
-  }
+  const checksByDistrictMap = checksByDistrict(checks);
   if (districts.length > 1) {
     const districtsSheet = workbook.addWorksheet('Районы');
     districtsSheet.columns = [
@@ -482,12 +506,12 @@ export async function buildExcel(rows) {
       { header: 'Выполнено', key: 'completed', width: 13 },
       { header: 'На проверке', key: 'pending', width: 13 },
       { header: 'Без фото', key: 'empty', width: 12 },
-      { header: 'Рисков', key: 'risks', width: 11 },
+      { header: 'Проверок', key: 'checks', width: 11 },
     ];
-    let totals = { total: 0, withPhoto: 0, completed: 0, pending: 0, empty: 0, risks: 0 };
+    let totals = { total: 0, withPhoto: 0, completed: 0, pending: 0, empty: 0, checks: 0 };
     for (const district of districts) {
       const parts = Object.fromEntries(completionMix(district).map((part) => [part.key, part.value]));
-      const districtRisks = risksByDistrict.get(district.district) || 0;
+      const districtChecks = checksByDistrictMap.get(district.district) || 0;
       districtsSheet.addRow({
         district: district.district || 'Без района',
         total: district.totalObjects,
@@ -496,7 +520,7 @@ export async function buildExcel(rows) {
         completed: district.completedObjects,
         pending: district.pendingReviewObjects,
         empty: parts.empty,
-        risks: districtRisks,
+        checks: districtChecks,
       });
       totals = {
         total: totals.total + district.totalObjects,
@@ -504,7 +528,7 @@ export async function buildExcel(rows) {
         completed: totals.completed + district.completedObjects,
         pending: totals.pending + district.pendingReviewObjects,
         empty: totals.empty + parts.empty,
-        risks: totals.risks + districtRisks,
+        checks: totals.checks + districtChecks,
       };
     }
     const totalRow = districtsSheet.addRow({
@@ -546,10 +570,11 @@ export async function buildExcel(rows) {
   dynamicsSheet.addRow(['Всего фиксаций', dynamics[dynamics.length - 1].cumulative]);
   styleHeaderRow(dynamicsSheet, 3);
 
-  /* ------------------------------------------------------------------ «Риск» */
-  // Отдельный пункт сводной отчётности: сюда попадает всё, что автоматически
-  // отнесено к категориям риска. Ручного разбора статуса нет.
-  const riskSheet = workbook.addWorksheet('Риск');
+  /* -------------------------------------------------------------- «Проверки» */
+  // Отдельный пункт сводной отчётности: сюда попадают автоматические проверки,
+  // которые к GPS не относятся. Риски по геопозиции убраны как необъективный
+  // показатель, поэтому лист содержит только дубли файлов на разных объектах.
+  const riskSheet = workbook.addWorksheet('Проверки');
   riskSheet.columns = [
     { header: '№', key: 'index', width: 6 },
     { header: 'Дата выявления', key: 'detectedAt', width: 18 },
@@ -560,84 +585,70 @@ export async function buildExcel(rows) {
     { header: 'ID объекта ОДХ', key: 'odhId', width: 16 },
     { header: 'Координаты объекта', key: 'objectPoint', width: 26 },
     { header: 'Исполнитель', key: 'performer', width: 24 },
-    { header: 'Широта GPS', key: 'gpsLatitude', width: 13 },
-    { header: 'Долгота GPS', key: 'gpsLongitude', width: 13 },
-    { header: 'Точность GPS, м', key: 'gpsAccuracyM', width: 14 },
-    { header: 'Расстояние до объекта, м', key: 'distanceM', width: 16 },
-    { header: 'Превышение зоны, м', key: 'overMeters', width: 16 },
     { header: 'Фото', key: 'photo', width: 22 },
     { header: 'Статус', key: 'statusLabel', width: 12 },
   ];
-  risks.forEach((risk, index) => {
+  checks.forEach((check, index) => {
     const excelRow = riskSheet.addRow({
       index: index + 1,
-      detectedAt: risk.detectedAt ? new Date(risk.detectedAt).toLocaleString('ru-RU') : '—',
-      kind: risk.kindLabel,
-      district: risk.district || '—',
-      balanceHolder: risk.balanceHolder || '—',
-      objectLabel: risk.objectLabel || '—',
-      odhId: risk.odhId || '—',
-      objectPoint: risk.objectPoint ? `${risk.objectPoint.latitude.toFixed(6)}, ${risk.objectPoint.longitude.toFixed(6)}` : '—',
-      performer: risk.performer || '—',
-      gpsLatitude: risk.gps.latitude ?? '—',
-      gpsLongitude: risk.gps.longitude ?? '—',
-      gpsAccuracyM: risk.gps.accuracyM ?? '—',
-      distanceM: risk.distanceM === null ? '—' : Number(risk.distanceM.toFixed(1)),
-      overMeters: risk.overMeters === null ? '—' : risk.overMeters,
-      statusLabel: risk.statusLabel,
+      detectedAt: check.detectedAt ? new Date(check.detectedAt).toLocaleString('ru-RU') : '—',
+      kind: check.kindLabel,
+      district: check.district || '—',
+      balanceHolder: check.balanceHolder || '—',
+      objectLabel: check.objectLabel || '—',
+      odhId: check.odhId || '—',
+      objectPoint: check.objectPoint ? `${check.objectPoint.latitude.toFixed(6)}, ${check.objectPoint.longitude.toFixed(6)}` : '—',
+      performer: check.performer || '—',
+      statusLabel: check.statusLabel,
     });
     excelRow.height = 78;
   });
   let riskImageRow = 1;
-  for (const risk of risks) {
-    const file = (risk.photoFiles || [])[0];
+  for (const check of checks) {
+    const file = (check.photoFiles || [])[0];
     const key = file ? (file.thumbnailKey || file.storageKey) : null;
     if (key) {
       try {
         // Встраивается только превью: оригиналы делают книгу несоразмерно тяжёлой.
         const buffer = await readFile(`${mediaRoot()}/${key}`);
         const imageId = workbook.addImage({ buffer, extension: key.endsWith('.png') ? 'png' : key.endsWith('.webp') ? 'webp' : 'jpeg' });
-        riskSheet.addImage(imageId, { tl: { col: 14, row: riskImageRow }, ext: { width: 150, height: 100 } });
+        riskSheet.addImage(imageId, { tl: { col: 10, row: riskImageRow }, ext: { width: 150, height: 100 } });
       } catch {
         // Метаданные остаются в строке, даже если файл недоступен.
       }
     }
     riskImageRow += 1;
   }
-  styleHeaderRow(riskSheet, 16);
-  shadeRows(riskSheet, riskSheet.rowCount, 16);
-  frameTable(riskSheet, riskSheet.rowCount, 16);
+  styleHeaderRow(riskSheet, 11);
+  shadeRows(riskSheet, riskSheet.rowCount, 11);
+  frameTable(riskSheet, riskSheet.rowCount, 11);
   riskSheet.views = [{ state: 'frozen', ySplit: 1 }];
-  riskSheet.autoFilter = { from: 'A1', to: 'P1' };
+  riskSheet.autoFilter = { from: 'A1', to: 'K1' };
 
-  // Топы по нарушениям: районы и исполнители внутри района.
-  addTopsSheet(workbook, risks);
+  // Дубли по районам и исполнителям отдельным листом.
+  addTopsSheet(workbook, checks);
 
   const objects = workbook.addWorksheet('Объекты');
-  const risksByObject = new Map();
-  for (const risk of risks) {
-    if (!risk.objectKey) continue;
-    risksByObject.set(risk.objectKey, (risksByObject.get(risk.objectKey) || 0) + 1);
-  }
+  const checksByObjectMap = checksByObject(checks);
 
   objects.columns = [
     { header: 'Район', key: 'district', width: 20 }, { header: 'Тип', key: 'objectType', width: 14 },
     { header: 'Объект', key: 'label', width: 42 }, { header: 'Балансодержатель', key: 'balanceHolder', width: 26 },
     { header: 'Ключ', key: 'objectKey', width: 42 },
     { header: 'Подтверждено', key: 'confirmed', width: 16 }, { header: 'На проверке', key: 'pending', width: 14 },
-    { header: 'GPS-риск', key: 'geoRisk', width: 12 }, { header: 'Рисков', key: 'risks', width: 10 },
+    { header: 'Проверок', key: 'checks', width: 11 },
   ];
   for (const row of payload.objects) {
     objects.addRow({ district: row.district || 'Без района', objectType: objectTypeLabel(row.objectType), label: row.label,
       balanceHolder: row.balanceHolder || '—', objectKey: row.objectKey,
       confirmed: row.confirmedPhotos, pending: row.pendingReviewPhotos,
-      geoRisk: row.geoRisk ? 'Да' : 'Нет', risks: risksByObject.get(row.objectKey) || 0 });
+      checks: checksByObjectMap.get(row.objectKey) || 0 });
   }
-  styleHeaderRow(objects, 9);
-  shadeRows(objects, objects.rowCount, 9);
-  frameTable(objects, objects.rowCount, 9);
+  styleHeaderRow(objects, 8);
+  shadeRows(objects, objects.rowCount, 8);
+  frameTable(objects, objects.rowCount, 8);
   objects.views = [{ state: 'frozen', ySplit: 1 }];
-  objects.autoFilter = { from: 'A1', to: 'I1' };
+  objects.autoFilter = { from: 'A1', to: 'H1' };
   const photos = workbook.addWorksheet('Фотографии');
   photos.columns = [
     { header: 'Район', key: 'district', width: 20 }, { header: 'Тип', key: 'objectType', width: 14 },
@@ -714,7 +725,7 @@ function objectsByReportingDistrict(objects) {
  * Отметки берутся из штабной модели, поэтому числа совпадают с листом «На штаб»,
  * картинкой для Telegram и PDF, а строки отсортированы от лучших к худшим.
  */
-function addDistrictSummarySheet(workbook, payload, board, risksByDistrict) {
+function addDistrictSummarySheet(workbook, payload, board, checksPerDistrict) {
   const sheet = workbook.addWorksheet('Сводка по районам');
   sheet.columns = [
     { header: '№', key: 'index', width: 6 },
@@ -726,7 +737,7 @@ function addDistrictSummarySheet(workbook, payload, board, risksByDistrict) {
     { header: 'С фото', key: 'withPhoto', width: 11 },
     { header: 'Охват, %', key: 'coverage', width: 11 },
     { header: 'На проверке', key: 'pending', width: 13 },
-    { header: 'Рисков', key: 'risks', width: 11 },
+    { header: 'Проверок', key: 'checks', width: 11 },
   ];
 
   const grouped = objectsByReportingDistrict(payload.objects);
@@ -743,7 +754,7 @@ function addDistrictSummarySheet(workbook, payload, board, risksByDistrict) {
         withPhoto,
         coverage: objects.length ? Math.round((withPhoto / objects.length) * 100) : null,
         pending: objects.filter((object) => object.pendingReviewPhotos > 0).length,
-        risks: risksByDistrict.get(name) || 0,
+        checks: checksPerDistrict.get(name) || 0,
       };
     })
     .sort((left, right) => right.percent - left.percent || left.district.localeCompare(right.district, 'ru'));
@@ -763,7 +774,7 @@ function addDistrictSummarySheet(workbook, payload, board, risksByDistrict) {
       ? Math.round((payload.objects.filter((object) => object.confirmedPhotos + object.pendingReviewPhotos > 0).length / payload.objects.length) * 100)
       : null,
     pending: payload.objects.filter((object) => object.pendingReviewPhotos > 0).length,
-    risks: rows.reduce((sum, row) => sum + row.risks, 0),
+    checks: rows.reduce((sum, row) => sum + row.checks, 0),
   });
   totalRow.font = { bold: true };
   for (let column = 1; column <= 10; column += 1) totalRow.getCell(column).fill = TOTAL_FILL;
@@ -789,7 +800,7 @@ function addDistrictSummarySheet(workbook, payload, board, risksByDistrict) {
  * Имя листа приходит готовым: длинные названия обрезаны и разведены с уже
  * занятыми, иначе повтор имени обрывает выгрузку целиком.
  */
-async function addDistrictSheet(workbook, { district, sheetName, objects, risksByObject }) {
+async function addDistrictSheet(workbook, { district, sheetName, objects, checksByObjectMap }) {
   const sheet = workbook.addWorksheet(sheetName ?? districtSheetName(district));
   const marks = headquartersCountsFor(objects);
   const percent = headquartersOverallPercentFor(marks);
@@ -814,8 +825,7 @@ async function addDistrictSheet(workbook, { district, sheetName, objects, risksB
     { header: '%', key: 'percent', width: 8 },
     { header: 'Подтверждено', key: 'confirmed', width: 13 },
     { header: 'На проверке', key: 'pending', width: 12 },
-    { header: 'GPS‑риск', key: 'geoRisk', width: 10 },
-    { header: 'Рисков', key: 'risks', width: 10 },
+    { header: 'Проверок', key: 'checks', width: 10 },
   ];
   objectColumns.forEach((column, index) => { sheet.getColumn(index + 1).width = column.width; });
 
@@ -838,8 +848,7 @@ async function addDistrictSheet(workbook, { district, sheetName, objects, risksB
       plan ? Math.round((covered / plan) * 100) : 0,
       object.confirmedPhotos,
       object.pendingReviewPhotos,
-      object.geoRisk ? 'Да' : 'Нет',
-      risksByObject.get(object.objectKey) || 0,
+      checksByObjectMap.get(object.objectKey) || 0,
     ];
     for (let column = 1; column <= objectColumns.length; column += 1) {
       const cell = excelRow.getCell(column);
@@ -931,23 +940,17 @@ function headquartersOverallPercentFor(marks) {
 export async function buildDistrictsExcel(rows) {
   const payload = reportPayload(rows);
   const board = headquartersBoard(payload);
-  const risks = collectRisks(payload.objects);
-
-  const risksByDistrict = new Map();
-  const risksByObject = new Map();
-  for (const risk of risks) {
-    const district = reportingDistrict(risk);
-    risksByDistrict.set(district, (risksByDistrict.get(district) || 0) + 1);
-    if (risk.objectKey) risksByObject.set(risk.objectKey, (risksByObject.get(risk.objectKey) || 0) + 1);
-  }
+  const checks = collectChecks(payload.objects);
+  const checksPerDistrict = checksByDistrict(checks);
+  const checksPerObject = checksByObject(checks);
 
   const workbook = new ExcelJS.Workbook();
   workbook.creator = 'SAO photo service';
   workbook.created = new Date();
 
-  addDistrictSummarySheet(workbook, payload, board, risksByDistrict);
+  addDistrictSummarySheet(workbook, payload, board, checksPerDistrict);
   addHeadquartersSheet(workbook, payload);
-  addTopsSheet(workbook, risks);
+  addTopsSheet(workbook, checks);
 
   const grouped = objectsByReportingDistrict(payload.objects);
   for (const district of board.names) {
@@ -955,7 +958,7 @@ export async function buildDistrictsExcel(rows) {
       district,
       sheetName: uniqueSheetName(workbook, districtSheetName(district)),
       objects: grouped.get(district) || [],
-      risksByObject,
+      checksByObjectMap: checksPerObject,
     });
   }
 
@@ -968,9 +971,10 @@ export function buildPdf(rows) {
   const districts = payload.byDistrict;
   const dynamics = uploadDynamics(rows, { days: DYNAMICS_DAYS });
   const mix = completionMix(overall);
-  // Топы по нарушениям — те же числа, что и на листе «Топы».
-  const risks = collectRisks(payload.objects);
-  const tops = riskTops(risks);
+  // Проверки (дубли файлов) — те же числа, что и на листе «Проверки».
+  const checks = collectChecks(payload.objects);
+  const checkSummary = summarizeChecks(checks);
+  const tops = topsFromChecks(checks);
 
   return new Promise((resolve, reject) => {
     const doc = new PDFDocument({ size: 'A4', margin: MARGIN, info: { Title: 'Краткий отчёт фотофиксации САО' } });
@@ -1004,7 +1008,7 @@ export function buildPdf(rows) {
     y += 30;
 
     doc.fillColor(CHART_COLORS.muted).fontSize(9)
-      .text(`С фото: ${overall.objectsWithPhoto}   ·   Без фото: ${overall.objectsWithoutPhoto}   ·   На проверке: ${overall.pendingReviewObjects}   ·   Риск GPS: ${overall.geoRiskObjects}`, left, y);
+      .text(`С фото: ${overall.objectsWithPhoto}   ·   Без фото: ${overall.objectsWithoutPhoto}   ·   На проверке: ${overall.pendingReviewObjects}   ·   Дублей фото: ${checkSummary.total}`, left, y);
     // Вторая строка — единица учёта: отметка, то есть конкретная точка на карте.
     doc.fillColor(CHART_COLORS.muted).fontSize(9)
       .text(`Отметки: ${overall.coveredPoints.toLocaleString('ru-RU')} из ${overall.totalPoints.toLocaleString('ru-RU')} отработано`, left, doc.y + 1);
@@ -1062,14 +1066,14 @@ export function buildPdf(rows) {
         .text('Районы отсортированы по выполнению. Объекты с балансодержателем «АвД САО», «ДЭУ» и объекты без района учтены в строке «АвД САО».', left, y, { width });
     }
 
-    /* -------------------------------------------------------- топы по рискам */
+    /* ------------------------------------------------- проверки: дубли фото */
     if (y > doc.page.height - 150) {
       doc.addPage();
       y = MARGIN;
     }
-    y = section(doc, y + 8, 'Топ районов по рискам');
+    y = section(doc, y + 8, 'Дубли фото по районам');
     if (!tops.total) {
-      doc.fillColor(CHART_COLORS.muted).fontSize(9).text('Риски не выявлены.', left, y);
+      doc.fillColor(CHART_COLORS.muted).fontSize(9).text('Дублей не найдено.', left, y);
       y = doc.y + 12;
     } else {
       const worst = Math.max(1, ...tops.districts.map((entry) => entry.count));
@@ -1084,22 +1088,22 @@ export function buildPdf(rows) {
           percent: (entry.count / worst) * 100,
           band: 'low',
           value: String(entry.count),
-          note: entry.count === 1 ? 'нарушение' : 'нарушений',
+          note: entry.count === 1 ? 'дубль' : 'дублей',
         });
       }
       doc.fillColor(CHART_COLORS.muted).fontSize(8)
-        .text(`Всего нарушений: ${tops.total}. Полосы показаны относительно самого проблемного района.`, left, y + 4, { width });
+        .text(`Всего дублей: ${tops.total}. Полосы показаны относительно самого проблемного района.`, left, y + 4, { width });
       y = doc.y + 16;
     }
 
-    /* --------------------------------------------------- топы исполнителей */
+    /* ---------------------------------------------- исполнители по районам */
     if (y > doc.page.height - 130) {
       doc.addPage();
       y = MARGIN;
     }
-    y = section(doc, y + 8, 'Топ исполнителей по районам');
+    y = section(doc, y + 8, 'Исполнители по районам');
     if (!tops.total) {
-      doc.fillColor(CHART_COLORS.muted).fontSize(9).text('Риски не выявлены.', left, y);
+      doc.fillColor(CHART_COLORS.muted).fontSize(9).text('Дублей не найдено.', left, y);
       y = doc.y + 12;
     } else {
       for (const entry of tops.districts) {
@@ -1107,7 +1111,7 @@ export function buildPdf(rows) {
           doc.addPage();
           y = MARGIN;
         }
-        doc.fillColor(CHART_COLORS.ink).fontSize(10).text(`${entry.district} · ${entry.count} нарушений`, left, y);
+        doc.fillColor(CHART_COLORS.ink).fontSize(10).text(`${entry.district} · ${entry.count} дублей`, left, y);
         y = doc.y + 4;
         for (const performer of entry.performers) {
           if (y > doc.page.height - 50) {
@@ -1125,7 +1129,7 @@ export function buildPdf(rows) {
         y += 8;
       }
       doc.fillColor(CHART_COLORS.muted).fontSize(8)
-        .text(`На каждый район показано до ${tops.performerLimit} исполнителей с наибольшим числом нарушений.`, left, y, { width });
+        .text(`На каждый район показано до 5 исполнителей с наибольшим числом дублей.`, left, y, { width });
     }
 
     doc.end();

@@ -76,12 +76,13 @@ test('the PDF is produced for a district scope without photos', async () => {
   assert.match(pdf.toString('latin1'), /\/Type\s*\/Page/);
 });
 
-test('сводная отчётность несёт отдельный лист «Риск» с автоматическими категориями', async () => {
+test('сводная отчётность несёт лист «Проверки» без рисков по GPS', async () => {
+  // Раньше сюда попадало превышение зоны GPS: показатель убран как необъективный,
+  // поэтому в книге остаются только проверки, не связанные с геопозицией.
   const overflow = reportRow('entrance', 'Ховрино', 0);
   overflow.object_key = 'object-1';
   overflow.balance_holder = 'Жилищник «Ховрино»';
   overflow.odh_id = '10002217';
-  // Статус не важен: нарушение определяется расстоянием до объекта.
   overflow.photos = [photo({ id: 'p-overflow', sha256: 'hash-overflow', geoStatus: 'review', distanceM: 34.4 })];
 
   const duplicateA = reportRow('entrance', 'Ховрино', 0);
@@ -106,30 +107,20 @@ test('сводная отчётность несёт отдельный лист
 
   assert.deepEqual(
     workbook.worksheets.map((sheet) => sheet.name),
-    ['Обзор', 'На штаб', 'Районы', 'Динамика', 'Риск', 'Топы', 'Объекты', 'Фотографии'],
+    ['Обзор', 'На штаб', 'Районы', 'Динамика', 'Проверки', 'Дубли', 'Объекты', 'Фотографии'],
   );
 
-  const riskSheet = workbook.getWorksheet('Риск');
-  assert.equal(riskSheet.getCell('A1').value, '№');
-  assert.equal(riskSheet.getCell('C1').value, 'Категория');
-  assert.equal(riskSheet.getCell('O1').value, 'Фото');
-  // Шапка, превышение зоны, две строки дубля и недостоверная геопривязка.
-  assert.equal(riskSheet.rowCount, 5);
+  const checksSheet = workbook.getWorksheet('Проверки');
+  assert.equal(checksSheet.getCell('A1').value, '№');
+  assert.equal(checksSheet.getCell('C1').value, 'Категория');
+  assert.equal(checksSheet.getCell('J1').value, 'Фото');
+  // Шапка и две строки дубля: превышение зоны и неточная геопривязка больше не риски.
+  assert.equal(checksSheet.rowCount, 3);
 
-  const categories = [2, 3, 4, 5].map((row) => riskSheet.getCell(`C${row}`).value);
-  assert.ok(categories.includes('Превышение зоны'));
-  assert.ok(categories.includes('Дубль фото на разных объектах'));
-  assert.ok(categories.includes('Недостоверная геопривязка'));
-
-  const overflowRow = categories.indexOf('Превышение зоны') + 2;
-  // 34.4 м при границе зоны 30 м — превышение 4.4 м.
-  assert.equal(riskSheet.getCell(`N${overflowRow}`).value, 4.4);
-  assert.equal(riskSheet.getCell(`E${overflowRow}`).value, 'Жилищник «Ховрино»');
-  assert.equal(riskSheet.getCell(`G${overflowRow}`).value, '10002217');
-  assert.equal(riskSheet.getCell(`P${overflowRow}`).value, 'Риск');
-
-  // Обычная фиксация в риски не попадает.
-  assert.equal(riskSheet.rowCount - 1, 4);
+  const categories = [2, 3].map((row) => checksSheet.getCell(`C${row}`).value);
+  assert.deepEqual([...new Set(categories)], ['Дубль фото на разных объектах']);
+  assert.equal(checksSheet.getCell('K2').value, 'Проверка');
+  assert.equal(checksSheet.getCell('E2').value, 'Жилищник «Ховрино»');
 });
 
 test('лист «На штаб»: отметки по категориям, строка «АвД САО» и ИТОГО', async () => {
@@ -307,7 +298,7 @@ test('единая выгрузка по районам: сводка, этал�
   const names = workbook.worksheets.map((sheet) => sheet.name);
 
   // Сверху три сводных листа, дальше — по листу на район.
-  assert.deepEqual(names.slice(0, 3), ['Сводка по районам', 'На штаб', 'Топы']);
+  assert.deepEqual(names.slice(0, 3), ['Сводка по районам', 'На штаб', 'Дубли']);
   assert.ok(names.includes('Головинский') && names.includes('Аэропорт') && names.includes('АвД САО'), names.join(', '));
 
   const summary = workbook.getWorksheet('Сводка по районам');
@@ -369,7 +360,7 @@ test('район с именем служебного листа не роняе
   await workbook.xlsx.load(await buildDistrictsExcel([{ ...reportRow('stop', 'На штаб', 1), object_key: 'clash' }]));
 
   const names = workbook.worksheets.map((sheet) => sheet.name);
-  assert.deepEqual(names, ['Сводка по районам', 'На штаб', 'Топы', 'На штаб (2)']);
+  assert.deepEqual(names, ['Сводка по районам', 'На штаб', 'Дубли', 'На штаб (2)']);
   // Эталонный лист остаётся нетронутым, а район получает свой.
   assert.equal(workbook.getWorksheet('На штаб').getCell('C3').value, 1);
   assert.equal(workbook.getWorksheet('На штаб (2)').getCell('E3').value, 'clash');
@@ -392,62 +383,61 @@ test('пустая выборка: книга открывается без пе
   assert.equal(sheet.getCell('M3').value, 0);
 });
 
-test('лист «Топы»: районы по рискам и исполнители внутри района', async () => {
-  const overflow = (id, performer) => photo({ id, sha256: `hash-${id}`, performer, geoStatus: 'review', distanceM: 40 });
+test('лист «Проверки»: дубли по районам и исполнители внутри района', async () => {
+  // Дубль — один и тот же файл на разных объектах; расстояние GPS проверок больше
+  // не создаёт: показатель убран как необъективный.
+  const duplicate = (id, sha, performer) => photo({ id, sha256: sha, performer });
 
-  const hovrino = reportRow('entrance', 'Ховрино', 0);
-  hovrino.object_key = 'tops-hovrino';
-  hovrino.balance_holder = 'Жилищник «Ховрино»';
-  hovrino.photos = [overflow('h1', 'Иванов И.И.'), overflow('h2', 'Иванов И.И.'), overflow('h3', 'Петров П.П.')];
+  const hovrinoA = reportRow('entrance', 'Ховрино', 0);
+  hovrinoA.object_key = 'tops-hovrino-a';
+  hovrinoA.balance_holder = 'Жилищник «Ховрино»';
+  hovrinoA.photos = [duplicate('h1', 'hash-hov', 'Иванов И.И.'), duplicate('h2', 'hash-hov-2', 'Иванов И.И.')];
 
-  // Объект стоит в Коптеве, но владелец — «АвД САО»: риск считается за АвД.
-  const autodor = reportRow('entrance', 'Коптево', 0);
-  autodor.object_key = 'tops-autodor';
-  autodor.balance_holder = 'АвД САО';
-  autodor.photos = [overflow('a1', 'Сидоров С.С.')];
+  const hovrinoB = reportRow('entrance', 'Ховрино', 0);
+  hovrinoB.object_key = 'tops-hovrino-b';
+  hovrinoB.balance_holder = 'Жилищник «Ховрино»';
+  hovrinoB.photos = [duplicate('h3', 'hash-hov', 'Иванов И.И.')];
 
-  // Объект без района приписать конкретному району нельзя — он тоже идёт АвД.
-  const unassigned = reportRow('entrance', null, 0);
-  unassigned.object_key = 'tops-null';
-  unassigned.balance_holder = 'ДЭУ 2';
-  unassigned.photos = [overflow('d1', 'Морозов С.С.')];
+  // Объект стоит в Коптеве, но владелец — «АвД САО»: строка считается за АвД.
+  const autodorA = reportRow('entrance', 'Коптево', 0);
+  autodorA.object_key = 'tops-autodor-a';
+  autodorA.balance_holder = 'АвД САО';
+  autodorA.photos = [duplicate('a1', 'hash-aut', 'Сидоров С.С.')];
+
+  const autodorB = reportRow('entrance', 'Коптево', 0);
+  autodorB.object_key = 'tops-autodor-b';
+  autodorB.balance_holder = 'АвД САО';
+  autodorB.photos = [duplicate('a2', 'hash-aut', 'Сидоров С.С.')];
 
   const workbook = new ExcelJS.Workbook();
-  await workbook.xlsx.load(await buildExcel([hovrino, autodor, unassigned]));
-  const sheet = workbook.getWorksheet('Топы');
+  await workbook.xlsx.load(await buildExcel([hovrinoA, hovrinoB, autodorA, autodorB]));
+  const sheet = workbook.getWorksheet('Дубли');
 
-  // Блок 1 — районы по числу нарушений, ниже ИТОГО.
-  assert.equal(sheet.getCell('A1').value, 'Топ районов по рискам');
+  // Блок 1 — районы по числу дублей, ниже ИТОГО.
+  assert.equal(sheet.getCell('A1').value, 'Дубли по районам');
   assert.equal(sheet.getCell('A2').value, '№');
   assert.equal(sheet.getCell('B2').value, 'Район');
-  assert.equal(sheet.getCell('C2').value, 'Нарушений');
-  assert.equal(sheet.getCell('A3').value, 1);
-  assert.equal(sheet.getCell('B3').value, 'Ховрино');
-  assert.equal(sheet.getCell('C3').value, 3);
-  assert.equal(sheet.getCell('A4').value, 2);
-  assert.equal(sheet.getCell('B4').value, 'АвД САО');
+  assert.equal(sheet.getCell('C2').value, 'Дублей');
+  assert.equal(sheet.getCell('B3').value, 'АвД САО');
+  assert.equal(sheet.getCell('C3').value, 2);
+  assert.equal(sheet.getCell('B4').value, 'Ховрино');
   assert.equal(sheet.getCell('C4').value, 2);
   assert.equal(sheet.getCell('A5').value, 'ИТОГО');
-  assert.equal(sheet.getCell('C5').value, 5);
+  assert.equal(sheet.getCell('C5').value, 4);
 
   // Блок 2 — исполнители по районам, у каждого района своя шапка.
-  assert.equal(sheet.getCell('A7').value, 'Топ исполнителей по районам');
+  assert.equal(sheet.getCell('A7').value, 'Исполнители по районам');
   assert.equal(sheet.getCell('B8').value, 'Исполнитель');
-  assert.equal(sheet.getCell('A9').value, 'Ховрино');
-  assert.equal(sheet.getCell('B10').value, 'Иванов И.И.');
+  assert.equal(sheet.getCell('A9').value, 'АвД САО');
+  assert.equal(sheet.getCell('B10').value, 'Сидоров С.С.');
   assert.equal(sheet.getCell('C10').value, 2);
-  assert.equal(sheet.getCell('B11').value, 'Петров П.П.');
-  assert.equal(sheet.getCell('C11').value, 1);
-  assert.equal(sheet.getCell('A12').value, 'АвД САО');
-  assert.equal(sheet.getCell('B13').value, 'Морозов С.С.');
-  assert.equal(sheet.getCell('B14').value, 'Сидоров С.С.');
 
   // Примечание внизу объясняет учёт района по балансодержателю.
-  assert.match(String(sheet.getCell('A16').value), /балансодержателю/);
-  assert.match(String(sheet.getCell('A16').value), /АвД САО/);
+  assert.match(String(sheet.getCell(`A${sheet.rowCount}`).value), /балансодержателю/);
+  assert.match(String(sheet.getCell(`A${sheet.rowCount}`).value), /АвД САО/);
 });
 
-test('лист «Топы» без рисков пишет одну строку', async () => {
+test('лист «Проверки» без дублей пишет одну строку', async () => {
   const clean = reportRow('stop', 'Аэропорт', 1);
   clean.object_key = 'clean-1';
   clean.photos = [photo({ id: 'p-clean', sha256: 'hash-clean' })];
@@ -455,7 +445,7 @@ test('лист «Топы» без рисков пишет одну строку
   const workbook = new ExcelJS.Workbook();
   await workbook.xlsx.load(await buildExcel([clean]));
 
-  const sheet = workbook.getWorksheet('Топы');
-  assert.equal(sheet.getCell('A1').value, 'Риски не выявлены');
+  const sheet = workbook.getWorksheet('Дубли');
+  assert.equal(sheet.getCell('A1').value, 'Дублей фото на разных объектах не найдено');
   assert.equal(sheet.rowCount, 1);
 });

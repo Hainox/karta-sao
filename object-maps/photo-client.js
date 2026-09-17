@@ -1,9 +1,10 @@
 import {
-  accountScope, accuracyVerdict, assessDistanceRisk, bandNote, bandText, boundaryNote, buildCoverageIndex,
+  accountScope, accuracyVerdict, bandNote, bandText, boundaryNote, buildCoverageIndex,
   buildQueue, canExport, coverageBand, coverageFor, coverageLabel, coveragePercent, districtBoundaries,
   filterRecords, formatCoordinates, formatMeters, geoStatusText, gpsDistanceLabel, groupLabel, groupValues,
-  isAutodorAccount, photoDetailRows, reportSummaryRows, riskTopRows, scopedDistricts, statusText,
+  isAutodorAccount, photoDetailRows, reportSummaryRows, scopedDistricts, statusText,
 } from './photo-model.js';
+import { errorText } from './photo-messages.js';
 
 const API_FALLBACK = 'https://obhod-sao.ru/photo-api';
 const TOKEN_KEY = 'sao-photo-service-token';
@@ -11,8 +12,11 @@ const SCENARIO_KEY = 'sao-photo-service-scenario';
 const PERFORMER_KEY = 'sao-photo-service-performer';
 const LIST_CAP = 250;
 const MAX_FILE_BYTES = 20 * 1024 * 1024;
-const SUPPORTED_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/heic', 'image/heif'];
-const SUPPORTED_EXTENSIONS = ['jpg', 'jpeg', 'png', 'webp', 'heic', 'heif'];
+// Сервис принимает только эти форматы (CHECK в БД и проверка MIME при разборе
+// multipart). HEIC/HEIF раньше обещались в подсказке, но всегда отклонялись —
+// район видел «unsupported_image» после съёмки с iPhone.
+const SUPPORTED_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
+const SUPPORTED_EXTENSIONS = ['jpg', 'jpeg', 'png', 'webp'];
 
 const STATUS_COLOR = { done: '#0c7a5a', partial: '#b8791a', pending: '#2f6fb0', empty: '#b4552f' };
 
@@ -22,8 +26,13 @@ const state = {
   dataset: null,
   coverage: new Map(),
   summary: null,
+  // Дневной отчёт по продуктивности: только для префектуры, приходит одним запросом.
+  daily: null,
   user: null,
   token: '',
+  // Исполнитель один на всю страницу: поле в карточке и поле в очереди раньше
+  // жили отдельно, и текст мог требовать «укажите исполнителя» там, где он уже введён.
+  performer: '',
   scenario: 'register',
   queueIndex: 0,
   selected: null,
@@ -63,12 +72,34 @@ async function apiJson(path, options) {
   let body = null;
   try { body = await response.json(); } catch { body = null; }
   if (!response.ok) {
-    const message = body?.message || body?.error || `Сервис ответил ${response.status}`;
-    const error = new Error(message);
+    const code = body?.error || '';
+    // Код нужен логике (протухшая сессия), текст — человеку.
+    const error = new Error(errorText(code, body?.message) || `Сервис ответил ${response.status}`);
     error.status = response.status;
+    error.code = code;
+    if (response.status === 401 && path !== '/auth/login') {
+      error.sessionExpired = true;
+      expireSession();
+    }
     throw error;
   }
   return body;
+}
+
+/**
+ * Сессия протухла посреди работы. Раньше метка входа продолжала показывать
+ * прежнего пользователя, а каждая ручка отдельно писала «Сводка недоступна:
+ * authentication_required». Теперь состояние сбрасывается один раз и понятно.
+ */
+function expireSession() {
+  if (!state.user) return;
+  rememberToken('');
+  setSession(null);
+  state.coverage = new Map();
+  state.summary = null;
+  invalidateQueue();
+  renderAll();
+  showToast('Сеанс истёк — войдите заново.', 'error');
 }
 
 function rememberToken(token) {
@@ -127,8 +158,13 @@ async function submitLogin(event) {
     rememberToken(body.token);
     element('paPasswordInput').value = '';
     setSession(body.user);
-    await refreshCoverage();
-    showToast('Вход выполнен.');
+    // Ошибку загрузки сводки нельзя перекрывать бодрым «Вход выполнен»: район
+    // видел «вход выполнен», а ниже оставалось пусто и непонятно почему.
+    const coverage = await refreshCoverage({ announce: false });
+    showToast(
+      coverage.ok ? 'Вход выполнен.' : `Вход выполнен, но сводка не загрузилась: ${coverage.error}`,
+      coverage.ok ? 'info' : 'error',
+    );
   } catch (error) {
     showToast(`Вход не выполнен: ${error.message}`, 'error');
   } finally {
@@ -152,13 +188,19 @@ async function submitLogout() {
 /* -------------------------------------------------------------- toast/state */
 
 let toastTimer = null;
+let lastErrorAt = 0;
 function showToast(message, kind = 'info') {
+  const now = Date.now();
+  // Сообщение об успехе не должно затирать ошибку: пользователь увидит «Всё
+  // хорошо», а причина сбоя исчезнет с экрана через миллисекунды.
+  if (kind !== 'error' && now - lastErrorAt < 6000) return;
+  if (kind === 'error') lastErrorAt = now;
   const toast = element('paToast');
   toast.textContent = message;
   toast.dataset.kind = kind;
   toast.dataset.visible = 'true';
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => { toast.dataset.visible = 'false'; }, 5200);
+  toastTimer = setTimeout(() => { toast.dataset.visible = 'false'; }, kind === 'error' ? 9000 : 5200);
 }
 
 function setSendState(kind, text) {
@@ -245,13 +287,13 @@ function fillGroupFilter() {
   element('paGroupLabel').textContent = groupLabel(state.dataset);
 }
 
-async function refreshCoverage() {
+async function refreshCoverage({ announce = true } = {}) {
   if (!state.user) {
     state.coverage = new Map();
     state.summary = null;
     invalidateQueue();
     renderAll();
-    return;
+    return { ok: true, empty: true };
   }
   const district = requestedDistrict();
   const query = district ? `?district=${encodeURIComponent(district)}` : '';
@@ -260,13 +302,24 @@ async function refreshCoverage() {
     state.coverage = buildCoverageIndex(state.summary);
     if (!district) state.boardAll = state.summary.byDistrict || [];
     fillDistrictFilter();
+    // День показываем только префектуре: у района нет ни выгрузок, ни сводки по округу.
+    if (canExport(state.user)) {
+      try { state.daily = await apiJson('/reports/daily'); } catch { state.daily = null; }
+    } else {
+      state.daily = null;
+    }
   } catch (error) {
     state.coverage = new Map();
     state.summary = null;
-    showToast(`Сводка недоступна: ${error.message}`, 'error');
+    // Протухшую сессию уже объяснил expireSession — второй текст не нужен.
+    if (announce && !error.sessionExpired) showToast(`Сводка недоступна: ${error.message}`, 'error');
+    invalidateQueue();
+    renderAll();
+    return { ok: false, error: error.message, empty: false };
   }
   invalidateQueue();
   renderAll();
+  return { ok: true, empty: !Number(state.summary?.overall?.totalObjects) };
 }
 
 function fillDistrictFilter() {
@@ -285,7 +338,6 @@ function fillDistrictFilter() {
 function renderAll() {
   renderSummary();
   renderDashboard();
-  renderRiskTops();
   renderList();
   renderMapObjects();
   renderBoundaries();
@@ -363,92 +415,6 @@ function renderDashboard() {
   for (const district of districts) list.appendChild(boardRow(district));
 }
 
-/**
- * Дашборд рисков: топ районов по числу нарушений и исполнители внутри района.
- * Данные приходят в сводке отдельным полем `riskTops`, поэтому блок показываем
- * всем, у кого есть сводка: район видит свой срез, префектура — весь округ.
- * Пустой блок — одна строка «Риски не выявлены», а не пустая сетка.
- */
-function renderRiskTops() {
-  const section = element('paRisk');
-  if (!state.summary) {
-    section.hidden = true;
-    return;
-  }
-  const risks = riskTopRows(state.summary);
-  section.hidden = false;
-  element('paRiskTotal').textContent = `Всего нарушений: ${risks.totalLabel}`;
-
-  const districts = element('paRiskDistricts');
-  districts.replaceChildren();
-  const performersBlock = element('paRiskPerformersBlock');
-  const performers = element('paRiskPerformers');
-  performers.replaceChildren();
-  element('paRiskNote').hidden = risks.empty;
-
-  if (risks.empty) {
-    performersBlock.hidden = true;
-    const note = document.createElement('p');
-    note.className = 'pa-note';
-    note.textContent = 'Риски не выявлены';
-    districts.appendChild(note);
-    return;
-  }
-  performersBlock.hidden = false;
-
-  for (const entry of risks.districts) {
-    const row = document.createElement('div');
-    row.className = 'pa-risk-row';
-    row.setAttribute('role', 'listitem');
-
-    const rank = document.createElement('span');
-    rank.className = 'pa-risk-rank';
-    rank.textContent = String(entry.rank);
-
-    const caption = document.createElement('span');
-    const name = document.createElement('span');
-    name.className = 'pa-board-name';
-    name.textContent = entry.district;
-    const note = document.createElement('span');
-    note.className = 'pa-board-note';
-    note.textContent = `${entry.sharePercent} % от всех нарушений`;
-    caption.append(name, note);
-
-    const bar = document.createElement('span');
-    bar.className = 'pa-board-bar';
-    const fill = document.createElement('span');
-    fill.style.width = `${Math.max(0, Math.min(100, entry.barPercent))}%`;
-    bar.appendChild(fill);
-
-    const value = document.createElement('span');
-    value.className = 'pa-board-value';
-    value.textContent = entry.countLabel;
-
-    row.append(rank, caption, bar, value);
-    districts.appendChild(row);
-
-    const group = document.createElement('div');
-    group.className = 'pa-risk-group';
-    const title = document.createElement('span');
-    title.className = 'pa-risk-group-name';
-    title.textContent = entry.district;
-    group.appendChild(title);
-    for (const performer of entry.performers) {
-      const line = document.createElement('div');
-      line.className = 'pa-risk-perf';
-      const who = document.createElement('span');
-      who.className = 'pa-board-name';
-      who.textContent = performer.performer;
-      const count = document.createElement('span');
-      count.className = 'pa-board-value';
-      count.textContent = performer.countLabel;
-      line.append(who, count);
-      group.appendChild(line);
-    }
-    performers.appendChild(group);
-  }
-}
-
 function renderSummary() {
   const box = element('paSummary');
   box.replaceChildren();
@@ -474,6 +440,17 @@ function renderSummary() {
   head.append(value, band);
   box.appendChild(head);
 
+  // Пустая сводка не должна выглядеть как «ещё грузится»: у района может не быть
+  // объектов из-за данных, а не из-за сети.
+  if (state.user && !Number(state.summary.overall?.totalObjects)) {
+    const note = document.createElement('p');
+    note.className = 'pa-note';
+    note.textContent = state.user.role === 'district_editor'
+      ? `По району «${state.user.district}» объектов нет. Проверьте учётную запись или обратитесь в префектуру.`
+      : 'В выбранной выборке объектов нет.';
+    box.appendChild(note);
+  }
+
   const metrics = document.createElement('dl');
   metrics.className = 'pa-metrics';
   for (const row of reportSummaryRows(state.summary).slice(0, 7)) {
@@ -488,6 +465,10 @@ function renderSummary() {
   }
   box.appendChild(metrics);
 
+  if (canExport(state.user) && state.daily) {
+    box.appendChild(dayBlock(state.daily));
+  }
+
   if (state.summary.unassigned && state.summary.unassigned.totalObjects > 0 && !element('paDistrictFilter').value) {
     const note = document.createElement('p');
     note.className = 'pa-unassigned';
@@ -496,7 +477,66 @@ function renderSummary() {
       + `${String(state.summary.unassigned.objectsWithPhoto)} с фото) — `
       + 'они учтены в строке «АвД САО» вместе с объектами владельца и «ДЭУ».';
     box.appendChild(note);
+    // Привязку не меняем: объект вне полигонов — это данные источника. Но
+    // префектура должна видеть, какие именно объекты остались без района.
+    const list = state.summary.unassigned.objects || [];
+    if (list.length) {
+      const details = document.createElement('details');
+      details.className = 'pa-unassigned-list';
+      const summary = document.createElement('summary');
+      summary.textContent = `Показать объекты без района (${list.length}`
+        + `${state.summary.unassigned.totalObjects > list.length ? ` из ${state.summary.unassigned.totalObjects}` : ''})`;
+      details.appendChild(summary);
+      const items = document.createElement('ul');
+      for (const object of list.slice(0, 20)) {
+        const item = document.createElement('li');
+        item.textContent = `${object.label || object.objectKey} · ${object.objectType} · точек ${object.sourcePoints}`;
+        items.appendChild(item);
+      }
+      if (list.length > 20) {
+        const rest = document.createElement('li');
+        rest.textContent = `…и ещё ${list.length - 20}`;
+        items.appendChild(rest);
+      }
+      details.appendChild(items);
+      box.appendChild(details);
+    }
   }
+}
+
+/**
+ * Блок «День»: что сделано за московские сутки и как это выглядит рядом со
+ * средним днём недели. Числа приходят одним запросом `/reports/daily`.
+ */
+function dayBlock(daily) {
+  const box = document.createElement('div');
+  box.className = 'pa-day';
+  const head = document.createElement('p');
+  head.className = 'pa-list-head';
+  head.textContent = `Продуктивность за ${daily.date} (МСК)`;
+  box.appendChild(head);
+
+  const signed = (value) => `${value > 0 ? '+' : ''}${Number(value).toLocaleString('ru-RU')}`;
+  const lines = [
+    `Загружено фото: ${Number(daily.overall.uploaded).toLocaleString('ru-RU')} (${signed(daily.deltas.uploadedVsYesterday)} к вчера)`,
+    `Подтверждено отметок: ${Number(daily.overall.closed).toLocaleString('ru-RU')} (${signed(daily.deltas.closedVsYesterday)} к вчера)`,
+    `Работали районы: ${daily.overall.activeDistricts} из ${daily.overall.totalDistricts}, исполнителей ${daily.overall.activePerformers}`,
+    `На проверке: ${Number(daily.overall.pending).toLocaleString('ru-RU')}`,
+  ];
+  if (daily.leaders.best.length) {
+    lines.push(`Лучшие за день: ${daily.leaders.best.map((entry) => `${entry.district} (${entry.closed})`).join(', ')}`);
+  }
+  if (daily.leaders.silent.length) {
+    lines.push(`Без загрузок: ${daily.leaders.silent.join(', ')}`);
+  }
+  const list = document.createElement('ul');
+  for (const line of lines) {
+    const item = document.createElement('li');
+    item.textContent = line;
+    list.appendChild(item);
+  }
+  box.appendChild(list);
+  return box;
 }
 
 function currentRecords() {
@@ -553,12 +593,6 @@ function renderList() {
     const counter = document.createElement('span');
     counter.textContent = `подтверждено ${coverage.confirmed} из ${coverage.required}`;
     meta.append(where, counter, rowChip(coverage.statusKey, coverage.statusLabel, coverage.pending));
-    if (coverage.geoRisk) {
-      const risk = document.createElement('span');
-      risk.className = 'pa-chip pa-chip-risk';
-      risk.textContent = 'Риск GPS';
-      meta.appendChild(risk);
-    }
     row.append(title, meta);
     row.addEventListener('click', () => openRecord(record, row));
     list.appendChild(row);
@@ -715,7 +749,7 @@ function resetPhotoForm() {
   const preview = element('paPreview');
   preview.removeAttribute('src');
   preview.style.display = 'none';
-  element('paGpsNote').textContent = 'GPS обязателен для отправки: нажмите «Определить GPS» и разрешите доступ.';
+  element('paGpsNote').textContent = 'GPS не обязателен: можно определить координаты кнопкой, а можно отправить фото без них — оно уйдёт на ручную проверку.';
   setSendState('idle', 'Не отправлено.');
   updateUploadButton();
 }
@@ -723,17 +757,15 @@ function resetPhotoForm() {
 function updateUploadButton() {
   const sendable = state.sendState !== 'sending';
   const hasFile = Boolean(state.file);
-  const hasGps = Boolean(state.gps);
-  const dialogPerformer = Boolean((element('paPerformer').value || '').trim());
-  const queuePerformer = Boolean((element('paQueuePerformer').value || '').trim());
+  const hasPerformer = Boolean(state.performer);
 
   const saveButton = element('paSave');
   if (saveButton) {
-    saveButton.disabled = !(Boolean(state.user) && hasFile && hasGps && sendable && dialogPerformer && Boolean(state.selected));
+    saveButton.disabled = !(Boolean(state.user) && hasFile && sendable && hasPerformer && Boolean(state.selected));
   }
   const queueButton = element('paQueueSave');
   if (queueButton) {
-    queueButton.disabled = !(Boolean(state.user) && hasFile && hasGps && sendable && queuePerformer && Boolean(queueRecord()));
+    queueButton.disabled = !(Boolean(state.user) && hasFile && sendable && hasPerformer && Boolean(queueRecord()));
   }
 
   const note = element('paLimitNote');
@@ -746,11 +778,12 @@ function updateUploadButton() {
   const missing = [];
   if (!state.user) missing.push('войдите в фотослужбу');
   if (!hasFile) missing.push('выберите фотографию');
-  if (!hasGps) missing.push('получите GPS');
-  if (!dialogPerformer) missing.push('укажите исполнителя');
+  if (!hasPerformer) missing.push('укажите исполнителя');
+  // GPS не обязателен: без координат фиксация просто уйдёт на ручную проверку.
   note.textContent = `Подтверждено ${coverage.confirmed} из ${coverage.required}. `
     + (remaining > 0 ? `Можно добавить ещё ${remaining}. ` : 'Норма по фото уже набрана — лишнее уйдёт на проверку. ')
-    + (missing.length ? `Для отправки: ${missing.join(', ')}.` : 'Всё готово к отправке.');
+    + (missing.length ? `Для отправки: ${missing.join(', ')}.` : 'Всё готово к отправке.')
+    + (state.gps ? '' : ' Координаты не указаны — фото уйдёт на ручную проверку.');
 }
 
 async function openRecord(record, trigger) {
@@ -766,19 +799,13 @@ async function openRecord(record, trigger) {
   counter.className = 'pa-chip';
   counter.textContent = `подтверждено ${coverage.confirmed} из ${coverage.required}`;
   statusLine.appendChild(counter);
-  if (coverage.geoRisk) {
-    const risk = document.createElement('span');
-    risk.className = 'pa-chip pa-chip-risk';
-    risk.textContent = 'Есть фиксация с риском GPS';
-    statusLine.appendChild(risk);
-  }
   const rows = [{ key: 'Координаты на карте', value: formatCoordinates(record.lat, record.lon) }];
   for (const [key, value] of Object.entries(record.properties || {})) {
     if (value !== null && value !== undefined && value !== '') rows.push({ key, value });
   }
   addDataRows(element('paDialogData'), rows);
   resetPhotoForm();
-  element('paPerformer').value = element('paPerformer').value || readPerformer();
+  element('paPerformer').value = state.performer || readPerformer();
   const dialog = element('paDialog');
   if (!dialog.open) dialog.showModal();
   await renderGallery(record);
@@ -869,6 +896,16 @@ async function renderGallery(record) {
       reject.addEventListener('click', () => reviewPhoto(raw.id, 'rejected', referenceBox.checked, record));
       actions.append(confirm, reject);
     }
+    // Пока приёмка не подтвердила кадр, район отзывает его сам: раньше район не
+    // мог убрать фото, загруженное по ошибке, и ждал префектуру.
+    if (raw.reviewStatus === 'pending_review') {
+      const withdraw = document.createElement('button');
+      withdraw.type = 'button';
+      withdraw.className = 'pa-btn';
+      withdraw.textContent = 'Отозвать фото';
+      withdraw.addEventListener('click', () => withdrawPhoto(raw.id, record, withdraw));
+      actions.appendChild(withdraw);
+    }
     body.append(actions, reference);
     card.append(image, body);
     gallery.appendChild(card);
@@ -899,6 +936,22 @@ async function reviewPhoto(photoId, status, isReference, record) {
     if (record) await renderGallery(record);
   } catch (error) {
     showToast(`Не удалось изменить фиксацию: ${error.message}`, 'error');
+  }
+}
+
+/** Мягкий отзыв своего кадра: подтверждённое приёмкой фото отозвать нельзя. */
+async function withdrawPhoto(photoId, record, button) {
+  const confirmed = window.confirm('Отозвать это фото? Оно исчезнет из галереи и счётчиков района.');
+  if (!confirmed) return;
+  button.disabled = true;
+  try {
+    await apiJson(`/photos/${encodeURIComponent(photoId)}/withdraw`, { method: 'POST' });
+    showToast('Фото отозвано.');
+    await refreshCoverage();
+    if (record) await renderGallery(record);
+  } catch (error) {
+    showToast(`Не удалось отозвать фото: ${error.message}`, 'error');
+    button.disabled = false;
   }
 }
 
@@ -985,7 +1038,9 @@ function pickFile(event, options) {
   if (!file) { state.file = null; updateUploadButton(); return; }
   if (!isSupportedFile(file)) {
     state.file = null;
-    showToast('Поддерживаются JPEG, PNG, WEBP, HEIC и HEIF.', 'error');
+    showToast(isHeic(file)
+      ? 'Формат HEIC не поддерживается — сохраните фото как JPEG и выберите его снова.'
+      : 'Поддерживаются JPEG, PNG и WEBP.', 'error');
     event.target.value = '';
     updateUploadButton();
     return;
@@ -1055,10 +1110,9 @@ function requestGps(noteId, record) {
     if (target && state.entry) {
       const points = await referencePointsFor(target);
       const distance = gpsDistanceLabel({ latitude: state.gps.lat, longitude: state.gps.lon }, points);
+      // Расстояние показываем справочно: риском оно больше не помечается, GPS
+      // не обязателен, и фиксация уходит на проверку в любом случае.
       note.textContent += ` ${distance}`;
-      if (assessDistanceRisk({ latitude: state.gps.lat, longitude: state.gps.lon }, points).risk) {
-        note.textContent += ' Фиксация всё равно отправится, но будет помечена как риск.';
-      }
     }
     updateUploadButton();
   }, (error) => {
@@ -1069,10 +1123,9 @@ function requestGps(noteId, record) {
 }
 
 async function sendPhoto(record, performerNode, commentNode) {
-  if (!state.file || !state.gps) { showToast('Нужны фотография и координаты GPS.', 'error'); return false; }
-  if (accuracyVerdict(state.gps.accuracy) === 'unusable') { showToast('Координаты слишком неточные: включите геолокацию и определите их заново.', 'error'); return false; }
-  const performer = performerNode.value.trim();
-  if (!performer) { showToast('Укажите исполнителя.', 'error'); performerNode.focus(); return false; }
+  if (!state.file) { showToast('Выберите фотографию.', 'error'); return false; }
+  const performer = (state.performer || performerNode?.value || '').trim();
+  if (!performer) { showToast(errorText('performer_required'), 'error'); performerNode?.focus(); return false; }
   setSendState('sending', 'Отправляется… не закрывайте страницу.');
   try {
     const blob = await compressImage(state.file);
@@ -1084,14 +1137,17 @@ async function sendPhoto(record, performerNode, commentNode) {
     form.append('sourceId', record.id);
     form.append('performer', performer);
     form.append('comment', commentNode.value.trim());
-    form.append('gpsLat', state.gps.lat);
-    form.append('gpsLon', state.gps.lon);
-    form.append('gpsAccuracyM', state.gps.accuracy);
-    form.append('capturedAt', state.gps.capturedAt);
+    // GPS не обязателен: координаты отправляем, только если их определили.
+    if (state.gps) {
+      form.append('gpsLat', state.gps.lat);
+      form.append('gpsLon', state.gps.lon);
+      form.append('gpsAccuracyM', state.gps.accuracy);
+      form.append('capturedAt', state.gps.capturedAt);
+    }
     const response = await api('/photos', { method: 'POST', headers: { 'Idempotency-Key': idempotencyKeyFor(record, state.file) }, body: form });
     let body = null;
     try { body = await response.json(); } catch { body = null; }
-    if (!response.ok) throw new Error(body?.message || body?.error || `Сервис ответил ${response.status}`);
+    if (!response.ok) throw Object.assign(new Error(errorText(body?.error, body?.message) || `Сервис ответил ${response.status}`), { code: body?.error, status: response.status });
     const review = [body?.geoStatus, body?.reviewStatus].filter(Boolean).map((value) => geoStatusText(value)).join(' · ');
     setSendState('review', `Отправлено${body?.duplicate ? ' (повтор не создал дубль)' : ''}. `
       + `${body?.distanceM === null || body?.distanceM === undefined ? '' : `Дистанция ${formatMeters(body.distanceM)}. `}`
@@ -1122,6 +1178,22 @@ function readPerformer() {
 
 function writePerformer(value) {
   try { sessionStorage.setItem(PERFORMER_KEY, value); } catch { /* ignore */ }
+}
+
+/**
+ * Один исполнитель на страницу: значение хранится в состоянии, оба поля
+ * (в карточке и в очереди) показывают его же. Без этого ввод в одном поле
+ * не влиял на кнопку в другом, и отправка требовала «указать исполнителя» заново.
+ */
+function setPerformer(value, sourceNode) {
+  const text = String(value || '').trim();
+  state.performer = text;
+  writePerformer(text);
+  for (const id of ['paPerformer', 'paQueuePerformer']) {
+    const node = element(id);
+    if (node && node !== sourceNode && node.value !== text) node.value = text;
+  }
+  updateUploadButton();
 }
 
 // Filtering and re-sorting 10k entrance rows on every button state change is wasteful,
@@ -1214,6 +1286,8 @@ async function downloadReport(kind) {
     : kind === 'headquarters' ? `/reports/export-headquarters.xlsx${query}`
     : kind === 'headquarters-pdf' ? `/reports/export-headquarters.pdf${query}`
     : kind === 'districts' ? `/reports/export-districts.xlsx${query}`
+    : kind === 'day' ? `/reports/daily.xlsx${query}`
+    : kind === 'day-pdf' ? `/reports/daily.pdf${query}`
     : `/reports/export.pdf${query}`;
   try {
     showToast('Готовим выгрузку…');
@@ -1227,6 +1301,8 @@ async function downloadReport(kind) {
       : kind === 'headquarters' ? 'sao-photo-headquarters.xlsx'
       : kind === 'headquarters-pdf' ? 'sao-photo-headquarters.pdf'
       : kind === 'districts' ? 'sao-photo-districts.xlsx'
+      : kind === 'day' ? 'sao-photo-day.xlsx'
+      : kind === 'day-pdf' ? 'sao-photo-day.pdf'
       : 'sao-photo-summary.pdf';
     document.body.appendChild(link);
     link.click();
@@ -1372,18 +1448,6 @@ function shell() {
           <h2 class="pa-dashboard-title" id="paDashboardTitle">Районы округа</h2>
           <div class="pa-board" id="paDistrictBoard" role="list"></div>
         </section>
-        <section class="pa-dashboard" id="paRisk" aria-labelledby="paRiskTitle" hidden>
-          <div class="pa-risk-head">
-            <h2 class="pa-dashboard-title" id="paRiskTitle">Топ районов по рискам</h2>
-            <span class="pa-risk-total" id="paRiskTotal"></span>
-          </div>
-          <div class="pa-risk-list" id="paRiskDistricts" role="list"></div>
-          <div id="paRiskPerformersBlock" hidden>
-            <h2 class="pa-dashboard-title" id="paRiskPerformersTitle">Топ исполнителей по районам</h2>
-            <div class="pa-risk-performers" id="paRiskPerformers"></div>
-          </div>
-          <p class="pa-note" id="paRiskNote" hidden>Район считается по балансодержателю: объекты «АвД САО», «ДЭУ» и объекты без района учтены в строке «АвД САО».</p>
-        </section>
         <div class="pa-filters">
           <div>
             <label class="pa-label" for="paSearch">Поиск по адресу, району и атрибутам</label>
@@ -1406,11 +1470,12 @@ function shell() {
               <option value="done">Выполнено</option>
               <option value="partial">Частично</option>
               <option value="pending">На проверке</option>
-              <option value="risk">Риск GPS</option>
             </select>
           </div>
         </div>
         <div class="pa-exports" id="paExports" hidden>
+          <button type="button" class="pa-btn" id="paExportDay">Excel: отчёт за день</button>
+          <button type="button" class="pa-btn" id="paExportDayPdf">PDF: отчёт за день</button>
           <button type="button" class="pa-btn" id="paExportXlsx">Excel: полный реестр</button>
           <button type="button" class="pa-btn" id="paExportDistricts">Excel: по районам</button>
           <button type="button" class="pa-btn" id="paExportHeadquarters">Excel: таблица на штаб</button>
@@ -1454,7 +1519,7 @@ function shell() {
         <button type="button" class="pa-btn pa-btn-primary" id="paQueueSave">Отправить фото</button>
       </div>
       <p class="pa-queue-state" id="paQueueState" role="status" data-state="idle">Не отправлено.</p>
-      <p class="pa-queue-gps" id="paQueueGpsNote">GPS обязателен: без координат сервер отклонит загрузку.</p>
+      <p class="pa-queue-gps" id="paQueueGpsNote">GPS не обязателен: без координат фото уйдёт на ручную проверку.</p>
     </section>
   </main>
 </div>
@@ -1480,7 +1545,7 @@ function shell() {
       <button type="button" class="pa-btn" id="paGpsButton">Определить GPS</button>
       <button type="submit" class="pa-btn pa-btn-primary" id="paSave" disabled>Отправить фото</button>
     </div>
-    <p class="pa-note" id="paGpsNote">GPS обязателен для отправки.</p>
+    <p class="pa-note" id="paGpsNote">GPS не обязателен: координаты можно определить кнопкой, а можно отправить фото без них.</p>
     <p class="pa-note" id="paUploadState" role="status" data-state="idle">Не отправлено.</p>
   </form>
   <h3>Сохранённые фотографии</h3>
@@ -1505,6 +1570,8 @@ function bindEvents() {
   element('paGroupFilter').addEventListener('change', () => { invalidateQueue(); renderList(); renderMapObjects(); renderQueue(); });
   element('paStatusFilter').addEventListener('change', () => { invalidateQueue(); renderList(); renderMapObjects(); renderQueue(); });
   element('paDistrictFilter').addEventListener('change', () => { invalidateQueue(); refreshCoverage(); });
+  element('paExportDay').addEventListener('click', () => downloadReport('day'));
+  element('paExportDayPdf').addEventListener('click', () => downloadReport('day-pdf'));
   element('paExportXlsx').addEventListener('click', () => downloadReport('xlsx'));
   element('paExportDistricts').addEventListener('click', () => downloadReport('districts'));
   element('paExportHeadquarters').addEventListener('click', () => downloadReport('headquarters'));
@@ -1529,12 +1596,12 @@ function bindEvents() {
     await renderGallery(state.selected);
     updateUploadButton();
   });
-  element('paPerformer').addEventListener('change', (event) => writePerformer(event.target.value.trim()));
+  element('paPerformer').addEventListener('input', (event) => setPerformer(event.target.value, event.target));
+  element('paPerformer').addEventListener('change', (event) => setPerformer(event.target.value, event.target));
   element('paQueueFile').addEventListener('change', (event) => pickFile(event, { previewId: 'paPreview', stateId: 'paQueueGpsNote' }));
   element('paQueueGps').addEventListener('click', () => requestGps('paQueueGpsNote', queueRecord()));
-  element('paPerformer').addEventListener('input', updateUploadButton);
-  element('paQueuePerformer').addEventListener('input', updateUploadButton);
-  element('paQueuePerformer').addEventListener('change', (event) => writePerformer(event.target.value.trim()));
+  element('paQueuePerformer').addEventListener('input', (event) => setPerformer(event.target.value, event.target));
+  element('paQueuePerformer').addEventListener('change', (event) => setPerformer(event.target.value, event.target));
   element('paQueueSkip').addEventListener('click', () => { state.queueIndex += 1; renderQueue(); });
   element('paQueueSave').addEventListener('click', async () => {
     const record = queueRecord();
@@ -1542,7 +1609,6 @@ function bindEvents() {
     const performer = element('paQueuePerformer');
     const ok = await sendPhoto(record, performer, element('paQueueComment'));
     if (ok) {
-      writePerformer(performer.value.trim());
       element('paQueueComment').value = '';
       state.queueIndex = 0;
       invalidateQueue();
@@ -1563,8 +1629,7 @@ function debounce(callback, delay) {
 export async function startPhotoApp(options = {}) {
   shell();
   bindEvents();
-  element('paPerformer').value = readPerformer();
-  element('paQueuePerformer').value = readPerformer();
+  setPerformer(readPerformer());
   renderExports();
   try {
     await loadManifest();

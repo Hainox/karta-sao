@@ -1,14 +1,13 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { completionMix, summarizeByDistrict, summarizeCoverage, summarizeCoverageByType, uploadDynamics } from '../src/report.js';
+import { completionMix, dayKey, summarizeByDistrict, summarizeCoverage, summarizeCoverageByType, uploadDynamics } from '../src/report.js';
 
-function row(district, objectType, confirmed, { pending = 0, geoRisk = false, uploadedAt = [] } = {}) {
+function row(district, objectType, confirmed, { pending = 0, uploadedAt = [] } = {}) {
   return {
     district,
     object_type: objectType,
     confirmedPhotos: confirmed,
     pendingReviewPhotos: pending,
-    geoRisk,
     photos: uploadedAt.map((stamp, index) => ({ id: `${district}-${objectType}-${index}`, uploadedAt: stamp })),
   };
 }
@@ -28,7 +27,6 @@ test('aggregates approved completion and photo counters by object type', () => {
     completedObjects: 1,
     partialObjects: 1,
     pendingReviewObjects: 1,
-    geoRiskObjects: 0,
     totalPoints: 0,
     coveredPoints: 0,
     pointsWithoutPhoto: 0,
@@ -58,13 +56,15 @@ test('keeps pending photos out of confirmed completion', () => {
   assert.equal(report.completionPercent, 0);
 });
 
-test('reports geo risks separately from completion', () => {
+test('исходные данные с лишними полями не ломают сводку', () => {
+  // Риски по GPS убраны из отчёта: поле geoRisk в выгрузке больше не считается,
+  // но старые строки с ним не должны ронять сводку.
   const report = summarizeCoverage([
     { objectType: 'stop', confirmedPhotos: 1, pendingReviewPhotos: 0, geoRisk: true },
   ]);
 
   assert.equal(report.completedObjects, 1);
-  assert.equal(report.geoRiskObjects, 1);
+  assert.equal('geoRiskObjects' in report, false);
 });
 
 test('does not calculate a percentage for an empty scope', () => {
@@ -75,7 +75,6 @@ test('does not calculate a percentage for an empty scope', () => {
     completedObjects: 0,
     partialObjects: 0,
     pendingReviewObjects: 0,
-    geoRiskObjects: 0,
     totalPoints: 0,
     coveredPoints: 0,
     pointsWithoutPhoto: 0,
@@ -195,7 +194,7 @@ test('объекты «АвД САО», «ДЭУ» и объекты без ра
   assert.equal(districts[districts.length - 1].district, 'АвД САО');
 });
 
-test('dynamics counts uploads per UTC day and keeps a running total', () => {
+test('dynamics counts uploads per MSK day and keeps a running total', () => {
   const now = new Date('2026-09-15T12:00:00Z');
   const series = uploadDynamics([
     row('Сокол', 'stop', 1, { uploadedAt: ['2026-09-14T09:00:00Z'] }),
@@ -208,6 +207,25 @@ test('dynamics counts uploads per UTC day and keeps a running total', () => {
   assert.deepEqual(series.map((point) => point.uploaded), [0, 1, 2]);
   // Фотографии до окна входят в накопленный итог, но не в дневные столбцы.
   assert.deepEqual(series.map((point) => point.cumulative), [1, 2, 4]);
+});
+
+test('вечерняя фиксация попадает в московский день, а не в предыдущий', () => {
+  // 22:30 UTC 16.09 — это 01:30 МСК 17.09: рабочий день округа уже следующий.
+  const series = uploadDynamics([
+    row('Сокол', 'stop', 1, { uploadedAt: ['2026-09-16T22:30:00Z'] }),
+    row('Сокол', 'stop', 1, { uploadedAt: ['2026-09-16T20:00:00Z'] }),
+  ], { days: 2, now: new Date('2026-09-17T06:00:00Z') });
+
+  assert.deepEqual(series.map((point) => point.date), ['2026-09-16', '2026-09-17']);
+  // 20:00 UTC — ещё 23:00 МСК 16.09, а 22:30 UTC — уже 17.09 по МСК.
+  assert.deepEqual(series.map((point) => point.uploaded), [1, 1]);
+});
+
+test('ключ дня считается по заданной зоне', () => {
+  assert.equal(dayKey('2026-09-16T22:30:00Z'), '2026-09-17');
+  assert.equal(dayKey('2026-09-16T20:59:59Z'), '2026-09-16');
+  assert.equal(dayKey('2026-09-16T22:30:00Z', 'UTC'), '2026-09-16');
+  assert.equal(dayKey('не дата'), null);
 });
 
 test('dynamics survives rows without photos and broken timestamps', () => {

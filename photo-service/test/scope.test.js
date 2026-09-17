@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { AUTODOR_OBJECT_SQL, isAutodorAccount, isAutodorHolder, objectAllowedFor } from '../src/scope.js';
+import { AUTODOR_OBJECT_SQL, districtMatchSql, isAutodorAccount, isAutodorHolder, objectAllowedFor, sameDistrict } from '../src/scope.js';
 
 const autodorUser = { role: 'district_editor', district: 'АвД САО' };
 const districtUser = { role: 'district_editor', district: 'Аэропорт' };
@@ -44,4 +44,29 @@ test('условие выборки АвД покрывает свои объе�
   assert.match(AUTODOR_OBJECT_SQL, /o\.district IS NULL/);
   assert.match(AUTODOR_OBJECT_SQL, /'АвД САО'/);
   assert.match(AUTODOR_OBJECT_SQL, /ILIKE 'ДЭУ%'/);
+});
+
+test('район учётки и район объекта сравниваются без учёта регистра, пробелов и «ё»', () => {
+  assert.equal(sameDistrict('Молжаниновский', 'молжаниновский'), true);
+  assert.equal(sameDistrict(' Молжаниновский ', 'Молжаниновский'), true);
+  assert.equal(sameDistrict('Восточное Дегунино', 'Восточное Дегунино'), true);
+  assert.equal(sameDistrict('Хорошевский', 'Хорошевский'), true);
+  assert.equal(sameDistrict('Коптево', 'Сокол'), false);
+  assert.equal(sameDistrict('', ''), false);
+  assert.equal(sameDistrict(null, 'Сокол'), false);
+});
+
+test('учётка с другим написанием района всё равно видит свои объекты', () => {
+  // Район учётки вводит администратор, район объекта приходит из границ:
+  // расхождение в регистре раньше давало вход без данных.
+  const lowercaseUser = { role: 'district_editor', district: 'молжаниновский' };
+  assert.equal(objectAllowedFor(lowercaseUser, { district: 'Молжаниновский', balance_holder: null }), true);
+  assert.equal(objectAllowedFor(lowercaseUser, { district: 'Коптево', balance_holder: null }), false);
+});
+
+test('условие выборки по району в SQL сравнивает так же мягко', () => {
+  const sql = districtMatchSql('$1');
+  assert.match(sql, /lower\(btrim/);
+  assert.match(sql, /replace\(/);
+  assert.match(sql, /\$1/);
 });

@@ -1,15 +1,18 @@
 import { summarizeCoverageByType, summarizeCoverage, summarizeByDistrict } from './report.js';
-import { AUTODOR_OBJECT_SQL, isAutodorAccount } from './scope.js';
+import { AUTODOR_OBJECT_SQL, districtMatchSql, isAutodorAccount } from './scope.js';
 
 const TYPES = new Set(['stop', 'pp', 'entrance']);
+// Объекты без района показываются префектуре списком: это данные источника, а не
+// ошибка расчёта, но их надо видеть — иначе «7 объектов» останутся числом без имён.
+const UNASSIGNED_LIST_LIMIT = 100;
 
 function scopeClause(user, requestedDistrict) {
   // Учётка АвД ведёт объекты владельца по всему округу, а не по одному району.
   if (user.role === 'district_editor') {
     if (isAutodorAccount(user.district)) return { sql: AUTODOR_OBJECT_SQL, params: [] };
-    return { sql: 'o.district = $1', params: [user.district] };
+    return { sql: districtMatchSql('$1'), params: [user.district] };
   }
-  if (requestedDistrict && requestedDistrict !== 'all') return { sql: 'o.district = $1', params: [requestedDistrict] };
+  if (requestedDistrict && requestedDistrict !== 'all') return { sql: districtMatchSql('$1'), params: [requestedDistrict] };
   return { sql: 'TRUE', params: [] };
 }
 
@@ -28,7 +31,6 @@ export async function loadReportRows(pool, user, requestedDistrict) {
            count(p.id) FILTER (WHERE p.source_id IS NULL)::int AS unbound_photos,
            count(p.id) FILTER (WHERE p.review_status = 'confirmed')::int AS confirmed_photos,
            count(p.id) FILTER (WHERE p.review_status = 'pending_review')::int AS pending_review_photos,
-           coalesce(bool_or(p.geo_status = 'risk'), false) AS geo_risk,
            json_agg(json_build_object(
              'id', p.id, 'storageKey', p.storage_key, 'thumbnailKey', p.thumbnail_key, 'mimeType', p.mime_type,
              'originalFilename', p.original_filename, 'byteSize', p.byte_size, 'sha256', p.sha256,
@@ -37,10 +39,11 @@ export async function loadReportRows(pool, user, requestedDistrict) {
              'gpsLongitude', p.gps_longitude, 'gpsAccuracyM', p.gps_accuracy_m,
              'distanceM', p.distance_m, 'geoStatus', p.geo_status, 'sourceId', p.source_id,
              'reviewStatus', p.review_status, 'reviewReason', p.review_reason,
+             'reviewedAt', p.reviewed_at, 'uploadedBy', p.uploaded_by,
              'isReference', p.is_reference
            ) ORDER BY p.uploaded_at) FILTER (WHERE p.id IS NOT NULL) AS photos
     FROM objects o
-    LEFT JOIN photos p ON p.object_key = o.object_key AND p.review_status <> 'rejected'
+    LEFT JOIN photos p ON p.object_key = o.object_key AND p.review_status NOT IN ('rejected', 'withdrawn')
     WHERE ${scope.sql}
     GROUP BY o.object_key
     ORDER BY o.district NULLS LAST, o.object_type, o.label, o.object_key
@@ -52,7 +55,6 @@ export async function loadReportRows(pool, user, requestedDistrict) {
     sourcePointCount: Number(row.source_point_count) || 0,
     coveredPoints: Number(row.covered_points) || 0,
     unboundPhotos: Number(row.unbound_photos) || 0,
-    geoRisk: row.geo_risk === true,
     photos: Array.isArray(row.photos) ? row.photos : [],
   }));
 }
@@ -66,7 +68,6 @@ export function reportPayload(rows) {
     objectType: row.object_type,
     confirmedPhotos: row.confirmedPhotos,
     pendingReviewPhotos: row.pendingReviewPhotos,
-    geoRisk: row.geoRisk,
     sourcePointCount: row.sourcePointCount,
     coveredPoints: row.coveredPoints,
   });
@@ -81,7 +82,18 @@ export function reportPayload(rows) {
     // Разрез по районам считается здесь же: боковой дашборд префектуры и отчёты
     // показывают одни и те же числа, а не две независимые реализации.
     byDistrict: summarizeByDistrict(rows),
-    unassigned: summarizeCoverage(unassignedRows.map(coverageOf)),
+    unassigned: {
+      ...summarizeCoverage(unassignedRows.map(coverageOf)),
+      objects: unassignedRows.slice(0, UNASSIGNED_LIST_LIMIT).map((row) => ({
+        objectKey: row.object_key,
+        objectType: row.object_type,
+        label: row.label,
+        balanceHolder: row.balance_holder || null,
+        sourcePoints: row.sourcePointCount,
+        sourceIds: row.source_ids,
+      })),
+      listLimit: UNASSIGNED_LIST_LIMIT,
+    },
     objects: rows.map((row) => ({
       objectKey: row.object_key,
       datasetId: row.dataset_id,
@@ -96,7 +108,6 @@ export function reportPayload(rows) {
       sourceVersion: row.source_version,
       confirmedPhotos: row.confirmedPhotos,
       pendingReviewPhotos: row.pendingReviewPhotos,
-      geoRisk: row.geoRisk,
       sourcePointCount: row.sourcePointCount,
       coveredPoints: row.coveredPoints,
       unboundPhotos: row.unboundPhotos,

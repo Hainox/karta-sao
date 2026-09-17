@@ -56,6 +56,23 @@ test('an empty scope still returns an empty board instead of failing', () => {
   const payload = reportPayload([]);
   assert.deepEqual(payload.byDistrict, []);
   assert.equal(payload.overall.totalObjects, 0);
+  assert.deepEqual(payload.unassigned.objects, []);
+});
+
+test('объекты без района перечисляются списком, а не только числом', () => {
+  const payload = reportPayload([
+    row('Сокол', 'stop', 1),
+    { ...row(null, 'entrance', 0), object_key: 'injob_entrances|entrance|77|1|unassigned', label: 'Коптево, 5, подъезд 3', sourcePointCount: 1 },
+    { ...row(null, 'pp', 0), object_key: 'odh_pp_coordinates|pp|10002198|unassigned', label: 'Бескудниковский бульвар', sourcePointCount: 4 },
+  ]);
+
+  assert.equal(payload.unassigned.totalObjects, 2);
+  assert.equal(payload.unassigned.objects.length, 2);
+  const [first] = payload.unassigned.objects;
+  assert.equal(first.objectKey, 'injob_entrances|entrance|77|1|unassigned');
+  assert.equal(first.label, 'Коптево, 5, подъезд 3');
+  assert.equal(first.sourcePoints, 1);
+  assert.equal(payload.unassigned.listLimit, 100);
 });
 
 test('отметки районов сходятся со сводкой САО: сумма по районам равна итогу', () => {

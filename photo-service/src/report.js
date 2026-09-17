@@ -21,9 +21,6 @@ function validateRecord(record) {
 
   const confirmedPhotos = requiredCount(record, 'confirmedPhotos');
   const pendingReviewPhotos = requiredCount(record, 'pendingReviewPhotos');
-  if (record.geoRisk !== undefined && typeof record.geoRisk !== 'boolean') {
-    throw new TypeError('geoRisk must be a boolean');
-  }
 
   const sourcePointCount = Number.isSafeInteger(record.sourcePointCount) && record.sourcePointCount > 0
     ? record.sourcePointCount
@@ -39,7 +36,6 @@ function validateRecord(record) {
     requiredPhotos: PHOTO_REQUIREMENTS[record.objectType],
     confirmedPhotos,
     pendingReviewPhotos,
-    geoRisk: record.geoRisk === true,
     sourcePointCount,
     coveredPoints,
   };
@@ -66,7 +62,6 @@ export function summarizeCoverage(records) {
     completedObjects: 0,
     partialObjects: 0,
     pendingReviewObjects: 0,
-    geoRiskObjects: 0,
     totalPoints: 0,
     coveredPoints: 0,
     pointsWithoutPhoto: 0,
@@ -77,7 +72,6 @@ export function summarizeCoverage(records) {
       requiredPhotos,
       confirmedPhotos,
       pendingReviewPhotos,
-      geoRisk,
       sourcePointCount,
       coveredPoints,
     } = validateRecord(record);
@@ -98,10 +92,6 @@ export function summarizeCoverage(records) {
     }
     if (!complete && confirmedPhotos > 0) {
       summary.partialObjects += 1;
-    }
-
-    if (geoRisk) {
-      summary.geoRiskObjects += 1;
     }
 
     // Точки источника: единица работы района — конкретная точка на карте.
@@ -151,7 +141,6 @@ function coverageRecord(row) {
     objectType: row.object_type,
     confirmedPhotos: row.confirmedPhotos,
     pendingReviewPhotos: row.pendingReviewPhotos,
-    geoRisk: row.geoRisk,
     // Отметки переносятся и в районный разрез: иначе сумма по районам давала бы
     // нули, а сводка САО — реальные числа, и «Отметки» из района не сошлись бы
     // со сводкой. Поля те же, что собирает reportPayload для общей сводки.
@@ -188,10 +177,27 @@ export function summarizeByDistrict(rows) {
 }
 
 /**
- * Photos uploaded per calendar day (UTC) over the trailing window, with the
+ * Календарный день в московском времени: «2026-09-17».
+ *
+ * Раньше день брался через `toISOString()`, то есть по UTC, и фиксация в 01:00
+ * МСК попадала в предыдущие сутки — в отчётах и сводках день не совпадал с
+ * рабочим днём округа.
+ */
+export const REPORT_TIME_ZONE = 'Europe/Moscow';
+
+export function dayKey(value, timeZone = REPORT_TIME_ZONE) {
+  const stamp = value instanceof Date ? value : new Date(value);
+  if (Number.isNaN(stamp.getTime())) return null;
+  return new Intl.DateTimeFormat('en-CA', {
+    timeZone, year: 'numeric', month: '2-digit', day: '2-digit',
+  }).format(stamp);
+}
+
+/**
+ * Photos uploaded per calendar day (МСК) over the trailing window, with the
  * running total that starts from everything uploaded before the window.
  */
-export function uploadDynamics(rows, { days = 14, now = new Date() } = {}) {
+export function uploadDynamics(rows, { days = 14, now = new Date(), timeZone = REPORT_TIME_ZONE } = {}) {
   if (!Array.isArray(rows)) throw new TypeError('Report rows must be an array');
   if (!Number.isSafeInteger(days) || days < 1) throw new TypeError('days must be a positive integer');
 
@@ -199,18 +205,20 @@ export function uploadDynamics(rows, { days = 14, now = new Date() } = {}) {
   for (const row of rows) {
     for (const photo of row.photos || []) {
       if (!photo.uploadedAt) continue;
-      const stamp = new Date(photo.uploadedAt);
-      if (Number.isNaN(stamp.getTime())) continue;
-      const key = stamp.toISOString().slice(0, 10);
+      const key = dayKey(photo.uploadedAt, timeZone);
+      if (!key) continue;
       perDay.set(key, (perDay.get(key) || 0) + 1);
     }
   }
 
+  const todayKey = dayKey(now, timeZone);
+  if (!todayKey) throw new TypeError('now must be a valid date');
+  const [year, month, day] = todayKey.split('-').map(Number);
   const dayMs = 24 * 60 * 60 * 1000;
-  const today = new Date(now);
+  const startOfSeries = Date.UTC(year, month - 1, day) - (days - 1) * dayMs;
   const series = [];
-  for (let offset = days - 1; offset >= 0; offset -= 1) {
-    const date = new Date(today.getTime() - offset * dayMs).toISOString().slice(0, 10);
+  for (let offset = 0; offset < days; offset += 1) {
+    const date = new Date(startOfSeries + offset * dayMs).toISOString().slice(0, 10);
     series.push({ date, uploaded: perDay.get(date) || 0 });
   }
 

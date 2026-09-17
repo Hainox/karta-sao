@@ -30,7 +30,11 @@ export function createNotifyClient({ url, secret, fetchImpl = fetch, logger = co
     ask: (payload) => post('/ask', payload),
     // Картинка с подписью: сводка для штаба уходит фотографией.
     photo: ({ caption, png, filename = 'sao-photo-digest.png' }) =>
-      post('/photo', { caption, filename, photo: Buffer.from(png).toString('base64') })
+      post('/photo', { caption, filename, photo: Buffer.from(png).toString('base64') }),
+    // Файл выгрузки: дневная книга уходит документом, чтобы её можно было открыть
+    // прямо из чата рядом с текстом сводки.
+    document: ({ caption, file, filename }) =>
+      post('/document', { caption, filename, file: Buffer.from(file).toString('base64') }),
   };
 }
 

@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { assessDistanceRisk, haversineDistanceMeters, isUnusableAccuracy } from '../src/geo.js';
+import { assessDistanceRisk, accuracyFlag, haversineDistanceMeters, isUnusableAccuracy, photoGeoVerdict } from '../src/geo.js';
 
 test('calculates a zero distance for identical coordinates', () => {
   assert.equal(haversineDistanceMeters(
@@ -86,4 +86,59 @@ test('позиция, определённая по сети, признаётс
   assert.equal(isUnusableAccuracy(null), false);
   assert.equal(isUnusableAccuracy(undefined), false);
   assert.equal(isUnusableAccuracy(Number.NaN), false);
+});
+
+test('признак точности повторяет шкалу клиента', () => {
+  assert.equal(accuracyFlag(3), 'ok');
+  assert.equal(accuracyFlag(5), 'ok');
+  assert.equal(accuracyFlag(5.1), 'review');
+  assert.equal(accuracyFlag(120), 'review');
+  assert.equal(accuracyFlag(501), 'unusable');
+  assert.equal(accuracyFlag(null), 'unknown');
+  assert.equal(accuracyFlag(undefined), 'unknown');
+  assert.equal(accuracyFlag(-1), 'unknown');
+});
+
+test('превышение зоны больше не помечается риском: только ручная проверка', () => {
+  const distance = assessDistanceRisk(
+    { latitude: 55.75, longitude: 37.61 },
+    [{ latitude: 55.7503, longitude: 37.61 }],
+  );
+  const verdict = photoGeoVerdict(distance, 40);
+
+  // GPS признан необъективным показателем: далёкая точка уходит на ручную проверку,
+  // а не красится «риском», и неточность прибора тоже не делает её риском.
+  assert.equal(verdict.status, 'review');
+  assert.equal(verdict.reviewReason, 'far_from_registered_point');
+  assert.equal(verdict.accuracy, 'review');
+  assert.ok(verdict.distanceMeters > 30);
+  assert.equal('risk' in verdict, false);
+});
+
+test('неточность сама по себе помечается отдельным признаком', () => {
+  const inside = assessDistanceRisk(
+    { latitude: 55.75, longitude: 37.61 },
+    [{ latitude: 55.75, longitude: 37.61 }],
+  );
+  const fine = photoGeoVerdict(inside, 2);
+  assert.equal(fine.status, 'within_radius');
+  assert.equal(fine.reviewReason, null);
+  assert.equal(fine.accuracy, 'ok');
+
+  const coarse = photoGeoVerdict(inside, 25);
+  assert.equal(coarse.status, 'within_radius');
+  assert.equal(coarse.reviewReason, 'gps_accuracy_above_5m');
+
+  const unknown = photoGeoVerdict(inside, null);
+  assert.equal(unknown.status, 'within_radius');
+  assert.equal(unknown.reviewReason, 'gps_accuracy_missing');
+});
+
+test('отсутствие GPS и точек сохраняет свою причину', () => {
+  assert.equal(photoGeoVerdict(assessDistanceRisk(null, [{ latitude: 55.75, longitude: 37.61 }]), 3).reviewReason, 'missing_gps');
+  assert.equal(photoGeoVerdict(assessDistanceRisk({ latitude: 55.75, longitude: 37.61 }, []), 3).reviewReason, 'missing_reference_points');
+});
+
+test('вердикт без результата замера не выдумывается', () => {
+  assert.throws(() => photoGeoVerdict(null, 5), /distanceAssessment/);
 });
