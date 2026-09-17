@@ -126,9 +126,12 @@ async function connectBase(page) {
   await page.locator('#routes-api-email').fill('префектура');
   await page.locator('#routes-api-password').fill('test-password');
   await page.locator('#routes-login').click();
-  await expect(page.locator('#routes-note')).toContainText('Вход выполнен: префектура · prefecture_admin');
+  // Счётчик приёмки после входа сам берёт данные из базы, поэтому сводка
+  // появляется без нажатия «Загрузить».
+  await expect(page.locator('#routes-note')).toContainText('объектов 9');
   await page.locator('#routes-load').click();
   await expect(page.locator('#routes-note')).toContainText('объектов 9');
+  await expect(page.locator('#review-live')).toBeVisible();
 }
 
 test('выгрузки становятся доступны после загрузки слоёв карты', async ({ page }) => {
@@ -366,6 +369,26 @@ test('лист «маршруты на штаб» повторяет форму 
   expect(board.comment.join('\n')).toContain('Приёмка: на приёмке 4, утверждено 4, отклонено 1');
   expect(board.comment.join('\n')).toContain('По категориям: маршруты 29 %');
   expect(String(board.note)).toContain('сколько объектов района нарисовали');
+});
+
+test('счётчик приёмки появляется после входа и считает по состояниям', async ({ page }) => {
+  await page.goto(baseURL);
+  await expect(page.locator('#export-register')).toBeEnabled();
+  // До входа префектуры счётчика нет: приёмка — её работа.
+  await expect(page.locator('#review-live')).toBeHidden();
+
+  await connectBase(page);
+  await expect(page.locator('#review-live')).toBeVisible();
+  await expect(page.locator('#review-counter .review-cell')).toHaveCount(8);
+
+  // По фикстуре: наборов 3 (1 на приёмке, 1 утверждён, 1 отклонён),
+  // объектов 9 (4 на приёмке, 4 утверждено, 1 отклонён).
+  await expect(page.locator('#review-counter .review-cell b')).toHaveText([
+    '1', '1', '1', '3', '4', '4', '1', '9'
+  ]);
+  await expect(page.locator('#review-updated')).toContainText('Приёмка разобрала 56 % объектов, утверждено 44 %');
+  await expect(page.locator('#review-updated')).toContainText('последняя отправка: Аэропорт, 17.09.2026 09:30');
+  await expect(page.locator('#review-updated')).toContainText('(МСК)');
 });
 
 test('выгрузка по районам: сводка и лист на каждый район с объектами', async ({ page }) => {

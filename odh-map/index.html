@@ -384,6 +384,56 @@
         outline: 2px solid var(--teal);
         outline-offset: 1px;
       }
+      .review-counter {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 9px;
+        margin-top: 9px;
+      }
+      .review-cell {
+        padding: 10px 12px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--surface);
+      }
+      .review-cell span {
+        display: block;
+        color: var(--muted);
+        font-size: 11px;
+        line-height: 1.3;
+      }
+      .review-cell b {
+        display: block;
+        margin-top: 4px;
+        font-size: 20px;
+        font-weight: 800;
+        color: var(--navy);
+      }
+      .review-cell[data-state="submitted"] b {
+        color: #2f6fb0;
+      }
+      .review-cell[data-state="approved"] b {
+        color: #0c7a5a;
+      }
+      .review-cell[data-state="rejected"] b {
+        color: #b4552f;
+      }
+      .live-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--teal);
+        animation: live-pulse 1.8s ease-in-out infinite;
+      }
+      @keyframes live-pulse {
+        0%,
+        100% {
+          opacity: 0.35;
+        }
+        50% {
+          opacity: 1;
+        }
+      }
       .map-stage {
         position: relative;
         min-width: 0;
@@ -872,6 +922,17 @@
             <p id="routes-note" class="file-note">
               Подключение не настроено.
             </p>
+          </section>
+          <section class="section" id="review-live" hidden>
+            <h2 class="section-title">
+              Приёмка в прямом эфире <span class="live-dot"></span>
+            </h2>
+            <p class="file-note">
+              Сколько наборов и объектов ждёт решения приёмки и что уже решено.
+              Обновляется само, пока страница открыта.
+            </p>
+            <div class="review-counter" id="review-counter"></div>
+            <p id="review-updated" class="file-note">Ждём данные…</p>
           </section>
           <section class="section">
             <h2 class="section-title">
@@ -1573,6 +1634,10 @@
       // объектов районов как незагруженный, а не показывает нули — иначе «нет
       // данных» читалось бы как «районы ничего не прислали».
       let baseModel = null;
+      // Счётчик приёмки обновляется сам: раз в полминуты, пока вкладка видима.
+      let reviewState = null;
+      let reviewTimer = null;
+      const REVIEW_INTERVAL_MS = 30000;
 
       function isPrefecture() {
         return ODHApi.user()?.role === "prefecture_admin";
@@ -1603,6 +1668,9 @@
         if (baseModel) note = ODHExports.baseSummary(baseModel);
         else if (user) note = `Вход выполнен: ${user.email} · ${user.role}. Нажмите «Загрузить».`;
         document.getElementById("routes-note").textContent = note;
+        // Счётчик приёмки живёт, только пока выполнен вход префектуры.
+        if (isPrefecture()) startReviewLive();
+        else stopReviewLive();
         updateExportState();
       }
       async function routesLogin() {
@@ -1627,16 +1695,80 @@
         }
         try {
           toast("Запрашиваем объекты районов…");
-          // Наборы приходят целиком, с объектами: пересчитываем их по типам в
-          // браузере, чтобы видеть маршруты уборки и роторные перекидки отдельно.
-          const response = await ODHApi.request("/api/submissions");
-          const payload = await response.json();
-          baseModel = ODHExports.collectBase(payload.submissions);
+          await fetchBase();
           refreshRoutesSession();
           toast("Объекты районов загружены: их увидят выгрузки.");
         } catch (error) {
           toast(`Не удалось загрузить объекты районов: ${error.message}`);
         }
+      }
+      /** Наборы приходят целиком, с объектами: из них собираем и таблицы, и счётчик. */
+      async function fetchBase() {
+        const payload = await ODHApi.request("/api/submissions").then((response) =>
+          response.json(),
+        );
+        baseModel = ODHExports.collectBase(payload.submissions);
+        reviewState = ODHExports.reviewCounter(payload.submissions);
+      }
+      function stopReviewLive() {
+        if (reviewTimer) clearInterval(reviewTimer);
+        reviewTimer = null;
+        document.getElementById("review-live").hidden = true;
+      }
+      /** Счётчик обновляется сам: приёмка идёт, пока страница открыта. */
+      function startReviewLive() {
+        document.getElementById("review-live").hidden = false;
+        if (!reviewTimer) {
+          reviewTimer = setInterval(() => {
+            // Скрытую вкладку не опрашиваем: это лишние запросы к службе.
+            if (!document.hidden) refreshReviewLive();
+          }, REVIEW_INTERVAL_MS);
+        }
+        refreshReviewLive();
+      }
+      async function refreshReviewLive() {
+        try {
+          await fetchBase();
+          renderReviewCounter(reviewState);
+          document.getElementById("routes-note").textContent =
+            ODHExports.baseSummary(baseModel);
+        } catch (error) {
+          document.getElementById("review-updated").textContent =
+            `Обновление не прошло: ${error.message}`;
+        }
+      }
+      function renderReviewCounter(state) {
+        if (!state) return;
+        const box = document.getElementById("review-counter");
+        box.replaceChildren();
+        const cells = [
+          ["Наборы: на приёмке", state.sets.submitted, "submitted"],
+          ["Наборы: утверждено", state.sets.approved, "approved"],
+          ["Наборы: отклонено", state.sets.rejected, "rejected"],
+          ["Наборов всего", state.sets.total, ""],
+          ["Объекты: на приёмке", state.objects.submitted, "submitted"],
+          ["Объекты: утверждено", state.objects.approved, "approved"],
+          ["Объекты: отклонено", state.objects.rejected, "rejected"],
+          ["Объектов всего", state.objects.total, ""]
+        ];
+        for (const [label, value, status] of cells) {
+          const cell = document.createElement("div");
+          cell.className = "review-cell";
+          if (status) cell.dataset.state = status;
+          const name = document.createElement("span");
+          name.textContent = label;
+          const number = document.createElement("b");
+          number.textContent = value.toLocaleString("ru-RU");
+          cell.append(name, number);
+          box.appendChild(cell);
+        }
+        const last = state.lastDistrict
+          ? `${state.lastDistrict}, ${ODHExports.formatSubmittedAt(state.lastSubmittedAt)}`
+          : "нет";
+        document.getElementById("review-updated").textContent =
+          `Приёмка разобрала ${state.judgedPercent} % объектов, утверждено `
+          + `${state.approvedPercent} % · последняя отправка: ${last} · обновлено `
+          + `${ODHExports.moscowMoment(state.checkedAt)} (МСК)`;
       }
       async function exportRoutesCsv() {
         if (!isPrefecture()) {
