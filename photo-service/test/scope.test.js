@@ -54,8 +54,15 @@ test('выборка района исключает объекты АвД и Д
   assert.match(sql, /AND NOT/);
   assert.match(sql, /'АвД САО'/);
   assert.match(sql, /ILIKE 'ДЭУ%'/);
+  // Без проверки на NULL «NOT (NULL = …)» снова даёт NULL и выбрасывает подъезды,
+  // у которых владельца нет вовсе.
+  assert.match(sql, /IS NOT NULL/);
   // Объекты без района к району не относятся вовсе — отдельного условия не нужно.
   assert.doesNotMatch(sql, /o\.district IS NULL/);
+});
+
+test('условие АвД тоже переживает отсутствие владельца', () => {
+  assert.match(AUTODOR_OBJECT_SQL, /IS NOT NULL/);
 });
 
 test('условие выборки АвД покрывает свои объекты, ДЭУ и объекты без района', () => {

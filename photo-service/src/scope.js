@@ -17,7 +17,9 @@ export function isAutodorHolder(holder) {
 const HOLDER_SQL = "coalesce(nullif(o.properties->>'Балансодержатель', ''), nullif(o.properties->>'Баланс', ''))";
 
 // Объект принадлежит владельцу «АвД САО» или «ДЭУ N», а не району, где стоит.
-const AUTODOR_HOLDER_SQL = `(${HOLDER_SQL} = 'АвД САО' OR ${HOLDER_SQL} ILIKE 'ДЭУ%')`;
+// Проверка на NULL обязательна: у подъездов владельца нет вовсе, а `NOT (NULL = …)`
+// в SQL даёт NULL, и тогда условие «не АвД» выбросило бы все подъезды.
+const AUTODOR_HOLDER_SQL = `(${HOLDER_SQL} IS NOT NULL AND (${HOLDER_SQL} = 'АвД САО' OR ${HOLDER_SQL} ILIKE 'ДЭУ%'))`;
 
 /** Условие выборки объектов для учётки АвД. */
 export const AUTODOR_OBJECT_SQL = `(o.district IS NULL OR ${AUTODOR_HOLDER_SQL})`;
