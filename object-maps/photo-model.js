@@ -269,13 +269,17 @@ export function filterRecords(records, options = {}) {
 }
 
 /**
- * Build the mobile route queue: objects that still need confirmed photos, kept in
- * group order so one walk covers a single group before moving on.
+ * Build the mobile route queue: points where the photo norm is not reached yet,
+ * kept in group order so one walk covers a single group before moving on.
+ *
+ * Уже загруженный, но ещё не подтверждённый кадр точку из очереди убирает:
+ * иначе район отправляли бы снимать её повторно, пока приёмка не разобрала
+ * первую, — а карточка у него уже заполнена.
  */
 export function buildQueue(records, options = {}) {
   const { coverageIndex, objectType } = options;
   return records
-    .filter((record) => !coverageFor(coverageIndex, record, objectType).complete)
+    .filter((record) => coverageFor(coverageIndex, record, objectType).remaining > 0)
     .slice()
     .sort((left, right) => {
       const group = String(left.group || '').localeCompare(String(right.group || ''), 'ru');

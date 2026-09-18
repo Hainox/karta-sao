@@ -222,6 +222,39 @@ test('the route queue skips completed objects and keeps group order', () => {
   assert.deepEqual(queue.map((record) => record.id), ['stop:2', 'stop:3']);
 });
 
+test('точка с загруженным, но ещё не подтверждённым кадром в очередь не возвращается', () => {
+  const records = [
+    { id: 'stop:1', label: 'А', group: 'Сокол' },
+    { id: 'stop:2', label: 'Б', group: 'Сокол' },
+    { id: 'pp:1', label: 'В', group: 'Сокол' },
+  ];
+  const index = buildCoverageIndex({
+    objects: [
+      { objectKey: 'a', objectType: 'stop', district: 'Сокол', sourceIds: ['stop:1'], photos: [{ sourceId: 'stop:1', reviewStatus: 'pending_review' }] },
+      { objectKey: 'b', objectType: 'pp', district: 'Сокол', sourceIds: ['pp:1'], photos: [{ sourceId: 'pp:1', reviewStatus: 'pending_review' }] },
+    ],
+  });
+
+  // Остановке хватит одного кадра: он есть, значит снимать нечего.
+  assert.deepEqual(
+    buildQueue(records.slice(0, 2), { coverageIndex: index, objectType: 'stop' }).map((record) => record.id),
+    ['stop:2'],
+  );
+  // Переходу нужно два: с одним кадром точка остаётся в очереди.
+  assert.deepEqual(
+    buildQueue([records[2]], { coverageIndex: index, objectType: 'pp' }).map((record) => record.id),
+    ['pp:1'],
+  );
+
+  const withTwo = buildCoverageIndex({
+    objects: [{
+      objectKey: 'b', objectType: 'pp', district: 'Сокол', sourceIds: ['pp:1'],
+      photos: [{ sourceId: 'pp:1', reviewStatus: 'pending_review' }, { sourceId: 'pp:1', reviewStatus: 'confirmed' }],
+    }],
+  });
+  assert.deepEqual(buildQueue([records[2]], { coverageIndex: withTwo, objectType: 'pp' }), []);
+});
+
 test('the on-screen summary always carries a number and a band word', () => {
   const rows = reportSummaryRows({
     overall: {

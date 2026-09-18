@@ -1277,12 +1277,12 @@ function renderQueue() {
   card.replaceChildren();
   element('paQueueProgress').textContent = queue.length
     ? `Осталось ${queue.length.toLocaleString('ru-RU')} объектов · показан ${Math.min(state.queueIndex + 1, queue.length)}`
-    : 'В очереди нет объектов — все подтверждены.';
+    : 'В очереди нет объектов — по всем есть кадры.';
   const record = queueRecord();
   if (!record) {
     const done = document.createElement('p');
     done.className = 'pa-queue-where';
-    done.textContent = 'Для выбранных фильтров все объекты имеют подтверждённое фото.';
+    done.textContent = 'Для выбранных фильтров по всем объектам есть кадры.';
     card.appendChild(done);
     setSendState('idle', 'Нет объектов для съёмки.');
     return;
