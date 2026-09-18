@@ -306,10 +306,10 @@ test('загруженные объекты районов попадают в �
   expect(block.totalLabel).toBe('ИТОГО');
   expect(block.totalNumbers).toEqual([6, 1, 2, 9, 4, 2, 1, '17.09.2026 09:30']);
 
-  // Тринадцать районов ничего не прислали — они обязаны быть в списке: иначе
+  // Четырнадцать районов ничего не прислали — они обязаны быть в списке: иначе
   // пропущенная строка читалась бы как «район не учли».
-  expect(block.laggingCount).toBe(13);
-  expect(block.lagging).toMatch(/^Без объектов \(13\): Беговой/);
+  expect(block.laggingCount).toBe(14);
+  expect(block.lagging).toMatch(/^Без объектов \(14\): АвД САО, Беговой/);
   // Состав «Прочих объектов» перечислен: свёрнутая колонка без расшифровки — загадка.
   expect(block.note).toContain('Временное складирование снега — 1');
   expect(block.note).toContain('Зона складирования роторного снега — 1');
@@ -568,7 +568,7 @@ test('печатная форма несёт и таблицу на штаб, и
   await expect(popup.locator('p.meta')).toContainText('объекты районов — единая база (сервис ОДХ)');
   await expect(popup.getByText('Маршруты уборки')).toBeVisible();
   await expect(popup.getByText('Роторные перекидки')).toBeVisible();
-  await expect(popup.getByText(/^Без объектов \(13\): Беговой/)).toBeVisible();
+  await expect(popup.getByText(/^Без объектов \(14\): АвД САО, Беговой/)).toBeVisible();
   await expect(popup.locator('pre')).toContainText('Направление — «Готовность слоёв карты ОДХ»');
   await expect(popup.getByText('Колонка «Объекты» — точки на карте')).toBeVisible();
 });

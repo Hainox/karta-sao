@@ -690,6 +690,9 @@
     for (const name of byDistrict.keys()) {
       if (!names.includes(name)) names.push(name);
     }
+    // АвД САО рисует маршруты наравне с районами: строка нужна и до первой отправки,
+    // иначе в отчёте её просто нет и вопрос «а где АвД» остаётся без ответа.
+    if (!names.includes(AUTODOR_HOLDER)) names.push(AUTODOR_HOLDER);
 
     const totals = blank('ИТОГО');
     const districts = names

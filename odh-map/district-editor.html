@@ -118,7 +118,9 @@
       const fields = Object.fromEntries(ids.map((id) => [id, document.getElementById(id)]));
       // Подпись в списке — «Жилищник «Район»», а значение остаётся именем района:
       // оно уходит в наборы, валидацию, базу и учётные записи.
-      DistrictChanges.DISTRICTS.forEach((name) => fields.district.add(new Option(`Жилищник «${name}»`, name)));
+      DistrictChanges.DISTRICTS.forEach((name) => fields.district.add(new Option(
+        // У АвД САО нет жилищника: это владелец дорог, а не район.
+        name === 'АвД САО' ? 'АвД САО' : `Жилищник «${name}»`, name)));
       Object.entries(DistrictChanges.TYPES).forEach(([key, type]) => fields.changeType.add(new Option(type.label, key)));
       const linkedDistrictValue = new URLSearchParams(window.location.search).get('district');
       const linkedDistrict = DistrictChanges.DISTRICTS.includes(linkedDistrictValue) ? linkedDistrictValue : null;
