@@ -671,11 +671,15 @@
         item.objects.push(objectRow(feature, submission, index));
         const kind = groupOfType(key);
         item.kinds[kind].plan += 1;
-        if (submission.status === 'submitted') item.submitted += 1;
-        else if (submission.status === 'approved') {
-          item.approved += 1;
-          item.kinds[kind].fact += 1;
-        } else if (submission.status === 'rejected') item.rejected += 1;
+        // Приёмка считается по маршрутам — ровно как в CSV службы. Иначе те же
+        // колонки в книге и в CSV показывали разные числа: там в них только
+        // маршруты, а зоны и точки идут отдельными колонками.
+        if (kind === 'route') {
+          if (submission.status === 'submitted') item.submitted += 1;
+          else if (submission.status === 'approved') item.approved += 1;
+          else if (submission.status === 'rejected') item.rejected += 1;
+        }
+        if (submission.status === 'approved') item.kinds[kind].fact += 1;
       }
       item.lastSubmittedAt = laterOf(item.lastSubmittedAt, submission && submission.submitted_at);
     }
@@ -790,15 +794,15 @@
   }
 
   /**
-   * Примечание под блоком. Объясняет состав «Прочих объектов» и главное
-   * расхождение: здесь приёмка считает все объекты набора, а в сводке службы —
-   * только маршруты, поэтому числа в этих колонках больше.
+   * Примечание под блоком. Объясняет состав «Прочих объектов» и единицу счёта
+   * приёмки: она считается по маршрутам — так же, как в сводке службы, поэтому
+   * числа в этих колонках сходятся с CSV колонка в колонку.
    */
   function baseNote(model) {
     const others = model.otherBreakdown.length
       ? model.otherBreakdown.map((entry) => `${entry.label} — ${entry.count}`).join(', ')
       : 'такие объекты районы не присылали';
-    return `«Всего» — все объекты, которые районы нарисовали и отправили; столько же в сумме показывают «Маршрутов», «Зон» и «Точек» в сводке службы. В «Прочие объекты» вошло: ${others}. Колонки приёмки считают все объекты набора, а в сводке службы «На приёмке», «Утверждено» и «Отклонено» считают только маршруты — поэтому здесь числа больше.`;
+    return `«Всего» — все объекты, которые районы нарисовали и отправили; столько же в сумме показывают «Маршрутов», «Зон» и «Точек» в сводке службы. В «Прочие объекты» вошло: ${others}. Колонки приёмки считают маршруты — та же единица, что в сводке службы, поэтому числа совпадают с CSV службы колонка в колонку.`;
   }
 
   /** Короткая сводка для сайдбара карты: одна фраза, без таблицы. */
@@ -934,7 +938,7 @@
       // Состояния приёмки в сетку эталона не помещаются, а штабу они нужны.
       extraLines: [
         `Приёмка: на приёмке ${countText(states.submitted)}, утверждено ${countText(states.approved)}, `
-        + `отклонено ${countText(states.rejected)} — считаются все объекты наборов.`
+        + `отклонено ${countText(states.rejected)} — считаются маршруты, как в CSV службы.`
       ]
     });
     comment.forEach((line, offset) => writeNote(sheet, secondTotalRow + 2 + offset, count, line, {
@@ -1111,7 +1115,7 @@
       cell.font = { name: HEADQUARTERS_FONT, size: 10, bold: true };
     }
 
-    writeNote(sheet, totalRow + 2, SUMMARY_COLUMNS.length, '«Всего» — объекты, которые район нарисовал и отправил в единую базу; «Маршруты», «Зоны» и «Точки» — их разбивка по видам. «На приёмке», «Утверждено» и «Отклонено» считают все объекты наборов района. Лист на каждый район с объектами идёт дальше в этой книге.');
+    writeNote(sheet, totalRow + 2, SUMMARY_COLUMNS.length, '«Всего» — объекты, которые район нарисовал и отправил в единую базу; «Маршруты», «Зоны» и «Точки» — их разбивка по видам. «На приёмке», «Утверждено» и «Отклонено» считают маршруты — та же единица, что в CSV службы, поэтому оба файла сходятся колонка в колонку. Лист на каждый район с объектами идёт дальше в этой книге.');
     sheet.views = [{ state: 'frozen', ySplit: 2 }];
     return sheet;
   }
