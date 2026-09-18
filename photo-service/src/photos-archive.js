@@ -218,6 +218,10 @@ export async function writePhotoArchive(rows, options = {}) {
   await archive.finalize();
   await done;
 
+  // Итоговый отчёт о ходе: архиватор шлёт событие «progress» раньше, чем поток
+  // сбросит байты, поэтому последний отчёт мог показать ноль записанного.
+  if (onProgress) onProgress({ photos: present.length, total: present.length, bytes: output.bytesWritten });
+
   const { size } = await stat(target);
   return { name, bytes: size, photos: present.length, total: present.length, skipped: skipped.length };
 }

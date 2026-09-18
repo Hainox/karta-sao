@@ -1,10 +1,17 @@
 import { summarizeCoverageByType, summarizeCoverage, summarizeByDistrict } from './report.js';
+import { PHOTO_REQUIREMENTS } from './completion.js';
 import { AUTODOR_OBJECT_SQL, districtMatchSql, isAutodorAccount } from './scope.js';
 
 const TYPES = new Set(['stop', 'pp', 'entrance']);
 // Объекты без района показываются префектуре списком: это данные источника, а не
 // ошибка расчёта, но их надо видеть — иначе «7 объектов» останутся числом без имён.
 const UNASSIGNED_LIST_LIMIT = 100;
+
+// Норма кадров на точку по видам — та же карта, что в completion.js: у перехода
+// снимают оба направления. Значения целые и берутся из кода, а не из запроса.
+const PHOTO_NORM_SQL = `CASE o.object_type ${Object.entries(PHOTO_REQUIREMENTS)
+  .map(([type, norm]) => `WHEN '${type}' THEN ${norm}`)
+  .join(' ')} ELSE 1 END`;
 
 function scopeClause(user, requestedDistrict) {
   // Учётка АвД ведёт объекты владельца по всему округу, а не по одному району.
@@ -27,7 +34,19 @@ export async function loadReportRows(pool, user, requestedDistrict) {
            nullif(o.properties->>'ID объекта ОДХ', '') AS odh_id,
            -- Единица учёта — точка источника: у одного перехода их может быть много.
            coalesce(array_length(o.source_ids, 1), 0) AS source_point_count,
-           count(DISTINCT p.source_id)::int AS covered_points,
+           -- Закрытая точка — та, где кадров набралось на норму вида (у перехода два).
+           -- Считаем точки, а не кадры: второй снимок перехода не удваивает ФАКТ.
+           coalesce((
+             SELECT count(1)::int FROM (
+               SELECT p2.source_id
+               FROM photos p2
+               WHERE p2.object_key = o.object_key
+                 AND p2.source_id IS NOT NULL
+                 AND p2.review_status NOT IN ('rejected', 'withdrawn')
+               GROUP BY p2.source_id
+               HAVING count(1) >= (${PHOTO_NORM_SQL})
+             ) closed
+           ), 0) AS covered_points,
            count(p.id) FILTER (WHERE p.source_id IS NULL)::int AS unbound_photos,
            count(p.id) FILTER (WHERE p.review_status = 'confirmed')::int AS confirmed_photos,
            count(p.id) FILTER (WHERE p.review_status = 'pending_review')::int AS pending_review_photos,

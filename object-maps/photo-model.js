@@ -1,9 +1,15 @@
 // Pure helpers for the photo atlas client. No DOM and no network here so the
 // mapping between the dataset records and the photo service can be unit tested.
 
-// Район снимает конкретную точку, поэтому норма — одно фото на точку.
+// Норма фото на точку по видам объектов. Совпадает с серверной PHOTO_REQUIREMENTS
+// (photo-service/src/completion.js). У пешеходного перехода снимают оба направления,
+// поэтому на точку нужно два кадра; у остановки и подъезда — один.
 // У объекта с одним ID точек может быть несколько, и каждая закрывается сама.
-export const POINT_PHOTO_REQUIREMENT = 1;
+export const PHOTO_REQUIREMENTS = Object.freeze({ stop: 1, pp: 2, entrance: 1 });
+
+export function photoRequirementFor(objectType) {
+  return PHOTO_REQUIREMENTS[objectType] ?? 1;
+}
 
 const REVIEW_TEXT = Object.freeze({
   pending_review: 'На проверке',
@@ -201,7 +207,7 @@ export function buildCoverageIndex(summaryPayload) {
 
 export function coverageFor(coverageIndex, record, objectType) {
   const entry = coverageIndex.get(record.id) || null;
-  const required = POINT_PHOTO_REQUIREMENT;
+  const required = photoRequirementFor(objectType);
   const confirmed = entry ? entry.confirmedPhotos : 0;
   const pending = entry ? entry.pendingReviewPhotos : 0;
   const complete = confirmed >= required;
@@ -212,7 +218,9 @@ export function coverageFor(coverageIndex, record, objectType) {
     pending,
     withPhoto: confirmed + pending > 0,
     complete,
-    remaining: Math.max(0, required - confirmed),
+    // Уже снятое, но ещё не подтверждённое тоже закрывает норму съёмки: иначе
+    // район отправляли бы снимать точку второй раз, пока приёмка не разобрала первую.
+    remaining: Math.max(0, required - confirmed - pending),
     statusKey,
     statusLabel: statusText(statusKey),
     district: entry ? entry.district : null,

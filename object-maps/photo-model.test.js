@@ -4,7 +4,7 @@ import {
   accountScope, accuracyVerdict, ACCURACY_REVIEW_METERS, assessDistanceRisk, bandNote, bandText, boundaryNote, buildCoverageIndex, buildQueue, canExport,
   coverageFor, coverageLabel, coveragePercent, districtBoundaries, filterRecords, formatAccuracy, formatCoordinates,
   formatDateTime, formatMeters, geoStatusText, gpsDistanceLabel, haversineDistanceMeters, normalizePhoto,
-  photoDetailRows, POINT_PHOTO_REQUIREMENT, reportSummaryRows, reviewStatusText, scopedDistricts,
+  photoDetailRows, photoRequirementFor, PHOTO_REQUIREMENTS, reportSummaryRows, reviewStatusText, scopedDistricts,
 } from './photo-model.js';
 
 const serverRow = {
@@ -89,8 +89,37 @@ test('translates review and geo statuses into explicit Russian text', () => {
   assert.equal(geoStatusText(''), 'Проверка не выполнялась');
 });
 
-test('норма — одно фото на точку', () => {
-  assert.equal(POINT_PHOTO_REQUIREMENT, 1);
+test('норма фото на точку зависит от вида объекта', () => {
+  assert.deepEqual(PHOTO_REQUIREMENTS, { stop: 1, pp: 2, entrance: 1 });
+  assert.equal(photoRequirementFor('pp'), 2);
+  assert.equal(photoRequirementFor('stop'), 1);
+  assert.equal(photoRequirementFor('entrance'), 1);
+  // Неизвестный вид без нормы не должен остаться: иначе точка «закрыта» сразу.
+  assert.equal(photoRequirementFor(undefined), 1);
+});
+
+test('пешеходному переходу нужно два кадра на точку', () => {
+  const one = buildCoverageIndex({
+    objects: [{
+      objectKey: 'pp|1', objectType: 'pp', district: 'Войковский', sourceIds: ['pp:1'],
+      photos: [{ sourceId: 'pp:1', reviewStatus: 'confirmed' }],
+    }],
+  });
+  const afterOne = coverageFor(one, { id: 'pp:1' }, 'pp');
+  assert.equal(afterOne.required, 2);
+  assert.equal(afterOne.complete, false);
+  assert.equal(afterOne.remaining, 1);
+
+  const two = buildCoverageIndex({
+    objects: [{
+      objectKey: 'pp|1', objectType: 'pp', district: 'Войковский', sourceIds: ['pp:1'],
+      photos: [{ sourceId: 'pp:1', reviewStatus: 'confirmed' }, { sourceId: 'pp:1', reviewStatus: 'confirmed' }],
+    }],
+  });
+  const afterTwo = coverageFor(two, { id: 'pp:1' }, 'pp');
+  assert.equal(afterTwo.confirmed, 2);
+  assert.equal(afterTwo.complete, true);
+  assert.equal(afterTwo.remaining, 0);
 });
 
 test('снимок одной точки не подтягивается на соседние точки того же объекта', () => {
@@ -105,10 +134,11 @@ test('снимок одной точки не подтягивается на с
   });
 
   const own = coverageFor(index, { id: 'pp:1' }, 'pp');
-  assert.equal(own.required, 1);
+  // Норма перехода — два кадра: одного подтверждённого для закрытия мало.
+  assert.equal(own.required, 2);
   assert.equal(own.confirmed, 1);
   assert.equal(own.pending, 1);
-  assert.equal(own.complete, true);
+  assert.equal(own.complete, false);
 
   // У соседних точек того же ID снимков нет — каждая точка закрывается сама.
   for (const id of ['pp:2', 'pp:3']) {

@@ -2,7 +2,7 @@ import {
   accountScope, accuracyVerdict, bandNote, bandText, boundaryNote, buildCoverageIndex,
   buildQueue, canExport, coverageBand, coverageFor, coverageLabel, coveragePercent, districtBoundaries,
   filterRecords, formatCoordinates, formatMeters, geoStatusText, gpsDistanceLabel, groupLabel, groupValues,
-  isAutodorAccount, photoDetailRows, reportSummaryRows, scopedDistricts, statusText,
+  isAutodorAccount, photoDetailRows, photoRequirementFor, reportSummaryRows, scopedDistricts, statusText,
 } from './photo-model.js';
 import { errorText } from './photo-messages.js';
 
@@ -36,8 +36,11 @@ const state = {
   scenario: 'register',
   queueIndex: 0,
   selected: null,
-  file: null,
+  // На точку можно выбрать столько кадров, сколько требует вид объекта: у
+  // пешеходного перехода их два, у остановки и подъезда — один.
+  files: [],
   previewUrl: '',
+  previewUrls: [],
   gps: null,
   idempotencyKey: '',
   idempotencySignature: '',
@@ -249,6 +252,7 @@ async function selectDataset(key, { keepScenario = true } = {}) {
   element('paSubtitle').textContent = `${entry.subtitle} · набор ${state.manifest.sourceDate} (${state.manifest.sourceVersion})`;
   element('paList').replaceChildren();
   element('paListCount').textContent = 'Загружаем объекты…';
+  applyFileInputMode();
   if (!state.dataCache.has(key)) state.dataCache.set(key, await loadDataset(entry));
   state.dataset = state.dataCache.get(key);
   state.queueIndex = 0;
@@ -258,6 +262,30 @@ async function selectDataset(key, { keepScenario = true } = {}) {
   buildMap();
   await refreshCoverage();
   if (!keepScenario) setScenario('register');
+}
+
+/**
+ * Форма берёт столько кадров, сколько требует вид объекта. Пешеходному переходу
+ * нужны два снимка — оба направления, — поэтому там включается выбор нескольких
+ * файлов; у остановки и подъезда камера остаётся с одним кадром.
+ */
+function applyFileInputMode() {
+  const multiple = photoRequirementFor(state.entry?.objectType) > 1;
+  const queueLabel = element('paQueueFileLabel');
+  if (queueLabel) queueLabel.textContent = multiple ? 'Выбрать фото (2)' : 'Сделать фото';
+  const fileLabel = element('paFileLabel');
+  if (fileLabel) {
+    fileLabel.textContent = multiple
+      ? 'Фотографии (JPEG, PNG или WEBP) — нужны 2: оба направления перехода'
+      : 'Фотография (JPEG, PNG или WEBP)';
+  }
+  for (const id of ['paFile', 'paQueueFile']) {
+    const input = element(id);
+    if (!input) continue;
+    input.multiple = multiple;
+    if (multiple) input.removeAttribute('capture');
+    else input.setAttribute('capture', 'environment');
+  }
 }
 
 function renderDatasetTabs() {
@@ -737,18 +765,27 @@ function releaseObjectUrls() {
   state.objectUrls = [];
 }
 
+// Превью выбранных кадров живут до отправки: объектные ссылки надо освобождать,
+// иначе браузер держит в памяти все снимки сессии.
+function releasePreviewUrls() {
+  for (const url of state.previewUrls) URL.revokeObjectURL(url);
+  state.previewUrls = [];
+  state.previewUrl = '';
+  const preview = element('paPreview');
+  if (preview) {
+    preview.removeAttribute('src');
+    preview.style.display = 'none';
+  }
+}
+
 function resetPhotoForm() {
-  state.file = null;
+  state.files = [];
   state.gps = null;
   state.idempotencyKey = '';
   state.idempotencySignature = '';
   element('paFile').value = '';
   element('paComment').value = '';
-  if (state.previewUrl) URL.revokeObjectURL(state.previewUrl);
-  state.previewUrl = '';
-  const preview = element('paPreview');
-  preview.removeAttribute('src');
-  preview.style.display = 'none';
+  releasePreviewUrls();
   element('paGpsNote').textContent = 'GPS не обязателен: можно определить координаты кнопкой, а можно отправить фото без них — оно уйдёт на ручную проверку.';
   setSendState('idle', 'Не отправлено.');
   updateUploadButton();
@@ -756,7 +793,7 @@ function resetPhotoForm() {
 
 function updateUploadButton() {
   const sendable = state.sendState !== 'sending';
-  const hasFile = Boolean(state.file);
+  const hasFile = state.files.length > 0;
   const hasPerformer = Boolean(state.performer);
 
   const saveButton = element('paSave');
@@ -774,15 +811,15 @@ function updateUploadButton() {
     note.textContent = 'Выберите объект, чтобы добавить фото.';
     return;
   }
-  const remaining = Math.max(0, coverage.required - coverage.confirmed - coverage.pending);
   const missing = [];
   if (!state.user) missing.push('войдите в фотослужбу');
   if (!hasFile) missing.push('выберите фотографию');
   if (!hasPerformer) missing.push('укажите исполнителя');
-  // GPS не обязателен: без координат фиксация просто уйдёт на ручную проверку.
-  note.textContent = `Подтверждено ${coverage.confirmed} из ${coverage.required}. `
-    + (remaining > 0 ? `Можно добавить ещё ${remaining}. ` : 'Норма по фото уже набрана — лишнее уйдёт на проверку. ')
-    + (missing.length ? `Для отправки: ${missing.join(', ')}.` : 'Всё готово к отправке.')
+  note.textContent = `Норма на точку — ${coverage.required} фото, подтверждено ${coverage.confirmed}. `
+    + (coverage.remaining > 0 ? `Осталось снять: ${coverage.remaining}. ` : 'Норма по фото набрана — лишнее уйдёт на проверку. ')
+    + (missing.length
+      ? `Для отправки: ${missing.join(', ')}.`
+      : `Выбрано фото: ${state.files.length} из ${coverage.required}. Всё готово к отправке.`)
     + (state.gps ? '' : ' Координаты не указаны — фото уйдёт на ручную проверку.');
 }
 
@@ -1018,45 +1055,50 @@ function makeThumbnail(file) {
   })).catch(() => null);
 }
 
-function acceptFile(file, { previewId, stateId }) {
+function acceptFiles(files, { previewId, stateId }) {
+  releasePreviewUrls();
   const preview = element(previewId);
-  if (state.previewUrl) URL.revokeObjectURL(state.previewUrl);
-  state.previewUrl = '';
-  if (isHeic(file)) {
-    preview.removeAttribute('src');
-    preview.style.display = 'none';
-  } else {
-    state.previewUrl = URL.createObjectURL(file);
+  const viewable = files.find((file) => !isHeic(file));
+  if (viewable) {
+    state.previewUrl = URL.createObjectURL(viewable);
+    state.previewUrls.push(state.previewUrl);
     preview.src = state.previewUrl;
     preview.style.display = 'block';
   }
-  if (stateId) element(stateId).textContent = `Выбрано фото: ${file.name}`;
+  if (stateId) element(stateId).textContent = `Выбрано фото: ${files.length}`;
 }
 
+/**
+ * Отбор кадров на точку: берём не больше нормы вида. Пешеходному переходу нужно
+ * два снимка — оба направления, — поэтому форма принимает несколько файлов.
+ */
 function pickFile(event, options) {
-  const file = event.target.files?.[0];
-  if (!file) { state.file = null; updateUploadButton(); return; }
-  if (!isSupportedFile(file)) {
-    state.file = null;
-    showToast(isHeic(file)
-      ? 'Формат HEIC не поддерживается — сохраните фото как JPEG и выберите его снова.'
-      : 'Поддерживаются JPEG, PNG и WEBP.', 'error');
-    event.target.value = '';
-    updateUploadButton();
-    return;
+  const chosen = [...(event.target.files || [])];
+  if (!chosen.length) { state.files = []; updateUploadButton(); return; }
+  const limit = photoRequirementFor(state.entry?.objectType);
+  const accepted = [];
+  for (const file of chosen) {
+    if (accepted.length >= limit) break;
+    if (isHeic(file)) {
+      showToast('Формат HEIC не поддерживается — сохраните фото как JPEG и выберите его снова.', 'error');
+      continue;
+    }
+    if (!isSupportedFile(file)) {
+      showToast('Поддерживаются JPEG, PNG и WEBP.', 'error');
+      continue;
+    }
+    if (file.size > MAX_FILE_BYTES) {
+      showToast('Размер файла больше 20 МБ.', 'error');
+      continue;
+    }
+    accepted.push(file);
   }
-  if (file.size > MAX_FILE_BYTES) {
-    state.file = null;
-    showToast('Размер файла больше 20 МБ.', 'error');
-    event.target.value = '';
-    updateUploadButton();
-    return;
-  }
-  state.file = file;
+  if (!accepted.length) { state.files = []; event.target.value = ''; updateUploadButton(); return; }
+  state.files = accepted;
   state.idempotencyKey = '';
   state.idempotencySignature = '';
-  acceptFile(file, options);
-  setSendState('idle', 'Фото выбрано, но ещё не отправлено.');
+  acceptFiles(accepted, options);
+  setSendState('idle', `Выбрано фото: ${accepted.length} из ${limit} — ещё не отправлено.`);
   updateUploadButton();
 }
 
@@ -1123,44 +1165,54 @@ function requestGps(noteId, record) {
 }
 
 async function sendPhoto(record, performerNode, commentNode) {
-  if (!state.file) { showToast('Выберите фотографию.', 'error'); return false; }
+  if (!state.files.length) { showToast('Выберите фотографию.', 'error'); return false; }
   const performer = (state.performer || performerNode?.value || '').trim();
   if (!performer) { showToast(errorText('performer_required'), 'error'); performerNode?.focus(); return false; }
-  setSendState('sending', 'Отправляется… не закрывайте страницу.');
+  const total = state.files.length;
+  setSendState('sending', total > 1 ? `Отправляется ${total} фото… не закрывайте страницу.` : 'Отправляется… не закрывайте страницу.');
   try {
-    const blob = await compressImage(state.file);
-    const form = new FormData();
-    form.append('file', blob, state.file.name || 'photo.jpg');
-    const thumbnail = await makeThumbnail(state.file);
-    if (thumbnail) form.append('thumbnail', thumbnail, 'preview.jpg');
-    form.append('datasetId', state.entry.datasetId);
-    form.append('sourceId', record.id);
-    form.append('performer', performer);
-    form.append('comment', commentNode.value.trim());
-    // GPS не обязателен: координаты отправляем, только если их определили.
-    if (state.gps) {
-      form.append('gpsLat', state.gps.lat);
-      form.append('gpsLon', state.gps.lon);
-      form.append('gpsAccuracyM', state.gps.accuracy);
-      form.append('capturedAt', state.gps.capturedAt);
+    let last = null;
+    let duplicate = false;
+    let sent = 0;
+    for (const file of [...state.files]) {
+      const blob = await compressImage(file);
+      const form = new FormData();
+      form.append('file', blob, file.name || 'photo.jpg');
+      const thumbnail = await makeThumbnail(file);
+      if (thumbnail) form.append('thumbnail', thumbnail, 'preview.jpg');
+      form.append('datasetId', state.entry.datasetId);
+      form.append('sourceId', record.id);
+      form.append('performer', performer);
+      form.append('comment', commentNode.value.trim());
+      // GPS не обязателен: координаты отправляем, только если их определили.
+      if (state.gps) {
+        form.append('gpsLat', state.gps.lat);
+        form.append('gpsLon', state.gps.lon);
+        form.append('gpsAccuracyM', state.gps.accuracy);
+        form.append('capturedAt', state.gps.capturedAt);
+      }
+      if (total > 1) setSendState('sending', `Отправляется фото ${sent + 1} из ${total}… не закрывайте страницу.`);
+      const response = await api('/photos', { method: 'POST', headers: { 'Idempotency-Key': idempotencyKeyFor(record, file) }, body: form });
+      let body = null;
+      try { body = await response.json(); } catch { body = null; }
+      if (!response.ok) throw Object.assign(new Error(errorText(body?.error, body?.message) || `Сервис ответил ${response.status}`), { code: body?.error, status: response.status });
+      // Отправленный кадр убираем из формы сразу: если упадёт второй, повтор
+      // дошлёт только его, а первый не создаст дубль.
+      state.files = state.files.filter((item) => item !== file);
+      sent += 1;
+      duplicate = duplicate || Boolean(body?.duplicate);
+      last = body;
     }
-    const response = await api('/photos', { method: 'POST', headers: { 'Idempotency-Key': idempotencyKeyFor(record, state.file) }, body: form });
-    let body = null;
-    try { body = await response.json(); } catch { body = null; }
-    if (!response.ok) throw Object.assign(new Error(errorText(body?.error, body?.message) || `Сервис ответил ${response.status}`), { code: body?.error, status: response.status });
-    const review = [body?.geoStatus, body?.reviewStatus].filter(Boolean).map((value) => geoStatusText(value)).join(' · ');
-    setSendState('review', `Отправлено${body?.duplicate ? ' (повтор не создал дубль)' : ''}. `
-      + `${body?.distanceM === null || body?.distanceM === undefined ? '' : `Дистанция ${formatMeters(body.distanceM)}. `}`
+    const review = [last?.geoStatus, last?.reviewStatus].filter(Boolean).map((value) => geoStatusText(value)).join(' · ');
+    setSendState('review', `Отправлено фото: ${sent}${duplicate ? ' (повтор не создал дубль)' : ''}. `
+      + `${last?.distanceM === null || last?.distanceM === undefined ? '' : `Дистанция ${formatMeters(last.distanceM)}. `}`
       + `${review || 'Ожидает проверки.'} В подтверждённые попадёт после проверки.`);
-    state.file = null;
+    state.files = [];
     state.gps = null;
     state.idempotencyKey = '';
     state.idempotencySignature = '';
-    if (state.previewUrl) { URL.revokeObjectURL(state.previewUrl); state.previewUrl = ''; }
+    releasePreviewUrls();
     for (const id of ['paFile', 'paQueueFile']) { const input = element(id); if (input) input.value = ''; }
-    const preview = element('paPreview');
-    preview.removeAttribute('src');
-    preview.style.display = 'none';
     await refreshCoverage();
     updateUploadButton();
     return true;
@@ -1513,7 +1565,7 @@ function shell() {
         <input id="paQueueComment" type="text" maxlength="1000" placeholder="Что зафиксировано…">
       </label>
       <div class="pa-queue-actions">
-        <label class="pa-btn pa-btn-camera" for="paQueueFile">Сделать фото</label>
+        <label class="pa-btn pa-btn-camera" for="paQueueFile" id="paQueueFileLabel">Сделать фото</label>
         <input class="pa-sr" id="paQueueFile" type="file" accept="image/jpeg,image/png,image/webp" capture="environment">
         <button type="button" class="pa-btn" id="paQueueGps">Определить GPS</button>
         <button type="button" class="pa-btn pa-btn-primary" id="paQueueSave">Отправить фото</button>
