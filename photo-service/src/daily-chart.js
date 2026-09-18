@@ -25,6 +25,8 @@ const PADDING = 28;
 const TITLE_HEIGHT = 34;
 const LEGEND_HEIGHT = 24;
 const AXIS_HEIGHT = 26;
+// Зазор между подписью шкалы и началом области графика.
+const TICK_GAP = 6;
 
 function countText(value) {
   return Number(value || 0).toLocaleString('ru-RU');
@@ -41,8 +43,14 @@ export function renderDailyChartImage(report, { width = 1180, height = 400 } = {
   const points = report.dynamics || [];
   const plotTop = PADDING + TITLE_HEIGHT + LEGEND_HEIGHT;
   const plotHeight = height - plotTop - AXIS_HEIGHT - PADDING;
-  const plotWidth = width - PADDING * 2;
   const max = Math.max(1, ...points.map((point) => Math.max(point.uploaded, point.closed)));
+  // Подписи шкалы шире левого поля, поэтому меряем самую длинную и отдаём ей
+  // место: иначе «5 602» обрезалось краем картинки до «602».
+  ctx.font = `11px "${FONT_FAMILY}"`;
+  const tickValues = Array.from({ length: 5 }, (_, step) => Math.round((max / 4) * step));
+  const tickWidth = Math.max(...tickValues.map((value) => ctx.measureText(countText(value)).width));
+  const plotLeft = PADDING + Math.ceil(tickWidth) + TICK_GAP;
+  const plotWidth = width - plotLeft - PADDING;
 
   ctx.textAlign = 'left';
   ctx.fillStyle = INK;
@@ -71,21 +79,20 @@ export function renderDailyChartImage(report, { width = 1180, height = 400 } = {
   ctx.fillStyle = MUTED;
   ctx.font = `11px "${FONT_FAMILY}"`;
   for (let step = 0; step <= 4; step += 1) {
-    const value = Math.round((max / 4) * step);
     const y = plotTop + plotHeight - (plotHeight / 4) * step;
     ctx.beginPath();
-    ctx.moveTo(PADDING, y + 0.5);
-    ctx.lineTo(PADDING + plotWidth, y + 0.5);
+    ctx.moveTo(plotLeft, y + 0.5);
+    ctx.lineTo(plotLeft + plotWidth, y + 0.5);
     ctx.stroke();
     ctx.textAlign = 'right';
-    ctx.fillText(countText(value), PADDING - 6, y + 4);
+    ctx.fillText(countText(tickValues[step]), plotLeft - TICK_GAP, y + 4);
     ctx.textAlign = 'left';
   }
 
   const slot = plotWidth / Math.max(1, points.length);
   const barWidth = Math.max(6, Math.min(18, slot * 0.28));
   points.forEach((point, index) => {
-    const centerX = PADDING + slot * index + slot / 2;
+    const centerX = plotLeft + slot * index + slot / 2;
     const baseline = plotTop + plotHeight;
     for (const [order, value, color] of [[-1, point.uploaded, UPLOADED], [1, point.closed, CLOSED]]) {
       const barHeight = value === 0 ? 0 : Math.max(3, (value / max) * plotHeight);
