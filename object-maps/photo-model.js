@@ -11,6 +11,12 @@ export function photoRequirementFor(objectType) {
   return PHOTO_REQUIREMENTS[objectType] ?? 1;
 }
 
+// Момент, с которого переход требует два кадра (12:00 МСК 18.09.2026) — та же
+// граница, что в серверном PHOTO_NORM_SINCE. Всё снятое до неё засчитывается по
+// прежнему правилу: тогда сайт закрывал точку после одного кадра, и районы снимали
+// по одному. Требование двух появилось позже самой съёмки — это была наша недоработка.
+export const PHOTO_NORM_SINCE = '2026-09-18T09:00:00Z';
+
 const REVIEW_TEXT = Object.freeze({
   pending_review: 'На проверке',
   confirmed: 'Подтверждено',
@@ -192,14 +198,26 @@ export function buildCoverageIndex(summaryPayload) {
     for (const photo of object.photos || []) {
       const sourceId = photo?.sourceId;
       if (!sourceId) continue;
-      const counts = perPoint.get(sourceId) || { confirmed: 0, pending: 0 };
+      const counts = perPoint.get(sourceId) || { confirmed: 0, pending: 0, latestUploadedAt: '' };
       if (photo.reviewStatus === 'confirmed') counts.confirmed += 1;
       else if (photo.reviewStatus !== 'rejected') counts.pending += 1;
+      const uploadedAt = String(photo.uploadedAt || '');
+      if (uploadedAt > counts.latestUploadedAt) counts.latestUploadedAt = uploadedAt;
       perPoint.set(sourceId, counts);
     }
     for (const sourceId of object.sourceIds || []) {
-      const counts = perPoint.get(sourceId) || { confirmed: 0, pending: 0 };
-      index.set(sourceId, { ...entry, confirmedPhotos: counts.confirmed, pendingReviewPhotos: counts.pending });
+      const counts = perPoint.get(sourceId) || { confirmed: 0, pending: 0, latestUploadedAt: '' };
+      // Кадр, снятый до введения нормы двух, закрывает точку по прежнему правилу.
+      // Сравниваем через Date: сервер отдаёт время с московским смещением, а порог
+      // записан в UTC, и как строки они несравнимы.
+      const legacyClosed = Boolean(counts.latestUploadedAt)
+        && Date.parse(counts.latestUploadedAt) < Date.parse(PHOTO_NORM_SINCE);
+      index.set(sourceId, {
+        ...entry,
+        confirmedPhotos: counts.confirmed,
+        pendingReviewPhotos: counts.pending,
+        legacyClosed,
+      });
     }
   }
   return index;
@@ -210,7 +228,10 @@ export function coverageFor(coverageIndex, record, objectType) {
   const required = photoRequirementFor(objectType);
   const confirmed = entry ? entry.confirmedPhotos : 0;
   const pending = entry ? entry.pendingReviewPhotos : 0;
-  const complete = confirmed >= required;
+  // Точка, снятая до введения нормы двух, закрыта по прежнему правилу: тогда
+  // хватало одного кадра, и требовать второй задним числом нечестно.
+  const legacyClosed = entry ? entry.legacyClosed === true : false;
+  const complete = confirmed >= required || legacyClosed;
   const statusKey = complete ? 'done' : confirmed > 0 ? 'partial' : pending > 0 ? 'pending' : 'empty';
   return {
     required,
@@ -218,9 +239,10 @@ export function coverageFor(coverageIndex, record, objectType) {
     pending,
     withPhoto: confirmed + pending > 0,
     complete,
+    legacyClosed,
     // Уже снятое, но ещё не подтверждённое тоже закрывает норму съёмки: иначе
     // район отправляли бы снимать точку второй раз, пока приёмка не разобрала первую.
-    remaining: Math.max(0, required - confirmed - pending),
+    remaining: complete ? 0 : Math.max(0, required - confirmed - pending),
     statusKey,
     statusLabel: statusText(statusKey),
     district: entry ? entry.district : null,

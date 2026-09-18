@@ -122,6 +122,34 @@ test('пешеходному переходу нужно два кадра на 
   assert.equal(afterTwo.remaining, 0);
 });
 
+test('точка, снятая до введения нормы двух кадров, закрыта по старому правилу', () => {
+  // Кадр загружен до 12:00 МСК 18.09.2026 — тогда хватало одного.
+  const legacy = buildCoverageIndex({
+    objects: [{
+      objectKey: 'pp|1', objectType: 'pp', district: 'Войковский', sourceIds: ['pp:1'],
+      photos: [{ sourceId: 'pp:1', reviewStatus: 'pending_review', uploadedAt: '2026-09-17T10:00:00.000Z' }],
+    }],
+  });
+  const before = coverageFor(legacy, { id: 'pp:1' }, 'pp');
+  assert.equal(before.legacyClosed, true);
+  assert.equal(before.complete, true);
+  assert.equal(before.remaining, 0);
+  // И в очередь на досъёмку такая точка не возвращается.
+  assert.deepEqual(buildQueue([{ id: 'pp:1', label: 'А', group: 'Сокол' }], { coverageIndex: legacy, objectType: 'pp' }), []);
+
+  // Кадр после порога — правило уже новое: одного мало.
+  const fresh = buildCoverageIndex({
+    objects: [{
+      objectKey: 'pp|1', objectType: 'pp', district: 'Войковский', sourceIds: ['pp:1'],
+      photos: [{ sourceId: 'pp:1', reviewStatus: 'pending_review', uploadedAt: '2026-09-18T12:30:00.000Z' }],
+    }],
+  });
+  const after = coverageFor(fresh, { id: 'pp:1' }, 'pp');
+  assert.equal(after.legacyClosed, false);
+  assert.equal(after.complete, false);
+  assert.equal(after.remaining, 1);
+});
+
 test('снимок одной точки не подтягивается на соседние точки того же объекта', () => {
   const index = buildCoverageIndex({
     objects: [{

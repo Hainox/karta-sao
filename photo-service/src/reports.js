@@ -1,5 +1,5 @@
 import { summarizeCoverageByType, summarizeCoverage, summarizeByDistrict } from './report.js';
-import { PHOTO_REQUIREMENTS } from './completion.js';
+import { PHOTO_NORM_SINCE, PHOTO_REQUIREMENTS } from './completion.js';
 import { AUTODOR_OBJECT_SQL, districtMatchSql, districtScopeSql, isAutodorAccount } from './scope.js';
 
 const TYPES = new Set(['stop', 'pp', 'entrance']);
@@ -38,6 +38,8 @@ export async function loadReportRows(pool, user, requestedDistrict) {
            coalesce(array_length(o.source_ids, 1), 0) AS source_point_count,
            -- Закрытая точка — та, где кадров набралось на норму вида (у перехода два).
            -- Считаем точки, а не кадры: второй снимок перехода не удваивает ФАКТ.
+           -- Всё, что снято до введения нормы (PHOTO_NORM_SINCE), засчитывается по
+           -- прежнему правилу: тогда хватало одного кадра, и это была наша недоработка.
            coalesce((
              SELECT count(1)::int FROM (
                SELECT p2.source_id
@@ -47,6 +49,7 @@ export async function loadReportRows(pool, user, requestedDistrict) {
                  AND p2.review_status NOT IN ('rejected', 'withdrawn')
                GROUP BY p2.source_id
                HAVING count(1) >= (${PHOTO_NORM_SQL})
+                   OR max(p2.uploaded_at) < TIMESTAMPTZ '${PHOTO_NORM_SINCE}'
              ) closed
            ), 0) AS covered_points,
            count(p.id) FILTER (WHERE p.source_id IS NULL)::int AS unbound_photos,
