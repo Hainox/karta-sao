@@ -4,7 +4,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { Pool } from 'pg';
 import { photoServiceDatabaseConfig } from '../src/config.js';
-import { districtResolver } from '../src/districts.js';
+import { districtForPoint, districtResolver } from '../src/districts.js';
 import { groupPpRecords, ppReportKey } from '../src/pp-objects.js';
 
 const sourceRootOption = process.argv.find((value) => value.startsWith('--source-root='));
