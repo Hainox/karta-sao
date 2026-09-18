@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { AUTODOR_OBJECT_SQL, districtMatchSql, isAutodorAccount, isAutodorHolder, objectAllowedFor, sameDistrict } from '../src/scope.js';
+import { AUTODOR_OBJECT_SQL, districtMatchSql, districtScopeSql, isAutodorAccount, isAutodorHolder, objectAllowedFor, sameDistrict } from '../src/scope.js';
 
 const autodorUser = { role: 'district_editor', district: 'АвД САО' };
 const districtUser = { role: 'district_editor', district: 'Аэропорт' };
@@ -33,11 +33,29 @@ test('учётка АвД работает со своими объектами 
   assert.equal(objectAllowedFor(autodorUser, { district: 'Беговой', balance_holder: 'Жилищник Беговой' }), false);
 });
 
-test('районная учётка видит только свой район, префектура — всё', () => {
-  assert.equal(objectAllowedFor(districtUser, { district: 'Аэропорт', balance_holder: 'АвД САО' }), true);
+test('районная учётка видит только свои объекты, префектура — всё', () => {
+  // Объект «АвД САО» стоит в Аэропорту, но ведёт его АвД: район его не снимает.
+  assert.equal(objectAllowedFor(districtUser, { district: 'Аэропорт', balance_holder: 'АвД САО' }), false);
+  assert.equal(objectAllowedFor(districtUser, { district: 'Аэропорт', balance_holder: 'ДЭУ 1' }), false);
+  assert.equal(objectAllowedFor(districtUser, { district: 'Аэропорт', balance_holder: 'Жилищник Аэропорт' }), true);
+  assert.equal(objectAllowedFor(districtUser, { district: 'Аэропорт', balance_holder: null }), true);
   assert.equal(objectAllowedFor(districtUser, { district: 'Коптево', balance_holder: 'АвД САО' }), false);
   assert.equal(objectAllowedFor(districtUser, { district: null, balance_holder: null }), false);
   assert.equal(objectAllowedFor(prefecture, { district: 'Коптево', balance_holder: 'Жилищник Коптево' }), true);
+  assert.equal(objectAllowedFor(prefecture, { district: 'Коптево', balance_holder: 'АвД САО' }), true);
+});
+
+test('выборка района исключает объекты АвД и ДЭУ', () => {
+  const sql = districtScopeSql('$1');
+  // Район совпадает…
+  assert.match(sql, /lower\(btrim/);
+  assert.match(sql, /\$1/);
+  // …и владелец не АвД/ДЭУ.
+  assert.match(sql, /AND NOT/);
+  assert.match(sql, /'АвД САО'/);
+  assert.match(sql, /ILIKE 'ДЭУ%'/);
+  // Объекты без района к району не относятся вовсе — отдельного условия не нужно.
+  assert.doesNotMatch(sql, /o\.district IS NULL/);
 });
 
 test('условие выборки АвД покрывает свои объекты, ДЭУ и объекты без района', () => {

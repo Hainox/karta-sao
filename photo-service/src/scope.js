@@ -16,8 +16,11 @@ export function isAutodorHolder(holder) {
 // Балансодержатель лежит в свойствах под разными именами по наборам.
 const HOLDER_SQL = "coalesce(nullif(o.properties->>'Балансодержатель', ''), nullif(o.properties->>'Баланс', ''))";
 
+// Объект принадлежит владельцу «АвД САО» или «ДЭУ N», а не району, где стоит.
+const AUTODOR_HOLDER_SQL = `(${HOLDER_SQL} = 'АвД САО' OR ${HOLDER_SQL} ILIKE 'ДЭУ%')`;
+
 /** Условие выборки объектов для учётки АвД. */
-export const AUTODOR_OBJECT_SQL = `(o.district IS NULL OR ${HOLDER_SQL} = 'АвД САО' OR ${HOLDER_SQL} ILIKE 'ДЭУ%')`;
+export const AUTODOR_OBJECT_SQL = `(o.district IS NULL OR ${AUTODOR_HOLDER_SQL})`;
 
 /** Район объекта в виде, пригодном для сравнения: без регистра, пробелов и «ё». */
 const DISTRICT_KEY_SQL = "replace(lower(btrim(coalesce(o.district, ''))), 'ё', 'е')";
@@ -28,6 +31,16 @@ const DISTRICT_KEY_SQL = "replace(lower(btrim(coalesce(o.district, ''))), 'ё', 
  */
 export function districtMatchSql(parameter = '$1') {
   return `${DISTRICT_KEY_SQL} = replace(lower(btrim(${parameter})), 'ё', 'е')`;
+}
+
+/**
+ * Условие «объект ведёт этот район»: совпадает район и владелец — сам район.
+ * Объекты «АвД САО» и «ДЭУ N» стоят на территории района, но ведёт их владелец,
+ * поэтому в районную сводку они не попадают — то же правило, что в
+ * `reportingDistrict` и в штабной таблице.
+ */
+export function districtScopeSql(parameter = '$1') {
+  return `(${districtMatchSql(parameter)} AND NOT ${AUTODOR_HOLDER_SQL})`;
 }
 
 /** Выражение балансодержателя для выборок, которые проверяют доступ построчно. */
@@ -56,6 +69,9 @@ export function sameDistrict(left, right) {
 export function objectAllowedFor(user, object) {
   if (user?.role !== 'district_editor') return true;
   if (isAutodorAccount(user.district)) return !object?.district || isAutodorHolder(object?.balance_holder);
+  // Объекты «АвД САО» и «ДЭУ N» ведёт их учётка: район их не снимает, даже если
+  // они стоят на его территории.
+  if (isAutodorHolder(object?.balance_holder)) return false;
   return sameDistrict(object?.district, user.district);
 }
 

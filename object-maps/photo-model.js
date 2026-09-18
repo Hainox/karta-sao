@@ -256,6 +256,9 @@ export function filterRecords(records, options = {}) {
     // Учётка АвД ведёт объекты по всему округу: их список приходит из сводки.
     if (objectKeys && !objectKeys.has(coverage.objectKey)) return false;
     if (district && !sameDistrict(coverage.district, district)) return false;
+    // Объекты владельца «АвД САО» и «ДЭУ» к району не относятся: они идут за АвД
+    // и в районном списке не показываются.
+    if (district && isAutodorHolder(recordHolder(record))) return false;
     if (status === 'without' && coverage.withPhoto) return false;
     if (status === 'with' && !coverage.withPhoto) return false;
     if (status === 'done' && !coverage.complete) return false;
@@ -392,6 +395,23 @@ export function sameDistrict(left, right) {
   const first = normalizeDistrict(left);
   const second = normalizeDistrict(right);
   return Boolean(first) && first === second;
+}
+
+// Балансодержатель лежит в свойствах под разными именами по наборам: у остановок
+// «Балансодержатель», у переходов «Баланс». У подъездов своего владельца нет.
+export function recordHolder(record) {
+  const properties = record?.properties || {};
+  return properties['Балансодержатель'] ?? properties['Баланс'] ?? '';
+}
+
+/**
+ * Объект принадлежит владельцу «АвД САО» или «ДЭУ N», а не району, где стоит.
+ * Такие объекты ведёт учётка АвД: район их не снимает и в своём списке не видит.
+ * Правило то же, что на сервере (`isAutodorHolder` в photo-service/src/scope.js).
+ */
+export function isAutodorHolder(holder) {
+  const value = String(holder ?? '').trim().toLowerCase();
+  return value === 'авд сао' || value.startsWith('дэу');
 }
 
 /**

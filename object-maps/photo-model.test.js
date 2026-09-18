@@ -3,8 +3,8 @@ import test from 'node:test';
 import {
   accountScope, accuracyVerdict, ACCURACY_REVIEW_METERS, assessDistanceRisk, bandNote, bandText, boundaryNote, buildCoverageIndex, buildQueue, canExport,
   coverageFor, coverageLabel, coveragePercent, districtBoundaries, filterRecords, formatAccuracy, formatCoordinates,
-  formatDateTime, formatMeters, geoStatusText, gpsDistanceLabel, haversineDistanceMeters, normalizePhoto,
-  photoDetailRows, photoRequirementFor, PHOTO_REQUIREMENTS, reportSummaryRows, reviewStatusText, scopedDistricts,
+  formatDateTime, formatMeters, geoStatusText, gpsDistanceLabel, haversineDistanceMeters, isAutodorHolder, normalizePhoto,
+  photoDetailRows, photoRequirementFor, PHOTO_REQUIREMENTS, recordHolder, reportSummaryRows, reviewStatusText, scopedDistricts,
 } from './photo-model.js';
 
 const serverRow = {
@@ -405,6 +405,35 @@ test('учётка АвД видит свои объекты во всех ра�
   assert.equal(airport.district, 'Аэропорт');
   assert.equal(airport.objectKeys, null);
   assert.deepEqual(scopedDistricts({ role: 'district_editor', district: 'Аэропорт' }, '', ['Аэропорт', 'Коптево']), ['Аэропорт']);
+});
+
+test('владелец читается из свойств набора и распознаётся как АвД или ДЭУ', () => {
+  assert.equal(isAutodorHolder(recordHolder({ properties: { 'Баланс': 'АвД САО' } })), true);
+  assert.equal(isAutodorHolder(recordHolder({ properties: { 'Балансодержатель': 'ДЭУ 1' } })), true);
+  assert.equal(isAutodorHolder(recordHolder({ properties: { 'Балансодержатель': 'Жилищник Сокол' } })), false);
+  assert.equal(isAutodorHolder(recordHolder({ properties: {} })), false);
+  assert.equal(isAutodorHolder(recordHolder({})), false);
+});
+
+test('объекты АвД и ДЭУ не попадают в список района', () => {
+  const records = [
+    { id: 'pp:1', label: 'Свой переход', group: 'Дмитровский', properties: { 'Баланс': 'Жилищник Дмитровский' } },
+    { id: 'pp:2', label: 'Переход ДЭУ', group: 'Дмитровский', properties: { 'Баланс': 'ДЭУ 2' } },
+    { id: 'pp:3', label: 'Переход АвД', group: 'Дмитровский', properties: { 'Баланс': 'АвД САО' } },
+    { id: 'pp:4', label: 'Свой подъезд', group: 'Дмитровский', properties: {} },
+  ];
+  const index = buildCoverageIndex({
+    objects: records.map((record) => ({
+      objectKey: record.id, objectType: 'pp', district: 'Дмитровский', sourceIds: [record.id], photos: [],
+    })),
+  });
+
+  // Районная учётка: остаются только объекты района — как и в районной сводке.
+  const own = filterRecords(records, { coverageIndex: index, objectType: 'pp', district: 'Дмитровский' });
+  assert.deepEqual(own.map((record) => record.id), ['pp:1', 'pp:4']);
+
+  // Префектура без фильтра района видит весь набор.
+  assert.equal(filterRecords(records, { coverageIndex: index, objectType: 'pp' }).length, 4);
 });
 
 test('a district account is scoped to its own district and cannot export', () => {

@@ -1,6 +1,6 @@
 import { summarizeCoverageByType, summarizeCoverage, summarizeByDistrict } from './report.js';
 import { PHOTO_REQUIREMENTS } from './completion.js';
-import { AUTODOR_OBJECT_SQL, districtMatchSql, isAutodorAccount } from './scope.js';
+import { AUTODOR_OBJECT_SQL, districtMatchSql, districtScopeSql, isAutodorAccount } from './scope.js';
 
 const TYPES = new Set(['stop', 'pp', 'entrance']);
 // Объекты без района показываются префектуре списком: это данные источника, а не
@@ -17,9 +17,11 @@ function scopeClause(user, requestedDistrict) {
   // Учётка АвД ведёт объекты владельца по всему округу, а не по одному району.
   if (user.role === 'district_editor') {
     if (isAutodorAccount(user.district)) return { sql: AUTODOR_OBJECT_SQL, params: [] };
-    return { sql: districtMatchSql('$1'), params: [user.district] };
+    // Район видит только свои объекты: объекты «АвД САО» и «ДЭУ N» ведёт владелец,
+    // даже если они стоят на территории района.
+    return { sql: districtScopeSql('$1'), params: [user.district] };
   }
-  if (requestedDistrict && requestedDistrict !== 'all') return { sql: districtMatchSql('$1'), params: [requestedDistrict] };
+  if (requestedDistrict && requestedDistrict !== 'all') return { sql: districtScopeSql('$1'), params: [requestedDistrict] };
   return { sql: 'TRUE', params: [] };
 }
 
