@@ -43,10 +43,12 @@ const BAND_NOTE = Object.freeze({
   high: 'выполнение 66 % и выше',
 });
 
+// Состояния точки отвечают на вопрос «что с ней делать»: снимать с нуля, доснять
+// кадр, ждать приёмку или ничего не делать. Порядок задаёт порядок в легенде.
 const STATUS_TEXT = Object.freeze({
   done: 'Выполнено',
-  partial: 'Частично',
   pending: 'На проверке',
+  incomplete: 'Не хватает кадра',
   empty: 'Без фото',
 });
 
@@ -232,22 +234,43 @@ export function coverageFor(coverageIndex, record, objectType) {
   // хватало одного кадра, и требовать второй задним числом нечестно.
   const legacyClosed = entry ? entry.legacyClosed === true : false;
   const complete = confirmed >= required || legacyClosed;
-  const statusKey = complete ? 'done' : confirmed > 0 ? 'partial' : pending > 0 ? 'pending' : 'empty';
+  const withPhoto = confirmed + pending > 0;
+  // Сколько кадров из нормы уже лежит — по ним видно и работу района, и остаток.
+  const taken = Math.min(confirmed + pending, required);
+  // Уже снятое, но ещё не подтверждённое тоже закрывает норму съёмки: иначе
+  // район отправляли бы снимать точку второй раз, пока приёмка не разобрала первую.
+  const remaining = complete ? 0 : Math.max(0, required - confirmed - pending);
+  // «Не хватает кадра» — точка, которой нужен ещё кадр, но кадры у неё уже есть:
+  // это состояние района, а не приёмки, поэтому оно отделено от «На проверке»
+  // (норма набрана, ждёт решения префектуры) и от «Без фото» (кадров нет вовсе).
+  const statusKey = complete ? 'done'
+    : remaining > 0 ? (withPhoto ? 'incomplete' : 'empty')
+      : 'pending';
   return {
     required,
     confirmed,
     pending,
-    withPhoto: confirmed + pending > 0,
+    withPhoto,
+    taken,
     complete,
     legacyClosed,
-    // Уже снятое, но ещё не подтверждённое тоже закрывает норму съёмки: иначе
-    // район отправляли бы снимать точку второй раз, пока приёмка не разобрала первую.
-    remaining: complete ? 0 : Math.max(0, required - confirmed - pending),
+    remaining,
     statusKey,
     statusLabel: statusText(statusKey),
     district: entry ? entry.district : null,
     objectKey: entry ? entry.objectKey : null,
   };
+}
+
+/**
+ * Счётчик строки: сколько кадров из нормы уже снято. Та же единица, что в сводке
+ * на штаб, — подтверждение приёмки показывается статусом и не обнуляет работу
+ * района: иначе в списке стоит «подтверждено 0 из 2» там, где точка отснята.
+ */
+export function coverageCounterText(coverage) {
+  if (!coverage || !coverage.withPhoto) return 'кадров нет';
+  if (coverage.legacyClosed) return 'зачтено по прежнему правилу';
+  return `снято ${coverage.taken} из ${coverage.required}`;
 }
 
 export function groupValues(records) {
@@ -287,7 +310,9 @@ export function filterRecords(records, options = {}) {
     // нет вовсе, и те, где есть один: раньше вторые не показывались нигде.
     if (status === 'incomplete' && coverage.remaining === 0) return false;
     if (status === 'done' && !coverage.complete) return false;
-    if (status === 'partial' && coverage.statusKey !== 'partial') return false;
+    // «Частично» — часть кадров приёмка уже приняла, но нормы точке не хватает.
+    if (status === 'partial' && !(coverage.confirmed > 0 && !coverage.complete)) return false;
+    // «На проверке» — есть кадры, по которым префектура ещё не вынесла решение.
     if (status === 'pending' && coverage.pending === 0) return false;
     return true;
   });
@@ -341,11 +366,16 @@ export function reportSummaryRows(payload) {
   const summary = payload?.overall;
   if (!summary) return [];
   const band = coverageBand(coveragePercent(summary));
+  // Охват считается по объектам, а отчётность — по отметкам: обе цифры стоят рядом,
+  // иначе район видит 8 % у себя и 13 % в сводке и считает это ошибкой.
+  const marks = Number(summary.totalPoints) || 0;
+  const closed = Number(summary.coveredPoints) || 0;
   const rows = [
     { key: 'Всего объектов', value: String(summary.totalObjects ?? 0) },
     { key: 'С фото', value: String(summary.objectsWithPhoto ?? 0) },
     { key: 'Без фото', value: String(summary.objectsWithoutPhoto ?? 0) },
-    { key: 'Охват', value: coverageLabel(summary) },
+    { key: 'Охват объектов', value: coverageLabel(summary) },
+    { key: 'Закрыто отметок', value: marks ? `${closed} из ${marks} — ${Math.round((closed / marks) * 100)} %` : 'нет отметок' },
     { key: 'На проверке', value: String(summary.pendingReviewObjects ?? 0) },
     { key: 'Подтверждено приёмкой', value: String(summary.completedObjects ?? 0) },
     { key: 'Статус', value: `${bandText(band)} — ${bandNote(band)}` },

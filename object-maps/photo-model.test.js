@@ -2,9 +2,9 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import {
   accountScope, accuracyVerdict, ACCURACY_REVIEW_METERS, assessDistanceRisk, bandNote, bandText, boundaryNote, buildCoverageIndex, buildQueue, canExport,
-  coverageFor, coverageLabel, coveragePercent, districtBoundaries, filterRecords, formatAccuracy, formatCoordinates,
-  formatDateTime, formatMeters, geoStatusText, gpsDistanceLabel, haversineDistanceMeters, isAutodorHolder, normalizePhoto,
-  photoDetailRows, photoRequirementFor, PHOTO_REQUIREMENTS, recordHolder, reportSummaryRows, reviewStatusText, scopedDistricts,
+  coverageCounterText, coverageFor, coverageLabel, coveragePercent, districtBoundaries, filterRecords, formatAccuracy,
+  formatCoordinates, formatDateTime, formatMeters, geoStatusText, gpsDistanceLabel, haversineDistanceMeters, isAutodorHolder,
+  normalizePhoto, photoDetailRows, photoRequirementFor, PHOTO_REQUIREMENTS, recordHolder, reportSummaryRows, reviewStatusText, scopedDistricts,
 } from './photo-model.js';
 
 const serverRow = {
@@ -313,9 +313,56 @@ test('the on-screen summary always carries a number and a band word', () => {
   });
   const byKey = Object.fromEntries(rows.map((row) => [row.key, row.value]));
   // Главный показатель — охват: сколько объектов уже с фото.
-  assert.equal(byKey['Охват'], '40 %');
+  assert.equal(byKey['Охват объектов'], '40 %');
   assert.equal(byKey['Статус'], 'Жёлтый — выполнение от 33 % до 66 %');
   assert.equal(byKey['Подтверждено приёмкой'], '34');
+  // Рядом стоит отчётная единица: закрытые отметки, как в сводке на штаб.
+  assert.equal(byKey['Закрыто отметок'], 'нет отметок');
+});
+
+test('в сводке на экране отметки считаются рядом с охватом по объектам', () => {
+  const rows = reportSummaryRows({
+    overall: { totalObjects: 678, objectsWithPhoto: 55, objectsWithoutPhoto: 623, totalPoints: 786, coveredPoints: 100 },
+  });
+  const byKey = Object.fromEntries(rows.map((row) => [row.key, row.value]));
+  assert.equal(byKey['Закрыто отметок'], '100 из 786 — 13 %');
+  assert.equal(byKey['Охват объектов'], '8 %');
+});
+
+test('точка с одним кадром перехода — «не хватает кадра», а не «на проверке»', () => {
+  const index = buildCoverageIndex({
+    objects: [
+      { objectKey: 'one', objectType: 'pp', district: 'Сокол', sourceIds: ['pp:one'], photos: [{ sourceId: 'pp:one', reviewStatus: 'pending_review' }] },
+      { objectKey: 'two', objectType: 'pp', district: 'Сокол', sourceIds: ['pp:two'], photos: [{ sourceId: 'pp:two', reviewStatus: 'pending_review' }, { sourceId: 'pp:two', reviewStatus: 'pending_review' }] },
+      { objectKey: 'none', objectType: 'pp', district: 'Сокол', sourceIds: ['pp:none'], photos: [] },
+    ],
+  });
+
+  const one = coverageFor(index, { id: 'pp:one' }, 'pp');
+  assert.equal(one.statusKey, 'incomplete');
+  assert.equal(one.statusLabel, 'Не хватает кадра');
+  assert.equal(one.taken, 1);
+  assert.equal(one.remaining, 1);
+  assert.equal(coverageCounterText(one), 'снято 1 из 2');
+
+  // Норма набрана — это уже ожидание приёмки, а не досъёмка.
+  const two = coverageFor(index, { id: 'pp:two' }, 'pp');
+  assert.equal(two.statusKey, 'pending');
+  assert.equal(two.remaining, 0);
+  assert.equal(two.taken, 2);
+  assert.equal(coverageCounterText(two), 'снято 2 из 2');
+
+  const none = coverageFor(index, { id: 'pp:none' }, 'pp');
+  assert.equal(none.statusKey, 'empty');
+  assert.equal(coverageCounterText(none), 'кадров нет');
+
+  // «Не хватает кадра» как отбор: и пустая точка, и та, где нужен второй кадр.
+  const records = [{ id: 'pp:one' }, { id: 'pp:two' }, { id: 'pp:none' }];
+  const options = { coverageIndex: index, objectType: 'pp' };
+  assert.deepEqual(filterRecords(records, { ...options, status: 'incomplete' }).map((record) => record.id), ['pp:one', 'pp:none']);
+  // «Частично» — только там, где часть кадров уже принята приёмкой.
+  assert.deepEqual(filterRecords(records, { ...options, status: 'partial' }), []);
+  assert.deepEqual(filterRecords(records, { ...options, status: 'done' }), []);
 });
 
 test('the summary is read from the nested overall section, not the payload root', () => {
@@ -326,7 +373,7 @@ test('the summary is read from the nested overall section, not the payload root'
     unassigned: { totalObjects: 2, objectsWithoutPhoto: 2, completedObjects: 0 },
     objects: [],
   };
-  assert.equal(reportSummaryRows(payload).length, 7);
+  assert.equal(reportSummaryRows(payload).length, 8);
   // Объекты есть, фото пока нет — это ноль процентов, а не «нет данных».
   assert.equal(coverageLabel(payload.overall), '0 %');
   assert.equal(coveragePercent(payload.overall), 0);
@@ -343,7 +390,8 @@ test('an empty scope is reported as having no data instead of zero percent', () 
     },
   });
   const byKey = Object.fromEntries(rows.map((row) => [row.key, row.value]));
-  assert.equal(byKey['Охват'], 'нет данных');
+  assert.equal(byKey['Охват объектов'], 'нет данных');
+  assert.equal(byKey['Закрыто отметок'], 'нет отметок');
   assert.equal(bandText(null), 'Нет данных');
   assert.equal(bandNote(null), 'Недостаточно данных для оценки');
 });

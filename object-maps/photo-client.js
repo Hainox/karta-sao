@@ -1,8 +1,9 @@
 import {
   accountScope, accuracyVerdict, bandNote, bandText, boundaryNote, buildCoverageIndex,
-  buildQueue, canExport, coverageBand, coverageFor, coverageLabel, coveragePercent, districtBoundaries,
-  filterRecords, formatCoordinates, formatMeters, geoStatusText, gpsDistanceLabel, groupLabel, groupValues,
-  isAutodorAccount, isAutodorHolder, photoDetailRows, photoRequirementFor, reportSummaryRows, scopedDistricts, statusText,
+  buildQueue, canExport, coverageBand, coverageCounterText, coverageFor, coverageLabel, coveragePercent,
+  districtBoundaries, filterRecords, formatCoordinates, formatMeters, geoStatusText, gpsDistanceLabel,
+  groupLabel, groupValues, isAutodorAccount, isAutodorHolder, photoDetailRows, photoRequirementFor,
+  reportSummaryRows, scopedDistricts, statusText,
 } from './photo-model.js';
 import { errorText } from './photo-messages.js';
 
@@ -18,7 +19,9 @@ const MAX_FILE_BYTES = 20 * 1024 * 1024;
 const SUPPORTED_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
 const SUPPORTED_EXTENSIONS = ['jpg', 'jpeg', 'png', 'webp'];
 
-const STATUS_COLOR = { done: '#0c7a5a', partial: '#b8791a', pending: '#2f6fb0', empty: '#b4552f' };
+// Цвет отвечает на вопрос «что делать»: красный — снимать с нуля, жёлтый — доснять
+// кадр, синий — ждать приёмку, зелёный — принято. Порядок задаёт порядок в легенде.
+const STATUS_COLOR = { done: '#0c7a5a', pending: '#2f6fb0', incomplete: '#e0a800', empty: '#b4552f' };
 
 const state = {
   manifest: null,
@@ -484,7 +487,10 @@ function renderDashboard() {
   const board = element('paDashboard');
   const list = element('paDistrictBoard');
   const districts = boardDistricts();
-  if (districts.length <= 1) {
+  // Доска округа — инструмент префектуры: району она ничего не добавляет, у него
+  // своя сводка выше. Под фильтром района доска остаётся на экране даже с одной
+  // строкой — иначе разрез по видам для выбранного района посмотреть нельзя.
+  if (!canExport(state.user)) {
     board.hidden = true;
     list.replaceChildren();
     return;
@@ -492,6 +498,16 @@ function renderDashboard() {
   board.hidden = false;
   renderBoardSwitch();
   list.replaceChildren();
+  if (!districts.length) {
+    const empty = document.createElement('p');
+    empty.className = 'pa-note';
+    const district = requestedDistrict();
+    empty.textContent = district
+      ? `У района «${district}» объектов этого вида нет.`
+      : 'Объектов этого вида нет.';
+    list.appendChild(empty);
+    return;
+  }
   for (const district of districts) list.appendChild(boardRow(district));
 }
 
@@ -693,7 +709,7 @@ function renderList() {
     const where = document.createElement('span');
     where.textContent = record.group || '—';
     const counter = document.createElement('span');
-    counter.textContent = `подтверждено ${coverage.confirmed} из ${coverage.required}`;
+    counter.textContent = coverageCounterText(coverage);
     meta.append(where, counter, rowChip(coverage.statusKey, coverage.statusLabel, coverage.pending));
     row.append(title, meta);
     row.addEventListener('click', () => openRecord(record, row));
@@ -908,7 +924,7 @@ async function openRecord(record, trigger) {
   statusLine.replaceChildren(rowChip(coverage.statusKey, coverage.statusLabel, coverage.pending));
   const counter = document.createElement('span');
   counter.className = 'pa-chip';
-  counter.textContent = `подтверждено ${coverage.confirmed} из ${coverage.required}`;
+  counter.textContent = coverageCounterText(coverage);
   statusLine.appendChild(counter);
   const rows = [{ key: 'Координаты на карте', value: formatCoordinates(record.lat, record.lon) }];
   for (const [key, value] of Object.entries(record.properties || {})) {
@@ -1371,7 +1387,7 @@ function renderQueue() {
   const grid = document.createElement('dl');
   grid.className = 'pa-queue-grid';
   const rows = [
-    ['Статус', `${coverage.statusLabel} · подтверждено ${coverage.confirmed} из ${coverage.required}`],
+    ['Статус', `${coverage.statusLabel} · ${coverageCounterText(coverage)}`],
     ['Осталось снять', String(coverage.remaining)],
     ['Координаты', formatCoordinates(record.lat, record.lon)],
   ];
@@ -1593,7 +1609,7 @@ function shell() {
             <select class="pa-input" id="paStatusFilter">
               <option value="all">Все объекты</option>
               <option value="without">Без фото</option>
-              <option value="incomplete">Не хватает кадра</option>
+              <option value="incomplete">Не хватает кадра — осталось снять</option>
               <option value="with">С фото</option>
               <option value="done">Выполнено</option>
               <option value="partial">Частично</option>
