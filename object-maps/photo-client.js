@@ -12,6 +12,8 @@ const TOKEN_KEY = 'sao-photo-service-token';
 const SCENARIO_KEY = 'sao-photo-service-scenario';
 const PERFORMER_KEY = 'sao-photo-service-performer';
 const LIST_CAP = 250;
+// С какой выборки карта начинает группировать точки в кластеры.
+const CLUSTER_FROM_MARKERS = 1000;
 const MAX_FILE_BYTES = 20 * 1024 * 1024;
 // Сервис принимает только эти форматы (CHECK в БД и проверка MIME при разборе
 // multipart). HEIC/HEIF раньше обещались в подсказке, но всегда отклонялись —
@@ -829,6 +831,10 @@ function buildMap() {
 function renderMapObjects() {
   if (!state.pointLayer || !state.dataset) return;
   const filtered = currentRecords();
+  // Кластеры включаем только на большой выборке: району важен цвет каждой точки
+  // («не хватает кадра» — жёлтая), а в кластере он не виден. На 10 000 подъездов
+  // округа карта иначе пестрая и тяжёлая для телефона.
+  state.pointLayer.options.set('clusterize', filtered.length > CLUSTER_FROM_MARKERS);
   const visible = new Set(filtered.map((record) => state.indexById.get(record.id)));
   state.pointLayer.setFilter((feature) => visible.has(Number(feature.id)));
   for (const record of filtered) {
