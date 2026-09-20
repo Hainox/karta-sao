@@ -31,6 +31,8 @@ const state = {
   dataset: null,
   coverage: new Map(),
   summary: null,
+  // Полный список районов для фильтра: под суженной сводкой сервер отдаёт один район.
+  districtOptions: null,
   // Вид оцифровки для бокового дашборда: «all» или тип объекта.
   boardType: 'all',
   // Смена района перестраивает вид карты: иначе найденные точки остаются за кадром.
@@ -365,10 +367,14 @@ function fillDistrictFilter() {
   if (state.user?.role === 'district_editor' || !state.summary) return;
   const select = element('paDistrictFilter');
   const current = select.value;
-  const districts = [...new Set((state.summary.objects || []).map((object) => object.district).filter(Boolean))]
-    .sort((left, right) => left.localeCompare(right, 'ru'));
+  // Полный список районов запоминаем, когда сводка не сужена: под фильтром района
+  // сервер отдаёт только его, и без этого из списка пропадали все остальные.
+  if (!requestedDistrict()) {
+    state.districtOptions = [...new Set((state.summary.objects || []).map((object) => object.district).filter(Boolean))]
+      .sort((left, right) => left.localeCompare(right, 'ru'));
+  }
   select.replaceChildren(new Option('Весь САО', ''));
-  for (const district of districts) select.appendChild(new Option(district, district));
+  for (const district of state.districtOptions || []) select.appendChild(new Option(district, district));
   if ([...select.options].some((option) => option.value === current)) select.value = current;
 }
 
