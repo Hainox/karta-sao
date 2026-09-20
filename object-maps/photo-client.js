@@ -31,6 +31,8 @@ const state = {
   summary: null,
   // Вид оцифровки для бокового дашборда: «all» или тип объекта.
   boardType: 'all',
+  // Смена района перестраивает вид карты: иначе найденные точки остаются за кадром.
+  fitDistrict: false,
   // Дневной отчёт по продуктивности: только для префектуры, приходит одним запросом.
   daily: null,
   user: null,
@@ -373,7 +375,10 @@ function renderAll() {
   renderDashboard();
   renderList();
   renderMapObjects();
-  renderBoundaries();
+  // Смена района — смена области просмотра: без этого точки остаются за кадром,
+  // и кажется, что фильтр ничего не нашёл.
+  renderBoundaries({ fit: state.fitDistrict === true });
+  state.fitDistrict = false;
   renderQueue();
 }
 
@@ -477,6 +482,7 @@ function boardRow(district) {
     row.addEventListener('click', () => {
       element('paDistrictFilter').value = district.district;
       invalidateQueue();
+      state.fitDistrict = true;
       refreshCoverage();
     });
   }
@@ -1713,7 +1719,7 @@ function bindEvents() {
   element('paSearch').addEventListener('input', debounce(() => { invalidateQueue(); renderList(); renderMapObjects(); renderQueue(); }, 220));
   element('paGroupFilter').addEventListener('change', () => { invalidateQueue(); renderList(); renderMapObjects(); renderQueue(); });
   element('paStatusFilter').addEventListener('change', () => { invalidateQueue(); renderList(); renderMapObjects(); renderQueue(); });
-  element('paDistrictFilter').addEventListener('change', () => { invalidateQueue(); refreshCoverage(); });
+  element('paDistrictFilter').addEventListener('change', () => { invalidateQueue(); state.fitDistrict = true; refreshCoverage(); });
   element('paExportDay').addEventListener('click', () => downloadReport('day'));
   element('paExportDayPdf').addEventListener('click', () => downloadReport('day-pdf'));
   element('paExportXlsx').addEventListener('click', () => downloadReport('xlsx'));
