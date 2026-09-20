@@ -1518,6 +1518,7 @@ function shell() {
             <select class="pa-input" id="paStatusFilter">
               <option value="all">Все объекты</option>
               <option value="without">Без фото</option>
+              <option value="incomplete">Не хватает кадра</option>
               <option value="with">С фото</option>
               <option value="done">Выполнено</option>
               <option value="partial">Частично</option>

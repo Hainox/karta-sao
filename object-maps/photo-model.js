@@ -283,6 +283,9 @@ export function filterRecords(records, options = {}) {
     if (district && isAutodorHolder(recordHolder(record))) return false;
     if (status === 'without' && coverage.withPhoto) return false;
     if (status === 'with' && !coverage.withPhoto) return false;
+    // «Не хватает кадра» — точки, где норма ещё не набрана. Нужны и те, где кадров
+    // нет вовсе, и те, где есть один: раньше вторые не показывались нигде.
+    if (status === 'incomplete' && coverage.remaining === 0) return false;
     if (status === 'done' && !coverage.complete) return false;
     if (status === 'partial' && coverage.statusKey !== 'partial') return false;
     if (status === 'pending' && coverage.pending === 0) return false;

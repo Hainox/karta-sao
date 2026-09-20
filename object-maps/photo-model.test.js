@@ -150,6 +150,27 @@ test('точка, снятая до введения нормы двух кад�
   assert.equal(after.remaining, 1);
 });
 
+test('фильтр «не хватает кадра» показывает точки, которым нужен ещё кадр', () => {
+  const records = [
+    { id: 'pp:1', label: 'Без кадров', group: 'Сокол' },
+    { id: 'pp:2', label: 'Один кадр', group: 'Сокол' },
+    { id: 'pp:3', label: 'Два кадра', group: 'Сокол' },
+  ];
+  const photo = (sourceId, minute) => ({ sourceId, reviewStatus: 'pending_review', uploadedAt: `2026-09-19T10:${minute}:00.000Z` });
+  const index = buildCoverageIndex({
+    objects: [
+      { objectKey: 'a', objectType: 'pp', district: 'Сокол', sourceIds: ['pp:1'], photos: [] },
+      { objectKey: 'b', objectType: 'pp', district: 'Сокол', sourceIds: ['pp:2'], photos: [photo('pp:2', '00')] },
+      { objectKey: 'c', objectType: 'pp', district: 'Сокол', sourceIds: ['pp:3'], photos: [photo('pp:3', '00'), photo('pp:3', '05')] },
+    ],
+  });
+  const options = { coverageIndex: index, objectType: 'pp' };
+  // Нужны обе точки: где кадров нет вовсе и где есть один — раньше вторая не показывалась.
+  assert.deepEqual(filterRecords(records, { ...options, status: 'incomplete' }).map((record) => record.id), ['pp:1', 'pp:2']);
+  // «Без фото» по-прежнему про точки без кадров вовсе.
+  assert.deepEqual(filterRecords(records, { ...options, status: 'without' }).map((record) => record.id), ['pp:1']);
+});
+
 test('снимок одной точки не подтягивается на соседние точки того же объекта', () => {
   const index = buildCoverageIndex({
     objects: [{
