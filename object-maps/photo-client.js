@@ -384,10 +384,11 @@ const BOARD_TYPES = Object.freeze([
 ]);
 
 /**
- * Строки дашборда по выбранному виду оцифровки. Считаем из объектов сводки, а не
- * из готового разреза: сервер отдаёт разрез только по всем видам сразу.
- * Район строки — по тому же правилу, что в отчётах: объекты «АвД САО» и «ДЭУ»
- * идут строкой владельца, а не районом, где стоят.
+ * Строки дашборда по выбранному виду оцифровки. Считаем отметки (точки), а не
+ * объекты: у одного перехода точек бывает несколько десятков, а в сводке на штаб
+ * единица учёта та же — иначе панель и сводка показывают разные проценты по
+ * одному и тому же району. Район строки — по правилу отчётов: объекты «АвД САО»
+ * и «ДЭУ» идут строкой владельца, а не районом, где стоят.
  */
 function boardRowsByType(type) {
   const objects = state.summary?.objects || [];
@@ -395,19 +396,29 @@ function boardRowsByType(type) {
   const grouped = new Map();
   for (const object of objects) {
     if (object.objectType !== type) continue;
-    const holder = object.balanceHolder;
-    const district = !object.district || isAutodorHolder(holder) ? 'АвД САО' : object.district;
-    const row = grouped.get(district) || { district, totalObjects: 0, objectsWithPhoto: 0 };
-    row.totalObjects += 1;
-    if ((object.photos || []).length > 0) row.objectsWithPhoto += 1;
+    const district = !object.district || isAutodorHolder(object.balanceHolder) ? 'АвД САО' : object.district;
+    const row = grouped.get(district) || { district, totalPoints: 0, coveredPoints: 0 };
+    row.totalPoints += Number(object.sourcePointCount) || 0;
+    row.coveredPoints += Number(object.coveredPoints) || 0;
     grouped.set(district, row);
   }
   return [...grouped.values()].sort((left, right) => {
     if ((left.district === 'АвД САО') !== (right.district === 'АвД САО')) {
       return left.district === 'АвД САО' ? 1 : -1;
     }
-    return (coveragePercent(right) - coveragePercent(left)) || left.district.localeCompare(right.district, 'ru');
+    return (pointsPercent(right) - pointsPercent(left)) || left.district.localeCompare(right.district, 'ru');
   });
+}
+
+/**
+ * Процент по закрытым отметкам — та же единица, что в сводке на штаб. Считать
+ * по объектам нельзя: «все объекты с фото» и «половина отметок закрыта» — это
+ * одно и то же состояние, а числа выглядят как противоречие.
+ */
+function pointsPercent(row) {
+  const plan = Number(row?.totalPoints) || 0;
+  if (!plan) return 0;
+  return Math.round(((Number(row.coveredPoints) || 0) / plan) * 100);
 }
 
 /**
@@ -438,12 +449,12 @@ function boardRow(district) {
   const name = document.createElement('span');
   name.className = 'pa-board-name';
   name.textContent = district.district;
-  // Считаем охват: сколько объектов строки уже с фото. Подтверждения приёмки
-  // могут прийти позже, но работа видна сразу — как и в штабной таблице.
-  const percent = coveragePercent(district);
+  // Единица учёта — отметка: у перехода точек несколько, и в сводке на штаб
+  // считается так же. Приёмка может подтвердить позже, но работа видна сразу.
+  const percent = pointsPercent(district);
   const note = document.createElement('span');
   note.className = 'pa-board-note';
-  note.textContent = `${district.objectsWithPhoto} из ${district.totalObjects} объектов с фото`;
+  note.textContent = `закрыто ${district.coveredPoints} из ${district.totalPoints} отметок`;
   caption.append(name, note);
 
   const bar = document.createElement('span');
