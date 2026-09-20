@@ -73,7 +73,7 @@ After unpacking, confirm no CR reached the server:
 grep -rl $'\r' /opt/sao-photo-service/photo-service/src /opt/odh-sao/api | head
 ```
 
-After the update, the sheet «На штаб» in the Excel export shows the plan in marks: 812 stops, 2 235 pedestrian-crossing points, 10 035 entrances.
+After the update, the sheet «На штаб» in the Excel export shows the plan in marks: 811 stops, 2 235 pedestrian-crossing points, 10 035 entrances.
 
 ## Backup and restore
 
