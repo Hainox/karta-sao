@@ -2,7 +2,7 @@ import {
   accountScope, accuracyVerdict, bandNote, bandText, boundaryNote, buildCoverageIndex,
   buildQueue, canExport, coverageBand, coverageFor, coverageLabel, coveragePercent, districtBoundaries,
   filterRecords, formatCoordinates, formatMeters, geoStatusText, gpsDistanceLabel, groupLabel, groupValues,
-  isAutodorAccount, photoDetailRows, photoRequirementFor, reportSummaryRows, scopedDistricts, statusText,
+  isAutodorAccount, isAutodorHolder, photoDetailRows, photoRequirementFor, reportSummaryRows, scopedDistricts, statusText,
 } from './photo-model.js';
 import { errorText } from './photo-messages.js';
 
@@ -26,6 +26,8 @@ const state = {
   dataset: null,
   coverage: new Map(),
   summary: null,
+  // Вид оцифровки для бокового дашборда: «all» или тип объекта.
+  boardType: 'all',
   // Дневной отчёт по продуктивности: только для префектуры, приходит одним запросом.
   daily: null,
   user: null,
@@ -372,14 +374,52 @@ function renderAll() {
   renderQueue();
 }
 
+// Виды оцифровки для бокового дашборда: смотреть охват можно не только по всем
+// объектам сразу, но и по каждому виду отдельно — у района они идут по-разному.
+const BOARD_TYPES = Object.freeze([
+  { key: 'all', label: 'Все виды' },
+  { key: 'stop', label: 'Остановки' },
+  { key: 'pp', label: 'Переходы' },
+  { key: 'entrance', label: 'Подъезды' },
+]);
+
+/**
+ * Строки дашборда по выбранному виду оцифровки. Считаем из объектов сводки, а не
+ * из готового разреза: сервер отдаёт разрез только по всем видам сразу.
+ * Район строки — по тому же правилу, что в отчётах: объекты «АвД САО» и «ДЭУ»
+ * идут строкой владельца, а не районом, где стоят.
+ */
+function boardRowsByType(type) {
+  const objects = state.summary?.objects || [];
+  if (type === 'all') return state.summary?.byDistrict || [];
+  const grouped = new Map();
+  for (const object of objects) {
+    if (object.objectType !== type) continue;
+    const holder = object.balanceHolder;
+    const district = !object.district || isAutodorHolder(holder) ? 'АвД САО' : object.district;
+    const row = grouped.get(district) || { district, totalObjects: 0, objectsWithPhoto: 0 };
+    row.totalObjects += 1;
+    if ((object.photos || []).length > 0) row.objectsWithPhoto += 1;
+    grouped.set(district, row);
+  }
+  return [...grouped.values()].sort((left, right) => {
+    if ((left.district === 'АвД САО') !== (right.district === 'АвД САО')) {
+      return left.district === 'АвД САО' ? 1 : -1;
+    }
+    return (coveragePercent(right) - coveragePercent(left)) || left.district.localeCompare(right.district, 'ru');
+  });
+}
+
 /**
  * Доска округа нужна префектуре: район и так видит только себя. Когда префектура
  * проваливается в один район, показываем сохранённый срез по всему округу.
  */
 function boardDistricts() {
   if (!canExport(state.user)) return [];
-  if (requestedDistrict()) return state.boardAll?.length ? state.boardAll : (state.summary?.byDistrict || []);
-  return state.summary?.byDistrict || [];
+  const rows = boardRowsByType(state.boardType);
+  if (state.boardType !== 'all') return rows;
+  if (requestedDistrict()) return state.boardAll?.length ? state.boardAll : rows;
+  return rows;
 }
 
 function boardRow(district) {
@@ -439,8 +479,31 @@ function renderDashboard() {
     return;
   }
   board.hidden = false;
+  renderBoardSwitch();
   list.replaceChildren();
   for (const district of districts) list.appendChild(boardRow(district));
+}
+
+/** Переключатель видов оцифровки: «все виды» и по одному на каждый. */
+function renderBoardSwitch() {
+  const box = element('paBoardSwitch');
+  if (!box) return;
+  box.replaceChildren();
+  for (const type of BOARD_TYPES) {
+    const chip = document.createElement('button');
+    chip.type = 'button';
+    chip.className = 'pa-board-chip';
+    chip.textContent = type.label;
+    const active = state.boardType === type.key;
+    chip.setAttribute('aria-pressed', String(active));
+    if (active) chip.dataset.active = 'true';
+    chip.addEventListener('click', () => {
+      if (state.boardType === type.key) return;
+      state.boardType = type.key;
+      renderDashboard();
+    });
+    box.appendChild(chip);
+  }
 }
 
 function renderSummary() {
@@ -1498,6 +1561,7 @@ function shell() {
         <div class="pa-summary" id="paSummary"></div>
         <section class="pa-dashboard" id="paDashboard" aria-labelledby="paDashboardTitle" hidden>
           <h2 class="pa-dashboard-title" id="paDashboardTitle">Районы округа</h2>
+          <div class="pa-board-switch" id="paBoardSwitch" role="group" aria-label="Вид оцифровки"></div>
           <div class="pa-board" id="paDistrictBoard" role="list"></div>
         </section>
         <div class="pa-filters">

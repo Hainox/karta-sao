@@ -187,6 +187,27 @@ button { cursor: pointer; }
 .pa-dashboard-title { margin: 0; font-size: 12px; text-transform: uppercase; letter-spacing: .07em; color: #54685f; }
 .pa-board { display: grid; gap: 3px; }
 
+/* Переключатель видов оцифровки: одна строка пилюль над списком районов. */
+.pa-board-switch { display: flex; flex-wrap: wrap; gap: 4px; }
+.pa-board-chip {
+  padding: 3px 8px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #fff;
+  color: #40564c;
+  font: inherit;
+  font-size: 11px;
+  line-height: 1.4;
+  cursor: pointer;
+}
+.pa-board-chip:hover { border-color: var(--accent, #1c7a55); color: var(--accent, #1c7a55); }
+.pa-board-chip[data-active='true'] {
+  border-color: var(--accent, #1c7a55);
+  background: var(--accent, #1c7a55);
+  color: #fff;
+  font-weight: 600;
+}
+
 .pa-board-row {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 68px 48px;
