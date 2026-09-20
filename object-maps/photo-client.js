@@ -57,6 +57,8 @@ const state = {
   objectUrls: [],
   map: null,
   pointLayer: null,
+  // Режим слоя точек: нужны ли кластеры на текущей выборке.
+  clusterizeMode: null,
   boundaryLayer: null,
   boundarySignature: '',
   districts: null,
@@ -808,13 +810,25 @@ function buildMap() {
   }
   if (!state.map) {
     state.map = new ymaps.Map('paMap', { center: [55.75, 37.61], zoom: 9, controls: ['zoomControl'] }, { suppressMapOpenBlock: true });
-    state.pointLayer = new ymaps.ObjectManager({ clusterize: true, gridSize: 64 });
-    state.pointLayer.objects.events.add('click', (event) => {
-      const record = state.dataset.records[Number(event.get('objectId'))];
-      if (record) openRecord(record, null);
-    });
-    state.map.geoObjects.add(state.pointLayer);
   }
+  ensurePointLayer(false);
+  renderMapObjects();
+  renderBoundaries({ fit: true });
+}
+
+/**
+ * Слой точек в нужном режиме. ObjectManager не меняет кластеризацию на лету,
+ * поэтому при смене режима слой пересобирается с теми же точками.
+ */
+function ensurePointLayer(clusterize) {
+  if (state.pointLayer && state.clusterizeMode === clusterize) return;
+  if (state.pointLayer) state.map.geoObjects.remove(state.pointLayer);
+  state.pointLayer = new ymaps.ObjectManager({ clusterize, gridSize: 64 });
+  state.clusterizeMode = clusterize;
+  state.pointLayer.objects.events.add('click', (event) => {
+    const record = state.dataset.records[Number(event.get('objectId'))];
+    if (record) openRecord(record, null);
+  });
   const features = state.dataset.records.map((record, index) => ({
     type: 'Feature',
     id: index,
@@ -822,19 +836,17 @@ function buildMap() {
     properties: { recordId: record.id },
     options: { preset: 'islands#circleIcon', iconColor: STATUS_COLOR.empty },
   }));
-  state.pointLayer.removeAll();
   state.pointLayer.add({ type: 'FeatureCollection', features });
-  renderMapObjects();
-  renderBoundaries({ fit: true });
+  state.map.geoObjects.add(state.pointLayer);
 }
 
 function renderMapObjects() {
-  if (!state.pointLayer || !state.dataset) return;
+  if (!state.dataset || !state.map) return;
   const filtered = currentRecords();
-  // Кластеры включаем только на большой выборке: району важен цвет каждой точки
+  // Кластеры нужны только на большой выборке: району важен цвет каждой точки
   // («не хватает кадра» — жёлтая), а в кластере он не виден. На 10 000 подъездов
   // округа карта иначе пестрая и тяжёлая для телефона.
-  state.pointLayer.options.set('clusterize', filtered.length > CLUSTER_FROM_MARKERS);
+  ensurePointLayer(filtered.length > CLUSTER_FROM_MARKERS);
   const visible = new Set(filtered.map((record) => state.indexById.get(record.id)));
   state.pointLayer.setFilter((feature) => visible.has(Number(feature.id)));
   for (const record of filtered) {
