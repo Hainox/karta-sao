@@ -6,6 +6,7 @@ import { objectTypeLabel, percentLabel, statusBandLabel, OBJECT_TYPES } from './
 import { HEADQUARTERS_NOTE, headquartersBoard, headquartersComment, headquartersValues } from './headquarters.js';
 import { checksByDistrict, checksByObject, collectChecks, summarizeChecks } from './checks.js';
 import { reportingDistrict } from './scope.js';
+import { BANDS, bandFill, percentBandRules as bandRules } from './bands.js';
 import {
   CHART_COLORS, bandColor, drawBarRow, drawBandChip, drawColumns, drawGauge, drawStackedBar, section,
 } from './pdf-charts.js';
@@ -115,39 +116,21 @@ function solidFill(argb) {
   return { type: 'pattern', pattern: 'solid', fgColor: { argb } };
 }
 
-// Светофор процентов: цвета — из эталона заказчика (бледные заливки, смысл несёт
-// число), пороги — те же, что у полосы статуса. Отдельный цвет у точного нуля.
-const BAND_FILLS = Object.freeze({
-  zero: 'FFEA9999', low: 'FFF4CCCC', middle: 'FFFFF2CC', high: 'FFD9EAD3',
-});
-
+// Светофор процентов: бледные заливки, смысл несёт число. Шкала и пороги —
+// общие для всех выгрузок, живут в bands.js.
 /**
  * Заливка ячейки процента: та же градация, что в правилах условного
  * форматирования, но записанная сразу в ячейку. Цвета видно и там, где правила
  * не пересчитываются, а сами правила продолжают работать при правках данных.
  */
 function percentBandFill(percent, plan) {
-  if (plan <= 0) return 'FFFFFFFF';
-  if (percent <= 0) return BAND_FILLS.zero;
-  if (percent < 33) return BAND_FILLS.low;
-  if (percent < 66) return BAND_FILLS.middle;
-  return BAND_FILLS.high;
+  return bandFill(percent, plan);
 }
 
 function percentBandRules(letter, firstRow, planLetter) {
   const cell = `$${letter}${firstRow}`;
   const plan = `$${planLetter}${firstRow}`;
-  return [
-    { when: `${cell}<=0`, band: 'zero' },
-    { when: `AND(${cell}>0,${cell}<33)`, band: 'low' },
-    { when: `AND(${cell}>=33,${cell}<66)`, band: 'middle' },
-    { when: `${cell}>=66`, band: 'high' },
-  ].map(({ when, band }) => ({
-    type: 'expression',
-    // Без плана красить нечего: у строки пустой категории цвета нет.
-    formulae: [`AND(${plan}>0,ISNUMBER(${cell}),${when})`],
-    style: { fill: solidFill(BAND_FILLS[band]) },
-  }));
+  return BANDS.flatMap((band) => bandRules(cell, plan, band));
 }
 
 function paintPercentBands(worksheet, firstRow, lastRow) {

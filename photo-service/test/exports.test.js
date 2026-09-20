@@ -238,7 +238,7 @@ test('лист «На штаб»: вторая таблица собираетс
   assert.equal(sheet.getCell('A26').value, 'Слабее всего — остановки (33 %).');
 });
 
-test('проценты «На штаб» подсвечены светофором: ноль, до 33, до 66, от 66', async () => {
+test('проценты «На штаб» подсвечены светофором: от красного до истинного зелёного', async () => {
   const rows = [
     { ...reportRow('stop', 'Беговой', 1), object_key: 'b-stop' },
     { ...reportRow('stop', 'Сокол', 0), object_key: 's-stop' },
@@ -255,15 +255,21 @@ test('проценты «На штаб» подсвечены светофоро
     assert.ok(refs.includes(`${column}11:${column}13`), `${column}: ${refs.join(', ')}`);
   }
 
+  // Восемь оттенков: сто процентов — истинный зелёный, 75 — жёлтый,
+  // 63 — оранжевый, ниже 50 — красный. Пороги те же, что в bands.js.
   const [firstBlock] = sheet.conditionalFormattings;
   assert.deepEqual(firstBlock.rules.map((rule) => rule.formulae[0]), [
     'AND($C3>0,ISNUMBER($E3),$E3<=0)',
-    'AND($C3>0,ISNUMBER($E3),AND($E3>0,$E3<33))',
-    'AND($C3>0,ISNUMBER($E3),AND($E3>=33,$E3<66))',
-    'AND($C3>0,ISNUMBER($E3),$E3>=66)',
+    'AND($C3>0,ISNUMBER($E3),AND($E3>=1,$E3<=24))',
+    'AND($C3>0,ISNUMBER($E3),AND($E3>=25,$E3<=49))',
+    'AND($C3>0,ISNUMBER($E3),AND($E3>=50,$E3<=62))',
+    'AND($C3>0,ISNUMBER($E3),AND($E3>=63,$E3<=74))',
+    'AND($C3>0,ISNUMBER($E3),AND($E3>=75,$E3<=89))',
+    'AND($C3>0,ISNUMBER($E3),AND($E3>=90,$E3<=99))',
+    'AND($C3>0,ISNUMBER($E3),$E3>=100)',
   ]);
   assert.deepEqual(firstBlock.rules.map((rule) => rule.style.fill.fgColor.argb), [
-    'FFEA9999', 'FFF4CCCC', 'FFFFF2CC', 'FFD9EAD3',
+    'FFEA9999', 'FFF4CCCC', 'FFF9DCD2', 'FFFCE4D6', 'FFF8CBAD', 'FFFFEB9C', 'FFC6EFCE', 'FF00B050',
   ]);
 
   // Табличные ячейки выровнены по центру и середине, рамка со всех сторон.

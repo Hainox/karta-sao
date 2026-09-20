@@ -28,13 +28,22 @@ function reportRow(objectType, district, points, covered, balanceHolder = null) 
 }
 
 test('светофор в PDF идёт по тем же порогам, что и на листе «На штаб»', () => {
-  // Точный ноль при плане — свой цвет, он темнее «до 33 %».
+  // Восемь оттенков от красного до истинного зелёного: 100 — зелёный,
+  // 75 — жёлтый, 63 — оранжевый, ниже 50 — красный.
   assert.equal(percentBand(0, 10), 'zero');
-  assert.equal(percentBand(32, 10), 'low');
-  assert.equal(percentBand(33, 10), 'middle');
-  assert.equal(percentBand(65, 10), 'middle');
-  assert.equal(percentBand(66, 10), 'high');
-  assert.equal(percentBand(100, 10), 'high');
+  assert.equal(percentBand(1, 10), 'critical');
+  assert.equal(percentBand(24, 10), 'critical');
+  assert.equal(percentBand(25, 10), 'low');
+  assert.equal(percentBand(49, 10), 'low');
+  assert.equal(percentBand(50, 10), 'warning');
+  assert.equal(percentBand(62, 10), 'warning');
+  assert.equal(percentBand(63, 10), 'orange');
+  assert.equal(percentBand(74, 10), 'orange');
+  assert.equal(percentBand(75, 10), 'yellow');
+  assert.equal(percentBand(89, 10), 'yellow');
+  assert.equal(percentBand(90, 10), 'lightGreen');
+  assert.equal(percentBand(99, 10), 'lightGreen');
+  assert.equal(percentBand(100, 10), 'green');
   // Без плана красить нечего — полосы нет.
   assert.equal(percentBand(0, 0), null);
   assert.equal(percentBand(null, 0), null);

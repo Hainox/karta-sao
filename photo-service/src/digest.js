@@ -1,5 +1,6 @@
 import { createCanvas, GlobalFonts } from '@napi-rs/canvas';
 import { fileURLToPath } from 'node:url';
+import { BANDS, bandFor } from './bands.js';
 import { headquartersComment, headquartersValues } from './headquarters.js';
 
 // Картинка для Telegram: вторая таблица листа «На штаб» — районы по убыванию
@@ -40,15 +41,14 @@ const HEADER_GROUPS = Object.freeze([
 ]);
 const SUBHEADER_LABELS = Object.freeze(['Объекты', 'Факт', '%']);
 
-const BAND_COLORS = Object.freeze({
-  zero: '#EA9999', low: '#F4CCCC', middle: '#FFF2CC', high: '#D9EAD3',
-});
+// Заливки и цвет числа на светофоре берутся из общей шкалы bands.js: картинка
+// должна показывать те же оттенки, что книга и PDF.
+const BAND_COLORS = Object.freeze(Object.fromEntries(BANDS.map((band) => [band.key, band.hex])));
+const BAND_TEXT = Object.freeze(Object.fromEntries(BANDS.map((band) => [band.key, band.text])));
 
 // Цвет числа на светофоре: на телефоне бледные заливки почти не читаются,
-// поэтому сам процент написан насыщенным цветом той же полосы.
-const BAND_TEXT = Object.freeze({
-  zero: '#B3382B', low: '#B3382B', middle: '#B8791A', high: '#1C7A55',
-});
+// поэтому сам процент написан насыщенным цветом той же полосы. Шкала — общая,
+// из bands.js, чтобы картинка и книга показывали одни и те же оттенки.
 const PERCENT_COLUMNS = Object.freeze([4, 7, 10, 13]);
 const PLAN_COLUMNS = Object.freeze([2, 5, 8, 11]);
 
@@ -57,11 +57,8 @@ const GRID = '#000000';
 
 /** Полоса светофора для процента; без плана полосы нет — ячейку не красим. */
 function bandOf(percent, plan) {
-  if (plan <= 0) return null;
-  if (percent <= 0) return 'zero';
-  if (percent < 33) return 'low';
-  if (percent < 66) return 'middle';
-  return 'high';
+  const band = bandFor(percent, plan);
+  return band ? band.key : null;
 }
 
 function cellOffset(index) {

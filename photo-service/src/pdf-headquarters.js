@@ -1,4 +1,5 @@
 import PDFDocument from 'pdfkit';
+import { bandFor } from './bands.js';
 import { PDF_FONT_NAME, PDF_FONT_PATH } from './exports.js';
 import { reportPayload } from './reports.js';
 import {
@@ -43,11 +44,8 @@ const GRID = '#c8d6e0';
 
 /** Пороги и цвета те же, что на листе: без плана полосы нет, точный ноль — свой цвет. */
 export function percentBand(percent, plan) {
-  if (!plan || percent === null || percent === undefined) return null;
-  if (percent <= 0) return 'zero';
-  if (percent < 33) return 'low';
-  if (percent < 66) return 'middle';
-  return 'high';
+  const band = bandFor(percent, plan);
+  return band ? band.key : null;
 }
 
 // Проценты целые — как на листе и в картинке для Telegram.

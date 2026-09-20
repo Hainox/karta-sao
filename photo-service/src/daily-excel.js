@@ -1,4 +1,5 @@
 import ExcelJS from 'exceljs';
+import { bandFor } from './bands.js';
 import { objectTypeLabel } from './labels.js';
 import { renderDailyChartImage } from './daily-chart.js';
 import { dailyComment } from './daily.js';
@@ -19,20 +20,12 @@ const ZEBRA_FILL = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFF7FA
 const THIN_BORDER = { style: 'thin', color: { argb: 'FFC8D6E0' } };
 const MUTED_FONT = { color: { argb: 'FF708089' }, size: 10 };
 
-// Светофор процентов: цвета из эталона заказчика, пороги общие со штабной таблицей.
-const BAND_FILLS = { zero: 'FFEA9999', low: 'FFF4CCCC', middle: 'FFFFF2CC', high: 'FFD9EAD3' };
-
+// Светофор процентов: общая шкала из bands.js — та же, что в штабной книге,
+// PDF и картинке для Telegram.
 const PERCENT_BAR = (argb) => ({
   type: 'dataBar', minLength: 0, maxLength: 100,
   cfvo: [{ type: 'num', value: 0 }, { type: 'num', value: 100 }], color: { argb },
 });
-
-function bandOf(percent) {
-  if (percent <= 0) return 'zero';
-  if (percent < 33) return 'low';
-  if (percent < 66) return 'middle';
-  return 'high';
-}
 
 function count(value) {
   return Number(value || 0).toLocaleString('ru-RU');
@@ -162,7 +155,7 @@ export async function buildDailyExcel(report, { generatedAt = new Date() } = {})
       entry.district, entry.uploaded, entry.closedPoints, entry.closed, entry.pending, entry.cumulativePercent,
     ], { fill: index % 2 === 1 ? ZEBRA_FILL.fgColor.argb : null });
     const percentCell = districts.getRow(row).getCell(6);
-    percentCell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: BAND_FILLS[bandOf(entry.cumulativePercent)] } };
+    percentCell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: bandFor(entry.cumulativePercent, 1).fill } };
   });
   const totalRow = 4 + report.districts.length;
   fillRow(districts, totalRow, [

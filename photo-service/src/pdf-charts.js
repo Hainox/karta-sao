@@ -1,10 +1,11 @@
 // Векторные графики для PDF-сводки. PDFKit рисует примитивами, поэтому
 // диаграммы не тянут зависимостей и печатаются резко в любом масштабе.
+import { BANDS } from './bands.js';
 
+// Цвета полос светофора для PDF и картинок: берутся из общей шкалы bands.js,
+// чтобы оттенки в книге, PDF и Telegram совпадали.
 export const CHART_COLORS = Object.freeze({
-  low: '#b3382b',
-  middle: '#b8791a',
-  high: '#1c7a55',
+  ...Object.fromEntries(BANDS.map((band) => [band.key, band.text])),
   none: '#7a8c86',
   track: '#e6ebe7',
   ink: '#243b34',
