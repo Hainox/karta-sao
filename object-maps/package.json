@@ -4,6 +4,6 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "test": "node --test photo-model.test.js photo-messages.test.js"
+    "test": "node --test photo-model.test.js photo-messages.test.js photo-client.test.js"
   }
 }

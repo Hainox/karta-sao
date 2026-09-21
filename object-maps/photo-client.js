@@ -23,7 +23,7 @@ const SUPPORTED_EXTENSIONS = ['jpg', 'jpeg', 'png', 'webp'];
 
 // Цвет отвечает на вопрос «что делать»: красный — снимать с нуля, жёлтый — доснять
 // кадр, бордовый — исправить возврат, синий — ждать приёмку, зелёный — принято.
-const STATUS_COLOR = { done: '#0c7a5a', pending: '#2f6fb0', rework: '#b54755', incomplete: '#e0a800', empty: '#b4552f' };
+const STATUS_COLOR = { done: '#0c7a5a', pending: '#2f6fb0', rework: '#d7193f', incomplete: '#e0a800', empty: '#b4552f' };
 
 const state = {
   manifest: null,
@@ -716,7 +716,7 @@ function renderList() {
     const coverage = coverageFor(state.coverage, record, state.entry.objectType);
     const row = document.createElement('button');
     row.type = 'button';
-    row.className = 'pa-row';
+    row.className = `pa-row${coverage.statusKey === 'rework' ? ' pa-row-rework' : ''}`;
     row.setAttribute('role', 'listitem');
     const title = document.createElement('span');
     title.className = 'pa-row-title';
@@ -737,12 +737,23 @@ function renderList() {
 function renderLegend() {
   const legend = element('paLegend');
   legend.replaceChildren();
+  const reworkCount = state.dataset
+    ? state.dataset.records.reduce((count, record) => (
+      count + (coverageFor(state.coverage, record, state.entry.objectType).statusKey === 'rework' ? 1 : 0)
+    ), 0)
+    : 0;
   for (const [statusKey, color] of Object.entries(STATUS_COLOR)) {
+    const item = document.createElement('span');
+    item.className = `pa-legend-item${statusKey === 'rework' ? ' pa-legend-rework' : ''}`;
     const dot = document.createElement('span');
     dot.className = 'pa-key';
+    dot.dataset.status = statusKey;
     dot.style.background = color;
-    const text = document.createTextNode(`${statusText(statusKey)} `);
-    legend.append(dot, text);
+    const text = document.createTextNode(statusKey === 'rework'
+      ? `НА ДОРАБОТКЕ: ${reworkCount.toLocaleString('ru-RU')}`
+      : statusText(statusKey));
+    item.append(dot, text);
+    legend.appendChild(item);
   }
 }
 
@@ -850,17 +861,24 @@ function ensurePointLayer(clusterize) {
 function renderMapObjects() {
   if (!state.dataset || !state.map) return;
   const filtered = currentRecords();
+  const reworkOnly = element('paStatusFilter').value === 'rework';
   // Кластеры нужны только на большой выборке: району важен цвет каждой точки
   // («не хватает кадра» — жёлтая), а в кластере он не виден. На 10 000 подъездов
   // округа карта иначе пестрая и тяжёлая для телефона.
-  ensurePointLayer(filtered.length > CLUSTER_FROM_MARKERS);
+  // Для режима «На доработке» кластеры отключены: каждая проблемная точка
+  // должна быть видна отдельно и доступна для перехода к объекту.
+  ensurePointLayer(!reworkOnly && filtered.length > CLUSTER_FROM_MARKERS);
   const visible = new Set(filtered.map((record) => state.indexById.get(record.id)));
   state.pointLayer.setFilter((feature) => visible.has(Number(feature.id)));
   for (const record of filtered) {
     const coverage = coverageFor(state.coverage, record, state.entry.objectType);
     state.pointLayer.objects.setObjectOptions(state.indexById.get(record.id), { iconColor: STATUS_COLOR[coverage.statusKey] });
   }
-  element('paMapStatus').textContent = `Показано ${filtered.length.toLocaleString('ru-RU')} из ${state.dataset.records.length.toLocaleString('ru-RU')} объектов`;
+  renderLegend();
+  const reworkCount = state.dataset.records.reduce((count, record) => (
+    count + (coverageFor(state.coverage, record, state.entry.objectType).statusKey === 'rework' ? 1 : 0)
+  ), 0);
+  element('paMapStatus').textContent = `Показано ${filtered.length.toLocaleString('ru-RU')} из ${state.dataset.records.length.toLocaleString('ru-RU')} объектов · на доработке: ${reworkCount.toLocaleString('ru-RU')}`;
 }
 
 /* ------------------------------------------------------------------ dialog */

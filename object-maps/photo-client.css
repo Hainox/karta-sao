@@ -280,13 +280,15 @@ button.pa-board-row:hover { background: #f2f7f3; border-color: #dfeae2; }
   padding: 11px 12px;
 }
 .pa-row:hover { background: #f2f7f3; border-color: #dfeae2; }
+.pa-row-rework { background: #fff0f3; border-color: #d7193f; box-shadow: inset 5px 0 0 #d7193f; }
+.pa-row-rework:hover { background: #ffe4e9; border-color: #b1122f; }
 .pa-row-title { display: block; font-weight: 700; font-size: 14px; overflow-wrap: anywhere; }
 .pa-row-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 6px; color: var(--muted); font-size: 12px; }
 .pa-chip { border-radius: 999px; padding: 2px 9px; font-weight: 700; border: 1px solid currentColor; }
 .pa-chip[data-status="done"] { color: #0b6248; background: #e6f5ee; }
 .pa-chip[data-status="incomplete"] { color: #7a5606; background: #fdf1cf; }
 .pa-chip[data-status="pending"] { color: #1f4f80; background: #eaf1fa; }
-.pa-chip[data-status="rework"] { color: #8f2637; background: #fdecef; }
+.pa-chip[data-status="rework"] { color: #fff; background: #d7193f; border-color: #b1122f; font-weight: 800; }
 .pa-chip[data-status="empty"] { color: #8a3a1c; background: #fdeee7; }
 .pa-chip-risk { color: #8a3a1c; background: #fdeee7; }
 
@@ -311,8 +313,11 @@ button.pa-board-row:hover { background: #f2f7f3; border-color: #dfeae2; }
 .pa-map-status { top: 12px; left: 12px; }
 /* The district outline in force is stated in words, not only drawn on the map. */
 .pa-boundary { top: 12px; right: 12px; }
-.pa-legend { bottom: 22px; left: 12px; max-width: 340px; line-height: 1.6; }
+.pa-legend { bottom: 22px; left: 12px; max-width: 340px; line-height: 1.6; display: flex; flex-wrap: wrap; gap: 6px 10px; }
+.pa-legend-item { display: inline-flex; align-items: center; gap: 4px; }
+.pa-legend-rework { padding: 3px 8px; border-radius: 999px; background: #fff0f3; color: #b1122f; font-weight: 800; box-shadow: 0 0 0 2px #ffd2db; }
 .pa-key { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 5px; }
+.pa-key[data-status="rework"] { width: 14px; height: 14px; box-shadow: 0 0 0 3px #ffd2db; }
 
 /* Mobile route queue: a standalone capture flow, not a squeezed desktop view. */
 .pa-queue { flex: 1; display: flex; flex-direction: column; gap: 12px; padding: 14px; max-width: 720px; width: 100%; margin: 0 auto; }
@@ -407,7 +412,8 @@ button.pa-board-row:hover { background: #f2f7f3; border-color: #dfeae2; }
 @media (max-width: 1100px) {
   .pa-register { grid-template-columns: 1fr; grid-template-rows: minmax(320px, 1fr); padding: 10px; }
   .pa-map-panel { min-height: 320px; }
-  .pa-map-status, .pa-legend { display: none; }
+  .pa-map-status { display: none; }
+  .pa-legend { display: flex; left: 8px; right: 8px; bottom: 8px; max-width: none; font-size: 11px; }
   .pa-boundary { left: 12px; right: 12px; top: 12px; }
 
   .pa-panel-toggle {
