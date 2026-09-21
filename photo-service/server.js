@@ -277,11 +277,12 @@ async function handleReview(request, response, user, photoId) {
     await client.query('BEGIN');
     const target = await client.query('SELECT id, object_key, source_id FROM photos WHERE id = $1 FOR UPDATE', [photoId]);
     if (!target.rowCount) { await client.query('ROLLBACK'); return sendError(response, request, 404, 'photo_not_found'); }
-    if (body.isReference === true) {
+    const isReference = body.status === 'confirmed';
+    if (isReference) {
       await client.query('UPDATE photos SET is_reference = false WHERE object_key = $1 AND source_id IS NOT DISTINCT FROM $2', [target.rows[0].object_key, target.rows[0].source_id]);
     }
-    result = await client.query(`UPDATE photos SET review_status = $1, review_reason = $2, is_reference = $3, reviewed_by = $4, reviewed_at = now() WHERE id = $5 RETURNING id, object_key, review_status, is_reference`, [body.status, reason || null, body.isReference === true, user.id, photoId]);
-    await client.query('INSERT INTO audit_log (actor_user_id, action, object_key, photo_id, metadata) VALUES ($1,$2,$3,$4,$5)', [user.id, `photo_${body.status}`, result.rows[0].object_key, photoId, JSON.stringify({ isReference: body.isReference === true, reason: reason || null })]);
+    result = await client.query(`UPDATE photos SET review_status = $1, review_reason = $2, is_reference = $3, reviewed_by = $4, reviewed_at = now() WHERE id = $5 RETURNING id, object_key, review_status, is_reference`, [body.status, reason || null, isReference, user.id, photoId]);
+    await client.query('INSERT INTO audit_log (actor_user_id, action, object_key, photo_id, metadata) VALUES ($1,$2,$3,$4,$5)', [user.id, `photo_${body.status}`, result.rows[0].object_key, photoId, JSON.stringify({ isReference, reason: reason || null })]);
     await client.query('COMMIT');
   } catch (error) {
     await client.query('ROLLBACK').catch(() => {});

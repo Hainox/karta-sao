@@ -32,7 +32,8 @@ def test_prefecture_review_cabinet_is_linked_and_has_safe_review_controls():
     assert "Кабинет приёмки" in markup
     assert "На доработку" in markup
     assert "Укажите причину возврата на доработку" in markup
-    assert "Сделать эталонным" in markup
+    assert "Принятое фото автоматически станет эталонным" in markup
+    assert "Сделать эталонным" not in markup
     assert "/review/queue" in markup
     assert "https://obhod-sao.ru/photo-api" in markup
     assert "review-cabinet" in page("hub/index.html")
