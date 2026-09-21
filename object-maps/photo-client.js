@@ -1083,10 +1083,15 @@ async function renderGallery(record) {
 
 async function reviewPhoto(photoId, status, isReference, record) {
   try {
+    const reason = status === 'rejected' ? window.prompt('Укажите причину возврата на доработку:', '')?.trim() : '';
+    if (status === 'rejected' && !reason) {
+      showToast('Укажите причину возврата на доработку.', 'error');
+      return;
+    }
     await apiJson(`/photos/${encodeURIComponent(photoId)}/review`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ status, isReference }),
+      body: JSON.stringify({ status, isReference, reason }),
     });
     showToast(status === 'confirmed' ? 'Фиксация подтверждена.' : 'Фиксация отклонена.');
     await refreshCoverage();

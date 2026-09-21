@@ -269,15 +269,30 @@ async function handleReview(request, response, user, photoId) {
   let body;
   try { body = await readJson(request); } catch (error) { return sendError(response, request, 400, error.code); }
   if (!['confirmed', 'rejected'].includes(body.status)) return sendError(response, request, 400, 'invalid_review_status');
-  const result = await pool.query(`UPDATE photos SET review_status = $1, review_reason = $2, is_reference = $3, reviewed_by = $4, reviewed_at = now() WHERE id = $5 RETURNING id, object_key, review_status, is_reference`, [body.status, typeof body.reason === 'string' ? body.reason.slice(0, 1000) : null, body.isReference === true, user.id, photoId]);
-  if (!result.rowCount) return sendError(response, request, 404, 'photo_not_found');
-  await pool.query('INSERT INTO audit_log (actor_user_id, action, object_key, photo_id, metadata) VALUES ($1,$2,$3,$4,$5)', [user.id, `photo_${body.status}`, result.rows[0].object_key, photoId, JSON.stringify({ isReference: body.isReference === true })]);
+  const reason = typeof body.reason === 'string' ? body.reason.trim().slice(0, 1000) : '';
+  if (body.status === 'rejected' && !reason) return sendError(response, request, 400, 'review_reason_required', 'Для возврата укажите причину доработки.');
+  const client = await pool.connect();
+  let result;
+  try {
+    await client.query('BEGIN');
+    const target = await client.query('SELECT id, object_key, source_id FROM photos WHERE id = $1 FOR UPDATE', [photoId]);
+    if (!target.rowCount) { await client.query('ROLLBACK'); return sendError(response, request, 404, 'photo_not_found'); }
+    if (body.isReference === true) {
+      await client.query('UPDATE photos SET is_reference = false WHERE object_key = $1 AND source_id IS NOT DISTINCT FROM $2', [target.rows[0].object_key, target.rows[0].source_id]);
+    }
+    result = await client.query(`UPDATE photos SET review_status = $1, review_reason = $2, is_reference = $3, reviewed_by = $4, reviewed_at = now() WHERE id = $5 RETURNING id, object_key, review_status, is_reference`, [body.status, reason || null, body.isReference === true, user.id, photoId]);
+    await client.query('INSERT INTO audit_log (actor_user_id, action, object_key, photo_id, metadata) VALUES ($1,$2,$3,$4,$5)', [user.id, `photo_${body.status}`, result.rows[0].object_key, photoId, JSON.stringify({ isReference: body.isReference === true, reason: reason || null })]);
+    await client.query('COMMIT');
+  } catch (error) {
+    await client.query('ROLLBACK').catch(() => {});
+    throw error;
+  } finally { client.release(); }
   notifier.event({
     kind: 'client',
     service: 'photo-service',
     title: body.status === 'confirmed' ? 'Префектура подтвердила фото' : 'Префектура отклонила фото',
     level: body.status === 'confirmed' ? 'info' : 'warning',
-    fields: { Объект: result.rows[0].object_key, Решение: body.status, Причина: body.reason || '—' }
+    fields: { Объект: result.rows[0].object_key, Решение: body.status, Причина: reason || '—' }
   });
   return sendJson(response, 200, result.rows[0], request);
 }
@@ -377,7 +392,8 @@ async function handler(request, response) {
       if (!object || !objectAllowedFor(user, object)) return sendError(response, request, 404, 'object_not_found');
       // Снимок принадлежит конкретной точке: у объекта с тем же ID могут быть
       // другие точки, и чужие кадры на них показывать нельзя.
-      const result = await pool.query(`SELECT id, storage_key, mime_type, original_filename, byte_size, performer, comment, captured_at, uploaded_at, gps_latitude, gps_longitude, gps_accuracy_m, distance_m, geo_status, review_status, review_reason, is_reference, source_id FROM photos WHERE object_key = $1 AND source_id = $2 AND review_status NOT IN ('rejected', 'withdrawn') ORDER BY uploaded_at`, [object.object_key, sourceId]);
+      const reviewFilter = user.role === 'prefecture_admin' ? "p.review_status <> 'withdrawn'" : "p.review_status NOT IN ('rejected', 'withdrawn')";
+      const result = await pool.query(`SELECT id, storage_key, mime_type, original_filename, byte_size, performer, comment, captured_at, uploaded_at, gps_latitude, gps_longitude, gps_accuracy_m, distance_m, geo_status, review_status, review_reason, is_reference, source_id FROM photos p WHERE object_key = $1 AND source_id = $2 AND ${reviewFilter} ORDER BY uploaded_at`, [object.object_key, sourceId]);
       return sendJson(response, 200, { objectKey: object.object_key, photos: result.rows }, request);
     }
     if (pathname === '/photos' && request.method === 'POST') return handleUpload(request, response, user);
@@ -392,7 +408,8 @@ async function handler(request, response) {
       // Доступ считается тем же правилом, что и на остальных объектных ручках:
       // учётке АвД принадлежат её объекты, объекты «ДЭУ» и объекты без района,
       // поэтому сравнение одного района отдавало ей 404 на каждом своём кадре.
-      const result = await pool.query(`SELECT p.storage_key, p.mime_type, o.district, ${HOLDER_SELECT_SQL} FROM photos p JOIN objects o ON o.object_key = p.object_key WHERE p.id = $1 AND p.review_status NOT IN ('rejected', 'withdrawn')`, [contentMatch[1]]);
+      const reviewFilter = user.role === 'prefecture_admin' ? "p.review_status <> 'withdrawn'" : "p.review_status NOT IN ('rejected', 'withdrawn')";
+      const result = await pool.query(`SELECT p.storage_key, p.mime_type, o.district, ${HOLDER_SELECT_SQL} FROM photos p JOIN objects o ON o.object_key = p.object_key WHERE p.id = $1 AND ${reviewFilter}`, [contentMatch[1]]);
       if (!result.rowCount || !objectAllowedFor(user, result.rows[0])) return sendError(response, request, 404, 'photo_not_found');
       // The atlas reads photo bytes through an authorised fetch, so the media response
       // needs the same CORS headers as the JSON endpoints.
@@ -416,6 +433,12 @@ async function handler(request, response) {
           report_key: row.report_key, district: row.district, label: row.label, reference_points: row.reference_points,
         }));
       return sendJson(response, 200, { objects: rows }, request);
+    }
+    if (pathname === '/review/queue' && request.method === 'GET') {
+      if (!requirePrefecture(response, request, user)) return;
+      const url = new URL(request.url, 'http://photo-service.local');
+      const rows = await loadReportRows(pool, user, url.searchParams.get('district') || undefined, { includeRejected: true });
+      return sendJson(response, 200, { objects: reportPayload(rows).objects }, request);
     }
     if (pathname === '/reports/summary' && request.method === 'GET') {
       const url = new URL(request.url, 'http://photo-service.local');

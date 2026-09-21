@@ -25,8 +25,11 @@ function scopeClause(user, requestedDistrict) {
   return { sql: 'TRUE', params: [] };
 }
 
-export async function loadReportRows(pool, user, requestedDistrict) {
+export async function loadReportRows(pool, user, requestedDistrict, { includeRejected = false } = {}) {
   const scope = scopeClause(user, requestedDistrict);
+  const photoJoin = includeRejected && user.role === 'prefecture_admin'
+    ? "p.review_status <> 'withdrawn'"
+    : "p.review_status NOT IN ('rejected', 'withdrawn')";
   const result = await pool.query(`
     SELECT o.object_key, o.dataset_id, o.object_type, o.report_key, o.source_ids, o.district,
            o.label, o.reference_points, o.properties, o.source_version,
@@ -67,7 +70,7 @@ export async function loadReportRows(pool, user, requestedDistrict) {
              'isReference', p.is_reference
            ) ORDER BY p.uploaded_at) FILTER (WHERE p.id IS NOT NULL) AS photos
     FROM objects o
-    LEFT JOIN photos p ON p.object_key = o.object_key AND p.review_status NOT IN ('rejected', 'withdrawn')
+    LEFT JOIN photos p ON p.object_key = o.object_key AND ${photoJoin}
     WHERE ${scope.sql}
     GROUP BY o.object_key
     ORDER BY o.district NULLS LAST, o.object_type, o.label, o.object_key

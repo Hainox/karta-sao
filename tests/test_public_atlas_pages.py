@@ -27,6 +27,17 @@ def test_hub_is_navigation_only_and_has_two_catalog_sections():
     assert "<iframe" not in markup
 
 
+def test_prefecture_review_cabinet_is_linked_and_has_safe_review_controls():
+    markup = page("review-cabinet/index.html")
+    assert "Кабинет приёмки" in markup
+    assert "На доработку" in markup
+    assert "Укажите причину возврата на доработку" in markup
+    assert "Сделать эталонным" in markup
+    assert "/review/queue" in markup
+    assert "https://obhod-sao.ru/photo-api" in markup
+    assert "review-cabinet" in page("hub/index.html")
+
+
 def test_odh_point_symbols_stay_within_sao_boundary_and_dry_snow_dumps_are_published():
     """No point icon may be published outside the declared SAO boundary."""
     layer_dir = Path("odh-map/layers")
