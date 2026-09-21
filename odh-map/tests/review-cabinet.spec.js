@@ -6,6 +6,7 @@ test('кабинет приёмки фильтрует очередь и тре�
   const secondId = '00000000-0000-4000-8000-000000000002';
   let firstStatus = 'pending_review';
   let secondStatus = 'pending_review';
+  let reviewSessionHeader;
   await page.route('https://mock.test/photo-api/**', async (route) => {
     const url = new URL(route.request().url());
     if (url.pathname.endsWith('/auth/login')) return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ token: 'test-token', user: { displayName: 'Префектура', role: 'prefecture_admin' } }) });
@@ -15,7 +16,7 @@ test('кабинет приёмки фильтрует очередь и тре�
       { objectKey: 'stops|Аэропорт|2', objectType: 'stop', district: 'Аэропорт', label: 'Остановка Следующая', sourcePointCount: 1, photos: [{ id: secondId, reviewStatus: secondStatus, isReference: false, reviewReason: secondStatus === 'rejected' ? 'Не видно маркировку' : null }] }
     ] }) });
     if (url.pathname.endsWith('/content')) return route.fulfill({ status: 200, contentType: 'image/jpeg', body: Buffer.from([0xff, 0xd8, 0xff, 0xd9]) });
-    if (url.pathname.endsWith('/review')) { reviewBody = JSON.parse(route.request().postData() || '{}'); if (url.pathname.includes(firstId)) firstStatus = reviewBody.status; if (url.pathname.includes(secondId)) secondStatus = reviewBody.status; return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ ok: true }) }); }
+    if (url.pathname.endsWith('/review')) { reviewSessionHeader = route.request().headers()['x-review-session']; reviewBody = JSON.parse(route.request().postData() || '{}'); if (url.pathname.includes(firstId)) firstStatus = reviewBody.status; if (url.pathname.includes(secondId)) secondStatus = reviewBody.status; return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ ok: true }) }); }
     return route.fulfill({ status: 404, contentType: 'application/json', body: '{}' });
   });
   await page.goto('http://127.0.0.1:8766/review-cabinet/?api=https%3A%2F%2Fmock.test%2Fphoto-api');
@@ -30,6 +31,7 @@ test('кабинет приёмки фильтрует очередь и тре�
   await expect(page.getByText('Снято после уборки территории')).toBeVisible();
   await page.keyboard.press('t');
   await expect.poll(() => reviewBody).toMatchObject({ status: 'confirmed', reason: '' });
+  expect(reviewSessionHeader).toBeTruthy();
   await expect(page.getByRole('heading', { name: 'Остановка Следующая' })).toBeVisible();
   await page.keyboard.press('u');
   await expect(page.getByText('Укажите причину возврата на доработку.')).toBeVisible();
