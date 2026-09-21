@@ -34,6 +34,7 @@ def test_prefecture_review_cabinet_is_linked_and_has_safe_review_controls():
     assert "Укажите причину возврата на доработку" in markup
     assert "Принятое фото автоматически станет эталонным" in markup
     assert "Сделать эталонным" not in markup
+    assert "Комментарий района" in markup
     assert "/review/claim" in markup
     assert "X-Review-Session" in markup
     assert "/review/queue" in markup

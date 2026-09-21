@@ -11,7 +11,7 @@ test('кабинет приёмки фильтрует очередь и тре�
     if (url.pathname.endsWith('/auth/login')) return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ token: 'test-token', user: { displayName: 'Префектура', role: 'prefecture_admin' } }) });
     if (url.pathname.endsWith('/review/claim')) return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ objectKey: JSON.parse(route.request().postData() || '{}').objectKey, leaseSeconds: 1800 }) });
     if (url.pathname.endsWith('/review/queue')) return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ objects: [
-      { objectKey: 'stops|Аэропорт|1', objectType: 'stop', district: 'Аэропорт', label: 'Остановка Тестовая', sourcePointCount: 1, photos: [{ id: firstId, reviewStatus: firstStatus, isReference: false, reviewReason: firstStatus === 'rejected' ? 'Не видно маркировку' : null }] },
+      { objectKey: 'stops|Аэропорт|1', objectType: 'stop', district: 'Аэропорт', label: 'Остановка Тестовая', sourcePointCount: 1, photos: [{ id: firstId, reviewStatus: firstStatus, isReference: false, comment: 'Снято после уборки территории', reviewReason: firstStatus === 'rejected' ? 'Не видно маркировку' : null }] },
       { objectKey: 'stops|Аэропорт|2', objectType: 'stop', district: 'Аэропорт', label: 'Остановка Следующая', sourcePointCount: 1, photos: [{ id: secondId, reviewStatus: secondStatus, isReference: false, reviewReason: secondStatus === 'rejected' ? 'Не видно маркировку' : null }] }
     ] }) });
     if (url.pathname.endsWith('/content')) return route.fulfill({ status: 200, contentType: 'image/jpeg', body: Buffer.from([0xff, 0xd8, 0xff, 0xd9]) });
@@ -26,6 +26,8 @@ test('кабинет приёмки фильтрует очередь и тре�
   await expect(page.getByRole('button', { name: /Остановка Тестовая/ })).toBeVisible();
   await page.getByRole('button', { name: /Остановка Тестовая/ }).click();
   await expect(page.getByText('Принятое фото автоматически станет эталонным.')).toBeVisible();
+  await expect(page.getByText('Комментарий района')).toBeVisible();
+  await expect(page.getByText('Снято после уборки территории')).toBeVisible();
   await page.keyboard.press('t');
   await expect.poll(() => reviewBody).toMatchObject({ status: 'confirmed', reason: '' });
   await expect(page.getByRole('heading', { name: 'Остановка Следующая' })).toBeVisible();
