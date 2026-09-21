@@ -25,14 +25,16 @@ function scopeClause(user, requestedDistrict) {
   return { sql: 'TRUE', params: [] };
 }
 
-export async function loadReportRows(pool, user, requestedDistrict, { includeRejected = false, reviewOnly = false } = {}) {
+export async function loadReportRows(pool, user, requestedDistrict, { includeRejected = false, reviewOnly = false, reviewOwner = '' } = {}) {
   const scope = scopeClause(user, requestedDistrict);
   const photoJoin = includeRejected && user.role === 'prefecture_admin'
     ? "p.review_status <> 'withdrawn'"
     : "p.review_status NOT IN ('rejected', 'withdrawn')";
+  const claimParameter = scope.params.length + 1;
   const queueFilter = reviewOnly
-    ? "AND EXISTS (SELECT 1 FROM photos pending_photo WHERE pending_photo.object_key = o.object_key AND pending_photo.review_status IN ('pending_review', 'rejected'))"
+    ? `AND EXISTS (SELECT 1 FROM photos pending_photo WHERE pending_photo.object_key = o.object_key AND pending_photo.review_status IN ('pending_review', 'rejected'))${reviewOwner ? ` AND NOT EXISTS (SELECT 1 FROM review_claims active_claim WHERE active_claim.object_key = o.object_key AND active_claim.expires_at > now() AND active_claim.owner_key <> $${claimParameter})` : ''}`
     : '';
+  const queryParams = reviewOwner ? [...scope.params, reviewOwner] : scope.params;
   const result = await pool.query(`
     SELECT o.object_key, o.dataset_id, o.object_type, o.report_key, o.source_ids, o.district,
            o.label, o.reference_points, o.properties, o.source_version,
@@ -77,7 +79,7 @@ export async function loadReportRows(pool, user, requestedDistrict, { includeRej
     WHERE ${scope.sql} ${queueFilter}
     GROUP BY o.object_key
     ORDER BY o.district NULLS LAST, o.object_type, o.label, o.object_key
-  `, scope.params);
+  `, queryParams);
   return result.rows.map((row) => ({
     ...row,
     confirmedPhotos: Number(row.confirmed_photos),

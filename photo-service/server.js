@@ -29,6 +29,7 @@ import { photoWithdrawVerdict, WITHDRAW_MESSAGES } from './src/withdraw.js';
 import { createNotifyClient } from './src/notify.js';
 
 const port = Number(process.env.PHOTO_SERVICE_PORT || 8788);
+const REVIEW_CLAIM_LEASE_SECONDS = 30 * 60;
 const basePath = (process.env.PHOTO_SERVICE_BASE_PATH || '').replace(/\/$/, '');
 const notifier = createNotifyClient({ url: process.env.NOTIFY_URL, secret: process.env.NOTIFY_SECRET });
 const cookiePolicy = photoServiceCookiePolicy({
@@ -141,7 +142,7 @@ async function currentUser(request) {
   const token = sessionToken(request);
   if (!token) return null;
   const result = await pool.query(
-    `SELECT u.id, u.email, u.display_name, u.role, u.district
+    `SELECT u.id, u.email, u.display_name, u.role, u.district, s.token_hash AS session_key
        FROM sessions s JOIN users u ON u.id = s.user_id
       WHERE s.token_hash = $1 AND s.expires_at > now() AND u.active = true`,
     [hashSessionToken(token)],
@@ -158,6 +159,11 @@ function requirePrefecture(response, request, user) {
   if (user.role === 'prefecture_admin') return true;
   sendError(response, request, 403, 'prefecture_role_required');
   return false;
+}
+
+function reviewOwnerKey(request, user) {
+  const browserSession = String(request.headers['x-review-session'] || '').trim().slice(0, 128);
+  return createHash('sha256').update(`${user.session_key}:${browserSession}`, 'utf8').digest('hex');
 }
 
 function validCoordinateFields(fields) {
@@ -264,6 +270,41 @@ async function handleUpload(request, response, user) {
   return sendJson(response, 201, { photoId, geoStatus: geo.status, distanceMeters: geo.distanceMeters ?? null, reviewStatus: 'pending_review', thumbnail: Boolean(thumbnail) }, request);
 }
 
+async function handleReviewClaim(request, response, user) {
+  if (!requirePrefecture(response, request, user)) return;
+  let body;
+  try { body = await readJson(request); } catch (error) { return sendError(response, request, 400, error.code); }
+  const objectKey = typeof body.objectKey === 'string' ? body.objectKey.trim() : '';
+  if (!objectKey) return sendError(response, request, 400, 'object_key_required', 'Не указан объект для проверки.');
+  const ownerKey = reviewOwnerKey(request, user);
+  const client = await pool.connect();
+  try {
+    await client.query('BEGIN');
+    const objectResult = await client.query(`SELECT o.object_key, o.district, ${HOLDER_SELECT_SQL} FROM objects o WHERE o.object_key = $1 FOR UPDATE`, [objectKey]);
+    if (!objectResult.rowCount || !objectAllowedFor(user, objectResult.rows[0])) {
+      await client.query('ROLLBACK');
+      return sendError(response, request, 404, 'object_not_found');
+    }
+    await client.query('DELETE FROM review_claims WHERE object_key = $1 AND expires_at <= now()', [objectKey]);
+    const existing = await client.query('SELECT owner_key FROM review_claims WHERE object_key = $1 FOR UPDATE', [objectKey]);
+    if (existing.rowCount && existing.rows[0].owner_key !== ownerKey) {
+      await client.query('ROLLBACK');
+      return sendError(response, request, 409, 'review_claimed', 'Задание уже проверяет другой сотрудник.');
+    }
+    await client.query(`
+      INSERT INTO review_claims (object_key, owner_key, claimed_at, expires_at)
+      VALUES ($1, $2, now(), now() + ($3 * interval '1 second'))
+      ON CONFLICT (object_key) DO UPDATE
+        SET owner_key = EXCLUDED.owner_key, claimed_at = now(), expires_at = EXCLUDED.expires_at
+    `, [objectKey, ownerKey, REVIEW_CLAIM_LEASE_SECONDS]);
+    await client.query('COMMIT');
+    return sendJson(response, 200, { objectKey, leaseSeconds: REVIEW_CLAIM_LEASE_SECONDS }, request);
+  } catch (error) {
+    await client.query('ROLLBACK').catch(() => {});
+    throw error;
+  } finally { client.release(); }
+}
+
 async function handleReview(request, response, user, photoId) {
   if (!requirePrefecture(response, request, user)) return;
   let body;
@@ -275,8 +316,17 @@ async function handleReview(request, response, user, photoId) {
   let result;
   try {
     await client.query('BEGIN');
-    const target = await client.query('SELECT id, object_key, source_id FROM photos WHERE id = $1 FOR UPDATE', [photoId]);
+    const target = await client.query('SELECT id, object_key, source_id, review_status FROM photos WHERE id = $1 FOR UPDATE', [photoId]);
     if (!target.rowCount) { await client.query('ROLLBACK'); return sendError(response, request, 404, 'photo_not_found'); }
+    const claim = await client.query('SELECT owner_key FROM review_claims WHERE object_key = $1 AND expires_at > now() FOR UPDATE', [target.rows[0].object_key]);
+    if (!claim.rowCount || claim.rows[0].owner_key !== reviewOwnerKey(request, user)) {
+      await client.query('ROLLBACK');
+      return sendError(response, request, 409, 'review_claim_required', 'Задание уже занято другим сотрудником или срок проверки истёк.');
+    }
+    if (target.rows[0].review_status === 'confirmed') {
+      await client.query('ROLLBACK');
+      return sendError(response, request, 409, 'review_already_processed', 'Фото уже обработано другим сотрудником.');
+    }
     const isReference = body.status === 'confirmed';
     if (isReference) {
       await client.query('UPDATE photos SET is_reference = false WHERE object_key = $1 AND source_id IS NOT DISTINCT FROM $2', [target.rows[0].object_key, target.rows[0].source_id]);
@@ -357,7 +407,7 @@ async function handleWithdraw(request, response, user, photoId) {
 async function handler(request, response) {
   if (request.method === 'OPTIONS') {
     if (!originAllowed(request)) return sendError(response, request, 403, 'origin_not_allowed');
-    response.writeHead(204, { 'Access-Control-Allow-Origin': request.headers.origin || '*', 'Access-Control-Allow-Credentials': 'true', 'Access-Control-Allow-Headers': 'Content-Type, Idempotency-Key, Authorization', 'Access-Control-Allow-Methods': 'GET,POST,PATCH,DELETE,OPTIONS', Vary: 'Origin' });
+    response.writeHead(204, { 'Access-Control-Allow-Origin': request.headers.origin || '*', 'Access-Control-Allow-Credentials': 'true', 'Access-Control-Allow-Headers': 'Content-Type, Idempotency-Key, Authorization, X-Review-Session', 'Access-Control-Allow-Methods': 'GET,POST,PATCH,DELETE,OPTIONS', Vary: 'Origin' });
     response.end();
     return;
   }
@@ -367,7 +417,11 @@ async function handler(request, response) {
     if (pathname === '/auth/login' && request.method === 'POST') return handleLogin(request, response);
     if (pathname === '/auth/logout' && request.method === 'POST') {
       const token = sessionToken(request);
-      if (token) await pool.query('DELETE FROM sessions WHERE token_hash = $1', [hashSessionToken(token)]);
+      if (token) {
+        const sessionHash = hashSessionToken(token);
+        await pool.query('DELETE FROM review_claims WHERE owner_key = $1', [reviewOwnerKey(request, { session_key: sessionHash })]);
+        await pool.query('DELETE FROM sessions WHERE token_hash = $1', [sessionHash]);
+      }
       response.setHeader('Set-Cookie', expiredSessionCookie(cookiePolicy));
       return sendJson(response, 200, { ok: true }, request);
     }
@@ -435,10 +489,11 @@ async function handler(request, response) {
         }));
       return sendJson(response, 200, { objects: rows }, request);
     }
+    if (pathname === '/review/claim' && request.method === 'POST') return handleReviewClaim(request, response, user);
     if (pathname === '/review/queue' && request.method === 'GET') {
       if (!requirePrefecture(response, request, user)) return;
       const url = new URL(request.url, 'http://photo-service.local');
-      const rows = await loadReportRows(pool, user, url.searchParams.get('district') || undefined, { includeRejected: true, reviewOnly: true });
+      const rows = await loadReportRows(pool, user, url.searchParams.get('district') || undefined, { includeRejected: true, reviewOnly: true, reviewOwner: reviewOwnerKey(request, user) });
       return sendJson(response, 200, { objects: reportPayload(rows).objects }, request);
     }
     if (pathname === '/reports/summary' && request.method === 'GET') {

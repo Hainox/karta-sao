@@ -9,6 +9,7 @@ test('кабинет приёмки фильтрует очередь и тре�
   await page.route('https://mock.test/photo-api/**', async (route) => {
     const url = new URL(route.request().url());
     if (url.pathname.endsWith('/auth/login')) return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ token: 'test-token', user: { displayName: 'Префектура', role: 'prefecture_admin' } }) });
+    if (url.pathname.endsWith('/review/claim')) return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ objectKey: JSON.parse(route.request().postData() || '{}').objectKey, leaseSeconds: 1800 }) });
     if (url.pathname.endsWith('/review/queue')) return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ objects: [
       { objectKey: 'stops|Аэропорт|1', objectType: 'stop', district: 'Аэропорт', label: 'Остановка Тестовая', sourcePointCount: 1, photos: [{ id: firstId, reviewStatus: firstStatus, isReference: false, reviewReason: firstStatus === 'rejected' ? 'Не видно маркировку' : null }] },
       { objectKey: 'stops|Аэропорт|2', objectType: 'stop', district: 'Аэропорт', label: 'Остановка Следующая', sourcePointCount: 1, photos: [{ id: secondId, reviewStatus: secondStatus, isReference: false, reviewReason: secondStatus === 'rejected' ? 'Не видно маркировку' : null }] }
