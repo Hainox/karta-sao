@@ -20,7 +20,7 @@ export const PHOTO_NORM_SINCE = '2026-09-18T09:00:00Z';
 const REVIEW_TEXT = Object.freeze({
   pending_review: 'На проверке',
   confirmed: 'Подтверждено',
-  rejected: 'Отклонено',
+  rejected: 'На доработке',
   withdrawn: 'Отозвано районом',
 });
 
@@ -48,6 +48,7 @@ const BAND_NOTE = Object.freeze({
 const STATUS_TEXT = Object.freeze({
   done: 'Выполнено',
   pending: 'На проверке',
+  rework: 'На доработке',
   incomplete: 'Не хватает кадра',
   empty: 'Без фото',
 });
@@ -167,7 +168,7 @@ export function formatCoordinates(latitude, longitude) {
 // One row per displayed property so the caption is asserted in tests instead of guessed.
 export function photoDetailRows(photo) {
   const normalized = normalizePhoto(photo);
-  return [
+  const rows = [
     { key: 'Снято', value: formatDateTime(normalized.capturedAt) },
     { key: 'Отправлено', value: formatDateTime(normalized.uploadedAt) },
     { key: 'Исполнитель', value: normalized.performer || 'не указан' },
@@ -179,6 +180,8 @@ export function photoDetailRows(photo) {
     { key: 'Комментарий', value: normalized.comment || '—' },
     { key: 'Эталонное фото', value: normalized.isReference ? 'Да' : 'Нет' },
   ];
+  if (normalized.reviewReason) rows.splice(5, 0, { key: 'Причина доработки', value: normalized.reviewReason });
+  return rows;
 }
 
 /**
@@ -200,24 +203,30 @@ export function buildCoverageIndex(summaryPayload) {
     for (const photo of object.photos || []) {
       const sourceId = photo?.sourceId;
       if (!sourceId) continue;
-      const counts = perPoint.get(sourceId) || { confirmed: 0, pending: 0, latestUploadedAt: '' };
+      const counts = perPoint.get(sourceId) || { confirmed: 0, pending: 0, latestUploadedAt: '', latestReviewStatus: '', rework: 0 };
       if (photo.reviewStatus === 'confirmed') counts.confirmed += 1;
       else if (photo.reviewStatus !== 'rejected') counts.pending += 1;
       const uploadedAt = String(photo.uploadedAt || '');
-      if (uploadedAt > counts.latestUploadedAt) counts.latestUploadedAt = uploadedAt;
+      if (uploadedAt >= counts.latestUploadedAt) {
+        counts.latestUploadedAt = uploadedAt;
+        counts.latestReviewStatus = photo.reviewStatus || '';
+      }
+      counts.rework = counts.latestReviewStatus === 'rejected' ? 1 : 0;
       perPoint.set(sourceId, counts);
     }
     for (const sourceId of object.sourceIds || []) {
-      const counts = perPoint.get(sourceId) || { confirmed: 0, pending: 0, latestUploadedAt: '' };
+      const counts = perPoint.get(sourceId) || { confirmed: 0, pending: 0, latestUploadedAt: '', latestReviewStatus: '', rework: 0 };
       // Кадр, снятый до введения нормы двух, закрывает точку по прежнему правилу.
       // Сравниваем через Date: сервер отдаёт время с московским смещением, а порог
       // записан в UTC, и как строки они несравнимы.
       const legacyClosed = Boolean(counts.latestUploadedAt)
+        && counts.latestReviewStatus !== 'rejected'
         && Date.parse(counts.latestUploadedAt) < Date.parse(PHOTO_NORM_SINCE);
       index.set(sourceId, {
         ...entry,
         confirmedPhotos: counts.confirmed,
         pendingReviewPhotos: counts.pending,
+        reworkPhotos: counts.rework,
         legacyClosed,
       });
     }
@@ -230,11 +239,12 @@ export function coverageFor(coverageIndex, record, objectType) {
   const required = photoRequirementFor(objectType);
   const confirmed = entry ? entry.confirmedPhotos : 0;
   const pending = entry ? entry.pendingReviewPhotos : 0;
+  const rework = entry ? entry.reworkPhotos : 0;
   // Точка, снятая до введения нормы двух, закрыта по прежнему правилу: тогда
   // хватало одного кадра, и требовать второй задним числом нечестно.
   const legacyClosed = entry ? entry.legacyClosed === true : false;
   const complete = confirmed >= required || legacyClosed;
-  const withPhoto = confirmed + pending > 0;
+  const withPhoto = confirmed + pending + rework > 0;
   // Сколько кадров из нормы уже лежит — по ним видно и работу района, и остаток.
   const taken = Math.min(confirmed + pending, required);
   // Уже снятое, но ещё не подтверждённое тоже закрывает норму съёмки: иначе
@@ -243,13 +253,15 @@ export function coverageFor(coverageIndex, record, objectType) {
   // «Не хватает кадра» — точка, которой нужен ещё кадр, но кадры у неё уже есть:
   // это состояние района, а не приёмки, поэтому оно отделено от «На проверке»
   // (норма набрана, ждёт решения префектуры) и от «Без фото» (кадров нет вовсе).
-  const statusKey = complete ? 'done'
+  const statusKey = rework > 0 ? 'rework'
+    : complete ? 'done'
     : remaining > 0 ? (withPhoto ? 'incomplete' : 'empty')
       : 'pending';
   return {
     required,
     confirmed,
     pending,
+    rework,
     withPhoto,
     taken,
     complete,
@@ -314,6 +326,7 @@ export function filterRecords(records, options = {}) {
     if (status === 'partial' && !(coverage.confirmed > 0 && !coverage.complete)) return false;
     // «На проверке» — есть кадры, по которым префектура ещё не вынесла решение.
     if (status === 'pending' && coverage.pending === 0) return false;
+    if (status === 'rework' && coverage.rework === 0) return false;
     return true;
   });
 }

@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { reportPayload } from '../src/reports.js';
+import { loadReportRows, reportPayload } from '../src/reports.js';
 
 function row(district, objectType, confirmed, pending = 0) {
   return {
@@ -39,6 +39,13 @@ test('the summary payload carries the per-district board for the prefecture', ()
   // «АвД САО» — она замыкает доску и не смешивается с районами.
   assert.equal(third.district, 'АвД САО');
   assert.equal(third.totalObjects, 1);
+});
+
+test('районная сводка запрашивает возвращённые фото вместе с причиной', async () => {
+  const queries = [];
+  const pool = { query: async (sql) => { queries.push(sql); return { rows: [] }; } };
+  await loadReportRows(pool, { role: 'district_editor', district: 'Сокол' }, undefined, { includeRejected: true });
+  assert.match(queries[0], /p\.review_status <> 'withdrawn'/);
 });
 
 test('the board keeps the same arithmetic as the overall summary', () => {

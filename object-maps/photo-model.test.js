@@ -62,6 +62,13 @@ test('never renders an invalid date or a lost GPS accuracy', () => {
   assert.equal(byKey['Эталонное фото'], 'Нет');
 });
 
+test('показывает районную причину возврата отдельной строкой', () => {
+  const rows = photoDetailRows({ reviewStatus: 'rejected', reviewReason: 'Не видно разметку' });
+  const byKey = Object.fromEntries(rows.map((row) => [row.key, row.value]));
+  assert.equal(byKey['Проверка'], 'На доработке');
+  assert.equal(byKey['Причина доработки'], 'Не видно разметку');
+});
+
 test('formats missing values as text instead of throwing', () => {
   assert.equal(formatDateTime(null), 'время не указано');
   assert.equal(formatDateTime('not-a-date'), 'время не указано');
@@ -213,8 +220,13 @@ test('classifies a point as done, pending, or empty', () => {
   assert.equal(coverageFor(index, { id: 'stop:pending' }, 'stop').withPhoto, true);
   assert.equal(coverageFor(index, { id: 'stop:none' }, 'stop').statusKey, 'empty');
   assert.equal(coverageFor(index, { id: 'stop:none' }, 'stop').statusLabel, 'Без фото');
-  // Отклонённый кадр точку не закрывает.
-  assert.equal(coverageFor(index, { id: 'stop:rejected' }, 'stop').withPhoto, false);
+  // Возврат не закрывает точку, но объект сразу виден району как доработка.
+  const rejected = coverageFor(index, { id: 'stop:rejected' }, 'stop');
+  assert.equal(rejected.withPhoto, true);
+  assert.equal(rejected.rework, 1);
+  assert.equal(rejected.statusKey, 'rework');
+  assert.equal(rejected.statusLabel, 'На доработке');
+  assert.equal(rejected.remaining, 1);
 });
 
 test('точка с подтверждённым снимком всё равно показывает снимок на проверке', () => {

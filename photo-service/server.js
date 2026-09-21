@@ -478,7 +478,9 @@ async function handler(request, response) {
       if (!object || !objectAllowedFor(user, object)) return sendError(response, request, 404, 'object_not_found');
       // Снимок принадлежит конкретной точке: у объекта с тем же ID могут быть
       // другие точки, и чужие кадры на них показывать нельзя.
-      const reviewFilter = user.role === 'prefecture_admin' ? "p.review_status <> 'withdrawn'" : "p.review_status NOT IN ('rejected', 'withdrawn')";
+      // Району нужно видеть возврат с причиной, чтобы объект сразу появился
+      // на его карте как «На доработке».
+      const reviewFilter = user.role === 'prefecture_admin' || user.role === 'district_editor' ? "p.review_status <> 'withdrawn'" : "p.review_status NOT IN ('rejected', 'withdrawn')";
       const result = await pool.query(`SELECT id, storage_key, mime_type, original_filename, byte_size, performer, comment, captured_at, uploaded_at, gps_latitude, gps_longitude, gps_accuracy_m, distance_m, geo_status, review_status, review_reason, is_reference, source_id FROM photos p WHERE object_key = $1 AND source_id = $2 AND ${reviewFilter} ORDER BY uploaded_at`, [object.object_key, sourceId]);
       return sendJson(response, 200, { objectKey: object.object_key, photos: result.rows }, request);
     }
@@ -494,7 +496,7 @@ async function handler(request, response) {
       // Доступ считается тем же правилом, что и на остальных объектных ручках:
       // учётке АвД принадлежат её объекты, объекты «ДЭУ» и объекты без района,
       // поэтому сравнение одного района отдавало ей 404 на каждом своём кадре.
-      const reviewFilter = user.role === 'prefecture_admin' ? "p.review_status <> 'withdrawn'" : "p.review_status NOT IN ('rejected', 'withdrawn')";
+      const reviewFilter = user.role === 'prefecture_admin' || user.role === 'district_editor' ? "p.review_status <> 'withdrawn'" : "p.review_status NOT IN ('rejected', 'withdrawn')";
       const result = await pool.query(`SELECT p.storage_key, p.mime_type, o.district, ${HOLDER_SELECT_SQL} FROM photos p JOIN objects o ON o.object_key = p.object_key WHERE p.id = $1 AND ${reviewFilter}`, [contentMatch[1]]);
       if (!result.rowCount || !objectAllowedFor(user, result.rows[0])) return sendError(response, request, 404, 'photo_not_found');
       // The atlas reads photo bytes through an authorised fetch, so the media response
@@ -530,7 +532,7 @@ async function handler(request, response) {
     }
     if (pathname === '/reports/summary' && request.method === 'GET') {
       const url = new URL(request.url, 'http://photo-service.local');
-      const rows = await loadReportRows(pool, user, url.searchParams.get('district') || undefined);
+      const rows = await loadReportRows(pool, user, url.searchParams.get('district') || undefined, { includeRejected: user.role === 'district_editor' });
       const payload = reportPayload(rows);
       // Проверки (дубли фото на разных объектах) отдаём отдельным блоком: риски
       // по GPS убраны как необъективный показатель, проверки к ним не относятся.

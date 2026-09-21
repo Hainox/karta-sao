@@ -22,8 +22,8 @@ const SUPPORTED_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
 const SUPPORTED_EXTENSIONS = ['jpg', 'jpeg', 'png', 'webp'];
 
 // Цвет отвечает на вопрос «что делать»: красный — снимать с нуля, жёлтый — доснять
-// кадр, синий — ждать приёмку, зелёный — принято. Порядок задаёт порядок в легенде.
-const STATUS_COLOR = { done: '#0c7a5a', pending: '#2f6fb0', incomplete: '#e0a800', empty: '#b4552f' };
+// кадр, бордовый — исправить возврат, синий — ждать приёмку, зелёный — принято.
+const STATUS_COLOR = { done: '#0c7a5a', pending: '#2f6fb0', rework: '#b54755', incomplete: '#e0a800', empty: '#b4552f' };
 
 const state = {
   manifest: null,
@@ -70,6 +70,7 @@ const state = {
   dataCache: new Map(),
   referencePoints: new Map(),
   boardAll: [],
+  coveragePollTimer: null,
 };
 
 const element = (id) => document.getElementById(id);
@@ -1649,6 +1650,7 @@ function shell() {
               <option value="done">Выполнено</option>
               <option value="partial">Частично</option>
               <option value="pending">На проверке</option>
+              <option value="rework">На доработке</option>
             </select>
           </div>
         </div>
@@ -1825,6 +1827,13 @@ export async function startPhotoApp(options = {}) {
   await selectDataset(options.dataset || params.get('dataset') || state.manifest.datasets[0].key);
   await restoreSession();
   await refreshCoverage();
+  // Если префектура вынесла решение на другом устройстве, район видит новый
+  // статус без ручной перезагрузки страницы. Обновление только после входа.
+  if (!state.coveragePollTimer) {
+    state.coveragePollTimer = window.setInterval(() => {
+      if (state.user) refreshCoverage({ announce: false });
+    }, 30000);
+  }
   if (window.ymaps) {
     window.ymaps.ready(() => { state.mapReady = true; buildMap(); });
   } else {

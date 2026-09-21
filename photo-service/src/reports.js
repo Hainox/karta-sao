@@ -27,7 +27,10 @@ function scopeClause(user, requestedDistrict) {
 
 export async function loadReportRows(pool, user, requestedDistrict, { includeRejected = false, reviewOnly = false, reviewOwner = '' } = {}) {
   const scope = scopeClause(user, requestedDistrict);
-  const photoJoin = includeRejected && user.role === 'prefecture_admin'
+  // Район должен видеть возвращённый кадр и причину доработки на той же карте,
+  // с которой он его отправлял. Префектура получает rejected только в очереди.
+  const canSeeRejected = user.role === 'prefecture_admin' || user.role === 'district_editor';
+  const photoJoin = includeRejected && canSeeRejected
     ? "p.review_status <> 'withdrawn'"
     : "p.review_status NOT IN ('rejected', 'withdrawn')";
   const claimParameter = scope.params.length + 1;
