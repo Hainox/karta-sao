@@ -11,6 +11,7 @@ test('кабинет приёмки фильтрует очередь и тре�
     const url = new URL(route.request().url());
     if (url.pathname.endsWith('/auth/login')) return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ token: 'test-token', user: { displayName: 'Префектура', role: 'prefecture_admin' } }) });
     if (url.pathname.endsWith('/review/claim')) return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ objectKey: JSON.parse(route.request().postData() || '{}').objectKey, leaseSeconds: 1800 }) });
+    if (url.pathname.endsWith('/review/history')) return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ items: [{ id: 7, objectKey: 'stops|Аэропорт|old', label: 'Остановка В истории', district: 'Аэропорт', objectType: 'stop', status: 'confirmed', operator: 'Префектура', createdAt: '2026-09-21T10:00:00Z' }] }) });
     if (url.pathname.endsWith('/review/queue')) return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ objects: [
       { objectKey: 'stops|Аэропорт|1', objectType: 'stop', district: 'Аэропорт', label: 'Остановка Тестовая', sourcePointCount: 1, photos: [{ id: firstId, reviewStatus: firstStatus, isReference: false, comment: 'Снято после уборки территории', reviewReason: firstStatus === 'rejected' ? 'Не видно маркировку' : null }] },
       { objectKey: 'stops|Аэропорт|2', objectType: 'stop', district: 'Аэропорт', label: 'Остановка Следующая', sourcePointCount: 1, photos: [{ id: secondId, reviewStatus: secondStatus, isReference: false, reviewReason: secondStatus === 'rejected' ? 'Не видно маркировку' : null }] }
@@ -24,6 +25,9 @@ test('кабинет приёмки фильтрует очередь и тре�
   await page.getByLabel('Пароль').fill('secret');
   await page.getByRole('button', { name: 'Войти' }).click();
   await expect(page.getByLabel('Район')).toContainText('Аэропорт');
+  await page.getByRole('button', { name: /История проверок/ }).click();
+  await expect(page.getByText('Остановка В истории')).toBeVisible();
+  await page.getByRole('button', { name: 'Закрыть' }).click();
   await expect(page.getByRole('button', { name: /Остановка Тестовая/ })).toBeVisible();
   await page.getByRole('button', { name: /Остановка Тестовая/ }).click();
   await expect(page.getByText('Принятое фото автоматически станет эталонным.')).toBeVisible();

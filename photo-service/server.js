@@ -305,6 +305,37 @@ async function handleReviewClaim(request, response, user) {
   } finally { client.release(); }
 }
 
+async function handleReviewHistory(request, response, user) {
+  if (!requirePrefecture(response, request, user)) return;
+  const url = new URL(request.url, 'http://photo-service.local');
+  const requestedLimit = Number(url.searchParams.get('limit') || 50);
+  const limit = Number.isInteger(requestedLimit) ? Math.min(Math.max(requestedLimit, 1), 100) : 50;
+  const result = await pool.query(`
+    SELECT a.id, a.object_key, a.photo_id, a.action, a.created_at,
+           a.metadata->>'reason' AS reason,
+           u.display_name AS operator,
+           o.label, o.district, o.object_type
+      FROM audit_log a
+      LEFT JOIN users u ON u.id = a.actor_user_id
+      LEFT JOIN objects o ON o.object_key = a.object_key
+     WHERE a.action IN ('photo_confirmed', 'photo_rejected')
+     ORDER BY a.created_at DESC, a.id DESC
+     LIMIT $1
+  `, [limit]);
+  return sendJson(response, 200, { items: result.rows.map((row) => ({
+    id: row.id,
+    objectKey: row.object_key,
+    photoId: row.photo_id,
+    status: row.action === 'photo_confirmed' ? 'confirmed' : 'rejected',
+    reason: row.reason,
+    operator: row.operator || 'Префектура',
+    label: row.label,
+    district: row.district,
+    objectType: row.object_type,
+    createdAt: row.created_at,
+  })) }, request);
+}
+
 async function handleReview(request, response, user, photoId) {
   if (!requirePrefecture(response, request, user)) return;
   let body;
@@ -490,6 +521,7 @@ async function handler(request, response) {
       return sendJson(response, 200, { objects: rows }, request);
     }
     if (pathname === '/review/claim' && request.method === 'POST') return handleReviewClaim(request, response, user);
+    if (pathname === '/review/history' && request.method === 'GET') return handleReviewHistory(request, response, user);
     if (pathname === '/review/queue' && request.method === 'GET') {
       if (!requirePrefecture(response, request, user)) return;
       const url = new URL(request.url, 'http://photo-service.local');

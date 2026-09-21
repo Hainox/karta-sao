@@ -36,6 +36,8 @@ def test_prefecture_review_cabinet_is_linked_and_has_safe_review_controls():
     assert "Сделать эталонным" not in markup
     assert "Комментарий района" in markup
     assert "/review/claim" in markup
+    assert "/review/history" in markup
+    assert "История проверок" in markup
     assert "X-Review-Session" in markup
     assert "/review/queue" in markup
     assert "https://obhod-sao.ru/photo-api" in markup
