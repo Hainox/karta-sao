@@ -437,7 +437,7 @@ async function handler(request, response) {
     if (pathname === '/review/queue' && request.method === 'GET') {
       if (!requirePrefecture(response, request, user)) return;
       const url = new URL(request.url, 'http://photo-service.local');
-      const rows = await loadReportRows(pool, user, url.searchParams.get('district') || undefined, { includeRejected: true });
+      const rows = await loadReportRows(pool, user, url.searchParams.get('district') || undefined, { includeRejected: true, reviewOnly: true });
       return sendJson(response, 200, { objects: reportPayload(rows).objects }, request);
     }
     if (pathname === '/reports/summary' && request.method === 'GET') {
