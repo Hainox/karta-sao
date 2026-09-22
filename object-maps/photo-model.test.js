@@ -206,6 +206,39 @@ test('снимок одной точки не подтягивается на с
   }
 });
 
+test('отклонённый кадр без sourceId остаётся видимым на карте объекта', () => {
+  const index = buildCoverageIndex({
+    objects: [{
+      objectKey: 'stop|legacy', objectType: 'stop', district: 'Сокол', sourceIds: ['stop:a', 'stop:b'],
+      photos: [{
+        reviewStatus: 'rejected', reviewReason: 'missing_gps', uploadedAt: '2026-09-22T08:00:00.000Z',
+      }],
+    }],
+  });
+
+  for (const id of ['stop:a', 'stop:b']) {
+    const coverage = coverageFor(index, { id }, 'stop');
+    assert.equal(coverage.rework, 1);
+    assert.equal(coverage.statusKey, 'rework');
+    assert.equal(coverage.withPhoto, true);
+  }
+});
+
+test('новый кадр снимает объектный fallback старого отклонения без sourceId', () => {
+  const index = buildCoverageIndex({
+    objects: [{
+      objectKey: 'stop|legacy', objectType: 'stop', district: 'Сокол', sourceIds: ['stop:a', 'stop:b'],
+      photos: [
+        { reviewStatus: 'rejected', uploadedAt: '2026-09-22T08:00:00.000Z' },
+        { sourceId: 'stop:a', reviewStatus: 'pending_review', uploadedAt: '2026-09-22T09:00:00.000Z' },
+      ],
+    }],
+  });
+
+  assert.equal(coverageFor(index, { id: 'stop:a' }, 'stop').statusKey, 'pending');
+  assert.equal(coverageFor(index, { id: 'stop:b' }, 'stop').statusKey, 'empty');
+});
+
 test('classifies a point as done, pending, or empty', () => {
   const index = buildCoverageIndex({
     objects: [

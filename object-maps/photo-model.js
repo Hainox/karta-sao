@@ -200,13 +200,26 @@ export function buildCoverageIndex(summaryPayload) {
       label: object.label || '',
     };
     const perPoint = new Map();
+    // Старые кадры, загруженные до обязательной привязки к координате, могут
+    // не иметь sourceId. Они всё равно принадлежат объекту и должны быть видны
+    // району, если последний такой кадр возвращён на доработку. Для ПП с
+    // несколькими точками это объектный fallback: точную точку без GPS назвать
+    // нельзя, но скрывать проблему с карты нельзя.
+    let latestObjectPhoto = { uploadedAt: '', reviewStatus: '', sourceId: null };
     for (const photo of object.photos || []) {
       const sourceId = photo?.sourceId;
+      const uploadedAt = String(photo.uploadedAt || '');
+      if (uploadedAt >= latestObjectPhoto.uploadedAt) {
+        latestObjectPhoto = {
+          uploadedAt,
+          reviewStatus: photo.reviewStatus || '',
+          sourceId: sourceId || null,
+        };
+      }
       if (!sourceId) continue;
       const counts = perPoint.get(sourceId) || { confirmed: 0, pending: 0, latestUploadedAt: '', latestReviewStatus: '', rework: 0 };
       if (photo.reviewStatus === 'confirmed') counts.confirmed += 1;
       else if (photo.reviewStatus !== 'rejected') counts.pending += 1;
-      const uploadedAt = String(photo.uploadedAt || '');
       if (uploadedAt >= counts.latestUploadedAt) {
         counts.latestUploadedAt = uploadedAt;
         counts.latestReviewStatus = photo.reviewStatus || '';
@@ -214,6 +227,7 @@ export function buildCoverageIndex(summaryPayload) {
       counts.rework = counts.latestReviewStatus === 'rejected' ? 1 : 0;
       perPoint.set(sourceId, counts);
     }
+    const unboundRework = latestObjectPhoto.reviewStatus === 'rejected' && !latestObjectPhoto.sourceId;
     for (const sourceId of object.sourceIds || []) {
       const counts = perPoint.get(sourceId) || { confirmed: 0, pending: 0, latestUploadedAt: '', latestReviewStatus: '', rework: 0 };
       // Кадр, снятый до введения нормы двух, закрывает точку по прежнему правилу.
@@ -226,7 +240,13 @@ export function buildCoverageIndex(summaryPayload) {
         ...entry,
         confirmedPhotos: counts.confirmed,
         pendingReviewPhotos: counts.pending,
-        reworkPhotos: counts.rework,
+        // Если последний кадр объекта отклонён без координатной привязки,
+        // подсвечиваем все его точки: иначе фильтр «На доработке» молча
+        // теряет обращение района. Более новый кадр (с sourceId или без него)
+        // заменяет fallback, потому что latestObjectPhoto пересчитывается по
+        // времени загрузки.
+        reworkPhotos: counts.rework || unboundRework ? 1 : 0,
+        unboundRework,
         legacyClosed,
       });
     }
