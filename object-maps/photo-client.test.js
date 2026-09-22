@@ -12,6 +12,8 @@ test('карта сохраняет заметную категорию дора
   assert.match(client, /statusKey === 'rework'/);
   assert.match(client, /НА ДОРАБОТКЕ/);
   assert.match(client, /ensurePointLayer\(!reworkOnly && filtered\.length > CLUSTER_FROM_MARKERS\)/);
+  assert.match(client, /setFilter\(\(object\) => visible\.has\(Number\(object\.id\)\)\)/);
+  assert.match(client, /countCoverageStatus\(filtered, state\.coverage, state\.entry\.objectType, 'rework'\)/);
   assert.match(css, /\.pa-row-rework/);
   assert.match(css, /\.pa-legend-rework/);
   assert.match(css, /#d7193f/);

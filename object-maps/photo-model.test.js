@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import {
   accountScope, accuracyVerdict, ACCURACY_REVIEW_METERS, assessDistanceRisk, bandNote, bandText, boundaryNote, buildCoverageIndex, buildQueue, canExport,
-  coverageCounterText, coverageFor, coverageLabel, coveragePercent, districtBoundaries, filterRecords, formatAccuracy,
+  countCoverageStatus, coverageCounterText, coverageFor, coverageLabel, coveragePercent, districtBoundaries, filterRecords, formatAccuracy,
   formatCoordinates, formatDateTime, formatMeters, geoStatusText, gpsDistanceLabel, haversineDistanceMeters, isAutodorHolder,
   normalizePhoto, photoDetailRows, photoRequirementFor, PHOTO_REQUIREMENTS, recordHolder, reportSummaryRows, reviewStatusText, scopedDistricts,
 } from './photo-model.js';
@@ -290,6 +290,32 @@ test('filters by district, group, free text and photo status', () => {
   assert.equal(filterRecords(records, { ...options, group: 'Дегунино' })[0].id, 'stop:1');
   assert.equal(filterRecords(records, { ...options, query: 'сокол' })[0].id, 'stop:2');
   assert.equal(filterRecords(records, { ...options, status: 'pending' }).length, 0);
+});
+
+test('список и легенда считают один и тот же набор точек на доработке', () => {
+  const records = [
+    { id: 'entrance:1', label: 'Возвращённый объект', group: 'Дмитровский' },
+    { id: 'entrance:2', label: 'Объект на проверке', group: 'Дмитровский' },
+    { id: 'entrance:3', label: 'Без фото', group: 'Дмитровский' },
+  ];
+  const coverage = buildCoverageIndex({
+    objects: [
+      {
+        objectKey: 'entrance:returned', objectType: 'entrance', district: 'Дмитровский',
+        sourceIds: ['entrance:1'],
+        photos: [{ sourceId: 'entrance:1', reviewStatus: 'rejected', uploadedAt: '2026-09-22T08:00:00.000Z' }],
+      },
+      {
+        objectKey: 'entrance:pending', objectType: 'entrance', district: 'Дмитровский',
+        sourceIds: ['entrance:2'],
+        photos: [{ sourceId: 'entrance:2', reviewStatus: 'pending_review', uploadedAt: '2026-09-22T08:00:00.000Z' }],
+      },
+    ],
+  });
+  const filtered = filterRecords(records, { coverageIndex: coverage, objectType: 'entrance', status: 'rework' });
+  assert.deepEqual(filtered.map((record) => record.id), ['entrance:1']);
+  assert.equal(countCoverageStatus(filtered, coverage, 'entrance', 'rework'), 1);
+  assert.equal(countCoverageStatus(records, coverage, 'entrance', 'rework'), 1);
 });
 
 test('фильтр по району не зависит от регистра и «ё» в названии', () => {

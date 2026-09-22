@@ -1,7 +1,7 @@
 import {
   accountScope, accuracyVerdict, bandNote, bandText, boundaryNote, buildCoverageIndex,
   buildQueue, canExport, coverageBand, coverageCounterText, coverageFor, coverageLabel, coveragePercent,
-  districtBoundaries, filterRecords, formatCoordinates, formatMeters, geoStatusText, gpsDistanceLabel,
+  countCoverageStatus, districtBoundaries, filterRecords, formatCoordinates, formatMeters, geoStatusText, gpsDistanceLabel,
   groupLabel, groupValues, isAutodorAccount, isAutodorHolder, photoDetailRows, photoRequirementFor,
   reportSummaryRows, scopedDistricts, statusText,
 } from './photo-model.js';
@@ -734,14 +734,11 @@ function renderList() {
   }
 }
 
-function renderLegend() {
+function renderLegend(records = null) {
   const legend = element('paLegend');
   legend.replaceChildren();
-  const reworkCount = state.dataset
-    ? state.dataset.records.reduce((count, record) => (
-      count + (coverageFor(state.coverage, record, state.entry.objectType).statusKey === 'rework' ? 1 : 0)
-    ), 0)
-    : 0;
+  const visibleRecords = records || (state.dataset ? currentRecords() : []);
+  const reworkCount = countCoverageStatus(visibleRecords, state.coverage, state.entry?.objectType, 'rework');
   for (const [statusKey, color] of Object.entries(STATUS_COLOR)) {
     const item = document.createElement('span');
     item.className = `pa-legend-item${statusKey === 'rework' ? ' pa-legend-rework' : ''}`;
@@ -847,13 +844,16 @@ function ensurePointLayer(clusterize) {
     const record = state.dataset.records[Number(event.get('objectId'))];
     if (record) openRecord(record, null);
   });
-  const features = state.dataset.records.map((record, index) => ({
-    type: 'Feature',
-    id: index,
-    geometry: { type: 'Point', coordinates: [record.lat, record.lon] },
-    properties: { recordId: record.id },
-    options: { preset: 'islands#circleIcon', iconColor: STATUS_COLOR.empty },
-  }));
+  const features = state.dataset.records.map((record, index) => {
+    const coverage = coverageFor(state.coverage, record, state.entry?.objectType);
+    return {
+      type: 'Feature',
+      id: index,
+      geometry: { type: 'Point', coordinates: [record.lat, record.lon] },
+      properties: { recordId: record.id },
+      options: { preset: 'islands#circleIcon', iconColor: STATUS_COLOR[coverage.statusKey] },
+    };
+  });
   state.pointLayer.add({ type: 'FeatureCollection', features });
   state.map.geoObjects.add(state.pointLayer);
 }
@@ -869,15 +869,21 @@ function renderMapObjects() {
   // должна быть видна отдельно и доступна для перехода к объекту.
   ensurePointLayer(!reworkOnly && filtered.length > CLUSTER_FROM_MARKERS);
   const visible = new Set(filtered.map((record) => state.indexById.get(record.id)));
-  state.pointLayer.setFilter((feature) => visible.has(Number(feature.id)));
-  for (const record of filtered) {
+  // Yandex passes the full GeoJSON object to setFilter, not the raw feature
+  // callback argument used by the old implementation. Using `object.id` keeps
+  // filtering reliable for both clustered and individual markers.
+  state.pointLayer.setFilter((object) => visible.has(Number(object.id)));
+  // Re-apply colors to every point after a summary refresh. Previously only
+  // currently filtered rows were recolored, leaving a rebuilt layer with stale
+  // default icons and making returned points appear absent.
+  for (const record of state.dataset.records) {
+    const index = state.indexById.get(record.id);
+    if (index === undefined) continue;
     const coverage = coverageFor(state.coverage, record, state.entry.objectType);
-    state.pointLayer.objects.setObjectOptions(state.indexById.get(record.id), { iconColor: STATUS_COLOR[coverage.statusKey] });
+    state.pointLayer.objects.setObjectOptions(index, { iconColor: STATUS_COLOR[coverage.statusKey] });
   }
-  renderLegend();
-  const reworkCount = state.dataset.records.reduce((count, record) => (
-    count + (coverageFor(state.coverage, record, state.entry.objectType).statusKey === 'rework' ? 1 : 0)
-  ), 0);
+  renderLegend(filtered);
+  const reworkCount = countCoverageStatus(filtered, state.coverage, state.entry.objectType, 'rework');
   element('paMapStatus').textContent = `Показано ${filtered.length.toLocaleString('ru-RU')} из ${state.dataset.records.length.toLocaleString('ru-RU')} объектов · на доработке: ${reworkCount.toLocaleString('ru-RU')}`;
 }
 

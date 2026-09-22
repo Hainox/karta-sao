@@ -346,9 +346,23 @@ export function filterRecords(records, options = {}) {
     if (status === 'partial' && !(coverage.confirmed > 0 && !coverage.complete)) return false;
     // «На проверке» — есть кадры, по которым префектура ещё не вынесла решение.
     if (status === 'pending' && coverage.pending === 0) return false;
-    if (status === 'rework' && coverage.rework === 0) return false;
+    // Сравниваем итоговый статус, а не только числовое поле: старые ответы
+    // сводки могли не содержать reworkPhotos, и тогда undefined проходил
+    // проверку `=== 0`, показывая чужие точки в очереди доработки.
+    if (status === 'rework' && coverage.statusKey !== 'rework') return false;
     return true;
   });
+}
+
+/**
+ * Count the same visible status that the list and map use. Keeping this in the
+ * pure model prevents the legend from drifting away from the filtered list
+ * during a district-scoped summary refresh.
+ */
+export function countCoverageStatus(records, coverageIndex, objectType, statusKey) {
+  return (records || []).reduce((count, record) => (
+    count + (coverageFor(coverageIndex, record, objectType).statusKey === statusKey ? 1 : 0)
+  ), 0);
 }
 
 /**
