@@ -41,6 +41,7 @@ def test_prefecture_review_cabinet_is_linked_and_has_safe_review_controls():
     assert "X-Review-Session" in markup
     assert "/review/queue" in markup
     assert "https://obhod-sao.ru/photo-api" in markup
+    assert "credentials:'include',cache:'no-store',headers:headers()" in markup
     assert "review-cabinet" in page("hub/index.html")
 
 
