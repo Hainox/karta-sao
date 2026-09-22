@@ -532,7 +532,12 @@ async function handler(request, response) {
     }
     if (pathname === '/reports/summary' && request.method === 'GET') {
       const url = new URL(request.url, 'http://photo-service.local');
-      const rows = await loadReportRows(pool, user, url.searchParams.get('district') || undefined, { includeRejected: user.role === 'district_editor' });
+      // The prefecture map must receive rejected photos as well: otherwise
+      // the review cabinet shows «На доработке», while the map silently
+      // excludes those points from its coverage payload.
+      const rows = await loadReportRows(pool, user, url.searchParams.get('district') || undefined, {
+        includeRejected: user.role === 'district_editor' || user.role === 'prefecture_admin',
+      });
       const payload = reportPayload(rows);
       // Проверки (дубли фото на разных объектах) отдаём отдельным блоком: риски
       // по GPS убраны как необъективный показатель, проверки к ним не относятся.

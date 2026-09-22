@@ -21,3 +21,12 @@ test('ручки объекта не сравнивают район учётк�
   assert.ok(!/district !== user\.district/.test(source), 'сравнение района в обход objectAllowedFor');
   assert.ok(!/row\.district === user\.district/.test(source), 'сравнение района в обход objectAllowedFor');
 });
+
+test('префектура видит возвращённые кадры и на карте, и в карточке проверки', () => {
+  // Возвращённый кадр остаётся доступен префектуре для повторной проверки и
+  // загрузки файла, а summary обязан передать его на карту как «На доработке».
+  assert.match(source, /const reviewFilter = user\.role === 'prefecture_admin' \|\| user\.role === 'district_editor' \? "p\.review_status <> 'withdrawn'/);
+  const summaryBlock = source.match(/if \(pathname === '\/reports\/summary'[\s\S]*?return sendJson/);
+  assert.ok(summaryBlock, 'ручка сводки не найдена');
+  assert.match(summaryBlock[0], /includeRejected: user\.role === 'district_editor' \|\| user\.role === 'prefecture_admin'/);
+});
