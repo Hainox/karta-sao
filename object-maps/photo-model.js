@@ -305,6 +305,62 @@ export function coverageCounterText(coverage) {
   return `снято ${coverage.taken} из ${coverage.required}`;
 }
 
+export function isDrawablePoint(record) {
+  const id = String(record?.id ?? '').trim();
+  const latitude = numberOrNull(record?.lat);
+  const longitude = numberOrNull(record?.lon);
+  return Boolean(id) && latitude !== null && longitude !== null
+    && Math.abs(latitude) <= 90 && Math.abs(longitude) <= 180;
+}
+
+/**
+ * Reconcile point IDs in the selected map layer with IDs in the photo summary.
+ * Point counters use only records that can actually be drawn on the map; API-only
+ * IDs are reported separately instead of silently inflating the visible-point
+ * totals. Map-only records remain visible and are counted as unverified/no-photo.
+ */
+export function auditPointLayer(records, coverageIndex, objectType) {
+  const rows = Array.isArray(records) ? records : [];
+  const index = coverageIndex instanceof Map ? coverageIndex : new Map();
+  const recordsById = new Map();
+  const duplicateMapIds = new Set();
+  let missingIdRecords = 0;
+
+  for (const record of rows) {
+    const id = String(record?.id ?? '').trim();
+    if (!id) {
+      missingIdRecords += 1;
+      continue;
+    }
+    if (recordsById.has(id)) duplicateMapIds.add(id);
+    recordsById.set(id, record);
+  }
+
+  const apiIds = new Set();
+  for (const [id, coverage] of index) {
+    if (coverage?.objectType === objectType) apiIds.add(id);
+  }
+
+  const drawable = [...recordsById.values()].filter(isDrawablePoint);
+  const mapDrawableIds = new Set(drawable.map((record) => String(record.id).trim()));
+  const apiOnlyIds = [...apiIds].filter((id) => !mapDrawableIds.has(id));
+  const mapOnlyIds = [...mapDrawableIds].filter((id) => !apiIds.has(id));
+  const pointsWithoutPhoto = drawable.filter((record) => (
+    coverageFor(index, record, objectType).statusKey === 'empty'
+  )).length;
+
+  return {
+    mapPoints: drawable.length,
+    apiPoints: apiIds.size,
+    pointsWithoutPhoto,
+    apiOnlyIds,
+    mapOnlyIds,
+    duplicateMapIds: [...duplicateMapIds],
+    missingIdRecords,
+    invalidCoordinates: recordsById.size - drawable.length,
+  };
+}
+
 export function groupValues(records) {
   return [...new Set(records.map((record) => record.group).filter(Boolean))].sort((left, right) => left.localeCompare(right, 'ru'));
 }
@@ -419,12 +475,12 @@ export function reportSummaryRows(payload) {
   const closed = Number(summary.coveredPoints) || 0;
   const rows = [
     { key: 'Всего объектов', value: String(summary.totalObjects ?? 0) },
-    { key: 'С фото', value: String(summary.objectsWithPhoto ?? 0) },
-    { key: 'Без фото', value: String(summary.objectsWithoutPhoto ?? 0) },
+    { key: 'Объектов с фото', value: String(summary.objectsWithPhoto ?? 0) },
+    { key: 'Объектов без фото', value: String(summary.objectsWithoutPhoto ?? 0) },
     { key: 'Охват объектов', value: coverageLabel(summary) },
     { key: 'Закрыто отметок', value: marks ? `${closed} из ${marks} — ${Math.round((closed / marks) * 100)} %` : 'нет отметок' },
-    { key: 'На проверке', value: String(summary.pendingReviewObjects ?? 0) },
-    { key: 'Подтверждено приёмкой', value: String(summary.completedObjects ?? 0) },
+    { key: 'Объектов на проверке', value: String(summary.pendingReviewObjects ?? 0) },
+    { key: 'Объектов принято', value: String(summary.completedObjects ?? 0) },
     { key: 'Статус', value: `${bandText(band)} — ${bandNote(band)}` },
   ];
   return rows;

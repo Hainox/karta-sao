@@ -48,6 +48,28 @@ test('районная сводка запрашивает возвращённ�
   assert.match(queries[0], /p\.review_status <> 'withdrawn'/);
 });
 
+test('a latest return invalidates earlier accepted coverage for that point', async () => {
+  const queries = [];
+  const pool = { query: async (sql) => { queries.push(sql); return { rows: [] }; } };
+  await loadReportRows(pool, { role: 'prefecture_admin' }, undefined, { includeRejected: true });
+  const sql = queries[0];
+
+  assert.match(sql, /array_agg\(p2\.review_status ORDER BY p2\.uploaded_at DESC, p2\.id DESC\)/);
+  assert.match(sql, /count\(1\) FILTER \(WHERE p2\.review_status <> 'rejected'\)/);
+  assert.match(sql, /max\(p2\.uploaded_at\) FILTER \(WHERE p2\.review_status <> 'rejected'\)/);
+  assert.match(sql, /p2\.review_status <> 'withdrawn'/);
+});
+
+test('the latest unbound return invalidates coverage for the whole object', async () => {
+  const queries = [];
+  const pool = { query: async (sql) => { queries.push(sql); return { rows: [] }; } };
+  await loadReportRows(pool, { role: 'prefecture_admin' }, undefined, { includeRejected: true });
+
+  assert.match(queries[0], /p_unbound\.source_id IS NULL/);
+  assert.match(queries[0], /p_unbound\.review_status = 'rejected'/);
+  assert.match(queries[0], /p_later\.uploaded_at, p_later\.id/);
+});
+
 test('the board keeps the same arithmetic as the overall summary', () => {
   // Объект без района тоже входит в сводку САО: он учтён в строке «АвД САО».
   const rows = [row('Сокол', 'stop', 1), row('Сокол', 'stop', 0), row('Аэропорт', 'stop', 0), row(null, 'stop', 0)];

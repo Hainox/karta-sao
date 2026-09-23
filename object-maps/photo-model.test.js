@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import {
-  accountScope, accuracyVerdict, ACCURACY_REVIEW_METERS, assessDistanceRisk, bandNote, bandText, boundaryNote, buildCoverageIndex, buildQueue, canExport,
+  accountScope, accuracyVerdict, ACCURACY_REVIEW_METERS, assessDistanceRisk, auditPointLayer, bandNote, bandText, boundaryNote, buildCoverageIndex, buildQueue, canExport,
   countCoverageStatus, coverageCounterText, coverageFor, coverageLabel, coveragePercent, districtBoundaries, filterRecords, formatAccuracy,
   formatCoordinates, formatDateTime, formatMeters, geoStatusText, gpsDistanceLabel, haversineDistanceMeters, isAutodorHolder,
   normalizePhoto, photoDetailRows, photoRequirementFor, PHOTO_REQUIREMENTS, recordHolder, reportSummaryRows, reviewStatusText, scopedDistricts,
@@ -318,6 +318,31 @@ test('список и легенда считают один и тот же на
   assert.equal(countCoverageStatus(records, coverage, 'entrance', 'rework'), 1);
 });
 
+test('аудит считает без фото только рисуемые точки и отдельно находит ID вне слоя', () => {
+  const records = [
+    { id: 'stop:1', lat: 55.8, lon: 37.5 },
+    { id: 'stop:2', lat: 55.81, lon: 37.51 },
+    { id: 'stop:3', lat: null, lon: 37.52 },
+  ];
+  const coverage = buildCoverageIndex({
+    objects: [{
+      objectKey: 'mapped', objectType: 'stop', district: 'Сокол', sourceIds: ['stop:1', 'stop:api-only'],
+      photos: [{ sourceId: 'stop:1', reviewStatus: 'confirmed' }],
+    }],
+  });
+
+  assert.deepEqual(auditPointLayer(records, coverage, 'stop'), {
+    mapPoints: 2,
+    apiPoints: 2,
+    pointsWithoutPhoto: 1,
+    apiOnlyIds: ['stop:api-only'],
+    mapOnlyIds: ['stop:2'],
+    duplicateMapIds: [],
+    missingIdRecords: 0,
+    invalidCoordinates: 1,
+  });
+});
+
 test('фильтр по району не зависит от регистра и «ё» в названии', () => {
   const records = [{ id: 'stop:1', label: 'Коровинское шоссе', group: 'ДЭУ 2' }];
   const index = buildCoverageIndex({
@@ -386,7 +411,9 @@ test('the on-screen summary always carries a number and a band word', () => {
   // Главный показатель — охват: сколько объектов уже с фото.
   assert.equal(byKey['Охват объектов'], '40 %');
   assert.equal(byKey['Статус'], 'Жёлтый — выполнение от 33 % до 66 %');
-  assert.equal(byKey['Подтверждено приёмкой'], '34');
+  assert.equal(byKey['Объектов с фото'], '40');
+  assert.equal(byKey['Объектов без фото'], '60');
+  assert.equal(byKey['Объектов принято'], '34');
   // Рядом стоит отчётная единица: закрытые отметки, как в сводке на штаб.
   assert.equal(byKey['Закрыто отметок'], 'нет отметок');
 });
