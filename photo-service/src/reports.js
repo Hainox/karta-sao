@@ -47,20 +47,36 @@ export async function loadReportRows(pool, user, requestedDistrict, { includeRej
            nullif(o.properties->>'ID объекта ОДХ', '') AS odh_id,
            -- Единица учёта — точка источника: у одного перехода их может быть много.
            coalesce(array_length(o.source_ids, 1), 0) AS source_point_count,
-           -- Закрытая точка — та, где кадров набралось на норму вида (у перехода два).
-           -- Считаем точки, а не кадры: второй снимок перехода не удваивает ФАКТ.
-           -- Всё, что снято до введения нормы (PHOTO_NORM_SINCE), засчитывается по
-           -- прежнему правилу: тогда хватало одного кадра, и это была наша недоработка.
+           -- Закрытая точка — та, где кадров набралось на норму вида (у перехода два)
+           -- и последний кадр не возвращён на доработку. Возврат перевешивает старое
+           -- подтверждение: иначе одна точка одновременно «принята» и «на доработке».
+           -- Кадры до PHOTO_NORM_SINCE засчитываются по прежней норме одного кадра.
            coalesce((
              SELECT count(1)::int FROM (
                SELECT p2.source_id
                FROM photos p2
                WHERE p2.object_key = o.object_key
                  AND p2.source_id IS NOT NULL
-                 AND p2.review_status NOT IN ('rejected', 'withdrawn')
+                 AND p2.review_status <> 'withdrawn'
                GROUP BY p2.source_id
-               HAVING count(1) >= (${PHOTO_NORM_SQL})
-                   OR max(p2.uploaded_at) < TIMESTAMPTZ '${PHOTO_NORM_SINCE}'
+               HAVING (array_agg(p2.review_status ORDER BY p2.uploaded_at DESC, p2.id DESC))[1] <> 'rejected'
+                  AND (
+                    count(1) FILTER (WHERE p2.review_status <> 'rejected') >= (${PHOTO_NORM_SQL})
+                    OR max(p2.uploaded_at) FILTER (WHERE p2.review_status <> 'rejected') < TIMESTAMPTZ '${PHOTO_NORM_SINCE}'
+                  )
+                  -- Непривязанный к sourceId возврат на карте действует на весь объект.
+                  AND NOT EXISTS (
+                    SELECT 1 FROM photos p_unbound
+                    WHERE p_unbound.object_key = o.object_key
+                      AND p_unbound.source_id IS NULL
+                      AND p_unbound.review_status = 'rejected'
+                      AND NOT EXISTS (
+                        SELECT 1 FROM photos p_later
+                        WHERE p_later.object_key = o.object_key
+                          AND p_later.review_status <> 'withdrawn'
+                          AND (p_later.uploaded_at, p_later.id) > (p_unbound.uploaded_at, p_unbound.id)
+                      )
+                  )
              ) closed
            ), 0) AS covered_points,
            count(p.id) FILTER (WHERE p.source_id IS NULL)::int AS unbound_photos,
@@ -76,7 +92,7 @@ export async function loadReportRows(pool, user, requestedDistrict, { includeRej
              'reviewStatus', p.review_status, 'reviewReason', p.review_reason,
              'reviewedAt', p.reviewed_at, 'uploadedBy', p.uploaded_by,
              'isReference', p.is_reference
-           ) ORDER BY p.uploaded_at) FILTER (WHERE p.id IS NOT NULL) AS photos
+           ) ORDER BY p.uploaded_at, p.id) FILTER (WHERE p.id IS NOT NULL) AS photos
     FROM objects o
     LEFT JOIN photos p ON p.object_key = o.object_key AND ${photoJoin}
     WHERE ${scope.sql} ${queueFilter}

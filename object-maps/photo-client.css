@@ -179,6 +179,21 @@ button { cursor: pointer; }
 .pa-metric { padding: 9px 11px; border: 1px solid #e6ece7; border-radius: 10px; background: #f6f8f5; }
 .pa-metric dt { color: var(--muted); font-size: 12px; }
 .pa-metric dd { margin: 3px 0 0; font-size: 18px; font-weight: 700; }
+.pa-point-audit {
+  margin: 0;
+  padding: 9px 11px;
+  border: 1px solid #b9d9c9;
+  border-radius: 10px;
+  background: #edf7f1;
+  color: #28443a;
+  font-size: 12px;
+  line-height: 1.45;
+}
+.pa-point-audit[data-state="warning"] {
+  border-color: #e0bd72;
+  background: #fff8e8;
+  color: #634b16;
+}
 
 .pa-unassigned { padding: 11px 12px; border: 1px dashed #cbbfa2; border-radius: 10px; background: #fdfaf1; font-size: 13px; line-height: 1.5; }
 

@@ -19,3 +19,18 @@ test('карта сохраняет заметную категорию дора
   assert.match(css, /#d7193f/);
   assert.match(css, /\.pa-map-status \{ display: none; \}/);
 });
+
+test('сводка отличает объекты от точек, а счётчик карты сверяется по рисуемым ID', async () => {
+  const [client, model] = await Promise.all([
+    readFile(new URL('./photo-client.js', import.meta.url), 'utf8'),
+    readFile(new URL('./photo-model.js', import.meta.url), 'utf8'),
+  ]);
+
+  assert.match(model, /key: 'Объектов без фото'/);
+  assert.match(model, /export function auditPointLayer\(/);
+  assert.match(model, /export function isDrawablePoint\(/);
+  assert.match(client, /Без фото на карте —/);
+  assert.match(client, /ID из сводки отсутствуют в наборе карты/);
+  assert.match(client, /\.filter\(isDrawablePoint\)/);
+  assert.match(client, /if \(!isDrawablePoint\(record\)\) return \[\]/);
+});

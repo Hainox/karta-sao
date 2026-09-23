@@ -1,8 +1,8 @@
 import {
-  accountScope, accuracyVerdict, bandNote, bandText, boundaryNote, buildCoverageIndex,
+  accountScope, accuracyVerdict, auditPointLayer, bandNote, bandText, boundaryNote, buildCoverageIndex,
   buildQueue, canExport, coverageBand, coverageCounterText, coverageFor, coverageLabel, coveragePercent,
   countCoverageStatus, districtBoundaries, filterRecords, formatCoordinates, formatMeters, geoStatusText, gpsDistanceLabel,
-  groupLabel, groupValues, isAutodorAccount, isAutodorHolder, photoDetailRows, photoRequirementFor,
+  groupLabel, groupValues, isAutodorAccount, isAutodorHolder, isDrawablePoint, photoDetailRows, photoRequirementFor,
   reportSummaryRows, scopedDistricts, statusText,
 } from './photo-model.js';
 import { errorText } from './photo-messages.js';
@@ -600,6 +600,44 @@ function renderSummary() {
   }
   box.appendChild(metrics);
 
+  const pointAudit = currentPointAudit();
+  if (pointAudit) {
+    const note = document.createElement('p');
+    note.className = 'pa-point-audit';
+    const typeTitle = state.entry?.title || 'текущий слой';
+    note.textContent = `Без фото на карте — ${pointAudit.pointsWithoutPhoto.toLocaleString('ru-RU')} из `
+      + `${pointAudit.mapPoints.toLocaleString('ru-RU')} точек · ${typeTitle}.`;
+    const issues = [];
+    if (pointAudit.apiOnlyIds.length) {
+      issues.push(`${pointAudit.apiOnlyIds.length} ID из сводки отсутствуют в наборе карты и не включены в точечный счёт`);
+    }
+    if (pointAudit.mapOnlyIds.length) {
+      issues.push(`${pointAudit.mapOnlyIds.length} точек слоя не связаны со сводкой`);
+    }
+    if (pointAudit.invalidCoordinates) {
+      issues.push(`${pointAudit.invalidCoordinates} запись без корректных координат не учитывается как точка`);
+    }
+    if (pointAudit.duplicateMapIds.length) {
+      issues.push(`${pointAudit.duplicateMapIds.length} повторяющихся ID слоя`);
+    }
+    if (pointAudit.missingIdRecords) {
+      issues.push(`${pointAudit.missingIdRecords} записей без ID`);
+    }
+    if (issues.length) {
+      note.dataset.state = 'warning';
+      note.textContent += ` Сверка: карта — ${pointAudit.mapPoints.toLocaleString('ru-RU')}, `
+        + `сводка — ${pointAudit.apiPoints.toLocaleString('ru-RU')}. ${issues.join('; ')}.`;
+    } else if (pointAudit.mapPoints === pointAudit.apiPoints) {
+      note.dataset.state = 'ok';
+      note.textContent += ` Сверка ID карты и системы: ${pointAudit.mapPoints.toLocaleString('ru-RU')} — совпадает.`;
+    } else {
+      note.dataset.state = 'warning';
+      note.textContent += ` Сверка ID: карта — ${pointAudit.mapPoints.toLocaleString('ru-RU')}, `
+        + `сводка — ${pointAudit.apiPoints.toLocaleString('ru-RU')}; требуется проверка связки.`;
+    }
+    box.appendChild(note);
+  }
+
   if (canExport(state.user) && state.daily) {
     box.appendChild(dayBlock(state.daily));
   }
@@ -608,7 +646,7 @@ function renderSummary() {
     const note = document.createElement('p');
     note.className = 'pa-unassigned';
     note.textContent = `Объектов без района: ${state.summary.unassigned.totalObjects} `
-      + `(${String(state.summary.unassigned.objectsWithoutPhoto)} без фото, `
+      + `(${String(state.summary.unassigned.objectsWithoutPhoto)} объектов без фото, `
       + `${String(state.summary.unassigned.objectsWithPhoto)} с фото) — `
       + 'они учтены в строке «АвД САО» вместе с объектами владельца и «ДЭУ».';
     box.appendChild(note);
@@ -686,7 +724,23 @@ function currentRecords() {
     status: element('paStatusFilter').value,
     coverageIndex: state.coverage,
     objectType: state.entry.objectType,
+  }).filter(isDrawablePoint);
+}
+
+function currentPointAudit() {
+  if (!state.dataset || !state.entry || !state.summary) return null;
+  const scope = accountScope(state.user, state.summary);
+  const district = state.user?.role === 'district_editor' ? scope.district : element('paDistrictFilter').value;
+  const records = filterRecords(state.dataset.records, {
+    query: '',
+    group: '',
+    district,
+    objectKeys: scope.objectKeys,
+    status: 'all',
+    coverageIndex: state.coverage,
+    objectType: state.entry.objectType,
   });
+  return auditPointLayer(records, state.coverage, state.entry.objectType);
 }
 
 function rowChip(statusKey, label, pending) {
@@ -844,15 +898,16 @@ function ensurePointLayer(clusterize) {
     const record = state.dataset.records[Number(event.get('objectId'))];
     if (record) openRecord(record, null);
   });
-  const features = state.dataset.records.map((record, index) => {
+  const features = state.dataset.records.flatMap((record, index) => {
+    if (!isDrawablePoint(record)) return [];
     const coverage = coverageFor(state.coverage, record, state.entry?.objectType);
-    return {
+    return [{
       type: 'Feature',
       id: index,
       geometry: { type: 'Point', coordinates: [record.lat, record.lon] },
       properties: { recordId: record.id },
       options: { preset: 'islands#circleIcon', iconColor: STATUS_COLOR[coverage.statusKey] },
-    };
+    }];
   });
   state.pointLayer.add({ type: 'FeatureCollection', features });
   state.map.geoObjects.add(state.pointLayer);
