@@ -2,7 +2,7 @@ import { expect, test } from './fixtures.js';
 
 const baseURL = 'http://127.0.0.1:8766/odh-map/';
 
-test('client validation rejects a route whose endpoints are inside but the segment crosses a concave boundary', async ({ page }) => {
+test('client validation allows a route to cross and leave the SAO boundary', async ({ page }) => {
   await page.goto(`${baseURL}district-editor.html`);
   const result = await page.evaluate(() => {
     const boundary = {
@@ -35,15 +35,15 @@ test('client validation rejects a route whose endpoints are inside but the segme
     return DistrictChanges.validate(changeSet, boundary);
   });
 
-  expect(result.valid).toBe(false);
-  expect(result.errors).toContain('Объект 1, сторона 1: пересекает границу САО.');
+  expect(result.valid).toBe(true);
+  expect(result.errors).toEqual([]);
 });
 
-test('client validation rejects more than 2,000 coordinate points before reading the boundary', async ({ page }) => {
+test('client validation allows routes with more than 2,000 coordinate points', async ({ page }) => {
   await page.goto(`${baseURL}district-editor.html`);
   const result = await page.evaluate(() => {
     const coordinates = Array.from({ length: 2001 }, () => [0.5, 0.5]);
-    const boundary = { features: [{ properties: { feature_kind: 'boundary_sao' }, get geometry() { throw new Error('Boundary should not be read'); } }] };
+    const boundary = { type: 'FeatureCollection', features: [] };
     const changeSet = {
       type: 'FeatureCollection',
       change_set_version: 'district_change_set_v2',
@@ -62,8 +62,31 @@ test('client validation rejects more than 2,000 coordinate points before reading
     return DistrictChanges.validate(changeSet, boundary);
   });
 
+  expect(result.valid).toBe(true);
+  expect(result.errors).toEqual([]);
+});
+
+test('client validation flags the same route drawn twice, including reversed direction', async ({ page }) => {
+  await page.goto(`${baseURL}district-editor.html`);
+  const result = await page.evaluate(() => {
+    const coordinates = [[0.5, 0.5], [1, 1], [1.5, 1.5]];
+    const feature = {
+      type: 'Feature',
+      properties: {
+        change_type: 'queue', queue_priority: '1', district: 'Аэропорт', author: 'Тест',
+        address: 'Синтетический маршрут', route_start: coordinates[0], route_end: coordinates.at(-1),
+        route_direction: 'start_to_end', nozzle_direction: 'both'
+      },
+      geometry: { type: 'LineString', coordinates }
+    };
+    return DistrictChanges.validate({
+      type: 'FeatureCollection', change_set_version: 'district_change_set_v2', district: 'Аэропорт', author: 'Тест',
+      features: [feature, { ...feature, geometry: { type: 'LineString', coordinates: [...coordinates].reverse() } }]
+    }, { type: 'FeatureCollection', features: [] });
+  });
+
   expect(result.valid).toBe(false);
-  expect(result.errors).toContain('В наборе не более 2000 координатных точек суммарно.');
+  expect(result.errors.join('\n')).toContain('дублирует маршрут 1');
 });
 
 test('сообщение об ошибке называет объект по номеру и типу, а не по позиции в файле', async ({ page }) => {

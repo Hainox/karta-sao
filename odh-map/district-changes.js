@@ -76,30 +76,19 @@
   const ROUTE_TYPES = new Set(['queue', 'rotor_transfer', 'dkm_route', 'tu_route', 'tu_route_yards']);
   const GROUP_LABELS = { route: 'Маршруты', zone: 'Зоны', point: 'Точки' };
   const ROMAN = { '1': 'I', '2': 'II', '3': 'III' };
-  const MAX_GEOMETRY_VERTICES = 2000;
   const SEGMENT_EPSILON = 1e-12;
 
   function clone(value) { return JSON.parse(JSON.stringify(value)); }
   function isCoordinate(value) { return Array.isArray(value) && value.length >= 2 && Number.isFinite(value[0]) && Number.isFinite(value[1]) && value[0] >= -180 && value[0] <= 180 && value[1] >= -90 && value[1] <= 90; }
   function sameCoordinate(a, b) { return isCoordinate(a) && isCoordinate(b) && a[0] === b[0] && a[1] === b[1]; }
-  function countGeometryVertices(geometry, limit) {
-    const coordinates = geometry?.coordinates;
-    if (!Array.isArray(coordinates)) return 0;
-    if (coordinates.length > MAX_GEOMETRY_VERTICES) return MAX_GEOMETRY_VERTICES + 1;
-    const isPosition = (value) => value.length >= 2 && typeof value[0] === 'number' && typeof value[1] === 'number';
-    if (isPosition(coordinates)) return 1;
-    let count = 0;
-    const stack = [{ value:coordinates, index:0 }];
-    while (stack.length) {
-      const frame = stack.at(-1);
-      if (frame.index >= frame.value.length) { stack.pop(); continue; }
-      const child = frame.value[frame.index++];
-      if (!Array.isArray(child)) continue;
-      if (child.length > MAX_GEOMETRY_VERTICES) return MAX_GEOMETRY_VERTICES + 1;
-      if (isPosition(child)) { if (++count > limit) return count; }
-      else stack.push({ value:child, index:0 });
-    }
-    return count;
+  function routeDuplicateKey(feature) {
+    const properties = feature?.properties || {};
+    if (!ROUTE_TYPES.has(properties.change_type) || feature?.geometry?.type !== 'LineString' || !Array.isArray(feature.geometry.coordinates)) return null;
+    const coordinates = feature.geometry.coordinates;
+    const forward = JSON.stringify(coordinates);
+    const reverse = JSON.stringify([...coordinates].reverse());
+    const routeClass = `${properties.change_type}:${properties.change_type === 'queue' ? properties.queue_priority : ''}`;
+    return `${routeClass}:${forward < reverse ? forward : reverse}`;
   }
   function pointInRing(point, ring) {
     if (!isCoordinate(point) || !Array.isArray(ring) || ring.length < 3) return false;
@@ -234,11 +223,12 @@
       if (properties.route_direction !== 'start_to_end') errors.push(`${label}: направление маршрута повреждено.`);
       if (!['left', 'right', 'both'].includes(properties.nozzle_direction)) errors.push(`${label}: направление сопла — left, right или both.`);
     }
+    const route = ROUTE_TYPES.has(properties?.change_type) && feature.geometry.type === 'LineString';
     coordinates.forEach((point, coordinateIndex) => {
       if (!isCoordinate(point)) errors.push(`${label}, вершина ${coordinateIndex + 1}: некорректные координаты.`);
-      else if (!pointWithinBoundary(point, polygons)) errors.push(`${label}, вершина ${coordinateIndex + 1}: находится за границей САО.`);
+      else if (!route && !pointWithinBoundary(point, polygons)) errors.push(`${label}, вершина ${coordinateIndex + 1}: находится за границей САО.`);
     });
-    geometrySegments(feature.geometry).forEach(([start, end], segmentIndex) => {
+    if (!route) geometrySegments(feature.geometry).forEach(([start, end], segmentIndex) => {
       if (!segmentWithinBoundary(start, end, edges)) errors.push(`${label}, сторона ${segmentIndex + 1}: пересекает границу САО.`);
     });
     if (feature.geometry.type === 'Polygon' && polygonContainsBoundaryHole(feature.geometry, polygons)) errors.push(`${label}: зона пересекает исключённую область САО.`);
@@ -251,15 +241,13 @@
     if (typeof changeSet?.author !== 'string' || !changeSet.author.trim()) errors.push('Укажите исполнителя.');
     if (!Array.isArray(changeSet?.features)) return { valid: false, errors };
     if (!changeSet.features.length) errors.push('Нужно добавить хотя бы один объект.');
-    if (changeSet.features.length > 500) errors.push('В одном наборе может быть не более 500 объектов.');
-    let vertexCount = 0;
-    for (const feature of changeSet.features) {
-      vertexCount += countGeometryVertices(feature?.geometry, MAX_GEOMETRY_VERTICES - vertexCount);
-      if (vertexCount > MAX_GEOMETRY_VERTICES) {
-        errors.push(`В наборе не более ${MAX_GEOMETRY_VERTICES} координатных точек суммарно.`);
-        return { valid:false, errors };
-      }
-    }
+    const routes = new Map();
+    changeSet.features.forEach((feature, index) => {
+      const key = routeDuplicateKey(feature);
+      if (key === null) return;
+      if (routes.has(key)) errors.push(`Маршрут ${index + 1} дублирует маршрут ${routes.get(key)} в этом наборе; удалите повтор.`);
+      else routes.set(key, index + 1);
+    });
     const polygons = boundaryPolygons(boundary); const edges = boundarySegments(polygons);
     changeSet.features.forEach((feature, index) => validateFeature(feature, index, boundary, errors, { district: changeSet.district, author: changeSet.author }, polygons, edges));
     return { valid: !errors.length, errors };
