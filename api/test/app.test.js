@@ -5,7 +5,7 @@ import { inflateRawSync } from 'node:zlib';
 import request from 'supertest';
 import { createApp } from '../app.js';
 import { hashPassword } from '../lib/auth.js';
-import { MAX_GEOMETRY_VERTICES, payloadHash, validateChangeSet } from '../lib/validation.js';
+import { payloadHash, validateChangeSet } from '../lib/validation.js';
 
 const publishedBoundary = JSON.parse(fs.readFileSync(new URL('../../odh-map/layers/sao_boundary_wgs84.geojson', import.meta.url), 'utf8'));
 
@@ -131,7 +131,7 @@ test('валидирует зоны накопления роторного сн
   assert.deepEqual(validateChangeSet(set, boundary), { valid: true, errors: [] });
 });
 
-test('отклоняет маршрут, у которого обе точки внутри САО, а сегмент выходит за границу', () => {
+test('разрешает маршрутам выходить за границу САО для разворотов', () => {
   const start = [37.3568222107043, 55.932847832297185];
   const end = [37.378520597289246, 55.9181242255081];
   const set = changeSet({ feature: {
@@ -139,26 +139,40 @@ test('отклоняет маршрут, у которого обе точки �
     properties: { district: 'Молжаниновский', author: 'Иванов И.И.', change_type: 'queue', queue_priority: '1', address: 'Тестовый маршрут', nozzle_direction: 'both', route_start: start, route_end: end, route_direction: 'start_to_end' }
   } });
   set.district = 'Молжаниновский';
-  assert.equal(validateChangeSet(set, publishedBoundary).valid, false);
+  assert.equal(validateChangeSet(set, publishedBoundary).valid, true);
 });
 
-test('отклоняет чрезмерно детальную геометрию до проверки границ', () => {
-  const unreadBoundary = { get features() { throw new Error('Проверка границ не должна запускаться для oversized geometry.'); } };
-  const oversizedCoordinates = [
-    Array.from({ length: MAX_GEOMETRY_VERTICES + 1 }, () => [37.1, 55.1]),
-    Array(MAX_GEOMETRY_VERTICES + 1).fill(1)
-  ];
+test('принимает маршрут длиннее прежнего лимита 2 000 вершин', () => {
+  const coordinates = Array.from({ length: 2501 }, (_, index) => [37.1 + index / 1e7, 55.1 + index / 1e7]);
+  const set = changeSet({ feature: {
+    type: 'Feature', geometry: { type: 'LineString', coordinates },
+    properties: { district: 'Аэропорт', author: 'Иванов И.И.', change_type: 'queue', queue_priority: '1', address: 'Длинный тестовый маршрут', nozzle_direction: 'both', route_start: coordinates[0], route_end: coordinates.at(-1), route_direction: 'start_to_end' }
+  } });
 
-  for (const coordinates of oversizedCoordinates) {
-    const set = changeSet({ feature: {
+  assert.equal(validateChangeSet(set, boundary).valid, true);
+});
+
+test('принимает более 500 неповторяющихся маршрутов в одном наборе', () => {
+  const set = changeSet();
+  set.features = Array.from({ length: 501 }, (_, index) => {
+    const offset = index / 10_000;
+    const coordinates = [[37.1 + offset, 55.1], [37.2 + offset, 55.2]];
+    return {
       type: 'Feature', geometry: { type: 'LineString', coordinates },
-      properties: { district: 'Аэропорт', author: 'Иванов И.И.', change_type: 'queue', queue_priority: '1', address: 'Тестовый маршрут', nozzle_direction: 'both', route_start: coordinates[0], route_end: coordinates.at(-1), route_direction: 'start_to_end' }
-    } });
-    const result = validateChangeSet(set, unreadBoundary);
+      properties: { district: 'Аэропорт', author: 'Иванов И.И.', change_type: 'queue', queue_priority: '1', address: `Тестовый маршрут ${index + 1}`, nozzle_direction: 'both', route_start: coordinates[0], route_end: coordinates.at(-1), route_direction: 'start_to_end' }
+    };
+  });
 
-    assert.equal(result.valid, false);
-    assert.match(result.errors.join('\n'), new RegExp(`не более ${MAX_GEOMETRY_VERTICES} координатных точек`));
-  }
+  assert.equal(validateChangeSet(set, boundary).valid, true);
+});
+
+test('отклоняет повтор одного и того же маршрута в обратном направлении', () => {
+  const set = changeSet();
+  set.features.push({ ...structuredClone(set.features[0]), geometry: { type: 'LineString', coordinates: [...set.features[0].geometry.coordinates].reverse() } });
+
+  const result = validateChangeSet(set, boundary);
+  assert.equal(result.valid, false);
+  assert.match(result.errors.join('\n'), /дублирует маршрут 1/);
 });
 
 test('отклоняет полигон, стороны которого выходят за границу САО', () => {
@@ -199,12 +213,23 @@ test('авторизация, районные права, приёмка и в�
   assert.equal(exported.body.features[0].properties.review_status, 'approved');
 });
 
-test('отклоняет неверный маршрут до сохранения', async () => {
+test('отклоняет маршрут с координатами вне диапазона WGS84', async () => {
   const { api, editorPassword } = await fixture();
   const editor = await login(api, 'editor@example.test', editorPassword);
-  const invalid = changeSet({ feature: { type: 'Feature', geometry: { type: 'LineString', coordinates: [[37.1, 55.1], [39, 57]] }, properties: { district: 'Аэропорт', author: 'Иванов И.И.', change_type: 'queue', queue_priority: '1', address: 'За границей' } } });
+  const invalid = changeSet({ feature: { type: 'Feature', geometry: { type: 'LineString', coordinates: [[37.1, 55.1], [190, 57]] }, properties: { district: 'Аэропорт', author: 'Иванов И.И.', change_type: 'queue', queue_priority: '1', address: 'Некорректные координаты', route_start: [37.1, 55.1], route_end: [190, 57], route_direction: 'start_to_end', nozzle_direction: 'both' } } });
   const response = await api.post('/api/submissions').set('Authorization', `Bearer ${editor}`).send({ changeSet: invalid }).expect(422);
-  assert.match(response.body.details.join('\n'), /вне границы САО/);
+  assert.match(response.body.details.join('\n'), /некорректные координаты WGS84/);
+});
+
+test('принимает отправленный районом маршрут, проходящий за границей САО', async () => {
+  const { api, editorPassword } = await fixture();
+  const editor = await login(api, 'editor@example.test', editorPassword);
+  const coordinates = [[37.1, 55.1], [39, 57]];
+  const route = changeSet({ feature: {
+    type: 'Feature', geometry: { type: 'LineString', coordinates },
+    properties: { district: 'Аэропорт', author: 'Иванов И.И.', change_type: 'queue', queue_priority: '1', address: 'Разворот за границей округа', nozzle_direction: 'both', route_start: coordinates[0], route_end: coordinates[1], route_direction: 'start_to_end' }
+  } });
+  await api.post('/api/submissions').set('Authorization', `Bearer ${editor}`).send({ changeSet: route }).expect(201);
 });
 
 test('возвращает ошибку проверки для повреждённых координат вместо HTTP 500', async () => {
@@ -401,7 +426,6 @@ test('повреждённый набор правок отвечает 4xx и �
     district: 'Аэропорт', author: 'Иванов И.И.', change_type: 'queue', queue_priority: '1', address: 'Тестовый маршрут',
     nozzle_direction: 'both', route_start: [37.1, 55.1], route_end: [37.2, 55.2], route_direction: 'start_to_end', ...over
   });
-  const longRoute = Array.from({ length: MAX_GEOMETRY_VERTICES + 1 }, (_, index) => [37.1 + index / 1e6, 55.1]);
   const cases = [
     ['changeSet = null', { changeSet: null }],
     ['changeSet — массив', { changeSet: [] }],
@@ -410,9 +434,7 @@ test('повреждённый набор правок отвечает 4xx и �
     ['features из не-объектов', { changeSet: { ...base, features: [null, 0, 'x', {}, { type: 'Feature' }] } }],
     ['объект без properties', { changeSet: { ...base, features: [{ type: 'Feature', geometry: { type: 'LineString', coordinates: [[37.1, 55.1], [37.2, 55.2]] } }] } }],
     ['неизвестный change_type', { changeSet: { ...base, features: [{ type: 'Feature', geometry: { type: 'LineString', coordinates: [[37.1, 55.1], [37.2, 55.2]] }, properties: props({ change_type: 'alien_type' }) }] } }],
-    ['координаты вне САО', { changeSet: { ...base, features: [{ type: 'Feature', geometry: { type: 'Point', coordinates: [0, 0] }, properties: { district: 'Аэропорт', author: 'Иванов И.И.', change_type: 'pgm', address: 'вне округа' } }] } }],
-    ['объектов больше 500', { changeSet: { ...base, features: Array.from({ length: 501 }, () => ({ type: 'Feature', geometry: { type: 'LineString', coordinates: [[37.1, 55.1], [37.2, 55.2]] }, properties: props() })) } }],
-    ['вершин больше предела', { changeSet: { ...base, features: [{ type: 'Feature', geometry: { type: 'LineString', coordinates: longRoute }, properties: props({ route_start: longRoute[0], route_end: longRoute.at(-1) }) }] } }]
+    ['координаты вне диапазона WGS84', { changeSet: { ...base, features: [{ type: 'Feature', geometry: { type: 'LineString', coordinates: [[37.1, 55.1], [190, 55.2]] }, properties: props({ route_end: [190, 55.2] }) }] } }]
   ];
 
   for (const [label, payload] of cases) {
