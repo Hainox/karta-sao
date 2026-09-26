@@ -41,3 +41,9 @@ test('выбор района Сокол приближает карту к от
   assert.ok(/element\('paGroupFilter'\)\.addEventListener\('change',[\s\S]{0,320}fitMapToRecords\(currentRecords\(\)\)/.test(client), 'смена района должна приближать выбранные точки');
   assert.ok(/state\.map\.setBounds\(viewport\.bounds/.test(client), 'область карты должна вычисляться по координатам точек');
 });
+
+test('основной фильтр района приближает карту к точкам после обновления сводки', async () => {
+  const client = await readFile(new URL('./photo-client.js', import.meta.url), 'utf8');
+
+  assert.ok(/element\('paDistrictFilter'\)\.addEventListener\('change', async \(\) => \{[\s\S]{0,220}await refreshCoverage\(\);[\s\S]{0,160}fitMapToRecords\(currentRecords\(\)\)/.test(client), 'основной фильтр района должен подгонять карту под отфильтрованные точки после загрузки данных');
+});

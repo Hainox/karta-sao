@@ -1846,7 +1846,12 @@ function bindEvents() {
     fitMapToRecords(currentRecords());
   });
   element('paStatusFilter').addEventListener('change', () => { invalidateQueue(); renderList(); renderMapObjects(); renderQueue(); });
-  element('paDistrictFilter').addEventListener('change', () => { invalidateQueue(); state.fitDistrict = true; refreshCoverage(); });
+  element('paDistrictFilter').addEventListener('change', async () => {
+    invalidateQueue();
+    state.fitDistrict = true;
+    await refreshCoverage();
+    fitMapToRecords(currentRecords());
+  });
   element('paExportDay').addEventListener('click', () => downloadReport('day'));
   element('paExportDayPdf').addEventListener('click', () => downloadReport('day-pdf'));
   element('paExportXlsx').addEventListener('click', () => downloadReport('xlsx'));
