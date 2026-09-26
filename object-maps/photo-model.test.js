@@ -292,6 +292,34 @@ test('filters by district, group, free text and photo status', () => {
   assert.equal(filterRecords(records, { ...options, status: 'pending' }).length, 0);
 });
 
+test('районный фильтр не скрывает подъезды без строки в фото-API', () => {
+  const records = [{ id: 'injob:413', lat: 55.794295, lon: 37.51839, group: 'Сокол' }];
+
+  assert.deepEqual(filterRecords(records, {
+    district: 'Сокол',
+    coverageIndex: new Map(),
+    objectType: 'entrance',
+  }), records);
+});
+
+test('границы карты по выбранному району строятся по рисуемым подъездам', async () => {
+  const { mapViewportForRecords } = await import('./photo-model.js');
+  assert.deepEqual(mapViewportForRecords([
+    { id: 'injob:1', lat: '55.79', lon: '37.48' },
+    { id: 'injob:2', lat: 55.81, lon: 37.52 },
+    { id: '', lat: 55.8, lon: 37.5 },
+    { id: 'injob:bad', lat: null, lon: 37.5 },
+  ]), {
+    pointCount: 2,
+    bounds: [[55.79, 37.48], [55.81, 37.52]],
+  });
+});
+
+test('для пустого фильтра карта не меняет область просмотра', async () => {
+  const { mapViewportForRecords } = await import('./photo-model.js');
+  assert.equal(mapViewportForRecords([{ id: 'injob:bad', lat: 91, lon: 37.5 }]), null);
+});
+
 test('список и легенда считают один и тот же набор точек на доработке', () => {
   const records = [
     { id: 'entrance:1', label: 'Возвращённый объект', group: 'Дмитровский' },

@@ -34,3 +34,10 @@ test('сводка отличает объекты от точек, а счёт�
   assert.match(client, /\.filter\(isDrawablePoint\)/);
   assert.match(client, /if \(!isDrawablePoint\(record\)\) return \[\]/);
 });
+
+test('выбор района Сокол приближает карту к отфильтрованным подъездам', async () => {
+  const client = await readFile(new URL('./photo-client.js', import.meta.url), 'utf8');
+
+  assert.ok(/element\('paGroupFilter'\)\.addEventListener\('change',[\s\S]{0,320}fitMapToRecords\(currentRecords\(\)\)/.test(client), 'смена района должна приближать выбранные точки');
+  assert.ok(/state\.map\.setBounds\(viewport\.bounds/.test(client), 'область карты должна вычисляться по координатам точек');
+});

@@ -313,6 +313,29 @@ export function isDrawablePoint(record) {
     && Math.abs(latitude) <= 90 && Math.abs(longitude) <= 180;
 }
 
+/** Return Yandex Maps bounds for the drawable records currently in the filter. */
+export function mapViewportForRecords(records) {
+  let south = Infinity;
+  let west = Infinity;
+  let north = -Infinity;
+  let east = -Infinity;
+  let pointCount = 0;
+
+  for (const record of Array.isArray(records) ? records : []) {
+    if (!isDrawablePoint(record)) continue;
+    const latitude = Number(record.lat);
+    const longitude = Number(record.lon);
+    south = Math.min(south, latitude);
+    west = Math.min(west, longitude);
+    north = Math.max(north, latitude);
+    east = Math.max(east, longitude);
+    pointCount += 1;
+  }
+
+  if (pointCount === 0) return null;
+  return { pointCount, bounds: [[south, west], [north, east]] };
+}
+
 /**
  * Reconcile point IDs in the selected map layer with IDs in the photo summary.
  * Point counters use only records that can actually be drawn on the map; API-only
@@ -388,7 +411,11 @@ export function filterRecords(records, options = {}) {
     const coverage = coverageFor(coverageIndex, record, objectType);
     // Учётка АвД ведёт объекты по всему округу: их список приходит из сводки.
     if (objectKeys && !objectKeys.has(coverage.objectKey)) return false;
-    if (district && !sameDistrict(coverage.district, district)) return false;
+    // Район из фото-API нужен для учёта снимков, но набор карты остаётся
+    // первичным источником точек. Если у точки ещё нет строки в сводке API,
+    // используем её район из слоя — иначе выбор района скрывал такие подъезды.
+    const recordDistrict = coverage.district || record.group || record.properties?.['Район'];
+    if (district && !sameDistrict(recordDistrict, district)) return false;
     // Объекты владельца «АвД САО» и «ДЭУ» к району не относятся: они идут за АвД
     // и в районном списке не показываются.
     if (district && isAutodorHolder(recordHolder(record))) return false;

@@ -2,7 +2,7 @@ import {
   accountScope, accuracyVerdict, auditPointLayer, bandNote, bandText, boundaryNote, buildCoverageIndex,
   buildQueue, canExport, coverageBand, coverageCounterText, coverageFor, coverageLabel, coveragePercent,
   countCoverageStatus, districtBoundaries, filterRecords, formatCoordinates, formatMeters, geoStatusText, gpsDistanceLabel,
-  groupLabel, groupValues, isAutodorAccount, isAutodorHolder, isDrawablePoint, photoDetailRows, photoRequirementFor,
+  groupLabel, groupValues, isAutodorAccount, isAutodorHolder, isDrawablePoint, mapViewportForRecords, photoDetailRows, photoRequirementFor,
   reportSummaryRows, scopedDistricts, statusText,
 } from './photo-model.js';
 import { errorText } from './photo-messages.js';
@@ -883,6 +883,17 @@ function buildMap() {
   ensurePointLayer(false);
   renderMapObjects();
   renderBoundaries({ fit: true });
+}
+
+function fitMapToRecords(records) {
+  if (!state.map) return;
+  const viewport = mapViewportForRecords(records);
+  if (!viewport) return;
+  if (viewport.pointCount === 1) {
+    state.map.setCenter(viewport.bounds[0], 16);
+    return;
+  }
+  state.map.setBounds(viewport.bounds, { checkZoomRange: true, zoomMargin: 48 });
 }
 
 /**
@@ -1827,7 +1838,13 @@ function bindEvents() {
     if (event.key === 'Escape' && element('paSide').dataset.open === 'true') setPanelOpen(false);
   });
   element('paSearch').addEventListener('input', debounce(() => { invalidateQueue(); renderList(); renderMapObjects(); renderQueue(); }, 220));
-  element('paGroupFilter').addEventListener('change', () => { invalidateQueue(); renderList(); renderMapObjects(); renderQueue(); });
+  element('paGroupFilter').addEventListener('change', () => {
+    invalidateQueue();
+    renderList();
+    renderMapObjects();
+    renderQueue();
+    fitMapToRecords(currentRecords());
+  });
   element('paStatusFilter').addEventListener('change', () => { invalidateQueue(); renderList(); renderMapObjects(); renderQueue(); });
   element('paDistrictFilter').addEventListener('change', () => { invalidateQueue(); state.fitDistrict = true; refreshCoverage(); });
   element('paExportDay').addEventListener('click', () => downloadReport('day'));
