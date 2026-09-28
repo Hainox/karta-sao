@@ -1,7 +1,7 @@
 import {
   accountScope, accuracyVerdict, auditPointLayer, bandNote, bandText, boundaryNote, buildCoverageIndex,
   buildQueue, canExport, coverageBand, coverageCounterText, coverageFor, coverageLabel, coveragePercent,
-  countCoverageStatus, districtBoundaries, filterRecords, formatCoordinates, formatMeters, geoStatusText, gpsDistanceLabel,
+  countCoverageStatus, districtBoundaries, fetchReportSummary, filterRecords, formatCoordinates, formatMeters, geoStatusText, gpsDistanceLabel,
   groupLabel, groupValues, isAutodorAccount, isAutodorHolder, isDrawablePoint, mapViewportForRecords, photoDetailRows, photoRequirementFor,
   reportSummaryRows, scopedDistricts, statusText,
 } from './photo-model.js';
@@ -340,7 +340,7 @@ async function refreshCoverage({ announce = true } = {}) {
   const district = requestedDistrict();
   const query = district ? `?district=${encodeURIComponent(district)}` : '';
   try {
-    state.summary = await apiJson(`/reports/summary${query}`);
+    state.summary = await fetchReportSummary(() => apiJson(`/reports/summary${query}`));
     state.coverage = buildCoverageIndex(state.summary);
     if (!district) state.boardAll = state.summary.byDistrict || [];
     fillDistrictFilter();

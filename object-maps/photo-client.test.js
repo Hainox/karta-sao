@@ -35,6 +35,12 @@ test('сводка отличает объекты от точек, а счёт�
   assert.match(client, /if \(!isDrawablePoint\(record\)\) return \[\]/);
 });
 
+test('клиент проверяет ответ сводки до чтения полей районов', async () => {
+  const client = await readFile(new URL('./photo-client.js', import.meta.url), 'utf8');
+
+  assert.match(client, /state\.summary = await fetchReportSummary\(\(\) => apiJson\(`\/reports\/summary\$\{query\}`\)\)/);
+});
+
 test('выбор района Сокол приближает карту к отфильтрованным подъездам', async () => {
   const client = await readFile(new URL('./photo-client.js', import.meta.url), 'utf8');
 

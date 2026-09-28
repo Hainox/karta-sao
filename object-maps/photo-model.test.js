@@ -3,9 +3,45 @@ import test from 'node:test';
 import {
   accountScope, accuracyVerdict, ACCURACY_REVIEW_METERS, assessDistanceRisk, auditPointLayer, bandNote, bandText, boundaryNote, buildCoverageIndex, buildQueue, canExport,
   countCoverageStatus, coverageCounterText, coverageFor, coverageLabel, coveragePercent, districtBoundaries, filterRecords, formatAccuracy,
-  formatCoordinates, formatDateTime, formatMeters, geoStatusText, gpsDistanceLabel, haversineDistanceMeters, isAutodorHolder,
+  formatCoordinates, formatDateTime, formatMeters, fetchReportSummary, geoStatusText, gpsDistanceLabel, haversineDistanceMeters, isAutodorHolder,
   normalizePhoto, photoDetailRows, photoRequirementFor, PHOTO_REQUIREMENTS, recordHolder, reportSummaryRows, reviewStatusText, scopedDistricts,
 } from './photo-model.js';
+
+test('accepts a complete photo report summary without retrying', async () => {
+  const summary = { overall: { totalObjects: 3 }, byDistrict: [] };
+  let requests = 0;
+
+  const result = await fetchReportSummary(async () => {
+    requests += 1;
+    return summary;
+  }, { delay: async () => {} });
+
+  assert.strictEqual(result, summary);
+  assert.equal(requests, 1);
+});
+
+test('retries once when the photo API returns an empty summary', async () => {
+  const summary = { overall: { totalObjects: 0 }, byDistrict: [] };
+  let requests = 0;
+
+  const result = await fetchReportSummary(async () => {
+    requests += 1;
+    return requests === 1 ? null : summary;
+  }, { delay: async () => {} });
+
+  assert.strictEqual(result, summary);
+  assert.equal(requests, 2);
+});
+
+test('explains a repeated empty photo summary instead of failing on byDistrict', async () => {
+  let requests = 0;
+
+  await assert.rejects(
+    fetchReportSummary(async () => { requests += 1; return null; }, { delay: async () => {} }),
+    /Сервис дважды вернул пустую или неполную сводку/,
+  );
+  assert.equal(requests, 2);
+});
 
 const serverRow = {
   id: 'aaaaaaaa-1111-4111-8111-aaaaaaaaaaaa',

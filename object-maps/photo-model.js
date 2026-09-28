@@ -7,6 +7,26 @@
 // У объекта с одним ID точек может быть несколько, и каждая закрывается сама.
 export const PHOTO_REQUIREMENTS = Object.freeze({ stop: 1, pp: 2, entrance: 1 });
 
+function isReportSummary(value) {
+  return Boolean(value && typeof value === 'object' && !Array.isArray(value)
+    && Array.isArray(value.byDistrict)
+    && value.overall && typeof value.overall === 'object' && !Array.isArray(value.overall));
+}
+
+/**
+ * The API can transiently return an empty/invalid JSON body (for example, a
+ * successful response with no content). Retry that response once before the
+ * dashboard consumes its required `byDistrict` and `overall` fields.
+ */
+export async function fetchReportSummary(fetchSummary, { delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms)) } = {}) {
+  for (let attempt = 0; attempt < 2; attempt += 1) {
+    const summary = await fetchSummary();
+    if (isReportSummary(summary)) return summary;
+    if (attempt === 0) await delay(500);
+  }
+  throw new Error('Сервис дважды вернул пустую или неполную сводку. Нажмите «Обновить» через несколько секунд.');
+}
+
 export function photoRequirementFor(objectType) {
   return PHOTO_REQUIREMENTS[objectType] ?? 1;
 }
