@@ -91,10 +91,12 @@ try {
         district: user.district || user.display_name,
         login: user.email,
         password,
-        role: districtRole ? 'Район' : 'Префектура',
+        role: districtRole ? 'Район' : user.role === 'mkd_editor' ? 'Отдел МКД' : 'Префектура',
         scope: districtRole
           ? 'Только свой район: снимает и отправляет фото. Выгрузок нет.'
-          : 'Весь САО: сводка, разбор фиксаций, выгрузки Excel и PDF.',
+          : user.role === 'mkd_editor'
+            ? 'Только подъезды, раздел «Первый этаж» (object-maps/mkd.html): свои фото, Excel и архив. В фотофиксацию не входит.'
+            : 'Весь САО: сводка, разбор фиксаций, выгрузки Excel и PDF.',
         checked: ok ? 'да' : 'НЕТ',
       });
     }

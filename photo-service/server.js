@@ -27,6 +27,10 @@ import { mediaRoot, readMedia, removeMedia, writeMedia } from './src/storage.js'
 import { HOLDER_SELECT_SQL, objectAllowedFor } from './src/scope.js';
 import { photoWithdrawVerdict, WITHDRAW_MESSAGES } from './src/withdraw.js';
 import { createNotifyClient } from './src/notify.js';
+import {
+  MKD_DATASET_ID, MKD_MESSAGES, mkdArchiveRows, mkdLimitVerdict, mkdPhotoPayload, mkdRouteVerdict, mkdSummary, mkdWriteVerdict,
+} from './src/mkd.js';
+import { MKD_TYPE_FOLDERS } from './src/photos-archive.js';
 
 const port = Number(process.env.PHOTO_SERVICE_PORT || 8788);
 const REVIEW_CLAIM_LEASE_SECONDS = 30 * 60;
@@ -435,6 +439,187 @@ async function handleWithdraw(request, response, user, photoId) {
   return sendJson(response, 200, { photoId, reviewStatus: 'withdrawn' }, request);
 }
 
+/* ------------------------------------------------------------ отдел МКД */
+
+// Фото первых этажей живут в своей таблице и своих ручках: ни одна выборка
+// фотофиксации их не читает, поэтому в её статистику они не попадают.
+
+const MKD_PHOTO_COLUMNS = `p.id, p.object_key, p.source_id, p.storage_key, p.thumbnail_key, p.mime_type, p.original_filename,
+  p.byte_size, p.sha256, p.performer, p.comment, p.captured_at, p.uploaded_at, p.gps_latitude, p.gps_longitude, p.gps_accuracy_m`;
+
+async function mkdEntranceBySource(sourceId) {
+  const result = await pool.query(
+    `SELECT o.object_key, o.district, o.label, o.reference_points FROM objects o
+      WHERE o.dataset_id = $1 AND o.object_type = 'entrance' AND $2 = ANY(o.source_ids) LIMIT 1`,
+    [MKD_DATASET_ID, sourceId],
+  );
+  return result.rows[0] || null;
+}
+
+async function loadMkdSummary() {
+  const [districts, photos] = await Promise.all([
+    pool.query(`SELECT o.district, sum(coalesce(array_length(o.source_ids, 1), 0))::int AS total
+                  FROM objects o WHERE o.dataset_id = $1 AND o.object_type = 'entrance' GROUP BY o.district`, [MKD_DATASET_ID]),
+    pool.query(`SELECT p.source_id, min(o.district) AS district, count(1)::int AS photos
+                  FROM mkd_floor_photos p JOIN objects o ON o.object_key = p.object_key
+                 GROUP BY p.source_id`),
+  ]);
+  return mkdSummary(districts.rows, photos.rows);
+}
+
+async function loadMkdPhotos(district) {
+  const params = district ? [district] : [];
+  const result = await pool.query(
+    `SELECT ${MKD_PHOTO_COLUMNS}, o.district, o.label, o.reference_points
+       FROM mkd_floor_photos p JOIN objects o ON o.object_key = p.object_key
+      ${district ? "WHERE replace(lower(btrim(coalesce(o.district, ''))), 'ё', 'е') = replace(lower(btrim($1)), 'ё', 'е')" : ''}
+      ORDER BY o.district NULLS LAST, o.label, p.source_id, p.uploaded_at`,
+    params,
+  );
+  return result.rows;
+}
+
+async function handleMkdUpload(request, response, user) {
+  const write = mkdWriteVerdict(user);
+  if (!write.ok) return sendError(response, request, write.status, write.code, write.message);
+  const idempotencyKey = request.headers['idempotency-key'];
+  if (typeof idempotencyKey !== 'string' || !/^[A-Za-z0-9._:-]{12,200}$/.test(idempotencyKey)) return sendError(response, request, 400, 'idempotency_key_required');
+  let parsed;
+  try { parsed = await parseMultipart(request); } catch (error) { return sendError(response, request, 400, error.code || 'invalid_multipart'); }
+  const sourceId = parsed.fields.sourceId?.trim();
+  const missingField = firstMissingUploadField({ datasetId: MKD_DATASET_ID, sourceId, performer: parsed.fields.performer });
+  if (missingField) return sendError(response, request, 400, missingField.code, missingField.message);
+  let gps = null;
+  try { gps = validCoordinateFields(parsed.fields); } catch (error) { return sendError(response, request, 400, error.code); }
+  if (gps && isUnusableAccuracy(gps.accuracy)) gps = null;
+  const entrance = await mkdEntranceBySource(sourceId);
+  if (!entrance) return sendError(response, request, 404, 'mkd_entrance_not_found', MKD_MESSAGES.mkd_entrance_not_found);
+  const media = await writeMedia(parsed.file.buffer, parsed.file.mimeType, mediaRoot(process.env));
+  const thumbnail = parsed.thumbnail ? await writeMedia(parsed.thumbnail.buffer, parsed.thumbnail.mimeType, mediaRoot(process.env)) : null;
+  const dropMedia = async () => {
+    await removeMedia(media.storageKey, mediaRoot(process.env)).catch(() => {});
+    if (thumbnail) await removeMedia(thumbnail.storageKey, mediaRoot(process.env)).catch(() => {});
+  };
+  const photoId = randomUUID();
+  const requestHash = createHash('sha256').update(JSON.stringify({ mkd: true, sourceId, fields: parsed.fields, sha256: media.sha256 })).digest('hex');
+  const client = await pool.connect();
+  try {
+    await client.query('BEGIN');
+    const existing = await client.query('SELECT photo_id, request_hash FROM mkd_idempotency_keys WHERE idempotency_key = $1 AND user_id = $2 FOR UPDATE', [idempotencyKey, user.id]);
+    if (existing.rowCount) {
+      await client.query('ROLLBACK');
+      await dropMedia();
+      if (existing.rows[0].request_hash !== requestHash) return sendError(response, request, 409, 'idempotency_key_reused');
+      return sendJson(response, 200, { photoId: existing.rows[0].photo_id, duplicate: true }, request);
+    }
+    // Лимит считаем под блокировкой объекта: две параллельные загрузки не
+    // должны вместе перешагнуть через десятое фото.
+    await client.query('SELECT object_key FROM objects WHERE object_key = $1 FOR UPDATE', [entrance.object_key]);
+    const count = await client.query('SELECT count(1)::int AS count FROM mkd_floor_photos WHERE source_id = $1', [sourceId]);
+    const limit = mkdLimitVerdict(count.rows[0].count);
+    if (!limit.ok) {
+      await client.query('ROLLBACK');
+      await dropMedia();
+      return sendError(response, request, limit.status, limit.code, limit.message);
+    }
+    await client.query(
+      `INSERT INTO mkd_floor_photos (id, object_key, source_id, storage_key, thumbnail_key, original_filename, mime_type, byte_size, sha256,
+        performer, comment, captured_at, gps_latitude, gps_longitude, gps_accuracy_m, uploaded_by)
+       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16)`,
+      [photoId, entrance.object_key, sourceId, media.storageKey, thumbnail?.storageKey ?? null, parsed.file.filename, parsed.file.mimeType,
+        parsed.file.buffer.length, media.sha256, parsed.fields.performer.trim(), (parsed.fields.comment || '').slice(0, 2000),
+        parsed.fields.capturedAt || null, gps?.latitude ?? null, gps?.longitude ?? null, gps?.accuracy ?? null, user.id],
+    );
+    await client.query('INSERT INTO mkd_idempotency_keys (idempotency_key, user_id, request_hash, photo_id) VALUES ($1,$2,$3,$4)', [idempotencyKey, user.id, requestHash, photoId]);
+    await client.query('INSERT INTO audit_log (actor_user_id, action, object_key, photo_id, metadata) VALUES ($1,$2,$3,$4,$5)', [user.id, 'mkd_photo_uploaded', entrance.object_key, photoId, JSON.stringify({ sourceId })]);
+    await client.query('COMMIT');
+  } catch (error) {
+    await client.query('ROLLBACK').catch(() => {});
+    await dropMedia();
+    throw error;
+  } finally { client.release(); }
+  return sendJson(response, 201, { photoId, sourceId, thumbnail: Boolean(thumbnail) }, request);
+}
+
+async function handleMkdDelete(request, response, user, photoId) {
+  const write = mkdWriteVerdict(user);
+  if (!write.ok) return sendError(response, request, write.status, write.code, write.message);
+  const result = await pool.query('DELETE FROM mkd_floor_photos WHERE id = $1 RETURNING object_key, source_id, storage_key, thumbnail_key', [photoId]);
+  if (!result.rowCount) return sendError(response, request, 404, 'photo_not_found');
+  const removed = result.rows[0];
+  await removeMedia(removed.storage_key, mediaRoot(process.env));
+  if (removed.thumbnail_key) await removeMedia(removed.thumbnail_key, mediaRoot(process.env));
+  await pool.query('INSERT INTO audit_log (actor_user_id, action, object_key, photo_id, metadata) VALUES ($1,$2,$3,$4,$5)', [user.id, 'mkd_photo_deleted', removed.object_key, photoId, JSON.stringify({ sourceId: removed.source_id })]);
+  response.writeHead(204, corsHeaders(request));
+  response.end();
+}
+
+/** Ручки раздела МКД. Возвращает false, если путь не из раздела. */
+async function handleMkd(request, response, user, pathname) {
+  const url = new URL(request.url, 'http://photo-service.local');
+  if (pathname === '/mkd/summary' && request.method === 'GET') {
+    sendJson(response, 200, await loadMkdSummary(), request);
+    return true;
+  }
+  if (pathname === '/mkd/photos' && request.method === 'GET') {
+    const sourceId = url.searchParams.get('sourceId');
+    if (!sourceId) { sendError(response, request, 400, 'source_point_required'); return true; }
+    const result = await pool.query(`SELECT ${MKD_PHOTO_COLUMNS} FROM mkd_floor_photos p WHERE p.source_id = $1 ORDER BY p.uploaded_at, p.id`, [sourceId]);
+    sendJson(response, 200, { sourceId, photos: result.rows.map(mkdPhotoPayload) }, request);
+    return true;
+  }
+  if (pathname === '/mkd/photos' && request.method === 'POST') { await handleMkdUpload(request, response, user); return true; }
+  const photoMatch = pathname.match(/^\/mkd\/photos\/([0-9a-f-]{36})$/);
+  if (photoMatch && request.method === 'DELETE') { await handleMkdDelete(request, response, user, photoMatch[1]); return true; }
+  const contentMatch = pathname.match(/^\/mkd\/photos\/([0-9a-f-]{36})\/content$/);
+  if (contentMatch && request.method === 'GET') {
+    const result = await pool.query('SELECT storage_key, mime_type FROM mkd_floor_photos WHERE id = $1', [contentMatch[1]]);
+    if (!result.rowCount) { sendError(response, request, 404, 'photo_not_found'); return true; }
+    response.writeHead(200, { 'Content-Type': result.rows[0].mime_type, 'Cache-Control': 'private, max-age=300', 'X-Content-Type-Options': 'nosniff', ...corsHeaders(request) });
+    readMedia(result.rows[0].storage_key, mediaRoot(process.env)).on('error', () => { if (!response.headersSent) sendError(response, request, 404, 'media_not_found'); else response.destroy(); }).pipe(response);
+    return true;
+  }
+  if (pathname === '/mkd/export.xlsx' && request.method === 'GET') {
+    const district = url.searchParams.get('district') || '';
+    const [summary, entrances, photos, { buildMkdExcel }] = await Promise.all([
+      loadMkdSummary(),
+      pool.query(
+        `SELECT unnest(o.source_ids) AS source_id, o.district, o.label FROM objects o
+          WHERE o.dataset_id = $1 AND o.object_type = 'entrance'
+            ${district ? "AND replace(lower(btrim(coalesce(o.district, ''))), 'ё', 'е') = replace(lower(btrim($2)), 'ё', 'е')" : ''}
+          ORDER BY o.district NULLS LAST, o.label`,
+        district ? [MKD_DATASET_ID, district] : [MKD_DATASET_ID],
+      ),
+      loadMkdPhotos(district),
+      import('./src/mkd-excel.js'),
+    ]);
+    const buffer = await buildMkdExcel({ summary, entrances: entrances.rows, photos }, { root: mediaRoot(process.env) });
+    response.writeHead(200, { 'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'Content-Disposition': 'attachment; filename="sao-mkd-first-floor.xlsx"', 'Cache-Control': 'no-store', ...corsHeaders(request) });
+    response.end(buffer);
+    return true;
+  }
+  if (pathname === '/mkd/photos.zip/prepare' && request.method === 'POST') {
+    const district = url.searchParams.get('district') || undefined;
+    const rows = mkdArchiveRows(await loadMkdPhotos(district));
+    await prunePhotoArchiveFiles(archiveDir(process.env), 2, 'sao-mkd');
+    const job = startPhotoArchiveJob({ rows, district: district || null, dir: archiveDir(process.env), typeFolders: MKD_TYPE_FOLDERS, prefix: 'sao-mkd' });
+    sendJson(response, 202, { id: job.id, status: job.status, total: job.total }, request);
+    return true;
+  }
+  const archiveJobMatch = pathname.match(/^\/mkd\/photos\.zip\/prepare\/([0-9a-f-]{36})$/);
+  if (archiveJobMatch && request.method === 'GET') {
+    const job = photoArchiveJob(archiveJobMatch[1]);
+    if (!job || job.kind !== 'mkd') { sendError(response, request, 404, 'archive_job_not_found'); return true; }
+    sendJson(response, 200, {
+      id: job.id, status: job.status, district: job.district, photos: job.photos, total: job.total, bytes: job.bytes,
+      skipped: job.skipped, name: job.name, error: job.error, startedAt: job.startedAt, finishedAt: job.finishedAt,
+      ticket: job.status === 'ready' ? job.ticket : null,
+    }, request);
+    return true;
+  }
+  return false;
+}
+
 async function handler(request, response) {
   if (request.method === 'OPTIONS') {
     if (!originAllowed(request)) return sendError(response, request, 403, 'origin_not_allowed');
@@ -467,6 +652,12 @@ async function handler(request, response) {
     }
     const user = await currentUser(request);
     if (!user) return sendError(response, request, 401, 'authentication_required');
+    // Учётка отдела МКД видит только свой раздел, а раздел МКД — только она и
+    // префектура. Проверка стоит до всех ручек, чтобы новая ручка фотофиксации
+    // не открылась отделу МКД случайно.
+    const mkdRoute = mkdRouteVerdict(user, pathname);
+    if (!mkdRoute.ok) return sendError(response, request, mkdRoute.status, mkdRoute.code, mkdRoute.message);
+    if (pathname.startsWith('/mkd/') && await handleMkd(request, response, user, pathname)) return;
     if (pathname === '/auth/me' && request.method === 'GET') return sendJson(response, 200, { user: { id: user.id, email: user.email, displayName: user.display_name, role: user.role, district: user.district } }, request);
     if (pathname === '/photos' && request.method === 'GET') {
       const url = new URL(request.url, 'http://photo-service.local');

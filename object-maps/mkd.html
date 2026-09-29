@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <link rel="icon" href="../favicon.ico" sizes="any">
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="robots" content="noindex">
+  <title>Первый этаж — подъезды САО · отдел МКД</title>
+  <link rel="stylesheet" href="photo-client.css">
+  <style>
+    .mkd-previews { display: flex; flex-wrap: wrap; gap: 6px; }
+    .mkd-preview { width: 84px; height: 84px; object-fit: cover; border-radius: 8px; border: 1px solid #c8d6e0; }
+  </style>
+  <script src="https://api-maps.yandex.ru/2.1/?apikey=6b197a0e-9109-4624-9520-954a47c26dda&amp;lang=ru_RU" type="text/javascript"></script>
+</head>
+<body>
+  <noscript>
+    <p style="padding:24px;font:16px/1.5 Arial,sans-serif">
+      Для работы с фото первых этажей нужен браузер с включённым JavaScript.
+    </p>
+  </noscript>
+  <script type="module">
+    import { startMkdApp } from './mkd-client.js';
+    startMkdApp();
+  </script>
+</body>
+</html>

@@ -18,7 +18,10 @@ export const ARCHIVE_VERSION = 'sao_photo_archive_v1';
 
 // Имя готового файла: дата и случайный хвост. Проверка нужна не только при
 // создании, но и при выдаче — по ней отсекаются любые чужие имена в каталоге.
-export const ARCHIVE_FILE_PATTERN = /^sao-photo-\d{4}-\d{2}-\d{2}-[0-9a-f]{8}\.zip$/;
+// Архив отдела МКД называется `sao-mkd-…`: у него своя очередь хранения, и
+// сборка одного раздела не удаляет готовый файл другого.
+export const ARCHIVE_FILE_PATTERN = /^sao-(photo|mkd)-\d{4}-\d{2}-\d{2}-[0-9a-f]{8}\.zip$/;
+const ARCHIVE_PREFIX = 'sao-photo';
 
 // Больше двух готовых архивов на диске не держим: каждый весит гигабайты.
 const ARCHIVE_KEEP = 2;
@@ -27,6 +30,8 @@ const JOBS_KEPT = 8;
 
 // Три папки видов внутри каждого района — ровно то, что заказано.
 export const TYPE_FOLDERS = Object.freeze({ stop: 'Остановки', pp: 'ПП', entrance: 'Подъезды' });
+// Архив отдела МКД: в каждом районе одна папка — «Первый этаж».
+export const MKD_TYPE_FOLDERS = Object.freeze({ mkd_floor: 'Первый этаж' });
 
 const FALLBACK_DISTRICT = 'Без района';
 const FALLBACK_LABEL = 'объект';
@@ -79,17 +84,17 @@ export function photoFileName(row, photo, index = 1) {
  * Папки архива: район плюс все три вида, даже там, где снимков пока нет — иначе
  * по архиву нельзя понять, папка вида пуста или её забыли создать.
  */
-export function archiveFolders(rows) {
+export function archiveFolders(rows, typeFolders = TYPE_FOLDERS) {
   const districts = new Map();
   for (const row of rows) {
     const district = safeSegment(row && row.district, FALLBACK_DISTRICT);
-    const type = TYPE_FOLDERS[row && row.object_type] || safeSegment(row && row.object_type, FALLBACK_TYPE);
+    const type = typeFolders[row && row.object_type] || safeSegment(row && row.object_type, FALLBACK_TYPE);
     if (!districts.has(district)) districts.set(district, new Set());
     districts.get(district).add(type);
   }
   const folders = [];
   for (const [district, types] of districts) {
-    for (const type of Object.values(TYPE_FOLDERS)) types.add(type);
+    for (const type of Object.values(typeFolders)) types.add(type);
     for (const type of [...types].sort((left, right) => left.localeCompare(right, 'ru'))) {
       folders.push(`${district}/${type}`);
     }
@@ -98,11 +103,11 @@ export function archiveFolders(rows) {
 }
 
 /** Список файлов архива: путь в архиве, ключ хранилища и данные для manifest. */
-export function photoArchiveEntries(rows) {
+export function photoArchiveEntries(rows, typeFolders = TYPE_FOLDERS) {
   const entries = [];
   for (const row of rows) {
     const district = safeSegment(row && row.district, FALLBACK_DISTRICT);
-    const folder = TYPE_FOLDERS[row && row.object_type] || safeSegment(row && row.object_type, FALLBACK_TYPE);
+    const folder = typeFolders[row && row.object_type] || safeSegment(row && row.object_type, FALLBACK_TYPE);
     const photos = Array.isArray(row && row.photos) ? row.photos : [];
     photos.forEach((photo, index) => {
       const coordinates = coordinatesOf(row, photo);
@@ -129,7 +134,7 @@ export function photoArchiveEntries(rows) {
 }
 
 /** Опись архива: что именно лежит внутри — без неё архив нечем проверить. */
-export function photoArchiveManifest(rows, files, { exportedAt = new Date().toISOString(), district = null, skipped = [] } = {}) {
+export function photoArchiveManifest(rows, files, { exportedAt = new Date().toISOString(), district = null, skipped = [], typeFolders = TYPE_FOLDERS } = {}) {
   return {
     archive_version: ARCHIVE_VERSION,
     exported_at: exportedAt,
@@ -140,7 +145,7 @@ export function photoArchiveManifest(rows, files, { exportedAt = new Date().toIS
       photos: files.length,
       skipped: skipped.length
     },
-    folders: archiveFolders(rows),
+    folders: archiveFolders(rows, typeFolders),
     // Ключ хранилища наружу не отдаём: он нужен только сервису.
     files: files.map(({ storageKey, ...file }) => file),
     skipped
@@ -153,8 +158,8 @@ export function archiveDir(environment = process.env) {
 }
 
 /** Имя файла архива: дата и короткий случайный хвост, чтобы ссылки не угадывались. */
-export function archiveName(exportedAt = new Date().toISOString()) {
-  return `sao-photo-${String(exportedAt).slice(0, 10)}-${randomUUID().slice(0, 8)}.zip`;
+export function archiveName(exportedAt = new Date().toISOString(), prefix = ARCHIVE_PREFIX) {
+  return `${prefix}-${String(exportedAt).slice(0, 10)}-${randomUUID().slice(0, 8)}.zip`;
 }
 
 /**
@@ -168,8 +173,11 @@ export function archiveName(exportedAt = new Date().toISOString()) {
  * поэтому архив и таблицы показывают одни и те же фотографии.
  */
 export async function writePhotoArchive(rows, options = {}) {
-  const { root = mediaRoot(), dir = archiveDir(), district = null, exportedAt, onProgress } = options;
-  const entries = photoArchiveEntries(rows);
+  const {
+    root = mediaRoot(), dir = archiveDir(), district = null, exportedAt, onProgress,
+    typeFolders = TYPE_FOLDERS, prefix = ARCHIVE_PREFIX,
+  } = options;
+  const entries = photoArchiveEntries(rows, typeFolders);
 
   const present = [];
   const skipped = [];
@@ -183,8 +191,8 @@ export async function writePhotoArchive(rows, options = {}) {
     }
   }
 
-  const manifest = photoArchiveManifest(rows, present, { exportedAt, district, skipped });
-  const name = archiveName(exportedAt || manifest.exported_at);
+  const manifest = photoArchiveManifest(rows, present, { exportedAt, district, skipped, typeFolders });
+  const name = archiveName(exportedAt || manifest.exported_at, prefix);
   await mkdir(dir, { recursive: true });
   const target = join(dir, name);
   const output = createWriteStream(target, { flags: 'wx' });
@@ -227,9 +235,9 @@ export async function writePhotoArchive(rows, options = {}) {
 }
 
 /** Убирает старые готовые архивы: держим только последние. Диск на сервере не бесконечен. */
-export async function prunePhotoArchiveFiles(dir = archiveDir(), keep = ARCHIVE_KEEP) {
+export async function prunePhotoArchiveFiles(dir = archiveDir(), keep = ARCHIVE_KEEP, prefix = ARCHIVE_PREFIX) {
   try {
-    const names = (await readdir(dir)).filter((name) => ARCHIVE_FILE_PATTERN.test(name));
+    const names = (await readdir(dir)).filter((name) => ARCHIVE_FILE_PATTERN.test(name) && name.startsWith(`${prefix}-`));
     const dated = await Promise.all(names.map(async (name) => ({
       name, modified: (await stat(join(dir, name))).mtimeMs
     })));
@@ -258,6 +266,8 @@ export function startPhotoArchiveJob({ rows, ...options } = {}) {
     ticket: randomUUID(),
     status: 'building',
     district: options.district || null,
+    // Раздел задачи: статус сборки МКД спрашивают через свою ручку.
+    kind: options.prefix === 'sao-mkd' ? 'mkd' : 'photo',
     startedAt: new Date().toISOString(),
     finishedAt: null,
     photos: 0,

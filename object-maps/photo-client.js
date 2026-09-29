@@ -128,6 +128,12 @@ function rememberToken(token) {
 }
 
 function setSession(user) {
+  // Учётка отдела МКД работает только на своей странице «Первый этаж»:
+  // фотофиксация ей закрыта и на сервере, поэтому сразу уводим её туда.
+  if (user?.role === 'mkd_editor') {
+    window.location.replace('./mkd.html');
+    return;
+  }
   state.user = user || null;
   const form = element('paLoginForm');
   const label = element('paSessionState');
@@ -144,6 +150,7 @@ function setSession(user) {
   const districtRole = user?.role === 'district_editor';
   element('paDistrictFilter').disabled = Boolean(districtRole);
   element('paDistrictFilter').closest('div').hidden = Boolean(districtRole);
+  element('paMkdLink').hidden = user?.role !== 'prefecture_admin';
   renderExports();
 }
 
@@ -1685,6 +1692,7 @@ function shell() {
       <span><strong id="paTitle">Фотофиксация объектов САО</strong><small id="paSubtitle">Загружаем набор данных…</small></span>
     </div>
     <a class="pa-atlas-link" href="../hub/">← Городской атлас</a>
+    <a class="pa-atlas-link" id="paMkdLink" href="./mkd.html" hidden>Первый этаж (МКД) →</a>
     <nav class="pa-datasets" id="paDatasets" role="tablist" aria-label="Набор объектов"></nav>
     <div class="pa-session">
       <form class="pa-login" id="paLoginForm">

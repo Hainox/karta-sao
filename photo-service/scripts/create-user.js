@@ -45,9 +45,10 @@ const login = normalizeLogin(option('login') ?? option('email'));
 const displayName = option('display-name');
 const role = option('role');
 const district = option('district') || null;
-if (!login || !displayName || !['district_editor', 'prefecture_admin'].includes(role)
-  || (role === 'district_editor' && !district) || (role === 'prefecture_admin' && district)) {
-  console.error('Usage: node scripts/create-user.js --login LOGIN --display-name NAME --role district_editor|prefecture_admin [--district DISTRICT]');
+// mkd_editor — отдел МКД: фото первых этажей подъездов по всему округу, района нет.
+if (!login || !displayName || !['district_editor', 'prefecture_admin', 'mkd_editor'].includes(role)
+  || (role === 'district_editor' && !district) || (role !== 'district_editor' && district)) {
+  console.error('Usage: node scripts/create-user.js --login LOGIN --display-name NAME --role district_editor|prefecture_admin|mkd_editor [--district DISTRICT]');
   process.exit(2);
 }
 const password = await readHidden('Password (12+ chars, input hidden): ');
