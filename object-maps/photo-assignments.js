@@ -54,7 +54,7 @@
       }
       async function refresh() {
         const version = ++revision;
-        
+
         message('Загружаем назначенные точки…');
         try {
           const data = await request(api.user() ? '?dataset=' + encodeURIComponent(dataset.datasetId) : '/public');
