@@ -1,3 +1,4 @@
+import { createObjectPhotoPointsRouter } from './lib/object-photo-points.js';
 import express from 'express';
 import { signToken, verifyPassword, verifyToken } from './lib/auth.js';
 import { safePhotoFilename, validatePhotoMarker, validatePhotoNote, validatePhotoUpload } from './lib/photo-markers.js';
@@ -19,7 +20,7 @@ export function createApp({ repository, boundary, jwtSecret, allowedOrigins = []
     if (!origin || allowedOrigins.includes(origin)) {
       if (origin) response.setHeader('Access-Control-Allow-Origin', origin);
       response.setHeader('Vary', 'Origin');
-      response.setHeader('Access-Control-Allow-Headers', 'Authorization, Content-Type, X-Photo-Filename');
+      response.setHeader('Access-Control-Allow-Headers', 'Authorization, Content-Type, X-Photo-Filename, X-Assignment-Version');
       response.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, PUT, DELETE, OPTIONS');
       if (request.method === 'OPTIONS') return response.sendStatus(204);
       return next();
@@ -56,6 +57,7 @@ export function createApp({ repository, boundary, jwtSecret, allowedOrigins = []
     } catch (error) { next(error); }
   });
 
+  app.use('/api/object-photo-points', createObjectPhotoPointsRouter({ repository, authenticate, boundary }));
   app.get('/api/me', authenticate, (request, response) => response.json({ user: request.user }));
 
   app.get('/api/photo-markers', authenticate, requirePrefecture, async (_request, response, next) => {

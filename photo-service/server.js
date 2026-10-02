@@ -1,3 +1,6 @@
+import { createPhotoServicePointsAdapter } from './src/tpu-points/photo-service-points-adapter.js';
+import { readFileSync } from 'node:fs';
+const tpuBoundary = JSON.parse(readFileSync(new URL('./src/tpu-points/sao_boundary_wgs84.geojson', import.meta.url), 'utf8'));
 import { createHash, randomUUID } from 'node:crypto';
 import { createReadStream } from 'node:fs';
 import { stat } from 'node:fs/promises';
@@ -44,6 +47,7 @@ const cookiePolicy = photoServiceCookiePolicy({
 const allowedOrigins = new Set((process.env.PHOTO_SERVICE_ALLOWED_ORIGINS || '').split(',').map((value) => value.trim()).filter(Boolean));
 const pool = new Pool({ ...photoServiceDatabaseConfig(process.env), max: 8, idleTimeoutMillis: 30000 });
 const loginThrottle = createLoginThrottle();
+const tpuPoints = createPhotoServicePointsAdapter({ pool, currentUser, boundary: tpuBoundary });
 
 function corsHeaders(request) {
   const origin = request?.headers?.origin;
@@ -623,12 +627,17 @@ async function handleMkd(request, response, user, pathname) {
 async function handler(request, response) {
   if (request.method === 'OPTIONS') {
     if (!originAllowed(request)) return sendError(response, request, 403, 'origin_not_allowed');
-    response.writeHead(204, { 'Access-Control-Allow-Origin': request.headers.origin || '*', 'Access-Control-Allow-Credentials': 'true', 'Access-Control-Allow-Headers': 'Content-Type, Idempotency-Key, Authorization, X-Review-Session', 'Access-Control-Allow-Methods': 'GET,POST,PATCH,DELETE,OPTIONS', Vary: 'Origin' });
+    response.writeHead(204, { 'Access-Control-Allow-Origin': request.headers.origin || '*', 'Access-Control-Allow-Credentials': 'true', 'Access-Control-Allow-Headers': 'Content-Type, Idempotency-Key, Authorization, X-Review-Session, X-Photo-Filename, X-Assignment-Version', 'Access-Control-Allow-Methods': 'GET,POST,PATCH,PUT,DELETE,OPTIONS', Vary: 'Origin' });
     response.end();
     return;
   }
   if (!originAllowed(request)) return sendError(response, request, 403, 'origin_not_allowed');
   const pathname = pathOf(request);
+  if (pathname === '/object-photo-points' || pathname.startsWith('/object-photo-points/')) {
+    for (const [key, value] of Object.entries(corsHeaders(request))) response.setHeader(key, value);
+    request.url = pathname + new URL(request.url, 'http://photo-service.local').search;
+    return tpuPoints(request, response);
+  }
   try {
     if (pathname === '/auth/login' && request.method === 'POST') return handleLogin(request, response);
     if (pathname === '/auth/logout' && request.method === 'POST') {

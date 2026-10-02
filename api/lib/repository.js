@@ -1,3 +1,4 @@
+import { createObjectPhotoPointRepository } from './object-photo-points.js';
 import crypto from 'node:crypto';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -29,6 +30,7 @@ export async function migrate(pool) {
 
 export function createRepository(pool) {
   return {
+    ...createObjectPhotoPointRepository(pool),
     async findUserByEmail(email) {
       const { rows } = await pool.query('SELECT id, email, password_hash, role, district FROM users WHERE lower(email) = lower($1)', [email]);
       return rows[0] || null;
