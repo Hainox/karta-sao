@@ -154,7 +154,7 @@ def add_photo_assignments(markup):
       <p class="assignment-status" id="assignmentStatus" role="status" aria-live="polite"></p></section><div class="list-head">''')
     markup = markup.replace('<div id="map" role=', '''<section class="assignment-picker" id="assignmentPicker" hidden><h3>Назначить точку съёмки</h3><p id="assignmentObject"></p>
       <form id="assignmentForm"><label for="assignmentLabel">Название точки</label><input id="assignmentLabel" maxlength="160" placeholder="Например: вход со стороны улицы" required>
-      <label for="assignmentNote">Что сфотографировать</label><textarea id="assignmentNote" maxlength="2000" rows="2"></textarea><p id="assignmentCoords">Нажмите на карте в месте съёмки</p>
+      <label for="assignmentNote">Что сфотографировать</label><textarea id="assignmentNote" maxlength="2000" rows="2"></textarea><p id="assignmentCoords">Нажмите на карте в месте съёмки</p><p id="assignmentDirection" aria-live="polite">Шаг 1: поставьте точку на карте.</p><button class="secondary-btn" id="assignmentMove" type="button">Переставить точку</button>
       <div class="form-actions"><button class="save-btn" id="assignmentSave" type="submit" disabled>Сохранить точку</button><button class="secondary-btn" id="assignmentCancel" type="button">Отмена</button></div></form></section><div id="map" role=''')
     markup = markup.replace('<div class="section-title">Добавить фотофиксацию</div>', '''<section id="assignmentPanel"><div class="section-title">Назначенные точки съёмки</div><button class="save-btn" id="assignmentAdd" type="button" hidden>Назначить точку на карте</button><div id="assignmentList"></div></section>
       <div hidden class="section-title">Локальный черновик фото</div>''')

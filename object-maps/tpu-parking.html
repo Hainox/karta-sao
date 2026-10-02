@@ -169,7 +169,7 @@
       <section class="map-panel" aria-label="Интерактивная карта">
         <section class="assignment-picker" id="assignmentPicker" hidden><h3>Назначить точку съёмки</h3><p id="assignmentObject"></p>
       <form id="assignmentForm"><label for="assignmentLabel">Название точки</label><input id="assignmentLabel" maxlength="160" placeholder="Например: вход со стороны улицы" required>
-      <label for="assignmentNote">Что сфотографировать</label><textarea id="assignmentNote" maxlength="2000" rows="2"></textarea><p id="assignmentCoords">Нажмите на карте в месте съёмки</p>
+      <label for="assignmentNote">Что сфотографировать</label><textarea id="assignmentNote" maxlength="2000" rows="2"></textarea><p id="assignmentCoords">Нажмите на карте в месте съёмки</p><p id="assignmentDirection" aria-live="polite">Шаг 1: поставьте точку на карте.</p><button class="secondary-btn" id="assignmentMove" type="button">Переставить точку</button>
       <div class="form-actions"><button class="save-btn" id="assignmentSave" type="submit" disabled>Сохранить точку</button><button class="secondary-btn" id="assignmentCancel" type="button">Отмена</button></div></form></section><div id="map" role="application" aria-label="Карта с объектами"></div>
         <div class="map-status" id="mapStatus">Загрузка карты…</div>
         <div class="map-key"><span class="key-dot"></span>без фото <span class="key-dot done"></span>есть фото <span hidden class="review-legend" id="reworkLegend">НА ДОРАБОТКЕ: 0</span></div>

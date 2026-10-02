@@ -8,7 +8,7 @@ import { createObjectPhotoPointRepository, createObjectPhotoPointsRouter } from 
 
 const secret = 'object-photo-points-test-secret-longer-than-32';
 const boundary = { type: 'FeatureCollection', features: [{ type: 'Feature', properties: {}, geometry: { type: 'Polygon', coordinates: [[[37,55],[38,55],[38,56],[37,56],[37,55]]] } }] };
-const assignment = { datasetId: 'sao_tpu_parking', objectKey: 'tpu:123', objectType: 'tpu', district: 'Аэропорт', longitude: 37.5, latitude: 55.5, label: 'Вход со стороны улицы', note: 'Снять общий вид' };
+const assignment = { datasetId: 'sao_tpu_parking', objectKey: 'tpu:123', objectType: 'tpu', district: 'Аэропорт', longitude: 37.5, latitude: 55.5, heading: 45, label: 'Вход со стороны улицы', note: 'Снять общий вид' };
 const jpeg = Buffer.from([0xff, 0xd8, 0xff, 0xe0, 1, 2, 3, 4]);
 const auth = (role, district = null) => `Bearer ${signToken({ id: crypto.randomUUID(), role, district }, secret)}`;
 
@@ -17,8 +17,8 @@ function fixture() {
   const repository = {
     async listObjectPhotoPoints({ district, objectKey }) { return points.filter((p) => !p.retired_at && (!district || p.district === district) && (!objectKey || p.object_key === objectKey)); },
     async getObjectPhotoPoint({ id, district }) { return points.find((p) => p.id === id && !p.retired_at && (!district || p.district === district)) || null; },
-    async createObjectPhotoPoint(input) { const p = { id: crypto.randomUUID(), dataset_id: input.datasetId, object_key: input.objectKey, object_type: input.objectType, district: input.district, longitude: input.longitude, latitude: input.latitude, label: input.label, note: input.note }; points.push(p); return p; },
-    async updateObjectPhotoPoint(input) { const p = points.find((p) => p.id === input.id && !p.retired_at); if (!p) return null; for (const key of ['longitude', 'latitude', 'label', 'note']) p[key] = input[key]; return p; },
+    async createObjectPhotoPoint(input) { const p = { id: crypto.randomUUID(), dataset_id: input.datasetId, object_key: input.objectKey, object_type: input.objectType, district: input.district, longitude: input.longitude, latitude: input.latitude, label: input.label, note: input.note, heading: input.heading }; points.push(p); return p; },
+    async updateObjectPhotoPoint(input) { const p = points.find((p) => p.id === input.id && !p.retired_at); if (!p) return null; for (const key of ['longitude', 'latitude', 'label', 'note', 'heading']) p[key] = input[key]; return p; },
     async retireObjectPhotoPoint({ id }) { const p = points.find((p) => p.id === id && !p.retired_at); if (!p) return null; p.retired_at = new Date().toISOString(); return p; },
     async listObjectPhotoPointPhotos(pointId) { return photos.filter((p) => p.point_id === pointId).map(({ photo_bytes, ...p }) => p); },
     async addObjectPhotoPointPhoto(input) { if (!await this.getObjectPhotoPoint({ id: input.pointId, district: input.district })) return null; const p = { id: crypto.randomUUID(), point_id: input.pointId, photo_bytes: input.bytes, photo_mime_type: input.mimeType, photo_filename: input.filename }; photos.push(p); const { photo_bytes, ...metadata } = p; return metadata; },
@@ -75,7 +75,7 @@ test('multiple stable assignments support movement, own-district photos and exac
 
 test('boundary, payload and image checks reject invalid points and disguised uploads', async () => {
   const { api } = fixture(); const root = auth('prefecture_admin');
-  for (const changes of [{ longitude: null }, { longitude: '37.5' }, { latitude: 57 }, { district: 'ЦАО' }, { datasetId: 'stops' }, { label: '' }, { note: {} }]) await api.post('/api/object-photo-points').set('Authorization', root).send({ ...assignment, ...changes }).expect(422);
+  for (const changes of [{ longitude: null }, { longitude: '37.5' }, { latitude: 57 }, { district: 'ЦАО' }, { datasetId: 'stops' }, { label: '' }, { note: {} }, { heading: -1 }, { heading: 360 }, { heading: '90' }]) await api.post('/api/object-photo-points').set('Authorization', root).send({ ...assignment, ...changes }).expect(422);
   const p = (await api.post('/api/object-photo-points').set('Authorization', root).send(assignment)).body.point;
   await api.put(`/api/object-photo-points/${p.id}/photos`).set('Authorization', root).set('Content-Type', 'image/png').set('X-Assignment-Version', '1').send(jpeg).expect(422);
   await api.get('/api/object-photo-points/not-a-uuid/photos').set('Authorization', root).expect(400);
@@ -116,6 +116,7 @@ test('public points expose coordinates without credentials, notes, photos or aud
   const result = await api.get('/api/object-photo-points/public').expect(200);
   assert.equal(result.body.points[0].id, created.body.point.id);
   assert.equal(result.body.points[0].longitude, assignment.longitude);
+  assert.equal(result.body.points[0].heading, 45);
   assert.equal(result.body.points[0].note, undefined);
   assert.equal(result.body.points[0].created_by, undefined);
   await api.post('/api/object-photo-points').send(assignment).expect(401);
@@ -131,4 +132,18 @@ test('repository rejects stale upload versions under the point lock', async () =
   assert.ok(calls.some(sql => sql.includes('FOR UPDATE')));
   assert.ok(calls.includes('ROLLBACK'));
   assert.ok(!calls.some(sql => sql.startsWith('INSERT')));
+});
+
+test('direction can change independently without moving the point, and survives metadata edits', async () => {
+  const { api } = fixture(); const root = auth('prefecture_admin');
+  const point = (await api.post('/api/object-photo-points').set('Authorization', root).send(assignment).expect(201)).body.point;
+  const turned = (await api.patch('/api/object-photo-points/' + point.id).set('Authorization', root).send({ heading: 270 }).expect(200)).body.point;
+  assert.equal(turned.longitude, assignment.longitude);
+  assert.equal(turned.latitude, assignment.latitude);
+  assert.equal(turned.heading, 270);
+  const renamed = (await api.patch('/api/object-photo-points/' + point.id).set('Authorization', root).send({ label: 'Другой ракурс' }).expect(200)).body.point;
+  assert.equal(renamed.heading, 270);
+  await api.patch('/api/object-photo-points/' + point.id).set('Authorization', root).send({ heading: 360 }).expect(422);
+  const publicPoint = (await api.get('/api/object-photo-points/public')).body.points[0];
+  assert.equal(publicPoint.heading, 270);
 });

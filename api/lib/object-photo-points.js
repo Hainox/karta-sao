@@ -17,7 +17,8 @@ export function validateObjectPhotoPoint(input, boundary) {
   else if (!isPointWithinBoundary([input.longitude, input.latitude], boundary)) errors.push('Точка должна находиться в границах САО.');
   if (typeof input?.label !== 'string' || !input.label.trim() || input.label.length > 160) errors.push('Название точки должно содержать от 1 до 160 символов.');
   if (input?.note !== undefined && (typeof input.note !== 'string' || input.note.length > 2000)) errors.push('Описание должно быть строкой до 2000 символов.');
-  return { valid: errors.length === 0, errors, value: errors.length ? null : { ...input, objectKey: input.objectKey.trim(), label: input.label.trim(), note: input.note?.trim() || '' } };
+  if (input?.heading != null && (typeof input.heading !== 'number' || !Number.isFinite(input.heading) || input.heading < 0 || input.heading >= 360)) errors.push('Направление должно быть числом от 0 до 360 градусов.');
+  return { valid: errors.length === 0, errors, value: errors.length ? null : { ...input, heading: input.heading ?? null, objectKey: input.objectKey.trim(), label: input.label.trim(), note: input.note?.trim() || '' } };
 }
 
 export function createObjectPhotoPointsRouter({ repository, authenticate, boundary }) {
@@ -26,7 +27,7 @@ export function createObjectPhotoPointsRouter({ repository, authenticate, bounda
     try {
       const points = await repository.listObjectPhotoPoints({ datasetId: 'sao_tpu_parking' });
       res.setHeader('Cache-Control', 'no-store');
-      res.json({ points: points.map(({ id, object_key, object_type, district, longitude, latitude, label }) => ({ id, object_key, object_type, district, longitude, latitude, label })) });
+      res.json({ points: points.map(({ id, object_key, object_type, district, longitude, latitude, label, heading }) => ({ id, object_key, object_type, district, longitude, latitude, label, heading })) });
     } catch (error) { next(error); }
   });
   router.use(authenticate, (req, res, next) => {
@@ -55,9 +56,9 @@ export function createObjectPhotoPointsRouter({ repository, authenticate, bounda
     try {
       const existing = await repository.getObjectPhotoPoint({ id: req.params.id });
       if (!existing) return res.status(404).json({ error: 'Точка не найдена.' });
-      const editable = ['longitude', 'latitude', 'label', 'note'];
-      if (!req.body || Object.keys(req.body).some((key) => !editable.includes(key))) return res.status(400).json({ error: 'Можно изменить координаты, название и описание точки.' });
-      const validation = validateObjectPhotoPoint({ datasetId: existing.dataset_id, objectKey: existing.object_key, objectType: existing.object_type, district: existing.district, longitude: existing.longitude, latitude: existing.latitude, label: existing.label, note: existing.note, ...req.body }, boundary);
+      const editable = ['longitude', 'latitude', 'label', 'note', 'heading'];
+      if (!req.body || Object.keys(req.body).some((key) => !editable.includes(key))) return res.status(400).json({ error: 'Можно изменить координаты, направление, название и описание точки.' });
+      const validation = validateObjectPhotoPoint({ datasetId: existing.dataset_id, objectKey: existing.object_key, objectType: existing.object_type, district: existing.district, longitude: existing.longitude, latitude: existing.latitude, label: existing.label, note: existing.note, heading: existing.heading ?? null, ...req.body }, boundary);
       if (!validation.valid) return res.status(422).json({ error: 'Точка не прошла проверку.', details: validation.errors });
       const point = await repository.updateObjectPhotoPoint({ id: req.params.id, ...validation.value, actorId: req.user.sub });
       if (!point) return res.status(404).json({ error: 'Точка не найдена.' });
@@ -130,15 +131,15 @@ export function createObjectPhotoPointRepository(pool, { writeAudit } = {}) {
       const { rows } = await pool.query('SELECT * FROM object_photo_points WHERE id = $1 AND retired_at IS NULL AND ($2::text IS NULL OR district = $2)', [id, district || null]);
       return rows[0] || null;
     },
-    createObjectPhotoPoint({ datasetId, objectKey, objectType, district, longitude, latitude, label, note, actorId }) {
+    createObjectPhotoPoint({ datasetId, objectKey, objectType, district, longitude, latitude, label, note, actorId, heading = null }) {
       return write(actorId, 'object_photo_point_created', { datasetId, objectKey }, async (client) => {
-        const { rows } = await client.query('INSERT INTO object_photo_points (id, dataset_id, object_key, object_type, district, longitude, latitude, label, note, created_by, updated_by) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$10) RETURNING *', [crypto.randomUUID(), datasetId, objectKey, objectType, district, longitude, latitude, label, note, actorId]);
+        const { rows } = await client.query('INSERT INTO object_photo_points (id, dataset_id, object_key, object_type, district, longitude, latitude, label, note, created_by, updated_by, heading) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$10,$11) RETURNING *', [crypto.randomUUID(), datasetId, objectKey, objectType, district, longitude, latitude, label, note, actorId, heading]);
         return rows[0];
       });
     },
-    updateObjectPhotoPoint({ id, longitude, latitude, label, note, actorId }) {
+    updateObjectPhotoPoint({ id, longitude, latitude, label, note, actorId, heading = null }) {
       return write(actorId, 'object_photo_point_updated', { pointId: id }, async (client) => {
-        const { rows } = await client.query('UPDATE object_photo_points SET assignment_version = assignment_version + CASE WHEN longitude IS DISTINCT FROM $2 OR latitude IS DISTINCT FROM $3 THEN 1 ELSE 0 END, longitude = $2, latitude = $3, label = $4, note = $5, updated_by = $6, updated_at = now() WHERE id = $1 AND retired_at IS NULL RETURNING *', [id, longitude, latitude, label, note, actorId]);
+        const { rows } = await client.query('UPDATE object_photo_points SET assignment_version = assignment_version + CASE WHEN longitude IS DISTINCT FROM $2 OR latitude IS DISTINCT FROM $3 OR heading IS DISTINCT FROM $7 THEN 1 ELSE 0 END, longitude = $2, latitude = $3, label = $4, note = $5, updated_by = $6, heading = $7, updated_at = now() WHERE id = $1 AND retired_at IS NULL RETURNING *', [id, longitude, latitude, label, note, actorId, heading]);
         return rows[0] || null;
       });
     },

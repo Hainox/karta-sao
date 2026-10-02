@@ -28,7 +28,7 @@
       function renderMap() {
         const map = getMap();
         if (!map || !window.ymaps) return;
-        markerLayout ||= ymaps.templateLayoutFactory.createClass('<div class="assignment-map-point">$[properties.iconContent]</div>');
+        markerLayout ||= ymaps.templateLayoutFactory.createClass('<div class="assignment-marker"><svg class="assignment-direction" width="160" height="160" viewBox="0 0 160 160" style="display:$[properties.arrowDisplay];transform:rotate($[properties.heading]deg)" aria-hidden="true"><path d="M80 8 L59 38 L70 38 L70 80 L90 80 L90 38 L101 38 Z" fill="#ffcb00" stroke="#102e60" stroke-width="5" stroke-linejoin="round"/></svg><div class="assignment-map-point">$[properties.iconContent]</div></div>');
         if (!layer) { layer = new ymaps.GeoObjectCollection(); map.geoObjects.add(layer); }
         layer.removeAll();
         const counters = new Map();
@@ -38,7 +38,7 @@
           if (visibleObjects && !visibleObjects.has(record.id)) continue;
           const number = (counters.get(point.object_key) || 0) + 1;
           counters.set(point.object_key, number);
-          const marker = new ymaps.Placemark([Number(point.latitude), Number(point.longitude)], { iconContent: String(number), hintContent: 'Точка съёмки ' + number }, { iconLayout: markerLayout, iconShape: { type: 'Circle', coordinates: [0, 0], radius: 24 }, zIndex: 2000 });
+          const marker = new ymaps.Placemark([Number(point.latitude), Number(point.longitude)], { iconContent: String(number), hintContent: 'Точка съёмки ' + number, heading: point.heading ?? 0, arrowDisplay: point.heading == null ? 'none' : 'block' }, { iconLayout: markerLayout, iconShape: { type: 'Circle', coordinates: [0, 0], radius: 24 }, zIndex: 2000 });
           marker.events.add('click', () => { if (!picking) openRecord(record); });
           layer.add(marker);
         }
@@ -79,7 +79,7 @@
             const image = document.createElement('img'); image.src = url; image.alt = 'Фото: ' + point.label; image.loading = 'lazy';
             link.append(image);
             if (photo.assignment_version && photo.assignment_version !== point.assignment_version) {
-              const note = document.createElement('small'); note.textContent = 'Фото до переноса точки'; link.append(note);
+              const note = document.createElement('small'); note.textContent = 'Фото до изменения точки или направления'; link.append(note);
             }
             target.append(link);
           }
@@ -133,45 +133,84 @@
         picking = null; picker.hidden = true;
         const map = getMap(); if (preview && map) map.geoObjects.remove(preview); preview = null;
       }
+      function renderPicker() {
+        const save = document.getElementById('assignmentSave');
+        save.disabled = picking.stage === 'position' || !picking.coordinates || picking.heading == null;
+        document.getElementById('assignmentCoords').textContent = picking.coordinates
+          ? picking.coordinates.map(v => Number(v).toFixed(6)).join(', ')
+          : 'Нажмите на карте в месте съёмки';
+        document.getElementById('assignmentDirection').textContent = picking.stage === 'position'
+          ? 'Шаг 1: поставьте точку на карте.'
+          : picking.heading == null
+            ? 'Шаг 2: нажмите на карте в сторону, куда нужно фотографировать.'
+            : 'Направление: ' + Math.round(picking.heading) + '°. Нажмите на карте, чтобы повернуть стрелку.';
+        const map = getMap();
+        if (preview) map.geoObjects.remove(preview);
+        preview = null;
+        if (picking.coordinates) {
+          renderMap();
+          preview = new ymaps.Placemark(picking.coordinates, {
+            iconContent: '•', heading: picking.heading ?? 0,
+            arrowDisplay: picking.heading == null ? 'none' : 'block'
+          }, { iconLayout: markerLayout, iconShape: { type: 'Circle', coordinates: [0, 0], radius: 24 }, zIndex: 3000 });
+          map.geoObjects.add(preview);
+        }
+      }
       function pick(coordinates) {
         if (!picking) return false;
         if (picking.saving) return true;
-        picking.coordinates = coordinates;
-        document.getElementById('assignmentCoords').textContent = coordinates.map(v => Number(v).toFixed(6)).join(', ');
-        document.getElementById('assignmentSave').disabled = false;
-        const map = getMap(); if (preview) map.geoObjects.remove(preview);
-        preview = new ymaps.Placemark(coordinates, {}, { preset: 'islands#redCircleDotIcon' }); map.geoObjects.add(preview);
+        if (picking.stage === 'position') {
+          picking.coordinates = coordinates;
+          picking.heading = null;
+          picking.stage = 'direction';
+        } else {
+          const rad = Math.PI / 180;
+          const [latitude, longitude] = picking.coordinates;
+          const delta = (coordinates[1] - longitude) * rad;
+          const y = Math.sin(delta) * Math.cos(coordinates[0] * rad);
+          const x = Math.cos(latitude * rad) * Math.sin(coordinates[0] * rad)
+            - Math.sin(latitude * rad) * Math.cos(coordinates[0] * rad) * Math.cos(delta);
+          if (Math.hypot(x, y) < 0.0000003) {
+            notify('Укажите направление чуть дальше от точки съёмки.', true);
+            return true;
+          }
+          picking.heading = (Math.atan2(y, x) / rad + 360) % 360;
+        }
+        renderPicker();
         return true;
       }
       function begin(point = null) {
         if (!isPrefecture() || !selected) return;
         if (picking?.saving) return;
         cancel();
-        picking = { record: selected, point, coordinates: point ? [Number(point.latitude), Number(point.longitude)] : null };
+        picking = { record: selected, point, coordinates: point ? [Number(point.latitude), Number(point.longitude)] : null,
+          heading: point?.heading == null ? null : Number(point.heading), stage: point ? 'direction' : 'position' };
         document.getElementById('assignmentLabel').value = point?.label || '';
         document.getElementById('assignmentNote').value = point?.note || '';
         document.getElementById('assignmentObject').textContent = selected.label;
-        document.getElementById('assignmentCoords').textContent = 'Нажмите на карте в месте съёмки';
-        document.getElementById('assignmentSave').disabled = !point;
         closeRecord(); picker.hidden = false;
-        getMap()?.setCenter([selected.lat, selected.lon], 18);
-        if (point) pick(picking.coordinates);
+        getMap()?.setCenter(point ? picking.coordinates : [selected.lat, selected.lon], 18);
+        renderPicker();
       }
+      document.getElementById('assignmentMove').onclick = () => {
+        if (!picking || picking.saving) return;
+        picking.stage = 'position'; picking.heading = null; renderPicker();
+      };
       document.getElementById('assignmentAdd').onclick = () => begin();
       document.getElementById('assignmentCancel').onclick = cancel;
       document.getElementById('assignmentForm').onsubmit = async event => {
-        event.preventDefault(); if (!picking?.coordinates) return;
+        event.preventDefault(); if (!picking?.coordinates || picking.heading == null || picking.stage === 'position') return;
         const assignment = picking;
         const account = api.user()?.email;
         const label = document.getElementById('assignmentLabel').value.trim();
         if (!label) return notify('Введите название точки съёмки.', true);
-        const body = { datasetId: dataset.datasetId, objectKey: assignment.record.id, district: assignment.record.group, objectType: assignment.record.kind, latitude: assignment.coordinates[0], longitude: assignment.coordinates[1], label, note: document.getElementById('assignmentNote').value.trim() };
+        const body = { datasetId: dataset.datasetId, objectKey: assignment.record.id, district: assignment.record.group, objectType: assignment.record.kind, latitude: assignment.coordinates[0], longitude: assignment.coordinates[1], label, heading: assignment.heading, note: document.getElementById('assignmentNote').value.trim() };
         const save = document.getElementById('assignmentSave'); save.disabled = true;
         assignment.saving = true;
         document.getElementById('assignmentCancel').disabled = true;
         document.getElementById('assignmentLogout').disabled = true;
         try {
-          const payload = assignment.point ? { latitude: body.latitude, longitude: body.longitude, label: body.label, note: body.note } : body;
+          const payload = assignment.point ? { latitude: body.latitude, longitude: body.longitude, label: body.label, note: body.note, heading: body.heading } : body;
           await request(assignment.point ? '/' + assignment.point.id : '', { method: assignment.point ? 'PATCH' : 'POST', body: JSON.stringify(payload) });
           if (picking !== assignment || api.user()?.email !== account) return;
           assignment.saving = false;
