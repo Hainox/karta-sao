@@ -1,4 +1,4 @@
-import { AVD_OWNER, AVD_OBJECTS, AVD_OUTSIDE_OBJECT, AVD_OUTSIDE_BOUNDARY } from './tpu-responsibility.js';
+import { AVD_OWNER, AVD_OBJECTS } from './tpu-responsibility.js';
 import crypto from 'node:crypto';
 import express from 'express';
 import { DISTRICTS, isPointWithinBoundary } from './validation.js';
@@ -12,10 +12,10 @@ export function validateObjectPhotoPoint(input, boundary) {
   const errors = [];
   if (input?.datasetId !== 'sao_tpu_parking') errors.push('Неизвестный набор объектов.');
   if (typeof input?.objectKey !== 'string' || !input.objectKey.trim() || input.objectKey.length > 180) errors.push('Укажите идентификатор объекта.');
-  if (!['tpu', 'parking'].includes(input?.objectType)) errors.push('Укажите тип объекта.');
+  if (input?.objectType !== 'tpu' || input?.objectKey?.startsWith?.('parking:')) errors.push('В задания входят только ТПУ.');
   if (!DISTRICTS.has(input?.district) && input?.district !== AVD_OWNER) errors.push('Укажите район САО.');
   if (typeof input?.longitude !== 'number' || typeof input?.latitude !== 'number' || !Number.isFinite(input.longitude) || !Number.isFinite(input.latitude) || Math.abs(input.longitude) > 180 || Math.abs(input.latitude) > 90) errors.push('Некорректные координаты.');
-  else if (!isPointWithinBoundary([input.longitude, input.latitude], boundary) && !(input.district === AVD_OWNER && input.objectKey === AVD_OUTSIDE_OBJECT && isPointWithinBoundary([input.longitude, input.latitude], AVD_OUTSIDE_BOUNDARY))) errors.push('Точка должна находиться в границах САО.');
+  else if (!isPointWithinBoundary([input.longitude, input.latitude], boundary)) errors.push('Точка должна находиться в границах САО.');
   if (AVD_OBJECTS.has(input?.objectKey) && input?.district !== AVD_OWNER) errors.push('Объект закреплён за АвД САО.');
   if (input?.district === AVD_OWNER && !AVD_OBJECTS.has(input?.objectKey)) errors.push('Объект не относится к АвД САО.');
   if (typeof input?.label !== 'string' || !input.label.trim() || input.label.length > 160) errors.push('Название точки должно содержать от 1 до 160 символов.');
@@ -127,11 +127,11 @@ export function createObjectPhotoPointRepository(pool, { writeAudit } = {}) {
   };
   return {
     async listObjectPhotoPoints({ datasetId, objectKey, district }) {
-      const { rows } = await pool.query('SELECT p.*, (SELECT count(*)::integer FROM object_photo_point_photos f WHERE f.point_id = p.id AND f.assignment_version = p.assignment_version) AS photo_count FROM object_photo_points p WHERE retired_at IS NULL AND dataset_id = $1 AND ($2::text IS NULL OR object_key = $2) AND ($3::text IS NULL OR district = $3) ORDER BY created_at, id', [datasetId, objectKey || null, district || null]);
+      const { rows } = await pool.query('SELECT p.*, (SELECT count(*)::integer FROM object_photo_point_photos f WHERE f.point_id = p.id AND f.assignment_version = p.assignment_version) AS photo_count FROM object_photo_points p WHERE retired_at IS NULL AND object_type = \'tpu\' AND dataset_id = $1 AND ($2::text IS NULL OR object_key = $2) AND ($3::text IS NULL OR district = $3) ORDER BY created_at, id', [datasetId, objectKey || null, district || null]);
       return rows;
     },
     async getObjectPhotoPoint({ id, district }) {
-      const { rows } = await pool.query('SELECT * FROM object_photo_points WHERE id = $1 AND retired_at IS NULL AND ($2::text IS NULL OR district = $2)', [id, district || null]);
+      const { rows } = await pool.query('SELECT * FROM object_photo_points WHERE id = $1 AND retired_at IS NULL AND object_type = \'tpu\' AND ($2::text IS NULL OR district = $2)', [id, district || null]);
       return rows[0] || null;
     },
     createObjectPhotoPoint({ datasetId, objectKey, objectType, district, longitude, latitude, label, note, actorId, heading = null }) {
@@ -159,7 +159,7 @@ export function createObjectPhotoPointRepository(pool, { writeAudit } = {}) {
     addObjectPhotoPointPhoto({ pointId, district, bytes, mimeType, filename, actorId, expectedVersion }) {
       return write(actorId, 'object_photo_point_photo_uploaded', { pointId }, async (client) => {
         // Lock the assignment so retirement cannot race with a district upload.
-        const point = await client.query('SELECT id, assignment_version, longitude, latitude FROM object_photo_points WHERE id = $1 AND retired_at IS NULL AND ($2::text IS NULL OR district = $2) FOR UPDATE', [pointId, district || null]);
+        const point = await client.query('SELECT id, assignment_version, longitude, latitude FROM object_photo_points WHERE id = $1 AND retired_at IS NULL AND object_type = \'tpu\' AND ($2::text IS NULL OR district = $2) FOR UPDATE', [pointId, district || null]);
         if (!point.rows[0]) return null;
         const assignment = point.rows[0];
         if (expectedVersion !== assignment.assignment_version) throw Object.assign(new Error('Точка изменена префектурой. Обновите карточку и выберите текущий ракурс.'), { status: 409 });

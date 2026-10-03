@@ -17,7 +17,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def build_records(workbook):
     book = openpyxl.load_workbook(workbook, data_only=True, read_only=True)
-    rows = [(kind, sheet, number, row) for kind, sheet in [('tpu', 'ТПУ'), ('parking', 'Парковки')] for number, row in enumerate(book[sheet].values, 1)]
+    rows = [(kind, sheet, number, row) for kind, sheet in [('tpu', 'ТПУ')] for number, row in enumerate(book[sheet].values, 1)]
     geometries = {}
     for path in sorted((ROOT / 'odh-map/layers').glob('sao_queue*_wgs84.geojson')):
         for feature in json.loads(path.read_text(encoding='utf-8'))['features']:
@@ -73,20 +73,20 @@ def build_records(workbook):
 def build(workbook):
     records, districts = build_records(workbook)
     data = {
-        'datasetId': 'sao_tpu_parking', 'title': 'Оцифровка ТПУ и автомобильных парковок САО',
-        'subtitle': '29 ТПУ · 65 автомобильных парковок · места съёмки назначает префектура',
-        'groupLabel': 'Район', 'exportName': 'Yandex_TPU_parking.csv',
+        'datasetId': 'sao_tpu_parking', 'title': 'Оцифровка ТПУ САО',
+        'subtitle': '29 ТПУ · места съёмки назначает префектура',
+        'groupLabel': 'Район', 'exportName': 'Yandex_TPU.csv',
         'mapNote': 'Маркеры показывают объекты. Места съёмки назначает префектура вручную; синие нумерованные точки — задания для районов.',
-        'parkingStatus': 'loaded', 'records': records, 'districts': sorted({d for d, _ in districts} | {r['group'] for r in records}),
+        'parkingStatus': 'excluded', 'records': records, 'districts': sorted({d for d, _ in districts} | {r['group'] for r in records}),
         'coordinateCorrection': CORRECTION_METADATA,
         'exportGroups': [[r['id']] for r in records],
     }
     markup = (ROOT / 'object-maps/stops.html').read_text(encoding='utf-8')
     encoded = json.dumps(data, ensure_ascii=False, separators=(',', ':')).replace('<', '\\u003c')
     markup = re.sub(r'(<script id="map-data" type="application/json">).*?(</script>)', lambda m: m[1] + encoded + m[2], markup, flags=re.S)
-    markup = markup.replace('<title>Карта</title>', '<title>Оцифровка ТПУ и парковок САО</title>')
+    markup = markup.replace('<title>Карта</title>', '<title>Оцифровка ТПУ САО</title>')
     markup = markup.replace('<div class="top-actions">', '<div class="top-actions"><a class="district-link" href="district-links.html">Районы и АвД САО</a><button class="export-btn" id="exportPhotos" type="button">Скачать фото для передачи (ZIP)</button>')
-    markup = markup.replace('<div class="filter-row">', '<label class="control-label" for="kindFilter">Вид объекта</label><select class="control" id="kindFilter"><option value="">ТПУ и парковки</option><option value="tpu">ТПУ</option><option value="parking">Автомобильные парковки</option></select><p class="small-note">Парковки нанесены по отдельному листу «Парковки» исходного Excel. Места съёмки назначаются вручную.</p><div class="filter-row">')
+    markup = markup.replace('<div class="filter-row">', '<p class="small-note">В задания входят только ТПУ. Места съёмки назначает префектура.</p><div class="filter-row">')
     markup = markup.replace('</style>', '[hidden]{display:none!important}.district-link{color:#d5eadc;font-weight:700;text-decoration:none}.top-actions{flex-wrap:wrap;justify-content:flex-end;gap:6px}.topbar{height:auto;min-height:76px;flex-basis:auto;padding-top:10px;padding-bottom:10px}.subtitle{max-width:600px}.map-key{max-width:calc(100% - 24px)}@media(max-width:850px){.topbar{align-items:flex-start;flex-direction:column}.top-actions{justify-content:flex-start}.subtitle{max-width:90vw}.workspace{grid-template-rows:minmax(210px,32vh) minmax(340px,1fr)}}\n</style>')
     markup = markup.replace('const reviewApi = localStorage.getItem("saoReviewApi") || "https://obhod-sao.ru/odh-api";', 'const reviewApi = ""; // Central district connection is a later stage.')
     markup = markup.replace('Array.from(new Set(DATA.records.map(record => record.group).filter(Boolean)))', 'Array.from(new Set(DATA.districts))')
@@ -97,16 +97,13 @@ def build(workbook):
     markup = markup.replace('<span class="review-legend" id="reworkLegend">', '<span hidden class="review-legend" id="reworkLegend">')
     markup = markup.replace(' + " · на доработке: " + reworkCount.toLocaleString("ru-RU")', '')
     markup = markup.replace('mimeType:blob.type || file.type || "image/jpeg",', 'mimeType:blob.type || file.type || ({jpg:"image/jpeg",jpeg:"image/jpeg",png:"image/png",webp:"image/webp",heic:"image/heic",heif:"image/heif"}[file.name.split(".").pop().toLowerCase()] || "application/octet-stream"),')
-    markup = markup.replace('const group = el("groupFilter").value;', 'const group = el("groupFilter").value;\n      const kind = el("kindFilter").value;')
-    markup = markup.replace('if (group && record.group !== group) return false;', 'if (group && record.group !== group) return false;\n        if (kind && record.kind !== kind) return false;')
     markup = markup.replace('empty.textContent = "Ничего не найдено.";', 'empty.textContent = "В выбранном районе пока нет объектов. Проверьте фильтры.";')
     markup = markup.replace('select.appendChild(option);\n      }\n    }', 'select.appendChild(option);\n      }\n      const requested = new URLSearchParams(location.search).get("district");\n      if (requested && !groups.includes(requested)) { const option = document.createElement("option"); option.value = requested; option.textContent = requested; select.appendChild(option); }\n      if (requested) select.value = requested;\n    }', 1)
     markup = markup.replace('let pointLayer = null;', 'let pointLayer = null;\n    let contourLayer = null;')
     markup = markup.replace('if (!pointLayer) return;', 'if (!pointLayer) return;\n      if (contourLayer) { contourLayer.removeAll(); for (const record of filtered) { const raw = record.geometry; const coordinates = raw.coordinates.map(p => raw.type === "Polygon" ? p.map(c => [c[1],c[0]]) : p.map(r => r.map(c => [c[1],c[0]]))); const polygons = raw.type === "Polygon" ? [coordinates] : coordinates; for (const polygon of polygons) { const contour = new ymaps.Polygon(polygon, {}, {fillColor:"#0c7a5a18",strokeColor:"#0c7a5a",strokeWidth:2}); contour.events.add("click", () => openRecord(record)); contourLayer.add(contour); } } }')
     markup = markup.replace('map.geoObjects.add(pointLayer);', 'contourLayer = new ymaps.GeoObjectCollection();\n      map.geoObjects.add(contourLayer);\n      map.geoObjects.add(pointLayer);')
     markup = markup.replace('if (bounds) map.setBounds(bounds, {checkZoomRange:true, zoomMargin:24});', 'const requestedDistrict = el("groupFilter").value;\n      const districtRecords = DATA.records.filter(r => !requestedDistrict || r.group === requestedDistrict);\n      if (districtRecords.length) { const lats = districtRecords.map(r => r.lat), lons = districtRecords.map(r => r.lon); map.setBounds([[Math.min(...lats),Math.min(...lons)],[Math.max(...lats),Math.max(...lons)]], {checkZoomRange:true, zoomMargin:24}); } else if (bounds) map.setBounds(bounds, {checkZoomRange:true, zoomMargin:24});')
-    markup = markup.replace('initEvents();', '''el("kindFilter").addEventListener("change", updateMapAndList);
-    el("exportPhotos").addEventListener("click", async () => {
+    markup = markup.replace('initEvents();', '''    el("exportPhotos").addEventListener("click", async () => {
       const button = el("exportPhotos");
       if (!state.storageReady) { showToast("Локальная база фото недоступна.", true); return; }
       button.disabled = true;
@@ -119,7 +116,7 @@ def build(workbook):
         const url = URL.createObjectURL(blob);
         const link = document.createElement("a");
         link.href = url;
-        link.download = "SAO_TPU_parking_" + (el("groupFilter").value || "all") + "_" + new Date().toISOString().slice(0,10) + ".zip";
+        link.download = "SAO_TPU_" + (el("groupFilter").value || "all") + "_" + new Date().toISOString().slice(0,10) + ".zip";
         link.click();
         setTimeout(() => URL.revokeObjectURL(url), 1000);
         showToast("Архив подготовлен: " + records.length + " объектов, " + photos.length + " фото. Передайте его для приёмки.");
@@ -134,9 +131,8 @@ def build(workbook):
     cards = []
     for district in sorted({d for d, _ in districts} | {r['group'] for r in records}):
         count = sum(r['group'] == district and r['kind'] == 'tpu' for r in records)
-        parking_count = sum(r['group'] == district and r['kind'] == 'parking' for r in records)
-        cards.append(f'<a class="card" href="tpu-parking.html?district={quote(district)}"><strong>{html.escape(district)}</strong><span>ТПУ: {count} · парковки: {parking_count}</span></a>')
-    (ROOT / 'object-maps/district-links.html').write_text('''<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Оцифровка ТПУ и парковок — ссылки районов</title><style>body{margin:0;background:#f5f5ef;color:#183c35;font:16px/1.5 "Segoe UI",Arial,sans-serif}main{max-width:1040px;margin:30px auto;padding:24px}a{color:#0c7a5a}h1{font-size:28px}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:24px}.card{padding:18px;border:1px solid #d9e0da;border-radius:12px;background:white;text-decoration:none}.card strong,.card span{display:block}.card span{color:#687873;font-size:13px;margin-top:8px}@media(max-width:700px){.cards{grid-template-columns:1fr}main{margin:0;padding:18px}}</style></head><body><main><a href="../hub/">← Атлас САО</a><h1>Оцифровка ТПУ и автомобильных парковок</h1><p>Выберите район, откройте точку и добавьте фотографию. Фото сохраняются в вашем браузере. Для передачи фотографий скачайте ZIP на карте и отправьте его для приёмки.</p><p>Это подготовительная база: места съёмки и распределение по районам требуют согласования. Подключение к общей базе будет следующим этапом.</p><a href="tpu-parking.html">Открыть все объекты →</a><div class="cards">''' + '\n'.join(cards) + '</div></main></body></html>', encoding='utf-8')
+        cards.append(f'<a class="card" href="tpu-parking.html?district={quote(district)}"><strong>{html.escape(district)}</strong><span>ТПУ: {count}</span></a>')
+    (ROOT / 'object-maps/district-links.html').write_text('''<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Оцифровка ТПУ — ссылки районов</title><style>body{margin:0;background:#f5f5ef;color:#183c35;font:16px/1.5 "Segoe UI",Arial,sans-serif}main{max-width:1040px;margin:30px auto;padding:24px}a{color:#0c7a5a}h1{font-size:28px}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:24px}.card{padding:18px;border:1px solid #d9e0da;border-radius:12px;background:white;text-decoration:none}.card strong,.card span{display:block}.card span{color:#687873;font-size:13px;margin-top:8px}@media(max-width:700px){.cards{grid-template-columns:1fr}main{margin:0;padding:18px}}</style></head><body><main><a href="../hub/">← Атлас САО</a><h1>Оцифровка ТПУ</h1><p>Выберите район, откройте точку и добавьте фотографию. Фото сохраняются в вашем браузере. Для передачи фотографий скачайте ZIP на карте и отправьте его для приёмки.</p><p>Это подготовительная база: места съёмки и распределение по районам требуют согласования. Подключение к общей базе будет следующим этапом.</p><a href="tpu-parking.html">Открыть все объекты →</a><div class="cards">''' + '\n'.join(cards) + '</div></main></body></html>', encoding='utf-8')
     links_path = ROOT / 'object-maps/district-links.html'
     links = links_path.read_text(encoding='utf-8').replace(
         'Выберите район, откройте точку и добавьте фотографию. Фото сохраняются в вашем браузере. Для передачи фотографий скачайте ZIP на карте и отправьте его для приёмки.',

@@ -29,24 +29,23 @@ def test_all_tpu_have_unique_source_ids_and_points_inside_contours():
         assert 17 < record['coordinateCorrection']['distance_m'] < 18
 
 
-def test_map_loads_excel_parking_and_supports_district_photo_packages():
+def test_map_only_contains_tpu_and_preserves_district_photo_workflow():
     markup = (ROOT / 'object-maps/tpu-parking.html').read_text(encoding='utf-8')
-    assert data()['parkingStatus'] == 'loaded'
-    parking = [r for r in data()['records'] if r['kind'] == 'parking']
-    assert len(parking) == len({r['id'] for r in parking}) == 65
-    assert {r['sourceRow'] for r in parking} == set(range(1, 66))
-    for record in parking:
-        assert record['id'] == 'parking:' + record['sourceNumber']
-        assert shape(record['geometry']).is_valid
-        assert shape(record['geometry']).covers(Point(record['lon'], record['lat']))
-        assert record['group']
-    assert 'id="kindFilter"' in markup
+    assert data()['parkingStatus'] == 'excluded'
+    assert len(data()['records']) == 29
+    assert all(record['kind'] == 'tpu' for record in data()['records'])
+    assert len(data()['exportGroups']) == 29
+    assert all(group[0].startswith('tpu:') for group in data()['exportGroups'])
+    assert 'id="kindFilter"' not in markup
     assert 'id="exportPhotos"' in markup
-    assert 'Парковки нанесены по отдельному листу' in markup
+    assert 'В задания входят только ТПУ' in markup
     assert 'district-links.html' in markup
-    assert '../object-maps/tpu-parking.html' in (ROOT / 'hub/index.html').read_text(encoding='utf-8')
+    hub = (ROOT / 'hub/index.html').read_text(encoding='utf-8')
+    assert '../object-maps/tpu-parking.html' in hub
+    assert 'Оцифровка ТПУ и автомобильных парковок' not in hub
     links = (ROOT / 'object-maps/district-links.html').read_text(encoding='utf-8')
     assert links.count('tpu-parking.html?district=') == 17
+    assert 'парковки:' not in links
     assert 'photo-assignments.js' in markup
     assert 'id="assignmentAdd"' in markup
     assert 'id="assignmentLogin"' in markup
@@ -75,9 +74,9 @@ def test_zip_preserves_photo_bytes_point_binding_and_heic_formats(tmp_path):
 
 def test_avd_receives_own_objects_and_geographic_districts_are_preserved():
     assigned = [r for r in data()['records'] if r['group'] == 'АвД САО']
-    assert len(assigned) == 12
+    assert len(assigned) == 10
     assert sum(r['kind'] == 'tpu' for r in assigned) == 10
-    assert sum(r['kind'] == 'parking' for r in assigned) == 2
+    assert all(r['kind'] == 'tpu' for r in assigned)
     for record in assigned:
         assert record['properties']['Балансодержатель'] == 'АвД САО'
         assert record['properties']['Район'] != 'АвД САО'
