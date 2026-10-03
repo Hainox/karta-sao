@@ -4,7 +4,7 @@ import express from 'express';
 import test from 'node:test';
 import request from 'supertest';
 import { signToken, verifyToken } from '../lib/auth.js';
-import { createObjectPhotoPointRepository, createObjectPhotoPointsRouter } from '../lib/object-photo-points.js';
+import { createObjectPhotoPointRepository, createObjectPhotoPointsRouter, validateObjectPhotoPoint } from '../lib/object-photo-points.js';
 
 const secret = 'object-photo-points-test-secret-longer-than-32';
 const boundary = { type: 'FeatureCollection', features: [{ type: 'Feature', properties: {}, geometry: { type: 'Polygon', coordinates: [[[37,55],[38,55],[38,56],[37,56],[37,55]]] } }] };
@@ -146,4 +146,33 @@ test('direction can change independently without moving the point, and survives 
   await api.patch('/api/object-photo-points/' + point.id).set('Authorization', root).send({ heading: 360 }).expect(422);
   const publicPoint = (await api.get('/api/object-photo-points/public')).body.points[0];
   assert.equal(publicPoint.heading, 270);
+});
+
+
+test('AvD sees and uploads only its balance-holder objects, districts cannot access them', async () => {
+  const { api } = fixture(); const root = auth('prefecture_admin');
+  const avd = auth('district_editor', 'АвД САО');
+  const avdPoint = (await api.post('/api/object-photo-points').set('Authorization', root)
+    .send({ ...assignment, objectKey: 'tpu:800905601', district: 'АвД САО' }).expect(201)).body.point;
+  const districtPoint = (await api.post('/api/object-photo-points').set('Authorization', root).send(assignment).expect(201)).body.point;
+  const own = await api.get('/api/object-photo-points?district=Аэропорт').set('Authorization', avd).expect(200);
+  assert.deepEqual(own.body.points.map(p => p.id), [avdPoint.id]);
+  await api.get('/api/object-photo-points/' + districtPoint.id + '/photos').set('Authorization', avd).expect(404);
+  await api.get('/api/object-photo-points/' + avdPoint.id + '/photos').set('Authorization', auth('district_editor', 'Ховрино')).expect(404);
+  await api.put('/api/object-photo-points/' + avdPoint.id + '/photos').set('Authorization', avd)
+    .set('Content-Type', 'image/jpeg').set('X-Assignment-Version', '1').send(jpeg).expect(201);
+  await api.post('/api/object-photo-points').set('Authorization', root)
+    .send({ ...assignment, district: 'АвД САО' }).expect(422);
+  await api.post('/api/object-photo-points').set('Authorization', root)
+    .send({ ...assignment, objectKey: 'tpu:800905601' }).expect(422);
+});
+
+test('AvD cemetery approach allows photography around its actual contour outside SAO only', () => {
+  const smallBoundary = { type: 'FeatureCollection', features: [{ type: 'Feature', properties: {},
+    geometry: { type: 'Polygon', coordinates: [[[37,55.7],[38,55.7],[38,55.9],[37,55.9],[37,55.7]]] } }] };
+  const outside = { ...assignment, objectKey: 'parking:10002419', objectType: 'parking', district: 'АвД САО',
+    longitude: 37.513736045308974, latitude: 55.92061506536954 };
+  assert.equal(validateObjectPhotoPoint(outside, smallBoundary).valid, true);
+  assert.equal(validateObjectPhotoPoint({ ...outside, longitude: 37.7, latitude: 56.1 }, smallBoundary).valid, false);
+  assert.equal(validateObjectPhotoPoint({ ...outside, district: 'Аэропорт' }, smallBoundary).valid, false);
 });

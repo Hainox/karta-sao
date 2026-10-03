@@ -45,7 +45,7 @@
       }
       function sessionUI() {
         const user = api.user();
-        session.textContent = user ? `${user.email} · ${user.role === 'prefecture_admin' ? 'Префектура' : user.role === 'district_editor' ? 'Район ' + user.district : 'Просмотр'}` : 'Вход по учётной записи оцифровки';
+        session.textContent = user ? `${user.email} · ${user.role === 'prefecture_admin' ? 'Префектура' : user.role === 'district_editor' ? (user.district === 'АвД САО' ? 'Организация ' : 'Район ') + user.district : 'Просмотр'}` : 'Вход по учётной записи оцифровки';
         document.getElementById('assignmentLogin').hidden = Boolean(user);
         document.getElementById('assignmentAccount').hidden = Boolean(user);
         document.getElementById('assignmentLogout').hidden = !user;

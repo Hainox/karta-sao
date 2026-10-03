@@ -46,7 +46,7 @@ def test_map_loads_excel_parking_and_supports_district_photo_packages():
     assert 'district-links.html' in markup
     assert '../object-maps/tpu-parking.html' in (ROOT / 'hub/index.html').read_text(encoding='utf-8')
     links = (ROOT / 'object-maps/district-links.html').read_text(encoding='utf-8')
-    assert links.count('tpu-parking.html?district=') == 16
+    assert links.count('tpu-parking.html?district=') == 17
     assert 'photo-assignments.js' in markup
     assert 'id="assignmentAdd"' in markup
     assert 'id="assignmentLogin"' in markup
@@ -71,3 +71,14 @@ def test_zip_preserves_photo_bytes_point_binding_and_heic_formats(tmp_path):
             assert photo['district'] == 'Ховрино'
             assert photo['file'].endswith('.jpg' if index == 3 else '.heic')
             assert archive.read(photo['file']) == bytes([0, 1, 2, 255])
+
+
+def test_avd_receives_own_objects_and_geographic_districts_are_preserved():
+    assigned = [r for r in data()['records'] if r['group'] == 'АвД САО']
+    assert len(assigned) == 12
+    assert sum(r['kind'] == 'tpu' for r in assigned) == 10
+    assert sum(r['kind'] == 'parking' for r in assigned) == 2
+    for record in assigned:
+        assert record['properties']['Балансодержатель'] == 'АвД САО'
+        assert record['properties']['Район'] != 'АвД САО'
+    assert all(r['group'] != 'АвД САО' for r in data()['records'] if r['properties']['Балансодержатель'] != 'АвД САО')

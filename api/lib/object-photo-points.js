@@ -1,3 +1,4 @@
+import { AVD_OWNER, AVD_OBJECTS, AVD_OUTSIDE_OBJECT, AVD_OUTSIDE_BOUNDARY } from './tpu-responsibility.js';
 import crypto from 'node:crypto';
 import express from 'express';
 import { DISTRICTS, isPointWithinBoundary } from './validation.js';
@@ -12,9 +13,11 @@ export function validateObjectPhotoPoint(input, boundary) {
   if (input?.datasetId !== 'sao_tpu_parking') errors.push('Неизвестный набор объектов.');
   if (typeof input?.objectKey !== 'string' || !input.objectKey.trim() || input.objectKey.length > 180) errors.push('Укажите идентификатор объекта.');
   if (!['tpu', 'parking'].includes(input?.objectType)) errors.push('Укажите тип объекта.');
-  if (!DISTRICTS.has(input?.district)) errors.push('Укажите район САО.');
+  if (!DISTRICTS.has(input?.district) && input?.district !== AVD_OWNER) errors.push('Укажите район САО.');
   if (typeof input?.longitude !== 'number' || typeof input?.latitude !== 'number' || !Number.isFinite(input.longitude) || !Number.isFinite(input.latitude) || Math.abs(input.longitude) > 180 || Math.abs(input.latitude) > 90) errors.push('Некорректные координаты.');
-  else if (!isPointWithinBoundary([input.longitude, input.latitude], boundary)) errors.push('Точка должна находиться в границах САО.');
+  else if (!isPointWithinBoundary([input.longitude, input.latitude], boundary) && !(input.district === AVD_OWNER && input.objectKey === AVD_OUTSIDE_OBJECT && isPointWithinBoundary([input.longitude, input.latitude], AVD_OUTSIDE_BOUNDARY))) errors.push('Точка должна находиться в границах САО.');
+  if (AVD_OBJECTS.has(input?.objectKey) && input?.district !== AVD_OWNER) errors.push('Объект закреплён за АвД САО.');
+  if (input?.district === AVD_OWNER && !AVD_OBJECTS.has(input?.objectKey)) errors.push('Объект не относится к АвД САО.');
   if (typeof input?.label !== 'string' || !input.label.trim() || input.label.length > 160) errors.push('Название точки должно содержать от 1 до 160 символов.');
   if (input?.note !== undefined && (typeof input.note !== 'string' || input.note.length > 2000)) errors.push('Описание должно быть строкой до 2000 символов.');
   if (input?.heading != null && (typeof input.heading !== 'number' || !Number.isFinite(input.heading) || input.heading < 0 || input.heading >= 360)) errors.push('Направление должно быть числом от 0 до 360 градусов.');

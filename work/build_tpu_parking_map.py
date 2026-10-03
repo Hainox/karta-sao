@@ -58,6 +58,12 @@ def build_records(workbook):
             'issues': [] if area > 0 else ['Контур вне границ районов САО — требуется назначить ответственный район'], 'alternate': None,
             'searchKey': ' '.join([name, district, source_id, parts[0]['properties'].get('customer', '')]),
         }
+        if record['properties']['Балансодержатель'].casefold() == 'АвД САО'.casefold():
+            record['group'] = 'АвД САО'
+            record['properties']['Ответственный за фото'] = 'АвД САО'
+            record['properties']['Назначение района'] = 'Географический район сохранён; фотофиксация закреплена за балансодержателем АвД САО'
+            record['searchKey'] += ' АвД САО'
+            record['issues'] = []
         records.append(record)
     if len({r['id'] for r in records}) != len(records):
         raise ValueError('Duplicate object IDs in workbook')
@@ -79,7 +85,7 @@ def build(workbook):
     encoded = json.dumps(data, ensure_ascii=False, separators=(',', ':')).replace('<', '\\u003c')
     markup = re.sub(r'(<script id="map-data" type="application/json">).*?(</script>)', lambda m: m[1] + encoded + m[2], markup, flags=re.S)
     markup = markup.replace('<title>Карта</title>', '<title>Оцифровка ТПУ и парковок САО</title>')
-    markup = markup.replace('<div class="top-actions">', '<div class="top-actions"><a class="district-link" href="district-links.html">Ссылки районов</a><button class="export-btn" id="exportPhotos" type="button">Скачать фото для передачи (ZIP)</button>')
+    markup = markup.replace('<div class="top-actions">', '<div class="top-actions"><a class="district-link" href="district-links.html">Районы и АвД САО</a><button class="export-btn" id="exportPhotos" type="button">Скачать фото для передачи (ZIP)</button>')
     markup = markup.replace('<div class="filter-row">', '<label class="control-label" for="kindFilter">Вид объекта</label><select class="control" id="kindFilter"><option value="">ТПУ и парковки</option><option value="tpu">ТПУ</option><option value="parking">Автомобильные парковки</option></select><p class="small-note">Парковки нанесены по отдельному листу «Парковки» исходного Excel. Места съёмки назначаются вручную.</p><div class="filter-row">')
     markup = markup.replace('</style>', '[hidden]{display:none!important}.district-link{color:#d5eadc;font-weight:700;text-decoration:none}.top-actions{flex-wrap:wrap;justify-content:flex-end;gap:6px}.topbar{height:auto;min-height:76px;flex-basis:auto;padding-top:10px;padding-bottom:10px}.subtitle{max-width:600px}.map-key{max-width:calc(100% - 24px)}@media(max-width:850px){.topbar{align-items:flex-start;flex-direction:column}.top-actions{justify-content:flex-start}.subtitle{max-width:90vw}.workspace{grid-template-rows:minmax(210px,32vh) minmax(340px,1fr)}}\n</style>')
     markup = markup.replace('const reviewApi = localStorage.getItem("saoReviewApi") || "https://obhod-sao.ru/odh-api";', 'const reviewApi = ""; // Central district connection is a later stage.')
@@ -126,7 +132,7 @@ def build(workbook):
     markup = add_photo_assignments(markup)
     (ROOT / 'object-maps/tpu-parking.html').write_text(markup, encoding='utf-8')
     cards = []
-    for district, _ in sorted(districts):
+    for district in sorted({d for d, _ in districts} | {r['group'] for r in records}):
         count = sum(r['group'] == district and r['kind'] == 'tpu' for r in records)
         parking_count = sum(r['group'] == district and r['kind'] == 'parking' for r in records)
         cards.append(f'<a class="card" href="tpu-parking.html?district={quote(district)}"><strong>{html.escape(district)}</strong><span>ТПУ: {count} · парковки: {parking_count}</span></a>')
@@ -134,7 +140,7 @@ def build(workbook):
     links_path = ROOT / 'object-maps/district-links.html'
     links = links_path.read_text(encoding='utf-8').replace(
         'Выберите район, откройте точку и добавьте фотографию. Фото сохраняются в вашем браузере. Для передачи фотографий скачайте ZIP на карте и отправьте его для приёмки.',
-        'Выберите район и войдите под учётной записью оцифровки. Откройте объект, выберите назначенную точку съёмки и отправьте фотографию. Доступ ограничен районом вашей учётной записи.',
+        'Выберите район или АвД САО и войдите под учётной записью оцифровки. Откройте объект, выберите назначенную точку съёмки и отправьте фотографию. Доступ ограничен объектами вашей учётной записи.',
     ).replace(
         'Это подготовительная база: места съёмки и распределение по районам требуют согласования. Подключение к общей базе будет следующим этапом.',
         'Места съёмки назначает префектура вручную. Назначенные точки видны на карте без входа. Для отправки фото войдите в учётную запись фотослужбы.',
