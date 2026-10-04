@@ -22,7 +22,8 @@ function fixture() {
     async retireObjectPhotoPoint({ id }) { const p = points.find((p) => p.id === id && !p.retired_at); if (!p) return null; p.retired_at = new Date().toISOString(); return p; },
     async listObjectPhotoPointPhotos(pointId) { return photos.filter((p) => p.point_id === pointId).map(({ photo_bytes, ...p }) => p); },
     async addObjectPhotoPointPhoto(input) { if (!await this.getObjectPhotoPoint({ id: input.pointId, district: input.district })) return null; const p = { id: crypto.randomUUID(), point_id: input.pointId, photo_bytes: input.bytes, photo_mime_type: input.mimeType, photo_filename: input.filename }; photos.push(p); const { photo_bytes, ...metadata } = p; return metadata; },
-    async getObjectPhotoPointPhoto({ pointId, photoId }) { return photos.find((p) => p.point_id === pointId && p.id === photoId) || null; }
+    async getObjectPhotoPointPhoto({ pointId, photoId }) { return photos.find((p) => p.point_id === pointId && p.id === photoId) || null; },
+    async deleteObjectPhotoPointPhoto({ pointId, photoId }) { const index = photos.findIndex((p) => p.point_id === pointId && p.id === photoId); if (index < 0) return null; return photos.splice(index, 1)[0]; }
   };
   const app = express();
   app.use(express.json());
@@ -73,6 +74,22 @@ test('multiple stable assignments support movement, own-district photos and exac
   assert.equal((await api.get('/api/object-photo-points').set('Authorization', root)).body.points.length, 1);
 });
 
+test('prefecture deletes a single photo and keeps the shooting point and its direction', async () => {
+  const { api, photos } = fixture(); const root = auth('prefecture_admin'); const editor = auth('district_editor', 'Аэропорт');
+  const point = (await api.post('/api/object-photo-points').set('Authorization', root).send(assignment).expect(201)).body.point;
+  const uploaded = (await api.put(`/api/object-photo-points/${point.id}/photos`).set('Authorization', editor).set('Content-Type', 'image/jpeg').set('X-Assignment-Version', '1').set('X-Photo-Filename', 'entrance.jpg').send(jpeg).expect(201)).body.photo;
+  await api.delete(`/api/object-photo-points/${point.id}/photos/${uploaded.id}`).set('Authorization', editor).expect(403);
+  await api.delete(`/api/object-photo-points/${point.id}/photos/00000000-0000-0000-0000-000000000000`).set('Authorization', root).expect(404);
+  await api.delete(`/api/object-photo-points/${point.id}/photos/${uploaded.id}`).set('Authorization', root).expect(204);
+  assert.equal(photos.length, 0, 'кадр удалён из хранилища');
+  const remaining = await api.get('/api/object-photo-points').set('Authorization', root).expect(200);
+  assert.equal(remaining.body.points.length, 1, 'точка съёмки не снята');
+  assert.equal(remaining.body.points[0].id, point.id);
+  assert.equal(remaining.body.points[0].heading, assignment.heading, 'направление (стрелка) сохранено');
+  assert.equal((await api.get(`/api/object-photo-points/${point.id}/photos`).set('Authorization', root)).body.photos.length, 0);
+  await api.delete(`/api/object-photo-points/${point.id}/photos/${uploaded.id}`).set('Authorization', root).expect(404);
+});
+
 test('boundary, payload and image checks reject invalid points and disguised uploads', async () => {
   const { api } = fixture(); const root = auth('prefecture_admin');
   for (const changes of [{ longitude: null }, { longitude: '37.5' }, { latitude: 57 }, { district: 'ЦАО' }, { datasetId: 'stops' }, { label: '' }, { note: {} }, { heading: -1 }, { heading: 360 }, { heading: '90' }]) await api.post('/api/object-photo-points').set('Authorization', root).send({ ...assignment, ...changes }).expect(422);
@@ -101,12 +118,16 @@ test('repository persists point metadata and photo bytes transactionally, scopes
   assert.match(calls.at(-1).sql, /f.assignment_version = p.assignment_version/);
   await repo.getObjectPhotoPointPhoto({ pointId: 'point', photoId: 'photo' });
   assert.match(calls.at(-1).sql, /id = \$1 AND point_id = \$2/);
+  await repo.deleteObjectPhotoPointPhoto({ pointId: 'point', photoId: 'photo', actorId: 'actor' });
+  const deleted = calls.filter((c) => c.sql.startsWith('DELETE FROM object_photo_point_photos')).at(-1);
+  assert.deepEqual(deleted.values, ['photo', 'point']);
+  assert.ok(calls.some((c) => c.sql.startsWith('INSERT INTO audit_events') && c.values[2] === 'object_photo_point_photo_deleted'));
   await repo.getObjectPhotoPoint({ id: 'point', district: 'Сокол' });
   assert.deepEqual(calls.at(-1).values, ['point', 'Сокол']);
   failAudit = true;
   await assert.rejects(repo.updateObjectPhotoPoint({ id: 'point', longitude: 37.6, latitude: 55.5, label: 'label', note: '', actorId: 'actor' }), /audit failure/);
   assert.match(calls.findLast((c) => c.sql.startsWith('UPDATE object_photo_points')).sql, /IS DISTINCT FROM/);
-  assert.equal(calls.at(-1).sql, 'ROLLBACK'); assert.equal(released, 3);
+  assert.equal(calls.at(-1).sql, 'ROLLBACK'); assert.equal(released, 4);
 });
 
 

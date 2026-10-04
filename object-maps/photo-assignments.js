@@ -70,6 +70,7 @@
           const { photos } = await request('/' + point.id + '/photos');
           if (version !== revision || !target.isConnected) return;
           if (!photos.length) { target.textContent = 'Фото пока нет.'; return; }
+          const canDelete = isPrefecture();
           for (const photo of photos) {
             const response = await api.request(endpoint + '/' + point.id + '/photos/' + photo.id);
             const blob = await response.blob();
@@ -81,7 +82,17 @@
             if (photo.assignment_version && photo.assignment_version !== point.assignment_version) {
               const note = document.createElement('small'); note.textContent = 'Фото до изменения точки или направления'; link.append(note);
             }
-            target.append(link);
+            if (!canDelete) { target.append(link); continue; }
+            const card = document.createElement('div'); card.className = 'assignment-photo'; card.append(link);
+            const remove = button('Удалить фото', async () => {
+              if (!confirm('Удалить фото точки «' + point.label + '»? Точка съёмки и направление (стрелка) останутся на месте.')) return;
+              remove.disabled = true;
+              try { await request('/' + point.id + '/photos/' + photo.id, { method: 'DELETE' }); notify('Фото удалено. Точка съёмки и направление сохранены.'); await refresh(); }
+              catch (error) { message(error.message, true); remove.disabled = false; }
+            });
+            remove.className = 'assignment-photo-remove';
+            card.append(remove);
+            target.append(card);
           }
         } catch (error) { if (target.isConnected) target.textContent = 'Не удалось загрузить фотографии: ' + error.message; }
       }

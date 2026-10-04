@@ -9,6 +9,9 @@
 .assignment-card input{display:block;max-width:100%;margin-top:5px}
 .assignment-photos{display:flex;gap:8px;flex-wrap:wrap;font-size:12px;margin-top:8px}
 .assignment-photos img{width:120px;height:90px;object-fit:cover;border-radius:6px}
+.assignment-photo{display:flex;flex-direction:column;gap:5px;align-items:flex-start}
+.assignment-photo-remove{padding:5px 9px;font-size:11px;color:#a12a1d;border-color:#e0b6ae;background:#fdf3f0}
+.assignment-photo-remove:hover{background:#fbe6e1}
 .assignment-picker{position:absolute;z-index:150;top:12px;right:12px;width:min(320px,calc(100% - 48px));padding:15px;background:white;border:2px solid #0c7a5a;border-radius:10px;box-shadow:0 4px 20px #0003}
 .assignment-picker label{display:block;margin:8px 0;font-size:13px}
 .assignment-picker h3{margin:0 0 5px;font-size:16px}

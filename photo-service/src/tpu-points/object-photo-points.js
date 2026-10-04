@@ -104,6 +104,15 @@ export function createObjectPhotoPointsRouter({ repository, authenticate, bounda
       res.type(photo.photo_mime_type).send(photo.photo_bytes);
     } catch (error) { next(error); }
   });
+  // Удаление одного кадра оставляет точку съёмки и её направление (стрелку) на месте:
+  // объект снова становится «без фото», но задание для района не пропадает.
+  router.delete('/:id/photos/:photoId', prefecture, accessPoint, async (req, res, next) => {
+    try {
+      const photo = await repository.deleteObjectPhotoPointPhoto({ pointId: req.params.id, photoId: req.params.photoId, actorId: req.user.sub });
+      if (!photo) return res.status(404).json({ error: 'Фото не найдено.' });
+      res.status(204).end();
+    } catch (error) { next(error); }
+  });
   return router;
 }
 
@@ -170,6 +179,12 @@ export function createObjectPhotoPointRepository(pool, { writeAudit } = {}) {
     async getObjectPhotoPointPhoto({ pointId, photoId }) {
       const { rows } = await pool.query('SELECT photo_bytes, photo_mime_type, photo_filename FROM object_photo_point_photos WHERE id = $1 AND point_id = $2', [photoId, pointId]);
       return rows[0] || null;
+    },
+    deleteObjectPhotoPointPhoto({ pointId, photoId, actorId }) {
+      return write(actorId, 'object_photo_point_photo_deleted', { pointId }, async (client) => {
+        const { rows } = await client.query('DELETE FROM object_photo_point_photos WHERE id = $1 AND point_id = $2 RETURNING id', [photoId, pointId]);
+        return rows[0] || null;
+      });
     }
   };
 }
