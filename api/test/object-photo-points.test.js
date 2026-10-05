@@ -188,22 +188,19 @@ test('AvD sees and uploads only its balance-holder objects, districts cannot acc
     .send({ ...assignment, objectKey: 'tpu:800905601' }).expect(422);
 });
 
-test('parking assignments are excluded even for prefecture and AvD, including spoofed TPU type', async () => {
-  const { api } = fixture(); const root = auth('prefecture_admin');
-  for (const input of [
-    { ...assignment, objectKey: 'parking:123', objectType: 'parking' },
-    { ...assignment, objectKey: 'parking:123', objectType: 'tpu' },
-    { ...assignment, objectKey: 'parking:10002419', objectType: 'parking', district: 'АвД САО' }
-  ]) {
-    assert.equal(validateObjectPhotoPoint(input, boundary).valid, false);
-    await api.post('/api/object-photo-points').set('Authorization', root).send(input).expect(422);
-  }
+test('AvD cemetery approach allows photography around its actual contour outside SAO only', () => {
+  const smallBoundary = { type: 'FeatureCollection', features: [{ type: 'Feature', properties: {},
+    geometry: { type: 'Polygon', coordinates: [[[37,55.7],[38,55.7],[38,55.9],[37,55.9],[37,55.7]]] } }] };
+  const outside = { ...assignment, objectKey: 'parking:10002419', objectType: 'parking', district: 'АвД САО',
+    longitude: 37.513736045308974, latitude: 55.92061506536954 };
+  assert.equal(validateObjectPhotoPoint(outside, smallBoundary).valid, true);
+  assert.equal(validateObjectPhotoPoint({ ...outside, longitude: 37.7, latitude: 56.1 }, smallBoundary).valid, false);
+  assert.equal(validateObjectPhotoPoint({ ...outside, district: 'Аэропорт' }, smallBoundary).valid, false);
 });
 
-test('repository hides parking assignments from listings, lookups and photo access', async () => {
-  const calls = [];
-  const repo = createObjectPhotoPointRepository({ async query(sql) { calls.push(sql); return { rows: [] }; } });
-  await repo.listObjectPhotoPoints({ datasetId: 'sao_tpu_parking' });
-  await repo.getObjectPhotoPoint({ id: 'point', district: 'АвД САО' });
-  assert.ok(calls.every(sql => sql.includes("object_type = 'tpu'")));
+test('parking returns to assignments, but the object type must match its identifier', () => {
+  const parking = { ...assignment, objectKey: 'parking:10002595', objectType: 'parking', district: 'Западное Дегунино' };
+  assert.equal(validateObjectPhotoPoint(parking, boundary).valid, true);
+  assert.equal(validateObjectPhotoPoint({ ...parking, objectType: 'tpu' }, boundary).valid, false);
+  assert.equal(validateObjectPhotoPoint({ ...parking, objectKey: 'tpu:10002595' }, boundary).valid, false);
 });

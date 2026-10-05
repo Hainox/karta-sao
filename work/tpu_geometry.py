@@ -80,3 +80,33 @@ def displacement_report(geometry):
         'after_valid': after.is_valid,
         'geometry_type': after.geom_type,
     }
+
+
+_ALIGNMENT_PATH = __import__('pathlib').Path(__file__).with_name('tpu_yandex_alignment.json')
+
+
+def yandex_offset(object_id):
+    """Residual east/north shift (metres) that fits a contour to the Yandex basemap."""
+    import json
+    data = json.loads(_ALIGNMENT_PATH.read_text(encoding='utf-8'))
+    item = data['objects'].get(str(object_id))
+    if item:
+        return item['east_m'], item['north_m'], item['method']
+    return data['global']['east_m'], data['global']['north_m'], 'global'
+
+
+def shift_geometry(geometry, east_m, north_m):
+    """Translate a WGS84 geometry by metres on the ground, keeping every vertex."""
+    import math
+    lat = shape(geometry).centroid.y
+    _, _, metres_per_lon = _GEOD.inv(37.5, lat, 37.5001, lat)
+    _, _, metres_per_lat = _GEOD.inv(37.5, lat, 37.5, lat + 0.0001)
+    dlon, dlat = east_m / metres_per_lon * 0.0001, north_m / metres_per_lat * 0.0001
+
+    def move(value):
+        if value and isinstance(value[0], (int, float)):
+            return [value[0] + dlon, value[1] + dlat, *value[2:]]
+        return [move(part) for part in value]
+    result = deepcopy(geometry)
+    result['coordinates'] = move(result['coordinates'])
+    return result
