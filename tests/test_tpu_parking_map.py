@@ -29,23 +29,24 @@ def test_all_tpu_have_unique_source_ids_and_points_inside_contours():
         assert 17 < record['coordinateCorrection']['distance_m'] < 18
 
 
-def test_map_only_contains_tpu_and_preserves_district_photo_workflow():
+def test_map_loads_excel_parking_and_supports_district_photo_packages():
     markup = (ROOT / 'object-maps/tpu-parking.html').read_text(encoding='utf-8')
-    assert data()['parkingStatus'] == 'excluded'
-    assert len(data()['records']) == 29
-    assert all(record['kind'] == 'tpu' for record in data()['records'])
-    assert len(data()['exportGroups']) == 29
-    assert all(group[0].startswith('tpu:') for group in data()['exportGroups'])
-    assert 'id="kindFilter"' not in markup
+    assert data()['parkingStatus'] == 'loaded'
+    parking = [r for r in data()['records'] if r['kind'] == 'parking']
+    assert len(parking) == len({r['id'] for r in parking}) == 65
+    assert {r['sourceRow'] for r in parking} == set(range(1, 66))
+    for record in parking:
+        assert record['id'] == 'parking:' + record['sourceNumber']
+        assert shape(record['geometry']).is_valid
+        assert shape(record['geometry']).covers(Point(record['lon'], record['lat']))
+        assert record['group']
+    assert 'id="kindFilter"' in markup
     assert 'id="exportPhotos"' in markup
-    assert 'В задания входят только ТПУ' in markup
+    assert 'Парковки нанесены по отдельному листу' in markup
     assert 'district-links.html' in markup
-    hub = (ROOT / 'hub/index.html').read_text(encoding='utf-8')
-    assert '../object-maps/tpu-parking.html' in hub
-    assert 'Оцифровка ТПУ и автомобильных парковок' not in hub
+    assert '../object-maps/tpu-parking.html' in (ROOT / 'hub/index.html').read_text(encoding='utf-8')
     links = (ROOT / 'object-maps/district-links.html').read_text(encoding='utf-8')
     assert links.count('tpu-parking.html?district=') == 17
-    assert 'парковки:' not in links
     assert 'photo-assignments.js' in markup
     assert 'id="assignmentAdd"' in markup
     assert 'id="assignmentLogin"' in markup
@@ -74,10 +75,25 @@ def test_zip_preserves_photo_bytes_point_binding_and_heic_formats(tmp_path):
 
 def test_avd_receives_own_objects_and_geographic_districts_are_preserved():
     assigned = [r for r in data()['records'] if r['group'] == 'АвД САО']
-    assert len(assigned) == 10
+    assert len(assigned) == 12
     assert sum(r['kind'] == 'tpu' for r in assigned) == 10
-    assert all(r['kind'] == 'tpu' for r in assigned)
+    assert sum(r['kind'] == 'parking' for r in assigned) == 2
     for record in assigned:
         assert record['properties']['Балансодержатель'] == 'АвД САО'
         assert record['properties']['Район'] != 'АвД САО'
     assert all(r['group'] != 'АвД САО' for r in data()['records'] if r['properties']['Балансодержатель'] != 'АвД САО')
+
+
+def test_parking_responsibility_follows_balance_holder_and_contours_fit_yandex():
+    records = data()['records']
+    parking = [r for r in records if r['kind'] == 'parking']
+    assert len(parking) == 65
+    assert 'Требует назначения района' not in data()['districts']
+    for record in records:
+        holder = record['properties']['Балансодержатель']
+        expected = 'АвД САО' if holder == 'АвД САО' else holder.replace('Жилищник ', '')
+        assert record['group'] == expected
+        shift = record['yandexAlignment']
+        assert shift['method'] in {'local', 'global'}
+        assert abs(shift['east_m']) <= 3.1 and abs(shift['north_m']) <= 3.1
+    assert sum(r['group'] == 'АвД САО' and r['kind'] == 'parking' for r in records) == 2

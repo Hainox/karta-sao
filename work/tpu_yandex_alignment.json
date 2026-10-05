@@ -1,0 +1,670 @@
+{
+ "description": "Residual shift of SMM-corrected ODH contours to Yandex basemap (map layer, z18, chamfer edge matching). Applied after tpu_geometry.correct_geometry.",
+ "basemap": "Yandex Maps scheme tiles, EPSG:3395, zoom 18 (~0.34 m/px)",
+ "date": "2026-10-05",
+ "global": {
+  "east_m": 0.39,
+  "north_m": 0.16
+ },
+ "rule": "Local shift when best match is within 3 m and improves edge distance by at least 5%; otherwise global shift.",
+ "objects": {
+  "800905601": {
+   "east_m": 0.26,
+   "north_m": 1.33,
+   "method": "local",
+   "edge_distance_px_before": 3.25,
+   "edge_distance_px_after": 3.05
+  },
+  "12345393": {
+   "east_m": 0.39,
+   "north_m": 0.16,
+   "method": "global",
+   "edge_distance_px_before": 3.05,
+   "edge_distance_px_after": 2.98
+  },
+  "313704656": {
+   "east_m": 0.39,
+   "north_m": 0.16,
+   "method": "global",
+   "edge_distance_px_before": 3.28,
+   "edge_distance_px_after": 3.25
+  },
+  "1331614005": {
+   "east_m": 0.72,
+   "north_m": 1.74,
+   "method": "local",
+   "edge_distance_px_before": 3.87,
+   "edge_distance_px_after": 3.23
+  },
+  "721910820": {
+   "east_m": 0.39,
+   "north_m": 0.16,
+   "method": "global",
+   "edge_distance_px_before": 3.25,
+   "edge_distance_px_after": 3.16
+  },
+  "757159046": {
+   "east_m": 0.39,
+   "north_m": 0.16,
+   "method": "global",
+   "edge_distance_px_before": 4.78,
+   "edge_distance_px_after": 4.79
+  },
+  "10002604": {
+   "east_m": 0.39,
+   "north_m": 0.16,
+   "method": "global",
+   "edge_distance_px_before": 5.47,
+   "edge_distance_px_after": 5.41
+  },
+  "10002300": {
+   "east_m": 2.3,
+   "north_m": 1.02,
+   "method": "local",
+   "edge_distance_px_before": 3.87,
+   "edge_distance_px_after": 3.23
+  },
+  "314892354": {
+   "east_m": 0.39,
+   "north_m": 0.16,
+   "method": "global",
+   "edge_distance_px_before": 3.67,
+   "edge_distance_px_after": 3.65
+  },
+  "10002406": {
+   "east_m": 0.66,
+   "north_m": 0.55,
+   "method": "local",
+   "edge_distance_px_before": 2.76,
+   "edge_distance_px_after": 2.43
+  },
+  "789337606": {
+   "east_m": 0.39,
+   "north_m": 0.16,
+   "method": "global",
+   "edge_distance_px_before": 9.89,
+   "edge_distance_px_after": 10.05
+  },
+  "10002414": {
+   "east_m": 0.95,
+   "north_m": 0.43,
+   "method": "local",
+   "edge_distance_px_before": 2.82,
+   "edge_distance_px_after": 2.48
+  },
+  "754431382": {
+   "east_m": 0.32,
+   "north_m": -0.04,
+   "method": "local",
+   "edge_distance_px_before": 1.6,
+   "edge_distance_px_after": 1.5
+  },
+  "753112476": {
+   "east_m": 0.39,
+   "north_m": 0.16,
+   "method": "global",
+   "edge_distance_px_before": 4.86,
+   "edge_distance_px_after": 4.66
+  },
+  "696603172": {
+   "east_m": 0.39,
+   "north_m": 0.16,
+   "method": "global",
+   "edge_distance_px_before": 3.95,
+   "edge_distance_px_after": 3.85
+  },
+  "1099944147": {
+   "east_m": 0.39,
+   "north_m": 0.16,
+   "method": "global",
+   "edge_distance_px_before": 9.9,
+   "edge_distance_px_after": 10.04
+  },
+  "667006150": {
+   "east_m": 0.39,
+   "north_m": 0.16,
+   "method": "global",
+   "edge_distance_px_before": 4.26,
+   "edge_distance_px_after": 4.32
+  },
+  "1017816137": {
+   "east_m": 2.03,
+   "north_m": 3.01,
+   "method": "local",
+   "edge_distance_px_before": 4.76,
+   "edge_distance_px_after": 3.54
+  },
+  "314902859": {
+   "east_m": 1.0,
+   "north_m": 0.27,
+   "method": "local",
+   "edge_distance_px_before": 2.75,
+   "edge_distance_px_after": 2.47
+  },
+  "314890525": {
+   "east_m": 0.39,
+   "north_m": 0.16,
+   "method": "global",
+   "edge_distance_px_before": 3.2,
+   "edge_distance_px_after": 3.07
+  },
+  "701406660": {
+   "east_m": 0.39,
+   "north_m": 0.16,
+   "method": "global",
+   "edge_distance_px_before": 3.83,
+   "edge_distance_px_after": 3.67
+  },
+  "314903749": {
+   "east_m": 1.07,
+   "north_m": 0.98,
+   "method": "local",
+   "edge_distance_px_before": 2.34,
+   "edge_distance_px_after": 2.06
+  },
+  "10002299": {
+   "east_m": 0.39,
+   "north_m": 0.16,
+   "method": "global",
+   "edge_distance_px_before": 3.12,
+   "edge_distance_px_after": 3.12
+  },
+  "751086786": {
+   "east_m": 0.66,
+   "north_m": 0.22,
+   "method": "local",
+   "edge_distance_px_before": 1.62,
+   "edge_distance_px_after": 1.45
+  },
+  "790307032": {
+   "east_m": 0.72,
+   "north_m": -0.42,
+   "method": "local",
+   "edge_distance_px_before": 4.54,
+   "edge_distance_px_after": 4.18
+  },
+  "789338230": {
+   "east_m": 0.39,
+   "north_m": 0.16,
+   "method": "global",
+   "edge_distance_px_before": 8.91,
+   "edge_distance_px_after": 8.96
+  },
+  "1100220890": {
+   "east_m": 0.39,
+   "north_m": 0.16,
+   "method": "global",
+   "edge_distance_px_before": 2.01,
+   "edge_distance_px_after": 1.97
+  },
+  "666849395": {
+   "east_m": 0.39,
+   "north_m": 0.16,
+   "method": "global",
+   "edge_distance_px_before": 2.55,
+   "edge_distance_px_after": 2.57
+  },
+  "1058620233": {
+   "east_m": 0.55,
+   "north_m": 2.48,
+   "method": "local",
+   "edge_distance_px_before": 2.76,
+   "edge_distance_px_after": 2.26
+  },
+  "1320389092": {
+   "east_m": 0.39,
+   "north_m": 0.16,
+   "method": "global",
+   "edge_distance_px_before": 9.07,
+   "edge_distance_px_after": 9.06
+  },
+  "754377899": {
+   "east_m": 0.39,
+   "north_m": 0.16,
+   "method": "global",
+   "edge_distance_px_before": 3.15,
+   "edge_distance_px_after": 3.04
+  },
+  "10002432": {
+   "east_m": 0.39,
+   "north_m": 0.16,
+   "method": "global",
+   "edge_distance_px_before": 7.73,
+   "edge_distance_px_after": 7.68
+  },
+  "10002481": {
+   "east_m": 0.39,
+   "north_m": 0.16,
+   "method": "global",
+   "edge_distance_px_before": 5.8,
+   "edge_distance_px_after": 5.66
+  },
+  "10002413": {
+   "east_m": 0.39,
+   "north_m": 0.16,
+   "method": "global",
+   "edge_distance_px_before": 1.44,
+   "edge_distance_px_after": 1.57
+  },
+  "1325125081": {
+   "east_m": 0.39,
+   "north_m": 0.16,
+   "method": "global",
+   "edge_distance_px_before": 8.46,
+   "edge_distance_px_after": 8.51
+  },
+  "314762004": {
+   "east_m": 0.86,
+   "north_m": -1.02,
+   "method": "local",
+   "edge_distance_px_before": 2.86,
+   "edge_distance_px_after": 2.5
+  },
+  "12345011": {
+   "east_m": 0.39,
+   "north_m": 0.16,
+   "method": "global",
+   "edge_distance_px_before": 6.44,
+   "edge_distance_px_after": 6.48
+  },
+  "10002444": {
+   "east_m": 0.39,
+   "north_m": 0.16,
+   "method": "global",
+   "edge_distance_px_before": 7.05,
+   "edge_distance_px_after": 7.17
+  },
+  "696723989": {
+   "east_m": -1.84,
+   "north_m": 0.58,
+   "method": "local",
+   "edge_distance_px_before": 3.97,
+   "edge_distance_px_after": 3.33
+  },
+  "1099409751": {
+   "east_m": -0.86,
+   "north_m": -1.63,
+   "method": "local",
+   "edge_distance_px_before": 3.99,
+   "edge_distance_px_after": 3.42
+  },
+  "312816226": {
+   "east_m": 0.39,
+   "north_m": 0.16,
+   "method": "global",
+   "edge_distance_px_before": 4.51,
+   "edge_distance_px_after": 4.55
+  },
+  "1324262183": {
+   "east_m": -0.44,
+   "north_m": 1.2,
+   "method": "local",
+   "edge_distance_px_before": 3.99,
+   "edge_distance_px_after": 3.78
+  },
+  "12344846": {
+   "east_m": -0.76,
+   "north_m": 1.59,
+   "method": "local",
+   "edge_distance_px_before": 2.67,
+   "edge_distance_px_after": 2.29
+  },
+  "10002422": {
+   "east_m": 0.39,
+   "north_m": 0.16,
+   "method": "global",
+   "edge_distance_px_before": 6.52,
+   "edge_distance_px_after": 6.4
+  },
+  "1100186205": {
+   "east_m": 0.67,
+   "north_m": 0.05,
+   "method": "local",
+   "edge_distance_px_before": 2.33,
+   "edge_distance_px_after": 2.05
+  },
+  "937069970": {
+   "east_m": 1.34,
+   "north_m": -0.7,
+   "method": "local",
+   "edge_distance_px_before": 2.95,
+   "edge_distance_px_after": 2.09
+  },
+  "10002434": {
+   "east_m": -1.36,
+   "north_m": -2.14,
+   "method": "local",
+   "edge_distance_px_before": 2.36,
+   "edge_distance_px_after": 2.15
+  },
+  "914079787": {
+   "east_m": 0.39,
+   "north_m": 0.16,
+   "method": "global",
+   "edge_distance_px_before": 5.76,
+   "edge_distance_px_after": 5.74
+  },
+  "1098111404": {
+   "east_m": 0.39,
+   "north_m": 0.16,
+   "method": "global",
+   "edge_distance_px_before": 7.43,
+   "edge_distance_px_after": 7.56
+  },
+  "12344934": {
+   "east_m": 0.39,
+   "north_m": 0.16,
+   "method": "global",
+   "edge_distance_px_before": 5.47,
+   "edge_distance_px_after": 5.52
+  },
+  "915397351": {
+   "east_m": 0.39,
+   "north_m": 0.16,
+   "method": "global",
+   "edge_distance_px_before": 6.98,
+   "edge_distance_px_after": 6.95
+  },
+  "896195952": {
+   "east_m": -0.28,
+   "north_m": 0.37,
+   "method": "local",
+   "edge_distance_px_before": 2.12,
+   "edge_distance_px_after": 2.01
+  },
+  "1324244810": {
+   "east_m": -2.67,
+   "north_m": -3.0,
+   "method": "local",
+   "edge_distance_px_before": 8.37,
+   "edge_distance_px_after": 6.49
+  },
+  "10002419": {
+   "east_m": 0.39,
+   "north_m": 0.16,
+   "method": "global",
+   "edge_distance_px_before": 7.77,
+   "edge_distance_px_after": 7.73
+  },
+  "903820014": {
+   "east_m": 0.39,
+   "north_m": 0.16,
+   "method": "global",
+   "edge_distance_px_before": 5.15,
+   "edge_distance_px_after": 5.23
+  },
+  "1325309435": {
+   "east_m": 0.39,
+   "north_m": 0.16,
+   "method": "global",
+   "edge_distance_px_before": 9.71,
+   "edge_distance_px_after": 9.68
+  },
+  "903721967": {
+   "east_m": 0.39,
+   "north_m": 0.16,
+   "method": "global",
+   "edge_distance_px_before": 4.71,
+   "edge_distance_px_after": 4.71
+  },
+  "1097300315": {
+   "east_m": 0.39,
+   "north_m": 0.16,
+   "method": "global",
+   "edge_distance_px_before": 2.4,
+   "edge_distance_px_after": 2.29
+  },
+  "696650686": {
+   "east_m": 0.39,
+   "north_m": 0.16,
+   "method": "global",
+   "edge_distance_px_before": 3.92,
+   "edge_distance_px_after": 4.27
+  },
+  "10002427": {
+   "east_m": 0.41,
+   "north_m": -0.9,
+   "method": "local",
+   "edge_distance_px_before": 2.59,
+   "edge_distance_px_after": 2.45
+  },
+  "1031019619": {
+   "east_m": -1.08,
+   "north_m": 1.56,
+   "method": "local",
+   "edge_distance_px_before": 4.8,
+   "edge_distance_px_after": 4.39
+  },
+  "1324743203": {
+   "east_m": 0.76,
+   "north_m": -1.52,
+   "method": "local",
+   "edge_distance_px_before": 1.24,
+   "edge_distance_px_after": 0.94
+  },
+  "10005164": {
+   "east_m": 0.39,
+   "north_m": 0.16,
+   "method": "global",
+   "edge_distance_px_before": 3.52,
+   "edge_distance_px_after": 3.52
+  },
+  "1063470058": {
+   "east_m": 0.39,
+   "north_m": 0.16,
+   "method": "global",
+   "edge_distance_px_before": 3.55,
+   "edge_distance_px_after": 3.67
+  },
+  "1030965467": {
+   "east_m": -0.44,
+   "north_m": 0.06,
+   "method": "local",
+   "edge_distance_px_before": 2.39,
+   "edge_distance_px_after": 2.2
+  },
+  "1324732294": {
+   "east_m": 0.39,
+   "north_m": 0.16,
+   "method": "global",
+   "edge_distance_px_before": 4.99,
+   "edge_distance_px_after": 4.83
+  },
+  "896385595": {
+   "east_m": -1.28,
+   "north_m": -0.6,
+   "method": "local",
+   "edge_distance_px_before": 3.54,
+   "edge_distance_px_after": 2.48
+  },
+  "10002470": {
+   "east_m": -1.28,
+   "north_m": -0.59,
+   "method": "local",
+   "edge_distance_px_before": 2.93,
+   "edge_distance_px_after": 1.89
+  },
+  "903722399": {
+   "east_m": 0.39,
+   "north_m": 0.16,
+   "method": "global",
+   "edge_distance_px_before": 4.44,
+   "edge_distance_px_after": 4.29
+  },
+  "886832264": {
+   "east_m": 0.39,
+   "north_m": 0.16,
+   "method": "global",
+   "edge_distance_px_before": 2.98,
+   "edge_distance_px_after": 2.98
+  },
+  "1207225628": {
+   "east_m": 0.39,
+   "north_m": 0.16,
+   "method": "global",
+   "edge_distance_px_before": 4.46,
+   "edge_distance_px_after": 4.22
+  },
+  "1097581701": {
+   "east_m": 0.39,
+   "north_m": 0.16,
+   "method": "global",
+   "edge_distance_px_before": 2.38,
+   "edge_distance_px_after": 2.43
+  },
+  "701391882": {
+   "east_m": 1.37,
+   "north_m": 0.73,
+   "method": "local",
+   "edge_distance_px_before": 2.72,
+   "edge_distance_px_after": 1.35
+  },
+  "689745536": {
+   "east_m": 0.39,
+   "north_m": 0.16,
+   "method": "global",
+   "edge_distance_px_before": 7.95,
+   "edge_distance_px_after": 7.88
+  },
+  "1093232879": {
+   "east_m": 0.19,
+   "north_m": 0.79,
+   "method": "local",
+   "edge_distance_px_before": 2.8,
+   "edge_distance_px_after": 2.52
+  },
+  "696590030": {
+   "east_m": 0.39,
+   "north_m": 0.16,
+   "method": "global",
+   "edge_distance_px_before": 5.17,
+   "edge_distance_px_after": 5.02
+  },
+  "10002450": {
+   "east_m": 0.39,
+   "north_m": 0.16,
+   "method": "global",
+   "edge_distance_px_before": 7.31,
+   "edge_distance_px_after": 7.31
+  },
+  "1324732280": {
+   "east_m": 0.59,
+   "north_m": 0.07,
+   "method": "local",
+   "edge_distance_px_before": 1.62,
+   "edge_distance_px_after": 1.22
+  },
+  "312823924": {
+   "east_m": -0.91,
+   "north_m": -1.55,
+   "method": "local",
+   "edge_distance_px_before": 6.18,
+   "edge_distance_px_after": 5.34
+  },
+  "1095989763": {
+   "east_m": 0.05,
+   "north_m": 1.71,
+   "method": "local",
+   "edge_distance_px_before": 2.33,
+   "edge_distance_px_after": 1.53
+  },
+  "10005155": {
+   "east_m": 0.39,
+   "north_m": 0.16,
+   "method": "global",
+   "edge_distance_px_before": 6.43,
+   "edge_distance_px_after": 6.42
+  },
+  "10002433": {
+   "east_m": 0.39,
+   "north_m": 0.16,
+   "method": "global",
+   "edge_distance_px_before": 8.13,
+   "edge_distance_px_after": 8.09
+  },
+  "1096755430": {
+   "east_m": 0.39,
+   "north_m": 0.16,
+   "method": "global",
+   "edge_distance_px_before": 1.32,
+   "edge_distance_px_after": 1.38
+  },
+  "945154270": {
+   "east_m": 0.39,
+   "north_m": 0.16,
+   "method": "global",
+   "edge_distance_px_before": 4.49,
+   "edge_distance_px_after": 4.35
+  },
+  "1324772152": {
+   "east_m": 0.39,
+   "north_m": 0.16,
+   "method": "global",
+   "edge_distance_px_before": 4.29,
+   "edge_distance_px_after": 4.25
+  },
+  "314949734": {
+   "east_m": -0.76,
+   "north_m": -2.14,
+   "method": "local",
+   "edge_distance_px_before": 2.94,
+   "edge_distance_px_after": 1.82
+  },
+  "708061019": {
+   "east_m": -0.9,
+   "north_m": -2.51,
+   "method": "local",
+   "edge_distance_px_before": 5.42,
+   "edge_distance_px_after": 3.39
+  },
+  "1325097190": {
+   "east_m": 0.39,
+   "north_m": 0.16,
+   "method": "global",
+   "edge_distance_px_before": 4.36,
+   "edge_distance_px_after": 4.53
+  },
+  "1250430885": {
+   "east_m": 0.39,
+   "north_m": 0.16,
+   "method": "global",
+   "edge_distance_px_before": 3.92,
+   "edge_distance_px_after": 3.93
+  },
+  "1095984858": {
+   "east_m": -1.08,
+   "north_m": 2.07,
+   "method": "local",
+   "edge_distance_px_before": 4.61,
+   "edge_distance_px_after": 4.01
+  },
+  "1095528747": {
+   "east_m": 0.39,
+   "north_m": 0.16,
+   "method": "global",
+   "edge_distance_px_before": 5.95,
+   "edge_distance_px_after": 5.69
+  },
+  "1277470679": {
+   "east_m": 0.39,
+   "north_m": 0.16,
+   "method": "global",
+   "edge_distance_px_before": 4.84,
+   "edge_distance_px_after": 4.88
+  },
+  "1325311400": {
+   "east_m": 0.72,
+   "north_m": 2.07,
+   "method": "local",
+   "edge_distance_px_before": 3.46,
+   "edge_distance_px_after": 2.22
+  },
+  "10002595": {
+   "east_m": -0.76,
+   "north_m": -0.95,
+   "method": "local",
+   "edge_distance_px_before": 0.8,
+   "edge_distance_px_after": 0.65
+  }
+ }
+}
