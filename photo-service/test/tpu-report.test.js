@@ -55,8 +55,23 @@ test('книга Excel содержит четыре листа и все 94 о�
   assert.equal(overview.getRow(overview.rowCount).getCell(3).value, 65);
 });
 
-async function request(role) {
-  const repository = { async tpuReportData() { return { points: [point('tpu:800905601', 'АвД САО', 1, '2026-10-06T09:00:00Z')], daily: [] }; } };
+test('сводка по парковкам — отдельная книга только с парковками', async () => {
+  const summary = summarizeTpu({ objects, kind: 'parking', points: [point('tpu:1', 'Аэропорт', 1), point('parking:2', 'АвД САО', 2, '2026-10-06T09:00:00Z')] });
+  assert.deepEqual(summary.objectRows.map((r) => r.id), ['parking:2']);
+  assert.deepEqual(summary.groupRows.map((r) => r.group), ['АвД САО']);
+  assert.equal(summary.pointRows.length, 1, 'точки ТПУ в сводку по парковкам не попадают');
+  const book = new ExcelJS.Workbook();
+  await book.xlsx.load(await buildTpuReport(summarizeTpu({ kind: 'parking', points: [] })));
+  const overview = book.getWorksheet('Сводка');
+  assert.match(overview.getRow(1).getCell(1).value, /парковок/);
+  assert.equal(overview.getRow(3).getCell(2).value, 'Объектов');
+  assert.equal(overview.getRow(overview.rowCount).getCell(2).value, 65);
+  assert.equal(book.getWorksheet('Объекты').rowCount, 66);
+});
+
+async function request(role, query = '') {
+  const calls = [];
+  const repository = { async tpuReportData(args) { calls.push(args); return { points: [point('tpu:800905601', 'АвД САО', 1, '2026-10-06T09:00:00Z')], daily: [] }; } };
   const app = express();
   app.use('/object-photo-points', createObjectPhotoPointsRouter({
     repository,
@@ -66,8 +81,8 @@ async function request(role) {
   const server = app.listen(0);
   await new Promise((resolve) => server.once('listening', resolve));
   try {
-    const response = await fetch(`http://127.0.0.1:${server.address().port}/object-photo-points/report.xlsx`);
-    return { status: response.status, type: response.headers.get('content-type'), body: Buffer.from(await response.arrayBuffer()) };
+    const response = await fetch(`http://127.0.0.1:${server.address().port}/object-photo-points/report.xlsx${query}`);
+    return { status: response.status, type: response.headers.get('content-type'), name: response.headers.get('content-disposition'), calls, body: Buffer.from(await response.arrayBuffer()) };
   } finally { await new Promise((resolve) => server.close(resolve)); }
 }
 
@@ -79,4 +94,10 @@ test('сводку по ТПУ скачивает только префекту�
   const book = new ExcelJS.Workbook();
   await book.xlsx.load(ok.body);
   assert.equal(book.getWorksheet('Точки').rowCount, 2);
+  assert.equal(ok.calls[0].kind, 'tpu', 'без параметра выгружается сводка по ТПУ');
+  const parking = await request('prefecture_admin', '?kind=parking');
+  assert.equal(parking.status, 200);
+  assert.equal(parking.calls[0].kind, 'parking');
+  assert.match(parking.name, /Svodka_Parkovki_SAO_/);
+  assert.equal((await request('prefecture_admin', '?kind=stops')).status, 400);
 });

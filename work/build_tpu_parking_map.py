@@ -199,7 +199,7 @@ def write_links(records, districts):
 
 
 def add_photo_assignments(markup):
-    markup = markup.replace('</head>', '<link rel="stylesheet" href="photo-assignments.css"></head>')
+    markup = markup.replace('</head>', '<link rel="stylesheet" href="photo-assignments.css?v=20261006b"></head>')
     markup = markup.replace('<div class="list-head">', '''<section class="assignment-login" aria-label="Учётная запись">
       <div class="assignment-session" id="assignmentSession"></div>
       <details id="assignmentAccount"><summary>Войти для назначения точек и отправки фото</summary><form id="assignmentLogin"><label for="assignmentEmail">Логин оцифровки</label><input id="assignmentEmail" autocomplete="username" required>
@@ -218,7 +218,7 @@ def add_photo_assignments(markup):
     markup = markup.replace('<div class="gallery" id="gallery">', '<div hidden class="gallery" id="gallery">')
     markup = markup.replace('<div class="footer-note">Яндекс Карты · фото и карточки объектов хранятся в этом браузере.</div>', '<div class="footer-note">Фото назначенных точек отправляются в общую базу после входа.</div>')
     markup = markup.replace('Скачать фото для передачи (ZIP)', 'Скачать локальный архив (ZIP)')
-    markup = markup.replace('  <script src="photo-package.js">', '  <script src="../odh-map/api-config.js"></script><script>if (["127.0.0.1", "localhost"].includes(location.hostname)) ODHApi.setBase("http://127.0.0.1:8789");</script><script src="tpu-photo-api.js"></script><script src="photo-assignments.js"></script>\n  <script src="photo-package.js">')
+    markup = markup.replace('  <script src="photo-package.js">', '  <script src="../odh-map/api-config.js"></script><script>if (["127.0.0.1", "localhost"].includes(location.hostname)) ODHApi.setBase("http://127.0.0.1:8789");</script><script src="tpu-photo-api.js"></script><script src="photo-assignments.js?v=20261006b"></script>\n  <script src="photo-package.js">')
     markup = markup.replace('let contourLayer = null;', 'let contourLayer = null;\n    let assignments = null;')
     markup = markup.replace('if (group && record.group !== group) return false;', 'if (group && record.group !== group) return false;\n        const account = (window.TpuPhotoApi || ODHApi).user(); if (account?.role === "district_editor" && account.district !== record.group) return false;')
     markup = markup.replace('contour.events.add("click", () => openRecord(record));', 'contour.events.add("click", event => { if (!assignments?.pick(event.get("coords"))) openRecord(record); });')
