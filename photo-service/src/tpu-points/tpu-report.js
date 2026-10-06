@@ -1,9 +1,14 @@
-// Сводка по оцифровке ТПУ и парковок для префектуры (Excel по кнопке на карте ТПУ).
-// Отдельно от отчётов ПП/ООТ/подъездов: берёт только точки съёмки ТПУ и их фото.
+// Сводки по оцифровке ТПУ и по парковкам для префектуры (Excel по кнопкам на карте ТПУ).
+// Каждая сводка — отдельный файл только по своему виду объектов; отчёты ПП/ООТ/подъездов не затрагиваются.
 import { readFileSync } from 'node:fs';
 
 export const TPU_OBJECTS = JSON.parse(readFileSync(new URL('./tpu-objects.json', import.meta.url), 'utf8'));
 const KIND = { tpu: 'ТПУ', parking: 'Парковка' };
+/** Виды сводок: что выгружается и как называется. */
+export const REPORT_KINDS = {
+  tpu: { title: 'ТПУ', file: 'Svodka_TPU_SAO' },
+  parking: { title: 'автомобильных парковок', file: 'Svodka_Parkovki_SAO' },
+};
 const DAY = 24 * 60 * 60 * 1000;
 const MOSCOW = 3 * 60 * 60 * 1000;
 
@@ -21,7 +26,8 @@ export function objectStatus(points) {
 }
 
 /** Чистый расчёт чисел сводки: Excel только раскладывает их по листам. */
-export function summarizeTpu({ objects = TPU_OBJECTS, points, daily = [], generatedAt = new Date(), days = 14 }) {
+export function summarizeTpu({ objects: all = TPU_OBJECTS, kind = null, points, daily = [], generatedAt = new Date(), days = 14 }) {
+  const objects = kind ? all.filter((o) => o.kind === kind) : all;
   const byObject = new Map(objects.map((o) => [o.id, []]));
   for (const point of points) if (byObject.has(point.object_key)) byObject.get(point.object_key).push(point);
   const objectRows = objects.map((o) => {
@@ -54,7 +60,7 @@ export function summarizeTpu({ objects = TPU_OBJECTS, points, daily = [], genera
     const row = counts.get(date);
     return { date, photos: Number(row?.photos || 0), points: Number(row?.points || 0) };
   });
-  return { generatedAt, objectRows, groupRows, total, pointRows, dynamics };
+  return { kind, generatedAt, objectRows, groupRows, total, pointRows, dynamics };
 }
 
 const HEADER = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FF123A32' } };
@@ -80,16 +86,21 @@ export async function buildTpuReport(summary, { mapUrl = 'https://hainox.github.
   book.created = summary.generatedAt;
 
   const overview = book.addWorksheet('Сводка');
-  headerRow(overview, ['Район / организация', 'ТПУ', 'Парковки', 'Объектов без точек', 'Точек съёмки', 'Отснято точек', '% отснято', 'Объектов готово', 'Последнее фото'], [26, 8, 10, 12, 11, 11, 10, 11, 18]);
-  overview.spliceRows(1, 0, [`Сводка оцифровки ТПУ и парковок САО на ${dateText(summary.generatedAt)}`], []);
+  // Сводка одного вида: один столбец «Объектов»; общая — отдельные столбцы ТПУ и парковок.
+  const counts = summary.kind ? [['Объектов', 10, (r) => r[summary.kind]]] : [['ТПУ', 8, (r) => r.tpu], ['Парковки', 10, (r) => r.parking]];
+  headerRow(overview, ['Район / организация', ...counts.map((c) => c[0]), 'Объектов без точек', 'Точек съёмки', 'Отснято точек', '% отснято', 'Объектов готово', 'Последнее фото'], [26, ...counts.map((c) => c[1]), 12, 11, 11, 10, 11, 18]);
+  const title = summary.kind ? REPORT_KINDS[summary.kind].title : 'ТПУ и парковок';
+  overview.spliceRows(1, 0, [`Сводка оцифровки ${title} САО на ${dateText(summary.generatedAt)}`], []);
   overview.getRow(1).font = { bold: true, size: 14 };
   overview.views = [{ state: 'frozen', ySplit: 3 }];
+  const percentColumn = counts.length + 5;
   for (const r of [...summary.groupRows, summary.total]) {
-    const row = overview.addRow([r.group, r.tpu, r.parking, r.withoutPoints, r.points, r.shot, percent(r.shot, r.points), r.done, dateText(r.lastPhotoAt)]);
-    row.getCell(7).numFmt = '0%';
+    const row = overview.addRow([r.group, ...counts.map((c) => c[2](r)), r.withoutPoints, r.points, r.shot, percent(r.shot, r.points), r.done, dateText(r.lastPhotoAt)]);
+    row.getCell(percentColumn).numFmt = '0%';
     if (r.group === 'Итого') row.font = { bold: true };
   }
-  overview.addConditionalFormatting({ ref: `G4:G${overview.rowCount}`, rules: [{ type: 'dataBar', cfvo: [{ type: 'num', value: 0 }, { type: 'num', value: 1 }], color: { argb: 'FF0C7A5A' } }] });
+  const letter = String.fromCharCode(64 + percentColumn);
+  overview.addConditionalFormatting({ ref: `${letter}4:${letter}${overview.rowCount}`, rules: [{ type: 'dataBar', cfvo: [{ type: 'num', value: 0 }, { type: 'num', value: 1 }], color: { argb: 'FF0C7A5A' } }] });
 
   const objects = book.addWorksheet('Объекты');
   headerRow(objects, ['Тип', 'Название', 'ID', 'Ответственный', 'Район по контуру', 'Балансодержатель', 'Точек', 'Отснято', 'Статус', 'Последнее фото', 'На карте'], [10, 48, 13, 22, 20, 26, 8, 9, 12, 18, 12]);

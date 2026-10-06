@@ -44,12 +44,15 @@ export function createObjectPhotoPointsRouter({ repository, authenticate, bounda
   router.param('photoId', (req, res, next, id) => UUID.test(id) ? next() : res.status(400).json({ error: 'Некорректный идентификатор фото.' }));
   router.get('/report.xlsx', (req, res, next) => req.user.role === 'prefecture_admin' ? next() : res.status(403).json({ error: 'Сводка доступна только префектуре.' }), async (req, res, next) => {
     try {
-      const [{ summarizeTpu, buildTpuReport }, data] = await Promise.all([import('./tpu-report.js'), repository.tpuReportData({ datasetId: 'sao_tpu_parking' })]);
+      // Сводки по ТПУ и по парковкам выгружаются отдельными файлами: ?kind=tpu (по умолчанию) или ?kind=parking.
+      const kind = req.query.kind || 'tpu';
+      if (!['tpu', 'parking'].includes(kind)) return res.status(400).json({ error: 'Неизвестный вид сводки.' });
+      const [{ summarizeTpu, buildTpuReport, REPORT_KINDS }, data] = await Promise.all([import('./tpu-report.js'), repository.tpuReportData({ datasetId: 'sao_tpu_parking', kind })]);
       const generatedAt = new Date();
-      const book = await buildTpuReport(summarizeTpu({ ...data, generatedAt }));
+      const book = await buildTpuReport(summarizeTpu({ ...data, kind, generatedAt }));
       const day = generatedAt.toISOString().slice(0, 10);
       res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-      res.setHeader('Content-Disposition', `attachment; filename="sao-tpu-${day}.xlsx"`);
+      res.setHeader('Content-Disposition', `attachment; filename="${REPORT_KINDS[kind].file}_${day}.xlsx"`);
       res.setHeader('Cache-Control', 'no-store');
       res.send(book);
     } catch (error) { next(error); }
@@ -152,9 +155,9 @@ export function createObjectPhotoPointRepository(pool, { writeAudit } = {}) {
       const { rows } = await pool.query('SELECT p.*, (SELECT count(*)::integer FROM object_photo_point_photos f WHERE f.point_id = p.id AND f.assignment_version = p.assignment_version) AS photo_count FROM object_photo_points p WHERE retired_at IS NULL AND dataset_id = $1 AND ($2::text IS NULL OR object_key = $2) AND ($3::text IS NULL OR district = $3) ORDER BY created_at, id', [datasetId, objectKey || null, district || null]);
       return rows;
     },
-    async tpuReportData({ datasetId }) {
-      const points = await pool.query('SELECT p.id, p.object_key, p.object_type, p.district, p.label, p.note, p.longitude, p.latitude, p.heading, p.created_at, (SELECT count(*)::integer FROM object_photo_point_photos f WHERE f.point_id = p.id AND f.assignment_version = p.assignment_version) AS photo_count, (SELECT max(f.uploaded_at) FROM object_photo_point_photos f WHERE f.point_id = p.id AND f.assignment_version = p.assignment_version) AS last_photo_at FROM object_photo_points p WHERE p.retired_at IS NULL AND p.dataset_id = $1 ORDER BY p.created_at, p.id', [datasetId]);
-      const daily = await pool.query("SELECT to_char(f.uploaded_at AT TIME ZONE 'Europe/Moscow', 'YYYY-MM-DD') AS day, count(*)::integer AS photos, count(DISTINCT f.point_id)::integer AS points FROM object_photo_point_photos f JOIN object_photo_points p ON p.id = f.point_id WHERE p.dataset_id = $1 AND p.retired_at IS NULL AND f.uploaded_at > now() - interval '30 days' GROUP BY 1 ORDER BY 1", [datasetId]);
+    async tpuReportData({ datasetId, kind = null }) {
+      const points = await pool.query('SELECT p.id, p.object_key, p.object_type, p.district, p.label, p.note, p.longitude, p.latitude, p.heading, p.created_at, (SELECT count(*)::integer FROM object_photo_point_photos f WHERE f.point_id = p.id AND f.assignment_version = p.assignment_version) AS photo_count, (SELECT max(f.uploaded_at) FROM object_photo_point_photos f WHERE f.point_id = p.id AND f.assignment_version = p.assignment_version) AS last_photo_at FROM object_photo_points p WHERE p.retired_at IS NULL AND p.dataset_id = $1 AND ($2::text IS NULL OR p.object_type = $2) ORDER BY p.created_at, p.id', [datasetId, kind]);
+      const daily = await pool.query("SELECT to_char(f.uploaded_at AT TIME ZONE 'Europe/Moscow', 'YYYY-MM-DD') AS day, count(*)::integer AS photos, count(DISTINCT f.point_id)::integer AS points FROM object_photo_point_photos f JOIN object_photo_points p ON p.id = f.point_id WHERE p.dataset_id = $1 AND p.retired_at IS NULL AND ($2::text IS NULL OR p.object_type = $2) AND f.uploaded_at > now() - interval '30 days' GROUP BY 1 ORDER BY 1", [datasetId, kind]);
       return { points: points.rows, daily: daily.rows };
     },
     async getObjectPhotoPoint({ id, district }) {

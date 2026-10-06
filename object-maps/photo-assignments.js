@@ -21,29 +21,39 @@
       const message = (text, error = false) => { status.textContent = text; if (error) notify(text, true); };
       const clearUrls = () => { urls.forEach(URL.revokeObjectURL); urls = []; };
       const endpoint = '/api/object-photo-points';
-      // Сводка по ТПУ в Excel — только для префектуры, отдельно от отчётов ПП/ООТ/подъездов.
-      const reportButton = document.createElement('button');
-      reportButton.type = 'button';
-      reportButton.className = 'secondary-btn';
-      reportButton.id = 'assignmentReport';
-      reportButton.textContent = 'Excel: сводка по ТПУ';
-      reportButton.hidden = true;
-      document.getElementById('assignmentLogout').after(reportButton);
-      reportButton.addEventListener('click', async () => {
-        reportButton.disabled = true;
-        reportButton.textContent = 'Готовим сводку…';
-        try {
-          const response = await api.request(endpoint + '/report.xlsx');
-          const url = URL.createObjectURL(await response.blob());
-          const link = document.createElement('a');
-          link.href = url;
-          link.download = 'Svodka_TPU_SAO_' + new Date().toISOString().slice(0, 10) + '.xlsx';
-          document.body.append(link); link.click(); link.remove();
-          setTimeout(() => URL.revokeObjectURL(url), 1500);
-          notify('Сводка по ТПУ скачана.');
-        } catch (error) { notify('Не удалось получить сводку: ' + error.message, true); }
-        finally { reportButton.disabled = false; reportButton.textContent = 'Excel: сводка по ТПУ'; }
-      });
+      // Сводки в Excel — только для префектуры: по ТПУ и по парковкам отдельными файлами,
+      // отдельно от отчётов ПП/ООТ/подъездов.
+      const reportButtons = [];
+      let reportAnchor = document.getElementById('assignmentLogout');
+      for (const report of [
+        { kind: 'tpu', id: 'assignmentReport', label: 'Excel: сводка по ТПУ', file: 'Svodka_TPU_SAO_', done: 'Сводка по ТПУ скачана.' },
+        { kind: 'parking', id: 'assignmentParkingReport', label: 'Excel: сводка по парковкам', file: 'Svodka_Parkovki_SAO_', done: 'Сводка по парковкам скачана.' },
+      ]) {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'secondary-btn assignment-report';
+        button.id = report.id;
+        button.textContent = report.label;
+        button.hidden = true;
+        reportAnchor.after(button);
+        reportAnchor = button;
+        reportButtons.push(button);
+        button.addEventListener('click', async () => {
+          button.disabled = true;
+          button.textContent = 'Готовим сводку…';
+          try {
+            const response = await api.request(endpoint + '/report.xlsx?kind=' + report.kind);
+            const url = URL.createObjectURL(await response.blob());
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = report.file + new Date().toISOString().slice(0, 10) + '.xlsx';
+            document.body.append(link); link.click(); link.remove();
+            setTimeout(() => URL.revokeObjectURL(url), 1500);
+            notify(report.done);
+          } catch (error) { notify('Не удалось получить сводку: ' + error.message, true); }
+          finally { button.disabled = false; button.textContent = report.label; }
+        });
+      }
       async function request(path = '', options) {
         const response = await api.request(endpoint + path, options);
         return response.status === 204 ? null : response.json();
@@ -73,7 +83,7 @@
         document.getElementById('assignmentAccount').hidden = Boolean(user);
         document.getElementById('assignmentLogout').hidden = !user;
         document.getElementById('assignmentAdd').hidden = !isPrefecture();
-        reportButton.hidden = !isPrefecture();
+        for (const button of reportButtons) button.hidden = !isPrefecture();
         applyScope(user);
       }
       async function refresh() {

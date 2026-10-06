@@ -22,8 +22,8 @@
 
 .assignment-marker{position:relative;width:0;height:0}.assignment-direction{position:absolute;left:-80px;top:-80px;overflow:visible;transform-origin:80px 80px;filter:drop-shadow(0 0 2px #fff) drop-shadow(0 2px 3px #0008);pointer-events:none}#assignmentDirection{font-weight:700;color:#143f86}
 
-#assignmentReport{display:block;margin-top:8px}
-#assignmentReport[hidden]{display:none}
+.assignment-report{display:block;margin-top:8px}
+.assignment-report[hidden]{display:none}
 
 /* Телефон: страница прокручивается целиком, вход над списком, карта крупнее. */
 @media(max-width:850px){
