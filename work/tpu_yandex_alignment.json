@@ -338,11 +338,10 @@
    "edge_distance_px_after": 2.15
   },
   "914079787": {
-   "east_m": 0.39,
-   "north_m": 0.16,
-   "method": "global",
-   "edge_distance_px_before": 5.76,
-   "edge_distance_px_after": 5.74
+   "east_m": 11.95,
+   "north_m": 13.4,
+   "method": "manual",
+   "checked_on": "Яндекс схема, широкий поиск, проверено глазами"
   },
   "1098111404": {
    "east_m": 0.39,
@@ -373,18 +372,16 @@
    "edge_distance_px_after": 2.01
   },
   "1324244810": {
-   "east_m": -2.67,
-   "north_m": -3.0,
-   "method": "local",
-   "edge_distance_px_before": 8.37,
-   "edge_distance_px_after": 6.49
+   "east_m": 11.77,
+   "north_m": -9.38,
+   "method": "manual",
+   "checked_on": "Яндекс схема, широкий поиск, проверено глазами"
   },
   "10002419": {
-   "east_m": 0.39,
-   "north_m": 0.16,
-   "method": "global",
-   "edge_distance_px_before": 7.77,
-   "edge_distance_px_after": 7.73
+   "east_m": 15.28,
+   "north_m": 14.05,
+   "method": "manual",
+   "checked_on": "Яндекс схема, широкий поиск, проверено глазами"
   },
   "903820014": {
    "east_m": 0.39,
@@ -394,11 +391,10 @@
    "edge_distance_px_after": 5.23
   },
   "1325309435": {
-   "east_m": 0.39,
-   "north_m": 0.16,
-   "method": "global",
-   "edge_distance_px_before": 9.71,
-   "edge_distance_px_after": 9.68
+   "east_m": -6.15,
+   "north_m": 11.57,
+   "method": "manual",
+   "checked_on": "Яндекс схема, широкий поиск, проверено глазами"
   },
   "903721967": {
    "east_m": 0.39,
@@ -464,11 +460,10 @@
    "edge_distance_px_after": 2.2
   },
   "1324732294": {
-   "east_m": 0.39,
-   "north_m": 0.16,
-   "method": "global",
-   "edge_distance_px_before": 4.99,
-   "edge_distance_px_after": 4.83
+   "east_m": -4.8,
+   "north_m": 7.19,
+   "method": "manual",
+   "checked_on": "Яндекс спутник, широкий поиск, проверено глазами"
   },
   "896385595": {
    "east_m": -1.28,
@@ -653,11 +648,10 @@
    "edge_distance_px_after": 4.88
   },
   "1325311400": {
-   "east_m": 0.72,
-   "north_m": 2.07,
-   "method": "local",
-   "edge_distance_px_before": 3.46,
-   "edge_distance_px_after": 2.22
+   "east_m": -0.79,
+   "north_m": -0.28,
+   "method": "manual",
+   "checked_on": "Яндекс спутник, широкий поиск, проверено глазами"
   },
   "10002595": {
    "east_m": -0.76,

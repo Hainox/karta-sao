@@ -94,6 +94,10 @@ def test_parking_responsibility_follows_balance_holder_and_contours_fit_yandex()
         expected = 'АвД САО' if holder == 'АвД САО' else holder.replace('Жилищник ', '')
         assert record['group'] == expected
         shift = record['yandexAlignment']
-        assert shift['method'] in {'local', 'global'}
-        assert abs(shift['east_m']) <= 3.1 and abs(shift['north_m']) <= 3.1
+        assert shift['method'] in {'local', 'global', 'manual'}
+        # Автоподгонка ограничена 3 м; большие сдвиги допустимы только после ручной проверки по подложке.
+        limit = 20 if shift['method'] == 'manual' else 3.1
+        assert abs(shift['east_m']) <= limit and abs(shift['north_m']) <= limit
+    manual = {r['id'] for r in records if r['yandexAlignment']['method'] == 'manual'}
+    assert {'parking:1325309435', 'parking:10002419', 'parking:1324244810', 'parking:914079787', 'parking:1324732294', 'parking:1325311400'} <= manual
     assert sum(r['group'] == 'АвД САО' and r['kind'] == 'parking' for r in records) == 2
