@@ -200,6 +200,7 @@
         document.getElementById('assignmentNote').value = point?.note || '';
         document.getElementById('assignmentObject').textContent = selected.label;
         closeRecord(); picker.hidden = false;
+        if (matchMedia('(max-width: 850px)').matches) document.getElementById('map')?.scrollIntoView({ block: 'start' });
         getMap()?.setCenter(point ? picking.coordinates : [selected.lat, selected.lon], 18);
         renderPicker();
       }
