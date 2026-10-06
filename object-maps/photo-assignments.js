@@ -21,6 +21,29 @@
       const message = (text, error = false) => { status.textContent = text; if (error) notify(text, true); };
       const clearUrls = () => { urls.forEach(URL.revokeObjectURL); urls = []; };
       const endpoint = '/api/object-photo-points';
+      // Сводка по ТПУ в Excel — только для префектуры, отдельно от отчётов ПП/ООТ/подъездов.
+      const reportButton = document.createElement('button');
+      reportButton.type = 'button';
+      reportButton.className = 'secondary-btn';
+      reportButton.id = 'assignmentReport';
+      reportButton.textContent = 'Excel: сводка по ТПУ';
+      reportButton.hidden = true;
+      document.getElementById('assignmentLogout').after(reportButton);
+      reportButton.addEventListener('click', async () => {
+        reportButton.disabled = true;
+        reportButton.textContent = 'Готовим сводку…';
+        try {
+          const response = await api.request(endpoint + '/report.xlsx');
+          const url = URL.createObjectURL(await response.blob());
+          const link = document.createElement('a');
+          link.href = url;
+          link.download = 'Svodka_TPU_SAO_' + new Date().toISOString().slice(0, 10) + '.xlsx';
+          document.body.append(link); link.click(); link.remove();
+          setTimeout(() => URL.revokeObjectURL(url), 1500);
+          notify('Сводка по ТПУ скачана.');
+        } catch (error) { notify('Не удалось получить сводку: ' + error.message, true); }
+        finally { reportButton.disabled = false; reportButton.textContent = 'Excel: сводка по ТПУ'; }
+      });
       async function request(path = '', options) {
         const response = await api.request(endpoint + path, options);
         return response.status === 204 ? null : response.json();
@@ -50,6 +73,7 @@
         document.getElementById('assignmentAccount').hidden = Boolean(user);
         document.getElementById('assignmentLogout').hidden = !user;
         document.getElementById('assignmentAdd').hidden = !isPrefecture();
+        reportButton.hidden = !isPrefecture();
         applyScope(user);
       }
       async function refresh() {

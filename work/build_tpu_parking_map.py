@@ -113,6 +113,7 @@ def build(workbook):
     else:
         build_page(encoded)
     write_links(records, districts)
+    write_catalog(records)
 
 
 def build_page(encoded):
@@ -165,6 +166,17 @@ def build_page(encoded):
     markup = markup.replace('  <script>\n  (() =>', '  <script src="photo-package.js"></script>\n  <script>\n  (() =>')
     markup = add_photo_assignments(markup)
     (ROOT / 'object-maps/tpu-parking.html').write_text(markup, encoding='utf-8')
+
+
+
+def write_catalog(records):
+    """Object list for the prefecture TPU report on the photo service."""
+    catalog = [{'id': r['id'], 'kind': r['kind'], 'label': r['label'], 'sourceNumber': r['sourceNumber'],
+                'group': r['group'], 'district': r['properties']['Район'],
+                'holder': r['properties']['Балансодержатель']} for r in records]
+    text = json.dumps(catalog, ensure_ascii=False, indent=1) + '\n'
+    for folder in ('api/lib', 'photo-service/src/tpu-points'):
+        (ROOT / folder / 'tpu-objects.json').write_text(text, encoding='utf-8')
 
 
 def write_links(records, districts):
