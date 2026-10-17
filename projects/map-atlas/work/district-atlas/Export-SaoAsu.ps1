@@ -94,6 +94,20 @@ function Invoke-AsuRead {
     return ,$result
 }
 
+function Get-AsuRecordStatusEvidence {
+    param([Collections.IDictionary]$Record, [int[]]$AllowedStates)
+    if ($null -ne $Record.state_id) {
+        if ($Record.state_id -notin $AllowedStates) { throw ('Record outside requested state: ' + $Record.state_id) }
+        return 'state_id'
+    }
+    # The real yard registry omits state_id and returns object_status_name.
+    # Preserve that evidence rather than inventing a numeric status mapping.
+    if ([string]::IsNullOrWhiteSpace([string]$Record.object_status_name)) {
+        throw 'Record has neither state_id nor object_status_name'
+    }
+    return 'object_status_name'
+}
+
 function Export-AsuData {
     param([string]$Directory, [string]$QueryDate, $Session)
     [void][DateTime]::ParseExact($QueryDate,'dd.MM.yyyy',[Globalization.CultureInfo]::InvariantCulture)
@@ -117,6 +131,8 @@ function Export-AsuData {
         if (($total -isnot [int] -and $total -isnot [long]) -or $total -lt 0 -or $total -gt 100000) { throw 'Unexpected registry count' }
         Write-Host ('{0}: {1} records' -f $query.key,$total)
         $ids = [Collections.Generic.HashSet[long]]::new()
+        $statusNames = [Collections.Generic.HashSet[string]]::new()
+        $stateIdMissing = 0
         for ($page=0; $page -lt [Math]::Ceiling($total / 50.0); $page++) {
             $params.page=$page
             $response = Invoke-AsuRead '/registry/ogh' $params $Session
@@ -124,8 +140,14 @@ function Export-AsuData {
             $rows = $response.data
             if ($rows.Count -ne [Math]::Min(50,$total-$page*50)) { throw 'Incomplete registry page' }
             foreach ($row in $rows) {
-                if (($query.params.ContainsKey('type_id') -and $row.type_id -ne $query.params.type_id) -or
-                    $row.state_id -notin @(1,4)) { throw 'Record outside requested type or state' }
+                if ($query.params.ContainsKey('type_id') -and $row.type_id -ne $query.params.type_id) {
+                    throw ('Record outside requested type: ' + $row.type_id)
+                }
+                $statusEvidence = Get-AsuRecordStatusEvidence $row $query.params.state_id
+                if ($statusEvidence -eq 'object_status_name') { $stateIdMissing++ }
+                if (-not [string]::IsNullOrWhiteSpace([string]$row.object_status_name)) {
+                    [void]$statusNames.Add([string]$row.object_status_name)
+                }
                 foreach ($key in @('sub_type_id','parent_type_id')) {
                     if ($query.params.ContainsKey($key) -and $row[$key] -ne $query.params[$key]) { throw 'Record outside requested subtype or parent' }
                 }
@@ -144,7 +166,8 @@ function Export-AsuData {
         $params.page=0
         $after = Invoke-AsuRead '/registry/ogh/count' $params $Session
         if ($after.data.count -ne $total -or $ids.Count -ne $total) { throw 'Registry count changed during export' }
-        $checks.Add(@{key=$query.key;count=$total})
+        $checks.Add(@{key=$query.key;count=$total;state_id_missing=$stateIdMissing;
+            observed_status_names=@($statusNames | Sort-Object)})
     }
     Save-AsuJson (Join-Path $directoryPath 'records.json') @($records.ToArray())
     $geometryIds = [long[]]@($allIds | Sort-Object)
