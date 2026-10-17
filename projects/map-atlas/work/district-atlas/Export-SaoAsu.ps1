@@ -2,10 +2,59 @@
 param(
     [string]$Date = (Get-Date -Format 'dd.MM.yyyy'),
     [string]$Username = '',
-    [string]$OutputDirectory = (Join-Path $env:LOCALAPPDATA ('SAO-ASU-Exports\' + (Get-Date -Format 'yyyyMMdd-HHmmss') + '-' + [Guid]::NewGuid().ToString('N').Substring(0,8)))
+    [string]$OutputDirectory = ''
 )
 
 $ErrorActionPreference = 'Stop'
+
+function Assert-AsuOutputDirectory {
+    param([string]$Directory)
+    $resolved = [IO.Path]::GetFullPath($Directory)
+    if ($resolved -eq [IO.Path]::GetPathRoot($resolved)) { throw 'Use a private subdirectory' }
+    $ancestor = $resolved
+    while ($ancestor) {
+        if (Test-Path -LiteralPath (Join-Path $ancestor '.git')) {
+            throw ('Export must be outside Git: ' + $ancestor)
+        }
+        if (Test-Path -LiteralPath $ancestor) {
+            $item = Get-Item -LiteralPath $ancestor -Force
+            if ($item.Attributes -band [IO.FileAttributes]::ReparsePoint) { throw 'Export cannot use symlinks or junctions' }
+        }
+        $ancestor = Split-Path -Path $ancestor -Parent
+    }
+    if ((Test-Path -LiteralPath $resolved) -or (Test-Path -LiteralPath ($resolved + '.zip'))) {
+        throw 'Use a new output directory; existing data will not be overwritten'
+    }
+    return $resolved
+}
+
+function Resolve-AsuOutputDirectory {
+    param([string]$Directory)
+    $candidates = [Collections.Generic.List[string]]::new()
+    if (-not [string]::IsNullOrWhiteSpace($Directory)) { $candidates.Add($Directory) }
+    else {
+        $suffix = (Get-Date -Format 'yyyyMMdd-HHmmss') + '-' + [Guid]::NewGuid().ToString('N').Substring(0,8)
+        $driveRoot = [IO.Path]::GetPathRoot([Environment]::SystemDirectory)
+        foreach ($base in @($env:LOCALAPPDATA, $env:TEMP, (Join-Path $driveRoot 'Temp'))) {
+            if (-not [string]::IsNullOrWhiteSpace($base)) {
+                $candidates.Add((Join-Path $base ('SAO-ASU-Exports\' + $suffix)))
+            }
+        }
+    }
+    $failures = [Collections.Generic.List[string]]::new()
+    foreach ($candidate in $candidates) {
+        try {
+            $resolved = Assert-AsuOutputDirectory $candidate
+            $parent = Split-Path -Path $resolved -Parent
+            New-Item -ItemType Directory -Path $parent -Force | Out-Null
+            $probe = Join-Path $parent ([Guid]::NewGuid().ToString('N') + '.probe')
+            try { [IO.File]::WriteAllText($probe, '') }
+            finally { if (Test-Path -LiteralPath $probe) { Remove-Item -LiteralPath $probe -Force } }
+            return $resolved
+        } catch { $failures.Add($_.Exception.Message) }
+    }
+    throw ('No writable private output directory found. ' + ($failures -join '; '))
+}
 
 function Save-AsuJson {
     param([string]$Path, $Value)
@@ -48,13 +97,7 @@ function Invoke-AsuRead {
 function Export-AsuData {
     param([string]$Directory, [string]$QueryDate, $Session)
     [void][DateTime]::ParseExact($QueryDate,'dd.MM.yyyy',[Globalization.CultureInfo]::InvariantCulture)
-    $directoryPath = [IO.Path]::GetFullPath($Directory)
-    $ancestor = $directoryPath
-    while ($ancestor) {
-        if (Test-Path -LiteralPath (Join-Path $ancestor '.git')) { throw 'Export must be outside Git' }
-        $ancestor = Split-Path -Path $ancestor -Parent
-    }
-    if (Test-Path -LiteralPath $directoryPath) { throw 'Use a new output directory; existing data will not be overwritten' }
+    $directoryPath = Assert-AsuOutputDirectory $Directory
     $raw = Join-Path $directoryPath 'raw'
     New-Item -ItemType Directory -Path $raw -Force | Out-Null
     $queries = Get-AsuQueries
@@ -142,6 +185,8 @@ if ($MyInvocation.InvocationName -ne '.') {
     $credential=$null; $password=$null; $body=$null; $asuSession=$null
     try {
         [void][DateTime]::ParseExact($Date,'dd.MM.yyyy',[Globalization.CultureInfo]::InvariantCulture)
+        $OutputDirectory = Resolve-AsuOutputDirectory $OutputDirectory
+        Write-Host ('OUTPUT: ' + $OutputDirectory)
         if ([string]::IsNullOrWhiteSpace($Username)) { $Username = Read-Host 'ASU login' }
         $credential = Get-Credential -UserName $Username -Message 'ASU ODS: password is not saved'
         $password = $credential.GetNetworkCredential().Password
