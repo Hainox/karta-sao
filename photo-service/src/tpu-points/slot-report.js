@@ -51,17 +51,59 @@ export function summarizeSlots({ rows, objects = SLOT_OBJECTS, generatedAt = new
   return { generatedAt, groupRows, kindRows, total: tally(objectRows, 'Итого по САО'), objectRows, rework };
 }
 
+// Оформление повторяет эталон префектуры: жёлтая шапка в рамке, все ячейки таблиц по центру и в тонкой рамке.
 const HEADER = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FF123A32' } };
+const TITLE = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFFFFF00' } };
 const STATUS_FILL = { closed: 'FFD8F0DE', review: 'FFDCE8FB', progress: 'FFFFF1C2', rework: 'FFF9DCD6', empty: 'FFE9ECEF' };
+const THIN = { style: 'thin' };
+const GRID = { top: THIN, left: THIN, bottom: THIN, right: THIN };
+const CENTER = { horizontal: 'center', vertical: 'middle' };
+const LINK = { name: 'Calibri', size: 11, color: { argb: 'FF0C5AA6' } };
 const dateText = (value) => (value ? new Date(value).toLocaleString('ru-RU', { timeZone: 'Europe/Moscow', dateStyle: 'short', timeStyle: 'short' }) : '');
+
+function gridRow(row, columns, { bold = false, wrap = false } = {}) {
+  for (let column = 1; column <= columns; column += 1) {
+    const cell = row.getCell(column);
+    cell.border = GRID;
+    cell.alignment = wrap ? { ...CENTER, wrapText: true } : CENTER;
+    cell.font = { name: 'Calibri', size: 11, bold };
+  }
+}
 
 function header(sheet, rowNumber, titles) {
   const row = sheet.getRow(rowNumber);
   row.values = titles;
-  row.font = { bold: true, color: { argb: 'FFFFFFFF' } };
-  row.fill = HEADER;
-  row.alignment = { vertical: 'middle', wrapText: true };
-  row.height = 32;
+  gridRow(row, titles.length, { wrap: true });
+  for (let column = 1; column <= titles.length; column += 1) {
+    row.getCell(column).font = { name: 'Calibri', size: 11, bold: true, color: { argb: 'FFFFFFFF' } };
+    row.getCell(column).fill = HEADER;
+  }
+  row.height = 32.1;
+}
+
+/** Две объединённые жёлтые строки (заголовок и пояснение) в общей жирной рамке. */
+function titleBlock(sheet, columns, title, note) {
+  sheet.getCell('A1').value = title;
+  sheet.getCell('A2').value = note;
+  for (const rowNumber of [1, 2]) {
+    for (let column = 1; column <= columns; column += 1) {
+      const cell = sheet.getRow(rowNumber).getCell(column);
+      cell.fill = TITLE;
+      cell.font = { name: 'Calibri', size: rowNumber === 1 ? 14 : 11, bold: rowNumber === 1 };
+      cell.alignment = { horizontal: 'center' };
+      cell.border = {
+        top: rowNumber === 1 ? { style: 'medium' } : undefined,
+        bottom: rowNumber === 2 ? { style: 'medium' } : undefined,
+        left: column === 1 ? { style: 'medium' } : undefined,
+        right: column === columns ? { style: 'medium' } : undefined,
+      };
+    }
+  }
+  // Объединяем после оформления и без переноса стиля: иначе рамка крайних ячеек потеряется.
+  const last = String.fromCharCode(64 + columns);
+  sheet.mergeCellsWithoutStyle(`A1:${last}1`);
+  sheet.mergeCellsWithoutStyle(`A2:${last}2`);
+  sheet.getRow(1).height = 18.75;
 }
 
 const SUMMARY_TITLES = ['Объектов', 'Фото требуется', 'Фото загружено', 'Принято', 'На проверке', 'Слотов на доработке', 'Объектов закрыто', 'Объектов без фото', '% принято', 'Последнее фото'];
@@ -71,20 +113,20 @@ export async function buildSlotReport(summary, { mapUrl = 'https://hainox.github
   const book = new ExcelJS.Workbook();
   book.creator = 'Фотослужба САО';
   const day = dateText(summary.generatedAt);
+  const columns = SUMMARY_TITLES.length + 1;
 
   const overview = book.addWorksheet('Свод по районам');
   overview.columns = [{ width: 28 }, ...SUMMARY_TITLES.map((t, i) => ({ width: i === SUMMARY_TITLES.length - 1 ? 17 : 12 }))];
-  overview.getCell('A1').value = `Свод по фото ТПУ и парковок на ${day}`;
-  overview.getCell('A1').font = { bold: true, size: 14 };
-  overview.getCell('A2').value = 'Слоты по заданию: принято — фото проверено префектурой; на доработке — фото отклонено, слот ждёт нового фото.';
+  titleBlock(overview, columns, `Свод по фото ТПУ и парковок на ${day}`,
+    'Слоты по заданию: принято — фото проверено префектурой; на доработке — фото отклонено, слот ждёт нового фото.');
   header(overview, 4, ['Район / организация', ...SUMMARY_TITLES]);
   let rowNumber = 5;
   const writeRows = (list, bold) => {
     for (const r of list) {
       const row = overview.getRow(rowNumber++);
       row.values = [r.label, ...summaryValues(r)];
+      gridRow(row, columns, { bold });
       row.getCell(10).numFmt = '0%';
-      if (bold) row.font = { bold: true };
     }
   };
   writeRows(summary.groupRows, false);
@@ -100,23 +142,24 @@ export async function buildSlotReport(summary, { mapUrl = 'https://hainox.github
   header(objects, 1, ['Вид', 'Название', 'ID', 'Ответственный', 'Фото требуется', 'Загружено', 'Принято', 'На проверке', 'На доработке', 'Статус', 'Последнее фото', 'На карте']);
   for (const r of summary.objectRows) {
     const row = objects.addRow([r.object.type || (r.kind === 'tpu' ? 'ТПУ' : 'Парковка'), r.object.label, r.object.sourceNumber, r.group, r.required, r.filled, r.accepted, r.pending, r.rework, r.statusLabel, dateText(r.lastPhotoAt), { text: 'Открыть', hyperlink: `${mapUrl}?object=${encodeURIComponent(r.id)}` }]);
+    gridRow(row, 12);
     row.getCell(10).fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: STATUS_FILL[r.status] } };
-    row.getCell(12).font = { color: { argb: 'FF0C5AA6' }, underline: true };
+    row.getCell(12).font = LINK;
   }
   objects.views = [{ state: 'frozen', ySplit: 1 }];
   objects.autoFilter = { from: 'A1', to: 'L1' };
 
   const rework = book.addWorksheet('На доработке');
-  rework.columns = [22, 50, 8, 60, 17, 12].map((width) => ({ width }));
+  rework.columns = [25, 50, 8, 60, 17, 12].map((width) => ({ width }));
   header(rework, 1, ['Ответственный', 'Объект', 'Слот', 'Что исправить', 'Отклонено', 'На карте']);
   for (const r of summary.rework) {
     const row = rework.addRow([r.object.group, r.object.label, r.slot, r.comment, dateText(r.rejectedAt), { text: 'Открыть', hyperlink: `${mapUrl}?object=${encodeURIComponent(r.id)}` }]);
-    row.getCell(4).alignment = { wrapText: true, vertical: 'top' };
-    row.getCell(6).font = { color: { argb: 'FF0C5AA6' }, underline: true };
+    gridRow(row, 6, { wrap: true });
+    row.getCell(6).font = LINK;
   }
   rework.views = [{ state: 'frozen', ySplit: 1 }];
   if (summary.rework.length) rework.autoFilter = { from: 'A1', to: 'F1' };
-  else rework.addRow(['Слотов на доработке нет.']);
+  else gridRow(rework.addRow(['Слотов на доработке нет.']), 6);
 
   return Buffer.from(await book.xlsx.writeBuffer());
 }
