@@ -93,19 +93,40 @@ def build_records(workbook):
     return records, district_shapes
 
 
-def build(workbook):
-    records, districts = build_records(workbook)
+PAGE = ROOT / 'object-maps/tpu-parking.html'
+DATA_BLOCK = re.compile(r'(<script id="map-data" type="application/json">)(.*?)(</script>)', re.S)
+
+
+def page_data():
+    """Data block of the published page, or None before the first build."""
+    current = PAGE.read_text(encoding='utf-8') if PAGE.exists() else ''
+    match = DATA_BLOCK.search(current)
+    return json.loads(match[2]) if match else None
+
+
+def subtitle(records):
+    tpu = sum(r['kind'] == 'tpu' for r in records)
+    pockets = sum(r.get('subkind') == 'pocket' for r in records)
+    lots = sum(r['kind'] == 'parking' for r in records) - pockets
+    text = f'{tpu} ТПУ · {lots:,} автомобильных парковок'.replace(',', '\u00a0')
+    if pockets:
+        text += f' · {pockets:,} парковочных карманов'.replace(',', '\u00a0')
+    return text + ' · места съёмки назначает префектура'
+
+
+def write_data(records, districts):
+    """Refresh the page data block, district links and report catalog together."""
     data = {
         'datasetId': 'sao_tpu_parking', 'title': 'Оцифровка ТПУ и автомобильных парковок САО',
-        'subtitle': '29 ТПУ · 65 автомобильных парковок · места съёмки назначает префектура',
+        'subtitle': subtitle(records),
         'groupLabel': 'Район', 'exportName': 'Yandex_TPU_parking.csv',
         'mapNote': 'Маркеры показывают объекты. Места съёмки назначает префектура вручную; синие нумерованные точки — задания для районов.',
-        'parkingStatus': 'loaded', 'records': records, 'districts': sorted({d for d, _ in districts} | {r['group'] for r in records}),
+        'parkingStatus': 'loaded', 'records': records, 'districts': sorted(set(districts) | {r['group'] for r in records}),
         'coordinateCorrection': CORRECTION_METADATA,
         'exportGroups': [[r['id']] for r in records],
     }
     encoded = json.dumps(data, ensure_ascii=False, separators=(',', ':')).replace('<', '\\u003c')
-    page = ROOT / 'object-maps/tpu-parking.html'
+    page = PAGE
     # stops.html is now a module app, so refresh only the data block of the existing page.
     current = page.read_text(encoding='utf-8') if page.exists() else ''
     if '<script id="map-data" type="application/json">' in current:
@@ -116,12 +137,20 @@ def build(workbook):
     write_catalog(records)
 
 
+def build(workbook):
+    records, districts = build_records(workbook)
+    # Парковки и карманы из выгрузки АСУ ОДХ добавляет work/add_tpu_parking_asu_objects.py; сохраняем их при пересборке.
+    previous = page_data()
+    records += [r for r in (previous or {}).get('records', []) if r.get('subkind')]
+    write_data(records, [d for d, _ in districts])
+
+
 def build_page(encoded):
     markup = (ROOT / 'object-maps/stops.html').read_text(encoding='utf-8')
     markup = re.sub(r'(<script id="map-data" type="application/json">).*?(</script>)', lambda m: m[1] + encoded + m[2], markup, flags=re.S)
     markup = markup.replace('<title>Карта</title>', '<title>Оцифровка ТПУ и парковок САО</title>')
     markup = markup.replace('<div class="top-actions">', '<div class="top-actions"><a class="district-link" href="district-links.html">Районы и АвД САО</a><button class="export-btn" id="exportPhotos" type="button">Скачать фото для передачи (ZIP)</button>')
-    markup = markup.replace('<div class="filter-row">', '<label class="control-label" for="kindFilter">Вид объекта</label><select class="control" id="kindFilter"><option value="">ТПУ и парковки</option><option value="tpu">ТПУ</option><option value="parking">Автомобильные парковки</option></select><p class="small-note">Парковки нанесены по отдельному листу «Парковки» исходного Excel. Места съёмки назначаются вручную.</p><div class="filter-row">')
+    markup = markup.replace('<div class="filter-row">', '<label class="control-label" for="kindFilter">Вид объекта</label><select class="control" id="kindFilter"><option value="">Все объекты</option><option value="tpu">ТПУ</option><option value="parking">Автомобильные парковки</option><option value="pocket">Парковочные карманы</option></select><p class="small-note">Парковки нанесены по отдельному листу «Парковки» исходного Excel. Парковки и карманы из выгрузки АСУ ОДХ показаны точками без контура. Места съёмки назначаются вручную.</p><div class="filter-row">')
     markup = markup.replace('</style>', '[hidden]{display:none!important}.district-link{color:#d5eadc;font-weight:700;text-decoration:none}.top-actions{flex-wrap:wrap;justify-content:flex-end;gap:6px}.topbar{height:auto;min-height:76px;flex-basis:auto;padding-top:10px;padding-bottom:10px}.subtitle{max-width:600px}.map-key{max-width:calc(100% - 24px)}@media(max-width:850px){.topbar{align-items:flex-start;flex-direction:column}.top-actions{justify-content:flex-start}.subtitle{max-width:90vw}.workspace{grid-template-rows:minmax(210px,32vh) minmax(340px,1fr)}}\n</style>')
     markup = markup.replace('const reviewApi = localStorage.getItem("saoReviewApi") || "https://obhod-sao.ru/odh-api";', 'const reviewApi = ""; // Central district connection is a later stage.')
     markup = markup.replace('Array.from(new Set(DATA.records.map(record => record.group).filter(Boolean)))', 'Array.from(new Set(DATA.districts))')
@@ -133,11 +162,11 @@ def build_page(encoded):
     markup = markup.replace(' + " · на доработке: " + reworkCount.toLocaleString("ru-RU")', '')
     markup = markup.replace('mimeType:blob.type || file.type || "image/jpeg",', 'mimeType:blob.type || file.type || ({jpg:"image/jpeg",jpeg:"image/jpeg",png:"image/png",webp:"image/webp",heic:"image/heic",heif:"image/heif"}[file.name.split(".").pop().toLowerCase()] || "application/octet-stream"),')
     markup = markup.replace('const group = el("groupFilter").value;', 'const group = el("groupFilter").value;\n      const kind = el("kindFilter").value;')
-    markup = markup.replace('if (group && record.group !== group) return false;', 'if (group && record.group !== group) return false;\n        if (kind && record.kind !== kind) return false;')
+    markup = markup.replace('if (group && record.group !== group) return false;', 'if (group && record.group !== group) return false;\n        if (kind && (record.subkind === "pocket" ? "pocket" : record.kind) !== kind) return false;')
     markup = markup.replace('empty.textContent = "Ничего не найдено.";', 'empty.textContent = "В выбранном районе пока нет объектов. Проверьте фильтры.";')
     markup = markup.replace('select.appendChild(option);\n      }\n    }', 'select.appendChild(option);\n      }\n      const requested = new URLSearchParams(location.search).get("district");\n      if (requested && !groups.includes(requested)) { const option = document.createElement("option"); option.value = requested; option.textContent = requested; select.appendChild(option); }\n      if (requested) select.value = requested;\n    }', 1)
     markup = markup.replace('let pointLayer = null;', 'let pointLayer = null;\n    let contourLayer = null;')
-    markup = markup.replace('if (!pointLayer) return;', 'if (!pointLayer) return;\n      if (contourLayer) { contourLayer.removeAll(); for (const record of filtered) { const raw = record.geometry; const coordinates = raw.coordinates.map(p => raw.type === "Polygon" ? p.map(c => [c[1],c[0]]) : p.map(r => r.map(c => [c[1],c[0]]))); const polygons = raw.type === "Polygon" ? [coordinates] : coordinates; for (const polygon of polygons) { const contour = new ymaps.Polygon(polygon, {}, {fillColor:"#0c7a5a18",strokeColor:"#0c7a5a",strokeWidth:2}); contour.events.add("click", () => openRecord(record)); contourLayer.add(contour); } } }')
+    markup = markup.replace('if (!pointLayer) return;', 'if (!pointLayer) return;\n      if (contourLayer) { contourLayer.removeAll(); for (const record of filtered) { const raw = record.geometry; if (!raw) continue; const coordinates = raw.coordinates.map(p => raw.type === "Polygon" ? p.map(c => [c[1],c[0]]) : p.map(r => r.map(c => [c[1],c[0]]))); const polygons = raw.type === "Polygon" ? [coordinates] : coordinates; for (const polygon of polygons) { const contour = new ymaps.Polygon(polygon, {}, {fillColor:"#0c7a5a18",strokeColor:"#0c7a5a",strokeWidth:2}); contour.events.add("click", () => openRecord(record)); contourLayer.add(contour); } } }')
     markup = markup.replace('map.geoObjects.add(pointLayer);', 'contourLayer = new ymaps.GeoObjectCollection();\n      map.geoObjects.add(contourLayer);\n      map.geoObjects.add(pointLayer);')
     markup = markup.replace('if (bounds) map.setBounds(bounds, {checkZoomRange:true, zoomMargin:24});', 'const requestedDistrict = el("groupFilter").value;\n      const districtRecords = DATA.records.filter(r => !requestedDistrict || r.group === requestedDistrict);\n      if (districtRecords.length) { const lats = districtRecords.map(r => r.lat), lons = districtRecords.map(r => r.lon); map.setBounds([[Math.min(...lats),Math.min(...lons)],[Math.max(...lats),Math.max(...lons)]], {checkZoomRange:true, zoomMargin:24}); } else if (bounds) map.setBounds(bounds, {checkZoomRange:true, zoomMargin:24});')
     markup = markup.replace('initEvents();', '''el("kindFilter").addEventListener("change", updateMapAndList);
@@ -173,7 +202,8 @@ def write_catalog(records):
     """Object list for the prefecture TPU report on the photo service."""
     catalog = [{'id': r['id'], 'kind': r['kind'], 'label': r['label'], 'sourceNumber': r['sourceNumber'],
                 'group': r['group'], 'district': r['properties']['Район'],
-                'holder': r['properties']['Балансодержатель']} for r in records]
+                'holder': r['properties']['Балансодержатель'],
+                **({'type': r['properties']['Тип']} if r.get('subkind') else {})} for r in records]
     text = json.dumps(catalog, ensure_ascii=False, indent=1) + '\n'
     for folder in ('api/lib', 'photo-service/src/tpu-points'):
         (ROOT / folder / 'tpu-objects.json').write_text(text, encoding='utf-8')
@@ -181,10 +211,12 @@ def write_catalog(records):
 
 def write_links(records, districts):
     cards = []
-    for district in sorted({d for d, _ in districts} | {r['group'] for r in records}):
+    for district in sorted(set(districts) | {r['group'] for r in records}):
         count = sum(r['group'] == district and r['kind'] == 'tpu' for r in records)
-        parking_count = sum(r['group'] == district and r['kind'] == 'parking' for r in records)
-        cards.append(f'<a class="card" href="tpu-parking.html?district={quote(district)}"><strong>{html.escape(district)}</strong><span>ТПУ: {count} · парковки: {parking_count}</span></a>')
+        pocket_count = sum(r['group'] == district and r.get('subkind') == 'pocket' for r in records)
+        parking_count = sum(r['group'] == district and r['kind'] == 'parking' for r in records) - pocket_count
+        pockets = f' · карманы: {pocket_count}' if pocket_count else ''
+        cards.append(f'<a class="card" href="tpu-parking.html?district={quote(district)}"><strong>{html.escape(district)}</strong><span>ТПУ: {count} · парковки: {parking_count}{pockets}</span></a>')
     (ROOT / 'object-maps/district-links.html').write_text('''<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Оцифровка ТПУ и парковок — ссылки районов</title><style>body{margin:0;background:#f5f5ef;color:#183c35;font:16px/1.5 "Segoe UI",Arial,sans-serif}main{max-width:1040px;margin:30px auto;padding:24px}a{color:#0c7a5a}h1{font-size:28px}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:24px}.card{padding:18px;border:1px solid #d9e0da;border-radius:12px;background:white;text-decoration:none}.card strong,.card span{display:block}.card span{color:#687873;font-size:13px;margin-top:8px}@media(max-width:700px){.cards{grid-template-columns:1fr}main{margin:0;padding:18px}}</style></head><body><main><a href="../hub/">← Атлас САО</a><h1>Оцифровка ТПУ и автомобильных парковок</h1><p>Выберите район, откройте точку и добавьте фотографию. Фото сохраняются в вашем браузере. Для передачи фотографий скачайте ZIP на карте и отправьте его для приёмки.</p><p>Это подготовительная база: места съёмки и распределение по районам требуют согласования. Подключение к общей базе будет следующим этапом.</p><a href="tpu-parking.html">Открыть все объекты →</a><div class="cards">''' + '\n'.join(cards) + '</div></main></body></html>', encoding='utf-8')
     links_path = ROOT / 'object-maps/district-links.html'
     links = links_path.read_text(encoding='utf-8').replace(
@@ -195,7 +227,7 @@ def write_links(records, districts):
         'Места съёмки назначает префектура вручную. Назначенные точки видны на карте без входа. Для отправки фото войдите в учётную запись фотослужбы.',
     )
     links_path.write_text(links, encoding='utf-8')
-    print(f'Built {sum(r["kind"] == "tpu" for r in records)} TPU, {sum(r["kind"] == "parking" for r in records)} parking, {len(districts)} district links')
+    print(f'Built {sum(r["kind"] == "tpu" for r in records)} TPU, {sum(r["kind"] == "parking" for r in records)} parking, {len(cards)} district links')
 
 
 def add_photo_assignments(markup):

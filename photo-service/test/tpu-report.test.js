@@ -43,16 +43,17 @@ test('последнее фото выбирается по времени, да
   assert.equal(summary.objectRows[0].lastPhotoAt, '2026-10-02T08:00:00.000Z');
 });
 
-test('книга Excel содержит четыре листа и все 94 объекта карты', async () => {
-  assert.equal(TPU_OBJECTS.length, 94);
+test('книга Excel содержит четыре листа и все 4 002 объекта карты', async () => {
+  // 29 ТПУ, 65 парковок с контуром и 3 908 парковок и карманов из выгрузки АСУ ОДХ.
+  assert.equal(TPU_OBJECTS.length, 4002);
   const book = new ExcelJS.Workbook();
   await book.xlsx.load(await buildTpuReport(summarizeTpu({ points: [], generatedAt: new Date('2026-10-06T12:00:00Z') })));
   assert.deepEqual(book.worksheets.map((s) => s.name), ['Сводка', 'Объекты', 'Точки', 'Динамика']);
-  assert.equal(book.getWorksheet('Объекты').rowCount, 95);
+  assert.equal(book.getWorksheet('Объекты').rowCount, 4003);
   const overview = book.getWorksheet('Сводка');
   assert.equal(overview.getRow(overview.rowCount).getCell(1).value, 'Итого');
   assert.equal(overview.getRow(overview.rowCount).getCell(2).value, 29);
-  assert.equal(overview.getRow(overview.rowCount).getCell(3).value, 65);
+  assert.equal(overview.getRow(overview.rowCount).getCell(3).value, 3973);
 });
 
 test('сводка по парковкам — отдельная книга только с парковками', async () => {
@@ -65,8 +66,11 @@ test('сводка по парковкам — отдельная книга т�
   const overview = book.getWorksheet('Сводка');
   assert.match(overview.getRow(1).getCell(1).value, /парковок/);
   assert.equal(overview.getRow(3).getCell(2).value, 'Объектов');
-  assert.equal(overview.getRow(overview.rowCount).getCell(2).value, 65);
-  assert.equal(book.getWorksheet('Объекты').rowCount, 66);
+  assert.equal(overview.getRow(overview.rowCount).getCell(2).value, 3973);
+  const rows = book.getWorksheet('Объекты');
+  assert.equal(rows.rowCount, 3974);
+  const types = new Set(rows.getColumn(1).values.slice(2));
+  assert.deepEqual([...types].sort(), ['Парковка', 'Парковочный карман'], 'карман подписан своим типом, а не «Парковка»');
 });
 
 async function request(role, query = '') {

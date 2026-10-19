@@ -3,6 +3,7 @@
 import { readFileSync } from 'node:fs';
 
 export const TPU_OBJECTS = JSON.parse(readFileSync(new URL('./tpu-objects.json', import.meta.url), 'utf8'));
+// Карманы и парковки из выгрузки АСУ ОДХ несут свой тип в каталоге (поле type).
 const KIND = { tpu: 'ТПУ', parking: 'Парковка' };
 /** Виды сводок: что выгружается и как называется. */
 export const REPORT_KINDS = {
@@ -105,7 +106,7 @@ export async function buildTpuReport(summary, { mapUrl = 'https://hainox.github.
   const objects = book.addWorksheet('Объекты');
   headerRow(objects, ['Тип', 'Название', 'ID', 'Ответственный', 'Район по контуру', 'Балансодержатель', 'Точек', 'Отснято', 'Статус', 'Последнее фото', 'На карте'], [10, 48, 13, 22, 20, 26, 8, 9, 12, 18, 12]);
   for (const r of summary.objectRows) {
-    const row = objects.addRow([KIND[r.kind] || r.kind, r.label, r.sourceNumber, r.group, r.district, r.holder, r.points, r.shot, r.status, dateText(r.lastPhotoAt), { text: 'Открыть', hyperlink: `${mapUrl}?object=${encodeURIComponent(r.id)}` }]);
+    const row = objects.addRow([r.type || KIND[r.kind] || r.kind, r.label, r.sourceNumber, r.group, r.district, r.holder, r.points, r.shot, r.status, dateText(r.lastPhotoAt), { text: 'Открыть', hyperlink: `${mapUrl}?object=${encodeURIComponent(r.id)}` }]);
     row.getCell(9).fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: STATUS_FILL[r.status] } };
     row.getCell(11).font = { color: { argb: 'FF0C5AA6' }, underline: true };
   }
@@ -114,7 +115,7 @@ export async function buildTpuReport(summary, { mapUrl = 'https://hainox.github.
   const points = book.addWorksheet('Точки');
   headerRow(points, ['Ответственный', 'Тип', 'Объект', 'Точка', 'Задание', 'Широта', 'Долгота', 'Направление, °', 'Фото текущего ракурса', 'Последнее фото', 'Назначена'], [22, 10, 44, 14, 36, 11, 11, 12, 12, 18, 18]);
   for (const p of summary.pointRows) {
-    points.addRow([p.district, KIND[p.object.kind] || p.object.kind, p.object.label, p.label, p.note || '', Number(p.latitude), Number(p.longitude), p.heading == null ? '' : Math.round(Number(p.heading)), Number(p.photo_count) > 0 ? 'Да' : 'Нет', dateText(p.last_photo_at), dateText(p.created_at)]);
+    points.addRow([p.district, p.object.type || KIND[p.object.kind] || p.object.kind, p.object.label, p.label, p.note || '', Number(p.latitude), Number(p.longitude), p.heading == null ? '' : Math.round(Number(p.heading)), Number(p.photo_count) > 0 ? 'Да' : 'Нет', dateText(p.last_photo_at), dateText(p.created_at)]);
   }
   points.autoFilter = { from: 'A1', to: 'K1' };
 
