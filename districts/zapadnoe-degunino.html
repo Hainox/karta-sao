@@ -47,6 +47,9 @@ h1{margin:2px 0 0;font-size:24px;line-height:1.15}
 .shoot-actions{display:flex;gap:8px}
 .shoot-actions button{flex:1;min-height:30px;padding:4px 10px;border:1px solid #8a979c;border-radius:8px;background:#fff;color:var(--ink);font:inherit;font-size:12px;cursor:pointer;text-align:center}
 .shoot-actions button:hover{border-color:var(--accent);color:var(--accent)}
+.shoot-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin-top:6px}
+.shoot-gallery img{width:100%;border:1px solid var(--line);border-radius:8px;background:#fff}
+.shoot-upload{display:block;margin-top:8px;font-size:12.5px;color:var(--muted)}
 .card{display:none;padding:14px;border:1px solid var(--line);border-radius:12px;background:var(--accent-soft)}
 .card.open{display:block}
 .card h2{margin:0 0 8px;font-size:17px}
@@ -96,6 +99,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     <div class="shoot-hint" id="shootHint">Точки съёмки эталонных фото назначает префектура: вход в учётную запись, затем клик ставит точку, второй клик — направление съёмки (стрелку).</div>
     <div class="shoot-actions">
       <button id="shootExport" type="button">Выгрузить GeoJSON</button>
+      <button id="shootReport" type="button" hidden>Excel: сводка точек</button>
     </div>
     <div class="card" id="card"></div>
     <div class="status" id="status">Загружаем данные…</div>
@@ -289,12 +293,21 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
 
   async function loadPhotoPoints() {
     try {
-      const response = await fetch(`${API_BASE}/object-photo-points/public?dataset=${DATASET}&district=${encodeURIComponent(DISTRICT)}`, { cache: 'no-store' });
-      if (!response.ok) throw new Error('HTTP ' + response.status);
-      const data = await response.json();
+      let data;
+      if (state.photoUser) {
+        // Под учёткой — полный список: assignment_version и photo_count нужны для
+        // отправки фото и галереи. Районная учётка видит только свой район.
+        const response = await apiRequest(`/object-photo-points?dataset=${DATASET}&district=${encodeURIComponent(DISTRICT)}`);
+        data = await response.json();
+      } else {
+        const response = await fetch(`${API_BASE}/object-photo-points/public?dataset=${DATASET}&district=${encodeURIComponent(DISTRICT)}`, { cache: 'no-store' });
+        if (!response.ok) throw new Error('HTTP ' + response.status);
+        data = await response.json();
+      }
       state.points = (data.points || []).map((p) => ({
         id: p.id, label: p.label, heading: p.heading == null ? null : Number(p.heading),
         lng: Number(p.longitude), lat: Number(p.latitude), district: p.district, serverPoint: true,
+        assignment_version: p.assignment_version, photo_count: Number(p.photo_count || 0),
       }));
       state.serverOk = true;
       $('shootHint').textContent = `Точек съёмки: ${state.points.length}. Назначает префектура: войдите и включите «Разметка».`;
@@ -373,15 +386,21 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
   function openPointCard(point) {
     const heading = point.heading == null ? 'не задано' : Math.round(Number(point.heading)) + '°';
     const canEdit = isPrefecture();
+    const isDistrictEditor = state.photoUser && state.photoUser.role === 'district_editor' && state.photoUser.district === point.district;
+    const canUpload = (isDistrictEditor || isPrefecture()) && state.serverOk && point.serverPoint;
     $('card').innerHTML = `
       <h2>Точка съёмки ${escapeHtml(point.label)}</h2>
       <div><strong>Направление:</strong> ${heading}</div>
       <div><strong>Координаты:</strong> ${Number(point.lat).toFixed(6)}, ${Number(point.lng).toFixed(6)}</div>
+      ${point.serverPoint ? `<div><strong>Фото текущего ракурса:</strong> ${Number(point.photo_count || 0)}</div>` : ''}
       ${canEdit ? `<div class="card-actions">
         <button id="cardRotate" type="button">Повернуть стрелку</button>
         <button id="cardDelete" class="danger" type="button">Удалить точку</button>
         <button id="cardClose" type="button">Закрыть</button>
-      </div>` : `<div class="card-actions"><button id="cardClose" type="button">Закрыть</button></div>`}`;
+      </div>` : `<div class="card-actions"><button id="cardClose" type="button">Закрыть</button></div>`}
+      ${canUpload ? `<label class="shoot-upload">Отправить фото этой точки (JPEG, PNG, WEBP, до 5 МБ)
+        <input id="cardPhoto" type="file" accept="image/jpeg,image/png,image/webp" hidden></label>
+      <div class="shoot-gallery" id="cardGallery"></div>` : ''}`;
     $('card').className = 'card open';
     if (canEdit) {
       $('cardRotate').addEventListener('click', () => beginRotation(point));
@@ -398,7 +417,56 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
         }
       });
     }
+    if (canUpload) {
+      $('cardPhoto').addEventListener('change', async (event) => {
+        const file = event.target.files[0];
+        event.target.value = '';
+        if (!file) return;
+        if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type) || file.size > 5 * 1024 * 1024) {
+          $('shootHint').textContent = 'Выберите JPEG, PNG или WEBP размером до 5 МБ.';
+          return;
+        }
+        try {
+          await apiRequest('/object-photo-points/' + point.id + '/photos', {
+            method: 'PUT',
+            headers: { 'Content-Type': file.type, 'X-Photo-Filename': encodeURIComponent(file.name), 'X-Assignment-Version': String(point.assignment_version ?? 1) },
+            body: file,
+          });
+          $('shootHint').textContent = `Фото отправлено к точке «${point.label}».`;
+          await reloadPhotoPoints();
+        } catch (error) {
+          $('shootHint').textContent = 'Фото не отправлено: ' + error.message;
+        }
+      });
+      loadGallery(point, $('cardGallery'));
+    }
     $('cardClose').addEventListener('click', () => { $('card').className = 'card'; });
+  }
+
+  async function loadGallery(point, container) {
+    try {
+      const response = await apiRequest(`/object-photo-points/${point.id}/photos`);
+      const data = await response.json();
+      const photos = data.photos || [];
+      if (!photos.length) { container.innerHTML = '<div class="status">Фото пока нет.</div>'; return; }
+      container.innerHTML = '';
+      for (const photo of photos) {
+        const imageResponse = await apiRequest(`/object-photo-points/${point.id}/photos/${photo.id}`);
+        const img = document.createElement('img');
+        img.alt = photo.photo_filename || 'фото точки';
+        img.title = photo.photo_filename || '';
+        img.src = URL.createObjectURL(await imageResponse.blob());
+        container.appendChild(img);
+      }
+    } catch (error) {
+      container.innerHTML = `<div class="status">Фото не загрузились: ${escapeHtml(error.message)}</div>`;
+    }
+  }
+
+  async function reloadPhotoPoints() {
+    await loadPhotoPoints();
+    renderShootMarkers();
+    renderShootList();
   }
 
   function setShootMode(on) {
@@ -543,6 +611,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
   function renderShootLogin() {
     const box = $('shootLoginBox');
     const user = state.photoUser;
+    $('shootReport').hidden = !isPrefecture();
     if (user) {
       box.hidden = false;
       $('shootLoginName').hidden = true;
@@ -564,13 +633,14 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     }
   }
 
-  $('shootLogin').addEventListener('click', () => {
+  $('shootLogin').addEventListener('click', async () => {
     if (state.photoUser) {
       sessionStorage.removeItem(TOKEN_KEY);
       sessionStorage.removeItem(USER_KEY);
       state.photoUser = null;
       if (state.shootMode) setShootMode(false);
       renderShootLogin();
+      await reloadPhotoPoints();
       $('shootHint').textContent = 'Вы вышли. Точки съёмки назначает префектура.';
       return;
     }
@@ -592,7 +662,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       state.photoUser = data.user;
       $('shootLoginPass').value = '';
       renderShootLogin();
-      renderShootMarkers();
+      await reloadPhotoPoints();
       $('shootHint').textContent = isPrefecture()
         ? 'Вход выполнен. Включите «Разметка» и ставьте точки съёмки.'
         : 'Вход выполнен, но назначать точки может только учётная запись префектуры.';
@@ -616,6 +686,20 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     setShootMode(!state.shootMode);
   });
   $('shootExport').addEventListener('click', exportPoints);
+  $('shootReport').addEventListener('click', async () => {
+    try {
+      const response = await apiRequest('/object-photo-points/report.xlsx?dataset=' + DATASET);
+      const blob = await response.blob();
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'Svodka_Tochki_Semki_SAO.xlsx';
+      a.click();
+      URL.revokeObjectURL(a.href);
+      $('shootHint').textContent = 'Сводка точек съёмки выгружена (Excel).';
+    } catch (error) {
+      $('shootHint').textContent = 'Сводка не выгрузилась: ' + error.message;
+    }
+  });
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') {
       if (state.picking) { state.picking = null; clearPreview(); }
