@@ -87,7 +87,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     <div><a class="back" href="index.html">← Все районы</a> · <a class="back" href="../hub/">Каталог</a></div>
     <h1>Западное Дегунино</h1>
     <div>Граница муниципального округа, дворовые территории и слои благоустройства по данным АСУ ОДС.</div>
-    <nav class="dist-nav"><a class="dist-link active" href="aeroport.html">Аэропорт</a><a class="dist-link" href="begovoy.html">Беговой</a><a class="dist-link" href="beskudnikovskiy.html">Бескудниковский</a><a class="dist-link" href="voykovskiy.html">Войковский</a><a class="dist-link" href="vostochnoe-degunino.html">Восточное Дегунино</a><a class="dist-link" href="golovinskiy.html">Головинский</a><a class="dist-link" href="dmitrovskiy.html">Дмитровский</a><a class="dist-link" href="zapadnoe-degunino.html">Западное Дегунино</a><a class="dist-link" href="koptevo.html">Коптево</a><a class="dist-link" href="levoberezhnyy.html">Левобережный</a><a class="dist-link" href="molzhaninovskiy.html">Молжаниновский</a><a class="dist-link" href="savelovskiy.html">Савеловский</a><a class="dist-link" href="sokol.html">Сокол</a><a class="dist-link" href="timiryazevskiy.html">Тимирязевский</a><a class="dist-link" href="hovrino.html">Ховрино</a><a class="dist-link" href="horoshevskiy.html">Хорошевский</a></nav>
+    <nav class="dist-nav"><a class="dist-link" href="aeroport.html">Аэропорт</a><a class="dist-link" href="begovoy.html">Беговой</a><a class="dist-link" href="beskudnikovskiy.html">Бескудниковский</a><a class="dist-link" href="voykovskiy.html">Войковский</a><a class="dist-link" href="vostochnoe-degunino.html">Восточное Дегунино</a><a class="dist-link" href="golovinskiy.html">Головинский</a><a class="dist-link" href="dmitrovskiy.html">Дмитровский</a><a class="dist-link active" href="zapadnoe-degunino.html">Западное Дегунино</a><a class="dist-link" href="koptevo.html">Коптево</a><a class="dist-link" href="levoberezhnyy.html">Левобережный</a><a class="dist-link" href="molzhaninovskiy.html">Молжаниновский</a><a class="dist-link" href="savelovskiy.html">Савеловский</a><a class="dist-link" href="sokol.html">Сокол</a><a class="dist-link" href="timiryazevskiy.html">Тимирязевский</a><a class="dist-link" href="hovrino.html">Ховрино</a><a class="dist-link" href="horoshevskiy.html">Хорошевский</a></nav>
     <div class="layers-head"><b>Слои</b><span class="status" id="layerTotal"></span></div>
     <div id="layerControls"></div>
     <div class="layers-head"><b>Точки съёмки</b><span class="head-actions"><button id="shootLogin" class="shoot-toggle" type="button">Вход</button><button id="shootToggle" class="shoot-toggle" type="button">Разметка</button></span></div>
@@ -121,7 +121,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
   const DATASET = 'sao_district_photo_points';
   const LAYERS = [
     { key: 'boundary',  label: 'Граница района',      color: '#1a3d7c', enabled: true,  strokeOnly: true },
-    { key: 'yards',     label: 'Дворовые территории', color: '#e8b84a', enabled: true },
+    { key: 'yards',     label: 'Дворовые территории', color: '#e8b84a', enabled: true, outline: { color: '#9a6400', width: 2.4 } },
     { key: 'dp',        label: 'Детские площадки',    color: '#2e9e52', enabled: false },
     { key: 'sp',        label: 'Спортивные площадки', color: '#1f78b4', enabled: false },
     { key: 'parking',   label: 'Автопарковки',        color: '#c2432e', enabled: false },
@@ -134,9 +134,10 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
   const $ = (id) => document.getElementById(id);
   const escapeHtml = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
 
-  function featureStyle(color, opacity, strokeOnly) {
+  function featureStyle(color, opacity, strokeOnly, outline) {
     if (strokeOnly) return { stroke: [{ color, width: 3.2, opacity: 0.9 }], fill: color, fillOpacity: 0, interactive: false, cursor: 'default' };
-    return { fill: color, fillOpacity: opacity, stroke: [{ color, width: 1.2, opacity: 0.9 }], interactive: true, cursor: 'pointer' };
+    const line = outline || { color, width: 1.2 };
+    return { fill: color, fillOpacity: opacity, stroke: [{ color: line.color, width: line.width, opacity: 0.95 }], interactive: true, cursor: 'pointer' };
   }
 
   function showCard(item) {
@@ -200,7 +201,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
         id: String(feature.id ?? `${key}-${index}`),
         geometry: feature.geometry,
         properties: { ...(feature.properties || {}), district: DISTRICT },
-        style: featureStyle(cfg.color, opacity, cfg.strokeOnly),
+        style: featureStyle(cfg.color, opacity, cfg.strokeOnly, cfg.outline),
         onClick: () => showCard(item)
       });
       feature._ymapFeature = child;

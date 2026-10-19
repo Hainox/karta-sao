@@ -48,12 +48,25 @@ docker compose -p sao-photo-service up -d photo-service
 
 The binding command is a dry run by default: it prints how many photos it would bind and how many it would skip (no GPS, no registered points). Photos without GPS keep no point and stay on manual review.
 
+### Photo slots on the TPU and parking map (migration 014)
+
+The TPU and parking map lets districts and АвД upload photos into slots (as many as the object's required photo count, one by default) and lets the prefecture accept or reject each photo with a comment. Slots live in the new `object_slot_photos` table, so this release needs the migration before the new code starts. The migration is idempotent and only creates the table and its indexes:
+
+```sh
+docker compose -p sao-photo-service build photo-service
+docker compose -p sao-photo-service run --rm photo-service node scripts/migrate.js
+docker compose -p sao-photo-service up -d photo-service
+curl -s https://obhod-sao.ru/photo-api/object-photo-points/slots/public | head -c 200
+```
+
+The last command must return `{"objects":[...]}` (an empty list before the first upload). When shipping files with `git archive`, include `photo-service/migrations`, otherwise `scripts/migrate.js` does not see `014_object_slot_photos.sql`.
+
 ### Shipping the files on a machine where the checkout is not the source of truth
 
 `/opt` is not a git checkout: files are copied over. Build the release archive with `git archive`, not with an archive of the working copy — on Windows `core.autocrlf=true` puts CRLF into the working copy, and a working-copy archive then writes CRLF into production, including into `Dockerfile`. `git archive` takes the index (always LF), and the rules in `.gitattributes` keep it that way:
 
 ```sh
-git archive --format=tar.gz -o /tmp/ps.tgz HEAD photo-service/src photo-service/server.js photo-service/scripts photo-service/README.md photo-service/package.json photo-service/package-lock.json
+git archive --format=tar.gz -o /tmp/ps.tgz HEAD photo-service/src photo-service/server.js photo-service/scripts photo-service/migrations photo-service/README.md photo-service/package.json photo-service/package-lock.json
 git archive --format=tar.gz -o /tmp/odh.tgz HEAD api notify
 ```
 

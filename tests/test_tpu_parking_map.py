@@ -133,3 +133,18 @@ def test_asu_lots_and_pockets_from_export_are_points_with_their_district():
     assert catalog == json.loads((ROOT / 'api/lib/tpu-objects.json').read_text(encoding='utf-8'))
     assert len(catalog) == len(data()['records'])
     assert sum(o.get('type') == 'Парковочный карман' for o in catalog) == 3340
+
+
+def test_object_card_has_photo_slots_and_status_colours():
+    markup = (ROOT / 'object-maps/tpu-parking.html').read_text(encoding='utf-8')
+    assert 'id="slotPanel"' in markup and 'photo-slots.js' in markup
+    assert 'slots?.open(record);' in markup and 'slots?.close();' in markup
+    assert 'на доработке' in markup and 'закрыта' in markup
+    slots = (ROOT / 'object-maps/photo-slots.js').read_text(encoding='utf-8')
+    # Без числа фото по заданию у объекта один слот.
+    assert "Number.isInteger(n) && n > 0 ? n : 1" in slots
+    catalog = json.loads((ROOT / 'photo-service/src/tpu-points/tpu-objects.json').read_text(encoding='utf-8'))
+    by_id = {o['id']: o for o in catalog}
+    for record in data()['records']:
+        expected = record['properties'].get('Фото по заданию')
+        assert by_id[record['id']].get('photos') == expected

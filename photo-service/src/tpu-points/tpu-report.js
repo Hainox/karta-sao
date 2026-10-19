@@ -1,6 +1,7 @@
 // Сводки по оцифровке ТПУ и по парковкам для префектуры (Excel по кнопкам на карте ТПУ).
 // Каждая сводка — отдельный файл только по своему виду объектов; отчёты ПП/ООТ/подъездов не затрагиваются.
 import { readFileSync } from 'node:fs';
+import { requiredPhotos, slotState } from './object-slots.js';
 
 export const TPU_OBJECTS = JSON.parse(readFileSync(new URL('./tpu-objects.json', import.meta.url), 'utf8'));
 // Карманы и парковки из выгрузки АСУ ОДХ несут свой тип в каталоге (поле type).
@@ -27,15 +28,21 @@ export function objectStatus(points) {
 }
 
 /** Чистый расчёт чисел сводки: Excel только раскладывает их по листам. */
-export function summarizeTpu({ objects: all = TPU_OBJECTS, kind = null, points, daily = [], generatedAt = new Date(), days = 14 }) {
+export function summarizeTpu({ objects: all = TPU_OBJECTS, kind = null, points, slots = [], daily = [], generatedAt = new Date(), days = 14 }) {
   const objects = kind ? all.filter((o) => o.kind === kind) : all;
   const byObject = new Map(objects.map((o) => [o.id, []]));
   for (const point of points) if (byObject.has(point.object_key)) byObject.get(point.object_key).push(point);
+  const slotsByObject = new Map();
+  for (const row of slots) { if (!slotsByObject.has(row.object_key)) slotsByObject.set(row.object_key, []); slotsByObject.get(row.object_key).push(row); }
   const objectRows = objects.map((o) => {
     const own = byObject.get(o.id);
     const shot = own.filter((p) => Number(p.photo_count) > 0);
     const last = shot.map((p) => iso(p.last_photo_at)).filter(Boolean).sort().at(-1) || null;
-    return { ...o, points: own.length, shot: shot.length, status: objectStatus(own), lastPhotoAt: last };
+    // Фото по слотам задания и их проверка префектурой.
+    const check = slotState(requiredPhotos(o), slotsByObject.get(o.id) || []);
+    const comments = check.slots.filter((s) => s.rejected).map((s) => `Слот ${s.slot}: ${s.rejected.review_comment}`).join('\n');
+    return { ...o, points: own.length, shot: shot.length, status: objectStatus(own), lastPhotoAt: last,
+      slotsRequired: check.required, slotsAccepted: check.accepted, slotStatus: check.label, slotComments: comments };
   });
   const groups = [...new Set(objects.map((o) => o.group))].sort((a, b) => a.localeCompare(b, 'ru'));
   const tally = (rows) => ({
@@ -65,6 +72,7 @@ export function summarizeTpu({ objects: all = TPU_OBJECTS, kind = null, points, 
 }
 
 const HEADER = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FF123A32' } };
+const SLOT_FILL = { 'Закрыта': 'FFD8F0DE', 'На проверке': 'FFDCE8FB', 'В работе': 'FFFFF1C2', 'На доработке': 'FFF9DCD6', 'Нет фото': 'FFE9ECEF' };
 const STATUS_FILL = { 'Готово': 'FFD8F0DE', 'В работе': 'FFFFF1C2', 'Не начато': 'FFF9DCD6', 'Нет точек': 'FFE9ECEF' };
 
 function headerRow(sheet, titles, widths) {
@@ -104,13 +112,14 @@ export async function buildTpuReport(summary, { mapUrl = 'https://hainox.github.
   overview.addConditionalFormatting({ ref: `${letter}4:${letter}${overview.rowCount}`, rules: [{ type: 'dataBar', cfvo: [{ type: 'num', value: 0 }, { type: 'num', value: 1 }], color: { argb: 'FF0C7A5A' } }] });
 
   const objects = book.addWorksheet('Объекты');
-  headerRow(objects, ['Тип', 'Название', 'ID', 'Ответственный', 'Район по контуру', 'Балансодержатель', 'Точек', 'Отснято', 'Статус', 'Последнее фото', 'На карте'], [10, 48, 13, 22, 20, 26, 8, 9, 12, 18, 12]);
+  headerRow(objects, ['Тип', 'Название', 'ID', 'Ответственный', 'Район по контуру', 'Балансодержатель', 'Точек', 'Отснято', 'Статус', 'Последнее фото', 'На карте', 'Фото требуется', 'Фото принято', 'Проверка фото', 'Что исправить'], [10, 48, 13, 22, 20, 26, 8, 9, 12, 18, 12, 10, 10, 14, 40]);
   for (const r of summary.objectRows) {
-    const row = objects.addRow([r.type || KIND[r.kind] || r.kind, r.label, r.sourceNumber, r.group, r.district, r.holder, r.points, r.shot, r.status, dateText(r.lastPhotoAt), { text: 'Открыть', hyperlink: `${mapUrl}?object=${encodeURIComponent(r.id)}` }]);
+    const row = objects.addRow([r.type || KIND[r.kind] || r.kind, r.label, r.sourceNumber, r.group, r.district, r.holder, r.points, r.shot, r.status, dateText(r.lastPhotoAt), { text: 'Открыть', hyperlink: `${mapUrl}?object=${encodeURIComponent(r.id)}` }, r.slotsRequired, r.slotsAccepted, r.slotStatus, r.slotComments]);
+    row.getCell(14).fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: SLOT_FILL[r.slotStatus] || 'FFE9ECEF' } };
     row.getCell(9).fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: STATUS_FILL[r.status] } };
     row.getCell(11).font = { color: { argb: 'FF0C5AA6' }, underline: true };
   }
-  objects.autoFilter = { from: 'A1', to: 'K1' };
+  objects.autoFilter = { from: 'A1', to: 'O1' };
 
   const points = book.addWorksheet('Точки');
   headerRow(points, ['Ответственный', 'Тип', 'Объект', 'Точка', 'Задание', 'Широта', 'Долгота', 'Направление, °', 'Фото текущего ракурса', 'Последнее фото', 'Назначена'], [22, 10, 44, 14, 36, 11, 11, 12, 12, 18, 18]);
