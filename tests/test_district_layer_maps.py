@@ -106,6 +106,11 @@ def test_pages_have_no_template_leftovers():
             f"{slug}.html нет входа учётной записью префектуры"
         assert "sao_district_photo_points" in html, \
             f"{slug}.html работает не с районным набором точек"
+        # Фото по точкам (район) и Excel-сводка (префектура)
+        assert "report.xlsx" in html and "X-Assignment-Version" in html, \
+            f"{slug}.html нет сводки Excel и отправки фото по точкам"
+        assert "district_editor" in html, \
+            f"{slug}.html не различает учётки районов для отправки фото"
 
 
 def test_boundary_matches_districts_geojson():

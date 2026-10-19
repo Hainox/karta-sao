@@ -25,6 +25,7 @@ const FAR_AWAY = { longitude: 37.7, latitude: 55.5 };
 
 async function serve(role, run) {
   const points = [];
+  const photos = [];
   const repository = {
     async listObjectPhotoPoints({ datasetId, district }) {
       return points.filter((p) => p.dataset_id === datasetId && (!district || p.district === district));
@@ -37,14 +38,22 @@ async function serve(role, run) {
         object_key: input.objectKey, object_type: input.objectType, district: input.district,
         longitude: input.longitude, latitude: input.latitude, label: input.label,
         note: input.note ?? '', heading: input.heading ?? null, created_by: input.actorId,
+        assignment_version: 1, created_at: new Date().toISOString(),
       };
       points.push(point);
       return point;
     },
+    async addObjectPhotoPointPhoto({ pointId, filename, expectedVersion }) {
+      const point = points.find((p) => p.id === pointId);
+      if (!point || point.assignment_version !== expectedVersion) return null;
+      const photo = { id: crypto.randomUUID(), point_id: pointId, photo_filename: filename };
+      photos.push(photo);
+      return photo;
+    },
     async updateObjectPhotoPoint(input) { const p = points.find((x) => x.id === input.id); if (!p) return null; Object.assign(p, input); return p; },
     async retireObjectPhotoPoint({ id }) { const p = points.find((x) => x.id === id); if (!p) return null; p.retired_at = new Date().toISOString(); return p; },
-    async listObjectPhotoPointPhotos() { return []; },
-    async addObjectPhotoPointPhoto() { return null; },
+    async listObjectPhotoPointPhotos(pointId) { return photos.filter((p) => p.point_id === pointId); },
+    async tpuReportData({ datasetId }) { return { points: points.filter((p) => p.dataset_id === datasetId), daily: [] }; },
     async getObjectPhotoPointPhoto() { return null; },
     async deleteObjectPhotoPointPhoto() { return null; },
   };
@@ -58,7 +67,7 @@ async function serve(role, run) {
   const server = app.listen(0);
   await new Promise((resolve) => server.once('listening', resolve));
   const base = `http://127.0.0.1:${server.address().port}/object-photo-points`;
-  try { return await run(base, repository, points); }
+  try { return await run(base, repository, points, photos); }
   finally { await new Promise((resolve) => server.close(resolve)); }
 }
 
@@ -121,5 +130,36 @@ test('направление (стрелка) редактируется отд�
     const body = await response.json();
     assert.equal(body.point.heading, 180);
     assert.equal(body.point.longitude, AEROPORT_INSIDE.longitude, 'координаты точки не тронуты');
+  });
+});
+
+test('префектура выгружает сводку районных точек (Excel)', async () => {
+  await serve('prefecture_admin', async (base, repository, points) => {
+    await repository.createObjectPhotoPoint(districtPoint({ label: '1.1' }));
+    const response = await fetch(`${base}/report.xlsx?dataset=sao_district_photo_points`);
+    assert.equal(response.status, 200);
+    assert.match(response.headers.get('content-type') || '', /spreadsheetml/);
+  });
+});
+
+test('сводка районных точек недоступна районной учётке', async () => {
+  await serve('district_editor', async (base) => {
+    const response = await fetch(`${base}/report.xlsx?dataset=sao_district_photo_points`);
+    assert.equal(response.status, 403);
+  });
+});
+
+test('районная учётка отправляет фото к точке своего района (текущий ракурс)', async () => {
+  await serve('district_editor', async (base, repository, points, photos) => {
+    const point = await repository.createObjectPhotoPoint(districtPoint());
+    const jpeg = Buffer.from([0xff, 0xd8, 0xff, 0xe0, 0x00, 0x10, 0x4a, 0x46, 0x49, 0x46, 0x00, 0x01]);
+    const response = await fetch(`${base}/${point.id}/photos`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'image/jpeg', 'X-Assignment-Version': '1', 'X-Photo-Filename': 'et.jpg' },
+      body: jpeg,
+    });
+    assert.equal(response.status, 201);
+    assert.equal(photos.length, 1, 'фото записано');
+    assert.equal(photos[0].point_id, point.id);
   });
 });

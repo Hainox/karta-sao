@@ -106,6 +106,20 @@ export function createObjectPhotoPointsRouter({ repository, authenticate, bounda
   router.param('photoId', (req, res, next, id) => UUID.test(id) ? next() : res.status(400).json({ error: 'Некорректный идентификатор фото.' }));
   router.get('/report.xlsx', (req, res, next) => req.user.role === 'prefecture_admin' ? next() : res.status(403).json({ error: 'Сводка доступна только префектуре.' }), async (req, res, next) => {
     try {
+      if (req.query.dataset === 'sao_district_photo_points') {
+        const [{ summarizeDistrictPoints, buildDistrictPointsReport, REPORT_KINDS_DISTRICT }, data] = await Promise.all([
+          import('./district-points-report.js'),
+          repository.tpuReportData({ datasetId: 'sao_district_photo_points', kind: null }),
+        ]);
+        const generatedAt = new Date();
+        const book = await buildDistrictPointsReport(summarizeDistrictPoints({ ...data, generatedAt }));
+        const day = generatedAt.toISOString().slice(0, 10);
+        res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        res.setHeader('Content-Disposition', `attachment; filename="${REPORT_KINDS_DISTRICT.district.file}_${day}.xlsx"`);
+        res.setHeader('Cache-Control', 'no-store');
+        res.send(book);
+        return;
+      }
       // Сводки по ТПУ и по парковкам выгружаются отдельными файлами: ?kind=tpu (по умолчанию) или ?kind=parking.
       const kind = req.query.kind || 'tpu';
       if (!['tpu', 'parking'].includes(kind)) return res.status(400).json({ error: 'Неизвестный вид сводки.' });
