@@ -74,7 +74,7 @@
       <h1>Кабинет приёмки · ТПУ и парковки</h1>
       <div class="subtitle">Фото по заданию от районов и АвД САО: принять или вернуть на доработку с комментарием</div>
     </div>
-    <div class="session"><span id="sessionInfo"></span><button class="secondary" id="logout" type="button" hidden>Выйти</button><a href="tpu-parking.html">Карта ТПУ и парковок →</a></div>
+    <div class="session"><span id="sessionInfo"></span><button class="primary" id="slotReport" type="button" hidden>Excel: свод по фото</button><button class="secondary" id="logout" type="button" hidden>Выйти</button><a href="tpu-parking.html">Карта ТПУ и парковок →</a></div>
   </header>
   <main>
     <form class="panel login" id="loginForm" hidden>
@@ -132,6 +132,7 @@
       el('workspace').hidden = !prefecture || !!state.object;
       el('objectView').hidden = !prefecture || !state.object;
       el('logout').hidden = !user;
+      el('slotReport').hidden = !prefecture;
       el('sessionInfo').textContent = user ? (user.email || '') + (prefecture ? ' · Префектура' : ' · нет прав приёмки') : '';
       if (user && !prefecture) el('loginStatus').textContent = 'Эта учётная запись не может принимать фото. Войдите учётной записью префектуры.';
       if (prefecture) load();
@@ -308,6 +309,20 @@
       el('loginStatus').textContent = 'Входим…';
       try { await api.login(el('loginName').value.trim(), el('loginPassword').value); el('loginPassword').value = ''; el('loginStatus').textContent = ''; showSession(); }
       catch (error) { el('loginStatus').textContent = 'Вход не выполнен: ' + error.message; }
+    };
+    // Свод Excel по фото в слотах — выгружает только префектура.
+    el('slotReport').onclick = async () => {
+      const button = el('slotReport');
+      button.disabled = true; button.textContent = 'Готовим свод…';
+      try {
+        const response = await api.request(endpoint + '/report.xlsx');
+        const url = URL.createObjectURL(await response.blob());
+        const link = document.createElement('a');
+        link.href = url; link.download = 'Svod_foto_TPU_parkovki_' + new Date().toISOString().slice(0, 10) + '.xlsx';
+        document.body.append(link); link.click(); link.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 1500);
+      } catch (error) { setStatus('listStatus', 'Не удалось получить свод: ' + error.message, true); }
+      finally { button.disabled = false; button.textContent = 'Excel: свод по фото'; }
     };
     el('logout').onclick = () => { api.clearSession(); state.queue = null; state.object = null; el('list').replaceChildren(); showSession(); };
     el('districtFilter').onchange = el('kindFilter').onchange = () => { state.shown = PAGE; render(); };

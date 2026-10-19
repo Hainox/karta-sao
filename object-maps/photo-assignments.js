@@ -29,6 +29,7 @@
       const reportButtons = [];
       let reportAnchor = document.getElementById('assignmentLogout');
       for (const report of [
+        { path: '/slots/report.xlsx', id: 'assignmentSlotReport', label: 'Excel: свод по фото (ТПУ и парковки)', file: 'Svod_foto_TPU_parkovki_', done: 'Свод по фото скачан.' },
         { kind: 'tpu', id: 'assignmentReport', label: 'Excel: сводка по ТПУ', file: 'Svodka_TPU_SAO_', done: 'Сводка по ТПУ скачана.' },
         { kind: 'parking', id: 'assignmentParkingReport', label: 'Excel: сводка по парковкам', file: 'Svodka_Parkovki_SAO_', done: 'Сводка по парковкам скачана.' },
       ]) {
@@ -45,7 +46,7 @@
           button.disabled = true;
           button.textContent = 'Готовим сводку…';
           try {
-            const response = await api.request(endpoint + '/report.xlsx?kind=' + report.kind);
+            const response = await api.request(endpoint + (report.path || '/report.xlsx?kind=' + report.kind));
             const url = URL.createObjectURL(await response.blob());
             const link = document.createElement('a');
             link.href = url;

@@ -156,3 +156,11 @@ def test_review_cabinet_for_tpu_and_parking_is_linked():
     assert 'tpu-photo-api.js' in cabinet and 'Отправить на доработку' in cabinet
     assert 'href="tpu-review.html"' in (ROOT / 'object-maps/tpu-parking.html').read_text(encoding='utf-8')
     assert '../object-maps/tpu-review.html' in (ROOT / 'hub/index.html').read_text(encoding='utf-8')
+
+
+def test_prefecture_downloads_slot_summary_excel():
+    cabinet = (ROOT / 'object-maps/tpu-review.html').read_text(encoding='utf-8')
+    assert 'id="slotReport"' in cabinet and "el('slotReport').hidden = !prefecture;" in cabinet
+    assignments = (ROOT / 'object-maps/photo-assignments.js').read_text(encoding='utf-8')
+    assert "path: '/slots/report.xlsx'" in assignments
+    assert 'button.hidden = !isPrefecture();' in assignments
