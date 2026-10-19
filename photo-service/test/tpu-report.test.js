@@ -105,3 +105,20 @@ test('сводку по ТПУ скачивает только префекту�
   assert.match(parking.name, /Svodka_Parkovki_SAO_/);
   assert.equal((await request('prefecture_admin', '?kind=stops')).status, 400);
 });
+
+test('сводка показывает проверку фото по слотам и что исправить', async () => {
+  const objects = [{ id: 'parking:7', kind: 'parking', label: 'Карман', sourceNumber: '7', group: 'Коптево', district: 'Коптево', holder: 'Жилищник Коптево', type: 'Парковочный карман', photos: 2 }];
+  const slots = [
+    { object_key: 'parking:7', slot: 1, status: 'accepted', review_comment: '', uploaded_at: '2026-10-06T09:00:00Z' },
+    { object_key: 'parking:7', slot: 2, status: 'rejected', review_comment: 'Не видно разметку', uploaded_at: '2026-10-06T09:00:00Z', reviewed_at: '2026-10-06T10:00:00Z' },
+  ];
+  const summary = summarizeTpu({ objects, kind: 'parking', points: [], slots });
+  assert.equal(summary.objectRows[0].slotStatus, 'На доработке');
+  assert.equal(summary.objectRows[0].slotsRequired, 2);
+  assert.equal(summary.objectRows[0].slotsAccepted, 1);
+  const book = new ExcelJS.Workbook();
+  await book.xlsx.load(await buildTpuReport(summary));
+  const row = book.getWorksheet('Объекты').getRow(2);
+  assert.equal(row.getCell(14).value, 'На доработке');
+  assert.equal(row.getCell(15).value, 'Слот 2: Не видно разметку');
+});

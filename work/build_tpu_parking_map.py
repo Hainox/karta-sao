@@ -203,7 +203,9 @@ def write_catalog(records):
     catalog = [{'id': r['id'], 'kind': r['kind'], 'label': r['label'], 'sourceNumber': r['sourceNumber'],
                 'group': r['group'], 'district': r['properties']['Район'],
                 'holder': r['properties']['Балансодержатель'],
-                **({'type': r['properties']['Тип']} if r.get('subkind') else {})} for r in records]
+                **({'type': r['properties']['Тип']} if r.get('subkind') else {}),
+                # Слоты фото по заданию; без числа в источнике фотослужба считает один слот.
+                **({'photos': r['properties']['Фото по заданию']} if r['properties'].get('Фото по заданию') else {})} for r in records]
     text = json.dumps(catalog, ensure_ascii=False, indent=1) + '\n'
     for folder in ('api/lib', 'photo-service/src/tpu-points'):
         (ROOT / folder / 'tpu-objects.json').write_text(text, encoding='utf-8')
