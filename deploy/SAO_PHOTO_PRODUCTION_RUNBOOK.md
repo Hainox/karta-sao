@@ -83,6 +83,20 @@ curl -s https://obhod-sao.ru/photo-api/object-photo-points/slots/public | head -
 
 The last command must return `{"objects":[...]}` (an empty list before the first upload). When shipping files with `git archive`, include `photo-service/migrations`, otherwise `scripts/migrate.js` does not see `014_object_slot_photos.sql`.
 
+### Issuing district and АвД accounts (`scripts/issue-district-accounts.js`)
+
+Gives new passwords to the district accounts of the 16 districts and АвД САО only (role `district_editor`); the prefecture and МКД accounts are not touched. Creates the АвД САО account (login `авд сао`) when it does not exist. Without `--apply` it only lists who would get a new password. Passwords are written only to the xlsx file, never to the console; the file has a ready message per district and a sheet with instructions for the TPU and parking map. Old district passwords stop working, including for stops, crossings and entrances (one account per district).
+
+```sh
+cd /opt/sao-photo-service/photo-service
+DC="docker compose -p sao-photo-service -f compose.yaml -f compose.recovery.yaml"
+$DC run --rm photo-service node scripts/issue-district-accounts.js
+install -d -m 0777 /tmp/uchetki
+$DC run --rm -v /tmp/uchetki:/out photo-service node scripts/issue-district-accounts.js --apply --out /out/uchetki.xlsx
+```
+
+Download `/tmp/uchetki/uchetki.xlsx`, then delete it on the server: `rm -rf /tmp/uchetki`.
+
 ### Shipping the files on a machine where the checkout is not the source of truth
 
 `/opt` is not a git checkout: files are copied over. Build the release archive with `git archive`, not with an archive of the working copy — on Windows `core.autocrlf=true` puts CRLF into the working copy, and a working-copy archive then writes CRLF into production, including into `Dockerfile`. `git archive` takes the index (always LF), and the rules in `.gitattributes` keep it that way:

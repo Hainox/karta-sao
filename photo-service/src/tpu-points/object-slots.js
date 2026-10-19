@@ -137,6 +137,18 @@ export function mountSlotRoutes(router, { repository, districtFor }) {
     } catch (error) { next(error); }
   };
 
+  // Свод Excel по фото в слотах — только префектуре.
+  router.get('/slots/report.xlsx', prefecture, async (req, res, next) => {
+    try {
+      const { summarizeSlots, buildSlotReport } = await import('./slot-report.js');
+      const generatedAt = new Date();
+      const book = await buildSlotReport(summarizeSlots({ rows: await repository.listSlotPhotos({ datasetId: SLOT_DATASET }), generatedAt }));
+      res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+      res.setHeader('Content-Disposition', `attachment; filename="Svod_foto_TPU_parkovki_${generatedAt.toISOString().slice(0, 10)}.xlsx"`);
+      res.setHeader('Cache-Control', 'no-store');
+      res.send(book);
+    } catch (error) { next(error); }
+  });
   // Кабинет приёмки: очередь фото на проверке и слоты на доработке по всем объектам.
   router.get('/slots/queue', prefecture, async (req, res, next) => {
     try {

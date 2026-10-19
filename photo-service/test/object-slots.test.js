@@ -150,3 +150,45 @@ test('очередь кабинета приёмки доступна тольк
     assert.equal(queue.pending[0].object.label, SLOT_OBJECTS.get(TPU).label);
   });
 });
+
+test('свод Excel по слотам: районы, виды объектов, объекты и доработка', async () => {
+  const { summarizeSlots, buildSlotReport } = await import('../src/tpu-points/slot-report.js');
+  const ExcelJS = (await import('exceljs')).default;
+  const rows = [
+    { ...row(1, 'accepted'), object_key: TPU },
+    { ...row(1, 'accepted'), object_key: POCKET },
+    { ...row(2, 'pending'), object_key: POCKET },
+    { ...row(3, 'rejected', { review_comment: 'Не видно разметку', reviewed_at: '2026-10-19T10:00:00Z' }), object_key: POCKET },
+  ];
+  const summary = summarizeSlots({ rows, generatedAt: new Date('2026-10-19T12:00:00Z') });
+  assert.equal(summary.objectRows.length, SLOT_OBJECTS.size);
+  assert.equal(summary.total.accepted, 2);
+  assert.equal(summary.total.pending, 1);
+  assert.equal(summary.total.rework, 1);
+  assert.equal(summary.total.closed, 1, 'ТПУ с одним слотом закрыт');
+  assert.equal(summary.total.required, [...SLOT_OBJECTS.values()].reduce((s, o) => s + requiredPhotos(o), 0));
+  const koptevo = summary.groupRows.find((g) => g.label === 'Коптево');
+  assert.equal(koptevo.accepted, 1);
+  assert.equal(koptevo.rework, 1);
+  assert.deepEqual(summary.kindRows.map((k) => k.label), ['ТПУ', 'Автомобильные парковки', 'Парковочные карманы']);
+  const book = new ExcelJS.Workbook();
+  await book.xlsx.load(await buildSlotReport(summary));
+  assert.deepEqual(book.worksheets.map((s) => s.name), ['Свод по районам', 'Объекты', 'На доработке']);
+  assert.equal(book.getWorksheet('Объекты').rowCount, SLOT_OBJECTS.size + 1);
+  assert.equal(book.getWorksheet('На доработке').getRow(2).getCell(4).value, 'Не видно разметку');
+  const overview = book.getWorksheet('Свод по районам');
+  const totalRow = overview.getColumn(1).values.indexOf('Итого по САО');
+  assert.equal(overview.getRow(totalRow).getCell(5).value, 2);
+});
+
+test('свод Excel по слотам скачивает только префектура', async () => {
+  await serve({ role: 'district_editor', district: 'Коптево' }, async (base) => {
+    assert.equal((await fetch(`${base}/slots/report.xlsx`)).status, 403);
+  });
+  await serve({ role: 'prefecture_admin' }, async (base) => {
+    await upload(base, TPU, 1);
+    const response = await fetch(`${base}/slots/report.xlsx`);
+    assert.equal(response.status, 200);
+    assert.match(response.headers.get('content-disposition'), /Svod_foto_TPU_parkovki_/);
+  });
+});
