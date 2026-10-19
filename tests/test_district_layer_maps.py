@@ -22,6 +22,13 @@ SLUGS = {
     "Ховрино": "hovrino", "Хорошевский": "horoshevskiy",
 }
 LAYER_KEYS = ["boundary", "yards", "dp", "sp", "parking", "paths", "sidewalks", "driveways", "odh"]
+DISTRICT_NOS = {
+    "aeroport": "1", "begovoy": "2", "beskudnikovskiy": "3", "voykovskiy": "4",
+    "vostochnoe-degunino": "5", "golovinskiy": "6", "dmitrovskiy": "7",
+    "zapadnoe-degunino": "8", "koptevo": "9", "levoberezhnyy": "10",
+    "molzhaninovskiy": "11", "savelovskiy": "12", "sokol": "13",
+    "timiryazevskiy": "14", "hovrino": "15", "horoshevskiy": "16",
+}
 
 
 def load_json(path):
@@ -78,6 +85,20 @@ def test_pages_have_no_template_leftovers():
             f"{slug}.html оставляет заливку у границы района"
         assert "feature._ymapFeature = child" in html and "state.map.removeChild(child)" in html, \
             f"{slug}.html не умеет снимать выключенные слои"
+        # Точки съёмки эталонных фото: инструмент разметки и стрелки направления
+        assert "Точки съёмки" in html, f"{slug}.html нет инструмента точек съёмки"
+        assert "YMapListener({ layer: 'any', onClick" in html, \
+            f"{slug}.html не ловит клики по карте для точек съёмки"
+        assert "new YMapMarker({ coordinates" in html, \
+            f"{slug}.html ставит точки не на географических координатах"
+        assert "shoot-arrow" in html and "rotate(${point.heading}deg)" in html, \
+            f"{slug}.html нет стрелки направления (heading в градусах)"
+        assert "Math.round(bearing(" in html, \
+            f"{slug}.html не считает азимут направления"
+        assert f"const DISTRICT_NO = '{DISTRICT_NOS[slug]}'" in html, \
+            f"{slug}.html неверный номер района в нумерации точек"
+        assert "userRotation" not in html, \
+            f"{slug}.html включает вращение карты — стрелки потеряли бы направление"
 
 
 def test_boundary_matches_districts_geojson():
