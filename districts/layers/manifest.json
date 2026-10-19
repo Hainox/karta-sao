@@ -1,0 +1,256 @@
+{
+  "layers": {
+    "boundary": {
+      "label": "Граница района",
+      "color": "#1a3d7c",
+      "enabled": true,
+      "description": "Официальная граница муниципального округа"
+    },
+    "yards": {
+      "label": "Дворовые территории",
+      "color": "#e8b84a",
+      "enabled": true,
+      "description": "Дворовые территории (АСУ ОДС, тип 38)"
+    },
+    "dp": {
+      "label": "Детские площадки",
+      "color": "#2e9e52",
+      "enabled": true,
+      "description": "Детские площадки (тип 27/41)"
+    },
+    "sp": {
+      "label": "Спортивные площадки",
+      "color": "#1f78b4",
+      "enabled": true,
+      "description": "Спортивные площадки (тип 27/42)"
+    },
+    "parking": {
+      "label": "Автопарковки",
+      "color": "#c2432e",
+      "enabled": false,
+      "description": "Автопарковки открытого типа (тип 27/1) и парковки на проезжих частях (тип 13)"
+    },
+    "paths": {
+      "label": "Тропинки",
+      "color": "#8a6d3b",
+      "enabled": false,
+      "description": "Пешеходные и велосипедные дорожки (ДТС, тип 30)"
+    },
+    "sidewalks": {
+      "label": "Тротуары",
+      "color": "#b3a2c7",
+      "enabled": false,
+      "description": "Тротуары (тип 14) и тротуары ДТС (тип 30)"
+    },
+    "driveways": {
+      "label": "Проезды",
+      "color": "#7f6a5d",
+      "enabled": false,
+      "description": "Проезды ДТС (тип 30) и въезды/примыкания (тип 13)"
+    },
+    "odh": {
+      "label": "Объекты ОДХ",
+      "color": "#5f7f95",
+      "enabled": false,
+      "description": "Объекты дорожного хозяйства (тип 1)"
+    }
+  },
+  "districts": {
+    "Аэропорт": {
+      "boundary": 1,
+      "yards": 160,
+      "dp": 188,
+      "sp": 72,
+      "parking": 1053,
+      "paths": 1129,
+      "sidewalks": 3015,
+      "driveways": 1087,
+      "odh": 69
+    },
+    "Беговой": {
+      "boundary": 1,
+      "yards": 115,
+      "dp": 102,
+      "sp": 56,
+      "parking": 626,
+      "paths": 698,
+      "sidewalks": 1532,
+      "driveways": 781,
+      "odh": 30
+    },
+    "Бескудниковский": {
+      "boundary": 1,
+      "yards": 121,
+      "dp": 201,
+      "sp": 79,
+      "parking": 874,
+      "paths": 1303,
+      "sidewalks": 1751,
+      "driveways": 974,
+      "odh": 23
+    },
+    "Войковский": {
+      "boundary": 1,
+      "yards": 151,
+      "dp": 182,
+      "sp": 64,
+      "parking": 980,
+      "paths": 1066,
+      "sidewalks": 2228,
+      "driveways": 1060,
+      "odh": 43
+    },
+    "Восточное Дегунино": {
+      "boundary": 1,
+      "yards": 81,
+      "dp": 120,
+      "sp": 58,
+      "parking": 981,
+      "paths": 759,
+      "sidewalks": 895,
+      "driveways": 690,
+      "odh": 21
+    },
+    "Головинский": {
+      "boundary": 1,
+      "yards": 136,
+      "dp": 175,
+      "sp": 124,
+      "parking": 1361,
+      "paths": 1261,
+      "sidewalks": 2489,
+      "driveways": 1363,
+      "odh": 40
+    },
+    "Дмитровский": {
+      "boundary": 1,
+      "yards": 182,
+      "dp": 152,
+      "sp": 69,
+      "parking": 1065,
+      "paths": 1288,
+      "sidewalks": 1575,
+      "driveways": 937,
+      "odh": 38
+    },
+    "Западное Дегунино": {
+      "boundary": 1,
+      "yards": 160,
+      "dp": 180,
+      "sp": 73,
+      "parking": 1250,
+      "paths": 1110,
+      "sidewalks": 1961,
+      "driveways": 1343,
+      "odh": 49
+    },
+    "Коптево": {
+      "boundary": 1,
+      "yards": 180,
+      "dp": 230,
+      "sp": 78,
+      "parking": 1487,
+      "paths": 1247,
+      "sidewalks": 2732,
+      "driveways": 1380,
+      "odh": 43
+    },
+    "Левобережный": {
+      "boundary": 1,
+      "yards": 136,
+      "dp": 133,
+      "sp": 75,
+      "parking": 635,
+      "paths": 1114,
+      "sidewalks": 1165,
+      "driveways": 860,
+      "odh": 34
+    },
+    "Молжаниновский": {
+      "boundary": 1,
+      "yards": 8,
+      "dp": 29,
+      "sp": 29,
+      "parking": 245,
+      "paths": 288,
+      "sidewalks": 504,
+      "driveways": 481,
+      "odh": 55
+    },
+    "Савеловский": {
+      "boundary": 1,
+      "yards": 147,
+      "dp": 143,
+      "sp": 39,
+      "parking": 763,
+      "paths": 586,
+      "sidewalks": 1825,
+      "driveways": 1080,
+      "odh": 29
+    },
+    "Сокол": {
+      "boundary": 1,
+      "yards": 82,
+      "dp": 105,
+      "sp": 57,
+      "parking": 600,
+      "paths": 844,
+      "sidewalks": 1651,
+      "driveways": 881,
+      "odh": 39
+    },
+    "Тимирязевский": {
+      "boundary": 1,
+      "yards": 137,
+      "dp": 185,
+      "sp": 67,
+      "parking": 1084,
+      "paths": 982,
+      "sidewalks": 2299,
+      "driveways": 1172,
+      "odh": 56
+    },
+    "Ховрино": {
+      "boundary": 1,
+      "yards": 221,
+      "dp": 282,
+      "sp": 77,
+      "parking": 1406,
+      "paths": 1350,
+      "sidewalks": 1986,
+      "driveways": 1523,
+      "odh": 28
+    },
+    "Хорошевский": {
+      "boundary": 1,
+      "yards": 114,
+      "dp": 185,
+      "sp": 71,
+      "parking": 1081,
+      "paths": 1290,
+      "sidewalks": 3018,
+      "driveways": 1563,
+      "odh": 86
+    }
+  },
+  "unassigned": {
+    "odh": 4,
+    "carriageways_other": 2541,
+    "parking": 14,
+    "driveways": 30,
+    "sidewalks": 90,
+    "dts_other": 1439,
+    "paths": 16
+  },
+  "totals": {
+    "boundary": 16,
+    "yards": 2131,
+    "dp": 2592,
+    "sp": 1088,
+    "parking": 15491,
+    "paths": 16315,
+    "sidewalks": 30626,
+    "driveways": 17175,
+    "odh": 683
+  }
+}
