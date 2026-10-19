@@ -55,6 +55,16 @@
     .empty{padding:30px;text-align:center;color:var(--muted)}
     .more{display:block;margin:16px auto 0}
     .session{display:flex;align-items:center;gap:10px;font-size:12px}
+    .objects{display:grid;gap:8px}
+    .object-row{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel);text-align:left;color:var(--ink)}
+    .object-row:hover{border-color:var(--green);box-shadow:0 4px 14px #163b3014}
+    .object-row strong{display:block;font-size:14px}
+    .object-row .open{color:var(--green);font-weight:700;white-space:nowrap}
+    .pill{display:inline-block;margin-right:6px;padding:1px 8px;border-radius:999px;font-size:11px;font-weight:800;color:#fff}
+    .pill.review{background:var(--blue)}.pill.rework{background:var(--red)}.pill.accepted{background:var(--green)}.pill.empty{background:#9aa8a3}
+    .object-head{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:12px}
+    .object-head h2{margin:4px 0 2px;font-size:18px}
+    .slot-empty-box{display:grid;place-items:center;height:70px;background:#eef1ee;color:var(--muted);font-size:13px}
     @media(max-width:800px){.counts{grid-template-columns:repeat(2,minmax(0,1fr))}.tabs{margin-left:0}.toolbar select{min-width:0;width:100%}.toolbar label{flex:1 1 100%}}
   </style>
 </head>
@@ -86,8 +96,16 @@
         </div>
       </div>
       <p class="status" id="listStatus" role="status"></p>
-      <div class="grid" id="list"></div>
+      <div class="objects" id="list"></div>
       <button class="secondary more" id="more" type="button" hidden>Показать ещё</button>
+    </section>
+    <section id="objectView" hidden>
+      <div class="object-head">
+        <div><button class="secondary" id="backToList" type="button">← К списку объектов</button><h2 id="objectTitle"></h2><div class="meta" id="objectMeta"></div></div>
+        <div class="actions"><button class="primary" id="acceptAll" type="button">Принять все фото на проверке</button><a class="secondary" id="objectMapLink" target="_blank">Объект на карте →</a></div>
+      </div>
+      <p class="status" id="objectStatus" role="status"></p>
+      <div class="grid" id="slotGrid"></div>
     </section>
   </main>
   <script src="../odh-map/api-config.js"></script><script>if (["127.0.0.1", "localhost"].includes(location.hostname)) ODHApi.setBase("http://127.0.0.1:8789");</script><script src="tpu-photo-api.js"></script>
@@ -99,17 +117,20 @@
     const PAGE = 24;
     const el = (id) => document.getElementById(id);
     const make = (tag, className, text) => { const node = document.createElement(tag); if (className) node.className = className; if (text != null) node.textContent = text; return node; };
-    const state = { queue: null, tab: 'pending', shown: PAGE, urls: [] };
+    const state = { queue: null, tab: 'pending', shown: PAGE, urls: [], object: null };
     const kindOf = (object) => object.kind === 'tpu' ? 'tpu' : object.type === 'Парковочный карман' ? 'pocket' : 'parking';
     const when = (value) => value ? new Date(value).toLocaleString('ru-RU', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }) : '';
 
     async function json(path, options) { return (await api.request(endpoint + path, options)).json(); }
+    function setStatus(id, text, error = false) { el(id).textContent = text; el(id).classList.toggle('error', error); }
+    function clearUrls() { state.urls.forEach(URL.revokeObjectURL); state.urls = []; }
 
     function showSession() {
       const user = api.user();
       const prefecture = user?.role === 'prefecture_admin';
       el('loginForm').hidden = prefecture;
-      el('workspace').hidden = !prefecture;
+      el('workspace').hidden = !prefecture || !!state.object;
+      el('objectView').hidden = !prefecture || !state.object;
       el('logout').hidden = !user;
       el('sessionInfo').textContent = user ? (user.email || '') + (prefecture ? ' · Префектура' : ' · нет прав приёмки') : '';
       if (user && !prefecture) el('loginStatus').textContent = 'Эта учётная запись не может принимать фото. Войдите учётной записью префектуры.';
@@ -117,16 +138,13 @@
     }
 
     async function load() {
-      el('listStatus').textContent = 'Загружаем очередь…';
+      setStatus('listStatus', 'Загружаем очередь…');
       try {
         state.queue = await json('/queue');
         fillDistricts();
         renderCounts();
         render();
-      } catch (error) {
-        el('listStatus').textContent = 'Не удалось загрузить очередь: ' + error.message;
-        el('listStatus').classList.add('error');
-      }
+      } catch (error) { setStatus('listStatus', 'Не удалось загрузить очередь: ' + error.message, true); }
     }
 
     function fillDistricts() {
@@ -140,11 +158,12 @@
 
     function renderCounts() {
       const c = state.queue.counts;
+      const objects = (rows) => new Set(rows.map((r) => r.object.id)).size;
       const items = [
-        ['review', state.queue.pending.length, 'фото на проверке'],
-        ['rework', state.queue.rework.length, 'слотов на доработке'],
+        ['review', objects(state.queue.pending), `объектов на проверке · ${state.queue.pending.length} фото`],
+        ['rework', objects(state.queue.rework), `объектов на доработке · ${state.queue.rework.length} слотов`],
         ['closed', c.closed, 'объектов закрыто'],
-        ['progress', c.progress + c.review + c.rework, 'объектов в работе'],
+        ['progress', c.progress, 'объектов в работе (не все слоты)'],
         ['empty', c.empty, 'объектов без фото'],
       ];
       el('counts').replaceChildren(...items.map(([key, value, label]) => {
@@ -154,92 +173,143 @@
       }));
     }
 
-    function rows() {
+    // Объекты вкладки: фото на проверке (или слоты на доработке) сгруппированы по объекту.
+    function objectRows() {
       const district = el('districtFilter').value;
       const kind = el('kindFilter').value;
-      return state.queue[state.tab].filter((row) => (!district || row.object.group === district) && (!kind || kindOf(row.object) === kind));
+      const groups = new Map();
+      for (const row of state.queue[state.tab]) {
+        if ((district && row.object.group !== district) || (kind && kindOf(row.object) !== kind)) continue;
+        if (!groups.has(row.object.id)) groups.set(row.object.id, { object: row.object, rows: [] });
+        groups.get(row.object.id).rows.push(row);
+      }
+      const first = (g) => Math.min(...g.rows.map((r) => new Date(r.uploaded_at).getTime()));
+      return [...groups.values()].sort((a, b) => state.tab === 'pending' ? first(a) - first(b) : first(b) - first(a));
     }
 
     function render() {
-      state.urls.forEach(URL.revokeObjectURL); state.urls = [];
       const list = el('list');
-      const all = rows();
+      const all = objectRows();
       const shown = all.slice(0, state.shown);
-      el('listStatus').classList.remove('error');
-      el('listStatus').textContent = all.length
-        ? `Показано ${shown.length} из ${all.length.toLocaleString('ru-RU')}` + (state.tab === 'pending' ? ' · сначала давно загруженные' : '')
-        : '';
-      list.replaceChildren(...shown.map(card));
-      if (!all.length) list.append(make('div', 'empty', state.tab === 'pending' ? 'Нет фото, ожидающих проверки.' : 'Нет слотов на доработке.'));
+      setStatus('listStatus', all.length ? `Объектов: ${all.length.toLocaleString('ru-RU')}` + (state.tab === 'pending' ? ' · сначала те, что ждут дольше всех' : '') : '');
+      list.replaceChildren(...shown.map((group) => {
+        const row = make('button', 'object-row'); row.type = 'button';
+        const info = make('div');
+        const pill = make('span', 'pill ' + (state.tab === 'pending' ? 'review' : 'rework'), state.tab === 'pending' ? `на проверке: ${group.rows.length}` : `на доработке: ${group.rows.length}`);
+        const meta = make('div', 'meta', `${group.object.group} · ${group.object.type} · слотов по заданию: ${group.object.required} · ` + (state.tab === 'pending' ? 'первое фото ' : 'отклонено ') + when(state.tab === 'pending' ? group.rows[0].uploaded_at : group.rows[0].reviewed_at));
+        info.append(make('strong', '', group.object.label), meta);
+        meta.prepend(pill);
+        row.append(info, make('span', 'open', 'Открыть объект →'));
+        row.onclick = () => openObject(group.object);
+        return row;
+      }));
+      if (!all.length) list.append(make('div', 'empty', state.tab === 'pending' ? 'Нет объектов с фото на проверке.' : 'Нет объектов на доработке.'));
       el('more').hidden = shown.length >= all.length;
     }
 
-    function photoBox(row) {
+    function photoBox(photo, label) {
       const box = make('a', 'photo placeholder', 'Загружаем фото…');
       box.target = '_blank'; box.rel = 'noopener';
-      api.request(endpoint + '/photos/' + row.id).then((response) => response.blob()).then((blob) => {
+      api.request(endpoint + '/photos/' + photo.id).then((response) => response.blob()).then((blob) => {
         const url = URL.createObjectURL(blob); state.urls.push(url);
-        const image = make('img'); image.src = url; image.alt = 'Фото: ' + row.object.label;
+        const image = make('img'); image.src = url; image.alt = label;
         box.href = url; box.classList.remove('placeholder'); box.replaceChildren(image);
       }).catch(() => { box.textContent = 'Фото не открылось'; });
       return box;
     }
 
-    function card(row) {
-      const node = make('article', 'card' + (state.tab === 'rework' ? ' rework' : ''));
+    async function openObject(object) {
+      state.object = object;
+      el('workspace').hidden = true; el('objectView').hidden = false;
+      el('objectTitle').textContent = object.label;
+      el('objectMeta').textContent = `${object.group} · ${object.type} · слотов по заданию: ${object.required}`;
+      el('objectMapLink').href = 'tpu-parking.html?object=' + encodeURIComponent(object.id);
+      window.scrollTo({ top: 0 });
+      await renderObject();
+    }
+
+    async function renderObject() {
+      clearUrls();
+      const grid = el('slotGrid');
+      grid.replaceChildren();
+      setStatus('objectStatus', 'Загружаем слоты…');
+      let detail;
+      try { detail = await json('/objects/' + encodeURIComponent(state.object.id)); }
+      catch (error) { setStatus('objectStatus', 'Не удалось открыть объект: ' + error.message, true); return; }
+      const labels = { empty: 'Нет фото', progress: 'В работе', review: 'На проверке', rework: 'На доработке', closed: 'Закрыта' };
+      setStatus('objectStatus', `Статус объекта: ${labels[detail.status]} · принято ${detail.accepted} из ${detail.required}`);
+      const pending = detail.slots.filter((s) => s.photo?.status === 'pending');
+      el('acceptAll').hidden = pending.length < 2;
+      el('acceptAll').onclick = async () => {
+        if (!confirm(`Принять все ${pending.length} фото этого объекта, которые на проверке?`)) return;
+        el('acceptAll').disabled = true;
+        try { for (const slot of pending) await json('/photos/' + slot.photo.id + '/review', { method: 'POST', body: JSON.stringify({ decision: 'accepted', comment: '' }) }); }
+        catch (error) { setStatus('objectStatus', 'Не удалось принять: ' + error.message, true); }
+        el('acceptAll').disabled = false;
+        await renderObject();
+      };
+      grid.replaceChildren(...detail.slots.map((slot) => slotCard(slot)));
+    }
+
+    function slotCard(slot) {
+      const node = make('article', 'card' + (slot.rejected ? ' rework' : ''));
       const body = make('div', 'body');
-      const meta = make('div', 'meta', `${row.object.group} · ${row.object.type} · слот ${row.slot} из ${row.object.required} · загружено ${when(row.uploaded_at)}`);
-      const link = make('a', 'map-link', 'Открыть объект на карте →'); link.href = 'tpu-parking.html?object=' + encodeURIComponent(row.object.id); link.target = '_blank';
-      body.append(make('h3', '', row.object.label), meta);
-      if (state.tab === 'rework') {
-        body.append(make('p', 'comment', 'Что исправить: ' + row.review_comment), make('div', 'meta', 'Отклонено ' + when(row.reviewed_at) + '. Ждём новое фото от района.'), link);
-      } else {
+      const title = make('h3', '', 'Слот ' + slot.slot + ' ');
+      body.append(title);
+      if (slot.photo) {
+        const accepted = slot.photo.status === 'accepted';
+        title.append(make('span', 'pill ' + (accepted ? 'accepted' : 'review'), accepted ? 'Принято' : 'На проверке'));
+        body.append(make('div', 'meta', 'Загружено ' + when(slot.photo.uploaded_at) + (accepted ? ' · принято ' + when(slot.photo.reviewed_at) : '')));
+        node.append(photoBox(slot.photo, 'Слот ' + slot.slot), body);
         const actions = make('div', 'actions');
-        const accept = make('button', 'primary', 'Принять'); accept.type = 'button';
         const reject = make('button', 'danger', 'Отклонить'); reject.type = 'button';
-        actions.append(accept, reject);
+        if (!accepted) { const accept = make('button', 'primary', 'Принять'); accept.type = 'button'; accept.onclick = () => decide(slot.photo, 'accepted', '', [accept, reject]); actions.append(accept); }
+        actions.append(reject);
         const form = make('form', 'reject-form'); form.hidden = true;
         const comment = make('textarea'); comment.placeholder = 'Что не так и что исправить — комментарий увидит район'; comment.maxLength = 2000; comment.required = true;
         const send = make('button', 'danger', 'Отправить на доработку'); send.type = 'submit';
         const cancel = make('button', 'secondary', 'Отмена'); cancel.type = 'button';
         const formActions = make('div', 'actions'); formActions.append(send, cancel);
         form.append(comment, formActions);
-        accept.onclick = () => decide(row, 'accepted', '', node, [accept, reject]);
         reject.onclick = () => { form.hidden = false; actions.hidden = true; comment.focus(); };
         cancel.onclick = () => { form.hidden = true; actions.hidden = false; };
-        form.onsubmit = (event) => { event.preventDefault(); const text = comment.value.trim(); if (text) decide(row, 'rejected', text, node, [send, cancel]); };
-        body.append(actions, form, link);
+        form.onsubmit = (event) => { event.preventDefault(); const text = comment.value.trim(); if (text) decide(slot.photo, 'rejected', text, [send, cancel]); };
+        body.append(actions, form);
+      } else if (slot.rejected) {
+        title.append(make('span', 'pill rework', 'На доработке'));
+        node.append(photoBox(slot.rejected, 'Отклонённое фото, слот ' + slot.slot), body);
+        body.append(make('p', 'comment', 'Что исправить: ' + slot.rejected.review_comment), make('div', 'meta', 'Отклонено ' + when(slot.rejected.reviewed_at) + '. Ждём новое фото от района.'));
+      } else {
+        title.append(make('span', 'pill empty', 'Нет фото'));
+        node.append(make('div', 'slot-empty-box', 'Район ещё не загрузил фото'), body);
       }
-      node.append(photoBox(row), body);
       return node;
     }
 
-    async function decide(row, decision, comment, node, buttons) {
+    async function decide(photo, decision, comment, buttons) {
       buttons.forEach((b) => { b.disabled = true; });
       try {
-        await json('/photos/' + row.id + '/review', { method: 'POST', body: JSON.stringify({ decision, comment }) });
-        node.remove();
-        // Очередь и счётчики пересчитывает сервер: объект мог закрыться или уйти на доработку.
-        const keep = state.shown;
-        state.queue = await json('/queue');
-        renderCounts();
-        state.shown = keep;
-        el('listStatus').textContent = decision === 'accepted' ? 'Фото принято.' : 'Фото отклонено, слот отправлен на доработку.';
-        setTimeout(render, 600);
+        await json('/photos/' + photo.id + '/review', { method: 'POST', body: JSON.stringify({ decision, comment }) });
+        await renderObject();
+        setStatus('objectStatus', (decision === 'accepted' ? 'Фото принято. ' : 'Фото отклонено, слот отправлен на доработку. ') + el('objectStatus').textContent);
       } catch (error) {
         buttons.forEach((b) => { b.disabled = false; });
-        el('listStatus').textContent = 'Не удалось сохранить решение: ' + error.message;
-        el('listStatus').classList.add('error');
+        setStatus('objectStatus', 'Не удалось сохранить решение: ' + error.message, true);
       }
     }
 
+    el('backToList').onclick = async () => {
+      state.object = null; clearUrls();
+      el('objectView').hidden = true; el('workspace').hidden = false;
+      await load();
+    };
     el('loginForm').onsubmit = async (event) => {
       event.preventDefault();
       el('loginStatus').textContent = 'Входим…';
       try { await api.login(el('loginName').value.trim(), el('loginPassword').value); el('loginPassword').value = ''; el('loginStatus').textContent = ''; showSession(); }
       catch (error) { el('loginStatus').textContent = 'Вход не выполнен: ' + error.message; }
     };
-    el('logout').onclick = () => { api.clearSession(); state.queue = null; el('list').replaceChildren(); showSession(); };
+    el('logout').onclick = () => { api.clearSession(); state.queue = null; state.object = null; el('list').replaceChildren(); showSession(); };
     el('districtFilter').onchange = el('kindFilter').onchange = () => { state.shown = PAGE; render(); };
     el('more').onclick = () => { state.shown += PAGE; render(); };
     document.querySelectorAll('.tab').forEach((tab) => {
