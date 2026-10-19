@@ -91,6 +91,8 @@ def test_pages_have_no_template_leftovers():
             f"{slug}.html точки съёмки не вынесены в подписанный слой пробного импорта"
         assert "if (!state.shootLayerOn) return;" in html, \
             f"{slug}.html рисует точки съёмки при выключенном слое"
+        assert re.findall(r'class="dist-link active" href="([^"]+)"', html) == [f"{slug}.html"], \
+            f"{slug}.html в списке районов подсвечен не свой район"
         enabled = re.findall(r"\{ key: '(\w+)',[^}]*enabled: true", html)
         assert enabled == ['boundary', 'yards'], \
             f"{slug}.html по умолчанию включены {enabled}: включены должны быть только граница и дворы"

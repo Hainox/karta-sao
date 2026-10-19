@@ -183,9 +183,10 @@ def write_files(out, counter, districts):
 def write_pages(districts):
     template = PAGE_TEMPLATE.read_text(encoding="utf-8")
     names = list(districts)
-    links = "".join('<a class="dist-link%s" href="%s.html">%s</a>' % (" active" if n == names[0] else "", SLUGS[n], n)
-                    for n in names)
     for n in names:
+        # Подсвечиваем район текущей страницы, а не первый в списке.
+        links = "".join('<a class="dist-link%s" href="%s.html">%s</a>' % (" active" if other == n else "", SLUGS[other], other)
+                        for other in names)
         html = (template
                 .replace("{{DISTRICT}}", n)
                 .replace("{{SLUG}}", SLUGS[n])
