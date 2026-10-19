@@ -2,6 +2,7 @@ import json
 import re
 import subprocess
 import zipfile
+from functools import cache
 from pathlib import Path
 
 from shapely.geometry import Point, shape
@@ -10,9 +11,15 @@ from shapely.geometry import Point, shape
 ROOT = Path(__file__).resolve().parents[1]
 
 
+@cache
 def data():
     markup = (ROOT / 'object-maps/tpu-parking.html').read_text(encoding='utf-8')
     return json.loads(re.search(r'<script id="map-data" type="application/json">(.*?)</script>', markup, re.S)[1])
+
+
+def contour_records():
+    """Objects of the original workbook; ASU lots and pockets (subkind) are points without contours."""
+    return [r for r in data()['records'] if not r.get('subkind')]
 
 
 def test_all_tpu_have_unique_source_ids_and_points_inside_contours():
@@ -32,7 +39,7 @@ def test_all_tpu_have_unique_source_ids_and_points_inside_contours():
 def test_map_loads_excel_parking_and_supports_district_photo_packages():
     markup = (ROOT / 'object-maps/tpu-parking.html').read_text(encoding='utf-8')
     assert data()['parkingStatus'] == 'loaded'
-    parking = [r for r in data()['records'] if r['kind'] == 'parking']
+    parking = [r for r in contour_records() if r['kind'] == 'parking']
     assert len(parking) == len({r['id'] for r in parking}) == 65
     assert {r['sourceRow'] for r in parking} == set(range(1, 66))
     for record in parking:
@@ -47,6 +54,7 @@ def test_map_loads_excel_parking_and_supports_district_photo_packages():
     assert '../object-maps/tpu-parking.html' in (ROOT / 'hub/index.html').read_text(encoding='utf-8')
     links = (ROOT / 'object-maps/district-links.html').read_text(encoding='utf-8')
     assert links.count('tpu-parking.html?district=') == 17
+    assert 'карманы: ' in links
     assert 'photo-assignments.js' in markup
     assert 'id="assignmentAdd"' in markup
     assert 'id="assignmentLogin"' in markup
@@ -74,7 +82,7 @@ def test_zip_preserves_photo_bytes_point_binding_and_heic_formats(tmp_path):
 
 
 def test_avd_receives_own_objects_and_geographic_districts_are_preserved():
-    assigned = [r for r in data()['records'] if r['group'] == 'АвД САО']
+    assigned = [r for r in contour_records() if r['group'] == 'АвД САО']
     assert len(assigned) == 12
     assert sum(r['kind'] == 'tpu' for r in assigned) == 10
     assert sum(r['kind'] == 'parking' for r in assigned) == 2
@@ -85,14 +93,15 @@ def test_avd_receives_own_objects_and_geographic_districts_are_preserved():
 
 
 def test_parking_responsibility_follows_balance_holder_and_contours_fit_yandex():
-    records = data()['records']
+    records = contour_records()
     parking = [r for r in records if r['kind'] == 'parking']
     assert len(parking) == 65
     assert 'Требует назначения района' not in data()['districts']
-    for record in records:
+    for record in data()['records']:
         holder = record['properties']['Балансодержатель']
         expected = 'АвД САО' if holder == 'АвД САО' else holder.replace('Жилищник ', '')
         assert record['group'] == expected
+    for record in records:
         shift = record['yandexAlignment']
         assert shift['method'] in {'local', 'global', 'manual'}
         # Автоподгонка ограничена 3 м; большие сдвиги допустимы только после ручной проверки по подложке.
@@ -101,3 +110,26 @@ def test_parking_responsibility_follows_balance_holder_and_contours_fit_yandex()
     manual = {r['id'] for r in records if r['yandexAlignment']['method'] == 'manual'}
     assert {'parking:1325309435', 'parking:10002419', 'parking:1324244810', 'parking:914079787', 'parking:1324732294', 'parking:1325311400'} <= manual
     assert sum(r['group'] == 'АвД САО' and r['kind'] == 'parking' for r in records) == 2
+
+
+def test_asu_lots_and_pockets_from_export_are_points_with_their_district():
+    asu = [r for r in data()['records'] if r.get('subkind')]
+    assert len(asu) == len({r['id'] for r in asu}) == 3908
+    assert sum(r['subkind'] == 'lot' for r in asu) == 568
+    assert sum(r['subkind'] == 'pocket' for r in asu) == 3340
+    assert sum(r['group'] == 'АвД САО' for r in asu) == 1692
+    for record in asu:
+        # Фотослужба принимает только виды tpu и parking: карман — подвид парковки.
+        assert record['kind'] == 'parking'
+        assert record['id'] == 'parking:' + record['sourceNumber']
+        assert 'geometry' not in record
+        assert 55.7 < record['lat'] < 56.0 and 37.3 < record['lon'] < 37.7
+        assert record['properties']['Тип'] == {'lot': 'Парковка', 'pocket': 'Парковочный карман'}[record['subkind']]
+        assert record['properties']['Район'] in data()['districts']
+    markup = (ROOT / 'object-maps/tpu-parking.html').read_text(encoding='utf-8')
+    assert '<option value="pocket">Парковочные карманы</option>' in markup
+    assert 'if (!raw) continue;' in markup
+    catalog = json.loads((ROOT / 'photo-service/src/tpu-points/tpu-objects.json').read_text(encoding='utf-8'))
+    assert catalog == json.loads((ROOT / 'api/lib/tpu-objects.json').read_text(encoding='utf-8'))
+    assert len(catalog) == len(data()['records'])
+    assert sum(o.get('type') == 'Парковочный карман' for o in catalog) == 3340
