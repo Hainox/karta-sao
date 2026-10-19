@@ -15,13 +15,13 @@
     "dp": {
       "label": "Детские площадки",
       "color": "#2e9e52",
-      "enabled": true,
+      "enabled": false,
       "description": "Детские площадки (тип 27/41)"
     },
     "sp": {
       "label": "Спортивные площадки",
       "color": "#1f78b4",
-      "enabled": true,
+      "enabled": false,
       "description": "Спортивные площадки (тип 27/42)"
     },
     "parking": {

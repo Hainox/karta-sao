@@ -85,20 +85,27 @@ def test_pages_have_no_template_leftovers():
             f"{slug}.html оставляет заливку у границы района"
         assert "feature._ymapFeature = child" in html and "state.map.removeChild(child)" in html, \
             f"{slug}.html не умеет снимать выключенные слои"
-        # Точки съёмки эталонных фото: инструмент разметки и стрелки направления
+        # Точки съёмки эталонных фото: инструмент разметки; на карте только кружки, без стрелок
         assert "Точки съёмки" in html, f"{slug}.html нет инструмента точек съёмки"
+        assert 'id="shootLayerToggle"' in html and "ПРОБНЫЙ ИМПОРТ С NEXTGIS" in html, \
+            f"{slug}.html точки съёмки не вынесены в подписанный слой пробного импорта"
+        assert "if (!state.shootLayerOn) return;" in html, \
+            f"{slug}.html рисует точки съёмки при выключенном слое"
+        enabled = re.findall(r"\{ key: '(\w+)',[^}]*enabled: true", html)
+        assert enabled == ['boundary', 'yards'], \
+            f"{slug}.html по умолчанию включены {enabled}: включены должны быть только граница и дворы"
         assert "YMapListener({ layer: 'any', onClick" in html, \
             f"{slug}.html не ловит клики по карте для точек съёмки"
         assert "new YMapMarker({ coordinates" in html, \
             f"{slug}.html ставит точки не на географических координатах"
-        assert "shoot-arrow" in html and "rotate(${point.heading}deg)" in html, \
-            f"{slug}.html нет стрелки направления (heading в градусах)"
+        assert "shoot-dot" in html and "shoot-arrow" not in html, \
+            f"{slug}.html рисует стрелки у точек съёмки — их убрали по просьбе префектуры"
         assert "Math.round(bearing(" in html, \
             f"{slug}.html не считает азимут направления"
         assert f"const DISTRICT_NO = '{DISTRICT_NOS[slug]}'" in html, \
             f"{slug}.html неверный номер района в нумерации точек"
         assert "userRotation" not in html, \
-            f"{slug}.html включает вращение карты — стрелки потеряли бы направление"
+            f"{slug}.html включает вращение карты — азимут направления разошёлся бы с экраном"
         # Общий контур фотослужбы: точки с сервера, вход префектуры
         assert "object-photo-points/public" in html, \
             f"{slug}.html не загружает точки съёмки с сервера"
