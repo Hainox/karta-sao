@@ -66,6 +66,37 @@ export function slotSummary(rows, objects = SLOT_OBJECTS) {
   return summary;
 }
 
+const objectInfo = (key, object) => ({ id: key, label: object.label, kind: object.kind, type: object.type || (object.kind === 'tpu' ? 'ТПУ' : 'Парковка'), group: object.group, required: requiredPhotos(object) });
+
+/**
+ * Очередь кабинета приёмки: фото на проверке (старые сверху), слоты на доработке
+ * с комментарием и число объектов по статусам — по всем объектам каталога.
+ */
+export function slotQueue(rows, objects = SLOT_OBJECTS) {
+  const byObject = new Map();
+  for (const row of rows) {
+    if (!objects.has(row.object_key)) continue;
+    if (!byObject.has(row.object_key)) byObject.set(row.object_key, []);
+    byObject.get(row.object_key).push(row);
+  }
+  const pending = [];
+  const rework = [];
+  const counts = { empty: objects.size - byObject.size, progress: 0, review: 0, rework: 0, closed: 0 };
+  for (const [key, own] of byObject) {
+    const object = objects.get(key);
+    const state = slotState(requiredPhotos(object), own);
+    counts[state.status] += 1;
+    for (const slot of state.slots) {
+      if (slot.photo?.status === 'pending') pending.push({ ...slot.photo, object: objectInfo(key, object) });
+      if (slot.rejected) rework.push({ ...slot.rejected, object: objectInfo(key, object) });
+    }
+  }
+  const time = (row) => new Date(row.uploaded_at).getTime();
+  pending.sort((a, b) => time(a) - time(b));
+  rework.sort((a, b) => time(b) - time(a));
+  return { counts, pending, rework };
+}
+
 export function validateReview(body) {
   const decision = body?.decision;
   const comment = typeof body?.comment === 'string' ? body.comment.trim() : '';
@@ -106,6 +137,13 @@ export function mountSlotRoutes(router, { repository, districtFor }) {
     } catch (error) { next(error); }
   };
 
+  // Кабинет приёмки: очередь фото на проверке и слоты на доработке по всем объектам.
+  router.get('/slots/queue', prefecture, async (req, res, next) => {
+    try {
+      res.setHeader('Cache-Control', 'no-store');
+      res.json(slotQueue(await repository.listSlotPhotos({ datasetId: SLOT_DATASET })));
+    } catch (error) { next(error); }
+  });
   router.get('/slots/objects/:objectKey', accessObject, async (req, res, next) => {
     try {
       const rows = await repository.listSlotPhotos({ datasetId: SLOT_DATASET, objectKey: req.params.objectKey });

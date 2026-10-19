@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Кабинет приёмки · ТПУ и парковки</title>
+  <style>
+    :root{--ink:#183c35;--muted:#687873;--line:#d9e0da;--paper:#f5f5ef;--panel:#fff;--green:#0c7a5a;--green-soft:#e7f3ed;--red:#d7193f;--red-soft:#fdecef;--blue:#2a6fdb;--amber:#d99a00}
+    *{box-sizing:border-box}
+    html,body{margin:0;background:var(--paper);color:var(--ink);font:14px/1.45 "Segoe UI",Arial,sans-serif}
+    button,input,select,textarea{font:inherit}
+    button{cursor:pointer}
+    [hidden]{display:none!important}
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:14px 22px;background:#123a32;color:#fff}
+    .topbar h1{margin:0;font-size:18px}
+    .topbar .subtitle{font-size:12px;color:#c5d8d1}
+    .topbar a{color:#d5eadc;font-weight:700;text-decoration:none}
+    main{max-width:1280px;margin:0 auto;padding:18px 16px 40px}
+    .panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px}
+    .login{max-width:380px;margin:40px auto;display:grid;gap:8px}
+    .login input{padding:10px;border:1px solid #cbd9ce;border-radius:8px}
+    .primary{padding:10px 14px;border:0;border-radius:9px;background:var(--green);color:#fff;font-weight:700}
+    .secondary{padding:8px 12px;border:1px solid #9fb3aa;border-radius:9px;background:#fff;color:var(--ink);font-weight:600}
+    .danger{padding:8px 12px;border:1px solid #e3a9b5;border-radius:9px;background:var(--red-soft);color:#8c1027;font-weight:700}
+    .status{font-size:13px;color:var(--muted)}
+    .error{color:#8c1027}
+    .counts{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-bottom:14px}
+    .count{padding:12px 14px;border-radius:12px;background:var(--panel);border:1px solid var(--line)}
+    .count strong{display:block;font-size:24px;line-height:1.1}
+    .count span{font-size:12px;color:var(--muted)}
+    .count-review strong{color:var(--blue)}.count-rework strong{color:var(--red)}.count-closed strong{color:var(--green)}.count-progress strong{color:var(--amber)}
+    .toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:end;margin-bottom:14px}
+    .toolbar label{display:grid;gap:4px;font-size:12px;font-weight:700;color:var(--muted)}
+    .toolbar select{min-width:190px;padding:8px;border:1px solid #cbd9ce;border-radius:8px;background:#fff}
+    .tabs{display:flex;gap:6px;margin-left:auto}
+    .tab{padding:8px 14px;border:1px solid var(--line);border-radius:999px;background:#fff;font-weight:700;color:var(--muted)}
+    .tab.active{background:var(--ink);border-color:var(--ink);color:#fff}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:12px}
+    .card{display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+    .card .photo{display:block;aspect-ratio:4/3;background:#e9eee9;color:var(--muted);font-size:12px;text-align:center}
+    .card .photo img{width:100%;height:100%;object-fit:cover;display:block}
+    .card .photo.placeholder{display:grid;place-items:center}
+    .card.rework .photo img{filter:grayscale(.6);opacity:.75}
+    .card .body{display:grid;gap:6px;padding:10px 12px 12px}
+    .card h3{margin:0;font-size:14px;line-height:1.3}
+    .meta{font-size:12px;color:var(--muted)}
+    .chip{display:inline-block;padding:1px 7px;border-radius:999px;background:var(--green-soft);color:var(--green);font-size:11px;font-weight:800}
+    .comment{margin:0;padding:7px 9px;border-radius:8px;background:var(--red-soft);color:#8c1027;font-size:13px;white-space:pre-wrap}
+    .actions{display:flex;gap:6px;flex-wrap:wrap}
+    .actions .primary,.actions .danger{flex:1}
+    .reject-form{display:grid;gap:6px}
+    .reject-form textarea{width:100%;min-height:70px;padding:8px;border:1px solid #e3a9b5;border-radius:8px;resize:vertical}
+    .card a.map-link{font-size:12px;color:var(--green);font-weight:700}
+    .empty{padding:30px;text-align:center;color:var(--muted)}
+    .more{display:block;margin:16px auto 0}
+    .session{display:flex;align-items:center;gap:10px;font-size:12px}
+    @media(max-width:800px){.counts{grid-template-columns:repeat(2,minmax(0,1fr))}.tabs{margin-left:0}.toolbar select{min-width:0;width:100%}.toolbar label{flex:1 1 100%}}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>Кабинет приёмки · ТПУ и парковки</h1>
+      <div class="subtitle">Фото по заданию от районов и АвД САО: принять или вернуть на доработку с комментарием</div>
+    </div>
+    <div class="session"><span id="sessionInfo"></span><button class="secondary" id="logout" type="button" hidden>Выйти</button><a href="tpu-parking.html">Карта ТПУ и парковок →</a></div>
+  </header>
+  <main>
+    <form class="panel login" id="loginForm" hidden>
+      <strong>Вход префектуры</strong>
+      <span class="status">Принимать и отклонять фото может только учётная запись префектуры.</span>
+      <input id="loginName" autocomplete="username" placeholder="Логин" required>
+      <input id="loginPassword" type="password" autocomplete="current-password" placeholder="Пароль" required>
+      <button class="primary" type="submit">Войти</button>
+      <span class="status" id="loginStatus" role="status"></span>
+    </form>
+    <section id="workspace" hidden>
+      <div class="counts" id="counts"></div>
+      <div class="toolbar">
+        <label>Район<select id="districtFilter"><option value="">Все районы и АвД САО</option></select></label>
+        <label>Вид объекта<select id="kindFilter"><option value="">Все объекты</option><option value="tpu">ТПУ</option><option value="parking">Автомобильные парковки</option><option value="pocket">Парковочные карманы</option></select></label>
+        <div class="tabs" role="tablist">
+          <button class="tab active" type="button" data-tab="pending" role="tab">На проверке</button>
+          <button class="tab" type="button" data-tab="rework" role="tab">На доработке</button>
+        </div>
+      </div>
+      <p class="status" id="listStatus" role="status"></p>
+      <div class="grid" id="list"></div>
+      <button class="secondary more" id="more" type="button" hidden>Показать ещё</button>
+    </section>
+  </main>
+  <script src="../odh-map/api-config.js"></script><script>if (["127.0.0.1", "localhost"].includes(location.hostname)) ODHApi.setBase("http://127.0.0.1:8789");</script><script src="tpu-photo-api.js"></script>
+  <script>
+  (() => {
+    'use strict';
+    const api = window.TpuPhotoApi || window.ODHApi;
+    const endpoint = '/api/object-photo-points/slots';
+    const PAGE = 24;
+    const el = (id) => document.getElementById(id);
+    const make = (tag, className, text) => { const node = document.createElement(tag); if (className) node.className = className; if (text != null) node.textContent = text; return node; };
+    const state = { queue: null, tab: 'pending', shown: PAGE, urls: [] };
+    const kindOf = (object) => object.kind === 'tpu' ? 'tpu' : object.type === 'Парковочный карман' ? 'pocket' : 'parking';
+    const when = (value) => value ? new Date(value).toLocaleString('ru-RU', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }) : '';
+
+    async function json(path, options) { return (await api.request(endpoint + path, options)).json(); }
+
+    function showSession() {
+      const user = api.user();
+      const prefecture = user?.role === 'prefecture_admin';
+      el('loginForm').hidden = prefecture;
+      el('workspace').hidden = !prefecture;
+      el('logout').hidden = !user;
+      el('sessionInfo').textContent = user ? (user.email || '') + (prefecture ? ' · Префектура' : ' · нет прав приёмки') : '';
+      if (user && !prefecture) el('loginStatus').textContent = 'Эта учётная запись не может принимать фото. Войдите учётной записью префектуры.';
+      if (prefecture) load();
+    }
+
+    async function load() {
+      el('listStatus').textContent = 'Загружаем очередь…';
+      try {
+        state.queue = await json('/queue');
+        fillDistricts();
+        renderCounts();
+        render();
+      } catch (error) {
+        el('listStatus').textContent = 'Не удалось загрузить очередь: ' + error.message;
+        el('listStatus').classList.add('error');
+      }
+    }
+
+    function fillDistricts() {
+      const select = el('districtFilter');
+      const current = select.value;
+      const groups = new Set([...state.queue.pending, ...state.queue.rework].map((row) => row.object.group));
+      select.replaceChildren(new Option('Все районы и АвД САО', ''));
+      for (const group of [...groups].sort((a, b) => a.localeCompare(b, 'ru'))) select.append(new Option(group, group));
+      select.value = groups.has(current) ? current : '';
+    }
+
+    function renderCounts() {
+      const c = state.queue.counts;
+      const items = [
+        ['review', state.queue.pending.length, 'фото на проверке'],
+        ['rework', state.queue.rework.length, 'слотов на доработке'],
+        ['closed', c.closed, 'объектов закрыто'],
+        ['progress', c.progress + c.review + c.rework, 'объектов в работе'],
+        ['empty', c.empty, 'объектов без фото'],
+      ];
+      el('counts').replaceChildren(...items.map(([key, value, label]) => {
+        const box = make('div', 'count count-' + key);
+        box.append(make('strong', '', Number(value).toLocaleString('ru-RU')), make('span', '', label));
+        return box;
+      }));
+    }
+
+    function rows() {
+      const district = el('districtFilter').value;
+      const kind = el('kindFilter').value;
+      return state.queue[state.tab].filter((row) => (!district || row.object.group === district) && (!kind || kindOf(row.object) === kind));
+    }
+
+    function render() {
+      state.urls.forEach(URL.revokeObjectURL); state.urls = [];
+      const list = el('list');
+      const all = rows();
+      const shown = all.slice(0, state.shown);
+      el('listStatus').classList.remove('error');
+      el('listStatus').textContent = all.length
+        ? `Показано ${shown.length} из ${all.length.toLocaleString('ru-RU')}` + (state.tab === 'pending' ? ' · сначала давно загруженные' : '')
+        : '';
+      list.replaceChildren(...shown.map(card));
+      if (!all.length) list.append(make('div', 'empty', state.tab === 'pending' ? 'Нет фото, ожидающих проверки.' : 'Нет слотов на доработке.'));
+      el('more').hidden = shown.length >= all.length;
+    }
+
+    function photoBox(row) {
+      const box = make('a', 'photo placeholder', 'Загружаем фото…');
+      box.target = '_blank'; box.rel = 'noopener';
+      api.request(endpoint + '/photos/' + row.id).then((response) => response.blob()).then((blob) => {
+        const url = URL.createObjectURL(blob); state.urls.push(url);
+        const image = make('img'); image.src = url; image.alt = 'Фото: ' + row.object.label;
+        box.href = url; box.classList.remove('placeholder'); box.replaceChildren(image);
+      }).catch(() => { box.textContent = 'Фото не открылось'; });
+      return box;
+    }
+
+    function card(row) {
+      const node = make('article', 'card' + (state.tab === 'rework' ? ' rework' : ''));
+      const body = make('div', 'body');
+      const meta = make('div', 'meta', `${row.object.group} · ${row.object.type} · слот ${row.slot} из ${row.object.required} · загружено ${when(row.uploaded_at)}`);
+      const link = make('a', 'map-link', 'Открыть объект на карте →'); link.href = 'tpu-parking.html?object=' + encodeURIComponent(row.object.id); link.target = '_blank';
+      body.append(make('h3', '', row.object.label), meta);
+      if (state.tab === 'rework') {
+        body.append(make('p', 'comment', 'Что исправить: ' + row.review_comment), make('div', 'meta', 'Отклонено ' + when(row.reviewed_at) + '. Ждём новое фото от района.'), link);
+      } else {
+        const actions = make('div', 'actions');
+        const accept = make('button', 'primary', 'Принять'); accept.type = 'button';
+        const reject = make('button', 'danger', 'Отклонить'); reject.type = 'button';
+        actions.append(accept, reject);
+        const form = make('form', 'reject-form'); form.hidden = true;
+        const comment = make('textarea'); comment.placeholder = 'Что не так и что исправить — комментарий увидит район'; comment.maxLength = 2000; comment.required = true;
+        const send = make('button', 'danger', 'Отправить на доработку'); send.type = 'submit';
+        const cancel = make('button', 'secondary', 'Отмена'); cancel.type = 'button';
+        const formActions = make('div', 'actions'); formActions.append(send, cancel);
+        form.append(comment, formActions);
+        accept.onclick = () => decide(row, 'accepted', '', node, [accept, reject]);
+        reject.onclick = () => { form.hidden = false; actions.hidden = true; comment.focus(); };
+        cancel.onclick = () => { form.hidden = true; actions.hidden = false; };
+        form.onsubmit = (event) => { event.preventDefault(); const text = comment.value.trim(); if (text) decide(row, 'rejected', text, node, [send, cancel]); };
+        body.append(actions, form, link);
+      }
+      node.append(photoBox(row), body);
+      return node;
+    }
+
+    async function decide(row, decision, comment, node, buttons) {
+      buttons.forEach((b) => { b.disabled = true; });
+      try {
+        await json('/photos/' + row.id + '/review', { method: 'POST', body: JSON.stringify({ decision, comment }) });
+        node.remove();
+        // Очередь и счётчики пересчитывает сервер: объект мог закрыться или уйти на доработку.
+        const keep = state.shown;
+        state.queue = await json('/queue');
+        renderCounts();
+        state.shown = keep;
+        el('listStatus').textContent = decision === 'accepted' ? 'Фото принято.' : 'Фото отклонено, слот отправлен на доработку.';
+        setTimeout(render, 600);
+      } catch (error) {
+        buttons.forEach((b) => { b.disabled = false; });
+        el('listStatus').textContent = 'Не удалось сохранить решение: ' + error.message;
+        el('listStatus').classList.add('error');
+      }
+    }
+
+    el('loginForm').onsubmit = async (event) => {
+      event.preventDefault();
+      el('loginStatus').textContent = 'Входим…';
+      try { await api.login(el('loginName').value.trim(), el('loginPassword').value); el('loginPassword').value = ''; el('loginStatus').textContent = ''; showSession(); }
+      catch (error) { el('loginStatus').textContent = 'Вход не выполнен: ' + error.message; }
+    };
+    el('logout').onclick = () => { api.clearSession(); state.queue = null; el('list').replaceChildren(); showSession(); };
+    el('districtFilter').onchange = el('kindFilter').onchange = () => { state.shown = PAGE; render(); };
+    el('more').onclick = () => { state.shown += PAGE; render(); };
+    document.querySelectorAll('.tab').forEach((tab) => {
+      tab.onclick = () => {
+        state.tab = tab.dataset.tab; state.shown = PAGE;
+        document.querySelectorAll('.tab').forEach((t) => t.classList.toggle('active', t === tab));
+        render();
+      };
+    });
+    showSession();
+  })();
+  </script>
+</body>
+</html>
