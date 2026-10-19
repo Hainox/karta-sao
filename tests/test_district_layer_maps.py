@@ -76,6 +76,8 @@ def test_pages_have_no_template_leftovers():
         assert "String(feature.id" in html, f"{slug}.html передаёт YMapFeature числовой id"
         assert "strokeOnly) return { stroke:" in html and "fillOpacity: 0" in html, \
             f"{slug}.html оставляет заливку у границы района"
+        assert "feature._ymapFeature = child" in html and "state.map.removeChild(child)" in html, \
+            f"{slug}.html не умеет снимать выключенные слои"
 
 
 def test_boundary_matches_districts_geojson():
