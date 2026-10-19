@@ -138,14 +138,15 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     const opacity = cfg.key === 'yards' ? 0.32 : 0.5;
     entry.features.forEach((feature, index) => {
       const item = { feature, layerKey: key };
-      item.child = new YMapFeature({
+      const child = new YMapFeature({
         id: String(feature.id ?? `${key}-${index}`),
         geometry: feature.geometry,
         properties: { ...(feature.properties || {}), district: 'Ховрино' },
         style: featureStyle(cfg.color, opacity, cfg.strokeOnly),
         onClick: () => showCard(item)
       });
-      state.map.addChild(item.child);
+      feature._ymapFeature = child;
+      state.map.addChild(child);
     });
     entry.drawn = true;
   }
@@ -153,7 +154,13 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
   function undraw(key) {
     const entry = state.layers[key];
     if (!entry || !entry.drawn || !state.map) return;
-    entry.features.forEach((item) => { if (item.child?.parent) state.map.removeChild(item.child); item.child = null; });
+    entry.features.forEach((feature) => {
+      const child = feature._ymapFeature;
+      if (child) {
+        try { state.map.removeChild(child); } catch (_) { /* уже снят */ }
+        feature._ymapFeature = null;
+      }
+    });
     entry.drawn = false;
   }
 
