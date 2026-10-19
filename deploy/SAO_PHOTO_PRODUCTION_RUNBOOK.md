@@ -34,6 +34,28 @@ Create accounts only through the hidden-input CLI, one account at a time. Never 
 
 ## Updating an installed service
 
+> **Production runs on the recovered database — always pass both compose files.**
+> Since 2026-10-08 the live service on obhod-sao.ru uses the database `sao_photo_recovery_20261008` and the media volume `sao-photo-recovery-media-20261008`. Both are switched on by `compose.recovery.yaml`, which lives only on the server, next to `compose.yaml`. Every `docker compose` command for the photo service there must include it:
+>
+> ```sh
+> cd /opt/sao-photo-service/photo-service
+> DC="docker compose -p sao-photo-service -f compose.yaml -f compose.recovery.yaml"
+> $DC build photo-service
+> $DC run --rm photo-service node scripts/migrate.js
+> $DC up -d photo-service
+> ```
+>
+> Without `-f compose.recovery.yaml` the service starts on the empty database `sao_photo_service`: every login fails with «Неверный логин или пароль», and the maps show no shooting points. This happened on 2026-10-19 (fixed by rerunning the commands above, no data lost). Never use `--remove-orphans` and never delete the `sao-photo-recovery-*` volumes or the `sao-photo-service_*` volumes.
+>
+> Check after every restart. Both commands must show data, not empty lists:
+>
+> ```sh
+> $DC exec photo-service env | grep PHOTO_SERVICE_DB_NAME        # sao_photo_recovery_20261008
+> curl -s "https://obhod-sao.ru/photo-api/object-photo-points/public?dataset=sao_district_photo_points" | head -c 200
+> ```
+>
+> The commands below are written for a plain install; on obhod-sao.ru replace `docker compose -p sao-photo-service` with `$DC`.
+
 Reports count source points (`photos.source_id`), so the database must know the point of every photo before the new code starts. The migration and the one-off binding are separate steps; skipping the migration makes the whole report query fail, skipping the binding leaves the point-based coverage at zero for photos uploaded earlier.
 
 ```sh

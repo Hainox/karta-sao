@@ -4,7 +4,7 @@ import crypto from 'node:crypto';
 import express from 'express';
 import test from 'node:test';
 import { createObjectPhotoPointsRouter } from '../src/tpu-points/object-photo-points.js';
-import { requiredPhotos, slotState, SLOT_OBJECTS, validateReview } from '../src/tpu-points/object-slots.js';
+import { requiredPhotos, slotQueue, slotState, SLOT_OBJECTS, validateReview } from '../src/tpu-points/object-slots.js';
 
 const JPEG = Buffer.from([0xff, 0xd8, 0xff, 0xe0, 0, 16, 74, 70, 73, 70, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0xff, 0xd9]);
 // Объекты каталога: карман Коптево на 11 фото, ТПУ без числа (один слот), объект АвД.
@@ -118,5 +118,35 @@ test('префектура отклоняет фото с комментарие
     assert.equal(state.status, 'closed');
     const summary = await (await fetch(`${base}/slots/public`)).json();
     assert.deepEqual(summary.objects, [{ object_key: TPU, required: 1, filled: 1, accepted: 1, status: 'closed' }]);
+  });
+});
+
+test('очередь кабинета приёмки: фото на проверке и слоты на доработке по всем объектам', () => {
+  const rows = [
+    { ...row(1, 'pending'), object_key: POCKET, uploaded_at: '2026-10-19T10:00:00Z' },
+    { ...row(2, 'rejected', { review_comment: 'Темно' }), object_key: POCKET, uploaded_at: '2026-10-19T09:00:00Z' },
+    { ...row(1, 'accepted'), object_key: TPU, uploaded_at: '2026-10-19T08:00:00Z' },
+    { ...row(1, 'pending'), object_key: 'tpu:нет-в-каталоге' },
+  ];
+  const queue = slotQueue(rows);
+  assert.equal(queue.pending.length, 1);
+  assert.equal(queue.pending[0].object.id, POCKET);
+  assert.equal(queue.pending[0].object.type, 'Парковочный карман');
+  assert.equal(queue.pending[0].object.required, 11);
+  assert.deepEqual(queue.rework.map((r) => r.review_comment), ['Темно']);
+  assert.equal(queue.counts.rework, 1);
+  assert.equal(queue.counts.closed, 1);
+  assert.equal(queue.counts.empty, SLOT_OBJECTS.size - 2);
+});
+
+test('очередь кабинета приёмки доступна только префектуре', async () => {
+  await serve({ role: 'district_editor', district: 'Коптево' }, async (base) => {
+    assert.equal((await fetch(`${base}/slots/queue`)).status, 403);
+  });
+  await serve({ role: 'prefecture_admin' }, async (base) => {
+    await upload(base, TPU, 1);
+    const queue = await (await fetch(`${base}/slots/queue`)).json();
+    assert.equal(queue.pending.length, 1);
+    assert.equal(queue.pending[0].object.label, SLOT_OBJECTS.get(TPU).label);
   });
 });

@@ -148,3 +148,11 @@ def test_object_card_has_photo_slots_and_status_colours():
     for record in data()['records']:
         expected = record['properties'].get('Фото по заданию')
         assert by_id[record['id']].get('photos') == expected
+
+
+def test_review_cabinet_for_tpu_and_parking_is_linked():
+    cabinet = (ROOT / 'object-maps/tpu-review.html').read_text(encoding='utf-8')
+    assert "'/api/object-photo-points/slots'" in cabinet and "'/queue'" in cabinet
+    assert 'tpu-photo-api.js' in cabinet and 'Отправить на доработку' in cabinet
+    assert 'href="tpu-review.html"' in (ROOT / 'object-maps/tpu-parking.html').read_text(encoding='utf-8')
+    assert '../object-maps/tpu-review.html' in (ROOT / 'hub/index.html').read_text(encoding='utf-8')
