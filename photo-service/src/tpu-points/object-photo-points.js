@@ -1,22 +1,83 @@
 import { AVD_OWNER, AVD_OBJECTS, AVD_OUTSIDE_OBJECT, AVD_OUTSIDE_BOUNDARY } from './tpu-responsibility.js';
 import crypto from 'node:crypto';
 import express from 'express';
+import { readFileSync } from 'node:fs';
 import { DISTRICTS, isPointWithinBoundary } from './validation.js';
+import { pointInRing } from '../districts.js';
 import { safePhotoFilename, validatePhotoUpload } from './photo-markers.js';
 
 const ROLES = new Set(['prefecture_admin', 'reviewer', 'district_editor']);
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const PHOTO_COLUMNS = 'id, point_id, assignment_version, assignment_longitude, assignment_latitude, photo_mime_type, photo_filename, photo_size, uploaded_by, uploaded_at';
 
+// Наборы точек съёмки. Районные точки («эталонные фото») — второй набор: точки
+// закреплены за конкретным районом, назначает их только префектура.
+const DATASETS = {
+  sao_tpu_parking: { objectTypes: ['tpu', 'parking'], allowAvd: true },
+  sao_district_photo_points: { objectTypes: ['district'], allowAvd: false },
+};
+
+// Полигоны 16 районов (WGS84) — та же выгрузка, что и в districts.geojson атласа.
+// Границы OSM-происхождения, поэтому допуск в метрах для пограничных точек.
+const DISTRICT_TOLERANCE_M = 250;
+const DISTRICT_FEATURES = JSON.parse(readFileSync(new URL('./districts_wgs84.geojson', import.meta.url), 'utf8')).features;
+
+/** Точка внутри полигона района (с вычетом дыр). */
+function pointInsideDistrict(longitude, latitude, district) {
+  for (const feature of DISTRICT_FEATURES) {
+    if (feature?.properties?.district !== district) continue;
+    const polygons = feature.geometry.type === 'Polygon' ? [feature.geometry.coordinates] : feature.geometry.coordinates;
+    for (const polygon of polygons) {
+      if (pointInRing([longitude, latitude], polygon[0])
+        && polygon.slice(1).every((hole) => !pointInRing([longitude, latitude], hole))) return true;
+    }
+  }
+  return false;
+}
+
+/** Расстояние от точки до полигона района в метрах (0 — точка на границе). */
+function distanceToDistrictMeters(longitude, latitude, district) {
+  let best = Infinity;
+  const mX = 111320 * Math.cos(latitude * Math.PI / 180);
+  const mY = 110540;
+  for (const feature of DISTRICT_FEATURES) {
+    if (feature?.properties?.district !== district) continue;
+    const polygons = feature.geometry.type === 'Polygon' ? [feature.geometry.coordinates] : feature.geometry.coordinates;
+    for (const polygon of polygons) {
+      for (const ring of polygon) {
+        for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+          const [x1, y1] = ring[i];
+          const [x2, y2] = ring[j];
+          const dx = (x2 - x1) * mX;
+          const dy = (y2 - y1) * mY;
+          const px = (longitude - x1) * mX;
+          const py = (latitude - y1) * mY;
+          const lengthSquared = dx * dx + dy * dy || 1e-9;
+          const t = Math.max(0, Math.min(1, (px * dx + py * dy) / lengthSquared));
+          const d = Math.hypot(px - t * dx, py - t * dy);
+          if (d < best) best = d;
+        }
+      }
+    }
+  }
+  return best;
+}
+
 export function validateObjectPhotoPoint(input, boundary) {
   const errors = [];
-  if (input?.datasetId !== 'sao_tpu_parking') errors.push('Неизвестный набор объектов.');
+  const dataset = DATASETS[input?.datasetId];
+  if (!dataset) errors.push('Неизвестный набор объектов.');
   if (typeof input?.objectKey !== 'string' || !input.objectKey.trim() || input.objectKey.length > 180) errors.push('Укажите идентификатор объекта.');
-  if (!['tpu', 'parking'].includes(input?.objectType)) errors.push('Укажите тип объекта.');
+  if (!dataset?.objectTypes.includes(input?.objectType)) errors.push('Укажите тип объекта.');
   else if (typeof input?.objectKey === 'string' && !input.objectKey.startsWith(input.objectType + ':')) errors.push('Тип объекта не совпадает с идентификатором.');
-  if (!DISTRICTS.has(input?.district) && input?.district !== AVD_OWNER) errors.push('Укажите район САО.');
+  if (!DISTRICTS.has(input?.district) && !(dataset?.allowAvd && input?.district === AVD_OWNER)) errors.push('Укажите район САО.');
   if (typeof input?.longitude !== 'number' || typeof input?.latitude !== 'number' || !Number.isFinite(input.longitude) || !Number.isFinite(input.latitude) || Math.abs(input.longitude) > 180 || Math.abs(input.latitude) > 90) errors.push('Некорректные координаты.');
   else if (!isPointWithinBoundary([input.longitude, input.latitude], boundary) && !(input.district === AVD_OWNER && input.objectKey === AVD_OUTSIDE_OBJECT && isPointWithinBoundary([input.longitude, input.latitude], AVD_OUTSIDE_BOUNDARY))) errors.push('Точка должна находиться в границах САО.');
+  else if (input?.datasetId === 'sao_district_photo_points' && DISTRICTS.has(input?.district)
+    && !pointInsideDistrict(input.longitude, input.latitude, input.district)
+    && distanceToDistrictMeters(input.longitude, input.latitude, input.district) > DISTRICT_TOLERANCE_M) {
+    errors.push('Точка съёмки должна находиться в своём районе.');
+  }
   if (AVD_OBJECTS.has(input?.objectKey) && input?.district !== AVD_OWNER) errors.push('Объект закреплён за АвД САО.');
   if (input?.district === AVD_OWNER && !AVD_OBJECTS.has(input?.objectKey)) errors.push('Объект не относится к АвД САО.');
   if (typeof input?.label !== 'string' || !input.label.trim() || input.label.length > 160) errors.push('Название точки должно содержать от 1 до 160 символов.');
@@ -29,7 +90,8 @@ export function createObjectPhotoPointsRouter({ repository, authenticate, bounda
   const router = express.Router();
   router.get('/public', async (req, res, next) => {
     try {
-      const points = await repository.listObjectPhotoPoints({ datasetId: 'sao_tpu_parking' });
+      const dataset = req.query.dataset === 'sao_district_photo_points' ? 'sao_district_photo_points' : 'sao_tpu_parking';
+      const points = await repository.listObjectPhotoPoints({ datasetId: dataset, district: req.query.district || null });
       res.setHeader('Cache-Control', 'no-store');
       res.json({ points: points.map(({ id, object_key, object_type, district, longitude, latitude, label, heading }) => ({ id, object_key, object_type, district, longitude, latitude, label, heading })) });
     } catch (error) { next(error); }
@@ -59,8 +121,9 @@ export function createObjectPhotoPointsRouter({ repository, authenticate, bounda
   });
   router.get('/', async (req, res, next) => {
     try {
-      if (req.query.dataset && req.query.dataset !== 'sao_tpu_parking') return res.status(400).json({ error: 'Неизвестный набор объектов.' });
-      const points = await repository.listObjectPhotoPoints({ datasetId: 'sao_tpu_parking', objectKey: req.query.objectKey, district: districtFor(req) || req.query.district });
+      if (req.query.dataset && !DATASETS[req.query.dataset]) return res.status(400).json({ error: 'Неизвестный набор объектов.' });
+      const datasetId = req.query.dataset || 'sao_tpu_parking';
+      const points = await repository.listObjectPhotoPoints({ datasetId, objectKey: req.query.objectKey, district: districtFor(req) || req.query.district });
       res.json({ points });
     } catch (error) { next(error); }
   });
