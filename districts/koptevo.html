@@ -21,8 +21,9 @@ h1{margin:2px 0 0;font-size:24px;line-height:1.15}
 .dist-link{display:inline-block;padding:4px 9px;border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--muted);font-size:12px;text-decoration:none}
 .dist-link:hover{border-color:var(--accent);color:var(--accent)}
 .dist-link.active{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:800}
-.layers-head{display:flex;align-items:center;justify-content:space-between;margin-top:6px}
+.layers-head{display:flex;align-items:center;justify-content:space-between;margin-top:6px;gap:6px}
 .layers-head b{font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.layers-head .head-actions{display:flex;gap:6px}
 .layer-row{display:flex;align-items:center;gap:9px;padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:#fff;cursor:pointer;user-select:none}
 .layer-row+.layer-row{margin-top:6px}
 .layer-row input{accent-color:var(--accent)}
@@ -32,6 +33,11 @@ h1{margin:2px 0 0;font-size:24px;line-height:1.15}
 .layer-row.off .label{color:var(--muted);font-weight:400}
 .shoot-toggle{min-height:32px;padding:4px 12px;border:1px solid var(--accent);border-radius:9px;background:var(--accent-soft);color:var(--accent);font:inherit;font-size:13px;font-weight:800;cursor:pointer}
 .shoot-toggle.active{background:var(--accent);color:#fff}
+.shoot-login{display:flex;flex-direction:column;gap:6px;padding:10px;border:1px solid var(--line);border-radius:10px;background:#fff}
+.shoot-login input{min-height:32px;padding:5px 9px;border:1px solid var(--line);border-radius:8px;font:inherit;font-size:13px}
+.shoot-login .row{display:flex;gap:6px}
+.shoot-login .row button{flex:1;min-height:30px;padding:4px 10px;border:1px solid #8a979c;border-radius:8px;background:#fff;color:var(--ink);font:inherit;font-size:12.5px;cursor:pointer}
+.shoot-login .row button.primary{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:800}
 .shoot-hint{margin-top:6px;padding:9px 11px;border:1px solid #cfe6df;border-radius:10px;background:#eff9f5;color:#27665a;font-size:12.5px;line-height:1.45}
 .shoot-list{display:flex;flex-direction:column;gap:5px}
 .shoot-item{display:flex;align-items:center;gap:8px;padding:6px 9px;border:1px solid var(--line);border-radius:9px;background:#fff;font-size:13px;cursor:pointer}
@@ -39,8 +45,8 @@ h1{margin:2px 0 0;font-size:24px;line-height:1.15}
 .shoot-item b{font-variant-numeric:tabular-nums}
 .shoot-item .deg{color:var(--muted);font-size:12px}
 .shoot-actions{display:flex;gap:8px}
-.shoot-actions button,.shoot-import{flex:1;min-height:30px;padding:4px 10px;border:1px solid #8a979c;border-radius:8px;background:#fff;color:var(--ink);font:inherit;font-size:12px;cursor:pointer;text-align:center}
-.shoot-actions button:hover,.shoot-import:hover{border-color:var(--accent);color:var(--accent)}
+.shoot-actions button{flex:1;min-height:30px;padding:4px 10px;border:1px solid #8a979c;border-radius:8px;background:#fff;color:var(--ink);font:inherit;font-size:12px;cursor:pointer;text-align:center}
+.shoot-actions button:hover{border-color:var(--accent);color:var(--accent)}
 .card{display:none;padding:14px;border:1px solid var(--line);border-radius:12px;background:var(--accent-soft)}
 .card.open{display:block}
 .card h2{margin:0 0 8px;font-size:17px}
@@ -79,12 +85,17 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     <nav class="dist-nav"><a class="dist-link active" href="aeroport.html">Аэропорт</a><a class="dist-link" href="begovoy.html">Беговой</a><a class="dist-link" href="beskudnikovskiy.html">Бескудниковский</a><a class="dist-link" href="voykovskiy.html">Войковский</a><a class="dist-link" href="vostochnoe-degunino.html">Восточное Дегунино</a><a class="dist-link" href="golovinskiy.html">Головинский</a><a class="dist-link" href="dmitrovskiy.html">Дмитровский</a><a class="dist-link" href="zapadnoe-degunino.html">Западное Дегунино</a><a class="dist-link" href="koptevo.html">Коптево</a><a class="dist-link" href="levoberezhnyy.html">Левобережный</a><a class="dist-link" href="molzhaninovskiy.html">Молжаниновский</a><a class="dist-link" href="savelovskiy.html">Савеловский</a><a class="dist-link" href="sokol.html">Сокол</a><a class="dist-link" href="timiryazevskiy.html">Тимирязевский</a><a class="dist-link" href="hovrino.html">Ховрино</a><a class="dist-link" href="horoshevskiy.html">Хорошевский</a></nav>
     <div class="layers-head"><b>Слои</b><span class="status" id="layerTotal"></span></div>
     <div id="layerControls"></div>
-    <div class="layers-head"><b>Точки съёмки</b><button id="shootToggle" class="shoot-toggle" type="button">Разметка</button></div>
+    <div class="layers-head"><b>Точки съёмки</b><span class="head-actions"><button id="shootLogin" class="shoot-toggle" type="button">Вход</button><button id="shootToggle" class="shoot-toggle" type="button">Разметка</button></span></div>
+    <div class="shoot-login" id="shootLoginBox" hidden>
+      <input id="shootLoginName" placeholder="Логин учётной записи" autocomplete="username">
+      <input id="shootLoginPass" type="password" placeholder="Пароль" autocomplete="current-password">
+      <div class="row"><button id="shootLoginGo" class="primary" type="button">Войти</button><button id="shootLogout" type="button" hidden>Выйти</button></div>
+      <div class="status" id="shootLoginState"></div>
+    </div>
     <div class="shoot-list" id="shootList"></div>
-    <div class="shoot-hint" id="shootHint">Точки съёмки эталонных фото. Включите «Разметка»: клик ставит точку, второй клик — направление съёмки (стрелку).</div>
+    <div class="shoot-hint" id="shootHint">Точки съёмки эталонных фото назначает префектура: вход в учётную запись, затем клик ставит точку, второй клик — направление съёмки (стрелку).</div>
     <div class="shoot-actions">
       <button id="shootExport" type="button">Выгрузить GeoJSON</button>
-      <label class="shoot-import">Импорт<input type="file" id="shootImport" accept=".geojson,.json" hidden></label>
     </div>
     <div class="card" id="card"></div>
     <div class="status" id="status">Загружаем данные…</div>
@@ -95,7 +106,12 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
 (() => {
   const SLUG = 'koptevo';
   const DISTRICT_NO = '9';
-  const POINT_KEY = 'sao-photo-points:' + SLUG;
+  const DISTRICT = 'Коптево';
+  const API_BASE = 'https://obhod-sao.ru/photo-api';
+  const TOKEN_KEY = 'sao-photo-token';
+  const USER_KEY = 'sao-photo-user';
+  const LOCAL_KEY = 'sao-photo-points:' + SLUG;
+  const DATASET = 'sao_district_photo_points';
   const LAYERS = [
     { key: 'boundary',  label: 'Граница района',      color: '#1a3d7c', enabled: true,  strokeOnly: true },
     { key: 'yards',     label: 'Дворовые территории', color: '#e8b84a', enabled: true },
@@ -107,7 +123,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     { key: 'driveways', label: 'Проезды',             color: '#7f6a5d', enabled: false },
     { key: 'odh',       label: 'Объекты ОДХ',         color: '#5f7f95', enabled: false },
   ];
-  const state = { map: null, layers: {}, shootMode: false, picking: null, points: loadPoints() };
+  const state = { map: null, layers: {}, shootMode: false, picking: null, points: [], serverOk: false, photoUser: readUser() };
   const $ = (id) => document.getElementById(id);
   const escapeHtml = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
 
@@ -157,7 +173,9 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       }
     }
     renderControls();
+    await loadPhotoPoints();
     renderShootMarkers();
+    renderShootLogin();
     const bounds = fitBounds();
     if (bounds) state.map.update({ location: { bounds } });
     $('status').textContent = `Загружено объектов: ${total.toLocaleString('ru-RU')}. Клик по объекту — карточка справа.`;
@@ -174,7 +192,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       const child = new YMapFeature({
         id: String(feature.id ?? `${key}-${index}`),
         geometry: feature.geometry,
-        properties: { ...(feature.properties || {}), district: 'Коптево' },
+        properties: { ...(feature.properties || {}), district: DISTRICT },
         style: featureStyle(cfg.color, opacity, cfg.strokeOnly),
         onClick: () => showCard(item)
       });
@@ -237,19 +255,54 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     });
   }
 
-  /* ---------- Точки съёмки эталонных фото ---------- */
+  /* ---------- Точки съёмки эталонных фото: сервер фотослужбы ---------- */
 
-  function loadPoints() {
+  function readUser() {
+    try { return JSON.parse(sessionStorage.getItem(USER_KEY) || 'null'); } catch (_) { return null; }
+  }
+
+  function isPrefecture() { return state.photoUser && state.photoUser.role === 'prefecture_admin'; }
+
+  async function apiRequest(path, options = {}) {
+    const headers = new Headers(options.headers || {});
+    if (options.body && !headers.has('Content-Type')) headers.set('Content-Type', 'application/json');
+    const token = sessionStorage.getItem(TOKEN_KEY);
+    if (token) headers.set('Authorization', 'Bearer ' + token);
+    const response = await fetch(API_BASE + path, { ...options, headers });
+    if (!response.ok) {
+      const body = await response.json().catch(() => ({}));
+      throw new Error(body.message || body.error || 'Ошибка сервиса: ' + response.status);
+    }
+    return response;
+  }
+
+  function loadLocalPoints() {
     try {
-      const raw = localStorage.getItem(POINT_KEY);
-      if (!raw) return [];
-      const list = JSON.parse(raw);
+      const list = JSON.parse(localStorage.getItem(LOCAL_KEY) || '[]');
       return Array.isArray(list) ? list.filter((p) => Number.isFinite(Number(p.lng)) && Number.isFinite(Number(p.lat))) : [];
     } catch (_) { return []; }
   }
 
-  function savePoints() {
-    try { localStorage.setItem(POINT_KEY, JSON.stringify(state.points)); } catch (_) { /* хранилище недоступно */ }
+  function saveLocalPoints() {
+    try { localStorage.setItem(LOCAL_KEY, JSON.stringify(state.points)); } catch (_) { /* хранилище недоступно */ }
+  }
+
+  async function loadPhotoPoints() {
+    try {
+      const response = await fetch(`${API_BASE}/object-photo-points/public?dataset=${DATASET}&district=${encodeURIComponent(DISTRICT)}`, { cache: 'no-store' });
+      if (!response.ok) throw new Error('HTTP ' + response.status);
+      const data = await response.json();
+      state.points = (data.points || []).map((p) => ({
+        id: p.id, label: p.label, heading: p.heading == null ? null : Number(p.heading),
+        lng: Number(p.longitude), lat: Number(p.latitude), district: p.district, serverPoint: true,
+      }));
+      state.serverOk = true;
+      $('shootHint').textContent = `Точек съёмки: ${state.points.length}. Назначает префектура: войдите и включите «Разметка».`;
+    } catch (error) {
+      state.points = loadLocalPoints();
+      state.serverOk = false;
+      $('shootHint').textContent = 'Сервер фотослужбы недоступен — показаны локальные точки браузера. Новые точки сохраняются локально: выгрузите их GeoJSON.';
+    }
   }
 
   function nextLabel() {
@@ -289,7 +342,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       if (point._marker) {
         try { state.map.removeChild(point._marker); } catch (_) {}
       }
-      const marker = new YMapMarker({ coordinates: [Number(point.lng), Number(point.lat)] }, pointMarkerElement(point, false));
+      const marker = new YMapMarker({ coordinates: [point.lng, point.lat] }, pointMarkerElement(point, false));
       point._marker = marker;
       state.map.addChild(marker);
     });
@@ -319,23 +372,32 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
 
   function openPointCard(point) {
     const heading = point.heading == null ? 'не задано' : Math.round(Number(point.heading)) + '°';
+    const canEdit = isPrefecture();
     $('card').innerHTML = `
       <h2>Точка съёмки ${escapeHtml(point.label)}</h2>
       <div><strong>Направление:</strong> ${heading}</div>
       <div><strong>Координаты:</strong> ${Number(point.lat).toFixed(6)}, ${Number(point.lng).toFixed(6)}</div>
-      <div class="card-actions">
+      ${canEdit ? `<div class="card-actions">
         <button id="cardRotate" type="button">Повернуть стрелку</button>
         <button id="cardDelete" class="danger" type="button">Удалить точку</button>
         <button id="cardClose" type="button">Закрыть</button>
-      </div>`;
+      </div>` : `<div class="card-actions"><button id="cardClose" type="button">Закрыть</button></div>`}`;
     $('card').className = 'card open';
-    $('cardRotate').addEventListener('click', () => beginRotation(point));
-    $('cardDelete').addEventListener('click', () => {
-      if (!confirm(`Удалить точку съёмки «${point.label}»?`)) return;
-      removeShootMarker(point);
-      state.points = state.points.filter((p) => p.id !== point.id);
-      savePoints(); renderShootList(); $('card').className = 'card';
-    });
+    if (canEdit) {
+      $('cardRotate').addEventListener('click', () => beginRotation(point));
+      $('cardDelete').addEventListener('click', async () => {
+        if (!confirm(`Удалить точку съёмки «${point.label}»?`)) return;
+        try {
+          if (state.serverOk && point.serverPoint) await apiRequest('/object-photo-points/' + point.id, { method: 'DELETE' });
+          removeShootMarker(point);
+          state.points = state.points.filter((p) => p.id !== point.id);
+          if (!point.serverPoint) saveLocalPoints();
+          renderShootList(); $('card').className = 'card';
+        } catch (error) {
+          $('shootHint').textContent = 'Точку не удалось удалить: ' + error.message;
+        }
+      });
+    }
     $('cardClose').addEventListener('click', () => { $('card').className = 'card'; });
   }
 
@@ -346,8 +408,8 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     $('shootToggle').classList.toggle('active', on);
     $('map').classList.toggle('marking', on);
     $('shootHint').textContent = on
-      ? 'Шаг 1: кликните на карте в месте съёмки. Шаг 2: кликните в сторону, куда фотографировать, — появится стрелка.'
-      : 'Точки съёмки эталонных фото. Включите «Разметка»: клик ставит точку, второй клик — направление съёмки (стрелку).';
+      ? 'Шаг 1: кликните на карте в месте съёмки. Шаг 2: кликните в сторону, куда фотографировать, — появится стрелка и точка сохранится.'
+      : `Точек съёмки: ${state.points.length}. Назначает префектура: войдите и включите «Разметка».`;
   }
 
   function clearPreview() {
@@ -373,7 +435,6 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     if (!state.shootMode) return;
     const [lng, lat] = coordinates;
     if (!state.picking) {
-      // Шаг 1: точка съёмки
       state.picking = { lng, lat, heading: null };
       renderPreview();
       $('shootHint').textContent = 'Шаг 2: кликните в сторону, куда фотографировать, — появится стрелка и точка сохранится.';
@@ -385,46 +446,78 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       $('shootHint').textContent = 'Кликните чуть дальше от точки съёмки: направление нельзя задать вплотную к точке.';
       return;
     }
-    // Шаг 2: направление — и сразу сохранение
     state.picking.heading = Math.round(bearing([state.picking.lng, state.picking.lat], [lng, lat]));
     commitPoint();
   }
 
+  async function commitPoint() {
+    const picking = state.picking;
+    if (!picking || picking.heading == null) return;
+    if (picking.existing) {
+      try {
+        if (state.serverOk && picking.existing.serverPoint) {
+          const response = await apiRequest('/object-photo-points/' + picking.existing.id, { method: 'PATCH', body: JSON.stringify({ heading: picking.heading }) });
+          const data = await response.json();
+          picking.existing.heading = data.point.heading == null ? null : Number(data.point.heading);
+        } else {
+          picking.existing.heading = picking.heading;
+          saveLocalPoints();
+        }
+        removeShootMarker(picking.existing);
+        state.picking = null;
+        clearPreview();
+        renderShootMarkers();
+        setShootMode(false);
+        $('shootHint').textContent = `Направление точки «${picking.existing.label}» сохранено: ${Math.round(Number(picking.existing.heading))}°.`;
+      } catch (error) {
+        $('shootHint').textContent = 'Направление не сохранилось: ' + error.message;
+      }
+      return;
+    }
+    const label = nextLabel();
+    let point;
+    try {
+      if (state.serverOk) {
+        const response = await apiRequest('/object-photo-points', {
+          method: 'POST',
+          body: JSON.stringify({
+            datasetId: DATASET, objectKey: 'district:' + SLUG, objectType: 'district',
+            district: DISTRICT, longitude: picking.lng, latitude: picking.lat,
+            label, heading: picking.heading, note: '',
+          })
+        });
+        const data = await response.json();
+        point = {
+          id: data.point.id, label: data.point.label,
+          heading: data.point.heading == null ? null : Number(data.point.heading),
+          lng: Number(data.point.longitude), lat: Number(data.point.latitude),
+          district: data.point.district, serverPoint: true,
+        };
+      } else {
+        point = {
+          id: 'p' + Date.now().toString(36) + Math.random().toString(36).slice(2, 7),
+          label, heading: picking.heading, lng: picking.lng, lat: picking.lat,
+          district: DISTRICT, serverPoint: false,
+        };
+        saveLocalPoints();
+      }
+      state.points.push(point);
+      state.picking = null;
+      clearPreview();
+      renderShootMarkers();
+      $('shootHint').textContent = `Точка ${point.label} добавлена (направление ${point.heading}°). Кликните для следующей точки.`;
+    } catch (error) {
+      $('shootHint').textContent = 'Точка не сохранена: ' + error.message;
+    }
+  }
+
   function beginRotation(point) {
     state.shootMode = true;
-    state.picking = { lng: Number(point.lng), lat: Number(point.lat), heading: null, existing: point };
+    state.picking = { lng: point.lng, lat: point.lat, heading: null, existing: point };
     $('shootToggle').classList.add('active');
     $('map').classList.add('marking');
     renderPreview();
     $('shootHint').textContent = `Точка «${point.label}»: кликните в сторону съёмки — стрелка повернётся и направление сохранится.`;
-  }
-
-  function commitPoint() {
-    const picking = state.picking;
-    if (!picking || picking.heading == null) return;
-    if (picking.existing) {
-      picking.existing.heading = picking.heading;
-      removeShootMarker(picking.existing);
-      state.picking = null;
-      clearPreview();
-      savePoints(); renderShootMarkers();
-      setShootMode(false);
-      $('shootHint').textContent = `Направление точки «${picking.existing.label}» сохранено: ${Math.round(picking.existing.heading)}°.`;
-      return;
-    }
-    const point = {
-      id: 'p' + Date.now().toString(36) + Math.random().toString(36).slice(2, 7),
-      label: nextLabel(),
-      heading: picking.heading,
-      lng: picking.lng, lat: picking.lat,
-      district: 'Коптево',
-      created_at: new Date().toISOString()
-    };
-    state.points.push(point);
-    state.picking = null;
-    clearPreview();
-    savePoints(); renderShootMarkers();
-    $('shootHint').textContent = `Точка ${point.label} добавлена (направление ${point.heading}°). Кликните для следующей точки.`;
   }
 
   function exportPoints() {
@@ -433,7 +526,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       name: 'photo_points_' + SLUG,
       features: state.points.map((p) => ({
         type: 'Feature',
-        properties: { label: p.label, heading: p.heading, district: p.district || 'Коптево', created_at: p.created_at },
+        properties: { label: p.label, heading: p.heading, district: p.district || DISTRICT },
         geometry: { type: 'Point', coordinates: [Number(p.lng), Number(p.lat)] }
       }))
     };
@@ -445,44 +538,84 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     URL.revokeObjectURL(a.href);
   }
 
-  function importPoints(file) {
-    const reader = new FileReader();
-    reader.onload = () => {
-      try {
-        const data = JSON.parse(String(reader.result));
-        const features = data.type === 'FeatureCollection' ? data.features || []
-          : data.type === 'Feature' ? [data] : [];
-        const incoming = features.filter((f) => f.geometry && f.geometry.type === 'Point')
-          .map((f) => {
-            const c = f.geometry.coordinates;
-            const p = f.properties || {};
-            return {
-              id: 'p' + Date.now().toString(36) + Math.random().toString(36).slice(2, 7),
-              label: p.label || nextLabel(),
-              heading: Number.isFinite(Number(p.heading)) ? Number(p.heading) : null,
-              lng: Number(c[0]), lat: Number(c[1]),
-              district: p.district || 'Коптево',
-              created_at: p.created_at || new Date().toISOString()
-            };
-          });
-        if (!incoming.length) { $('shootHint').textContent = 'В файле не найдено точек (ожидается GeoJSON FeatureCollection с Point).'; return; }
-        state.points = [...state.points, ...incoming];
-        savePoints(); renderShootMarkers();
-        $('shootHint').textContent = `Импортировано точек: ${incoming.length}. Всего: ${state.points.length}.`;
-      } catch (error) {
-        $('shootHint').textContent = 'Файл не прочитан: ' + error.message;
-      }
-    };
-    reader.readAsText(file);
+  /* ---------- Вход префектуры ---------- */
+
+  function renderShootLogin() {
+    const box = $('shootLoginBox');
+    const user = state.photoUser;
+    if (user) {
+      box.hidden = false;
+      $('shootLoginName').hidden = true;
+      $('shootLoginPass').hidden = true;
+      $('shootLoginGo').hidden = true;
+      $('shootLogout').hidden = false;
+      $('shootLoginState').textContent = isPrefecture()
+        ? `Вошли: ${user.login || user.email || 'префектура'} · назначать точки можно.`
+        : `Вошли: ${user.login || user.email || user.role} · точки назначает только префектура.`;
+      $('shootLogin').textContent = 'Выход';
+    } else {
+      box.hidden = true;
+      $('shootLoginName').hidden = false;
+      $('shootLoginPass').hidden = false;
+      $('shootLoginGo').hidden = false;
+      $('shootLogout').hidden = true;
+      $('shootLoginState').textContent = '';
+      $('shootLogin').textContent = 'Вход';
+    }
   }
 
-  $('shootToggle').addEventListener('click', () => setShootMode(!state.shootMode));
-  $('shootExport').addEventListener('click', exportPoints);
-  $('shootImport').addEventListener('change', (event) => {
-    const file = event.target.files[0];
-    if (file) importPoints(file);
-    event.target.value = '';
+  $('shootLogin').addEventListener('click', () => {
+    if (state.photoUser) {
+      sessionStorage.removeItem(TOKEN_KEY);
+      sessionStorage.removeItem(USER_KEY);
+      state.photoUser = null;
+      if (state.shootMode) setShootMode(false);
+      renderShootLogin();
+      $('shootHint').textContent = 'Вы вышли. Точки съёмки назначает префектура.';
+      return;
+    }
+    const box = $('shootLoginBox');
+    box.hidden = !box.hidden;
+    if (!box.hidden) $('shootLoginName').focus();
   });
+
+  $('shootLoginGo').addEventListener('click', async () => {
+    const login = $('shootLoginName').value.trim();
+    const password = $('shootLoginPass').value;
+    if (!login || !password) { $('shootLoginState').textContent = 'Укажите логин и пароль.'; return; }
+    $('shootLoginState').textContent = 'Входим…';
+    try {
+      const response = await apiRequest('/auth/login', { method: 'POST', body: JSON.stringify({ login, password }) });
+      const data = await response.json();
+      sessionStorage.setItem(TOKEN_KEY, data.token);
+      sessionStorage.setItem(USER_KEY, JSON.stringify(data.user));
+      state.photoUser = data.user;
+      $('shootLoginPass').value = '';
+      renderShootLogin();
+      renderShootMarkers();
+      $('shootHint').textContent = isPrefecture()
+        ? 'Вход выполнен. Включите «Разметка» и ставьте точки съёмки.'
+        : 'Вход выполнен, но назначать точки может только учётная запись префектуры.';
+    } catch (error) {
+      $('shootLoginState').textContent = 'Не удалось войти: ' + error.message;
+    }
+  });
+
+  $('shootLoginPass').addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') $('shootLoginGo').click();
+  });
+
+  $('shootToggle').addEventListener('click', () => {
+    if (!isPrefecture()) {
+      const box = $('shootLoginBox');
+      box.hidden = false;
+      $('shootLoginName').focus();
+      $('shootHint').textContent = 'Точки съёмки назначает префектура. Войдите в учётную запись префектуры, чтобы включить разметку.';
+      return;
+    }
+    setShootMode(!state.shootMode);
+  });
+  $('shootExport').addEventListener('click', exportPoints);
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') {
       if (state.picking) { state.picking = null; clearPreview(); }

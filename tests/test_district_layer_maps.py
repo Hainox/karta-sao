@@ -99,6 +99,13 @@ def test_pages_have_no_template_leftovers():
             f"{slug}.html неверный номер района в нумерации точек"
         assert "userRotation" not in html, \
             f"{slug}.html включает вращение карты — стрелки потеряли бы направление"
+        # Общий контур фотослужбы: точки с сервера, вход префектуры
+        assert "object-photo-points/public" in html, \
+            f"{slug}.html не загружает точки съёмки с сервера"
+        assert "/auth/login" in html and "prefecture_admin" in html, \
+            f"{slug}.html нет входа учётной записью префектуры"
+        assert "sao_district_photo_points" in html, \
+            f"{slug}.html работает не с районным набором точек"
 
 
 def test_boundary_matches_districts_geojson():
