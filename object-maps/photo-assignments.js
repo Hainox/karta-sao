@@ -1,5 +1,8 @@
 (function () {
   'use strict';
+  // Стрелки направления съёмки пока выключены: точка ставится одним кликом, направление
+  // не запрашивается и не рисуется. Сохранённое ранее направление не стирается.
+  const SHOW_DIRECTION = false;
   window.SaoPhotoAssignments = {
     mount({ dataset, getMap, notify, openRecord, closeRecord, applyScope, onChange }) {
       const panel = document.getElementById('assignmentPanel');
@@ -71,7 +74,7 @@
           if (visibleObjects && !visibleObjects.has(record.id)) continue;
           const number = (counters.get(point.object_key) || 0) + 1;
           counters.set(point.object_key, number);
-          const marker = new ymaps.Placemark([Number(point.latitude), Number(point.longitude)], { iconContent: String(number), hintContent: 'Точка съёмки ' + number, heading: point.heading ?? 0, arrowDisplay: point.heading == null ? 'none' : 'block' }, { iconLayout: markerLayout, iconShape: { type: 'Circle', coordinates: [0, 0], radius: 24 }, zIndex: 2000 });
+          const marker = new ymaps.Placemark([Number(point.latitude), Number(point.longitude)], { iconContent: String(number), hintContent: 'Точка съёмки ' + number, heading: point.heading ?? 0, arrowDisplay: SHOW_DIRECTION && point.heading != null ? 'block' : 'none' }, { iconLayout: markerLayout, iconShape: { type: 'Circle', coordinates: [0, 0], radius: 24 }, zIndex: 2000 });
           marker.events.add('click', () => { if (!picking) openRecord(record); });
           layer.add(marker);
         }
@@ -180,11 +183,13 @@
       }
       function renderPicker() {
         const save = document.getElementById('assignmentSave');
-        save.disabled = picking.stage === 'position' || !picking.coordinates || picking.heading == null;
+        save.disabled = !picking.coordinates || (SHOW_DIRECTION && (picking.stage === 'position' || picking.heading == null));
         document.getElementById('assignmentCoords').textContent = picking.coordinates
           ? picking.coordinates.map(v => Number(v).toFixed(6)).join(', ')
           : 'Нажмите на карте в месте съёмки';
-        document.getElementById('assignmentDirection').textContent = picking.stage === 'position'
+        document.getElementById('assignmentDirection').textContent = !SHOW_DIRECTION
+          ? (picking.coordinates ? 'Точка поставлена. Нажмите на карте, чтобы переставить её, или сохраните.' : 'Нажмите на карте в месте съёмки.')
+          : picking.stage === 'position'
           ? 'Шаг 1: поставьте точку на карте.'
           : picking.heading == null
             ? 'Шаг 2: нажмите на карте в сторону, куда нужно фотографировать.'
@@ -196,7 +201,7 @@
           renderMap();
           preview = new ymaps.Placemark(picking.coordinates, {
             iconContent: '•', heading: picking.heading ?? 0,
-            arrowDisplay: picking.heading == null ? 'none' : 'block'
+            arrowDisplay: SHOW_DIRECTION && picking.heading != null ? 'block' : 'none'
           }, { iconLayout: markerLayout, iconShape: { type: 'Circle', coordinates: [0, 0], radius: 24 }, zIndex: 3000 });
           map.geoObjects.add(preview);
         }
@@ -204,7 +209,9 @@
       function pick(coordinates) {
         if (!picking) return false;
         if (picking.saving) return true;
-        if (picking.stage === 'position') {
+        if (!SHOW_DIRECTION) {
+          picking.coordinates = coordinates;
+        } else if (picking.stage === 'position') {
           picking.coordinates = coordinates;
           picking.heading = null;
           picking.stage = 'direction';
@@ -240,12 +247,12 @@
       }
       document.getElementById('assignmentMove').onclick = () => {
         if (!picking || picking.saving) return;
-        picking.stage = 'position'; picking.heading = null; renderPicker();
+        picking.stage = 'position'; if (SHOW_DIRECTION) picking.heading = null; renderPicker();
       };
       document.getElementById('assignmentAdd').onclick = () => begin();
       document.getElementById('assignmentCancel').onclick = cancel;
       document.getElementById('assignmentForm').onsubmit = async event => {
-        event.preventDefault(); if (!picking?.coordinates || picking.heading == null || picking.stage === 'position') return;
+        event.preventDefault(); if (!picking?.coordinates || (SHOW_DIRECTION && (picking.heading == null || picking.stage === 'position'))) return;
         const assignment = picking;
         const account = api.user()?.email;
         const label = document.getElementById('assignmentLabel').value.trim();
