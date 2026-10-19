@@ -3,6 +3,7 @@ import crypto from 'node:crypto';
 import express from 'express';
 import { readFileSync } from 'node:fs';
 import { DISTRICTS, isPointWithinBoundary } from './validation.js';
+import { pointInRing } from '../districts.js';
 import { safePhotoFilename, validatePhotoUpload } from './photo-markers.js';
 
 const ROLES = new Set(['prefecture_admin', 'reviewer', 'district_editor']);
@@ -21,7 +22,20 @@ const DATASETS = {
 const DISTRICT_TOLERANCE_M = 250;
 const DISTRICT_FEATURES = JSON.parse(readFileSync(new URL('./districts_wgs84.geojson', import.meta.url), 'utf8')).features;
 
-/** Расстояние от точки до полигона района в метрах (0 — точка внутри). */
+/** Точка внутри полигона района (с вычетом дыр). */
+function pointInsideDistrict(longitude, latitude, district) {
+  for (const feature of DISTRICT_FEATURES) {
+    if (feature?.properties?.district !== district) continue;
+    const polygons = feature.geometry.type === 'Polygon' ? [feature.geometry.coordinates] : feature.geometry.coordinates;
+    for (const polygon of polygons) {
+      if (pointInRing([longitude, latitude], polygon[0])
+        && polygon.slice(1).every((hole) => !pointInRing([longitude, latitude], hole))) return true;
+    }
+  }
+  return false;
+}
+
+/** Расстояние от точки до полигона района в метрах (0 — точка на границе). */
 function distanceToDistrictMeters(longitude, latitude, district) {
   let best = Infinity;
   const mX = 111320 * Math.cos(latitude * Math.PI / 180);
@@ -60,6 +74,7 @@ export function validateObjectPhotoPoint(input, boundary) {
   if (typeof input?.longitude !== 'number' || typeof input?.latitude !== 'number' || !Number.isFinite(input.longitude) || !Number.isFinite(input.latitude) || Math.abs(input.longitude) > 180 || Math.abs(input.latitude) > 90) errors.push('Некорректные координаты.');
   else if (!isPointWithinBoundary([input.longitude, input.latitude], boundary) && !(input.district === AVD_OWNER && input.objectKey === AVD_OUTSIDE_OBJECT && isPointWithinBoundary([input.longitude, input.latitude], AVD_OUTSIDE_BOUNDARY))) errors.push('Точка должна находиться в границах САО.');
   else if (input?.datasetId === 'sao_district_photo_points' && DISTRICTS.has(input?.district)
+    && !pointInsideDistrict(input.longitude, input.latitude, input.district)
     && distanceToDistrictMeters(input.longitude, input.latitude, input.district) > DISTRICT_TOLERANCE_M) {
     errors.push('Точка съёмки должна находиться в своём районе.');
   }

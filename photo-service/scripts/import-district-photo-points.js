@@ -26,6 +26,14 @@ const SLUGS = {
   'Ховрино': 'hovrino', 'Хорошевский': 'horoshevskiy',
 };
 const NAME_PREFIX = /^\d+\s*—\s*/;
+const MERCATOR_R = 20037508.34;
+
+/** Web Mercator (EPSG:3857, метры) -> WGS84 [долгота, широта]. */
+function fromMercator(x, y) {
+  const lon = (x / MERCATOR_R) * 180;
+  const lat = (Math.atan(Math.exp((y / MERCATOR_R) * Math.PI)) * 360) / Math.PI - 90;
+  return [Math.round(lon * 1e7) / 1e7, Math.round(lat * 1e7) / 1e7];
+}
 
 const boundary = JSON.parse(readFileSync(new URL('../src/tpu-points/sao_boundary_wgs84.geojson', import.meta.url), 'utf8'));
 const data = JSON.parse(readFileSync(sourceArg.slice('--source='.length), 'utf8'));
@@ -58,7 +66,9 @@ try {
     if (!geometry || (geometry.type !== 'Point' && geometry.type !== 'MultiPoint')) {
       rejected += 1; problems.push(`${label}: нет точечной геометрии`); continue;
     }
-    const [longitude, latitude] = geometry.type === 'Point' ? geometry.coordinates : geometry.coordinates[0];
+    let [longitude, latitude] = geometry.type === 'Point' ? geometry.coordinates : geometry.coordinates[0];
+    // NextGIS отдаёт слой в EPSG:3857 (метры): переводим в WGS84.
+    if (Math.abs(longitude) > 180 || Math.abs(latitude) > 90) [longitude, latitude] = fromMercator(longitude, latitude);
     const slug = SLUGS[district];
     if (!slug) { rejected += 1; problems.push(`${label}: неизвестный район «${district}»`); continue; }
     const input = {
