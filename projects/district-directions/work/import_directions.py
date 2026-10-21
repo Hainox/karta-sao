@@ -20,7 +20,7 @@ def build(source=SOURCE, output=OUT):
     transform = Transformer.from_crs(crs, 'EPSG:4326', always_xy=True)
     boundaries = []
     for path in sorted((ROOT / 'districts/layers').glob('*/boundary.geojson')):
-        for feature in json.loads(path.read_text(encoding='utf-8'))['features']:
+        for feature in json.loads(path.read_text(encoding='utf-8', newline='\n'))['features']:
             boundaries.append((path.parent.name, feature['properties'].get('district') or feature['properties'].get('name'), shape(feature['geometry'])))
     groups, ids = {}, set()
     for feature in data['features']:
@@ -43,9 +43,9 @@ def build(source=SOURCE, output=OUT):
     manifest = {'source': source.name, 'source_sha256': hashlib.sha256(raw).hexdigest(), 'source_crs': crs, 'coordinates': 'WGS84 longitude, latitude', 'azimuth': 'degrees clockwise from north; unchanged from source', 'total': len(ids), 'districts': {}}
     for slug, features in sorted(groups.items()):
         file = slug + '.geojson'
-        (output / file).write_text(json.dumps({'type': 'FeatureCollection', 'features': features}, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+        (output / file).write_text(json.dumps({'type': 'FeatureCollection', 'features': features}, ensure_ascii=False, indent=2) + '\n', encoding='utf-8', newline='\n')
         manifest['districts'][slug] = {'count': len(features), 'file': file, 'district': features[0]['properties']['district']}
-    (output / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+    (output / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n', encoding='utf-8', newline='\n')
     print(json.dumps(manifest, ensure_ascii=False))
     return manifest
 
