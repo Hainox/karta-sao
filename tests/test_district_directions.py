@@ -35,7 +35,7 @@ def test_all_directions_keep_source_ids_azimuths_and_positions_in_the_right_dist
             assert feature['properties']['district'] == district['district']
             before = original[fid]['geometry']['coordinates']
             restored = inverse.transform(*feature['geometry']['coordinates'])
-            assert max(abs(a-b) for a,b in zip(before, restored)) < 0.00001
+            assert max(abs(a-b) for a,b in zip(before, restored)) < 0.001
     assert found == set(original)
 
 def test_generated_directions_are_reproducible(tmp_path):

@@ -31,6 +31,8 @@ def build(source=SOURCE, output=OUT):
         if isinstance(azimuth, bool) or not isinstance(azimuth, (int, float)) or not math.isfinite(azimuth) or not 0 <= azimuth < 360:
             raise ValueError('Некорректный azimuth у fid ' + str(fid))
         lng, lat = transform.transform(*feature['geometry']['coordinates'], errcheck=True)
+        # Nine decimals keep sub-millimetre precision and stable JSON across PROJ platforms.
+        lng, lat = round(lng, 9), round(lat, 9)
         matches = [(slug, name) for slug, name, geom in boundaries if geom.covers(Point(lng, lat))]
         if len(matches) != 1:
             raise ValueError(f'fid {fid}: район определён неоднозначно: {matches}')
