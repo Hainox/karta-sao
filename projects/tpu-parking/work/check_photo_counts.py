@@ -9,6 +9,8 @@ def check(workbook, output):
     content = urllib.request.urlopen('https://hainox.github.io/karta-sao/object-maps/tpu-parking.html').read().decode()
     data = json.loads(re.search(r'<script id="map-data" type="application/json">(.*?)</script>', content, re.S).group(1))
     records = {r['id']: r for r in data['records']}
+    live = json.load(urllib.request.urlopen('https://obhod-sao.ru/photo-api/object-photo-points/slots/public'))
+    counts = {r['object_key']: r['required'] for r in live['objects']}
     catalog = {r['id']: r for r in json.loads((ROOT / 'photo-service/src/tpu-points/tpu-objects.json').read_text(encoding='utf-8'))}
     rows = list(openpyxl.load_workbook(workbook, data_only=True, read_only=True).active.values)
     expected_headers = ['№', 'Район', 'Участок', 'id ОДХ', 'Улица', 'id Парковки', 'Координаты', 'Количество фото (подзадач)', 'Количество парковочных мест', 'Площадь_кв.м', 'Тип']
@@ -28,11 +30,11 @@ def check(workbook, output):
         else:
             prop = record['properties']
             lat, lon = map(lambda v: float(v.replace(',', '.')), str(coords).split())
-            fields = [('Фото', prop.get('Фото по заданию'), photos), ('Слоты каталога', obj.get('photos', 1), photos), ('ID ОДХ', str(prop.get('ID ОДХ')), str(int(parent))), ('Участок', prop.get('Участок'), section), ('Парковочных мест', prop.get('Парковочных мест'), spaces), ('Площадь', prop.get('Площадь, кв. м'), area), ('Тип', prop.get('Тип'), kind), ('Улица', record['label'].removeprefix(kind + ': '), str(street).strip()), ('Ответственный', record['group'].casefold(), str(district).casefold())]
+            fields = [('Фото', prop.get('Фото по заданию'), photos), ('Слоты каталога', obj.get('photos', 1), photos), ('Слоты сервера', counts.get(key, obj.get('photos', 1)), photos), ('ID ОДХ', str(prop.get('ID ОДХ')), str(int(parent))), ('Участок', prop.get('Участок'), section), ('Парковочных мест', prop.get('Парковочных мест'), spaces), ('Площадь', prop.get('Площадь, кв. м'), area), ('Тип', prop.get('Тип'), kind), ('Улица', record['label'].removeprefix(kind + ': '), str(street).strip()), ('Ответственный', record['group'].casefold(), str(district).casefold())]
             for name, actual, expected in fields:
                 if actual != expected: errors.append(name)
             if abs(record['lat'] - lat) > 1e-8 or abs(record['lon'] - lon) > 1e-8: errors.append('Координаты')
-        result.append({'Строка Excel': index, 'ID объекта': key, 'Фото Excel': photos, 'Фото карта': record and record['properties'].get('Фото по заданию'), 'Слоты каталога': obj and obj.get('photos',1), 'Результат': '; '.join(errors) or 'Совпадает'})
+        result.append({'Строка Excel': index, 'ID объекта': key, 'Фото Excel': photos, 'Фото карта': record and record['properties'].get('Фото по заданию'), 'Слоты каталога': obj and obj.get('photos',1), 'Слоты сервера': counts.get(key, obj.get('photos',1) if obj else None), 'Результат': '; '.join(errors) or 'Совпадает'})
     output.parent.mkdir(parents=True, exist_ok=True)
     with output.open('w', encoding='utf-8-sig', newline='') as stream:
         writer = csv.DictWriter(stream, fieldnames=list(result[0]), delimiter=';'); writer.writeheader(); writer.writerows(result)
