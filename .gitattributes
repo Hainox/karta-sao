@@ -12,3 +12,7 @@ api/** text=auto eol=lf
 notify/** text=auto eol=lf
 object-maps/** text=auto eol=lf
 odh-map/** text=auto eol=lf
+
+# Исходник направлений хранится побайтно; сгенерированные слои воспроизводятся с LF.
+projects/district-directions/work/*.geojson -text
+districts/directions/** text=auto eol=lf
