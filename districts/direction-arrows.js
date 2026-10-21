@@ -23,6 +23,7 @@
         const district = manifest.districts[slug];
         if (!district) return;
         const data = await load('directions/' + district.file);
+        const elements = [];
         const markers = data.features.map(feature => {
           const button = document.createElement('button');
           button.type = 'button'; button.className = 'direction-marker';
@@ -31,10 +32,19 @@
           button.dataset.fid = feature.properties.fid;
           button.dataset.azimuth = feature.properties.azimuth;
           button.innerHTML = arrow;
-          button.firstChild.style.transform = 'rotate(' + feature.properties.azimuth + 'deg)';
+          elements.push(button);
           button.addEventListener('click', event => { event.stopPropagation(); showCard(card, feature); });
           return new window.ymaps3.YMapMarker({ coordinates: feature.geometry.coordinates, zIndex: 2400 }, button);
         });
+        let currentScale;
+        const resize = zoom => {
+          const scale = Math.round(Math.min(1, Math.max(0.18, 2 ** ((zoom - 18) / 2))) * 1000) / 1000;
+          if (scale === currentScale) return;
+          currentScale = scale;
+          for (const button of elements) button.firstChild.style.transform = 'rotate(' + button.dataset.azimuth + 'deg) scale(' + scale + ')';
+        };
+        resize(map.zoom);
+        map.addChild(new window.ymaps3.YMapListener({ onUpdate: ({ location }) => resize(location.zoom) }));
         let visible = false;
         const toggle = on => {
           if (on === visible) return;

@@ -8,12 +8,19 @@ try {
     await page.goto((process.argv[2] || 'https://hainox.github.io/karta-sao/') + 'districts/' + slug + '.html', {waitUntil:'domcontentloaded'});
     await page.locator('#directionLayerToggle').waitFor({timeout:60000});
     assert.equal(await page.locator('.direction-marker').count(),count);
+    const initialScale = await page.locator('.direction-marker svg').first().evaluate(svg=>Number(svg.style.transform.match(/scale\(([^)]+)\)/)[1]));
+    assert.ok(initialScale < 0.5);
+    await page.mouse.move(1050,500);
+    await page.mouse.wheel(0,-700);
+    await page.waitForFunction(before=>Number(document.querySelector('.direction-marker svg').style.transform.match(/scale\(([^)]+)\)/)[1]) > before, initialScale);
+    await page.mouse.wheel(0,700);
+    await page.waitForFunction(()=>Number(document.querySelector('.direction-marker svg').style.transform.match(/scale\(([^)]+)\)/)[1]) < 0.5);
     await page.locator('#directionLayerToggle').uncheck();
     assert.equal(await page.locator('.direction-marker').count(),0);
     await page.locator('#directionLayerToggle').check();
     assert.equal(await page.locator('.direction-marker').count(),count);
     if (process.argv[3]) await page.screenshot({path:process.argv[3] + '/' + slug + '.png'});
-    console.log('PASS live map ' + slug + ': ' + count + ' arrows, independent toggle.');
+    console.log('PASS live map ' + slug + ': ' + count + ' arrows, zoom scaling and independent toggle.');
   }
   assert.deepEqual(errors,[]);
 } finally { await browser.close(); }

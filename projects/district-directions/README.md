@@ -9,3 +9,5 @@
 Повторить импорт из корня проекта: `python projects/district-directions/work/import_directions.py`. Нужны `pyproj` и `shapely` (они используются в географических сборщиках проекта). Шаблон районных страниц — `work/district_page_template.html`, подключение сохраняется при `write_pages` в `work/build_district_layer_maps.py`.
 
 Проверки: `python -m pytest tests -q`; `npm run test:ui -- tests/district-directions.spec.js` в `odh-map/`. Браузерный тест использует замену SDK для независимой проверки элементов и переключателя; реальная подложка проверяется отдельно скриптом `work/check_live_directions.mjs`.
+
+Размер стрелок изменяется через `YMapListener.onUpdate` по `location.zoom`: на zoom 14 — 25% полного размера, zoom 16 — 50%, zoom 18 и ближе — 100%; минимум 18%. Масштаб и поворот выполняются относительно основания стрелки, поэтому её координата остаётся неподвижной.

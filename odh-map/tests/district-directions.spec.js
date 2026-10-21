@@ -1,10 +1,13 @@
 import { test, expect } from '@playwright/test';
 
-const sdk = `class YMap { constructor(element) { this.element=element; } addChild(child) { if(child.element) this.element.append(child.element); return this; } removeChild(child) { child.element?.remove(); return this; } update() {} }
+const sdk = `class YMap { constructor(element) { this.element=element; this.zoom=13; } addChild(child) { if(child.element) this.element.append(child.element); return this; } removeChild(child) { child.element?.remove(); return this; } update() {} }
 class YMapMarker { constructor(options, element) { this.element=element; element.dataset.coordinates=JSON.stringify(options.coordinates); } }
 class YMapFeature { constructor(options) { this.options=options; } }
 class Layer {}
-window.ymaps3={ready:Promise.resolve(),YMap,YMapMarker,YMapFeature,YMapDefaultSchemeLayer:Layer,YMapDefaultFeaturesLayer:Layer,YMapListener:Layer};`;
+const listeners=[];
+class YMapListener { constructor(options) { listeners.push(options); } }
+window.directionTestZoom=zoom=>listeners.forEach(listener=>listener.onUpdate?.({location:{zoom}}));
+window.ymaps3={ready:Promise.resolve(),YMap,YMapMarker,YMapFeature,YMapDefaultSchemeLayer:Layer,YMapDefaultFeaturesLayer:Layer,YMapListener};`;
 
 for (const [slug, count] of [['vostochnoe-degunino',68],['beskudnikovskiy',19],['aeroport',0]]) {
   test('отдельный слой направлений: ' + slug, async ({page}) => {
@@ -24,6 +27,17 @@ for (const [slug, count] of [['vostochnoe-degunino',68],['beskudnikovskiy',19],[
       const azimuth=await marker.getAttribute('data-azimuth');
       const rotation = await marker.locator('svg').evaluate(svg => parseFloat(svg.style.transform.replace('rotate(', '')));
       expect(Math.abs(rotation - Number(azimuth))).toBeLessThan(0.001);
+      const scale = () => marker.locator('svg').evaluate(svg => Number(svg.style.transform.match(/scale\(([^)]+)\)/)[1]));
+      const overviewScale = await scale();
+      expect(overviewScale).toBeLessThanOrEqual(0.3);
+      const anchor = await marker.getAttribute('data-coordinates');
+      await page.evaluate(() => window.directionTestZoom(18));
+      expect(await scale()).toBe(1);
+      await page.evaluate(() => window.directionTestZoom(14));
+      expect(await scale()).toBe(0.25);
+      await page.evaluate(() => window.directionTestZoom(8));
+      expect(await scale()).toBe(0.18);
+      await expect(marker).toHaveAttribute('data-coordinates', anchor);
       await marker.dispatchEvent('click');
       await expect(page.locator('#card')).toContainText('Азимут: '+azimuth+'°');
       await page.locator('#directionLayerToggle').uncheck();
