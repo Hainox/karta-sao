@@ -24,6 +24,19 @@ export function requiredPhotos(object) {
   return Number.isInteger(value) && value > 0 ? value : 1;
 }
 
+export function objectsWithSlotCounts(counts, objects = SLOT_OBJECTS) {
+  const result = new Map(objects);
+  for (const row of counts) {
+    const object = result.get(row.object_key);
+    if (object) result.set(row.object_key, { ...object, photos: row.required });
+  }
+  return result;
+}
+
+async function effectiveObjects(repository) {
+  return objectsWithSlotCounts(await repository.listSlotCounts());
+}
+
 const time = (row) => new Date(row.reviewed_at || row.uploaded_at || 0).getTime();
 
 /**
@@ -111,7 +124,14 @@ export function mountPublicSlotRoutes(router, { repository }) {
   router.get('/slots/public', async (req, res, next) => {
     try {
       res.setHeader('Cache-Control', 'no-store');
-      res.json({ objects: slotSummary(await repository.listSlotPhotos({ datasetId: SLOT_DATASET })) });
+      const counts = await repository.listSlotCounts();
+      const objects = objectsWithSlotCounts(counts);
+      const summary = slotSummary(await repository.listSlotPhotos({ datasetId: SLOT_DATASET }), objects);
+      const seen = new Set(summary.map((row) => row.object_key));
+      for (const row of counts) {
+        if (objects.has(row.object_key) && !seen.has(row.object_key)) summary.push({ object_key: row.object_key, required: row.required, filled: 0, accepted: 0, status: 'empty' });
+      }
+      res.json({ objects: summary });
     } catch (error) { next(error); }
   });
 }
@@ -142,7 +162,7 @@ export function mountSlotRoutes(router, { repository, districtFor }) {
     try {
       const { summarizeSlots, buildSlotReport } = await import('./slot-report.js');
       const generatedAt = new Date();
-      const book = await buildSlotReport(summarizeSlots({ rows: await repository.listSlotPhotos({ datasetId: SLOT_DATASET }), generatedAt }));
+      const book = await buildSlotReport(summarizeSlots({ rows: await repository.listSlotPhotos({ datasetId: SLOT_DATASET }), objects: await effectiveObjects(repository), generatedAt }));
       res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
       res.setHeader('Content-Disposition', `attachment; filename="Svod_foto_TPU_parkovki_${generatedAt.toISOString().slice(0, 10)}.xlsx"`);
       res.setHeader('Cache-Control', 'no-store');
@@ -153,14 +173,24 @@ export function mountSlotRoutes(router, { repository, districtFor }) {
   router.get('/slots/queue', prefecture, async (req, res, next) => {
     try {
       res.setHeader('Cache-Control', 'no-store');
-      res.json(slotQueue(await repository.listSlotPhotos({ datasetId: SLOT_DATASET })));
+      res.json(slotQueue(await repository.listSlotPhotos({ datasetId: SLOT_DATASET }), await effectiveObjects(repository)));
     } catch (error) { next(error); }
   });
   router.get('/slots/objects/:objectKey', accessObject, async (req, res, next) => {
     try {
       const rows = await repository.listSlotPhotos({ datasetId: SLOT_DATASET, objectKey: req.params.objectKey });
       res.setHeader('Cache-Control', 'no-store');
-      res.json({ objectKey: req.params.objectKey, ...slotState(requiredPhotos(req.slotObject), rows) });
+      res.json({ objectKey: req.params.objectKey, ...slotState(requiredPhotos((await effectiveObjects(repository)).get(req.params.objectKey)), rows) });
+    } catch (error) { next(error); }
+  });
+  router.put('/slots/objects/:objectKey/count', prefecture, accessObject, async (req, res, next) => {
+    try {
+      const { required, expectedRequired } = req.body || {};
+      if (!Number.isInteger(required) || required < 1 || required > 50 || !Number.isInteger(expectedRequired) || expectedRequired < 1 || expectedRequired > 50) {
+        return res.status(422).json({ error: 'Количество слотов должно быть целым числом от 1 до 50.' });
+      }
+      await repository.setSlotCount({ objectKey: req.params.objectKey, required, expectedRequired, baseRequired: requiredPhotos(req.slotObject), actorId: req.user.sub });
+      res.json({ objectKey: req.params.objectKey, required });
     } catch (error) { next(error); }
   });
   router.put('/slots/objects/:objectKey/:slot/photo',
@@ -170,12 +200,12 @@ export function mountSlotRoutes(router, { repository, districtFor }) {
     async (req, res, next) => {
       try {
         const slot = Number(req.params.slot);
-        if (!Number.isInteger(slot) || slot < 1 || slot > requiredPhotos(req.slotObject)) return res.status(400).json({ error: 'Такого слота у объекта нет.' });
+        if (!Number.isInteger(slot) || slot < 1 || slot > requiredPhotos((await effectiveObjects(repository)).get(req.params.objectKey))) return res.status(400).json({ error: 'Такого слота у объекта нет.' });
         const validation = validatePhotoUpload(req.body, req.get('content-type'));
         if (!validation.valid) return res.status(422).json({ error: validation.error });
         const photo = await repository.addSlotPhoto({
           datasetId: SLOT_DATASET, objectKey: req.params.objectKey, slot, district: req.slotObject.group,
-          bytes: req.body, mimeType: validation.mimeType, filename: safePhotoFilename(req.get('x-photo-filename')), actorId: req.user.sub,
+          bytes: req.body, mimeType: validation.mimeType, filename: safePhotoFilename(req.get('x-photo-filename')), actorId: req.user.sub, baseRequired: requiredPhotos(req.slotObject),
         });
         res.status(201).json({ photo });
       } catch (error) { next(error); }
@@ -202,6 +232,21 @@ export function mountSlotRoutes(router, { repository, districtFor }) {
 /** Методы хранилища слотов; write — общая транзакция с записью в журнал аудита. */
 export function createSlotRepository(pool, write) {
   return {
+    async listSlotCounts() {
+      const { rows } = await pool.query('SELECT object_key, required FROM object_slot_counts WHERE dataset_id = $1', [SLOT_DATASET]);
+      return rows;
+    },
+    setSlotCount({ objectKey, required, expectedRequired, baseRequired, actorId }) {
+      return write(actorId, 'object_slot_count_changed', { objectKey, required, previous: expectedRequired }, async (client) => {
+        await client.query('SELECT pg_advisory_xact_lock(hashtextextended($1, 0))', [SLOT_DATASET + ':' + objectKey]);
+        const current = await client.query('SELECT required FROM object_slot_counts WHERE dataset_id = $1 AND object_key = $2', [SLOT_DATASET, objectKey]);
+        if ((current.rows[0]?.required ?? baseRequired) !== expectedRequired) throw Object.assign(new Error('Количество слотов уже изменено. Обновите карточку.'), { status: 409 });
+        const occupied = await client.query('SELECT 1 FROM object_slot_photos WHERE dataset_id = $1 AND object_key = $2 AND slot > $3 LIMIT 1', [SLOT_DATASET, objectKey, required]);
+        if (occupied.rows.length) throw Object.assign(new Error('В удаляемых слотах есть фотографии. Слоты с фотографиями и историей проверки сохраняются.'), { status: 409 });
+        await client.query('INSERT INTO object_slot_counts (dataset_id, object_key, required, updated_by) VALUES ($1,$2,$3,$4) ON CONFLICT (dataset_id, object_key) DO UPDATE SET required = EXCLUDED.required, updated_by = EXCLUDED.updated_by, updated_at = now()', [SLOT_DATASET, objectKey, required, actorId]);
+        return { id: objectKey, required };
+      });
+    },
     async listSlotPhotos({ datasetId, objectKey = null, district = null }) {
       const { rows } = await pool.query(`SELECT ${SLOT_COLUMNS} FROM object_slot_photos WHERE dataset_id = $1 AND ($2::text IS NULL OR object_key = $2) AND ($3::text IS NULL OR district = $3) ORDER BY uploaded_at, id`, [datasetId, objectKey, district]);
       return rows;
@@ -214,8 +259,11 @@ export function createSlotRepository(pool, write) {
       const { rows } = await pool.query('SELECT photo_bytes, photo_mime_type FROM object_slot_photos WHERE id = $1', [id]);
       return rows[0] || null;
     },
-    addSlotPhoto({ datasetId, objectKey, slot, district, bytes, mimeType, filename, actorId }) {
+    addSlotPhoto({ datasetId, objectKey, slot, district, bytes, mimeType, filename, actorId, baseRequired }) {
       return write(actorId, 'object_slot_photo_uploaded', { objectKey, slot }, async (client) => {
+        await client.query('SELECT pg_advisory_xact_lock(hashtextextended($1, 0))', [datasetId + ':' + objectKey]);
+        const counts = await client.query('SELECT required FROM object_slot_counts WHERE dataset_id = $1 AND object_key = $2', [datasetId, objectKey]);
+        if (slot > (counts.rows[0]?.required ?? baseRequired)) throw Object.assign(new Error('Количество слотов изменено. Обновите карточку.'), { status: 409 });
         try {
           const { rows } = await client.query(`INSERT INTO object_slot_photos (id, dataset_id, object_key, slot, district, photo_bytes, photo_mime_type, photo_filename, photo_size, uploaded_by) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) RETURNING ${SLOT_COLUMNS}`, [crypto.randomUUID(), datasetId, objectKey, slot, district, bytes, mimeType, filename, bytes.length, actorId]);
           return rows[0];

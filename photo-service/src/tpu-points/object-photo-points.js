@@ -5,7 +5,7 @@ import { readFileSync } from 'node:fs';
 import { DISTRICTS, isPointWithinBoundary } from './validation.js';
 import { pointInRing } from '../districts.js';
 import { safePhotoFilename, validatePhotoUpload } from './photo-markers.js';
-import { createSlotRepository, mountPublicSlotRoutes, mountSlotRoutes } from './object-slots.js';
+import { objectsWithSlotCounts, createSlotRepository, mountPublicSlotRoutes, mountSlotRoutes } from './object-slots.js';
 
 const ROLES = new Set(['prefecture_admin', 'reviewer', 'district_editor']);
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
@@ -129,7 +129,7 @@ export function createObjectPhotoPointsRouter({ repository, authenticate, bounda
       if (!['tpu', 'parking'].includes(kind)) return res.status(400).json({ error: 'Неизвестный вид сводки.' });
       const [{ summarizeTpu, buildTpuReport, REPORT_KINDS }, data] = await Promise.all([import('./tpu-report.js'), repository.tpuReportData({ datasetId: 'sao_tpu_parking', kind })]);
       const generatedAt = new Date();
-      const book = await buildTpuReport(summarizeTpu({ ...data, kind, generatedAt }));
+      const book = await buildTpuReport(summarizeTpu({ ...data, objects: [...objectsWithSlotCounts(await repository.listSlotCounts()).values()], kind, generatedAt }));
       const day = generatedAt.toISOString().slice(0, 10);
       res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
       res.setHeader('Content-Disposition', `attachment; filename="${REPORT_KINDS[kind].file}_${day}.xlsx"`);

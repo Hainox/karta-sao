@@ -48,7 +48,14 @@ test('отклонить фото можно только с комментар�
 
 async function serve(user, run) {
   const photos = [];
+  const counts = new Map();
   const repository = {
+    async listSlotCounts() { return [...counts].map(([object_key, required]) => ({ object_key, required })); },
+    async setSlotCount({ objectKey, required, expectedRequired, baseRequired }) {
+      if ((counts.get(objectKey) ?? baseRequired) !== expectedRequired) throw Object.assign(new Error('stale'), { status: 409 });
+      if (photos.some((p) => p.object_key === objectKey && p.slot > required)) throw Object.assign(new Error('occupied'), { status: 409 });
+      counts.set(objectKey, required);
+    },
     async listObjectPhotoPoints() { return []; },
     async listSlotPhotos({ objectKey }) { return photos.filter((p) => !objectKey || p.object_key === objectKey); },
     async getSlotPhoto({ id, district }) { return photos.find((p) => p.id === id && (!district || p.district === district)) || null; },
@@ -198,4 +205,45 @@ test('свод Excel по слотам скачивает только преф�
     assert.equal(response.status, 200);
     assert.match(response.headers.get('content-disposition'), /Svod_foto_TPU_parkovki_/);
   });
+});
+
+const resize = (base, key, required, expectedRequired) => fetch(`${base}/slots/objects/${encodeURIComponent(key)}/count`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ required, expectedRequired }) });
+
+test('префектура меняет число слотов, защищает историю и обнаруживает устаревшую карточку', async () => {
+  await serve({ role: 'prefecture_admin' }, async (base, photos) => {
+    assert.equal((await resize(base, TPU, 2, 1)).status, 200);
+    let state = await (await fetch(`${base}/slots/objects/${TPU}`)).json();
+    assert.equal(state.required, 2);
+    assert.equal(state.slots.length, 2);
+    const summary = await (await fetch(`${base}/slots/public`)).json();
+    assert.equal(summary.objects.find((o) => o.object_key === TPU).required, 2);
+    assert.equal((await resize(base, TPU, 3, 1)).status, 409);
+    assert.equal((await upload(base, TPU, 2)).status, 201);
+    assert.equal((await resize(base, TPU, 1, 2)).status, 409);
+    assert.equal(photos.length, 1);
+    await review(base, photos[0].id, { decision: 'rejected', comment: 'История сохраняется' });
+    assert.equal((await resize(base, TPU, 1, 2)).status, 409);
+    assert.equal((await resize(base, TPU, 0, 2)).status, 422);
+    assert.equal((await resize(base, TPU, 51, 2)).status, 422);
+    assert.equal((await resize(base, TPU, 2.5, 2)).status, 422);
+    assert.equal((await resize(base, TPU, '3', 2)).status, 422);
+    assert.equal((await resize(base, TPU, 3, 2)).status, 200);
+    assert.equal((await resize(base, TPU, 2, 3)).status, 200);
+    const ExcelJS = (await import('exceljs')).default;
+    const book = new ExcelJS.Workbook();
+    await book.xlsx.load(Buffer.from(await (await fetch(`${base}/slots/report.xlsx`)).arrayBuffer()));
+    const objectRows = book.getWorksheet('Объекты');
+    const index = objectRows.getColumn(3).values.indexOf('800905601');
+    assert.equal(objectRows.getRow(index).getCell(5).value, 2);
+    const queue = await (await fetch(`${base}/slots/queue`)).json();
+    assert.equal(queue.rework[0].object.required, 2);
+    assert.equal((await upload(base, TPU, 3)).status, 400);
+    assert.equal((await resize(base, 'parking:missing', 2, 1)).status, 404);
+  });
+});
+
+test('район и наблюдатель не меняют число слотов даже своего объекта', async () => {
+  for (const user of [{ role: 'district_editor', district: 'Коптево' }, { role: 'reviewer' }]) {
+    await serve(user, async (base) => assert.equal((await resize(base, POCKET, 12, 11)).status, 403));
+  }
 });

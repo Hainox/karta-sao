@@ -24,7 +24,7 @@
       let summary = new Map();
       const user = () => api.user();
       const clearUrls = () => { urls.forEach(URL.revokeObjectURL); urls = []; };
-      const required = (r) => { const n = Number(r?.properties?.['Фото по заданию']); return Number.isInteger(n) && n > 0 ? n : 1; };
+      const required = (r) => { const n = Number(summary.get(r?.id)?.required ?? r?.properties?.['Фото по заданию']); return Number.isInteger(n) && n > 0 ? n : 1; };
       const canUpload = (r) => { const u = user(); return !!u && (u.role === 'prefecture_admin' || (u.role === 'district_editor' && u.district === r.group)); };
       const isPrefecture = () => user()?.role === 'prefecture_admin';
       const el = (tag, className, text) => { const node = document.createElement(tag); if (className) node.className = className; if (text != null) node.textContent = text; return node; };
@@ -80,6 +80,20 @@
         } catch (error) { notify(error.message, true); }
       }
 
+      async function changeCount(key, current, next) {
+        const controls = panel.querySelector('.slot-count-controls');
+        for (const button of controls.querySelectorAll('button')) button.disabled = true;
+        try {
+          await json('/objects/' + encodeURIComponent(key) + '/count', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ required: next, expectedRequired: current }) });
+          notify('Количество слотов: ' + next + '.');
+          await loadSummary();
+          if (record?.id === key) await refresh();
+        } catch (error) {
+          notify(error.message, true);
+          if (record?.id === key) await refresh();
+        }
+      }
+
       function uploader(slot) {
         const label = el('label', 'slot-upload', 'Загрузить фото');
         const input = el('input'); input.type = 'file'; input.accept = 'image/jpeg,image/png,image/webp'; input.setAttribute('capture', 'environment');
@@ -116,6 +130,16 @@
         catch (error) { if (version === revision) panel.append(el('p', 'slot-hint', 'Слоты недоступны: ' + error.message)); return; }
         if (version !== revision) return;
         line.replaceChildren(chip(state.status), document.createTextNode(` принято ${state.accepted} из ${state.required}`));
+        if (isPrefecture()) {
+          const key = record.id;
+          const controls = el('div', 'slot-count-controls form-actions');
+          const add = button('Добавить слот', () => changeCount(key, state.required, state.required + 1));
+          const remove = button('Убрать слот', () => changeCount(key, state.required, state.required - 1));
+          add.disabled = state.required >= 50;
+          remove.disabled = state.required <= 1;
+          controls.append(add, remove);
+          panel.append(controls, el('p', 'slot-hint', 'Можно убрать последний пустой слот. Слоты с фото и историей проверки сохраняются. От 1 до 50 слотов.'));
+        }
         const grid = el('div', 'slot-grid');
         panel.append(grid);
         for (const slot of state.slots) {

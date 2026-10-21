@@ -73,9 +73,9 @@ test('сводка по парковкам — отдельная книга т�
   assert.deepEqual([...types].sort(), ['Парковка', 'Парковочный карман'], 'карман подписан своим типом, а не «Парковка»');
 });
 
-async function request(role, query = '') {
+async function request(role, query = '', counts = []) {
   const calls = [];
-  const repository = { async tpuReportData(args) { calls.push(args); return { points: [point('tpu:800905601', 'АвД САО', 1, '2026-10-06T09:00:00Z')], daily: [] }; } };
+  const repository = { async listSlotCounts() { return counts; }, async tpuReportData(args) { calls.push(args); return { points: [point('tpu:800905601', 'АвД САО', 1, '2026-10-06T09:00:00Z')], daily: [] }; } };
   const app = express();
   app.use('/object-photo-points', createObjectPhotoPointsRouter({
     repository,
@@ -121,4 +121,14 @@ test('сводка показывает проверку фото по слот�
   const row = book.getWorksheet('Объекты').getRow(2);
   assert.equal(row.getCell(14).value, 'На доработке');
   assert.equal(row.getCell(15).value, 'Слот 2: Не видно разметку');
+});
+
+test('сводка ТПУ учитывает изменённое префектурой число слотов', async () => {
+  const response = await request('prefecture_admin', '', [{ object_key: 'tpu:800905601', required: 3 }]);
+  assert.equal(response.status, 200);
+  const book = new ExcelJS.Workbook();
+  await book.xlsx.load(response.body);
+  const sheet = book.getWorksheet('Объекты');
+  const index = sheet.getColumn(3).values.indexOf('800905601');
+  assert.equal(sheet.getRow(index).getCell(12).value, 3);
 });
