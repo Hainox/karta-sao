@@ -1,3 +1,4 @@
+import { createDirectionRepository, mountPublicDirectionRoutes, mountDirectionRoutes } from './direction-corrections.js';
 import { AVD_OWNER, AVD_OBJECTS, AVD_OUTSIDE_OBJECT, AVD_OUTSIDE_BOUNDARY } from './tpu-responsibility.js';
 import crypto from 'node:crypto';
 import express from 'express';
@@ -98,6 +99,7 @@ export function createObjectPhotoPointsRouter({ repository, authenticate, bounda
     } catch (error) { next(error); }
   });
   mountPublicSlotRoutes(router, { repository });
+  mountPublicDirectionRoutes(router, { repository });
   router.use(authenticate, (req, res, next) => {
     if (!ROLES.has(req.user.role) || (req.user.role === 'district_editor' && !req.user.district)) return res.status(403).json({ error: 'Нет доступа к точкам фотофиксации.' });
     next();
@@ -106,6 +108,7 @@ export function createObjectPhotoPointsRouter({ repository, authenticate, bounda
   const districtFor = (req) => req.user.role === 'district_editor' ? req.user.district : undefined;
   // Слоты фото по заданию и их проверка — до маршрутов «/:id» точек съёмки.
   mountSlotRoutes(router, { repository, districtFor });
+  mountDirectionRoutes(router, { repository });
   router.param('id', (req, res, next, id) => UUID.test(id) ? next() : res.status(400).json({ error: 'Некорректный идентификатор точки.' }));
   router.param('photoId', (req, res, next, id) => UUID.test(id) ? next() : res.status(400).json({ error: 'Некорректный идентификатор фото.' }));
   router.get('/report.xlsx', (req, res, next) => req.user.role === 'prefecture_admin' ? next() : res.status(403).json({ error: 'Сводка доступна только префектуре.' }), async (req, res, next) => {
@@ -233,6 +236,7 @@ export function createObjectPhotoPointRepository(pool, { writeAudit } = {}) {
   };
   return {
     ...createSlotRepository(pool, write),
+    ...createDirectionRepository(pool, write),
     async listObjectPhotoPoints({ datasetId, objectKey, district }) {
       const { rows } = await pool.query('SELECT p.*, (SELECT count(*)::integer FROM object_photo_point_photos f WHERE f.point_id = p.id AND f.assignment_version = p.assignment_version) AS photo_count FROM object_photo_points p WHERE retired_at IS NULL AND dataset_id = $1 AND ($2::text IS NULL OR object_key = $2) AND ($3::text IS NULL OR district = $3) ORDER BY created_at, id', [datasetId, objectKey || null, district || null]);
       return rows;

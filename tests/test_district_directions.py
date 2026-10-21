@@ -52,6 +52,6 @@ def test_district_pages_keep_separate_direction_layer_hook_in_template():
     for page in (ROOT / 'districts').glob('*.html'):
         if page.name == 'index.html': continue
         text = page.read_text(encoding='utf-8')
-        assert 'direction-arrows.js?v=20261021b' in text
-        assert 'direction-arrows.css?v=20261021b' in text
+        assert 'direction-arrows.js?v=20261021c' in text
+        assert 'direction-arrows.css?v=20261021c' in text
         assert 'SaoDistrictDirections.mount' in text

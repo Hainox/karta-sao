@@ -1,6 +1,10 @@
-.direction-marker{position:relative;display:block;width:24px;height:24px;transform:translate(-12px,-12px);padding:0;border:0;background:transparent;cursor:pointer;z-index:1;overflow:visible}
-.direction-marker svg{position:absolute;left:-24px;top:-76px;width:72px;height:96px;overflow:visible;transform-origin:36px 88px;pointer-events:none;filter:drop-shadow(0 2px 2px #10263670)}
-.direction-marker:focus-visible{outline:3px solid #126bff;outline-offset:4px;border-radius:50%}
+.direction-marker{position:absolute;left:0;top:0;display:block;width:0;height:0;margin:0;padding:0;border:0;background:transparent;cursor:pointer;z-index:1;overflow:visible;transform:none}
+.direction-marker svg{position:absolute;left:-36px;top:-88px;width:72px;height:96px;overflow:visible;transform-box:border-box;transform-origin:36px 88px;pointer-events:none;filter:drop-shadow(0 2px 2px #10263670)}
+.direction-anchor{position:absolute;left:-5px;top:-5px;width:10px;height:10px;border:2px solid white;border-radius:50%;background:#16345b;box-sizing:border-box;box-shadow:0 0 0 1px #16345b;pointer-events:auto}
+.direction-marker.editing{cursor:grab}.direction-marker.editing .direction-anchor{left:-8px;top:-8px;width:16px;height:16px;background:#ffcf1c;border:3px solid #16345b;box-shadow:0 0 0 2px white}
+.direction-marker:focus-visible .direction-anchor{outline:3px solid #126bff;outline-offset:3px}
 .direction-layer-note{padding:8px 10px;border:1px solid #c2432e;border-radius:8px;color:#983320;font-size:12px}
+.direction-marker svg path{pointer-events:visiblePainted}
+.direction-editor{padding:8px 10px;font-size:12px;color:var(--muted)}.direction-editor button{border:1px solid var(--accent);border-radius:8px;background:white;color:var(--accent);padding:7px 10px;font:inherit;font-weight:700;cursor:pointer}.direction-editor button[aria-pressed="true"]{background:var(--accent);color:white}.direction-editor button:disabled{opacity:.5;cursor:wait}.direction-editor p{margin:6px 0;line-height:1.45}
 
-.direction-marker svg path,.direction-marker svg circle{pointer-events:visiblePainted}
+.direction-card-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.direction-card-actions input{width:100px;padding:6px;border:1px solid var(--line);border-radius:6px;font:inherit}.direction-card-actions button{padding:7px;border:1px solid var(--accent);border-radius:6px;background:white;color:var(--accent);cursor:pointer;font:inherit}

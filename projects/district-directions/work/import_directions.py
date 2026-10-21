@@ -46,6 +46,10 @@ def build(source=SOURCE, output=OUT):
         (output / file).write_text(json.dumps({'type': 'FeatureCollection', 'features': features}, ensure_ascii=False, indent=2) + '\n', encoding='utf-8', newline='\n')
         manifest['districts'][slug] = {'count': len(features), 'file': file, 'district': features[0]['properties']['district']}
     (output / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n', encoding='utf-8', newline='\n')
+    if output.resolve() == OUT.resolve():
+        catalog = [{'fid': f['properties']['fid'], 'district': f['properties']['district'], 'longitude': f['geometry']['coordinates'][0], 'latitude': f['geometry']['coordinates'][1], 'azimuth': f['properties']['azimuth']} for features in groups.values() for f in features]
+        catalog.sort(key=lambda row: row['fid'])
+        (ROOT / 'photo-service/src/tpu-points/direction-objects.json').write_text(json.dumps(catalog, ensure_ascii=False, indent=2) + '\n', encoding='utf-8', newline='\n')
     print(json.dumps(manifest, ensure_ascii=False))
     return manifest
 

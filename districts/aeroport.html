@@ -79,12 +79,13 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
   document.head.appendChild(script);
 });
 </script>
-<link rel="stylesheet" href="direction-arrows.css?v=20261021b">
+<link rel="stylesheet" href="direction-arrows.css?v=20261021c">
+<link rel="stylesheet" href="../atlas-brand.css?v=20261021">
 </head>
 <body>
 <div class="app">
   <aside class="sidebar">
-    <div class="brand"><span class="brand-mark">САО</span><span><b>Городской атлас САО</b><small>Карта района</small></span></div>
+    <div class="brand"><span class="brand-mark atlas-emblem"><img src="../assets/sao-emblem.svg?v=20261021" alt="САО — Северный округ"></span><span><b>Городской атлас САО</b><small>Карта района</small></span></div>
     <div><a class="back" href="index.html">← Все районы</a> · <a class="back" href="../hub/">Каталог</a></div>
     <h1>Аэропорт</h1>
     <div>Граница муниципального округа, дворовые территории и слои благоустройства по данным АСУ ОДС.</div>
@@ -110,7 +111,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
   </aside>
   <main id="map"></main>
 </div>
-<script src="direction-arrows.js?v=20261021b"></script>
+<script src="direction-arrows.js?v=20261021c"></script>
 <script>
 (() => {
   const SLUG = 'aeroport';
@@ -183,7 +184,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       }
     }
     renderControls();
-    await SaoDistrictDirections.mount({ map: state.map, slug: SLUG, controls: $('layerControls'), card: $('card') });
+    state.directionLayer = await SaoDistrictDirections.mount({ map: state.map, slug: SLUG, controls: $('layerControls'), card: $('card'), request: apiRequest, getUser: () => state.photoUser, onEditingChange: on => { if (on) setShootMode(false); } });
     await loadPhotoPoints();
     renderShootMarkers();
     renderShootLogin();
@@ -487,6 +488,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
   }
 
   function setShootMode(on) {
+    if (on) state.directionLayer?.finishEditing();
     state.shootMode = on;
     if (on && !state.shootLayerOn) setShootLayer(true);
     state.picking = null;
@@ -627,6 +629,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
   /* ---------- Вход префектуры ---------- */
 
   function renderShootLogin() {
+    state.directionLayer?.refreshUser();
     const box = $('shootLoginBox');
     const user = state.photoUser;
     $('shootReport').hidden = !isPrefecture();
