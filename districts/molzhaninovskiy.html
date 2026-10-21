@@ -79,6 +79,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
   document.head.appendChild(script);
 });
 </script>
+<link rel="stylesheet" href="direction-arrows.css?v=20261021">
 </head>
 <body>
 <div class="app">
@@ -109,6 +110,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
   </aside>
   <main id="map"></main>
 </div>
+<script src="direction-arrows.js?v=20261021"></script>
 <script>
 (() => {
   const SLUG = 'molzhaninovskiy';
@@ -181,6 +183,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       }
     }
     renderControls();
+    await SaoDistrictDirections.mount({ map: state.map, slug: SLUG, controls: $('layerControls'), card: $('card') });
     await loadPhotoPoints();
     renderShootMarkers();
     renderShootLogin();

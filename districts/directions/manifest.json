@@ -1,0 +1,20 @@
+{
+  "source": "Ракурсы_180.geojson",
+  "source_sha256": "595623e02b260e6e52d659c60ed0d7e44a0f55fc00895b0cf3cd33210001094e",
+  "source_crs": "urn:ogc:def:crs:EPSG::3395",
+  "coordinates": "WGS84 longitude, latitude",
+  "azimuth": "degrees clockwise from north; unchanged from source",
+  "total": 87,
+  "districts": {
+    "beskudnikovskiy": {
+      "count": 19,
+      "file": "beskudnikovskiy.geojson",
+      "district": "Бескудниковский"
+    },
+    "vostochnoe-degunino": {
+      "count": 68,
+      "file": "vostochnoe-degunino.geojson",
+      "district": "Восточное Дегунино"
+    }
+  }
+}

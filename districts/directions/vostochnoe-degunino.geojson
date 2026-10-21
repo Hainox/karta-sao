@@ -1,0 +1,1093 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "direction180:8",
+      "properties": {
+        "fid": 8,
+        "azimuth": 264.13617,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.56675209916787,
+          55.855336520836495
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:9",
+      "properties": {
+        "fid": 9,
+        "azimuth": 102.00886,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.56697608771433,
+          55.8557378650464
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:11",
+      "properties": {
+        "fid": 11,
+        "azimuth": 99.23671,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.567337076536006,
+          55.85679225487201
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:14",
+      "properties": {
+        "fid": 14,
+        "azimuth": 272.88871,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.567755546474025,
+          55.85789209007653
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:15",
+      "properties": {
+        "fid": 15,
+        "azimuth": 97.19569,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.56788906788603,
+          55.858395836996294
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:16",
+      "properties": {
+        "fid": 16,
+        "azimuth": 94.46382,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.568019524796235,
+          55.85884928727179
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:18",
+      "properties": {
+        "fid": 18,
+        "azimuth": 85.81051,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.568084510838254,
+          55.859150621374326
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:19",
+      "properties": {
+        "fid": 19,
+        "azimuth": 271.9686,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.56751545853053,
+          55.85934206436599
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:20",
+      "properties": {
+        "fid": 20,
+        "azimuth": 81.90879,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.56814798094475,
+          55.85965189132021
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:21",
+      "properties": {
+        "fid": 21,
+        "azimuth": 92.26318,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.568139603775826,
+          55.859978833731375
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:22",
+      "properties": {
+        "fid": 22,
+        "azimuth": 84.33327,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.568134285982254,
+          55.86035104275911
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:23",
+      "properties": {
+        "fid": 23,
+        "azimuth": 82.18599,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.56796003461475,
+          55.86129841928822
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:24",
+      "properties": {
+        "fid": 24,
+        "azimuth": 271.9068,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.567357780899236,
+          55.86127024450957
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:27",
+      "properties": {
+        "fid": 27,
+        "azimuth": 70.65726,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.566191386628624,
+          55.86437593981583
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:28",
+      "properties": {
+        "fid": 28,
+        "azimuth": 68.85171,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.565730342853215,
+          55.86502335284486
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:32",
+      "properties": {
+        "fid": 32,
+        "azimuth": 70.4776,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.56412048162435,
+          55.86694557887696
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:34",
+      "properties": {
+        "fid": 34,
+        "azimuth": 64.44473,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.563465900647,
+          55.86780265789848
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:40",
+      "properties": {
+        "fid": 40,
+        "azimuth": 67.62779,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.56189542048342,
+          55.869787287220205
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:41",
+      "properties": {
+        "fid": 41,
+        "azimuth": 68.20697,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.56137448275885,
+          55.87035758941303
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:42",
+      "properties": {
+        "fid": 42,
+        "azimuth": 64.65694,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.56120487883304,
+          55.870592397020516
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:46",
+      "properties": {
+        "fid": 46,
+        "azimuth": 69.63279,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.55968410985892,
+          55.87256984718073
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:47",
+      "properties": {
+        "fid": 47,
+        "azimuth": 69.15376,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.55938931648572,
+          55.87285668670331
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:49",
+      "properties": {
+        "fid": 49,
+        "azimuth": 62.2398,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.55913192345201,
+          55.8732289096026
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:50",
+      "properties": {
+        "fid": 50,
+        "azimuth": 72.77198,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.55841761488406,
+          55.87417484897176
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:51",
+      "properties": {
+        "fid": 51,
+        "azimuth": 75.98275,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.558099364969635,
+          55.874748394920566
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:52",
+      "properties": {
+        "fid": 52,
+        "azimuth": 74.76155,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.558013178580445,
+          55.874951303650995
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:53",
+      "properties": {
+        "fid": 53,
+        "azimuth": 83.91906,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.557915192795754,
+          55.875243077588976
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:54",
+      "properties": {
+        "fid": 54,
+        "azimuth": 88.06828,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.55786702507707,
+          55.87696664436598
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:55",
+      "properties": {
+        "fid": 55,
+        "azimuth": 215.95011,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.55787156404935,
+          55.876503481661494
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:56",
+      "properties": {
+        "fid": 56,
+        "azimuth": 91.73562,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5578198002023,
+          55.87781125315643
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:57",
+      "properties": {
+        "fid": 57,
+        "azimuth": 90.04736,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.55780852952209,
+          55.8782605869388
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:58",
+      "properties": {
+        "fid": 58,
+        "azimuth": 254.59361,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.55729358352654,
+          55.87896834935474
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:59",
+      "properties": {
+        "fid": 59,
+        "azimuth": 87.65632,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.55776478977332,
+          55.878941306377875
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:60",
+      "properties": {
+        "fid": 60,
+        "azimuth": 85.63943,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.557893018734376,
+          55.88095651838257
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:61",
+      "properties": {
+        "fid": 61,
+        "azimuth": 270.04686,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.55720993461368,
+          55.880928331473925
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:62",
+      "properties": {
+        "fid": 62,
+        "azimuth": 270.04686,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.55721234713916,
+          55.88258983904602
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:63",
+      "properties": {
+        "fid": 63,
+        "azimuth": 86.53642,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.55780908089655,
+          55.88270189589493
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:64",
+      "properties": {
+        "fid": 64,
+        "azimuth": 271.84055,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5571954090056,
+          55.883250426325866
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:65",
+      "properties": {
+        "fid": 65,
+        "azimuth": 88.2252,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.55780555064726,
+          55.883853458149055
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:66",
+      "properties": {
+        "fid": 66,
+        "azimuth": 269.45502,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.55729321920756,
+          55.88435876955783
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:67",
+      "properties": {
+        "fid": 67,
+        "azimuth": 87.4685,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.55775170447905,
+          55.88578366565585
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:68",
+      "properties": {
+        "fid": 68,
+        "azimuth": 268.68009,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.55726236325583,
+          55.88570509125104
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:69",
+      "properties": {
+        "fid": 69,
+        "azimuth": 268.98371,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.55722243987443,
+          55.88594486293838
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:70",
+      "properties": {
+        "fid": 70,
+        "azimuth": 90.04728,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.55770859891988,
+          55.88690365227851
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:71",
+      "properties": {
+        "fid": 71,
+        "azimuth": 88.06809,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.557624158936655,
+          55.88781031089774
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:72",
+      "properties": {
+        "fid": 72,
+        "azimuth": 271.7863,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.55728138564072,
+          55.88801669016082
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:73",
+      "properties": {
+        "fid": 73,
+        "azimuth": 270.04691,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.55726096587553,
+          55.888335252834445
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:74",
+      "properties": {
+        "fid": 74,
+        "azimuth": 227.92247,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.55765426501775,
+          55.88799723747896
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:75",
+      "properties": {
+        "fid": 75,
+        "azimuth": 83.32337,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.557737254547746,
+          55.888645203539525
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:76",
+      "properties": {
+        "fid": 76,
+        "azimuth": 88.06818,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.557726616309004,
+          55.88952877458457
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:77",
+      "properties": {
+        "fid": 77,
+        "azimuth": 266.34764,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5571661368668,
+          55.88980147958381
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:78",
+      "properties": {
+        "fid": 78,
+        "azimuth": 90.68522,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.557703681494615,
+          55.89016505332176
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:79",
+      "properties": {
+        "fid": 79,
+        "azimuth": 268.53619,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.55714982493149,
+          55.89089630405159
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:80",
+      "properties": {
+        "fid": 80,
+        "azimuth": 89.40934,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.55771409731382,
+          55.89116513778898
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:81",
+      "properties": {
+        "fid": 81,
+        "azimuth": 273.1755,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.557087206079025,
+          55.89194923464194
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:82",
+      "properties": {
+        "fid": 82,
+        "azimuth": 265.13738,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.557135490304226,
+          55.89232644645541
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:83",
+      "properties": {
+        "fid": 83,
+        "azimuth": 268.53616,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.55711595454221,
+          55.893256965643815
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:84",
+      "properties": {
+        "fid": 84,
+        "azimuth": 265.13736,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.557110675235585,
+          55.893731444399705
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:85",
+      "properties": {
+        "fid": 85,
+        "azimuth": 88.5366,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.55764975284014,
+          55.89306726482705
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:86",
+      "properties": {
+        "fid": 86,
+        "azimuth": 269.09783,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.55710888721958,
+          55.89404161524307
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:87",
+      "properties": {
+        "fid": 87,
+        "azimuth": 266.67317,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.557067502470595,
+          55.89482376555452
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:88",
+      "properties": {
+        "fid": 88,
+        "azimuth": 83.12143,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.55755983892747,
+          55.89483192229484
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:89",
+      "properties": {
+        "fid": 89,
+        "azimuth": 25.01736,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.55745562910078,
+          55.894984540439246
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:90",
+      "properties": {
+        "fid": 90,
+        "azimuth": 287.00807,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.55708572595893,
+          55.895045067681885
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:91",
+      "properties": {
+        "fid": 91,
+        "azimuth": 81.89987,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.55733672399992,
+          55.89529141192927
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:92",
+      "properties": {
+        "fid": 92,
+        "azimuth": 35.69617,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.55744729161911,
+          55.89540536946712
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:93",
+      "properties": {
+        "fid": 93,
+        "azimuth": 217.00523,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.553440135063866,
+          55.896599208334116
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:94",
+      "properties": {
+        "fid": 94,
+        "azimuth": 227.71064,
+        "district": "Восточное Дегунино"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.55468679443213,
+          55.896152694392015
+        ]
+      }
+    }
+  ]
+}

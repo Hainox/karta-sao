@@ -1,0 +1,309 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "direction180:10",
+      "properties": {
+        "fid": 10,
+        "azimuth": 279.97921,
+        "district": "Бескудниковский"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.5663398196711,
+          55.855815329724955
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:12",
+      "properties": {
+        "fid": 12,
+        "azimuth": 277.19494,
+        "district": "Бескудниковский"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.56698325196955,
+          55.857320576412185
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:13",
+      "properties": {
+        "fid": 13,
+        "azimuth": 280.56842,
+        "district": "Бескудниковский"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.56724993345674,
+          55.85812855607183
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:17",
+      "properties": {
+        "fid": 17,
+        "azimuth": 269.24672,
+        "district": "Бескудниковский"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.56748006850243,
+          55.858913291988785
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:25",
+      "properties": {
+        "fid": 25,
+        "azimuth": 185.33298,
+        "district": "Бескудниковский"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.56614848824982,
+          55.863686878774935
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:26",
+      "properties": {
+        "fid": 26,
+        "azimuth": 252.77807,
+        "district": "Бескудниковский"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.56579147741505,
+          55.86413975082831
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:29",
+      "properties": {
+        "fid": 29,
+        "azimuth": 264.5141,
+        "district": "Бескудниковский"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.56498219720546,
+          55.86515116745404
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:30",
+      "properties": {
+        "fid": 30,
+        "azimuth": 248.20948,
+        "district": "Бескудниковский"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.56441978685761,
+          55.86582042418736
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:31",
+      "properties": {
+        "fid": 31,
+        "azimuth": 256.52898,
+        "district": "Бескудниковский"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.563795001439466,
+          55.86664898746493
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:33",
+      "properties": {
+        "fid": 33,
+        "azimuth": 255.98729,
+        "district": "Бескудниковский"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.56359866120245,
+          55.8669257272719
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:35",
+      "properties": {
+        "fid": 35,
+        "azimuth": 248.2082,
+        "district": "Бескудниковский"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.56286965482092,
+          55.86786331800571
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:36",
+      "properties": {
+        "fid": 36,
+        "azimuth": 247.38823,
+        "district": "Бескудниковский"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.56254228919899,
+          55.86825580767017
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:37",
+      "properties": {
+        "fid": 37,
+        "azimuth": 247.84182,
+        "district": "Бескудниковский"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.561799158951416,
+          55.86925082254128
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:38",
+      "properties": {
+        "fid": 38,
+        "azimuth": 244.18183,
+        "district": "Бескудниковский"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.56160560278183,
+          55.86941857856627
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:39",
+      "properties": {
+        "fid": 39,
+        "azimuth": 247.38729,
+        "district": "Бескудниковский"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.561406384478374,
+          55.86978082283835
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:43",
+      "properties": {
+        "fid": 43,
+        "azimuth": 248.20634,
+        "district": "Бескудниковский"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.56061764347465,
+          55.87072513560244
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:44",
+      "properties": {
+        "fid": 44,
+        "azimuth": 245.77596,
+        "district": "Бескудниковский"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.560046172510404,
+          55.87142120172367
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:45",
+      "properties": {
+        "fid": 45,
+        "azimuth": 243.43501,
+        "district": "Бескудниковский"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.559438982613415,
+          55.8721742865723
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "direction180:48",
+      "properties": {
+        "fid": 48,
+        "azimuth": 247.76785,
+        "district": "Бескудниковский"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.559159255123284,
+          55.87256391495257
+        ]
+      }
+    }
+  ]
+}
