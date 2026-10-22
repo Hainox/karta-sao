@@ -13,6 +13,46 @@
   };
   const endpoint = '/api/object-photo-points/slots';
 
+  // Keep raw uploads below common proxy limits as well as the service's 5 MB cap.
+  const UPLOAD_BYTES = 900 * 1024;
+  async function prepareSlotPhoto(file) {
+    if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) {
+      throw new Error('Выберите фотографию в формате JPEG, PNG или WebP.');
+    }
+    if (!file.size) throw new Error('Выбран пустой файл. Выберите другую фотографию.');
+    if (file.size <= UPLOAD_BYTES) return file;
+    if (file.size > 40 * 1024 * 1024) throw new Error('Фотография больше 40 МБ. Уменьшите её перед загрузкой.');
+    const url = URL.createObjectURL(file);
+    try {
+      const image = await new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = () => resolve(img);
+        img.onerror = () => reject(new Error('Не удалось открыть фото. Сохраните его как JPEG и повторите загрузку.'));
+        img.src = url;
+      });
+      const canvas = document.createElement('canvas');
+      const scale = Math.min(1, 2000 / Math.max(image.naturalWidth, image.naturalHeight));
+      canvas.width = Math.max(1, Math.round(image.naturalWidth * scale));
+      canvas.height = Math.max(1, Math.round(image.naturalHeight * scale));
+      const context = canvas.getContext('2d');
+      if (!context) throw new Error('Браузер не смог подготовить фото. Выберите JPEG размером до 900 КБ.');
+      for (let attempt = 0; attempt < 4; attempt += 1) {
+        context.fillStyle = '#fff';
+        context.fillRect(0, 0, canvas.width, canvas.height);
+        context.drawImage(image, 0, 0, canvas.width, canvas.height);
+        for (const quality of [0.86, 0.72, 0.58]) {
+          const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', quality));
+          if (blob && blob.size <= UPLOAD_BYTES) {
+            return new File([blob], (file.name.replace(/\.[^.]*$/, '') || 'photo') + '.jpg', { type: 'image/jpeg' });
+          }
+        }
+        canvas.width = Math.max(1, Math.round(canvas.width * 0.75));
+        canvas.height = Math.max(1, Math.round(canvas.height * 0.75));
+      }
+      throw new Error('Не удалось уменьшить фото. Выберите JPEG размером до 900 КБ.');
+    } finally { URL.revokeObjectURL(url); }
+  }
+
   window.SaoPhotoSlots = {
     STATUS,
     mount({ notify, onSummary }) {
@@ -100,12 +140,20 @@
         input.onchange = async () => {
           const file = input.files[0];
           if (!file) return;
-          input.disabled = true; label.firstChild.textContent = 'Отправляем…';
+          const objectKey = record.id;
+          input.disabled = true; label.firstChild.textContent = 'Готовим фото…';
           try {
-            await json('/objects/' + encodeURIComponent(record.id) + '/' + slot + '/photo', { method: 'PUT', headers: { 'Content-Type': file.type, 'X-Photo-Filename': encodeURIComponent(file.name) }, body: file });
+            const photo = await prepareSlotPhoto(file);
+            label.firstChild.textContent = 'Отправляем…';
+            await json('/objects/' + encodeURIComponent(objectKey) + '/' + slot + '/photo', { method: 'PUT', headers: { 'Content-Type': photo.type, 'X-Photo-Filename': encodeURIComponent(photo.name) }, body: photo });
             notify('Фото загружено в слот ' + slot + ' и ждёт проверки.');
-            await refresh();
-          } catch (error) { notify('Не удалось загрузить фото: ' + error.message, true); input.disabled = false; label.firstChild.textContent = 'Загрузить фото'; }
+            if (record?.id === objectKey) await refresh();
+          } catch (error) {
+            const message = /entity too large|request_too_large|413/i.test(error.message)
+              ? 'Сервер отклонил размер фото. Выберите JPEG меньшего размера и повторите загрузку.' : error.message;
+            notify('Не удалось загрузить фото: ' + message, true);
+            input.disabled = false; input.value = ''; label.firstChild.textContent = 'Загрузить фото';
+          }
         };
         label.append(input);
         return label;
@@ -187,3 +235,4 @@
     },
   };
 }());
+
