@@ -1,0 +1,478 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Кабинет приёмки · Точки съёмки районов</title>
+  <style>
+    :root{--ink:#183c35;--muted:#687873;--line:#d9e0da;--paper:#f5f5ef;--panel:#fff;--green:#0c7a5a;--green-soft:#e7f3ed;--red:#d7193f;--red-soft:#fdecef;--blue:#2a6fdb;--amber:#d99a00}
+    *{box-sizing:border-box}
+    html,body{margin:0;background:var(--paper);color:var(--ink);font:14px/1.45 "Segoe UI",Arial,sans-serif}
+    button,input,select,textarea{font:inherit}
+    button{cursor:pointer}
+    [hidden]{display:none!important}
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:14px 22px;background:#123a32;color:#fff}
+    .topbar h1{margin:0;font-size:18px}
+    .topbar .subtitle{font-size:12px;color:#c5d8d1}
+    .topbar a{color:#d5eadc;font-weight:700;text-decoration:none}
+    main{max-width:1280px;margin:0 auto;padding:18px 16px 40px}
+    .panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px}
+    .login{max-width:380px;margin:40px auto;display:grid;gap:8px}
+    .login input{padding:10px;border:1px solid #cbd9ce;border-radius:8px}
+    .primary{padding:10px 14px;border:0;border-radius:9px;background:var(--green);color:#fff;font-weight:700}
+    .secondary{padding:8px 12px;border:1px solid #9fb3aa;border-radius:9px;background:#fff;color:var(--ink);font-weight:600}
+    .danger{padding:8px 12px;border:1px solid #e3a9b5;border-radius:9px;background:var(--red-soft);color:#8c1027;font-weight:700}
+    .status{font-size:13px;color:var(--muted)}
+    .error{color:#8c1027}
+    .counts{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-bottom:14px}
+    .count{padding:12px 14px;border-radius:12px;background:var(--panel);border:1px solid var(--line)}
+    .count strong{display:block;font-size:24px;line-height:1.1}
+    .count span{font-size:12px;color:var(--muted)}
+    .count-review strong{color:var(--blue)}.count-rework strong{color:var(--red)}.count-closed strong{color:var(--green)}.count-empty strong{color:#75857f}
+    .toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:end;margin-bottom:14px}
+    .toolbar label{display:grid;gap:4px;font-size:12px;font-weight:700;color:var(--muted)}
+    .toolbar select{min-width:190px;padding:8px;border:1px solid #cbd9ce;border-radius:8px;background:#fff}
+    .tabs{display:flex;gap:6px;margin-left:auto}
+    .tab{padding:8px 14px;border:1px solid var(--line);border-radius:999px;background:#fff;font-weight:700;color:var(--muted)}
+    .tab.active{background:var(--ink);border-color:var(--ink);color:#fff}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+    .card{display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+    .card .photo{display:block;aspect-ratio:4/3;background:#e9eee9;color:var(--muted);font-size:12px;text-align:center}
+    .photo-panel{margin:0}
+    .card .photo,.photo-stage{position:relative;overflow:hidden}
+    .photo img,.photo-stage img{position:absolute;left:50%;top:50%;object-fit:contain;display:block;transform:translate(-50%,-50%) rotate(var(--photo-angle,0deg))}
+    .photo-tools{display:flex;gap:6px;align-items:center;flex-wrap:wrap;padding:8px}
+    .photo-tools button{min-height:40px}
+    .photo-angle{font-size:12px;color:var(--muted);min-width:30px}
+    .photo-viewer{width:min(1100px,calc(100% - 24px));max-width:none;max-height:calc(100dvh - 24px);padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--panel);color:var(--ink)}
+    .photo-viewer::backdrop{background:#10241ed9}
+    .photo-viewer header{display:flex;gap:12px;justify-content:space-between;align-items:center}
+    .photo-viewer h2{margin:0;font-size:18px}
+    .photo-stage{height:min(70dvh,750px);background:#e9eee9;margin-top:10px}
+    .card .photo.placeholder{display:grid;place-items:center}
+    .card.rework .photo img{filter:grayscale(.6);opacity:.75}
+    .card .body{display:grid;gap:6px;padding:10px 12px 12px}
+    .card h3{margin:0;font-size:14px;line-height:1.3}
+    .meta{font-size:12px;color:var(--muted)}
+    .chip{display:inline-block;padding:1px 7px;border-radius:999px;background:var(--green-soft);color:var(--green);font-size:11px;font-weight:800}
+    .comment{margin:0;padding:7px 9px;border-radius:8px;background:var(--red-soft);color:#8c1027;font-size:13px;white-space:pre-wrap}
+    .actions{display:flex;gap:6px;flex-wrap:wrap}
+    .actions .primary,.actions .danger{flex:1}
+    .reject-form{display:grid;gap:6px}
+    .reject-form textarea{width:100%;min-height:70px;padding:8px;border:1px solid #e3a9b5;border-radius:8px;resize:vertical}
+    .card a.map-link{font-size:12px;color:var(--green);font-weight:700}
+    .empty{padding:30px;text-align:center;color:var(--muted)}
+    .more{display:block;margin:16px auto 0}
+    .session{display:flex;align-items:center;gap:10px;font-size:12px}
+    .objects{display:grid;gap:8px}
+    .object-row{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel);text-align:left;color:var(--ink)}
+    .object-row:hover{border-color:var(--green);box-shadow:0 4px 14px #163b3014}
+    .object-row strong{display:block;font-size:14px}
+    .object-row .open{color:var(--green);font-weight:700;white-space:nowrap}
+    .pill{display:inline-block;margin-right:6px;padding:1px 8px;border-radius:999px;font-size:11px;font-weight:800;color:#fff}
+    .pill.review{background:var(--blue)}.pill.rework{background:var(--red)}.pill.accepted{background:var(--green)}.pill.empty{background:#9aa8a3}
+    .object-head{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:12px}
+    .object-head h2{margin:4px 0 2px;font-size:18px}
+    .slot-empty-box{display:grid;place-items:center;min-height:70px;background:#eef1ee;color:var(--muted);font-size:13px}
+    @media(max-width:800px){.counts{grid-template-columns:repeat(2,minmax(0,1fr))}.tabs{margin-left:0}.toolbar select{min-width:0;width:100%}.toolbar label{flex:1 1 100%}}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>Кабинет приёмки · Точки съёмки районов</h1>
+      <div class="subtitle">По одному фото на точку: принять снимок или вернуть району с комментарием. После решения кабинет сам открывает следующую точку.</div>
+    </div>
+    <div class="session"><span id="sessionInfo"></span><button class="secondary" id="logout" type="button" hidden>Выйти</button><a href="index.html">Карты районов →</a></div>
+  </header>
+  <main>
+    <form class="panel login" id="loginForm" hidden>
+      <strong>Вход префектуры</strong>
+      <span class="status">Принимать и отклонять фото точек съёмки может только учётная запись префектуры.</span>
+      <input id="loginName" autocomplete="username" placeholder="Логин" required>
+      <input id="loginPassword" type="password" autocomplete="current-password" placeholder="Пароль" required>
+      <button class="primary" type="submit">Войти</button>
+      <span class="status" id="loginStatus" role="status"></span>
+    </form>
+    <section id="workspace" hidden>
+      <div class="counts" id="counts"></div>
+      <div class="toolbar">
+        <label>Район<select id="districtFilter"><option value="">Все районы САО</option></select></label>
+        <div class="tabs" role="tablist">
+          <button class="tab active" type="button" data-tab="pending" role="tab">На проверке</button>
+          <button class="tab" type="button" data-tab="rework" role="tab">На доработке</button>
+        </div>
+      </div>
+      <p class="status" id="listStatus" role="status"></p>
+      <div class="objects" id="list"></div>
+      <button class="secondary more" id="more" type="button" hidden>Показать ещё</button>
+    </section>
+    <section id="objectView" hidden>
+      <div class="object-head">
+        <div><button class="secondary" id="backToList" type="button">← К списку точек</button><h2 id="objectTitle"></h2><div class="meta" id="objectMeta"></div></div>
+        <div class="actions"><button class="primary" id="acceptObject" type="button">Принять объект</button><a class="secondary" id="objectMapLink" target="_blank">Точка на карте района →</a></div>
+      </div>
+      <p class="status" id="objectStatus" role="status"></p>
+      <p class="status" id="acceptObjectHint"></p>
+      <button class="secondary" id="nextObject" type="button" hidden>Следующая точка →</button>
+      <button class="secondary" id="retryObject" type="button" hidden>Повторить загрузку точки</button>
+      <div class="grid" id="slotGrid"></div>
+    </section>
+  </main>
+  <dialog id="photoViewer" class="photo-viewer" aria-labelledby="photoViewerTitle">
+    <header><h2 id="photoViewerTitle"></h2><button class="secondary" id="viewerClose" type="button" autofocus>Закрыть</button></header>
+    <div id="photoStage" class="photo-stage"></div>
+    <div id="viewerTools"></div>
+  </dialog>
+  <script src="../odh-map/api-config.js"></script><script>if (["127.0.0.1", "localhost"].includes(location.hostname)) ODHApi.setBase("http://127.0.0.1:8789");</script><script src="../object-maps/tpu-photo-api.js"></script>
+  <script>
+  (() => {
+    'use strict';
+    const api = window.TpuPhotoApi || window.ODHApi;
+    const endpoint = '/api/object-photo-points/district-photos';
+    const PAGE = 24;
+    const el = (id) => document.getElementById(id);
+    const make = (tag, className, text) => { const node = document.createElement(tag); if (className) node.className = className; if (text != null) node.textContent = text; return node; };
+    const state = { queue: null, tab: 'pending', shown: PAGE, urls: [], objectId: null, busy: false, revision: 0, angles: new Map(), photoViews: [], photoGeneration: 0 };
+    const DISTRICT_SLUGS = {
+      'Аэропорт': 'aeroport', 'Беговой': 'begovoy', 'Бескудниковский': 'beskudnikovskiy',
+      'Войковский': 'voykovskiy', 'Восточное Дегунино': 'vostochnoe-degunino',
+      'Головинский': 'golovinskiy', 'Дмитровский': 'dmitrovskiy',
+      'Западное Дегунино': 'zapadnoe-degunino', 'Коптево': 'koptevo',
+      'Левобережный': 'levoberezhnyy', 'Молжаниновский': 'molzhaninovskiy',
+      'Савёловский': 'savelovskiy', 'Сокол': 'sokol', 'Тимирязевский': 'timiryazevskiy',
+      'Ховрино': 'hovrino', 'Хорошёвский': 'horoshevskiy',
+    };
+    const when = (value) => value ? new Date(value).toLocaleString('ru-RU', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }) : '';
+
+    async function json(path, options) { return (await api.request(endpoint + path, options)).json(); }
+    function photoPath(pointId, photoId) { return '/api/object-photo-points/' + pointId + '/photos/' + photoId; }
+    function setStatus(id, text, error = false) { el(id).textContent = text; el(id).classList.toggle('error', error); }
+    function clearUrls() { state.photoGeneration++; if (el('photoViewer').open) el('photoViewer').close(); state.photoViews = []; state.urls.forEach(URL.revokeObjectURL); state.urls = []; }
+
+    function showSession() {
+      const user = api.user();
+      const prefecture = user?.role === 'prefecture_admin';
+      el('loginForm').hidden = prefecture;
+      el('workspace').hidden = !prefecture || !!state.objectId;
+      el('objectView').hidden = !prefecture || !state.objectId;
+      el('logout').hidden = !user;
+      el('sessionInfo').textContent = user ? (user.email || '') + (prefecture ? ' · Префектура' : ' · нет прав приёмки') : '';
+      if (user && !prefecture) el('loginStatus').textContent = 'Эта учётная запись не может принимать фото. Войдите учётной записью префектуры.';
+      if (prefecture) load();
+    }
+
+    async function load() {
+      setStatus('listStatus', 'Загружаем очередь…');
+      try {
+        state.queue = await json('/queue');
+        fillDistricts();
+        renderCounts();
+        render();
+      } catch (error) { setStatus('listStatus', 'Не удалось загрузить очередь: ' + error.message, true); }
+    }
+
+    function fillDistricts() {
+      const select = el('districtFilter');
+      const current = select.value;
+      const groups = new Set([...state.queue.pending, ...state.queue.rework].map((row) => row.district));
+      select.replaceChildren(new Option('Все районы САО', ''));
+      for (const group of [...groups].sort((a, b) => a.localeCompare(b, 'ru'))) select.append(new Option(group, group));
+      if (current && !groups.has(current)) select.append(new Option(current, current));
+      select.value = current;
+    }
+
+    function renderCounts() {
+      const c = state.queue.counts;
+      const items = [
+        ['review', c.pending, 'точек на проверке'],
+        ['rework', c.rework, 'точек на доработке'],
+        ['closed', c.accepted, 'точек с принятым фото'],
+        ['empty', c.empty, 'точек без фото'],
+        ['total', c.total, 'всего точек в наборе'],
+      ];
+      el('counts').replaceChildren(...items.map(([key, value, label]) => {
+        const box = make('div', 'count count-' + key);
+        box.append(make('strong', '', Number(value).toLocaleString('ru-RU')), make('span', '', label));
+        return box;
+      }));
+    }
+
+    function filteredRows(tab = state.tab) {
+      const district = el('districtFilter').value;
+      return state.queue[tab].filter((row) => !district || row.district === district);
+    }
+
+    function render() {
+      const list = el('list');
+      const all = filteredRows();
+      const shown = all.slice(0, state.shown);
+      setStatus('listStatus', all.length ? `Точек: ${all.length.toLocaleString('ru-RU')}` + (state.tab === 'pending' ? ' · сначала те, что ждут дольше всех' : '') : '');
+      list.replaceChildren(...shown.map((row) => {
+        const button = make('button', 'object-row'); button.type = 'button';
+        const info = make('div');
+        const pill = make('span', 'pill ' + (state.tab === 'pending' ? 'review' : 'rework'), state.tab === 'pending' ? 'на проверке' : 'на доработке');
+        const heading = row.heading == null ? 'без направления' : 'направление ' + Math.round(Number(row.heading)) + '°';
+        const meta = make('div', 'meta', `${row.district} · ${heading} · ` + (state.tab === 'pending' ? 'загружено ' + when(row.uploaded_at) : 'отклонено ' + when(row.rejected_at)));
+        info.append(make('strong', '', row.label), meta);
+        meta.prepend(pill);
+        button.append(info, make('span', 'open', 'Открыть точку →'));
+        button.onclick = () => openPoint(row);
+        return button;
+      }));
+      if (!all.length) list.append(make('div', 'empty', state.tab === 'pending' ? 'Нет точек с фото на проверке.' : 'Нет точек на доработке.'));
+      el('more').hidden = shown.length >= all.length;
+    }
+
+    function fitPhoto(view) {
+      const angle = state.angles.get(view.id) || 0;
+      const sideways = angle % 180 !== 0;
+      view.image.style.width = (sideways ? view.box.clientHeight : view.box.clientWidth) + 'px';
+      view.image.style.height = (sideways ? view.box.clientWidth : view.box.clientHeight) + 'px';
+      view.image.style.setProperty('--photo-angle', angle + 'deg');
+      view.status.textContent = angle + '°';
+    }
+
+    function rotatePhoto(id, delta) {
+      const angle = delta === 0 ? 0 : ((state.angles.get(id) || 0) + delta + 360) % 360;
+      state.angles.set(id, angle);
+      state.photoViews.filter(view => view.id === id).forEach(fitPhoto);
+    }
+
+    function photoTools(id, image, box) {
+      const tools = make('div', 'photo-tools');
+      const status = make('span', 'photo-angle', '0°');
+      status.setAttribute('role', 'status');
+      const view = { id, image, box, status };
+      state.photoViews.push(view);
+      for (const [label, delta, text] of [['Повернуть влево', -90, '↶ Влево'], ['Повернуть вправо', 90, '↷ Вправо'], ['Сбросить поворот', 0, 'Сброс']]) {
+        const button = make('button', 'secondary', text); button.type = 'button';
+        button.setAttribute('aria-label', label); button.title = label;
+        button.onclick = () => rotatePhoto(id, delta);
+        tools.append(button);
+      }
+      tools.append(status);
+      image.onload = () => fitPhoto(view);
+      return { tools, view };
+    }
+
+    function openPhoto(pointId, photo, label, url) {
+      const viewer = el('photoViewer');
+      el('photoViewerTitle').textContent = label;
+      const image = make('img'); image.alt = label; image.src = url;
+      const { tools, view } = photoTools(photo.id, image, el('photoStage'));
+      el('photoStage').replaceChildren(image);
+      el('viewerTools').replaceChildren(tools);
+      viewer.showModal();
+      fitPhoto(view);
+    }
+
+    function photoBox(pointId, photo, label) {
+      const generation = state.photoGeneration;
+      const panel = make('figure', 'photo-panel');
+      const box = make('a', 'photo placeholder', 'Загружаем фото…');
+      panel.append(box);
+      api.request(photoPath(pointId, photo.id)).then((response) => response.blob()).then((blob) => {
+        if (generation !== state.photoGeneration || !box.isConnected) return;
+        const url = URL.createObjectURL(blob); state.urls.push(url);
+        const image = make('img'); image.src = url; image.alt = label;
+        const { tools, view } = photoTools(photo.id, image, box);
+        box.href = url; box.classList.remove('placeholder'); box.replaceChildren(image);
+        box.onclick = event => { event.preventDefault(); openPhoto(pointId, photo, label, url); };
+        panel.append(tools);
+        fitPhoto(view);
+      }).catch(() => { box.textContent = 'Фото не открылось'; });
+      return panel;
+    }
+
+    el('viewerClose').onclick = () => el('photoViewer').close();
+    el('photoViewer').onclose = () => {
+      state.photoViews = state.photoViews.filter(view => view.box !== el('photoStage'));
+      el('photoStage').replaceChildren(); el('viewerTools').replaceChildren();
+    };
+    window.addEventListener('resize', () => state.photoViews.forEach(fitPhoto));
+
+    function currentRow(pointId) {
+      const from = (rows, kind) => { const row = rows.find((r) => r.point_id === pointId); return row ? { row, kind } : null; };
+      return from(state.queue.pending, 'pending') || from(state.queue.rework, 'rework') || null;
+    }
+
+    async function openPoint(row) {
+      if (state.objectId !== row.point_id) state.angles.clear();
+      state.objectId = row.point_id;
+      state.revision++;
+      el('workspace').hidden = true; el('objectView').hidden = false;
+      window.scrollTo({ top: 0 });
+      await renderPoint();
+    }
+
+    async function renderPoint() {
+      const revision = state.revision;
+      clearUrls();
+      el('acceptObject').hidden = true;
+      el('nextObject').hidden = true;
+      el('retryObject').hidden = true;
+      el('acceptObjectHint').textContent = '';
+      el('objectTitle').textContent = '';
+      el('objectMeta').textContent = '';
+      const grid = el('slotGrid');
+      grid.replaceChildren();
+      setStatus('objectStatus', 'Загружаем точку…');
+      let queue;
+      try { queue = await json('/queue'); }
+      catch (error) {
+        if (revision === state.revision) {
+          setStatus('objectStatus', 'Не удалось открыть точку: ' + error.message, true);
+          el('retryObject').hidden = false;
+        }
+        throw error;
+      }
+      if (revision !== state.revision) return;
+      state.queue = queue;
+      fillDistricts(); renderCounts(); render();
+      const found = currentRow(state.objectId);
+      if (!found) {
+        setStatus('objectStatus', 'Снимок этой точки уже проверен: он принят или ждёт новой пересдачи.');
+        el('nextObject').hidden = state.tab !== 'pending';
+        return;
+      }
+      const { row, kind } = found;
+      el('objectTitle').textContent = 'Точка съёмки ' + row.label;
+      el('objectMeta').textContent = `${row.district} · ${row.heading == null ? 'без направления' : 'направление ' + Math.round(Number(row.heading)) + '°'}${row.longitude != null ? ' · ' + Number(row.latitude).toFixed(6) + ', ' + Number(row.longitude).toFixed(6) : ''}`;
+      el('objectMapLink').href = DISTRICT_SLUGS[row.district] ? DISTRICT_SLUGS[row.district] + '.html' : 'index.html';
+      grid.replaceChildren(pointCard(row, kind));
+      const pendingPhoto = kind === 'pending';
+      setStatus('objectStatus', pendingPhoto ? 'Снимок ждёт решения: принять объект или вернуть на доработку с комментарием.' : 'Точка на доработке: ждём новый снимок от района.');
+      el('acceptObject').hidden = !pendingPhoto;
+      el('acceptObject').onclick = pendingPhoto ? () => reviewPhotos([{ id: row.photo_id }], 'accepted', '') : null;
+      el('nextObject').hidden = state.tab !== 'pending' || pendingPhoto;
+      lockReview(state.busy);
+    }
+
+    function pointCard(row, kind) {
+      const node = make('article', 'card' + (kind === 'rework' ? ' rework' : ''));
+      const body = make('div', 'body');
+      const title = make('h3', '', 'Снимок точки ');
+      body.append(title);
+      if (kind === 'pending') {
+        title.append(make('span', 'pill review', 'На проверке'));
+        body.append(make('div', 'meta', 'Загружено ' + when(row.uploaded_at) + (row.photo_filename ? ' · ' + row.photo_filename : '')));
+        node.append(photoBox(row.point_id, { id: row.photo_id }, 'Фото точки ' + row.label), body);
+        const actions = make('div', 'actions');
+        const accept = make('button', 'primary', 'Принять'); accept.type = 'button';
+        accept.onclick = () => decide({ id: row.photo_id }, 'accepted', '');
+        const reject = make('button', 'danger', 'Отклонить'); reject.type = 'button';
+        actions.append(accept, reject);
+        const form = make('form', 'reject-form'); form.hidden = true;
+        const comment = make('textarea'); comment.placeholder = 'Что не так и что исправить — комментарий увидит район'; comment.maxLength = 2000; comment.required = true;
+        const send = make('button', 'danger', 'Отправить на доработку'); send.type = 'submit';
+        const cancel = make('button', 'secondary', 'Отмена'); cancel.type = 'button';
+        const formActions = make('div', 'actions'); formActions.append(send, cancel);
+        form.append(comment, formActions);
+        reject.onclick = () => { form.hidden = false; actions.hidden = true; comment.focus(); };
+        cancel.onclick = () => { form.hidden = true; actions.hidden = false; };
+        form.onsubmit = (event) => { event.preventDefault(); const text = comment.value.trim(); if (text) decide({ id: row.photo_id }, 'rejected', text); };
+        body.append(actions, form);
+      } else if (kind === 'rework') {
+        title.append(make('span', 'pill rework', 'На доработке'));
+        if (row.photo_id) node.append(photoBox(row.point_id, { id: row.photo_id }, 'Отклонённое фото точки ' + row.label), body);
+        body.append(make('p', 'comment', 'Что исправить: ' + (row.rejected_comment || '—')), make('div', 'meta', 'Отклонено ' + when(row.rejected_at) + '. Ждём новое фото от района.'));
+      }
+      return node;
+    }
+
+    async function nextPoint() {
+      const revision = state.revision;
+      const queue = await json('/queue');
+      if (revision !== state.revision) return;
+      state.queue = queue;
+      fillDistricts(); renderCounts(); render();
+      const district = el('districtFilter').value;
+      const next = queue.pending.find((row) => !district || row.district === district);
+      if (next) { await openPoint(next); return; }
+      backToList();
+      setStatus('listStatus', 'Все точки в выбранной очереди проверены.');
+    }
+
+    function backToList() {
+      state.objectId = null; state.revision++; clearUrls(); state.angles.clear();
+      el('slotGrid').replaceChildren();
+      el('objectView').hidden = true; el('workspace').hidden = false;
+    }
+
+    function lockReview(locked) {
+      state.busy = locked;
+      document.querySelectorAll('#objectView button').forEach(button => { button.disabled = locked; });
+    }
+
+    async function reviewPhotos(photos, decision, comment) {
+      if (state.busy) return;
+      const revision = state.revision;
+      lockReview(true);
+      let saved = false;
+      try {
+        for (const photo of photos) {
+          if (revision !== state.revision) return;
+          await json('/photos/' + photo.id + '/review', { method: 'POST', body: JSON.stringify({ decision, comment }) });
+        }
+        saved = true;
+        if (revision !== state.revision) return;
+        await renderPoint();
+        if (state.tab === 'pending') {
+          const found = currentRow(state.objectId);
+          if (!found || found.kind !== 'pending') await nextPoint();
+        }
+      } catch (error) {
+        if (revision !== state.revision) return;
+        if (!saved) { try { await renderPoint(); } catch (_) {} }
+        setStatus('objectStatus', (saved ? 'Решение сохранено. Не удалось обновить кабинет: ' : 'Не удалось сохранить решение: ') + error.message, true);
+      } finally { lockReview(false); }
+    }
+
+    async function decide(photo, decision, comment) {
+      await reviewPhotos([photo], decision, comment);
+    }
+
+    el('retryObject').onclick = async () => {
+      if (state.busy) return;
+      lockReview(true);
+      try { await renderPoint(); }
+      catch (error) { setStatus('objectStatus', 'Не удалось обновить кабинет: ' + error.message, true); }
+      finally { lockReview(false); }
+    };
+
+    el('nextObject').onclick = async () => {
+      if (state.busy) return;
+      lockReview(true);
+      try { await nextPoint(); }
+      catch (error) { setStatus('objectStatus', 'Не удалось загрузить следующую точку: ' + error.message, true); }
+      finally { lockReview(false); }
+    };
+
+    el('backToList').onclick = async () => {
+      backToList();
+      await load();
+      setStatus('listStatus', '');
+    };
+    el('loginForm').onsubmit = async (event) => {
+      event.preventDefault();
+      el('loginStatus').textContent = 'Входим…';
+      try { await api.login(el('loginName').value.trim(), el('loginPassword').value); el('loginPassword').value = ''; el('loginStatus').textContent = ''; showSession(); }
+      catch (error) { el('loginStatus').textContent = 'Вход не выполнен: ' + error.message; }
+    };
+    el('logout').onclick = () => { api.clearSession(); backToList(); state.queue = null; el('list').replaceChildren(); showSession(); };
+    el('districtFilter').onchange = () => { state.shown = PAGE; render(); };
+    el('more').onclick = () => { state.shown += PAGE; render(); };
+    document.querySelectorAll('.tab').forEach((tab) => {
+      tab.onclick = () => {
+        state.tab = tab.dataset.tab; state.shown = PAGE;
+        document.querySelectorAll('.tab').forEach((t) => t.classList.toggle('active', t === tab));
+        render();
+      };
+    });
+    showSession();
+  })();
+  </script>
+</body>
+</html>

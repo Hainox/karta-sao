@@ -1,4 +1,5 @@
 import { createDirectionRepository, mountPublicDirectionRoutes, mountDirectionRoutes } from './direction-corrections.js';
+import { DISTRICT_DATASET, createDistrictPointPhotoRepository, mountDistrictPointPhotoRoutes } from './district-point-photos.js';
 import { AVD_OWNER, AVD_OBJECTS, AVD_OUTSIDE_OBJECT, AVD_OUTSIDE_BOUNDARY } from './tpu-responsibility.js';
 import crypto from 'node:crypto';
 import express from 'express';
@@ -10,7 +11,9 @@ import { objectsWithSlotCounts, createSlotRepository, mountPublicSlotRoutes, mou
 
 const ROLES = new Set(['prefecture_admin', 'reviewer', 'district_editor']);
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
-const PHOTO_COLUMNS = 'id, point_id, assignment_version, assignment_longitude, assignment_latitude, photo_mime_type, photo_filename, photo_size, uploaded_by, uploaded_at';
+// Статусы фото появляются с миграции 017: ракурс-marker приёмки — у районных
+// точек («одно живое фото на точку»), у ТПУ старые вложения остаются принятыми.
+const PHOTO_COLUMNS = 'id, point_id, assignment_version, assignment_longitude, assignment_latitude, photo_mime_type, photo_filename, photo_size, uploaded_by, uploaded_at, status, review_comment, reviewed_by, reviewed_at, dataset_id';
 
 // Наборы точек съёмки. Районные точки («эталонные фото») — второй набор: точки
 // закреплены за конкретным районом, назначает их только префектура.
@@ -95,7 +98,9 @@ export function createObjectPhotoPointsRouter({ repository, authenticate, bounda
       const dataset = req.query.dataset === 'sao_district_photo_points' ? 'sao_district_photo_points' : 'sao_tpu_parking';
       const points = await repository.listObjectPhotoPoints({ datasetId: dataset, district: req.query.district || null });
       res.setHeader('Cache-Control', 'no-store');
-      res.json({ points: points.map(({ id, object_key, object_type, district, longitude, latitude, label, heading }) => ({ id, object_key, object_type, district, longitude, latitude, label, heading })) });
+      // У районных точек открытым остаётся и состояние слота (без комментария
+      // префектуры): карты окрашивают точки, кабинет не открывает себя лишний раз.
+      res.json({ points: points.map(({ id, object_key, object_type, district, longitude, latitude, label, heading, photo_count, photo_state }) => ({ id, object_key, object_type, district, longitude, latitude, label, heading, photo_count, ...(photo_state ? { photo_state } : {}) })) });
     } catch (error) { next(error); }
   });
   mountPublicSlotRoutes(router, { repository });
@@ -106,9 +111,10 @@ export function createObjectPhotoPointsRouter({ repository, authenticate, bounda
   });
   const prefecture = (req, res, next) => req.user.role === 'prefecture_admin' ? next() : res.status(403).json({ error: 'Точки назначает только префектура.' });
   const districtFor = (req) => req.user.role === 'district_editor' ? req.user.district : undefined;
-  // Слоты фото по заданию и их проверка — до маршрутов «/:id» точек съёмки.
+  // Слоты фото по заданию, направления и приёмка районных точек — до «/:id» съёмки.
   mountSlotRoutes(router, { repository, districtFor });
   mountDirectionRoutes(router, { repository });
+  mountDistrictPointPhotoRoutes(router, { repository, districtFor });
   router.param('id', (req, res, next, id) => UUID.test(id) ? next() : res.status(400).json({ error: 'Некорректный идентификатор точки.' }));
   router.param('photoId', (req, res, next, id) => UUID.test(id) ? next() : res.status(400).json({ error: 'Некорректный идентификатор фото.' }));
   router.get('/report.xlsx', (req, res, next) => req.user.role === 'prefecture_admin' ? next() : res.status(403).json({ error: 'Сводка доступна только префектуре.' }), async (req, res, next) => {
@@ -163,7 +169,7 @@ export function createObjectPhotoPointsRouter({ repository, authenticate, bounda
       if (!req.body || Object.keys(req.body).some((key) => !editable.includes(key))) return res.status(400).json({ error: 'Можно изменить координаты, направление, название и описание точки.' });
       const validation = validateObjectPhotoPoint({ datasetId: existing.dataset_id, objectKey: existing.object_key, objectType: existing.object_type, district: existing.district, longitude: existing.longitude, latitude: existing.latitude, label: existing.label, note: existing.note, heading: existing.heading ?? null, ...req.body }, boundary);
       if (!validation.valid) return res.status(422).json({ error: 'Точка не прошла проверку.', details: validation.errors });
-      const point = await repository.updateObjectPhotoPoint({ id: req.params.id, ...validation.value, actorId: req.user.sub });
+      const point = await repository.updateObjectPhotoPoint({ id: req.params.id, ...validation.value, actorId: req.user.sub, keepAssignmentVersion: existing.dataset_id === DISTRICT_DATASET });
       if (!point) return res.status(404).json({ error: 'Точка не найдена.' });
       res.json({ point });
     } catch (error) { next(error); }
@@ -237,7 +243,25 @@ export function createObjectPhotoPointRepository(pool, { writeAudit } = {}) {
   return {
     ...createSlotRepository(pool, write),
     ...createDirectionRepository(pool, write),
+    ...createDistrictPointPhotoRepository(pool, write),
     async listObjectPhotoPoints({ datasetId, objectKey, district }) {
+      // Районный набор: рядом со счётчиком живёт состояние слота точки —
+      // «Нет фото / На проверке / Принято / На доработке» без комментария.
+      if (datasetId === DISTRICT_DATASET) {
+        const { rows } = await pool.query(`
+          SELECT p.*,
+            (SELECT count(*)::integer FROM object_photo_point_photos f WHERE f.point_id = p.id AND f.assignment_version = p.assignment_version) AS photo_count,
+            CASE
+              WHEN EXISTS (SELECT 1 FROM object_photo_point_photos f WHERE f.point_id = p.id AND f.status = 'pending' AND f.dataset_id = 'sao_district_photo_points') THEN 'pending'
+              WHEN EXISTS (SELECT 1 FROM object_photo_point_photos f WHERE f.point_id = p.id AND f.status = 'accepted' AND f.dataset_id = 'sao_district_photo_points') THEN 'accepted'
+              WHEN EXISTS (SELECT 1 FROM object_photo_point_photos f WHERE f.point_id = p.id AND f.status = 'rejected' AND f.dataset_id = 'sao_district_photo_points') THEN 'rework'
+              ELSE 'empty'
+            END AS photo_state
+          FROM object_photo_points p
+          WHERE retired_at IS NULL AND dataset_id = $1 AND ($2::text IS NULL OR object_key = $2) AND ($3::text IS NULL OR district = $3)
+          ORDER BY created_at, id`, [datasetId, objectKey || null, district || null]);
+        return rows;
+      }
       const { rows } = await pool.query('SELECT p.*, (SELECT count(*)::integer FROM object_photo_point_photos f WHERE f.point_id = p.id AND f.assignment_version = p.assignment_version) AS photo_count FROM object_photo_points p WHERE retired_at IS NULL AND dataset_id = $1 AND ($2::text IS NULL OR object_key = $2) AND ($3::text IS NULL OR district = $3) ORDER BY created_at, id', [datasetId, objectKey || null, district || null]);
       return rows;
     },
@@ -260,9 +284,13 @@ export function createObjectPhotoPointRepository(pool, { writeAudit } = {}) {
         return rows[0];
       });
     },
-    updateObjectPhotoPoint({ id, longitude, latitude, label, note, actorId, heading = null }) {
+    updateObjectPhotoPoint({ id, longitude, latitude, label, note, actorId, heading = null, keepAssignmentVersion = false }) {
       return write(actorId, 'object_photo_point_updated', { pointId: id }, async (client) => {
-        const { rows } = await client.query('UPDATE object_photo_points SET assignment_version = assignment_version + CASE WHEN longitude IS DISTINCT FROM $2 OR latitude IS DISTINCT FROM $3 OR heading IS DISTINCT FROM $7 THEN 1 ELSE 0 END, longitude = $2, latitude = $3, label = $4, note = $5, updated_by = $6, heading = $7, updated_at = now() WHERE id = $1 AND retired_at IS NULL RETURNING *', [id, longitude, latitude, label, note, actorId, heading]);
+        // У районных точек перенос и смена направления не перетирают фото:
+        // слот живёт своей жизнью («Принято» сохраняется). У ТПУ остаётся
+        // прежняя привязка снимков к версии ракурса: версия растёт только
+        // когда изменилась привязка или направление.
+        const { rows } = await client.query('UPDATE object_photo_points SET assignment_version = assignment_version + CASE WHEN NOT $8::boolean AND (longitude IS DISTINCT FROM $2 OR latitude IS DISTINCT FROM $3 OR heading IS DISTINCT FROM $7) THEN 1 ELSE 0 END, longitude = $2, latitude = $3, label = $4, note = $5, updated_by = $6, heading = $7, updated_at = now() WHERE id = $1 AND retired_at IS NULL RETURNING *', [id, longitude, latitude, label, note, actorId, heading, keepAssignmentVersion]);
         return rows[0] || null;
       });
     },
@@ -279,11 +307,17 @@ export function createObjectPhotoPointRepository(pool, { writeAudit } = {}) {
     addObjectPhotoPointPhoto({ pointId, district, bytes, mimeType, filename, actorId, expectedVersion }) {
       return write(actorId, 'object_photo_point_photo_uploaded', { pointId }, async (client) => {
         // Lock the assignment so retirement cannot race with a district upload.
-        const point = await client.query('SELECT id, assignment_version, longitude, latitude FROM object_photo_points WHERE id = $1 AND retired_at IS NULL AND ($2::text IS NULL OR district = $2) FOR UPDATE', [pointId, district || null]);
+        const point = await client.query('SELECT id, assignment_version, longitude, latitude, dataset_id FROM object_photo_points WHERE id = $1 AND retired_at IS NULL AND ($2::text IS NULL OR district = $2) FOR UPDATE', [pointId, district || null]);
         if (!point.rows[0]) return null;
         const assignment = point.rows[0];
         if (expectedVersion !== assignment.assignment_version) throw Object.assign(new Error('Точка изменена префектурой. Обновите карточку и выберите текущий ракурс.'), { status: 409 });
-        const { rows } = await client.query(`INSERT INTO object_photo_point_photos (id, point_id, photo_bytes, photo_mime_type, photo_filename, photo_size, uploaded_by, assignment_version, assignment_longitude, assignment_latitude) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) RETURNING ${PHOTO_COLUMNS}`, [crypto.randomUUID(), pointId, bytes, mimeType, filename, bytes.length, actorId, assignment.assignment_version, assignment.longitude, assignment.latitude]);
+        // Районная точка — один слот: в нём уже действует фото (на проверке
+        // или принятое), новое не принимаем; отклонение открывает слот заново.
+        if (assignment.dataset_id === DISTRICT_DATASET) {
+          const active = await client.query(`SELECT 1 FROM object_photo_point_photos WHERE point_id = $1 AND status IN ('pending', 'accepted') LIMIT 1`, [pointId]);
+          if (active.rows.length) throw Object.assign(new Error('В слоте точки уже есть фото: на проверке или принятое. Заменить его может префектура, а после отклонения фото загружается заново.'), { status: 409 });
+        }
+        const { rows } = await client.query(`INSERT INTO object_photo_point_photos (id, point_id, photo_bytes, photo_mime_type, photo_filename, photo_size, uploaded_by, assignment_version, assignment_longitude, assignment_latitude, status, dataset_id) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12) RETURNING ${PHOTO_COLUMNS}`, [crypto.randomUUID(), pointId, bytes, mimeType, filename, bytes.length, actorId, assignment.assignment_version, assignment.longitude, assignment.latitude, assignment.dataset_id === DISTRICT_DATASET ? 'pending' : 'accepted', assignment.dataset_id]);
         return rows[0];
       });
     },
