@@ -518,8 +518,10 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
   }
 
   function pointVisible(point) {
-    if (!state.shootLayerOn) return false;
-    return state.gpkgLayerOn || !isGpkgPoint(point);
+    // «Точки из GPKG» — самостоятельный слой: его галочка работает и при
+    // выключенном слое эталонных точек, иначе слой-ребёнок не показывался.
+    if (isGpkgPoint(point)) return state.gpkgLayerOn;
+    return state.shootLayerOn;
   }
 
   function renderShootMarkers() {
@@ -889,6 +891,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     $('gpkgLayerToggle').checked = on;
     $('gpkgLayerRow').classList.toggle('off', !on);
     renderShootMarkers();
+    renderShootList();
   }
 
   function setShootLayer(on) {
