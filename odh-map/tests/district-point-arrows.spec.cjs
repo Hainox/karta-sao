@@ -30,6 +30,9 @@ async function setup(page,seed=[]){
 test('сохранённые направления 0°, 90° и 270° видны, неизвестное не рисуется как север',async({page})=>{
   await setup(page,[0,90,270,null].map((heading,i)=>({id:'p'+i,label:'1.'+i,heading,lng:37.5,lat:55.8,photo_state:'accepted'})));
   await expect(page.locator('.shoot-marker svg')).toHaveCount(3);
+  await expect(page.locator('.shoot-marker svg').first()).toBeHidden();
+  await page.evaluate(()=>window.districtArrowTest.setShootMode(true));
+  await expect(page.locator('.shoot-marker svg').first()).toBeVisible();
   for(const [i,heading]of [0,90,270].entries())await expect(page.locator('.shoot-marker').nth(i).locator('svg')).toHaveAttribute('style',new RegExp('rotate\\('+heading+'deg\\)'));
 });
 test('два клика создают точку со стрелкой; координаты остаются у первого клика',async({page})=>{
