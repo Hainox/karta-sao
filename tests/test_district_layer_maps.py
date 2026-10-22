@@ -89,8 +89,10 @@ def test_pages_have_no_template_leftovers():
         assert "Точки съёмки" in html, f"{slug}.html нет инструмента точек съёмки"
         assert 'id="shootLayerToggle"' in html and "ПРОБНЫЙ ИМПОРТ С NEXTGIS" in html, \
             f"{slug}.html точки съёмки не вынесены в подписанный слой пробного импорта"
-        assert "if (!state.shootLayerOn) return;" in html, \
+        assert "if (!pointVisible(point)) return;" in html and "state.gpkgLayerOn" in html, \
             f"{slug}.html рисует точки съёмки при выключенном слое"
+        assert 'id="gpkgLayerToggle"' in html and "Точки из GPKG" in html, \
+            f"{slug}.html не выносит точки из GPKG в отдельный переключаемый слой"
         assert re.findall(r'class="dist-link active" href="([^"]+)"', html) == [f"{slug}.html"], \
             f"{slug}.html в списке районов подсвечен не свой район"
         assert "outline: { color: '#9a6400', width: 2.4 }" in html, \
@@ -122,6 +124,15 @@ def test_pages_have_no_template_leftovers():
             f"{slug}.html нет сводки Excel и отправки фото по точкам"
         assert "district_editor" in html, \
             f"{slug}.html не различает учётки районов для отправки фото"
+        # Полное редактирование точки: подпись, координаты, азимут, примечание
+        assert 'name="label"' in html and 'name="latitude"' in html and 'name="longitude"' in html, \
+            f"{slug}.html не позволяет редактировать подпись и координаты точки"
+        assert 'name="heading"' in html and 'name="note"' in html, \
+            f"{slug}.html не позволяет редактировать направление и примечание"
+        assert "savePointEdits" in html, \
+            f"{slug}.html не сохраняет изменения точки"
+        assert "Маркеры карты держат ссылки на объекты Яндекс Карт" in html, \
+            f"{slug}.html сериализует маркеры карты в localStorage и теряет локальные правки"
 
 
 def test_boundary_matches_districts_geojson():
