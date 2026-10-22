@@ -105,6 +105,8 @@
         <div class="actions"><button class="primary" id="acceptAll" type="button">Принять все фото на проверке</button><a class="secondary" id="objectMapLink" target="_blank">Объект на карте →</a></div>
       </div>
       <p class="status" id="objectStatus" role="status"></p>
+      <button class="secondary" id="nextObject" type="button" hidden>Следующий объект →</button>
+      <button class="secondary" id="retryObject" type="button" hidden>Повторить загрузку объекта</button>
       <div class="grid" id="slotGrid"></div>
     </section>
   </main>
@@ -117,7 +119,7 @@
     const PAGE = 24;
     const el = (id) => document.getElementById(id);
     const make = (tag, className, text) => { const node = document.createElement(tag); if (className) node.className = className; if (text != null) node.textContent = text; return node; };
-    const state = { queue: null, tab: 'pending', shown: PAGE, urls: [], object: null };
+    const state = { queue: null, tab: 'pending', shown: PAGE, urls: [], object: null, busy: false, revision: 0 };
     const kindOf = (object) => object.kind === 'tpu' ? 'tpu' : object.type === 'Парковочный карман' ? 'pocket' : 'parking';
     const when = (value) => value ? new Date(value).toLocaleString('ru-RU', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }) : '';
 
@@ -154,7 +156,8 @@
       const groups = new Set([...state.queue.pending, ...state.queue.rework].map((row) => row.object.group));
       select.replaceChildren(new Option('Все районы и АвД САО', ''));
       for (const group of [...groups].sort((a, b) => a.localeCompare(b, 'ru'))) select.append(new Option(group, group));
-      select.value = groups.has(current) ? current : '';
+      if (current && !groups.has(current)) select.append(new Option(current, current));
+      select.value = current;
     }
 
     function renderCounts() {
@@ -175,17 +178,17 @@
     }
 
     // Объекты вкладки: фото на проверке (или слоты на доработке) сгруппированы по объекту.
-    function objectRows() {
+    function objectRows(tab = state.tab) {
       const district = el('districtFilter').value;
       const kind = el('kindFilter').value;
       const groups = new Map();
-      for (const row of state.queue[state.tab]) {
+      for (const row of state.queue[tab]) {
         if ((district && row.object.group !== district) || (kind && kindOf(row.object) !== kind)) continue;
         if (!groups.has(row.object.id)) groups.set(row.object.id, { object: row.object, rows: [] });
         groups.get(row.object.id).rows.push(row);
       }
       const first = (g) => Math.min(...g.rows.map((r) => new Date(r.uploaded_at).getTime()));
-      return [...groups.values()].sort((a, b) => state.tab === 'pending' ? first(a) - first(b) : first(b) - first(a));
+      return [...groups.values()].sort((a, b) => tab === 'pending' ? first(a) - first(b) : first(b) - first(a));
     }
 
     function render() {
@@ -212,6 +215,7 @@
       const box = make('a', 'photo placeholder', 'Загружаем фото…');
       box.target = '_blank'; box.rel = 'noopener';
       api.request(endpoint + '/photos/' + photo.id).then((response) => response.blob()).then((blob) => {
+        if (!box.isConnected) return;
         const url = URL.createObjectURL(blob); state.urls.push(url);
         const image = make('img'); image.src = url; image.alt = label;
         box.href = url; box.classList.remove('placeholder'); box.replaceChildren(image);
@@ -221,35 +225,47 @@
 
     async function openObject(object) {
       state.object = object;
+      state.revision++;
       el('workspace').hidden = true; el('objectView').hidden = false;
       el('objectTitle').textContent = object.label;
       el('objectMeta').textContent = `${object.group} · ${object.type} · слотов по заданию: ${object.required}`;
       el('objectMapLink').href = 'tpu-parking.html?object=' + encodeURIComponent(object.id);
       window.scrollTo({ top: 0 });
-      await renderObject();
+      try { await renderObject(); } catch (_) { /* Ошибка показана в карточке объекта. */ }
     }
 
     async function renderObject() {
+      const object = state.object;
+      const revision = state.revision;
       clearUrls();
+      el('acceptAll').hidden = true;
+      el('nextObject').hidden = true;
+      el('retryObject').hidden = true;
       const grid = el('slotGrid');
       grid.replaceChildren();
       setStatus('objectStatus', 'Загружаем слоты…');
       let detail;
-      try { detail = await json('/objects/' + encodeURIComponent(state.object.id)); }
-      catch (error) { setStatus('objectStatus', 'Не удалось открыть объект: ' + error.message, true); return; }
+      try { detail = await json('/objects/' + encodeURIComponent(object.id)); }
+      catch (error) {
+        if (revision === state.revision) {
+          setStatus('objectStatus', 'Не удалось открыть объект: ' + error.message, true);
+          el('retryObject').hidden = false;
+        }
+        throw error;
+      }
+      if (revision !== state.revision) return;
       const labels = { empty: 'Нет фото', progress: 'В работе', review: 'На проверке', rework: 'На доработке', closed: 'Закрыта' };
       setStatus('objectStatus', `Статус объекта: ${labels[detail.status]} · принято ${detail.accepted} из ${detail.required}`);
       const pending = detail.slots.filter((s) => s.photo?.status === 'pending');
       el('acceptAll').hidden = pending.length < 2;
       el('acceptAll').onclick = async () => {
         if (!confirm(`Принять все ${pending.length} фото этого объекта, которые на проверке?`)) return;
-        el('acceptAll').disabled = true;
-        try { for (const slot of pending) await json('/photos/' + slot.photo.id + '/review', { method: 'POST', body: JSON.stringify({ decision: 'accepted', comment: '' }) }); }
-        catch (error) { setStatus('objectStatus', 'Не удалось принять: ' + error.message, true); }
-        el('acceptAll').disabled = false;
-        await renderObject();
+        await reviewPhotos(pending.map(slot => slot.photo), 'accepted', '');
       };
+      el('nextObject').hidden = state.tab !== 'pending' || pending.length > 0;
       grid.replaceChildren(...detail.slots.map((slot) => slotCard(slot)));
+      lockReview(state.busy);
+      return detail;
     }
 
     function slotCard(slot) {
@@ -264,7 +280,7 @@
         node.append(photoBox(slot.photo, 'Слот ' + slot.slot), body);
         const actions = make('div', 'actions');
         const reject = make('button', 'danger', 'Отклонить'); reject.type = 'button';
-        if (!accepted) { const accept = make('button', 'primary', 'Принять'); accept.type = 'button'; accept.onclick = () => decide(slot.photo, 'accepted', '', [accept, reject]); actions.append(accept); }
+        if (!accepted) { const accept = make('button', 'primary', 'Принять'); accept.type = 'button'; accept.onclick = () => decide(slot.photo, 'accepted', ''); actions.append(accept); }
         actions.append(reject);
         const form = make('form', 'reject-form'); form.hidden = true;
         const comment = make('textarea'); comment.placeholder = 'Что не так и что исправить — комментарий увидит район'; comment.maxLength = 2000; comment.required = true;
@@ -274,7 +290,7 @@
         form.append(comment, formActions);
         reject.onclick = () => { form.hidden = false; actions.hidden = true; comment.focus(); };
         cancel.onclick = () => { form.hidden = true; actions.hidden = false; };
-        form.onsubmit = (event) => { event.preventDefault(); const text = comment.value.trim(); if (text) decide(slot.photo, 'rejected', text, [send, cancel]); };
+        form.onsubmit = (event) => { event.preventDefault(); const text = comment.value.trim(); if (text) decide(slot.photo, 'rejected', text); };
         body.append(actions, form);
       } else if (slot.rejected) {
         title.append(make('span', 'pill rework', 'На доработке'));
@@ -287,20 +303,71 @@
       return node;
     }
 
-    async function decide(photo, decision, comment, buttons) {
-      buttons.forEach((b) => { b.disabled = true; });
-      try {
-        await json('/photos/' + photo.id + '/review', { method: 'POST', body: JSON.stringify({ decision, comment }) });
-        await renderObject();
-        setStatus('objectStatus', (decision === 'accepted' ? 'Фото принято. ' : 'Фото отклонено, слот отправлен на доработку. ') + el('objectStatus').textContent);
-      } catch (error) {
-        buttons.forEach((b) => { b.disabled = false; });
-        setStatus('objectStatus', 'Не удалось сохранить решение: ' + error.message, true);
-      }
+    async function nextObject() {
+      const revision = state.revision;
+      const queue = await json('/queue');
+      if (revision !== state.revision) return;
+      state.queue = queue;
+      fillDistricts(); renderCounts(); render();
+      const next = objectRows('pending')[0];
+      if (next) { await openObject(next.object); return; }
+      state.object = null; state.revision++; clearUrls();
+      el('slotGrid').replaceChildren();
+      el('objectView').hidden = true; el('workspace').hidden = false;
+      setStatus('listStatus', 'Все объекты в выбранной очереди проверены.');
     }
 
+    function lockReview(locked) {
+      state.busy = locked;
+      document.querySelectorAll('#objectView button').forEach(button => { button.disabled = locked; });
+    }
+
+    async function reviewPhotos(photos, decision, comment) {
+      if (state.busy) return;
+      const revision = state.revision;
+      lockReview(true);
+      let saved = false;
+      try {
+        for (const photo of photos) {
+          if (revision !== state.revision) return;
+          await json('/photos/' + photo.id + '/review', { method: 'POST', body: JSON.stringify({ decision, comment }) });
+        }
+        saved = true;
+        if (revision !== state.revision) return;
+        const detail = await renderObject();
+        if (detail && state.tab === 'pending' && !detail.slots.some(slot => slot.photo?.status === 'pending')) await nextObject();
+      } catch (error) {
+        if (revision !== state.revision) return;
+        // При частичном успехе показываем актуальные слоты, сохраняя сообщение об ошибке.
+        if (!saved) { try { await renderObject(); } catch (_) {} }
+        setStatus('objectStatus', (saved ? 'Решение сохранено. Не удалось обновить кабинет: ' : 'Не удалось сохранить все решения: ') + error.message, true);
+      } finally { lockReview(false); }
+    }
+
+    async function decide(photo, decision, comment) {
+      await reviewPhotos([photo], decision, comment);
+    }
+
+    el('retryObject').onclick = async () => {
+      if (state.busy) return;
+      lockReview(true);
+      try {
+        const detail = await renderObject();
+        if (detail && state.tab === 'pending' && !detail.slots.some(slot => slot.photo?.status === 'pending')) await nextObject();
+      } catch (error) { setStatus('objectStatus', 'Не удалось обновить кабинет: ' + error.message, true); }
+      finally { lockReview(false); }
+    };
+
+    el('nextObject').onclick = async () => {
+      if (state.busy) return;
+      lockReview(true);
+      try { await nextObject(); }
+      catch (error) { setStatus('objectStatus', 'Не удалось загрузить следующий объект: ' + error.message, true); }
+      finally { lockReview(false); }
+    };
+
     el('backToList').onclick = async () => {
-      state.object = null; clearUrls();
+      state.object = null; state.revision++; clearUrls();
       el('objectView').hidden = true; el('workspace').hidden = false;
       await load();
     };
@@ -324,7 +391,7 @@
       } catch (error) { setStatus('listStatus', 'Не удалось получить свод: ' + error.message, true); }
       finally { button.disabled = false; button.textContent = 'Excel: свод по фото'; }
     };
-    el('logout').onclick = () => { api.clearSession(); state.queue = null; state.object = null; el('list').replaceChildren(); showSession(); };
+    el('logout').onclick = () => { api.clearSession(); state.queue = null; state.object = null; state.revision++; clearUrls(); el('list').replaceChildren(); showSession(); };
     el('districtFilter').onchange = el('kindFilter').onchange = () => { state.shown = PAGE; render(); };
     el('more').onclick = () => { state.shown += PAGE; render(); };
     document.querySelectorAll('.tab').forEach((tab) => {
