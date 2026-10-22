@@ -23,7 +23,7 @@ h1{margin:2px 0 0;font-size:24px;line-height:1.15}
 .dist-link.active{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:800}
 .layers-head{display:flex;align-items:center;justify-content:space-between;margin-top:6px;gap:6px}
 .layers-head b{font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
-.layers-head .head-actions{display:flex;gap:6px}
+.layers-head .head-actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
 .layer-row{display:flex;align-items:center;gap:9px;padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:#fff;cursor:pointer;user-select:none}
 .layer-row+.layer-row{margin-top:6px}
 .layer-row input{accent-color:var(--accent)}
@@ -143,7 +143,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     <nav class="dist-nav"><a class="dist-link" href="aeroport.html">Аэропорт</a><a class="dist-link" href="begovoy.html">Беговой</a><a class="dist-link" href="beskudnikovskiy.html">Бескудниковский</a><a class="dist-link" href="voykovskiy.html">Войковский</a><a class="dist-link" href="vostochnoe-degunino.html">Восточное Дегунино</a><a class="dist-link" href="golovinskiy.html">Головинский</a><a class="dist-link" href="dmitrovskiy.html">Дмитровский</a><a class="dist-link" href="zapadnoe-degunino.html">Западное Дегунино</a><a class="dist-link" href="koptevo.html">Коптево</a><a class="dist-link active" href="levoberezhnyy.html">Левобережный</a><a class="dist-link" href="molzhaninovskiy.html">Молжаниновский</a><a class="dist-link" href="savelovskiy.html">Савеловский</a><a class="dist-link" href="sokol.html">Сокол</a><a class="dist-link" href="timiryazevskiy.html">Тимирязевский</a><a class="dist-link" href="hovrino.html">Ховрино</a><a class="dist-link" href="horoshevskiy.html">Хорошевский</a></nav>
     <div class="layers-head"><b>Слои</b><span class="status" id="layerTotal"></span></div>
     <div id="layerControls"></div>
-    <div class="layers-head"><b>Точки съёмки</b><span class="head-actions"><button id="shootLogin" class="shoot-toggle" type="button">Вход</button><button id="shootToggle" class="shoot-toggle" type="button">Разметка</button><button id="dragToggle" class="shoot-toggle" type="button" hidden>Перенос точек</button><button id="handToggle" class="shoot-toggle" type="button" hidden>Рука</button></span></div>
+    <div class="layers-head"><b>Точки съёмки</b><span class="head-actions"><button id="shootLogin" class="shoot-toggle" type="button">Вход</button><button id="shootToggle" class="shoot-toggle" type="button">Разметка</button><button id="dragToggle" class="shoot-toggle" type="button" hidden>Перенос</button><button id="handToggle" class="shoot-toggle" type="button" hidden>Рука</button></span></div>
     <div class="shoot-login" id="shootLoginBox" hidden>
       <input id="shootLoginName" placeholder="Логин учётной записи" autocomplete="username">
       <input id="shootLoginPass" type="password" placeholder="Пароль" autocomplete="current-password">
@@ -204,7 +204,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
   }
 
   function showCard(item) {
-    const p = item.properties || {};
+    const p = (item.feature?.properties || item.properties || {});
     const rows = [
       ['Тип объекта', p.object_type_name],
       ['Покрытие', p.coating_type_name],
@@ -213,7 +213,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       ['Статус', p.object_status_name],
       ['Источник', p.source],
     ].filter(([, v]) => v != null && v !== '').map(([k, v]) => `<div><strong>${k}:</strong> ${escapeHtml(v)}</div>`).join('');
-    const title = p.object_type_name || item.properties.district || 'Объект';
+    const title = p.object_type_name || p.district || 'Объект';
     $('card').innerHTML = `<h2>${escapeHtml(title)}</h2>${rows || '<div>Подробностей в реестре нет.</div>'}`;
     $('card').className = 'card open';
   }
@@ -228,9 +228,9 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       // Список задаём явно: при редактировании из него убирается перетаскивание мышью.
       behaviors: MAP_BEHAVIORS,
     }, [new YMapDefaultSchemeLayer({}), new YMapDefaultFeaturesLayer({})]);
-    // Клик по карте: координаты приходят из YMapListener; карта не вращается,
-    // поэтому направление в экранных градусах = компасному азимуту.
-    state.map.addChild(new YMapListener({ layer: 'any', onClick: (obj) => handleMapClick(obj && obj.coordinates) }));
+    // Клик по карте: координаты приходят из YMapListener вторым аргументом (event.coordinates);
+    // карта не вращается, поэтому направление в экранных градусах = компасному азимуту.
+    state.map.addChild(new YMapListener({ layer: 'any', onClick: (_object, event) => handleMapClick(event && event.coordinates) }));
     let total = 0;
     for (const layer of LAYERS) {
       try {
