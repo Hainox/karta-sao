@@ -116,6 +116,8 @@ h1{margin:2px 0 0;font-size:24px;line-height:1.15}
 .shoot-dot{position:absolute;left:-6px;top:-6px;width:12px;height:12px;border-radius:50%;background:#ffcb00;border:2px solid #102e60;box-shadow:0 0 0 1.5px #fff,0 1px 3px rgba(16,38,54,.4)}
 #map.dragmode .shoot-marker{cursor:grab}
 #map.dragmode .shoot-marker:active{cursor:grabbing}
+#map.handmode{cursor:grab!important}
+#map.handmode .shoot-marker{cursor:default}
 .shoot-marker.preview .shoot-dot{background:#fff;border-color:#ffcb00}
 @media(max-width:820px){.app{grid-template-columns:1fr;grid-template-rows:auto minmax(0,1fr)}#map{height:calc(100vh - 300px);min-height:420px}}
 </style>
@@ -141,7 +143,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     <nav class="dist-nav"><a class="dist-link active" href="aeroport.html">Аэропорт</a><a class="dist-link" href="begovoy.html">Беговой</a><a class="dist-link" href="beskudnikovskiy.html">Бескудниковский</a><a class="dist-link" href="voykovskiy.html">Войковский</a><a class="dist-link" href="vostochnoe-degunino.html">Восточное Дегунино</a><a class="dist-link" href="golovinskiy.html">Головинский</a><a class="dist-link" href="dmitrovskiy.html">Дмитровский</a><a class="dist-link" href="zapadnoe-degunino.html">Западное Дегунино</a><a class="dist-link" href="koptevo.html">Коптево</a><a class="dist-link" href="levoberezhnyy.html">Левобережный</a><a class="dist-link" href="molzhaninovskiy.html">Молжаниновский</a><a class="dist-link" href="savelovskiy.html">Савеловский</a><a class="dist-link" href="sokol.html">Сокол</a><a class="dist-link" href="timiryazevskiy.html">Тимирязевский</a><a class="dist-link" href="hovrino.html">Ховрино</a><a class="dist-link" href="horoshevskiy.html">Хорошевский</a></nav>
     <div class="layers-head"><b>Слои</b><span class="status" id="layerTotal"></span></div>
     <div id="layerControls"></div>
-    <div class="layers-head"><b>Точки съёмки</b><span class="head-actions"><button id="shootLogin" class="shoot-toggle" type="button">Вход</button><button id="shootToggle" class="shoot-toggle" type="button">Разметка</button><button id="dragToggle" class="shoot-toggle" type="button" hidden>Перенос точек</button></span></div>
+    <div class="layers-head"><b>Точки съёмки</b><span class="head-actions"><button id="shootLogin" class="shoot-toggle" type="button">Вход</button><button id="shootToggle" class="shoot-toggle" type="button">Разметка</button><button id="dragToggle" class="shoot-toggle" type="button" hidden>Перенос точек</button><button id="handToggle" class="shoot-toggle" type="button" hidden>Рука</button></span></div>
     <div class="shoot-login" id="shootLoginBox" hidden>
       <input id="shootLoginName" placeholder="Логин учётной записи" autocomplete="username">
       <input id="shootLoginPass" type="password" placeholder="Пароль" autocomplete="current-password">
@@ -191,7 +193,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     { key: 'driveways', label: 'Проезды',             color: '#7f6a5d', enabled: false },
     { key: 'odh',       label: 'Объекты ОДХ',         color: '#5f7f95', enabled: false },
   ];
-  const state = { map: null, layers: {}, shootMode: false, shootLayerOn: false, picking: null, points: [], serverOk: false, photoUser: readUser(), photoAngles: new Map(), activePhoto: null, dragMode: false, dragSession: null, movePick: null };
+  const state = { map: null, layers: {}, shootMode: false, shootLayerOn: false, picking: null, points: [], serverOk: false, photoUser: readUser(), photoAngles: new Map(), activePhoto: null, dragMode: false, handMode: false, movePick: null, suppressClick: false };
   const $ = (id) => document.getElementById(id);
   const escapeHtml = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
 
@@ -222,7 +224,9 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     const { YMap, YMapDefaultSchemeLayer, YMapDefaultFeaturesLayer, YMapFeature, YMapListener } = ymaps3;
     state.map = new YMap($('map'), {
       location: { center: [37.50, 55.84], zoom: 13 },
-      showScaleInCopyrights: true, theme: 'light'
+      showScaleInCopyrights: true, theme: 'light',
+      // Список задаём явно: при редактировании из него убирается перетаскивание мышью.
+      behaviors: MAP_BEHAVIORS,
     }, [new YMapDefaultSchemeLayer({}), new YMapDefaultFeaturesLayer({})]);
     // Клик по карте: координаты приходят из YMapListener; карта не вращается,
     // поэтому направление в экранных градусах = компасному азимуту.
@@ -409,81 +413,32 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     if (preview) return el;
     el.addEventListener('click', (event) => {
       event.stopPropagation();
+      if (state.handMode) return;
       if (state.suppressClick) { state.suppressClick = false; return; }
       if (state.dragMode) {
         state.movePick = { point, element: el };
-        $('map').classList.add('selecting');
         $('shootHint').textContent = `Точка «${point.label}» выбрана: перетащите её в новое место или кликните по карте, куда перенести. Стрелка направления и фото сохранятся.`;
         return;
       }
       openPointCard(point);
     });
-    el.addEventListener('pointerdown', (event) => {
-      if (!state.dragMode) return;
-      event.stopPropagation();
-      event.preventDefault();
-      try { el.setPointerCapture(event.pointerId); } catch (_) { /* уже потерян */ }
-      state.dragSession = { point, element: el, startX: event.clientX, startY: event.clientY, dx: 0, dy: 0, moved: false };
-    });
-    el.addEventListener('pointermove', (event) => {
-      const session = state.dragSession;
-      if (!session || session.element !== el) return;
-      if (event.buttons === 0 && event.pointerType === 'mouse') return;
-      const dx = event.clientX - session.startX;
-      const dy = event.clientY - session.startY;
-      if (!session.moved && Math.hypot(dx, dy) > 4) {
-        session.moved = true;
-        state.movePick = null;
-        $('map').classList.remove('selecting');
-        el.setPointerCapture?.(event.pointerId);
-      }
-      if (!session.moved) return;
-      session.dx = dx; session.dy = dy;
-      el.style.transform = `translate(${dx}px, ${dy}px)`;
-    });
-    el.addEventListener('pointerup', (event) => finishDrag(event));
-    el.addEventListener('pointercancel', () => cancelDrag());
     return el;
   }
 
-  /* Режим переноса: перетаскивание точки мышью/пальцем; резерв — «выбрать точку, кликнуть по карте». */
-  function cancelDrag() {
-    const session = state.dragSession;
-    if (session) { session.element.style.transform = ''; state.dragSession = null; }
-  }
-
-  function finishDrag(event) {
-    const session = state.dragSession;
-    if (!session || session.element !== event.currentTarget) return;
-    state.dragSession = null;
-    session.element.style.transform = '';
-    if (!session.moved) return; // клик обрабатывается отдельно
-    state.suppressClick = true;
-    const converter = state.map?.convertToWorldCoordinates;
-    const world = typeof converter === 'function' ? converter.call(state.map, [event.clientX, event.clientY]) : null;
-    if (!Array.isArray(world) || !Number.isFinite(Number(world[0])) || !Number.isFinite(Number(world[1]))) {
-      state.movePick = { point: session.point, element: session.element };
-      $('map').classList.add('selecting');
-      $('shootHint').textContent = `Точку «${session.point.label}» перетащить не удалось (картография не отдала координаты). Кликните по карте в новом месте — точка перенесётся туда.`;
-      return;
-    }
-    commitMove(session.point, world);
-  }
-
+  /* Режим переноса: точку тащит нативный драг маркера (как у слоя направлений);
+     резерв — «выбрать точку, кликнуть по карте» — работает на любом устройстве. */
   async function commitMove(point, [lng, lat]) {
     try {
       const response = await apiRequest('/object-photo-points/' + point.id, { method: 'PATCH', body: JSON.stringify({ longitude: lng, latitude: lat }) });
       const data = await response.json();
       point.lng = Number(data.point.longitude);
       point.lat = Number(data.point.latitude);
-      if (state.movePick) state.movePick = null;
-      $('map').classList.remove('selecting');
+      state.movePick = null;
       await reloadPhotoPoints();
       $('shootHint').textContent = `Точка «${point.label}» перенесена. Стрелка направления и фото слота сохранены.`;
     } catch (error) {
       $('shootHint').textContent = 'Точку не удалось перенести: ' + error.message;
-      if (state.movePick) state.movePick = null;
-      $('map').classList.remove('selecting');
+      state.movePick = null;
     }
   }
 
@@ -498,7 +453,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       }
       // Пробный импорт NextGIS — отдельный слой: без галочки точки на карту не выводятся.
       if (!state.shootLayerOn) return;
-      const marker = new YMapMarker({ coordinates: [point.lng, point.lat] }, pointMarkerElement(point, false));
+      const marker = new YMapMarker({ coordinates: [point.lng, point.lat], draggable: state.dragMode && !state.handMode, mapFollowsOnDrag: false, onDragEnd: (coordinates) => { state.suppressClick = true; commitMove(point, coordinates); } }, pointMarkerElement(point, false));
       point._marker = marker;
       state.map.addChild(marker);
     });
@@ -847,24 +802,52 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
   function setDragMode(on) {
     if (on) setShootMode(false);
     state.dragMode = on;
+    if (on) setHandMode(false, true);
     state.movePick = null;
-    cancelDrag();
     $('dragToggle').classList.toggle('active', on);
     $('map').classList.toggle('dragmode', on);
-    $('map').classList.remove('selecting');
+    state.points.forEach((point) => { try { point._marker?.update({ draggable: on && !state.handMode }); } catch (_) { /* маркер не создан */ } });
     $('shootHint').textContent = on
-      ? 'Режим переноса: перетащите точку в новое место (или кликните точку, затем кликните по карте). Стрелка направления и фото слота сохранятся.'
+      ? 'Режим переноса: перетащите точку в новое место (или кликните точку, затем кликните по карте). Стрелка направления и фото слота сохранятся. Карта при зажатой мыши не двигается — включите «Рука», чтобы переместить обзор.'
       : `Точек съёмки: ${state.points.length}. Назначает префектура: войдите и включите «Разметка».`;
+  }
+
+  /** Режим руки: двигать карту мышью, пока активен режим редактирования. */
+  function setHandMode(on, silent = false) {
+    state.handMode = on;
+    $('handToggle').classList.toggle('active', on);
+    $('map').classList.toggle('handmode', on);
+    applyMapBehaviors();
+    state.points.forEach((point) => { try { point._marker?.update({ draggable: state.dragMode && !on }); } catch (_) { /* маркер не создан */ } });
+    if (silent) return;
+    $('shootHint').textContent = on
+      ? 'Режим руки: карту можно двигать зажатой мышью; точки не ставятся и не переносятся. Выключите «Рука», чтобы продолжить редактирование.'
+      : state.shootMode
+        ? 'Шаг 1: кликните на карте в месте съёмки. Шаг 2: кликните в сторону, куда фотографировать, — направление и точка сохранятся.'
+        : state.dragMode
+          ? 'Режим переноса: перетащите точку в новое место (или кликните точку, затем кликните по карте). Стрелка направления и фото слота сохранятся. Карта при зажатой мыши не двигается — включите «Рука», чтобы переместить карту.'
+          : `Точек съёмки: ${state.points.length}. Назначает префектура: войдите и включите «Разметка».`;
+  }
+
+  /* При редактировании карта не должна ездить от зажатой мыши: убираем
+     поведение «drag», оставляя колесо, пинч и движение одним пальцем. */
+  const MAP_BEHAVIORS = ['drag', 'scrollZoom', 'pinchZoom', 'oneFingerZoom', 'doubleTapZoom'];
+  function applyMapBehaviors() {
+    if (!state.map) return;
+    const editing = (state.shootMode || state.dragMode) && !state.handMode;
+    try { state.map.update({ behaviors: editing ? MAP_BEHAVIORS.filter((b) => b !== 'drag') : MAP_BEHAVIORS }); } catch (_) { /* старая сборка API без behaviors */ }
   }
 
   function setShootMode(on) {
     if (on) { state.directionLayer?.finishEditing(); if (state.dragMode) setDragMode(false); }
     state.shootMode = on;
     if (on && !state.shootLayerOn) setShootLayer(true);
+    if (on) setHandMode(false, true);
     state.picking = null;
     clearPreview();
     $('shootToggle').classList.toggle('active', on);
     $('map').classList.toggle('marking', on);
+    applyMapBehaviors();
     $('shootHint').textContent = on
       ? 'Шаг 1: кликните на карте в месте съёмки. Шаг 2: кликните в сторону, куда фотографировать, — направление и точка сохранятся.'
       : `Точек съёмки: ${state.points.length}. Назначает префектура: войдите и включите «Разметка».`;
@@ -890,11 +873,11 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
 
   function handleMapClick(coordinates) {
     if (!Array.isArray(coordinates) || coordinates.length < 2) return;
+    if (state.handMode) return;
     const [lng, lat] = coordinates;
     if (state.dragMode && state.movePick) {
       const point = state.movePick.point;
       state.movePick = null;
-      $('map').classList.remove('selecting');
       commitMove(point, [lng, lat]);
       return;
     }
@@ -978,10 +961,12 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
 
   function beginRotation(point) {
     if (state.dragMode) setDragMode(false);
+    if (state.handMode) setHandMode(false, true);
     state.shootMode = true;
     state.picking = { lng: point.lng, lat: point.lat, heading: null, existing: point };
     $('shootToggle').classList.add('active');
     $('map').classList.add('marking');
+    applyMapBehaviors();
     renderPreview();
     $('shootHint').textContent = `Точка «${point.label}»: кликните в сторону съёмки — направление сохранится.`;
   }
@@ -1012,6 +997,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     const user = state.photoUser;
     $('shootReport').hidden = !isPrefecture();
     $('dragToggle').hidden = !isPrefecture();
+    $('handToggle').hidden = !isPrefecture();
     if (user) {
       box.hidden = false;
       $('shootLoginName').hidden = true;
@@ -1040,6 +1026,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       state.photoUser = null;
       if (state.shootMode) setShootMode(false);
       if (state.dragMode) setDragMode(false);
+      if (state.handMode) setHandMode(false);
       renderShootLogin();
       await reloadPhotoPoints();
       $('shootHint').textContent = 'Вы вышли. Точки съёмки назначает префектура.';
@@ -1097,6 +1084,17 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     }
     setDragMode(!state.dragMode);
   });
+
+  $('handToggle').addEventListener('click', () => {
+    if (!isPrefecture()) {
+      const box = $('shootLoginBox');
+      box.hidden = false;
+      $('shootLoginName').focus();
+      $('shootHint').textContent = 'Режим руки нужен при редактировании точек. Войдите в учётную запись префектуры.';
+      return;
+    }
+    setHandMode(!state.handMode);
+  });
   $('shootExport').addEventListener('click', exportPoints);
   $('shootLayerToggle').addEventListener('change', (event) => setShootLayer(event.target.checked));
   $('shootReport').addEventListener('click', async () => {
@@ -1119,8 +1117,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
   });
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') {
-      cancelDrag();
-      if (state.movePick) { state.movePick = null; $('map').classList.remove('selecting'); }
+      if (state.movePick) { state.movePick = null; }
       if (state.picking) { state.picking = null; clearPreview(); }
       if (state.shootMode) setShootMode(false);
       $('card').className = 'card';

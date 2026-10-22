@@ -42,7 +42,10 @@ export function summarizeTpu({ objects: all = TPU_OBJECTS, kind = null, points, 
     const check = slotState(requiredPhotos(o), slotsByObject.get(o.id) || []);
     const comments = check.slots.filter((s) => s.rejected).map((s) => `Слот ${s.slot}: ${s.rejected.review_comment}`).join('\n');
     return { ...o, points: own.length, shot: shot.length, status: objectStatus(own), lastPhotoAt: last,
-      slotsRequired: check.required, slotsAccepted: check.accepted, slotStatus: check.label, slotComments: comments };
+      slotsRequired: check.required, slotsFilled: check.filled, slotsAccepted: check.accepted,
+      pendingSlots: check.slots.filter((s) => s.photo?.status === 'pending').length,
+      reworkSlots: check.slots.filter((s) => s.rejected).length,
+      slotList: check.slots, slotStatus: check.label, slotComments: comments };
   });
   const groups = [...new Set(objects.map((o) => o.group))].sort((a, b) => a.localeCompare(b, 'ru'));
   const tally = (rows) => ({
@@ -53,6 +56,8 @@ export function summarizeTpu({ objects: all = TPU_OBJECTS, kind = null, points, 
     shot: rows.reduce((s, r) => s + r.shot, 0),
     done: rows.filter((r) => r.status === 'Готово').length,
     lastPhotoAt: rows.map((r) => r.lastPhotoAt).filter(Boolean).sort().at(-1) || null,
+    slotsRequired: rows.reduce((s, r) => s + r.slotsRequired, 0),
+    slotsAccepted: rows.reduce((s, r) => s + r.slotsAccepted, 0),
   });
   const groupRows = groups.map((group) => ({ group, ...tally(objectRows.filter((r) => r.group === group)) }));
   const total = { group: 'Итого', ...tally(objectRows) };
@@ -87,8 +92,117 @@ function headerRow(sheet, titles, widths) {
 
 const dateText = (value) => (value ? new Date(value).toLocaleString('ru-RU', { timeZone: 'Europe/Moscow', dateStyle: 'short', timeStyle: 'short' }) : '');
 
+const PARKING_TYPE_LABELS = { 'Парковка': 'Автомобильные парковки', 'Парковочный карман': 'Парковочные карманы' };
+const YELLOW_FILL = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFFFFF00' } };
+const THIN = { style: 'thin' };
+const CENTER = { horizontal: 'center', vertical: 'center' };
+
+/** Эталон префектуры: все ячейки данных по центру и в тонкой рамке. */
+function frameRows(sheet, firstRow, lastRow, columns) {
+  for (let i = firstRow; i <= lastRow; i++) {
+    const row = sheet.getRow(i);
+    for (let j = 1; j <= columns; j++) {
+      const cell = row.getCell(j);
+      cell.border = { top: THIN, bottom: THIN, left: THIN, right: THIN };
+      cell.alignment = CENTER;
+    }
+  }
+}
+
+function styleGreenHeader(sheet, rowIndex, columns) {
+  const row = sheet.getRow(rowIndex);
+  row.height = 32.1;
+  row.font = { bold: true, color: { argb: 'FFFFFFFF' } };
+  row.alignment = { ...CENTER, wrapText: true };
+  for (let j = 1; j <= columns; j++) row.getCell(j).fill = HEADER;
+}
+
+/** Проверка слотов для строки сводки: статусы объектов, доля принятых фото, последнее фото. */
+const parkingTally = (rows) => ({
+  count: rows.length,
+  closed: rows.filter((r) => r.slotStatus === 'Закрыта').length,
+  empty: rows.filter((r) => r.slotStatus === 'Нет фото').length,
+  review: rows.filter((r) => r.slotStatus === 'На проверке').length,
+  rework: rows.filter((r) => r.slotStatus === 'На доработке').length,
+  accepted: rows.reduce((sum, r) => sum + r.slotsAccepted, 0),
+  required: rows.reduce((sum, r) => sum + r.slotsRequired, 0),
+  lastPhotoAt: rows.map((r) => r.lastPhotoAt).filter(Boolean).sort().at(-1) || null,
+});
+
+/** Книга по парковкам — точный формат эталона префектуры (ЭТАЛОН ПАРКОВКИ СВОД.xlsx). */
+async function buildParkingReport(summary, { mapUrl = 'https://hainox.github.io/karta-sao/object-maps/tpu-parking.html' } = {}) {
+  const { default: ExcelJS } = await import('exceljs');
+  const book = new ExcelJS.Workbook();
+  book.creator = 'Фотослужба САО';
+  book.created = summary.generatedAt;
+
+  const headers = ['Район / организация', 'Всего Объектов', 'Объектов закрыто', 'Объектов без фото', 'Обьектов на проверке', 'Обьектов на доработке ', '% принято', 'Последнее фото'];
+  const widths = [28, 12, undefined, undefined, 12.3, undefined, 10.6, 15.9];
+  const overview = book.addWorksheet('Свод по районам');
+  overview.columns = headers.map((header, i) => ({ header, width: widths[i] }));
+  // Титул и пояснение — жёлтые строки в жирной рамке над шапкой (строки 1–2), шапка — строка 4.
+  overview.spliceRows(1, 0, [`Свод по фото парковок на ${dateText(summary.generatedAt)}`], ['Слоты по заданию: принято — фото проверено префектурой; на доработке — фото отклонено, слот ждёт нового фото.'], []);
+  overview.mergeCells(1, 1, 1, 8);
+  overview.mergeCells(2, 1, 2, 8);
+  const titleRow = overview.getRow(1);
+  titleRow.font = { bold: true, size: 14 };
+  titleRow.fill = YELLOW_FILL;
+  titleRow.border = { top: { style: 'medium' } };
+  titleRow.height = 18.75;
+  const legendRow = overview.getRow(2);
+  legendRow.font = { size: 11 };
+  legendRow.fill = YELLOW_FILL;
+  legendRow.border = { bottom: { style: 'medium' } };
+  legendRow.height = 15.75;
+
+  const writeRow = (label, tally, bold = false) => {
+    const row = overview.addRow([label, tally.count, tally.closed, tally.empty, tally.review, tally.rework, percent(tally.accepted, tally.required), dateText(tally.lastPhotoAt)]);
+    row.getCell(7).numFmt = '0%';
+    if (bold) row.font = { bold: true };
+    return row;
+  };
+  for (const group of summary.groupRows) writeRow(group.group, parkingTally(summary.objectRows.filter((r) => r.group === group.group)));
+  writeRow('Итого по САО', parkingTally(summary.objectRows), true);
+  // Вторая таблица: разбивка по виду объекта (парковки и карманы отдельно).
+  overview.addRow([]);
+  const breakdownHeaderRow = overview.addRow(['Вид объекта', ...headers.slice(1)]);
+  breakdownHeaderRow.height = 32.1;
+  styleGreenHeader(overview, breakdownHeaderRow.number, 8);
+  for (const [type, label] of Object.entries(PARKING_TYPE_LABELS)) writeRow(label, parkingTally(summary.objectRows.filter((r) => (r.type || KIND[r.kind] || r.kind) === type)));
+  styleGreenHeader(overview, 4, 8);
+  frameRows(overview, 4, overview.rowCount, 8);
+  overview.views = [{ state: 'frozen', ySplit: 4 }];
+
+  const objects = book.addWorksheet('Объекты');
+  headerRow(objects, ['Вид', 'Название', 'ID', 'Ответственный', 'Фото требуется', 'Загружено', 'Принято', 'На проверке', 'На доработке', 'Статус', 'Последнее фото', 'На карте'], [10, 50, 14, 22, 11, 11, 10, 11, 12, 14, 17, 12]);
+  objects.autoFilter = { from: 'A1', to: 'L1' };
+  for (const r of summary.objectRows) {
+    const row = objects.addRow([r.type || KIND[r.kind] || r.kind, r.label, r.sourceNumber, r.group, r.slotsRequired, r.slotsFilled, r.slotsAccepted, r.pendingSlots, r.reworkSlots, r.slotStatus, dateText(r.lastPhotoAt), { text: 'Открыть', hyperlink: `${mapUrl}?object=${encodeURIComponent(r.id)}` }]);
+    row.getCell(10).fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: SLOT_FILL[r.slotStatus] || 'FFE9ECEF' } };
+    row.getCell(12).font = { color: { argb: 'FF0C5AA6' } };
+  }
+  frameRows(objects, 2, objects.rowCount, 12);
+
+  const rework = book.addWorksheet('На доработке');
+  headerRow(rework, ['Ответственный', 'Объект', 'Слот', 'Что исправить', 'Отклонено', 'На карте'], [25, 50, 8, 60, 17, 12]);
+  for (const r of summary.objectRows) {
+    for (const slot of r.slotList) {
+      if (!slot.rejected) continue;
+      const row = rework.addRow([r.group, r.label, slot.slot, slot.rejected.review_comment, dateText(slot.rejected.reviewed_at), { text: 'Открыть', hyperlink: `${mapUrl}?object=${encodeURIComponent(r.id)}` }]);
+      row.getCell(6).font = { color: { argb: 'FF0C5AA6' } };
+    }
+  }
+  if (rework.rowCount < 2) rework.addRow(['Слотов на доработке нет.']);
+  frameRows(rework, 2, rework.rowCount, 6);
+
+  return Buffer.from(await book.xlsx.writeBuffer());
+}
+
 /** Книга Excel со сводкой по ТПУ и парковкам. */
-export async function buildTpuReport(summary, { mapUrl = 'https://hainox.github.io/karta-sao/object-maps/tpu-parking.html' } = {}) {
+export async function buildTpuReport(summary, options = {}) {
+  // Парковки — отдельный формат по эталону префектуры; ТПУ и общая книга остаются прежними.
+  if (summary.kind === 'parking') return buildParkingReport(summary, options);
+  const { mapUrl = 'https://hainox.github.io/karta-sao/object-maps/tpu-parking.html' } = options;
   const { default: ExcelJS } = await import('exceljs');
   const book = new ExcelJS.Workbook();
   book.creator = 'Фотослужба САО';

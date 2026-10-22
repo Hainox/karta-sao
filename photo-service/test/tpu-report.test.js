@@ -56,21 +56,61 @@ test('книга Excel содержит четыре листа и все 4 002 
   assert.equal(overview.getRow(overview.rowCount).getCell(3).value, 3973);
 });
 
-test('сводка по парковкам — отдельная книга только с парковками', async () => {
+test('сводка по парковкам — отдельная книга по эталону префектуры', async () => {
   const summary = summarizeTpu({ objects, kind: 'parking', points: [point('tpu:1', 'Аэропорт', 1), point('parking:2', 'АвД САО', 2, '2026-10-06T09:00:00Z')] });
   assert.deepEqual(summary.objectRows.map((r) => r.id), ['parking:2']);
   assert.deepEqual(summary.groupRows.map((r) => r.group), ['АвД САО']);
   assert.equal(summary.pointRows.length, 1, 'точки ТПУ в сводку по парковкам не попадают');
   const book = new ExcelJS.Workbook();
-  await book.xlsx.load(await buildTpuReport(summarizeTpu({ kind: 'parking', points: [] })));
-  const overview = book.getWorksheet('Сводка');
-  assert.match(overview.getRow(1).getCell(1).value, /парковок/);
-  assert.equal(overview.getRow(3).getCell(2).value, 'Объектов');
-  assert.equal(overview.getRow(overview.rowCount).getCell(2).value, 3973);
+  await book.xlsx.load(await buildTpuReport(summarizeTpu({ kind: 'parking', points: [], generatedAt: new Date('2026-10-22T09:47:00Z') })));
+  assert.deepEqual(book.worksheets.map((s) => s.name), ['Свод по районам', 'Объекты', 'На доработке']);
+  const overview = book.getWorksheet('Свод по районам');
+  assert.match(overview.getRow(1).getCell(1).value, /Свод по фото парковок на/);
+  assert.equal(overview.getRow(4).getCell(2).value, 'Всего Объектов');
+  assert.equal(overview.getRow(4).getCell(5).value, 'Обьектов на проверке');
+  const last = overview.getRow(overview.rowCount);
+  assert.equal(last.getCell(1).value, 'Парковочные карманы');
+  const parkingRow = overview.getRow(overview.rowCount - 1);
+  assert.equal(parkingRow.getCell(1).value, 'Автомобильные парковки');
+  assert.equal(parkingRow.getCell(2).value, 633);
+  const итого = overview.getRow(overview.rowCount - 2);
+  assert.equal(итого.getCell(1).value, 'Вид объекта');
   const rows = book.getWorksheet('Объекты');
   assert.equal(rows.rowCount, 3974);
   const types = new Set(rows.getColumn(1).values.slice(2));
   assert.deepEqual([...types].sort(), ['Парковка', 'Парковочный карман'], 'карман подписан своим типом, а не «Парковка»');
+  assert.equal(book.getWorksheet('На доработке').getRow(2).getCell(1).value, 'Слотов на доработке нет.');
+});
+
+test('книга парковок оформлена по эталону: жёлтый титул, зелёные шапки, проценты и ссылка', async () => {
+  const objects = [
+    { id: 'tpu:1', kind: 'tpu', label: 'ТПУ один', sourceNumber: '1', group: 'Аэропорт', district: 'Аэропорт', holder: 'Жилищник Аэропорт' },
+    { id: 'parking:2', kind: 'parking', label: 'Парковка два', sourceNumber: '2', group: 'АвД САО', district: 'Сокол', holder: 'АвД САО', type: 'Парковка', photos: 2 },
+    { id: 'parking:3', kind: 'parking', label: 'Карман три', sourceNumber: '3', group: 'Коптево', district: 'Сокол', holder: 'Жилищник Сокол', type: 'Парковочный карман' },
+  ];
+  const slots = [
+    { object_key: 'parking:2', slot: 1, status: 'accepted', review_comment: '', uploaded_at: '2026-10-06T09:00:00Z' },
+    { object_key: 'parking:2', slot: 2, status: 'pending', review_comment: '', uploaded_at: '2026-10-06T09:30:00Z' },
+  ];
+  const book = new ExcelJS.Workbook();
+  await book.xlsx.load(await buildTpuReport(summarizeTpu({ objects, kind: 'parking', points: [point('parking:2', 'АвД САО', 2, '2026-10-06T09:30:00Z')], slots, generatedAt: new Date('2026-10-22T09:47:00Z') })));
+  const overview = book.getWorksheet('Свод по районам');
+  const title = overview.getRow(1);
+  assert.equal(title.font.bold, true);
+  assert.equal(title.fill.fgColor.argb, 'FFFFFF00');
+  assert.equal(overview.getRow(2).fill.fgColor.argb, 'FFFFFF00');
+  const header = overview.getRow(4);
+  assert.equal(header.getCell(3).fill.fgColor.argb, 'FF123A32');
+  assert.equal(header.font.color.argb, 'FFFFFFFF');
+  assert.equal(overview.getCell('G5').numFmt, '0%');
+  assert.equal(overview.views[0].ySplit, 4);
+  const rows = book.getWorksheet('Объекты');
+  const row = rows.getRow(2);
+  assert.equal(row.getCell(10).fill.fgColor.argb, 'FFDCE8FB', 'статус слота окрашен по палитре эталона');
+  assert.match(row.getCell(12).hyperlink, /tpu-parking\.html\?object=parking%3A2$/, 'ссылка на карту ведёт на объект');
+  const rework = book.getWorksheet('На доработке');
+  assert.equal(rework.getRow(1).getCell(4).value, 'Что исправить');
+  assert.equal(rework.views[0].ySplit, 1);
 });
 
 async function request(role, query = '', counts = []) {
@@ -119,8 +159,12 @@ test('сводка показывает проверку фото по слот�
   const book = new ExcelJS.Workbook();
   await book.xlsx.load(await buildTpuReport(summary));
   const row = book.getWorksheet('Объекты').getRow(2);
-  assert.equal(row.getCell(14).value, 'На доработке');
-  assert.equal(row.getCell(15).value, 'Слот 2: Не видно разметку');
+  assert.equal(row.getCell(10).value, 'На доработке', 'статус объекта по слотам');
+  assert.equal(row.getCell(6).value, 1, 'живое фото одно — принятое');
+  assert.equal(row.getCell(8).value, 0);
+  assert.equal(row.getCell(9).value, 1, 'один слот ждёт пересдачи');
+  const rework = book.getWorksheet('На доработке');
+  assert.deepEqual(rework.getRow(2).values.slice(1, 5), ['Коптево', 'Карман', 2, 'Не видно разметку']);
 });
 
 test('сводка ТПУ учитывает изменённое префектурой число слотов', async () => {
