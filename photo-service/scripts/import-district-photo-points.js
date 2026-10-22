@@ -58,7 +58,7 @@ try {
   const problems = [];
   for (const feature of data.features || []) {
     const props = feature.properties || {};
-    const district = String(props.layer || '').replace(NAME_PREFIX, '').trim();
+    const district = String(props.district || props.layer || '').replace(NAME_PREFIX, '').trim();
     const label = String(props.field_1 ?? props.label ?? '').trim();
     if (!district || !label) { skipped += 1; continue; }
     if (seen.has(`${district}\u0000${label}`)) { skipped += 1; continue; }
@@ -73,7 +73,9 @@ try {
     if (!slug) { rejected += 1; problems.push(`${label}: неизвестный район «${district}»`); continue; }
     const input = {
       datasetId: 'sao_district_photo_points', objectKey: `district:${slug}`, objectType: 'district',
-      district, longitude, latitude, label, note: '', heading: null,
+      district, longitude, latitude, label,
+      note: String(props.note ?? props.source_note ?? '').slice(0, 2000),
+      heading: props.heading == null ? null : Number(props.heading),
     };
     const validation = validateObjectPhotoPoint(input, boundary);
     if (!validation.valid) {

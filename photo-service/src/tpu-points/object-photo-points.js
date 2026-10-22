@@ -100,7 +100,12 @@ export function createObjectPhotoPointsRouter({ repository, authenticate, bounda
       res.setHeader('Cache-Control', 'no-store');
       // У районных точек открытым остаётся и состояние слота (без комментария
       // префектуры): карты окрашивают точки, кабинет не открывает себя лишний раз.
-      res.json({ points: points.map(({ id, object_key, object_type, district, longitude, latitude, label, heading, photo_count, photo_state }) => ({ id, object_key, object_type, district, longitude, latitude, label, heading, photo_count, ...(photo_state ? { photo_state } : {}) })) });
+      res.json({ points: points.map((point) => {
+        const { id, object_key, object_type, district, longitude, latitude, label, heading, photo_count, photo_state, note } = point;
+        // Признак «точка перенесена из GeoPackage» — без раскрытия текста примечания.
+        const imported = dataset === 'sao_district_photo_points' && typeof note === 'string' && note.startsWith('Источник:');
+        return { id, object_key, object_type, district, longitude, latitude, label, heading, photo_count, ...(photo_state ? { photo_state } : {}), ...(imported ? { imported: true } : {}) };
+      }) });
     } catch (error) { next(error); }
   });
   mountPublicSlotRoutes(router, { repository });

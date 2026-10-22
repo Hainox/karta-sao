@@ -133,6 +133,37 @@ test('направление (стрелка) редактируется отд�
   });
 });
 
+test('префектура редактирует подпись, координаты, азимут и примечание точки', async () => {
+  await serve('prefecture_admin', async (base, repository, points) => {
+    const created = await repository.createObjectPhotoPoint(districtPoint());
+    const changes = {
+      label: 'Коровинское · 002', longitude: 37.54, latitude: 55.811,
+      heading: 271.5, note: 'Источник: Коровинское.gpkg; fid=2.',
+    };
+    const response = await fetch(`${base}/${created.id}`, {
+      method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(changes),
+    });
+    assert.equal(response.status, 200);
+    const { point } = await response.json();
+    assert.equal(point.label, changes.label);
+    assert.equal(point.longitude, changes.longitude);
+    assert.equal(point.latitude, changes.latitude);
+    assert.equal(point.heading, changes.heading);
+    assert.equal(point.note, changes.note);
+    assert.equal(points.length, 1, 'редактирование не создаёт дубликат точки');
+  });
+});
+
+test('районная учётка не меняет подпись и координаты точки', async () => {
+  await serve('district_editor', async (base, repository) => {
+    const created = await repository.createObjectPhotoPoint(districtPoint());
+    const response = await fetch(`${base}/${created.id}`, {
+      method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ label: 'подмена' }),
+    });
+    assert.equal(response.status, 403);
+  });
+});
+
 test('префектура выгружает сводку районных точек (Excel)', async () => {
   await serve('prefecture_admin', async (base, repository, points) => {
     await repository.createObjectPhotoPoint(districtPoint({ label: '1.1' }));
