@@ -104,7 +104,7 @@ def test_pages_have_no_template_leftovers():
             f"{slug}.html не ловит клики по карте для точек съёмки"
         assert "new YMapMarker({ coordinates" in html, \
             f"{slug}.html ставит точки не на географических координатах"
-        assert "shoot-dot" in html and ".shoot-arrow{display:block" in html, \
+        assert "shoot-dot" in html and ".shoot-arrow{display:block" in html and "--shoot-arrow-scale" in html, \
             f"{slug}.html не показывает направления точек в режиме разметки"
         assert "Math.round(bearing(" in html, \
             f"{slug}.html не считает азимут направления"
