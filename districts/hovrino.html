@@ -160,8 +160,8 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       <div class="row"><button id="shootLoginGo" class="primary" type="button">Войти</button><button id="shootLogout" type="button" hidden>Выйти</button></div>
       <div class="status" id="shootLoginState"></div>
     </div>
-    <label class="layer-row off" id="shootLayerRow"><input type="checkbox" id="shootLayerToggle"><span class="swatch" style="background:#ffcb00"></span><span class="label">Точки съёмки<span class="trial-badge">ПРОБНЫЙ ИМПОРТ С NEXTGIS</span></span><span class="count" id="shootLayerCount">0</span></label>
-    <label class="layer-row" id="gpkgLayerRow"><input type="checkbox" id="gpkgLayerToggle" checked><span class="swatch" style="background:#ff8a00"></span><span class="label">Точки из GPKG<span class="trial-badge">147 · СО СТРЕЛКАМИ</span></span><span class="count" id="gpkgLayerCount">0</span></label>
+    <label class="layer-row off" id="shootLayerRow" hidden><input type="checkbox" id="shootLayerToggle"><span class="swatch" style="background:#ffcb00"></span><span class="label">Точки съёмки<span class="trial-badge">ПРОБНЫЙ ИМПОРТ С NEXTGIS</span></span><span class="count" id="shootLayerCount">0</span></label>
+    <label class="layer-row" id="gpkgLayerRow" hidden><input type="checkbox" id="gpkgLayerToggle" checked><span class="swatch" style="background:#ff8a00"></span><span class="label">Точки из GPKG<span class="trial-badge">147 · СО СТРЕЛКАМИ</span></span><span class="count" id="gpkgLayerCount">0</span></label>
     <label class="layer-row off" id="prefectureArchiveRow" hidden><input type="checkbox" id="prefectureArchiveToggle"><span class="swatch" style="background:#7b61a8"></span><span class="label">Архивные точки префектуры до 23.10.2026 11:00</span><span class="count" id="prefectureArchiveCount">0</span></label>
     <details class="shoot-list-box"><summary>Список точек</summary><div class="shoot-list" id="shootList"></div></details>
     <div class="shoot-hint" id="shootHint">Точки съёмки эталонных фото: префектура и район ставят точки (вход в учётную запись, затем клик ставит точку, второй клик — направление съёмки). Точки района ждут приёмки префектурой; после приёмки открывается фото-слот.</div>
@@ -555,12 +555,13 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
   }
 
   function pointVisible(point) {
-    // «Точки из GPKG» — самостоятельный слой: его галочка работает и при
-    // выключенном слое эталонных точек, иначе слой-ребёнок не показывался.
-    if (isGpkgPoint(point)) return state.gpkgLayerOn;
-    // Район всегда видит свои точки, ждущие приёмки или возвращённые на доработку.
-    if (isDistrictEditor() && point.review_status !== 'accepted') return true;
-    return state.shootLayerOn;
+    // Импортные слои (NextGIS и GPKG) видит только префектура. Район работает
+    // со своими обычными точками: после входа они видны сразу, без галочек,
+    // включая ожидающие приёмки и возвращённые на доработку. Без входа
+    // точки не показываются.
+    if (isGpkgPoint(point)) return isPrefecture() && state.gpkgLayerOn;
+    if (isPrefecture()) return state.shootLayerOn;
+    return isDistrictEditor();
   }
 
   function renderShootMarkers() {
@@ -1170,6 +1171,9 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     $('shootReport').hidden = !isPrefecture();
     $('shootPhotoReport').hidden = !isPrefecture();
     $('pointAcceptance').hidden = !isPrefecture();
+    $('shootLayerRow').hidden = !isPrefecture();
+    $('shootToggle').hidden = !isPrefecture();
+    if (!isPrefecture() && state.shootMode) setShootMode(false);
     $('prefectureArchiveRow').hidden = !isPrefecture();
     if (!isPrefecture() && state.prefectureArchiveOn) setPrefectureArchiveLayer(false);
     $('dragToggle').hidden = !isPrefecture() && !isDistrictEditor();
@@ -1183,7 +1187,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       $('gpkgLayerRow').hidden = true;
       renderControls();
     } else {
-      $('gpkgLayerRow').hidden = false;
+      $('gpkgLayerRow').hidden = !isPrefecture();
     }
     if (user) {
       box.hidden = false;

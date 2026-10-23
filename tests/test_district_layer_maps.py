@@ -129,8 +129,8 @@ def test_pages_have_no_template_leftovers():
             f"{slug}.html нет модели приёмки точек (isDistrictEditor/review_status)"
         assert "acceptance.html" in html and 'id="pointAcceptance"' in html, \
             f"{slug}.html нет ссылки на кабинет приёмки точек"
-        assert "point.review_status !== 'accepted'" in html, \
-            f"{slug}.html район не видит свои ожидающие приёмки точки"
+        assert "return isDistrictEditor();" in html, \
+            f"{slug}.html район не видит свои точки после входа (включая ожидающие приёмки)"
         assert "(point.review_status || 'accepted') === 'accepted'" in html, \
             f"{slug}.html фотослот не привязан к приёмке точки"
         assert 'id="shootPhotoReport"' in html and "downloadDistrictReport" in html and "&report=" in html, \
