@@ -5,7 +5,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 
 const districtPages = readdirSync(new URL('../../districts/', import.meta.url))
-  .filter((name) => name.endsWith('.html') && !['index.html', 'review.html'].includes(name));
+  .filter((name) => name.endsWith('.html') && !['index.html', 'review.html', 'acceptance.html'].includes(name));
 
 test('all district maps have a prefecture-only hideable archive layer and valid inline script', () => {
   assert.equal(districtPages.length, 16);

@@ -11,6 +11,7 @@
     "test": "node --test test/*.test.js",
     "migrate": "node scripts/migrate.js",
     "create-user": "node scripts/create-user.js",
+    "prepare-district-map-accounts": "node scripts/prepare-district-map-accounts.js",
     "import-maps": "node scripts/import-object-maps.js",
     "merge-split-objects": "node scripts/merge-split-objects.js"
   },

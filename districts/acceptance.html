@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Приёмка точек фотофиксации — САО</title>
+  <style>
+    :root{color-scheme:light;--ink:#183c35;--muted:#62736e;--line:#d9e2dc;--paper:#f5f7f3;--green:#0c7a5a;--red:#b33b2e}
+    *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.5 "Segoe UI",Arial,sans-serif}
+    main{max-width:1100px;margin:0 auto;padding:28px 20px 60px}.top{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    a{color:var(--green)}h1{font-size:28px;margin:24px 0 6px}.muted{color:var(--muted)}.panel,.point{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px}
+    .login{max-width:440px;margin:30px auto}.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.row input{flex:1;min-width:150px}
+    input,textarea,select,button{font:inherit;border:1px solid #9aa9a2;border-radius:9px;padding:10px 12px;background:#fff;color:var(--ink)}button{cursor:pointer;font-weight:600}
+    button.primary{background:var(--green);border-color:var(--green);color:#fff}.danger{border-color:#d1a29c;color:var(--red)}button:disabled{opacity:.55;cursor:wait}
+    #message{min-height:24px;margin:12px 0;color:var(--muted)}#queue{display:grid;gap:12px;margin-top:16px}.point-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start}
+    .point h2{font-size:18px;margin:0}.badge{white-space:nowrap;color:#765e00;background:#fff2bf;padding:4px 9px;border-radius:99px;font-size:12px}
+    .meta{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 16px;margin:14px 0;color:#3e554d}.meta b{color:var(--ink)}textarea{width:100%;min-height:70px;resize:vertical}.actions{margin-top:12px}
+    .empty{padding:28px;text-align:center;background:#fff;border-radius:12px;color:var(--muted)}.tools{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.tools select{min-width:210px}
+    [hidden]{display:none!important}@media(max-width:620px){main{padding:18px 12px 40px}.point-head{display:block}.badge{display:inline-block;margin-top:8px}.meta{grid-template-columns:1fr}.login{margin:18px 0}}
+  </style>
+</head>
+<body>
+  <main>
+    <div class="top"><a href="index.html">← Районные карты</a><button id="logout" hidden>Выйти</button></div>
+    <section id="login" class="panel login">
+      <h1>Вход префектуры</h1>
+      <p class="muted">Кабинет решений по новым точкам фотофиксации районов.</p>
+      <form id="loginForm" class="row">
+        <input id="loginName" autocomplete="username" placeholder="Логин" required>
+        <input id="loginPassword" type="password" autocomplete="current-password" placeholder="Пароль" required>
+        <button class="primary">Войти</button>
+      </form>
+      <p id="loginMessage" class="muted" role="status" aria-live="polite"></p>
+    </section>
+    <section id="cabinet" hidden>
+      <h1>Приёмка точек фотофиксации</h1>
+      <p class="muted">Проверьте район, координаты, название и направление. После приёмки район увидит фотослот на своей карте.</p>
+      <div class="tools"><strong id="count">Ожидают: 0</strong><select id="districtFilter" aria-label="Фильтр по району"><option value="">Все районы</option></select><button id="refresh">Обновить очередь</button></div>
+      <p id="message" role="status" aria-live="polite"></p>
+      <div id="queue"></div>
+    </section>
+  </main>
+  <script>
+    (() => {
+      const API = 'https://obhod-sao.ru/photo-api';
+      const TOKEN_KEY = 'sao-photo-token';
+      const USER_KEY = 'sao-photo-user';
+      const slugs = {
+        'Аэропорт':'aeroport','Беговой':'begovoy','Бескудниковский':'beskudnikovskiy','Войковский':'voykovskiy',
+        'Восточное Дегунино':'vostochnoe-degunino','Головинский':'golovinskiy','Дмитровский':'dmitrovskiy',
+        'Западное Дегунино':'zapadnoe-degunino','Коптево':'koptevo','Левобережный':'levoberezhnyy',
+        'Молжаниновский':'molzhaninovskiy','Савеловский':'savelovskiy','Сокол':'sokol','Тимирязевский':'timiryazevskiy',
+        'Ховрино':'hovrino','Хорошевский':'horoshevskiy'
+      };
+      const $ = (id) => document.getElementById(id);
+      const text = (tag, value, className) => { const node = document.createElement(tag); node.textContent = value ?? ''; if (className) node.className = className; return node; };
+      let points = [];
+      function user() { try { return JSON.parse(sessionStorage.getItem(USER_KEY) || 'null'); } catch (_) { return null; } }
+      async function request(path, options = {}) {
+        const headers = new Headers(options.headers || {});
+        const token = sessionStorage.getItem(TOKEN_KEY);
+        if (token) headers.set('Authorization', `Bearer ${token}`);
+        if (options.body) headers.set('Content-Type', 'application/json');
+        const response = await fetch(API + path, { ...options, headers, cache: 'no-store' });
+        const body = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error(body.error || `Ошибка сервиса ${response.status}`);
+        return body;
+      }
+      function setMessage(value) { $('message').textContent = value; $('loginMessage').textContent = value; }
+      function render() {
+        const filter = $('districtFilter').value;
+        const visible = points.filter((point) => !filter || point.district === filter);
+        $('count').textContent = `Ожидают: ${points.length}`;
+        $('queue').replaceChildren();
+        if (!visible.length) { $('queue').append(text('div', filter ? 'В этом районе нет точек на проверке.' : 'Очередь пуста.', 'empty')); return; }
+        for (const point of visible) {
+          const card = document.createElement('article'); card.className = 'point';
+          const head = document.createElement('div'); head.className = 'point-head';
+          head.append(text('h2', `${point.district} · точка ${point.label}`), text('span', 'Ожидает решения', 'badge'));
+          const meta = document.createElement('div'); meta.className = 'meta';
+          meta.append(text('div', `Координаты: ${Number(point.latitude).toFixed(6)}, ${Number(point.longitude).toFixed(6)}`));
+          meta.append(text('div', `Направление: ${point.heading == null ? 'не задано' : Math.round(point.heading) + '°'}`));
+          meta.append(text('div', `Описание: ${point.note || '—'}`));
+          const link = document.createElement('a'); link.href = `${slugs[point.district] || ''}.html`; link.textContent = 'Открыть карту района';
+          meta.append(link);
+          const comment = document.createElement('textarea'); comment.maxLength = 1000; comment.placeholder = 'Комментарий обязателен, если вернуть на доработку'; comment.setAttribute('aria-label', `Комментарий по точке ${point.label}`);
+          const actions = document.createElement('div'); actions.className = 'row actions';
+          const accept = text('button', 'Принять', 'primary'); accept.type = 'button';
+          const rework = text('button', 'Вернуть на доработку', 'danger'); rework.type = 'button';
+          accept.addEventListener('click', () => decide(point, 'accepted', '', accept, rework));
+          rework.addEventListener('click', () => decide(point, 'rework', comment.value, accept, rework));
+          actions.append(accept, rework);
+          card.append(head, meta, comment, actions);
+          $('queue').append(card);
+        }
+      }
+      async function decide(point, decision, comment, ...buttons) {
+        if (decision === 'rework' && !comment.trim()) { setMessage('Укажите, что нужно исправить перед возвратом.'); return; }
+        buttons.forEach((button) => { button.disabled = true; });
+        try {
+          await request(`/object-photo-points/${encodeURIComponent(point.id)}/review`, { method: 'POST', body: JSON.stringify({ decision, comment }) });
+          setMessage(decision === 'accepted' ? `Точка ${point.label} принята; фотослот доступен району.` : `Точка ${point.label} возвращена району на доработку.`);
+          await loadQueue();
+        } catch (error) { setMessage(error.message); buttons.forEach((button) => { button.disabled = false; }); }
+      }
+      async function loadQueue() {
+        setMessage('Обновляю очередь…');
+        try {
+          const data = await request('/object-photo-points/review-queue');
+          points = data.points || [];
+          const selected = $('districtFilter').value;
+          $('districtFilter').replaceChildren(new Option('Все районы', ''), ...[...new Set(points.map((point) => point.district))].sort((a,b) => a.localeCompare(b,'ru')).map((district) => new Option(district, district)));
+          $('districtFilter').value = selected;
+          render(); setMessage('Очередь обновлена.');
+        } catch (error) { setMessage(error.message); }
+      }
+      function show() {
+        const loggedUser = user();
+        const isPrefecture = loggedUser?.role === 'prefecture_admin';
+        $('login').hidden = isPrefecture;
+        $('loginForm').hidden = !!loggedUser;
+        $('cabinet').hidden = !isPrefecture;
+        $('logout').hidden = !loggedUser;
+        if (loggedUser && !isPrefecture) setMessage('Этот кабинет доступен только префектуре.');
+        if (isPrefecture) loadQueue();
+      }
+      $('loginForm').addEventListener('submit', async (event) => {
+        event.preventDefault(); setMessage('');
+        try {
+          const response = await fetch(`${API}/auth/login`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ login: $('loginName').value.trim(), password: $('loginPassword').value }) });
+          const data = await response.json().catch(() => ({}));
+          if (!response.ok) throw new Error(data.error || 'Не удалось войти.');
+          sessionStorage.setItem(TOKEN_KEY, data.token); sessionStorage.setItem(USER_KEY, JSON.stringify(data.user));
+          $('loginPassword').value = ''; show();
+        } catch (error) { setMessage(error.message); }
+      });
+      $('logout').addEventListener('click', () => { sessionStorage.removeItem(TOKEN_KEY); sessionStorage.removeItem(USER_KEY); points = []; show(); });
+      $('refresh').addEventListener('click', loadQueue);
+      $('districtFilter').addEventListener('change', render);
+      show();
+    })();
+  </script>
+</body>
+</html>

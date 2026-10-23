@@ -50,8 +50,8 @@ def test_district_pages_keep_separate_direction_layer_hook_in_template():
     template = (ROOT / 'work/district_page_template.html').read_text(encoding='utf-8')
     assert 'SaoDistrictDirections.mount' in template
     for page in (ROOT / 'districts').glob('*.html'):
-        # index.html — каталог; review.html — кабинет приёмки фото, у него нет карты направлений.
-        if page.name in ('index.html', 'review.html'):
+        # index.html — каталог; review.html и acceptance.html — кабинеты без карты направлений.
+        if page.name in ('index.html', 'review.html', 'acceptance.html'):
             continue
         text = page.read_text(encoding='utf-8')
         assert 'direction-arrows.js?v=20261021c' in text

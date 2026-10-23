@@ -124,6 +124,20 @@ def test_pages_have_no_template_leftovers():
             f"{slug}.html нет сводки Excel и отправки фото по точкам"
         assert "district_editor" in html, \
             f"{slug}.html не различает учётки районов для отправки фото"
+        # Приёмка точек районов: район ставит pending, префектура принимает в acceptance.html
+        assert "isDistrictEditor" in html and "review_status" in html, \
+            f"{slug}.html нет модели приёмки точек (isDistrictEditor/review_status)"
+        assert "acceptance.html" in html and 'id="pointAcceptance"' in html, \
+            f"{slug}.html нет ссылки на кабинет приёмки точек"
+        assert "point.review_status !== 'accepted'" in html, \
+            f"{slug}.html район не видит свои ожидающие приёмки точки"
+        assert "(point.review_status || 'accepted') === 'accepted'" in html, \
+            f"{slug}.html фотослот не привязан к приёмке точки"
+        assert 'id="shootPhotoReport"' in html and "downloadDistrictReport" in html and "&report=" in html, \
+            f"{slug}.html нет отдельной сводки Excel по фото"
+        # Архивный слой префектуры (PR #37) должен сохраниться
+        assert 'id="prefectureArchiveRow"' in html and "setPrefectureArchiveLayer" in html, \
+            f"{slug}.html нет архивного слоя точек префектуры"
         # Полное редактирование точки: подпись, координаты, азимут, примечание
         assert 'name="label"' in html and 'name="latitude"' in html and 'name="longitude"' in html, \
             f"{slug}.html не позволяет редактировать подпись и координаты точки"
