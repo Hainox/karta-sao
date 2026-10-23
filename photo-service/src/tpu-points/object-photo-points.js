@@ -17,10 +17,17 @@ const PHOTO_COLUMNS = 'id, point_id, assignment_version, assignment_longitude, a
 // Московское время: точки, созданные раньше этой границы, видит только префектура в архивном слое.
 const PREFECTURE_ARCHIVE_CUTOFF = "TIMESTAMPTZ '2026-10-23 11:00:00+03'";
 const PREFECTURE_ARCHIVE_CUTOFF_MS = Date.parse('2026-10-23T08:00:00.000Z');
+// Импортные точки районного набора (пробный импорт из NextGIS, GeoPackage и пр.)
+// помечены примечанием «Источник: ...». Это рабочий материал префектуры: районы
+// и публичный доступ их не получают, фото в них не грузят.
+const IMPORTED_NOTE_PREFIX = 'Источник:';
+const isImportedDistrictPoint = (point) => point?.dataset_id === DISTRICT_DATASET
+  && typeof point?.note === 'string' && point.note.startsWith(IMPORTED_NOTE_PREFIX);
 
 // Наборы точек съёмки. Районные точки («эталонные фото») — второй набор: точки
-// закреплены за конкретным районом; ставит их префектура либо район (с приёмкой
-// префектурой через acceptance.html), правит — оба, чужих точек не трогают.
+// закреплены за конкретным районом; ставит и правит их только префектура.
+// Приёмки точек нет: каждая точка сразу принята и имеет открытый фотослот,
+// район только загружает фото в свои точки.
 const DATASETS = {
   sao_tpu_parking: { objectTypes: ['tpu', 'parking'], allowAvd: true },
   sao_district_photo_points: { objectTypes: ['district'], allowAvd: false },
@@ -102,11 +109,13 @@ export function createObjectPhotoPointsRouter({ repository, authenticate, bounda
       const dataset = req.query.dataset === 'sao_district_photo_points' ? 'sao_district_photo_points' : 'sao_tpu_parking';
       // Публично видны только принятые префектурой точки: ожидающие приёмки
       // (их ставит район) и архив до 23.10.2026 11:00 в открытые списки не идут.
+      // Импортные точки (NextGIS/GPKG) публичный список тоже не отдаёт.
       const points = await repository.listObjectPhotoPoints({
         datasetId: dataset,
         district: req.query.district || null,
         acceptedOnly: dataset === 'sao_district_photo_points',
         excludePrefectureArchive: dataset === 'sao_district_photo_points',
+        excludeImported: dataset === 'sao_district_photo_points',
       });
       res.setHeader('Cache-Control', 'no-store');
       // У районных точек открытым остаётся и состояние слота (без комментария
@@ -138,13 +147,6 @@ export function createObjectPhotoPointsRouter({ repository, authenticate, bounda
       const district = typeof req.query.district === 'string' ? req.query.district : null;
       res.setHeader('Cache-Control', 'private, no-store');
       res.json({ points: await repository.listPrefectureArchivePoints({ district }) });
-    } catch (error) { next(error); }
-  });
-  // Очередь приёмки точек, которые поставил район: кабинет acceptance.html.
-  router.get('/review-queue', prefecture, async (_req, res, next) => {
-    try {
-      res.setHeader('Cache-Control', 'no-store');
-      res.json({ points: await repository.listDistrictPointReviewQueue() });
     } catch (error) { next(error); }
   });
   router.get('/report.xlsx', (req, res, next) => req.user.role === 'prefecture_admin' ? next() : res.status(403).json({ error: 'Сводка доступна только префектуре.' }), async (req, res, next) => {
@@ -195,7 +197,7 @@ export function createObjectPhotoPointsRouter({ repository, authenticate, bounda
     try {
       if (req.query.dataset && !DATASETS[req.query.dataset]) return res.status(400).json({ error: 'Неизвестный набор объектов.' });
       const datasetId = req.query.dataset || 'sao_tpu_parking';
-      const points = await repository.listObjectPhotoPoints({ datasetId, objectKey: req.query.objectKey, district: districtFor(req) || req.query.district, acceptedOnly: req.user.role === 'district_editor' && datasetId === 'sao_district_photo_points', excludePrefectureArchive: datasetId === 'sao_district_photo_points' });
+      const points = await repository.listObjectPhotoPoints({ datasetId, objectKey: req.query.objectKey, district: districtFor(req) || req.query.district, acceptedOnly: req.user.role === 'district_editor' && datasetId === 'sao_district_photo_points', excludePrefectureArchive: datasetId === 'sao_district_photo_points', excludeImported: datasetId === 'sao_district_photo_points' && req.user.role === 'district_editor' });
       res.json({ points });
     } catch (error) { next(error); }
   });
@@ -203,6 +205,7 @@ export function createObjectPhotoPointsRouter({ repository, authenticate, bounda
     try {
       const validation = validateObjectPhotoPoint(req.body, boundary);
       if (!validation.valid) return res.status(422).json({ error: 'Точка не прошла проверку.', details: validation.errors });
+      // Приёмки точек нет: точка сразу принята и имеет открытый фотослот.
       res.status(201).json({ point: await repository.createObjectPhotoPoint({ ...validation.value, reviewStatus: 'accepted', actorId: req.user.sub }) });
     } catch (error) { next(error); }
   });
@@ -219,19 +222,6 @@ export function createObjectPhotoPointsRouter({ repository, authenticate, bounda
       res.json({ point });
     } catch (error) { next(error); }
   });
-  // Решение по точке от района: принять либо вернуть на доработку с комментарием.
-  router.post('/:id/review', prefecture, async (req, res, next) => {
-    try {
-      const decision = req.body?.decision;
-      const comment = typeof req.body?.comment === 'string' ? req.body.comment.trim() : '';
-      if (!['accepted', 'rework'].includes(decision)) return res.status(422).json({ error: 'Выберите «Принять» или «На доработку».' });
-      if (decision === 'rework' && !comment) return res.status(422).json({ error: 'Напишите, что нужно исправить.' });
-      if (comment.length > 1000) return res.status(422).json({ error: 'Комментарий должен быть не длиннее 1000 символов.' });
-      const point = await repository.reviewDistrictPoint({ id: req.params.id, decision, comment, actorId: req.user.sub });
-      if (!point) return res.status(409).json({ error: 'Точка уже обработана или не найдена в очереди.' });
-      res.json({ point });
-    } catch (error) { next(error); }
-  });
   router.delete('/:id', prefecture, async (req, res, next) => {
     try {
       const point = await repository.retireObjectPhotoPoint({ id: req.params.id, actorId: req.user.sub });
@@ -244,21 +234,16 @@ export function createObjectPhotoPointsRouter({ repository, authenticate, bounda
       req.photoPoint = await repository.getObjectPhotoPoint({ id: req.params.id, district: districtFor(req) });
       if (!req.photoPoint) return res.status(404).json({ error: 'Точка не найдена.' });
       if (req.user.role !== 'prefecture_admin' && req.photoPoint.dataset_id === 'sao_district_photo_points'
-        && new Date(req.photoPoint.created_at).getTime() < PREFECTURE_ARCHIVE_CUTOFF_MS) {
+        && (new Date(req.photoPoint.created_at).getTime() < PREFECTURE_ARCHIVE_CUTOFF_MS || isImportedDistrictPoint(req.photoPoint))) {
         return res.status(404).json({ error: 'Точка не найдена.' });
       }
       next();
     } catch (error) { next(error); }
   };
-  // Загрузка фото — только после приёмки точки префектурой (для ТПУ статус
-  // всегда «принята», поведение набора не меняется).
-  const pointAccepted = (req, res, next) => req.photoPoint.review_status === 'accepted'
-    ? next()
-    : res.status(409).json({ error: 'Фотослот появится после приёмки точки префектурой.' });
   router.get('/:id/photos', accessPoint, async (req, res, next) => {
     try { res.json({ photos: await repository.listObjectPhotoPointPhotos(req.params.id) }); } catch (error) { next(error); }
   });
-  router.put('/:id/photos', (req, res, next) => req.user.role !== 'reviewer' ? next() : res.status(403).json({ error: 'Фото загружает район или префектура.' }), accessPoint, pointAccepted, express.raw({ type: ['image/jpeg', 'image/png', 'image/webp'], limit: '5mb' }), async (req, res, next) => {
+  router.put('/:id/photos', (req, res, next) => req.user.role !== 'reviewer' ? next() : res.status(403).json({ error: 'Фото загружает район или префектура.' }), accessPoint, express.raw({ type: ['image/jpeg', 'image/png', 'image/webp'], limit: '5mb' }), async (req, res, next) => {
     try {
       const expectedVersion = Number(req.get('x-assignment-version'));
       if (!Number.isSafeInteger(expectedVersion) || expectedVersion < 1) return res.status(400).json({ error: 'Укажите версию точки съёмки.' });
@@ -311,7 +296,7 @@ export function createObjectPhotoPointRepository(pool, { writeAudit } = {}) {
     ...createSlotRepository(pool, write),
     ...createDirectionRepository(pool, write),
     ...createDistrictPointPhotoRepository(pool, write),
-    async listObjectPhotoPoints({ datasetId, objectKey, district, acceptedOnly = false, excludePrefectureArchive = false }) {
+    async listObjectPhotoPoints({ datasetId, objectKey, district, acceptedOnly = false, excludePrefectureArchive = false, excludeImported = false }) {
       // Районный набор: рядом со счётчиком живёт состояние слота точки —
       // «Нет фото / На проверке / Принято / На доработке» без комментария.
       if (datasetId === DISTRICT_DATASET) {
@@ -328,7 +313,8 @@ export function createObjectPhotoPointRepository(pool, { writeAudit } = {}) {
           WHERE retired_at IS NULL AND dataset_id = $1 AND ($2::text IS NULL OR object_key = $2) AND ($3::text IS NULL OR district = $3)
             AND (NOT $4::boolean OR review_status = 'accepted')
             AND (NOT $5::boolean OR created_at >= ${PREFECTURE_ARCHIVE_CUTOFF})
-          ORDER BY created_at, id`, [datasetId, objectKey || null, district || null, acceptedOnly, excludePrefectureArchive]);
+            AND (NOT $6::boolean OR COALESCE(note, '') NOT LIKE 'Источник:%')
+          ORDER BY created_at, id`, [datasetId, objectKey || null, district || null, acceptedOnly, excludePrefectureArchive, excludeImported]);
         return rows;
       }
       const { rows } = await pool.query('SELECT p.*, (SELECT count(*)::integer FROM object_photo_point_photos f WHERE f.point_id = p.id AND f.assignment_version = p.assignment_version) AS photo_count FROM object_photo_points p WHERE retired_at IS NULL AND dataset_id = $1 AND ($2::text IS NULL OR object_key = $2) AND ($3::text IS NULL OR district = $3) ORDER BY created_at, id', [datasetId, objectKey || null, district || null]);
@@ -349,10 +335,6 @@ export function createObjectPhotoPointRepository(pool, { writeAudit } = {}) {
           AND p.created_at < ${PREFECTURE_ARCHIVE_CUTOFF}
           AND ($1::text IS NULL OR p.district = $1)
         ORDER BY p.created_at, p.district, p.label`, [district || null]);
-      return rows;
-    },
-    async listDistrictPointReviewQueue() {
-      const { rows } = await pool.query("SELECT p.*, 0::integer AS photo_count FROM object_photo_points p WHERE p.dataset_id = 'sao_district_photo_points' AND p.review_status = 'pending' AND p.retired_at IS NULL ORDER BY p.created_at, p.district, p.label");
       return rows;
     },
     async tpuReportData({ datasetId, kind = null }) {
@@ -379,15 +361,8 @@ export function createObjectPhotoPointRepository(pool, { writeAudit } = {}) {
         // У районных точек перенос и смена направления не перетирают фото:
         // слот живёт своей жизнью («Принято» сохраняется). У ТПУ остаётся
         // прежняя привязка снимков к версии ракурса: версия растёт только
-        // когда изменилась привязка или направление. Правка районом возвращает
-        // точку на приёмку: комментарий и отметка решения очищаются.
+        // когда изменилась привязка или направление.
         const { rows } = await client.query(`UPDATE object_photo_points SET assignment_version = assignment_version + CASE WHEN NOT $8::boolean AND (longitude IS DISTINCT FROM $2 OR latitude IS DISTINCT FROM $3 OR heading IS DISTINCT FROM $7) THEN 1 ELSE 0 END, longitude = $2, latitude = $3, label = $4, note = $5, updated_by = $6, heading = $7, review_status = COALESCE($9, review_status), review_comment = CASE WHEN $9 = 'pending' THEN '' ELSE review_comment END, reviewed_by = CASE WHEN $9 = 'pending' THEN NULL ELSE reviewed_by END, reviewed_at = CASE WHEN $9 = 'pending' THEN NULL ELSE reviewed_at END, updated_at = now() WHERE id = $1 AND retired_at IS NULL RETURNING *`, [id, longitude, latitude, label, note, actorId, heading, keepAssignmentVersion, reviewStatus]);
-        return rows[0] || null;
-      });
-    },
-    reviewDistrictPoint({ id, decision, comment, actorId }) {
-      return write(actorId, 'district_photo_point_reviewed', { pointId: id, decision }, async (client) => {
-        const { rows } = await client.query("UPDATE object_photo_points SET review_status = $2, review_comment = $3, reviewed_by = $4, reviewed_at = now(), updated_at = now(), updated_by = $4 WHERE id = $1 AND dataset_id = 'sao_district_photo_points' AND review_status = 'pending' AND retired_at IS NULL RETURNING *", [id, decision, comment, actorId]);
         return rows[0] || null;
       });
     },

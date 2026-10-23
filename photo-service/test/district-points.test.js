@@ -27,10 +27,11 @@ async function serve(role, run) {
   const points = [];
   const photos = [];
   const repository = {
-    async listObjectPhotoPoints({ datasetId, district, acceptedOnly = false, excludePrefectureArchive = false }) {
+    async listObjectPhotoPoints({ datasetId, district, acceptedOnly = false, excludePrefectureArchive = false, excludeImported = false }) {
       return points.filter((p) => p.dataset_id === datasetId && (!district || p.district === district)
         && (!acceptedOnly || (p.review_status || 'accepted') === 'accepted')
-        && (!excludePrefectureArchive || new Date(p.created_at).getTime() >= Date.parse('2026-10-23T08:00:00.000Z')));
+        && (!excludePrefectureArchive || new Date(p.created_at).getTime() >= Date.parse('2026-10-23T08:00:00.000Z'))
+        && (!excludeImported || !(p.note || '').startsWith('Источник:')));
     },
     async listPrefectureArchivePoints({ district }) {
       return points.filter((p) => p.dataset_id === 'sao_district_photo_points' && (!district || p.district === district)
@@ -66,16 +67,6 @@ async function serve(role, run) {
         p.review_status = reviewStatus;
         if (reviewStatus === 'pending') { p.review_comment = ''; p.reviewed_by = null; p.reviewed_at = null; }
       }
-      return p;
-    },
-    async listDistrictPointReviewQueue() { return points.filter((p) => p.dataset_id === 'sao_district_photo_points' && p.review_status === 'pending' && !p.retired_at); },
-    async reviewDistrictPoint({ id, decision, comment, actorId }) {
-      const p = points.find((x) => x.id === id && x.review_status === 'pending' && !x.retired_at);
-      if (!p) return null;
-      p.review_status = decision;
-      p.review_comment = comment;
-      p.reviewed_by = actorId;
-      p.reviewed_at = new Date().toISOString();
       return p;
     },
     async retireObjectPhotoPoint({ id }) { const p = points.find((x) => x.id === id); if (!p) return null; p.retired_at = new Date().toISOString(); return p; },
@@ -127,19 +118,20 @@ test('районная точка вне своего района отклон�
   });
 });
 
-test('районы обеих ролей не могут назначать точки', async () => {
-  for (const role of ['district_editor']) await serve(role, async (base, repository, points) => {
-    const response = await fetch(base + '/', { method:'POST',headers:{ 'Content-Type':'application/json' },body:JSON.stringify(districtPoint()) });
-    assert.equal(response.status,403);
-    assert.equal(points.length,0);
+test('районная учётка не создаёт точки — ставит только префектура', async () => {
+  await serve('district_editor', async (base, repository, points) => {
+    const response = await fetch(`${base}/`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(districtPoint()) });
+    assert.equal(response.status, 403);
+    assert.equal(points.length, 0);
   });
 });
 
-test('районная учётка не создаёт точку в чужом районе', async () => {
-  await serve('district_editor', async (base, repository, points) => {
-    const response = await fetch(`${base}/`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(districtPoint({ district: 'Сокол', objectKey: 'district:sokol', longitude: 37.51, latitude: 55.80 })) });
-    assert.equal(response.status, 403);
-    assert.equal(points.length, 0);
+test('точка префектуры сразу принята — приёмки точек нет', async () => {
+  await serve('prefecture_admin', async (base, repository, points) => {
+    const response = await fetch(`${base}/`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(districtPoint()) });
+    assert.equal(response.status, 201);
+    assert.equal((await response.json()).point.review_status, 'accepted');
+    assert.equal(points.length, 1);
   });
 });
 
@@ -157,48 +149,6 @@ test('публичный список отдаёт только районный
   });
 });
 
-test('очередь приёмки точек доступна только префектуре и ждёт только pending', async () => {
-  await serve('district_editor', async (base) => {
-    const response = await fetch(`${base}/review-queue`);
-    assert.equal(response.status, 403);
-  });
-  await serve('prefecture_admin', async (base, repository) => {
-    const pending = await repository.createObjectPhotoPoint(districtPoint({ label: '1.1', reviewStatus: 'pending' }));
-    await repository.createObjectPhotoPoint(districtPoint({ label: '1.2', reviewStatus: 'accepted' }));
-    const response = await fetch(`${base}/review-queue`);
-    assert.equal(response.status, 200);
-    assert.deepEqual((await response.json()).points.map((point) => point.id), [pending.id]);
-  });
-});
-
-test('префектура принимает или возвращает точку на доработку', async () => {
-  await serve('prefecture_admin', async (base, repository) => {
-    const point = await repository.createObjectPhotoPoint(districtPoint({ reviewStatus: 'pending' }));
-    const response = await fetch(`${base}/${point.id}/review`, {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ decision: 'rework', comment: 'Уточнить направление съёмки.' }),
-    });
-    assert.equal(response.status, 200);
-    const body = await response.json();
-    assert.equal(body.point.review_status, 'rework');
-    assert.equal(body.point.review_comment, 'Уточнить направление съёмки.');
-
-    const noComment = await fetch(`${base}/${point.id}/review`, {
-      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ decision: 'rework', comment: '  ' }),
-    });
-    assert.equal(noComment.status, 422, 'возврат без комментария не проходит');
-  });
-});
-
-test('районная учётка не принимает точку сама', async () => {
-  await serve('district_editor', async (base, repository) => {
-    const point = await repository.createObjectPhotoPoint(districtPoint({ reviewStatus: 'pending' }));
-    const response = await fetch(`${base}/${point.id}/review`, {
-      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ decision: 'accepted', comment: '' }),
-    });
-    assert.equal(response.status, 403);
-  });
-});
 
 test('районы не могут менять точки, даже ожидающие приёмки', async () => {
   for (const role of ['district_editor']) await serve(role, async (base, repository) => {
@@ -219,6 +169,7 @@ test('районная учётка видит лишь назначенные �
     assert.deepEqual((await response.json()).points.map(p => p.label), ['1.1']);
   });
 });
+
 test('архивные точки видны только префектуре и не попадают в обычный список', async () => {
   await serve('prefecture_admin', async (base, repository, points) => {
     const archived = await repository.createObjectPhotoPoint(districtPoint({ label: 'архив' }));
@@ -323,18 +274,17 @@ test('районная учётка отправляет фото к точке 
   });
 });
 
-test('районная учётка не загружает фото, пока точка не принята префектурой', async () => {
+test('фото к точке загружается сразу — слот открыт без приёмки точки', async () => {
   await serve('district_editor', async (base, repository, _points, photos) => {
-    const point = await repository.createObjectPhotoPoint(districtPoint({ reviewStatus: 'pending' }));
+    const point = await repository.createObjectPhotoPoint(districtPoint());
     const jpeg = Buffer.from([0xff, 0xd8, 0xff, 0xe0, 0x00, 0x10, 0x4a, 0x46, 0x49, 0x46, 0x00, 0x01]);
     const response = await fetch(`${base}/${point.id}/photos`, {
       method: 'PUT',
       headers: { 'Content-Type': 'image/jpeg', 'X-Assignment-Version': '1', 'X-Photo-Filename': 'et.jpg' },
       body: jpeg,
     });
-    assert.equal(response.status, 409);
-    assert.match((await response.json()).error, /приёмк/);
-    assert.equal(photos.length, 0, 'слот не открыт');
+    assert.equal(response.status, 201);
+    assert.equal(photos.length, 1, 'фото записано в слот новой точки');
   });
 });
 
@@ -345,5 +295,49 @@ test('префектура выгружает отдельную сводку п
     assert.equal(response.status, 200);
     assert.match(response.headers.get('content-type') || '', /spreadsheetml/);
     assert.match(response.headers.get('content-disposition') || '', /Svodka_Foto_Rayonov_SAO_/);
+  });
+});
+
+test('публичный список не отдаёт импортные точки (NextGIS, GPKG) — они только для префектуры', async () => {
+  await serve('prefecture_admin', async (base, repository) => {
+    const regular = await repository.createObjectPhotoPoint(districtPoint({ label: 'обычная' }));
+    await repository.createObjectPhotoPoint(districtPoint({ label: 'импорт', note: 'Источник: Коровинское.gpkg; fid=2.' }));
+    const response = await fetch(`${base}/public?dataset=sao_district_photo_points&district=${encodeURIComponent('Аэропорт')}`);
+    assert.equal(response.status, 200);
+    const body = await response.json();
+    assert.deepEqual(body.points.map((point) => point.id), [regular.id]);
+  });
+});
+
+test('районная учётка видит только обычные точки района, префектура — все', async () => {
+  await serve('district_editor', async (base, repository) => {
+    const regular = await repository.createObjectPhotoPoint(districtPoint({ label: 'обычная' }));
+    await repository.createObjectPhotoPoint(districtPoint({ label: 'импорт', note: 'Источник: NextGIS; id=7.' }));
+    const response = await fetch(`${base}/?dataset=sao_district_photo_points&district=${encodeURIComponent('Аэропорт')}`);
+    assert.equal(response.status, 200);
+    assert.deepEqual((await response.json()).points.map((point) => point.id), [regular.id]);
+  });
+  await serve('prefecture_admin', async (base, repository) => {
+    await repository.createObjectPhotoPoint(districtPoint({ label: 'обычная' }));
+    await repository.createObjectPhotoPoint(districtPoint({ label: 'импорт', note: 'Источник: NextGIS; id=7.' }));
+    const response = await fetch(`${base}/?dataset=sao_district_photo_points&district=${encodeURIComponent('Аэропорт')}`);
+    assert.equal(response.status, 200);
+    assert.equal((await response.json()).points.length, 2);
+  });
+});
+
+test('районная учётка не открывает импортную точку и не грузит в неё фото', async () => {
+  await serve('district_editor', async (base, repository, points, photos) => {
+    const imported = await repository.createObjectPhotoPoint(districtPoint({ label: 'импорт', note: 'Источник: NextGIS; id=7.' }));
+    const listResponse = await fetch(`${base}/${imported.id}/photos`);
+    assert.equal(listResponse.status, 404);
+    const jpeg = Buffer.from([0xff, 0xd8, 0xff, 0xe0, 0x00, 0x10, 0x4a, 0x46, 0x49, 0x46, 0x00, 0x01]);
+    const putResponse = await fetch(`${base}/${imported.id}/photos`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'image/jpeg', 'X-Assignment-Version': '1', 'X-Photo-Filename': 'et.jpg' },
+      body: jpeg,
+    });
+    assert.equal(putResponse.status, 404);
+    assert.equal(photos.length, 0);
   });
 });
