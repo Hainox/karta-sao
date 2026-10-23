@@ -153,14 +153,14 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     <nav class="dist-nav"><a class="dist-link" href="aeroport.html">Аэропорт</a><a class="dist-link" href="begovoy.html">Беговой</a><a class="dist-link" href="beskudnikovskiy.html">Бескудниковский</a><a class="dist-link" href="voykovskiy.html">Войковский</a><a class="dist-link" href="vostochnoe-degunino.html">Восточное Дегунино</a><a class="dist-link" href="golovinskiy.html">Головинский</a><a class="dist-link" href="dmitrovskiy.html">Дмитровский</a><a class="dist-link active" href="zapadnoe-degunino.html">Западное Дегунино</a><a class="dist-link" href="koptevo.html">Коптево</a><a class="dist-link" href="levoberezhnyy.html">Левобережный</a><a class="dist-link" href="molzhaninovskiy.html">Молжаниновский</a><a class="dist-link" href="savelovskiy.html">Савеловский</a><a class="dist-link" href="sokol.html">Сокол</a><a class="dist-link" href="timiryazevskiy.html">Тимирязевский</a><a class="dist-link" href="hovrino.html">Ховрино</a><a class="dist-link" href="horoshevskiy.html">Хорошевский</a></nav>
     <div class="layers-head"><b>Слои</b><span class="status" id="layerTotal"></span></div>
     <div id="layerControls"></div>
-    <div class="layers-head"><b>Точки съёмки</b><span class="head-actions"><a id="pointAcceptance" class="shoot-toggle" href="acceptance.html" hidden>Кабинет приёмки точек</a><button id="shootLogin" class="shoot-toggle" type="button">Вход</button><button id="shootToggle" class="shoot-toggle" type="button">Разметка</button><button id="dragToggle" class="shoot-toggle" type="button" hidden>Перенос</button><button id="handToggle" class="shoot-toggle" type="button" hidden>Рука</button></span></div>
+    <div class="layers-head"><b>Точки съёмки</b><span class="head-actions"><button id="shootLogin" class="shoot-toggle" type="button">Вход</button><button id="shootToggle" class="shoot-toggle" type="button">Разметка</button><button id="dragToggle" class="shoot-toggle" type="button" hidden>Перенос</button><button id="handToggle" class="shoot-toggle" type="button" hidden>Рука</button></span></div>
     <div class="shoot-login" id="shootLoginBox" hidden>
       <input id="shootLoginName" placeholder="Логин учётной записи" autocomplete="username">
       <input id="shootLoginPass" type="password" placeholder="Пароль" autocomplete="current-password">
       <div class="row"><button id="shootLoginGo" class="primary" type="button">Войти</button><button id="shootLogout" type="button" hidden>Выйти</button></div>
       <div class="status" id="shootLoginState"></div>
     </div>
-    <label class="layer-row off" id="shootLayerRow" hidden><input type="checkbox" id="shootLayerToggle"><span class="swatch" style="background:#ffcb00"></span><span class="label">Точки съёмки<span class="trial-badge">ПРОБНЫЙ ИМПОРТ С NEXTGIS</span></span><span class="count" id="shootLayerCount">0</span></label>
+    <label class="layer-row off" id="shootLayerRow" hidden><input type="checkbox" id="shootLayerToggle"><span class="swatch" style="background:#ffcb00"></span><span class="label">Точки съёмки</span><span class="count" id="shootLayerCount">0</span></label>
     <label class="layer-row" id="gpkgLayerRow" hidden><input type="checkbox" id="gpkgLayerToggle" checked><span class="swatch" style="background:#ff8a00"></span><span class="label">Точки из GPKG<span class="trial-badge">147 · СО СТРЕЛКАМИ</span></span><span class="count" id="gpkgLayerCount">0</span></label>
     <label class="layer-row off" id="prefectureArchiveRow" hidden><input type="checkbox" id="prefectureArchiveToggle"><span class="swatch" style="background:#7b61a8"></span><span class="label">Архивные точки префектуры до 23.10.2026 11:00</span><span class="count" id="prefectureArchiveCount">0</span></label>
     <details class="shoot-list-box"><summary>Список точек</summary><div class="shoot-list" id="shootList"></div></details>
@@ -556,12 +556,12 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
 
   function pointVisible(point) {
     // Импортные слои (NextGIS и GPKG) видит только префектура. Район работает
-    // со своими обычными точками: после входа они видны сразу, без галочек,
-    // включая ожидающие приёмки и возвращённые на доработку. Без входа
-    // точки не показываются.
+    // в слое «Точки съёмки» (при входе он включается сам): в нём все его
+    // обычные точки, включая ожидающие приёмки и возвращённые на доработку.
+    // Без входа точки не показываются.
     if (isGpkgPoint(point)) return isPrefecture() && state.gpkgLayerOn;
     if (isPrefecture()) return state.shootLayerOn;
-    return isDistrictEditor();
+    return isDistrictEditor() && state.shootLayerOn;
   }
 
   function renderShootMarkers() {
@@ -1170,8 +1170,8 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     const user = state.photoUser;
     $('shootReport').hidden = !isPrefecture();
     $('shootPhotoReport').hidden = !isPrefecture();
-    $('pointAcceptance').hidden = !isPrefecture();
-    $('shootLayerRow').hidden = !isPrefecture();
+    $('shootLayerRow').hidden = !isPrefecture() && !isDistrictEditor();
+    if (isDistrictEditor() && !state.shootLayerOn) setShootLayer(true);
     $('shootToggle').hidden = !isPrefecture();
     if (!isPrefecture() && state.shootMode) setShootMode(false);
     $('prefectureArchiveRow').hidden = !isPrefecture();

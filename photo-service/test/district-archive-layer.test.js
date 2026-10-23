@@ -31,13 +31,14 @@ test('imported layers and markup mode are prefecture-only on district maps and i
     // Строки служебных слоёв не видны до входа префектуры.
     assert.match(html, /<label class="layer-row off" id="shootLayerRow" hidden>/, name);
     assert.match(html, /<label class="layer-row" id="gpkgLayerRow" hidden>/, name);
-    assert.match(html, /\$\('shootLayerRow'\)\.hidden = !isPrefecture\(\)/, name);
+    assert.match(html, /\$\('shootLayerRow'\)\.hidden = !isPrefecture\(\) && !isDistrictEditor\(\)/, name);
+    assert.doesNotMatch(html, /ПРОБНЫЙ ИМПОРТ/, name);
     assert.match(html, /\$\('gpkgLayerRow'\)\.hidden = !isPrefecture\(\)/, name);
     assert.match(html, /\$\('shootToggle'\)\.hidden = !isPrefecture\(\)/, name);
     // Импортные точки — только префектуре; район после входа видит свои точки
     // без галочек, без входа точки не показываются.
     assert.match(html, /if \(isGpkgPoint\(point\)\) return isPrefecture\(\) && state\.gpkgLayerOn;/, name);
-    assert.match(html, /if \(isPrefecture\(\)\) return state\.shootLayerOn;\n    return isDistrictEditor\(\);/, name);
+    assert.match(html, /if \(isPrefecture\(\)\) return state\.shootLayerOn;\n    return isDistrictEditor\(\) && state\.shootLayerOn;/, name);
     const scripts = [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].map((match) => match[1]);
     for (const source of scripts) new Script(source, { filename: name });
   }

@@ -87,8 +87,10 @@ def test_pages_have_no_template_leftovers():
             f"{slug}.html не умеет снимать выключенные слои"
         # Точки съёмки: кружки в просмотре, сохранённые направления — в режиме разметки
         assert "Точки съёмки" in html, f"{slug}.html нет инструмента точек съёмки"
-        assert 'id="shootLayerToggle"' in html and "ПРОБНЫЙ ИМПОРТ С NEXTGIS" in html, \
-            f"{slug}.html точки съёмки не вынесены в подписанный слой пробного импорта"
+        assert 'id="shootLayerToggle"' in html, \
+            f"{slug}.html точки съёмки не вынесены в отдельный слой"
+        assert "ПРОБНЫЙ ИМПОРТ" not in html, \
+            f"{slug}.html осталась пометка пробного импорта на слое точек съёмки"
         assert "if (!pointVisible(point)) return;" in html and "state.gpkgLayerOn" in html, \
             f"{slug}.html рисует точки съёмки при выключенном слое"
         assert 'id="gpkgLayerToggle"' in html and "Точки из GPKG" in html, \
@@ -124,13 +126,13 @@ def test_pages_have_no_template_leftovers():
             f"{slug}.html нет сводки Excel и отправки фото по точкам"
         assert "district_editor" in html, \
             f"{slug}.html не различает учётки районов для отправки фото"
-        # Приёмка точек районов: район ставит pending, префектура принимает в acceptance.html
+        # Приёмка точек отключена: точки ставит только префектура, кабинета acceptance.html нет
         assert "isDistrictEditor" in html and "review_status" in html, \
-            f"{slug}.html нет модели приёмки точек (isDistrictEditor/review_status)"
-        assert "acceptance.html" in html and 'id="pointAcceptance"' in html, \
-            f"{slug}.html нет ссылки на кабинет приёмки точек"
-        assert "return isDistrictEditor();" in html, \
-            f"{slug}.html район не видит свои точки после входа (включая ожидающие приёмки)"
+            f"{slug}.html не различает учётки районов (isDistrictEditor/review_status)"
+        assert 'id="pointAcceptance"' not in html and "acceptance.html" not in html, \
+            f"{slug}.html осталась ссылка на отключённый кабинет приёмки точек"
+        assert "return isDistrictEditor() && state.shootLayerOn;" in html, \
+            f"{slug}.html район не видит свои точки в слое съёмки после входа (включая ожидающие приёмки)"
         assert "(point.review_status || 'accepted') === 'accepted'" in html, \
             f"{slug}.html фотослот не привязан к приёмке точки"
         assert 'id="shootPhotoReport"' in html and "downloadDistrictReport" in html and "&report=" in html, \
