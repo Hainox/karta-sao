@@ -46,14 +46,16 @@ def test_generated_directions_are_reproducible(tmp_path):
     for output in OUT.glob('*'):
         assert (tmp_path / output.name).read_bytes() == output.read_bytes()
 
-def test_district_pages_keep_separate_direction_layer_hook_in_template():
+def test_district_pages_have_only_the_working_shooting_point_layer():
     template = (ROOT / 'work/district_page_template.html').read_text(encoding='utf-8')
-    assert 'SaoDistrictDirections.mount' in template
+    assert 'SaoDistrictDirections.mount' not in template
     for page in (ROOT / 'districts').glob('*.html'):
-        # index.html — каталог; review.html и acceptance.html — кабинеты без карты направлений.
         if page.name in ('index.html', 'review.html', 'acceptance.html'):
             continue
         text = page.read_text(encoding='utf-8')
-        assert 'direction-arrows.js?v=20261021c' in text
-        assert 'direction-arrows.css?v=20261021c' in text
-        assert 'SaoDistrictDirections.mount' in text
+        assert 'id="shootLayerRow"' in text
+        assert 'direction-arrows.js' not in text
+        assert 'direction-arrows.css' not in text
+        assert 'id="gpkgLayerRow"' not in text
+        assert 'id="prefectureArchiveRow"' not in text
+        assert '/prefecture-archive?' not in text

@@ -6,7 +6,7 @@ import test from 'node:test';
 
 const districtPages = join(import.meta.dirname, '../../districts');
 
-test('все карты районов скрывают архивный слой от районных учёток и сохраняют отдельный переключатель', async () => {
+test('все карты районов сохраняют права редактирования и только один точечный слой', async () => {
   const pages = (await readdir(districtPages)).filter((name) => name.endsWith('.html') && !['index.html', 'review.html', 'acceptance.html'].includes(name));
   assert.equal(pages.length, 16);
 
@@ -18,11 +18,11 @@ test('все карты районов скрывают архивный сло�
     assert.match(html, /Локальная точка не создаётся/, page + ': нет локальной псевдозаписи');
     assert.match(html, /Не создавайте её повторно/, page + ': после POST проверка чтения');
     assert.doesNotMatch(html, /district_photographer/, page + ': нет новой роли');
-    assert.equal((html.match(/id="prefectureArchiveRow"/g) || []).length, 1, `${page}: отдельная строка архивного слоя`);
-    assert.equal((html.match(/id="prefectureArchiveToggle"/g) || []).length, 1, `${page}: один переключатель архивного слоя`);
-    assert.match(html, /prefectureArchiveRow'\)\.hidden = !isPrefecture\(\)/, `${page}: слой показывается только префектуре`);
-    assert.match(html, /prefecture-archive\?district=/, `${page}: архив загружается отдельным запросом`);
-    assert.match(html, /point\.prefectureArchive \? ' archive' : ''/, `${page}: архивные точки имеют отдельное оформление`);
+    assert.equal((html.match(/id="shootLayerToggle"/g) || []).length, 1, `${page}: один рабочий слой`);
+    assert.doesNotMatch(html, /id="(?:prefectureArchive|gpkgLayer)(?:Row|Toggle)"/, `${page}: дополнительные слои удалены`);
+    assert.doesNotMatch(html, /prefecture-archive\?district=/, `${page}: архив не загружается`);
+    assert.match(html, /button.textContent = 'Загрузить фото'/, `${page}: явная кнопка фотослота`);
+    assert.doesNotMatch(html, /Статус приёмки точки/, `${page}: проверяются фотографии, не точки`);
 
     const inlineScripts = [...html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/gi)].map((match) => match[1]).filter((script) => script.trim());
     for (const source of inlineScripts) assert.doesNotThrow(() => new Script(source), `${page}: синтаксис встроенного JavaScript`);
