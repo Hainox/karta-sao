@@ -52,7 +52,11 @@ h1{margin:2px 0 0;font-size:24px;line-height:1.15}
 .shoot-actions button:hover{border-color:var(--accent);color:var(--accent)}
 .shoot-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin-top:6px}
 .shoot-gallery img{width:100%;border:1px solid var(--line);border-radius:8px;background:#fff}
-.shoot-upload{display:block;margin-top:8px;font-size:12.5px;color:var(--muted)}
+.shoot-upload{display:grid;gap:8px;margin-top:8px;padding:10px;border:1px dashed var(--accent);border-radius:10px;background:#fff;font-size:12.5px;color:var(--muted)}
+.shoot-upload button{min-height:44px;padding:10px 14px;border:1px solid var(--accent);border-radius:8px;background:var(--accent);color:#fff;font:inherit;font-size:14px;font-weight:800;cursor:pointer}
+.shoot-upload button:focus-visible{outline:3px solid #d99a00;outline-offset:2px}
+.shoot-upload button:disabled{opacity:.65;cursor:wait}
+.shoot-upload p{margin:0}
 /* Слот фото точки: статус приёмки, комментарий префектуры, поворот кадра. */
 .shoot-slot-chain{margin-top:8px;display:flex;flex-direction:column;gap:6px}
 .shoot-slot{padding:9px 10px;border:1px solid var(--line);border-radius:10px;background:#fff;font-size:13px;line-height:1.45}
@@ -140,7 +144,6 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
   document.head.appendChild(script);
 });
 </script>
-<link rel="stylesheet" href="direction-arrows.css?v=20261021c">
 <link rel="stylesheet" href="../atlas-brand.css?v=20261021">
 </head>
 <body>
@@ -161,8 +164,6 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       <div class="status" id="shootLoginState"></div>
     </div>
     <label class="layer-row off" id="shootLayerRow" hidden><input type="checkbox" id="shootLayerToggle"><span class="swatch" style="background:#ffcb00"></span><span class="label">Точки съёмки</span><span class="count" id="shootLayerCount">0</span></label>
-    <label class="layer-row" id="gpkgLayerRow" hidden><input type="checkbox" id="gpkgLayerToggle" checked><span class="swatch" style="background:#ff8a00"></span><span class="label">Точки из GPKG<span class="trial-badge">147 · СО СТРЕЛКАМИ</span></span><span class="count" id="gpkgLayerCount">0</span></label>
-    <label class="layer-row off" id="prefectureArchiveRow" hidden><input type="checkbox" id="prefectureArchiveToggle"><span class="swatch" style="background:#7b61a8"></span><span class="label">Архивные точки префектуры до 23.10.2026 11:00</span><span class="count" id="prefectureArchiveCount">0</span></label>
     <details class="shoot-list-box"><summary>Список точек</summary><div class="shoot-list" id="shootList"></div></details>
     <div class="shoot-hint" id="shootHint">Точки и направления назначает префектура. Район загружает снимки на назначенные точки.</div>
     <div class="shoot-actions">
@@ -184,7 +185,6 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
   </aside>
   <main id="map"></main>
 </div>
-<script src="direction-arrows.js?v=20261021c"></script>
 <script>
 (() => {
   const SLUG = 'dmitrovskiy';
@@ -206,7 +206,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     { key: 'driveways', label: 'Проезды',             color: '#7f6a5d', enabled: false },
     { key: 'odh',       label: 'Объекты ОДХ',         color: '#5f7f95', enabled: false },
   ];
-  const state = { map: null, layers: {}, shootMode: false, shootLayerOn: false, gpkgLayerOn: true, prefectureArchiveOn: false, picking: null, points: [], prefectureArchivePoints: [], serverOk: false, photoUser: readUser(), photoAngles: new Map(), activePhoto: null, dragMode: false, handMode: false, movePick: null, suppressClick: false };
+  const state = { map: null, layers: {}, shootMode: false, shootLayerOn: false, picking: null, points: [], serverOk: false, photoUser: readUser(), photoAngles: new Map(), activePhoto: null, dragMode: false, handMode: false, movePick: null, suppressClick: false };
   const $ = (id) => document.getElementById(id);
   const escapeHtml = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
 
@@ -268,7 +268,6 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       }
     }
     renderControls();
-    state.directionLayer = await SaoDistrictDirections.mount({ map: state.map, slug: SLUG, controls: $('layerControls'), card: $('card'), request: apiRequest, getUser: () => state.photoUser, onEditingChange: on => { if (on) setShootMode(false); } });
     await loadPhotoPoints();
     renderShootMarkers();
     renderShootLogin();
@@ -414,27 +413,9 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
         imported: p.imported === true || String(p.note || '').startsWith('Источник:'),
       }));
       state.serverOk = true;
-      state.prefectureArchivePoints = [];
-      if (isPrefecture()) {
-        try {
-          const archiveResponse = await apiRequest(`/object-photo-points/prefecture-archive?district=${encodeURIComponent(DISTRICT)}`);
-          const archiveData = await archiveResponse.json();
-          state.prefectureArchivePoints = (archiveData.points || []).map((p) => ({
-            id: p.id, label: p.label, heading: p.heading == null ? null : Number(p.heading),
-            lng: Number(p.longitude), lat: Number(p.latitude), district: p.district,
-            serverPoint: true, assignment_version: p.assignment_version, photo_count: Number(p.photo_count || 0),
-            photo_state: p.photo_state || null, note: p.note || '', imported: p.imported === true,
-            review_status: p.review_status || 'accepted', review_comment: p.review_comment || '',
-            prefectureArchive: true,
-          }));
-        } catch (archiveError) {
-          console.warn('Не удалось загрузить архивные точки префектуры:', archiveError);
-        }
-      }
       $('shootHint').textContent = `Точек съёмки: ${state.points.length}. Префектура назначает точки, районы загружают фото.`;
     } catch (error) {
       state.points = loadLocalPoints();
-      state.prefectureArchivePoints = [];
       state.serverOk = false;
       $('shootHint').textContent = 'Нет связи с сервером. Локальные данные показаны только для справки; разметка и правки запрещены. Обновите карту после восстановления связи.';
     }
@@ -551,20 +532,15 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
   }
 
   function pointVisible(point) {
-    // Импортные слои (NextGIS и GPKG) видит только префектура. Район работает
-    // в слое «Точки съёмки» (при входе он включается сам): в нём все его
-    // обычные точки, включая ожидающие приёмки и возвращённые на доработку.
-    // Без входа точки не показываются.
-    if (isGpkgPoint(point)) return isPrefecture() && state.gpkgLayerOn;
+    // Импортные и архивные наборы хранятся отдельно; на карте один рабочий слой.
+    if (isGpkgPoint(point)) return false;
     if (isPrefecture()) return state.shootLayerOn;
     return isDistrictEditor() && state.shootLayerOn;
   }
 
   function renderShootMarkers() {
     const { YMapMarker } = window.ymaps3;
-    const gpkg = state.points.filter(isGpkgPoint).length;
-    $('shootLayerCount').textContent = state.points.length.toLocaleString('ru-RU');
-    $('gpkgLayerCount').textContent = gpkg.toLocaleString('ru-RU');
+    $('shootLayerCount').textContent = state.points.filter((point) => !isGpkgPoint(point)).length.toLocaleString('ru-RU');
     if (!state.map) return;
     state.points.forEach((point) => {
       if (point._marker) {
@@ -576,25 +552,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       point._marker = marker;
       state.map.addChild(marker);
     });
-    $('prefectureArchiveCount').textContent = state.prefectureArchivePoints.length.toLocaleString('ru-RU');
-    state.prefectureArchivePoints.forEach((point) => {
-      if (point._marker) {
-        try { state.map.removeChild(point._marker); } catch (_) {}
-        point._marker = null;
-      }
-      if (!state.prefectureArchiveOn || !isPrefecture()) return;
-      const marker = new YMapMarker({ coordinates: [point.lng, point.lat] }, pointMarkerElement(point, false));
-      point._marker = marker;
-      state.map.addChild(marker);
-    });
     renderShootList();
-  }
-
-  function setPrefectureArchiveLayer(on) {
-    state.prefectureArchiveOn = Boolean(on && isPrefecture());
-    $('prefectureArchiveToggle').checked = state.prefectureArchiveOn;
-    $('prefectureArchiveRow').classList.toggle('off', !state.prefectureArchiveOn);
-    renderShootMarkers();
   }
 
   function removeShootMarker(point) {
@@ -607,11 +565,9 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
   function renderShootList() {
     const box = $('shootList');
     const stateLabel = { pending: 'проверка', accepted: 'принято', rework: 'доработка', empty: 'без фото' };
-    const reviewLabel = { pending: 'на приёмке', rework: 'на доработке точки' };
     const sorted = state.points.filter(pointVisible).sort((a, b) => String(a.label).localeCompare(String(b.label), 'ru', { numeric: true }));
     box.innerHTML = sorted.map((p) => {
-      const review = reviewLabel[p.review_status] ? ` · ${reviewLabel[p.review_status]}` : '';
-      return `<div class="shoot-item" data-id="${p.id}"${p.photo_state ? ` data-state="${p.photo_state}"` : ''}><b>${escapeHtml(p.label)}</b><span class="deg">${p.heading == null ? 'без направления' : Math.round(Number(p.heading)) + '°'}</span><span class="chip">${stateLabel[p.photo_state || 'empty']}${review}</span></div>`;
+      return `<div class="shoot-item" data-id="${p.id}"${p.photo_state ? ` data-state="${p.photo_state}"` : ''}><b>${escapeHtml(p.label)}</b><span class="deg">${p.heading == null ? 'без направления' : Math.round(Number(p.heading)) + '°'}</span><span class="chip">${stateLabel[p.photo_state || 'empty']}</span></div>`;
     }).join('') || '<div class="status">Точек пока нет.</div>';
     box.querySelectorAll('.shoot-item').forEach((row) => {
       row.addEventListener('click', () => {
@@ -689,9 +645,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
 
   function canUploadPoint(point) {
     const ownsDistrictPoint = isDistrictEditor() && point.district === DISTRICT;
-    // Фотослот открывается только после приёмки точки префектурой.
-    return (ownsDistrictPoint || isPrefecture()) && state.serverOk && point.serverPoint
-      && (point.prefectureArchive || (point.review_status || 'accepted') === 'accepted');
+    return (ownsDistrictPoint || isPrefecture()) && state.serverOk && point.serverPoint;
   }
 
   /* Слот точки из истории фото: активное (на проверке или принятое) и последнее отклонение. */
@@ -705,15 +659,13 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
 
   async function openPointCard(point) {
     const heading = point.heading == null ? 'не задано' : Math.round(Number(point.heading)) + '°';
-    const ownsDistrictPoint = isDistrictEditor() && point.district === DISTRICT && !point.prefectureArchive;
-    // Район правит только свои ожидающие или возвращённые на доработку точки.
+    // Точки назначает и редактирует префектура; район отправляет только фото.
     const canEdit = isPrefecture() && state.serverOk && point.serverPoint && !point.prefectureArchive;
     const canDelete = isPrefecture() && state.serverOk && point.serverPoint && !point.prefectureArchive;
     $('card').innerHTML = `
       <h2>Точка съёмки ${escapeHtml(point.label)}</h2>
       <div><strong>Направление:</strong> ${heading}</div>
       <div><strong>Координаты:</strong> ${Number(point.lat).toFixed(6)}, ${Number(point.lng).toFixed(6)}</div>
-      ${point.serverPoint && !point.prefectureArchive ? `<div><strong>Статус приёмки точки:</strong> ${point.review_status === 'pending' ? 'на проверке у префектуры' : point.review_status === 'rework' ? 'на доработке' : 'принята'}</div>${point.review_status === 'rework' && point.review_comment ? `<div><strong>Что исправить:</strong> ${escapeHtml(point.review_comment)}</div>` : ''}` : ''}
       <div class="shoot-slot-chain" id="cardSlot"></div>
       ${canEdit ? `<form class="point-edit" id="pointEditForm">
         <label>Подпись точки<input name="label" maxlength="160" required value="${escapeHtml(point.label)}"></label>
@@ -725,9 +677,9 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
         <label>Примечание / источник<textarea name="note" maxlength="2000">${escapeHtml(point.note || '')}</textarea></label>
         <button type="submit">Сохранить изменения</button>
       </form>
-      <div class="edit-hint">${ownsDistrictPoint ? 'После сохранения точка снова уйдёт на приёмку префектурой. Точку можно перетащить в режиме «Перенос», а направление — довернуть кликом по карте.' : 'Точку можно перетащить в режиме «Перенос», а направление — довернуть кликом по карте. Подпись, координаты, азимут и примечание сохраняются в фотослужбе.'}</div>` : ''}
+      <div class="edit-hint">Точку можно перетащить в режиме «Перенос», а направление — довернуть кликом по карте. Подпись, координаты, азимут и примечание сохраняются в фотослужбе.</div>` : ''}
       ${canEdit ? `<div class="card-actions">
-        <button id="cardRotate" type="button">${ownsDistrictPoint ? 'Исправить направление' : 'Изменить направление'}</button>
+        <button id="cardRotate" type="button">Изменить направление</button>
         ${canDelete ? '<button id="cardDelete" class="danger" type="button">Удалить точку</button>' : ''}
         <button id="cardClose" type="button">Закрыть</button>
       </div>` : `<div class="card-actions"><button id="cardClose" type="button">Закрыть</button></div>`}`;
@@ -777,7 +729,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     }
     const slot = slotFromPhotos(photos);
     const upload = canUploadPoint(point) && !slot.active;
-    const parts = [`<div class="shoot-slot"><span class="slot-pill ${slot.status}">${SLOT_LABELS[slot.status]}</span>`];
+    const parts = [`<div class="shoot-slot"><strong>Фото по точке · 1 слот</strong><br><span class="slot-pill ${slot.status}">${SLOT_LABELS[slot.status]}</span>`];
     if (slot.active) {
       parts.push(`<div class="slot-meta">Снимок от ${formatWhen(slot.active.uploaded_at)}${slot.active.status === 'accepted' ? ' · принят ' + formatWhen(slot.active.reviewed_at) : ' · ждёт решения префектуры'}</div>`);
     }
@@ -794,7 +746,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       const accept = document.createElement('button');
       accept.type = 'button';
       accept.className = 'primary';
-      accept.textContent = 'Принять объект';
+      accept.textContent = 'Принять фото';
       accept.addEventListener('click', () => reviewDistrictPhoto(point, slot.active.id, 'accepted', ''));
       actions.appendChild(accept);
       if (slot.active.status === 'pending') {
@@ -842,21 +794,32 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
   }
 
   function bindPublicUpload(point, panel) {
-    const label = document.createElement('label');
-    label.className = 'shoot-upload';
-    label.innerHTML = 'Отправить фото этой точки (JPEG, PNG, WEBP, до 5 МБ)';
+    const form = document.createElement('div');
+    form.className = 'shoot-upload';
+    const hint = document.createElement('p');
+    hint.textContent = 'Один снимок по стрелке направления. JPEG, PNG или WEBP, до 5 МБ.';
     const input = document.createElement('input');
     input.type = 'file';
     input.accept = 'image/jpeg,image/png,image/webp';
     input.hidden = true;
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.textContent = 'Загрузить фото';
+    button.addEventListener('click', () => input.click());
+    const status = document.createElement('p');
+    status.setAttribute('role', 'status');
+    status.setAttribute('aria-live', 'polite');
     input.addEventListener('change', async (event) => {
       const file = event.target.files[0];
       event.target.value = '';
-      if (!file) return;
+      if (!file || button.disabled) return;
       if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type) || file.size > 5 * 1024 * 1024) {
-        $('shootHint').textContent = 'Выберите JPEG, PNG или WEBP размером до 5 МБ.';
+        status.textContent = 'Выберите JPEG, PNG или WEBP размером до 5 МБ.';
         return;
       }
+      button.disabled = true;
+      button.textContent = 'Отправляем фото…';
+      status.textContent = 'Дождитесь завершения загрузки.';
       try {
         await apiRequest('/object-photo-points/' + point.id + '/photos', {
           method: 'PUT',
@@ -867,12 +830,15 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
         await reloadPhotoPoints();
         await renderSlotChain(point);
       } catch (error) {
-        $('shootHint').textContent = 'Фото не отправлено: ' + error.message;
-        await renderSlotChain(point);
+        status.textContent = 'Фото не отправлено: ' + error.message + '. Повторите загрузку.';
+        $('shootHint').textContent = status.textContent;
+      } finally {
+        button.disabled = false;
+        button.textContent = 'Загрузить фото';
       }
     });
-    label.appendChild(input);
-    panel.appendChild(label);
+    form.append(hint, button, input, status);
+    panel.appendChild(form);
   }
 
   async function reviewDistrictPhoto(point, photoId, decision, comment) {
@@ -883,7 +849,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
         body: JSON.stringify({ decision, comment }),
       });
       $('shootHint').textContent = decision === 'accepted'
-        ? `Объект «${point.label}» принят: снимок утверждён.`
+        ? `Фото точки «${point.label}» принято.`
         : `Точка «${point.label}» возвращена на доработку: район увидит комментарий.`;
       await reloadPhotoPoints();
       await renderSlotChain(point);
@@ -948,14 +914,6 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     renderShootList();
   }
 
-  function setGpkgLayer(on) {
-    state.gpkgLayerOn = on;
-    $('gpkgLayerToggle').checked = on;
-    $('gpkgLayerRow').classList.toggle('off', !on);
-    renderShootMarkers();
-    renderShootList();
-  }
-
   function setShootLayer(on) {
     state.shootLayerOn = on;
     $('shootLayerToggle').checked = on;
@@ -1006,7 +964,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
 
   function setShootMode(on) {
     if (on && (!isPrefecture() || !state.serverOk)) { $('shootHint').textContent = 'Разметка доступна только префектуре при работающем сервере.'; return; }
-    if (on) { state.directionLayer?.finishEditing(); if (state.dragMode) setDragMode(false); }
+    if (on && state.dragMode) setDragMode(false);
     state.shootMode = on;
     if (on && !state.shootLayerOn) setShootLayer(true);
     if (on) setHandMode(false, true);
@@ -1159,7 +1117,6 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
   /* ---------- Вход префектуры ---------- */
 
   function renderShootLogin() {
-    state.directionLayer?.refreshUser();
     const box = $('shootLoginBox');
     const user = state.photoUser;
     $('shootReport').hidden = !isPrefecture();
@@ -1168,21 +1125,8 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     if (isDistrictEditor() && !state.shootLayerOn) setShootLayer(true);
     $('shootToggle').hidden = !isPrefecture();
     if (!isPrefecture() && state.shootMode) setShootMode(false);
-    $('prefectureArchiveRow').hidden = !isPrefecture();
-    if (!isPrefecture() && state.prefectureArchiveOn) setPrefectureArchiveLayer(false);
     $('dragToggle').hidden = !isPrefecture();
     $('handToggle').hidden = !isPrefecture();
-    // Району GPKG-слой не нужен: он приватный импорт префектуры.
-    if (isDistrictEditor()) {
-      for (const layer of LAYERS) {
-        if (/gpkg/i.test(`${layer.key} ${layer.label}`) && layer.enabled) { layer.enabled = false; undraw(layer.key); }
-      }
-      setGpkgLayer(false);
-      $('gpkgLayerRow').hidden = true;
-      renderControls();
-    } else {
-      $('gpkgLayerRow').hidden = !isPrefecture();
-    }
     if (user) {
       box.hidden = false;
       $('shootLoginName').hidden = true;
@@ -1190,7 +1134,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       $('shootLoginGo').hidden = true;
       $('shootLogout').hidden = false;
       $('shootLoginState').textContent = isPrefecture()
-        ? `Вошли: ${user.login || user.email || 'префектура'} · приёмка точек и фото, отчёты доступны.`
+        ? `Вошли: ${user.login || user.email || 'префектура'} · приёмка фото и отчёты доступны.`
         : `Вошли: ${user.login || user.email || user.role} · выберите назначенную точку и загрузите фото.`;
       $('shootLogin').textContent = 'Выход';
     } else {
@@ -1282,8 +1226,6 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
   });
   $('shootExport').addEventListener('click', exportPoints);
   $('shootLayerToggle').addEventListener('change', (event) => setShootLayer(event.target.checked));
-  $('gpkgLayerToggle').addEventListener('change', (event) => setGpkgLayer(event.target.checked));
-  $('prefectureArchiveToggle').addEventListener('change', (event) => setPrefectureArchiveLayer(event.target.checked));
   async function downloadDistrictReport(report, filename, label) {
     try {
       const response = await apiRequest('/object-photo-points/report.xlsx?dataset=' + DATASET + '&report=' + report);

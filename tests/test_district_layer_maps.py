@@ -91,10 +91,10 @@ def test_pages_have_no_template_leftovers():
             f"{slug}.html точки съёмки не вынесены в отдельный слой"
         assert "ПРОБНЫЙ ИМПОРТ" not in html, \
             f"{slug}.html осталась пометка пробного импорта на слое точек съёмки"
-        assert "if (!pointVisible(point)) return;" in html and "state.gpkgLayerOn" in html, \
+        assert "if (!pointVisible(point)) return;" in html and "state.shootLayerOn" in html, \
             f"{slug}.html рисует точки съёмки при выключенном слое"
-        assert 'id="gpkgLayerToggle"' in html and "Точки из GPKG" in html, \
-            f"{slug}.html не выносит точки из GPKG в отдельный переключаемый слой"
+        assert 'id="gpkgLayerToggle"' not in html, \
+            f"{slug}.html остался отдельный слой GPKG"
         assert re.findall(r'class="dist-link active" href="([^"]+)"', html) == [f"{slug}.html"], \
             f"{slug}.html в списке районов подсвечен не свой район"
         assert "outline: { color: '#9a6400', width: 2.4 }" in html, \
@@ -133,13 +133,15 @@ def test_pages_have_no_template_leftovers():
             f"{slug}.html осталась ссылка на отключённый кабинет приёмки точек"
         assert "return isDistrictEditor() && state.shootLayerOn;" in html, \
             f"{slug}.html район не видит свои точки в слое съёмки после входа (включая ожидающие приёмки)"
-        assert "(point.review_status || 'accepted') === 'accepted'" in html, \
-            f"{slug}.html фотослот не привязан к приёмке точки"
+        assert "&& (point.prefectureArchive || (point.review_status" not in html, \
+            f"{slug}.html фотослот ошибочно зависит от старого статуса приёмки точки"
         assert 'id="shootPhotoReport"' in html and "downloadDistrictReport" in html and "&report=" in html, \
             f"{slug}.html нет отдельной сводки Excel по фото"
-        # Архивный слой префектуры (PR #37) должен сохраниться
-        assert 'id="prefectureArchiveRow"' in html and "setPrefectureArchiveLayer" in html, \
-            f"{slug}.html нет архивного слоя точек префектуры"
+        # По актуальному заданию на карте остаётся один точечный слой.
+        assert 'id="prefectureArchiveRow"' not in html and 'id="gpkgLayerRow"' not in html, \
+            f"{slug}.html показывает дополнительные точечные слои"
+        assert "button.textContent = 'Загрузить фото'" in html, \
+            f"{slug}.html нет явной кнопки загрузки в фотослот"
         # Полное редактирование точки: подпись, координаты, азимут, примечание
         assert 'name="label"' in html and 'name="latitude"' in html and 'name="longitude"' in html, \
             f"{slug}.html не позволяет редактировать подпись и координаты точки"
