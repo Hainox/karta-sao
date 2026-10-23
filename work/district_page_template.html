@@ -120,12 +120,12 @@ h1{margin:2px 0 0;font-size:24px;line-height:1.15}
 #map{height:100vh}
 #map.marking{cursor:crosshair}
 .shoot-marker{position:relative;width:0;height:0;background:none;border:0;padding:0;cursor:pointer}
-.shoot-dot{position:absolute;left:-6px;top:-6px;width:12px;height:12px;border-radius:50%;background:#ffcb00;border:2px solid #102e60;box-shadow:0 0 0 1.5px #fff,0 1px 3px rgba(16,38,54,.4)}
+.shoot-dot{position:absolute;left:-9px;top:-9px;width:18px;height:18px;border-radius:50%;background:#ffcb00;border:2.5px solid #102e60;box-shadow:0 0 0 2px #fff,0 1px 4px rgba(16,38,54,.45);z-index:2}
 #map.dragmode .shoot-marker{cursor:grab}
 #map.dragmode .shoot-marker:active{cursor:grabbing}
 #map.handmode{cursor:grab!important}
 #map.handmode .shoot-marker{cursor:default}
-.shoot-arrow{display:block;position:absolute;left:-32px;top:-72px;width:64px;height:80px;overflow:visible;transform-origin:32px 72px;pointer-events:none;scale:var(--shoot-arrow-scale,.35);filter:drop-shadow(0 1px 2px #10263650)}
+.shoot-arrow{display:block;position:absolute;left:-32px;top:-72px;width:64px;height:80px;overflow:visible;transform-origin:32px 72px;pointer-events:none;scale:var(--shoot-arrow-scale,.35);filter:drop-shadow(0 1px 2px #10263650);z-index:1}
 .shoot-arrow path{pointer-events:none}
 .shoot-marker.preview .shoot-dot{background:#fff;border-color:#ffcb00}
 .shoot-marker.archive .shoot-dot{background:#7b61a8;border-color:#fff;box-shadow:0 0 0 2px #4d3478,0 1px 4px #10263680}

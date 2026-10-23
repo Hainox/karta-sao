@@ -120,12 +120,12 @@ h1{margin:2px 0 0;font-size:24px;line-height:1.15}
 #map{height:100vh}
 #map.marking{cursor:crosshair}
 .shoot-marker{position:relative;width:0;height:0;background:none;border:0;padding:0;cursor:pointer}
-.shoot-dot{position:absolute;left:-6px;top:-6px;width:12px;height:12px;border-radius:50%;background:#ffcb00;border:2px solid #102e60;box-shadow:0 0 0 1.5px #fff,0 1px 3px rgba(16,38,54,.4)}
+.shoot-dot{position:absolute;left:-9px;top:-9px;width:18px;height:18px;border-radius:50%;background:#ffcb00;border:2.5px solid #102e60;box-shadow:0 0 0 2px #fff,0 1px 4px rgba(16,38,54,.45);z-index:2}
 #map.dragmode .shoot-marker{cursor:grab}
 #map.dragmode .shoot-marker:active{cursor:grabbing}
 #map.handmode{cursor:grab!important}
 #map.handmode .shoot-marker{cursor:default}
-.shoot-arrow{display:block;position:absolute;left:-32px;top:-72px;width:64px;height:80px;overflow:visible;transform-origin:32px 72px;pointer-events:none;scale:var(--shoot-arrow-scale,.35);filter:drop-shadow(0 1px 2px #10263650)}
+.shoot-arrow{display:block;position:absolute;left:-32px;top:-72px;width:64px;height:80px;overflow:visible;transform-origin:32px 72px;pointer-events:none;scale:var(--shoot-arrow-scale,.35);filter:drop-shadow(0 1px 2px #10263650);z-index:1}
 .shoot-arrow path{pointer-events:none}
 .shoot-marker.preview .shoot-dot{background:#fff;border-color:#ffcb00}
 .shoot-marker.archive .shoot-dot{background:#7b61a8;border-color:#fff;box-shadow:0 0 0 2px #4d3478,0 1px 4px #10263680}
@@ -153,7 +153,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     <nav class="dist-nav"><a class="dist-link" href="aeroport.html">Аэропорт</a><a class="dist-link" href="begovoy.html">Беговой</a><a class="dist-link active" href="beskudnikovskiy.html">Бескудниковский</a><a class="dist-link" href="voykovskiy.html">Войковский</a><a class="dist-link" href="vostochnoe-degunino.html">Восточное Дегунино</a><a class="dist-link" href="golovinskiy.html">Головинский</a><a class="dist-link" href="dmitrovskiy.html">Дмитровский</a><a class="dist-link" href="zapadnoe-degunino.html">Западное Дегунино</a><a class="dist-link" href="koptevo.html">Коптево</a><a class="dist-link" href="levoberezhnyy.html">Левобережный</a><a class="dist-link" href="molzhaninovskiy.html">Молжаниновский</a><a class="dist-link" href="savelovskiy.html">Савеловский</a><a class="dist-link" href="sokol.html">Сокол</a><a class="dist-link" href="timiryazevskiy.html">Тимирязевский</a><a class="dist-link" href="hovrino.html">Ховрино</a><a class="dist-link" href="horoshevskiy.html">Хорошевский</a></nav>
     <div class="layers-head"><b>Слои</b><span class="status" id="layerTotal"></span></div>
     <div id="layerControls"></div>
-    <div class="layers-head"><b>Точки съёмки</b><span class="head-actions"><button id="shootLogin" class="shoot-toggle" type="button">Вход</button><button id="shootToggle" class="shoot-toggle" type="button">Разметка</button><button id="dragToggle" class="shoot-toggle" type="button" hidden>Перенос</button><button id="handToggle" class="shoot-toggle" type="button" hidden>Рука</button></span></div>
+    <div class="layers-head"><b>Точки съёмки</b><span class="head-actions"><button id="shootLogin" class="shoot-toggle" type="button">Вход</button><button id="shootToggle" class="shoot-toggle" type="button" hidden>Разметка</button><button id="dragToggle" class="shoot-toggle" type="button" hidden>Перенос</button><button id="handToggle" class="shoot-toggle" type="button" hidden>Рука</button></span></div>
     <div class="shoot-login" id="shootLoginBox" hidden>
       <input id="shootLoginName" placeholder="Логин учётной записи" autocomplete="username">
       <input id="shootLoginPass" type="password" placeholder="Пароль" autocomplete="current-password">
@@ -164,7 +164,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     <label class="layer-row" id="gpkgLayerRow" hidden><input type="checkbox" id="gpkgLayerToggle" checked><span class="swatch" style="background:#ff8a00"></span><span class="label">Точки из GPKG<span class="trial-badge">147 · СО СТРЕЛКАМИ</span></span><span class="count" id="gpkgLayerCount">0</span></label>
     <label class="layer-row off" id="prefectureArchiveRow" hidden><input type="checkbox" id="prefectureArchiveToggle"><span class="swatch" style="background:#7b61a8"></span><span class="label">Архивные точки префектуры до 23.10.2026 11:00</span><span class="count" id="prefectureArchiveCount">0</span></label>
     <details class="shoot-list-box"><summary>Список точек</summary><div class="shoot-list" id="shootList"></div></details>
-    <div class="shoot-hint" id="shootHint">Точки съёмки эталонных фото: префектура и район ставят точки (вход в учётную запись, затем клик ставит точку, второй клик — направление съёмки). Точки района ждут приёмки префектурой; после приёмки открывается фото-слот.</div>
+    <div class="shoot-hint" id="shootHint">Точки и направления назначает префектура. Район загружает снимки на назначенные точки.</div>
     <div class="shoot-actions">
       <button id="shootExport" type="button">Выгрузить GeoJSON</button>
       <button id="shootReport" type="button" hidden>Excel: точки</button>
@@ -431,12 +431,12 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
           console.warn('Не удалось загрузить архивные точки префектуры:', archiveError);
         }
       }
-      $('shootHint').textContent = `Точек съёмки: ${state.points.length}. Ставят префектура и район: войдите и включите «Разметка».`;
+      $('shootHint').textContent = `Точек съёмки: ${state.points.length}. Префектура назначает точки, районы загружают фото.`;
     } catch (error) {
       state.points = loadLocalPoints();
       state.prefectureArchivePoints = [];
       state.serverOk = false;
-      $('shootHint').textContent = 'Сервер фотослужбы недоступен — показаны локальные точки браузера. Новые точки сохраняются локально: выгрузите их GeoJSON.';
+      $('shootHint').textContent = 'Нет связи с сервером. Локальные данные показаны только для справки; разметка и правки запрещены. Обновите карту после восстановления связи.';
     }
   }
 
@@ -495,6 +495,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
   /* Режим переноса: точку тащит нативный драг маркера (как у слоя направлений);
      резерв — «выбрать точку, кликнуть по карте» — работает на любом устройстве. */
   async function commitMove(point, [lng, lat]) {
+    if (!isPrefecture() || !state.serverOk || !point.serverPoint) { $('shootHint').textContent = 'Точка не перенесена: нет полномочий или связи с сервером.'; return; }
     try {
       const response = await apiRequest('/object-photo-points/' + point.id, { method: 'PATCH', body: JSON.stringify({ longitude: lng, latitude: lat }) });
       const data = await response.json();
@@ -523,6 +524,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       note: String(formData.get('note') || '').trim(),
     };
     try {
+      if (!isPrefecture() || !state.serverOk || !point.serverPoint) throw new Error('Точка не изменена: правки доступны только через сервер префектуре.');
       if (point.serverPoint && state.serverOk) {
         const response = await apiRequest('/object-photo-points/' + point.id, { method: 'PATCH', body: JSON.stringify(changes) });
         const data = await response.json();
@@ -533,12 +535,6 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
           review_comment: data.point.review_comment || '',
         });
         await reloadPhotoPoints();
-      } else {
-        const target = state.points.find((candidate) => candidate.id === point.id) || point;
-        Object.assign(target, { label: changes.label, lat: changes.latitude, lng: changes.longitude, heading: changes.heading, note: changes.note });
-        saveLocalPoints();
-        renderShootMarkers();
-        renderShootList();
       }
       const updated = state.points.find((candidate) => candidate.id === point.id);
       if (updated) await openPointCard(updated);
@@ -576,7 +572,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
         point._marker = null;
       }
       if (!pointVisible(point)) return;
-      const marker = new YMapMarker({ coordinates: [point.lng, point.lat], draggable: state.dragMode && !state.handMode, mapFollowsOnDrag: false, onDragEnd: (coordinates) => { state.suppressClick = true; commitMove(point, coordinates); } }, pointMarkerElement(point, false));
+      const marker = new YMapMarker({ coordinates: [point.lng, point.lat], draggable: isPrefecture() && state.dragMode && !state.handMode, mapFollowsOnDrag: false, onDragEnd: (coordinates) => { state.suppressClick = true; commitMove(point, coordinates); } }, pointMarkerElement(point, false));
       point._marker = marker;
       state.map.addChild(marker);
     });
@@ -711,8 +707,8 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     const heading = point.heading == null ? 'не задано' : Math.round(Number(point.heading)) + '°';
     const ownsDistrictPoint = isDistrictEditor() && point.district === DISTRICT && !point.prefectureArchive;
     // Район правит только свои ожидающие или возвращённые на доработку точки.
-    const canEdit = isPrefecture() || (ownsDistrictPoint && point.serverPoint && ['pending', 'rework'].includes(point.review_status));
-    const canDelete = isPrefecture() && !point.prefectureArchive;
+    const canEdit = isPrefecture() && state.serverOk && point.serverPoint && !point.prefectureArchive;
+    const canDelete = isPrefecture() && state.serverOk && point.serverPoint && !point.prefectureArchive;
     $('card').innerHTML = `
       <h2>Точка съёмки ${escapeHtml(point.label)}</h2>
       <div><strong>Направление:</strong> ${heading}</div>
@@ -969,6 +965,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
 
   /** Отдельный режим редактирования: перенос уже расставленных точек со стрелками. */
   function setDragMode(on) {
+    if (on && (!isPrefecture() || !state.serverOk)) return;
     if (on) setShootMode(false);
     state.dragMode = on;
     if (on) setHandMode(false, true);
@@ -978,7 +975,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     state.points.forEach((point) => { try { point._marker?.update({ draggable: on && !state.handMode }); } catch (_) { /* маркер не создан */ } });
     $('shootHint').textContent = on
       ? 'Режим переноса: перетащите точку в новое место (или кликните точку, затем кликните по карте). Стрелка направления и фото слота сохранятся. Карта при зажатой мыши не двигается — включите «Рука», чтобы переместить обзор.'
-      : `Точек съёмки: ${state.points.length}. Ставят префектура и район: войдите и включите «Разметка».`;
+      : `Точек съёмки: ${state.points.length}. Префектура назначает точки, районы загружают фото.`;
   }
 
   /** Режим руки: двигать карту мышью, пока активен режим редактирования. */
@@ -995,7 +992,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
         ? 'Шаг 1: кликните на карте в месте съёмки. Шаг 2: кликните в сторону, куда фотографировать, — направление и точка сохранятся.'
         : state.dragMode
           ? 'Режим переноса: перетащите точку в новое место (или кликните точку, затем кликните по карте). Стрелка направления и фото слота сохранятся. Карта при зажатой мыши не двигается — включите «Рука», чтобы переместить карту.'
-          : `Точек съёмки: ${state.points.length}. Ставят префектура и район: войдите и включите «Разметка».`;
+          : `Точек съёмки: ${state.points.length}. Префектура назначает точки, районы загружают фото.`;
   }
 
   /* При редактировании карта не должна ездить от зажатой мыши: убираем
@@ -1008,6 +1005,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
   }
 
   function setShootMode(on) {
+    if (on && (!isPrefecture() || !state.serverOk)) { $('shootHint').textContent = 'Разметка доступна только префектуре при работающем сервере.'; return; }
     if (on) { state.directionLayer?.finishEditing(); if (state.dragMode) setDragMode(false); }
     state.shootMode = on;
     if (on && !state.shootLayerOn) setShootLayer(true);
@@ -1019,7 +1017,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     applyMapBehaviors();
     $('shootHint').textContent = on
       ? 'Шаг 1: кликните на карте в месте съёмки. Шаг 2: кликните в сторону, куда фотографировать, — направление и точка сохранятся.'
-      : `Точек съёмки: ${state.points.length}. Ставят префектура и район: войдите и включите «Разметка».`;
+      : `Точек съёмки: ${state.points.length}. Префектура назначает точки, районы загружают фото.`;
   }
 
   function clearPreview() {
@@ -1041,7 +1039,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
   }
 
   function handleMapClick(coordinates) {
-    if (!Array.isArray(coordinates) || coordinates.length < 2) return;
+    if (!isPrefecture() || !state.serverOk || !Array.isArray(coordinates) || coordinates.length < 2) return;
     if (state.handMode) return;
     const [lng, lat] = coordinates;
     if (state.dragMode && state.movePick) {
@@ -1050,7 +1048,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       commitMove(point, [lng, lat]);
       return;
     }
-    if (!state.shootMode) return;
+    if (!state.shootMode || !isPrefecture()) return;
     if (!state.picking) {
       state.picking = { lng, lat, heading: null };
       renderPreview();
@@ -1071,6 +1069,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
   async function commitPoint() {
     const picking = state.picking;
     if (!picking || picking.heading == null) return;
+    if (!isPrefecture() || !state.serverOk) { $('shootHint').textContent = 'Точка не создана: нет полномочий или связи с сервером.'; return; }
     if (picking.existing) {
       try {
         if (state.serverOk && picking.existing.serverPoint) {
@@ -1078,8 +1077,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
           const data = await response.json();
           picking.existing.heading = data.point.heading == null ? null : Number(data.point.heading);
         } else {
-          picking.existing.heading = picking.heading;
-          saveLocalPoints();
+          throw new Error('Нет связи с сервером: направление не сохранено.');
         }
         removeShootMarker(picking.existing);
         state.picking = null;
@@ -1113,26 +1111,22 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
           review_status: data.point.review_status || 'accepted',
         };
       } else {
-        point = {
-          id: 'p' + Date.now().toString(36) + Math.random().toString(36).slice(2, 7),
-          label, heading: picking.heading, lng: picking.lng, lat: picking.lat,
-          district: DISTRICT, serverPoint: false,
-        };
-        saveLocalPoints();
+        throw new Error('Нет связи с сервером. Локальная точка не создаётся.');
       }
       state.points.push(point);
       state.picking = null;
       clearPreview();
-      renderShootMarkers();
-      $('shootHint').textContent = isDistrictEditor()
-        ? `Точка ${point.label} отправлена префектуре на приёмку; фотослот откроется после принятия.`
-        : `Точка ${point.label} добавлена (направление ${point.heading}°). Кликните для следующей точки.`;
+      await reloadPhotoPoints();
+      $('shootHint').textContent = state.serverOk && state.points.some((saved) => saved.id === point.id)
+        ? `Точка ${point.label} подтверждена сервером (направление ${point.heading}°).`
+        : `Сервер принял точку ${point.label}, но повторное чтение не подтвердилось. Не создавайте её повторно, обновите карту.`;
     } catch (error) {
       $('shootHint').textContent = 'Точка не сохранена: ' + error.message;
     }
   }
 
   function beginRotation(point) {
+    if (!isPrefecture() || !state.serverOk || !point.serverPoint) return;
     if (state.dragMode) setDragMode(false);
     if (state.handMode) setHandMode(false, true);
     state.shootMode = true;
@@ -1176,8 +1170,8 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     if (!isPrefecture() && state.shootMode) setShootMode(false);
     $('prefectureArchiveRow').hidden = !isPrefecture();
     if (!isPrefecture() && state.prefectureArchiveOn) setPrefectureArchiveLayer(false);
-    $('dragToggle').hidden = !isPrefecture() && !isDistrictEditor();
-    $('handToggle').hidden = !isPrefecture() && !isDistrictEditor();
+    $('dragToggle').hidden = !isPrefecture();
+    $('handToggle').hidden = !isPrefecture();
     // Району GPKG-слой не нужен: он приватный импорт префектуры.
     if (isDistrictEditor()) {
       for (const layer of LAYERS) {
@@ -1197,7 +1191,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       $('shootLogout').hidden = false;
       $('shootLoginState').textContent = isPrefecture()
         ? `Вошли: ${user.login || user.email || 'префектура'} · приёмка точек и фото, отчёты доступны.`
-        : `Вошли: ${user.login || user.email || user.role} · ставьте точки своего района, они ждут приёмки префектурой.`;
+        : `Вошли: ${user.login || user.email || user.role} · выберите назначенную точку и загрузите фото.`;
       $('shootLogin').textContent = 'Выход';
     } else {
       box.hidden = true;
@@ -1220,7 +1214,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       if (state.handMode) setHandMode(false);
       renderShootLogin();
       await reloadPhotoPoints();
-      $('shootHint').textContent = 'Вы вышли. Точки съёмки ставят префектура и район.';
+      $('shootHint').textContent = 'Вы вышли. Точки съёмки назначает префектура; районы фотографируют.';
       return;
     }
     const box = $('shootLoginBox');
@@ -1244,7 +1238,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       await reloadPhotoPoints();
       $('shootHint').textContent = isPrefecture()
         ? 'Вход выполнен. Включите «Разметка» и ставьте точки съёмки.'
-        : 'Вход выполнен. Ставьте точки своего района — после приёмки префектурой откроется фотослот.';
+        : 'Вход выполнен. Выберите назначенную префектурой точку и отправьте фотографию.';
     } catch (error) {
       $('shootLoginState').textContent = 'Не удалось войти: ' + error.message;
     }
@@ -1255,33 +1249,33 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
   });
 
   $('shootToggle').addEventListener('click', () => {
-    if (!isPrefecture() && !isDistrictEditor()) {
+    if (!isPrefecture()) {
       const box = $('shootLoginBox');
       box.hidden = false;
       $('shootLoginName').focus();
-      $('shootHint').textContent = 'Разметка доступна учёткам префектуры и района. Войдите, чтобы ставить точки.';
+      $('shootHint').textContent = 'Точки назначает только префектура. Район загружает фотографии.';
       return;
     }
     setShootMode(!state.shootMode);
   });
 
   $('dragToggle').addEventListener('click', () => {
-    if (!isPrefecture() && !isDistrictEditor()) {
+    if (!isPrefecture()) {
       const box = $('shootLoginBox');
       box.hidden = false;
       $('shootLoginName').focus();
-      $('shootHint').textContent = 'Перенос точек доступен учёткам префектуры и района. Войдите, чтобы включить режим переноса.';
+      $('shootHint').textContent = 'Точки может переносить только префектура.';
       return;
     }
     setDragMode(!state.dragMode);
   });
 
   $('handToggle').addEventListener('click', () => {
-    if (!isPrefecture() && !isDistrictEditor()) {
+    if (!isPrefecture()) {
       const box = $('shootLoginBox');
       box.hidden = false;
       $('shootLoginName').focus();
-      $('shootHint').textContent = 'Режим руки нужен при редактировании точек. Войдите в учётную запись.';
+      $('shootHint').textContent = 'Режим редактирования точек доступен только префектуре.';
       return;
     }
     setHandMode(!state.handMode);

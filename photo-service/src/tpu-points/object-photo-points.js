@@ -197,7 +197,7 @@ export function createObjectPhotoPointsRouter({ repository, authenticate, bounda
     try {
       if (req.query.dataset && !DATASETS[req.query.dataset]) return res.status(400).json({ error: 'Неизвестный набор объектов.' });
       const datasetId = req.query.dataset || 'sao_tpu_parking';
-      const points = await repository.listObjectPhotoPoints({ datasetId, objectKey: req.query.objectKey, district: districtFor(req) || req.query.district, excludePrefectureArchive: datasetId === 'sao_district_photo_points', excludeImported: datasetId === 'sao_district_photo_points' && req.user.role === 'district_editor' });
+      const points = await repository.listObjectPhotoPoints({ datasetId, objectKey: req.query.objectKey, district: districtFor(req) || req.query.district, acceptedOnly: req.user.role === 'district_editor' && datasetId === 'sao_district_photo_points', excludePrefectureArchive: datasetId === 'sao_district_photo_points', excludeImported: datasetId === 'sao_district_photo_points' && req.user.role === 'district_editor' });
       res.json({ points });
     } catch (error) { next(error); }
   });

@@ -12,6 +12,12 @@ test('все карты районов скрывают архивный сло�
 
   for (const page of pages) {
     const html = await readFile(join(districtPages, page), 'utf8');
+    assert.match(html, /const canEdit = isPrefecture\(\) && state.serverOk/, page + ': только префектура правит точки');
+    assert.match(html, /\$\('shootToggle'\)\.hidden = !isPrefecture\(\)/, page + ': районы без разметки');
+    assert.match(html, /if \(!state.shootMode \|\| !isPrefecture\(\)\) return/, page + ': право на постановку');
+    assert.match(html, /Локальная точка не создаётся/, page + ': нет локальной псевдозаписи');
+    assert.match(html, /Не создавайте её повторно/, page + ': после POST проверка чтения');
+    assert.doesNotMatch(html, /district_photographer/, page + ': нет новой роли');
     assert.equal((html.match(/id="prefectureArchiveRow"/g) || []).length, 1, `${page}: отдельная строка архивного слоя`);
     assert.equal((html.match(/id="prefectureArchiveToggle"/g) || []).length, 1, `${page}: один переключатель архивного слоя`);
     assert.match(html, /prefectureArchiveRow'\)\.hidden = !isPrefecture\(\)/, `${page}: слой показывается только префектуре`);

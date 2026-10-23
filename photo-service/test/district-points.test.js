@@ -149,6 +149,27 @@ test('публичный список отдаёт только районный
   });
 });
 
+
+test('районы не могут менять точки, даже ожидающие приёмки', async () => {
+  for (const role of ['district_editor']) await serve(role, async (base, repository) => {
+    const point = await repository.createObjectPhotoPoint(districtPoint({ reviewStatus:'rework' }));
+    const response = await fetch(base + '/' + point.id, { method:'PATCH',headers:{ 'Content-Type':'application/json' },body:JSON.stringify({ heading:180 }) });
+    assert.equal(response.status,403);
+    assert.equal(point.heading,45);
+  });
+});
+
+test('районная учётка видит лишь назначенные префектурой точки своего района', async () => {
+  await serve('district_editor', async (base, repository) => {
+    await repository.createObjectPhotoPoint(districtPoint({ label:'1.1', reviewStatus:'accepted' }));
+    await repository.createObjectPhotoPoint(districtPoint({ label:'1.2', reviewStatus:'pending' }));
+    await repository.createObjectPhotoPoint(districtPoint({ label:'1.3', district:'Сокол', objectKey:'district:sokol' }));
+    const response = await fetch(base + '/?dataset=sao_district_photo_points');
+    assert.equal(response.status, 200);
+    assert.deepEqual((await response.json()).points.map(p => p.label), ['1.1']);
+  });
+});
+
 test('архивные точки видны только префектуре и не попадают в обычный список', async () => {
   await serve('prefecture_admin', async (base, repository, points) => {
     const archived = await repository.createObjectPhotoPoint(districtPoint({ label: 'архив' }));
