@@ -27,8 +27,13 @@ async function serve(role, run) {
   const points = [];
   const photos = [];
   const repository = {
-    async listObjectPhotoPoints({ datasetId, district }) {
-      return points.filter((p) => p.dataset_id === datasetId && (!district || p.district === district));
+    async listObjectPhotoPoints({ datasetId, district, excludePrefectureArchive = false }) {
+      return points.filter((p) => p.dataset_id === datasetId && (!district || p.district === district)
+        && (!excludePrefectureArchive || new Date(p.created_at).getTime() >= Date.parse('2026-10-23T08:00:00.000Z')));
+    },
+    async listPrefectureArchivePoints({ district }) {
+      return points.filter((p) => p.dataset_id === 'sao_district_photo_points' && (!district || p.district === district)
+        && new Date(p.created_at).getTime() < Date.parse('2026-10-23T08:00:00.000Z'));
     },
     async getObjectPhotoPoint({ id, district }) { return points.find((p) => p.id === id && !p.retired_at && (!district || p.district === district)) || null; },
     async createObjectPhotoPoint(input) {
@@ -119,6 +124,37 @@ test('публичный список отдаёт только районный
     assert.equal(body.points[0].district, 'Аэропорт');
     assert.equal(body.points[0].label, '1.1');
     assert.equal(body.points[0].heading, 45);
+  });
+});
+
+test('архивные точки видны только префектуре и не попадают в обычный список', async () => {
+  await serve('prefecture_admin', async (base, repository, points) => {
+    const archived = await repository.createObjectPhotoPoint(districtPoint({ label: 'архив' }));
+    archived.created_at = '2026-10-23T07:59:59.999Z';
+    const current = await repository.createObjectPhotoPoint(districtPoint({ label: 'новая' }));
+    current.created_at = '2026-10-23T08:00:00.000Z';
+
+    const archiveResponse = await fetch(`${base}/prefecture-archive?district=${encodeURIComponent('Аэропорт')}`);
+    assert.equal(archiveResponse.status, 200);
+    assert.deepEqual((await archiveResponse.json()).points.map((point) => point.id), [archived.id]);
+
+    const ordinaryResponse = await fetch(`${base}/?dataset=sao_district_photo_points&district=${encodeURIComponent('Аэропорт')}`);
+    assert.deepEqual((await ordinaryResponse.json()).points.map((point) => point.id), [current.id]);
+
+    const publicResponse = await fetch(`${base}/public?dataset=sao_district_photo_points&district=${encodeURIComponent('Аэропорт')}`);
+    assert.deepEqual((await publicResponse.json()).points.map((point) => point.id), [current.id]);
+    assert.equal(points.length, 2);
+  });
+});
+
+test('архивный слой и фото старых точек недоступны районной учётке', async () => {
+  await serve('district_editor', async (base, repository) => {
+    const archived = await repository.createObjectPhotoPoint(districtPoint({ label: 'архив' }));
+    archived.created_at = '2026-10-23T07:59:59.999Z';
+    const archiveResponse = await fetch(`${base}/prefecture-archive?district=${encodeURIComponent('Аэропорт')}`);
+    assert.equal(archiveResponse.status, 403);
+    const photoResponse = await fetch(`${base}/${archived.id}/photos`);
+    assert.equal(photoResponse.status, 404);
   });
 });
 
