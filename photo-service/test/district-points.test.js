@@ -88,7 +88,7 @@ async function serve(role, run) {
   app.use(express.json({ limit: '32kb' }));
   app.use('/object-photo-points', createObjectPhotoPointsRouter({
     repository,
-    authenticate: (req, _res, next) => { req.user = { id: 'user', role, district: role === 'district_editor' ? 'Аэропорт' : null, sub: 'user' }; next(); },
+    authenticate: (req, _res, next) => { req.user = { id: 'user', role, district: ['district_editor', 'district_photographer'].includes(role) ? 'Аэропорт' : null, sub: 'user' }; next(); },
     boundary: saoBoundary,
   }));
   const server = app.listen(0);
@@ -127,12 +127,11 @@ test('районная точка вне своего района отклон�
   });
 });
 
-test('районная учётка отправляет свою точку на приёмку префектуре', async () => {
-  await serve('district_editor', async (base, repository, points) => {
-    const response = await fetch(`${base}/`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(districtPoint()) });
-    assert.equal(response.status, 201);
-    assert.equal((await response.json()).point.review_status, 'pending');
-    assert.equal(points.length, 1);
+test('районы обеих ролей не могут назначать точки', async () => {
+  for (const role of ['district_editor','district_photographer']) await serve(role, async (base, repository, points) => {
+    const response = await fetch(base + '/', { method:'POST',headers:{ 'Content-Type':'application/json' },body:JSON.stringify(districtPoint()) });
+    assert.equal(response.status,403);
+    assert.equal(points.length,0);
   });
 });
 
@@ -201,24 +200,24 @@ test('районная учётка не принимает точку сама'
   });
 });
 
-test('район правит свою ожидающую точку и возвращает её на приёмку', async () => {
-  await serve('district_editor', async (base, repository) => {
-    const point = await repository.createObjectPhotoPoint(districtPoint({ reviewStatus: 'rework', reviewComment: 'Уточнить направление.' }));
-    const response = await fetch(`${base}/${point.id}`, {
-      method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ label: '1.1 исправлено' }),
-    });
-    assert.equal(response.status, 200);
-    const body = await response.json();
-    assert.equal(body.point.label, '1.1 исправлено');
-    assert.equal(body.point.review_status, 'pending', 'после правки точка снова на приёмке');
-    assert.equal(body.point.review_comment, '', 'старый комментарий префектуры очищен');
+test('районы не могут менять точки, даже ожидающие приёмки', async () => {
+  for (const role of ['district_editor','district_photographer']) await serve(role, async (base, repository) => {
+    const point = await repository.createObjectPhotoPoint(districtPoint({ reviewStatus:'rework' }));
+    const response = await fetch(base + '/' + point.id, { method:'PATCH',headers:{ 'Content-Type':'application/json' },body:JSON.stringify({ heading:180 }) });
+    assert.equal(response.status,403);
+    assert.equal(point.heading,45);
   });
-  await serve('district_editor', async (base, repository) => {
-    const accepted = await repository.createObjectPhotoPoint(districtPoint({ reviewStatus: 'accepted' }));
-    const response = await fetch(`${base}/${accepted.id}`, {
-      method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ label: 'подмена' }),
-    });
-    assert.equal(response.status, 403, 'принятую точку район не правит');
+});
+
+test('отдельный фотограф видит только свои принятые точки и не может получить ТПУ', async () => {
+  await serve('district_photographer', async (base, repository) => {
+    await repository.createObjectPhotoPoint(districtPoint({ label:'1.1',reviewStatus:'accepted' }));
+    await repository.createObjectPhotoPoint(districtPoint({ label:'1.2',reviewStatus:'pending' }));
+    const own = await fetch(base + '/?dataset=sao_district_photo_points');
+    assert.equal(own.status,200);
+    assert.deepEqual((await own.json()).points.map(point=>point.label),['1.1']);
+    assert.equal((await fetch(base+'/?dataset=sao_tpu_parking')).status,403);
+    assert.equal((await fetch(base+'/review-queue')).status,403);
   });
 });
 
