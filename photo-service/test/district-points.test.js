@@ -27,10 +27,11 @@ async function serve(role, run) {
   const points = [];
   const photos = [];
   const repository = {
-    async listObjectPhotoPoints({ datasetId, district, acceptedOnly = false, excludePrefectureArchive = false }) {
+    async listObjectPhotoPoints({ datasetId, district, acceptedOnly = false, excludePrefectureArchive = false, excludeImported = false }) {
       return points.filter((p) => p.dataset_id === datasetId && (!district || p.district === district)
         && (!acceptedOnly || (p.review_status || 'accepted') === 'accepted')
-        && (!excludePrefectureArchive || new Date(p.created_at).getTime() >= Date.parse('2026-10-23T08:00:00.000Z')));
+        && (!excludePrefectureArchive || new Date(p.created_at).getTime() >= Date.parse('2026-10-23T08:00:00.000Z'))
+        && (!excludeImported || !(p.note || '').startsWith('Источник:')));
     },
     async listPrefectureArchivePoints({ district }) {
       return points.filter((p) => p.dataset_id === 'sao_district_photo_points' && (!district || p.district === district)
@@ -348,5 +349,49 @@ test('префектура выгружает отдельную сводку п
     assert.equal(response.status, 200);
     assert.match(response.headers.get('content-type') || '', /spreadsheetml/);
     assert.match(response.headers.get('content-disposition') || '', /Svodka_Foto_Rayonov_SAO_/);
+  });
+});
+
+test('публичный список не отдаёт импортные точки (NextGIS, GPKG) — они только для префектуры', async () => {
+  await serve('prefecture_admin', async (base, repository) => {
+    const regular = await repository.createObjectPhotoPoint(districtPoint({ label: 'обычная' }));
+    await repository.createObjectPhotoPoint(districtPoint({ label: 'импорт', note: 'Источник: Коровинское.gpkg; fid=2.' }));
+    const response = await fetch(`${base}/public?dataset=sao_district_photo_points&district=${encodeURIComponent('Аэропорт')}`);
+    assert.equal(response.status, 200);
+    const body = await response.json();
+    assert.deepEqual(body.points.map((point) => point.id), [regular.id]);
+  });
+});
+
+test('районная учётка видит только обычные точки района, префектура — все', async () => {
+  await serve('district_editor', async (base, repository) => {
+    const regular = await repository.createObjectPhotoPoint(districtPoint({ label: 'обычная' }));
+    await repository.createObjectPhotoPoint(districtPoint({ label: 'импорт', note: 'Источник: NextGIS; id=7.' }));
+    const response = await fetch(`${base}/?dataset=sao_district_photo_points&district=${encodeURIComponent('Аэропорт')}`);
+    assert.equal(response.status, 200);
+    assert.deepEqual((await response.json()).points.map((point) => point.id), [regular.id]);
+  });
+  await serve('prefecture_admin', async (base, repository) => {
+    await repository.createObjectPhotoPoint(districtPoint({ label: 'обычная' }));
+    await repository.createObjectPhotoPoint(districtPoint({ label: 'импорт', note: 'Источник: NextGIS; id=7.' }));
+    const response = await fetch(`${base}/?dataset=sao_district_photo_points&district=${encodeURIComponent('Аэропорт')}`);
+    assert.equal(response.status, 200);
+    assert.equal((await response.json()).points.length, 2);
+  });
+});
+
+test('районная учётка не открывает импортную точку и не грузит в неё фото', async () => {
+  await serve('district_editor', async (base, repository, points, photos) => {
+    const imported = await repository.createObjectPhotoPoint(districtPoint({ label: 'импорт', note: 'Источник: NextGIS; id=7.' }));
+    const listResponse = await fetch(`${base}/${imported.id}/photos`);
+    assert.equal(listResponse.status, 404);
+    const jpeg = Buffer.from([0xff, 0xd8, 0xff, 0xe0, 0x00, 0x10, 0x4a, 0x46, 0x49, 0x46, 0x00, 0x01]);
+    const putResponse = await fetch(`${base}/${imported.id}/photos`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'image/jpeg', 'X-Assignment-Version': '1', 'X-Photo-Filename': 'et.jpg' },
+      body: jpeg,
+    });
+    assert.equal(putResponse.status, 404);
+    assert.equal(photos.length, 0);
   });
 });
