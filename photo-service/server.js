@@ -668,6 +668,7 @@ async function handler(request, response) {
     if (!mkdRoute.ok) return sendError(response, request, mkdRoute.status, mkdRoute.code, mkdRoute.message);
     if (pathname.startsWith('/mkd/') && await handleMkd(request, response, user, pathname)) return;
     if (pathname === '/auth/me' && request.method === 'GET') return sendJson(response, 200, { user: { id: user.id, email: user.email, displayName: user.display_name, role: user.role, district: user.district } }, request);
+    if (user.role === 'district_photographer') return sendError(response, request, 403, 'district_map_only');
     if (pathname === '/photos' && request.method === 'GET') {
       const url = new URL(request.url, 'http://photo-service.local');
       const datasetId = url.searchParams.get('datasetId');

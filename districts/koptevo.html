@@ -153,7 +153,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     <nav class="dist-nav"><a class="dist-link" href="aeroport.html">Аэропорт</a><a class="dist-link" href="begovoy.html">Беговой</a><a class="dist-link" href="beskudnikovskiy.html">Бескудниковский</a><a class="dist-link" href="voykovskiy.html">Войковский</a><a class="dist-link" href="vostochnoe-degunino.html">Восточное Дегунино</a><a class="dist-link" href="golovinskiy.html">Головинский</a><a class="dist-link" href="dmitrovskiy.html">Дмитровский</a><a class="dist-link" href="zapadnoe-degunino.html">Западное Дегунино</a><a class="dist-link active" href="koptevo.html">Коптево</a><a class="dist-link" href="levoberezhnyy.html">Левобережный</a><a class="dist-link" href="molzhaninovskiy.html">Молжаниновский</a><a class="dist-link" href="savelovskiy.html">Савеловский</a><a class="dist-link" href="sokol.html">Сокол</a><a class="dist-link" href="timiryazevskiy.html">Тимирязевский</a><a class="dist-link" href="hovrino.html">Ховрино</a><a class="dist-link" href="horoshevskiy.html">Хорошевский</a></nav>
     <div class="layers-head"><b>Слои</b><span class="status" id="layerTotal"></span></div>
     <div id="layerControls"></div>
-    <div class="layers-head"><b>Точки съёмки</b><span class="head-actions"><a id="pointAcceptance" class="shoot-toggle" href="acceptance.html" hidden>Кабинет приёмки точек</a><button id="shootLogin" class="shoot-toggle" type="button">Вход</button><button id="shootToggle" class="shoot-toggle" type="button">Разметка</button><button id="dragToggle" class="shoot-toggle" type="button" hidden>Перенос</button><button id="handToggle" class="shoot-toggle" type="button" hidden>Рука</button></span></div>
+    <div class="layers-head"><b>Точки съёмки</b><span class="head-actions"><a id="pointAcceptance" class="shoot-toggle" href="acceptance.html" hidden>Кабинет приёмки точек</a><button id="shootLogin" class="shoot-toggle" type="button">Вход</button><button id="shootToggle" class="shoot-toggle" type="button" hidden>Разметка</button><button id="dragToggle" class="shoot-toggle" type="button" hidden>Перенос</button><button id="handToggle" class="shoot-toggle" type="button" hidden>Рука</button></span></div>
     <div class="shoot-login" id="shootLoginBox" hidden>
       <input id="shootLoginName" placeholder="Логин учётной записи" autocomplete="username">
       <input id="shootLoginPass" type="password" placeholder="Пароль" autocomplete="current-password">
@@ -164,7 +164,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     <label class="layer-row" id="gpkgLayerRow"><input type="checkbox" id="gpkgLayerToggle" checked><span class="swatch" style="background:#ff8a00"></span><span class="label">Точки из GPKG<span class="trial-badge">147 · СО СТРЕЛКАМИ</span></span><span class="count" id="gpkgLayerCount">0</span></label>
     <label class="layer-row off" id="prefectureArchiveRow" hidden><input type="checkbox" id="prefectureArchiveToggle"><span class="swatch" style="background:#7b61a8"></span><span class="label">Архивные точки префектуры до 23.10.2026 11:00</span><span class="count" id="prefectureArchiveCount">0</span></label>
     <details class="shoot-list-box"><summary>Список точек</summary><div class="shoot-list" id="shootList"></div></details>
-    <div class="shoot-hint" id="shootHint">Точки съёмки эталонных фото: префектура и район ставят точки (вход в учётную запись, затем клик ставит точку, второй клик — направление съёмки). Точки района ждут приёмки префектурой; после приёмки открывается фото-слот.</div>
+    <div class="shoot-hint" id="shootHint">Точки и направления назначает префектура. Район загружает снимки на назначенные точки.</div>
     <div class="shoot-actions">
       <button id="shootExport" type="button">Выгрузить GeoJSON</button>
       <button id="shootReport" type="button" hidden>Excel: точки</button>
@@ -358,7 +358,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
   }
 
   function isPrefecture() { return state.photoUser && state.photoUser.role === 'prefecture_admin'; }
-  function isDistrictEditor() { return state.photoUser && state.photoUser.role === 'district_editor' && state.photoUser.district === DISTRICT; }
+  function isDistrictEditor() { return state.photoUser && ['district_editor', 'district_photographer'].includes(state.photoUser.role) && state.photoUser.district === DISTRICT; }
 
   async function apiRequest(path, options = {}) {
     const headers = new Headers(options.headers || {});
@@ -710,7 +710,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     const heading = point.heading == null ? 'не задано' : Math.round(Number(point.heading)) + '°';
     const ownsDistrictPoint = isDistrictEditor() && point.district === DISTRICT && !point.prefectureArchive;
     // Район правит только свои ожидающие или возвращённые на доработку точки.
-    const canEdit = isPrefecture() || (ownsDistrictPoint && point.serverPoint && ['pending', 'rework'].includes(point.review_status));
+    const canEdit = isPrefecture();
     const canDelete = isPrefecture() && !point.prefectureArchive;
     $('card').innerHTML = `
       <h2>Точка съёмки ${escapeHtml(point.label)}</h2>
@@ -1049,7 +1049,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       commitMove(point, [lng, lat]);
       return;
     }
-    if (!state.shootMode) return;
+    if (!state.shootMode || !isPrefecture()) return;
     if (!state.picking) {
       state.picking = { lng, lat, heading: null };
       renderPreview();
@@ -1170,10 +1170,11 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     $('shootReport').hidden = !isPrefecture();
     $('shootPhotoReport').hidden = !isPrefecture();
     $('pointAcceptance').hidden = !isPrefecture();
+    $('shootToggle').hidden = !isPrefecture();
     $('prefectureArchiveRow').hidden = !isPrefecture();
     if (!isPrefecture() && state.prefectureArchiveOn) setPrefectureArchiveLayer(false);
-    $('dragToggle').hidden = !isPrefecture() && !isDistrictEditor();
-    $('handToggle').hidden = !isPrefecture() && !isDistrictEditor();
+    $('dragToggle').hidden = !isPrefecture();
+    $('handToggle').hidden = !isPrefecture();
     // Району GPKG-слой не нужен: он приватный импорт префектуры.
     if (isDistrictEditor()) {
       for (const layer of LAYERS) {
@@ -1216,7 +1217,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       if (state.handMode) setHandMode(false);
       renderShootLogin();
       await reloadPhotoPoints();
-      $('shootHint').textContent = 'Вы вышли. Точки съёмки ставят префектура и район.';
+      $('shootHint').textContent = 'Вы вышли. Точки съёмки назначает префектура; районы фотографируют.';
       return;
     }
     const box = $('shootLoginBox');
@@ -1240,7 +1241,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       await reloadPhotoPoints();
       $('shootHint').textContent = isPrefecture()
         ? 'Вход выполнен. Включите «Разметка» и ставьте точки съёмки.'
-        : 'Вход выполнен. Ставьте точки своего района — после приёмки префектурой откроется фотослот.';
+        : 'Вход выполнен. Выберите назначенную префектурой точку и отправьте фотографию.';
     } catch (error) {
       $('shootLoginState').textContent = 'Не удалось войти: ' + error.message;
     }
@@ -1251,18 +1252,18 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
   });
 
   $('shootToggle').addEventListener('click', () => {
-    if (!isPrefecture() && !isDistrictEditor()) {
+    if (!isPrefecture()) {
       const box = $('shootLoginBox');
       box.hidden = false;
       $('shootLoginName').focus();
-      $('shootHint').textContent = 'Разметка доступна учёткам префектуры и района. Войдите, чтобы ставить точки.';
+      $('shootHint').textContent = 'Точки назначает только префектура. Район загружает фотографии.';
       return;
     }
     setShootMode(!state.shootMode);
   });
 
   $('dragToggle').addEventListener('click', () => {
-    if (!isPrefecture() && !isDistrictEditor()) {
+    if (!isPrefecture()) {
       const box = $('shootLoginBox');
       box.hidden = false;
       $('shootLoginName').focus();
@@ -1273,7 +1274,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
   });
 
   $('handToggle').addEventListener('click', () => {
-    if (!isPrefecture() && !isDistrictEditor()) {
+    if (!isPrefecture()) {
       const box = $('shootLoginBox');
       box.hidden = false;
       $('shootLoginName').focus();
