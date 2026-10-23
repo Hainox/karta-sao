@@ -195,40 +195,26 @@ export function createObjectPhotoPointsRouter({ repository, authenticate, bounda
     try {
       if (req.query.dataset && !DATASETS[req.query.dataset]) return res.status(400).json({ error: 'Неизвестный набор объектов.' });
       const datasetId = req.query.dataset || 'sao_tpu_parking';
-      const points = await repository.listObjectPhotoPoints({ datasetId, objectKey: req.query.objectKey, district: districtFor(req) || req.query.district, excludePrefectureArchive: datasetId === 'sao_district_photo_points' });
+      const points = await repository.listObjectPhotoPoints({ datasetId, objectKey: req.query.objectKey, district: districtFor(req) || req.query.district, acceptedOnly: req.user.role === 'district_editor' && datasetId === 'sao_district_photo_points', excludePrefectureArchive: datasetId === 'sao_district_photo_points' });
       res.json({ points });
     } catch (error) { next(error); }
   });
-  router.post('/', async (req, res, next) => {
+  router.post('/', prefecture, async (req, res, next) => {
     try {
-      // Район ставит точки только своего района — с приёмкой префектурой;
-      // префектура ставит точки любых районов сразу с статусом «принята».
-      const isDistrict = req.user.role === 'district_editor';
-      if (isDistrict && (req.body?.datasetId !== 'sao_district_photo_points' || req.body?.district !== req.user.district)) {
-        return res.status(403).json({ error: 'Районная учётная запись может назначать точки только своего района.' });
-      }
-      if (!isDistrict && req.user.role !== 'prefecture_admin') return res.status(403).json({ error: 'Точки может назначать только район или префектура.' });
       const validation = validateObjectPhotoPoint(req.body, boundary);
       if (!validation.valid) return res.status(422).json({ error: 'Точка не прошла проверку.', details: validation.errors });
-      const reviewStatus = isDistrict ? 'pending' : 'accepted';
-      res.status(201).json({ point: await repository.createObjectPhotoPoint({ ...validation.value, reviewStatus, actorId: req.user.sub }) });
+      res.status(201).json({ point: await repository.createObjectPhotoPoint({ ...validation.value, reviewStatus: 'accepted', actorId: req.user.sub }) });
     } catch (error) { next(error); }
   });
-  router.patch('/:id', async (req, res, next) => {
+  router.patch('/:id', prefecture, async (req, res, next) => {
     try {
-      if (!['prefecture_admin', 'district_editor'].includes(req.user.role)) return res.status(403).json({ error: 'Нет прав изменять точку.' });
-      const isDistrict = req.user.role === 'district_editor';
-      const existing = await repository.getObjectPhotoPoint({ id: req.params.id, district: districtFor(req) });
+      const existing = await repository.getObjectPhotoPoint({ id: req.params.id });
       if (!existing) return res.status(404).json({ error: 'Точка не найдена.' });
-      if (isDistrict && (existing.dataset_id !== 'sao_district_photo_points' || !['pending', 'rework'].includes(existing.review_status))) {
-        return res.status(403).json({ error: 'Район может исправлять только свою точку, ожидающую приёмки или возвращённую на доработку.' });
-      }
       const editable = ['longitude', 'latitude', 'label', 'note', 'heading'];
       if (!req.body || Object.keys(req.body).some((key) => !editable.includes(key))) return res.status(400).json({ error: 'Можно изменить координаты, направление, название и описание точки.' });
       const validation = validateObjectPhotoPoint({ datasetId: existing.dataset_id, objectKey: existing.object_key, objectType: existing.object_type, district: existing.district, longitude: existing.longitude, latitude: existing.latitude, label: existing.label, note: existing.note, heading: existing.heading ?? null, ...req.body }, boundary);
       if (!validation.valid) return res.status(422).json({ error: 'Точка не прошла проверку.', details: validation.errors });
-      // Правка районом возвращает точку на повторную приёмку; префектура не сбрасывает статус.
-      const point = await repository.updateObjectPhotoPoint({ id: req.params.id, ...validation.value, actorId: req.user.sub, reviewStatus: isDistrict ? 'pending' : undefined, keepAssignmentVersion: existing.dataset_id === DISTRICT_DATASET });
+      const point = await repository.updateObjectPhotoPoint({ id: req.params.id, ...validation.value, actorId: req.user.sub, keepAssignmentVersion: existing.dataset_id === DISTRICT_DATASET });
       if (!point) return res.status(404).json({ error: 'Точка не найдена.' });
       res.json({ point });
     } catch (error) { next(error); }
