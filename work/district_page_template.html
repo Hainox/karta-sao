@@ -50,7 +50,8 @@ h1{margin:2px 0 0;font-size:24px;line-height:1.15}
 .shoot-actions{display:flex;gap:8px}
 .shoot-actions button{flex:1;min-height:30px;padding:4px 10px;border:1px solid #8a979c;border-radius:8px;background:#fff;color:var(--ink);font:inherit;font-size:12px;cursor:pointer;text-align:center}
 .shoot-actions button:hover{border-color:var(--accent);color:var(--accent)}
-.shoot-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin-top:6px}
+.shoot-gallery{display:grid;grid-template-columns:minmax(0,1fr);gap:6px;margin-top:6px}
+.shoot-gallery>div{min-width:0}
 .shoot-gallery img{width:100%;border:1px solid var(--line);border-radius:8px;background:#fff}
 .shoot-upload{display:grid;gap:8px;margin-top:8px;padding:10px;border:1px dashed var(--accent);border-radius:10px;background:#fff;font-size:12.5px;color:var(--muted)}
 .shoot-upload button{min-height:44px;padding:10px 14px;border:1px solid var(--accent);border-radius:8px;background:var(--accent);color:#fff;font:inherit;font-size:14px;font-weight:800;cursor:pointer}
@@ -81,7 +82,7 @@ h1{margin:2px 0 0;font-size:24px;line-height:1.15}
 .ph-stage{position:relative;overflow:hidden;display:grid;place-items:center;border:1px solid var(--line);border-radius:8px;background:#fff;min-height:96px}
 .ph-stage img{max-width:100%;max-height:170px;transform:rotate(var(--pa,0deg));transition:transform .15s ease}
 .ph-stage.side img{max-height:230px}
-.ph-tools{display:flex;gap:5px;margin-top:4px;justify-content:center}
+.ph-tools{display:flex;flex-wrap:wrap;gap:5px;margin-top:4px;justify-content:center}
 .ph-tools button{min-height:25px;padding:2px 8px;border:1px solid #a9b5ba;border-radius:7px;background:#fff;color:var(--ink);font:inherit;font-size:11.5px;cursor:pointer}
 .ph-tools button:hover{border-color:var(--accent);color:var(--accent)}
 .photo-viewer{width:auto;min-width:min(560px,92vw);max-width:min(940px,94vw);border:0;border-radius:14px;padding:12px 14px;background:var(--panel)}
