@@ -95,3 +95,17 @@ test('на телефоне видна кнопка загрузки высот�
   expect((await upload.boundingBox()).height).toBeGreaterThanOrEqual(44);
   await page.locator('#card').screenshot({path:testInfo.outputPath('district-photo-slot-mobile.png')});
 });
+for (const width of [1280,390]) test('фото и кнопки поворота не выходят за карточку при ширине '+width,async({page},testInfo)=>{
+  await page.setViewportSize({width,height:844});
+  await setup(page,{role:'prefecture_admin',photos:[{id:'22222222-2222-4222-8222-222222222222',status:'accepted',uploaded_at:'2026-10-23T12:00:00Z',reviewed_at:'2026-10-23T12:05:00Z'}]});
+  const gallery=page.locator('#cardSlot .shoot-gallery').first();
+  await expect(gallery.locator('.ph-tools button')).toHaveCount(3);
+  const bounds=await gallery.boundingBox();
+  for(const button of await gallery.locator('.ph-tools button').all()){
+    const box=await button.boundingBox();
+    expect(box.x).toBeGreaterThanOrEqual(bounds.x-1);
+    expect(box.x+box.width).toBeLessThanOrEqual(bounds.x+bounds.width+1);
+  }
+  expect(await gallery.locator('.ph-stage').first().evaluate(el=>el.getBoundingClientRect().width)).toBeGreaterThan(bounds.width*.9);
+  await page.locator('#card').screenshot({path:testInfo.outputPath('district-photo-layout-'+width+'.png')});
+});
