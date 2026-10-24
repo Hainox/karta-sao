@@ -1,3 +1,4 @@
+import { DISTRICTS } from './tpu-points/validation.js';
 import { createHash, randomBytes, scrypt as scryptCallback, timingSafeEqual } from 'node:crypto';
 import { promisify } from 'node:util';
 
@@ -95,3 +96,12 @@ export function bearerToken(header) {
 }
 
 export { MAX_SESSION_AGE_SECONDS };
+
+// District entry is intentionally public. Role and scope always come from the DB.
+export async function authenticateMapUser(user, password) {
+  if (!user || user.active !== true) return false;
+  const district = normalizeLogin(user.district).replace(/ё/g, 'е');
+  const districtAllowed = [...DISTRICTS, 'АвД САО'].some((name) => normalizeLogin(name).replace(/ё/g, 'е') === district);
+  if (user.role === 'district_editor' && districtAllowed) return true;
+  return verifyPassword(password, user.password_hash);
+}

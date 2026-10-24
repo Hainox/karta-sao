@@ -109,3 +109,30 @@ for (const width of [1280,390]) test('фото и кнопки поворота 
   expect(await gallery.locator('.ph-stage').first().evaluate(el=>el.getBoundingClientRect().width)).toBeGreaterThan(bounds.width*.9);
   await page.locator('#card').screenshot({path:testInfo.outputPath('district-photo-layout-'+width+'.png')});
 });
+
+test('район входит одной кнопкой без пароля и не получает разметку',async({page})=>{
+  await setup(page);
+  let loginBody;
+  await page.route('https://obhod-sao.ru/photo-api/auth/login',async route=>{
+    loginBody=route.request().postDataJSON();
+    return route.fulfill({json:{token:'test-session',user:{role:'district_editor',district:'Дмитровский',email:'дмитровский'}}});
+  });
+  await page.evaluate(()=>{const t=window.districtPhotoTest;t.state.photoUser=null;t.renderShootLogin();});
+  await page.getByRole('button',{name:'Войти как район без пароля',exact:true}).click();
+  await expect(page.locator('#shootLoginState')).toContainText('дмитровский');
+  expect(loginBody).toEqual({login:'Дмитровский',password:''});
+  await expect(page.locator('#shootDistrictGo')).toBeHidden();
+  await expect(page.locator('#shootToggle')).toBeHidden();
+  await expect(page.locator('#shootReport')).toBeHidden();
+});
+
+test('неудачный районный вход показывает ошибку и позволяет повторить попытку',async({page})=>{
+  await setup(page);
+  await page.route('https://obhod-sao.ru/photo-api/auth/login',route=>route.fulfill({status:503,json:{message:'Сервис временно недоступен'}}));
+  await page.evaluate(()=>{const t=window.districtPhotoTest;t.state.photoUser=null;t.renderShootLogin();});
+  const button=page.getByRole('button',{name:'Войти как район без пароля',exact:true});
+  await button.click();
+  await expect(page.locator('#shootLoginState')).toContainText('Не удалось войти');
+  await expect(button).toBeEnabled();
+  await expect(page.locator('#shootToggle')).toBeHidden();
+});
