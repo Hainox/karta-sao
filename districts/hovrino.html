@@ -158,6 +158,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     <div class="layers-head"><b>Слои</b><span class="status" id="layerTotal"></span></div>
     <div id="layerControls"></div>
     <div class="layers-head"><b>Точки съёмки</b><span class="head-actions"><button id="shootLogin" class="shoot-toggle" type="button">Вход</button><button id="shootToggle" class="shoot-toggle" type="button" hidden>Разметка</button><button id="dragToggle" class="shoot-toggle" type="button" hidden>Перенос</button><button id="handToggle" class="shoot-toggle" type="button" hidden>Рука</button></span></div>
+    <button id="shootDistrictGo" class="shoot-toggle" type="button">Войти как район без пароля</button>
     <div class="shoot-login" id="shootLoginBox" hidden>
       <input id="shootLoginName" placeholder="Логин учётной записи" autocomplete="username">
       <input id="shootLoginPass" type="password" placeholder="Пароль" autocomplete="current-password">
@@ -1120,6 +1121,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
   function renderShootLogin() {
     const box = $('shootLoginBox');
     const user = state.photoUser;
+    $('shootDistrictGo').hidden = Boolean(user);
     $('shootReport').hidden = !isPrefecture();
     $('shootPhotoReport').hidden = !isPrefecture();
     $('shootLayerRow').hidden = !isPrefecture() && !isDistrictEditor();
@@ -1145,7 +1147,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       $('shootLoginGo').hidden = false;
       $('shootLogout').hidden = true;
       $('shootLoginState').textContent = '';
-      $('shootLogin').textContent = 'Вход';
+      $('shootLogin').textContent = 'Вход префектуры';
     }
   }
 
@@ -1167,10 +1169,8 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     if (!box.hidden) $('shootLoginName').focus();
   });
 
-  $('shootLoginGo').addEventListener('click', async () => {
-    const login = $('shootLoginName').value.trim();
-    const password = $('shootLoginPass').value;
-    if (!login || !password) { $('shootLoginState').textContent = 'Укажите логин и пароль.'; return; }
+  async function loginToMap(login, password = '') {
+    if (!login) { $('shootLoginState').textContent = 'Укажите название района.'; return; }
     $('shootLoginState').textContent = 'Входим…';
     try {
       const response = await apiRequest('/auth/login', { method: 'POST', body: JSON.stringify({ login, password }) });
@@ -1187,6 +1187,13 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     } catch (error) {
       $('shootLoginState').textContent = 'Не удалось войти: ' + error.message;
     }
+  }
+  $('shootLoginGo').addEventListener('click', () => loginToMap($('shootLoginName').value.trim(), $('shootLoginPass').value));
+  $('shootDistrictGo').addEventListener('click', async () => {
+    const button = $('shootDistrictGo');
+    button.disabled = true;
+    $('shootLoginBox').hidden = false;
+    try { await loginToMap(DISTRICT); } finally { button.disabled = false; }
   });
 
   $('shootLoginPass').addEventListener('keydown', (event) => {

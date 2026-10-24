@@ -1698,8 +1698,8 @@ function shell() {
       <form class="pa-login" id="paLoginForm">
         <label class="pa-sr" for="paLoginInput">Название района</label>
         <input id="paLoginInput" type="text" placeholder="Название района" autocomplete="username">
-        <label class="pa-sr" for="paPasswordInput">Пароль</label>
-        <input id="paPasswordInput" type="password" placeholder="Пароль" autocomplete="current-password">
+        <label class="pa-sr" for="paPasswordInput">Пароль только для префектуры</label>
+        <input id="paPasswordInput" type="password" placeholder="Пароль только префектуре" autocomplete="current-password">
         <button type="submit" class="pa-btn pa-btn-primary" id="paLoginButton">Войти</button>
       </form>
       <button type="button" class="pa-btn" id="paLogoutButton" hidden>Выйти</button>

@@ -162,3 +162,13 @@ Install `deploy/photo-service-cron.example` with executable scripts (`chmod 750 
 - Excel contains object rows, photo metadata and embedded previews; PDF contains the short summary and risks. Both print the report date and the dataset version.
 - Photo content and both exports are reachable from the atlas origin (CORS headers present).
 - Existing `/odh-api/` routes and `jirajura` health remain unchanged.
+
+### Вход районов без пароля (2026-10-24)
+
+Районные `district_editor` с действующей учёткой и известным районом САО (включая АвД САО) входят без пароля. Учётные записи префектуры продолжают проверять пароль. Название района — публичный выбор, а не подтверждение личности: любой посетитель может действовать в рамках районных прав. Серверные проверки объектов, приёмки и назначения точек сохранены.
+
+Для установленного сервера `deploy/enable-district-passwordless.py` проверяет восстановленную БД и структуру обработчика, сохраняет два заменяемых файла в каталоге `passwordless-rollback-*`, проверяет синтаксис Node и меняет только политику входа. Запустите его из закреплённого коммита, затем пересоберите только фотослужбу с обоими compose-файлами. Данные, пароли и сессии в БД не изменяются.
+
+Проверка после развёртывания: Коптево входит без пароля, префектура без пароля получает 401, после районного входа доступны фотослоты, а назначение точек и приёмка недоступны. Слияние в main обновляет Pages, но само по себе не обновляет фотослужбу.
+
+Проверка зависимостей 2026-10-24: npm audit выявляет GHSA-27r3-jxmh-p828 в транзитивном body-parser. HTTP-сервер фотослужбы использует node:http и собственный readJson, Express/body-parser в обработке запросов не используются. Обновление этой зависимости отложено в отдельную задачу; повторная оценка до 2026-10-31.

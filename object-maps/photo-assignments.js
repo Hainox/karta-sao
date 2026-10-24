@@ -272,6 +272,10 @@
         } catch (error) { notify('Не удалось сохранить точку: ' + error.message, true); }
         finally { assignment.saving = false; save.disabled = false; document.getElementById('assignmentCancel').disabled = false; document.getElementById('assignmentLogout').disabled = false; }
       };
+      const passwordInput = document.getElementById('assignmentPassword');
+      passwordInput.required = false;
+      passwordInput.placeholder = 'Районам пароль не нужен';
+      document.querySelector('label[for="assignmentPassword"]').textContent = 'Пароль только для префектуры';
       document.getElementById('assignmentLogin').onsubmit = async event => {
         event.preventDefault(); const password = document.getElementById('assignmentPassword');
         const submit = event.currentTarget.querySelector('button'); submit.disabled = true;

@@ -12,7 +12,7 @@ import { photoServiceCookiePolicy, photoServiceDatabaseConfig } from './src/conf
 import { createHealthHandler } from './src/health.js';
 import {
   bearerToken, createSessionToken, expiredSessionCookie, hashSessionToken,
-  MAX_SESSION_AGE_SECONDS, normalizeLogin, parseCookies, sessionCookie, verifyPassword,
+  MAX_SESSION_AGE_SECONDS, authenticateMapUser, normalizeLogin, parseCookies, sessionCookie,
 } from './src/auth.js';
 import { parseMultipart } from './src/multipart.js';
 import { firstMissingUploadField } from './src/upload-fields.js';
@@ -193,11 +193,12 @@ async function handleLogin(request, response) {
   const login = normalizeLogin(body.login ?? body.email);
   const result = await pool.query('SELECT * FROM users WHERE email = $1 AND active = true', [login]);
   const user = result.rows[0];
-  if (!user || !(await verifyPassword(body.password, user.password_hash))) {
+  if (!(await authenticateMapUser(user, body.password))) {
     loginThrottle.recordFailure(key);
-    return sendError(response, request, 401, 'invalid_credentials', 'Неверный логин или пароль. Логин — название района.');
+    return sendError(response, request, 401, 'invalid_credentials', 'Проверьте название района. Для префектуры требуется пароль.');
   }
-  loginThrottle.clear(key);
+  // Public district entry must not reset the prefecture password failure counter.
+  if (user.role !== 'district_editor') loginThrottle.clear(key);
   const token = createSessionToken();
   await pool.query(`INSERT INTO sessions (token_hash, user_id, expires_at) VALUES ($1, $2, now() + ($3 * interval '1 second'))`, [hashSessionToken(token), user.id, MAX_SESSION_AGE_SECONDS]);
   response.setHeader('Set-Cookie', sessionCookie(token, cookiePolicy));
