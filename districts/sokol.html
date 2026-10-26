@@ -11,7 +11,7 @@
 *{box-sizing:border-box}html,body{height:100%;margin:0}
 body{background:var(--canvas);color:var(--ink);font-family:"Century Gothic",Inter,Arial,sans-serif}
 .app{display:grid;grid-template-columns:340px minmax(0,1fr);height:100vh}
-.sidebar{display:flex;flex-direction:column;gap:12px;overflow:auto;padding:18px;background:var(--paper);border-right:1px solid var(--line)}
+.sidebar{min-width:0;display:flex;flex-direction:column;gap:12px;overflow:auto;padding:18px;background:var(--paper);border-right:1px solid var(--line)}
 .brand{display:flex;align-items:center;gap:10px}
 .brand-mark{display:grid;place-items:center;flex:0 0 40px;width:40px;height:40px;border-radius:10px;background:var(--ink);color:#f5c86a;font-weight:800}
 .brand b{font-size:17px}.brand small{display:block;color:var(--muted);font-size:11px;letter-spacing:.06em;text-transform:uppercase}
@@ -105,7 +105,7 @@ h1{margin:2px 0 0;font-size:24px;line-height:1.15}
 .shoot-review-link{margin-top:2px;font-size:12.5px}
 .shoot-review-link a{color:var(--accent);font-weight:800;text-decoration:none}
 .shoot-review-link a:hover{text-decoration:underline}
-.card{display:none;padding:14px;border:1px solid var(--line);border-radius:12px;background:var(--accent-soft)}
+.card{min-width:0;overflow-wrap:anywhere;display:none;padding:14px;border:1px solid var(--line);border-radius:12px;background:var(--accent-soft)}
 .card.open{display:block}
 .card h2{margin:0 0 8px;font-size:17px}
 .card div{font-size:13.5px;line-height:1.55;margin-top:2px}
@@ -134,7 +134,7 @@ h1{margin:2px 0 0;font-size:24px;line-height:1.15}
 .shoot-arrow path{pointer-events:none}
 .shoot-marker.preview .shoot-dot{background:#fff;border-color:#ffcb00}
 .shoot-marker.archive .shoot-dot{background:#7b61a8;border-color:#fff;box-shadow:0 0 0 2px #4d3478,0 1px 4px #10263680}
-@media(max-width:820px){.app{grid-template-columns:1fr;grid-template-rows:auto minmax(0,1fr)}#map{height:calc(100vh - 300px);min-height:420px}}
+@media(max-width:820px){.app{grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr)}#map{height:calc(100vh - 300px);min-height:420px}}
 </style>
 <script>
 window.ymaps3Ready = new Promise((resolve, reject) => {
@@ -668,7 +668,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       <h2>Точка съёмки ${escapeHtml(point.label)}</h2>
       <div><strong>Направление:</strong> ${heading}</div>
       <div><strong>Координаты:</strong> ${Number(point.lat).toFixed(6)}, ${Number(point.lng).toFixed(6)}</div>
-      <div class="shoot-slot-chain" id="cardSlot"></div>
+      <div class="shoot-slot-chain" id="cardSlot" data-point-id="${escapeHtml(point.id)}"></div>
       ${canEdit ? `<form class="point-edit" id="pointEditForm">
         <label>Подпись точки<input name="label" maxlength="160" required value="${escapeHtml(point.label)}"></label>
         <div class="coordinate-fields">
@@ -709,7 +709,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
   /** Панель слота: статус приёмки, комментарий префектуры, отправка и пересдача фото. */
   async function renderSlotChain(point) {
     const panel = $('cardSlot');
-    if (!panel) return;
+    if (!panel || panel.dataset.pointId !== point.id) return;
     if (!point.serverPoint || !state.serverOk) {
       panel.innerHTML = '<div class="shoot-slot">Точка локальная: фото приёмки работают после сохранения точки на сервере.</div>';
       return;
@@ -795,11 +795,36 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     input.focus();
   }
 
+  async function preparePointPhoto(file) {
+    if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) {
+      throw new Error('Выберите JPEG, PNG или WEBP. Для HEIC выберите на телефоне экспорт в JPEG.');
+    }
+    if (file.size > 40 * 1024 * 1024) throw new Error('Снимок больше 40 МБ. Выберите фото меньшего размера.');
+    if (file.size <= 5 * 1024 * 1024) return file;
+    const url = URL.createObjectURL(file);
+    try {
+      const image = await new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = () => resolve(img);
+        img.onerror = () => reject(new Error('Не удалось прочитать снимок. Выберите другое фото.'));
+        img.src = url;
+      });
+      const scale = Math.min(1, 2560 / Math.max(image.naturalWidth, image.naturalHeight));
+      const canvas = document.createElement('canvas');
+      canvas.width = Math.max(1, Math.round(image.naturalWidth * scale));
+      canvas.height = Math.max(1, Math.round(image.naturalHeight * scale));
+      canvas.getContext('2d').drawImage(image, 0, 0, canvas.width, canvas.height);
+      const blob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/jpeg', 0.85));
+      if (!blob || blob.size > 5 * 1024 * 1024) throw new Error('Не удалось уменьшить снимок до 5 МБ. Выберите фото меньшего размера.');
+      return new File([blob], file.name.replace(/\.[^.]+$/, '') + '.jpg', { type: 'image/jpeg' });
+    } finally { URL.revokeObjectURL(url); }
+  }
+
   function bindPublicUpload(point, panel) {
     const form = document.createElement('div');
     form.className = 'shoot-upload';
     const hint = document.createElement('p');
-    hint.textContent = 'Один снимок по стрелке направления. JPEG, PNG или WEBP, до 5 МБ.';
+    hint.textContent = 'Один снимок по стрелке направления. JPEG, PNG или WEBP до 40 МБ; крупное фото уменьшается автоматически.';
     const input = document.createElement('input');
     input.type = 'file';
     input.accept = 'image/jpeg,image/png,image/webp';
@@ -813,20 +838,17 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     status.setAttribute('aria-live', 'polite');
     input.addEventListener('change', async (event) => {
       const file = event.target.files[0];
-      event.target.value = '';
       if (!file || button.disabled) return;
-      if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type) || file.size > 5 * 1024 * 1024) {
-        status.textContent = 'Выберите JPEG, PNG или WEBP размером до 5 МБ.';
-        return;
-      }
       button.disabled = true;
       button.textContent = 'Отправляем фото…';
       status.textContent = 'Дождитесь завершения загрузки.';
       try {
+        status.textContent = file.size > 5 * 1024 * 1024 ? 'Подготавливаем крупное фото…' : 'Отправляем фото…';
+        const uploadFile = await preparePointPhoto(file);
         await apiRequest('/object-photo-points/' + point.id + '/photos', {
           method: 'PUT',
-          headers: { 'Content-Type': file.type, 'X-Photo-Filename': encodeURIComponent(file.name), 'X-Assignment-Version': String(point.assignment_version ?? 1) },
-          body: file,
+          headers: { 'Content-Type': uploadFile.type, 'X-Photo-Filename': encodeURIComponent(uploadFile.name), 'X-Assignment-Version': String(point.assignment_version ?? 1) },
+          body: uploadFile,
         });
         $('shootHint').textContent = `Фото отправлено к точке «${point.label}»: префектура примет его или вернёт с комментарием.`;
         await reloadPhotoPoints();
@@ -835,6 +857,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
         status.textContent = 'Фото не отправлено: ' + error.message + '. Повторите загрузку.';
         $('shootHint').textContent = status.textContent;
       } finally {
+        input.value = '';
         button.disabled = false;
         button.textContent = 'Загрузить фото';
       }
