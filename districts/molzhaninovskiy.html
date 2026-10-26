@@ -406,6 +406,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
         if (!response.ok) throw new Error('HTTP ' + response.status);
         data = await response.json();
       }
+      state.points.forEach(removeShootMarker);
       state.points = (data.points || []).map((p) => ({
         id: p.id, label: p.label, heading: p.heading == null ? null : Number(p.heading),
         lng: Number(p.longitude), lat: Number(p.latitude), district: p.district, serverPoint: true,
@@ -417,6 +418,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       state.serverOk = true;
       $('shootHint').textContent = `Точек съёмки: ${state.points.length}. Префектура назначает точки, районы загружают фото.`;
     } catch (error) {
+      state.points.forEach(removeShootMarker);
       state.points = loadLocalPoints();
       state.serverOk = false;
       $('shootHint').textContent = 'Нет связи с сервером. Локальные данные показаны только для справки; разметка и правки запрещены. Обновите карту после восстановления связи.';

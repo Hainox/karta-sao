@@ -181,3 +181,22 @@ test('карточка загрузки не расширяет экран те�
   const box=await page.getByRole('button',{name:'Загрузить фото',exact:true}).boundingBox();
   expect(box.x+box.width).toBeLessThanOrEqual(390);
 });
+
+test('обновление точек после входа и загрузки не оставляет старые маркеры',async({page})=>{
+  await setup(page);
+  const counts=await page.evaluate(async()=>{
+    const t=window.districtPhotoTest;
+    const markers=new Set();
+    t.state.map={addChild:marker=>markers.add(marker),removeChild:marker=>markers.delete(marker)};
+    t.state.shootLayerOn=true;
+    t.renderShootMarkers();
+    const before=markers.size;
+    await t.loadPhotoPoints();
+    t.renderShootMarkers();
+    const afterFirst=markers.size;
+    await t.loadPhotoPoints();
+    t.renderShootMarkers();
+    return {before,afterFirst,afterSecond:markers.size};
+  });
+  expect(counts).toEqual({before:1,afterFirst:1,afterSecond:1});
+});
