@@ -136,3 +136,67 @@ test('неудачный районный вход показывает ошиб
   await expect(button).toBeEnabled();
   await expect(page.locator('#shootToggle')).toBeHidden();
 });
+
+test('завершение загрузки предыдущей точки не подменяет открытую следующую',async({page})=>{
+  const writes=await setup(page);
+  let release;
+  const gate=new Promise(resolve=>{release=resolve;});
+  let started;
+  const uploadStarted=new Promise(resolve=>{started=resolve;});
+  await page.route('https://obhod-sao.ru/photo-api/**',async route=>{
+    if(route.request().method()==='PUT'){started();await gate;}
+    return route.fallback();
+  });
+  await page.locator('#cardSlot input[type=file]').setInputFiles({name:'first.png',mimeType:'image/png',buffer:Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=','base64')});
+  await uploadStarted;
+  await page.evaluate(()=>{const t=window.districtPhotoTest;return t.openPointCard({...t.state.points[0],id:'33333333-3333-4333-8333-333333333333',label:'7.550'});});
+  const refreshed=page.waitForResponse(response=>response.url().includes('/object-photo-points?dataset='));
+  release();
+  await refreshed;
+  await expect.poll(()=>writes.length).toBe(1);
+  await expect(page.locator('#card h2')).toContainText('7.550');
+  await expect(page.locator('#cardSlot .slot-pill')).toHaveText('Нет фото');
+  await expect(page.getByRole('button',{name:'Загрузить фото',exact:true})).toBeVisible();
+  await page.locator('#cardSlot input[type=file]').setInputFiles({name:'second.png',mimeType:'image/png',buffer:Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=','base64')});
+  await expect(page.locator('#cardSlot .slot-pill')).toHaveText('На проверке');
+  expect(writes).toHaveLength(2);
+  expect(writes[0].url).toContain(point.id);
+  expect(writes[1].url).toContain('33333333-3333-4333-8333-333333333333');
+});
+
+test('крупный снимок автоматически уменьшается до допустимого размера',async({page})=>{
+  const writes=await setup(page);
+  const png=Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=','base64');
+  await page.locator('#cardSlot input[type=file]').setInputFiles({name:'large.png',mimeType:'image/png',buffer:Buffer.concat([png,Buffer.alloc(6*1024*1024)])});
+  await expect(page.locator('#cardSlot .slot-pill')).toHaveText('На проверке');
+  expect(writes).toHaveLength(1);
+  expect(writes[0].headers['content-type']).toBe('image/jpeg');
+  expect(writes[0].bytes.length).toBeLessThan(5*1024*1024);
+});
+
+test('карточка загрузки не расширяет экран телефона',async({page})=>{
+  await page.setViewportSize({width:390,height:844});
+  await setup(page);
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBeLessThanOrEqual(390);
+  const box=await page.getByRole('button',{name:'Загрузить фото',exact:true}).boundingBox();
+  expect(box.x+box.width).toBeLessThanOrEqual(390);
+});
+
+test('обновление точек после входа и загрузки не оставляет старые маркеры',async({page})=>{
+  await setup(page);
+  const counts=await page.evaluate(async()=>{
+    const t=window.districtPhotoTest;
+    const markers=new Set();
+    t.state.map={addChild:marker=>markers.add(marker),removeChild:marker=>markers.delete(marker)};
+    t.state.shootLayerOn=true;
+    t.renderShootMarkers();
+    const before=markers.size;
+    await t.loadPhotoPoints();
+    t.renderShootMarkers();
+    const afterFirst=markers.size;
+    await t.loadPhotoPoints();
+    t.renderShootMarkers();
+    return {before,afterFirst,afterSecond:markers.size};
+  });
+  expect(counts).toEqual({before:1,afterFirst:1,afterSecond:1});
+});
