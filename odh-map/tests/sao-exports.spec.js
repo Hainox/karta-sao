@@ -5,7 +5,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { expect, test as base } from './fixtures.js';
 
-const rootURL = 'http://127.0.0.1:8766/';
+const rootURL = 'http://localhost:8766/';
 const EXCELJS_CDN = /cdn\.jsdelivr\.net\/npm\/exceljs@/;
 const localExcelJs = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -120,7 +120,7 @@ test('книга: сводка по районам, сводка по участ
 
 test('кнопка выгрузки отдаёт книгу целиком', async ({ page }) => {
   await page.goto(rootURL);
-  await expect(page.locator('#status')).toContainText('Загружено: Районы и участки', { timeout: 120000 });
+  await expect(page.locator('#status')).toContainText('Готово. Загружено объектов', { timeout: 120000 });
   const [download] = await Promise.all([
     page.waitForEvent('download', { timeout: 120000 }),
     page.locator('#exportButton').click()

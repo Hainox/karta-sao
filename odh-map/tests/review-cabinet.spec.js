@@ -45,3 +45,38 @@ test('кабинет приёмки фильтрует очередь и тре�
   await expect.poll(() => reviewBody).toMatchObject({ status: 'rejected', reason: 'Не видно маркировку' });
   await expect(page.getByText('Поток заданий на проверку завершён.')).toBeVisible();
 });
+
+test('кабинет приёмки выгружает Excel-сводку по текущему фильтру вида работ', async ({ page }) => {
+  let exportUrl;
+  await page.route('https://mock.test/photo-api/**', async (route) => {
+    const url = new URL(route.request().url());
+    if (url.pathname.endsWith('/auth/login')) return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ token: 'test-token', user: { displayName: 'Префектура', role: 'prefecture_admin' } }) });
+    if (url.pathname.endsWith('/review/history')) return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ items: [] }) });
+    if (url.pathname.endsWith('/review/queue')) return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ objects: [
+      { objectKey: 'entrances|Аэропорт|1', objectType: 'entrance', district: 'Аэропорт', label: 'Подъезд Тестовый', sourcePointCount: 1, photos: [{ id: '00000000-0000-4000-8000-000000000003', reviewStatus: 'pending_review', isReference: false }] },
+    ] }) });
+    if (url.pathname.endsWith('/reports/review.xlsx')) {
+      exportUrl = route.request().url();
+      return route.fulfill({
+        status: 200,
+        contentType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        headers: { 'Content-Disposition': 'attachment; filename="Svod_foto_podezdy_SAO_2026-10-27.xlsx"' },
+        body: Buffer.from([0x50, 0x4b, 0x03, 0x04]),
+      });
+    }
+    if (url.pathname.endsWith('/content')) return route.fulfill({ status: 200, contentType: 'image/jpeg', body: Buffer.from([0xff, 0xd8, 0xff, 0xd9]) });
+    return route.fulfill({ status: 404, contentType: 'application/json', body: '{}' });
+  });
+  await page.goto('http://127.0.0.1:8766/review-cabinet/?api=https%3A%2F%2Fmock.test%2Fphoto-api');
+  await page.getByLabel('Логин').fill('prefecture@example.test');
+  await page.getByLabel('Пароль').fill('secret');
+  await page.getByRole('button', { name: 'Войти' }).click();
+  await expect(page.getByRole('button', { name: 'Excel: свод по фото' })).toBeVisible();
+  await page.getByLabel('Вид работ').selectOption('entrance');
+  const downloadPromise = page.waitForEvent('download');
+  await page.getByRole('button', { name: 'Excel: свод по фото' }).click();
+  const download = await downloadPromise;
+  expect(download.suggestedFilename()).toBe('Svod_foto_podezdy_SAO_2026-10-27.xlsx');
+  expect(exportUrl).toContain('type=entrance');
+  await expect(page.locator('#saveState')).toContainText('Свод скачан');
+});

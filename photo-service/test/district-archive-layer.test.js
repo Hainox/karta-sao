@@ -36,7 +36,7 @@ test('импортные точки скрыты, а разметка досту
     // Импортные точки не отображаются; район после входа видит свои точки
     // без галочек, без входа точки не показываются.
     assert.match(html, /if \(isGpkgPoint\(point\)\) return false;/, name);
-    assert.match(html, /if \(isPrefecture\(\)\) return state\.shootLayerOn;\n    return isDistrictEditor\(\) && state\.shootLayerOn;/, name);
+    assert.match(html, /if \(isPrefecture\(\)\) return state\.shootLayerOn;\r?\n    return isDistrictEditor\(\) && state\.shootLayerOn;/, name);
     const scripts = [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].map((match) => match[1]);
     for (const source of scripts) new Script(source, { filename: name });
   }

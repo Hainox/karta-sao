@@ -9,10 +9,13 @@ script=script.slice(0,script.lastIndexOf('  createMap().catch'))+`window.distric
 const sdk=`class Marker {constructor(options,element){this.options=options;this.element=element;this.element.dataset.coordinates=JSON.stringify(options.coordinates);} update(options){Object.assign(this.options,options);} } window.ymaps3={YMapMarker:Marker};`;
 async function setup(page,seed=[]){
   const writes=[];
+  let created=null;
   await page.route('https://obhod-sao.ru/photo-api/**',async route=>{
     const req=route.request(),body=req.postDataJSON();
-    writes.push({method:req.method(),body});
-    if(req.method()==='POST')return route.fulfill({json:{point:{id:'new-point',label:'1.1',longitude:body.longitude,latitude:body.latitude,heading:body.heading,district:'Аэропорт'}}});
+    if(req.method()!=='GET')writes.push({method:req.method(),body});
+    if(req.method()==='POST'){created={id:'new-point',label:'1.1',longitude:body.longitude,latitude:body.latitude,heading:body.heading,district:'Аэропорт'};return route.fulfill({json:{point:created}});}
+    // После сохранения карта перечитывает список точек; у GET тела нет.
+    if(req.method()==='GET')return route.fulfill({json:{points:created?[created]:seed}});
     return route.fulfill({json:{point:{...seed[0],heading:body.heading}}});
   });
   const clean=template.replace(/<script\b[^>]*>[\s\S]*?<\/script>/g,'').replace(/<link\b[^>]*>/g,'');
@@ -30,7 +33,8 @@ async function setup(page,seed=[]){
 test('сохранённые направления 0°, 90° и 270° видны, неизвестное не рисуется как север',async({page})=>{
   await setup(page,[0,90,270,null].map((heading,i)=>({id:'p'+i,label:'1.'+i,heading,lng:37.5,lat:55.8,photo_state:'accepted'})));
   await expect(page.locator('.shoot-marker svg')).toHaveCount(3);
-  await expect(page.locator('.shoot-marker svg').first()).toBeHidden();
+  // Стрелки видны и в обычном просмотре: так решили в #35, режим разметки их не прячет.
+  await expect(page.locator('.shoot-marker svg').first()).toBeVisible();
   await page.evaluate(()=>window.districtArrowTest.setShootMode(true));
   await expect(page.locator('.shoot-marker svg').first()).toBeVisible();
   for(const [i,heading]of [0,90,270].entries())await expect(page.locator('.shoot-marker').nth(i).locator('svg')).toHaveAttribute('style',new RegExp('rotate\\('+heading+'deg\\)'));
@@ -38,7 +42,7 @@ test('сохранённые направления 0°, 90° и 270° видн�
 test('два клика создают точку со стрелкой; координаты остаются у первого клика',async({page})=>{
   const writes=await setup(page);
   await page.evaluate(()=>{const t=window.districtArrowTest;t.setShootMode(true);t.handleMapClick([37.5,55.8]);t.handleMapClick([37.501,55.8]);});
-  await expect(page.locator('#shootHint')).toContainText('добавлена');
+  await expect(page.locator('#shootHint')).toContainText('подтверждена сервером');
   expect(writes).toHaveLength(1);expect(writes[0].body.heading).toBe(90);
   await expect(page.locator('.shoot-marker:not(.preview) svg')).toHaveCount(1);
   await expect(page.locator('.shoot-marker:not(.preview)')).toHaveAttribute('data-coordinates','[37.5,55.8]');

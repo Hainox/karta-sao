@@ -20,7 +20,7 @@ import { createLoginThrottle } from './src/login-throttle.js';
 import { clientAddress } from './src/client-address.js';
 import { buildDistrictsExcel, buildExcel, buildHeadquartersExcel, buildPdf } from './src/exports.js';
 import { buildHeadquartersPdf } from './src/pdf-headquarters.js';
-import { loadReportRows, reportPayload } from './src/reports.js';
+import { loadReportRows, reportPayload, validateType } from './src/reports.js';
 import {
   ARCHIVE_FILE_PATTERN, archiveDir, photoArchiveByTicket, photoArchiveJob,
   prunePhotoArchiveFiles, startPhotoArchiveJob
@@ -777,6 +777,22 @@ async function handler(request, response) {
       const rows = await loadReportRows(pool, user, url.searchParams.get('district') || undefined);
       const buffer = await buildDistrictsExcel(rows);
       response.writeHead(200, { 'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'Content-Disposition': 'attachment; filename="sao-photo-districts.xlsx"', 'Cache-Control': 'no-store', ...corsHeaders(request) });
+      response.end(buffer);
+      return;
+    }
+    // Свод кабинета приёмки фотофиксации: тот же формат, что у сводки по парковкам.
+    // Возвращённые кадры нужны для листа «На доработке», поэтому includeRejected.
+    if (pathname === '/reports/review.xlsx' && request.method === 'GET') {
+      if (!requirePrefecture(response, request, user)) return;
+      const url = new URL(request.url, 'http://photo-service.local');
+      const type = validateType(url.searchParams.get('type') || undefined);
+      const rows = await loadReportRows(pool, user, url.searchParams.get('district') || undefined, { includeRejected: true });
+      const { summarizeReview, buildReviewReport } = await import('./src/review-report.js');
+      const generatedAt = new Date();
+      const buffer = await buildReviewReport(summarizeReview({ rows, type, generatedAt }), { generatedAt });
+      const suffix = type ? { stop: 'ostanovki', pp: 'PP', entrance: 'podezdy' }[type] + '_SAO' : 'SAO';
+      const day = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Moscow' }).format(generatedAt);
+      response.writeHead(200, { 'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'Content-Disposition': `attachment; filename="Svod_foto_${suffix}_${day}.xlsx"`, 'Cache-Control': 'no-store', ...corsHeaders(request) });
       response.end(buffer);
       return;
     }
