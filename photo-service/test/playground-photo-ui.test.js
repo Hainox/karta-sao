@@ -13,3 +13,11 @@ function fake(){
 }
 test('слой загружается отдельно и выключается без удаления других данных',async()=>{let x=fake();x.container.input.checked=true;await x.container.input.onchange();assert.equal(x.markers.length,1);assert.match(x.requests[0].url,/playgrounds\/public/);x.container.input.checked=false;await x.container.input.onchange();assert.equal(x.markers.length,0)});
 test('карточка площадки открывает один фотослот района',async()=>{let x=fake();x.container.input.checked=true;await x.container.input.onchange();await x.markers[0].el.onclick({stopPropagation(){}});assert.match(x.card.html,/Детская площадка/);assert.equal(x.card.controls.children.length,2)});
+test('цвет точки отражает статус фото и обновляется после изменения статуса',async()=>{
+ const x=fake();x.container.input.checked=true;await x.container.input.onchange();
+ for(const [state,color] of [['empty','#808080'],['pending','#f2c200'],['rework','#d93025'],['accepted','#16834c']]){
+  x.point.photo_state=state;await x.layer.refresh();
+  assert.match(x.markers[0].el.style.cssText,new RegExp('background:'+color));
+  assert.match(x.markers[0].el.style.cssText,/border-radius:50%/);
+ }
+});
