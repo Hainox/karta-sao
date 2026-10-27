@@ -5,8 +5,10 @@ import { resolve, dirname } from 'node:path';
 import { loadPoints } from './playground-seed-lib.js';
 const here=dirname(fileURLToPath(import.meta.url));
 const args=process.argv.slice(2);
-if(args.some(x=>x!=='--apply')) throw new Error('Допустим только флаг --apply');
-const records=await loadPoints(resolve(here,'../../districts/layers'));
+const sourceArg=args.find(x=>x.startsWith('--source='));
+if(args.some(x=>x!=='--apply'&&!x.startsWith('--source=')) || args.filter(x=>x.startsWith('--source=')).length>1) throw new Error('Допустимы --apply и --source=/path/to/districts/layers');
+const sourceRoot=sourceArg ? resolve(sourceArg.slice('--source='.length)) : resolve(here,'../../districts/layers');
+const records=await loadPoints(sourceRoot);
 const summary={points:records.length,slots:records.length,children:records.filter(x=>x.kind==='dp').length,
   sport:records.filter(x=>x.kind==='sp').length,apply:args.includes('--apply')};
 if(!summary.apply){console.log(JSON.stringify(summary,null,2));process.exit(0);}
