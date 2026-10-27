@@ -157,6 +157,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     <nav class="dist-nav"><a class="dist-link" href="aeroport.html">Аэропорт</a><a class="dist-link" href="begovoy.html">Беговой</a><a class="dist-link" href="beskudnikovskiy.html">Бескудниковский</a><a class="dist-link" href="voykovskiy.html">Войковский</a><a class="dist-link active" href="vostochnoe-degunino.html">Восточное Дегунино</a><a class="dist-link" href="golovinskiy.html">Головинский</a><a class="dist-link" href="dmitrovskiy.html">Дмитровский</a><a class="dist-link" href="zapadnoe-degunino.html">Западное Дегунино</a><a class="dist-link" href="koptevo.html">Коптево</a><a class="dist-link" href="levoberezhnyy.html">Левобережный</a><a class="dist-link" href="molzhaninovskiy.html">Молжаниновский</a><a class="dist-link" href="savelovskiy.html">Савеловский</a><a class="dist-link" href="sokol.html">Сокол</a><a class="dist-link" href="timiryazevskiy.html">Тимирязевский</a><a class="dist-link" href="hovrino.html">Ховрино</a><a class="dist-link" href="horoshevskiy.html">Хорошевский</a></nav>
     <div class="layers-head"><b>Слои</b><span class="status" id="layerTotal"></span></div>
     <div id="layerControls"></div>
+    <div id="playgroundPhotoLayer"></div>
     <div class="layers-head"><b>Точки съёмки</b><span class="head-actions"><button id="shootLogin" class="shoot-toggle" type="button">Вход</button><button id="shootToggle" class="shoot-toggle" type="button" hidden>Разметка</button><button id="dragToggle" class="shoot-toggle" type="button" hidden>Перенос</button><button id="handToggle" class="shoot-toggle" type="button" hidden>Рука</button></span></div>
     <button id="shootDistrictGo" class="shoot-toggle" type="button">Войти как район без пароля</button>
     <div class="shoot-login" id="shootLoginBox" hidden>
@@ -187,6 +188,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
   </aside>
   <main id="map"></main>
 </div>
+<script src="playground-photo-layer.js?v=20261027"></script>
 <script>
 (() => {
   const SLUG = 'vostochnoe-degunino';
@@ -277,6 +279,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       }
     }
     renderControls();
+    window.initPlaygroundPhotoLayer({ map: state.map, district: DISTRICT, apiRequest, getUser: () => state.photoUser, preparePointPhoto, escapeHtml });
     await loadPhotoPoints();
     renderShootMarkers();
     renderShootLogin();
