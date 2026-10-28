@@ -167,9 +167,21 @@ export function createObjectPhotoPointsRouter({ repository, authenticate, bounda
           res.send(book);
           return;
         }
+        if (req.query.report === 'review') {
+          const [{ summarizeDistrictPoints, buildDistrictPointsReport }, points] = await Promise.all([
+            import('./district-review-excel.js'),
+            repository.listObjectPhotoPoints({ datasetId: 'sao_district_photo_points', acceptedOnly: true, excludePrefectureArchive: true, excludeImported: true }),
+          ]);
+          const book = await buildDistrictPointsReport(summarizeDistrictPoints({ points, generatedAt: new Date() }));
+          res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+          res.setHeader('Content-Disposition', 'attachment; filename="Svodka_Vezdnye_Gruppy_SAO.xlsx"');
+          res.setHeader('Cache-Control', 'no-store');
+          res.send(book);
+          return;
+        }
         const [{ summarizeDistrictPoints, buildDistrictPointsReport, REPORT_KINDS_DISTRICT }, data] = await Promise.all([
           import('./district-points-report.js'),
-          repository.listObjectPhotoPoints({ datasetId: 'sao_district_photo_points', acceptedOnly: true, excludePrefectureArchive: true, excludeImported: true }).then(points => ({ points })),
+          repository.tpuReportData({ datasetId: 'sao_district_photo_points', kind: null }),
         ]);
         const generatedAt = new Date();
         const book = await buildDistrictPointsReport(summarizeDistrictPoints({ ...data, generatedAt }));
