@@ -296,7 +296,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     }
     renderControls();
     state.playgroundLayer = window.initPlaygroundPhotoLayer({ map: state.map, district: DISTRICT, apiRequest, getUser: () => state.photoUser, preparePointPhoto, escapeHtml });
-    $('playgroundPhotoLayer').querySelector('.layer-row').hidden = true;
+    $('playgroundPhotoLayer').querySelector('.layer-row').style.display = 'none';
     await loadPhotoPoints();
     renderShootMarkers();
     renderShootLogin();
