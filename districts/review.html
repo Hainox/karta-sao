@@ -469,7 +469,7 @@
       setStatus('listStatus', 'Готовим сводку Excel…');
       let url;
       try {
-        const response = await api.request('/api/object-photo-points/report.xlsx?dataset=sao_district_photo_points&report=points');
+        const response = await api.request('/api/object-photo-points/report.xlsx?dataset=sao_district_photo_points&report=review');
         url = URL.createObjectURL(await response.blob());
         const link = document.createElement('a');
         link.href = url;
