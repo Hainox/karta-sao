@@ -464,7 +464,23 @@
       $('status').textContent = `Показано объектов: ${visible}. Загружено: ${enabled}.`;
     }
 
-    function showDetails(item) {
+    function showDetails(item, selectedCoordinates) {
+      let center = selectedCoordinates;
+      if (!Array.isArray(center) || !Number.isFinite(center[0]) || !Number.isFinite(center[1])) {
+        let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+        const collect = value => {
+          if (!Array.isArray(value)) return;
+          if (Number.isFinite(value[0]) && Number.isFinite(value[1])) {
+            minX = Math.min(minX, value[0]); maxX = Math.max(maxX, value[0]);
+            minY = Math.min(minY, value[1]); maxY = Math.max(maxY, value[1]);
+          } else value.forEach(collect);
+        };
+        collect(item.geometry?.coordinates);
+        if (Number.isFinite(minX)) center = [(minX + maxX) / 2, (minY + maxY) / 2];
+      }
+      if (state.map && Array.isArray(center) && Number.isFinite(center[0]) && Number.isFinite(center[1])) {
+        state.map.update({ location: { center, zoom: state.map.zoom }, duration: 300 });
+      }
       const labels = {address:'Адрес', source_address:'Адрес-источник', container_count:'Количество контейнеров', purpose:'Назначение', ownership:'Собственник', 'Начальник участка':'Начальник участка', 'Телефон начальника участка':'Телефон начальника участка', status:'Статус привязки', storage:'Место складирования', passes:'Количество проходов', note:'Примечание'};
       const allowed = ['address','source_address','container_count','purpose','ownership','Начальник участка','Телефон начальника участка','status','storage','passes','note'];
       const extra = Object.entries(item.properties).filter(([key]) => allowed.includes(key)).map(([key,value]) => `<div><strong>${labels[key]}:</strong> ${escapeHtml(value)}</div>`).join('');

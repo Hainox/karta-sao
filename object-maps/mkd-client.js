@@ -471,6 +471,10 @@ function releaseUrls(list) {
 }
 
 async function openRecord(record, trigger) {
+  const lat = Number(record.lat), lon = Number(record.lon);
+  if (state.map && record.lat != null && record.lon != null && Number.isFinite(lat) && Number.isFinite(lon)) {
+    state.map.setCenter([lat, lon], state.map.getZoom());
+  }
   state.selected = record;
   state.lastFocused = trigger || document.activeElement;
   setPanelOpen(false);
