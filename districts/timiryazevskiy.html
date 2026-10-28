@@ -189,7 +189,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
   </aside>
   <main id="map"></main>
 </div>
-<script src="playground-photo-layer.js?v=20261028-unified"></script>
+<script src="playground-photo-layer.js?v=20261028-restore"></script>
 <script>
 (() => {
   const SLUG = 'timiryazevskiy';
@@ -296,7 +296,6 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     }
     renderControls();
     state.playgroundLayer = window.initPlaygroundPhotoLayer({ map: state.map, district: DISTRICT, apiRequest, getUser: () => state.photoUser, preparePointPhoto, escapeHtml });
-    $('playgroundPhotoLayer').querySelector('.layer-row').style.display = 'none';
     await loadPhotoPoints();
     renderShootMarkers();
     renderShootLogin();
