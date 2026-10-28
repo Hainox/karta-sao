@@ -5,7 +5,7 @@ import pg from 'pg';
 import { createObjectPhotoPointRepository } from '../src/tpu-points/object-photo-points.js';
 import { districtQueueFromRows } from '../src/tpu-points/district-point-photos.js';
 
-const MIGRATIONS = ['008_tpu_photo_points.sql', '009_tpu_photo_point_heading.sql', '013_district_photo_points.sql', '017_district_point_photo_slots.sql'];
+const MIGRATIONS = ['008_tpu_photo_points.sql', '009_tpu_photo_point_heading.sql', '013_district_photo_points.sql', '017_district_point_photo_slots.sql', '018_district_point_review.sql'];
 const JPEG = Buffer.from([0xff, 0xd8, 0xff, 0xe0, 0, 16, 74, 70, 73, 70, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0xff, 0xd9]);
 // Точка внутри Аэропорта (полигоны districts_wgs84.geojson).
 const AEROPORT = { longitude: 37.539, latitude: 55.81 };

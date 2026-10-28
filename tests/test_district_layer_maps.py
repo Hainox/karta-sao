@@ -248,3 +248,16 @@ def test_both_digitizations_sit_together_under_shooting_points():
         assert markup.index('<div id="layerControls"></div>') < markup.index("<b>Точки съёмки</b>") < entrances < playgrounds
         assert playgrounds < markup.index('class="shoot-list-box"')
         assert "playground-photo-layer.js" in markup
+
+
+def test_shooting_points_hint_counts_only_the_entrance_layer():
+    """Подсказка «Точек съёмки: N» считает те же точки, что слой «въездные группы».
+
+    Под учётной записью префектуры список точек включает импортные наборы NextGIS/GPKG;
+    в слой они не входят, значит и в счёт не должны.
+    """
+    for slug in SLUGS.values():
+        html = (DISTRICTS_PAGES / f"{slug}.html").read_text(encoding="utf-8")
+        assert "Точек съёмки: ${state.points.length}" not in html, slug
+        assert html.count("Точек съёмки: ${layerPointCount()") == 4, slug
+        assert "$('shootLayerCount').textContent = layerPointCount()" in html, slug
