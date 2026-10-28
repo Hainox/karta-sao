@@ -439,7 +439,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
         imported: p.imported === true || String(p.note || '').startsWith('Источник:'),
       }));
       state.serverOk = true;
-      $('shootHint').textContent = `Точек съёмки: ${state.points.length}. Префектура назначает точки, районы загружают фото.`;
+      $('shootHint').textContent = `Точек съёмки: ${layerPointCount().toLocaleString('ru-RU')}. Префектура назначает точки, районы загружают фото.`;
     } catch (error) {
       state.points.forEach(removeShootMarker);
       state.points = loadLocalPoints();
@@ -558,6 +558,11 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     return /^(Коровинское ш\. — Бескудниковский бул\.|800-летия Москвы|Ангарская ул\.) · /.test(String(point.label || ''));
   }
 
+  // Считаем только точки слоя «въездные группы»: импортные наборы префектуры в него не входят.
+  function layerPointCount() {
+    return state.points.filter((point) => !isGpkgPoint(point)).length;
+  }
+
   function pointVisible(point) {
     // Импортные и архивные наборы хранятся отдельно; на карте один рабочий слой.
     if (isGpkgPoint(point)) return false;
@@ -567,7 +572,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
 
   function renderShootMarkers() {
     const { YMapMarker } = window.ymaps3;
-    $('shootLayerCount').textContent = state.points.filter((point) => !isGpkgPoint(point)).length.toLocaleString('ru-RU');
+    $('shootLayerCount').textContent = layerPointCount().toLocaleString('ru-RU');
     if (!state.map) return;
     state.points.forEach((point) => {
       if (point._marker) {
@@ -983,7 +988,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     state.points.forEach((point) => { try { point._marker?.update({ draggable: on && !state.handMode }); } catch (_) { /* маркер не создан */ } });
     $('shootHint').textContent = on
       ? 'Режим переноса: перетащите точку в новое место (или кликните точку, затем кликните по карте). Стрелка направления и фото слота сохранятся. Карта при зажатой мыши не двигается — включите «Рука», чтобы переместить обзор.'
-      : `Точек съёмки: ${state.points.length}. Префектура назначает точки, районы загружают фото.`;
+      : `Точек съёмки: ${layerPointCount().toLocaleString('ru-RU')}. Префектура назначает точки, районы загружают фото.`;
   }
 
   /** Режим руки: двигать карту мышью, пока активен режим редактирования. */
@@ -1000,7 +1005,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
         ? 'Шаг 1: кликните на карте в месте съёмки. Шаг 2: кликните в сторону, куда фотографировать, — направление и точка сохранятся.'
         : state.dragMode
           ? 'Режим переноса: перетащите точку в новое место (или кликните точку, затем кликните по карте). Стрелка направления и фото слота сохранятся. Карта при зажатой мыши не двигается — включите «Рука», чтобы переместить карту.'
-          : `Точек съёмки: ${state.points.length}. Префектура назначает точки, районы загружают фото.`;
+          : `Точек съёмки: ${layerPointCount().toLocaleString('ru-RU')}. Префектура назначает точки, районы загружают фото.`;
   }
 
   /* При редактировании карта не должна ездить от зажатой мыши: убираем
@@ -1025,7 +1030,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     applyMapBehaviors();
     $('shootHint').textContent = on
       ? 'Шаг 1: кликните на карте в месте съёмки. Шаг 2: кликните в сторону, куда фотографировать, — направление и точка сохранятся.'
-      : `Точек съёмки: ${state.points.length}. Префектура назначает точки, районы загружают фото.`;
+      : `Точек съёмки: ${layerPointCount().toLocaleString('ru-RU')}. Префектура назначает точки, районы загружают фото.`;
   }
 
   function clearPreview() {

@@ -1,5 +1,5 @@
 import { createDirectionRepository, mountPublicDirectionRoutes, mountDirectionRoutes } from './direction-corrections.js';
-import { DISTRICT_DATASET, createDistrictPointPhotoRepository, mountDistrictPointPhotoRoutes } from './district-point-photos.js';
+import { DISTRICT_DATASET, IMPORTED_NOTE_PREFIX, PREFECTURE_ARCHIVE_CUTOFF, PREFECTURE_ARCHIVE_CUTOFF_MS, createDistrictPointPhotoRepository, mountDistrictPointPhotoRoutes } from './district-point-photos.js';
 import { AVD_OWNER, AVD_OBJECTS, AVD_OUTSIDE_OBJECT, AVD_OUTSIDE_BOUNDARY } from './tpu-responsibility.js';
 import crypto from 'node:crypto';
 import express from 'express';
@@ -14,13 +14,6 @@ const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 // Статусы фото появляются с миграции 017: ракурс-marker приёмки — у районных
 // точек («одно живое фото на точку»), у ТПУ старые вложения остаются принятыми.
 const PHOTO_COLUMNS = 'id, point_id, assignment_version, assignment_longitude, assignment_latitude, photo_mime_type, photo_filename, photo_size, uploaded_by, uploaded_at, status, review_comment, reviewed_by, reviewed_at, dataset_id';
-// Московское время: точки, созданные раньше этой границы, видит только префектура в архивном слое.
-const PREFECTURE_ARCHIVE_CUTOFF = "TIMESTAMPTZ '2026-10-23 11:00:00+03'";
-const PREFECTURE_ARCHIVE_CUTOFF_MS = Date.parse('2026-10-23T08:00:00.000Z');
-// Импортные точки районного набора (пробный импорт из NextGIS, GeoPackage и пр.)
-// помечены примечанием «Источник: ...». Это рабочий материал префектуры: районы
-// и публичный доступ их не получают, фото в них не грузят.
-const IMPORTED_NOTE_PREFIX = 'Источник:';
 const isImportedDistrictPoint = (point) => point?.dataset_id === DISTRICT_DATASET
   && typeof point?.note === 'string' && point.note.startsWith(IMPORTED_NOTE_PREFIX);
 
@@ -123,7 +116,7 @@ export function createObjectPhotoPointsRouter({ repository, authenticate, bounda
       res.json({ points: points.map((point) => {
         const { id, object_key, object_type, district, longitude, latitude, label, heading, photo_count, photo_state, note } = point;
         // Признак «точка перенесена из GeoPackage» — без раскрытия текста примечания.
-        const imported = dataset === 'sao_district_photo_points' && typeof note === 'string' && note.startsWith('Источник:');
+        const imported = dataset === 'sao_district_photo_points' && typeof note === 'string' && note.startsWith(IMPORTED_NOTE_PREFIX);
         return { id, object_key, object_type, district, longitude, latitude, label, heading, photo_count, ...(photo_state ? { photo_state } : {}), ...(imported ? { imported: true } : {}) };
       }) });
     } catch (error) { next(error); }

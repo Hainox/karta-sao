@@ -8,6 +8,13 @@ import { validateReview } from './object-slots.js';
 import { buildDigitizationReport, summarizeDigitization } from '../digitization-report.js';
 
 export const DISTRICT_DATASET = 'sao_district_photo_points';
+// Московское время: точки, созданные раньше этой границы, видит только префектура в архивном слое.
+export const PREFECTURE_ARCHIVE_CUTOFF = "TIMESTAMPTZ '2026-10-23 11:00:00+03'";
+export const PREFECTURE_ARCHIVE_CUTOFF_MS = Date.parse('2026-10-23T08:00:00.000Z');
+// Импортные точки районного набора (пробный импорт из NextGIS, GeoPackage и пр.)
+// помечены примечанием «Источник: ...». Это рабочий материал префектуры: районы
+// и публичный доступ их не получают, фото в них не грузят.
+export const IMPORTED_NOTE_PREFIX = 'Источник:';
 
 export const POINT_STATE_LABELS = {
   empty: 'Нет фото', pending: 'На проверке', accepted: 'Принято', rework: 'На доработке',
@@ -141,7 +148,13 @@ export function createDistrictPointPhotoRepository(pool, write) {
           WHERE t.point_id = p.id AND t.dataset_id = 'sao_district_photo_points' AND t.status = 'rejected'
           ORDER BY t.reviewed_at DESC, t.id DESC LIMIT 1
         ) r ON true
-        WHERE p.dataset_id = 'sao_district_photo_points' AND p.retired_at IS NULL`);
+        WHERE p.dataset_id = 'sao_district_photo_points' AND p.retired_at IS NULL
+          -- Только точки слоя «Точки съёмки · въездные группы» на картах районов:
+          -- принятые, не архивные и не импортные. Иначе счётчики кабинета и свод
+          -- включают тысячи скрытых точек, которых районы не видят и не снимают.
+          AND p.review_status = 'accepted'
+          AND p.created_at >= ${PREFECTURE_ARCHIVE_CUTOFF}
+          AND COALESCE(p.note, '') NOT LIKE '${IMPORTED_NOTE_PREFIX}%'`);
       return rows;
     },
     reviewDistrictPointPhoto({ id, decision, comment, actorId }) {
