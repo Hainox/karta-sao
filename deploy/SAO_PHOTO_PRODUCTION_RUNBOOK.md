@@ -83,6 +83,22 @@ curl -s https://obhod-sao.ru/photo-api/object-photo-points/slots/public | head -
 
 The last command must return `{"objects":[...]}` (an empty list before the first upload). When shipping files with `git archive`, include `photo-service/migrations`, otherwise `scripts/migrate.js` does not see `014_object_slot_photos.sql`.
 
+### Sidewalk shooting points (migration 020, `scripts/import-sidewalk-photo-points.js`)
+
+The district maps let the prefecture move, rotate and delete the draft sidewalk shooting points («Точки съёмки · тротуары (тест)»). The points live in the new `sidewalk_photo_points` table; the migration only creates it and does not touch other data. After the migration, load the points from the published atlas layers. The import is a dry run by default and skips points whose number is already in the table, so rerunning it never overwrites the prefecture's edits:
+
+```sh
+cd /opt/sao-photo-service/photo-service
+DC="docker compose -p sao-photo-service -f compose.yaml -f compose.recovery.yaml"
+$DC build photo-service
+$DC run --rm photo-service node scripts/migrate.js
+$DC run --rm -v /opt/sao-photo-service:/sources:ro photo-service node scripts/import-sidewalk-photo-points.js --source=/sources/districts/layers
+$DC run --rm -v /opt/sao-photo-service:/sources:ro photo-service node scripts/import-sidewalk-photo-points.js --source=/sources/districts/layers --apply
+$DC up -d photo-service
+```
+
+The dry run must report 5 670 points and 0 with errors. Until this is done, the maps show the same points from the layer file, read-only.
+
 ### Issuing district and АвД accounts (`scripts/issue-district-accounts.js`)
 
 Gives new passwords to the district accounts of the 16 districts and АвД САО only (role `district_editor`); the prefecture and МКД accounts are not touched. Creates the АвД САО account (login `авд сао`) when it does not exist. Without `--apply` it only lists who would get a new password. Passwords are written only to the xlsx file, never to the console; the file has a ready message per district and a sheet with instructions for the TPU and parking map. Old district passwords stop working, including for stops, crossings and entrances (one account per district).
