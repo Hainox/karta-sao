@@ -80,13 +80,13 @@
     },
     "Бескудниковский": {
       "boundary": 1,
-      "yards": 121,
+      "yards": 122,
       "dp": 130,
       "sp": 44,
       "parking": 874,
-      "paths": 1303,
-      "sidewalks": 1751,
-      "driveways": 974,
+      "paths": 1305,
+      "sidewalks": 1758,
+      "driveways": 976,
       "odh": 23
     },
     "Войковский": {
@@ -102,13 +102,13 @@
     },
     "Восточное Дегунино": {
       "boundary": 1,
-      "yards": 81,
+      "yards": 80,
       "dp": 105,
       "sp": 45,
       "parking": 981,
-      "paths": 759,
-      "sidewalks": 895,
-      "driveways": 690,
+      "paths": 757,
+      "sidewalks": 888,
+      "driveways": 688,
       "odh": 21
     },
     "Головинский": {
