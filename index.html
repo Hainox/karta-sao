@@ -270,8 +270,8 @@
       mno: { label: 'МНО', file: 'mno.geojson', color: '#e67e22', enabled: false },
       dp: { label: 'Детские площадки', file: 'dp.geojson', color: '#2e86de', enabled: false },
       sp: { label: 'Спортивные площадки', file: 'sp.geojson', color: '#27ae60', enabled: false },
-      smm_storage: { label: 'Места хранения СММ (402 площадки)', file: 'odh-map/layers/sao_smm_storage_locations_wgs84.geojson', color: '#6a1b9a', enabled: false, lazy: true },
-      urns: { label: URNS_LABEL, file: 'urns_sao_active_snapshot.geojson', kmlFile: 'urns_sao_active_snapshot.kml', color: '#7b61a8', enabled: false, lazy: true }
+      smm_storage: { label: 'Места хранения СММ (402 площадки)', file: 'odh-map/layers/sao_smm_storage_locations_wgs84.geojson', color: '#6a1b9a', enabled: false, lazy: true, expected: 402 },
+      urns: { label: URNS_LABEL, file: 'urns_sao_active_snapshot.geojson', kmlFile: 'urns_sao_active_snapshot.kml', color: '#7b61a8', enabled: false, lazy: true, expected: 27029 }
     };
     const MARKER_ICONS = {
       mno: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 5.5h8l-.7 8H4.7zM3 4h10M6 2.5h4M6.5 7.5v4M9.5 7.5v4"/></svg>',
@@ -385,7 +385,7 @@
           <input type="checkbox" data-layer="${key}" aria-label="${escapeHtml(layer.label)}" ${layer.enabled ? 'checked' : ''} ${layer.error || layer.loading ? 'disabled' : ''}>
           <span class="layer-swatch" style="background:${layer.color}"></span>
           <span>${escapeHtml(layer.label)}</span>
-          <span class="layer-count">${layer.error ? 'error' : layer.loading ? '...' : layer.records.length}</span>
+          <span class="layer-count">${layer.error ? 'error' : layer.loading ? '...' : layer.lazy && !layer.records.length ? layer.expected : layer.records.length}</span>
           ${layer.kmlFile ? `<a class="layer-download" href="${escapeHtml(layer.kmlFile)}" download title="Download KML">KML</a>` : ''}
         </label>`).join('');
       $('layerControls').querySelectorAll('input[data-layer]').forEach((input) => input.addEventListener('change', async () => {
@@ -433,8 +433,19 @@
       }));
     }
 
+    function inSelectedArea(item) {
+      return (state.district === 'ALL' || item.district === state.district) && (state.section === 'ALL' || item.section === state.section);
+    }
+
     function isVisible(item) {
-      return state.layers[item.layerKey].enabled && (state.district === 'ALL' || item.district === state.district) && (state.section === 'ALL' || item.section === state.section);
+      return state.layers[item.layerKey].enabled && inSelectedArea(item);
+    }
+
+    // Подводит карту к выбранному району или участку: по дворам, а если их нет — по любым объектам выборки.
+    function fitToSelection() {
+      const selected = allRecords().filter(inSelectedArea);
+      const yards = selected.filter((item) => item.layerKey === 'areas');
+      fitToData(yards.length ? yards : selected);
     }
 
     function renderVisibleFeatures() {
@@ -457,7 +468,7 @@
       const labels = {address:'Адрес', source_address:'Адрес-источник', container_count:'Количество контейнеров', purpose:'Назначение', ownership:'Собственник', 'Начальник участка':'Начальник участка', 'Телефон начальника участка':'Телефон начальника участка', status:'Статус привязки', storage:'Место складирования', passes:'Количество проходов', note:'Примечание'};
       const allowed = ['address','source_address','container_count','purpose','ownership','Начальник участка','Телефон начальника участка','status','storage','passes','note'];
       const extra = Object.entries(item.properties).filter(([key]) => allowed.includes(key)).map(([key,value]) => `<div><strong>${labels[key]}:</strong> ${escapeHtml(value)}</div>`).join('');
-      $('details').innerHTML = `<div><strong>${escapeHtml(item.name)}</strong></div><div>Район: <strong>${escapeHtml(item.district)}</strong></div><div>Участок: <strong>${escapeHtml(item.section)}</strong></div>${extra}`;
+      $('details').innerHTML = `<div><strong>${escapeHtml(item.name)}</strong></div><div>Район: <strong>${escapeHtml(item.district)}</strong>${item.properties.district_source === 'boundary' ? ' (определён по границе района)' : ''}</div><div>Участок: <strong>${escapeHtml(item.section)}</strong></div>${extra}`;
     }
 
     async function createMapFeatures(records) {
@@ -666,10 +677,10 @@
 
     $('districtSelect').addEventListener('change', (event) => {
       state.district = event.target.value; state.section = 'ALL';
-      renderSectionSelect(); renderLegend(); renderVisibleFeatures();
+      renderSectionSelect(); renderLegend(); renderVisibleFeatures(); fitToSelection();
     });
     $('sectionSelect').addEventListener('change', (event) => {
-      state.section = event.target.value; renderVisibleFeatures();
+      state.section = event.target.value; renderVisibleFeatures(); fitToSelection();
     });
     $('resetButton').addEventListener('click', () => {
       state.district = 'ALL'; state.section = 'ALL';
