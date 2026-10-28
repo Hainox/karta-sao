@@ -6,9 +6,9 @@ import { createReadStream } from 'node:fs';
 import { stat } from 'node:fs/promises';
 import { createServer } from 'node:http';
 import { join } from 'node:path';
-import { Pool } from 'pg';
 import { assessDistanceRisk, isUnusableAccuracy, photoGeoVerdict } from './src/geo.js';
 import { photoServiceCookiePolicy, photoServiceDatabaseConfig } from './src/config.js';
+import { createDatabasePool } from './src/db-pool.js';
 import { createHealthHandler } from './src/health.js';
 import {
   bearerToken, createSessionToken, expiredSessionCookie, hashSessionToken,
@@ -45,7 +45,7 @@ const cookiePolicy = photoServiceCookiePolicy({
   PHOTO_SERVICE_COOKIE_PATH: process.env.PHOTO_SERVICE_COOKIE_PATH || (basePath || '/photo-api'),
 });
 const allowedOrigins = new Set((process.env.PHOTO_SERVICE_ALLOWED_ORIGINS || '').split(',').map((value) => value.trim()).filter(Boolean));
-const pool = new Pool({ ...photoServiceDatabaseConfig(process.env), max: 8, idleTimeoutMillis: 30000 });
+const pool = createDatabasePool({ ...photoServiceDatabaseConfig(process.env), max: 8, idleTimeoutMillis: 30000 });
 const loginThrottle = createLoginThrottle();
 const tpuPoints = createPhotoServicePointsAdapter({ pool, currentUser, boundary: tpuBoundary });
 
