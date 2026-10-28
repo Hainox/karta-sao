@@ -76,7 +76,8 @@ class Local:
         def conv(coords):
             return [self.xy(*c[:2]) for c in coords]
         if g.geom_type == "Polygon":
-            return Polygon(conv(g.exterior.coords), [conv(r.coords) for r in g.interiors])
+            # buffer(0) чинит самопересечения контуров из АСУ ОДС.
+            return Polygon(conv(g.exterior.coords), [conv(r.coords) for r in g.interiors]).buffer(0)
         if g.geom_type == "MultiPolygon":
             return unary_union([self.geom(p) for p in g.geoms])
         raise ValueError(g.geom_type)
