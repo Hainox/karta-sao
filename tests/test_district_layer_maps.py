@@ -261,3 +261,19 @@ def test_shooting_points_hint_counts_only_the_entrance_layer():
         assert "Точек съёмки: ${state.points.length}" not in html, slug
         assert html.count("Точек съёмки: ${layerPointCount()") == 4, slug
         assert "$('shootLayerCount').textContent = layerPointCount()" in html, slug
+
+
+def test_centering_only_in_view_or_hand_mode():
+    """Центрирование на объекте не срабатывает в «Разметке» и «Переносе», только в просмотре или с «Рукой».
+
+    Правило одно на все слои: точки съёмки, площадки ДП/СП и тротуары центрируют карту через centerSelection.
+    """
+    guard = "if ((state.shootMode || state.dragMode) && !state.handMode) return;"
+    template = (ROOT / "work" / "district_page_template.html").read_text(encoding="utf-8")
+    for markup in [template] + [(DISTRICTS_PAGES / f"{slug}.html").read_text(encoding="utf-8") for slug in SLUGS.values()]:
+        body = markup[markup.index("function centerSelection(coordinates) {"):]
+        assert guard in body[:body.index("\n  }\n")]
+        assert "preparePointPhoto, escapeHtml, centerSelection });" in markup
+    layer = (DISTRICTS_PAGES / "playground-photo-layer.js").read_text(encoding="utf-8")
+    assert "map.update({location:{center" not in layer
+    assert "centerSelection(coordinates)" in layer
