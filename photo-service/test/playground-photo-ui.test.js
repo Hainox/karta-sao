@@ -31,3 +31,17 @@ test('единое управление показывает только выб
  await x.layer.setKind('sp',true);
  assert.equal(x.markers.length,0);
 });
+
+test('фотослой работает независимо от выбора видов площадок',async()=>{
+ const x=fake();
+ await x.layer.setKind('sp',true);
+ assert.equal(x.markers.length,0);
+ x.container.input.checked=true;
+ await x.container.input.onchange();
+ assert.equal(x.markers.length,1);
+ await x.layer.setKind('sp',false);
+ assert.equal(x.markers.length,1);
+ x.container.input.checked=false;
+ await x.container.input.onchange();
+ assert.equal(x.markers.length,0);
+});
