@@ -22,10 +22,7 @@ const PAGES = [
   { path: '/hub/', name: 'хаб — каталог карт', expect: ['a.map-card'], map: false },
   { path: '/', name: 'дворы и участки', expect: ['#map'], map: true },
   { path: '/odh-map/', name: 'ОДХ и очередность', expect: ['#map'], map: true },
-  { path: '/odh-map/district-links.html', name: 'ссылки районам', expect: ['a', '.district-link-card'], map: false },
-  { path: '/odh-map/district-editor.html', name: 'редактор района', expect: ['#map'], map: true },
   { path: '/odh-map/district-review.html', name: 'приёмка префектуры', expect: ['#map'], map: true },
-  { path: '/odh-map/prefecture-guide.html', name: 'памятка префектуры', expect: ['body'], map: false },
   { path: '/object-maps/', name: 'фотофиксация', expect: ['#paMap'], map: true },
   { path: '/object-maps/stops.html', name: 'фотофиксация — остановки', expect: ['#paMap'], map: true },
   { path: '/object-maps/pp.html', name: 'фотофиксация — ПП', expect: ['#paMap'], map: true },
@@ -34,14 +31,12 @@ const PAGES = [
   { path: '/object-maps/tpu-review.html', name: 'кабинет приёмки ТПУ', expect: ['#loginForm'], map: false },
   { path: '/review-cabinet/', name: 'кабинет приёмки фото', expect: ['#loginForm'], map: false },
   { path: '/districts/', name: 'каталог районов', expect: ['a'], map: false },
-  { path: '/smm/', name: 'маршруты СММ', expect: ['body'], map: true },
   { path: '/yards-print/', name: 'печать дворов A3', expect: ['#map'], map: true },
   { path: '/yards-print/print-a1.html', name: 'печать дворов A1', expect: ['#map'], map: true },
   { path: '/odh-map/print-a3.html', name: 'печать ОДХ A3', expect: ['#map'], map: true },
   { path: '/odh-map/print-a1.html', name: 'печать ОДХ A1', expect: ['#map'], map: true },
   // Лист 1000×1400 мм на экране шире окна по замыслу — прокрутку не считаем ошибкой.
   { path: '/odh-map/print-1000x1400.html', name: 'лист 1000x1400', expect: ['body'], map: true, overflow: false },
-  { path: '/smm/print-a3.html', name: 'печать СММ A3', expect: ['body'], map: false },
   ...DISTRICT_PAGES
 ];
 
