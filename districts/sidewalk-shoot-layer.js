@@ -4,7 +4,7 @@
 // при каждом входе и выходе. Точки берутся со службы фото, где префектура их
 // переносит, поворачивает и удаляет. Если служба недоступна или точки туда ещё
 // не загружены, показывается опубликованный файл слоя — без правок.
-window.initSidewalkShootLayer = function ({ map, slug, district, apiRequest, escapeHtml, centerSelection }) {
+window.initSidewalkShootLayer = function ({ map, slug, district, apiRequest, escapeHtml, centerSelection, popover, getUser, preparePointPhoto }) {
   const container = document.getElementById('sidewalkShootLayer');
   const card = document.getElementById('card');
   const API = '/object-photo-points/sidewalks';
@@ -18,7 +18,11 @@ window.initSidewalkShootLayer = function ({ map, slug, district, apiRequest, esc
   let suppressClick = false;
 
   const fromServer = (p) => ({ id: p.id, point_no: p.point_no, address: p.address, side: p.side, role: p.role,
-    also_covers: p.also_covers, status: p.status, heading: Number(p.heading), lng: Number(p.longitude), lat: Number(p.latitude) });
+    also_covers: p.also_covers, status: p.status, heading: Number(p.heading), lng: Number(p.longitude), lat: Number(p.latitude),
+    photo_state: p.photo_state || 'empty' });
+  const PHOTO_LABELS = { empty: 'Нет фото', pending: 'На проверке', accepted: 'Принято', rework: 'На доработке' };
+  const when = (value) => value ? new Date(value).toLocaleString('ru-RU', { day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' }) : '';
+  let photoUrl = null;
   const fromFile = (f) => ({ id: f.properties.point_no, point_no: f.properties.point_no, address: f.properties.address,
     side: f.properties.side, role: f.properties.role, also_covers: f.properties.also_covers, status: f.properties.status,
     heading: Number(f.properties.azimuth), lng: f.geometry.coordinates[0], lat: f.geometry.coordinates[1] });
@@ -37,6 +41,7 @@ window.initSidewalkShootLayer = function ({ map, slug, district, apiRequest, esc
     const el = document.createElement('button');
     el.type = 'button';
     el.className = 'shoot-marker sidewalk-shoot' + (point.id === movingId ? ' moving' : '');
+    if (point.photo_state && point.photo_state !== 'empty') el.dataset.photoState = point.photo_state;
     el.title = `Тротуар ${point.point_no} · ${point.address} · ${point.heading}°`;
     el.innerHTML = '<span class="shoot-dot"></span>';
     el.append(arrowSvg(point.heading));
@@ -78,7 +83,8 @@ window.initSidewalkShootLayer = function ({ map, slug, district, apiRequest, esc
     setStatus('Сохраняем…');
     try {
       const response = await apiRequest(`${API}/${point.id}`, { method: 'PATCH', body: JSON.stringify(body) });
-      Object.assign(point, fromServer((await response.json()).point));
+      const photoState = point.photo_state;
+      Object.assign(point, fromServer((await response.json()).point), { photo_state: photoState });
       redrawOne(point);
       if (current === point) openCard(point, okText);
       return true;
@@ -98,30 +104,32 @@ window.initSidewalkShootLayer = function ({ map, slug, district, apiRequest, esc
   function openCard(point, message = '') {
     current = point;
     const e = escapeHtml;
-    const rows = [
-      ['Адрес', point.address],
+    popover.open({ coordinates: [point.lng, point.lat], kind: 'sidewalk', title: point.address || 'Точка ' + point.point_no,
+      subtitle: 'Точка ' + point.point_no + (point.status ? ', ' + point.status : ''), heading: point.heading });
+    const facts = [
       ['Сторона', point.side],
       ['Место', point.role],
       ['Направление кадра', point.heading + '°'],
       ['Также снимает', point.also_covers],
-      ['Статус', point.status],
-    ].filter(([, v]) => v != null && v !== '').map(([k, v]) => `<div><strong>${k}:</strong> ${e(v)}</div>`).join('');
-    const tools = editable ? `<div class="sw-tools">
-        <div class="row"><button type="button" data-sw="left" title="Повернуть против часовой">⟲ ${STEP}°</button>
-        <input type="number" min="0" max="359" step="1" value="${point.heading}" data-sw="heading" aria-label="Направление кадра, градусы">
-        <button type="button" data-sw="right" title="Повернуть по часовой">${STEP}° ⟳</button>
+    ].filter(([, v]) => v != null && v !== '').map(([k, v]) => `<dt>${k}</dt><dd>${e(v)}</dd>`).join('');
+    const tools = editable ? `<section class="pin-section"><h3>Точка</h3>
+        <div class="pin-actions"><button type="button" data-sw="left" aria-label="Повернуть на ${STEP}° против часовой">⟲ ${STEP}°</button>
+        <input type="number" min="0" max="359" step="1" value="${point.heading}" data-sw="heading" aria-label="Направление кадра, градусы" style="flex:0 0 70px">
+        <button type="button" data-sw="right" aria-label="Повернуть на ${STEP}° по часовой">${STEP}° ⟳</button>
         <button type="button" data-sw="save-heading" class="primary">Сохранить направление</button></div>
-        <div class="row"><button type="button" data-sw="move">${movingId === point.id ? 'Отменить перенос' : 'Перенести'}</button>
+        <div class="pin-actions"><button type="button" data-sw="move">${movingId === point.id ? 'Отменить перенос' : 'Перенести'}</button>
         <button type="button" data-sw="delete" class="danger">Удалить точку</button></div>
-      </div>` : '';
-    card.innerHTML = `<h2>Точка съёмки тротуара ${e(point.point_no)}</h2>${rows}${tools}<div class="status" data-sw-status role="status">${e(message || (editable ? '' : 'Правки недоступны: точки показаны из файла.'))}</div>`;
-    card.className = 'card open';
+      </section>` : '';
+    const photo = editable ? '<section class="pin-section" data-sw-photo><h3>Фото</h3><p class="pin-note">Загружаем…</p></section>' : '';
+    card.innerHTML = `<dl class="pin-facts">${facts}</dl>${photo}${tools}<p class="pin-note" data-sw-status role="status">${e(message || (editable ? '' : 'Правки и фото недоступны: точки показаны из файла.'))}</p>`;
     if (!editable) return;
+    renderPhoto(point);
     const input = card.querySelector('[data-sw="heading"]');
     const preview = (deg) => {
       const heading = ((Math.round(deg) % 360) + 360) % 360;
       input.value = heading;
       if (point._arrow) point._arrow.style.transform = 'rotate(' + heading + 'deg)';
+      popover.setHeading(heading);
     };
     card.querySelector('[data-sw="left"]').addEventListener('click', () => preview(Number(input.value) - STEP));
     card.querySelector('[data-sw="right"]').addEventListener('click', () => preview(Number(input.value) + STEP));
@@ -134,7 +142,7 @@ window.initSidewalkShootLayer = function ({ map, slug, district, apiRequest, esc
     card.querySelector('[data-sw="move"]').addEventListener('click', () => {
       movingId = movingId === point.id ? null : point.id;
       redrawOne(point);
-      openCard(point, movingId ? 'Перетащите точку на новое место — она сохранится сама.' : '');
+      openCard(point, movingId ? 'Перетащите точку на новое место: она сохранится сама.' : '');
     });
     card.querySelector('[data-sw="delete"]').addEventListener('click', async () => {
       if (!window.confirm(`Удалить точку ${point.point_no}? Номер больше не будет использован.`)) return;
@@ -145,9 +153,115 @@ window.initSidewalkShootLayer = function ({ map, slug, district, apiRequest, esc
         redrawOne(point);
         updateCount();
         current = null;
-        card.innerHTML = `<h2>Точка ${e(point.point_no)} удалена</h2>`;
+        popover.close();
       } catch (error) { setStatus('Не удалено: ' + error.message); }
     });
+  }
+
+  /** Раздел «Фото»: один снимок на точку, как у площадок ДП/СП. */
+  async function renderPhoto(point) {
+    const box = card.querySelector('[data-sw-photo]');
+    if (!box) return;
+    const e = escapeHtml;
+    const user = getUser ? getUser() : null;
+    const isPrefecture = user?.role === 'prefecture_admin';
+    const canUpload = isPrefecture || (user?.role === 'district_editor' && user.district === district);
+    let slot;
+    try {
+      slot = await (await apiRequest(`${API}/${point.id}/slot`)).json();
+    } catch (error) {
+      box.innerHTML = `<h3>Фото</h3><p class="pin-note bad">Не удалось открыть фото: ${e(error.message)}</p>`;
+      return;
+    }
+    if (current !== point || !box.isConnected) return;
+    const state = slot.active ? (slot.active.status === 'accepted' ? 'accepted' : 'pending') : slot.rejected ? 'rework' : 'empty';
+    if (point.photo_state !== state) { point.photo_state = state; redrawOne(point); }
+    const head = `<h3>Фото <span class="slot-pill ${state}">${PHOTO_LABELS[state]}</span></h3>`;
+    if (slot.active) {
+      box.innerHTML = `${head}<img class="pin-shot" alt="Снимок тротуара у точки ${e(point.point_no)}" data-sw-shot>
+        <p class="pin-note">${state === 'pending' ? 'Загружено' : 'Принято'} ${e(when(slot.active.reviewed_at || slot.active.uploaded_at))}</p>
+        ${isPrefecture ? `<div class="pin-actions">${state === 'pending' ? '<button type="button" class="primary" data-sw="accept">Принять фото</button><button type="button" data-sw="return">Вернуть на доработку</button>' : ''}
+          <button type="button" class="danger" data-sw="remove">Убрать фото</button></div>` : ''}`;
+      try {
+        const blob = await (await apiRequest(`${API}/${point.id}/photo`)).blob();
+        if (current !== point || !box.isConnected) return;
+        if (photoUrl) URL.revokeObjectURL(photoUrl);
+        photoUrl = URL.createObjectURL(blob);
+        const img = box.querySelector('[data-sw-shot]');
+        img.src = photoUrl;
+        img.addEventListener('click', () => {
+          const viewer = document.getElementById('photoViewer');
+          const full = document.getElementById('pvImage');
+          if (!viewer || !full) return;
+          full.src = photoUrl;
+          const name = document.getElementById('pvName');
+          if (name) name.textContent = 'Точка ' + point.point_no;
+          viewer.showModal();
+        });
+      } catch (_) { /* превью не обязательно: статус и кнопки уже на месте */ }
+      box.querySelector('[data-sw="accept"]')?.addEventListener('click', () => review(point, 'accepted', ''));
+      box.querySelector('[data-sw="return"]')?.addEventListener('click', () => askReturn(point, box));
+      box.querySelector('[data-sw="remove"]')?.addEventListener('click', async () => {
+        if (!window.confirm('Убрать фото с точки? Снимок останется в истории, точка снова будет без фото.')) return;
+        try { await apiRequest(`${API}/${point.id}/photo`, { method: 'DELETE' }); renderPhoto(point); }
+        catch (error) { setStatus('Фото не убрано: ' + error.message); }
+      });
+      return;
+    }
+    const returned = slot.rejected ? `<p class="pin-return"><strong>Вернули на доработку.</strong> ${e(slot.rejected.review_comment)}</p>` : '';
+    if (!canUpload) {
+      box.innerHTML = `${head}${returned}<p class="pin-note">Фото ещё нет.</p>`;
+      return;
+    }
+    box.innerHTML = `${head}${returned}
+      <button type="button" class="pin-drop" data-sw="drop">
+        <svg viewBox="0 0 34 34" aria-hidden="true"><path d="M5 11.5h5.2l2.3-3.5h9l2.3 3.5H29v15.5H5z"/><circle cx="17" cy="18.5" r="5.2"/></svg>
+        <span><b>${slot.rejected ? 'Загрузить новое фото' : 'Загрузить фото'}</b>
+        <small>Снимок вдоль тротуара по стрелке. Можно перетащить файл сюда. JPEG, PNG или WEBP; большое фото уменьшится само.</small></span>
+      </button>
+      <input type="file" accept="image/jpeg,image/png,image/webp" hidden data-sw="file">`;
+    const drop = box.querySelector('[data-sw="drop"]');
+    const file = box.querySelector('[data-sw="file"]');
+    const send = async (picked) => {
+      if (!picked) return;
+      drop.disabled = true;
+      setStatus('Отправляем фото…');
+      try {
+        const prepared = await preparePointPhoto(picked);
+        await apiRequest(`${API}/${point.id}/photo`, { method: 'PUT', body: prepared,
+          headers: { 'Content-Type': prepared.type, 'X-Photo-Filename': encodeURIComponent(prepared.name) } });
+        setStatus(isPrefecture ? 'Фото загружено и принято.' : 'Фото отправлено на проверку.');
+        renderPhoto(point);
+      } catch (error) {
+        drop.disabled = false;
+        setStatus('Фото не отправлено: ' + error.message);
+      }
+    };
+    drop.addEventListener('click', () => file.click());
+    file.addEventListener('change', () => send(file.files[0]));
+    drop.addEventListener('dragover', (event) => { event.preventDefault(); drop.classList.add('over'); });
+    drop.addEventListener('dragleave', () => drop.classList.remove('over'));
+    drop.addEventListener('drop', (event) => { event.preventDefault(); drop.classList.remove('over'); send(event.dataTransfer.files[0]); });
+  }
+
+  function askReturn(point, box) {
+    const actions = box.querySelector('.pin-actions');
+    actions.innerHTML = '<input data-sw="reason" maxlength="2000" placeholder="Что исправить на снимке" aria-label="Причина возврата"><button type="button" class="primary" data-sw="send-return">Вернуть</button><button type="button" data-sw="cancel">Отмена</button>';
+    const reason = actions.querySelector('[data-sw="reason"]');
+    reason.focus();
+    actions.querySelector('[data-sw="cancel"]').addEventListener('click', () => renderPhoto(point));
+    actions.querySelector('[data-sw="send-return"]').addEventListener('click', () => {
+      if (!reason.value.trim()) { reason.placeholder = 'Напишите, что исправить'; reason.focus(); return; }
+      review(point, 'rejected', reason.value.trim());
+    });
+  }
+
+  async function review(point, decision, comment) {
+    try {
+      await apiRequest(`${API}/${point.id}/review`, { method: 'POST', body: JSON.stringify({ decision, comment }) });
+      setStatus(decision === 'accepted' ? 'Фото принято.' : 'Фото возвращено на доработку.');
+      renderPhoto(point);
+    } catch (error) { setStatus('Решение не сохранено: ' + error.message); }
   }
 
   function updateCount() {

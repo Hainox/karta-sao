@@ -5,12 +5,16 @@ on:
     paths:
       - 'photo-service/**'
       - 'object-maps/**'
+      - 'districts/playground-photo-layer.js'
+      - 'districts/layers/*/sidewalk_shoot.geojson'
       - 'deploy/nginx/sao-photo-location.conf'
       - '.github/workflows/photo-service.yml'
   pull_request:
     paths:
       - 'photo-service/**'
       - 'object-maps/**'
+      - 'districts/playground-photo-layer.js'
+      - 'districts/layers/*/sidewalk_shoot.geojson'
       - 'deploy/nginx/sao-photo-location.conf'
       - '.github/workflows/photo-service.yml'
 

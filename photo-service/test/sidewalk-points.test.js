@@ -76,13 +76,21 @@ test('список требует район САО', async () => {
   assert.equal(r.code, 400);
 });
 
-test('район и проверяющий не видят точки тротуаров', () => {
+test('проверяющий не допускается, район — только к фото своей точки', () => {
   const x = setup();
   const roleGuard = x.router.stack.filter((layer) => !layer.route)[1].handle;
-  for (const role of ['district_editor', 'reviewer']) {
-    const r = res();
-    roleGuard({ user: { role, district: 'Сокол' } }, r, () => assert.fail('пропустил ' + role));
-    assert.equal(r.code, 403);
+  const r = res();
+  roleGuard({ user: { role: 'reviewer' } }, r, () => assert.fail('пропустил проверяющего'));
+  assert.equal(r.code, 403);
+  let passed = false;
+  roleGuard({ user: { role: 'district_editor', district: 'Сокол' } }, res(), () => { passed = true; });
+  assert.ok(passed, 'район проходит к фото своих точек');
+  // Пока префектура согласовывает точки, список, правка, удаление и приёмка — только у неё.
+  for (const [path, method] of [['/', 'get'], ['/:id', 'patch'], ['/:id', 'delete'], ['/:id/review', 'post'], ['/:id/photo', 'delete']]) {
+    const guard = x.router.stack.find((l) => l.route?.path === path && l.route.methods[method]).route.stack[0].handle;
+    const gr = res();
+    guard({ user: { role: 'district_editor', district: 'Сокол' } }, gr, () => assert.fail(`район прошёл ${method} ${path}`));
+    assert.equal(gr.code, 403);
   }
 });
 

@@ -273,7 +273,24 @@ def test_centering_only_in_view_or_hand_mode():
     for markup in [template] + [(DISTRICTS_PAGES / f"{slug}.html").read_text(encoding="utf-8") for slug in SLUGS.values()]:
         body = markup[markup.index("function centerSelection(coordinates) {"):]
         assert guard in body[:body.index("\n  }\n")]
-        assert "preparePointPhoto, escapeHtml, centerSelection });" in markup
+        assert "preparePointPhoto, escapeHtml, centerSelection" in markup
     layer = (DISTRICTS_PAGES / "playground-photo-layer.js").read_text(encoding="utf-8")
     assert "map.update({location:{center" not in layer
     assert "centerSelection(coordinates)" in layer
+
+
+def test_points_open_in_popover_card():
+    """Карточка точки открывается окном у самой точки; площадные объекты остаются в левом меню.
+
+    Окно (districts/point-popover.js) подключено на всех страницах, все три вида точек
+    открывают его, а площадные объекты пишут в отдельную карточку #objectCard.
+    """
+    template = (ROOT / "work" / "district_page_template.html").read_text(encoding="utf-8")
+    for markup in [template] + [(DISTRICTS_PAGES / f"{slug}.html").read_text(encoding="utf-8") for slug in SLUGS.values()]:
+        assert 'href="point-popover.css' in markup and 'src="point-popover.js' in markup
+        assert '<div class="card" id="objectCard"></div>' in markup
+        assert "state.popover = window.createPointPopover(" in markup
+        assert "state.popover.open({ coordinates: [Number(point.lng), Number(point.lat)], kind: 'entrance'" in markup
+        assert "popover: state.popover" in markup
+    for layer in ("playground-photo-layer.js", "sidewalk-shoot-layer.js"):
+        assert "popover.open(" in (DISTRICTS_PAGES / layer).read_text(encoding="utf-8")

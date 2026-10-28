@@ -115,6 +115,20 @@ $DC up -d photo-service
 
 Migration 017 used to fail on rerun with «more than one row returned by a subquery used as an expression» once a district point had three or more photos (returns for rework). Since 2026-10-28 it passes on such data and changes nothing there; that failure blocked every update of the service.
 
+### Sidewalk point photos (migration 021)
+
+Photos of the sidewalk shooting points live in the new `sidewalk_photo_slot_photos` table (one active photo per point, like playgrounds). Ship the files the same way as for migration 020 (`git archive origin/main photo-service/... | tar -x -C /opt/sao-photo-service`, after a copy of the replaced files), then:
+
+```sh
+cd /opt/sao-photo-service/photo-service
+DC="docker compose -p sao-photo-service -f compose.yaml -f compose.recovery.yaml"
+$DC build photo-service
+$DC run --rm photo-service node scripts/migrate.js
+$DC up -d photo-service
+```
+
+`migrate.js` must end with `021_sidewalk_photo_slots.sql applied`. The sidewalk points are already loaded; do not rerun the import.
+
 ### Issuing district and АвД accounts (`scripts/issue-district-accounts.js`)
 
 Gives new passwords to the district accounts of the 16 districts and АвД САО only (role `district_editor`); the prefecture and МКД accounts are not touched. Creates the АвД САО account (login `авд сао`) when it does not exist. Without `--apply` it only lists who would get a new password. Passwords are written only to the xlsx file, never to the console; the file has a ready message per district and a sheet with instructions for the TPU and parking map. Old district passwords stop working, including for stops, crossings and entrances (one account per district).

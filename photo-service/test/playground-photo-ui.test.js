@@ -8,11 +8,13 @@ function fake(){
  const point={id:'p1',kind:'dp',address:'Тест',source_id:'5',longitude:37.5,latitude:55.8,photo_state:'empty'};
  async function apiRequest(url,options){requests.push({url,options});return {json:async()=>({points:[point]}),blob:async()=>new Blob([])}}
  vm.runInNewContext(script,{window,document,URL,Blob,encodeURIComponent,console});
- let layer=window.initPlaygroundPhotoLayer({map,district:'Аэропорт',apiRequest,getUser:()=>({role:'district_editor',district:'Аэропорт'}),preparePointPhoto:async f=>f,escapeHtml:x=>String(x)});
- return {container,card,markers,requests,point,layer,map}
+ const popover={opened:[],open(options){this.opened.push(options)}};
+ const centerSelection=(center)=>map.update({location:{center,zoom:map.zoom},duration:300});
+ let layer=window.initPlaygroundPhotoLayer({map,district:'Аэропорт',apiRequest,getUser:()=>({role:'district_editor',district:'Аэропорт'}),preparePointPhoto:async f=>f,escapeHtml:x=>String(x),centerSelection,popover});
+ return {container,card,markers,requests,point,layer,map,popover}
 }
 test('слой загружается отдельно и выключается без удаления других данных',async()=>{let x=fake();x.container.input.checked=true;await x.container.input.onchange();assert.equal(x.markers.length,1);assert.match(x.requests[0].url,/playgrounds\/public/);x.container.input.checked=false;await x.container.input.onchange();assert.equal(x.markers.length,0)});
-test('карточка площадки открывает один фотослот района',async()=>{let x=fake();x.container.input.checked=true;await x.container.input.onchange();await x.markers[0].el.onclick({stopPropagation(){}});assert.match(x.card.html,/Детская площадка/);assert.equal(x.card.controls.children.length,2);assert.deepEqual(Array.from(x.map.lastUpdate.location.center),[37.5,55.8]);assert.equal(x.map.lastUpdate.location.zoom,14)});
+test('карточка площадки открывает один фотослот района',async()=>{let x=fake();x.container.input.checked=true;await x.container.input.onchange();await x.markers[0].el.onclick({stopPropagation(){}});assert.equal(JSON.stringify(x.popover.opened.at(-1)),JSON.stringify({coordinates:[37.5,55.8],kind:'dp',title:'Тест',subtitle:'ID в таблице 5'}));assert.match(x.card.html,/Фото/);assert.equal(x.card.controls.children.length,3);assert.deepEqual(Array.from(x.map.lastUpdate.location.center),[37.5,55.8]);assert.equal(x.map.lastUpdate.location.zoom,14)});
 test('цвет точки отражает статус фото и обновляется после изменения статуса',async()=>{
  const x=fake();x.container.input.checked=true;await x.container.input.onchange();
  for(const [state,color] of [['empty','#808080'],['pending','#f2c200'],['rework','#d93025'],['accepted','#16834c']]){
