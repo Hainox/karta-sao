@@ -207,3 +207,28 @@ def test_unassigned_features_stay_out_of_district_files():
             continue
         per = sum(man["districts"][d][key] for d in SLUGS)
         assert per <= man["totals"][key], "сумма по районам не может превышать общий итог"
+
+
+def test_objects_inside_a_registry_yard_sit_on_that_yards_district_page():
+    """Двор из REGISTRY_YARDS и всё внутри него — на карте района двора по реестру АСУ ОДС.
+
+    2026-10-28 двор «Бескудниковский бульв. 10 к.1–5» (Бескудниковский) с тротуарами
+    и проездами оказался на карте Восточного Дегунина: граница OSM целиком относит его туда.
+    """
+    from work.build_district_layer_maps import YardRegistry, centroid
+
+    registry = YardRegistry.load()
+    wrong = []
+    for name, slug in SLUGS.items():
+        for key in LAYER_KEYS:
+            if key == "boundary":
+                continue
+            data = json.loads((DISTRICTS_LAYERS / slug / f"{key}.geojson").read_text(encoding="utf-8"))
+            for feat in data["features"]:
+                owner = registry.district_at(centroid(feat["geometry"]))
+                if owner and owner != name:
+                    wrong.append((slug, key, feat["properties"].get("id"), owner))
+    assert wrong == []
+
+    yards = json.loads((DISTRICTS_LAYERS / "beskudnikovskiy" / "yards.geojson").read_text(encoding="utf-8"))
+    assert 128225312100038 in {f["properties"]["id"] for f in yards["features"]}

@@ -5,11 +5,22 @@ r"""Фаза 2: нарезка слоёв АСУ по 16 районам и ге�
        districts/<slug>.html + districts/index.html  (генерируются из шаблона)
 
 Район определяется попаданием центроида объекта в полигон districts.geojson.
+Исключение — дворы из REGISTRY_YARDS: граница OSM относит их не к тому району,
+что реестр АСУ ОДС (areas.geojson), поэтому двор и объекты внутри него берут
+район из реестра. Список пополняется только по жалобе района, точечно.
 Объекты вне всех 16 полигонов честно уходят в layers/unassigned/.
 """
 from __future__ import annotations
 import argparse, json, math, pathlib, shutil, sys
 DISTRICTS_FILE = pathlib.Path(__file__).resolve().parent.parent / "districts.geojson"
+AREAS_FILE = pathlib.Path(__file__).resolve().parent.parent / "areas.geojson"
+
+# ID двора в реестре АСУ ОДС (areas.geojson, поле «ID») — дворы, которым район даёт реестр, а не граница.
+REGISTRY_YARDS = {
+    # «Бескудниковский бульв. 10 к.1–5»: Жилищник Бескудниковский, а граница OSM целиком
+    # относит двор к Восточному Дегунину (жалоба района 2026-10-28).
+    "128225312100038",
+}
 OUT_ROOT = pathlib.Path(__file__).resolve().parent.parent / "districts"
 PAGE_TEMPLATE = pathlib.Path(__file__).resolve().parent / "district_page_template.html"
 
@@ -82,7 +93,37 @@ def load_geojson(path):
     return json.loads(pathlib.Path(path).read_text(encoding="utf-8"))
 
 
-def build_layers(source_dir, districts):
+class YardRegistry:
+    """Дворы реестра АСУ ОДС с районом; сетка по bbox для быстрого поиска."""
+    CELL = 0.01
+
+    def __init__(self, features):
+        self.yards = []
+        self.grid = {}
+        for f in features:
+            geom = f["geometry"]
+            polys = geom["coordinates"] if geom["type"] == "MultiPolygon" else [geom["coordinates"]]
+            xs = [p[0] for poly in polys for p in poly[0]]
+            ys = [p[1] for poly in polys for p in poly[0]]
+            index = len(self.yards)
+            self.yards.append((f["properties"]["district"], polys))
+            for i in range(int(min(xs) / self.CELL), int(max(xs) / self.CELL) + 1):
+                for j in range(int(min(ys) / self.CELL), int(max(ys) / self.CELL) + 1):
+                    self.grid.setdefault((i, j), []).append(index)
+
+    @classmethod
+    def load(cls, path=AREAS_FILE, ids=REGISTRY_YARDS):
+        return cls([f for f in load_geojson(path)["features"] if f["properties"]["ID"] in ids])
+
+    def district_at(self, point):
+        """Район двора, внутри которого точка; None — вне дворов или дворы разных районов."""
+        cell = (int(point[0] / self.CELL), int(point[1] / self.CELL))
+        owners = {self.yards[i][0] for i in self.grid.get(cell, ())
+                  if any(pip(point, poly) for poly in self.yards[i][1])}
+        return owners.pop() if len(owners) == 1 else None
+
+
+def build_layers(source_dir, districts, registry):
     """Читает слои Фазы 1 и возвращает {layer_key: {district: [features]}}."""
     src = pathlib.Path(source_dir)
     def features_of(filename):
@@ -94,7 +135,7 @@ def build_layers(source_dir, districts):
 
     def assign(name, feature, extra=None):
         c = centroid(feature["geometry"])
-        dist = district_of(c, districts)
+        dist = registry.district_at(c) or district_of(c, districts)
         props = {k: feature["properties"].get(k) for k in PROP_KEYS if feature["properties"].get(k) is not None}
         props["district"] = dist
         if extra:
@@ -236,7 +277,7 @@ def main():
     if set(districts) != set(SLUGS):
         print("District mismatch:", set(districts) ^ set(SLUGS), file=sys.stderr)
         sys.exit(1)
-    out, counter = build_layers(args.source, districts)
+    out, counter = build_layers(args.source, districts, YardRegistry.load())
     manifest = write_files(out, counter, districts)
     write_pages(districts)
     print(json.dumps({"districts": len(districts), "totals": manifest["totals"],
