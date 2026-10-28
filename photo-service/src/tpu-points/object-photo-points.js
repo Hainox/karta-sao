@@ -169,7 +169,7 @@ export function createObjectPhotoPointsRouter({ repository, authenticate, bounda
         }
         const [{ summarizeDistrictPoints, buildDistrictPointsReport, REPORT_KINDS_DISTRICT }, data] = await Promise.all([
           import('./district-points-report.js'),
-          repository.tpuReportData({ datasetId: 'sao_district_photo_points', kind: null }),
+          repository.listObjectPhotoPoints({ datasetId: 'sao_district_photo_points', acceptedOnly: true, excludePrefectureArchive: true, excludeImported: true }).then(points => ({ points })),
         ]);
         const generatedAt = new Date();
         const book = await buildDistrictPointsReport(summarizeDistrictPoints({ ...data, generatedAt }));
