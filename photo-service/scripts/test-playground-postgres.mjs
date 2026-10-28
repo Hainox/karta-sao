@@ -67,6 +67,18 @@ try {
   await book.xlsx.load(Buffer.from(await report.arrayBuffer()));
   const totalRow = book.getWorksheet('Свод по районам').getRow(5 + 16);
   assert.deepEqual(totalRow.values.slice(1, 7), ['Итого по САО', 3042, 1, 3040, 0, 1]);
+  // Миграции перезапускаются при каждой выкладке: районная точка с тремя
+  // снимками (два возврата на доработку) не должна ронять повторный прогон.
+  const districtPoint = '11111111-1111-4111-8111-111111111111';
+  await pool.query(`INSERT INTO object_photo_points (id,dataset_id,object_key,object_type,district,longitude,latitude,label,created_by,updated_by)
+    VALUES ($1,'sao_district_photo_points','district:sokol','district','Сокол',37.5,55.8,'p','test-admin','test-admin')`, [districtPoint]);
+  for (const [name, status, age] of [['a.png', 'rejected', 3], ['b.png', 'rejected', 2], ['c.png', 'accepted', 1]]) {
+    await pool.query(`INSERT INTO object_photo_point_photos (id,point_id,photo_bytes,photo_mime_type,photo_filename,photo_size,uploaded_by,uploaded_at,assignment_version,assignment_longitude,assignment_latitude,status,dataset_id)
+      VALUES (gen_random_uuid(),$1,'x','image/png',$2,1,'test-admin',now()-make_interval(days=>$4),1,37.5,55.8,$3,'sao_district_photo_points')`, [districtPoint, name, status, age]);
+  }
+  run('scripts/migrate.js');
+  const history = await pool.query('SELECT status FROM object_photo_point_photos WHERE point_id=$1 ORDER BY uploaded_at', [districtPoint]);
+  assert.deepEqual(history.rows.map((row) => row.status), ['rejected', 'rejected', 'accepted']);
   console.log('PASS: PostgreSQL migrations, import, slots, duplicate prevention, review, review queue and summary');
 } finally {
   if (server) await new Promise(resolve => server.close(resolve));
