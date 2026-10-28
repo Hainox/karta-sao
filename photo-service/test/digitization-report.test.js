@@ -53,8 +53,8 @@ test('книга Excel: свод по районам, точки и лист д�
 });
 
 test('строки очереди точек съёмки превращаются в точки свода', async () => {
-  const { entrancePointsForReport } = await import('../src/tpu-points/district-point-photos.js');
-  const points = entrancePointsForReport([
+  const { slotPointsForReport } = await import('../src/tpu-points/district-point-photos.js');
+  const points = slotPointsForReport([
     { district: 'Коптево', label: '9.1', photo_status: 'accepted', photo_id: 'a', uploaded_at: '2026-10-27T08:00:00Z' },
     { district: 'Коптево', label: '9.2', rejected_photo_id: 'r', rejected_comment: 'Темно', rejected_at: '2026-10-27T10:00:00Z', rejected_uploaded_at: '2026-10-27T07:00:00Z' },
     { district: 'Коптево', label: '9.3' },

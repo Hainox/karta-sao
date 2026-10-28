@@ -49,7 +49,25 @@ try {
   assert.equal((await upload()).status, 409);
   const active = await pool.query("SELECT status FROM playground_photo_slot_photos WHERE point_id=$1 ORDER BY uploaded_at", [point.id]);
   assert.deepEqual(active.rows.map(row => row.status), ['rejected','accepted']);
-  console.log('PASS: PostgreSQL migrations, import, slots, duplicate prevention and review');
+
+  // Кабинет приёмки, режим «ДП и СП»: очередь и свод считают все площадки по реальному SQL.
+  const returned = (await (await fetch(base + '/public?district=' + encodeURIComponent('Аэропорт'))).json()).points[1];
+  assert.equal((await fetch(base + '/' + returned.id + '/photo', { method:'PUT',headers:{'x-test-role':'district','content-type':'image/png'},body:png })).status, 201);
+  assert.equal((await fetch(base + '/' + returned.id + '/review', {method:'POST',headers:{'x-test-role':'admin','content-type':'application/json'},body:JSON.stringify({decision:'rejected',comment:'Площадка не в кадре'})})).status, 200);
+  assert.equal((await fetch(base + '/queue', {headers:{'x-test-role':'district'}})).status, 403);
+  const queue = await (await fetch(base + '/queue', {headers:{'x-test-role':'admin'}})).json();
+  assert.deepEqual(queue.counts, { total: 3042, empty: 3040, pending: 0, accepted: 1, rework: 1 });
+  assert.equal(queue.rework[0].point_id, returned.id);
+  assert.equal(queue.rework[0].rejected_comment, 'Площадка не в кадре');
+  assert.ok(['dp', 'sp'].includes(queue.rework[0].kind));
+  const report = await fetch(base + '/report.xlsx', {headers:{'x-test-role':'admin'}});
+  assert.equal(report.status, 200);
+  const { default: ExcelJS } = await import('exceljs');
+  const book = new ExcelJS.Workbook();
+  await book.xlsx.load(Buffer.from(await report.arrayBuffer()));
+  const totalRow = book.getWorksheet('Свод по районам').getRow(5 + 16);
+  assert.deepEqual(totalRow.values.slice(1, 7), ['Итого по САО', 3042, 1, 3040, 0, 1]);
+  console.log('PASS: PostgreSQL migrations, import, slots, duplicate prevention, review, review queue and summary');
 } finally {
   if (server) await new Promise(resolve => server.close(resolve));
   await pool.end();
