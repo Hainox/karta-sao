@@ -136,6 +136,39 @@ PHOTO_SERVICE_BACKUP_DIR=/var/backups/sao-photo-service \
 
 Before the first real upload, verify `SHA256SUMS` and complete one restore into a disposable Compose project. Restore is destructive for its explicitly named test target and requires `PHOTO_SERVICE_RESTORE_CONFIRM=I_UNDERSTAND_THIS_REPLACES_THE_TEST_DATABASE`.
 
+### Nightly encrypted backups on obhod-sao.ru (`deploy/server-backup/`)
+
+Since 2026-10-12 production is backed up by `server-backup.py`, not by `scripts/backup.sh`. The sources live in `deploy/server-backup/`; on the server they are installed as:
+
+| Repository file | On the server | Run by |
+|---|---|---|
+| `server-backup.py` | `/opt/sao-recovery/server-backup.py` | `sao-backup-database.timer` (03:30 UTC), `sao-backup-media.timer` (03:46 UTC) |
+| `sao_backup_retention.py` | `/opt/sao-recovery/sao_backup_retention.py` | imported by `server-backup.py` |
+| `sao-offsite.sh` | `/usr/local/bin/sao-offsite.sh` | `sao-offsite.timer` (04:40 UTC), Google Drive `SAO-backups/` |
+
+Each run writes `/opt/sao-recovery/server-backups/<stamp>-<kind>/sao-<stamp>-<kind>.tar.age` plus `result.json`; `result.json` is written last and marks the copy complete. The server keeps 2 copies of each kind; Google Drive keeps 30 database copies and 1 media copy.
+
+Photos are stored in the photo database (`object_slot_photos`, `object_photo_point_photos`), so every database copy contains all photos and grows by gigabytes a day. On 2026-10-28 the disk filled up overnight: a run died half-way, left 31 GB of unencrypted dumps, PostgreSQL could not checkpoint and the photo service went down with 502. The script now:
+
+- deletes its own directory when a run fails, and removes leftovers of earlier failed runs (only directories that contain nothing but `payload/`, `payload.tar` and the partial `.age`);
+- deletes the oldest complete copy before writing a new one, and refuses to start when free space is below twice the last copy plus 30 % growth plus 5 GB;
+- streams `tar` into `age`, so no plaintext `payload.tar` is written.
+
+Install an update (back up the old files first, keep the file names):
+
+```sh
+cd /opt/sao-recovery
+cp server-backup.py server-backup.py.bak-$(date +%Y%m%d)
+install -m 0700 /path/to/release/deploy/server-backup/server-backup.py server-backup.py
+install -m 0600 /path/to/release/deploy/server-backup/sao_backup_retention.py sao_backup_retention.py
+systemctl start sao-backup-database.service && journalctl -u sao-backup-database.service -n 5 --no-pager
+ls -la /opt/sao-recovery/server-backups && df -h /
+```
+
+`/opt/sao-recovery/daily-databases/` received another, **unencrypted** full dump every day at 05:00 UTC from a job that is neither a systemd timer, a cron entry nor a container on the server (probably a scheduled SSH job from another machine). Until that job is found and switched off at its source, make the directory immutable with `chattr +i /opt/sao-recovery/daily-databases`, so the job fails instead of filling the disk; `chattr -i` reverts it.
+
+If the disk fills up anyway: the database log shows `PANIC: could not write ... No space left on device`. Check `df -h /` and `du -xh / --max-depth=2 | sort -h | tail`, delete the oldest backup copies (never `docker system prune` or volumes), then `$DC restart database` and `$DC restart photo-service`. While the disk is full, `tune2fs -m 0 /dev/mapper/hk-root` gives PostgreSQL the root reserve; put it back with `tune2fs -m 5` afterwards.
+
 ## Proxy rollout
 
 1. Back up `/opt/jirajura/deploy/nginx/active.conf.template` and `/opt/jirajura/docker-compose.prod.yml`.
