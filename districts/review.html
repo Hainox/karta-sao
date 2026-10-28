@@ -99,6 +99,7 @@
       <div class="counts" id="counts"></div>
       <div class="toolbar">
         <label>Район<select id="districtFilter"><option value="">Все районы САО</option></select></label>
+        <button class="secondary" id="exportPoints" type="button">Скачать сводку Excel</button>
         <div class="tabs" role="tablist">
           <button class="tab active" type="button" data-tab="pending" role="tab">На проверке</button>
           <button class="tab" type="button" data-tab="rework" role="tab">На доработке</button>
@@ -462,6 +463,28 @@
       catch (error) { el('loginStatus').textContent = 'Вход не выполнен: ' + error.message; }
     };
     el('logout').onclick = () => { api.clearSession(); backToList(); state.queue = null; el('list').replaceChildren(); showSession(); };
+    el('exportPoints').onclick = async () => {
+      const button = el('exportPoints');
+      button.disabled = true;
+      setStatus('listStatus', 'Готовим сводку Excel…');
+      let url;
+      try {
+        const response = await api.request('/api/object-photo-points/report.xlsx?dataset=sao_district_photo_points&report=review');
+        url = URL.createObjectURL(await response.blob());
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'Svodka_tochek_SAO.xlsx';
+        document.body.append(link);
+        link.click();
+        link.remove();
+        setStatus('listStatus', 'Сводка по всем районам скачана.');
+      } catch (error) {
+        setStatus('listStatus', 'Не удалось скачать сводку: ' + error.message, true);
+      } finally {
+        if (url) setTimeout(() => URL.revokeObjectURL(url), 60000);
+        button.disabled = false;
+      }
+    };
     el('districtFilter').onchange = () => { state.shown = PAGE; render(); };
     el('more').onclick = () => { state.shown += PAGE; render(); };
     document.querySelectorAll('.tab').forEach((tab) => {
