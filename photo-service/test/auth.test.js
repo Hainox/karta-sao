@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { bearerToken, expiredSessionCookie, hashPassword, hashSessionToken, normalizeLogin, parseCookies, sessionCookie, verifyPassword } from '../src/auth.js';
+import { bearerToken, expiredSessionCookie, hashPassword, hashSessionToken, isAnonymousSessionProbe, normalizeLogin, parseCookies, sessionCookie, verifyPassword } from '../src/auth.js';
 
 test('district names are accepted as normalized logins', () => {
   assert.equal(normalizeLogin('  Аэропорт '), 'аэропорт');
@@ -63,4 +63,16 @@ test('битое значение cookie не роняет разбор сесс
   const cookies = parseCookies('a=%ZZ; photo_session=ok');
   assert.equal(cookies.a, '%ZZ');
   assert.equal(cookies.photo_session, 'ok');
+});
+
+test('a visitor without any session is told "no user" instead of an error', () => {
+  assert.equal(isAnonymousSessionProbe('GET', '/auth/me', {}), true);
+  assert.equal(isAnonymousSessionProbe('GET', '/auth/me', { cookie: 'other=1' }), true);
+});
+
+test('a presented session, even an expired one, still goes through the normal check', () => {
+  assert.equal(isAnonymousSessionProbe('GET', '/auth/me', { cookie: 'photo_session=stale' }), false);
+  assert.equal(isAnonymousSessionProbe('GET', '/auth/me', { authorization: 'Bearer stale' }), false);
+  assert.equal(isAnonymousSessionProbe('GET', '/photos', {}), false);
+  assert.equal(isAnonymousSessionProbe('POST', '/auth/me', {}), false);
 });

@@ -11,7 +11,7 @@ import { photoServiceCookiePolicy, photoServiceDatabaseConfig } from './src/conf
 import { createDatabasePool } from './src/db-pool.js';
 import { createHealthHandler } from './src/health.js';
 import {
-  bearerToken, createSessionToken, expiredSessionCookie, hashSessionToken,
+  bearerToken, createSessionToken, expiredSessionCookie, hashSessionToken, isAnonymousSessionProbe,
   MAX_SESSION_AGE_SECONDS, authenticateMapUser, normalizeLogin, parseCookies, sessionCookie,
 } from './src/auth.js';
 import { parseMultipart } from './src/multipart.js';
@@ -660,6 +660,7 @@ async function handler(request, response) {
       if (!job || job.name !== archiveFileMatch[1]) return sendError(response, request, 404, 'archive_not_found');
       return serveArchiveFile(request, response, archiveFileMatch[1]);
     }
+    if (isAnonymousSessionProbe(request.method, pathname, request.headers)) return sendJson(response, 200, { user: null }, request);
     const user = await currentUser(request);
     if (!user) return sendError(response, request, 401, 'authentication_required');
     // Учётка отдела МКД видит только свой раздел, а раздел МКД — только она и

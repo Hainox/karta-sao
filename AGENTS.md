@@ -5,7 +5,7 @@
 - Gotchas: Pages need a local server (`python3 -m http.server 8000`): `file://` blocks the GeoJSON fetch and the Yandex key is referer-locked to `localhost:8000`. GeoJSON order is `[lng, lat]`.
 - Checks: `python -m pytest tests -q` from the root (atlas pages and published data); `npm test` in `photo-service/`; `npm run test:ui` (Playwright) in `odh-map/`. CI runs only the first two.
 - Conventions: UI text, README, and `ChangeLog.md` are in Russian; each user-visible change gets a dated `ChangeLog.md` bullet. Working sources go in `projects/.../work`, finished ODH layers in `odh-map/layers/`; the root holds only published layers. The type dictionary in `odh-map/district-changes.js` drives line colours, labels, and legend at once; change types there only.
-- Why: an object outside every yard stays «Без участка» in exports; it is never silently attributed to a district. `object_no` is assigned once and never renumbered, because people refer to objects by it.
+- Why: an object outside every yard stays «Без участка» in exports; it is never silently attributed to a district. The one explicit exception: urns that the MAF export leaves without a district get one from `districts.geojson` via `work/assign_urn_districts.py`, marked `district_source: "boundary"` and shown as such in the card. `object_no` is assigned once and never renumbered, because people refer to objects by it.
 - Off-limits: generated layers are rebuilt by their scripts, not edited by hand: `districts.geojson` via `work/build_districts_boundaries.py` then `work/apply_water_mask.py`. `projects/odh-yandex-export/outputs/` holds past deliverables.
 
 ## Pointers

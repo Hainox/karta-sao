@@ -95,6 +95,14 @@ export function bearerToken(header) {
   return match ? match[1] : '';
 }
 
+// Every map asks /auth/me on load. A visitor who never signed in carries no session at all;
+// answering them "no user" instead of 401 keeps every page's browser console free of a red
+// error. Anyone who presents a session, even an expired one, still gets the normal check.
+export function isAnonymousSessionProbe(method, pathname, headers) {
+  return method === 'GET' && pathname === '/auth/me'
+    && !parseCookies(headers.cookie).photo_session && !bearerToken(headers.authorization);
+}
+
 export { MAX_SESSION_AGE_SECONDS };
 
 // District entry is intentionally public. Role and scope always come from the DB.

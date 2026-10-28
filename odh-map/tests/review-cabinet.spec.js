@@ -67,6 +67,8 @@ test('кабинет приёмки выгружает Excel-сводку по �
     if (url.pathname.endsWith('/content')) return route.fulfill({ status: 200, contentType: 'image/jpeg', body: Buffer.from([0xff, 0xd8, 0xff, 0xd9]) });
     return route.fulfill({ status: 404, contentType: 'application/json', body: '{}' });
   });
+  // Имя файла несёт дату по Москве: фиксируем часы, иначе тест проходит только в один день.
+  await page.clock.setFixedTime(new Date('2026-10-27T09:00:00Z'));
   await page.goto('http://127.0.0.1:8766/review-cabinet/?api=https%3A%2F%2Fmock.test%2Fphoto-api');
   await page.getByLabel('Логин').fill('prefecture@example.test');
   await page.getByLabel('Пароль').fill('secret');
