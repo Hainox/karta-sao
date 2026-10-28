@@ -28,19 +28,23 @@ ALTER TABLE object_photo_point_photos ALTER COLUMN dataset_id SET NOT NULL;
 -- Несколько старых снимков у одной районной точки: последняя остаётся
 -- принятой, предыдущие уходят в «заменённые», чтобы уникальный индекс ниже
 -- прошёл на существующих данных.
+-- Миграции перезапускаются при каждой выкладке: запрос обязан проходить и на
+-- живых данных, где у точки бывает три и больше снимков (возвраты на
+-- доработку). Прежний подзапрос с OFFSET 1 в этом случае падал с «more than
+-- one row returned by a subquery». Принятый снимок уходит в заменённые, только
+-- если у той же точки есть более поздний принятый: при живом уникальном
+-- индексе ниже (не больше одного действующего фото) это ничего не меняет.
 UPDATE object_photo_point_photos f
 SET status = 'superseded'
-FROM (
-  SELECT p.id AS point_id,
-         (SELECT other.id FROM object_photo_point_photos other
-          WHERE other.point_id = p.id AND other.dataset_id = 'sao_district_photo_points'
-          ORDER BY other.uploaded_at DESC, other.id DESC OFFSET 1) AS older_id
-  FROM object_photo_points p
-  WHERE p.dataset_id = 'sao_district_photo_points'
-) duplicates
-WHERE f.id = duplicates.older_id
-  AND f.dataset_id = 'sao_district_photo_points'
-  AND f.status = 'accepted';
+WHERE f.dataset_id = 'sao_district_photo_points'
+  AND f.status = 'accepted'
+  AND EXISTS (
+    SELECT 1 FROM object_photo_point_photos newer
+    WHERE newer.point_id = f.point_id
+      AND newer.dataset_id = 'sao_district_photo_points'
+      AND newer.status = 'accepted'
+      AND (newer.uploaded_at, newer.id) > (f.uploaded_at, f.id)
+  );
 
 -- В слоте районной точки одновременно лежит не больше одного действующего
 -- фото (на проверке или принятого). Остаток держит БД, а не приложение.

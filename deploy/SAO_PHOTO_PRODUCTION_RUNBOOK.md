@@ -85,19 +85,35 @@ The last command must return `{"objects":[...]}` (an empty list before the first
 
 ### Sidewalk shooting points (migration 020, `scripts/import-sidewalk-photo-points.js`)
 
-The district maps let the prefecture move, rotate and delete the draft sidewalk shooting points («Точки съёмки · тротуары (тест)»). The points live in the new `sidewalk_photo_points` table; the migration only creates it and does not touch other data. After the migration, load the points from the published atlas layers. The import is a dry run by default and skips points whose number is already in the table, so rerunning it never overwrites the prefecture's edits:
+The district maps let the prefecture move, rotate and delete the draft sidewalk shooting points («Точки съёмки · тротуары (тест)»). The points live in the new `sidewalk_photo_points` table; the migration only creates it and does not touch other data.
+
+`/opt/sao-photo-service` has a `.git` folder, but the files are copied over (see «Shipping the files» below), so `git pull` refuses to run. Fetch the commit and unpack it with `git archive` instead; this never touches `.env` or `compose.recovery.yaml`. Keep a copy of the replaced files first: it is the only rollback.
+
+```sh
+cd /opt/sao-photo-service
+tar -czf /var/backups/sao-photo-service/photo-service-files-$(date +%F-%H%M).tgz --exclude=photo-service/node_modules photo-service
+git fetch origin main
+git archive origin/main photo-service/src photo-service/server.js photo-service/scripts photo-service/migrations photo-service/README.md photo-service/package.json photo-service/package-lock.json | tar -x -C /opt/sao-photo-service
+grep -rl $'\r' photo-service/src photo-service/migrations | head
+rm -rf /tmp/sidewalk-layers && mkdir -p /tmp/sidewalk-layers
+git archive origin/main $(git ls-tree -r --name-only origin/main districts/layers | grep sidewalk_shoot.geojson) | tar -x -C /tmp/sidewalk-layers
+```
+
+Then rebuild, migrate, load the points and restart. The import is a dry run by default and skips points whose number is already in the table, so rerunning it never overwrites the prefecture's edits:
 
 ```sh
 cd /opt/sao-photo-service/photo-service
 DC="docker compose -p sao-photo-service -f compose.yaml -f compose.recovery.yaml"
 $DC build photo-service
 $DC run --rm photo-service node scripts/migrate.js
-$DC run --rm -v /opt/sao-photo-service:/sources:ro photo-service node scripts/import-sidewalk-photo-points.js --source=/sources/districts/layers
-$DC run --rm -v /opt/sao-photo-service:/sources:ro photo-service node scripts/import-sidewalk-photo-points.js --source=/sources/districts/layers --apply
+$DC run --rm -v /tmp/sidewalk-layers:/sources:ro photo-service node scripts/import-sidewalk-photo-points.js --source=/sources/districts/layers
+$DC run --rm -v /tmp/sidewalk-layers:/sources:ro photo-service node scripts/import-sidewalk-photo-points.js --source=/sources/districts/layers --apply
 $DC up -d photo-service
 ```
 
-The dry run must report 5 670 points and 0 with errors. Until this is done, the maps show the same points from the layer file, read-only.
+`migrate.js` must end with `020_sidewalk_photo_points.sql applied`, and the dry run must report 5 670 points and 0 with errors. Until this is done, the maps show the same points from the layer file, read-only.
+
+Migration 017 used to fail on rerun with «more than one row returned by a subquery used as an expression» once a district point had three or more photos (returns for rework). Since 2026-10-28 it passes on such data and changes nothing there; that failure blocked every update of the service.
 
 ### Issuing district and АвД accounts (`scripts/issue-district-accounts.js`)
 
