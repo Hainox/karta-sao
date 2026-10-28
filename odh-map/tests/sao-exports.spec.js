@@ -128,5 +128,6 @@ test('кнопка выгрузки отдаёт книгу целиком', asy
   expect(download.suggestedFilename()).toMatch(/^sao-objekty-po-rayonam-i-uchastkam-\d{4}-\d{2}-\d{2}\.xlsx$/);
   // Объектов ровно столько, сколько прочитано картой.
   await expect(page.locator('#status')).toContainText('Выгрузка готова', { timeout: 120000 });
-  await expect(page.locator('#status')).toContainText('листов 20');
+  // 2 сводки + лист на район: 16 районов и «Без района» (урны за границей САО).
+  await expect(page.locator('#status')).toContainText('районов 17, листов 19');
 });
