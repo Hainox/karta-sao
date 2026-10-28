@@ -1,0 +1,112 @@
+/* Общая основа панелей («худа») всех карт атласа: читаемо для любого возраста,
+   крупные цели нажатия, видимый фокус, спокойные анимации. Цвета — атласа.
+   Подключается после atlas-brand.css; сами карты задают только раскладку. */
+:root{
+  --hud-ink:#102636;--hud-muted:#4f626a;--hud-line:#d3dde0;--hud-paper:#f7f5ef;--hud-surface:#fff;
+  --hud-accent:#0d827c;--hud-accent-strong:#0a6b66;--hud-accent-soft:#e6f4f1;--hud-focus:#f2b705;
+  --hud-danger:#a12a1a;--hud-ok:#0c7a5a;--hud-pending:#2a6fdb;--hud-rework:#c22545;--hud-empty:#9aa7ac;
+  --hud-radius:12px;--hud-radius-sm:9px;--hud-target:40px;
+  --hud-ease:cubic-bezier(.2,.7,.2,1);--hud-fast:.16s;--hud-mid:.24s;
+  --hud-shadow:0 14px 34px -18px rgba(16,38,54,.55),0 2px 6px rgba(16,38,54,.10);
+}
+
+/* Видимый фокус для клавиатуры на всех элементах панели и карты. */
+.hud :is(a,button,input,select,summary,textarea):focus-visible,.hud-focus:focus-visible{outline:3px solid var(--hud-focus);outline-offset:2px;border-radius:6px}
+
+/* Раздел панели: сворачивается, шеврон поворачивается, содержимое мягко появляется. */
+.hud-section{border-top:1px solid var(--hud-line);padding-top:12px}
+.hud-section > summary{display:flex;align-items:center;gap:10px;min-height:var(--hud-target);list-style:none;cursor:pointer;user-select:none}
+.hud-section > summary::-webkit-details-marker{display:none}
+.hud-section > summary .hud-title{flex:1;margin:0;font-size:16px;font-weight:800;color:var(--hud-ink)}
+.hud-section > summary .hud-meta{color:var(--hud-muted);font-size:13px;font-variant-numeric:tabular-nums}
+.hud-chev{flex:0 0 26px;display:grid;place-items:center;width:26px;height:26px;border-radius:8px;color:var(--hud-muted);transition:transform var(--hud-mid) var(--hud-ease),background var(--hud-fast)}
+.hud-chev svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.hud-section[open] > summary .hud-chev{transform:rotate(180deg)}
+.hud-section > summary:hover .hud-chev{background:rgba(16,38,54,.06);color:var(--hud-ink)}
+.hud-section[open] > .hud-body{animation:hud-reveal var(--hud-mid) var(--hud-ease)}
+.hud-body{display:flex;flex-direction:column;gap:8px;padding:4px 0 2px}
+@keyframes hud-reveal{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+
+/* Строка слоя: переключатель вместо мелкой галочки, вся строка — цель нажатия. */
+.hud .layer-row{min-height:var(--hud-target);gap:11px;padding:8px 12px;border-radius:var(--hud-radius-sm);transition:border-color var(--hud-fast),background var(--hud-fast),box-shadow var(--hud-fast)}
+.hud .layer-row + .layer-row{margin-top:6px}
+.hud .layer-row:hover{border-color:#a9c9c4}
+.hud .layer-row:not(.off){border-color:#9fd0c7;background:linear-gradient(0deg,var(--hud-accent-soft),var(--hud-accent-soft)) padding-box}
+.hud .layer-row .label{font-size:14.5px;line-height:1.3}
+.hud .layer-row.off .label{color:var(--hud-muted)}
+.hud .layer-row .count{font-size:13px;color:var(--hud-muted)}
+.hud .layer-row input[type=checkbox]{appearance:none;-webkit-appearance:none;flex:0 0 36px;width:36px;height:22px;margin:0;border-radius:999px;background:#c7d1d4;position:relative;cursor:pointer;transition:background var(--hud-fast) var(--hud-ease)}
+.hud .layer-row input[type=checkbox]::before{content:"";position:absolute;left:3px;top:3px;width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(16,38,54,.35);transition:transform var(--hud-mid) var(--hud-ease)}
+.hud .layer-row input[type=checkbox]:checked{background:var(--hud-accent)}
+.hud .layer-row input[type=checkbox]:checked::before{transform:translateX(14px)}
+.hud .layer-row input[type=checkbox]:focus-visible{outline:3px solid var(--hud-focus);outline-offset:2px}
+.hud .swatch{flex:0 0 14px;width:14px;height:14px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px rgba(16,38,54,.25)}
+
+/* Кнопки: основная, обычная, тихая, опасная. */
+.hud-btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:var(--hud-target);padding:8px 14px;border:1px solid #a9b8bc;border-radius:var(--hud-radius-sm);background:var(--hud-surface);color:var(--hud-ink);font:inherit;font-size:14px;font-weight:700;line-height:1.2;text-decoration:none;cursor:pointer;transition:background var(--hud-fast),border-color var(--hud-fast),color var(--hud-fast),transform var(--hud-fast)}
+.hud-btn:hover{border-color:var(--hud-accent);color:var(--hud-accent)}
+.hud-btn:active{transform:translateY(1px)}
+.hud-btn.primary{border-color:var(--hud-accent);background:var(--hud-accent);color:#fff}
+.hud-btn.primary:hover{background:var(--hud-accent-strong);color:#fff}
+.hud-btn.ghost{border-color:transparent;background:transparent;color:var(--hud-accent)}
+.hud-btn.ghost:hover{background:var(--hud-accent-soft)}
+.hud-btn.danger{border-color:#e3b3ad;color:var(--hud-danger)}
+.hud-btn[disabled]{opacity:.55;cursor:progress}
+.hud-btn[hidden]{display:none}
+.hud-btn svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* Переключатель режимов: одна плашка, выбранный режим подсвечен. */
+.hud-seg{display:flex;gap:4px;padding:4px;border:1px solid var(--hud-line);border-radius:var(--hud-radius);background:#eef2f2}
+.hud-seg[hidden]{display:none}
+.hud-seg > button{flex:1;min-height:36px;padding:6px 8px;border:0;border-radius:9px;background:transparent;color:var(--hud-muted);font:inherit;font-size:13.5px;font-weight:800;cursor:pointer;transition:background var(--hud-mid) var(--hud-ease),color var(--hud-fast),box-shadow var(--hud-mid)}
+.hud-seg > button:hover{color:var(--hud-ink)}
+.hud-seg > button.active{background:var(--hud-surface);color:var(--hud-accent-strong);box-shadow:0 1px 4px rgba(16,38,54,.18)}
+.hud-seg > button[hidden]{display:none}
+
+/* Подсказка к текущему действию: меняется — мягко подсвечивается. */
+.hud-callout{display:flex;gap:10px;align-items:flex-start;margin:0;padding:10px 12px;border:1px solid #cfe6df;border-radius:var(--hud-radius-sm);background:#f1faf7;color:#1f5c51;font-size:13.5px;line-height:1.45}
+.hud-callout::before{content:"";flex:0 0 18px;height:18px;margin-top:1px;border-radius:50%;background:var(--hud-accent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cpath d='M9 8v5M9 5.2v.1' stroke='white' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") center/18px no-repeat}
+.hud-callout:empty{display:none}
+.hud-callout.flash{animation:hud-flash .9s var(--hud-ease)}
+@keyframes hud-flash{0%{background:#fff6d6;border-color:#f2d27a}100%{background:#f1faf7;border-color:#cfe6df}}
+
+/* Плашка учётной записи. */
+.hud-account{display:flex;align-items:center;gap:10px;padding:8px 10px;border:1px solid var(--hud-line);border-radius:var(--hud-radius);background:var(--hud-surface)}
+.hud-account .who{flex:1;min-width:0;font-size:13.5px;line-height:1.35}
+.hud-account .who b{display:block;font-size:14px}
+.hud-account .avatar{flex:0 0 32px;display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:var(--hud-accent-soft);color:var(--hud-accent-strong);font-weight:800}
+
+/* Всплывающее сообщение внизу экрана вместо строки состояния. */
+.hud-toast{position:fixed;left:50%;bottom:22px;z-index:2000;max-width:min(560px,calc(100vw - 32px));padding:11px 16px;border-radius:12px;background:var(--hud-ink);color:#fff;font-size:14px;line-height:1.4;box-shadow:var(--hud-shadow);transform:translate(-50%,16px);opacity:0;pointer-events:none;transition:opacity var(--hud-mid) var(--hud-ease),transform var(--hud-mid) var(--hud-ease)}
+.hud-toast.show{opacity:1;transform:translate(-50%,0)}
+
+/* Сводка префектуры: плашка поверх карты. */
+.hud-summary{position:fixed;top:14px;right:14px;z-index:900;width:min(330px,calc(100vw - 28px));border:1px solid #c9d4d6;border-radius:14px;background:rgba(255,255,255,.97);box-shadow:var(--hud-shadow);color:var(--hud-ink);font-size:13.5px;animation:hud-drop var(--hud-mid) var(--hud-ease)}
+.hud-summary[hidden]{display:none}
+@keyframes hud-drop{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+.hud-summary header{display:flex;align-items:center;gap:8px;padding:10px 10px 10px 14px}
+.hud-summary header b{flex:1;font-size:14.5px}
+.hud-summary header small{color:var(--hud-muted);font-size:12px;font-variant-numeric:tabular-nums}
+.hud-summary .hud-icon-btn{display:grid;place-items:center;width:32px;height:32px;border:0;border-radius:8px;background:transparent;color:var(--hud-muted);cursor:pointer}
+.hud-summary .hud-icon-btn:hover{background:rgba(16,38,54,.07);color:var(--hud-ink)}
+.hud-summary .hud-icon-btn svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform var(--hud-mid) var(--hud-ease)}
+.hud-summary.busy [data-refresh] svg{animation:hud-spin .9s linear infinite}
+.hud-summary.collapsed [data-collapse] svg{transform:rotate(180deg)}
+@keyframes hud-spin{to{transform:rotate(360deg)}}
+.hud-summary ul{list-style:none;margin:0;padding:0 14px 12px;display:grid;gap:11px}
+.hud-summary.collapsed ul{gap:7px}
+.hud-sum-row .line{display:flex;align-items:baseline;gap:8px}
+.hud-sum-row .name{flex:1;font-weight:700}
+.hud-sum-row .pct{font-weight:800;font-variant-numeric:tabular-nums}
+.hud-bar{display:flex;height:9px;margin-top:5px;border-radius:999px;background:#e8eef0;overflow:hidden}
+.hud-bar i{display:block;height:100%;transition:width .6s var(--hud-ease)}
+.hud-bar .accepted{background:var(--hud-ok)}.hud-bar .pending{background:var(--hud-pending)}.hud-bar .rework{background:var(--hud-rework)}
+.hud-sum-row .legend{display:flex;flex-wrap:wrap;gap:4px 12px;margin-top:5px;color:var(--hud-muted);font-size:12.5px;font-variant-numeric:tabular-nums}
+.hud-sum-row .legend span::before{content:"";display:inline-block;width:8px;height:8px;margin-right:5px;border-radius:50%;background:var(--dot)}
+.hud-summary.collapsed .legend{display:none}
+.hud-summary .hud-sum-note{margin:0;padding:0 14px 12px;color:var(--hud-muted);font-size:12.5px}
+
+@media (max-width:820px){.hud-summary{top:auto;bottom:12px;right:12px}.hud-summary.collapsed ul{display:none}}
+@media (prefers-reduced-motion:reduce){
+  .hud *,.hud-toast,.hud-summary,.hud-summary *{animation:none!important;transition:none!important}
+}
