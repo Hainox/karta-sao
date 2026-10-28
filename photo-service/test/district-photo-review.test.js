@@ -148,3 +148,22 @@ test('решение принимает или отклоняет фото по 
     assert.deepEqual(reviewed()[0], { id: '4917ba9f-fa5d-4a86-8f04-1a5ea1fe3c1e', decision: 'accepted', comment: '', actorId: 'user' });
   });
 });
+
+test('свод по фото въездных групп выгружается префектуре одной книгой Excel', async () => {
+  await serve('prefecture_admin', async ({ base }) => {
+    const response = await fetch(`${base}/district-photos/report.xlsx`);
+    assert.equal(response.status, 200);
+    assert.match(response.headers.get('content-disposition'), /Svod_foto_vezdnye_gruppy_SAO_\d{4}-\d{2}-\d{2}\.xlsx/);
+    const ExcelJS = (await import('exceljs')).default;
+    const book = new ExcelJS.Workbook();
+    await book.xlsx.load(Buffer.from(await response.arrayBuffer()));
+    const airport = book.getWorksheet('Свод по районам').getRow(5);
+    assert.deepEqual(airport.values.slice(1, 6), ['Аэропорт', 4, 1, 0, 2]);
+    assert.equal(book.getWorksheet('На доработке').getRow(2).getCell(3).value, 'Снимок без клумбы в кадре');
+  });
+  for (const role of ['district_editor', 'reviewer']) {
+    await serve(role, async ({ base }) => {
+      assert.equal((await fetch(`${base}/district-photos/report.xlsx`)).status, 403);
+    });
+  }
+});
