@@ -197,7 +197,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
   </aside>
   <main id="map"></main>
 </div>
-<script src="playground-photo-layer.js?v=20261028-restore"></script>
+<script src="playground-photo-layer.js?v=20261028-center"></script>
 <script src="sidewalk-shoot-layer.js?v=20261028-edit"></script>
 <script>
 (() => {
@@ -232,8 +232,11 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     return { fill: color, fillOpacity: opacity, stroke: [{ color: line.color, width: line.width, opacity: 0.95 }], interactive: true, cursor: 'pointer' };
   }
 
+  /** Центрирование на выбранном объекте — только в просмотре или в режиме «Рука»:
+      в «Разметке» и «Переносе» карта стоит на месте, иначе она уезжает из-под курсора. */
   function centerSelection(coordinates) {
     if (!state.map || !Array.isArray(coordinates)) return;
+    if ((state.shootMode || state.dragMode) && !state.handMode) return;
     let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
     function visit(value) {
       if (!Array.isArray(value)) return;
@@ -304,7 +307,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       }
     }
     renderControls();
-    state.playgroundLayer = window.initPlaygroundPhotoLayer({ map: state.map, district: DISTRICT, apiRequest, getUser: () => state.photoUser, preparePointPhoto, escapeHtml });
+    state.playgroundLayer = window.initPlaygroundPhotoLayer({ map: state.map, district: DISTRICT, apiRequest, getUser: () => state.photoUser, preparePointPhoto, escapeHtml, centerSelection });
     state.sidewalkLayer = window.initSidewalkShootLayer({ map: state.map, slug: SLUG, district: DISTRICT, apiRequest, escapeHtml, centerSelection });
     await loadPhotoPoints();
     renderShootMarkers();
