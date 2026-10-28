@@ -39,6 +39,7 @@ h1{margin:2px 0 0;font-size:24px;line-height:1.15}
 .shoot-login .row button{flex:1;min-height:30px;padding:4px 10px;border:1px solid #8a979c;border-radius:8px;background:#fff;color:var(--ink);font:inherit;font-size:12.5px;cursor:pointer}
 .shoot-login .row button.primary{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:800}
 .shoot-hint{margin-top:6px;padding:9px 11px;border:1px solid #cfe6df;border-radius:10px;background:#eff9f5;color:#27665a;font-size:12.5px;line-height:1.45}
+.shoot-hint:empty{display:none}
 .shoot-list{display:flex;flex-direction:column;gap:5px;margin-top:6px;max-height:280px;overflow:auto}
 .trial-badge{display:inline-block;margin-top:3px;padding:1px 6px;border-radius:5px;background:#fff3c4;color:#7a5a00;font-size:10.5px;font-weight:800;letter-spacing:.04em}
 .layer-row .label .trial-badge{display:table}
@@ -165,7 +166,8 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       <div class="row"><button id="shootLoginGo" class="primary" type="button">Войти</button><button id="shootLogout" type="button" hidden>Выйти</button></div>
       <div class="status" id="shootLoginState"></div>
     </div>
-    <label class="layer-row off" id="shootLayerRow" hidden><input type="checkbox" id="shootLayerToggle"><span class="swatch" style="background:#ffcb00"></span><span class="label">Точки съёмки</span><span class="count" id="shootLayerCount">0</span></label>
+    <label class="layer-row off" id="shootLayerRow" hidden><input type="checkbox" id="shootLayerToggle"><span class="swatch" style="background:#ffcb00"></span><span class="label">Точки съёмки · въездные группы</span><span class="count" id="shootLayerCount">0</span></label>
+    <div id="playgroundPhotoLayer"></div>
     <details class="shoot-list-box"><summary>Список точек</summary><div class="shoot-list" id="shootList"></div></details>
     <div class="shoot-hint" id="shootHint">Точки и направления назначает префектура. Район загружает снимки на назначенные точки.</div>
     <div class="shoot-actions">
@@ -187,6 +189,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
   </aside>
   <main id="map"></main>
 </div>
+<script src="playground-photo-layer.js?v=20261027-status-colors"></script>
 <script>
 (() => {
   const SLUG = '{{SLUG}}';
@@ -200,8 +203,10 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
   const LAYERS = [
     { key: 'boundary',  label: 'Граница района',      color: '#1a3d7c', enabled: true,  strokeOnly: true },
     { key: 'yards',     label: 'Дворовые территории', color: '#e8b84a', enabled: true, outline: { color: '#9a6400', width: 2.4 } },
-    { key: 'dp',        label: 'Детские площадки',    color: '#2e9e52', enabled: false },
-    { key: 'sp',        label: 'Спортивные площадки', color: '#1f78b4', enabled: false },
+    { key: 'dp_table', label: 'Детские площадки — точки из таблицы', color: '#2e9e52', enabled: false },
+    { key: 'sp_table', label: 'Спортивные площадки — точки из таблицы', color: '#1f78b4', enabled: false },
+    { key: 'dp',        label: 'Детские площадки — контуры АСУ ОДС', color: '#2e9e52', enabled: false },
+    { key: 'sp',        label: 'Спортивные площадки — контуры АСУ ОДС', color: '#1f78b4', enabled: false },
     { key: 'parking',   label: 'Автопарковки',        color: '#c2432e', enabled: false },
     { key: 'paths',     label: 'Тропинки',            color: '#8a6d3b', enabled: false },
     { key: 'sidewalks', label: 'Тротуары',            color: '#b3a2c7', enabled: false },
@@ -224,8 +229,13 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       ['Тип объекта', p.object_type_name],
       ['Покрытие', p.coating_type_name],
       ['Площадь, м²', p.total_area != null ? Number(p.total_area).toLocaleString('ru-RU') : null],
-      ['В составе', p.parent_object_name],
+      ['В составе', p.source_id ? null : p.parent_object_name],
       ['Статус', p.object_status_name],
+      ['Адрес', p.source_id ? p.parent_object_name : null],
+      ['ID в таблице', p.source_id],
+      ['Балансодержатель', p.balance_holder],
+      ['Год благоустройства', p.improvement_year],
+      ['Примечание', p.reference_note],
       ['Источник', p.source],
     ].filter(([, v]) => v != null && v !== '').map(([k, v]) => `<div><strong>${k}:</strong> ${escapeHtml(v)}</div>`).join('');
     const title = p.object_type_name || p.district || 'Объект';
@@ -270,6 +280,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       }
     }
     renderControls();
+    window.initPlaygroundPhotoLayer({ map: state.map, district: DISTRICT, apiRequest, getUser: () => state.photoUser, preparePointPhoto, escapeHtml });
     await loadPhotoPoints();
     renderShootMarkers();
     renderShootLogin();
@@ -286,6 +297,18 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     const opacity = cfg.key === 'yards' ? 0.32 : 0.5;
     entry.features.forEach((feature, index) => {
       const item = { feature, layerKey: key };
+      if (feature.geometry?.type === 'Point') {
+        const marker = document.createElement('button');
+        marker.type = 'button';
+        marker.title = feature.properties?.object_type_name || 'Площадка';
+        marker.setAttribute('aria-label', marker.title + ': ' + (feature.properties?.parent_object_name || ''));
+        Object.assign(marker.style, { width: '16px', height: '16px', borderRadius: '50%', border: '2px solid white', background: cfg.color, boxShadow: '0 1px 5px #0009', cursor: 'pointer', transform: 'translate(-50%, -50%)', padding: '0' });
+        marker.addEventListener('click', (event) => { event.stopPropagation(); showCard(item); });
+        const child = new window.ymaps3.YMapMarker({ coordinates: feature.geometry.coordinates }, marker);
+        feature._ymapFeature = child;
+        state.map.addChild(child);
+        return;
+      }
       const child = new YMapFeature({
         id: String(feature.id ?? `${key}-${index}`),
         geometry: feature.geometry,
