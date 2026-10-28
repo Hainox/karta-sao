@@ -232,3 +232,19 @@ def test_objects_inside_a_registry_yard_sit_on_that_yards_district_page():
 
     yards = json.loads((DISTRICTS_LAYERS / "beskudnikovskiy" / "yards.geojson").read_text(encoding="utf-8"))
     assert 128225312100038 in {f["properties"]["id"] for f in yards["features"]}
+
+
+def test_both_digitizations_sit_together_under_shooting_points():
+    """Въездные группы и площадки ДП/СП — две оцифровки в одном блоке «Точки съёмки».
+
+    Слой площадок стоит сразу за слоем въездных групп, а не среди слоёв АСУ ОДС.
+    Шаблон и 16 страниц совпадают, чтобы пересборка не теряла слой площадок.
+    """
+    template = (ROOT / "work" / "district_page_template.html").read_text(encoding="utf-8")
+    for markup in [template] + [(DISTRICTS_PAGES / f"{slug}.html").read_text(encoding="utf-8") for slug in SLUGS.values()]:
+        assert '<span class="label">Точки съёмки · въездные группы</span>' in markup
+        entrances = markup.index('id="shootLayerRow"')
+        playgrounds = markup.index('<div id="playgroundPhotoLayer"></div>')
+        assert markup.index('<div id="layerControls"></div>') < markup.index("<b>Точки съёмки</b>") < entrances < playgrounds
+        assert playgrounds < markup.index('class="shoot-list-box"')
+        assert "playground-photo-layer.js" in markup

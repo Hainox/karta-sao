@@ -39,6 +39,7 @@ h1{margin:2px 0 0;font-size:24px;line-height:1.15}
 .shoot-login .row button{flex:1;min-height:30px;padding:4px 10px;border:1px solid #8a979c;border-radius:8px;background:#fff;color:var(--ink);font:inherit;font-size:12.5px;cursor:pointer}
 .shoot-login .row button.primary{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:800}
 .shoot-hint{margin-top:6px;padding:9px 11px;border:1px solid #cfe6df;border-radius:10px;background:#eff9f5;color:#27665a;font-size:12.5px;line-height:1.45}
+.shoot-hint:empty{display:none}
 .shoot-list{display:flex;flex-direction:column;gap:5px;margin-top:6px;max-height:280px;overflow:auto}
 .trial-badge{display:inline-block;margin-top:3px;padding:1px 6px;border-radius:5px;background:#fff3c4;color:#7a5a00;font-size:10.5px;font-weight:800;letter-spacing:.04em}
 .layer-row .label .trial-badge{display:table}
@@ -157,7 +158,6 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     <nav class="dist-nav"><a class="dist-link" href="aeroport.html">Аэропорт</a><a class="dist-link" href="begovoy.html">Беговой</a><a class="dist-link" href="beskudnikovskiy.html">Бескудниковский</a><a class="dist-link" href="voykovskiy.html">Войковский</a><a class="dist-link active" href="vostochnoe-degunino.html">Восточное Дегунино</a><a class="dist-link" href="golovinskiy.html">Головинский</a><a class="dist-link" href="dmitrovskiy.html">Дмитровский</a><a class="dist-link" href="zapadnoe-degunino.html">Западное Дегунино</a><a class="dist-link" href="koptevo.html">Коптево</a><a class="dist-link" href="levoberezhnyy.html">Левобережный</a><a class="dist-link" href="molzhaninovskiy.html">Молжаниновский</a><a class="dist-link" href="savelovskiy.html">Савеловский</a><a class="dist-link" href="sokol.html">Сокол</a><a class="dist-link" href="timiryazevskiy.html">Тимирязевский</a><a class="dist-link" href="hovrino.html">Ховрино</a><a class="dist-link" href="horoshevskiy.html">Хорошевский</a></nav>
     <div class="layers-head"><b>Слои</b><span class="status" id="layerTotal"></span></div>
     <div id="layerControls"></div>
-    <div id="playgroundPhotoLayer"></div>
     <div class="layers-head"><b>Точки съёмки</b><span class="head-actions"><button id="shootLogin" class="shoot-toggle" type="button">Вход</button><button id="shootToggle" class="shoot-toggle" type="button" hidden>Разметка</button><button id="dragToggle" class="shoot-toggle" type="button" hidden>Перенос</button><button id="handToggle" class="shoot-toggle" type="button" hidden>Рука</button></span></div>
     <button id="shootDistrictGo" class="shoot-toggle" type="button">Войти как район без пароля</button>
     <div class="shoot-login" id="shootLoginBox" hidden>
@@ -166,7 +166,8 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       <div class="row"><button id="shootLoginGo" class="primary" type="button">Войти</button><button id="shootLogout" type="button" hidden>Выйти</button></div>
       <div class="status" id="shootLoginState"></div>
     </div>
-    <label class="layer-row off" id="shootLayerRow" hidden><input type="checkbox" id="shootLayerToggle"><span class="swatch" style="background:#ffcb00"></span><span class="label">Точки съёмки</span><span class="count" id="shootLayerCount">0</span></label>
+    <label class="layer-row off" id="shootLayerRow" hidden><input type="checkbox" id="shootLayerToggle"><span class="swatch" style="background:#ffcb00"></span><span class="label">Точки съёмки · въездные группы</span><span class="count" id="shootLayerCount">0</span></label>
+    <div id="playgroundPhotoLayer"></div>
     <details class="shoot-list-box"><summary>Список точек</summary><div class="shoot-list" id="shootList"></div></details>
     <div class="shoot-hint" id="shootHint">Точки и направления назначает префектура. Район загружает снимки на назначенные точки.</div>
     <div class="shoot-actions">
