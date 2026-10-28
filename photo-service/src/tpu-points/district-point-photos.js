@@ -5,6 +5,7 @@
 // следующий, пока очередь не кончится.
 import express from 'express';
 import { validateReview } from './object-slots.js';
+import { buildDigitizationReport, summarizeDigitization } from '../digitization-report.js';
 
 export const DISTRICT_DATASET = 'sao_district_photo_points';
 
@@ -61,6 +62,22 @@ export function districtQueueFromRows(rows) {
   return { counts, pending, rework };
 }
 
+/** Точки для свода по фото въездных групп: состояние слота и последний снимок. */
+export function entrancePointsForReport(rows) {
+  return rows.map((row) => {
+    const state = pointState(row);
+    return {
+      district: row.district,
+      label: row.label,
+      kind: null,
+      state: state.status,
+      lastPhotoAt: state.photo?.uploaded_at || state.rejected?.uploaded_at || null,
+      rejectedComment: state.rejected?.comment || '',
+      rejectedAt: state.rejected?.reviewed_at || null,
+    };
+  });
+}
+
 const REVIEW_COLUMNS = 'id, point_id, uploaded_by, uploaded_at, status, review_comment, reviewed_by, reviewed_at';
 
 /** Маршруты кабинета и методы хранилища; write — общая транзакция аудита. */
@@ -71,6 +88,22 @@ export function mountDistrictPointPhotoRoutes(router, { repository }) {
     try {
       res.setHeader('Cache-Control', 'no-store');
       res.json(districtQueueFromRows(await repository.listDistrictPointPhotoQueue()));
+    } catch (error) { next(error); }
+  });
+
+  router.get('/district-photos/report.xlsx', prefecture, async (req, res, next) => {
+    try {
+      const generatedAt = new Date();
+      const summary = summarizeDigitization({ points: entrancePointsForReport(await repository.listDistrictPointPhotoQueue()), generatedAt });
+      const buffer = await buildDigitizationReport(summary, {
+        title: 'Свод по фото въездных групп (точки съёмки)',
+        note: 'Одна точка — один снимок. Закрыта — снимок принят префектурой; на доработке — снимок отклонён, точка ждёт нового.',
+      });
+      const day = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Moscow' }).format(generatedAt);
+      res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+      res.setHeader('Content-Disposition', `attachment; filename="Svod_foto_vezdnye_gruppy_SAO_${day}.xlsx"`);
+      res.setHeader('Cache-Control', 'no-store');
+      res.send(buffer);
     } catch (error) { next(error); }
   });
 

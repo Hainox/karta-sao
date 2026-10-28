@@ -103,6 +103,7 @@
           <button class="tab active" type="button" data-tab="pending" role="tab">На проверке</button>
           <button class="tab" type="button" data-tab="rework" role="tab">На доработке</button>
         </div>
+        <button class="secondary" id="exportReport" type="button">Excel: свод по фото</button>
       </div>
       <p class="status" id="listStatus" role="status"></p>
       <div class="objects" id="list"></div>
@@ -141,8 +142,8 @@
       'Головинский': 'golovinskiy', 'Дмитровский': 'dmitrovskiy',
       'Западное Дегунино': 'zapadnoe-degunino', 'Коптево': 'koptevo',
       'Левобережный': 'levoberezhnyy', 'Молжаниновский': 'molzhaninovskiy',
-      'Савёловский': 'savelovskiy', 'Сокол': 'sokol', 'Тимирязевский': 'timiryazevskiy',
-      'Ховрино': 'hovrino', 'Хорошёвский': 'horoshevskiy',
+      'Савеловский': 'savelovskiy', 'Сокол': 'sokol', 'Тимирязевский': 'timiryazevskiy',
+      'Ховрино': 'hovrino', 'Хорошевский': 'horoshevskiy',
     };
     const when = (value) => value ? new Date(value).toLocaleString('ru-RU', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }) : '';
 
@@ -464,6 +465,24 @@
     el('logout').onclick = () => { api.clearSession(); backToList(); state.queue = null; el('list').replaceChildren(); showSession(); };
     el('districtFilter').onchange = () => { state.shown = PAGE; render(); };
     el('more').onclick = () => { state.shown += PAGE; render(); };
+    // Свод по всем районам в формате сводки парковок: свод, точки и лист доработки.
+    el('exportReport').onclick = async () => {
+      const button = el('exportReport');
+      button.disabled = true;
+      setStatus('listStatus', 'Готовим свод по фото…');
+      try {
+        const blob = await (await api.request(endpoint + '/report.xlsx')).blob();
+        const day = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Moscow' }).format(new Date());
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'Svod_foto_vezdnye_gruppy_SAO_' + day + '.xlsx';
+        link.click();
+        setTimeout(() => URL.revokeObjectURL(link.href), 1000);
+        setStatus('listStatus', 'Свод скачан.');
+      } catch (error) {
+        setStatus('listStatus', 'Не удалось выгрузить свод: ' + error.message, true);
+      } finally { button.disabled = false; }
+    };
     document.querySelectorAll('.tab').forEach((tab) => {
       tab.onclick = () => {
         state.tab = tab.dataset.tab; state.shown = PAGE;

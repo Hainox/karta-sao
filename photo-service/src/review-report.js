@@ -34,8 +34,8 @@ const timeOf = (value) => (value ? new Date(value).getTime() : 0);
 // База отдаёт даты объектами Date, поэтому всё сравниваем через ISO.
 const iso = (value) => (value ? new Date(value).toISOString() : null);
 const latest = (values) => values.filter(Boolean).map(iso).sort().at(-1) || null;
-const percent = (part, whole) => (whole ? part / whole : 0);
-const dateText = (value) => (value
+export const percent = (part, whole) => (whole ? part / whole : 0);
+export const dateText = (value) => (value
   ? new Date(value).toLocaleString('ru-RU', { timeZone: 'Europe/Moscow', dateStyle: 'short', timeStyle: 'short' })
   : '');
 
@@ -192,7 +192,7 @@ export function summarizeReview({ rows, type = null, generatedAt = new Date() })
 // Палитра и сетка — те же, что у эталона сводки по парковкам.
 const HEADER = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FF123A32' } };
 const TITLE = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFFFFF00' } };
-const STATUS_FILL = {
+export const STATUS_FILL = {
   closed: 'FFD8F0DE',
   review: 'FFDCE8FB',
   progress: 'FFFFF1C2',
@@ -202,9 +202,9 @@ const STATUS_FILL = {
 const THIN = { style: 'thin' };
 const GRID = { top: THIN, left: THIN, bottom: THIN, right: THIN };
 const CENTER = { horizontal: 'center', vertical: 'middle' };
-const LINK = { name: 'Calibri', size: 11, color: { argb: 'FF0C5AA6' } };
+export const LINK = { name: 'Calibri', size: 11, color: { argb: 'FF0C5AA6' } };
 
-function gridRow(row, columns, { bold = false, wrap = false } = {}) {
+export function gridRow(row, columns, { bold = false, wrap = false } = {}) {
   for (let column = 1; column <= columns; column += 1) {
     const cell = row.getCell(column);
     cell.border = GRID;
@@ -213,7 +213,7 @@ function gridRow(row, columns, { bold = false, wrap = false } = {}) {
   }
 }
 
-function header(sheet, rowNumber, titles) {
+export function header(sheet, rowNumber, titles) {
   const row = sheet.getRow(rowNumber);
   row.values = titles;
   gridRow(row, titles.length, { wrap: true });
@@ -225,7 +225,7 @@ function header(sheet, rowNumber, titles) {
 }
 
 /** Две объединённые жёлтые строки (заголовок и пояснение) в общей жирной рамке. */
-function titleBlock(sheet, columns, title, note) {
+export function titleBlock(sheet, columns, title, note) {
   sheet.getCell('A1').value = title;
   sheet.getCell('A2').value = note;
   for (const rowNumber of [1, 2]) {
@@ -250,11 +250,11 @@ function titleBlock(sheet, columns, title, note) {
 }
 
 // Шапка эталона: те же слова и порядок колонок, что в сводке по парковкам.
-const SUMMARY_TITLES = Object.freeze([
+export const SUMMARY_TITLES = Object.freeze([
   'Всего Объектов', 'Объектов закрыто', 'Объектов без фото',
   'Обьектов на проверке', 'Обьектов на доработке ', '% принято', 'Последнее фото',
 ]);
-const summaryValues = (row) => [
+export const summaryValues = (row) => [
   row.objects, row.closed, row.empty, row.review, row.reworkObjects,
   percent(row.accepted, row.required), dateText(row.lastPhotoAt),
 ];
