@@ -1,0 +1,7347 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.001",
+    "district": "Дмитровский",
+    "address": "Дмитровское шоссе, дом 155, корпус 3",
+    "unom": 6744,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 270,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5420695,
+     55.8981473
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.002",
+    "district": "Дмитровский",
+    "address": "Дмитровское шоссе, дом 155, корпус 3",
+    "unom": 6744,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 90,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5406448,
+     55.8981384
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.003",
+    "district": "Дмитровский",
+    "address": "Вагоноремонтная улица, дом 19",
+    "unom": 3197,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 179,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.531039,
+     55.8980866
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.004",
+    "district": "Дмитровский",
+    "address": "Вагоноремонтная улица, дом 13",
+    "unom": 3195,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 181,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5331089,
+     55.8980765
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.005",
+    "district": "Дмитровский",
+    "address": "Вагоноремонтная улица, дом 5А",
+    "unom": 3190,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 180,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5399159,
+     55.8980571
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.006",
+    "district": "Дмитровский",
+    "address": "Дмитровское шоссе, дом 155, корпус 1",
+    "unom": 6742,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 180,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5421329,
+     55.8980165
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.007",
+    "district": "Дмитровский",
+    "address": "Вагоноремонтная улица, дом 17",
+    "unom": 3196,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 179,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5317795,
+     55.8979678
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.008",
+    "district": "Дмитровский",
+    "address": "Карельский бульвар, дом 28",
+    "unom": 9471,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 179,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.539182,
+     55.8977435
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.009",
+    "district": "Дмитровский",
+    "address": "Клязьминская улица, дом 36",
+    "unom": 10274,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 180,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5301698,
+     55.8972853
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.010",
+    "district": "Дмитровский",
+    "address": "Карельский бульвар, дом 26",
+    "unom": 9470,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 180,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5384844,
+     55.8972756
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.011",
+    "district": "Дмитровский",
+    "address": "Дмитровское шоссе, дом 155, корпус 2",
+    "unom": 6743,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 91,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5407127,
+     55.8972165
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.012",
+    "district": "Дмитровский",
+    "address": "Вагоноремонтная улица, дом 5А",
+    "unom": 3190,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 0,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5398938,
+     55.8972099
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.013",
+    "district": "Дмитровский",
+    "address": "Дмитровское шоссе, дом 155, корпус 1",
+    "unom": 6742,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 0,
+    "status": "черновик",
+    "also_covers": "Дмитровское шоссе, дом 155, корпус 2 (подъезды 1–4)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5421436,
+     55.8971851
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.014",
+    "district": "Дмитровский",
+    "address": "Вагоноремонтная улица, дом 17",
+    "unom": 3196,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 359,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5318028,
+     55.8971158
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.015",
+    "district": "Дмитровский",
+    "address": "Вагоноремонтная улица, дом 19",
+    "unom": 3197,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 359,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5310559,
+     55.8971024
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.016",
+    "district": "Дмитровский",
+    "address": "Карельский бульвар, дом 28",
+    "unom": 9471,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 359,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.539202,
+     55.8970909
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.017",
+    "district": "Дмитровский",
+    "address": "Вагоноремонтная улица, дом 13",
+    "unom": 3195,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 1,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5330594,
+     55.8970267
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.018",
+    "district": "Дмитровский",
+    "address": "Вагоноремонтная улица, дом 5, корпус 1",
+    "unom": 3191,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 179,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5396593,
+     55.8969277
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.019",
+    "district": "Дмитровский",
+    "address": "Карельский бульвар, дом 26",
+    "unom": 9470,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 0,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5384889,
+     55.8969092
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.020",
+    "district": "Дмитровский",
+    "address": "Карельский бульвар, дом 23, корпус 1",
+    "unom": 9467,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 180,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5342019,
+     55.8969009
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.021",
+    "district": "Дмитровский",
+    "address": "Карельский бульвар, дом 24",
+    "unom": 9469,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 180,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5378291,
+     55.8968769
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.022",
+    "district": "Дмитровский",
+    "address": "Дмитровское шоссе, дом 153",
+    "unom": 6741,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 180,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5423239,
+     55.8967848
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.023",
+    "district": "Дмитровский",
+    "address": "Дмитровское шоссе, дом 151, корпус 5",
+    "unom": 6740,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 180,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5407713,
+     55.8967217
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.024",
+    "district": "Дмитровский",
+    "address": "Клязьминская улица, дом 36",
+    "unom": 10274,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 0,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5302412,
+     55.896559
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.025",
+    "district": "Дмитровский",
+    "address": "Карельский бульвар, дом 22",
+    "unom": 9466,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 180,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5371981,
+     55.8965549
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.026",
+    "district": "Дмитровский",
+    "address": "Вагоноремонтная улица, дом 5, корпус 1",
+    "unom": 3191,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 359,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5396674,
+     55.8965462
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.027",
+    "district": "Дмитровский",
+    "address": "Вагоноремонтная улица, дом 5, корпус 2",
+    "unom": 3192,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 179,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5403037,
+     55.8964086
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.028",
+    "district": "Дмитровский",
+    "address": "Клязьминская улица, дом 34",
+    "unom": 10273,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 179,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5300263,
+     55.8964064
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.029",
+    "district": "Дмитровский",
+    "address": "Дмитровское шоссе, дом 151, корпус 3",
+    "unom": 75061,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 180,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5413277,
+     55.8963209
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.030",
+    "district": "Дмитровский",
+    "address": "Карельский бульвар, дом 23, корпус 1",
+    "unom": 9467,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 0,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5342111,
+     55.8962334
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.031",
+    "district": "Дмитровский",
+    "address": "Дмитровское шоссе, дом 151, корпус 5",
+    "unom": 6740,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 0,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5407548,
+     55.8962188
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.032",
+    "district": "Дмитровский",
+    "address": "Карельский бульвар, дом 22",
+    "unom": 9466,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 0,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5371915,
+     55.8960844
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.033",
+    "district": "Дмитровский",
+    "address": "Карельский бульвар, дом 21, корпус 1",
+    "unom": 31406,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 180,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5348158,
+     55.8960767
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.034",
+    "district": "Дмитровский",
+    "address": "Дмитровское шоссе, дом 151, корпус 3",
+    "unom": 75061,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 0,
+    "status": "черновик",
+    "also_covers": "Дмитровское шоссе, дом 151, корпус 4 (подъезды 2–3)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5413116,
+     55.8960243
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.035",
+    "district": "Дмитровский",
+    "address": "Дмитровское шоссе, дом 151, корпус 2",
+    "unom": 6737,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 180,
+    "status": "черновик",
+    "also_covers": "Дмитровское шоссе, дом 153 (подъезды 1)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5422906,
+     55.8959459
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.036",
+    "district": "Дмитровский",
+    "address": "Дмитровское шоссе, дом 153",
+    "unom": 6741,
+    "role": "угол",
+    "side": "подъезды 2–3",
+    "azimuth": 0,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5425621,
+     55.8959422
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.037",
+    "district": "Дмитровский",
+    "address": "Дмитровское шоссе, дом 151, корпус 2",
+    "unom": 6737,
+    "role": "угол",
+    "side": "подъезды 3–4",
+    "azimuth": 90,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.541966,
+     55.8956548
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.038",
+    "district": "Дмитровский",
+    "address": "Дмитровское шоссе, дом 147, корпус 2",
+    "unom": 6735,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 179,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5394694,
+     55.8956064
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.039",
+    "district": "Дмитровский",
+    "address": "Клязьминская улица, дом 34",
+    "unom": 10273,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 359,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5301504,
+     55.8954917
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.040",
+    "district": "Дмитровский",
+    "address": "Дмитровское шоссе, дом 149",
+    "unom": 6736,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 191,
+    "status": "черновик",
+    "also_covers": "Дмитровское шоссе, дом 151, корпус 2 (подъезды 1–2)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5423687,
+     55.8954191
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.041",
+    "district": "Дмитровский",
+    "address": "Дмитровское шоссе, дом 149",
+    "unom": 6736,
+    "role": "угол",
+    "side": "подъезды 4",
+    "azimuth": 191,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5426632,
+     55.8954149
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.042",
+    "district": "Дмитровский",
+    "address": "Лобненская улица, дом 12, корпус 4",
+    "unom": 13324,
+    "role": "угол",
+    "side": "подъезды 7–10",
+    "azimuth": 229,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5273685,
+     55.8953766
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.043",
+    "district": "Дмитровский",
+    "address": "Дмитровское шоссе, дом 147, корпус 2",
+    "unom": 6735,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 359,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5394757,
+     55.8953491
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.044",
+    "district": "Дмитровский",
+    "address": "Клязьминская улица, дом 32",
+    "unom": 10269,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 180,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.530231,
+     55.8953485
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.045",
+    "district": "Дмитровский",
+    "address": "Карельский бульвар, дом 21, корпус 1",
+    "unom": 31406,
+    "role": "середина фасада",
+    "side": "подъезды 1–6",
+    "azimuth": 180,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.534843,
+     55.8953316
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.046",
+    "district": "Дмитровский",
+    "address": "Карельский бульвар, дом 21, корпус 2",
+    "unom": 9465,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 180,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5333167,
+     55.8950888
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.047",
+    "district": "Дмитровский",
+    "address": "Клязьминская улица, дом 32, корпус 1",
+    "unom": 10270,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 90,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5309655,
+     55.8950021
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.048",
+    "district": "Дмитровский",
+    "address": "Карельский бульвар, дом 18А",
+    "unom": 9464,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 179,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5379327,
+     55.894993
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.049",
+    "district": "Дмитровский",
+    "address": "Клязьминская улица, дом 32, корпус 1",
+    "unom": 10270,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 270,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5324297,
+     55.8949737
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.050",
+    "district": "Дмитровский",
+    "address": "Лобненская улица, дом 12, корпус 4",
+    "unom": 13324,
+    "role": "угол",
+    "side": "подъезды 7–10",
+    "azimuth": 49,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5260661,
+     55.8947067
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.051",
+    "district": "Дмитровский",
+    "address": "Карельский бульвар, дом 21, корпус 2",
+    "unom": 9465,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 0,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5333216,
+     55.8946827
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.052",
+    "district": "Дмитровский",
+    "address": "Лобненская улица, дом 12, корпус 3",
+    "unom": 13323,
+    "role": "угол",
+    "side": "подъезды 12–13",
+    "azimuth": 178,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5262906,
+     55.8946494
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.053",
+    "district": "Дмитровский",
+    "address": "Карельский бульвар, дом 18А",
+    "unom": 9464,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 359,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5379781,
+     55.8946263
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.054",
+    "district": "Дмитровский",
+    "address": "Дмитровское шоссе, дом 149",
+    "unom": 6736,
+    "role": "середина фасада",
+    "side": "подъезды 4",
+    "azimuth": 11,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5423,
+     55.894583
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.055",
+    "district": "Дмитровский",
+    "address": "Клязьминская улица, дом 32",
+    "unom": 10269,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 0,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5302416,
+     55.8945739
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.056",
+    "district": "Дмитровский",
+    "address": "Карельский бульвар, дом 21, корпус 1",
+    "unom": 31406,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 0,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5349217,
+     55.8945627
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.057",
+    "district": "Дмитровский",
+    "address": "Долгопрудная улица, дом 6, корпус 2",
+    "unom": 6880,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 90,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5406765,
+     55.8945138
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.058",
+    "district": "Дмитровский",
+    "address": "Долгопрудная улица, дом 6, корпус 2",
+    "unom": 6880,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 270,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5413311,
+     55.8945128
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.059",
+    "district": "Дмитровский",
+    "address": "Клязьминская улица, дом 32, корпус 2",
+    "unom": 10271,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 179,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5323146,
+     55.8945016
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.060",
+    "district": "Дмитровский",
+    "address": "Карельский бульвар, дом 5",
+    "unom": 9457,
+    "role": "угол",
+    "side": "подъезды 9–10",
+    "azimuth": 217,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5345345,
+     55.8944914
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.061",
+    "district": "Дмитровский",
+    "address": "Карельский бульвар, дом 5",
+    "unom": 9457,
+    "role": "угол",
+    "side": "подъезды 4–8",
+    "azimuth": 217,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5347697,
+     55.8943993
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.062",
+    "district": "Дмитровский",
+    "address": "Клязьминская улица, дом 21, корпус 1",
+    "unom": 10263,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 180,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.528823,
+     55.8943846
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.063",
+    "district": "Дмитровский",
+    "address": "Долгопрудная улица, дом 12",
+    "unom": 5041053,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 89,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5379003,
+     55.8943679
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.064",
+    "district": "Дмитровский",
+    "address": "Клязьминская улица, дом 30, корпус 2",
+    "unom": 10267,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 198,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5307876,
+     55.8943664
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.065",
+    "district": "Дмитровский",
+    "address": "Долгопрудная улица, дом 10",
+    "unom": 6500219,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 178,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.539206,
+     55.894364
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.066",
+    "district": "Дмитровский",
+    "address": "Долгопрудная улица, дом 12",
+    "unom": 5041053,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 179,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5382124,
+     55.8943469
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.067",
+    "district": "Дмитровский",
+    "address": "Клязьминская улица, дом 30, корпус 1",
+    "unom": 10266,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 180,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5301663,
+     55.8943468
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.068",
+    "district": "Дмитровский",
+    "address": "Клязьминская улица, дом 32, корпус 3",
+    "unom": 10272,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 179,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5325711,
+     55.8942494
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.069",
+    "district": "Дмитровский",
+    "address": "Дмитровское шоссе, дом 149",
+    "unom": 6736,
+    "role": "угол",
+    "side": "подъезды 5",
+    "azimuth": 101,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5419612,
+     55.8941381
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.070",
+    "district": "Дмитровский",
+    "address": "Дмитровское шоссе, дом 149",
+    "unom": 6736,
+    "role": "угол",
+    "side": "подъезды 5",
+    "azimuth": 281,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5426321,
+     55.8941203
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.071",
+    "district": "Дмитровский",
+    "address": "Клязьминская улица, дом 32, корпус 2",
+    "unom": 10271,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 359,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5323209,
+     55.8940651
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.072",
+    "district": "Дмитровский",
+    "address": "Клязьминская улица, дом 30, корпус 2",
+    "unom": 10267,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 18,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5305792,
+     55.8940248
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.073",
+    "district": "Дмитровский",
+    "address": "Клязьминская улица, дом 30, корпус 3",
+    "unom": 10268,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 223,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5315952,
+     55.8940092
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.074",
+    "district": "Дмитровский",
+    "address": "Клязьминская улица, дом 30, корпус 1",
+    "unom": 10266,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 0,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5301573,
+     55.8939789
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.075",
+    "district": "Дмитровский",
+    "address": "Лобненская улица, дом 12, корпус 3",
+    "unom": 13323,
+    "role": "угол",
+    "side": "подъезды 12–13",
+    "azimuth": 358,
+    "status": "черновик",
+    "also_covers": "Лобненская улица, дом 12, корпус 3 (подъезды 11)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5264565,
+     55.8939412
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.076",
+    "district": "Дмитровский",
+    "address": "Лобненская улица, дом 12, корпус 3",
+    "unom": 13323,
+    "role": "угол",
+    "side": "подъезды 11",
+    "azimuth": 88,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5261205,
+     55.8939339
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.077",
+    "district": "Дмитровский",
+    "address": "Карельский бульвар, дом 5",
+    "unom": 9457,
+    "role": "середина фасада",
+    "side": "подъезды 4–8",
+    "azimuth": 37,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5339746,
+     55.8937986
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.078",
+    "district": "Дмитровский",
+    "address": "Клязьминская улица, дом 32, корпус 3",
+    "unom": 10272,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 359,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5324552,
+     55.8937574
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.079",
+    "district": "Дмитровский",
+    "address": "Клязьминская улица, дом 30, корпус 3",
+    "unom": 10268,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 43,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5311365,
+     55.8937455
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.080",
+    "district": "Дмитровский",
+    "address": "Долгопрудная улица, дом 10",
+    "unom": 6500219,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 358,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.539246,
+     55.8937453
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.081",
+    "district": "Дмитровский",
+    "address": "Дмитровское шоссе, дом 149",
+    "unom": 6736,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 11,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5417654,
+     55.8937405
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.082",
+    "district": "Дмитровский",
+    "address": "Дмитровское шоссе, дом 149",
+    "unom": 6736,
+    "role": "угол",
+    "side": "подъезды 4",
+    "azimuth": 11,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5420759,
+     55.8937314
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.083",
+    "district": "Дмитровский",
+    "address": "Долгопрудная улица, дом 12",
+    "unom": 5041053,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 359,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5383874,
+     55.893714
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.084",
+    "district": "Дмитровский",
+    "address": "Долгопрудная улица, дом 12",
+    "unom": 5041053,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 359,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5378789,
+     55.8937129
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.085",
+    "district": "Дмитровский",
+    "address": "Клязьминская улица, дом 21, корпус 1",
+    "unom": 10263,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 0,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.528739,
+     55.893632
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.086",
+    "district": "Дмитровский",
+    "address": "Долгопрудная улица, дом 7",
+    "unom": 5123437,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 180,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5391083,
+     55.8934988
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.087",
+    "district": "Дмитровский",
+    "address": "Лобненская улица, дом 12, корпус 2",
+    "unom": 13322,
+    "role": "угол",
+    "side": "подъезды 11",
+    "azimuth": 179,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5259871,
+     55.8934798
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.088",
+    "district": "Дмитровский",
+    "address": "Карельский бульвар, дом 3, корпус 4",
+    "unom": 31405,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 226,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5319366,
+     55.8934661
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.089",
+    "district": "Дмитровский",
+    "address": "Долгопрудная улица, дом 13, корпус 1",
+    "unom": 6888,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 179,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5370957,
+     55.8932227
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.090",
+    "district": "Дмитровский",
+    "address": "Карельский бульвар, дом 5",
+    "unom": 9457,
+    "role": "середина фасада",
+    "side": "подъезды 9–10",
+    "azimuth": 37,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5328601,
+     55.8932202
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.091",
+    "district": "Дмитровский",
+    "address": "Карельский бульвар, дом 3, корпус 4",
+    "unom": 31405,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 46,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5314704,
+     55.8932184
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.092",
+    "district": "Дмитровский",
+    "address": "Карельский бульвар, дом 5",
+    "unom": 9457,
+    "role": "середина фасада",
+    "side": "подъезды 4–8",
+    "azimuth": 37,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5331123,
+     55.8932121
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.093",
+    "district": "Дмитровский",
+    "address": "Клязьминская улица, дом 28А",
+    "unom": 6050868,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 180,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5302622,
+     55.8932026
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.094",
+    "district": "Дмитровский",
+    "address": "Долгопрудная улица, дом 7",
+    "unom": 5123437,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 0,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5391114,
+     55.8930134
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.095",
+    "district": "Дмитровский",
+    "address": "Карельский бульвар, дом 8, корпус 1",
+    "unom": 9460,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 359,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5358111,
+     55.892942
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.096",
+    "district": "Дмитровский",
+    "address": "Клязьминская улица, дом 28А",
+    "unom": 6050868,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 0,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5302588,
+     55.8928251
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.097",
+    "district": "Дмитровский",
+    "address": "Долгопрудная улица, дом 13, корпус 1",
+    "unom": 6888,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 359,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5371904,
+     55.8927672
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.098",
+    "district": "Дмитровский",
+    "address": "Карельский бульвар, дом 4, корпус 4",
+    "unom": 9456,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 89,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5341747,
+     55.8927466
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.099",
+    "district": "Дмитровский",
+    "address": "Карельский бульвар, дом 4, корпус 4",
+    "unom": 9456,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 269,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5348792,
+     55.8927207
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.100",
+    "district": "Дмитровский",
+    "address": "Дмитровское шоссе, дом 139",
+    "unom": 51656,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 179,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5412009,
+     55.8927033
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.101",
+    "district": "Дмитровский",
+    "address": "Клязьминская улица, дом 19",
+    "unom": 10262,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 178,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5290194,
+     55.8926768
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.102",
+    "district": "Дмитровский",
+    "address": "Долгопрудная улица, дом 11",
+    "unom": 6886,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 359,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5378693,
+     55.8926659
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.103",
+    "district": "Дмитровский",
+    "address": "Лобненская улица, дом 12, корпус 1",
+    "unom": 13321,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 133,
+    "status": "черновик",
+    "also_covers": "Лобненская улица, дом 12, корпус 2 (подъезды 9–10); Лобненская улица, дом 12, корпус 2 (подъезды 11)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5262543,
+     55.8926453
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.104",
+    "district": "Дмитровский",
+    "address": "Долгопрудная улица, дом 13, корпус 2",
+    "unom": 6889,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 179,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5371963,
+     55.8926343
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.105",
+    "district": "Дмитровский",
+    "address": "Карельский бульвар, дом 5",
+    "unom": 9457,
+    "role": "угол",
+    "side": "подъезды 9–10",
+    "azimuth": 37,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5319714,
+     55.8925114
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.106",
+    "district": "Дмитровский",
+    "address": "Карельский бульвар, дом 5",
+    "unom": 9457,
+    "role": "угол",
+    "side": "подъезды 4–8",
+    "azimuth": 37,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5323091,
+     55.8924907
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.107",
+    "district": "Дмитровский",
+    "address": "Карельский бульвар, дом 4, корпус 2",
+    "unom": 9454,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 179,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5344556,
+     55.8922637
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.108",
+    "district": "Дмитровский",
+    "address": "Лобненская улица, дом 12, корпус 1",
+    "unom": 13321,
+    "role": "середина фасада",
+    "side": "подъезды 1–6",
+    "azimuth": 313,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5271706,
+     55.8921596
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.109",
+    "district": "Дмитровский",
+    "address": "Долгопрудная улица, дом 13, корпус 2",
+    "unom": 6889,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 359,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5372084,
+     55.8920839
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.110",
+    "district": "Дмитровский",
+    "address": "Дмитровское шоссе, дом 139",
+    "unom": 51656,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 359,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5412032,
+     55.8920649
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.111",
+    "district": "Дмитровский",
+    "address": "Долгопрудная улица, дом 13А",
+    "unom": 6890,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 180,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5376932,
+     55.8920037
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.112",
+    "district": "Дмитровский",
+    "address": "Дмитровское шоссе, дом 137, корпус 1",
+    "unom": 6733,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 179,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.540604,
+     55.8919103
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.113",
+    "district": "Дмитровский",
+    "address": "Лобненская улица, дом 8",
+    "unom": 13318,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 180,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.537204,
+     55.8918934
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.114",
+    "district": "Дмитровский",
+    "address": "Карельский бульвар, дом 4, корпус 2",
+    "unom": 9454,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 359,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5345626,
+     55.8918552
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.115",
+    "district": "Дмитровский",
+    "address": "Лобненская улица, дом 15, корпус 2",
+    "unom": 13330,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 215,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5258084,
+     55.8917778
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.116",
+    "district": "Дмитровский",
+    "address": "Карельский бульвар, дом 2, корпус 2",
+    "unom": 9448,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 179,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.533088,
+     55.8917716
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.117",
+    "district": "Дмитровский",
+    "address": "Клязьминская улица, дом 19",
+    "unom": 10262,
+    "role": "угол",
+    "side": "подъезды 6–8",
+    "azimuth": 268,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5293646,
+     55.8917677
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.118",
+    "district": "Дмитровский",
+    "address": "Дмитровское шоссе, дом 135, корпус 1",
+    "unom": 6732,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 180,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5413014,
+     55.8916904
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.119",
+    "district": "Дмитровский",
+    "address": "Лобненская улица, дом 12, корпус 1",
+    "unom": 13321,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 313,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.528048,
+     55.8916902
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.120",
+    "district": "Дмитровский",
+    "address": "Клязьминская улица, дом 19",
+    "unom": 10262,
+    "role": "угол",
+    "side": "подъезды 6–8",
+    "azimuth": 88,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5282576,
+     55.8916791
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.121",
+    "district": "Дмитровский",
+    "address": "Лобненская улица, дом 15, корпус 1",
+    "unom": 13329,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 133,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5260734,
+     55.8916337
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.122",
+    "district": "Дмитровский",
+    "address": "Клязьминская улица, дом 19",
+    "unom": 10262,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 358,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5290723,
+     55.8915218
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.123",
+    "district": "Дмитровский",
+    "address": "Карельский бульвар, дом 2, корпус 2",
+    "unom": 9448,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 359,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.533032,
+     55.8915149
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.124",
+    "district": "Дмитровский",
+    "address": "Лобненская улица, дом 6А",
+    "unom": 13316,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 359,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5379518,
+     55.8912488
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.125",
+    "district": "Дмитровский",
+    "address": "Лобненская улица, дом 15, корпус 2",
+    "unom": 13330,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 35,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5248524,
+     55.8910003
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.126",
+    "district": "Дмитровский",
+    "address": "Лобненская улица, дом 15, корпус 1",
+    "unom": 13329,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 313,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.527568,
+     55.8908498
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.127",
+    "district": "Дмитровский",
+    "address": "Лобненская улица, дом 8",
+    "unom": 13318,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 0,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5372237,
+     55.8908494
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.128",
+    "district": "Дмитровский",
+    "address": "Дмитровское шоссе, дом 135, корпус 1",
+    "unom": 6732,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 0,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5413029,
+     55.8907658
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.129",
+    "district": "Дмитровский",
+    "address": "Клязьминская улица, дом 17",
+    "unom": 10261,
+    "role": "угол",
+    "side": "подъезды 1–9",
+    "azimuth": 215,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5277376,
+     55.8906979
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.130",
+    "district": "Дмитровский",
+    "address": "Лобненская улица, дом 2",
+    "unom": 13312,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 90,
+    "status": "черновик",
+    "also_covers": "Лобненская улица, дом 4 (подъезды 1–4)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5399918,
+     55.8906287
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.131",
+    "district": "Дмитровский",
+    "address": "Лобненская улица, дом 6",
+    "unom": 13315,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 270,
+    "status": "черновик",
+    "also_covers": "Лобненская улица, дом 4 (подъезды 1–4)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5386203,
+     55.8906244
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.132",
+    "district": "Дмитровский",
+    "address": "Лобненская улица, дом 6",
+    "unom": 13315,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 90,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5368997,
+     55.8905832
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.133",
+    "district": "Дмитровский",
+    "address": "Клязьминская улица, дом 9, корпус 2",
+    "unom": 10257,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 215,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5241524,
+     55.8904528
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.134",
+    "district": "Дмитровский",
+    "address": "Клязьминская улица, дом 17",
+    "unom": 10261,
+    "role": "середина фасада",
+    "side": "подъезды 1–9",
+    "azimuth": 215,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5268788,
+     55.8899976
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.135",
+    "district": "Дмитровский",
+    "address": "Клязьминская улица, дом 9, корпус 2",
+    "unom": 10257,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 35,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5230943,
+     55.8895806
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.136",
+    "district": "Дмитровский",
+    "address": "Клязьминская улица, дом 17",
+    "unom": 10261,
+    "role": "угол",
+    "side": "подъезды 1–9",
+    "azimuth": 35,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5260012,
+     55.8893046
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.137",
+    "district": "Дмитровский",
+    "address": "Лобненская улица, дом 9",
+    "unom": 13319,
+    "role": "угол",
+    "side": "подъезды 3–4",
+    "azimuth": 269,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5386102,
+     55.8889833
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.138",
+    "district": "Дмитровский",
+    "address": "Дмитровское шоссе, дом 131, корпус 2",
+    "unom": 6731,
+    "role": "угол",
+    "side": "подъезды 2–5",
+    "azimuth": 90,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5398402,
+     55.8889772
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.139",
+    "district": "Дмитровский",
+    "address": "Лобненская улица, дом 9",
+    "unom": 13319,
+    "role": "угол",
+    "side": "подъезды 3–4",
+    "azimuth": 89,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5370911,
+     55.8889753
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.140",
+    "district": "Дмитровский",
+    "address": "Дмитровское шоссе, дом 131, корпус 2",
+    "unom": 6731,
+    "role": "угол",
+    "side": "подъезды 2–5",
+    "azimuth": 270,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5413593,
+     55.8889547
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.141",
+    "district": "Дмитровский",
+    "address": "Лобненская улица, дом 3",
+    "unom": 61172,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 270,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5406755,
+     55.8886932
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.142",
+    "district": "Дмитровский",
+    "address": "Лобненская улица, дом 3",
+    "unom": 61172,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 90,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5399021,
+     55.8886889
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.143",
+    "district": "Дмитровский",
+    "address": "Клязьминская улица, дом 13",
+    "unom": 10260,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 213,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5251151,
+     55.88858
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.144",
+    "district": "Дмитровский",
+    "address": "Клязьминская улица, дом 13",
+    "unom": 10260,
+    "role": "угол",
+    "side": "подъезды 3–5",
+    "azimuth": 123,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5240916,
+     55.8884594
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.145",
+    "district": "Дмитровский",
+    "address": "Лобненская улица, дом 5",
+    "unom": 13314,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 180,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5394516,
+     55.8884568
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.146",
+    "district": "Дмитровский",
+    "address": "Дмитровское шоссе, дом 131, корпус 1",
+    "unom": 6730,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 0,
+    "status": "черновик",
+    "also_covers": "Дмитровское шоссе, дом 129, корпус 2 (подъезды 3–4); Дмитровское шоссе, дом 129, корпус 1 (подъезды 1–3)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5413567,
+     55.888258
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.147",
+    "district": "Дмитровский",
+    "address": "Клязьминская улица, дом 13",
+    "unom": 10260,
+    "role": "угол",
+    "side": "подъезды 3–5",
+    "azimuth": 303,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5250318,
+     55.8880871
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.148",
+    "district": "Дмитровский",
+    "address": "Клязьминская улица, дом 13",
+    "unom": 10260,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 33,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5245144,
+     55.8880595
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.149",
+    "district": "Дмитровский",
+    "address": "Лобненская улица, дом 5",
+    "unom": 13314,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 0,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5394507,
+     55.8879159
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.150",
+    "district": "Дмитровский",
+    "address": "Дмитровское шоссе, дом 129, корпус 2",
+    "unom": 6729,
+    "role": "угол",
+    "side": "подъезды 2",
+    "azimuth": 101,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5406082,
+     55.8878687
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.151",
+    "district": "Дмитровский",
+    "address": "Клязьминская улица, дом 11, корпус 2",
+    "unom": 75079,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 261,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5238352,
+     55.8878194
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.152",
+    "district": "Дмитровский",
+    "address": "Клязьминская улица, дом 5, корпус 1",
+    "unom": 10251,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 255,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5206871,
+     55.8877911
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.153",
+    "district": "Дмитровский",
+    "address": "Клязьминская улица, дом 11, корпус 2",
+    "unom": 75079,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 81,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5223771,
+     55.8877225
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.154",
+    "district": "Дмитровский",
+    "address": "Дмитровское шоссе, дом 129, корпус 1",
+    "unom": 6728,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 359,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5413989,
+     55.8876799
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.155",
+    "district": "Дмитровский",
+    "address": "Клязьминская улица, дом 11, корпус 2",
+    "unom": 75079,
+    "role": "угол",
+    "side": "подъезды 3",
+    "azimuth": 261,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.523878,
+     55.8876615
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.156",
+    "district": "Дмитровский",
+    "address": "Клязьминская улица, дом 5, корпус 1",
+    "unom": 10251,
+    "role": "середина фасада",
+    "side": "подъезды 1–5",
+    "azimuth": 255,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5198317,
+     55.8876474
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.157",
+    "district": "Дмитровский",
+    "address": "Клязьминская улица, дом 11, корпус 2",
+    "unom": 75079,
+    "role": "угол",
+    "side": "подъезды 3",
+    "azimuth": 81,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5226507,
+     55.887535
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.158",
+    "district": "Дмитровский",
+    "address": "Клязьминская улица, дом 5, корпус 1",
+    "unom": 10251,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 75,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5189954,
+     55.8875141
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.159",
+    "district": "Дмитровский",
+    "address": "Коровинское шоссе, дом 36, корпус 1",
+    "unom": 11036,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 248,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5176859,
+     55.8872282
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.160",
+    "district": "Дмитровский",
+    "address": "Коровинское шоссе, дом 36, корпус 1",
+    "unom": 11036,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 68,
+    "status": "черновик",
+    "also_covers": "Коровинское шоссе, дом 36, корпус 1 (подъезды 5)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5158302,
+     55.8868474
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.161",
+    "district": "Дмитровский",
+    "address": "Икшинская улица, дом 6",
+    "unom": 8771,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 180,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.539853,
+     55.88676
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.162",
+    "district": "Дмитровский",
+    "address": "Дмитровское шоссе, дом 125, корпус 2",
+    "unom": 6725,
+    "role": "угол",
+    "side": "подъезды 3",
+    "azimuth": 255,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5409491,
+     55.8867539
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.163",
+    "district": "Дмитровский",
+    "address": "Дмитровское шоссе, дом 125, корпус 1",
+    "unom": 6724,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 178,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5414165,
+     55.8867329
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.164",
+    "district": "Дмитровский",
+    "address": "Икшинская улица, дом 8",
+    "unom": 8772,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 180,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5393034,
+     55.8867246
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.165",
+    "district": "Дмитровский",
+    "address": "Дмитровское шоссе, дом 125, корпус 2",
+    "unom": 6725,
+    "role": "угол",
+    "side": "подъезды 3",
+    "azimuth": 75,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5406429,
+     55.8866897
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.166",
+    "district": "Дмитровский",
+    "address": "Коровинское шоссе, дом 36, корпус 1",
+    "unom": 11036,
+    "role": "угол",
+    "side": "подъезды 5",
+    "azimuth": 338,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5160728,
+     55.8865444
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.167",
+    "district": "Дмитровский",
+    "address": "Дмитровское шоссе, дом 125, корпус 2",
+    "unom": 6725,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 345,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5409558,
+     55.8864198
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.168",
+    "district": "Дмитровский",
+    "address": "Клязьминская улица, дом 10, корпус 1",
+    "unom": 10258,
+    "role": "угол",
+    "side": "подъезды 1–8",
+    "azimuth": 220,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.524041,
+     55.8863591
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.169",
+    "district": "Дмитровский",
+    "address": "Дмитровское шоссе, дом 125, корпус 1",
+    "unom": 6724,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 358,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5414237,
+     55.8862682
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.170",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 67, корпус 1",
+    "unom": 674,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 151,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5254201,
+     55.8862573
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.171",
+    "district": "Дмитровский",
+    "address": "Коровинское шоссе, дом 34",
+    "unom": 11035,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 179,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5164613,
+     55.8862479
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.172",
+    "district": "Дмитровский",
+    "address": "Дмитровское шоссе, дом 123, корпус 1",
+    "unom": 6723,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 270,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5417948,
+     55.8862377
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.173",
+    "district": "Дмитровский",
+    "address": "Икшинская улица, дом 4",
+    "unom": 8770,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 270,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5409566,
+     55.8862029
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.174",
+    "district": "Дмитровский",
+    "address": "Икшинская улица, дом 4",
+    "unom": 8770,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 90,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.540453,
+     55.8862004
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.175",
+    "district": "Дмитровский",
+    "address": "Икшинская улица, дом 6",
+    "unom": 8771,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 0,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5399932,
+     55.8861818
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.176",
+    "district": "Дмитровский",
+    "address": "Дмитровское шоссе, дом 123, корпус 1",
+    "unom": 6723,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 90,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5412776,
+     55.8861789
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.177",
+    "district": "Дмитровский",
+    "address": "Икшинская улица, дом 8",
+    "unom": 8772,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 0,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5393096,
+     55.8861774
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.178",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 67, корпус 3",
+    "unom": 340207,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 112,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5235857,
+     55.8859509
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.179",
+    "district": "Дмитровский",
+    "address": "Коровинское шоссе, дом 34",
+    "unom": 11035,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 359,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5166198,
+     55.8859088
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.180",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 67, корпус 1",
+    "unom": 674,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 331,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5258468,
+     55.8858304
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.181",
+    "district": "Дмитровский",
+    "address": "улица Софьи Ковалевской, дом 14",
+    "unom": 10299,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 180,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5344875,
+     55.8857985
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.182",
+    "district": "Дмитровский",
+    "address": "Клязьминская улица, дом 10, корпус 1",
+    "unom": 10258,
+    "role": "середина фасада",
+    "side": "подъезды 1–8",
+    "azimuth": 40,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5232056,
+     55.8857168
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.183",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 65",
+    "unom": 673,
+    "role": "угол",
+    "side": "подъезды 3–8",
+    "azimuth": 125,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5264505,
+     55.8857
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.184",
+    "district": "Дмитровский",
+    "address": "Яхромская улица, дом 14/5",
+    "unom": 30818,
+    "role": "угол",
+    "side": "подъезды 3",
+    "azimuth": 269,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.540049,
+     55.8856473
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.185",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 67, корпус 3",
+    "unom": 340207,
+    "role": "угол",
+    "side": "подъезды 3–5",
+    "azimuth": 112,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.523745,
+     55.8856422
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.186",
+    "district": "Дмитровский",
+    "address": "улица Софьи Ковалевской, дом 14",
+    "unom": 10299,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 0,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5345028,
+     55.8854791
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.187",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 67, корпус 3",
+    "unom": 340207,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 22,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5234337,
+     55.8854749
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.188",
+    "district": "Дмитровский",
+    "address": "Дмитровское шоссе, дом 119, корпус 1",
+    "unom": 6721,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 178,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5415591,
+     55.885468
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.189",
+    "district": "Дмитровский",
+    "address": "Учинская улица, дом 11",
+    "unom": 26989,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 359,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5353954,
+     55.8854635
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.190",
+    "district": "Дмитровский",
+    "address": "Яхромская улица, дом 14/5",
+    "unom": 30818,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 359,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5395741,
+     55.8854426
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.191",
+    "district": "Дмитровский",
+    "address": "Яхромская улица, дом 9, корпус 3",
+    "unom": 61175,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 180,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5387491,
+     55.8853533
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.192",
+    "district": "Дмитровский",
+    "address": "Яхромская улица, дом 8",
+    "unom": 75039,
+    "role": "угол",
+    "side": "подъезды 3–4",
+    "azimuth": 179,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5398727,
+     55.8852951
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.193",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 67, корпус 3",
+    "unom": 340207,
+    "role": "угол",
+    "side": "подъезды 3–5",
+    "azimuth": 292,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5254715,
+     55.8852605
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.194",
+    "district": "Дмитровский",
+    "address": "Клязьминская улица, дом 10, корпус 1",
+    "unom": 10258,
+    "role": "угол",
+    "side": "подъезды 1–8",
+    "azimuth": 40,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5223923,
+     55.8852441
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.195",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 65",
+    "unom": 673,
+    "role": "середина фасада",
+    "side": "подъезды 3–8",
+    "azimuth": 125,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5274994,
+     55.8852318
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.196",
+    "district": "Дмитровский",
+    "address": "улица Софьи Ковалевской, дом 12, корпус 3",
+    "unom": 75127,
+    "role": "угол",
+    "side": "подъезды 3",
+    "azimuth": 270,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5363713,
+     55.8851595
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.197",
+    "district": "Дмитровский",
+    "address": "улица Софьи Ковалевской, дом 12, корпус 1",
+    "unom": 75072,
+    "role": "угол",
+    "side": "подъезды 3",
+    "azimuth": 90,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5337229,
+     55.8851564
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.198",
+    "district": "Дмитровский",
+    "address": "улица Софьи Ковалевской, дом 12, корпус 3",
+    "unom": 75127,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 180,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5360178,
+     55.8851543
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.199",
+    "district": "Дмитровский",
+    "address": "улица Софьи Ковалевской, дом 12, корпус 2",
+    "unom": 75068,
+    "role": "угол",
+    "side": "подъезды 3",
+    "azimuth": 270,
+    "status": "черновик",
+    "also_covers": "улица Софьи Ковалевской, дом 12, корпус 3 (подъезды 3)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.535404,
+     55.8851459
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.200",
+    "district": "Дмитровский",
+    "address": "улица Софьи Ковалевской, дом 12, корпус 1",
+    "unom": 75072,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 180,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5340334,
+     55.8851453
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.201",
+    "district": "Дмитровский",
+    "address": "улица Софьи Ковалевской, дом 12, корпус 2",
+    "unom": 75068,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 180,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5350871,
+     55.8851453
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.202",
+    "district": "Дмитровский",
+    "address": "улица Софьи Ковалевской, дом 12, корпус 1",
+    "unom": 75072,
+    "role": "угол",
+    "side": "подъезды 3",
+    "azimuth": 270,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5344016,
+     55.8851453
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.203",
+    "district": "Дмитровский",
+    "address": "улица Софьи Ковалевской, дом 12, корпус 2",
+    "unom": 75068,
+    "role": "угол",
+    "side": "подъезды 3",
+    "azimuth": 90,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5346045,
+     55.8851429
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.204",
+    "district": "Дмитровский",
+    "address": "Дмитровское шоссе, дом 119, корпус 1",
+    "unom": 6721,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 358,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5415826,
+     55.8851424
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.205",
+    "district": "Дмитровский",
+    "address": "Клязьминская улица, дом 8Б",
+    "unom": 10256,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 151,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5232691,
+     55.8851372
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.206",
+    "district": "Дмитровский",
+    "address": "Яхромская улица, дом 9, корпус 2",
+    "unom": 61174,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 180,
+    "status": "черновик",
+    "also_covers": "Яхромская улица, дом 9, корпус 3 (подъезды 1)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5386262,
+     55.8850115
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.207",
+    "district": "Дмитровский",
+    "address": "Яхромская улица, дом 8",
+    "unom": 75039,
+    "role": "угол",
+    "side": "подъезды 1–2, 5",
+    "azimuth": 269,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5408007,
+     55.8849718
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.208",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 67, корпус 3",
+    "unom": 340207,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 292,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5255229,
+     55.8849621
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.209",
+    "district": "Дмитровский",
+    "address": "Дмитровское шоссе, дом 117, корпус 1",
+    "unom": 6720,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 270,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5416277,
+     55.8849563
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.210",
+    "district": "Дмитровский",
+    "address": "Дмитровское шоссе, дом 117, корпус 1",
+    "unom": 6720,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 90,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5413148,
+     55.884954
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.211",
+    "district": "Дмитровский",
+    "address": "Яхромская улица, дом 8",
+    "unom": 75039,
+    "role": "угол",
+    "side": "подъезды 1–2, 5",
+    "azimuth": 89,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.539634,
+     55.88495
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.212",
+    "district": "Дмитровский",
+    "address": "Яхромская улица, дом 8",
+    "unom": 75039,
+    "role": "угол",
+    "side": "подъезды 3–4",
+    "azimuth": 359,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5398795,
+     55.8849372
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.213",
+    "district": "Дмитровский",
+    "address": "улица Софьи Ковалевской, дом 10, корпус 1",
+    "unom": 10296,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 179,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5331939,
+     55.8848895
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.214",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 65",
+    "unom": 673,
+    "role": "угол",
+    "side": "подъезды 3–8",
+    "azimuth": 305,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5286126,
+     55.884796
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.215",
+    "district": "Дмитровский",
+    "address": "Яхромская улица, дом 9, корпус 1",
+    "unom": 61173,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 90,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5379699,
+     55.8847462
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.216",
+    "district": "Дмитровский",
+    "address": "улица Софьи Ковалевской, дом 12, корпус 2",
+    "unom": 75068,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 0,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5349912,
+     55.8846918
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.217",
+    "district": "Дмитровский",
+    "address": "Яхромская улица, дом 9, корпус 2",
+    "unom": 61174,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 0,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5384998,
+     55.8846899
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.218",
+    "district": "Дмитровский",
+    "address": "улица Софьи Ковалевской, дом 12, корпус 1",
+    "unom": 75072,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 0,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5340027,
+     55.8846869
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.219",
+    "district": "Дмитровский",
+    "address": "улица Софьи Ковалевской, дом 12, корпус 3",
+    "unom": 75127,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 0,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5360123,
+     55.884685
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.220",
+    "district": "Дмитровский",
+    "address": "Учинская улица, дом 7",
+    "unom": 75151,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 179,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5360306,
+     55.8845509
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.221",
+    "district": "Дмитровский",
+    "address": "улица Софьи Ковалевской, дом 10, корпус 2",
+    "unom": 10297,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 179,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5340751,
+     55.8844667
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.222",
+    "district": "Дмитровский",
+    "address": "Яхромская улица, дом 6",
+    "unom": 75018,
+    "role": "угол",
+    "side": "подъезды 4–5",
+    "azimuth": 270,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5407686,
+     55.8844624
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.223",
+    "district": "Дмитровский",
+    "address": "улица Софьи Ковалевской, дом 10, корпус 1",
+    "unom": 10296,
+    "role": "середина фасада",
+    "side": "подъезды 1–6",
+    "azimuth": 179,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.533204,
+     55.8844604
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.224",
+    "district": "Дмитровский",
+    "address": "Яхромская улица, дом 6",
+    "unom": 75018,
+    "role": "угол",
+    "side": "подъезды 4–5",
+    "azimuth": 90,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5397108,
+     55.884442
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.225",
+    "district": "Дмитровский",
+    "address": "Яхромская улица, дом 6",
+    "unom": 75018,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 180,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5399584,
+     55.8844376
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.226",
+    "district": "Дмитровский",
+    "address": "Яхромская улица, дом 9, корпус 1",
+    "unom": 61173,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 0,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5382453,
+     55.8843409
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.227",
+    "district": "Дмитровский",
+    "address": "Дмитровское шоссе, дом 115, корпус 1",
+    "unom": 6719,
+    "role": "угол",
+    "side": "подъезды 3–4",
+    "azimuth": 89,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5411902,
+     55.8843278
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.228",
+    "district": "Дмитровский",
+    "address": "Коровинское шоссе, дом 30",
+    "unom": 11031,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 179,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5185214,
+     55.8842582
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.229",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 57, корпус 3",
+    "unom": 669,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 151,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5260212,
+     55.8842461
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.230",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 59, корпус 1",
+    "unom": 671,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 150,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5285249,
+     55.8841354
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.231",
+    "district": "Дмитровский",
+    "address": "улица Софьи Ковалевской, дом 10, корпус 2",
+    "unom": 10297,
+    "role": "середина фасада",
+    "side": "подъезды 1–6",
+    "azimuth": 359,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5340918,
+     55.8840329
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.232",
+    "district": "Дмитровский",
+    "address": "улица Софьи Ковалевской, дом 10, корпус 3",
+    "unom": 10298,
+    "role": "середина фасада",
+    "side": "подъезды 1–6",
+    "azimuth": 359,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5354257,
+     55.8839801
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.233",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 57, корпус 3",
+    "unom": 669,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 331,
+    "status": "черновик",
+    "also_covers": "Ангарская улица, дом 57, корпус 4 (круговой тротуар)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5261875,
+     55.8839662
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.234",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 57, корпус 4",
+    "unom": 340208,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 179,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5265477,
+     55.883943
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.235",
+    "district": "Дмитровский",
+    "address": "Учинская улица, дом 7",
+    "unom": 75151,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 359,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5360301,
+     55.8839355
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.236",
+    "district": "Дмитровский",
+    "address": "Дмитровское шоссе, дом 113, корпус 1",
+    "unom": 6718,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 179,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5412461,
+     55.8839253
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.237",
+    "district": "Дмитровский",
+    "address": "улица Софьи Ковалевской, дом 10, корпус 1",
+    "unom": 10296,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 359,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5332277,
+     55.8839089
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.238",
+    "district": "Дмитровский",
+    "address": "Дмитровское шоссе, дом 115, корпус 1",
+    "unom": 6719,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 359,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5416835,
+     55.883895
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.239",
+    "district": "Дмитровский",
+    "address": "Клязьминская улица, дом 6, корпус 2",
+    "unom": 10253,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 150,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5213242,
+     55.8838266
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.240",
+    "district": "Дмитровский",
+    "address": "Учинская улица, дом 3, корпус 1",
+    "unom": 340216,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 179,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5361293,
+     55.8838257
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.241",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 59, корпус 1",
+    "unom": 671,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 330,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5288629,
+     55.8838032
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.242",
+    "district": "Дмитровский",
+    "address": "Яхромская улица, дом 6",
+    "unom": 75018,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 0,
+    "status": "черновик",
+    "also_covers": "Яхромская улица, дом 4, корпус 2 (подъезды 1–2)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.540044,
+     55.8837887
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.243",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 59",
+    "unom": 670,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 150,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5292666,
+     55.8837769
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.244",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 57, корпус 4",
+    "unom": 340208,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 359,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5265919,
+     55.8836619
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.245",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 57, корпус 4",
+    "unom": 340208,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 359,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5260279,
+     55.8836163
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.246",
+    "district": "Дмитровский",
+    "address": "улица Софьи Ковалевской, дом 8",
+    "unom": 10295,
+    "role": "угол",
+    "side": "подъезды 1–10",
+    "azimuth": 178,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5331706,
+     55.8836015
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.247",
+    "district": "Дмитровский",
+    "address": "Яхромская улица, дом 3, корпус 2",
+    "unom": 30805,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 341,
+    "status": "черновик",
+    "also_covers": "Яхромская улица, дом 3, корпус 3 (подъезды 1)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5384044,
+     55.8835557
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.248",
+    "district": "Дмитровский",
+    "address": "Коровинское шоссе, дом 26/2",
+    "unom": 11024,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 149,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5193839,
+     55.8835064
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.249",
+    "district": "Дмитровский",
+    "address": "улица Софьи Ковалевской, дом 10, корпус 2",
+    "unom": 10297,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 359,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5341041,
+     55.8834912
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.250",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 57, корпус 1",
+    "unom": 340397,
+    "role": "угол",
+    "side": "подъезды 3–4",
+    "azimuth": 150,
+    "status": "черновик",
+    "also_covers": "Ангарская улица, дом 57, корпус 1 (подъезды 5–6)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5278149,
+     55.8834536
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.251",
+    "district": "Дмитровский",
+    "address": "Яхромская улица, дом 4",
+    "unom": 75001,
+    "role": "угол",
+    "side": "подъезды 2–3",
+    "azimuth": 179,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5396147,
+     55.8834104
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.252",
+    "district": "Дмитровский",
+    "address": "Яхромская улица, дом 4",
+    "unom": 75001,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 179,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5393448,
+     55.8834087
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.253",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 57, корпус 1",
+    "unom": 340397,
+    "role": "угол",
+    "side": "подъезды 7",
+    "azimuth": 240,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5282274,
+     55.8833863
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.254",
+    "district": "Дмитровский",
+    "address": "улица Софьи Ковалевской, дом 10, корпус 3",
+    "unom": 10298,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 359,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.535445,
+     55.8833779
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.255",
+    "district": "Дмитровский",
+    "address": "Яхромская улица, дом 4, корпус 2",
+    "unom": 75053,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 1,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5400185,
+     55.8832799
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.256",
+    "district": "Дмитровский",
+    "address": "Яхромская улица, дом 3, корпус 3",
+    "unom": 30806,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 340,
+    "status": "черновик",
+    "also_covers": "Яхромская улица, дом 3, корпус 4 (подъезды 1)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5383955,
+     55.8832457
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.257",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 57, корпус 1",
+    "unom": 340397,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 150,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5269092,
+     55.8832178
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.258",
+    "district": "Дмитровский",
+    "address": "Дмитровское шоссе, дом 111",
+    "unom": 6717,
+    "role": "угол",
+    "side": "подъезды 3–4",
+    "azimuth": 179,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5417146,
+     55.8831633
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.259",
+    "district": "Дмитровский",
+    "address": "Дмитровское шоссе, дом 113, корпус 1",
+    "unom": 6718,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 359,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5412691,
+     55.8830995
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.260",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 57, корпус 1",
+    "unom": 340397,
+    "role": "угол",
+    "side": "подъезды 5–6",
+    "azimuth": 60,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5265728,
+     55.8830772
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.261",
+    "district": "Дмитровский",
+    "address": "Коровинское шоссе, дом 24, корпус 2",
+    "unom": 11022,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 240,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5217185,
+     55.8830617
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.262",
+    "district": "Дмитровский",
+    "address": "Коровинское шоссе, дом 24, корпус 1",
+    "unom": 11021,
+    "role": "угол",
+    "side": "подъезды 1–10",
+    "azimuth": 150,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5194023,
+     55.8830207
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.263",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 57, корпус 1",
+    "unom": 340397,
+    "role": "угол",
+    "side": "подъезды 3–4",
+    "azimuth": 330,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5282764,
+     55.8830117
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.264",
+    "district": "Дмитровский",
+    "address": "Клязьминская улица, дом 6, корпус 2",
+    "unom": 10253,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 330,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5220647,
+     55.8829591
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.265",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 57, корпус 1",
+    "unom": 340397,
+    "role": "угол",
+    "side": "подъезды 7",
+    "azimuth": 60,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5267295,
+     55.882941
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.266",
+    "district": "Дмитровский",
+    "address": "Яхромская улица, дом 3, корпус 4",
+    "unom": 30807,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 341,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5385415,
+     55.8829004
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.267",
+    "district": "Дмитровский",
+    "address": "Учинская улица, дом 3, корпус 1",
+    "unom": 340216,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 359,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5361418,
+     55.8828901
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.268",
+    "district": "Дмитровский",
+    "address": "Яхромская улица, дом 4",
+    "unom": 75001,
+    "role": "угол",
+    "side": "подъезды 2–3",
+    "azimuth": 359,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5396964,
+     55.8828147
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.269",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 45, корпус 6",
+    "unom": 655,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 241,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.524808,
+     55.8827943
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.270",
+    "district": "Дмитровский",
+    "address": "Яхромская улица, дом 2",
+    "unom": 30804,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 270,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5407964,
+     55.882675
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.271",
+    "district": "Дмитровский",
+    "address": "Дмитровское шоссе, дом 111",
+    "unom": 6717,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 89,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5412359,
+     55.8826718
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.272",
+    "district": "Дмитровский",
+    "address": "улица Софьи Ковалевской, дом 8",
+    "unom": 10295,
+    "role": "середина фасада",
+    "side": "подъезды 1–10",
+    "azimuth": 178,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5332309,
+     55.8826459
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.273",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 57, корпус 1",
+    "unom": 340397,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 330,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5275194,
+     55.8826009
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.274",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 45, корпус 6",
+    "unom": 655,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 61,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5240267,
+     55.8825455
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.275",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 55",
+    "unom": 666,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 150,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5289479,
+     55.8825268
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.276",
+    "district": "Дмитровский",
+    "address": "Коровинское шоссе, дом 24, корпус 2",
+    "unom": 11022,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 60,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5202611,
+     55.8825134
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.277",
+    "district": "Дмитровский",
+    "address": "Яхромская улица, дом 1, корпус 2",
+    "unom": 75089,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 90,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5378385,
+     55.8825093
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.278",
+    "district": "Дмитровский",
+    "address": "Дмитровское шоссе, дом 109, корпус 1",
+    "unom": 6716,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 179,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5409063,
+     55.8824969
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.279",
+    "district": "Дмитровский",
+    "address": "Яхромская улица, дом 2",
+    "unom": 30804,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 0,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5392725,
+     55.8824919
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.280",
+    "district": "Дмитровский",
+    "address": "Яхромская улица, дом 1, корпус 2",
+    "unom": 75089,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 270,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5386567,
+     55.8824838
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.281",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 51, корпус 2",
+    "unom": 340336,
+    "role": "угол",
+    "side": "подъезды 5–6",
+    "azimuth": 240,
+    "status": "черновик",
+    "also_covers": "Ангарская улица, дом 57, корпус 1 (круговой тротуар)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5273301,
+     55.882476
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.282",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 51, корпус 2",
+    "unom": 340336,
+    "role": "угол",
+    "side": "подъезды 3–4",
+    "azimuth": 150,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5271134,
+     55.882323
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.283",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 51, корпус 2",
+    "unom": 340336,
+    "role": "угол",
+    "side": "подъезды 7",
+    "azimuth": 240,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5275269,
+     55.8823094
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.284",
+    "district": "Дмитровский",
+    "address": "Коровинское шоссе, дом 24, корпус 1",
+    "unom": 11021,
+    "role": "середина фасада",
+    "side": "подъезды 1–10",
+    "azimuth": 150,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5200243,
+     55.8823043
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.285",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 55",
+    "unom": 666,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 330,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5291806,
+     55.8822947
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.286",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 53, корпус 1",
+    "unom": 340217,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 188,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5288121,
+     55.8821775
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.287",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 51, корпус 2",
+    "unom": 340336,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 150,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5262074,
+     55.8820605
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.288",
+    "district": "Дмитровский",
+    "address": "Дмитровское шоссе, дом 109, корпус 1",
+    "unom": 6716,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 359,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5409269,
+     55.8820084
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.289",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 51, корпус 2",
+    "unom": 340336,
+    "role": "угол",
+    "side": "подъезды 5–6",
+    "azimuth": 60,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5259356,
+     55.8819772
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.290",
+    "district": "Дмитровский",
+    "address": "Яхромская улица, дом 1А",
+    "unom": 30803,
+    "role": "угол",
+    "side": "подъезды 1–8",
+    "azimuth": 257,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5396802,
+     55.8819029
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.291",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 53, корпус 1",
+    "unom": 340217,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 8,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5287157,
+     55.8818887
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.292",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 51, корпус 2",
+    "unom": 340336,
+    "role": "угол",
+    "side": "подъезды 3–4",
+    "azimuth": 330,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5275847,
+     55.8818669
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.293",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 51, корпус 2",
+    "unom": 340336,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 240,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5280222,
+     55.8818274
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.294",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 51, корпус 2",
+    "unom": 340336,
+    "role": "угол",
+    "side": "подъезды 7",
+    "azimuth": 60,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5260343,
+     55.8818089
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.295",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 49, корпус 5",
+    "unom": 661,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 150,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5276417,
+     55.8817436
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.296",
+    "district": "Дмитровский",
+    "address": "Яхромская улица, дом 1А",
+    "unom": 30803,
+    "role": "середина фасада",
+    "side": "подъезды 1–8",
+    "azimuth": 77,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.538336,
+     55.8817258
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.297",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 45, корпус 3",
+    "unom": 340300,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 175,
+    "status": "черновик",
+    "also_covers": "Ангарская улица, дом 45, корпус 4 (подъезды 1)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5250485,
+     55.8817064
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.298",
+    "district": "Дмитровский",
+    "address": "Коровинское шоссе, дом 22, корпус 1",
+    "unom": 11017,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 240,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5235506,
+     55.8817
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.299",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 45, корпус 3",
+    "unom": 340300,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 85,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.524533,
+     55.8816957
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.300",
+    "district": "Дмитровский",
+    "address": "улица Софьи Ковалевской, дом 8",
+    "unom": 10295,
+    "role": "угол",
+    "side": "подъезды 1–10",
+    "azimuth": 358,
+    "status": "черновик",
+    "also_covers": "улица Софьи Ковалевской, дом 6 (подъезды 1)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5333754,
+     55.881558
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.301",
+    "district": "Дмитровский",
+    "address": "Яхромская улица, дом 1А",
+    "unom": 30803,
+    "role": "угол",
+    "side": "подъезды 1–8",
+    "azimuth": 77,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5369465,
+     55.881544
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.302",
+    "district": "Дмитровский",
+    "address": "Коровинское шоссе, дом 24, корпус 1",
+    "unom": 11021,
+    "role": "угол",
+    "side": "подъезды 1–10",
+    "azimuth": 330,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5209413,
+     55.8815378
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.303",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 49, корпус 5",
+    "unom": 661,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 330,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5278602,
+     55.8815268
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.304",
+    "district": "Дмитровский",
+    "address": "Коровинское шоссе, дом 24, корпус 1",
+    "unom": 11021,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 330,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.520614,
+     55.8814875
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.305",
+    "district": "Дмитровский",
+    "address": "Коровинское шоссе, дом 22, корпус 1",
+    "unom": 11017,
+    "role": "середина фасада",
+    "side": "подъезды 1–6",
+    "azimuth": 60,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5229089,
+     55.8814848
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.306",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 51, корпус 2",
+    "unom": 340336,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 330,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5268137,
+     55.8814463
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.307",
+    "district": "Дмитровский",
+    "address": "Учинская улица, дом 1А",
+    "unom": 26982,
+    "role": "угол",
+    "side": "подъезды 1–7",
+    "azimuth": 256,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5358436,
+     55.8814363
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.308",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 45, корпус 3",
+    "unom": 340300,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 355,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5251153,
+     55.88138
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.309",
+    "district": "Дмитровский",
+    "address": "Коровинское шоссе, дом 22",
+    "unom": 11016,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 150,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5212358,
+     55.8813693
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.310",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 45, корпус 3",
+    "unom": 340300,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 355,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5247382,
+     55.8813689
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.311",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 45, корпус 2",
+    "unom": 340296,
+    "role": "угол",
+    "side": "подъезды 5–6",
+    "azimuth": 240,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5267597,
+     55.8813245
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.312",
+    "district": "Дмитровский",
+    "address": "Учинская улица, дом 1А",
+    "unom": 26982,
+    "role": "середина фасада",
+    "side": "подъезды 1–7",
+    "azimuth": 256,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5348123,
+     55.8812576
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.313",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 45, корпус 2",
+    "unom": 340296,
+    "role": "угол",
+    "side": "подъезды 7",
+    "azimuth": 240,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5268937,
+     55.8812275
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.314",
+    "district": "Дмитровский",
+    "address": "Коровинское шоссе, дом 22, корпус 1",
+    "unom": 11017,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 60,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5218753,
+     55.8812229
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.315",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 45, корпус 2",
+    "unom": 340296,
+    "role": "угол",
+    "side": "подъезды 3–4",
+    "azimuth": 150,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.526467,
+     55.8812133
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.316",
+    "district": "Дмитровский",
+    "address": "Учинская улица, дом 1А",
+    "unom": 26982,
+    "role": "угол",
+    "side": "подъезды 1–7",
+    "azimuth": 76,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5337522,
+     55.881147
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.317",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 45, корпус 2",
+    "unom": 340296,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 150,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5255232,
+     55.8809769
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.318",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 45, корпус 2",
+    "unom": 340296,
+    "role": "угол",
+    "side": "подъезды 5–6",
+    "azimuth": 60,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5254088,
+     55.8808554
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.319",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 45, корпус 2",
+    "unom": 340296,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 240,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5272775,
+     55.880836
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.320",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 45, корпус 2",
+    "unom": 340296,
+    "role": "угол",
+    "side": "подъезды 3–4",
+    "azimuth": 330,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5269119,
+     55.8807823
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.321",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 45, корпус 2",
+    "unom": 340296,
+    "role": "угол",
+    "side": "подъезды 7",
+    "azimuth": 60,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5254487,
+     55.8807471
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.322",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 45, корпус 5",
+    "unom": 654,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 151,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5271687,
+     55.880605
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.323",
+    "district": "Дмитровский",
+    "address": "Коровинское шоссе, дом 22",
+    "unom": 11016,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 330,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5221105,
+     55.8805622
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.324",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 43",
+    "unom": 649,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 150,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5246427,
+     55.8805442
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.325",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 47",
+    "unom": 656,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 151,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5278731,
+     55.8804634
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.326",
+    "district": "Дмитровский",
+    "address": "Коровинское шоссе, дом 20, корпус 2",
+    "unom": 11012,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 241,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.524377,
+     55.8804313
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.327",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 45, корпус 5",
+    "unom": 654,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 331,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5273531,
+     55.8804248
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.328",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 45, корпус 2",
+    "unom": 340296,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 330,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5261637,
+     55.8803542
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.329",
+    "district": "Дмитровский",
+    "address": "улица Софьи Ковалевской, дом 4А",
+    "unom": 10293,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 75,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5337755,
+     55.8802528
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.330",
+    "district": "Дмитровский",
+    "address": "Коровинское шоссе, дом 20, корпус 1",
+    "unom": 11011,
+    "role": "угол",
+    "side": "подъезды 1–8",
+    "azimuth": 150,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5221621,
+     55.8802339
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.331",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 47",
+    "unom": 656,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 331,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5280894,
+     55.8802233
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.332",
+    "district": "Дмитровский",
+    "address": "улица Софьи Ковалевской, дом 4, корпус 2",
+    "unom": 10290,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 165,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5355954,
+     55.8802091
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.333",
+    "district": "Дмитровский",
+    "address": "улица Софьи Ковалевской, дом 4",
+    "unom": 10289,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 165,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5336055,
+     55.8800833
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.334",
+    "district": "Дмитровский",
+    "address": "Коровинское шоссе, дом 20, корпус 2",
+    "unom": 11012,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 61,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5228263,
+     55.87993
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.335",
+    "district": "Дмитровский",
+    "address": "улица Софьи Ковалевской, дом 4, корпус 2",
+    "unom": 10290,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 345,
+    "status": "черновик",
+    "also_covers": "улица Софьи Ковалевской, дом 4, корпус 3 (подъезды 1)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.535759,
+     55.8798619
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.336",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 43",
+    "unom": 649,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 330,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.525493,
+     55.8797107
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.337",
+    "district": "Дмитровский",
+    "address": "Коровинское шоссе, дом 20, корпус 1",
+    "unom": 11011,
+    "role": "середина фасада",
+    "side": "подъезды 1–8",
+    "azimuth": 330,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5228314,
+     55.8795849
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.338",
+    "district": "Дмитровский",
+    "address": "улица Софьи Ковалевской, дом 4",
+    "unom": 10289,
+    "role": "середина фасада",
+    "side": "подъезды 1–6",
+    "azimuth": 165,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5338826,
+     55.8795454
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.339",
+    "district": "Дмитровский",
+    "address": "улица Софьи Ковалевской, дом 4, корпус 3",
+    "unom": 10291,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 345,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5356559,
+     55.8795311
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.340",
+    "district": "Дмитровский",
+    "address": "улица Софьи Ковалевской, дом 4, корпус 4",
+    "unom": 10292,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 165,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5354855,
+     55.8794645
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.341",
+    "district": "Дмитровский",
+    "address": "Ангарская улица, дом 39",
+    "unom": 647,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 151,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.524348,
+     55.8792603
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.342",
+    "district": "Дмитровский",
+    "address": "улица Софьи Ковалевской, дом 4, корпус 4",
+    "unom": 10292,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 345,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5355748,
+     55.8791909
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.343",
+    "district": "Дмитровский",
+    "address": "Коровинское шоссе, дом 20, корпус 1",
+    "unom": 11011,
+    "role": "угол",
+    "side": "подъезды 1–8",
+    "azimuth": 330,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5233971,
+     55.8790061
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.344",
+    "district": "Дмитровский",
+    "address": "улица Софьи Ковалевской, дом 4",
+    "unom": 10289,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 345,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5341444,
+     55.8789653
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.345",
+    "district": "Дмитровский",
+    "address": "улица Софьи Ковалевской, дом 2А",
+    "unom": 10288,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 165,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5337754,
+     55.8788772
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.346",
+    "district": "Дмитровский",
+    "address": "улица Софьи Ковалевской, дом 2, корпус 4",
+    "unom": 10286,
+    "role": "угол",
+    "side": "подъезды 1–8",
+    "azimuth": 163,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5361523,
+     55.8788482
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.347",
+    "district": "Дмитровский",
+    "address": "улица Софьи Ковалевской, дом 2А",
+    "unom": 10288,
+    "role": "середина фасада",
+    "side": "подъезды 1–6",
+    "azimuth": 345,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5340576,
+     55.8784162
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.348",
+    "district": "Дмитровский",
+    "address": "улица Софьи Ковалевской, дом 2, корпус 4",
+    "unom": 10286,
+    "role": "середина фасада",
+    "side": "подъезды 1–8",
+    "azimuth": 163,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5364252,
+     55.8781953
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.349",
+    "district": "Дмитровский",
+    "address": "улица Софьи Ковалевской, дом 2А",
+    "unom": 10288,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 345,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5343158,
+     55.8778287
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.350",
+    "district": "Дмитровский",
+    "address": "улица Софьи Ковалевской, дом 2",
+    "unom": 10282,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 165,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5341108,
+     55.8777882
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.351",
+    "district": "Дмитровский",
+    "address": "улица Софьи Ковалевской, дом 2, корпус 2",
+    "unom": 10284,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 165,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5351439,
+     55.8775525
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.352",
+    "district": "Дмитровский",
+    "address": "улица Софьи Ковалевской, дом 2, корпус 4",
+    "unom": 10286,
+    "role": "угол",
+    "side": "подъезды 1–8",
+    "azimuth": 343,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.536818,
+     55.8774708
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.353",
+    "district": "Дмитровский",
+    "address": "улица Софьи Ковалевской, дом 2, корпус 5",
+    "unom": 10287,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 253,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5375497,
+     55.8773971
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.354",
+    "district": "Дмитровский",
+    "address": "улица Софьи Ковалевской, дом 2",
+    "unom": 10282,
+    "role": "середина фасада",
+    "side": "подъезды 1–6",
+    "azimuth": 165,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5343251,
+     55.8771435
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.355",
+    "district": "Дмитровский",
+    "address": "улица Софьи Ковалевской, дом 2, корпус 5",
+    "unom": 10287,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 73,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5361714,
+     55.8771283
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.356",
+    "district": "Дмитровский",
+    "address": "улица Софьи Ковалевской, дом 2, корпус 1",
+    "unom": 10283,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 254,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.536071,
+     55.8770081
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.357",
+    "district": "Дмитровский",
+    "address": "улица Софьи Ковалевской, дом 2, корпус 1",
+    "unom": 10283,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 74,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5346922,
+     55.876775
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.358",
+    "district": "Дмитровский",
+    "address": "улица Софьи Ковалевской, дом 2",
+    "unom": 10282,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 345,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5346345,
+     55.8765087
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.359",
+    "district": "Дмитровский",
+    "address": "улица 800-летия Москвы, дом 2, корпус 1",
+    "unom": 4859,
+    "role": "угол",
+    "side": "подъезды 1–8",
+    "azimuth": 253,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.532665,
+     55.8757195
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.360",
+    "district": "Дмитровский",
+    "address": "улица 800-летия Москвы, дом 2, корпус 2",
+    "unom": 4860,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 163,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5323613,
+     55.8754634
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.361",
+    "district": "Дмитровский",
+    "address": "улица 800-летия Москвы, дом 2, корпус 1",
+    "unom": 4859,
+    "role": "середина фасада",
+    "side": "подъезды 1–8",
+    "azimuth": 253,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.531116,
+     55.8754003
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.362",
+    "district": "Дмитровский",
+    "address": "улица 800-летия Москвы, дом 2, корпус 1",
+    "unom": 4859,
+    "role": "угол",
+    "side": "подъезды 1–8",
+    "azimuth": 73,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5295101,
+     55.8751369
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.363",
+    "district": "Дмитровский",
+    "address": "улица 800-летия Москвы, дом 2, корпус 2",
+    "unom": 4860,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 343,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5327952,
+     55.8750195
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.364",
+    "district": "Дмитровский",
+    "address": "Коровинское шоссе, дом 16",
+    "unom": 11007,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 197,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5293719,
+     55.8749341
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.365",
+    "district": "Дмитровский",
+    "address": "Коровинское шоссе, дом 14, корпус 1",
+    "unom": 11003,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 140,
+    "status": "черновик",
+    "also_covers": "Коровинское шоссе, дом 16 (подъезды 1–4)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5289494,
+     55.874021
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т7.366",
+    "district": "Дмитровский",
+    "address": "Коровинское шоссе, дом 14, корпус 1",
+    "unom": 11003,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 320,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5300467,
+     55.8733749
+    ]
+   }
+  }
+ ]
+}
