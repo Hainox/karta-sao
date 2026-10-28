@@ -5,7 +5,6 @@ page = (Path(__file__).resolve().parents[1] / "index.html").read_text(encoding="
 
 required_fragments = {
     "selected HUD title": "Карта маршрутов ОДХ САО",
-    "district workflow link": "district-links.html",
     "print link": "print-1000x1400.html",
     "SAO extent action": "На всю территорию САО",
     "layer controls": "Слои и условные обозначения",

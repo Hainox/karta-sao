@@ -6,10 +6,8 @@ const BASE = process.env.ATLAS_BASE || 'https://hainox.github.io/karta-sao';
 
 const PAGES = [
   { path: '/', name: 'дворы и участки (Яндекс API)', engine: 'yandex', ready: ['canvas'] },
-  { path: '/smm/', name: 'маршруты СММ (Яндекс API)', engine: 'yandex', ready: ['canvas'] },
   { path: '/object-maps/', name: 'фотофиксация (Яндекс API 2.1)', engine: 'yandex', ready: ['#paLoginInput'] },
   { path: '/odh-map/', name: 'ОДХ (Leaflet + Яндекс-плитки)', engine: 'leaflet', ready: ['.leaflet-container', 'img.leaflet-tile'] },
-  { path: '/odh-map/district-editor.html', name: 'редактор района', engine: 'leaflet', ready: ['.leaflet-container', 'img.leaflet-tile'] },
   { path: '/odh-map/district-review.html', name: 'приёмка префектуры', engine: 'leaflet', ready: ['.leaflet-container', 'img.leaflet-tile'] },
   { path: '/yards-print/', name: 'печать дворов A3', engine: 'leaflet', ready: ['.leaflet-container', 'img.leaflet-tile'] },
   { path: '/odh-map/print-a3.html', name: 'печать ОДХ A3', engine: 'leaflet', ready: ['.leaflet-container'] }

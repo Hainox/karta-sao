@@ -18,7 +18,7 @@
   <div class="app">
     <header class="topbar">
       <div class="brand"><span class="brand-mark atlas-emblem"><img src="../assets/sao-emblem.svg?v=20261021" alt="САО — Северный округ"></span><span>ОДХ САО<small>Рабочий контур · приёмка правок</small></span></div>
-      <nav class="topbar-actions" aria-label="Навигация"><a class="link-action" href="../hub/"><i class="fa-solid fa-atlas"></i> Городской атлас САО</a><a class="link-action" href="prefecture-guide.html"><i class="fa-solid fa-book-open"></i> Памятка префектуры</a><a class="link-action" href="district-links.html"><i class="fa-solid fa-link"></i> Районные ссылки</a><a class="link-action" href="district-editor.html"><i class="fa-solid fa-pen-ruler"></i> Редактор</a><a class="primary-action" href="index.html"><i class="fa-solid fa-map"></i> Утверждённая карта</a></nav>
+      <nav class="topbar-actions" aria-label="Навигация"><a class="link-action" href="../hub/"><i class="fa-solid fa-atlas"></i> Городской атлас САО</a><a class="primary-action" href="index.html"><i class="fa-solid fa-map"></i> Утверждённая карта</a></nav>
     </header>
     <main class="workspace">
       <aside class="sidebar">
@@ -117,7 +117,7 @@
         entry.changeSet.features.forEach((feature, index) => {
           const layer = L.geoJSON(feature, { style:() => visualOptions(feature), pointToLayer:(_, latlng) => L.circleMarker(latlng, visualOptions(feature)) });
           entry.layers.addLayer(layer); entry.layersByFeature.set(feature, layer);
-          // Подпись и карточка объекта — общие с редактором района, поэтому префектура
+          // Подпись и карточка объекта берутся из общего модуля, поэтому префектура
           // видит ровно то же обозначение, что нарисовал район.
           ODHObjectLabels.attach(layer, feature, {
             index,
