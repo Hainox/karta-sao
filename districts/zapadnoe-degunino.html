@@ -154,7 +154,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
 });
 </script>
 <link rel="stylesheet" href="../atlas-brand.css?v=20261021">
-<link rel="stylesheet" href="point-popover.css?v=20261028">
+<link rel="stylesheet" href="point-popover.css?v=20261028-doors">
 </head>
 <body>
 <div class="app">
@@ -177,6 +177,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     <label class="layer-row off" id="shootLayerRow" hidden><input type="checkbox" id="shootLayerToggle"><span class="swatch" style="background:#ffcb00"></span><span class="label">Точки съёмки · въездные группы</span><span class="count" id="shootLayerCount">0</span></label>
     <div id="playgroundPhotoLayer"></div>
     <div id="sidewalkShootLayer" hidden></div>
+    <div id="entranceRefLayer" hidden></div>
     <details class="shoot-list-box"><summary>Список точек</summary><div class="shoot-list" id="shootList"></div></details>
     <div class="shoot-hint" id="shootHint">Точки и направления назначает префектура. Район загружает снимки на назначенные точки.</div>
     <div class="shoot-actions">
@@ -199,9 +200,10 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
   </aside>
   <main id="map"></main>
 </div>
-<script src="point-popover.js?v=20261028"></script>
+<script src="point-popover.js?v=20261028-doors"></script>
 <script src="playground-photo-layer.js?v=20261028-popover"></script>
 <script src="sidewalk-shoot-layer.js?v=20261028-popover"></script>
+<script src="entrance-ref-layer.js?v=20261028"></script>
 <script>
 (() => {
   const SLUG = 'zapadnoe-degunino';
@@ -325,6 +327,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     state.popover = window.createPointPopover({ map: state.map, card: $('card'), mapElement: $('map') });
     state.playgroundLayer = window.initPlaygroundPhotoLayer({ map: state.map, district: DISTRICT, apiRequest, getUser: () => state.photoUser, preparePointPhoto, escapeHtml, centerSelection, popover: state.popover });
     state.sidewalkLayer = window.initSidewalkShootLayer({ map: state.map, slug: SLUG, district: DISTRICT, apiRequest, escapeHtml, centerSelection, popover: state.popover, getUser: () => state.photoUser, preparePointPhoto });
+    state.entranceLayer = window.initEntranceRefLayer({ map: state.map, slug: SLUG, escapeHtml, centerSelection, popover: state.popover });
     await loadPhotoPoints();
     renderShootMarkers();
     renderShootLogin();
@@ -1233,6 +1236,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     $('shootLayerRow').hidden = !isPrefecture() && !isDistrictEditor();
     // Тестовый слой тротуаров пока видит только префектура.
     if (state.sidewalkLayer) state.sidewalkLayer.setVisible(isPrefecture());
+    if (state.entranceLayer) state.entranceLayer.setVisible(isPrefecture());
     if (isDistrictEditor() && !state.shootLayerOn) setShootLayer(true);
     $('shootToggle').hidden = !isPrefecture();
     if (!isPrefecture() && state.shootMode) setShootMode(false);
