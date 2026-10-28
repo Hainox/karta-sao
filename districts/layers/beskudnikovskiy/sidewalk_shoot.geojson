@@ -1,0 +1,8901 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.001",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 71, корпус 1",
+    "unom": 7245,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 180,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5570409,
+     55.878657
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.002",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 71, корпус 1",
+    "unom": 7245,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 0,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5569817,
+     55.8779109
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.003",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 71, корпус 1",
+    "unom": 7245,
+    "role": "угол",
+    "side": "подъезды 2",
+    "azimuth": 0,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5565454,
+     55.8779107
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.004",
+    "district": "Бескудниковский",
+    "address": "улица 800-летия Москвы, дом 16, корпус 1",
+    "unom": 7240,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 163,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5516588,
+     55.8776401
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.005",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 96, корпус 4",
+    "unom": 340285,
+    "role": "угол",
+    "side": "подъезды 2–4",
+    "azimuth": 150,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5494703,
+     55.8775131
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.006",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 96, корпус 3",
+    "unom": 340282,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 171,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5484371,
+     55.8774931
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.007",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 96, корпус 3",
+    "unom": 340282,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 81,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5479887,
+     55.8774562
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.008",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 96, корпус 4",
+    "unom": 340285,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 150,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5492086,
+     55.8774205
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.009",
+    "district": "Бескудниковский",
+    "address": "улица 800-летия Москвы, дом 12",
+    "unom": 4882,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 253,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5445416,
+     55.8774088
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.010",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 69, корпус 2",
+    "unom": 7243,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 180,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5567055,
+     55.8773412
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.011",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 96, корпус 3",
+    "unom": 340282,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 351,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.548526,
+     55.8771843
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.012",
+    "district": "Бескудниковский",
+    "address": "улица 800-летия Москвы, дом 12",
+    "unom": 4882,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 253,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5447069,
+     55.8771498
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.013",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 96, корпус 3",
+    "unom": 340282,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 351,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5480805,
+     55.8771389
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.014",
+    "district": "Бескудниковский",
+    "address": "улица 800-летия Москвы, дом 10",
+    "unom": 4871,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 253,
+    "status": "черновик",
+    "also_covers": "улица 800-летия Москвы, дом 12 (подъезды 1–4)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5429562,
+     55.8771143
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.015",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 96, корпус 1",
+    "unom": 340284,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 171,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5482966,
+     55.8770804
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.016",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 105, корпус 1",
+    "unom": 6710,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 190,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5455312,
+     55.8769407
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.017",
+    "district": "Бескудниковский",
+    "address": "улица 800-летия Москвы, дом 8",
+    "unom": 4869,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 253,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5402881,
+     55.8769157
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.018",
+    "district": "Бескудниковский",
+    "address": "улица 800-летия Москвы, дом 10",
+    "unom": 4871,
+    "role": "середина фасада",
+    "side": "подъезды 1–6",
+    "azimuth": 253,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5416714,
+     55.8769129
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.019",
+    "district": "Бескудниковский",
+    "address": "улица 800-летия Москвы, дом 12",
+    "unom": 4882,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 343,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5430722,
+     55.8769054
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.020",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 105, корпус 2",
+    "unom": 6711,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 193,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5446951,
+     55.876876
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.021",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 96, корпус 4",
+    "unom": 340285,
+    "role": "угол",
+    "side": "подъезды 2–4",
+    "azimuth": 330,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5501616,
+     55.8767634
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.022",
+    "district": "Бескудниковский",
+    "address": "улица 800-летия Москвы, дом 8",
+    "unom": 4869,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 73,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5394663,
+     55.8767587
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.023",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 69, корпус 2",
+    "unom": 7243,
+    "role": "середина фасада",
+    "side": "подъезды 1–6",
+    "azimuth": 180,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5566437,
+     55.8767232
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.024",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 96, корпус 4",
+    "unom": 340285,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 330,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5498451,
+     55.8767003
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.025",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 105, корпус 1",
+    "unom": 6710,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 10,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5454462,
+     55.8766987
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.026",
+    "district": "Бескудниковский",
+    "address": "улица 800-летия Москвы, дом 10",
+    "unom": 4871,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 73,
+    "status": "черновик",
+    "also_covers": "улица 800-летия Москвы, дом 8 (круговой тротуар)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5404253,
+     55.8766572
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.027",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 96, корпус 5",
+    "unom": 340281,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 151,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5501201,
+     55.8766225
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.028",
+    "district": "Бескудниковский",
+    "address": "улица 800-летия Москвы, дом 6",
+    "unom": 4867,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 253,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5396781,
+     55.8765753
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.029",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 103",
+    "unom": 6709,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 170,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5453748,
+     55.8765578
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.030",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 105, корпус 2",
+    "unom": 6711,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 13,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5445598,
+     55.8765559
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.031",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 105, корпус 3",
+    "unom": 6712,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 10,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5436737,
+     55.8765018
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.032",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 69, корпус 3",
+    "unom": 7244,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 270,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5561326,
+     55.8764803
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.033",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 69, корпус 3",
+    "unom": 7244,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 90,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5555605,
+     55.876476
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.034",
+    "district": "Бескудниковский",
+    "address": "улица 800-летия Москвы, дом 6",
+    "unom": 4867,
+    "role": "середина фасада",
+    "side": "подъезды 1–6",
+    "azimuth": 253,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5384301,
+     55.8763401
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.035",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 105, корпус 4",
+    "unom": 6713,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 12,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5427936,
+     55.8763379
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.036",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 105, корпус 5",
+    "unom": 6714,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 11,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5418691,
+     55.8761874
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.037",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 69, корпус 2",
+    "unom": 7243,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 0,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5566022,
+     55.8761614
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.038",
+    "district": "Бескудниковский",
+    "address": "улица 800-летия Москвы, дом 6",
+    "unom": 4867,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 73,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5371226,
+     55.8761293
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.039",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 96, корпус 1",
+    "unom": 340284,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 351,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.548574,
+     55.8761254
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.040",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 69, корпус 2",
+    "unom": 7243,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 270,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5570808,
+     55.8760878
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.041",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский проезд, дом 4, корпус 2",
+    "unom": 340222,
+    "role": "угол",
+    "side": "подъезды 3–4",
+    "azimuth": 267,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5555083,
+     55.8760643
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.042",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 101, корпус 1",
+    "unom": 6708,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 170,
+    "status": "черновик",
+    "also_covers": "Дмитровское шоссе, дом 103 (подъезды 1)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5454134,
+     55.8760478
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.043",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 105, корпус 6",
+    "unom": 6715,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 11,
+    "status": "черновик",
+    "also_covers": "Дмитровское шоссе, дом 105, корпус 6 (подъезды 1)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5409605,
+     55.8760288
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.044",
+    "district": "Бескудниковский",
+    "address": "улица 800-летия Москвы, дом 4, корпус 1",
+    "unom": 4863,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 162,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5351665,
+     55.8759566
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.045",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский проезд, дом 4, корпус 2",
+    "unom": 340222,
+    "role": "угол",
+    "side": "подъезды 3–4",
+    "azimuth": 87,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5538056,
+     55.8759533
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.046",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 69, корпус 1",
+    "unom": 7242,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 269,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5568698,
+     55.8759351
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.047",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 96, корпус 5",
+    "unom": 340281,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 331,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5508054,
+     55.8759245
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.048",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский проезд, дом 4, корпус 2",
+    "unom": 340222,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 267,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5555936,
+     55.8757874
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.049",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 101, корпус 1",
+    "unom": 6708,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 350,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5457366,
+     55.8754431
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.050",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 99, корпус 1",
+    "unom": 6706,
+    "role": "угол",
+    "side": "подъезды 1–8",
+    "azimuth": 171,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5460653,
+     55.8753616
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.051",
+    "district": "Бескудниковский",
+    "address": "улица 800-летия Москвы, дом 4, корпус 1",
+    "unom": 4863,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 342,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5353906,
+     55.8753428
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.052",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский проезд, дом 2, корпус 2",
+    "unom": 340221,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 244,
+    "status": "черновик",
+    "also_covers": "Бескудниковский проезд, дом 2, корпус 2 (подъезды 2)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5510277,
+     55.8752936
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.053",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский проезд, дом 2, корпус 2",
+    "unom": 340221,
+    "role": "угол",
+    "side": "подъезды 3–5",
+    "azimuth": 154,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5512188,
+     55.8752554
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.054",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский проезд, дом 2, корпус 2",
+    "unom": 340221,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 64,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5504444,
+     55.8751411
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.055",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 94, корпус 1",
+    "unom": 340247,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 172,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5492184,
+     55.8750081
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.056",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский проезд, дом 2, корпус 1",
+    "unom": 340223,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 243,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.550327,
+     55.875005
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.057",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 94, корпус 1",
+    "unom": 340247,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 82,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5486849,
+     55.8749435
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.058",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 46, корпус 3",
+    "unom": 1990,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 263,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5453267,
+     55.8748725
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.059",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский проезд, дом 2, корпус 1",
+    "unom": 340223,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 63,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5496276,
+     55.8748307
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.060",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 46, корпус 3",
+    "unom": 1990,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 83,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.544345,
+     55.8748078
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.061",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 61",
+    "unom": 7234,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 155,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.556821,
+     55.8747843
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.062",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 99, корпус 1",
+    "unom": 6706,
+    "role": "середина фасада",
+    "side": "подъезды 1–8",
+    "azimuth": 351,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5462421,
+     55.8747368
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.063",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 58, корпус 2",
+    "unom": 340301,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 161,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5365131,
+     55.8746914
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.064",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 94, корпус 1",
+    "unom": 340247,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 352,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5492881,
+     55.8746536
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.065",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский проезд, дом 2, корпус 1",
+    "unom": 340223,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 333,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5497712,
+     55.8746432
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.066",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 94, корпус 1",
+    "unom": 340247,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 352,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5487961,
+     55.8746347
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.067",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 58, корпус 2",
+    "unom": 340301,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 71,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5360085,
+     55.8745873
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.068",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский проезд, дом 2, корпус 2",
+    "unom": 340221,
+    "role": "угол",
+    "side": "подъезды 3–5",
+    "azimuth": 334,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5519141,
+     55.8745194
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.069",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 58, корпус 2",
+    "unom": 340301,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 341,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5366612,
+     55.8744449
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.070",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский проезд, дом 2, корпус 2",
+    "unom": 340221,
+    "role": "угол",
+    "side": "подъезды 2",
+    "azimuth": 334,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5516523,
+     55.8744149
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.071",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 50/1",
+    "unom": 6519657,
+    "role": "угол",
+    "side": "подъезды 2, 4",
+    "azimuth": 173,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5402785,
+     55.8743425
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.072",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 38, корпус 1",
+    "unom": 340246,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 99,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.552237,
+     55.87434
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.073",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 50/1",
+    "unom": 6519657,
+    "role": "угол",
+    "side": "подъезды 3",
+    "azimuth": 173,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5400082,
+     55.8743247
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.074",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 38, корпус 1",
+    "unom": 340246,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 189,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5527291,
+     55.8743242
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.075",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 40, корпус 1",
+    "unom": 1983,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 189,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5493139,
+     55.8743124
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.076",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 50/1",
+    "unom": 6519657,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 83,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5394316,
+     55.8742947
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.077",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульв., дом 52, корпус 1",
+    "unom": 5174567,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 174,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5388442,
+     55.8742697
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.078",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 61",
+    "unom": 7234,
+    "role": "середина фасада",
+    "side": "подъезды 1–6",
+    "azimuth": 155,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5572468,
+     55.8742523
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.079",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 56, корпус 1",
+    "unom": 340292,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 130,
+    "status": "черновик",
+    "also_covers": "Бескудниковский бульвар, дом 58, корпус 2 (круговой тротуар)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5360396,
+     55.8742097
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.080",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 36, корпус 3",
+    "unom": 1978,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 155,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5546034,
+     55.8741858
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.081",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 40, корпус 3",
+    "unom": 1985,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 189,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5510957,
+     55.8741323
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.082",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 99, корпус 1",
+    "unom": 6706,
+    "role": "угол",
+    "side": "подъезды 1–8",
+    "azimuth": 351,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5464375,
+     55.8740895
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.083",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 38, корпус 1",
+    "unom": 340246,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 9,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5521006,
+     55.8740289
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.084",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульв., дом 52",
+    "unom": 6043024,
+    "role": "угол",
+    "side": "подъезды 3–4",
+    "azimuth": 193,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5374392,
+     55.8740261
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.085",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 38, корпус 1",
+    "unom": 340246,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 9,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5526466,
+     55.8739704
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.086",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульв., дом 52",
+    "unom": 6043024,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 193,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5388106,
+     55.8739416
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.087",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 40, корпус 3",
+    "unom": 1985,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 9,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5509268,
+     55.8738777
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.088",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 36, корпус 3",
+    "unom": 1978,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 335,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.554879,
+     55.8738672
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.089",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 56, корпус 1",
+    "unom": 340292,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 310,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5369367,
+     55.8737876
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.090",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 61",
+    "unom": 7234,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 335,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5575515,
+     55.8737055
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.091",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульв., дом 52",
+    "unom": 6043024,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 103,
+    "status": "черновик",
+    "also_covers": "Бескудниковский бульв., дом 52 (подъезды 3–4)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5372521,
+     55.8736432
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.092",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 36, корпус 4",
+    "unom": 1979,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 335,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5545935,
+     55.8735724
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.093",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 50/1",
+    "unom": 6519657,
+    "role": "угол",
+    "side": "подъезды 2, 4",
+    "azimuth": 353,
+    "status": "черновик",
+    "also_covers": "Бескудниковский бульвар, дом 50/1 (подъезды 1)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5404949,
+     55.8735407
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.094",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 50/1",
+    "unom": 6519657,
+    "role": "угол",
+    "side": "подъезды 3",
+    "azimuth": 353,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5401805,
+     55.8734878
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.095",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульв., дом 52",
+    "unom": 6043024,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 283,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5385885,
+     55.8734747
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.096",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 50/1",
+    "unom": 6519657,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 83,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5395934,
+     55.8734691
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.097",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 36, корпус 1",
+    "unom": 75069,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 335,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5536427,
+     55.8734411
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.098",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 53, корпус 3",
+    "unom": 340170,
+    "role": "угол",
+    "side": "подъезды 5–6",
+    "azimuth": 246,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5578595,
+     55.8734294
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.099",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульв., дом 52, корпус 1",
+    "unom": 5174567,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 354,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5390076,
+     55.8733982
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.100",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 53, корпус 2",
+    "unom": 340171,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 156,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5581439,
+     55.8733667
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.101",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 53, корпус 3",
+    "unom": 340170,
+    "role": "угол",
+    "side": "подъезды 4",
+    "azimuth": 246,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5579926,
+     55.8732689
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.102",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 53, корпус 3",
+    "unom": 340170,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 156,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.557045,
+     55.8732306
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.103",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 97, корпус 1",
+    "unom": 6705,
+    "role": "угол",
+    "side": "подъезды 1–8",
+    "azimuth": 173,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5464227,
+     55.8732048
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.104",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 53, корпус 3",
+    "unom": 340170,
+    "role": "угол",
+    "side": "подъезды 5–6",
+    "azimuth": 66,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5566757,
+     55.8731294
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.105",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 45",
+    "unom": 1987,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 173,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5457795,
+     55.8730785
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.106",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 47",
+    "unom": 1991,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 173,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5450477,
+     55.8730201
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.107",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 51",
+    "unom": 2000,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 173,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5435027,
+     55.8729908
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.108",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 49",
+    "unom": 1998,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 173,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5443004,
+     55.8729775
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.109",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 53, корпус 3",
+    "unom": 340170,
+    "role": "угол",
+    "side": "подъезды 4",
+    "azimuth": 66,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5568051,
+     55.872968
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.110",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 32, корпус 6",
+    "unom": 340172,
+    "role": "угол",
+    "side": "подъезды 3–4",
+    "azimuth": 156,
+    "status": "черновик",
+    "also_covers": "Бескудниковский бульвар, дом 32, корпус 6 (подъезды 5–6)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5558226,
+     55.8728796
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.111",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 32, корпус 6",
+    "unom": 340172,
+    "role": "угол",
+    "side": "подъезды 2",
+    "azimuth": 156,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5555505,
+     55.8727797
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.112",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 32, корпус 6",
+    "unom": 340172,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 246,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5560409,
+     55.8726732
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.113",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 31",
+    "unom": 470058,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 111,
+    "status": "черновик",
+    "also_covers": "Дмитровское шоссе, дом 90, корпус 1 (круговой тротуар)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5514082,
+     55.8726004
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.114",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 53, корпус 2",
+    "unom": 340171,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 336,
+    "status": "черновик",
+    "also_covers": "Дубнинская улица, дом 53, корпус 3 (круговой тротуар)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5587752,
+     55.8725431
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.115",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 97, корпус 1",
+    "unom": 6705,
+    "role": "середина фасада",
+    "side": "подъезды 1–8",
+    "azimuth": 173,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5465697,
+     55.8725259
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.116",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 32, корпус 6",
+    "unom": 340172,
+    "role": "угол",
+    "side": "подъезды 5–6",
+    "azimuth": 66,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5544316,
+     55.8725008
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.117",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 31",
+    "unom": 470058,
+    "role": "угол",
+    "side": "подъезды 3–4",
+    "azimuth": 111,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5518646,
+     55.8724832
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.118",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 53, корпус 1",
+    "unom": 340206,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 246,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5591601,
+     55.8724228
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.119",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 90, корпус 1",
+    "unom": 470057,
+    "role": "середина фасада",
+    "side": "подъезды 3–4",
+    "azimuth": 230,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5499221,
+     55.8724035
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.120",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 53, корпус 3",
+    "unom": 340170,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 336,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5577348,
+     55.8723842
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.121",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 55, корпус 1",
+    "unom": 2003,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 355,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5402762,
+     55.8723212
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.122",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 53, корпус 3",
+    "unom": 340170,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 336,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5573541,
+     55.8722715
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.123",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 31",
+    "unom": 470058,
+    "role": "угол",
+    "side": "подъезды 3–4",
+    "azimuth": 291,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5528643,
+     55.8722614
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.124",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 31",
+    "unom": 470058,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 21,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5511716,
+     55.8722098
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.125",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 32, корпус 6",
+    "unom": 340172,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 66,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.554494,
+     55.8721997
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.126",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 45",
+    "unom": 1987,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 353,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5459876,
+     55.8721524
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.127",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 32, корпус 5",
+    "unom": 340226,
+    "role": "угол",
+    "side": "подъезды 2–3",
+    "azimuth": 156,
+    "status": "черновик",
+    "also_covers": "Бескудниковский бульвар, дом 32, корпус 6 (подъезды 3–4)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5564843,
+     55.8721149
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.128",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 47",
+    "unom": 1991,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 353,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5452638,
+     55.8720599
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.129",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 32, корпус 6",
+    "unom": 340172,
+    "role": "угол",
+    "side": "подъезды 2",
+    "azimuth": 336,
+    "status": "черновик",
+    "also_covers": "Бескудниковский бульвар, дом 32, корпус 5 (круговой тротуар)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5560936,
+     55.8720297
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.130",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 53, корпус 1",
+    "unom": 340206,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 66,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5575099,
+     55.8720072
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.131",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 49",
+    "unom": 1998,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 353,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.544372,
+     55.8719957
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.132",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 32, корпус 4",
+    "unom": 1971,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 177,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5551014,
+     55.8719933
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.133",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 51",
+    "unom": 2000,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 353,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5437894,
+     55.871969
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.134",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 32, корпус 5",
+    "unom": 340226,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 246,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5571802,
+     55.8719334
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.135",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 32, корпус 3",
+    "unom": 1970,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 177,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5554712,
+     55.8719026
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.136",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 95, корпус 1",
+    "unom": 6698,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 263,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5470407,
+     55.8718963
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.137",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 97, корпус 1",
+    "unom": 6705,
+    "role": "угол",
+    "side": "подъезды 1–8",
+    "azimuth": 353,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5467099,
+     55.8718956
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.138",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 57, корпус 2",
+    "unom": 2008,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 11,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5383576,
+     55.8718405
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.139",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 31",
+    "unom": 470058,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 291,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5529238,
+     55.8717524
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.140",
+    "district": "Бескудниковский",
+    "address": "Коровинское шоссе, дом 12",
+    "unom": 6520002,
+    "role": "угол",
+    "side": "подъезды 2",
+    "azimuth": 195,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5341414,
+     55.8717329
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.141",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 95, корпус 1",
+    "unom": 6698,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 83,
+    "status": "черновик",
+    "also_covers": "Дмитровское шоссе, дом 95, корпус 2 (подъезды 1–4)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5450927,
+     55.8717209
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.142",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 90, корпус 1",
+    "unom": 470057,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 320,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5495523,
+     55.8717167
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.143",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 32, корпус 4",
+    "unom": 1971,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 357,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5553102,
+     55.8717032
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.144",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 32, корпус 5",
+    "unom": 340226,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 66,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5563955,
+     55.8716958
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.145",
+    "district": "Бескудниковский",
+    "address": "Коровинское шоссе, дом 12",
+    "unom": 6520002,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 195,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5345055,
+     55.8716917
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.146",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 32, корпус 5",
+    "unom": 340226,
+    "role": "угол",
+    "side": "подъезды 2–3",
+    "azimuth": 336,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.556799,
+     55.871591
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.147",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 29, корпус 1",
+    "unom": 1962,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 155,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5531753,
+     55.8715895
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.148",
+    "district": "Бескудниковский",
+    "address": "Коровинское шоссе, дом 12",
+    "unom": 6520002,
+    "role": "угол",
+    "side": "подъезды 3",
+    "azimuth": 105,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5337235,
+     55.8715609
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.149",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 32, корпус 3",
+    "unom": 1970,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 357,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5554061,
+     55.8715424
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.150",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 95, корпус 2",
+    "unom": 6699,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 84,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5438608,
+     55.8715324
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.151",
+    "district": "Бескудниковский",
+    "address": "Коровинское шоссе, дом 12",
+    "unom": 6520002,
+    "role": "угол",
+    "side": "подъезды 3",
+    "azimuth": 285,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5344187,
+     55.8714578
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.152",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 32, корпус 2",
+    "unom": 1969,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 177,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5555461,
+     55.8714147
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.153",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 32, корпус 1",
+    "unom": 1968,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 177,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5558968,
+     55.8713018
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.154",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 32, корпус 2",
+    "unom": 1969,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 357,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5557684,
+     55.8711339
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.155",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 29, корпус 1",
+    "unom": 1962,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 335,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5535863,
+     55.8710756
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.156",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 93, корпус 2",
+    "unom": 6612519,
+    "role": "угол",
+    "side": "подъезды 5–6",
+    "azimuth": 173,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5435499,
+     55.8709848
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.157",
+    "district": "Бескудниковский",
+    "address": "Коровинское шоссе, дом 12",
+    "unom": 6520002,
+    "role": "угол",
+    "side": "подъезды 2",
+    "azimuth": 15,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5337425,
+     55.8708744
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.158",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 32, корпус 1",
+    "unom": 1968,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 357,
+    "status": "черновик",
+    "also_covers": "Бескудниковский бульвар, дом 30, корпус 2 (круговой тротуар)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5557694,
+     55.8708506
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.159",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 30, корпус 2",
+    "unom": 340151,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 180,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5562228,
+     55.8708497
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.160",
+    "district": "Бескудниковский",
+    "address": "Коровинское шоссе, дом 12",
+    "unom": 6520002,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 285,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5340234,
+     55.8707508
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.161",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 47, корпус 1",
+    "unom": 340114,
+    "role": "угол",
+    "side": "подъезды 2–4",
+    "azimuth": 245,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5606535,
+     55.8706348
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.162",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 47, корпус 1",
+    "unom": 340114,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 155,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5603292,
+     55.87062
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.163",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 27, корпус 4",
+    "unom": 340450,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 157,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5542828,
+     55.8706095
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.164",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 30, корпус 3",
+    "unom": 340142,
+    "role": "угол",
+    "side": "подъезды 2–3",
+    "azimuth": 246,
+    "status": "черновик",
+    "also_covers": "Бескудниковский бульвар, дом 30, корпус 3 (подъезды 5)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5581648,
+     55.8705456
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.165",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 30, корпус 3",
+    "unom": 340142,
+    "role": "угол",
+    "side": "подъезды 4",
+    "azimuth": 156,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5578673,
+     55.870534
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.166",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 30, корпус 2",
+    "unom": 340151,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 0,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5562213,
+     55.8705305
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.167",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 27, корпус 4",
+    "unom": 340450,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 67,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5538844,
+     55.8705246
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.168",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 30, корпус 2",
+    "unom": 340151,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 0,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5558461,
+     55.8705212
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.169",
+    "district": "Бескудниковский",
+    "address": "Коровинское шоссе, дом 6, корпус 3",
+    "unom": 10990,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 103,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5370919,
+     55.8704547
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.170",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 30, корпус 3",
+    "unom": 340142,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 246,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5583241,
+     55.8704336
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.171",
+    "district": "Бескудниковский",
+    "address": "Коровинское шоссе, дом 6, корпус 3",
+    "unom": 10990,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 283,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5377393,
+     55.8703727
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.172",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 86, корпус 6",
+    "unom": 340451,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 120,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5493393,
+     55.870363
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.173",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 93, корпус 2",
+    "unom": 6612519,
+    "role": "угол",
+    "side": "подъезды 3–4",
+    "azimuth": 263,
+    "status": "черновик",
+    "also_covers": "Дмитровское шоссе, дом 93, корпус 2 (подъезды 5–6)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5436707,
+     55.87035
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.174",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 47, корпус 1",
+    "unom": 340114,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 335,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5605589,
+     55.8703345
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.175",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 86, корпус 6",
+    "unom": 340451,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 210,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5496798,
+     55.8702918
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.176",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 93, корпус 2",
+    "unom": 6612519,
+    "role": "угол",
+    "side": "подъезды 3–4",
+    "azimuth": 83,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5426928,
+     55.8702855
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.177",
+    "district": "Бескудниковский",
+    "address": "Коровинское шоссе, дом 6, корпус 2",
+    "unom": 31408,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 191,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.537323,
+     55.8702568
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.178",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 47, корпус 1",
+    "unom": 340114,
+    "role": "угол",
+    "side": "подъезды 2–4",
+    "azimuth": 65,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5591574,
+     55.8702473
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.179",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 30, корпус 3",
+    "unom": 340142,
+    "role": "угол",
+    "side": "подъезды 2–3",
+    "azimuth": 66,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5567307,
+     55.8701856
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.180",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 30, корпус 3",
+    "unom": 340142,
+    "role": "угол",
+    "side": "подъезды 5",
+    "azimuth": 336,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5585594,
+     55.8701361
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.181",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 30, корпус 3",
+    "unom": 340142,
+    "role": "угол",
+    "side": "подъезды 4",
+    "azimuth": 336,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5581443,
+     55.8700319
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.182",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 30, корпус 3",
+    "unom": 340142,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 66,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5566848,
+     55.8700242
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.183",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 30, корпус 4",
+    "unom": 340143,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 156,
+    "status": "черновик",
+    "also_covers": "Дубнинская улица, дом 47, корпус 1 (круговой тротуар)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5591613,
+     55.8699622
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.184",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 30, корпус 4",
+    "unom": 340143,
+    "role": "угол",
+    "side": "подъезды 2–3",
+    "azimuth": 156,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.558747,
+     55.8698895
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.185",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 28, корпус 4",
+    "unom": 1961,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 176,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5568367,
+     55.8698626
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.186",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 27, корпус 4",
+    "unom": 340450,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 337,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5548236,
+     55.8698282
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.187",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 30, корпус 4",
+    "unom": 340143,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 66,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5583371,
+     55.8697982
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.188",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 30, корпус 3",
+    "unom": 340142,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 336,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5569986,
+     55.8697548
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.189",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 45, корпус 1",
+    "unom": 340124,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 246,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5613237,
+     55.86971
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.190",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 27, корпус 4",
+    "unom": 340450,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 337,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5544448,
+     55.8697023
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.191",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 30, корпус 4",
+    "unom": 340143,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 246,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5594155,
+     55.8696692
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.192",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 86",
+    "unom": 340417,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 174,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5501023,
+     55.8695606
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.193",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 28, корпус 3",
+    "unom": 1960,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 176,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5571126,
+     55.8695506
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.194",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 86",
+    "unom": 340417,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 84,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5496052,
+     55.8695425
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.195",
+    "district": "Бескудниковский",
+    "address": "Коровинское шоссе, дом 6, корпус 1",
+    "unom": 10989,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 193,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5397832,
+     55.8695175
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.196",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 45, корпус 1",
+    "unom": 340124,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 246,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5614801,
+     55.8695075
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.197",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 30, корпус 4",
+    "unom": 340143,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 66,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5586354,
+     55.8694736
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.198",
+    "district": "Бескудниковский",
+    "address": "Коровинское шоссе, дом 6, корпус 2",
+    "unom": 31408,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 11,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5371072,
+     55.8694559
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.199",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 25, корпус 4",
+    "unom": 340449,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 156,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5551499,
+     55.8694379
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.200",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 30, корпус 4",
+    "unom": 340143,
+    "role": "угол",
+    "side": "подъезды 2–3",
+    "azimuth": 336,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5590939,
+     55.8693548
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.201",
+    "district": "Бескудниковский",
+    "address": "Селигерская улица, дом 32А",
+    "unom": 5247654,
+    "role": "угол",
+    "side": "подъезды 2",
+    "azimuth": 191,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5441498,
+     55.8693316
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.202",
+    "district": "Бескудниковский",
+    "address": "Коровинское шоссе, дом 4А",
+    "unom": 5274920,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 129,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5390477,
+     55.8693294
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.203",
+    "district": "Бескудниковский",
+    "address": "Селигерская улица, дом 32А",
+    "unom": 5247654,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 191,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5445928,
+     55.8692978
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.204",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 86",
+    "unom": 340417,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 264,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5501832,
+     55.8692833
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.205",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 25, корпус 4",
+    "unom": 340449,
+    "role": "угол",
+    "side": "подъезды 4–5",
+    "azimuth": 246,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5553453,
+     55.8692797
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.206",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 28, корпус 2",
+    "unom": 1959,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 176,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5573693,
+     55.8692696
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.207",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 86",
+    "unom": 340417,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 84,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5496274,
+     55.8692405
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.208",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 86, корпус 6",
+    "unom": 340451,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 30,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5486008,
+     55.8691847
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.209",
+    "district": "Бескудниковский",
+    "address": "Коровинское шоссе, дом 4А",
+    "unom": 5274920,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 219,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.539337,
+     55.869178
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.210",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 45, корпус 1",
+    "unom": 340124,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 66,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559474,
+     55.8691669
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.211",
+    "district": "Бескудниковский",
+    "address": "Коровинское шоссе, дом 6, корпус 1",
+    "unom": 10989,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 13,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5397077,
+     55.869152
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.212",
+    "district": "Бескудниковский",
+    "address": "Рогачёвский переулок, дом 7, корпус 1",
+    "unom": 340419,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 177,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5539523,
+     55.8691311
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.213",
+    "district": "Бескудниковский",
+    "address": "Рогачёвский переулок, дом 7, корпус 1",
+    "unom": 340419,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 177,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5534632,
+     55.8691164
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.214",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 25, корпус 4",
+    "unom": 340449,
+    "role": "угол",
+    "side": "подъезды 4–5",
+    "azimuth": 66,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5545783,
+     55.8690898
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.215",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 28, корпус 1",
+    "unom": 1958,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 175,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5575884,
+     55.8689865
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.216",
+    "district": "Бескудниковский",
+    "address": "Коровинское шоссе, дом 4А",
+    "unom": 5274920,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 39,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.538514,
+     55.8689595
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.217",
+    "district": "Бескудниковский",
+    "address": "Селигерская улица, дом 32А",
+    "unom": 5247654,
+    "role": "угол",
+    "side": "подъезды 2",
+    "azimuth": 11,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5439946,
+     55.8688811
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.218",
+    "district": "Бескудниковский",
+    "address": "Селигерская улица, дом 32А",
+    "unom": 5247654,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 11,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5444315,
+     55.8688351
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.219",
+    "district": "Бескудниковский",
+    "address": "Коровинское шоссе, дом 4А",
+    "unom": 5274920,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 39,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5388267,
+     55.8688244
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.220",
+    "district": "Бескудниковский",
+    "address": "Селигерская улица, дом 26, корпус 1",
+    "unom": 340418,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 263,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5506848,
+     55.8688178
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.221",
+    "district": "Бескудниковский",
+    "address": "Рогачёвский переулок, дом 7, корпус 1",
+    "unom": 340419,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 267,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5539711,
+     55.8688169
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.222",
+    "district": "Бескудниковский",
+    "address": "Рогачёвский переулок, дом 7, корпус 1",
+    "unom": 340419,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 357,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5535004,
+     55.8688009
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.223",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 43",
+    "unom": 340084,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 155,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559628,
+     55.868792
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.224",
+    "district": "Бескудниковский",
+    "address": "Селигерская улица, дом 26, корпус 1",
+    "unom": 340418,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 83,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5493367,
+     55.8687249
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.225",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 25, корпус 4",
+    "unom": 340449,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 336,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5558322,
+     55.8686301
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.226",
+    "district": "Бескудниковский",
+    "address": "Селигерская улица, дом 26, корпус 1",
+    "unom": 340418,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 263,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5509615,
+     55.868611
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.227",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 28, корпус 1",
+    "unom": 1958,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 355,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5575894,
+     55.8685966
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.228",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 28, корпус 5",
+    "unom": 340106,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 163,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.557968,
+     55.868567
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.229",
+    "district": "Бескудниковский",
+    "address": "Селигерская улица, дом 26, корпус 1",
+    "unom": 340418,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 353,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5495265,
+     55.8685387
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.230",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 43",
+    "unom": 340084,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 245,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5598387,
+     55.8685276
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.231",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 25, корпус 4",
+    "unom": 340449,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 336,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5552,
+     55.868507
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.232",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 28, корпус 5",
+    "unom": 340106,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 73,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.557512,
+     55.8684756
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.233",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 43",
+    "unom": 340084,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 65,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5588193,
+     55.8682647
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.234",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 28, корпус 5",
+    "unom": 340106,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 343,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5581507,
+     55.8682344
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.235",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 28, корпус 5",
+    "unom": 340106,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 343,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5577644,
+     55.8681478
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.236",
+    "district": "Бескудниковский",
+    "address": "Рогачёвский переулок, дом 4, корпус 1",
+    "unom": 340338,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 157,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5527242,
+     55.867983
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.237",
+    "district": "Бескудниковский",
+    "address": "Рогачёвский переулок, дом 4, корпус 1",
+    "unom": 340338,
+    "role": "угол",
+    "side": "подъезды 2",
+    "azimuth": 247,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5532632,
+     55.8679461
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.238",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 24, корпус 1",
+    "unom": 340077,
+    "role": "угол",
+    "side": "подъезды 2–4",
+    "azimuth": 246,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5604857,
+     55.867832
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.239",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 39",
+    "unom": 340044,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 245,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5628711,
+     55.8678149
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.240",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 24, корпус 1",
+    "unom": 340077,
+    "role": "угол",
+    "side": "подъезды 5",
+    "azimuth": 156,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5602359,
+     55.8678079
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.241",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 23, корпус 1",
+    "unom": 31863,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 156,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5561688,
+     55.8677971
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.242",
+    "district": "Бескудниковский",
+    "address": "Рогачёвский переулок, дом 4, корпус 1",
+    "unom": 340338,
+    "role": "угол",
+    "side": "подъезды 2",
+    "azimuth": 67,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5524521,
+     55.8677618
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.243",
+    "district": "Бескудниковский",
+    "address": "Селигерская улица, дом 22/2",
+    "unom": 23314,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 157,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5512922,
+     55.8677572
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.244",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 39",
+    "unom": 340044,
+    "role": "угол",
+    "side": "подъезды 3–5",
+    "azimuth": 155,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5625949,
+     55.8677447
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.245",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 24, корпус 1",
+    "unom": 340077,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 246,
+    "status": "черновик",
+    "also_covers": "Бескудниковский бульвар, дом 24, корпус 1 (подъезды 6)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5606823,
+     55.8677014
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.246",
+    "district": "Бескудниковский",
+    "address": "Рогачёвский переулок, дом 4, корпус 1",
+    "unom": 340338,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 337,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5530689,
+     55.8676973
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.247",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 24, корпус 1",
+    "unom": 340077,
+    "role": "середина фасада",
+    "side": "подъезды 2–4",
+    "azimuth": 66,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5595789,
+     55.8676096
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.248",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 39",
+    "unom": 340044,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 65,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5617794,
+     55.867496
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.249",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 24, корпус 1",
+    "unom": 340077,
+    "role": "угол",
+    "side": "подъезды 6",
+    "azimuth": 336,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5609268,
+     55.8674534
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.250",
+    "district": "Бескудниковский",
+    "address": "Селигерская улица, дом 22/2",
+    "unom": 23314,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 337,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5515269,
+     55.8674486
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.251",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 24, корпус 1",
+    "unom": 340077,
+    "role": "середина фасада",
+    "side": "подъезды 1",
+    "azimuth": 66,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.55967,
+     55.8674415
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.252",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 23, корпус 1",
+    "unom": 31863,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 336,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.556543,
+     55.8674286
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.253",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 37, корпус 2",
+    "unom": 340082,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 154,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5611948,
+     55.8673872
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.254",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 24, корпус 1",
+    "unom": 340077,
+    "role": "угол",
+    "side": "подъезды 5",
+    "azimuth": 336,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5605186,
+     55.8673758
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.255",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 24, корпус 1",
+    "unom": 340077,
+    "role": "угол",
+    "side": "подъезды 2–4",
+    "azimuth": 66,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5586239,
+     55.8673644
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.256",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 24, корпус 1",
+    "unom": 340077,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 66,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5587465,
+     55.8672045
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.257",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 37, корпус 2",
+    "unom": 340082,
+    "role": "угол",
+    "side": "подъезды 2–3",
+    "azimuth": 154,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560881,
+     55.8671858
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.258",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 21, корпус 2",
+    "unom": 340359,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 247,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5570041,
+     55.8671443
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.259",
+    "district": "Бескудниковский",
+    "address": "Селигерская улица, дом 18, корпус 2",
+    "unom": 340360,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 246,
+    "status": "черновик",
+    "also_covers": "Селигерская улица, дом 18, корпус 3 (подъезды 1–2)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5528189,
+     55.867115
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.260",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 37, корпус 2",
+    "unom": 340082,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 64,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5605276,
+     55.8671061
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.261",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 21, корпус 2",
+    "unom": 340359,
+    "role": "угол",
+    "side": "подъезды 2–5",
+    "azimuth": 157,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5566876,
+     55.8670988
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.262",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 39",
+    "unom": 340044,
+    "role": "угол",
+    "side": "подъезды 3–5",
+    "azimuth": 335,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5631393,
+     55.8670833
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.263",
+    "district": "Бескудниковский",
+    "address": "Селигерская улица, дом 18, корпус 3",
+    "unom": 340361,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 282,
+    "status": "черновик",
+    "also_covers": "Селигерская улица, дом 18, корпус 4 (подъезды 1–2)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5537805,
+     55.8669969
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.264",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 21, корпус 2",
+    "unom": 340359,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 67,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5562348,
+     55.8669568
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.265",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 37, корпус 2",
+    "unom": 340082,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 244,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5615667,
+     55.8669513
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.266",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 37, корпус 1",
+    "unom": 340045,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 156,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5635998,
+     55.8668869
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.267",
+    "district": "Бескудниковский",
+    "address": "Селигерская улица, дом 18, корпус 2",
+    "unom": 340360,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 66,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5519607,
+     55.8668861
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.268",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 21, корпус 1",
+    "unom": 340333,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 177,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.555798,
+     55.8667967
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.269",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 21, корпус 1",
+    "unom": 340333,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 177,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5553025,
+     55.8667834
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.270",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 37, корпус 2",
+    "unom": 340082,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 64,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5607965,
+     55.8667394
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.271",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 37, корпус 2",
+    "unom": 340082,
+    "role": "угол",
+    "side": "подъезды 2–3",
+    "azimuth": 334,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5612596,
+     55.8666404
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.272",
+    "district": "Бескудниковский",
+    "address": "Селигерская улица, дом 18, корпус 4",
+    "unom": 340362,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 320,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5544187,
+     55.8665751
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.273",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 21, корпус 1",
+    "unom": 340333,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 267,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5558178,
+     55.8664815
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.274",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 37, корпус 1",
+    "unom": 340045,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 66,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5617111,
+     55.86648
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.275",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 21, корпус 2",
+    "unom": 340359,
+    "role": "угол",
+    "side": "подъезды 6",
+    "azimuth": 247,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5575414,
+     55.8664689
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.276",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 21, корпус 1",
+    "unom": 340333,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 357,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5553293,
+     55.8664672
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.277",
+    "district": "Бескудниковский",
+    "address": "Селигерская улица, дом 18, корпус 1",
+    "unom": 340343,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 109,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5523557,
+     55.8663588
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.278",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 21, корпус 2",
+    "unom": 340359,
+    "role": "угол",
+    "side": "подъезды 6",
+    "azimuth": 67,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5567725,
+     55.8662921
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.279",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 37, корпус 1",
+    "unom": 340045,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 336,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5618091,
+     55.8662541
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.280",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 21, корпус 2",
+    "unom": 340359,
+    "role": "угол",
+    "side": "подъезды 2–5",
+    "azimuth": 337,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5573619,
+     55.8662084
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.281",
+    "district": "Бескудниковский",
+    "address": "Селигерская улица, дом 18, корпус 1",
+    "unom": 340343,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 19,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.55242,
+     55.866136
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.282",
+    "district": "Бескудниковский",
+    "address": "Селигерская улица, дом 18, корпус 1",
+    "unom": 340343,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 289,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5535308,
+     55.8661011
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.283",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 35",
+    "unom": 340046,
+    "role": "угол",
+    "side": "подъезды 2–3",
+    "azimuth": 156,
+    "status": "черновик",
+    "also_covers": "Дубнинская улица, дом 35 (подъезды 1)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.561749,
+     55.8660161
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.284",
+    "district": "Бескудниковский",
+    "address": "Селигерская улица, дом 18, корпус 1",
+    "unom": 340343,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 289,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5534091,
+     55.866007
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.285",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 19, корпус 2",
+    "unom": 340358,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 247,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.55802,
+     55.8659043
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.286",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 35",
+    "unom": 340046,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 66,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5609928,
+     55.8658723
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.287",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 19, корпус 2",
+    "unom": 340358,
+    "role": "угол",
+    "side": "подъезды 2–5",
+    "azimuth": 157,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5576577,
+     55.8658295
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.288",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 19, корпус 1",
+    "unom": 340337,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 178,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5565847,
+     55.8658014
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.289",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 19, корпус 1",
+    "unom": 340337,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 88,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5560851,
+     55.8657945
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.290",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 19, корпус 2",
+    "unom": 340358,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 67,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5571796,
+     55.8657092
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.291",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 20, корпус 5",
+    "unom": 340083,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 85,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5597863,
+     55.8655779
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.292",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 20, корпус 5",
+    "unom": 340083,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 175,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5602634,
+     55.8655663
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.293",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 19, корпус 1",
+    "unom": 340337,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 268,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5565984,
+     55.8655301
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.294",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 19, корпус 1",
+    "unom": 340337,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 88,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5561054,
+     55.8655201
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.295",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 35",
+    "unom": 340046,
+    "role": "угол",
+    "side": "подъезды 2–3",
+    "azimuth": 336,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5621752,
+     55.865478
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.296",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 20, корпус 5",
+    "unom": 340083,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 355,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5603154,
+     55.8653012
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.297",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 20, корпус 5",
+    "unom": 340083,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 355,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5599408,
+     55.8652428
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.298",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 19, корпус 2",
+    "unom": 340358,
+    "role": "угол",
+    "side": "подъезды 6",
+    "azimuth": 247,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5585091,
+     55.865202
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.299",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 29, корпус 1",
+    "unom": 75149,
+    "role": "угол",
+    "side": "подъезды 5–7",
+    "azimuth": 246,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5650133,
+     55.8651135
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.300",
+    "district": "Бескудниковский",
+    "address": "Селигерская улица, дом 14",
+    "unom": 23311,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 157,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5533636,
+     55.8650745
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.301",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 22",
+    "unom": 75168,
+    "role": "угол",
+    "side": "подъезды 2",
+    "azimuth": 157,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5621611,
+     55.865036
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.302",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 22",
+    "unom": 75168,
+    "role": "угол",
+    "side": "подъезды 3",
+    "azimuth": 157,
+    "status": "черновик",
+    "also_covers": "Бескудниковский бульвар, дом 22 (подъезды 4)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5624658,
+     55.8650327
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.303",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 19, корпус 2",
+    "unom": 340358,
+    "role": "угол",
+    "side": "подъезды 6",
+    "azimuth": 67,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.557719,
+     55.865011
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.304",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 29, корпус 1",
+    "unom": 75149,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 156,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5647664,
+     55.8650023
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.305",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 19, корпус 2",
+    "unom": 340358,
+    "role": "угол",
+    "side": "подъезды 2–5",
+    "azimuth": 337,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5583432,
+     55.864942
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.306",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 22",
+    "unom": 75168,
+    "role": "угол",
+    "side": "подъезды 1, 5",
+    "azimuth": 247,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5626508,
+     55.8649236
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.307",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 17, корпус 1",
+    "unom": 340334,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 176,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5574631,
+     55.8648498
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.308",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 17, корпус 1",
+    "unom": 340334,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 176,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.556827,
+     55.8648207
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.309",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 22",
+    "unom": 75168,
+    "role": "угол",
+    "side": "подъезды 4",
+    "azimuth": 67,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5609289,
+     55.8647089
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.310",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 29, корпус 1",
+    "unom": 75149,
+    "role": "угол",
+    "side": "подъезды 5–7",
+    "azimuth": 66,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563535,
+     55.8647074
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.311",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 22",
+    "unom": 75168,
+    "role": "угол",
+    "side": "подъезды 3",
+    "azimuth": 337,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562874,
+     55.8646287
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.312",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 27, корпус 2",
+    "unom": 75178,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 155,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5635436,
+     55.8645828
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.313",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 17, корпус 1",
+    "unom": 340334,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 266,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5573751,
+     55.8645484
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.314",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 22",
+    "unom": 75168,
+    "role": "угол",
+    "side": "подъезды 2",
+    "azimuth": 337,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5624833,
+     55.8645179
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.315",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 22",
+    "unom": 75168,
+    "role": "угол",
+    "side": "подъезды 1, 5",
+    "azimuth": 67,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5610116,
+     55.8645146
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.316",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 17, корпус 1",
+    "unom": 340334,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 356,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5568643,
+     55.8644941
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.317",
+    "district": "Бескудниковский",
+    "address": "Селигерская улица, дом 12, корпус 2",
+    "unom": 340395,
+    "role": "угол",
+    "side": "подъезды 3",
+    "azimuth": 201,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5544948,
+     55.8644782
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.318",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 27, корпус 2",
+    "unom": 75178,
+    "role": "угол",
+    "side": "подъезды 2–3",
+    "azimuth": 155,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5630247,
+     55.8644407
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.319",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 15, корпус 1",
+    "unom": 1927,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 66,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5586726,
+     55.864416
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.320",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский переулок, дом 1, корпус 3",
+    "unom": 340411,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 177,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5557908,
+     55.864381
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.321",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 16, корпус 4",
+    "unom": 1931,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 176,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5610983,
+     55.8643393
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.322",
+    "district": "Бескудниковский",
+    "address": "Селигерская улица, дом 12, корпус 2",
+    "unom": 340395,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 201,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.554974,
+     55.8643198
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.323",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 22",
+    "unom": 75168,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 337,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5612188,
+     55.8642359
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.324",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 29, корпус 1",
+    "unom": 75149,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 336,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5653972,
+     55.8641918
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.325",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 27, корпус 2",
+    "unom": 75178,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 245,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5637505,
+     55.8641665
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.326",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 16, корпус 3",
+    "unom": 1930,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 176,
+    "status": "черновик",
+    "also_covers": "Бескудниковский бульвар, дом 16, корпус 4 (подъезды 1)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5613178,
+     55.86404
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.327",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 27, корпус 1",
+    "unom": 75139,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 252,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5657782,
+     55.8639894
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.328",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 27, корпус 2",
+    "unom": 75178,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 65,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563004,
+     55.8639695
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.329",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский переулок, дом 1, корпус 2",
+    "unom": 340410,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 210,
+    "status": "черновик",
+    "also_covers": "Бескудниковский переулок, дом 1, корпус 3 (подъезды 1–2)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5558306,
+     55.86392
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.330",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 27, корпус 2",
+    "unom": 75178,
+    "role": "угол",
+    "side": "подъезды 2–3",
+    "azimuth": 335,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5634637,
+     55.8638604
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.331",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 13",
+    "unom": 5003183,
+    "role": "угол",
+    "side": "подъезды 4–6",
+    "azimuth": 156,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5590266,
+     55.8638418
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.332",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 29, корпус 1",
+    "unom": 75149,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 336,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5641285,
+     55.8638414
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.333",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский переулок, дом 1, корпус 2",
+    "unom": 340410,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 210,
+    "status": "черновик",
+    "also_covers": "Бескудниковский переулок, дом 1, корпус 3 (круговой тротуар)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5561651,
+     55.8638303
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.334",
+    "district": "Бескудниковский",
+    "address": "Селигерская улица, дом 12, корпус 2",
+    "unom": 340395,
+    "role": "угол",
+    "side": "подъезды 3",
+    "azimuth": 21,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.554153,
+     55.863828
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.335",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 27, корпус 1",
+    "unom": 75139,
+    "role": "середина фасада",
+    "side": "подъезды 1–4",
+    "azimuth": 252,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5649326,
+     55.8638135
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.336",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 27, корпус 1",
+    "unom": 75139,
+    "role": "угол",
+    "side": "подъезды 5",
+    "azimuth": 252,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5660488,
+     55.8637839
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.337",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 13",
+    "unom": 5003183,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 246,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559422,
+     55.8637636
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.338",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 16, корпус 2",
+    "unom": 1929,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 177,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5615391,
+     55.863761
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.339",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 16, корпус 3",
+    "unom": 1930,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 356,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5613476,
+     55.8637459
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.340",
+    "district": "Бескудниковский",
+    "address": "Селигерская улица, дом 12, корпус 2",
+    "unom": 340395,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 291,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.554532,
+     55.8637075
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.341",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 27, корпус 1",
+    "unom": 75139,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 72,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5639067,
+     55.8636256
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.342",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 27, корпус 1",
+    "unom": 75139,
+    "role": "середина фасада",
+    "side": "подъезды 5",
+    "azimuth": 252,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5650467,
+     55.8636122
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.343",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский переулок, дом 1, корпус 1",
+    "unom": 340409,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 246,
+    "status": "черновик",
+    "also_covers": "Бескудниковский переулок, дом 1, корпус 2 (подъезды 1–2)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5554898,
+     55.8635179
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.344",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 16, корпус 1",
+    "unom": 1928,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 176,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5618022,
+     55.8634736
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.345",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 16, корпус 2",
+    "unom": 1929,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 357,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5615723,
+     55.8634475
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.346",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 27, корпус 1",
+    "unom": 75139,
+    "role": "угол",
+    "side": "подъезды 5",
+    "azimuth": 72,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5640505,
+     55.8634322
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.347",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 13",
+    "unom": 5003183,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 66,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.558102,
+     55.8634313
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.348",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский переулок, дом 1, корпус 1",
+    "unom": 340409,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 66,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5546961,
+     55.8633434
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.349",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 16, корпус 1",
+    "unom": 1928,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 356,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5618264,
+     55.8632887
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.350",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 13",
+    "unom": 5003183,
+    "role": "угол",
+    "side": "подъезды 7",
+    "azimuth": 246,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559833,
+     55.8632421
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.351",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский переулок, дом 1, корпус 1",
+    "unom": 340409,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 336,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5548382,
+     55.8631636
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.352",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 13",
+    "unom": 5003183,
+    "role": "угол",
+    "side": "подъезды 7",
+    "azimuth": 66,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5590091,
+     55.8630653
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.353",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 13",
+    "unom": 5003183,
+    "role": "угол",
+    "side": "подъезды 4–6",
+    "azimuth": 336,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5597081,
+     55.8629768
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.354",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульв., дом 11, корпус 2",
+    "unom": 5002994,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 156,
+    "status": "черновик",
+    "also_covers": "Бескудниковский бульвар, дом 13 (круговой тротуар)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5586683,
+     55.8628463
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.355",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульв., дом 11, корпус 1",
+    "unom": 5001529,
+    "role": "угол",
+    "side": "подъезды 2–4",
+    "azimuth": 156,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559955,
+     55.8626823
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.356",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульв., дом 11, корпус 1",
+    "unom": 5001529,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 246,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5603471,
+     55.8626229
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.357",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульв., дом 11, корпус 1",
+    "unom": 5001529,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 66,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5595507,
+     55.8624221
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.358",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульв., дом 11, корпус 2",
+    "unom": 5002994,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 336,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5590449,
+     55.8623677
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.359",
+    "district": "Бескудниковский",
+    "address": "Селигерская улица, дом 2",
+    "unom": 470054,
+    "role": "угол",
+    "side": "подъезды 2",
+    "azimuth": 257,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5559304,
+     55.8621482
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.360",
+    "district": "Бескудниковский",
+    "address": "Селигерская улица, дом 2",
+    "unom": 470054,
+    "role": "угол",
+    "side": "подъезды 4",
+    "azimuth": 167,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5552533,
+     55.8620707
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.361",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульв., дом 11, корпус 1",
+    "unom": 5001529,
+    "role": "угол",
+    "side": "подъезды 5",
+    "azimuth": 246,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5608234,
+     55.8620309
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.362",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульв., дом 11, корпус 1",
+    "unom": 5001529,
+    "role": "угол",
+    "side": "подъезды 5",
+    "azimuth": 66,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5602935,
+     55.8618973
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.363",
+    "district": "Бескудниковский",
+    "address": "Селигерская улица, дом 2",
+    "unom": 470054,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 257,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5563688,
+     55.8618511
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.364",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульв., дом 11, корпус 1",
+    "unom": 5001529,
+    "role": "угол",
+    "side": "подъезды 2–4",
+    "azimuth": 336,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5606448,
+     55.8618085
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.365",
+    "district": "Бескудниковский",
+    "address": "Селигерская улица, дом 2",
+    "unom": 470054,
+    "role": "угол",
+    "side": "подъезды 4",
+    "azimuth": 347,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5554327,
+     55.8616491
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.366",
+    "district": "Бескудниковский",
+    "address": "Селигерская улица, дом 2",
+    "unom": 470054,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 347,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5550515,
+     55.8616259
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.367",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 74, корпус 2",
+    "unom": 5001523,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 176,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5565332,
+     55.8614852
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.368",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 74, корпус 2",
+    "unom": 5001523,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 176,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5560667,
+     55.8614696
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.369",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 74, корпус 2",
+    "unom": 5001523,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 266,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5566048,
+     55.8611814
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.370",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 74, корпус 2",
+    "unom": 5001523,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 356,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5561009,
+     55.8611801
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.371",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 76, корпус 1",
+    "unom": 6681,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 338,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.554762,
+     55.8610698
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.372",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 74, корпус 1",
+    "unom": 470059,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 107,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.555281,
+     55.861
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.373",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 74, корпус 1",
+    "unom": 470059,
+    "role": "угол",
+    "side": "подъезды 2–4",
+    "azimuth": 107,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5553437,
+     55.860713
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.374",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 74, корпус 1",
+    "unom": 470059,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 197,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5574102,
+     55.8606137
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.375",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 74, корпус 1",
+    "unom": 470059,
+    "role": "угол",
+    "side": "подъезды 2–4",
+    "azimuth": 287,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5569916,
+     55.8604005
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.376",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 5",
+    "unom": 5001501,
+    "role": "угол",
+    "side": "подъезды 3–5",
+    "azimuth": 180,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5610876,
+     55.8601793
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.377",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 70",
+    "unom": 5002997,
+    "role": "угол",
+    "side": "подъезды 5–7",
+    "azimuth": 222,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5598508,
+     55.8600862
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.378",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 5",
+    "unom": 5001501,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 270,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5614807,
+     55.8599946
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.379",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 5",
+    "unom": 5001501,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 90,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5602561,
+     55.8599848
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.380",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 70",
+    "unom": 5002997,
+    "role": "середина фасада",
+    "side": "подъезды 5–7",
+    "azimuth": 222,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5591343,
+     55.8596324
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.381",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 5",
+    "unom": 5001501,
+    "role": "угол",
+    "side": "подъезды 6",
+    "azimuth": 270,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5614781,
+     55.8595152
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.382",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 5",
+    "unom": 5001501,
+    "role": "угол",
+    "side": "подъезды 6",
+    "azimuth": 90,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5606187,
+     55.8595097
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.383",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 70",
+    "unom": 5002997,
+    "role": "угол",
+    "side": "подъезды 2–4",
+    "azimuth": 132,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5583864,
+     55.8594535
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.384",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 6, корпус 3",
+    "unom": 75129,
+    "role": "угол",
+    "side": "подъезды 3–4",
+    "azimuth": 182,
+    "status": "черновик",
+    "also_covers": "Бескудниковский бульвар, дом 6, корпус 3 (подъезды 6)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5632337,
+     55.8593823
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.385",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 6, корпус 3",
+    "unom": 75129,
+    "role": "угол",
+    "side": "подъезды 5",
+    "azimuth": 272,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5637964,
+     55.8593715
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.386",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 6, корпус 3",
+    "unom": 75129,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 182,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5642287,
+     55.8593662
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.387",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 6, корпус 3",
+    "unom": 75129,
+    "role": "угол",
+    "side": "подъезды 5",
+    "azimuth": 92,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5629323,
+     55.8593516
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.388",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 5",
+    "unom": 5001501,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 0,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560457,
+     55.8593088
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.389",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 5",
+    "unom": 5001501,
+    "role": "угол",
+    "side": "подъезды 3–5",
+    "azimuth": 0,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5610782,
+     55.8592972
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.390",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 70",
+    "unom": 5002997,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 222,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5595436,
+     55.8591777
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.391",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 70",
+    "unom": 5002997,
+    "role": "угол",
+    "side": "подъезды 5–7",
+    "azimuth": 42,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5584043,
+     55.8591764
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.392",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульв., дом 3",
+    "unom": 5001511,
+    "role": "угол",
+    "side": "подъезды 2–3",
+    "azimuth": 180,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5611009,
+     55.8591298
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.393",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульв., дом 3",
+    "unom": 5001511,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 180,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5606552,
+     55.8591069
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.394",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 68",
+    "unom": 470085,
+    "role": "угол",
+    "side": "подъезды 3",
+    "azimuth": 133,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5600512,
+     55.8589616
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.395",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 70",
+    "unom": 5002997,
+    "role": "угол",
+    "side": "подъезды 2–4",
+    "azimuth": 312,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5594977,
+     55.8588895
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.396",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 70",
+    "unom": 5002997,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 42,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5590647,
+     55.858876
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.397",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 68",
+    "unom": 470085,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 133,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5597266,
+     55.8587811
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.398",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 6, корпус 3",
+    "unom": 75129,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 92,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5629011,
+     55.8587203
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.399",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульв., дом 3",
+    "unom": 5001511,
+    "role": "угол",
+    "side": "подъезды 2–3",
+    "azimuth": 0,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5610961,
+     55.8585745
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.400",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 6, корпус 3",
+    "unom": 75129,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 272,
+    "status": "черновик",
+    "also_covers": "Бескудниковский бульвар, дом 6, корпус 3 (подъезды 7)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5641314,
+     55.8585608
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.401",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 6, корпус 3",
+    "unom": 75129,
+    "role": "угол",
+    "side": "подъезды 7",
+    "azimuth": 92,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5628797,
+     55.8584783
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.402",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 68",
+    "unom": 470085,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 313,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5603553,
+     55.8584502
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.403",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 6, корпус 3",
+    "unom": 75129,
+    "role": "угол",
+    "side": "подъезды 3–4",
+    "azimuth": 2,
+    "status": "черновик",
+    "also_covers": "Бескудниковский бульвар, дом 6, корпус 3 (подъезды 6)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5632016,
+     55.8584145
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.404",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 6, корпус 2",
+    "unom": 75142,
+    "role": "угол",
+    "side": "подъезды 2–4",
+    "azimuth": 98,
+    "status": "черновик",
+    "also_covers": "Бескудниковский бульвар, дом 6, корпус 2 (подъезды 5–6)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5640405,
+     55.8581599
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.405",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 66",
+    "unom": 6674,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 263,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5612877,
+     55.8581102
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.406",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 6, корпус 2",
+    "unom": 75142,
+    "role": "угол",
+    "side": "подъезды 2–4",
+    "azimuth": 278,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5657095,
+     55.8580286
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.407",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 6, корпус 2",
+    "unom": 75142,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 188,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5653436,
+     55.8580274
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.408",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 66",
+    "unom": 6674,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 83,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5601894,
+     55.858016
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.409",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 6, корпус 2",
+    "unom": 75142,
+    "role": "угол",
+    "side": "подъезды 5–6",
+    "azimuth": 8,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5638847,
+     55.8576485
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.410",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 6, корпус 2",
+    "unom": 75142,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 8,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5652184,
+     55.8575368
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.411",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 2, корпус 1",
+    "unom": 75057,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 189,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5627999,
+     55.8574227
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.412",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 2, корпус 1",
+    "unom": 75057,
+    "role": "угол",
+    "side": "подъезды 2–4",
+    "azimuth": 99,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5625746,
+     55.8574108
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.413",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 2, корпус 1",
+    "unom": 75057,
+    "role": "угол",
+    "side": "подъезды 2–4",
+    "azimuth": 279,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5641173,
+     55.8572767
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.414",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 4",
+    "unom": 75021,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 99,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5645986,
+     55.8571282
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.415",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 4",
+    "unom": 75021,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 279,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5655056,
+     55.857043
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.416",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 2, корпус 2",
+    "unom": 75055,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 188,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5640054,
+     55.8570203
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.417",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 5, корпус 2",
+    "unom": 75067,
+    "role": "угол",
+    "side": "подъезды 2–3",
+    "azimuth": 100,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565863,
+     55.8570075
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.418",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 2, корпус 1",
+    "unom": 75057,
+    "role": "угол",
+    "side": "подъезды 5",
+    "azimuth": 9,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5624201,
+     55.8569676
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.419",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 5, корпус 2",
+    "unom": 75067,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 190,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5664437,
+     55.8569528
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.420",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 2, корпус 1",
+    "unom": 75057,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 9,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5627124,
+     55.8569419
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.421",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 2, корпус 2",
+    "unom": 75055,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 188,
+    "status": "черновик",
+    "also_covers": "Бескудниковский бульвар, дом 4 (круговой тротуар)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5645013,
+     55.8569249
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.422",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 5, корпус 2",
+    "unom": 75067,
+    "role": "угол",
+    "side": "подъезды 2–3",
+    "azimuth": 280,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5666057,
+     55.8568819
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.423",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 4",
+    "unom": 75021,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 279,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5654424,
+     55.8568231
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.424",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 2, корпус 1",
+    "unom": 75057,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 279,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5640042,
+     55.8567959
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.425",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 2, корпус 3",
+    "unom": 75043,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 98,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5631015,
+     55.8565647
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.426",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 2, корпус 2",
+    "unom": 75055,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 278,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5643061,
+     55.8564964
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.427",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 2, корпус 2",
+    "unom": 75055,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 8,
+    "status": "черновик",
+    "also_covers": "Бескудниковский бульвар, дом 2, корпус 3 (подъезды 1)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5638628,
+     55.8564646
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.428",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 5, корпус 2",
+    "unom": 75067,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 10,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5662822,
+     55.8564214
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.429",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 5, корпус 1",
+    "unom": 75054,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 100,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5655136,
+     55.8563672
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.430",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 2, корпус 3",
+    "unom": 75043,
+    "role": "угол",
+    "side": "подъезды 2",
+    "azimuth": 98,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563152,
+     55.8563355
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.431",
+    "district": "Бескудниковский",
+    "address": "Бескудниковский бульвар, дом 2, корпус 3",
+    "unom": 75043,
+    "role": "угол",
+    "side": "подъезды 2",
+    "azimuth": 278,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5638923,
+     55.856271
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.432",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 5, корпус 1",
+    "unom": 75054,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 280,
+    "status": "черновик",
+    "also_covers": "Дубнинская улица, дом 5, корпус 1 (подъезды 2)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5663975,
+     55.85623
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.433",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 3",
+    "unom": 75016,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 99,
+    "status": "черновик",
+    "also_covers": "Дубнинская улица, дом 3 (подъезды 4–5)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5637744,
+     55.8561696
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.434",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 3",
+    "unom": 75016,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 279,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565305,
+     55.85599
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.435",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 1",
+    "unom": 7137,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 193,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5658002,
+     55.8558494
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.436",
+    "district": "Бескудниковский",
+    "address": "Дубнинская улица, дом 3",
+    "unom": 75016,
+    "role": "угол",
+    "side": "подъезды 4–5",
+    "azimuth": 9,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5636685,
+     55.8556825
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.437",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 64, корпус 5",
+    "unom": 75022,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 98,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5646064,
+     55.8552805
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.438",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 64, корпус 4",
+    "unom": 75015,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 99,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563634,
+     55.8552794
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.439",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 64, корпус 5",
+    "unom": 75022,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 278,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5656667,
+     55.855204
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.440",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 64, корпус 4",
+    "unom": 75015,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 279,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5645657,
+     55.8551437
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.441",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 64, корпус 1",
+    "unom": 6670,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 9,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5627693,
+     55.8551115
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.442",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 64, корпус 5",
+    "unom": 75022,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 278,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5655764,
+     55.8550745
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т3.443",
+    "district": "Бескудниковский",
+    "address": "Дмитровское шоссе, дом 64, корпус 4",
+    "unom": 75015,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 9,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5635476,
+     55.8550698
+    ]
+   }
+  }
+ ]
+}
