@@ -1,0 +1,6860 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.001",
+    "district": "Западное Дегунино",
+    "address": "Краснополянская улица, дом 8",
+    "unom": 11623,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 90,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4918295,
+     55.8856486
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.002",
+    "district": "Западное Дегунино",
+    "address": "Краснополянская улица, дом 8",
+    "unom": 11623,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 270,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4927253,
+     55.8856483
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.003",
+    "district": "Западное Дегунино",
+    "address": "улица Бусиновская Горка, дом 13",
+    "unom": 3020,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 180,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4926318,
+     55.8855247
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.004",
+    "district": "Западное Дегунино",
+    "address": "Краснополянская улица, дом 6, корпус 2",
+    "unom": 11622,
+    "role": "угол",
+    "side": "подъезды 5–8",
+    "azimuth": 270,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4918781,
+     55.8852987
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.005",
+    "district": "Западное Дегунино",
+    "address": "Краснополянская улица, дом 6, корпус 2",
+    "unom": 11622,
+    "role": "угол",
+    "side": "подъезды 5–8",
+    "azimuth": 90,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.490132,
+     55.8852979
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.006",
+    "district": "Западное Дегунино",
+    "address": "Краснополянская улица, дом 6, корпус 1",
+    "unom": 11621,
+    "role": "угол",
+    "side": "подъезды 4",
+    "azimuth": 90,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4898719,
+     55.8851552
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.007",
+    "district": "Западное Дегунино",
+    "address": "улица Бусиновская Горка, дом 13",
+    "unom": 3020,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 0,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4925507,
+     55.8846863
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.008",
+    "district": "Западное Дегунино",
+    "address": "улица Бусиновская Горка, дом 11, корпус 1",
+    "unom": 3017,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 180,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4923742,
+     55.8844288
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.009",
+    "district": "Западное Дегунино",
+    "address": "улица Бусиновская Горка, дом 11, корпус 3",
+    "unom": 3019,
+    "role": "угол",
+    "side": "подъезды 7–8",
+    "azimuth": 180,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4909379,
+     55.8844187
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.010",
+    "district": "Западное Дегунино",
+    "address": "Краснополянская улица, дом 6, корпус 1",
+    "unom": 11621,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 90,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4899874,
+     55.8843437
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.011",
+    "district": "Западное Дегунино",
+    "address": "Краснополянская улица, дом 6, корпус 1",
+    "unom": 11621,
+    "role": "угол",
+    "side": "подъезды 2–3",
+    "azimuth": 0,
+    "status": "черновик",
+    "also_covers": "Краснополянская улица, дом 6, корпус 1 (подъезды 1)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4903912,
+     55.8843331
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.012",
+    "district": "Западное Дегунино",
+    "address": "улица Бусиновская Горка, дом 11, корпус 2",
+    "unom": 3018,
+    "role": "угол",
+    "side": "подъезды 3–6",
+    "azimuth": 90,
+    "status": "черновик",
+    "also_covers": "улица Бусиновская Горка, дом 11, корпус 3 (подъезды 7–8)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4908511,
+     55.8840145
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.013",
+    "district": "Западное Дегунино",
+    "address": "улица Бусиновская Горка, дом 11, корпус 2",
+    "unom": 3018,
+    "role": "угол",
+    "side": "подъезды 3–6",
+    "azimuth": 270,
+    "status": "черновик",
+    "also_covers": "улица Бусиновская Горка, дом 11, корпус 1 (подъезды 1–2)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4924461,
+     55.8839981
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.014",
+    "district": "Западное Дегунино",
+    "address": "улица Маршала Федоренко, дом 16/2, корпус 2",
+    "unom": 27163,
+    "role": "угол",
+    "side": "подъезды 5–8",
+    "azimuth": 270,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4884522,
+     55.8837265
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.015",
+    "district": "Западное Дегунино",
+    "address": "улица Маршала Федоренко, дом 14, корпус 4",
+    "unom": 27161,
+    "role": "угол",
+    "side": "подъезды 9–12",
+    "azimuth": 180,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4895479,
+     55.8837145
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.016",
+    "district": "Западное Дегунино",
+    "address": "улица Маршала Федоренко, дом 16/2, корпус 1",
+    "unom": 27162,
+    "role": "угол",
+    "side": "подъезды 4",
+    "azimuth": 90,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4863984,
+     55.8835376
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.017",
+    "district": "Западное Дегунино",
+    "address": "улица Маршала Федоренко, дом 14, корпус 4",
+    "unom": 27161,
+    "role": "угол",
+    "side": "подъезды 9–12",
+    "azimuth": 0,
+    "status": "черновик",
+    "also_covers": "улица Маршала Федоренко, дом 14, корпус 3 (подъезды 7–8)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4896482,
+     55.8828931
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.018",
+    "district": "Западное Дегунино",
+    "address": "улица Маршала Федоренко, дом 14, корпус 3",
+    "unom": 27160,
+    "role": "угол",
+    "side": "подъезды 7–8",
+    "azimuth": 90,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4888208,
+     55.8828784
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.019",
+    "district": "Западное Дегунино",
+    "address": "улица Маршала Федоренко, дом 14, корпус 1",
+    "unom": 27158,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 179,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4874879,
+     55.8828032
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.020",
+    "district": "Западное Дегунино",
+    "address": "улица Маршала Федоренко, дом 16/2, корпус 1",
+    "unom": 27162,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 270,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4869575,
+     55.8827665
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.021",
+    "district": "Западное Дегунино",
+    "address": "улица Маршала Федоренко, дом 16/2, корпус 1",
+    "unom": 27162,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 90,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4864956,
+     55.8827664
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.022",
+    "district": "Западное Дегунино",
+    "address": "улица Маршала Федоренко, дом 16/2, корпус 1",
+    "unom": 27162,
+    "role": "угол",
+    "side": "подъезды 2–3",
+    "azimuth": 0,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4867193,
+     55.8827363
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.023",
+    "district": "Западное Дегунино",
+    "address": "улица Маршала Федоренко, дом 14, корпус 2",
+    "unom": 27159,
+    "role": "угол",
+    "side": "подъезды 3–6",
+    "azimuth": 90,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.487412,
+     55.8824598
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.024",
+    "district": "Западное Дегунино",
+    "address": "улица Маршала Федоренко, дом 14, корпус 2",
+    "unom": 27159,
+    "role": "угол",
+    "side": "подъезды 3–6",
+    "azimuth": 270,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4888191,
+     55.8823757
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.025",
+    "district": "Западное Дегунино",
+    "address": "улица Маршала Федоренко, дом 14, корпус 1",
+    "unom": 27158,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 359,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4875406,
+     55.882369
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.026",
+    "district": "Западное Дегунино",
+    "address": "улица Маршала Федоренко, дом 10, корпус 2",
+    "unom": 27157,
+    "role": "угол",
+    "side": "подъезды 5–8",
+    "azimuth": 90,
+    "status": "черновик",
+    "also_covers": "улица Маршала Федоренко, дом 10, корпус 1 (подъезды 2–3)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4901508,
+     55.8820225
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.027",
+    "district": "Западное Дегунино",
+    "address": "улица Маршала Федоренко, дом 8, корпус 4",
+    "unom": 27155,
+    "role": "угол",
+    "side": "подъезды 9–12",
+    "azimuth": 180,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4930491,
+     55.8820224
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.028",
+    "district": "Западное Дегунино",
+    "address": "улица Маршала Федоренко, дом 10, корпус 2",
+    "unom": 27157,
+    "role": "угол",
+    "side": "подъезды 5–8",
+    "azimuth": 270,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4918979,
+     55.8820158
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.029",
+    "district": "Западное Дегунино",
+    "address": "улица Маршала Федоренко, дом 10, корпус 1",
+    "unom": 27156,
+    "role": "угол",
+    "side": "подъезды 4",
+    "azimuth": 181,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4898924,
+     55.8818966
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.030",
+    "district": "Западное Дегунино",
+    "address": "Базовская улица, дом 17",
+    "unom": 5123265,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 127,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5114661,
+     55.8811814
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.031",
+    "district": "Западное Дегунино",
+    "address": "улица Маршала Федоренко, дом 8, корпус 4",
+    "unom": 27155,
+    "role": "угол",
+    "side": "подъезды 9–12",
+    "azimuth": 0,
+    "status": "черновик",
+    "also_covers": "улица Маршала Федоренко, дом 8, корпус 3 (подъезды 7–8)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4930962,
+     55.8811701
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.032",
+    "district": "Западное Дегунино",
+    "address": "улица Маршала Федоренко, дом 8, корпус 3",
+    "unom": 27154,
+    "role": "угол",
+    "side": "подъезды 7–8",
+    "azimuth": 90,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4922538,
+     55.8811435
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.033",
+    "district": "Западное Дегунино",
+    "address": "улица Маршала Федоренко, дом 8, корпус 1",
+    "unom": 27152,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 180,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4908468,
+     55.8811264
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.034",
+    "district": "Западное Дегунино",
+    "address": "улица Маршала Федоренко, дом 10, корпус 1",
+    "unom": 27156,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 91,
+    "status": "черновик",
+    "also_covers": "улица Маршала Федоренко, дом 10, корпус 1 (подъезды 4)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4898599,
+     55.8810687
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.035",
+    "district": "Западное Дегунино",
+    "address": "улица Маршала Федоренко, дом 10, корпус 1",
+    "unom": 27156,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 271,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4903787,
+     55.8810641
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.036",
+    "district": "Западное Дегунино",
+    "address": "улица Маршала Федоренко, дом 10, корпус 1",
+    "unom": 27156,
+    "role": "угол",
+    "side": "подъезды 2–3",
+    "azimuth": 1,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4901322,
+     55.8810349
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.037",
+    "district": "Западное Дегунино",
+    "address": "Коровинское шоссе, дом 31А",
+    "unom": 11033,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 150,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.518537,
+     55.8809973
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.038",
+    "district": "Западное Дегунино",
+    "address": "Базовская улица, дом 17",
+    "unom": 5123265,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 127,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5124959,
+     55.8809339
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.039",
+    "district": "Западное Дегунино",
+    "address": "Базовская улица, дом 17",
+    "unom": 5123265,
+    "role": "угол",
+    "side": "подъезды 8",
+    "azimuth": 217,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.511414,
+     55.8808299
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.040",
+    "district": "Западное Дегунино",
+    "address": "улица Бусиновская Горка, дом 1, корпус 2",
+    "unom": 3016,
+    "role": "угол",
+    "side": "подъезды 5–6",
+    "azimuth": 270,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.496169,
+     55.8808032
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.041",
+    "district": "Западное Дегунино",
+    "address": "улица Бусиновская Горка, дом 1, корпус 2",
+    "unom": 3016,
+    "role": "угол",
+    "side": "подъезды 5–6",
+    "azimuth": 90,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4953012,
+     55.8808029
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.042",
+    "district": "Западное Дегунино",
+    "address": "улица Маршала Федоренко, дом 8, корпус 2",
+    "unom": 27153,
+    "role": "угол",
+    "side": "подъезды 3–6",
+    "azimuth": 270,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4923328,
+     55.8807203
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.043",
+    "district": "Западное Дегунино",
+    "address": "улица Маршала Федоренко, дом 8, корпус 2",
+    "unom": 27153,
+    "role": "угол",
+    "side": "подъезды 3–6",
+    "azimuth": 90,
+    "status": "черновик",
+    "also_covers": "улица Маршала Федоренко, дом 8, корпус 1 (подъезды 1–2)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4909484,
+     55.8806843
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.044",
+    "district": "Западное Дегунино",
+    "address": "улица Маршала Федоренко, дом 8, корпус 1",
+    "unom": 27152,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 0,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4905194,
+     55.8806661
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.045",
+    "district": "Западное Дегунино",
+    "address": "улица Бусиновская Горка, дом 1, корпус 1",
+    "unom": 3015,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 180,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.496056,
+     55.880609
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.046",
+    "district": "Западное Дегунино",
+    "address": "Базовская улица, дом 17",
+    "unom": 5123265,
+    "role": "угол",
+    "side": "подъезды 5–7",
+    "azimuth": 127,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5106563,
+     55.8805904
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.047",
+    "district": "Западное Дегунино",
+    "address": "Коровинское шоссе, дом 31А",
+    "unom": 11033,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 330,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5190275,
+     55.8805276
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.048",
+    "district": "Западное Дегунино",
+    "address": "Базовская улица, дом 17",
+    "unom": 5123265,
+    "role": "угол",
+    "side": "подъезды 2–4",
+    "azimuth": 217,
+    "status": "черновик",
+    "also_covers": "Базовская улица, дом 17 (подъезды 1)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5135461,
+     55.8804753
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.049",
+    "district": "Западное Дегунино",
+    "address": "Базовская улица, дом 17",
+    "unom": 5123265,
+    "role": "угол",
+    "side": "подъезды 8",
+    "azimuth": 37,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5109122,
+     55.8804541
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.050",
+    "district": "Западное Дегунино",
+    "address": "Базовская улица, дом 24Б",
+    "unom": 6608359,
+    "role": "угол",
+    "side": "подъезды 2",
+    "azimuth": 151,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5158199,
+     55.8803958
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.051",
+    "district": "Западное Дегунино",
+    "address": "Базовская улица, дом 24Б",
+    "unom": 6608359,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 241,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5162953,
+     55.8803128
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.052",
+    "district": "Западное Дегунино",
+    "address": "Базовская улица, дом 17",
+    "unom": 5123265,
+    "role": "середина фасада",
+    "side": "подъезды 5–7",
+    "azimuth": 307,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5115738,
+     55.8801846
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.053",
+    "district": "Западное Дегунино",
+    "address": "Базовская улица, дом 24Б",
+    "unom": 6608359,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 61,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5155375,
+     55.8801061
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.054",
+    "district": "Западное Дегунино",
+    "address": "Базовская улица, дом 22А",
+    "unom": 1194,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 150,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5151551,
+     55.8799359
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.055",
+    "district": "Западное Дегунино",
+    "address": "Базовская улица, дом 24Б",
+    "unom": 6608359,
+    "role": "угол",
+    "side": "подъезды 3–4",
+    "azimuth": 241,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5167542,
+     55.8798502
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.056",
+    "district": "Западное Дегунино",
+    "address": "Базовская улица, дом 17",
+    "unom": 5123265,
+    "role": "угол",
+    "side": "подъезды 5–7",
+    "azimuth": 307,
+    "status": "черновик",
+    "also_covers": "Базовская улица, дом 17 (подъезды 2–4)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5125164,
+     55.8797867
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.057",
+    "district": "Западное Дегунино",
+    "address": "улица Бусиновская Горка, дом 1, корпус 1",
+    "unom": 3015,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 0,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4960567,
+     55.8797633
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.058",
+    "district": "Западное Дегунино",
+    "address": "Базовская улица, дом 24Д",
+    "unom": 75160,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 239,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5181745,
+     55.8796718
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.059",
+    "district": "Западное Дегунино",
+    "address": "Базовская улица, дом 24Б",
+    "unom": 6608359,
+    "role": "угол",
+    "side": "подъезды 3–4",
+    "azimuth": 61,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5160355,
+     55.8796101
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.060",
+    "district": "Западное Дегунино",
+    "address": "Базовская улица, дом 24Б",
+    "unom": 6608359,
+    "role": "угол",
+    "side": "подъезды 2",
+    "azimuth": 331,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5166257,
+     55.8795864
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.061",
+    "district": "Западное Дегунино",
+    "address": "улица Маршала Федоренко, дом 2, корпус 3",
+    "unom": 27149,
+    "role": "угол",
+    "side": "подъезды 7–8",
+    "azimuth": 180,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.49579,
+     55.8794973
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.062",
+    "district": "Западное Дегунино",
+    "address": "улица Маршала Федоренко, дом 2, корпус 1",
+    "unom": 27147,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 180,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4942631,
+     55.8794916
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.063",
+    "district": "Западное Дегунино",
+    "address": "Базовская улица, дом 22А",
+    "unom": 1194,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 330,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5156493,
+     55.8794649
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.064",
+    "district": "Западное Дегунино",
+    "address": "Базовская улица, дом 22Г",
+    "unom": 1193,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 149,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5160331,
+     55.8791541
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.065",
+    "district": "Западное Дегунино",
+    "address": "улица Маршала Федоренко, дом 2, корпус 3",
+    "unom": 27149,
+    "role": "угол",
+    "side": "подъезды 7–8",
+    "azimuth": 0,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4958582,
+     55.8791182
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.066",
+    "district": "Западное Дегунино",
+    "address": "улица Маршала Федоренко, дом 2, корпус 2",
+    "unom": 27148,
+    "role": "угол",
+    "side": "подъезды 3–6",
+    "azimuth": 270,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4960881,
+     55.8790667
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.067",
+    "district": "Западное Дегунино",
+    "address": "улица Маршала Федоренко, дом 2, корпус 1",
+    "unom": 27147,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 0,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.49439,
+     55.8790554
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.068",
+    "district": "Западное Дегунино",
+    "address": "улица Маршала Федоренко, дом 2, корпус 2",
+    "unom": 27148,
+    "role": "угол",
+    "side": "подъезды 3–6",
+    "azimuth": 90,
+    "status": "черновик",
+    "also_covers": "улица Маршала Федоренко, дом 2, корпус 1 (круговой тротуар)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4939573,
+     55.8790073
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.069",
+    "district": "Западное Дегунино",
+    "address": "Базовская улица, дом 22В",
+    "unom": 1195,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 240,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5176864,
+     55.8787739
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.070",
+    "district": "Западное Дегунино",
+    "address": "Ангарская улица, дом 33А",
+    "unom": 5274228,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 239,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5216248,
+     55.8785711
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.071",
+    "district": "Западное Дегунино",
+    "address": "Базовская улица, дом 22Г",
+    "unom": 1193,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 329,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5166598,
+     55.8785602
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.072",
+    "district": "Западное Дегунино",
+    "address": "Базовская улица, дом 22В",
+    "unom": 1195,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 60,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5168456,
+     55.8784939
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.073",
+    "district": "Западное Дегунино",
+    "address": "Ангарская улица, дом 33А",
+    "unom": 5274228,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 59,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5212793,
+     55.8784559
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.074",
+    "district": "Западное Дегунино",
+    "address": "Базовская улица, дом 20, корпус 2",
+    "unom": 340405,
+    "role": "угол",
+    "side": "подъезды 2–3",
+    "azimuth": 220,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5151965,
+     55.8784325
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.075",
+    "district": "Западное Дегунино",
+    "address": "Базовская улица, дом 20, корпус 2",
+    "unom": 340405,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 220,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5156308,
+     55.878354
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.076",
+    "district": "Западное Дегунино",
+    "address": "Ангарская улица, дом 23, корпус 3",
+    "unom": 634,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 179,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5176309,
+     55.8780647
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.077",
+    "district": "Западное Дегунино",
+    "address": "Базовская улица, дом 20, корпус 2",
+    "unom": 340405,
+    "role": "угол",
+    "side": "подъезды 2–3",
+    "azimuth": 40,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5145456,
+     55.8780019
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.078",
+    "district": "Западное Дегунино",
+    "address": "Коровинское шоссе, дом 25/30",
+    "unom": 11023,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 150,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.522138,
+     55.8779424
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.079",
+    "district": "Западное Дегунино",
+    "address": "Ангарская улица, дом 23, корпус 3",
+    "unom": 634,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 359,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5176429,
+     55.8778427
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.080",
+    "district": "Западное Дегунино",
+    "address": "Ангарская улица, дом 28, корпус 2",
+    "unom": 75108,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 240,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5223056,
+     55.877825
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.081",
+    "district": "Западное Дегунино",
+    "address": "Базовская улица, дом 20, корпус 2",
+    "unom": 340405,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 40,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5148633,
+     55.8778104
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.082",
+    "district": "Западное Дегунино",
+    "address": "Новая улица, дом 21",
+    "unom": 16298,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 215,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5144483,
+     55.8777281
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.083",
+    "district": "Западное Дегунино",
+    "address": "Базовская улица, дом 14",
+    "unom": 1185,
+    "role": "угол",
+    "side": "подъезды 2–5",
+    "azimuth": 125,
+    "status": "черновик",
+    "also_covers": "Базовская улица, дом 14 (подъезды 6)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5115665,
+     55.8776443
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.084",
+    "district": "Западное Дегунино",
+    "address": "Коровинское шоссе, дом 25/30",
+    "unom": 11023,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 330,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5227342,
+     55.8775417
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.085",
+    "district": "Западное Дегунино",
+    "address": "Новая улица, дом 22",
+    "unom": 16299,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 124,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.515195,
+     55.8775414
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.086",
+    "district": "Западное Дегунино",
+    "address": "Ангарская улица, дом 28, корпус 2",
+    "unom": 75108,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 60,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5211845,
+     55.8774592
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.087",
+    "district": "Западное Дегунино",
+    "address": "Коровинское шоссе, дом 23, корпус 1",
+    "unom": 75096,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 150,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5229435,
+     55.877389
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.088",
+    "district": "Западное Дегунино",
+    "address": "Новая улица, дом 21",
+    "unom": 16298,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 35,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5139976,
+     55.8773701
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.089",
+    "district": "Западное Дегунино",
+    "address": "Базовская улица, дом 12",
+    "unom": 31444,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 216,
+    "status": "черновик",
+    "also_covers": "Базовская улица, дом 14 (подъезды 6)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5112364,
+     55.8773356
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.090",
+    "district": "Западное Дегунино",
+    "address": "Базовская улица, дом 14",
+    "unom": 1185,
+    "role": "середина фасада",
+    "side": "подъезды 2–5",
+    "azimuth": 305,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.512594,
+     55.8772967
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.091",
+    "district": "Западное Дегунино",
+    "address": "Новая улица, дом 22",
+    "unom": 16299,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 304,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5159845,
+     55.8772371
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.092",
+    "district": "Западное Дегунино",
+    "address": "Ангарская улица, дом 26, корпус 2",
+    "unom": 75066,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 134,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5215299,
+     55.8772119
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.093",
+    "district": "Западное Дегунино",
+    "address": "Ангарская улица, дом 26, корпус 3",
+    "unom": 75115,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 239,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5227129,
+     55.8770593
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.094",
+    "district": "Западное Дегунино",
+    "address": "Базовская улица, дом 14",
+    "unom": 1185,
+    "role": "угол",
+    "side": "подъезды 2–5",
+    "azimuth": 305,
+    "status": "черновик",
+    "also_covers": "Базовская улица, дом 14 (подъезды 1)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5134394,
+     55.8769422
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.095",
+    "district": "Западное Дегунино",
+    "address": "Ангарская улица, дом 26, корпус 2",
+    "unom": 75066,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 314,
+    "status": "черновик",
+    "also_covers": "Ангарская улица, дом 26, корпус 3 (подъезды 1)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5221127,
+     55.8768932
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.096",
+    "district": "Западное Дегунино",
+    "address": "Ангарская улица, дом 26, корпус 3",
+    "unom": 75115,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 239,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5230107,
+     55.8768926
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.097",
+    "district": "Западное Дегунино",
+    "address": "Базовская улица, дом 12",
+    "unom": 31444,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 36,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5105353,
+     55.8767992
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.098",
+    "district": "Западное Дегунино",
+    "address": "Новая улица, дом 14",
+    "unom": 16295,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 124,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5144098,
+     55.8766691
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.099",
+    "district": "Западное Дегунино",
+    "address": "Новая улица, дом 9",
+    "unom": 16293,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 214,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5125801,
+     55.8766648
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.100",
+    "district": "Западное Дегунино",
+    "address": "Базовская улица, дом 10",
+    "unom": 1184,
+    "role": "угол",
+    "side": "подъезды 2–5",
+    "azimuth": 125,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5102017,
+     55.8766564
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.101",
+    "district": "Западное Дегунино",
+    "address": "Ангарская улица, дом 26, корпус 4",
+    "unom": 75064,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 151,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5217773,
+     55.8766465
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.102",
+    "district": "Западное Дегунино",
+    "address": "Коровинское шоссе, дом 23, корпус 3",
+    "unom": 75109,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 150,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5225134,
+     55.8766329
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.103",
+    "district": "Западное Дегунино",
+    "address": "Коровинское шоссе, дом 23, корпус 1",
+    "unom": 75096,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 330,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.523686,
+     55.8766203
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.104",
+    "district": "Западное Дегунино",
+    "address": "Ангарская улица, дом 21",
+    "unom": 631,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 304,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5172093,
+     55.8765914
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.105",
+    "district": "Западное Дегунино",
+    "address": "Коровинское шоссе, дом 21, корпус 1",
+    "unom": 75095,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 151,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5236793,
+     55.8764897
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.106",
+    "district": "Западное Дегунино",
+    "address": "Коровинское шоссе, дом 23, корпус 3",
+    "unom": 75109,
+    "role": "угол",
+    "side": "подъезды 2",
+    "azimuth": 150,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5221869,
+     55.8764497
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.107",
+    "district": "Западное Дегунино",
+    "address": "Ангарская улица, дом 26, корпус 4",
+    "unom": 75064,
+    "role": "угол",
+    "side": "подъезды 3",
+    "azimuth": 151,
+    "status": "черновик",
+    "also_covers": "Ангарская улица, дом 26, корпус 4 (подъезды 4)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.520846,
+     55.8763512
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.108",
+    "district": "Западное Дегунино",
+    "address": "Ангарская улица, дом 26, корпус 4",
+    "unom": 75064,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 241,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5220305,
+     55.876346
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.109",
+    "district": "Западное Дегунино",
+    "address": "Новая улица, дом 9",
+    "unom": 16293,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 34,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5121872,
+     55.8763413
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.110",
+    "district": "Западное Дегунино",
+    "address": "Ангарская улица, дом 22, корпус 1",
+    "unom": 75037,
+    "role": "угол",
+    "side": "подъезды 3–5",
+    "azimuth": 240,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5183782,
+     55.8762878
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.111",
+    "district": "Западное Дегунино",
+    "address": "Новая улица, дом 14",
+    "unom": 16295,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 304,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5155763,
+     55.8762307
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.112",
+    "district": "Западное Дегунино",
+    "address": "Базовская улица, дом 10",
+    "unom": 1184,
+    "role": "середина фасада",
+    "side": "подъезды 2–5",
+    "azimuth": 125,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5113642,
+     55.8761966
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.113",
+    "district": "Западное Дегунино",
+    "address": "Коровинское шоссе, дом 23, корпус 3",
+    "unom": 75109,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 330,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5230842,
+     55.8761637
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.114",
+    "district": "Западное Дегунино",
+    "address": "Коровинское шоссе, дом 23, корпус 2",
+    "unom": 75125,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 239,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5235866,
+     55.8761244
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.115",
+    "district": "Западное Дегунино",
+    "address": "Коровинское шоссе, дом 23, корпус 3",
+    "unom": 75109,
+    "role": "угол",
+    "side": "подъезды 2",
+    "azimuth": 330,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.522688,
+     55.8760387
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.116",
+    "district": "Западное Дегунино",
+    "address": "Ангарская улица, дом 22, корпус 1",
+    "unom": 75037,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 150,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5173442,
+     55.8760083
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.117",
+    "district": "Западное Дегунино",
+    "address": "Коровинское шоссе, дом 23, корпус 2",
+    "unom": 75125,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 59,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5231837,
+     55.8759864
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.118",
+    "district": "Западное Дегунино",
+    "address": "Ангарская улица, дом 26, корпус 4",
+    "unom": 75064,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 61,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5208406,
+     55.8759703
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.119",
+    "district": "Западное Дегунино",
+    "address": "Базовская улица, дом 10",
+    "unom": 1184,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 215,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5123613,
+     55.875956
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.120",
+    "district": "Западное Дегунино",
+    "address": "Ангарская улица, дом 22, корпус 1",
+    "unom": 75037,
+    "role": "угол",
+    "side": "подъезды 2",
+    "azimuth": 330,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5189015,
+     55.8759142
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.121",
+    "district": "Западное Дегунино",
+    "address": "Ангарская улица, дом 26, корпус 4",
+    "unom": 75064,
+    "role": "угол",
+    "side": "подъезды 3",
+    "azimuth": 331,
+    "status": "черновик",
+    "also_covers": "Ангарская улица, дом 26, корпус 4 (подъезды 4)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5212856,
+     55.875905
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.122",
+    "district": "Западное Дегунино",
+    "address": "Весенняя улица, дом 20А",
+    "unom": 3746,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 214,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5103592,
+     55.8759
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.123",
+    "district": "Западное Дегунино",
+    "address": "Ангарская улица, дом 22, корпус 1",
+    "unom": 75037,
+    "role": "угол",
+    "side": "подъезды 6",
+    "azimuth": 150,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5171723,
+     55.8758741
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.124",
+    "district": "Западное Дегунино",
+    "address": "Коровинское шоссе, дом 21, корпус 1",
+    "unom": 75095,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 331,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5244346,
+     55.8758407
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.125",
+    "district": "Западное Дегунино",
+    "address": "Базовская улица, дом 10",
+    "unom": 1184,
+    "role": "угол",
+    "side": "подъезды 2–5",
+    "azimuth": 305,
+    "status": "черновик",
+    "also_covers": "Базовская улица, дом 10 (подъезды 1)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5121456,
+     55.8757856
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.126",
+    "district": "Западное Дегунино",
+    "address": "Ангарская улица, дом 17",
+    "unom": 626,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 303,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5160179,
+     55.8757488
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.127",
+    "district": "Западное Дегунино",
+    "address": "Весенняя улица, дом 20",
+    "unom": 3745,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 124,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5100288,
+     55.8756463
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.128",
+    "district": "Западное Дегунино",
+    "address": "Ангарская улица, дом 22, корпус 2",
+    "unom": 75034,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 152,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5182069,
+     55.8755727
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.129",
+    "district": "Западное Дегунино",
+    "address": "Коровинское шоссе, дом 19",
+    "unom": 75102,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 150,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5245189,
+     55.8755433
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.130",
+    "district": "Западное Дегунино",
+    "address": "Ангарская улица, дом 22, корпус 1",
+    "unom": 75037,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 330,
+    "status": "черновик",
+    "also_covers": "Ангарская улица, дом 22, корпус 2 (круговой тротуар)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5177534,
+     55.8755331
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.131",
+    "district": "Западное Дегунино",
+    "address": "Новая улица, дом 10",
+    "unom": 16294,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 123,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5130398,
+     55.8754814
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.132",
+    "district": "Западное Дегунино",
+    "address": "Ангарская улица, дом 22, корпус 4",
+    "unom": 75035,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 240,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5204484,
+     55.875468
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.133",
+    "district": "Западное Дегунино",
+    "address": "Ангарская улица, дом 22, корпус 1",
+    "unom": 75037,
+    "role": "угол",
+    "side": "подъезды 6",
+    "azimuth": 330,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5175529,
+     55.8754678
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.134",
+    "district": "Западное Дегунино",
+    "address": "Талдомская улица, дом 17, корпус 3",
+    "unom": 75116,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 241,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5244283,
+     55.8753832
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.135",
+    "district": "Западное Дегунино",
+    "address": "Талдомская улица, дом 17, корпус 2",
+    "unom": 75138,
+    "role": "угол",
+    "side": "подъезды 2–3",
+    "azimuth": 241,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5232321,
+     55.8753185
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.136",
+    "district": "Западное Дегунино",
+    "address": "Ангарская улица, дом 22, корпус 3",
+    "unom": 75040,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 150,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5188983,
+     55.8752771
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.137",
+    "district": "Западное Дегунино",
+    "address": "Весенняя улица, дом 25, корпус 1",
+    "unom": 3748,
+    "role": "угол",
+    "side": "подъезды 2–4",
+    "azimuth": 124,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5090864,
+     55.8752295
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.138",
+    "district": "Западное Дегунино",
+    "address": "Талдомская улица, дом 17, корпус 3",
+    "unom": 75116,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 241,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5247045,
+     55.8752266
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.139",
+    "district": "Западное Дегунино",
+    "address": "Талдомская улица, дом 17, корпус 3",
+    "unom": 75116,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 61,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5239639,
+     55.8751954
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.140",
+    "district": "Западное Дегунино",
+    "address": "Ангарская улица, дом 22, корпус 2",
+    "unom": 75034,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 332,
+    "status": "черновик",
+    "also_covers": "Ангарская улица, дом 22, корпус 3 (подъезды 2)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5186429,
+     55.8751814
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.141",
+    "district": "Западное Дегунино",
+    "address": "Весенняя улица, дом 20",
+    "unom": 3745,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 304,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5112785,
+     55.8751672
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.142",
+    "district": "Западное Дегунино",
+    "address": "Ангарская улица, дом 13",
+    "unom": 624,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 213,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5152165,
+     55.8751632
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.143",
+    "district": "Западное Дегунино",
+    "address": "Ангарская улица, дом 20, корпус 1",
+    "unom": 75145,
+    "role": "угол",
+    "side": "подъезды 2",
+    "azimuth": 213,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5164286,
+     55.8751209
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.144",
+    "district": "Западное Дегунино",
+    "address": "Талдомская улица, дом 17, корпус 2",
+    "unom": 75138,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 151,
+    "status": "черновик",
+    "also_covers": "Талдомская улица, дом 17, корпус 2 (подъезды 4)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5223567,
+     55.8751092
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.145",
+    "district": "Западное Дегунино",
+    "address": "Ангарская улица, дом 22, корпус 2",
+    "unom": 75034,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 332,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5183284,
+     55.8750969
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.146",
+    "district": "Западное Дегунино",
+    "address": "Ангарская улица, дом 20, корпус 2",
+    "unom": 75147,
+    "role": "угол",
+    "side": "подъезды 2–4",
+    "azimuth": 124,
+    "status": "черновик",
+    "also_covers": "Ангарская улица, дом 20, корпус 1 (подъезды 1)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5167194,
+     55.8750785
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.147",
+    "district": "Западное Дегунино",
+    "address": "Ангарская улица, дом 22, корпус 4",
+    "unom": 75035,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 60,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5192264,
+     55.8750769
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.148",
+    "district": "Западное Дегунино",
+    "address": "Новая улица, дом 10",
+    "unom": 16294,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 303,
+    "status": "черновик",
+    "also_covers": "Ангарская улица, дом 13 (подъезды 3–4)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5141184,
+     55.8750428
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.149",
+    "district": "Западное Дегунино",
+    "address": "Весенняя улица, дом 25, корпус 2",
+    "unom": 3749,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 124,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5088629,
+     55.8750416
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.150",
+    "district": "Западное Дегунино",
+    "address": "Талдомская улица, дом 17, корпус 2",
+    "unom": 75138,
+    "role": "угол",
+    "side": "подъезды 2–3",
+    "azimuth": 61,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5221034,
+     55.8749975
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.151",
+    "district": "Западное Дегунино",
+    "address": "Коровинское шоссе, дом 19",
+    "unom": 75102,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 330,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5253153,
+     55.8749321
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.152",
+    "district": "Западное Дегунино",
+    "address": "Весенняя улица, дом 18",
+    "unom": 3743,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 214,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5126052,
+     55.8749218
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.153",
+    "district": "Западное Дегунино",
+    "address": "Талдомская улица, дом 17, корпус 1",
+    "unom": 75137,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 150,
+    "status": "черновик",
+    "also_covers": "Талдомская улица, дом 17, корпус 1 (подъезды 7); Талдомская улица, дом 17, корпус 2 (круговой тротуар)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5238949,
+     55.874915
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.154",
+    "district": "Западное Дегунино",
+    "address": "Весенняя улица, дом 25, корпус 1",
+    "unom": 3748,
+    "role": "угол",
+    "side": "подъезды 2–4",
+    "azimuth": 304,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5098767,
+     55.8748834
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.155",
+    "district": "Западное Дегунино",
+    "address": "Новая улица, дом 5",
+    "unom": 16292,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 190,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5103479,
+     55.8748488
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.156",
+    "district": "Западное Дегунино",
+    "address": "Ангарская улица, дом 22, корпус 3",
+    "unom": 75040,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 330,
+    "status": "черновик",
+    "also_covers": "Ангарская улица, дом 22, корпус 3 (подъезды 2)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5193593,
+     55.8748169
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.157",
+    "district": "Западное Дегунино",
+    "address": "Ангарская улица, дом 20, корпус 1",
+    "unom": 75145,
+    "role": "угол",
+    "side": "подъезды 2",
+    "azimuth": 33,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5160111,
+     55.8747877
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.158",
+    "district": "Западное Дегунино",
+    "address": "Ангарская улица, дом 20, корпус 2",
+    "unom": 75147,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 214,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5176377,
+     55.8747682
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.159",
+    "district": "Западное Дегунино",
+    "address": "Талдомская улица, дом 17, корпус 1",
+    "unom": 75137,
+    "role": "угол",
+    "side": "подъезды 2–4",
+    "azimuth": 240,
+    "status": "черновик",
+    "also_covers": "Талдомская улица, дом 17, корпус 1 (подъезды 6)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5244775,
+     55.8747408
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.160",
+    "district": "Западное Дегунино",
+    "address": "Весенняя улица, дом 25, корпус 2",
+    "unom": 3749,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 304,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5096587,
+     55.8747329
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.161",
+    "district": "Западное Дегунино",
+    "address": "Базовская улица, дом 4, корпус 1",
+    "unom": 1186,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 218,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5078313,
+     55.8747171
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.162",
+    "district": "Западное Дегунино",
+    "address": "Ангарская улица, дом 20, корпус 1",
+    "unom": 75145,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 33,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5162803,
+     55.8746609
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.163",
+    "district": "Западное Дегунино",
+    "address": "Ангарская улица, дом 20, корпус 2",
+    "unom": 75147,
+    "role": "угол",
+    "side": "подъезды 2–4",
+    "azimuth": 304,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.517926,
+     55.8746603
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.164",
+    "district": "Западное Дегунино",
+    "address": "Талдомская улица, дом 17, корпус 2",
+    "unom": 75138,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 331,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5228168,
+     55.8746441
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.165",
+    "district": "Западное Дегунино",
+    "address": "Ангарская улица, дом 13",
+    "unom": 624,
+    "role": "угол",
+    "side": "подъезды 3–4",
+    "azimuth": 303,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5151085,
+     55.8746125
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.166",
+    "district": "Западное Дегунино",
+    "address": "Весенняя улица, дом 18",
+    "unom": 3743,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 34,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5121928,
+     55.8746032
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.167",
+    "district": "Западное Дегунино",
+    "address": "Талдомская улица, дом 17, корпус 1",
+    "unom": 75137,
+    "role": "угол",
+    "side": "подъезды 7",
+    "azimuth": 330,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5244108,
+     55.8745994
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.168",
+    "district": "Западное Дегунино",
+    "address": "Базовская улица, дом 4Б",
+    "unom": 1187,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 126,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5082203,
+     55.8745824
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.169",
+    "district": "Западное Дегунино",
+    "address": "Ангарская улица, дом 18",
+    "unom": 31852,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 214,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5160804,
+     55.8745422
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.170",
+    "district": "Западное Дегунино",
+    "address": "Весенняя улица, дом 14",
+    "unom": 3741,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 214,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5139069,
+     55.8745205
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.171",
+    "district": "Западное Дегунино",
+    "address": "Талдомская улица, дом 17, корпус 1",
+    "unom": 75137,
+    "role": "угол",
+    "side": "подъезды 5",
+    "azimuth": 150,
+    "status": "черновик",
+    "also_covers": "Талдомская улица, дом 17, корпус 2 (подъезды 4)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5226215,
+     55.8745063
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.172",
+    "district": "Западное Дегунино",
+    "address": "Талдомская улица, дом 17, корпус 1",
+    "unom": 75137,
+    "role": "середина фасада",
+    "side": "подъезды 2–4",
+    "azimuth": 60,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5235643,
+     55.8744399
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.173",
+    "district": "Западное Дегунино",
+    "address": "Талдомская улица, дом 17, корпус 1",
+    "unom": 75137,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 330,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5241483,
+     55.8744341
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.174",
+    "district": "Западное Дегунино",
+    "address": "Весенняя улица, дом 21",
+    "unom": 3747,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 123,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5115213,
+     55.8743778
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.175",
+    "district": "Западное Дегунино",
+    "address": "Ангарская улица, дом 13",
+    "unom": 624,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 33,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5143169,
+     55.8743767
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.176",
+    "district": "Западное Дегунино",
+    "address": "Талдомская улица, дом 17, корпус 1",
+    "unom": 75137,
+    "role": "середина фасада",
+    "side": "подъезды 6",
+    "azimuth": 60,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5237574,
+     55.8743432
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.177",
+    "district": "Западное Дегунино",
+    "address": "Ангарская улица, дом 20, корпус 3",
+    "unom": 75148,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 214,
+    "status": "черновик",
+    "also_covers": "Ангарская улица, дом 20, корпус 2 (подъезды 1)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5171002,
+     55.8743248
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.178",
+    "district": "Западное Дегунино",
+    "address": "Новая улица, дом 5",
+    "unom": 16292,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 10,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5102369,
+     55.874308
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.179",
+    "district": "Западное Дегунино",
+    "address": "Весенняя улица, дом 14",
+    "unom": 3741,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 34,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5134627,
+     55.8742296
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.180",
+    "district": "Западное Дегунино",
+    "address": "Весенняя улица, дом 21",
+    "unom": 3747,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 303,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5119511,
+     55.8742284
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.181",
+    "district": "Западное Дегунино",
+    "address": "Базовская улица, дом 4, корпус 1",
+    "unom": 1186,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 38,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5071276,
+     55.874204
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.182",
+    "district": "Западное Дегунино",
+    "address": "Новая улица, дом 3",
+    "unom": 16291,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 190,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.509659,
+     55.8741728
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.183",
+    "district": "Западное Дегунино",
+    "address": "Ангарская улица, дом 18",
+    "unom": 31852,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 34,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5156207,
+     55.8741465
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.184",
+    "district": "Западное Дегунино",
+    "address": "Талдомская улица, дом 17, корпус 1",
+    "unom": 75137,
+    "role": "угол",
+    "side": "подъезды 2–4",
+    "azimuth": 60,
+    "status": "черновик",
+    "also_covers": "Талдомская улица, дом 17, корпус 1 (подъезды 6)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5226627,
+     55.8741364
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.185",
+    "district": "Западное Дегунино",
+    "address": "Базовская улица, дом 4А",
+    "unom": 1188,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 124,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5078527,
+     55.8741269
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.186",
+    "district": "Западное Дегунино",
+    "address": "Талдомская улица, дом 17, корпус 1",
+    "unom": 75137,
+    "role": "угол",
+    "side": "подъезды 5",
+    "azimuth": 330,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5230975,
+     55.8740924
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.187",
+    "district": "Западное Дегунино",
+    "address": "Ангарская улица, дом 20, корпус 3",
+    "unom": 75148,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 34,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5165276,
+     55.8737548
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.188",
+    "district": "Западное Дегунино",
+    "address": "Весенняя улица, дом 17/9",
+    "unom": 3742,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 124,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5132144,
+     55.8737526
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.189",
+    "district": "Западное Дегунино",
+    "address": "Новая улица, дом 3",
+    "unom": 16291,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 10,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5094947,
+     55.8736434
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.190",
+    "district": "Западное Дегунино",
+    "address": "Талдомская улица, дом 15",
+    "unom": 25494,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 330,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.522,
+     55.8735831
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.191",
+    "district": "Западное Дегунино",
+    "address": "Ангарская улица, дом 16",
+    "unom": 75027,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 34,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5150634,
+     55.8735502
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.192",
+    "district": "Западное Дегунино",
+    "address": "Новая улица, дом 1",
+    "unom": 16290,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 190,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5089325,
+     55.8734967
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.193",
+    "district": "Западное Дегунино",
+    "address": "Талдомская улица, дом 11, корпус 2",
+    "unom": 75173,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 126,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5190872,
+     55.8734866
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.194",
+    "district": "Западное Дегунино",
+    "address": "Талдомская улица, дом 13",
+    "unom": 25493,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 149,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5203723,
+     55.8734317
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.195",
+    "district": "Западное Дегунино",
+    "address": "Ангарская улица, дом 7, корпус 2",
+    "unom": 622,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 214,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5127463,
+     55.873382
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.196",
+    "district": "Западное Дегунино",
+    "address": "Талдомская улица, дом 11, корпус 1",
+    "unom": 75172,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 216,
+    "status": "черновик",
+    "also_covers": "Талдомская улица, дом 11, корпус 2 (подъезды 1–2)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5198806,
+     55.8731702
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.197",
+    "district": "Западное Дегунино",
+    "address": "Весенняя улица, дом 17/9",
+    "unom": 3742,
+    "role": "угол",
+    "side": "подъезды 3–5",
+    "azimuth": 34,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5131556,
+     55.8731601
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.198",
+    "district": "Западное Дегунино",
+    "address": "Ангарская улица, дом 7, корпус 2",
+    "unom": 622,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 34,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5122974,
+     55.8731427
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.199",
+    "district": "Западное Дегунино",
+    "address": "Ангарская улица, дом 7, корпус 1",
+    "unom": 621,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 214,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5130526,
+     55.8730624
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.200",
+    "district": "Западное Дегунино",
+    "address": "Новая улица, дом 1",
+    "unom": 16290,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 10,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5087672,
+     55.87297
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.201",
+    "district": "Западное Дегунино",
+    "address": "Весенняя улица, дом 5",
+    "unom": 340055,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 123,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5154392,
+     55.8728429
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.202",
+    "district": "Западное Дегунино",
+    "address": "Ангарская улица, дом 7, корпус 1",
+    "unom": 621,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 34,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5127473,
+     55.8728115
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.203",
+    "district": "Западное Дегунино",
+    "address": "Ангарская улица, дом 8",
+    "unom": 75176,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 216,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5137321,
+     55.8727649
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.204",
+    "district": "Западное Дегунино",
+    "address": "Весенняя улица, дом 5",
+    "unom": 340055,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 303,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.516166,
+     55.8725951
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.205",
+    "district": "Западное Дегунино",
+    "address": "Весенняя улица, дом 3, корпус 1",
+    "unom": 340047,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 214,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5158715,
+     55.872456
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.206",
+    "district": "Западное Дегунино",
+    "address": "Ангарская улица, дом 8",
+    "unom": 75176,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 36,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5132351,
+     55.8723858
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.207",
+    "district": "Западное Дегунино",
+    "address": "улица Ивана Сусанина, дом 10",
+    "unom": 75128,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 108,
+    "status": "черновик",
+    "also_covers": "улица Ивана Сусанина, дом 10 (подъезды 2)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5286349,
+     55.8718187
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.208",
+    "district": "Западное Дегунино",
+    "address": "Весенняя улица, дом 3, корпус 1",
+    "unom": 340047,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 34,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5153737,
+     55.8718115
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.209",
+    "district": "Западное Дегунино",
+    "address": "Ангарская улица, дом 3",
+    "unom": 618,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 197,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5117752,
+     55.8717517
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.210",
+    "district": "Западное Дегунино",
+    "address": "улица Ивана Сусанина, дом 10",
+    "unom": 75128,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 288,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5292682,
+     55.871675
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.211",
+    "district": "Западное Дегунино",
+    "address": "Ангарская улица, дом 1, корпус 2",
+    "unom": 614,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 16,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5095039,
+     55.8716369
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.212",
+    "district": "Западное Дегунино",
+    "address": "улица Ивана Сусанина, дом 10",
+    "unom": 75128,
+    "role": "угол",
+    "side": "подъезды 2",
+    "azimuth": 18,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.528463,
+     55.8714196
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.213",
+    "district": "Западное Дегунино",
+    "address": "Дегунинская улица, дом 32",
+    "unom": 6372,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 183,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5299755,
+     55.8713787
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.214",
+    "district": "Западное Дегунино",
+    "address": "Ангарская улица, дом 4",
+    "unom": 75177,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 124,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5119879,
+     55.8710874
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.215",
+    "district": "Западное Дегунино",
+    "address": "Дегунинская улица, дом 30",
+    "unom": 6371,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 162,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5297355,
+     55.870894
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.216",
+    "district": "Западное Дегунино",
+    "address": "Ангарская улица, дом 1",
+    "unom": 613,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 16,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.510095,
+     55.8708493
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.217",
+    "district": "Западное Дегунино",
+    "address": "Коровинское шоссе, дом 15, корпус 1",
+    "unom": 11004,
+    "role": "угол",
+    "side": "подъезды 1–8",
+    "azimuth": 129,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5312546,
+     55.8708309
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.218",
+    "district": "Западное Дегунино",
+    "address": "улица Ивана Сусанина, дом 8, корпус 1",
+    "unom": 340137,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 90,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5281518,
+     55.8707018
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.219",
+    "district": "Западное Дегунино",
+    "address": "улица Ивана Сусанина, дом 8, корпус 1",
+    "unom": 340137,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 270,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5286245,
+     55.8706962
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.220",
+    "district": "Западное Дегунино",
+    "address": "Талдомская улица, дом 3",
+    "unom": 25487,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 215,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5139732,
+     55.8706286
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.221",
+    "district": "Западное Дегунино",
+    "address": "Ангарская улица, дом 4",
+    "unom": 75177,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 304,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5134229,
+     55.8706018
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.222",
+    "district": "Западное Дегунино",
+    "address": "Коровинское шоссе, дом 15, корпус 1",
+    "unom": 11004,
+    "role": "середина фасада",
+    "side": "подъезды 1–8",
+    "azimuth": 309,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5323749,
+     55.8703576
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.223",
+    "district": "Западное Дегунино",
+    "address": "Талдомская улица, дом 3",
+    "unom": 25487,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 35,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5135751,
+     55.870302
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.224",
+    "district": "Западное Дегунино",
+    "address": "Коровинское шоссе, дом 15, корпус 2",
+    "unom": 340199,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 132,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5305702,
+     55.8701875
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.225",
+    "district": "Западное Дегунино",
+    "address": "Коровинское шоссе, дом 15, корпус 2",
+    "unom": 340199,
+    "role": "угол",
+    "side": "подъезды 4",
+    "azimuth": 222,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5309609,
+     55.8701506
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.226",
+    "district": "Западное Дегунино",
+    "address": "Коровинское шоссе, дом 15, корпус 2",
+    "unom": 340199,
+    "role": "угол",
+    "side": "подъезды 2–3",
+    "azimuth": 132,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5304487,
+     55.8700681
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.227",
+    "district": "Западное Дегунино",
+    "address": "Путейская улица, дом 2",
+    "unom": 6006119,
+    "role": "угол",
+    "side": "подъезды 3–4",
+    "azimuth": 214,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5143585,
+     55.8700623
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.228",
+    "district": "Западное Дегунино",
+    "address": "Дегунинская улица, дом 23, корпус 1",
+    "unom": 340152,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 180,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5296719,
+     55.8700545
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.229",
+    "district": "Западное Дегунино",
+    "address": "Дегунинская улица, дом 23, корпус 1",
+    "unom": 340152,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 180,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5292666,
+     55.8700532
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.230",
+    "district": "Западное Дегунино",
+    "address": "Коровинское шоссе, дом 15, корпус 2",
+    "unom": 340199,
+    "role": "угол",
+    "side": "подъезды 4",
+    "azimuth": 42,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5305767,
+     55.869902
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.231",
+    "district": "Западное Дегунино",
+    "address": "Коровинское шоссе, дом 15, корпус 1",
+    "unom": 11004,
+    "role": "угол",
+    "side": "подъезды 1–8",
+    "azimuth": 309,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5333933,
+     55.869888
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.232",
+    "district": "Западное Дегунино",
+    "address": "Коровинское шоссе, дом 11, корпус 3",
+    "unom": 75038,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 221,
+    "status": "черновик",
+    "also_covers": "Коровинское шоссе, дом 13, корпус 1 (подъезды 1)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5344267,
+     55.8698446
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.233",
+    "district": "Западное Дегунино",
+    "address": "Дегунинская улица, дом 23, корпус 1",
+    "unom": 340152,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 270,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.529674,
+     55.869801
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.234",
+    "district": "Западное Дегунино",
+    "address": "Дегунинская улица, дом 23, корпус 1",
+    "unom": 340152,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 0,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5292818,
+     55.8697822
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.235",
+    "district": "Западное Дегунино",
+    "address": "Коровинское шоссе, дом 11, корпус 3",
+    "unom": 75038,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 41,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5341568,
+     55.8696698
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.236",
+    "district": "Западное Дегунино",
+    "address": "Путейская улица, дом 2",
+    "unom": 6006119,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 124,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5137043,
+     55.8696246
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.237",
+    "district": "Западное Дегунино",
+    "address": "Коровинское шоссе, дом 15, корпус 2",
+    "unom": 340199,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 312,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5319312,
+     55.8695742
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.238",
+    "district": "Западное Дегунино",
+    "address": "Коровинское шоссе, дом 13, корпус 1",
+    "unom": 11001,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 40,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5337726,
+     55.8695703
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.239",
+    "district": "Западное Дегунино",
+    "address": "Путейская улица, дом 2",
+    "unom": 6006119,
+    "role": "угол",
+    "side": "подъезды 3–4",
+    "azimuth": 34,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5135508,
+     55.8694921
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.240",
+    "district": "Западное Дегунино",
+    "address": "улица Ивана Сусанина, дом 6, корпус 2",
+    "unom": 340057,
+    "role": "угол",
+    "side": "подъезды 4",
+    "azimuth": 100,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5272708,
+     55.8694751
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.241",
+    "district": "Западное Дегунино",
+    "address": "улица Ивана Сусанина, дом 6, корпус 2",
+    "unom": 340057,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 190,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5276111,
+     55.8694708
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.242",
+    "district": "Западное Дегунино",
+    "address": "Коровинское шоссе, дом 15, корпус 2",
+    "unom": 340199,
+    "role": "угол",
+    "side": "подъезды 2–3",
+    "azimuth": 312,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.531619,
+     55.8693943
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.243",
+    "district": "Западное Дегунино",
+    "address": "улица Ивана Сусанина, дом 6, корпус 2",
+    "unom": 340057,
+    "role": "угол",
+    "side": "подъезды 4",
+    "azimuth": 280,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5281272,
+     55.869391
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.244",
+    "district": "Западное Дегунино",
+    "address": "Путейская улица, дом 2",
+    "unom": 6006119,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 304,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5144547,
+     55.8693462
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.245",
+    "district": "Западное Дегунино",
+    "address": "Коровинское шоссе, дом 11, корпус 1",
+    "unom": 11000,
+    "role": "угол",
+    "side": "подъезды 1–8",
+    "azimuth": 129,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5345661,
+     55.8693422
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.246",
+    "district": "Западное Дегунино",
+    "address": "улица Ивана Сусанина, дом 6, корпус 2",
+    "unom": 340057,
+    "role": "угол",
+    "side": "подъезды 3",
+    "azimuth": 100,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5272273,
+     55.8693368
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.247",
+    "district": "Западное Дегунино",
+    "address": "улица Ивана Сусанина, дом 6, корпус 2",
+    "unom": 340057,
+    "role": "угол",
+    "side": "подъезды 3",
+    "azimuth": 280,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5280821,
+     55.869254
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.248",
+    "district": "Западное Дегунино",
+    "address": "Коровинское шоссе, дом 11, корпус 1",
+    "unom": 11000,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 39,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5342462,
+     55.8691508
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.249",
+    "district": "Западное Дегунино",
+    "address": "улица Ивана Сусанина, дом 6, корпус 4",
+    "unom": 340111,
+    "role": "угол",
+    "side": "подъезды 3",
+    "azimuth": 100,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5280925,
+     55.8690695
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.250",
+    "district": "Западное Дегунино",
+    "address": "улица Ивана Сусанина, дом 6, корпус 4",
+    "unom": 340111,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 190,
+    "status": "черновик",
+    "also_covers": "улица Ивана Сусанина, дом 6, корпус 4 (подъезды 3)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5286109,
+     55.8690035
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.251",
+    "district": "Западное Дегунино",
+    "address": "улица Ивана Сусанина, дом 6, корпус 4",
+    "unom": 340111,
+    "role": "угол",
+    "side": "подъезды 2",
+    "azimuth": 100,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5279698,
+     55.8689015
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.252",
+    "district": "Западное Дегунино",
+    "address": "Коровинское шоссе, дом 11, корпус 1",
+    "unom": 11000,
+    "role": "середина фасада",
+    "side": "подъезды 1–8",
+    "azimuth": 309,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5356046,
+     55.8688493
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.253",
+    "district": "Западное Дегунино",
+    "address": "улица Ивана Сусанина, дом 6, корпус 4",
+    "unom": 340111,
+    "role": "угол",
+    "side": "подъезды 2",
+    "azimuth": 280,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5288286,
+     55.8688185
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.254",
+    "district": "Западное Дегунино",
+    "address": "улица Ивана Сусанина, дом 6, корпус 2",
+    "unom": 340057,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 10,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.527354,
+     55.8687845
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.255",
+    "district": "Западное Дегунино",
+    "address": "Коровинское шоссе, дом 11, корпус 2",
+    "unom": 340229,
+    "role": "угол",
+    "side": "подъезды 3",
+    "azimuth": 163,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5344929,
+     55.8687661
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.256",
+    "district": "Западное Дегунино",
+    "address": "Коровинское шоссе, дом 11, корпус 2",
+    "unom": 340229,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 73,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5340417,
+     55.8686512
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.257",
+    "district": "Западное Дегунино",
+    "address": "улица Ивана Сусанина, дом 6, корпус 4",
+    "unom": 340111,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 10,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5284041,
+     55.8685613
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.258",
+    "district": "Западное Дегунино",
+    "address": "улица Ивана Сусанина, дом 6, корпус 1",
+    "unom": 340056,
+    "role": "угол",
+    "side": "подъезды 2–4",
+    "azimuth": 191,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5270509,
+     55.8684703
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.259",
+    "district": "Западное Дегунино",
+    "address": "улица Ивана Сусанина, дом 6, корпус 3",
+    "unom": 340112,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 190,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5283645,
+     55.8684032
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.260",
+    "district": "Западное Дегунино",
+    "address": "Коровинское шоссе, дом 11, корпус 1",
+    "unom": 11000,
+    "role": "угол",
+    "side": "подъезды 1–8",
+    "azimuth": 309,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5365702,
+     55.8683281
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.261",
+    "district": "Западное Дегунино",
+    "address": "Дегунинская улица, дом 19, корпус 1",
+    "unom": 75080,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 160,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5302451,
+     55.8682979
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.262",
+    "district": "Западное Дегунино",
+    "address": "Дегунинская улица, дом 20, корпус 1",
+    "unom": 340458,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 219,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5337164,
+     55.8681757
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.263",
+    "district": "Западное Дегунино",
+    "address": "улица Ивана Сусанина, дом 6, корпус 3",
+    "unom": 340112,
+    "role": "угол",
+    "side": "подъезды 2–3",
+    "azimuth": 100,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5277217,
+     55.8681185
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.264",
+    "district": "Западное Дегунино",
+    "address": "Коровинское шоссе, дом 11, корпус 2",
+    "unom": 340229,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 253,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5351773,
+     55.868012
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.265",
+    "district": "Западное Дегунино",
+    "address": "улица Ивана Сусанина, дом 6, корпус 1",
+    "unom": 340056,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 281,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5274965,
+     55.8679554
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.266",
+    "district": "Западное Дегунино",
+    "address": "улица Ивана Сусанина, дом 6, корпус 3",
+    "unom": 340112,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 10,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5280145,
+     55.8679079
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.267",
+    "district": "Западное Дегунино",
+    "address": "Дегунинская улица, дом 19, корпус 1",
+    "unom": 75080,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 340,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5305562,
+     55.8678522
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.268",
+    "district": "Западное Дегунино",
+    "address": "Коровинское шоссе, дом 7, корпус 1",
+    "unom": 10991,
+    "role": "угол",
+    "side": "подъезды 1–8",
+    "azimuth": 130,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5377006,
+     55.867838
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.269",
+    "district": "Западное Дегунино",
+    "address": "Дегунинская улица, дом 20, корпус 1",
+    "unom": 340458,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 39,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5332201,
+     55.8678246
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.270",
+    "district": "Западное Дегунино",
+    "address": "Дегунинская улица, дом 26",
+    "unom": 6370,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 158,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5315715,
+     55.8678096
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.271",
+    "district": "Западное Дегунино",
+    "address": "улица Ивана Сусанина, дом 6, корпус 1",
+    "unom": 340056,
+    "role": "угол",
+    "side": "подъезды 2–4",
+    "azimuth": 11,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5269156,
+     55.8677522
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.272",
+    "district": "Западное Дегунино",
+    "address": "улица Ивана Сусанина, дом 4, корпус 7",
+    "unom": 340136,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 179,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5278371,
+     55.8676948
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.273",
+    "district": "Западное Дегунино",
+    "address": "улица Ивана Сусанина, дом 4, корпус 1",
+    "unom": 25268,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 198,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5266653,
+     55.867553
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.274",
+    "district": "Западное Дегунино",
+    "address": "Дегунинская улица, дом 17",
+    "unom": 6367,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 160,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5309978,
+     55.8675515
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.275",
+    "district": "Западное Дегунино",
+    "address": "Дегунинская улица, дом 22",
+    "unom": 6369,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 158,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5320108,
+     55.8674916
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.276",
+    "district": "Западное Дегунино",
+    "address": "улица Ивана Сусанина, дом 4, корпус 7",
+    "unom": 340136,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 359,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.527841,
+     55.8674759
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.277",
+    "district": "Западное Дегунино",
+    "address": "Коровинское шоссе, дом 7, корпус 1",
+    "unom": 10991,
+    "role": "середина фасада",
+    "side": "подъезды 1–8",
+    "azimuth": 310,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5387516,
+     55.867347
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.278",
+    "district": "Западное Дегунино",
+    "address": "улица Ивана Сусанина, дом 4, корпус 6",
+    "unom": 340153,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 178,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5276961,
+     55.8673386
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.279",
+    "district": "Западное Дегунино",
+    "address": "Коровинское шоссе, дом 7, корпус 3",
+    "unom": 340248,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 220,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5375853,
+     55.867313
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.280",
+    "district": "Западное Дегунино",
+    "address": "Дегунинская улица, дом 22",
+    "unom": 6369,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 338,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5323696,
+     55.8672781
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.281",
+    "district": "Западное Дегунино",
+    "address": "улица Ивана Сусанина, дом 4, корпус 6",
+    "unom": 340153,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 178,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5281974,
+     55.8672634
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.282",
+    "district": "Западное Дегунино",
+    "address": "Коровинское шоссе, дом 7, корпус 3",
+    "unom": 340248,
+    "role": "угол",
+    "side": "подъезды 2–4",
+    "azimuth": 130,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5371655,
+     55.8671057
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.283",
+    "district": "Западное Дегунино",
+    "address": "улица Ивана Сусанина, дом 4, корпус 6",
+    "unom": 340153,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 358,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5277213,
+     55.867084
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.284",
+    "district": "Западное Дегунино",
+    "address": "улица Ивана Сусанина, дом 4, корпус 5",
+    "unom": 340169,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 88,
+    "status": "черновик",
+    "also_covers": "улица Ивана Сусанина, дом 4, корпус 6 (круговой тротуар)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.528175,
+     55.8670346
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.285",
+    "district": "Западное Дегунино",
+    "address": "улица Ивана Сусанина, дом 4, корпус 5",
+    "unom": 340169,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 178,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5286464,
+     55.8669863
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.286",
+    "district": "Западное Дегунино",
+    "address": "Дегунинская улица, дом 15",
+    "unom": 6365,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 130,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5321597,
+     55.8669411
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.287",
+    "district": "Западное Дегунино",
+    "address": "Коровинское шоссе, дом 7, корпус 3",
+    "unom": 340248,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 40,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5369769,
+     55.8669142
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.288",
+    "district": "Западное Дегунино",
+    "address": "Коровинское шоссе, дом 7, корпус 1",
+    "unom": 10991,
+    "role": "угол",
+    "side": "подъезды 1–8",
+    "azimuth": 310,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5395846,
+     55.8668861
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.289",
+    "district": "Западное Дегунино",
+    "address": "улица Ивана Сусанина, дом 4, корпус 5",
+    "unom": 340169,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 268,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.528612,
+     55.8668211
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.290",
+    "district": "Западное Дегунино",
+    "address": "Дегунинская улица, дом 17",
+    "unom": 6367,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 340,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5315489,
+     55.8668197
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.291",
+    "district": "Западное Дегунино",
+    "address": "улица Ивана Сусанина, дом 4, корпус 5",
+    "unom": 340169,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 88,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5281919,
+     55.866813
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.292",
+    "district": "Западное Дегунино",
+    "address": "Коровинское шоссе, дом 7, корпус 3",
+    "unom": 340248,
+    "role": "угол",
+    "side": "подъезды 2–4",
+    "azimuth": 310,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.538199,
+     55.8666676
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.293",
+    "district": "Западное Дегунино",
+    "address": "улица Ивана Сусанина, дом 4, корпус 3",
+    "unom": 25270,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 198,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5272376,
+     55.8666623
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.294",
+    "district": "Западное Дегунино",
+    "address": "Дегунинская улица, дом 12, корпус 1",
+    "unom": 340456,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 219,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5369803,
+     55.8666524
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.295",
+    "district": "Западное Дегунино",
+    "address": "Коровинское шоссе, дом 3А, корпус 1",
+    "unom": 340313,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 90,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5408441,
+     55.86661
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.296",
+    "district": "Западное Дегунино",
+    "address": "Коровинское шоссе, дом 3А, корпус 1",
+    "unom": 340313,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 270,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5411369,
+     55.8666086
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.297",
+    "district": "Западное Дегунино",
+    "address": "улица Ивана Сусанина, дом 4, корпус 3",
+    "unom": 25270,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 18,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.527176,
+     55.8664942
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.298",
+    "district": "Западное Дегунино",
+    "address": "Коровинское шоссе, дом 7, корпус 3",
+    "unom": 340248,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 310,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5379464,
+     55.8664568
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.299",
+    "district": "Западное Дегунино",
+    "address": "Коровинское шоссе, дом 3А, корпус 1",
+    "unom": 340313,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 270,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5413374,
+     55.8663897
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.300",
+    "district": "Западное Дегунино",
+    "address": "Дегунинская улица, дом 15",
+    "unom": 6365,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 310,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5333529,
+     55.8663417
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.301",
+    "district": "Западное Дегунино",
+    "address": "Дегунинская улица, дом 12, корпус 1",
+    "unom": 340456,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 39,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5364805,
+     55.8663023
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.302",
+    "district": "Западное Дегунино",
+    "address": "Коровинское шоссе, дом 3, корпус 1",
+    "unom": 10980,
+    "role": "угол",
+    "side": "подъезды 1–8",
+    "azimuth": 130,
+    "status": "черновик",
+    "also_covers": "Коровинское шоссе, дом 3А, корпус 1 (круговой тротуар)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5409291,
+     55.8662922
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.303",
+    "district": "Западное Дегунино",
+    "address": "улица Ивана Сусанина, дом 4, корпус 4",
+    "unom": 25271,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 198,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5280837,
+     55.8662879
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.304",
+    "district": "Западное Дегунино",
+    "address": "Дегунинская улица, дом 13",
+    "unom": 6361,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 130,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5341077,
+     55.8660303
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.305",
+    "district": "Западное Дегунино",
+    "address": "Коровинское шоссе, дом 3, корпус 2",
+    "unom": 340295,
+    "role": "угол",
+    "side": "подъезды 4",
+    "azimuth": 221,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5408338,
+     55.8658009
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.306",
+    "district": "Западное Дегунино",
+    "address": "Коровинское шоссе, дом 3, корпус 1",
+    "unom": 10980,
+    "role": "середина фасада",
+    "side": "подъезды 1–8",
+    "azimuth": 130,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5419747,
+     55.8657686
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.307",
+    "district": "Западное Дегунино",
+    "address": "улица Ивана Сусанина, дом 2, корпус 1",
+    "unom": 25267,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 123,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5276347,
+     55.86571
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.308",
+    "district": "Западное Дегунино",
+    "address": "Дегунинская улица, дом 13, корпус 1",
+    "unom": 6362,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 90,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5317948,
+     55.8656014
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.309",
+    "district": "Западное Дегунино",
+    "address": "Дегунинская улица, дом 13, корпус 1",
+    "unom": 6362,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 270,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5333871,
+     55.865594
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.310",
+    "district": "Западное Дегунино",
+    "address": "Коровинское шоссе, дом 3, корпус 2",
+    "unom": 340295,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 131,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5404257,
+     55.8655682
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.311",
+    "district": "Западное Дегунино",
+    "address": "Дегунинская улица, дом 13",
+    "unom": 6361,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 310,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5352605,
+     55.8654865
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.312",
+    "district": "Западное Дегунино",
+    "address": "Коровинское шоссе, дом 3, корпус 2",
+    "unom": 340295,
+    "role": "угол",
+    "side": "подъезды 4",
+    "azimuth": 41,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5402189,
+     55.8654006
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.313",
+    "district": "Западное Дегунино",
+    "address": "Коровинское шоссе, дом 3, корпус 1",
+    "unom": 10980,
+    "role": "угол",
+    "side": "подъезды 1–8",
+    "azimuth": 310,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5427765,
+     55.8653965
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.314",
+    "district": "Западное Дегунино",
+    "address": "Коровинское шоссе, дом 1, корпус 1",
+    "unom": 10977,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 219,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5437931,
+     55.8653592
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.315",
+    "district": "Западное Дегунино",
+    "address": "улица Ивана Сусанина, дом 2, корпус 1",
+    "unom": 25267,
+    "role": "середина фасада",
+    "side": "подъезды 1–6",
+    "azimuth": 303,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5287069,
+     55.8653393
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.316",
+    "district": "Западное Дегунино",
+    "address": "Дегунинская улица, дом 4, корпус 1",
+    "unom": 340457,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 219,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5401336,
+     55.8651237
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.317",
+    "district": "Западное Дегунино",
+    "address": "Коровинское шоссе, дом 3, корпус 2",
+    "unom": 340295,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 311,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5414091,
+     55.8650833
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.318",
+    "district": "Западное Дегунино",
+    "address": "Коровинское шоссе, дом 1, корпус 1",
+    "unom": 10977,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 39,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5432874,
+     55.8650092
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.319",
+    "district": "Западное Дегунино",
+    "address": "Дегунинская улица, дом 13, корпус 2",
+    "unom": 6363,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 90,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5318281,
+     55.8649886
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.320",
+    "district": "Западное Дегунино",
+    "address": "Дегунинская улица, дом 13, корпус 2",
+    "unom": 6363,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 270,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5333146,
+     55.8649881
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.321",
+    "district": "Западное Дегунино",
+    "address": "улица Ивана Сусанина, дом 2, корпус 1",
+    "unom": 25267,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 303,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5297972,
+     55.864932
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.322",
+    "district": "Западное Дегунино",
+    "address": "Коровинское шоссе, дом 1, корпус 2",
+    "unom": 340294,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 266,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5434499,
+     55.8649287
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.323",
+    "district": "Западное Дегунино",
+    "address": "Дегунинская улица, дом 5",
+    "unom": 6357,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 270,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5360072,
+     55.8648772
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.324",
+    "district": "Западное Дегунино",
+    "address": "Дегунинская улица, дом 5",
+    "unom": 6357,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 90,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5345135,
+     55.86484
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.325",
+    "district": "Западное Дегунино",
+    "address": "Коровинское шоссе, дом 1, корпус 2",
+    "unom": 340294,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 86,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5413792,
+     55.8648097
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.326",
+    "district": "Западное Дегунино",
+    "address": "Дегунинская улица, дом 4, корпус 1",
+    "unom": 340457,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 39,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5395515,
+     55.8647222
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.327",
+    "district": "Западное Дегунино",
+    "address": "Дегунинская улица, дом 3, корпус 2",
+    "unom": 340168,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 181,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5369737,
+     55.8638966
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.328",
+    "district": "Западное Дегунино",
+    "address": "Дегунинская улица, дом 3, корпус 2",
+    "unom": 340168,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 1,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.537028,
+     55.8636282
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.329",
+    "district": "Западное Дегунино",
+    "address": "Дегунинская улица, дом 3, корпус 3",
+    "unom": 340244,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 181,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5374865,
+     55.8632146
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.330",
+    "district": "Западное Дегунино",
+    "address": "Дегунинская улица, дом 3, корпус 3",
+    "unom": 340244,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 181,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5379086,
+     55.8631484
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.331",
+    "district": "Западное Дегунино",
+    "address": "Дегунинская улица, дом 3, корпус 3",
+    "unom": 340244,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 1,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5374731,
+     55.8628825
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.332",
+    "district": "Западное Дегунино",
+    "address": "Дегунинская улица, дом 3, корпус 3",
+    "unom": 340244,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 271,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5380278,
+     55.862875
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.333",
+    "district": "Западное Дегунино",
+    "address": "Дегунинская улица, дом 3, корпус 4",
+    "unom": 340245,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 181,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.537265,
+     55.8626617
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.334",
+    "district": "Западное Дегунино",
+    "address": "Дегунинская улица, дом 3, корпус 4",
+    "unom": 340245,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 181,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.537715,
+     55.8626412
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.335",
+    "district": "Западное Дегунино",
+    "address": "Дегунинская улица, дом 3, корпус 4",
+    "unom": 340245,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 1,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5372566,
+     55.8623691
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.336",
+    "district": "Западное Дегунино",
+    "address": "Дегунинская улица, дом 3, корпус 4",
+    "unom": 340245,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 271,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5377592,
+     55.8623385
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.337",
+    "district": "Западное Дегунино",
+    "address": "Дмитровское шоссе, дом 73Б",
+    "unom": 5322634,
+    "role": "угол",
+    "side": "подъезды 3–4",
+    "azimuth": 237,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5563349,
+     55.856514
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.338",
+    "district": "Западное Дегунино",
+    "address": "Дмитровское шоссе, дом 73Б",
+    "unom": 5322634,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 147,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5557498,
+     55.8562973
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.339",
+    "district": "Западное Дегунино",
+    "address": "Дмитровское шоссе, дом 73Б",
+    "unom": 5322634,
+    "role": "угол",
+    "side": "подъезды 3–4",
+    "azimuth": 57,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5553359,
+     55.8561439
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.340",
+    "district": "Западное Дегунино",
+    "address": "Дмитровское шоссе, дом 73Б",
+    "unom": 5322634,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 237,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5573065,
+     55.8556564
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т8.341",
+    "district": "Западное Дегунино",
+    "address": "Дмитровское шоссе, дом 73Б",
+    "unom": 5322634,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 327,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5567923,
+     55.8554058
+    ]
+   }
+  }
+ ]
+}

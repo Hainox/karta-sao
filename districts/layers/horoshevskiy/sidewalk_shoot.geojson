@@ -1,0 +1,8002 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.001",
+    "district": "Хорошевский",
+    "address": "Ленинградский проспект, дом 59",
+    "unom": 12685,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 204,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5242138,
+     55.8020288
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.002",
+    "district": "Хорошевский",
+    "address": "Ленинградский проспект, дом 59",
+    "unom": 12685,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 204,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5246812,
+     55.801936
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.003",
+    "district": "Хорошевский",
+    "address": "Ленинградский проспект, дом 59",
+    "unom": 12685,
+    "role": "угол",
+    "side": "подъезды 4–5",
+    "azimuth": 114,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5236286,
+     55.8015642
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.004",
+    "district": "Хорошевский",
+    "address": "Ленинградский проспект, дом 59",
+    "unom": 12685,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 24,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5237978,
+     55.8014997
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.005",
+    "district": "Хорошевский",
+    "address": "Ленинградский проспект, дом 59",
+    "unom": 12685,
+    "role": "угол",
+    "side": "подъезды 4–5",
+    "azimuth": 294,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5241904,
+     55.801414
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.006",
+    "district": "Хорошевский",
+    "address": "Ленинградский проспект, дом 57",
+    "unom": 12683,
+    "role": "угол",
+    "side": "подъезды 5",
+    "azimuth": 189,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5238069,
+     55.8008052
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.007",
+    "district": "Хорошевский",
+    "address": "Ленинградский проспект, дом 57",
+    "unom": 12683,
+    "role": "угол",
+    "side": "подъезды 6",
+    "azimuth": 189,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.524123,
+     55.8007575
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.008",
+    "district": "Хорошевский",
+    "address": "Ленинградский проспект, дом 57",
+    "unom": 12683,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 99,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5237461,
+     55.8005936
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.009",
+    "district": "Хорошевский",
+    "address": "Ленинградский проспект, дом 57",
+    "unom": 12683,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 279,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5251617,
+     55.8004822
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.010",
+    "district": "Хорошевский",
+    "address": "улица Острякова, дом 8",
+    "unom": 18000,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 179,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5248885,
+     55.8002785
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.011",
+    "district": "Хорошевский",
+    "address": "улица Острякова, дом 6",
+    "unom": 17999,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 179,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5268717,
+     55.8001572
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.012",
+    "district": "Хорошевский",
+    "address": "улица Острякова, дом 8",
+    "unom": 18000,
+    "role": "угол",
+    "side": "подъезды 5",
+    "azimuth": 179,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5239226,
+     55.8001423
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.013",
+    "district": "Хорошевский",
+    "address": "Ленинградский проспект, дом 57",
+    "unom": 12683,
+    "role": "угол",
+    "side": "подъезды 5",
+    "azimuth": 9,
+    "status": "черновик",
+    "also_covers": "улица Острякова, дом 8 (подъезды 6)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5236364,
+     55.8000986
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.014",
+    "district": "Хорошевский",
+    "address": "улица Острякова, дом 6",
+    "unom": 17999,
+    "role": "середина фасада",
+    "side": "подъезды 3–5",
+    "azimuth": 89,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5264404,
+     55.8000592
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.015",
+    "district": "Хорошевский",
+    "address": "Ленинградский проспект, дом 57",
+    "unom": 12683,
+    "role": "угол",
+    "side": "подъезды 6",
+    "azimuth": 9,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5239206,
+     55.8000077
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.016",
+    "district": "Хорошевский",
+    "address": "улица Острякова, дом 8",
+    "unom": 18000,
+    "role": "угол",
+    "side": "подъезды 3–4",
+    "azimuth": 89,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5235784,
+     55.7999708
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.017",
+    "district": "Хорошевский",
+    "address": "улица Острякова, дом 8",
+    "unom": 18000,
+    "role": "угол",
+    "side": "подъезды 6",
+    "azimuth": 359,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5236214,
+     55.7998227
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.018",
+    "district": "Хорошевский",
+    "address": "улица Острякова, дом 9",
+    "unom": 18001,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 90,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5232707,
+     55.7994215
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.019",
+    "district": "Хорошевский",
+    "address": "улица Острякова, дом 9",
+    "unom": 18001,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 270,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5246278,
+     55.7994111
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.020",
+    "district": "Хорошевский",
+    "address": "улица Викторенко, дом 4, корпус 1",
+    "unom": 74182,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 211,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5283029,
+     55.7992904
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.021",
+    "district": "Хорошевский",
+    "address": "улица Острякова, дом 11",
+    "unom": 18002,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 191,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.523272,
+     55.7992671
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.022",
+    "district": "Хорошевский",
+    "address": "улица Викторенко, дом 4, корпус 1",
+    "unom": 74182,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 211,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5285552,
+     55.7992062
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.023",
+    "district": "Хорошевский",
+    "address": "Ленинградский проспект, дом 45, корпус 1",
+    "unom": 12667,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 127,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5332343,
+     55.7990887
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.024",
+    "district": "Хорошевский",
+    "address": "Ленинградский проспект, дом 45, корпус 2",
+    "unom": 12668,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 218,
+    "status": "черновик",
+    "also_covers": "Ленинградский проспект, дом 45, корпус 3 (подъезды 1–4)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5331194,
+     55.7989502
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.025",
+    "district": "Хорошевский",
+    "address": "улица Острякова, дом 11",
+    "unom": 18002,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 11,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5230817,
+     55.7989236
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.026",
+    "district": "Хорошевский",
+    "address": "Ленинградский проспект, дом 45, корпус 1",
+    "unom": 12667,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 307,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5342347,
+     55.7986593
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.027",
+    "district": "Хорошевский",
+    "address": "улица Викторенко, дом 4, корпус 1",
+    "unom": 74182,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 31,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5273603,
+     55.798455
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.028",
+    "district": "Хорошевский",
+    "address": "улица Викторенко, дом 4, корпус 1",
+    "unom": 74182,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 301,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5276671,
+     55.7983256
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.029",
+    "district": "Хорошевский",
+    "address": "Ленинградский проспект, дом 45, корпус 2",
+    "unom": 12668,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 38,
+    "status": "черновик",
+    "also_covers": "Ленинградский проспект, дом 45, корпус 3 (подъезды 1–4)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5320544,
+     55.7981832
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.030",
+    "district": "Хорошевский",
+    "address": "проезд Аэропорта, дом 6",
+    "unom": 1037,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 190,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5232223,
+     55.7977994
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.031",
+    "district": "Хорошевский",
+    "address": "Ленинградский проспект, дом 43, корпус 2",
+    "unom": 12665,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 218,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5346651,
+     55.7977915
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.032",
+    "district": "Хорошевский",
+    "address": "Ленинградский проспект, дом 45, корпус 4",
+    "unom": 12670,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 35,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5322152,
+     55.7977185
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.033",
+    "district": "Хорошевский",
+    "address": "Ленинградский проспект, дом 45, корпус 5",
+    "unom": 12671,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 35,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5317105,
+     55.7975848
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.034",
+    "district": "Хорошевский",
+    "address": "Ленинградский проспект, дом 43, корпус 2",
+    "unom": 12665,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 38,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5341181,
+     55.7973619
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.035",
+    "district": "Хорошевский",
+    "address": "проезд Аэропорта, дом 6",
+    "unom": 1037,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 10,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5229677,
+     55.7970604
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.036",
+    "district": "Хорошевский",
+    "address": "проезд Аэропорта, дом 3",
+    "unom": 1036,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 203,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5232151,
+     55.7967045
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.037",
+    "district": "Хорошевский",
+    "address": "улица Викторенко, дом 12/1",
+    "unom": 3842,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 201,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5241907,
+     55.7964865
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.038",
+    "district": "Хорошевский",
+    "address": "проезд Аэропорта, дом 11",
+    "unom": 1038,
+    "role": "угол",
+    "side": "подъезды 2–3",
+    "azimuth": 11,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5225409,
+     55.7964613
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.039",
+    "district": "Хорошевский",
+    "address": "проезд Аэропорта, дом 3",
+    "unom": 1036,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 23,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5229037,
+     55.7962845
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.040",
+    "district": "Хорошевский",
+    "address": "улица Викторенко, дом 12",
+    "unom": 3843,
+    "role": "угол",
+    "side": "подъезды 4–5",
+    "azimuth": 210,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5252439,
+     55.7962716
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.041",
+    "district": "Хорошевский",
+    "address": "Чапаевский переулок, дом 5, корпус 1",
+    "unom": 28312,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 191,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5196256,
+     55.7961868
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.042",
+    "district": "Хорошевский",
+    "address": "улица Викторенко, дом 12/1",
+    "unom": 3842,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 21,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5239865,
+     55.7961255
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.043",
+    "district": "Хорошевский",
+    "address": "улица Викторенко, дом 14",
+    "unom": 3844,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 211,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5242952,
+     55.7960535
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.044",
+    "district": "Хорошевский",
+    "address": "улица Викторенко, дом 12",
+    "unom": 3843,
+    "role": "угол",
+    "side": "подъезды 4–5",
+    "azimuth": 30,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5248544,
+     55.7958708
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.045",
+    "district": "Хорошевский",
+    "address": "проезд Аэропорта, дом 11Б",
+    "unom": 1039,
+    "role": "угол",
+    "side": "подъезды 2–3",
+    "azimuth": 191,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5222301,
+     55.7958624
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.046",
+    "district": "Хорошевский",
+    "address": "улица Викторенко, дом 14",
+    "unom": 3844,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 31,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5238596,
+     55.7956134
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.047",
+    "district": "Хорошевский",
+    "address": "Чапаевский переулок, дом 5, корпус 1",
+    "unom": 28312,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 11,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5193525,
+     55.7954732
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.048",
+    "district": "Хорошевский",
+    "address": "проезд Аэропорта, дом 11Б",
+    "unom": 1039,
+    "role": "угол",
+    "side": "подъезды 2–3",
+    "azimuth": 11,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5220804,
+     55.7954286
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.049",
+    "district": "Хорошевский",
+    "address": "Чапаевский переулок, дом 5, корпус 2",
+    "unom": 28313,
+    "role": "угол",
+    "side": "подъезды 3–4",
+    "azimuth": 12,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.520035,
+     55.7953539
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.050",
+    "district": "Хорошевский",
+    "address": "улица Авиаконструктора Микояна, дом 14, корпус 2",
+    "unom": 340186,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 174,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5275986,
+     55.7942005
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.051",
+    "district": "Хорошевский",
+    "address": "улица Авиаконструктора Микояна, дом 14, корпус 2",
+    "unom": 340186,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 84,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5253598,
+     55.7940264
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.052",
+    "district": "Хорошевский",
+    "address": "улица Авиаконструктора Микояна, дом 14, корпус 2",
+    "unom": 340186,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 264,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5277381,
+     55.7939285
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.053",
+    "district": "Хорошевский",
+    "address": "улица Авиаконструктора Микояна, дом 14, корпус 2",
+    "unom": 340186,
+    "role": "середина фасада",
+    "side": "подъезды 1–5",
+    "azimuth": 264,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5266692,
+     55.7938623
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.054",
+    "district": "Хорошевский",
+    "address": "улица Авиаконструктора Микояна, дом 14, корпус 2",
+    "unom": 340186,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 84,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5254495,
+     55.7937741
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.055",
+    "district": "Хорошевский",
+    "address": "улица Авиаконструктора Микояна, дом 14, корпус 1",
+    "unom": 340187,
+    "role": "угол",
+    "side": "подъезды 5",
+    "azimuth": 248,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5278384,
+     55.7937262
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.056",
+    "district": "Хорошевский",
+    "address": "улица Авиаконструктора Микояна, дом 14, корпус 1",
+    "unom": 340187,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 248,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.527919,
+     55.7935663
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.057",
+    "district": "Хорошевский",
+    "address": "улица Авиаконструктора Микояна, дом 14, корпус 1",
+    "unom": 340187,
+    "role": "середина фасада",
+    "side": "подъезды 1–4",
+    "azimuth": 68,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5269449,
+     55.7933573
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.058",
+    "district": "Хорошевский",
+    "address": "улица Авиаконструктора Микояна, дом 14, корпус 1",
+    "unom": 340187,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 248,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5282212,
+     55.7932649
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.059",
+    "district": "Хорошевский",
+    "address": "улица Авиаконструктора Микояна, дом 14, корпус 1",
+    "unom": 340187,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 68,
+    "status": "черновик",
+    "also_covers": "улица Авиаконструктора Микояна, дом 14, корпус 1 (подъезды 5)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5257742,
+     55.793151
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.060",
+    "district": "Хорошевский",
+    "address": "проезд Берёзовой Рощи, дом 10",
+    "unom": 340067,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 174,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5192883,
+     55.7895356
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.061",
+    "district": "Хорошевский",
+    "address": "проезд Берёзовой Рощи, дом 10",
+    "unom": 340067,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 84,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.51874,
+     55.7895261
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.062",
+    "district": "Хорошевский",
+    "address": "Ходынский бульвар, дом 19",
+    "unom": 340069,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 265,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5217064,
+     55.7892866
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.063",
+    "district": "Хорошевский",
+    "address": "Ходынский бульвар, дом 19",
+    "unom": 340069,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 85,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5197326,
+     55.7892179
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.064",
+    "district": "Хорошевский",
+    "address": "проезд Берёзовой Рощи, дом 10",
+    "unom": 340067,
+    "role": "середина фасада",
+    "side": "подъезды 1–5",
+    "azimuth": 174,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5192932,
+     55.7888985
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.065",
+    "district": "Хорошевский",
+    "address": "Ходынский бульвар, дом 19",
+    "unom": 340069,
+    "role": "угол",
+    "side": "подъезды 8–9",
+    "azimuth": 265,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5217669,
+     55.7888585
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.066",
+    "district": "Хорошевский",
+    "address": "Ходынский бульвар, дом 19",
+    "unom": 340069,
+    "role": "угол",
+    "side": "подъезды 10",
+    "azimuth": 265,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5218119,
+     55.788705
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.067",
+    "district": "Хорошевский",
+    "address": "Ходынский бульвар, дом 19",
+    "unom": 340069,
+    "role": "угол",
+    "side": "подъезды 4–7",
+    "azimuth": 355,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5215502,
+     55.7886345
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.068",
+    "district": "Хорошевский",
+    "address": "Ходынский бульвар, дом 19",
+    "unom": 340069,
+    "role": "угол",
+    "side": "подъезды 10",
+    "azimuth": 85,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5198443,
+     55.7885992
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.069",
+    "district": "Хорошевский",
+    "address": "проезд Берёзовой Рощи, дом 10",
+    "unom": 340067,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 354,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5194055,
+     55.7882826
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.070",
+    "district": "Хорошевский",
+    "address": "проезд Берёзовой Рощи, дом 10",
+    "unom": 340067,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 354,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5190081,
+     55.7882283
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.071",
+    "district": "Хорошевский",
+    "address": "проезд Берёзовой Рощи, дом 8",
+    "unom": 340115,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 255,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5196553,
+     55.7879776
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.072",
+    "district": "Хорошевский",
+    "address": "проезд Берёзовой Рощи, дом 8",
+    "unom": 340115,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 75,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5190236,
+     55.7878892
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.073",
+    "district": "Хорошевский",
+    "address": "проезд Берёзовой Рощи, дом 8",
+    "unom": 340115,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 255,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.519809,
+     55.787668
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.074",
+    "district": "Хорошевский",
+    "address": "проезд Берёзовой Рощи, дом 8",
+    "unom": 340115,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 345,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5191947,
+     55.7875548
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.075",
+    "district": "Хорошевский",
+    "address": "проезд Берёзовой Рощи, дом 6",
+    "unom": 340116,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 160,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5198544,
+     55.7875013
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.076",
+    "district": "Хорошевский",
+    "address": "проезд Берёзовой Рощи, дом 6",
+    "unom": 340116,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 70,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5192885,
+     55.7873923
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.077",
+    "district": "Хорошевский",
+    "address": "улица Куусинена, дом 19, корпус 2",
+    "unom": 12481,
+    "role": "угол",
+    "side": "подъезды 3–5",
+    "azimuth": 164,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5116056,
+     55.7873351
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.078",
+    "district": "Хорошевский",
+    "address": "улица Куусинена, дом 19, корпус 3",
+    "unom": 12480,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 254,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5117117,
+     55.7871872
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.079",
+    "district": "Хорошевский",
+    "address": "проезд Берёзовой Рощи, дом 6",
+    "unom": 340116,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 340,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5201064,
+     55.7871087
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.080",
+    "district": "Хорошевский",
+    "address": "улица Куусинена, дом 19, корпус 3",
+    "unom": 12480,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 74,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5108781,
+     55.7870515
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.081",
+    "district": "Хорошевский",
+    "address": "улица Зорге, дом 18, корпус 3",
+    "unom": 8506,
+    "role": "угол",
+    "side": "подъезды 6–7",
+    "azimuth": 253,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5105528,
+     55.7869951
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.082",
+    "district": "Хорошевский",
+    "address": "проезд Берёзовой Рощи, дом 6",
+    "unom": 340116,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 340,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5195575,
+     55.7869745
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.083",
+    "district": "Хорошевский",
+    "address": "Ходынский бульвар, дом 15",
+    "unom": 340071,
+    "role": "угол",
+    "side": "подъезды 4, 6",
+    "azimuth": 145,
+    "status": "черновик",
+    "also_covers": "Ходынский бульвар, дом 15 (подъезды 3)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5229493,
+     55.7869673
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.084",
+    "district": "Хорошевский",
+    "address": "Ходынский бульвар, дом 15",
+    "unom": 340071,
+    "role": "угол",
+    "side": "подъезды 5",
+    "azimuth": 145,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.522748,
+     55.7869294
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.085",
+    "district": "Хорошевский",
+    "address": "улица Зорге, дом 18, корпус 2",
+    "unom": 8505,
+    "role": "угол",
+    "side": "подъезды 3–5",
+    "azimuth": 163,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5097074,
+     55.7868563
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.086",
+    "district": "Хорошевский",
+    "address": "улица Зорге, дом 18, корпус 3",
+    "unom": 8506,
+    "role": "угол",
+    "side": "подъезды 6–7",
+    "azimuth": 73,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5094753,
+     55.7867236
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.087",
+    "district": "Хорошевский",
+    "address": "Ходынский бульвар, дом 15",
+    "unom": 340071,
+    "role": "угол",
+    "side": "подъезды 7–8",
+    "azimuth": 235,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.52348,
+     55.7866049
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.088",
+    "district": "Хорошевский",
+    "address": "Ходынский бульвар, дом 15",
+    "unom": 340071,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 55,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5211221,
+     55.7865521
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.089",
+    "district": "Хорошевский",
+    "address": "улица Куусинена, дом 19, корпус 2",
+    "unom": 12481,
+    "role": "угол",
+    "side": "подъезды 3–5",
+    "azimuth": 344,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5120431,
+     55.7864934
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.090",
+    "district": "Хорошевский",
+    "address": "улица Куусинена, дом 19, корпус 1",
+    "unom": 12482,
+    "role": "угол",
+    "side": "подъезды 6",
+    "azimuth": 74,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5116826,
+     55.7864439
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.091",
+    "district": "Хорошевский",
+    "address": "улица Куусинена, дом 17, корпус 3",
+    "unom": 12477,
+    "role": "угол",
+    "side": "подъезды 2",
+    "azimuth": 163,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5112228,
+     55.7864006
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.092",
+    "district": "Хорошевский",
+    "address": "Ходынский бульвар, дом 15",
+    "unom": 340071,
+    "role": "угол",
+    "side": "подъезды 4, 6",
+    "azimuth": 325,
+    "status": "черновик",
+    "also_covers": "Ходынский бульвар, дом 15 (подъезды 5); Ходынский бульвар, дом 15 (подъезды 9–10)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5236059,
+     55.7863893
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.093",
+    "district": "Хорошевский",
+    "address": "улица Гризодубовой, дом 4, корпус 4",
+    "unom": 340065,
+    "role": "угол",
+    "side": "подъезды 1–7",
+    "azimuth": 143,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5206787,
+     55.7863746
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.094",
+    "district": "Хорошевский",
+    "address": "Ходынский бульвар, дом 15",
+    "unom": 340071,
+    "role": "угол",
+    "side": "подъезды 3",
+    "azimuth": 55,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5213395,
+     55.7863708
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.095",
+    "district": "Хорошевский",
+    "address": "Ходынский бульвар, дом 15",
+    "unom": 340071,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 235,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5237582,
+     55.786285
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.096",
+    "district": "Хорошевский",
+    "address": "улица Зорге, дом 18, корпус 1",
+    "unom": 8504,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 253,
+    "status": "черновик",
+    "also_covers": "улица Куусинена, дом 17, корпус 3 (круговой тротуар)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5107149,
+     55.7862749
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.097",
+    "district": "Хорошевский",
+    "address": "улица Гризодубовой, дом 4, корпус 4",
+    "unom": 340065,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 53,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5203544,
+     55.7862447
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.098",
+    "district": "Хорошевский",
+    "address": "улица Зорге, дом 18, корпус 1",
+    "unom": 8504,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 73,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.509741,
+     55.786201
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.099",
+    "district": "Хорошевский",
+    "address": "улица Куусинена, дом 17, корпус 3",
+    "unom": 12477,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 253,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5116594,
+     55.786199
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.100",
+    "district": "Хорошевский",
+    "address": "улица Зорге, дом 18, корпус 2",
+    "unom": 8505,
+    "role": "угол",
+    "side": "подъезды 3–5",
+    "azimuth": 343,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5101193,
+     55.786165
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.101",
+    "district": "Хорошевский",
+    "address": "улица Куусинена, дом 17, корпус 2",
+    "unom": 12478,
+    "role": "угол",
+    "side": "подъезды 3–5",
+    "azimuth": 163,
+    "status": "черновик",
+    "also_covers": "улица Куусинена, дом 17, корпус 3 (подъезды 2)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5113581,
+     55.7860914
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.102",
+    "district": "Хорошевский",
+    "address": "улица Куусинена, дом 17, корпус 3",
+    "unom": 12477,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 73,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5109532,
+     55.786075
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.103",
+    "district": "Хорошевский",
+    "address": "Ходынский бульвар, дом 13",
+    "unom": 340068,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 221,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5240613,
+     55.7860271
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.104",
+    "district": "Хорошевский",
+    "address": "Ходынский бульвар, дом 15",
+    "unom": 340071,
+    "role": "угол",
+    "side": "подъезды 7–8",
+    "azimuth": 55,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5218466,
+     55.7859385
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.105",
+    "district": "Хорошевский",
+    "address": "Ходынский бульвар, дом 13",
+    "unom": 340068,
+    "role": "угол",
+    "side": "подъезды 5–6",
+    "azimuth": 131,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5241252,
+     55.7858953
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.106",
+    "district": "Хорошевский",
+    "address": "улица Зорге, дом 16",
+    "unom": 8503,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 163,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5104592,
+     55.7858651
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.107",
+    "district": "Хорошевский",
+    "address": "Ходынский бульвар, дом 15",
+    "unom": 340071,
+    "role": "угол",
+    "side": "подъезды 9–10",
+    "azimuth": 55,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5220252,
+     55.7858287
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.108",
+    "district": "Хорошевский",
+    "address": "улица Гризодубовой, дом 4, корпус 4",
+    "unom": 340065,
+    "role": "середина фасада",
+    "side": "подъезды 1–7",
+    "azimuth": 143,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5215543,
+     55.7857395
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.109",
+    "district": "Хорошевский",
+    "address": "Ходынский бульвар, дом 13",
+    "unom": 340068,
+    "role": "угол",
+    "side": "подъезды 7–8",
+    "azimuth": 221,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5250011,
+     55.7856995
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.110",
+    "district": "Хорошевский",
+    "address": "Ходынский бульвар, дом 15",
+    "unom": 340071,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 325,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5224328,
+     55.7856261
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.111",
+    "district": "Хорошевский",
+    "address": "Ходынский бульвар, дом 13",
+    "unom": 340068,
+    "role": "угол",
+    "side": "подъезды 9–10",
+    "azimuth": 221,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5251389,
+     55.7855169
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.112",
+    "district": "Хорошевский",
+    "address": "Ходынский бульвар, дом 13",
+    "unom": 340068,
+    "role": "угол",
+    "side": "подъезды 5–6",
+    "azimuth": 311,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5251626,
+     55.7853948
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.113",
+    "district": "Хорошевский",
+    "address": "улица Куусинена, дом 17, корпус 1",
+    "unom": 12479,
+    "role": "угол",
+    "side": "подъезды 7",
+    "azimuth": 254,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5120943,
+     55.7853454
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.114",
+    "district": "Хорошевский",
+    "address": "Ходынский бульвар, дом 13",
+    "unom": 340068,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 41,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5227601,
+     55.7853189
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.115",
+    "district": "Хорошевский",
+    "address": "улица Куусинена, дом 17, корпус 2",
+    "unom": 12478,
+    "role": "угол",
+    "side": "подъезды 3–5",
+    "azimuth": 343,
+    "status": "черновик",
+    "also_covers": "улица Куусинена, дом 17, корпус 1 (подъезды 6)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5118092,
+     55.7852963
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.116",
+    "district": "Хорошевский",
+    "address": "улица Куусинена, дом 15, корпус 2",
+    "unom": 12475,
+    "role": "угол",
+    "side": "подъезды 3–4",
+    "azimuth": 164,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5127254,
+     55.7852216
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.117",
+    "district": "Хорошевский",
+    "address": "улица Гризодубовой, дом 4, корпус 3",
+    "unom": 340064,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 130,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5222205,
+     55.7851934
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.118",
+    "district": "Хорошевский",
+    "address": "улица Зорге, дом 16",
+    "unom": 8503,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 343,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5108461,
+     55.7851657
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.119",
+    "district": "Хорошевский",
+    "address": "Ходынский бульвар, дом 11",
+    "unom": 340072,
+    "role": "угол",
+    "side": "подъезды 3–4",
+    "azimuth": 207,
+    "status": "черновик",
+    "also_covers": "Ходынский бульвар, дом 11 (подъезды 5–6)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5260636,
+     55.7851632
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.120",
+    "district": "Хорошевский",
+    "address": "улица Гризодубовой, дом 4, корпус 4",
+    "unom": 340065,
+    "role": "угол",
+    "side": "подъезды 1–7",
+    "azimuth": 323,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.522437,
+     55.7851288
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.121",
+    "district": "Хорошевский",
+    "address": "улица Куусинена, дом 17, корпус 1",
+    "unom": 12479,
+    "role": "угол",
+    "side": "подъезды 7",
+    "azimuth": 74,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5114556,
+     55.7851255
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.122",
+    "district": "Хорошевский",
+    "address": "улица Гризодубовой, дом 4, корпус 3",
+    "unom": 340064,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 40,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5219446,
+     55.7850285
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.123",
+    "district": "Хорошевский",
+    "address": "Ходынский бульвар, дом 11",
+    "unom": 340072,
+    "role": "угол",
+    "side": "подъезды 7–8",
+    "azimuth": 207,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5269183,
+     55.7850172
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.124",
+    "district": "Хорошевский",
+    "address": "Ходынский бульвар, дом 5, корпус 1",
+    "unom": 340121,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 252,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5347378,
+     55.7849701
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.125",
+    "district": "Хорошевский",
+    "address": "Ходынский бульвар, дом 11",
+    "unom": 340072,
+    "role": "угол",
+    "side": "подъезды 9–10",
+    "azimuth": 207,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5271476,
+     55.7849575
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.126",
+    "district": "Хорошевский",
+    "address": "улица Гризодубовой, дом 4, корпус 4",
+    "unom": 340065,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 323,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5220843,
+     55.7849446
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.127",
+    "district": "Хорошевский",
+    "address": "Ходынский бульвар, дом 5, корпус 1",
+    "unom": 340121,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 72,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5342281,
+     55.7848747
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.128",
+    "district": "Хорошевский",
+    "address": "улица Зорге, дом 14, корпус 1",
+    "unom": 8502,
+    "role": "угол",
+    "side": "подъезды 6–7",
+    "azimuth": 253,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5114436,
+     55.7848496
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.129",
+    "district": "Хорошевский",
+    "address": "улица Зорге, дом 14, корпус 2",
+    "unom": 8501,
+    "role": "угол",
+    "side": "подъезды 3–5",
+    "azimuth": 163,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5108772,
+     55.7847717
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.130",
+    "district": "Хорошевский",
+    "address": "Ходынский бульвар, дом 11",
+    "unom": 340072,
+    "role": "угол",
+    "side": "подъезды 5–6",
+    "azimuth": 297,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.527177,
+     55.7847554
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.131",
+    "district": "Хорошевский",
+    "address": "Ходынский бульвар, дом 13",
+    "unom": 340068,
+    "role": "угол",
+    "side": "подъезды 9–10",
+    "azimuth": 41,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5239568,
+     55.7847322
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.132",
+    "district": "Хорошевский",
+    "address": "улица Гризодубовой, дом 4, корпус 3",
+    "unom": 340064,
+    "role": "середина фасада",
+    "side": "подъезды 1–4",
+    "azimuth": 130,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5233958,
+     55.7846449
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.133",
+    "district": "Хорошевский",
+    "address": "Ходынский бульвар, дом 5, корпус 1",
+    "unom": 340121,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 252,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5350031,
+     55.7846371
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.134",
+    "district": "Хорошевский",
+    "address": "улица Зорге, дом 14, корпус 1",
+    "unom": 8502,
+    "role": "угол",
+    "side": "подъезды 6–7",
+    "azimuth": 73,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5105854,
+     55.7845803
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.135",
+    "district": "Хорошевский",
+    "address": "Ходынский бульвар, дом 13",
+    "unom": 340068,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 311,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5243432,
+     55.7845489
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.136",
+    "district": "Хорошевский",
+    "address": "Ходынский бульвар, дом 5, корпус 2",
+    "unom": 340120,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 252,
+    "status": "черновик",
+    "also_covers": "Ходынский бульвар, дом 5, корпус 1 (круговой тротуар)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5343187,
+     55.7845437
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.137",
+    "district": "Хорошевский",
+    "address": "Ходынский бульвар, дом 11",
+    "unom": 340072,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 27,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5249261,
+     55.7844133
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.138",
+    "district": "Хорошевский",
+    "address": "улица Куусинена, дом 15, корпус 1",
+    "unom": 12476,
+    "role": "угол",
+    "side": "подъезды 5–6",
+    "azimuth": 254,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5133937,
+     55.7844077
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.139",
+    "district": "Хорошевский",
+    "address": "Ходынский бульвар, дом 5, корпус 2",
+    "unom": 340120,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 72,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5337464,
+     55.7844013
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.140",
+    "district": "Хорошевский",
+    "address": "улица Куусинена, дом 15, корпус 1",
+    "unom": 12476,
+    "role": "угол",
+    "side": "подъезды 5–6",
+    "azimuth": 74,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5123946,
+     55.7842685
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.141",
+    "district": "Хорошевский",
+    "address": "Ходынский бульвар, дом 11",
+    "unom": 340072,
+    "role": "угол",
+    "side": "подъезды 3–4",
+    "azimuth": 27,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5252066,
+     55.7842423
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.142",
+    "district": "Хорошевский",
+    "address": "улица Зорге, дом 14, корпус 3",
+    "unom": 8500,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 253,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5119322,
+     55.784192
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.143",
+    "district": "Хорошевский",
+    "address": "улица Гризодубовой, дом 4, корпус 3",
+    "unom": 340064,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 310,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5246636,
+     55.7840931
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.144",
+    "district": "Хорошевский",
+    "address": "Ходынский бульвар, дом 5, корпус 3",
+    "unom": 340119,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 252,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5340261,
+     55.7840578
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.145",
+    "district": "Хорошевский",
+    "address": "улица Зорге, дом 14, корпус 2",
+    "unom": 8501,
+    "role": "угол",
+    "side": "подъезды 3–5",
+    "azimuth": 343,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5111902,
+     55.7840511
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.146",
+    "district": "Хорошевский",
+    "address": "улица Зорге, дом 14, корпус 3",
+    "unom": 8500,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 73,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5109813,
+     55.7840042
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.147",
+    "district": "Хорошевский",
+    "address": "Ходынский бульвар, дом 5, корпус 3",
+    "unom": 340119,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 72,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5333851,
+     55.7839121
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.148",
+    "district": "Хорошевский",
+    "address": "улица Гризодубовой, дом 4, корпус 3",
+    "unom": 340064,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 310,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5243784,
+     55.7839092
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.149",
+    "district": "Хорошевский",
+    "address": "Ходынский бульвар, дом 11",
+    "unom": 340072,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 297,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.526671,
+     55.7837459
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.150",
+    "district": "Хорошевский",
+    "address": "Ходынский бульвар, дом 5, корпус 3",
+    "unom": 340119,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 252,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5342504,
+     55.7837186
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.151",
+    "district": "Хорошевский",
+    "address": "Ходынский бульвар, дом 5, корпус 3",
+    "unom": 340119,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 342,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5335937,
+     55.783591
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.152",
+    "district": "Хорошевский",
+    "address": "Ходынский бульвар, дом 5, корпус 4",
+    "unom": 340118,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 162,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5330576,
+     55.7834812
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.153",
+    "district": "Хорошевский",
+    "address": "Ходынский бульвар, дом 5, корпус 4",
+    "unom": 340118,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 342,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5332426,
+     55.7830609
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.154",
+    "district": "Хорошевский",
+    "address": "улица Куусинена, дом 11, корпус 2",
+    "unom": 12471,
+    "role": "угол",
+    "side": "подъезды 2–3",
+    "azimuth": 163,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5139996,
+     55.7830322
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.155",
+    "district": "Хорошевский",
+    "address": "улица Зорге, дом 10, корпус 1",
+    "unom": 8499,
+    "role": "угол",
+    "side": "подъезды 3",
+    "azimuth": 163,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5121436,
+     55.7828923
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.156",
+    "district": "Хорошевский",
+    "address": "улица Зорге, дом 10, корпус 1",
+    "unom": 8499,
+    "role": "угол",
+    "side": "подъезды 3",
+    "azimuth": 343,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5122567,
+     55.7826827
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.157",
+    "district": "Хорошевский",
+    "address": "улица Куусинена, дом 6, корпус 5",
+    "unom": 12451,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 164,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5172522,
+     55.7826453
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.158",
+    "district": "Хорошевский",
+    "address": "улица Куусинена, дом 11, корпус 2",
+    "unom": 12471,
+    "role": "угол",
+    "side": "подъезды 2–3",
+    "azimuth": 343,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5142905,
+     55.7824932
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.159",
+    "district": "Хорошевский",
+    "address": "улица Куусинена, дом 6, корпус 1",
+    "unom": 12447,
+    "role": "угол",
+    "side": "подъезды 9",
+    "azimuth": 253,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5160553,
+     55.7823613
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.160",
+    "district": "Хорошевский",
+    "address": "улица Зорге, дом 10, корпус 2",
+    "unom": 8497,
+    "role": "угол",
+    "side": "подъезды 2",
+    "azimuth": 163,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5124378,
+     55.7822542
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.161",
+    "district": "Хорошевский",
+    "address": "улица Куусинена, дом 6, корпус 1",
+    "unom": 12447,
+    "role": "угол",
+    "side": "подъезды 9",
+    "azimuth": 73,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5155227,
+     55.7822436
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.162",
+    "district": "Хорошевский",
+    "address": "улица Куусинена, дом 6, корпус 2",
+    "unom": 12448,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 163,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5158447,
+     55.7821395
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.163",
+    "district": "Хорошевский",
+    "address": "улица Куусинена, дом 6, корпус 5",
+    "unom": 12451,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 344,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5175481,
+     55.7821185
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.164",
+    "district": "Хорошевский",
+    "address": "улица Зорге, дом 10, корпус 2",
+    "unom": 8497,
+    "role": "угол",
+    "side": "подъезды 2",
+    "azimuth": 343,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5125547,
+     55.7820382
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.165",
+    "district": "Хорошевский",
+    "address": "улица Гризодубовой, дом 1, корпус 2",
+    "unom": 340176,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 107,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5329217,
+     55.78202
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.166",
+    "district": "Хорошевский",
+    "address": "улица Гризодубовой, дом 1, корпус 1",
+    "unom": 340174,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 107,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5331217,
+     55.7819522
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.167",
+    "district": "Хорошевский",
+    "address": "улица Куусинена, дом 11, корпус 1",
+    "unom": 12472,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 73,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5138092,
+     55.7819292
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.168",
+    "district": "Хорошевский",
+    "address": "улица Гризодубовой, дом 1, корпус 2",
+    "unom": 340176,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 197,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5334007,
+     55.781923
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.169",
+    "district": "Хорошевский",
+    "address": "улица Гризодубовой, дом 1, корпус 3",
+    "unom": 340175,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 107,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5324045,
+     55.7818958
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.170",
+    "district": "Хорошевский",
+    "address": "улица Куусинена, дом 6, корпус 7",
+    "unom": 12453,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 163,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5176966,
+     55.781851
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.171",
+    "district": "Хорошевский",
+    "address": "улица Гризодубовой, дом 1, корпус 2",
+    "unom": 340176,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 107,
+    "status": "черновик",
+    "also_covers": "улица Гризодубовой, дом 1, корпус 3 (круговой тротуар)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.532762,
+     55.781836
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.172",
+    "district": "Хорошевский",
+    "address": "улица Зорге, дом 10, корпус 2",
+    "unom": 8497,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 253,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5129503,
+     55.7817878
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.173",
+    "district": "Хорошевский",
+    "address": "улица Гризодубовой, дом 1, корпус 5",
+    "unom": 340177,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 207,
+    "status": "черновик",
+    "also_covers": "улица Гризодубовой, дом 1, корпус 1 (подъезды 1–2)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5340497,
+     55.7817482
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.174",
+    "district": "Хорошевский",
+    "address": "улица Гризодубовой, дом 1, корпус 2",
+    "unom": 340176,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 287,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5333455,
+     55.7817361
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.175",
+    "district": "Хорошевский",
+    "address": "улица Гризодубовой, дом 1, корпус 3",
+    "unom": 340175,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 107,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5322471,
+     55.7817175
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.176",
+    "district": "Хорошевский",
+    "address": "улица Гризодубовой, дом 1, корпус 3",
+    "unom": 340175,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 287,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5328306,
+     55.7816168
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.177",
+    "district": "Хорошевский",
+    "address": "улица Гризодубовой, дом 1, корпус 4",
+    "unom": 340178,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 287,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5323019,
+     55.7814709
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.178",
+    "district": "Хорошевский",
+    "address": "улица Куусинена, дом 6, корпус 2",
+    "unom": 12448,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 343,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5162758,
+     55.7813624
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.179",
+    "district": "Хорошевский",
+    "address": "улица Куусинена, дом 6, корпус 7",
+    "unom": 12453,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 343,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5179771,
+     55.781319
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.180",
+    "district": "Хорошевский",
+    "address": "улица Гризодубовой, дом 1, корпус 5",
+    "unom": 340177,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 27,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5336101,
+     55.781276
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.181",
+    "district": "Хорошевский",
+    "address": "улица Куусинена, дом 6, корпус 3",
+    "unom": 12449,
+    "role": "угол",
+    "side": "подъезды 4",
+    "azimuth": 253,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5167281,
+     55.7811917
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.182",
+    "district": "Хорошевский",
+    "address": "улица Куусинена, дом 6, корпус 3",
+    "unom": 12449,
+    "role": "угол",
+    "side": "подъезды 5–6",
+    "azimuth": 343,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5165308,
+     55.7809958
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.183",
+    "district": "Хорошевский",
+    "address": "улица Куусинена, дом 4А, корпус 2",
+    "unom": 12442,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 163,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5171218,
+     55.7808956
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.184",
+    "district": "Хорошевский",
+    "address": "улица Куусинена, дом 7, корпус 3",
+    "unom": 12464,
+    "role": "угол",
+    "side": "подъезды 4",
+    "azimuth": 74,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.51439,
+     55.7808233
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.185",
+    "district": "Хорошевский",
+    "address": "улица Полины Осипенко, дом 10, корпус 1",
+    "unom": 340262,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 138,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5343561,
+     55.7805871
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.186",
+    "district": "Хорошевский",
+    "address": "улица Полины Осипенко, дом 8, корпус 1",
+    "unom": 470031,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 136,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5353334,
+     55.7805704
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.187",
+    "district": "Хорошевский",
+    "address": "улица Куусинена, дом 7, корпус 2",
+    "unom": 12465,
+    "role": "угол",
+    "side": "подъезды 3",
+    "azimuth": 253,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5153937,
+     55.7804878
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.188",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 74, корпус 3",
+    "unom": 28114,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 200,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.526013,
+     55.7804251
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.189",
+    "district": "Хорошевский",
+    "address": "улица Куусинена, дом 7, корпус 2",
+    "unom": 12465,
+    "role": "угол",
+    "side": "подъезды 3",
+    "azimuth": 73,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5149097,
+     55.7804064
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.190",
+    "district": "Хорошевский",
+    "address": "улица Полины Осипенко, дом 10, корпус 1",
+    "unom": 340262,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 138,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5341689,
+     55.7803557
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.191",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 72, корпус 4",
+    "unom": 28113,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 201,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5267789,
+     55.7802526
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.192",
+    "district": "Хорошевский",
+    "address": "улица Полины Осипенко, дом 8, корпус 3",
+    "unom": 470033,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 135,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.537379,
+     55.7800871
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.193",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 68, корпус 5",
+    "unom": 28108,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 201,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5275274,
+     55.7800738
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.194",
+    "district": "Хорошевский",
+    "address": "улица Полины Осипенко, дом 8, корпус 1",
+    "unom": 470031,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 316,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5362314,
+     55.7800512
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.195",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 82, корпус 11",
+    "unom": 28124,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 252,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5218426,
+     55.7800253
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.196",
+    "district": "Хорошевский",
+    "address": "улица Куусинена, дом 4А, корпус 2",
+    "unom": 12442,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 343,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5176047,
+     55.780021
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.197",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 82, корпус 11",
+    "unom": 28124,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 72,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5214806,
+     55.7799603
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.198",
+    "district": "Хорошевский",
+    "address": "улица Куусинена, дом 7, корпус 2",
+    "unom": 12465,
+    "role": "угол",
+    "side": "подъезды 2",
+    "azimuth": 253,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5156732,
+     55.7799576
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.199",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 82, корпус 7",
+    "unom": 28118,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 72,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.519712,
+     55.779957
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.200",
+    "district": "Хорошевский",
+    "address": "улица Полины Осипенко, дом 10, корпус 1",
+    "unom": 340262,
+    "role": "угол",
+    "side": "подъезды 4–7",
+    "azimuth": 228,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5353559,
+     55.7799164
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.201",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 74, корпус 3",
+    "unom": 28114,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 20,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5256764,
+     55.7799088
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.202",
+    "district": "Хорошевский",
+    "address": "улица Полины Осипенко, дом 8",
+    "unom": 470032,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 174,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5364933,
+     55.7799028
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.203",
+    "district": "Хорошевский",
+    "address": "улица Полины Осипенко, дом 8",
+    "unom": 470032,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 174,
+    "status": "черновик",
+    "also_covers": "улица Полины Осипенко, дом 8, корпус 1 (круговой тротуар)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5361019,
+     55.7798762
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.204",
+    "district": "Хорошевский",
+    "address": "улица Куусинена, дом 7, корпус 2",
+    "unom": 12465,
+    "role": "угол",
+    "side": "подъезды 2",
+    "azimuth": 73,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5151889,
+     55.7798755
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.205",
+    "district": "Хорошевский",
+    "address": "улица Полины Осипенко, дом 10, корпус 1",
+    "unom": 340262,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 48,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.533112,
+     55.7798501
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.206",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 78",
+    "unom": 28117,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 253,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5226248,
+     55.7797612
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.207",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 72, корпус 4",
+    "unom": 28113,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 21,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5264408,
+     55.7797493
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.208",
+    "district": "Хорошевский",
+    "address": "улица Полины Осипенко, дом 10, корпус 1",
+    "unom": 340262,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 228,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5356979,
+     55.7797355
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.209",
+    "district": "Хорошевский",
+    "address": "улица Полины Осипенко, дом 8, корпус 3",
+    "unom": 470033,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 315,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5380132,
+     55.7797289
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.210",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 72, корпус 3",
+    "unom": 28112,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 202,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5259782,
+     55.7797251
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.211",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 64, корпус 2",
+    "unom": 28104,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 110,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5298295,
+     55.7797054
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.212",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 82, корпус 2",
+    "unom": 28121,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 162,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5199519,
+     55.779689
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.213",
+    "district": "Хорошевский",
+    "address": "улица Полины Осипенко, дом 8",
+    "unom": 470032,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 264,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5365537,
+     55.7796251
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.214",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 78",
+    "unom": 28117,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 73,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5219936,
+     55.7796236
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.215",
+    "district": "Хорошевский",
+    "address": "улица Полины Осипенко, дом 8",
+    "unom": 470032,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 354,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5361557,
+     55.7796015
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.216",
+    "district": "Хорошевский",
+    "address": "улица Полины Осипенко, дом 10, корпус 1",
+    "unom": 340262,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 318,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.535379,
+     55.7795985
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.217",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 70, корпус 3",
+    "unom": 28110,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 202,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5267534,
+     55.7795582
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.218",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 76, корпус 5",
+    "unom": 28116,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 21,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5249471,
+     55.7795451
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.219",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 72, корпус 3",
+    "unom": 28112,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 22,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5258493,
+     55.7795448
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.220",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 64, корпус 2",
+    "unom": 28104,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 290,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5307123,
+     55.7795191
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.221",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 68, корпус 5",
+    "unom": 28108,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 21,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5271431,
+     55.779517
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.222",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 84, корпус 4",
+    "unom": 28128,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 252,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5199724,
+     55.7795136
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.223",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 76, корпус 4",
+    "unom": 28115,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 201,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5252402,
+     55.7795062
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.224",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 84, корпус 4",
+    "unom": 28128,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 72,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5193334,
+     55.7794191
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.225",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 70, корпус 3",
+    "unom": 28110,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 22,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5266234,
+     55.779372
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.226",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 68, корпус 4",
+    "unom": 28107,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 202,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5275137,
+     55.7793078
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.227",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 64, корпус 1",
+    "unom": 28103,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 201,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.530607,
+     55.7792946
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.228",
+    "district": "Хорошевский",
+    "address": "улица Полины Осипенко, дом 10, корпус 1",
+    "unom": 340262,
+    "role": "угол",
+    "side": "подъезды 4–7",
+    "azimuth": 48,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5339395,
+     55.7791906
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.229",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 82, корпус 2",
+    "unom": 28121,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 342,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5202533,
+     55.7791571
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.230",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 58",
+    "unom": 31229,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 109,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5326726,
+     55.7791526
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.231",
+    "district": "Хорошевский",
+    "address": "улица Поликарпова, дом 19, корпус 2",
+    "unom": 20467,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 229,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5477228,
+     55.7791402
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.232",
+    "district": "Хорошевский",
+    "address": "улица Полины Осипенко, дом 10, корпус 1",
+    "unom": 340262,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 318,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5342196,
+     55.7790418
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.233",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 62",
+    "unom": 28102,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 200,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5319023,
+     55.7790367
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.234",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 58",
+    "unom": 31229,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 289,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5335421,
+     55.7789648
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.235",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 72, корпус 1",
+    "unom": 28111,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 111,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5240898,
+     55.7789217
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.236",
+    "district": "Хорошевский",
+    "address": "улица Полины Осипенко, дом 2, корпус 3",
+    "unom": 470039,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 181,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5419048,
+     55.7788866
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.237",
+    "district": "Хорошевский",
+    "address": "улица Полины Осипенко, дом 2, корпус 3",
+    "unom": 470039,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 91,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5415201,
+     55.7788773
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.238",
+    "district": "Хорошевский",
+    "address": "улица Куусинена, дом 4, корпус 1",
+    "unom": 12439,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 342,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5175391,
+     55.7788596
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.239",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 82, корпус 9",
+    "unom": 28125,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 162,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5204548,
+     55.7788253
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.240",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 50, корпус 3",
+    "unom": 28097,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 111,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5341809,
+     55.7787847
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.241",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 56",
+    "unom": 28100,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 203,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5336648,
+     55.7787698
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.242",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 72, корпус 1",
+    "unom": 28111,
+    "role": "угол",
+    "side": "подъезды 3",
+    "azimuth": 111,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5241097,
+     55.7787679
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.243",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 68, корпус 4",
+    "unom": 28107,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 22,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5271142,
+     55.7787378
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.244",
+    "district": "Хорошевский",
+    "address": "Хорошёвский тупик, дом 7",
+    "unom": 28049,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 202,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5281869,
+     55.7787371
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.245",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 70, корпус 1",
+    "unom": 28109,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 111,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5250706,
+     55.7787065
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.246",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 72, корпус 1",
+    "unom": 28111,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 291,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5252711,
+     55.7786609
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.247",
+    "district": "Хорошевский",
+    "address": "улица Полины Осипенко, дом 2, корпус 3",
+    "unom": 470039,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 91,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5414932,
+     55.7786426
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.248",
+    "district": "Хорошевский",
+    "address": "улица Полины Осипенко, дом 2, корпус 3",
+    "unom": 470039,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 271,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5419253,
+     55.7786379
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.249",
+    "district": "Хорошевский",
+    "address": "улица Полины Осипенко, дом 2, корпус 2",
+    "unom": 470036,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 139,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5402047,
+     55.7785942
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.250",
+    "district": "Хорошевский",
+    "address": "улица Поликарпова, дом 19, корпус 1",
+    "unom": 20466,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 229,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.54863,
+     55.7785815
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.251",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 68, корпус 1",
+    "unom": 28106,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 111,
+    "status": "черновик",
+    "also_covers": "Хорошёвское шоссе, дом 70, корпус 1 (подъезды 1–2)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5260814,
+     55.7785774
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.252",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 72, корпус 1",
+    "unom": 28111,
+    "role": "угол",
+    "side": "подъезды 3",
+    "azimuth": 291,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5251377,
+     55.778537
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.253",
+    "district": "Хорошевский",
+    "address": "улица Зорге, дом 2",
+    "unom": 8493,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 163,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.513898,
+     55.7784431
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.254",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 64, корпус 1",
+    "unom": 28103,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 21,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5299808,
+     55.7784268
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.255",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 68, корпус 1",
+    "unom": 28106,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 21,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5258689,
+     55.7784231
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.256",
+    "district": "Хорошевский",
+    "address": "улица Полины Осипенко, дом 2, корпус 2",
+    "unom": 470036,
+    "role": "угол",
+    "side": "подъезды 8–11",
+    "azimuth": 139,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5385944,
+     55.7784038
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.257",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 62",
+    "unom": 28102,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 20,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5315008,
+     55.7784022
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.258",
+    "district": "Хорошевский",
+    "address": "Хорошёвский тупик, дом 7",
+    "unom": 28049,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 22,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5279403,
+     55.7783861
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.259",
+    "district": "Хорошевский",
+    "address": "улица Поликарпова, дом 25",
+    "unom": 20470,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 12,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5440542,
+     55.7783789
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.260",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 82, корпус 9",
+    "unom": 28125,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 342,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5207507,
+     55.77833
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.261",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 68, корпус 1",
+    "unom": 28106,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 291,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5272471,
+     55.7783277
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.262",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 56",
+    "unom": 28100,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 23,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5332375,
+     55.7782886
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.263",
+    "district": "Хорошевский",
+    "address": "улица Полины Осипенко, дом 2, корпус 2",
+    "unom": 470036,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 319,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5408989,
+     55.7781838
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.264",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 60",
+    "unom": 28101,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 201,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.531287,
+     55.7781732
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.265",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 92",
+    "unom": 28133,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 253,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5146831,
+     55.7781617
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.266",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 66",
+    "unom": 28105,
+    "role": "угол",
+    "side": "подъезды 2–3",
+    "azimuth": 110,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5273316,
+     55.778157
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.267",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 68, корпус 1",
+    "unom": 28106,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 291,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5271327,
+     55.7781374
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.268",
+    "district": "Хорошевский",
+    "address": "улица Полины Осипенко, дом 2, корпус 1",
+    "unom": 470038,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 209,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5380507,
+     55.778113
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.269",
+    "district": "Хорошевский",
+    "address": "1-й Хорошёвский проезд, дом 2/17",
+    "unom": 20465,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 228,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.549274,
+     55.7781042
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.270",
+    "district": "Хорошевский",
+    "address": "1-й Хорошёвский проезд, дом 2/17",
+    "unom": 20465,
+    "role": "угол",
+    "side": "подъезды 2–7",
+    "azimuth": 138,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5487988,
+     55.7780922
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.271",
+    "district": "Хорошевский",
+    "address": "улица Полины Осипенко, дом 2, корпус 2",
+    "unom": 470036,
+    "role": "середина фасада",
+    "side": "подъезды 3–7",
+    "azimuth": 229,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.540066,
+     55.7780919
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.272",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 88",
+    "unom": 28131,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 253,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5167177,
+     55.7780916
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.273",
+    "district": "Хорошевский",
+    "address": "улица Зорге, дом 2",
+    "unom": 8493,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 343,
+    "status": "черновик",
+    "also_covers": "Хорошёвское шоссе, дом 92 (подъезды 1–2)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5141726,
+     55.778063
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.274",
+    "district": "Хорошевский",
+    "address": "улица Полины Осипенко, дом 2, корпус 1",
+    "unom": 470038,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 209,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5384147,
+     55.7780018
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.275",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 66",
+    "unom": 28105,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 20,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5272328,
+     55.7779865
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.276",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 66",
+    "unom": 28105,
+    "role": "угол",
+    "side": "подъезды 2–3",
+    "azimuth": 290,
+    "status": "черновик",
+    "also_covers": "Хорошёвское шоссе, дом 66 (подъезды 1)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5285345,
+     55.7779765
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.277",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 90",
+    "unom": 28132,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 73,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.515043,
+     55.7779599
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.278",
+    "district": "Хорошевский",
+    "address": "улица Куусинена, дом 1",
+    "unom": 12436,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 343,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.516443,
+     55.7779292
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.279",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 50, корпус 2",
+    "unom": 28096,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 21,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5353944,
+     55.7778708
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.280",
+    "district": "Хорошевский",
+    "address": "улица Полины Осипенко, дом 2, корпус 1",
+    "unom": 470038,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 29,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.537816,
+     55.7778704
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.281",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 88",
+    "unom": 28131,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 73,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5157626,
+     55.7778251
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.282",
+    "district": "Хорошевский",
+    "address": "улица Полины Осипенко, дом 2",
+    "unom": 470037,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 209,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5385583,
+     55.7778165
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.283",
+    "district": "Хорошевский",
+    "address": "1-й Хорошёвский проезд, дом 2/17",
+    "unom": 20465,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 48,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5487709,
+     55.7777952
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.284",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 66",
+    "unom": 28105,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 20,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.528406,
+     55.7777767
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.285",
+    "district": "Хорошевский",
+    "address": "1-й Хорошёвский проезд, дом 4, корпус 3",
+    "unom": 28028,
+    "role": "угол",
+    "side": "подъезды 7–9",
+    "azimuth": 228,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5485609,
+     55.7777536
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.286",
+    "district": "Хорошевский",
+    "address": "улица Полины Осипенко, дом 2, корпус 1",
+    "unom": 470038,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 299,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5381595,
+     55.7777445
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.287",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 60",
+    "unom": 28101,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 21,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5309666,
+     55.7777025
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.288",
+    "district": "Хорошевский",
+    "address": "улица Полины Осипенко, дом 2",
+    "unom": 470037,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 209,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5389236,
+     55.7776982
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.289",
+    "district": "Хорошевский",
+    "address": "улица Полины Осипенко, дом 2, корпус 2",
+    "unom": 470036,
+    "role": "угол",
+    "side": "подъезды 8–11",
+    "azimuth": 319,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5398005,
+     55.7776289
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.290",
+    "district": "Хорошевский",
+    "address": "1-й Хорошёвский проезд, дом 2/17",
+    "unom": 20465,
+    "role": "угол",
+    "side": "подъезды 8–9",
+    "azimuth": 228,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5500957,
+     55.7776035
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.291",
+    "district": "Хорошевский",
+    "address": "улица Полины Осипенко, дом 2",
+    "unom": 470037,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 29,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5383052,
+     55.7775485
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.292",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 41, корпус Г",
+    "unom": 28088,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 252,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5112962,
+     55.7774978
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.293",
+    "district": "Хорошевский",
+    "address": "1-й Хорошёвский проезд, дом 4, корпус 2",
+    "unom": 28027,
+    "role": "угол",
+    "side": "подъезды 4–6",
+    "azimuth": 136,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5481701,
+     55.7774846
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.294",
+    "district": "Хорошевский",
+    "address": "улица Полины Осипенко, дом 2",
+    "unom": 470037,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 299,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.538666,
+     55.7774392
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.295",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 39, корпус 1",
+    "unom": 28086,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 355,
+    "status": "черновик",
+    "also_covers": "Хорошёвское шоссе, дом 39, корпус 1 (подъезды 1)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5120958,
+     55.777427
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.296",
+    "district": "Хорошевский",
+    "address": "1-й Хорошёвский проезд, дом 4, корпус 3",
+    "unom": 28028,
+    "role": "угол",
+    "side": "подъезды 7–9",
+    "azimuth": 48,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5479016,
+     55.7774178
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.297",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 39, корпус 2",
+    "unom": 28087,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 175,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5130618,
+     55.7774011
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.298",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 52, корпус 2",
+    "unom": 28099,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 111,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5314888,
+     55.7773773
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.299",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 41, корпус Г",
+    "unom": 28088,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 72,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5104548,
+     55.7773457
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.300",
+    "district": "Хорошевский",
+    "address": "1-й Хорошёвский проезд, дом 4, корпус 1",
+    "unom": 28026,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 228,
+    "status": "черновик",
+    "also_covers": "1-й Хорошёвский проезд, дом 2/17 (подъезды 8–9)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5494899,
+     55.7772801
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.301",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 39, корпус 2",
+    "unom": 28087,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 355,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5130796,
+     55.7772783
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.302",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 43, корпус В",
+    "unom": 28092,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 253,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5100448,
+     55.7772433
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.303",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 52, корпус 2",
+    "unom": 28099,
+    "role": "угол",
+    "side": "подъезды 3",
+    "azimuth": 111,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5313363,
+     55.7771674
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.304",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 43, корпус Б",
+    "unom": 28091,
+    "role": "угол",
+    "side": "подъезды 4–6",
+    "azimuth": 163,
+    "status": "черновик",
+    "also_covers": "Хорошёвское шоссе, дом 43, корпус В (подъезды 1–2)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5096401,
+     55.7771604
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.305",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 50, корпус 1",
+    "unom": 28095,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 111,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5334324,
+     55.7771035
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.306",
+    "district": "Хорошевский",
+    "address": "1-й Хорошёвский проезд, дом 4, корпус 2",
+    "unom": 28027,
+    "role": "угол",
+    "side": "подъезды 4–6",
+    "azimuth": 316,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5487955,
+     55.7770992
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.307",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 52, корпус 1",
+    "unom": 28098,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 111,
+    "status": "черновик",
+    "also_covers": "Хорошёвское шоссе, дом 52, корпус 2 (подъезды 1–2)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5324977,
+     55.7770696
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.308",
+    "district": "Хорошевский",
+    "address": "улица Поликарпова, дом 11",
+    "unom": 20463,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 206,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5507655,
+     55.776917
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.309",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 52, корпус 2",
+    "unom": 28099,
+    "role": "угол",
+    "side": "подъезды 3",
+    "azimuth": 291,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5323801,
+     55.7769002
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.310",
+    "district": "Хорошевский",
+    "address": "1-й Хорошёвский проезд, дом 6",
+    "unom": 28029,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 228,
+    "status": "черновик",
+    "also_covers": "1-й Хорошёвский проезд, дом 4, корпус 1 (подъезды 1–3)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5487544,
+     55.7768786
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.311",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 50, корпус 1",
+    "unom": 28095,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 291,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5346753,
+     55.776863
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.312",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 52, корпус 1",
+    "unom": 28098,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 291,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5339078,
+     55.7768077
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.313",
+    "district": "Хорошевский",
+    "address": "улица Поликарпова, дом 9",
+    "unom": 20461,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 207,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5519347,
+     55.7767716
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.314",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 41, корпус Е",
+    "unom": 28089,
+    "role": "угол",
+    "side": "подъезды 4–7",
+    "azimuth": 167,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5117727,
+     55.7767062
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.315",
+    "district": "Хорошевский",
+    "address": "улица Поликарпова, дом 11",
+    "unom": 20463,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 26,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5505297,
+     55.7766651
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.316",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 48",
+    "unom": 28094,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 111,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5344913,
+     55.776627
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.317",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 23, корпус 2",
+    "unom": 28080,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 206,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5287838,
+     55.7765869
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.318",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 43, корпус А",
+    "unom": 28090,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 162,
+    "status": "черновик",
+    "also_covers": "Хорошёвское шоссе, дом 43, корпус Б (подъезды 4–6)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5100315,
+     55.7765575
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.319",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 43, корпус А",
+    "unom": 28090,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 72,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.509676,
+     55.7765094
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.320",
+    "district": "Хорошевский",
+    "address": "1-й Хорошёвский проезд, дом 6",
+    "unom": 28029,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 48,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5479771,
+     55.776485
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.321",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 23, корпус 1",
+    "unom": 28079,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 291,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5291797,
+     55.7764763
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.322",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 48",
+    "unom": 28094,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 291,
+    "status": "черновик",
+    "also_covers": "Хорошёвское шоссе, дом 46 (подъезды 2–3)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5355337,
+     55.7763213
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.323",
+    "district": "Хорошевский",
+    "address": "1-й Хорошёвский проезд, дом 10, корпус 2",
+    "unom": 28031,
+    "role": "угол",
+    "side": "подъезды 8",
+    "azimuth": 318,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5462812,
+     55.7762876
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.324",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 23, корпус 2",
+    "unom": 28080,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 26,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5285452,
+     55.7761988
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.325",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 36Б",
+    "unom": 28084,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 23,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5386608,
+     55.7761971
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.326",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 17",
+    "unom": 28074,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 111,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5310669,
+     55.7761774
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.327",
+    "district": "Хорошевский",
+    "address": "1-й Хорошёвский проезд, дом 10, корпус 2",
+    "unom": 28031,
+    "role": "угол",
+    "side": "подъезды 5–7",
+    "azimuth": 48,
+    "status": "черновик",
+    "also_covers": "1-й Хорошёвский проезд, дом 12, корпус 3 (подъезды 7–9)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5455956,
+     55.7761423
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.328",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 46",
+    "unom": 28093,
+    "role": "угол",
+    "side": "подъезды 2–3",
+    "azimuth": 291,
+    "status": "черновик",
+    "also_covers": "Хорошёвское шоссе, дом 46 (подъезды 1)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5366983,
+     55.7761137
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.329",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 46",
+    "unom": 28093,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 21,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5355664,
+     55.7760667
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.330",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 41, корпус Е",
+    "unom": 28089,
+    "role": "угол",
+    "side": "подъезды 4–7",
+    "azimuth": 347,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5120221,
+     55.7760515
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.331",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 43, корпус А",
+    "unom": 28090,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 342,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5102886,
+     55.7760267
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.332",
+    "district": "Хорошевский",
+    "address": "1-й Хорошёвский проезд, дом 10, корпус 1",
+    "unom": 28030,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 137,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5466959,
+     55.7760253
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.333",
+    "district": "Хорошевский",
+    "address": "1-й Хорошёвский проезд, дом 12, корпус 2",
+    "unom": 28033,
+    "role": "угол",
+    "side": "подъезды 4–6",
+    "azimuth": 138,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5452694,
+     55.7759722
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.334",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 46",
+    "unom": 28093,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 21,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5365679,
+     55.7759246
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.335",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 17",
+    "unom": 28074,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 291,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5325289,
+     55.7758524
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.336",
+    "district": "Хорошевский",
+    "address": "1-й Хорошёвский проезд, дом 12, корпус 3",
+    "unom": 28034,
+    "role": "угол",
+    "side": "подъезды 7–9",
+    "azimuth": 48,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5448486,
+     55.7757589
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.337",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 21А",
+    "unom": 28077,
+    "role": "угол",
+    "side": "подъезды 3",
+    "azimuth": 115,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5289199,
+     55.7757409
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.338",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 19",
+    "unom": 28075,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 201,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5310202,
+     55.7757149
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.339",
+    "district": "Хорошевский",
+    "address": "1-й Хорошёвский проезд, дом 14, корпус 3",
+    "unom": 28037,
+    "role": "угол",
+    "side": "подъезды 7–9",
+    "azimuth": 228,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5446954,
+     55.7756839
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.340",
+    "district": "Хорошевский",
+    "address": "1-й Хорошёвский проезд, дом 10, корпус 1",
+    "unom": 28030,
+    "role": "угол",
+    "side": "подъезды 2–4",
+    "azimuth": 47,
+    "status": "черновик",
+    "also_covers": "1-й Хорошёвский проезд, дом 12, корпус 1 (подъезды 1–3)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5463661,
+     55.7756313
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.341",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 11",
+    "unom": 28069,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 118,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5336625,
+     55.7756223
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.342",
+    "district": "Хорошевский",
+    "address": "1-й Хорошёвский проезд, дом 12, корпус 2",
+    "unom": 28033,
+    "role": "угол",
+    "side": "подъезды 4–6",
+    "azimuth": 318,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5459541,
+     55.7755467
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.343",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 21А",
+    "unom": 28077,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 115,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5289421,
+     55.7755104
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.344",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 13, корпус 3",
+    "unom": 28070,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 111,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5322,
+     55.775508
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.345",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 21А",
+    "unom": 28077,
+    "role": "угол",
+    "side": "подъезды 3",
+    "azimuth": 295,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5299364,
+     55.775473
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.346",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 12, корпус 1",
+    "unom": 340332,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 258,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5522562,
+     55.775422
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.347",
+    "district": "Хорошевский",
+    "address": "1-й Хорошёвский проезд, дом 14, корпус 2",
+    "unom": 28036,
+    "role": "угол",
+    "side": "подъезды 4–6",
+    "azimuth": 138,
+    "status": "черновик",
+    "also_covers": "1-й Хорошёвский проезд, дом 14, корпус 3 (подъезды 7–9)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5441687,
+     55.775409
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.348",
+    "district": "Хорошевский",
+    "address": "5-я Магистральная улица, дом 18",
+    "unom": 13629,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 205,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5289142,
+     55.7753638
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.349",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 13А, корпус 1",
+    "unom": 28071,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 202,
+    "status": "черновик",
+    "also_covers": "Хорошёвское шоссе, дом 19 (подъезды 1–2)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5308146,
+     55.7753147
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.350",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 34",
+    "unom": 28083,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 111,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5388235,
+     55.7753118
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.351",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 21А",
+    "unom": 28077,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 295,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5297918,
+     55.7753028
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.352",
+    "district": "Хорошевский",
+    "address": "1-й Хорошёвский проезд, дом 16, корпус 2",
+    "unom": 28039,
+    "role": "угол",
+    "side": "подъезды 5–6",
+    "azimuth": 228,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5439347,
+     55.7752971
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.353",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 12, корпус 1",
+    "unom": 340332,
+    "role": "середина фасада",
+    "side": "подъезды 1–6",
+    "azimuth": 78,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5506539,
+     55.7752742
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.354",
+    "district": "Хорошевский",
+    "address": "1-й Хорошёвский проезд, дом 12, корпус 1",
+    "unom": 28032,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 48,
+    "status": "черновик",
+    "also_covers": "1-й Хорошёвский проезд, дом 14, корпус 1 (подъезды 1–3)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5456036,
+     55.7752698
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.355",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 13, корпус 3",
+    "unom": 28070,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 291,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5335435,
+     55.7752153
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.356",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 11",
+    "unom": 28069,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 298,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5351081,
+     55.7751849
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.357",
+    "district": "Хорошевский",
+    "address": "5-я Магистральная улица, дом 20",
+    "unom": 13630,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 202,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5295244,
+     55.7751734
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.358",
+    "district": "Хорошевский",
+    "address": "1-й Хорошёвский проезд, дом 16, корпус 2",
+    "unom": 28039,
+    "role": "угол",
+    "side": "подъезды 5–6",
+    "azimuth": 48,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5434621,
+     55.7750533
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.359",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 12, корпус 1",
+    "unom": 340332,
+    "role": "середина фасада",
+    "side": "подъезды 1–6",
+    "azimuth": 78,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5494811,
+     55.7750242
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.360",
+    "district": "Хорошевский",
+    "address": "5-я Магистральная улица, дом 18",
+    "unom": 13629,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 25,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5286021,
+     55.7749887
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.361",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 12, корпус 1",
+    "unom": 340332,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 78,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5480789,
+     55.7749671
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.362",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 24",
+    "unom": 28081,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 112,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.541757,
+     55.7749593
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.363",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 13А, корпус 1",
+    "unom": 28071,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 22,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5306007,
+     55.774924
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.364",
+    "district": "Хорошевский",
+    "address": "1-й Хорошёвский проезд, дом 14, корпус 1",
+    "unom": 28035,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 48,
+    "status": "черновик",
+    "also_covers": "1-й Хорошёвский проезд, дом 14, корпус 2 (подъезды 4–6)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5448559,
+     55.7748823
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.365",
+    "district": "Хорошевский",
+    "address": "1-й Хорошёвский проезд, дом 16, корпус 1",
+    "unom": 28038,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 226,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5446925,
+     55.7748131
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.366",
+    "district": "Хорошевский",
+    "address": "5-я Магистральная улица, дом 20",
+    "unom": 13630,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 22,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.529266,
+     55.7748041
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.367",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 7, строение 2",
+    "unom": 28064,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 201,
+    "status": "черновик",
+    "also_covers": "Хорошёвское шоссе, дом 7, строение 1 (подъезды 1–2)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.537228,
+     55.7748002
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.368",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 7, строение 1",
+    "unom": 28063,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 292,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.537666,
+     55.7747477
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.369",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 22",
+    "unom": 28078,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 112,
+    "status": "черновик",
+    "also_covers": "Хорошёвское шоссе, дом 24 (подъезды 1–3)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5429104,
+     55.7747462
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.370",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 22",
+    "unom": 28078,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 292,
+    "status": "черновик",
+    "also_covers": "1-й Хорошёвский проезд, дом 16, корпус 1 (подъезды 1–2)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5441758,
+     55.7746223
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.371",
+    "district": "Хорошевский",
+    "address": "2-й Хорошёвский проезд, дом 3",
+    "unom": 28040,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 201,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5363131,
+     55.7744957
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.372",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 22",
+    "unom": 28078,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 292,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5439521,
+     55.7743228
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.373",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 7, строение 2",
+    "unom": 28064,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 21,
+    "status": "черновик",
+    "also_covers": "3-й Хорошёвский проезд, дом 10 (подъезды 1)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5370177,
+     55.7742922
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.374",
+    "district": "Хорошевский",
+    "address": "2-й Хорошёвский проезд, дом 3",
+    "unom": 28040,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 21,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5360237,
+     55.7740648
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.375",
+    "district": "Хорошевский",
+    "address": "5-я Магистральная улица, дом 16",
+    "unom": 13628,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 245,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5294506,
+     55.7739166
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.376",
+    "district": "Хорошевский",
+    "address": "Магистральный переулок, дом 5",
+    "unom": 13631,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 200,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5245384,
+     55.7738594
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.377",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 1",
+    "unom": 28054,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 111,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5429627,
+     55.7736679
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.378",
+    "district": "Хорошевский",
+    "address": "5-я Магистральная улица, дом 16",
+    "unom": 13628,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 65,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5283698,
+     55.7736319
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.379",
+    "district": "Хорошевский",
+    "address": "Магистральный переулок, дом 7, корпус 1",
+    "unom": 13620,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 203,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5250694,
+     55.7735751
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.380",
+    "district": "Хорошевский",
+    "address": "2-й Хорошёвский проезд, дом 7А",
+    "unom": 28043,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 134,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5329037,
+     55.7735645
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.381",
+    "district": "Хорошевский",
+    "address": "5-я Магистральная улица, дом 14, корпус 2",
+    "unom": 13627,
+    "role": "угол",
+    "side": "подъезды 3–4",
+    "azimuth": 24,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5273328,
+     55.7735109
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.382",
+    "district": "Хорошевский",
+    "address": "3-й Хорошёвский проезд, дом 4",
+    "unom": 74138,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 111,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5391877,
+     55.7734128
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.383",
+    "district": "Хорошевский",
+    "address": "Магистральный переулок, дом 5",
+    "unom": 13631,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 20,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.524234,
+     55.7733952
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.384",
+    "district": "Хорошевский",
+    "address": "Магистральный переулок, дом 5А",
+    "unom": 13632,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 111,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5238978,
+     55.7733325
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.385",
+    "district": "Хорошевский",
+    "address": "2-й Хорошёвский проезд, дом 7А",
+    "unom": 28043,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 314,
+    "status": "черновик",
+    "also_covers": "2-й Хорошёвский проезд, дом 7Б (подъезды 1–3)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5335139,
+     55.773256
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.386",
+    "district": "Хорошевский",
+    "address": "Хорошёвское шоссе, дом 1",
+    "unom": 28054,
+    "role": "угол",
+    "side": "подъезды 6",
+    "azimuth": 21,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5436281,
+     55.7732086
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.387",
+    "district": "Хорошевский",
+    "address": "Магистральный переулок, дом 5А",
+    "unom": 13632,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 291,
+    "status": "черновик",
+    "also_covers": "Магистральный переулок, дом 7, корпус 1 (подъезды 1–2)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.524787,
+     55.7731685
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.388",
+    "district": "Хорошевский",
+    "address": "3-й Хорошёвский проезд, дом 4",
+    "unom": 74138,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 291,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5406733,
+     55.77309
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.389",
+    "district": "Хорошевский",
+    "address": "2-й Хорошёвский проезд, дом 7Б",
+    "unom": 28042,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 314,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5343414,
+     55.7727907
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.390",
+    "district": "Хорошевский",
+    "address": "5-я Магистральная улица, дом 10",
+    "unom": 13623,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 205,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5266852,
+     55.772725
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.391",
+    "district": "Хорошевский",
+    "address": "1-я Магистральная улица, дом 22, корпус 1",
+    "unom": 13608,
+    "role": "угол",
+    "side": "подъезды 4",
+    "azimuth": 206,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5154948,
+     55.772335
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.392",
+    "district": "Хорошевский",
+    "address": "1-я Магистральная улица, дом 22, корпус 1",
+    "unom": 13608,
+    "role": "угол",
+    "side": "подъезды 3",
+    "azimuth": 206,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5157985,
+     55.7723004
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.393",
+    "district": "Хорошевский",
+    "address": "5-я Магистральная улица, дом 10",
+    "unom": 13623,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 25,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5262542,
+     55.7721438
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.394",
+    "district": "Хорошевский",
+    "address": "1-я Магистральная улица, дом 22, корпус 1",
+    "unom": 13608,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 296,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5156185,
+     55.7720296
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.395",
+    "district": "Хорошевский",
+    "address": "1-я Магистральная улица, дом 22, корпус 1",
+    "unom": 13608,
+    "role": "угол",
+    "side": "подъезды 3",
+    "azimuth": 26,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5154699,
+     55.7719118
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.396",
+    "district": "Хорошевский",
+    "address": "3-я Магистральная улица, дом 26Б",
+    "unom": 13615,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 103,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5180359,
+     55.7681597
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.397",
+    "district": "Хорошевский",
+    "address": "3-я Магистральная улица, дом 26Б",
+    "unom": 13615,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 283,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5191126,
+     55.7680226
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т16.398",
+    "district": "Хорошевский",
+    "address": "3-я Магистральная улица, дом 20Б",
+    "unom": 13612,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 193,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5192403,
+     55.7674447
+    ]
+   }
+  }
+ ]
+}

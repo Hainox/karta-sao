@@ -32,8 +32,16 @@ from shapely import affinity
 ROOT = Path(__file__).resolve().parents[3]
 WORK = Path(__file__).resolve().parent
 
-SLUGS = {"dmitrovskiy": "Дмитровский"}
-DISTRICT_NOS = {"dmitrovskiy": "7"}
+SLUGS = {
+    "aeroport": "Аэропорт", "begovoy": "Беговой", "beskudnikovskiy": "Бескудниковский",
+    "voykovskiy": "Войковский", "vostochnoe-degunino": "Восточное Дегунино",
+    "golovinskiy": "Головинский", "dmitrovskiy": "Дмитровский",
+    "zapadnoe-degunino": "Западное Дегунино", "koptevo": "Коптево",
+    "levoberezhnyy": "Левобережный", "molzhaninovskiy": "Молжаниновский",
+    "savelovskiy": "Савеловский", "sokol": "Сокол", "timiryazevskiy": "Тимирязевский",
+    "hovrino": "Ховрино", "horoshevskiy": "Хорошевский",
+}
+DISTRICT_NOS = {slug: str(no) for no, slug in enumerate(SLUGS, 1)}
 
 ENTRANCE_TO_BUILDING_M = 12   # подъезд дальше — дом не найден
 FACADE_ANGLE_DEG = 20         # подъезды на рёбрах с таким разбросом — один фасад
@@ -68,7 +76,8 @@ class Local:
         def conv(coords):
             return [self.xy(*c[:2]) for c in coords]
         if g.geom_type == "Polygon":
-            return Polygon(conv(g.exterior.coords), [conv(r.coords) for r in g.interiors])
+            # buffer(0) чинит самопересечения контуров из АСУ ОДС.
+            return Polygon(conv(g.exterior.coords), [conv(r.coords) for r in g.interiors]).buffer(0)
         if g.geom_type == "MultiPolygon":
             return unary_union([self.geom(p) for p in g.geoms])
         raise ValueError(g.geom_type)

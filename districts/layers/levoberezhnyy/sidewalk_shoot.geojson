@@ -1,0 +1,3952 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.001",
+    "district": "Левобережный",
+    "address": "Прибрежный проезд, дом 7",
+    "unom": 20774,
+    "role": "угол",
+    "side": "подъезды 1–10",
+    "azimuth": 240,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4667077,
+     55.8753612
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.002",
+    "district": "Левобережный",
+    "address": "Прибрежный проезд, дом 7",
+    "unom": 20774,
+    "role": "середина фасада",
+    "side": "подъезды 1–10",
+    "azimuth": 240,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4650757,
+     55.8748555
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.003",
+    "district": "Левобережный",
+    "address": "Прибрежный проезд, дом 7",
+    "unom": 20774,
+    "role": "угол",
+    "side": "подъезды 1–10",
+    "azimuth": 60,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4634539,
+     55.8742874
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.004",
+    "district": "Левобережный",
+    "address": "Валдайский проезд, дом 21",
+    "unom": 74008,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 252,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4635671,
+     55.8731839
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.005",
+    "district": "Левобережный",
+    "address": "Валдайский проезд, дом 21",
+    "unom": 74008,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 72,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4628037,
+     55.8729685
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.006",
+    "district": "Левобережный",
+    "address": "Прибрежный проезд, дом 1",
+    "unom": 20769,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 347,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4608365,
+     55.8728366
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.007",
+    "district": "Левобережный",
+    "address": "Валдайский проезд, дом 22",
+    "unom": 3215,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 199,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4647953,
+     55.8726825
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.008",
+    "district": "Левобережный",
+    "address": "Смольная улица, дом 73",
+    "unom": 24031,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 250,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4682234,
+     55.8725843
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.009",
+    "district": "Левобережный",
+    "address": "Смольная улица, дом 73",
+    "unom": 24031,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 70,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4671708,
+     55.8724015
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.010",
+    "district": "Левобережный",
+    "address": "Валдайский проезд, дом 22",
+    "unom": 3215,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 19,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4647675,
+     55.8723955
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.011",
+    "district": "Левобережный",
+    "address": "Смольная улица, дом 67, корпус 3",
+    "unom": 24028,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 159,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4676819,
+     55.8721484
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.012",
+    "district": "Левобережный",
+    "address": "Смольная улица, дом 67, корпус 2",
+    "unom": 24027,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 249,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4690927,
+     55.871972
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.013",
+    "district": "Левобережный",
+    "address": "Прибрежный проезд, дом 4",
+    "unom": 20771,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 221,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4616219,
+     55.871954
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.014",
+    "district": "Левобережный",
+    "address": "Смольная улица, дом 67, корпус 2",
+    "unom": 24027,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 69,
+    "status": "черновик",
+    "also_covers": "Смольная улица, дом 67, корпус 3 (подъезды 1–2)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.467976,
+     55.871728
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.015",
+    "district": "Левобережный",
+    "address": "Ленинградское шоссе, дом 134",
+    "unom": 12814,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 96,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4603542,
+     55.8715407
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.016",
+    "district": "Левобережный",
+    "address": "Ленинградское шоссе, дом 134",
+    "unom": 12814,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 276,
+    "status": "черновик",
+    "also_covers": "Прибрежный проезд, дом 4 (подъезды 1–2)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4611164,
+     55.871497
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.017",
+    "district": "Левобережный",
+    "address": "Смольная улица, дом 65",
+    "unom": 24025,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 248,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.470539,
+     55.8713967
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.018",
+    "district": "Левобережный",
+    "address": "Ленинградское шоссе, дом 132",
+    "unom": 12813,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 162,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4613621,
+     55.8713016
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.019",
+    "district": "Левобережный",
+    "address": "Смольная улица, дом 65",
+    "unom": 24025,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 68,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4697403,
+     55.8712188
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.020",
+    "district": "Левобережный",
+    "address": "Ленинградское шоссе, дом 132",
+    "unom": 12813,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 342,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4616006,
+     55.8708959
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.021",
+    "district": "Левобережный",
+    "address": "Смольная улица, дом 63",
+    "unom": 24024,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 159,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4705186,
+     55.8708916
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.022",
+    "district": "Левобережный",
+    "address": "Валдайский проезд, дом 13А, корпус 1",
+    "unom": 340140,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 159,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4640433,
+     55.870795
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.023",
+    "district": "Левобережный",
+    "address": "Ленинградское шоссе, дом 130, корпус 3",
+    "unom": 340219,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 125,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4620149,
+     55.8707292
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.024",
+    "district": "Левобережный",
+    "address": "Валдайский проезд, дом 13А, корпус 1",
+    "unom": 340140,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 159,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4636337,
+     55.8706887
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.025",
+    "district": "Левобережный",
+    "address": "Ленинградское шоссе, дом 130, корпус 3",
+    "unom": 340219,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 305,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4625799,
+     55.8705097
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.026",
+    "district": "Левобережный",
+    "address": "Ленинградское шоссе, дом 130, корпус 2",
+    "unom": 340212,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 134,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4615303,
+     55.8701315
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.027",
+    "district": "Левобережный",
+    "address": "Ленинградское шоссе, дом 130, корпус 1",
+    "unom": 340183,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 248,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4631933,
+     55.8701093
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.028",
+    "district": "Левобережный",
+    "address": "Валдайский проезд, дом 13А, корпус 1",
+    "unom": 340140,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 249,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4645626,
+     55.8700256
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.029",
+    "district": "Левобережный",
+    "address": "Валдайский проезд, дом 13А, корпус 1",
+    "unom": 340140,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 339,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4641318,
+     55.8699529
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.030",
+    "district": "Левобережный",
+    "address": "Ленинградское шоссе, дом 130, корпус 2",
+    "unom": 340212,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 44,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4610897,
+     55.8699387
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.031",
+    "district": "Левобережный",
+    "address": "Ленинградское шоссе, дом 130, корпус 1",
+    "unom": 340183,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 248,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4634657,
+     55.8699354
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.032",
+    "district": "Левобережный",
+    "address": "Ленинградское шоссе, дом 130, корпус 2",
+    "unom": 340212,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 224,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4617736,
+     55.8699214
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.033",
+    "district": "Левобережный",
+    "address": "Ленинградское шоссе, дом 130, корпус 1",
+    "unom": 340183,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 68,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4620846,
+     55.8698721
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.034",
+    "district": "Левобережный",
+    "address": "Смольная улица, дом 63",
+    "unom": 24024,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 339,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4712512,
+     55.8698664
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.035",
+    "district": "Левобережный",
+    "address": "Ленинградское шоссе, дом 130, корпус 2",
+    "unom": 340212,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 44,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4614453,
+     55.869727
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.036",
+    "district": "Левобережный",
+    "address": "Ленинградское шоссе, дом 130, корпус 1",
+    "unom": 340183,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 338,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4622981,
+     55.869614
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.037",
+    "district": "Левобережный",
+    "address": "Ленинградское шоссе, дом 128, корпус 2",
+    "unom": 340355,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 157,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4634745,
+     55.869479
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.038",
+    "district": "Левобережный",
+    "address": "Ленинградское шоссе, дом 128, корпус 2",
+    "unom": 340355,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 157,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4630599,
+     55.869406
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.039",
+    "district": "Левобережный",
+    "address": "Валдайский проезд, дом 9А, корпус 1",
+    "unom": 340138,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 158,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4650547,
+     55.8692974
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.040",
+    "district": "Левобережный",
+    "address": "Ленинградское шоссе, дом 128, корпус 2",
+    "unom": 340355,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 247,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4636704,
+     55.8692387
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.041",
+    "district": "Левобережный",
+    "address": "Смольная улица, дом 61, корпус 1",
+    "unom": 340440,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 186,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4726364,
+     55.8692386
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.042",
+    "district": "Левобережный",
+    "address": "Валдайский проезд, дом 9А, корпус 1",
+    "unom": 340138,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 158,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4646495,
+     55.8691895
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.043",
+    "district": "Левобережный",
+    "address": "Смольная улица, дом 61, корпус 1",
+    "unom": 340440,
+    "role": "угол",
+    "side": "подъезды 2–5",
+    "azimuth": 186,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4721241,
+     55.86915
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.044",
+    "district": "Левобережный",
+    "address": "Ленинградское шоссе, дом 128, корпус 2",
+    "unom": 340355,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 337,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4632877,
+     55.8691131
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.045",
+    "district": "Левобережный",
+    "address": "Ленинградское шоссе, дом 124, корпус 3",
+    "unom": 340182,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 248,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4641909,
+     55.8686632
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.046",
+    "district": "Левобережный",
+    "address": "Валдайский проезд, дом 9А, корпус 1",
+    "unom": 340138,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 248,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4655835,
+     55.8685218
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.047",
+    "district": "Левобережный",
+    "address": "Ленинградское шоссе, дом 124, корпус 3",
+    "unom": 340182,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 68,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4632994,
+     55.8684748
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.048",
+    "district": "Левобережный",
+    "address": "Смольная улица, дом 61, корпус 1",
+    "unom": 340440,
+    "role": "середина фасада",
+    "side": "подъезды 2–5",
+    "azimuth": 186,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4719424,
+     55.8684682
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.049",
+    "district": "Левобережный",
+    "address": "Ленинградское шоссе, дом 124, корпус 1",
+    "unom": 340254,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 222,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4627491,
+     55.8684533
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.050",
+    "district": "Левобережный",
+    "address": "Валдайский проезд, дом 9А, корпус 1",
+    "unom": 340138,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 338,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4652007,
+     55.8684237
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.051",
+    "district": "Левобережный",
+    "address": "Ленинградское шоссе, дом 124, корпус 1",
+    "unom": 340254,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 42,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4624055,
+     55.8682209
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.052",
+    "district": "Левобережный",
+    "address": "Смольная улица, дом 57, корпус 1",
+    "unom": 340461,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 204,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4738895,
+     55.8680567
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.053",
+    "district": "Левобережный",
+    "address": "Ленинградское шоссе, дом 120, корпус 3",
+    "unom": 340342,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 100,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4641705,
+     55.8679596
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.054",
+    "district": "Левобережный",
+    "address": "Ленинградское шоссе, дом 120, корпус 3",
+    "unom": 340342,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 190,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4646509,
+     55.8679053
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.055",
+    "district": "Левобережный",
+    "address": "Смольная улица, дом 61, корпус 1",
+    "unom": 340440,
+    "role": "угол",
+    "side": "подъезды 2–5",
+    "azimuth": 6,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.471746,
+     55.8678265
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.056",
+    "district": "Левобережный",
+    "address": "Смольная улица, дом 61, корпус 1",
+    "unom": 340440,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 276,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4723894,
+     55.8677735
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.057",
+    "district": "Левобережный",
+    "address": "Ленинградское шоссе, дом 120, корпус 3",
+    "unom": 340342,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 100,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4641073,
+     55.8676898
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.058",
+    "district": "Левобережный",
+    "address": "Ленинградское шоссе, дом 120, корпус 3",
+    "unom": 340342,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 280,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4645785,
+     55.8676406
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.059",
+    "district": "Левобережный",
+    "address": "Валдайский проезд, дом 10, корпус 1",
+    "unom": 340256,
+    "role": "угол",
+    "side": "подъезды 2–3",
+    "azimuth": 204,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4680146,
+     55.8674975
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.060",
+    "district": "Левобережный",
+    "address": "Смольная улица, дом 57, корпус 1",
+    "unom": 340461,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 24,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4734144,
+     55.8673882
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.061",
+    "district": "Левобережный",
+    "address": "Смольная улица, дом 57, корпус 1",
+    "unom": 340461,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 24,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4729392,
+     55.8673845
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.062",
+    "district": "Левобережный",
+    "address": "Ленинградское шоссе, дом 118, корпус 1",
+    "unom": 340307,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 134,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4635044,
+     55.8671134
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.063",
+    "district": "Левобережный",
+    "address": "Ленинградское шоссе, дом 118, корпус 1",
+    "unom": 340307,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 224,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.463793,
+     55.8669312
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.064",
+    "district": "Левобережный",
+    "address": "Беломорская улица, дом 7, корпус 2",
+    "unom": 1797,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 341,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4698183,
+     55.8669093
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.065",
+    "district": "Левобережный",
+    "address": "Ленинградское шоссе, дом 118, корпус 1",
+    "unom": 340307,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 44,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4631079,
+     55.8668599
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.066",
+    "district": "Левобережный",
+    "address": "Ленинградское шоссе, дом 118, корпус 1",
+    "unom": 340307,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 44,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4633938,
+     55.8666944
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.067",
+    "district": "Левобережный",
+    "address": "Беломорская улица, дом 13, корпус 1",
+    "unom": 340255,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 113,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4741909,
+     55.8666009
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.068",
+    "district": "Левобережный",
+    "address": "Беломорская улица, дом 13, корпус 2",
+    "unom": 340185,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 253,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4733726,
+     55.8665066
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.069",
+    "district": "Левобережный",
+    "address": "Валдайский проезд, дом 10, корпус 1",
+    "unom": 340256,
+    "role": "угол",
+    "side": "подъезды 2–3",
+    "azimuth": 24,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4671496,
+     55.8665041
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.070",
+    "district": "Левобережный",
+    "address": "Валдайский проезд, дом 12",
+    "unom": 3211,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 338,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4688734,
+     55.8664027
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.071",
+    "district": "Левобережный",
+    "address": "Беломорская улица, дом 13, корпус 2",
+    "unom": 340185,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 73,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4726858,
+     55.8663852
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.072",
+    "district": "Левобережный",
+    "address": "Беломорская улица, дом 7, корпус 1",
+    "unom": 1796,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 160,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4701133,
+     55.8663004
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.073",
+    "district": "Левобережный",
+    "address": "Беломорская улица, дом 5, корпус 3",
+    "unom": 1794,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 158,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4689459,
+     55.8662867
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.074",
+    "district": "Левобережный",
+    "address": "Беломорская улица, дом 7, корпус 1",
+    "unom": 1796,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 340,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4702005,
+     55.8661971
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.075",
+    "district": "Левобережный",
+    "address": "Беломорская улица, дом 11, корпус 2",
+    "unom": 340184,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 252,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4725306,
+     55.8661634
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.076",
+    "district": "Левобережный",
+    "address": "Беломорская улица, дом 5, корпус 3",
+    "unom": 1794,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 338,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4691729,
+     55.8660334
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.077",
+    "district": "Левобережный",
+    "address": "Беломорская улица, дом 11, корпус 2",
+    "unom": 340184,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 72,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4716785,
+     55.8660087
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.078",
+    "district": "Левобережный",
+    "address": "Беломорская улица, дом 13, корпус 1",
+    "unom": 340255,
+    "role": "угол",
+    "side": "подъезды 2–4",
+    "azimuth": 203,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4747159,
+     55.8659851
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.079",
+    "district": "Левобережный",
+    "address": "Беломорская улица, дом 5, корпус 2",
+    "unom": 1793,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 160,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4694908,
+     55.8656972
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.080",
+    "district": "Левобережный",
+    "address": "Беломорская улица, дом 13, корпус 1",
+    "unom": 340255,
+    "role": "угол",
+    "side": "подъезды 2–4",
+    "azimuth": 23,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4742355,
+     55.8654262
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.081",
+    "district": "Левобережный",
+    "address": "Валдайский проезд, дом 6",
+    "unom": 3207,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 159,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4683536,
+     55.8654105
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.082",
+    "district": "Левобережный",
+    "address": "Беломорская улица, дом 5, корпус 2",
+    "unom": 1793,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 340,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4696976,
+     55.8653791
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.083",
+    "district": "Левобережный",
+    "address": "Беломорская улица, дом 13, корпус 1",
+    "unom": 340255,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 23,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4733005,
+     55.8652838
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.084",
+    "district": "Левобережный",
+    "address": "Беломорская улица, дом 26",
+    "unom": 1821,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 231,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4768348,
+     55.8652252
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.085",
+    "district": "Левобережный",
+    "address": "Валдайский проезд, дом 6",
+    "unom": 3207,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 339,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4685549,
+     55.8651149
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.086",
+    "district": "Левобережный",
+    "address": "Беломорская улица, дом 5, корпус 1",
+    "unom": 1792,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 159,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4699142,
+     55.8651039
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.087",
+    "district": "Левобережный",
+    "address": "Валдайский проезд, дом 4",
+    "unom": 3205,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 159,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4683229,
+     55.865069
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.088",
+    "district": "Левобережный",
+    "address": "Валдайский проезд, дом 4",
+    "unom": 3205,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 339,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.468516,
+     55.8647882
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.089",
+    "district": "Левобережный",
+    "address": "Беломорская улица, дом 26",
+    "unom": 1821,
+    "role": "середина фасада",
+    "side": "подъезды 1–5",
+    "azimuth": 231,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4757958,
+     55.8647352
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.090",
+    "district": "Левобережный",
+    "address": "Ленинградское шоссе, дом 112, корпус 2",
+    "unom": 12799,
+    "role": "угол",
+    "side": "подъезды 9–16",
+    "azimuth": 249,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4677196,
+     55.8645961
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.091",
+    "district": "Левобережный",
+    "address": "Беломорская улица, дом 3, корпус 1",
+    "unom": 1790,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 159,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4688217,
+     55.8645707
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.092",
+    "district": "Левобережный",
+    "address": "Смольная улица, дом 51, корпус 2",
+    "unom": 340240,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 141,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4759849,
+     55.8644597
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.093",
+    "district": "Левобережный",
+    "address": "Беломорская улица, дом 5, корпус 1",
+    "unom": 1792,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 339,
+    "status": "черновик",
+    "also_covers": "Беломорская улица, дом 1 (подъезды 1)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4706395,
+     55.8643744
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.094",
+    "district": "Левобережный",
+    "address": "Ленинградское шоссе, дом 112, корпус 2",
+    "unom": 12799,
+    "role": "середина фасада",
+    "side": "подъезды 9–16",
+    "azimuth": 69,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4664917,
+     55.864372
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.095",
+    "district": "Левобережный",
+    "address": "Беломорская улица, дом 1",
+    "unom": 74129,
+    "role": "угол",
+    "side": "подъезды 2–4",
+    "azimuth": 249,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4710104,
+     55.8643507
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.096",
+    "district": "Левобережный",
+    "address": "Беломорская улица, дом 3, корпус 1",
+    "unom": 1790,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 339,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4690181,
+     55.8642896
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.097",
+    "district": "Левобережный",
+    "address": "Беломорская улица, дом 26",
+    "unom": 1821,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 51,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4747949,
+     55.8642708
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.098",
+    "district": "Левобережный",
+    "address": "Беломорская улица, дом 1",
+    "unom": 74129,
+    "role": "середина фасада",
+    "side": "подъезды 2–4",
+    "azimuth": 249,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4699088,
+     55.8641061
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.099",
+    "district": "Левобережный",
+    "address": "Ленинградское шоссе, дом 112, корпус 2",
+    "unom": 12799,
+    "role": "угол",
+    "side": "подъезды 9–16",
+    "azimuth": 69,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.465407,
+     55.8640776
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.100",
+    "district": "Левобережный",
+    "address": "Беломорская улица, дом 1",
+    "unom": 74129,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 339,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4708589,
+     55.8640589
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.101",
+    "district": "Левобережный",
+    "address": "Беломорская улица, дом 1",
+    "unom": 74129,
+    "role": "угол",
+    "side": "подъезды 5",
+    "azimuth": 159,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4690412,
+     55.8640237
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.102",
+    "district": "Левобережный",
+    "address": "Ленинградское шоссе, дом 112/1, корпус 1",
+    "unom": 12798,
+    "role": "угол",
+    "side": "подъезды 1–8",
+    "azimuth": 249,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4679482,
+     55.8640023
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.103",
+    "district": "Левобережный",
+    "address": "Беломорская улица, дом 1",
+    "unom": 74129,
+    "role": "угол",
+    "side": "подъезды 2–4",
+    "azimuth": 69,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4687893,
+     55.8639271
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.104",
+    "district": "Левобережный",
+    "address": "Смольная улица, дом 51, корпус 3",
+    "unom": 340241,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 141,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4747792,
+     55.8639254
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.105",
+    "district": "Левобережный",
+    "address": "Ленинградское шоссе, дом 112/1, корпус 1",
+    "unom": 12798,
+    "role": "середина фасада",
+    "side": "подъезды 1–8",
+    "azimuth": 249,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.466936,
+     55.8638208
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.106",
+    "district": "Левобережный",
+    "address": "Смольная улица, дом 51, корпус 2",
+    "unom": 340240,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 321,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4771105,
+     55.8637872
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.107",
+    "district": "Левобережный",
+    "address": "Ленинградское шоссе, дом 112/1, корпус 1",
+    "unom": 12798,
+    "role": "угол",
+    "side": "подъезды 1–8",
+    "azimuth": 69,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4658147,
+     55.8635703
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.108",
+    "district": "Левобережный",
+    "address": "Смольная улица, дом 51, корпус 3",
+    "unom": 340241,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 321,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4757631,
+     55.8632491
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.109",
+    "district": "Левобережный",
+    "address": "Смольная улица, дом 45",
+    "unom": 24015,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 173,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.478844,
+     55.8627793
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.110",
+    "district": "Левобережный",
+    "address": "Беломорская улица, дом 18А",
+    "unom": 340129,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 96,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4731684,
+     55.8627354
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.111",
+    "district": "Левобережный",
+    "address": "Смольная улица, дом 43",
+    "unom": 24014,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 194,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4795391,
+     55.8627007
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.112",
+    "district": "Левобережный",
+    "address": "Беломорская улица, дом 18А",
+    "unom": 340129,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 276,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4738728,
+     55.8626963
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.113",
+    "district": "Левобережный",
+    "address": "Смольная улица, дом 47",
+    "unom": 24016,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 139,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4778823,
+     55.8626121
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.114",
+    "district": "Левобережный",
+    "address": "Беломорская улица, дом 18А",
+    "unom": 340129,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 6,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4731969,
+     55.8625446
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.115",
+    "district": "Левобережный",
+    "address": "Беломорская улица, дом 18А",
+    "unom": 340129,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 276,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4737622,
+     55.8625027
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.116",
+    "district": "Левобережный",
+    "address": "Беломорская улица, дом 24, корпус 3",
+    "unom": 340330,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 199,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4773665,
+     55.8623129
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.117",
+    "district": "Левобережный",
+    "address": "Беломорская улица, дом 12, корпус 1",
+    "unom": 340302,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 129,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4702375,
+     55.8622445
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.118",
+    "district": "Левобережный",
+    "address": "Смольная улица, дом 41",
+    "unom": 24013,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 207,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4799726,
+     55.8622106
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.119",
+    "district": "Левобережный",
+    "address": "Беломорская улица, дом 20, корпус 1",
+    "unom": 340304,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 104,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4749898,
+     55.8621542
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.120",
+    "district": "Левобережный",
+    "address": "Беломорская улица, дом 20, корпус 1",
+    "unom": 340304,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 284,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4760912,
+     55.8619951
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.121",
+    "district": "Левобережный",
+    "address": "Беломорская улица, дом 18, корпус 1",
+    "unom": 1812,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 229,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4748471,
+     55.8619623
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.122",
+    "district": "Левобережный",
+    "address": "Беломорская улица, дом 24, корпус 3",
+    "unom": 340330,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 19,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4771332,
+     55.8619206
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.123",
+    "district": "Левобережный",
+    "address": "Беломорская улица, дом 12, корпус 1",
+    "unom": 340302,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 309,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.471046,
+     55.8618744
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.124",
+    "district": "Левобережный",
+    "address": "Беломорская улица, дом 8, корпус 1",
+    "unom": 340462,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 128,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.469194,
+     55.8617941
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.125",
+    "district": "Левобережный",
+    "address": "Беломорская улица, дом 18, корпус 1",
+    "unom": 1812,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 49,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4743473,
+     55.8617686
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.126",
+    "district": "Левобережный",
+    "address": "Смольная улица, дом 39",
+    "unom": 24011,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 215,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4803283,
+     55.861665
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.127",
+    "district": "Левобережный",
+    "address": "Беломорская улица, дом 20, корпус 2",
+    "unom": 340305,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 103,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4758229,
+     55.8616353
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.128",
+    "district": "Левобережный",
+    "address": "Беломорская улица, дом 8, корпус 1",
+    "unom": 340462,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 308,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4698378,
+     55.8615336
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.129",
+    "district": "Левобережный",
+    "address": "Беломорская улица, дом 20, корпус 2",
+    "unom": 340305,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 283,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4769413,
+     55.8615118
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.130",
+    "district": "Левобережный",
+    "address": "Беломорская улица, дом 14, корпус 1",
+    "unom": 340303,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 159,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.470618,
+     55.8614638
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.131",
+    "district": "Левобережный",
+    "address": "Беломорская улица, дом 18, корпус 2",
+    "unom": 1813,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 230,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4757718,
+     55.861437
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.132",
+    "district": "Левобережный",
+    "address": "Беломорская улица, дом 8, корпус 1",
+    "unom": 340462,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 308,
+    "status": "черновик",
+    "also_covers": "Ленинградское шоссе, дом 108, корпус 2 (круговой тротуар)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4696266,
+     55.8613639
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.133",
+    "district": "Левобережный",
+    "address": "Ленинградское шоссе, дом 108, корпус 3",
+    "unom": 340239,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 131,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.46813,
+     55.861327
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.134",
+    "district": "Левобережный",
+    "address": "Беломорская улица, дом 18, корпус 2",
+    "unom": 1813,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 50,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4751297,
+     55.861252
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.135",
+    "district": "Левобережный",
+    "address": "Ленинградское шоссе, дом 108, корпус 2",
+    "unom": 340211,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 159,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4693069,
+     55.8611903
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.136",
+    "district": "Левобережный",
+    "address": "Беломорская улица, дом 20, корпус 3",
+    "unom": 340306,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 104,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4766149,
+     55.8611271
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.137",
+    "district": "Левобережный",
+    "address": "Ленинградское шоссе, дом 108, корпус 3",
+    "unom": 340239,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 311,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4686465,
+     55.8610765
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.138",
+    "district": "Левобережный",
+    "address": "Беломорская улица, дом 14, корпус 1",
+    "unom": 340303,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 339,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4709437,
+     55.8609787
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.139",
+    "district": "Левобережный",
+    "address": "Беломорская улица, дом 20, корпус 3",
+    "unom": 340306,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 284,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4777179,
+     55.8609724
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.140",
+    "district": "Левобережный",
+    "address": "Беломорская улица, дом 18, корпус 3",
+    "unom": 1814,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 230,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4764812,
+     55.860938
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.141",
+    "district": "Левобережный",
+    "address": "Ленинградское шоссе, дом 108, корпус 1",
+    "unom": 340210,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 159,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4687935,
+     55.8608418
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.142",
+    "district": "Левобережный",
+    "address": "Ленинградское шоссе, дом 108, корпус 1",
+    "unom": 340210,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 69,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4683971,
+     55.8608089
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.143",
+    "district": "Левобережный",
+    "address": "Беломорская улица, дом 18, корпус 3",
+    "unom": 1814,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 50,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4759179,
+     55.8607441
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.144",
+    "district": "Левобережный",
+    "address": "Ленинградское шоссе, дом 108, корпус 2",
+    "unom": 340211,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 339,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.469858,
+     55.8604451
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.145",
+    "district": "Левобережный",
+    "address": "Фестивальная улица, дом 41, корпус 4",
+    "unom": 340460,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 148,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4816338,
+     55.8603901
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.146",
+    "district": "Левобережный",
+    "address": "Беломорская улица, дом 10, корпус 3",
+    "unom": 1803,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 249,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4722735,
+     55.8603894
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.147",
+    "district": "Левобережный",
+    "address": "Беломорская улица, дом 10, корпус 3",
+    "unom": 1803,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 69,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4715078,
+     55.8602256
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.148",
+    "district": "Левобережный",
+    "address": "Фестивальная улица, дом 41, корпус 4",
+    "unom": 340460,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 238,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4818866,
+     55.8601344
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.149",
+    "district": "Левобережный",
+    "address": "Фестивальная улица, дом 41, корпус 4",
+    "unom": 340460,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 58,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4808462,
+     55.8601161
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.150",
+    "district": "Левобережный",
+    "address": "Ленинградское шоссе, дом 108, корпус 1",
+    "unom": 340210,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 339,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4692138,
+     55.8601124
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.151",
+    "district": "Левобережный",
+    "address": "Беломорская улица, дом 10, корпус 2",
+    "unom": 1802,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 161,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4712622,
+     55.8599426
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.152",
+    "district": "Левобережный",
+    "address": "Фестивальная улица, дом 41, корпус 4",
+    "unom": 340460,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 58,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4810658,
+     55.8598924
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.153",
+    "district": "Левобережный",
+    "address": "Фестивальная улица, дом 41, корпус 3",
+    "unom": 340350,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 238,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4824263,
+     55.8597271
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.154",
+    "district": "Левобережный",
+    "address": "Беломорская улица, дом 10, корпус 2",
+    "unom": 1802,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 341,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.471547,
+     55.8595505
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.155",
+    "district": "Левобережный",
+    "address": "Беломорская улица, дом 10, корпус 2",
+    "unom": 1802,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 341,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4710784,
+     55.8595282
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.156",
+    "district": "Левобережный",
+    "address": "Фестивальная улица, дом 41, корпус 3",
+    "unom": 340350,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 238,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4825909,
+     55.8594929
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.157",
+    "district": "Левобережный",
+    "address": "Фестивальная улица, дом 41, корпус 3",
+    "unom": 340350,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 58,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4815918,
+     55.8594225
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.158",
+    "district": "Левобережный",
+    "address": "Фестивальная улица, дом 41, корпус 3",
+    "unom": 340350,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 328,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4818198,
+     55.8591946
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.159",
+    "district": "Левобережный",
+    "address": "Фестивальная улица, дом 41, корпус 2",
+    "unom": 340348,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 238,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4831607,
+     55.8589998
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.160",
+    "district": "Левобережный",
+    "address": "Фестивальная улица, дом 41, корпус 2",
+    "unom": 340348,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 238,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4833661,
+     55.8588112
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.161",
+    "district": "Левобережный",
+    "address": "Ленинградское шоссе, дом 98, корпус 5",
+    "unom": 12792,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 159,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4730401,
+     55.8587455
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.162",
+    "district": "Левобережный",
+    "address": "Фестивальная улица, дом 41, корпус 2",
+    "unom": 340348,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 58,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4823554,
+     55.8587258
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.163",
+    "district": "Левобережный",
+    "address": "Ленинградское шоссе, дом 102",
+    "unom": 12794,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 249,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4697241,
+     55.8586214
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.164",
+    "district": "Левобережный",
+    "address": "Фестивальная улица, дом 41, корпус 2",
+    "unom": 340348,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 328,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4825557,
+     55.8585208
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.165",
+    "district": "Левобережный",
+    "address": "Фестивальная улица, дом 41, корпус 1",
+    "unom": 340459,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 238,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4836878,
+     55.8584426
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.166",
+    "district": "Левобережный",
+    "address": "Ленинградское шоссе, дом 102",
+    "unom": 12794,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 69,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4687333,
+     55.8584034
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.167",
+    "district": "Левобережный",
+    "address": "Фестивальная улица, дом 41, корпус 1",
+    "unom": 340459,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 238,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4839764,
+     55.858223
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.168",
+    "district": "Левобережный",
+    "address": "Ленинградское шоссе, дом 98, корпус 5",
+    "unom": 12792,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 339,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4733989,
+     55.858185
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.169",
+    "district": "Левобережный",
+    "address": "Фестивальная улица, дом 41, корпус 1",
+    "unom": 340459,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 58,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4828903,
+     55.8581616
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.170",
+    "district": "Левобережный",
+    "address": "Фестивальная улица, дом 39, корпус 1",
+    "unom": 27289,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 158,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.482229,
+     55.8581444
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.171",
+    "district": "Левобережный",
+    "address": "Фестивальная улица, дом 15, корпус 1",
+    "unom": 27260,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 249,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4762765,
+     55.8580399
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.172",
+    "district": "Левобережный",
+    "address": "Фестивальная улица, дом 41, корпус 1",
+    "unom": 340459,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 328,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4831153,
+     55.8579463
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.173",
+    "district": "Левобережный",
+    "address": "Ленинградское шоссе, дом 98, корпус 1",
+    "unom": 12788,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 159,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4703791,
+     55.8578985
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.174",
+    "district": "Левобережный",
+    "address": "Фестивальная улица, д. 15, корпус 2",
+    "unom": 6117875,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 339,
+    "status": "черновик",
+    "also_covers": "Фестивальная улица, дом 15, корпус 1 (подъезды 1–3)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4753406,
+     55.8578812
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.175",
+    "district": "Левобережный",
+    "address": "Ленинградское шоссе, дом 98, корпус 1",
+    "unom": 12788,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 339,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4707134,
+     55.8573935
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.176",
+    "district": "Левобережный",
+    "address": "Ленинградское шоссе, дом 96, корпус 1",
+    "unom": 12783,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 159,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.469662,
+     55.8571962
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.177",
+    "district": "Левобережный",
+    "address": "Фестивальная улица, дом 4",
+    "unom": 74044,
+    "role": "угол",
+    "side": "подъезды 2–4",
+    "azimuth": 92,
+    "status": "черновик",
+    "also_covers": "Фестивальная улица, дом 4 (подъезды 1)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4845369,
+     55.8567015
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.178",
+    "district": "Левобережный",
+    "address": "Фестивальная улица, дом 4",
+    "unom": 74044,
+    "role": "угол",
+    "side": "подъезды 2–4",
+    "azimuth": 272,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4860216,
+     55.8566999
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.179",
+    "district": "Левобережный",
+    "address": "Ленинградское шоссе, дом 96, корпус 1",
+    "unom": 12783,
+    "role": "угол",
+    "side": "подъезды 4",
+    "azimuth": 339,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.470452,
+     55.8566083
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.180",
+    "district": "Левобережный",
+    "address": "Фестивальная улица, дом 17, корпус 1",
+    "unom": 340027,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 249,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4782691,
+     55.8565657
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.181",
+    "district": "Левобережный",
+    "address": "Ленинградское шоссе, дом 96, корпус 1",
+    "unom": 12783,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 339,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4701137,
+     55.8565063
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.182",
+    "district": "Левобережный",
+    "address": "Фестивальная улица, дом 17, корпус 1",
+    "unom": 340027,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 69,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4777371,
+     55.8564315
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.183",
+    "district": "Левобережный",
+    "address": "Фестивальная улица, дом 9",
+    "unom": 27253,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 338,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4744546,
+     55.8563128
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.184",
+    "district": "Левобережный",
+    "address": "Фестивальная улица, дом 17, корпус 1",
+    "unom": 340027,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 249,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4783666,
+     55.8562834
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.185",
+    "district": "Левобережный",
+    "address": "Ленинградское шоссе, дом 94, корпус 1",
+    "unom": 12780,
+    "role": "угол",
+    "side": "подъезды 2–5",
+    "azimuth": 159,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4702454,
+     55.8562494
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.186",
+    "district": "Левобережный",
+    "address": "Фестивальная улица, дом 17, корпус 1",
+    "unom": 340027,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 339,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4778792,
+     55.8562144
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.187",
+    "district": "Левобережный",
+    "address": "Фестивальная улица, дом 4",
+    "unom": 74044,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 2,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4844833,
+     55.8561775
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.188",
+    "district": "Левобережный",
+    "address": "Ленинградское шоссе, дом 94, корпус 1",
+    "unom": 12780,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 249,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4712401,
+     55.8555577
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.189",
+    "district": "Левобережный",
+    "address": "Ленинградское шоссе, дом 94, корпус 1",
+    "unom": 12780,
+    "role": "угол",
+    "side": "подъезды 2–5",
+    "azimuth": 339,
+    "status": "черновик",
+    "also_covers": "Ленинградское шоссе, дом 94, корпус 1 (подъезды 1)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4706979,
+     55.8554317
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.190",
+    "district": "Левобережный",
+    "address": "Ленинградское шоссе, дом 92/1",
+    "unom": 74148,
+    "role": "угол",
+    "side": "подъезды 1–7",
+    "azimuth": 159,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4713233,
+     55.85528
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.191",
+    "district": "Левобережный",
+    "address": "Фестивальная улица, дом 5",
+    "unom": 27251,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 159,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4735595,
+     55.8552409
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.192",
+    "district": "Левобережный",
+    "address": "Фестивальная улица, дом 3",
+    "unom": 27248,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 159,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.472557,
+     55.855009
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.193",
+    "district": "Левобережный",
+    "address": "Ленинградское шоссе, дом 92/1",
+    "unom": 74148,
+    "role": "середина фасада",
+    "side": "подъезды 1–7",
+    "azimuth": 159,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.471729,
+     55.854692
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.194",
+    "district": "Левобережный",
+    "address": "Фестивальная улица, дом 5",
+    "unom": 27251,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 339,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4740008,
+     55.854587
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.195",
+    "district": "Левобережный",
+    "address": "Фестивальная улица, дом 3",
+    "unom": 27248,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 339,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.473089,
+     55.8543613
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.196",
+    "district": "Левобережный",
+    "address": "Ленинградское шоссе, дом 92/1",
+    "unom": 74148,
+    "role": "угол",
+    "side": "подъезды 1–7",
+    "azimuth": 339,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4722114,
+     55.8541557
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т10.197",
+    "district": "Левобережный",
+    "address": "Ленинградское шоссе, дом 92/1",
+    "unom": 74148,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 339,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4718991,
+     55.8540987
+    ]
+   }
+  }
+ ]
+}
