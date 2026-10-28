@@ -205,8 +205,8 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     { key: 'yards',     label: 'Дворовые территории', color: '#e8b84a', enabled: true, outline: { color: '#9a6400', width: 2.4 } },
     { key: 'dp_table', label: 'Детские площадки — точки из таблицы', color: '#2e9e52', enabled: false },
     { key: 'sp_table', label: 'Спортивные площадки — точки из таблицы', color: '#1f78b4', enabled: false },
-    { key: 'dp',        label: 'Детские площадки — контуры АСУ ОДС', color: '#2e9e52', enabled: false },
-    { key: 'sp',        label: 'Спортивные площадки — контуры АСУ ОДС', color: '#1f78b4', enabled: false },
+    { key: 'dp',        label: 'Детские площадки', color: '#2e9e52', enabled: false },
+    { key: 'sp',        label: 'Спортивные площадки', color: '#1f78b4', enabled: false },
     { key: 'parking',   label: 'Автопарковки',        color: '#c2432e', enabled: false },
     { key: 'paths',     label: 'Тропинки',            color: '#8a6d3b', enabled: false },
     { key: 'sidewalks', label: 'Тротуары',            color: '#b3a2c7', enabled: false },
@@ -295,7 +295,8 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       }
     }
     renderControls();
-    window.initPlaygroundPhotoLayer({ map: state.map, district: DISTRICT, apiRequest, getUser: () => state.photoUser, preparePointPhoto, escapeHtml });
+    state.playgroundLayer = window.initPlaygroundPhotoLayer({ map: state.map, district: DISTRICT, apiRequest, getUser: () => state.photoUser, preparePointPhoto, escapeHtml });
+    $('playgroundPhotoLayer').querySelector('.layer-row').hidden = true;
     await loadPhotoPoints();
     renderShootMarkers();
     renderShootLogin();
@@ -369,7 +370,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
 
   function renderControls() {
     const box = $('layerControls');
-    box.innerHTML = LAYERS.map((layer) => {
+    box.innerHTML = LAYERS.filter(layer => !['dp_table', 'sp_table'].includes(layer.key)).map((layer) => {
       const entry = state.layers[layer.key];
       const count = entry ? entry.features.length : 0;
       const off = !layer.enabled;
@@ -381,10 +382,21 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       </label>`;
     }).join('');
     box.querySelectorAll('input').forEach((input) => {
-      input.addEventListener('change', () => {
+      input.addEventListener('change', async () => {
         const layer = LAYERS.find((l) => l.key === input.dataset.key);
         layer.enabled = input.checked;
         if (layer.enabled) draw(layer.key); else undraw(layer.key);
+        if (layer.key === 'dp' || layer.key === 'sp') {
+          const fallback = layer.key + '_table';
+          if (!layer.enabled) undraw(fallback);
+          try {
+            await state.playgroundLayer.setKind(layer.key, layer.enabled);
+            undraw(fallback);
+          } catch (error) {
+            if (layer.enabled) draw(fallback);
+            $('playgroundPhotoLayer').querySelector('[data-message]').textContent = 'Фото площадок временно недоступны; показаны точки из таблицы.';
+          }
+        }
         input.closest('.layer-row').classList.toggle('off', !layer.enabled);
       });
     });
