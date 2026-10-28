@@ -223,7 +223,22 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     return { fill: color, fillOpacity: opacity, stroke: [{ color: line.color, width: line.width, opacity: 0.95 }], interactive: true, cursor: 'pointer' };
   }
 
+  function centerSelection(coordinates) {
+    if (!state.map || !Array.isArray(coordinates)) return;
+    let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+    function visit(value) {
+      if (!Array.isArray(value)) return;
+      if (typeof value[0] === 'number' && typeof value[1] === 'number' && Number.isFinite(value[0]) && Number.isFinite(value[1])) {
+        minX = Math.min(minX, value[0]); maxX = Math.max(maxX, value[0]);
+        minY = Math.min(minY, value[1]); maxY = Math.max(maxY, value[1]);
+      } else value.forEach(visit);
+    }
+    visit(coordinates);
+    if (Number.isFinite(minX)) state.map.update({ location: { center: [(minX + maxX) / 2, (minY + maxY) / 2], zoom: state.map.zoom }, duration: 300 });
+  }
+
   function showCard(item) {
+    centerSelection(item.feature?.geometry?.coordinates || item.geometry?.coordinates);
     const p = (item.feature?.properties || item.properties || {});
     const rows = [
       ['Тип объекта', p.object_type_name],
@@ -495,6 +510,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
         $('shootHint').textContent = `Точка «${point.label}» выбрана: перетащите её в новое место или кликните по карте, куда перенести. Стрелка направления и фото сохранятся.`;
         return;
       }
+      centerSelection([Number(point.lng), Number(point.lat)]);
       openPointCard(point);
     });
     return el;
@@ -604,7 +620,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     box.querySelectorAll('.shoot-item').forEach((row) => {
       row.addEventListener('click', () => {
         const point = state.points.find((p) => String(p.id) === row.dataset.id);
-        if (point) openPointCard(point);
+        if (point) { centerSelection([Number(point.lng), Number(point.lat)]); openPointCard(point); }
       });
     });
   }
