@@ -1,0 +1,4856 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.470752,
+     55.86429
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 74129,
+    "address": "Беломорская улица, дом 1",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6274
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.470508,
+     55.864209
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 74129,
+    "address": "Беломорская улица, дом 1",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6275
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.470033,
+     55.86411
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 74129,
+    "address": "Беломорская улица, дом 1",
+    "entrance": 3,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6276
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.469548,
+     55.864005
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 74129,
+    "address": "Беломорская улица, дом 1",
+    "entrance": 4,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6277
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.469091,
+     55.863899
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 74129,
+    "address": "Беломорская улица, дом 1",
+    "entrance": 5,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6278
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4713,
+     55.859755
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 1802,
+    "address": "Беломорская улица, дом 10, корпус 2",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6279
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.471611,
+     55.860216
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 1803,
+    "address": "Беломорская улица, дом 10, корпус 3",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6280
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.471871,
+     55.86027
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 1803,
+    "address": "Беломорская улица, дом 10, корпус 3",
+    "entrance": 2,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6281
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.472134,
+     55.860329
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 1803,
+    "address": "Беломорская улица, дом 10, корпус 3",
+    "entrance": 3,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6282
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.472302,
+     55.866121
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340184,
+    "address": "Беломорская улица, дом 11, корпус 2",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6283
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.471986,
+     55.866063
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340184,
+    "address": "Беломорская улица, дом 11, корпус 2",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6284
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.470897,
+     55.861938
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340302,
+    "address": "Беломорская улица, дом 12, корпус 1",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 23,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 6285
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.470363,
+     55.862171
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340302,
+    "address": "Беломорская улица, дом 12, корпус 1",
+    "entrance": 2,
+    "plot": 1,
+    "floors": 23,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 6286
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.473543,
+     55.865303
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340255,
+    "address": "Беломорская улица, дом 13, корпус 1",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 25,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 6287
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.473992,
+     55.865401
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340255,
+    "address": "Беломорская улица, дом 13, корпус 1",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 25,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 6288
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.474392,
+     55.865556
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340255,
+    "address": "Беломорская улица, дом 13, корпус 1",
+    "entrance": 3,
+    "plot": 3,
+    "floors": 25,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 6289
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.474636,
+     55.865859
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340255,
+    "address": "Беломорская улица, дом 13, корпус 1",
+    "entrance": 4,
+    "plot": 3,
+    "floors": 25,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 6290
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.474575,
+     55.86613
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340255,
+    "address": "Беломорская улица, дом 13, корпус 1",
+    "entrance": 5,
+    "plot": 3,
+    "floors": 25,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 6291
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.474373,
+     55.866441
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340255,
+    "address": "Беломорская улица, дом 13, корпус 1",
+    "entrance": 6,
+    "plot": 3,
+    "floors": 25,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 6292
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.473288,
+     55.866483
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340185,
+    "address": "Беломорская улица, дом 13, корпус 2",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6293
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.472966,
+     55.866423
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340185,
+    "address": "Беломорская улица, дом 13, корпус 2",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6294
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.470793,
+     55.861316
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340303,
+    "address": "Беломорская улица, дом 14, корпус 1",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6295
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.470938,
+     55.861107
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340303,
+    "address": "Беломорская улица, дом 14, корпус 1",
+    "entrance": 2,
+    "plot": 1,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6296
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.472981,
+     55.861744
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 1811,
+    "address": "Беломорская улица, дом 16",
+    "entrance": 1,
+    "plot": 2,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6297
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.474545,
+     55.861874
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 1812,
+    "address": "Беломорская улица, дом 18, корпус 1",
+    "entrance": 1,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6298
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.475316,
+     55.861357
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 1813,
+    "address": "Беломорская улица, дом 18, корпус 2",
+    "entrance": 1,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6299
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.47612,
+     55.860867
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 1814,
+    "address": "Беломорская улица, дом 18, корпус 3",
+    "entrance": 1,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6300
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.473493,
+     55.862703
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340129,
+    "address": "Беломорская улица, дом 18А",
+    "entrance": 1,
+    "plot": 2,
+    "floors": 23,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 6301
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.475836,
+     55.862017
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340304,
+    "address": "Беломорская улица, дом 20, корпус 1",
+    "entrance": 1,
+    "plot": 2,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6302
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.475477,
+     55.862062
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340304,
+    "address": "Беломорская улица, дом 20, корпус 1",
+    "entrance": 2,
+    "plot": 2,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6303
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.475146,
+     55.862101
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340304,
+    "address": "Беломорская улица, дом 20, корпус 1",
+    "entrance": 3,
+    "plot": 2,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6304
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.476647,
+     55.861489
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340305,
+    "address": "Беломорская улица, дом 20, корпус 2",
+    "entrance": 1,
+    "plot": 2,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6305
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.476263,
+     55.861536
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340305,
+    "address": "Беломорская улица, дом 20, корпус 2",
+    "entrance": 2,
+    "plot": 2,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6306
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.475964,
+     55.861572
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340305,
+    "address": "Беломорская улица, дом 20, корпус 2",
+    "entrance": 3,
+    "plot": 2,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6307
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.477428,
+     55.860989
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340306,
+    "address": "Беломорская улица, дом 20, корпус 3",
+    "entrance": 1,
+    "plot": 2,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6308
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.47704,
+     55.861029
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340306,
+    "address": "Беломорская улица, дом 20, корпус 3",
+    "entrance": 2,
+    "plot": 2,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6309
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.476744,
+     55.861072
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340306,
+    "address": "Беломорская улица, дом 20, корпус 3",
+    "entrance": 3,
+    "plot": 2,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6310
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.477175,
+     55.861985
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340330,
+    "address": "Беломорская улица, дом 24, корпус 3",
+    "entrance": 1,
+    "plot": 2,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6311
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.475079,
+     55.864414
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 1821,
+    "address": "Беломорская улица, дом 26",
+    "entrance": 1,
+    "plot": 2,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6312
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.475464,
+     55.864594
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 1821,
+    "address": "Беломорская улица, дом 26",
+    "entrance": 2,
+    "plot": 2,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6313
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.475838,
+     55.864768
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 1821,
+    "address": "Беломорская улица, дом 26",
+    "entrance": 3,
+    "plot": 2,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6314
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.476281,
+     55.864975
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 1821,
+    "address": "Беломорская улица, дом 26",
+    "entrance": 4,
+    "plot": 2,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6315
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.476672,
+     55.865157
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 1821,
+    "address": "Беломорская улица, дом 26",
+    "entrance": 5,
+    "plot": 2,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6316
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.468997,
+     55.864482
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 1790,
+    "address": "Беломорская улица, дом 3, корпус 1",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6317
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.470396,
+     55.864644
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 1792,
+    "address": "Беломорская улица, дом 5, корпус 1",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6318
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.47021,
+     55.864917
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 1792,
+    "address": "Беломорская улица, дом 5, корпус 1",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6319
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.469704,
+     55.865541
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 1793,
+    "address": "Беломорская улица, дом 5, корпус 2",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6320
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.469213,
+     55.866086
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 1794,
+    "address": "Беломорская улица, дом 5, корпус 3",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6321
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.470315,
+     55.866258
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 1796,
+    "address": "Беломорская улица, дом 7, корпус 1",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6322
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.469844,
+     55.86694
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 1797,
+    "address": "Беломорская улица, дом 7, корпус 2",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6323
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.469386,
+     55.867591
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 1798,
+    "address": "Беломорская улица, дом 7, корпус 3",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6324
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.469548,
+     55.861641
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340462,
+    "address": "Беломорская улица, дом 8, корпус 1",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 24,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 6325
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.469509,
+     55.861657
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340462,
+    "address": "Беломорская улица, дом 8, корпус 1",
+    "entrance": 2,
+    "plot": 1,
+    "floors": 24,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 6326
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.467422,
+     55.866694
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340256,
+    "address": "Валдайский проезд, дом 10, корпус 1",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 25,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 6327
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.467423,
+     55.866903
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340256,
+    "address": "Валдайский проезд, дом 10, корпус 1",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 25,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 6328
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.467627,
+     55.867147
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340256,
+    "address": "Валдайский проезд, дом 10, корпус 1",
+    "entrance": 3,
+    "plot": 3,
+    "floors": 25,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 6329
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.467893,
+     55.867297
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340256,
+    "address": "Валдайский проезд, дом 10, корпус 1",
+    "entrance": 4,
+    "plot": 3,
+    "floors": 25,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 6330
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.468551,
+     55.867037
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 3211,
+    "address": "Валдайский проезд, дом 12",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6331
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.468801,
+     55.866667
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 3211,
+    "address": "Валдайский проезд, дом 12",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6332
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.463875,
+     55.870527
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340140,
+    "address": "Валдайский проезд, дом 13А, корпус 1",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6333
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.464025,
+     55.870307
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340140,
+    "address": "Валдайский проезд, дом 13А, корпус 1",
+    "entrance": 2,
+    "plot": 5,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6334
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.464164,
+     55.870089
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340140,
+    "address": "Валдайский проезд, дом 13А, корпус 1",
+    "entrance": 3,
+    "plot": 5,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6335
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.463422,
+     55.873048
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 74008,
+    "address": "Валдайский проезд, дом 21",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6336
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.462955,
+     55.872989
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 74008,
+    "address": "Валдайский проезд, дом 21",
+    "entrance": 2,
+    "plot": 5,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6337
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.464852,
+     55.872518
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 3215,
+    "address": "Валдайский проезд, дом 22",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6338
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.468417,
+     55.864932
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 3205,
+    "address": "Валдайский проезд, дом 4",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6339
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.468454,
+     55.865279
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 3207,
+    "address": "Валдайский проезд, дом 6",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6340
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.464893,
+     55.869037
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340138,
+    "address": "Валдайский проезд, дом 9А, корпус 1",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6341
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.465038,
+     55.868816
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340138,
+    "address": "Валдайский проезд, дом 9А, корпус 1",
+    "entrance": 2,
+    "plot": 5,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6342
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.465185,
+     55.868605
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340138,
+    "address": "Валдайский проезд, дом 9А, корпус 1",
+    "entrance": 3,
+    "plot": 5,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6343
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.469293,
+     55.857635
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 12793,
+    "address": "Ленинградское шоссе, дом 100",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6344
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.469177,
+     55.857799
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 12793,
+    "address": "Ленинградское шоссе, дом 100",
+    "entrance": 2,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6345
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.469071,
+     55.857963
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 12793,
+    "address": "Ленинградское шоссе, дом 100",
+    "entrance": 3,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6346
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.468958,
+     55.858121
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 12793,
+    "address": "Ленинградское шоссе, дом 100",
+    "entrance": 4,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6347
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.468877,
+     55.858438
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 12794,
+    "address": "Ленинградское шоссе, дом 102",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6348
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.469165,
+     55.8585
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 12794,
+    "address": "Ленинградское шоссе, дом 102",
+    "entrance": 2,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6349
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.469454,
+     55.858562
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 12794,
+    "address": "Ленинградское шоссе, дом 102",
+    "entrance": 3,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6350
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.467895,
+     55.860456
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 470034,
+    "address": "Ленинградское шоссе, дом 108",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 35,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 6351
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.467909,
+     55.860666
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 470034,
+    "address": "Ленинградское шоссе, дом 108",
+    "entrance": 2,
+    "plot": 1,
+    "floors": 35,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 6352
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.469091,
+     55.860223
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340210,
+    "address": "Ленинградское шоссе, дом 108, корпус 1",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6353
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.468933,
+     55.860443
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340210,
+    "address": "Ленинградское шоссе, дом 108, корпус 1",
+    "entrance": 2,
+    "plot": 1,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6354
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.468793,
+     55.860666
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340210,
+    "address": "Ленинградское шоссе, дом 108, корпус 1",
+    "entrance": 3,
+    "plot": 1,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6355
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.469494,
+     55.861024
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340211,
+    "address": "Ленинградское шоссе, дом 108, корпус 2",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6356
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.469638,
+     55.860812
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340211,
+    "address": "Ленинградское шоссе, дом 108, корпус 2",
+    "entrance": 2,
+    "plot": 1,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6357
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.469778,
+     55.8606
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340211,
+    "address": "Ленинградское шоссе, дом 108, корпус 2",
+    "entrance": 3,
+    "plot": 1,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6358
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.468499,
+     55.861151
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340239,
+    "address": "Ленинградское шоссе, дом 108, корпус 3",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6359
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.468244,
+     55.861261
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340239,
+    "address": "Ленинградское шоссе, дом 108, корпус 3",
+    "entrance": 2,
+    "plot": 1,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6360
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.467581,
+     55.864518
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 12799,
+    "address": "Ленинградское шоссе, дом 112, корпус 2",
+    "entrance": 9,
+    "plot": 5,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6361
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.467285,
+     55.864458
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 12799,
+    "address": "Ленинградское шоссе, дом 112, корпус 2",
+    "entrance": 10,
+    "plot": 5,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6362
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.46699,
+     55.864394
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 12799,
+    "address": "Ленинградское шоссе, дом 112, корпус 2",
+    "entrance": 11,
+    "plot": 5,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6363
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.466695,
+     55.864334
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 12799,
+    "address": "Ленинградское шоссе, дом 112, корпус 2",
+    "entrance": 12,
+    "plot": 5,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6364
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4664,
+     55.864274
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 12799,
+    "address": "Ленинградское шоссе, дом 112, корпус 2",
+    "entrance": 13,
+    "plot": 5,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6365
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.466105,
+     55.86421
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 12799,
+    "address": "Ленинградское шоссе, дом 112, корпус 2",
+    "entrance": 14,
+    "plot": 5,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6366
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.46581,
+     55.86415
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 12799,
+    "address": "Ленинградское шоссе, дом 112, корпус 2",
+    "entrance": 15,
+    "plot": 5,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6367
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.46552,
+     55.86409
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 12799,
+    "address": "Ленинградское шоссе, дом 112, корпус 2",
+    "entrance": 16,
+    "plot": 5,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6368
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.46795,
+     55.863968
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 12798,
+    "address": "Ленинградское шоссе, дом 112/1, корпус 1",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6369
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.467649,
+     55.863912
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 12798,
+    "address": "Ленинградское шоссе, дом 112/1, корпус 1",
+    "entrance": 2,
+    "plot": 5,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6370
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.467363,
+     55.863852
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 12798,
+    "address": "Ленинградское шоссе, дом 112/1, корпус 1",
+    "entrance": 3,
+    "plot": 5,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6371
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.467064,
+     55.863785
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 12798,
+    "address": "Ленинградское шоссе, дом 112/1, корпус 1",
+    "entrance": 4,
+    "plot": 5,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6372
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.466777,
+     55.863719
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 12798,
+    "address": "Ленинградское шоссе, дом 112/1, корпус 1",
+    "entrance": 5,
+    "plot": 5,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6373
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.466468,
+     55.863654
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 12798,
+    "address": "Ленинградское шоссе, дом 112/1, корпус 1",
+    "entrance": 6,
+    "plot": 5,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6374
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.46619,
+     55.863597
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 12798,
+    "address": "Ленинградское шоссе, дом 112/1, корпус 1",
+    "entrance": 7,
+    "plot": 5,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6375
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.465887,
+     55.863524
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 12798,
+    "address": "Ленинградское шоссе, дом 112/1, корпус 1",
+    "entrance": 8,
+    "plot": 5,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6376
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.463585,
+     55.866824
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340307,
+    "address": "Ленинградское шоссе, дом 118, корпус 1",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 22,
+    "lifts": "4",
+    "garbage_chute": "есть",
+    "source_row": 6377
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.464256,
+     55.867682
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340342,
+    "address": "Ленинградское шоссе, дом 120, корпус 3",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 22,
+    "lifts": "5",
+    "garbage_chute": "нет",
+    "source_row": 6378
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.462529,
+     55.868468
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340254,
+    "address": "Ленинградское шоссе, дом 124, корпус 1",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 22,
+    "lifts": "4",
+    "garbage_chute": "есть",
+    "source_row": 6379
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.463878,
+     55.868552
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340182,
+    "address": "Ленинградское шоссе, дом 124, корпус 3",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6380
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.463386,
+     55.868442
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340182,
+    "address": "Ленинградское шоссе, дом 124, корпус 3",
+    "entrance": 2,
+    "plot": 5,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6381
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.463245,
+     55.869189
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340355,
+    "address": "Ленинградское шоссе, дом 128, корпус 2",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 22,
+    "lifts": "5",
+    "garbage_chute": "нет",
+    "source_row": 6382
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.462946,
+     55.869952
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340183,
+    "address": "Ленинградское шоссе, дом 130, корпус 1",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6383
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.462451,
+     55.869848
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340183,
+    "address": "Ленинградское шоссе, дом 130, корпус 1",
+    "entrance": 2,
+    "plot": 5,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6384
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.461566,
+     55.869827
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340212,
+    "address": "Ленинградское шоссе, дом 130, корпус 2",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 22,
+    "lifts": "4",
+    "garbage_chute": "есть",
+    "source_row": 6385
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.462226,
+     55.870681
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340219,
+    "address": "Ленинградское шоссе, дом 130, корпус 3",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 22,
+    "lifts": "4",
+    "garbage_chute": "нет",
+    "source_row": 6386
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.461479,
+     55.871038
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 12813,
+    "address": "Ленинградское шоссе, дом 132",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6387
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.461322,
+     55.871264
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 12813,
+    "address": "Ленинградское шоссе, дом 132",
+    "entrance": 2,
+    "plot": 5,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6388
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.460849,
+     55.871504
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 12814,
+    "address": "Ленинградское шоссе, дом 134",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6389
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.460404,
+     55.871542
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 12814,
+    "address": "Ленинградское шоссе, дом 134",
+    "entrance": 2,
+    "plot": 5,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6390
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.472032,
+     55.854195
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 74148,
+    "address": "Ленинградское шоссе, дом 92/1",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6391
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.47192,
+     55.854349
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 74148,
+    "address": "Ленинградское шоссе, дом 92/1",
+    "entrance": 2,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6392
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.471797,
+     55.854514
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 74148,
+    "address": "Ленинградское шоссе, дом 92/1",
+    "entrance": 3,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6393
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.471697,
+     55.854674
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 74148,
+    "address": "Ленинградское шоссе, дом 92/1",
+    "entrance": 4,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6394
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.471611,
+     55.854805
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 74148,
+    "address": "Ленинградское шоссе, дом 92/1",
+    "entrance": 5,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6395
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.471485,
+     55.854966
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 74148,
+    "address": "Ленинградское шоссе, дом 92/1",
+    "entrance": 6,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6396
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.471379,
+     55.855132
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 74148,
+    "address": "Ленинградское шоссе, дом 92/1",
+    "entrance": 7,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6397
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.470933,
+     55.855503
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 12780,
+    "address": "Ленинградское шоссе, дом 94, корпус 1",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 6,
+    "lifts": "1",
+    "garbage_chute": "нет",
+    "source_row": 6398
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.470668,
+     55.85557
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 12780,
+    "address": "Ленинградское шоссе, дом 94, корпус 1",
+    "entrance": 2,
+    "plot": 1,
+    "floors": 6,
+    "lifts": "1",
+    "garbage_chute": "нет",
+    "source_row": 6399
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.470568,
+     55.855719
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 12780,
+    "address": "Ленинградское шоссе, дом 94, корпус 1",
+    "entrance": 3,
+    "plot": 1,
+    "floors": 6,
+    "lifts": "1",
+    "garbage_chute": "нет",
+    "source_row": 6400
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.47038,
+     55.855995
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 12780,
+    "address": "Ленинградское шоссе, дом 94, корпус 1",
+    "entrance": 4,
+    "plot": 1,
+    "floors": 6,
+    "lifts": "1",
+    "garbage_chute": "нет",
+    "source_row": 6401
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.470307,
+     55.856108
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 12780,
+    "address": "Ленинградское шоссе, дом 94, корпус 1",
+    "entrance": 5,
+    "plot": 1,
+    "floors": 6,
+    "lifts": "1",
+    "garbage_chute": "нет",
+    "source_row": 6402
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.470508,
+     55.856154
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 12780,
+    "address": "Ленинградское шоссе, дом 94, корпус 1",
+    "entrance": 6,
+    "plot": 1,
+    "floors": 6,
+    "lifts": "1",
+    "garbage_chute": "нет",
+    "source_row": 6403
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.469721,
+     55.857042
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 12783,
+    "address": "Ленинградское шоссе, дом 96, корпус 1",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 8,
+    "lifts": "1",
+    "garbage_chute": "нет",
+    "source_row": 6404
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.469896,
+     55.856786
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 12783,
+    "address": "Ленинградское шоссе, дом 96, корпус 1",
+    "entrance": 2,
+    "plot": 1,
+    "floors": 8,
+    "lifts": "1",
+    "garbage_chute": "нет",
+    "source_row": 6405
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.469981,
+     55.856669
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 12783,
+    "address": "Ленинградское шоссе, дом 96, корпус 1",
+    "entrance": 3,
+    "plot": 1,
+    "floors": 8,
+    "lifts": "1",
+    "garbage_chute": "нет",
+    "source_row": 6406
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.470357,
+     55.856752
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 12783,
+    "address": "Ленинградское шоссе, дом 96, корпус 1",
+    "entrance": 4,
+    "plot": 1,
+    "floors": 8,
+    "lifts": "1",
+    "garbage_chute": "нет",
+    "source_row": 6407
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.470633,
+     55.85741
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 12788,
+    "address": "Ленинградское шоссе, дом 98, корпус 1",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "есть",
+    "source_row": 6408
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.470525,
+     55.857562
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 12788,
+    "address": "Ленинградское шоссе, дом 98, корпус 1",
+    "entrance": 2,
+    "plot": 1,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "есть",
+    "source_row": 6409
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.470411,
+     55.857732
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 12788,
+    "address": "Ленинградское шоссе, дом 98, корпус 1",
+    "entrance": 3,
+    "plot": 1,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "есть",
+    "source_row": 6410
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.470307,
+     55.857877
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 12788,
+    "address": "Ленинградское шоссе, дом 98, корпус 1",
+    "entrance": 4,
+    "plot": 1,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "есть",
+    "source_row": 6411
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.471507,
+     55.857755
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 12789,
+    "address": "Ленинградское шоссе, дом 98, корпус 2",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "есть",
+    "source_row": 6412
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.471377,
+     55.857944
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 12789,
+    "address": "Ленинградское шоссе, дом 98, корпус 2",
+    "entrance": 2,
+    "plot": 1,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "есть",
+    "source_row": 6413
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.471283,
+     55.858088
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 12789,
+    "address": "Ленинградское шоссе, дом 98, корпус 2",
+    "entrance": 3,
+    "plot": 1,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "есть",
+    "source_row": 6414
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.471173,
+     55.858242
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 12789,
+    "address": "Ленинградское шоссе, дом 98, корпус 2",
+    "entrance": 4,
+    "plot": 1,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "есть",
+    "source_row": 6415
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.47289,
+     55.858094
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 12791,
+    "address": "Ленинградское шоссе, дом 98, корпус 4",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "есть",
+    "source_row": 6416
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.472787,
+     55.858245
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 12791,
+    "address": "Ленинградское шоссе, дом 98, корпус 4",
+    "entrance": 2,
+    "plot": 1,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "есть",
+    "source_row": 6417
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.47266,
+     55.858412
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 12791,
+    "address": "Ленинградское шоссе, дом 98, корпус 4",
+    "entrance": 3,
+    "plot": 1,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "есть",
+    "source_row": 6418
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.472565,
+     55.858568
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 12791,
+    "address": "Ленинградское шоссе, дом 98, корпус 4",
+    "entrance": 4,
+    "plot": 1,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "есть",
+    "source_row": 6419
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.473402,
+     55.858185
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 12792,
+    "address": "Ленинградское шоссе, дом 98, корпус 5",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "нет",
+    "source_row": 6420
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.473296,
+     55.858346
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 12792,
+    "address": "Ленинградское шоссе, дом 98, корпус 5",
+    "entrance": 2,
+    "plot": 1,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "нет",
+    "source_row": 6421
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.473182,
+     55.858496
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 12792,
+    "address": "Ленинградское шоссе, дом 98, корпус 5",
+    "entrance": 3,
+    "plot": 1,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "нет",
+    "source_row": 6422
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.473078,
+     55.858649
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 12792,
+    "address": "Ленинградское шоссе, дом 98, корпус 5",
+    "entrance": 4,
+    "plot": 1,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "нет",
+    "source_row": 6423
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.460571,
+     55.873001
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 20769,
+    "address": "Прибрежный проезд, дом 1",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6424
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.46154,
+     55.871793
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 20771,
+    "address": "Прибрежный проезд, дом 4",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6425
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.461257,
+     55.871603
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 20771,
+    "address": "Прибрежный проезд, дом 4",
+    "entrance": 2,
+    "plot": 5,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6426
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.466548,
+     55.875299
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 20774,
+    "address": "Прибрежный проезд, дом 7",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6427
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.466232,
+     55.875199
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 20774,
+    "address": "Прибрежный проезд, дом 7",
+    "entrance": 2,
+    "plot": 5,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6428
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.465948,
+     55.875097
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 20774,
+    "address": "Прибрежный проезд, дом 7",
+    "entrance": 3,
+    "plot": 5,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6429
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.465622,
+     55.874991
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 20774,
+    "address": "Прибрежный проезд, дом 7",
+    "entrance": 4,
+    "plot": 5,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6430
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.465316,
+     55.874895
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 20774,
+    "address": "Прибрежный проезд, дом 7",
+    "entrance": 5,
+    "plot": 5,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6431
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.465019,
+     55.874793
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 20774,
+    "address": "Прибрежный проезд, дом 7",
+    "entrance": 6,
+    "plot": 5,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6432
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.464694,
+     55.874693
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 20774,
+    "address": "Прибрежный проезд, дом 7",
+    "entrance": 7,
+    "plot": 5,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6433
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.46438,
+     55.874586
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 20774,
+    "address": "Прибрежный проезд, дом 7",
+    "entrance": 8,
+    "plot": 5,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6434
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.464078,
+     55.874491
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 20774,
+    "address": "Прибрежный проезд, дом 7",
+    "entrance": 9,
+    "plot": 5,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6435
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.46376,
+     55.874386
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 20774,
+    "address": "Прибрежный проезд, дом 7",
+    "entrance": 10,
+    "plot": 5,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6436
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.480247,
+     55.861629
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 24011,
+    "address": "Смольная улица, дом 39",
+    "entrance": 1,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6437
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.47995,
+     55.862186
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 24013,
+    "address": "Смольная улица, дом 41",
+    "entrance": 1,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6438
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.479465,
+     55.86254
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 24014,
+    "address": "Смольная улица, дом 43",
+    "entrance": 1,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6439
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.478711,
+     55.862727
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 24015,
+    "address": "Смольная улица, дом 45",
+    "entrance": 1,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6440
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.47792,
+     55.862585
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 24016,
+    "address": "Смольная улица, дом 47",
+    "entrance": 1,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6441
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.476827,
+     55.863866
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340240,
+    "address": "Смольная улица, дом 51, корпус 2",
+    "entrance": 1,
+    "plot": 2,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6442
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.476593,
+     55.864028
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340240,
+    "address": "Смольная улица, дом 51, корпус 2",
+    "entrance": 2,
+    "plot": 2,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6443
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.476344,
+     55.864198
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340240,
+    "address": "Смольная улица, дом 51, корпус 2",
+    "entrance": 3,
+    "plot": 2,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6444
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.476098,
+     55.864368
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340240,
+    "address": "Смольная улица, дом 51, корпус 2",
+    "entrance": 4,
+    "plot": 2,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6445
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.474992,
+     55.863803
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340241,
+    "address": "Смольная улица, дом 51, корпус 3",
+    "entrance": 1,
+    "plot": 2,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6446
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.475246,
+     55.863631
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340241,
+    "address": "Смольная улица, дом 51, корпус 3",
+    "entrance": 2,
+    "plot": 2,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6447
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.475494,
+     55.863452
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340241,
+    "address": "Смольная улица, дом 51, корпус 3",
+    "entrance": 3,
+    "plot": 2,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6448
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.475713,
+     55.863307
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340241,
+    "address": "Смольная улица, дом 51, корпус 3",
+    "entrance": 4,
+    "plot": 2,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6449
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.473798,
+     55.867956
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340461,
+    "address": "Смольная улица, дом 57, корпус 1",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 23,
+    "lifts": "3",
+    "garbage_chute": "нет",
+    "source_row": 6450
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.473713,
+     55.867681
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340461,
+    "address": "Смольная улица, дом 57, корпус 1",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 23,
+    "lifts": "3",
+    "garbage_chute": "нет",
+    "source_row": 6451
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.473372,
+     55.867433
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340461,
+    "address": "Смольная улица, дом 57, корпус 1",
+    "entrance": 3,
+    "plot": 3,
+    "floors": 23,
+    "lifts": "3",
+    "garbage_chute": "нет",
+    "source_row": 6452
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.47224,
+     55.869056
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340440,
+    "address": "Смольная улица, дом 61, корпус 1",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 25,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 6453
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.472101,
+     55.868847
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340440,
+    "address": "Смольная улица, дом 61, корпус 1",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 25,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 6454
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.471937,
+     55.868562
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340440,
+    "address": "Смольная улица, дом 61, корпус 1",
+    "entrance": 3,
+    "plot": 3,
+    "floors": 25,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 6455
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.471906,
+     55.868321
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340440,
+    "address": "Смольная улица, дом 61, корпус 1",
+    "entrance": 4,
+    "plot": 3,
+    "floors": 25,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 6456
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.471956,
+     55.867975
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340440,
+    "address": "Смольная улица, дом 61, корпус 1",
+    "entrance": 5,
+    "plot": 3,
+    "floors": 25,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 6457
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.472057,
+     55.867815
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340440,
+    "address": "Смольная улица, дом 61, корпус 1",
+    "entrance": 6,
+    "plot": 3,
+    "floors": 25,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 6458
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.470652,
+     55.870805
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 24024,
+    "address": "Смольная улица, дом 63",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6459
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.470789,
+     55.870618
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 24024,
+    "address": "Смольная улица, дом 63",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6460
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.470951,
+     55.870373
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 24024,
+    "address": "Смольная улица, дом 63",
+    "entrance": 3,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6461
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.47111,
+     55.870147
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 24024,
+    "address": "Смольная улица, дом 63",
+    "entrance": 4,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6462
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.470374,
+     55.871291
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 24025,
+    "address": "Смольная улица, дом 65",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6463
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.46995,
+     55.8712
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 24025,
+    "address": "Смольная улица, дом 65",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6464
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.468609,
+     55.871658
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 24027,
+    "address": "Смольная улица, дом 67, корпус 2",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6465
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.468252,
+     55.871579
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 24027,
+    "address": "Смольная улица, дом 67, корпус 2",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6466
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.46791,
+     55.871785
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 24028,
+    "address": "Смольная улица, дом 67, корпус 3",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6467
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.467764,
+     55.871979
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 24028,
+    "address": "Смольная улица, дом 67, корпус 3",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6468
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.468018,
+     55.872535
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 24031,
+    "address": "Смольная улица, дом 73",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6469
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.467715,
+     55.872475
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 24031,
+    "address": "Смольная улица, дом 73",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6470
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.467382,
+     55.872401
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 24031,
+    "address": "Смольная улица, дом 73",
+    "entrance": 3,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6471
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.475174,
+     55.858122
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 6117875,
+    "address": "Фестивальная улица, д. 15, корпус 2",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 24,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 6472
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.474983,
+     55.858394
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 6117875,
+    "address": "Фестивальная улица, д. 15, корпус 2",
+    "entrance": 2,
+    "plot": 1,
+    "floors": 24,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 6473
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.474939,
+     55.85849
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 6117875,
+    "address": "Фестивальная улица, д. 15, корпус 2",
+    "entrance": 3,
+    "plot": 1,
+    "floors": 24,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 6474
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.475158,
+     55.858538
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 6117875,
+    "address": "Фестивальная улица, д. 15, корпус 2",
+    "entrance": 4,
+    "plot": 1,
+    "floors": 24,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 6475
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.476264,
+     55.858029
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 27260,
+    "address": "Фестивальная улица, дом 15, корпус 1",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6476
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.475932,
+     55.857951
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 27260,
+    "address": "Фестивальная улица, дом 15, корпус 1",
+    "entrance": 2,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6477
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.475618,
+     55.857887
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 27260,
+    "address": "Фестивальная улица, дом 15, корпус 1",
+    "entrance": 3,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6478
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.478049,
+     55.856486
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340027,
+    "address": "Фестивальная улица, дом 17, корпус 1",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 24,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6479
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.472946,
+     55.854416
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 27248,
+    "address": "Фестивальная улица, дом 3",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6480
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.472842,
+     55.854574
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 27248,
+    "address": "Фестивальная улица, дом 3",
+    "entrance": 2,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6481
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.472733,
+     55.854728
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 27248,
+    "address": "Фестивальная улица, дом 3",
+    "entrance": 3,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6482
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.472617,
+     55.854887
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 27248,
+    "address": "Фестивальная улица, дом 3",
+    "entrance": 4,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6483
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.482354,
+     55.857963
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 27289,
+    "address": "Фестивальная улица, дом 39, корпус 1",
+    "entrance": 1,
+    "plot": 2,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 6484
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.484511,
+     55.856406
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 74044,
+    "address": "Фестивальная улица, дом 4",
+    "entrance": 1,
+    "plot": 2,
+    "floors": 22,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 6485
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.484854,
+     55.856664
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 74044,
+    "address": "Фестивальная улица, дом 4",
+    "entrance": 2,
+    "plot": 2,
+    "floors": 22,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 6486
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.485245,
+     55.856658
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 74044,
+    "address": "Фестивальная улица, дом 4",
+    "entrance": 3,
+    "plot": 2,
+    "floors": 22,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 6487
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.485663,
+     55.856666
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 74044,
+    "address": "Фестивальная улица, дом 4",
+    "entrance": 4,
+    "plot": 2,
+    "floors": 22,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 6488
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.483382,
+     55.858286
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340459,
+    "address": "Фестивальная улица, дом 41, корпус 1",
+    "entrance": 1,
+    "plot": 2,
+    "floors": 22,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 6489
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.483104,
+     55.8582
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340459,
+    "address": "Фестивальная улица, дом 41, корпус 1",
+    "entrance": 2,
+    "plot": 2,
+    "floors": 22,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 6490
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.48278,
+     55.858852
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340348,
+    "address": "Фестивальная улица, дом 41, корпус 2",
+    "entrance": 1,
+    "plot": 2,
+    "floors": 22,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 6491
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.482529,
+     55.858771
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340348,
+    "address": "Фестивальная улица, дом 41, корпус 2",
+    "entrance": 2,
+    "plot": 2,
+    "floors": 22,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 6492
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.48204,
+     55.859519
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340350,
+    "address": "Фестивальная улица, дом 41, корпус 3",
+    "entrance": 1,
+    "plot": 2,
+    "floors": 22,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 6493
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.48181,
+     55.859448
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340350,
+    "address": "Фестивальная улица, дом 41, корпус 3",
+    "entrance": 2,
+    "plot": 2,
+    "floors": 22,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 6494
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.481314,
+     55.860053
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340460,
+    "address": "Фестивальная улица, дом 41, корпус 4",
+    "entrance": 1,
+    "plot": 2,
+    "floors": 22,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 6495
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.481603,
+     55.860132
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 340460,
+    "address": "Фестивальная улица, дом 41, корпус 4",
+    "entrance": 2,
+    "plot": 2,
+    "floors": 22,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 6496
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.473852,
+     55.854661
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 27251,
+    "address": "Фестивальная улица, дом 5",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6497
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.473751,
+     55.854812
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 27251,
+    "address": "Фестивальная улица, дом 5",
+    "entrance": 2,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6498
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.473643,
+     55.854968
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 27251,
+    "address": "Фестивальная улица, дом 5",
+    "entrance": 3,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6499
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.473529,
+     55.855133
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 27251,
+    "address": "Фестивальная улица, дом 5",
+    "entrance": 4,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6500
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.474004,
+     55.856991
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 27253,
+    "address": "Фестивальная улица, дом 9",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6501
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.474128,
+     55.856833
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 27253,
+    "address": "Фестивальная улица, дом 9",
+    "entrance": 2,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6502
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.474253,
+     55.856656
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 27253,
+    "address": "Фестивальная улица, дом 9",
+    "entrance": 3,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6503
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.474384,
+     55.856464
+    ]
+   },
+   "properties": {
+    "district": "Левобережный",
+    "unom": 27253,
+    "address": "Фестивальная улица, дом 9",
+    "entrance": 4,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 6504
+   }
+  }
+ ]
+}

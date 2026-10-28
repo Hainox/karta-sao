@@ -1,0 +1,10148 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564521,
+     55.859564
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 75098,
+    "address": "Бескудниковский бульвар, дом 8, корпус 1",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2584
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564644,
+     55.859882
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 75098,
+    "address": "Бескудниковский бульвар, дом 8, корпус 1",
+    "entrance": 2,
+    "plot": 1,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2585
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564175,
+     55.859934
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 75098,
+    "address": "Бескудниковский бульвар, дом 8, корпус 1",
+    "entrance": 3,
+    "plot": 1,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2586
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564544,
+     55.86018
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 75082,
+    "address": "Бескудниковский бульвар, дом 8, корпус 2",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2587
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564601,
+     55.860486
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 75082,
+    "address": "Бескудниковский бульвар, дом 8, корпус 2",
+    "entrance": 2,
+    "plot": 1,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2588
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564075,
+     55.860543
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 75082,
+    "address": "Бескудниковский бульвар, дом 8, корпус 2",
+    "entrance": 3,
+    "plot": 1,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2589
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564542,
+     55.860948
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 75087,
+    "address": "Бескудниковский бульвар, дом 8, корпус 3",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2590
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564546,
+     55.860742
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 75087,
+    "address": "Бескудниковский бульвар, дом 8, корпус 3",
+    "entrance": 2,
+    "plot": 1,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2591
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564547,
+     55.861273
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 75088,
+    "address": "Бескудниковский бульвар, дом 8, корпус 4",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2592
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564248,
+     55.861382
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 75088,
+    "address": "Бескудниковский бульвар, дом 8, корпус 4",
+    "entrance": 2,
+    "plot": 1,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2593
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.56379,
+     55.861472
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 75088,
+    "address": "Бескудниковский бульвар, дом 8, корпус 4",
+    "entrance": 3,
+    "plot": 1,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2594
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.568136,
+     55.861546
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7157,
+    "address": "Дубнинская улица, дом 10, корпус 1",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2595
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.568074,
+     55.861713
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7157,
+    "address": "Дубнинская улица, дом 10, корпус 1",
+    "entrance": 2,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2596
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.568013,
+     55.861898
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7157,
+    "address": "Дубнинская улица, дом 10, корпус 1",
+    "entrance": 3,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2597
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.56795,
+     55.862081
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7157,
+    "address": "Дубнинская улица, дом 10, корпус 1",
+    "entrance": 4,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2598
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.567873,
+     55.862265
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7157,
+    "address": "Дубнинская улица, дом 10, корпус 1",
+    "entrance": 5,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2599
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.567817,
+     55.86245
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7157,
+    "address": "Дубнинская улица, дом 10, корпус 1",
+    "entrance": 6,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2600
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.56786,
+     55.862699
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7157,
+    "address": "Дубнинская улица, дом 10, корпус 1",
+    "entrance": 7,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2601
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.567747,
+     55.86288
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7157,
+    "address": "Дубнинская улица, дом 10, корпус 1",
+    "entrance": 8,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2602
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.567652,
+     55.863045
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7157,
+    "address": "Дубнинская улица, дом 10, корпус 1",
+    "entrance": 9,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2603
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.56756,
+     55.863208
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7157,
+    "address": "Дубнинская улица, дом 10, корпус 1",
+    "entrance": 10,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2604
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.569785,
+     55.861798
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7158,
+    "address": "Дубнинская улица, дом 10, корпус 2",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2605
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.569737,
+     55.862002
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7158,
+    "address": "Дубнинская улица, дом 10, корпус 2",
+    "entrance": 2,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2606
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.569702,
+     55.86219
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7158,
+    "address": "Дубнинская улица, дом 10, корпус 2",
+    "entrance": 3,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2607
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.569665,
+     55.862381
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7158,
+    "address": "Дубнинская улица, дом 10, корпус 2",
+    "entrance": 4,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2608
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.569526,
+     55.862629
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7158,
+    "address": "Дубнинская улица, дом 10, корпус 2",
+    "entrance": 5,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2609
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.569418,
+     55.862782
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7158,
+    "address": "Дубнинская улица, дом 10, корпус 2",
+    "entrance": 6,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2610
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.569283,
+     55.862942
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7158,
+    "address": "Дубнинская улица, дом 10, корпус 2",
+    "entrance": 7,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2611
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.569176,
+     55.863098
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7158,
+    "address": "Дубнинская улица, дом 10, корпус 2",
+    "entrance": 8,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2612
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.569033,
+     55.863272
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7158,
+    "address": "Дубнинская улица, дом 10, корпус 2",
+    "entrance": 9,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2613
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.568921,
+     55.863426
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7158,
+    "address": "Дубнинская улица, дом 10, корпус 2",
+    "entrance": 10,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2614
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.57105,
+     55.863979
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7159,
+    "address": "Дубнинская улица, дом 10, корпус 3",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2615
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.570756,
+     55.863916
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7159,
+    "address": "Дубнинская улица, дом 10, корпус 3",
+    "entrance": 2,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2616
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.570411,
+     55.863858
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7159,
+    "address": "Дубнинская улица, дом 10, корпус 3",
+    "entrance": 3,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2617
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.570074,
+     55.863792
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7159,
+    "address": "Дубнинская улица, дом 10, корпус 3",
+    "entrance": 4,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2618
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.569821,
+     55.863743
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7159,
+    "address": "Дубнинская улица, дом 10, корпус 3",
+    "entrance": 5,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2619
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.569584,
+     55.863695
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7159,
+    "address": "Дубнинская улица, дом 10, корпус 3",
+    "entrance": 6,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2620
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.572242,
+     55.864061
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7160,
+    "address": "Дубнинская улица, дом 10, корпус 4",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2621
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.572852,
+     55.862272
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7161,
+    "address": "Дубнинская улица, дом 10, корпус 5",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2622
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.57275,
+     55.862472
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7161,
+    "address": "Дубнинская улица, дом 10, корпус 5",
+    "entrance": 2,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2623
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.572664,
+     55.862644
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7161,
+    "address": "Дубнинская улица, дом 10, корпус 5",
+    "entrance": 3,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2624
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.572574,
+     55.862837
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7161,
+    "address": "Дубнинская улица, дом 10, корпус 5",
+    "entrance": 4,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2625
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.572501,
+     55.863002
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7161,
+    "address": "Дубнинская улица, дом 10, корпус 5",
+    "entrance": 5,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2626
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.572409,
+     55.863175
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7161,
+    "address": "Дубнинская улица, дом 10, корпус 5",
+    "entrance": 6,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2627
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.572303,
+     55.86337
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7161,
+    "address": "Дубнинская улица, дом 10, корпус 5",
+    "entrance": 7,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2628
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.572236,
+     55.863514
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7161,
+    "address": "Дубнинская улица, дом 10, корпус 5",
+    "entrance": 8,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2629
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.570602,
+     55.864726
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7163,
+    "address": "Дубнинская улица, дом 12, корпус 2",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2630
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.570254,
+     55.864661
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7163,
+    "address": "Дубнинская улица, дом 12, корпус 2",
+    "entrance": 2,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2631
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.569949,
+     55.864601
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7163,
+    "address": "Дубнинская улица, дом 12, корпус 2",
+    "entrance": 3,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2632
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.569627,
+     55.864539
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7163,
+    "address": "Дубнинская улица, дом 12, корпус 2",
+    "entrance": 4,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2633
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.569303,
+     55.864475
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7163,
+    "address": "Дубнинская улица, дом 12, корпус 2",
+    "entrance": 5,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2634
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.568957,
+     55.864407
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7163,
+    "address": "Дубнинская улица, дом 12, корпус 2",
+    "entrance": 6,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2635
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.57021,
+     55.866238
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7164,
+    "address": "Дубнинская улица, дом 12, корпус 3",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2636
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.570292,
+     55.86606
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7164,
+    "address": "Дубнинская улица, дом 12, корпус 3",
+    "entrance": 2,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2637
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.570364,
+     55.865886
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7164,
+    "address": "Дубнинская улица, дом 12, корпус 3",
+    "entrance": 3,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2638
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.570447,
+     55.86571
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7164,
+    "address": "Дубнинская улица, дом 12, корпус 3",
+    "entrance": 4,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2639
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.57052,
+     55.865525
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7164,
+    "address": "Дубнинская улица, дом 12, корпус 3",
+    "entrance": 5,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2640
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.570589,
+     55.865356
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7164,
+    "address": "Дубнинская улица, дом 12, корпус 3",
+    "entrance": 6,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2641
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.570657,
+     55.865187
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7164,
+    "address": "Дубнинская улица, дом 12, корпус 3",
+    "entrance": 7,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2642
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.570744,
+     55.865013
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7164,
+    "address": "Дубнинская улица, дом 12, корпус 3",
+    "entrance": 8,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2643
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.569681,
+     55.866356
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7165,
+    "address": "Дубнинская улица, дом 12, корпус 4",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2644
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.569357,
+     55.866284
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7165,
+    "address": "Дубнинская улица, дом 12, корпус 4",
+    "entrance": 2,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2645
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.569036,
+     55.866202
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7165,
+    "address": "Дубнинская улица, дом 12, корпус 4",
+    "entrance": 3,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2646
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.568722,
+     55.866122
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7165,
+    "address": "Дубнинская улица, дом 12, корпус 4",
+    "entrance": 4,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2647
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.568413,
+     55.866049
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7165,
+    "address": "Дубнинская улица, дом 12, корпус 4",
+    "entrance": 5,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2648
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.568101,
+     55.865968
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7165,
+    "address": "Дубнинская улица, дом 12, корпус 4",
+    "entrance": 6,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2649
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.567197,
+     55.859703
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 75092,
+    "address": "Дубнинская улица, дом 13",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2650
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.56719,
+     55.859473
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 75092,
+    "address": "Дубнинская улица, дом 13",
+    "entrance": 2,
+    "plot": 1,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2651
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.567272,
+     55.860001
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 75092,
+    "address": "Дубнинская улица, дом 13",
+    "entrance": 3,
+    "plot": 1,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2652
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.56684,
+     55.860051
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 75092,
+    "address": "Дубнинская улица, дом 13",
+    "entrance": 4,
+    "plot": 1,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2653
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.566436,
+     55.860051
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 75092,
+    "address": "Дубнинская улица, дом 13",
+    "entrance": 5,
+    "plot": 1,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2654
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.566039,
+     55.860051
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 75092,
+    "address": "Дубнинская улица, дом 13",
+    "entrance": 6,
+    "plot": 1,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2655
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565802,
+     55.865258
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7167,
+    "address": "Дубнинская улица, дом 14, корпус 1",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2656
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565666,
+     55.865431
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7167,
+    "address": "Дубнинская улица, дом 14, корпус 1",
+    "entrance": 2,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2657
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565534,
+     55.865596
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7167,
+    "address": "Дубнинская улица, дом 14, корпус 1",
+    "entrance": 3,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2658
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565397,
+     55.865764
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7167,
+    "address": "Дубнинская улица, дом 14, корпус 1",
+    "entrance": 4,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2659
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565245,
+     55.865953
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7167,
+    "address": "Дубнинская улица, дом 14, корпус 1",
+    "entrance": 5,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2660
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565111,
+     55.86612
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7167,
+    "address": "Дубнинская улица, дом 14, корпус 1",
+    "entrance": 6,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2661
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564987,
+     55.866289
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7167,
+    "address": "Дубнинская улица, дом 14, корпус 1",
+    "entrance": 7,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2662
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564848,
+     55.866451
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7167,
+    "address": "Дубнинская улица, дом 14, корпус 1",
+    "entrance": 8,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2663
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564713,
+     55.866622
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7167,
+    "address": "Дубнинская улица, дом 14, корпус 1",
+    "entrance": 9,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2664
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564581,
+     55.866784
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7167,
+    "address": "Дубнинская улица, дом 14, корпус 1",
+    "entrance": 10,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2665
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.570608,
+     55.866982
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7168,
+    "address": "Дубнинская улица, дом 14, корпус 2",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2666
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.570672,
+     55.867259
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7169,
+    "address": "Дубнинская улица, дом 14, корпус 3",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2667
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.570727,
+     55.867547
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7170,
+    "address": "Дубнинская улица, дом 14, корпус 4",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2668
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.567129,
+     55.86063
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 75111,
+    "address": "Дубнинская улица, дом 15, корпус 1",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2669
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.567159,
+     55.86042
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 75111,
+    "address": "Дубнинская улица, дом 15, корпус 1",
+    "entrance": 2,
+    "plot": 1,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2670
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565912,
+     55.860819
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 75120,
+    "address": "Дубнинская улица, дом 15, корпус 2",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2671
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.56591,
+     55.860601
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 75120,
+    "address": "Дубнинская улица, дом 15, корпус 2",
+    "entrance": 2,
+    "plot": 1,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2672
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563586,
+     55.868091
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7171,
+    "address": "Дубнинская улица, дом 16, корпус 1",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2673
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563456,
+     55.868247
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7171,
+    "address": "Дубнинская улица, дом 16, корпус 1",
+    "entrance": 2,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2674
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563329,
+     55.86841
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7171,
+    "address": "Дубнинская улица, дом 16, корпус 1",
+    "entrance": 3,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2675
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563207,
+     55.868562
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7171,
+    "address": "Дубнинская улица, дом 16, корпус 1",
+    "entrance": 4,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2676
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563032,
+     55.868783
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7171,
+    "address": "Дубнинская улица, дом 16, корпус 1",
+    "entrance": 5,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2677
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562909,
+     55.868945
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7171,
+    "address": "Дубнинская улица, дом 16, корпус 1",
+    "entrance": 6,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2678
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562775,
+     55.869116
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7171,
+    "address": "Дубнинская улица, дом 16, корпус 1",
+    "entrance": 7,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2679
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562648,
+     55.869273
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7171,
+    "address": "Дубнинская улица, дом 16, корпус 1",
+    "entrance": 8,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2680
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562521,
+     55.869435
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7171,
+    "address": "Дубнинская улица, дом 16, корпус 1",
+    "entrance": 9,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2681
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562386,
+     55.869603
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7171,
+    "address": "Дубнинская улица, дом 16, корпус 1",
+    "entrance": 10,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2682
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.566178,
+     55.866869
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7172,
+    "address": "Дубнинская улица, дом 16, корпус 2",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2683
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.566047,
+     55.867037
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7172,
+    "address": "Дубнинская улица, дом 16, корпус 2",
+    "entrance": 2,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2684
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565928,
+     55.867193
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7172,
+    "address": "Дубнинская улица, дом 16, корпус 2",
+    "entrance": 3,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2685
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565793,
+     55.867359
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7172,
+    "address": "Дубнинская улица, дом 16, корпус 2",
+    "entrance": 4,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2686
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.56566,
+     55.867527
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7172,
+    "address": "Дубнинская улица, дом 16, корпус 2",
+    "entrance": 5,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2687
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565534,
+     55.867692
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7172,
+    "address": "Дубнинская улица, дом 16, корпус 2",
+    "entrance": 6,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2688
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565397,
+     55.867861
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7172,
+    "address": "Дубнинская улица, дом 16, корпус 2",
+    "entrance": 7,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2689
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565266,
+     55.868024
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7172,
+    "address": "Дубнинская улица, дом 16, корпус 2",
+    "entrance": 8,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2690
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565138,
+     55.868189
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7172,
+    "address": "Дубнинская улица, дом 16, корпус 2",
+    "entrance": 9,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2691
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565013,
+     55.868355
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7172,
+    "address": "Дубнинская улица, дом 16, корпус 2",
+    "entrance": 10,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2692
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.569333,
+     55.867905
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7173,
+    "address": "Дубнинская улица, дом 16, корпус 3",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2693
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.568982,
+     55.867814
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7173,
+    "address": "Дубнинская улица, дом 16, корпус 3",
+    "entrance": 2,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2694
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.56867,
+     55.867739
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7173,
+    "address": "Дубнинская улица, дом 16, корпус 3",
+    "entrance": 3,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2695
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.568344,
+     55.867659
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7173,
+    "address": "Дубнинская улица, дом 16, корпус 3",
+    "entrance": 4,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2696
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.568078,
+     55.867589
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7173,
+    "address": "Дубнинская улица, дом 16, корпус 3",
+    "entrance": 5,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2697
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.567713,
+     55.867495
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7173,
+    "address": "Дубнинская улица, дом 16, корпус 3",
+    "entrance": 6,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2698
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.567398,
+     55.867419
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7173,
+    "address": "Дубнинская улица, дом 16, корпус 3",
+    "entrance": 7,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2699
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.567121,
+     55.867347
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7173,
+    "address": "Дубнинская улица, дом 16, корпус 3",
+    "entrance": 8,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2700
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.56814,
+     55.868533
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7174,
+    "address": "Дубнинская улица, дом 16, корпус 4",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2701
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.568285,
+     55.868332
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7174,
+    "address": "Дубнинская улица, дом 16, корпус 4",
+    "entrance": 2,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2702
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.570125,
+     55.868028
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7176,
+    "address": "Дубнинская улица, дом 16, корпус 6",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2703
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.570067,
+     55.868198
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7176,
+    "address": "Дубнинская улица, дом 16, корпус 6",
+    "entrance": 2,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2704
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.56997,
+     55.868379
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7176,
+    "address": "Дубнинская улица, дом 16, корпус 6",
+    "entrance": 3,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2705
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.569915,
+     55.868533
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7176,
+    "address": "Дубнинская улица, дом 16, корпус 6",
+    "entrance": 4,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2706
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.569841,
+     55.868721
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7176,
+    "address": "Дубнинская улица, дом 16, корпус 6",
+    "entrance": 5,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2707
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.569773,
+     55.868878
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7176,
+    "address": "Дубнинская улица, дом 16, корпус 6",
+    "entrance": 6,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2708
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.569704,
+     55.869058
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7176,
+    "address": "Дубнинская улица, дом 16, корпус 6",
+    "entrance": 7,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2709
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.569621,
+     55.869245
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7176,
+    "address": "Дубнинская улица, дом 16, корпус 6",
+    "entrance": 8,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2710
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.569545,
+     55.869429
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7176,
+    "address": "Дубнинская улица, дом 16, корпус 6",
+    "entrance": 9,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2711
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.569474,
+     55.869587
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7176,
+    "address": "Дубнинская улица, дом 16, корпус 6",
+    "entrance": 10,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2712
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.566666,
+     55.861205
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 75124,
+    "address": "Дубнинская улица, дом 17, корпус 1",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2713
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.567085,
+     55.8611
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 75124,
+    "address": "Дубнинская улица, дом 17, корпус 1",
+    "entrance": 2,
+    "plot": 1,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2714
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.567131,
+     55.860878
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 75124,
+    "address": "Дубнинская улица, дом 17, корпус 1",
+    "entrance": 3,
+    "plot": 1,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2715
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565952,
+     55.861134
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 75123,
+    "address": "Дубнинская улица, дом 17, корпус 2",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2716
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565795,
+     55.861314
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 75123,
+    "address": "Дубнинская улица, дом 17, корпус 2",
+    "entrance": 2,
+    "plot": 1,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2717
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565182,
+     55.861345
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 75123,
+    "address": "Дубнинская улица, дом 17, корпус 2",
+    "entrance": 3,
+    "plot": 1,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2718
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.569206,
+     55.870192
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7179,
+    "address": "Дубнинская улица, дом 18, корпус 1",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2719
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.56766,
+     55.856214
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7139,
+    "address": "Дубнинская улица, дом 2, корпус 2",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2720
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.567758,
+     55.856605
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7140,
+    "address": "Дубнинская улица, дом 2, корпус 3",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2721
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.568303,
+     55.857345
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 75060,
+    "address": "Дубнинская улица, дом 2, корпус 6",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2722
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.56805,
+     55.857448
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 75060,
+    "address": "Дубнинская улица, дом 2, корпус 6",
+    "entrance": 2,
+    "plot": 1,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2723
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.567999,
+     55.857683
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 75060,
+    "address": "Дубнинская улица, дом 2, корпус 6",
+    "entrance": 3,
+    "plot": 1,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2724
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.568115,
+     55.857193
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 75060,
+    "address": "Дубнинская улица, дом 2, корпус 6",
+    "entrance": 4,
+    "plot": 1,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2725
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.568253,
+     55.858004
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 75059,
+    "address": "Дубнинская улица, дом 2, корпус 7",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2726
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.568208,
+     55.858246
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 75059,
+    "address": "Дубнинская улица, дом 2, корпус 7",
+    "entrance": 2,
+    "plot": 1,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2727
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.561413,
+     55.870872
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7180,
+    "address": "Дубнинская улица, дом 20, корпус 1",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2728
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.561253,
+     55.871055
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7180,
+    "address": "Дубнинская улица, дом 20, корпус 1",
+    "entrance": 2,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2729
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.561159,
+     55.871196
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7180,
+    "address": "Дубнинская улица, дом 20, корпус 1",
+    "entrance": 3,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2730
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.561024,
+     55.871367
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7180,
+    "address": "Дубнинская улица, дом 20, корпус 1",
+    "entrance": 4,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2731
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.56086,
+     55.871557
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7180,
+    "address": "Дубнинская улица, дом 20, корпус 1",
+    "entrance": 5,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2732
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560719,
+     55.871725
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7180,
+    "address": "Дубнинская улица, дом 20, корпус 1",
+    "entrance": 6,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2733
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560595,
+     55.871896
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7180,
+    "address": "Дубнинская улица, дом 20, корпус 1",
+    "entrance": 7,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2734
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560452,
+     55.872063
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7180,
+    "address": "Дубнинская улица, дом 20, корпус 1",
+    "entrance": 8,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2735
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560328,
+     55.872232
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7180,
+    "address": "Дубнинская улица, дом 20, корпус 1",
+    "entrance": 9,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2736
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560179,
+     55.872395
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7180,
+    "address": "Дубнинская улица, дом 20, корпус 1",
+    "entrance": 10,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2737
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564396,
+     55.869167
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7181,
+    "address": "Дубнинская улица, дом 20, корпус 2",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2738
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564284,
+     55.869319
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7181,
+    "address": "Дубнинская улица, дом 20, корпус 2",
+    "entrance": 2,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2739
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564135,
+     55.869494
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7181,
+    "address": "Дубнинская улица, дом 20, корпус 2",
+    "entrance": 3,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2740
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564004,
+     55.869656
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7181,
+    "address": "Дубнинская улица, дом 20, корпус 2",
+    "entrance": 4,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2741
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563894,
+     55.869824
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7181,
+    "address": "Дубнинская улица, дом 20, корпус 2",
+    "entrance": 5,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2742
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563755,
+     55.869989
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7181,
+    "address": "Дубнинская улица, дом 20, корпус 2",
+    "entrance": 6,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2743
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563614,
+     55.870153
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7181,
+    "address": "Дубнинская улица, дом 20, корпус 2",
+    "entrance": 7,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2744
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563488,
+     55.870313
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7181,
+    "address": "Дубнинская улица, дом 20, корпус 2",
+    "entrance": 8,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2745
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564571,
+     55.871103
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7182,
+    "address": "Дубнинская улица, дом 20, корпус 3",
+    "entrance": 1,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2746
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564296,
+     55.871035
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7182,
+    "address": "Дубнинская улица, дом 20, корпус 3",
+    "entrance": 2,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2747
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565742,
+     55.870476
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7182,
+    "address": "Дубнинская улица, дом 20, корпус 3",
+    "entrance": 3,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2748
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5655,
+     55.870404
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7182,
+    "address": "Дубнинская улица, дом 20, корпус 3",
+    "entrance": 4,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2749
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5652,
+     55.870336
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7182,
+    "address": "Дубнинская улица, дом 20, корпус 3",
+    "entrance": 5,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2750
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564934,
+     55.870264
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7182,
+    "address": "Дубнинская улица, дом 20, корпус 3",
+    "entrance": 6,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2751
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564681,
+     55.870318
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7182,
+    "address": "Дубнинская улица, дом 20, корпус 3",
+    "entrance": 7,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2752
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564567,
+     55.870466
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7182,
+    "address": "Дубнинская улица, дом 20, корпус 3",
+    "entrance": 8,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2753
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.56445,
+     55.870626
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7182,
+    "address": "Дубнинская улица, дом 20, корпус 3",
+    "entrance": 9,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2754
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564328,
+     55.870771
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7182,
+    "address": "Дубнинская улица, дом 20, корпус 3",
+    "entrance": 10,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2755
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565419,
+     55.87175
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7183,
+    "address": "Дубнинская улица, дом 20, корпус 4",
+    "entrance": 1,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2756
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565546,
+     55.871585
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7183,
+    "address": "Дубнинская улица, дом 20, корпус 4",
+    "entrance": 2,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2757
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565672,
+     55.871423
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7183,
+    "address": "Дубнинская улица, дом 20, корпус 4",
+    "entrance": 3,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2758
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565809,
+     55.871265
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7183,
+    "address": "Дубнинская улица, дом 20, корпус 4",
+    "entrance": 4,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2759
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565927,
+     55.871113
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7183,
+    "address": "Дубнинская улица, дом 20, корпус 4",
+    "entrance": 5,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2760
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.566067,
+     55.870937
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7183,
+    "address": "Дубнинская улица, дом 20, корпус 4",
+    "entrance": 6,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2761
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.566188,
+     55.870782
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7183,
+    "address": "Дубнинская улица, дом 20, корпус 4",
+    "entrance": 7,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2762
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.566309,
+     55.870615
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7183,
+    "address": "Дубнинская улица, дом 20, корпус 4",
+    "entrance": 8,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2763
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563177,
+     55.87072
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7184,
+    "address": "Дубнинская улица, дом 22, корпус 1",
+    "entrance": 1,
+    "plot": 2,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2764
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563028,
+     55.870921
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7184,
+    "address": "Дубнинская улица, дом 22, корпус 1",
+    "entrance": 2,
+    "plot": 2,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2765
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562868,
+     55.871119
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7184,
+    "address": "Дубнинская улица, дом 22, корпус 1",
+    "entrance": 3,
+    "plot": 2,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2766
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562708,
+     55.871321
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7184,
+    "address": "Дубнинская улица, дом 22, корпус 1",
+    "entrance": 4,
+    "plot": 2,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2767
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563553,
+     55.871889
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7185,
+    "address": "Дубнинская улица, дом 22, корпус 2",
+    "entrance": 1,
+    "plot": 2,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2768
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563259,
+     55.871813
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7185,
+    "address": "Дубнинская улица, дом 22, корпус 2",
+    "entrance": 2,
+    "plot": 2,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2769
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562972,
+     55.871739
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7185,
+    "address": "Дубнинская улица, дом 22, корпус 2",
+    "entrance": 3,
+    "plot": 2,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2770
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562663,
+     55.871665
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7185,
+    "address": "Дубнинская улица, дом 22, корпус 2",
+    "entrance": 4,
+    "plot": 2,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2771
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565055,
+     55.872025
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7186,
+    "address": "Дубнинская улица, дом 22, корпус 3",
+    "entrance": 1,
+    "plot": 2,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2772
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564767,
+     55.871948
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7186,
+    "address": "Дубнинская улица, дом 22, корпус 3",
+    "entrance": 2,
+    "plot": 2,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2773
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564457,
+     55.871872
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7186,
+    "address": "Дубнинская улица, дом 22, корпус 3",
+    "entrance": 3,
+    "plot": 2,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2774
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564169,
+     55.871804
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7186,
+    "address": "Дубнинская улица, дом 22, корпус 3",
+    "entrance": 4,
+    "plot": 2,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2775
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.56218,
+     55.871969
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 340276,
+    "address": "Дубнинская улица, дом 22, корпус 4",
+    "entrance": 1,
+    "plot": 2,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "нет",
+    "source_row": 2776
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.561887,
+     55.872312
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 340277,
+    "address": "Дубнинская улица, дом 22, корпус 5",
+    "entrance": 1,
+    "plot": 2,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "нет",
+    "source_row": 2777
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.561588,
+     55.872687
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 340278,
+    "address": "Дубнинская улица, дом 22, корпус 6",
+    "entrance": 1,
+    "plot": 2,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "нет",
+    "source_row": 2778
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.561311,
+     55.873062
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7187,
+    "address": "Дубнинская улица, дом 24, корпус 1",
+    "entrance": 1,
+    "plot": 2,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2779
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.561173,
+     55.873222
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7187,
+    "address": "Дубнинская улица, дом 24, корпус 1",
+    "entrance": 2,
+    "plot": 2,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2780
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.561015,
+     55.873422
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7187,
+    "address": "Дубнинская улица, дом 24, корпус 1",
+    "entrance": 3,
+    "plot": 2,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2781
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560905,
+     55.873561
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7187,
+    "address": "Дубнинская улица, дом 24, корпус 1",
+    "entrance": 4,
+    "plot": 2,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2782
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.561804,
+     55.874055
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7188,
+    "address": "Дубнинская улица, дом 24, корпус 2",
+    "entrance": 1,
+    "plot": 2,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2783
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.56145,
+     55.873979
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7188,
+    "address": "Дубнинская улица, дом 24, корпус 2",
+    "entrance": 2,
+    "plot": 2,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2784
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.561129,
+     55.87391
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7188,
+    "address": "Дубнинская улица, дом 24, корпус 2",
+    "entrance": 3,
+    "plot": 2,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2785
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560822,
+     55.873843
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7188,
+    "address": "Дубнинская улица, дом 24, корпус 2",
+    "entrance": 4,
+    "plot": 2,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2786
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563989,
+     55.872773
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 340163,
+    "address": "Дубнинская улица, дом 24, корпус 3",
+    "entrance": 1,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2787
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563726,
+     55.872708
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 340163,
+    "address": "Дубнинская улица, дом 24, корпус 3",
+    "entrance": 2,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2788
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563434,
+     55.872626
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 340163,
+    "address": "Дубнинская улица, дом 24, корпус 3",
+    "entrance": 3,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2789
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563129,
+     55.872551
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 340163,
+    "address": "Дубнинская улица, дом 24, корпус 3",
+    "entrance": 4,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2790
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562871,
+     55.872607
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 340163,
+    "address": "Дубнинская улица, дом 24, корпус 3",
+    "entrance": 5,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2791
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562737,
+     55.872773
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 340163,
+    "address": "Дубнинская улица, дом 24, корпус 3",
+    "entrance": 6,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2792
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.56261,
+     55.87293
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 340163,
+    "address": "Дубнинская улица, дом 24, корпус 3",
+    "entrance": 7,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2793
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562495,
+     55.873076
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 340163,
+    "address": "Дубнинская улица, дом 24, корпус 3",
+    "entrance": 8,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2794
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562783,
+     55.873393
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 340163,
+    "address": "Дубнинская улица, дом 24, корпус 3",
+    "entrance": 9,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2795
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562513,
+     55.873324
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 340163,
+    "address": "Дубнинская улица, дом 24, корпус 3",
+    "entrance": 10,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2796
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563258,
+     55.874264
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7191,
+    "address": "Дубнинская улица, дом 24, корпус 4",
+    "entrance": 1,
+    "plot": 2,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2797
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562945,
+     55.8742
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7191,
+    "address": "Дубнинская улица, дом 24, корпус 4",
+    "entrance": 2,
+    "plot": 2,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2798
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.56264,
+     55.874134
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7191,
+    "address": "Дубнинская улица, дом 24, корпус 4",
+    "entrance": 3,
+    "plot": 2,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2799
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562322,
+     55.874078
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7191,
+    "address": "Дубнинская улица, дом 24, корпус 4",
+    "entrance": 4,
+    "plot": 2,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2800
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563611,
+     55.874014
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7192,
+    "address": "Дубнинская улица, дом 24, корпус 5",
+    "entrance": 1,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2801
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563735,
+     55.873866
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7192,
+    "address": "Дубнинская улица, дом 24, корпус 5",
+    "entrance": 2,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2802
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563872,
+     55.873689
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7192,
+    "address": "Дубнинская улица, дом 24, корпус 5",
+    "entrance": 3,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2803
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563999,
+     55.873527
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7192,
+    "address": "Дубнинская улица, дом 24, корпус 5",
+    "entrance": 4,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2804
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564124,
+     55.873371
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7192,
+    "address": "Дубнинская улица, дом 24, корпус 5",
+    "entrance": 5,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2805
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564259,
+     55.873196
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7192,
+    "address": "Дубнинская улица, дом 24, корпус 5",
+    "entrance": 6,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2806
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564384,
+     55.873036
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7192,
+    "address": "Дубнинская улица, дом 24, корпус 5",
+    "entrance": 7,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2807
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564526,
+     55.87286
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7192,
+    "address": "Дубнинская улица, дом 24, корпус 5",
+    "entrance": 8,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2808
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560334,
+     55.87448
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 75048,
+    "address": "Дубнинская улица, дом 26, корпус 1",
+    "entrance": 1,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2809
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.56018,
+     55.874592
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 75048,
+    "address": "Дубнинская улица, дом 26, корпус 1",
+    "entrance": 2,
+    "plot": 2,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2810
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560037,
+     55.874783
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 75048,
+    "address": "Дубнинская улица, дом 26, корпус 1",
+    "entrance": 3,
+    "plot": 2,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2811
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559926,
+     55.874908
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 75048,
+    "address": "Дубнинская улица, дом 26, корпус 1",
+    "entrance": 4,
+    "plot": 2,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2812
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559847,
+     55.875023
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 75048,
+    "address": "Дубнинская улица, дом 26, корпус 1",
+    "entrance": 5,
+    "plot": 2,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2813
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559996,
+     55.875144
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 75048,
+    "address": "Дубнинская улица, дом 26, корпус 1",
+    "entrance": 6,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2814
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560936,
+     55.87574
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7193,
+    "address": "Дубнинская улица, дом 26, корпус 2",
+    "entrance": 1,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2815
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.56064,
+     55.875659
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7193,
+    "address": "Дубнинская улица, дом 26, корпус 2",
+    "entrance": 2,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2816
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.56101,
+     55.874945
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7194,
+    "address": "Дубнинская улица, дом 26, корпус 3",
+    "entrance": 1,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2817
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560875,
+     55.875111
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7194,
+    "address": "Дубнинская улица, дом 26, корпус 3",
+    "entrance": 2,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2818
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560737,
+     55.875277
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7194,
+    "address": "Дубнинская улица, дом 26, корпус 3",
+    "entrance": 3,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2819
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560603,
+     55.875445
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7194,
+    "address": "Дубнинская улица, дом 26, корпус 3",
+    "entrance": 4,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2820
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.561734,
+     55.876344
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7195,
+    "address": "Дубнинская улица, дом 26, корпус 4",
+    "entrance": 1,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2821
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.56186,
+     55.8762
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7195,
+    "address": "Дубнинская улица, дом 26, корпус 4",
+    "entrance": 2,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2822
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.561983,
+     55.876033
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7195,
+    "address": "Дубнинская улица, дом 26, корпус 4",
+    "entrance": 3,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2823
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562114,
+     55.875879
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7195,
+    "address": "Дубнинская улица, дом 26, корпус 4",
+    "entrance": 4,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2824
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562249,
+     55.875706
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7195,
+    "address": "Дубнинская улица, дом 26, корпус 4",
+    "entrance": 5,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2825
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562381,
+     55.875542
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7195,
+    "address": "Дубнинская улица, дом 26, корпус 4",
+    "entrance": 6,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2826
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562523,
+     55.875375
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7195,
+    "address": "Дубнинская улица, дом 26, корпус 4",
+    "entrance": 7,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2827
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562642,
+     55.875212
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7195,
+    "address": "Дубнинская улица, дом 26, корпус 4",
+    "entrance": 8,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2828
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562171,
+     55.875066
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7196,
+    "address": "Дубнинская улица, дом 26, корпус 5",
+    "entrance": 1,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2829
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.561868,
+     55.875
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7196,
+    "address": "Дубнинская улица, дом 26, корпус 5",
+    "entrance": 2,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2830
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.561561,
+     55.874939
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7196,
+    "address": "Дубнинская улица, дом 26, корпус 5",
+    "entrance": 3,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2831
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.561253,
+     55.874873
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7196,
+    "address": "Дубнинская улица, дом 26, корпус 5",
+    "entrance": 4,
+    "plot": 2,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2832
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559329,
+     55.875595
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7198,
+    "address": "Дубнинская улица, дом 28, корпус 1",
+    "entrance": 1,
+    "plot": 2,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2833
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559198,
+     55.875771
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7198,
+    "address": "Дубнинская улица, дом 28, корпус 1",
+    "entrance": 2,
+    "plot": 2,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2834
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559063,
+     55.875938
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7198,
+    "address": "Дубнинская улица, дом 28, корпус 1",
+    "entrance": 3,
+    "plot": 2,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2835
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.558934,
+     55.876105
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7198,
+    "address": "Дубнинская улица, дом 28, корпус 1",
+    "entrance": 4,
+    "plot": 2,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2836
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.55889,
+     55.880662
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7204,
+    "address": "Дубнинская улица, дом 30, корпус 1",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2837
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.558665,
+     55.880777
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7204,
+    "address": "Дубнинская улица, дом 30, корпус 1",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2838
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.558498,
+     55.881105
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7205,
+    "address": "Дубнинская улица, дом 30, корпус 2",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2839
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.558491,
+     55.881301
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7205,
+    "address": "Дубнинская улица, дом 30, корпус 2",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2840
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.558487,
+     55.881502
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7205,
+    "address": "Дубнинская улица, дом 30, корпус 2",
+    "entrance": 3,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2841
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.558489,
+     55.881691
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7205,
+    "address": "Дубнинская улица, дом 30, корпус 2",
+    "entrance": 4,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2842
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.558483,
+     55.881886
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7205,
+    "address": "Дубнинская улица, дом 30, корпус 2",
+    "entrance": 5,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2843
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.558478,
+     55.882087
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7205,
+    "address": "Дубнинская улица, дом 30, корпус 2",
+    "entrance": 6,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2844
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.55848,
+     55.882288
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7205,
+    "address": "Дубнинская улица, дом 30, корпус 2",
+    "entrance": 7,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2845
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.558471,
+     55.88249
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7205,
+    "address": "Дубнинская улица, дом 30, корпус 2",
+    "entrance": 8,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2846
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.561256,
+     55.877068
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 31526,
+    "address": "Дубнинская улица, дом 30Б",
+    "entrance": 1,
+    "plot": 2,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2847
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.561319,
+     55.877361
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 31526,
+    "address": "Дубнинская улица, дом 30Б",
+    "entrance": 2,
+    "plot": 2,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2848
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.561322,
+     55.877577
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 31526,
+    "address": "Дубнинская улица, дом 30Б",
+    "entrance": 3,
+    "plot": 2,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2849
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.561318,
+     55.877789
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 31526,
+    "address": "Дубнинская улица, дом 30Б",
+    "entrance": 4,
+    "plot": 2,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2850
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.558884,
+     55.882979
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7206,
+    "address": "Дубнинская улица, дом 32, корпус 1",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2851
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559262,
+     55.883299
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7207,
+    "address": "Дубнинская улица, дом 32, корпус 2",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2852
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559629,
+     55.883607
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7208,
+    "address": "Дубнинская улица, дом 32, корпус 3",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2853
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559882,
+     55.883889
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7209,
+    "address": "Дубнинская улица, дом 32, корпус 4",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2854
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559622,
+     55.882169
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 75106,
+    "address": "Дубнинская улица, дом 32, корпус 5",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2855
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559955,
+     55.881943
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 75106,
+    "address": "Дубнинская улица, дом 32, корпус 5",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2856
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559656,
+     55.882509
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 75106,
+    "address": "Дубнинская улица, дом 32, корпус 5",
+    "entrance": 3,
+    "plot": 3,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2857
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.55922,
+     55.882565
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 75106,
+    "address": "Дубнинская улица, дом 32, корпус 5",
+    "entrance": 4,
+    "plot": 3,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2858
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.561043,
+     55.882647
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 75090,
+    "address": "Дубнинская улица, дом 32, корпус 6",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2859
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560666,
+     55.882467
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 75090,
+    "address": "Дубнинская улица, дом 32, корпус 6",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2860
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.561273,
+     55.88245
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 75090,
+    "address": "Дубнинская улица, дом 32, корпус 6",
+    "entrance": 3,
+    "plot": 3,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2861
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560524,
+     55.883358
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 340049,
+    "address": "Дубнинская улица, дом 32, корпус 7",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2862
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560979,
+     55.883252
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 340080,
+    "address": "Дубнинская улица, дом 32, корпус 8",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2863
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.561428,
+     55.883187
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 340081,
+    "address": "Дубнинская улица, дом 32, корпус 9",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2864
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.55902,
+     55.884055
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7210,
+    "address": "Дубнинская улица, дом 34",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2865
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.55902,
+     55.884263
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7210,
+    "address": "Дубнинская улица, дом 34",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2866
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.55902,
+     55.884505
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7210,
+    "address": "Дубнинская улица, дом 34",
+    "entrance": 3,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2867
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.55901,
+     55.884737
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7210,
+    "address": "Дубнинская улица, дом 34",
+    "entrance": 4,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2868
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559011,
+     55.884973
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7210,
+    "address": "Дубнинская улица, дом 34",
+    "entrance": 5,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2869
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559011,
+     55.885211
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7210,
+    "address": "Дубнинская улица, дом 34",
+    "entrance": 6,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2870
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559002,
+     55.885423
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7210,
+    "address": "Дубнинская улица, дом 34",
+    "entrance": 7,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2871
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.558876,
+     55.886024
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7211,
+    "address": "Дубнинская улица, дом 36, корпус 1",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2872
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.55927,
+     55.886316
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7211,
+    "address": "Дубнинская улица, дом 36, корпус 1",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2873
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559609,
+     55.886663
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7212,
+    "address": "Дубнинская улица, дом 36, корпус 3",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2874
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559866,
+     55.886949
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7213,
+    "address": "Дубнинская улица, дом 36, корпус 4",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2875
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.558895,
+     55.8871
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7215,
+    "address": "Дубнинская улица, дом 38, корпус 1",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2876
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.558879,
+     55.887336
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7215,
+    "address": "Дубнинская улица, дом 38, корпус 1",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2877
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.558882,
+     55.887571
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7215,
+    "address": "Дубнинская улица, дом 38, корпус 1",
+    "entrance": 3,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2878
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.558876,
+     55.887795
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7215,
+    "address": "Дубнинская улица, дом 38, корпус 1",
+    "entrance": 4,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2879
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.558878,
+     55.88803
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7215,
+    "address": "Дубнинская улица, дом 38, корпус 1",
+    "entrance": 5,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2880
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.558861,
+     55.888293
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7215,
+    "address": "Дубнинская улица, дом 38, корпус 1",
+    "entrance": 6,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2881
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.55887,
+     55.888505
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7215,
+    "address": "Дубнинская улица, дом 38, корпус 1",
+    "entrance": 7,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2882
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.570823,
+     55.85761
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7146,
+    "address": "Дубнинская улица, дом 4, корпус 2",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2883
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.571334,
+     55.858173
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7147,
+    "address": "Дубнинская улица, дом 4, корпус 3",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2884
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.571783,
+     55.858761
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7148,
+    "address": "Дубнинская улица, дом 4, корпус 4",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2885
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.558653,
+     55.889727
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7219,
+    "address": "Дубнинская улица, дом 42",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2886
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559047,
+     55.890053
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7219,
+    "address": "Дубнинская улица, дом 42",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2887
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.558724,
+     55.891497
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7223,
+    "address": "Дубнинская улица, дом 46",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2888
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.558722,
+     55.891709
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7223,
+    "address": "Дубнинская улица, дом 46",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2889
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.558711,
+     55.891951
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7223,
+    "address": "Дубнинская улица, дом 46",
+    "entrance": 3,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2890
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.558713,
+     55.892189
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7223,
+    "address": "Дубнинская улица, дом 46",
+    "entrance": 4,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2891
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.558697,
+     55.892428
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7223,
+    "address": "Дубнинская улица, дом 46",
+    "entrance": 5,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2892
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.558705,
+     55.89264
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7223,
+    "address": "Дубнинская улица, дом 46",
+    "entrance": 6,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2893
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.558701,
+     55.892872
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7223,
+    "address": "Дубнинская улица, дом 46",
+    "entrance": 7,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2894
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560233,
+     55.892321
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7224,
+    "address": "Дубнинская улица, дом 46, корпус 1",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2895
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560233,
+     55.892563
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7224,
+    "address": "Дубнинская улица, дом 46, корпус 1",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2896
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560051,
+     55.892965
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7228,
+    "address": "Дубнинская улица, дом 48, корпус 1",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2897
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560053,
+     55.893172
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7228,
+    "address": "Дубнинская улица, дом 48, корпус 1",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2898
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560031,
+     55.893692
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7229,
+    "address": "Дубнинская улица, дом 48, корпус 2",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2899
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560034,
+     55.893456
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7229,
+    "address": "Дубнинская улица, дом 48, корпус 2",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2900
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.558685,
+     55.89359
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 31399,
+    "address": "Дубнинская улица, дом 50",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2901
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.558682,
+     55.893815
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 31399,
+    "address": "Дубнинская улица, дом 50",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2902
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.572521,
+     55.859971
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7152,
+    "address": "Дубнинская улица, дом 6, корпус 3",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2903
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.572528,
+     55.860144
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7152,
+    "address": "Дубнинская улица, дом 6, корпус 3",
+    "entrance": 2,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2904
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.572532,
+     55.860308
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7152,
+    "address": "Дубнинская улица, дом 6, корпус 3",
+    "entrance": 3,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2905
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.572531,
+     55.86049
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7152,
+    "address": "Дубнинская улица, дом 6, корпус 3",
+    "entrance": 4,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2906
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.572538,
+     55.860662
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7152,
+    "address": "Дубнинская улица, дом 6, корпус 3",
+    "entrance": 5,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2907
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.572538,
+     55.860838
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7152,
+    "address": "Дубнинская улица, дом 6, корпус 3",
+    "entrance": 6,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2908
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.556642,
+     55.882313
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7246,
+    "address": "Дубнинская улица, дом 73, корпус 1",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2909
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.556641,
+     55.882166
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7246,
+    "address": "Дубнинская улица, дом 73, корпус 1",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2910
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.556649,
+     55.882
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7246,
+    "address": "Дубнинская улица, дом 73, корпус 1",
+    "entrance": 3,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2911
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.556649,
+     55.881776
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7246,
+    "address": "Дубнинская улица, дом 73, корпус 1",
+    "entrance": 4,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2912
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.556649,
+     55.881591
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7246,
+    "address": "Дубнинская улица, дом 73, корпус 1",
+    "entrance": 5,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2913
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.556656,
+     55.881451
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7246,
+    "address": "Дубнинская улица, дом 73, корпус 1",
+    "entrance": 6,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2914
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.556661,
+     55.881232
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7246,
+    "address": "Дубнинская улица, дом 73, корпус 1",
+    "entrance": 7,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2915
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.556657,
+     55.881067
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7246,
+    "address": "Дубнинская улица, дом 73, корпус 1",
+    "entrance": 8,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2916
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.55621,
+     55.880666
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7247,
+    "address": "Дубнинская улица, дом 73, корпус 2",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2917
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.554576,
+     55.882377
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7248,
+    "address": "Дубнинская улица, дом 73, корпус 3",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2918
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.554403,
+     55.882231
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7248,
+    "address": "Дубнинская улица, дом 73, корпус 3",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2919
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.554233,
+     55.88209
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7248,
+    "address": "Дубнинская улица, дом 73, корпус 3",
+    "entrance": 3,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2920
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.554069,
+     55.881953
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7248,
+    "address": "Дубнинская улица, дом 73, корпус 3",
+    "entrance": 4,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2921
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.554365,
+     55.880687
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7249,
+    "address": "Дубнинская улица, дом 73, корпус 4",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2922
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.554273,
+     55.880868
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7249,
+    "address": "Дубнинская улица, дом 73, корпус 4",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2923
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.554196,
+     55.881039
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7249,
+    "address": "Дубнинская улица, дом 73, корпус 4",
+    "entrance": 3,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2924
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.554113,
+     55.881207
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7249,
+    "address": "Дубнинская улица, дом 73, корпус 4",
+    "entrance": 4,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2925
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.554025,
+     55.881379
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7249,
+    "address": "Дубнинская улица, дом 73, корпус 4",
+    "entrance": 5,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2926
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.553936,
+     55.881572
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7249,
+    "address": "Дубнинская улица, дом 73, корпус 4",
+    "entrance": 6,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2927
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.556017,
+     55.882559
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7250,
+    "address": "Дубнинская улица, дом 73, корпус 6",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2928
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.555751,
+     55.882606
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7250,
+    "address": "Дубнинская улица, дом 73, корпус 6",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2929
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.555426,
+     55.882668
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7250,
+    "address": "Дубнинская улица, дом 73, корпус 6",
+    "entrance": 3,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2930
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.555175,
+     55.882713
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7250,
+    "address": "Дубнинская улица, дом 73, корпус 6",
+    "entrance": 4,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2931
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.572819,
+     55.861127
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7156,
+    "address": "Дубнинская улица, дом 8, корпус 1",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2932
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.57277,
+     55.861309
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7156,
+    "address": "Дубнинская улица, дом 8, корпус 1",
+    "entrance": 2,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2933
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.572735,
+     55.861473
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7156,
+    "address": "Дубнинская улица, дом 8, корпус 1",
+    "entrance": 3,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2934
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.572693,
+     55.861681
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7156,
+    "address": "Дубнинская улица, дом 8, корпус 1",
+    "entrance": 4,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2935
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.572656,
+     55.861842
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7156,
+    "address": "Дубнинская улица, дом 8, корпус 1",
+    "entrance": 5,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2936
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.572618,
+     55.86199
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 7156,
+    "address": "Дубнинская улица, дом 8, корпус 1",
+    "entrance": 6,
+    "plot": 1,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 2937
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.568756,
+     55.871613
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 51690,
+    "address": "Керамический проезд, дом 45, корпус 1",
+    "entrance": 1,
+    "plot": 2,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2938
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.568878,
+     55.871325
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 51690,
+    "address": "Керамический проезд, дом 45, корпус 1",
+    "entrance": 2,
+    "plot": 2,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2939
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.569011,
+     55.871042
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 51690,
+    "address": "Керамический проезд, дом 45, корпус 1",
+    "entrance": 3,
+    "plot": 2,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2940
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.569076,
+     55.870835
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 51690,
+    "address": "Керамический проезд, дом 45, корпус 1",
+    "entrance": 4,
+    "plot": 2,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2941
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.568059,
+     55.87322
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 51779,
+    "address": "Керамический проезд, дом 47, корпус 1",
+    "entrance": 1,
+    "plot": 2,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2942
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.568178,
+     55.872935
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 51779,
+    "address": "Керамический проезд, дом 47, корпус 1",
+    "entrance": 2,
+    "plot": 2,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2943
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.568323,
+     55.87263
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 51779,
+    "address": "Керамический проезд, дом 47, корпус 1",
+    "entrance": 3,
+    "plot": 2,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2944
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.567306,
+     55.875034
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 51780,
+    "address": "Керамический проезд, дом 49, корпус 1",
+    "entrance": 1,
+    "plot": 2,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2945
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.567381,
+     55.874866
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 51780,
+    "address": "Керамический проезд, дом 49, корпус 1",
+    "entrance": 2,
+    "plot": 2,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2946
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.567499,
+     55.874587
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 51780,
+    "address": "Керамический проезд, дом 49, корпус 1",
+    "entrance": 3,
+    "plot": 2,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2947
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.567621,
+     55.874303
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 51780,
+    "address": "Керамический проезд, дом 49, корпус 1",
+    "entrance": 4,
+    "plot": 2,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2948
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.566251,
+     55.875802
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 31537,
+    "address": "Керамический проезд, дом 51, корпус 1",
+    "entrance": 1,
+    "plot": 2,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2949
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565873,
+     55.875728
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 31537,
+    "address": "Керамический проезд, дом 51, корпус 1",
+    "entrance": 2,
+    "plot": 2,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2950
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565534,
+     55.875658
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 31537,
+    "address": "Керамический проезд, дом 51, корпус 1",
+    "entrance": 3,
+    "plot": 2,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2951
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564691,
+     55.875593
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 31538,
+    "address": "Керамический проезд, дом 51, корпус 2",
+    "entrance": 1,
+    "plot": 2,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2952
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564327,
+     55.875515
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 31538,
+    "address": "Керамический проезд, дом 51, корпус 2",
+    "entrance": 2,
+    "plot": 2,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2953
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5666,
+     55.876704
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 51781,
+    "address": "Керамический проезд, дом 53, корпус 1",
+    "entrance": 1,
+    "plot": 2,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2954
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.566731,
+     55.876408
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 51781,
+    "address": "Керамический проезд, дом 53, корпус 1",
+    "entrance": 2,
+    "plot": 2,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2955
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.566868,
+     55.876097
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 51781,
+    "address": "Керамический проезд, дом 53, корпус 1",
+    "entrance": 3,
+    "plot": 2,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2956
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.566928,
+     55.875934
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 51781,
+    "address": "Керамический проезд, дом 53, корпус 1",
+    "entrance": 4,
+    "plot": 2,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2957
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.566157,
+     55.877944
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 51782,
+    "address": "Керамический проезд, дом 55, корпус 1",
+    "entrance": 1,
+    "plot": 2,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2958
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.566235,
+     55.877644
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 51782,
+    "address": "Керамический проезд, дом 55, корпус 1",
+    "entrance": 2,
+    "plot": 2,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2959
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.566318,
+     55.87736
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 51782,
+    "address": "Керамический проезд, дом 55, корпус 1",
+    "entrance": 3,
+    "plot": 2,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2960
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.566067,
+     55.87896
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 51691,
+    "address": "Керамический проезд, дом 57, корпус 1",
+    "entrance": 1,
+    "plot": 2,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2961
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.566055,
+     55.878676
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 51691,
+    "address": "Керамический проезд, дом 57, корпус 1",
+    "entrance": 2,
+    "plot": 2,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2962
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.566057,
+     55.878378
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 51691,
+    "address": "Керамический проезд, дом 57, корпус 1",
+    "entrance": 3,
+    "plot": 2,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2963
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562959,
+     55.885711
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 9964,
+    "address": "Керамический проезд, дом 61, корпус 1",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2964
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563351,
+     55.885998
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 9965,
+    "address": "Керамический проезд, дом 61, корпус 2",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2965
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.56264,
+     55.886319
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 9966,
+    "address": "Керамический проезд, дом 63, корпус 1",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2966
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563151,
+     55.88662
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 9967,
+    "address": "Керамический проезд, дом 63, корпус 2",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2967
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563204,
+     55.887249
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 9968,
+    "address": "Керамический проезд, дом 65, корпус 1",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2968
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563602,
+     55.887543
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 9969,
+    "address": "Керамический проезд, дом 65, корпус 2",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2969
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562837,
+     55.887856
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 9970,
+    "address": "Керамический проезд, дом 67, корпус 1",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2970
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563331,
+     55.888165
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 9971,
+    "address": "Керамический проезд, дом 67, корпус 2",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2971
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562853,
+     55.888664
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 9972,
+    "address": "Керамический проезд, дом 69, корпус 1",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2972
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562441,
+     55.888661
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 9972,
+    "address": "Керамический проезд, дом 69, корпус 1",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2973
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.56201,
+     55.888659
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 9972,
+    "address": "Керамический проезд, дом 69, корпус 1",
+    "entrance": 3,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2974
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.561596,
+     55.88866
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 9972,
+    "address": "Керамический проезд, дом 69, корпус 1",
+    "entrance": 4,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2975
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.561173,
+     55.888655
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 9972,
+    "address": "Керамический проезд, дом 69, корпус 1",
+    "entrance": 5,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2976
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560762,
+     55.888654
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 9972,
+    "address": "Керамический проезд, дом 69, корпус 1",
+    "entrance": 6,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2977
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560341,
+     55.888653
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 9972,
+    "address": "Керамический проезд, дом 69, корпус 1",
+    "entrance": 7,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2978
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559917,
+     55.888654
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 9972,
+    "address": "Керамический проезд, дом 69, корпус 1",
+    "entrance": 8,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2979
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562747,
+     55.890719
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 9973,
+    "address": "Керамический проезд, дом 71, корпус 1",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2980
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562748,
+     55.890539
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 9973,
+    "address": "Керамический проезд, дом 71, корпус 1",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2981
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562745,
+     55.89035
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 9973,
+    "address": "Керамический проезд, дом 71, корпус 1",
+    "entrance": 3,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2982
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562757,
+     55.890166
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 9973,
+    "address": "Керамический проезд, дом 71, корпус 1",
+    "entrance": 4,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2983
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562756,
+     55.889986
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 9973,
+    "address": "Керамический проезд, дом 71, корпус 1",
+    "entrance": 5,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2984
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562757,
+     55.889802
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 9973,
+    "address": "Керамический проезд, дом 71, корпус 1",
+    "entrance": 6,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2985
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562758,
+     55.88962
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 9973,
+    "address": "Керамический проезд, дом 71, корпус 1",
+    "entrance": 7,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2986
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562765,
+     55.889438
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 9973,
+    "address": "Керамический проезд, дом 71, корпус 1",
+    "entrance": 8,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2987
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562765,
+     55.88925
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 9973,
+    "address": "Керамический проезд, дом 71, корпус 1",
+    "entrance": 9,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2988
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562769,
+     55.889074
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 9973,
+    "address": "Керамический проезд, дом 71, корпус 1",
+    "entrance": 10,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2989
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563601,
+     55.891629
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 9974,
+    "address": "Керамический проезд, дом 73, корпус 1",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2990
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.56367,
+     55.891895
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 9974,
+    "address": "Керамический проезд, дом 73, корпус 1",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2991
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563413,
+     55.892113
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 9975,
+    "address": "Керамический проезд, дом 75, корпус 1",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2992
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563411,
+     55.892354
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 9975,
+    "address": "Керамический проезд, дом 75, корпус 1",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2993
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.561632,
+     55.892761
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 9976,
+    "address": "Керамический проезд, дом 77, корпус 1",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2994
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.561628,
+     55.893005
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 9976,
+    "address": "Керамический проезд, дом 77, корпус 1",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2995
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.561814,
+     55.892289
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 9977,
+    "address": "Керамический проезд, дом 77, корпус 2",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2996
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.561813,
+     55.892542
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 9977,
+    "address": "Керамический проезд, дом 77, корпус 2",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2997
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.549786,
+     55.879385
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 4857,
+    "address": "улица 800-летия Москвы, дом 1, корпус 1",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2998
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.549103,
+     55.880601
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 4858,
+    "address": "улица 800-летия Москвы, дом 1, корпус 4",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 2999
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564679,
+     55.88107
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 4872,
+    "address": "улица 800-летия Москвы, дом 11",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 3000
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564347,
+     55.881581
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 4873,
+    "address": "улица 800-летия Москвы, дом 11, корпус 1",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 3001
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562828,
+     55.882676
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 4881,
+    "address": "улица 800-летия Москвы, дом 11, корпус 10",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 3002
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564042,
+     55.882095
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 4874,
+    "address": "улица 800-летия Москвы, дом 11, корпус 2",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 3003
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564257,
+     55.882622
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 4875,
+    "address": "улица 800-летия Москвы, дом 11, корпус 3",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 3004
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564509,
+     55.883075
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 4876,
+    "address": "улица 800-летия Москвы, дом 11, корпус 4",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 3005
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564725,
+     55.883546
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 4877,
+    "address": "улица 800-летия Москвы, дом 11, корпус 5",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 3006
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564948,
+     55.884016
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 4878,
+    "address": "улица 800-летия Москвы, дом 11, корпус 6",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 3007
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564151,
+     55.884241
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 4879,
+    "address": "улица 800-летия Москвы, дом 11, корпус 7",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 3008
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563845,
+     55.884232
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 4879,
+    "address": "улица 800-летия Москвы, дом 11, корпус 7",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 3009
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563514,
+     55.884222
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 4879,
+    "address": "улица 800-летия Москвы, дом 11, корпус 7",
+    "entrance": 3,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 3010
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563151,
+     55.884205
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 4879,
+    "address": "улица 800-летия Москвы, дом 11, корпус 7",
+    "entrance": 4,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 3011
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.56282,
+     55.884198
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 4879,
+    "address": "улица 800-летия Москвы, дом 11, корпус 7",
+    "entrance": 5,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 3012
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.56248,
+     55.884186
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 4879,
+    "address": "улица 800-летия Москвы, дом 11, корпус 7",
+    "entrance": 6,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 3013
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562571,
+     55.883072
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 4880,
+    "address": "улица 800-летия Москвы, дом 11, корпус 8",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 3014
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562555,
+     55.88325
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 4880,
+    "address": "улица 800-летия Москвы, дом 11, корпус 8",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 3015
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562523,
+     55.883454
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 4880,
+    "address": "улица 800-летия Москвы, дом 11, корпус 8",
+    "entrance": 3,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 3016
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562494,
+     55.883618
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 4880,
+    "address": "улица 800-летия Москвы, дом 11, корпус 8",
+    "entrance": 4,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 3017
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.549379,
+     55.878183
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 4883,
+    "address": "улица 800-летия Москвы, дом 14",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 3018
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.548983,
+     55.878119
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 4883,
+    "address": "улица 800-летия Москвы, дом 14",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 3019
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.548638,
+     55.878057
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 4883,
+    "address": "улица 800-летия Москвы, дом 14",
+    "entrance": 3,
+    "plot": 3,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 3020
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.54816,
+     55.877832
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 4883,
+    "address": "улица 800-летия Москвы, дом 14",
+    "entrance": 4,
+    "plot": 3,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 3021
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.552103,
+     55.878638
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 4884,
+    "address": "улица 800-летия Москвы, дом 16",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 3022
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.551703,
+     55.878569
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 4884,
+    "address": "улица 800-летия Москвы, дом 16",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 3023
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.551296,
+     55.878498
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 4884,
+    "address": "улица 800-летия Москвы, дом 16",
+    "entrance": 3,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 3024
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.550885,
+     55.878428
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 4884,
+    "address": "улица 800-летия Москвы, дом 16",
+    "entrance": 4,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 3025
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.550528,
+     55.878367
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 4884,
+    "address": "улица 800-летия Москвы, дом 16",
+    "entrance": 5,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 3026
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.550097,
+     55.878295
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 4884,
+    "address": "улица 800-летия Москвы, дом 16",
+    "entrance": 6,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 3027
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.552772,
+     55.879011
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 4885,
+    "address": "улица 800-летия Москвы, дом 18",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 3028
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.552414,
+     55.878953
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 4885,
+    "address": "улица 800-летия Москвы, дом 18",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 3029
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.555344,
+     55.879206
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 4886,
+    "address": "улица 800-летия Москвы, дом 20",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 3030
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.554944,
+     55.879136
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 4886,
+    "address": "улица 800-летия Москвы, дом 20",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 3031
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.554546,
+     55.879069
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 4886,
+    "address": "улица 800-летия Москвы, дом 20",
+    "entrance": 3,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 3032
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.554138,
+     55.879002
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 4886,
+    "address": "улица 800-летия Москвы, дом 20",
+    "entrance": 4,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 3033
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.553747,
+     55.878933
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 4886,
+    "address": "улица 800-летия Москвы, дом 20",
+    "entrance": 5,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 3034
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.553329,
+     55.878864
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 4886,
+    "address": "улица 800-летия Москвы, дом 20",
+    "entrance": 6,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 3035
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559066,
+     55.879227
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 31866,
+    "address": "улица 800-летия Москвы, дом 24",
+    "entrance": 1,
+    "plot": 2,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 3036
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559191,
+     55.879429
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 31866,
+    "address": "улица 800-летия Москвы, дом 24",
+    "entrance": 2,
+    "plot": 2,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 3037
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560977,
+     55.879806
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 31507,
+    "address": "улица 800-летия Москвы, дом 26, корпус 1",
+    "entrance": 1,
+    "plot": 2,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 3038
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560604,
+     55.879811
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 31507,
+    "address": "улица 800-летия Москвы, дом 26, корпус 1",
+    "entrance": 2,
+    "plot": 2,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 3039
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560232,
+     55.87981
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 31507,
+    "address": "улица 800-летия Москвы, дом 26, корпус 1",
+    "entrance": 3,
+    "plot": 2,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 3040
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559847,
+     55.879813
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 31507,
+    "address": "улица 800-летия Москвы, дом 26, корпус 1",
+    "entrance": 4,
+    "plot": 2,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 3041
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.55945,
+     55.879813
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 31507,
+    "address": "улица 800-летия Москвы, дом 26, корпус 1",
+    "entrance": 5,
+    "plot": 2,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 3042
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560991,
+     55.879459
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 31507,
+    "address": "улица 800-летия Москвы, дом 26, корпус 1",
+    "entrance": 6,
+    "plot": 2,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 3043
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560993,
+     55.879233
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 31507,
+    "address": "улица 800-летия Москвы, дом 26, корпус 1",
+    "entrance": 7,
+    "plot": 2,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 3044
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559703,
+     55.878336
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 31508,
+    "address": "улица 800-летия Москвы, дом 26, корпус 2",
+    "entrance": 1,
+    "plot": 2,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 3045
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560075,
+     55.878409
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 31508,
+    "address": "улица 800-летия Москвы, дом 26, корпус 2",
+    "entrance": 2,
+    "plot": 2,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 3046
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559753,
+     55.87861
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 31508,
+    "address": "улица 800-летия Москвы, дом 26, корпус 2",
+    "entrance": 3,
+    "plot": 2,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 3047
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559753,
+     55.878834
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 31508,
+    "address": "улица 800-летия Москвы, дом 26, корпус 2",
+    "entrance": 4,
+    "plot": 2,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 3048
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.552434,
+     55.879804
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 4861,
+    "address": "улица 800-летия Москвы, дом 3, корпус 1",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 3049
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.552117,
+     55.879755
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 4861,
+    "address": "улица 800-летия Москвы, дом 3, корпус 1",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 3050
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.551815,
+     55.879698
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 4861,
+    "address": "улица 800-летия Москвы, дом 3, корпус 1",
+    "entrance": 3,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 3051
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.551501,
+     55.879647
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 4861,
+    "address": "улица 800-летия Москвы, дом 3, корпус 1",
+    "entrance": 4,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 3052
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.551189,
+     55.87959
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 4861,
+    "address": "улица 800-летия Москвы, дом 3, корпус 1",
+    "entrance": 5,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 3053
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.550881,
+     55.879541
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 4861,
+    "address": "улица 800-летия Москвы, дом 3, корпус 1",
+    "entrance": 6,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 3054
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.561884,
+     55.880793
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 4868,
+    "address": "улица 800-летия Москвы, дом 7, корпус 1",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 3055
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.561533,
+     55.880767
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 4868,
+    "address": "улица 800-летия Москвы, дом 7, корпус 1",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 3056
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.561247,
+     55.880746
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 4868,
+    "address": "улица 800-летия Москвы, дом 7, корпус 1",
+    "entrance": 3,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 3057
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560853,
+     55.880716
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 4868,
+    "address": "улица 800-летия Москвы, дом 7, корпус 1",
+    "entrance": 4,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 3058
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560503,
+     55.880693
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 4868,
+    "address": "улица 800-летия Москвы, дом 7, корпус 1",
+    "entrance": 5,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 3059
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560206,
+     55.880671
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 4868,
+    "address": "улица 800-летия Москвы, дом 7, корпус 1",
+    "entrance": 6,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 3060
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559881,
+     55.880646
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 4868,
+    "address": "улица 800-летия Москвы, дом 7, корпус 1",
+    "entrance": 7,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 3061
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559522,
+     55.880621
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 4868,
+    "address": "улица 800-летия Москвы, дом 7, корпус 1",
+    "entrance": 8,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 3062
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563296,
+     55.880894
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 4870,
+    "address": "улица 800-летия Москвы, дом 9",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 3063
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562947,
+     55.880868
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 4870,
+    "address": "улица 800-летия Москвы, дом 9",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 3064
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562613,
+     55.880845
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 4870,
+    "address": "улица 800-летия Москвы, дом 9",
+    "entrance": 3,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 3065
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.56228,
+     55.880817
+    ]
+   },
+   "properties": {
+    "district": "Восточное Дегунино",
+    "unom": 4870,
+    "address": "улица 800-летия Москвы, дом 9",
+    "entrance": 4,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 3066
+   }
+  }
+ ]
+}

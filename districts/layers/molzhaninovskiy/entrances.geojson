@@ -1,0 +1,1118 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.347767,
+     55.946614
+    ]
+   },
+   "properties": {
+    "district": "Молжаниновский",
+    "unom": 340432,
+    "address": "Синявинская улица, дом 11, корпус 10",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 19,
+    "lifts": "2",
+    "garbage_chute": "нет",
+    "source_row": 6505
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.347579,
+     55.946722
+    ]
+   },
+   "properties": {
+    "district": "Молжаниновский",
+    "unom": 340432,
+    "address": "Синявинская улица, дом 11, корпус 10",
+    "entrance": 2,
+    "plot": 1,
+    "floors": 19,
+    "lifts": "2",
+    "garbage_chute": "нет",
+    "source_row": 6506
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.347332,
+     55.94687
+    ]
+   },
+   "properties": {
+    "district": "Молжаниновский",
+    "unom": 340432,
+    "address": "Синявинская улица, дом 11, корпус 10",
+    "entrance": 3,
+    "plot": 1,
+    "floors": 19,
+    "lifts": "2",
+    "garbage_chute": "нет",
+    "source_row": 6507
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.347542,
+     55.94737
+    ]
+   },
+   "properties": {
+    "district": "Молжаниновский",
+    "unom": 340432,
+    "address": "Синявинская улица, дом 11, корпус 10",
+    "entrance": 4,
+    "plot": 1,
+    "floors": 19,
+    "lifts": "2",
+    "garbage_chute": "нет",
+    "source_row": 6508
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.347311,
+     55.947247
+    ]
+   },
+   "properties": {
+    "district": "Молжаниновский",
+    "unom": 340432,
+    "address": "Синявинская улица, дом 11, корпус 10",
+    "entrance": 5,
+    "plot": 1,
+    "floors": 19,
+    "lifts": "2",
+    "garbage_chute": "нет",
+    "source_row": 6509
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.347053,
+     55.947108
+    ]
+   },
+   "properties": {
+    "district": "Молжаниновский",
+    "unom": 340432,
+    "address": "Синявинская улица, дом 11, корпус 10",
+    "entrance": 6,
+    "plot": 1,
+    "floors": 19,
+    "lifts": "2",
+    "garbage_chute": "нет",
+    "source_row": 6510
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.348948,
+     55.947554
+    ]
+   },
+   "properties": {
+    "district": "Молжаниновский",
+    "unom": 340433,
+    "address": "Синявинская улица, дом 11, корпус 11",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 25,
+    "lifts": "3",
+    "garbage_chute": "нет",
+    "source_row": 6511
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.349479,
+     55.947237
+    ]
+   },
+   "properties": {
+    "district": "Молжаниновский",
+    "unom": 340434,
+    "address": "Синявинская улица, дом 11, корпус 12",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 25,
+    "lifts": "3",
+    "garbage_chute": "нет",
+    "source_row": 6512
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.349732,
+     55.946882
+    ]
+   },
+   "properties": {
+    "district": "Молжаниновский",
+    "unom": 340435,
+    "address": "Синявинская улица, дом 11, корпус 13",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 19,
+    "lifts": "2",
+    "garbage_chute": "нет",
+    "source_row": 6513
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.349962,
+     55.946749
+    ]
+   },
+   "properties": {
+    "district": "Молжаниновский",
+    "unom": 340435,
+    "address": "Синявинская улица, дом 11, корпус 13",
+    "entrance": 2,
+    "plot": 1,
+    "floors": 19,
+    "lifts": "2",
+    "garbage_chute": "нет",
+    "source_row": 6514
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.350215,
+     55.946608
+    ]
+   },
+   "properties": {
+    "district": "Молжаниновский",
+    "unom": 340435,
+    "address": "Синявинская улица, дом 11, корпус 13",
+    "entrance": 3,
+    "plot": 1,
+    "floors": 19,
+    "lifts": "2",
+    "garbage_chute": "нет",
+    "source_row": 6515
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.350418,
+     55.946494
+    ]
+   },
+   "properties": {
+    "district": "Молжаниновский",
+    "unom": 340435,
+    "address": "Синявинская улица, дом 11, корпус 13",
+    "entrance": 4,
+    "plot": 1,
+    "floors": 19,
+    "lifts": "2",
+    "garbage_chute": "нет",
+    "source_row": 6516
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.350644,
+     55.94637
+    ]
+   },
+   "properties": {
+    "district": "Молжаниновский",
+    "unom": 340435,
+    "address": "Синявинская улица, дом 11, корпус 13",
+    "entrance": 5,
+    "plot": 1,
+    "floors": 19,
+    "lifts": "2",
+    "garbage_chute": "нет",
+    "source_row": 6517
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.347831,
+     55.943656
+    ]
+   },
+   "properties": {
+    "district": "Молжаниновский",
+    "unom": 340437,
+    "address": "Синявинская улица, дом 11, корпус 16",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 19,
+    "lifts": "2",
+    "garbage_chute": "нет",
+    "source_row": 6518
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.347606,
+     55.943789
+    ]
+   },
+   "properties": {
+    "district": "Молжаниновский",
+    "unom": 340437,
+    "address": "Синявинская улица, дом 11, корпус 16",
+    "entrance": 2,
+    "plot": 1,
+    "floors": 19,
+    "lifts": "2",
+    "garbage_chute": "нет",
+    "source_row": 6519
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.34737,
+     55.943927
+    ]
+   },
+   "properties": {
+    "district": "Молжаниновский",
+    "unom": 340437,
+    "address": "Синявинская улица, дом 11, корпус 16",
+    "entrance": 3,
+    "plot": 1,
+    "floors": 19,
+    "lifts": "2",
+    "garbage_chute": "нет",
+    "source_row": 6520
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.347139,
+     55.944063
+    ]
+   },
+   "properties": {
+    "district": "Молжаниновский",
+    "unom": 340437,
+    "address": "Синявинская улица, дом 11, корпус 16",
+    "entrance": 4,
+    "plot": 1,
+    "floors": 19,
+    "lifts": "2",
+    "garbage_chute": "нет",
+    "source_row": 6521
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.346914,
+     55.944196
+    ]
+   },
+   "properties": {
+    "district": "Молжаниновский",
+    "unom": 340437,
+    "address": "Синявинская улица, дом 11, корпус 16",
+    "entrance": 5,
+    "plot": 1,
+    "floors": 19,
+    "lifts": "2",
+    "garbage_chute": "нет",
+    "source_row": 6522
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.34723,
+     55.944629
+    ]
+   },
+   "properties": {
+    "district": "Молжаниновский",
+    "unom": 340437,
+    "address": "Синявинская улица, дом 11, корпус 16",
+    "entrance": 6,
+    "plot": 1,
+    "floors": 19,
+    "lifts": "2",
+    "garbage_chute": "нет",
+    "source_row": 6523
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.346973,
+     55.944491
+    ]
+   },
+   "properties": {
+    "district": "Молжаниновский",
+    "unom": 340437,
+    "address": "Синявинская улица, дом 11, корпус 16",
+    "entrance": 7,
+    "plot": 1,
+    "floors": 19,
+    "lifts": "2",
+    "garbage_chute": "нет",
+    "source_row": 6524
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.346721,
+     55.944358
+    ]
+   },
+   "properties": {
+    "district": "Молжаниновский",
+    "unom": 340437,
+    "address": "Синявинская улица, дом 11, корпус 16",
+    "entrance": 8,
+    "plot": 1,
+    "floors": 19,
+    "lifts": "2",
+    "garbage_chute": "нет",
+    "source_row": 6525
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.346646,
+     55.949165
+    ]
+   },
+   "properties": {
+    "district": "Молжаниновский",
+    "unom": 340424,
+    "address": "Синявинская улица, дом 11, корпус 2",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 25,
+    "lifts": "3",
+    "garbage_chute": "нет",
+    "source_row": 6526
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.346801,
+     55.948831
+    ]
+   },
+   "properties": {
+    "district": "Молжаниновский",
+    "unom": 340425,
+    "address": "Синявинская улица, дом 11, корпус 3",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 19,
+    "lifts": "2",
+    "garbage_chute": "нет",
+    "source_row": 6527
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.346533,
+     55.948701
+    ]
+   },
+   "properties": {
+    "district": "Молжаниновский",
+    "unom": 340425,
+    "address": "Синявинская улица, дом 11, корпус 3",
+    "entrance": 2,
+    "plot": 1,
+    "floors": 19,
+    "lifts": "2",
+    "garbage_chute": "нет",
+    "source_row": 6528
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.346296,
+     55.948587
+    ]
+   },
+   "properties": {
+    "district": "Молжаниновский",
+    "unom": 340425,
+    "address": "Синявинская улица, дом 11, корпус 3",
+    "entrance": 3,
+    "plot": 1,
+    "floors": 19,
+    "lifts": "2",
+    "garbage_chute": "нет",
+    "source_row": 6529
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.34606,
+     55.948469
+    ]
+   },
+   "properties": {
+    "district": "Молжаниновский",
+    "unom": 340425,
+    "address": "Синявинская улица, дом 11, корпус 3",
+    "entrance": 4,
+    "plot": 1,
+    "floors": 19,
+    "lifts": "2",
+    "garbage_chute": "нет",
+    "source_row": 6530
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.346952,
+     55.94778
+    ]
+   },
+   "properties": {
+    "district": "Молжаниновский",
+    "unom": 340425,
+    "address": "Синявинская улица, дом 11, корпус 3",
+    "entrance": 5,
+    "plot": 1,
+    "floors": 19,
+    "lifts": "2",
+    "garbage_chute": "нет",
+    "source_row": 6531
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.346737,
+     55.947918
+    ]
+   },
+   "properties": {
+    "district": "Молжаниновский",
+    "unom": 340425,
+    "address": "Синявинская улица, дом 11, корпус 3",
+    "entrance": 6,
+    "plot": 1,
+    "floors": 19,
+    "lifts": "2",
+    "garbage_chute": "нет",
+    "source_row": 6532
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.346528,
+     55.948051
+    ]
+   },
+   "properties": {
+    "district": "Молжаниновский",
+    "unom": 340425,
+    "address": "Синявинская улица, дом 11, корпус 3",
+    "entrance": 7,
+    "plot": 1,
+    "floors": 19,
+    "lifts": "2",
+    "garbage_chute": "нет",
+    "source_row": 6533
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.346291,
+     55.948204
+    ]
+   },
+   "properties": {
+    "district": "Молжаниновский",
+    "unom": 340425,
+    "address": "Синявинская улица, дом 11, корпус 3",
+    "entrance": 8,
+    "plot": 1,
+    "floors": 19,
+    "lifts": "2",
+    "garbage_chute": "нет",
+    "source_row": 6534
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.347284,
+     55.948689
+    ]
+   },
+   "properties": {
+    "district": "Молжаниновский",
+    "unom": 340425,
+    "address": "Синявинская улица, дом 11, корпус 3",
+    "entrance": 9,
+    "plot": 1,
+    "floors": 19,
+    "lifts": "2",
+    "garbage_chute": "нет",
+    "source_row": 6535
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.347488,
+     55.948559
+    ]
+   },
+   "properties": {
+    "district": "Молжаниновский",
+    "unom": 340425,
+    "address": "Синявинская улица, дом 11, корпус 3",
+    "entrance": 10,
+    "plot": 1,
+    "floors": 19,
+    "lifts": "2",
+    "garbage_chute": "нет",
+    "source_row": 6536
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.346323,
+     55.947575
+    ]
+   },
+   "properties": {
+    "district": "Молжаниновский",
+    "unom": 340426,
+    "address": "Синявинская улица, дом 11, корпус 4",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 19,
+    "lifts": "2",
+    "garbage_chute": "нет",
+    "source_row": 6537
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.346098,
+     55.947701
+    ]
+   },
+   "properties": {
+    "district": "Молжаниновский",
+    "unom": 340426,
+    "address": "Синявинская улица, дом 11, корпус 4",
+    "entrance": 2,
+    "plot": 1,
+    "floors": 19,
+    "lifts": "2",
+    "garbage_chute": "нет",
+    "source_row": 6538
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.3454,
+     55.947717
+    ]
+   },
+   "properties": {
+    "district": "Молжаниновский",
+    "unom": 340426,
+    "address": "Синявинская улица, дом 11, корпус 4",
+    "entrance": 3,
+    "plot": 1,
+    "floors": 19,
+    "lifts": "2",
+    "garbage_chute": "нет",
+    "source_row": 6539
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.345164,
+     55.947587
+    ]
+   },
+   "properties": {
+    "district": "Молжаниновский",
+    "unom": 340426,
+    "address": "Синявинская улица, дом 11, корпус 4",
+    "entrance": 4,
+    "plot": 1,
+    "floors": 19,
+    "lifts": "2",
+    "garbage_chute": "нет",
+    "source_row": 6540
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.344912,
+     55.947448
+    ]
+   },
+   "properties": {
+    "district": "Молжаниновский",
+    "unom": 340426,
+    "address": "Синявинская улица, дом 11, корпус 4",
+    "entrance": 5,
+    "plot": 1,
+    "floors": 19,
+    "lifts": "2",
+    "garbage_chute": "нет",
+    "source_row": 6541
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.344686,
+     55.947325
+    ]
+   },
+   "properties": {
+    "district": "Молжаниновский",
+    "unom": 340426,
+    "address": "Синявинская улица, дом 11, корпус 4",
+    "entrance": 6,
+    "plot": 1,
+    "floors": 19,
+    "lifts": "2",
+    "garbage_chute": "нет",
+    "source_row": 6542
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.344477,
+     55.947207
+    ]
+   },
+   "properties": {
+    "district": "Молжаниновский",
+    "unom": 340426,
+    "address": "Синявинская улица, дом 11, корпус 4",
+    "entrance": 7,
+    "plot": 1,
+    "floors": 19,
+    "lifts": "2",
+    "garbage_chute": "нет",
+    "source_row": 6543
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.344268,
+     55.947093
+    ]
+   },
+   "properties": {
+    "district": "Молжаниновский",
+    "unom": 340426,
+    "address": "Синявинская улица, дом 11, корпус 4",
+    "entrance": 8,
+    "plot": 1,
+    "floors": 19,
+    "lifts": "2",
+    "garbage_chute": "нет",
+    "source_row": 6544
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.34495,
+     55.946593
+    ]
+   },
+   "properties": {
+    "district": "Молжаниновский",
+    "unom": 340426,
+    "address": "Синявинская улица, дом 11, корпус 4",
+    "entrance": 9,
+    "plot": 1,
+    "floors": 19,
+    "lifts": "2",
+    "garbage_chute": "нет",
+    "source_row": 6545
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.344724,
+     55.946719
+    ]
+   },
+   "properties": {
+    "district": "Молжаниновский",
+    "unom": 340426,
+    "address": "Синявинская улица, дом 11, корпус 4",
+    "entrance": 10,
+    "plot": 1,
+    "floors": 19,
+    "lifts": "2",
+    "garbage_chute": "нет",
+    "source_row": 6546
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.344418,
+     55.946894
+    ]
+   },
+   "properties": {
+    "district": "Молжаниновский",
+    "unom": 340426,
+    "address": "Синявинская улица, дом 11, корпус 4",
+    "entrance": 11,
+    "plot": 1,
+    "floors": 19,
+    "lifts": "2",
+    "garbage_chute": "нет",
+    "source_row": 6547
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.344118,
+     55.945774
+    ]
+   },
+   "properties": {
+    "district": "Молжаниновский",
+    "unom": 340427,
+    "address": "Синявинская улица, дом 11, корпус 5",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 19,
+    "lifts": "2",
+    "garbage_chute": "нет",
+    "source_row": 6548
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.343882,
+     55.945912
+    ]
+   },
+   "properties": {
+    "district": "Молжаниновский",
+    "unom": 340427,
+    "address": "Синявинская улица, дом 11, корпус 5",
+    "entrance": 2,
+    "plot": 1,
+    "floors": 19,
+    "lifts": "2",
+    "garbage_chute": "нет",
+    "source_row": 6549
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.343651,
+     55.946051
+    ]
+   },
+   "properties": {
+    "district": "Молжаниновский",
+    "unom": 340427,
+    "address": "Синявинская улица, дом 11, корпус 5",
+    "entrance": 3,
+    "plot": 1,
+    "floors": 19,
+    "lifts": "2",
+    "garbage_chute": "нет",
+    "source_row": 6550
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.343404,
+     55.946195
+    ]
+   },
+   "properties": {
+    "district": "Молжаниновский",
+    "unom": 340427,
+    "address": "Синявинская улица, дом 11, корпус 5",
+    "entrance": 4,
+    "plot": 1,
+    "floors": 19,
+    "lifts": "2",
+    "garbage_chute": "нет",
+    "source_row": 6551
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.343162,
+     55.94634
+    ]
+   },
+   "properties": {
+    "district": "Молжаниновский",
+    "unom": 340427,
+    "address": "Синявинская улица, дом 11, корпус 5",
+    "entrance": 5,
+    "plot": 1,
+    "floors": 19,
+    "lifts": "2",
+    "garbage_chute": "нет",
+    "source_row": 6552
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.343468,
+     55.946789
+    ]
+   },
+   "properties": {
+    "district": "Молжаниновский",
+    "unom": 340427,
+    "address": "Синявинская улица, дом 11, корпус 5",
+    "entrance": 6,
+    "plot": 1,
+    "floors": 19,
+    "lifts": "2",
+    "garbage_chute": "нет",
+    "source_row": 6553
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.343264,
+     55.946677
+    ]
+   },
+   "properties": {
+    "district": "Молжаниновский",
+    "unom": 340427,
+    "address": "Синявинская улица, дом 11, корпус 5",
+    "entrance": 7,
+    "plot": 1,
+    "floors": 19,
+    "lifts": "2",
+    "garbage_chute": "нет",
+    "source_row": 6554
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.343006,
+     55.946542
+    ]
+   },
+   "properties": {
+    "district": "Молжаниновский",
+    "unom": 340427,
+    "address": "Синявинская улица, дом 11, корпус 5",
+    "entrance": 8,
+    "plot": 1,
+    "floors": 19,
+    "lifts": "2",
+    "garbage_chute": "нет",
+    "source_row": 6555
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.345577,
+     55.945087
+    ]
+   },
+   "properties": {
+    "district": "Молжаниновский",
+    "unom": 340429,
+    "address": "Синявинская улица, дом 11, корпус 7",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 25,
+    "lifts": "3",
+    "garbage_chute": "нет",
+    "source_row": 6556
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.346125,
+     55.944762
+    ]
+   },
+   "properties": {
+    "district": "Молжаниновский",
+    "unom": 340430,
+    "address": "Синявинская улица, дом 11, корпус 8",
+    "entrance": 1,
+    "plot": 1,
+    "floors": 25,
+    "lifts": "3",
+    "garbage_chute": "нет",
+    "source_row": 6557
+   }
+  }
+ ]
+}

@@ -9,6 +9,7 @@ window.createPointPopover = function ({ map, card, mapElement }) {
     dp: { label: 'Детская площадка', color: '#2e9e52' },
     sp: { label: 'Спортивная площадка', color: '#1f78b4' },
     sidewalk: { label: 'Тротуар', color: '#7b4fc9' },
+    door: { label: 'Входная группа', color: '#1d3c4f' },
   };
   const narrow = window.matchMedia('(max-width: 720px)');
   const shell = document.createElement('div');

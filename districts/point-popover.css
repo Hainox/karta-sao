@@ -88,3 +88,7 @@
 .shoot-marker.sidewalk-shoot[data-photo-state="pending"] .shoot-dot{background:#2a6fdb}
 .shoot-marker.sidewalk-shoot[data-photo-state="accepted"] .shoot-dot{background:#0c7a5a}
 .shoot-marker.sidewalk-shoot[data-photo-state="rework"] .shoot-dot{background:#d7193f}
+
+/* Входные группы (подъезды): метка с номером подъезда; на обзорном зуме мельче. */
+.entrance-ref{position:absolute;left:0;top:0;min-width:17px;height:17px;padding:0 4px;border:1.5px solid #fff;border-radius:5px;background:#1d3c4f;color:#fff;font:800 10px/14px "Century Gothic",Inter,Arial,sans-serif;font-variant-numeric:tabular-nums;text-align:center;box-shadow:0 1px 3px rgba(16,38,54,.5);cursor:pointer;transform:translate(-50%,-50%) scale(clamp(.6,calc(var(--shoot-arrow-scale,1) * 1.6),1))}
+.entrance-ref:hover,.entrance-ref:focus-visible{background:var(--accent);outline:none;z-index:3}

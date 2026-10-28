@@ -1,0 +1,9770 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559848,
+     55.862498
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 5001529,
+    "address": "Бескудниковский бульв., дом 11, корпус 1",
+    "entrance": 1,
+    "plot": 8,
+    "floors": 10,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1377
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560032,
+     55.862561
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 5001529,
+    "address": "Бескудниковский бульв., дом 11, корпус 1",
+    "entrance": 2,
+    "plot": 8,
+    "floors": 10,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1378
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.56027,
+     55.862295
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 5001529,
+    "address": "Бескудниковский бульв., дом 11, корпус 1",
+    "entrance": 3,
+    "plot": 8,
+    "floors": 10,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1379
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560436,
+     55.862073
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 5001529,
+    "address": "Бескудниковский бульв., дом 11, корпус 1",
+    "entrance": 4,
+    "plot": 8,
+    "floors": 10,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1380
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560538,
+     55.861959
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 5001529,
+    "address": "Бескудниковский бульв., дом 11, корпус 1",
+    "entrance": 5,
+    "plot": 8,
+    "floors": 10,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1381
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.558902,
+     55.862515
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 5002994,
+    "address": "Бескудниковский бульв., дом 11, корпус 2",
+    "entrance": 1,
+    "plot": 8,
+    "floors": 22,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 1382
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.558775,
+     55.862667
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 5002994,
+    "address": "Бескудниковский бульв., дом 11, корпус 2",
+    "entrance": 2,
+    "plot": 8,
+    "floors": 22,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 1383
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.56066,
+     55.858997
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 5001511,
+    "address": "Бескудниковский бульв., дом 3",
+    "entrance": 1,
+    "plot": 8,
+    "floors": 8,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 1384
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.561162,
+     55.858874
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 5001511,
+    "address": "Бескудниковский бульв., дом 3",
+    "entrance": 2,
+    "plot": 8,
+    "floors": 8,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 1385
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.56116,
+     55.858847
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 5001511,
+    "address": "Бескудниковский бульв., дом 3",
+    "entrance": 3,
+    "plot": 8,
+    "floors": 13,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 1386
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.538234,
+     55.873538
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 6043024,
+    "address": "Бескудниковский бульв., дом 52",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 22,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 1387
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.538095,
+     55.873555
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 6043024,
+    "address": "Бескудниковский бульв., дом 52",
+    "entrance": 2,
+    "plot": 5,
+    "floors": 22,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 1388
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.537482,
+     55.873798
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 6043024,
+    "address": "Бескудниковский бульв., дом 52",
+    "entrance": 3,
+    "plot": 5,
+    "floors": 22,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 1389
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.537493,
+     55.873842
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 6043024,
+    "address": "Бескудниковский бульв., дом 52",
+    "entrance": 4,
+    "plot": 5,
+    "floors": 22,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 1390
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.538903,
+     55.874074
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 5174567,
+    "address": "Бескудниковский бульв., дом 52, корпус 1",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 20,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 1391
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.538945,
+     55.873796
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 5174567,
+    "address": "Бескудниковский бульв., дом 52, корпус 1",
+    "entrance": 2,
+    "plot": 5,
+    "floors": 20,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 1392
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.539052,
+     55.873465
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 5174567,
+    "address": "Бескудниковский бульв., дом 52, корпус 1",
+    "entrance": 3,
+    "plot": 5,
+    "floors": 20,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 1393
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563245,
+     55.859823
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 1914,
+    "address": "Бескудниковский бульвар, дом 10, корпус 1",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 1394
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563209,
+     55.860142
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 1915,
+    "address": "Бескудниковский бульвар, дом 10, корпус 2",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 1395
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.56318,
+     55.860455
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 1916,
+    "address": "Бескудниковский бульвар, дом 10, корпус 3",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 1396
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563153,
+     55.860768
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 1917,
+    "address": "Бескудниковский бульвар, дом 10, корпус 4",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 1397
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563022,
+     55.861319
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75150,
+    "address": "Бескудниковский бульвар, дом 10, корпус 5",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 24,
+    "lifts": "4",
+    "garbage_chute": "есть",
+    "source_row": 1398
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.558255,
+     55.863516
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 5003183,
+    "address": "Бескудниковский бульвар, дом 13",
+    "entrance": 1,
+    "plot": 8,
+    "floors": 13,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1399
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.558652,
+     55.863613
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 5003183,
+    "address": "Бескудниковский бульвар, дом 13",
+    "entrance": 2,
+    "plot": 8,
+    "floors": 13,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1400
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.55897,
+     55.863689
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 5003183,
+    "address": "Бескудниковский бульвар, дом 13",
+    "entrance": 3,
+    "plot": 8,
+    "floors": 15,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1401
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559134,
+     55.863729
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 5003183,
+    "address": "Бескудниковский бульвар, дом 13",
+    "entrance": 4,
+    "plot": 8,
+    "floors": 15,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1402
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559338,
+     55.863519
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 5003183,
+    "address": "Бескудниковский бульвар, дом 13",
+    "entrance": 5,
+    "plot": 8,
+    "floors": 18,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1403
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559554,
+     55.863236
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 5003183,
+    "address": "Бескудниковский бульвар, дом 13",
+    "entrance": 6,
+    "plot": 8,
+    "floors": 10,
+    "lifts": "2",
+    "garbage_chute": "нет",
+    "source_row": 1404
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559386,
+     55.863114
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 5003183,
+    "address": "Бескудниковский бульвар, дом 13",
+    "entrance": 7,
+    "plot": 8,
+    "floors": 10,
+    "lifts": "2",
+    "garbage_chute": "нет",
+    "source_row": 1405
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.55882,
+     55.864454
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 1927,
+    "address": "Бескудниковский бульвар, дом 15, корпус 1",
+    "entrance": 1,
+    "plot": 8,
+    "floors": 15,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1406
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.56176,
+     55.863288
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 1928,
+    "address": "Бескудниковский бульвар, дом 16, корпус 1",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 1407
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.561516,
+     55.863577
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 1929,
+    "address": "Бескудниковский бульвар, дом 16, корпус 2",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 1408
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5613,
+     55.86387
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 1930,
+    "address": "Бескудниковский бульвар, дом 16, корпус 3",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 1409
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.561072,
+     55.864173
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 1931,
+    "address": "Бескудниковский бульвар, дом 16, корпус 4",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 1410
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.556875,
+     55.864637
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340334,
+    "address": "Бескудниковский бульвар, дом 17, корпус 1",
+    "entrance": 1,
+    "plot": 8,
+    "floors": 25,
+    "lifts": "4",
+    "garbage_chute": "есть",
+    "source_row": 1411
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.556117,
+     55.865639
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340337,
+    "address": "Бескудниковский бульвар, дом 19, корпус 1",
+    "entrance": 1,
+    "plot": 8,
+    "floors": 25,
+    "lifts": "4",
+    "garbage_chute": "есть",
+    "source_row": 1412
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.557356,
+     55.865723
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340358,
+    "address": "Бескудниковский бульвар, дом 19, корпус 2",
+    "entrance": 1,
+    "plot": 8,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1413
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.557822,
+     55.865668
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340358,
+    "address": "Бескудниковский бульвар, дом 19, корпус 2",
+    "entrance": 2,
+    "plot": 8,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1414
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.557991,
+     55.865442
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340358,
+    "address": "Бескудниковский бульвар, дом 19, корпус 2",
+    "entrance": 3,
+    "plot": 8,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1415
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.558151,
+     55.865224
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340358,
+    "address": "Бескудниковский бульвар, дом 19, корпус 2",
+    "entrance": 4,
+    "plot": 8,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1416
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.558194,
+     55.865098
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340358,
+    "address": "Бескудниковский бульвар, дом 19, корпус 2",
+    "entrance": 5,
+    "plot": 8,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1417
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.557877,
+     55.865017
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340358,
+    "address": "Бескудниковский бульвар, дом 19, корпус 2",
+    "entrance": 6,
+    "plot": 8,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1418
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562719,
+     55.857079
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75057,
+    "address": "Бескудниковский бульвар, дом 2, корпус 1",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1419
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563894,
+     55.857288
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75057,
+    "address": "Бескудниковский бульвар, дом 2, корпус 1",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1420
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563497,
+     55.857325
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75057,
+    "address": "Бескудниковский бульвар, дом 2, корпус 1",
+    "entrance": 3,
+    "plot": 3,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1421
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563136,
+     55.85736
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75057,
+    "address": "Бескудниковский бульвар, дом 2, корпус 1",
+    "entrance": 4,
+    "plot": 3,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1422
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562535,
+     55.857254
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75057,
+    "address": "Бескудниковский бульвар, дом 2, корпус 1",
+    "entrance": 5,
+    "plot": 3,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1423
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564041,
+     55.856614
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75055,
+    "address": "Бескудниковский бульвар, дом 2, корпус 2",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1424
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564203,
+     55.856915
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75055,
+    "address": "Бескудниковский бульвар, дом 2, корпус 2",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1425
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563687,
+     55.856412
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75043,
+    "address": "Бескудниковский бульвар, дом 2, корпус 3",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1426
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563275,
+     55.856374
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75043,
+    "address": "Бескудниковский бульвар, дом 2, корпус 3",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1427
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559785,
+     55.865842
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 1940,
+    "address": "Бескудниковский бульвар, дом 20, корпус 1",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 1428
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559549,
+     55.866125
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 1941,
+    "address": "Бескудниковский бульвар, дом 20, корпус 2",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 1429
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559332,
+     55.866419
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 1942,
+    "address": "Бескудниковский бульвар, дом 20, корпус 3",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 1430
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.55911,
+     55.866705
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 1943,
+    "address": "Бескудниковский бульвар, дом 20, корпус 4",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 1431
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560286,
+     55.865433
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340083,
+    "address": "Бескудниковский бульвар, дом 20, корпус 5",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 24,
+    "lifts": "4",
+    "garbage_chute": "есть",
+    "source_row": 1432
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.555355,
+     55.866608
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340333,
+    "address": "Бескудниковский бульвар, дом 21, корпус 1",
+    "entrance": 1,
+    "plot": 8,
+    "floors": 25,
+    "lifts": "4",
+    "garbage_chute": "есть",
+    "source_row": 1433
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.556389,
+     55.866984
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340359,
+    "address": "Бескудниковский бульвар, дом 21, корпус 2",
+    "entrance": 1,
+    "plot": 8,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1434
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.556854,
+     55.866899
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340359,
+    "address": "Бескудниковский бульвар, дом 21, корпус 2",
+    "entrance": 2,
+    "plot": 8,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1435
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.556978,
+     55.866738
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340359,
+    "address": "Бескудниковский бульвар, дом 21, корпус 2",
+    "entrance": 3,
+    "plot": 8,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1436
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.557143,
+     55.86654
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340359,
+    "address": "Бескудниковский бульвар, дом 21, корпус 2",
+    "entrance": 4,
+    "plot": 8,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1437
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.557217,
+     55.866363
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340359,
+    "address": "Бескудниковский бульвар, дом 21, корпус 2",
+    "entrance": 5,
+    "plot": 8,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1438
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.556887,
+     55.866277
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340359,
+    "address": "Бескудниковский бульвар, дом 21, корпус 2",
+    "entrance": 6,
+    "plot": 8,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1439
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.561382,
+     55.864635
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75168,
+    "address": "Бескудниковский бульвар, дом 22",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1440
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562368,
+     55.864835
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75168,
+    "address": "Бескудниковский бульвар, дом 22",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1441
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.56269,
+     55.864757
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75168,
+    "address": "Бескудниковский бульвар, дом 22",
+    "entrance": 3,
+    "plot": 3,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1442
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.561865,
+     55.864892
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75168,
+    "address": "Бескудниковский бульвар, дом 22",
+    "entrance": 4,
+    "plot": 3,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1443
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.561527,
+     55.86481
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75168,
+    "address": "Бескудниковский бульвар, дом 22",
+    "entrance": 5,
+    "plot": 3,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1444
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.55633,
+     55.867631
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 31863,
+    "address": "Бескудниковский бульвар, дом 23, корпус 1",
+    "entrance": 1,
+    "plot": 8,
+    "floors": 15,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1445
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559094,
+     55.867311
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340077,
+    "address": "Бескудниковский бульвар, дом 24, корпус 1",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1446
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559175,
+     55.86749
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340077,
+    "address": "Бескудниковский бульвар, дом 24, корпус 1",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1447
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559588,
+     55.867589
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340077,
+    "address": "Бескудниковский бульвар, дом 24, корпус 1",
+    "entrance": 3,
+    "plot": 3,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1448
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559914,
+     55.867664
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340077,
+    "address": "Бескудниковский бульвар, дом 24, корпус 1",
+    "entrance": 4,
+    "plot": 3,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1449
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560404,
+     55.867599
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340077,
+    "address": "Бескудниковский бульвар, дом 24, корпус 1",
+    "entrance": 5,
+    "plot": 3,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1450
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560717,
+     55.867528
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340077,
+    "address": "Бескудниковский бульвар, дом 24, корпус 1",
+    "entrance": 6,
+    "plot": 3,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1451
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.555674,
+     55.868716
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340449,
+    "address": "Бескудниковский бульвар, дом 25, корпус 4",
+    "entrance": 1,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1452
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.555525,
+     55.868917
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340449,
+    "address": "Бескудниковский бульвар, дом 25, корпус 4",
+    "entrance": 2,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1453
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.555372,
+     55.869107
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340449,
+    "address": "Бескудниковский бульвар, дом 25, корпус 4",
+    "entrance": 3,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1454
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.555037,
+     55.869197
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340449,
+    "address": "Бескудниковский бульвар, дом 25, корпус 4",
+    "entrance": 4,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1455
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.554581,
+     55.869269
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340449,
+    "address": "Бескудниковский бульвар, дом 25, корпус 4",
+    "entrance": 5,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1456
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.554416,
+     55.8699
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340450,
+    "address": "Бескудниковский бульвар, дом 27, корпус 4",
+    "entrance": 1,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1457
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.554524,
+     55.870217
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340450,
+    "address": "Бескудниковский бульвар, дом 27, корпус 4",
+    "entrance": 2,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1458
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.554378,
+     55.870376
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340450,
+    "address": "Бескудниковский бульвар, дом 27, корпус 4",
+    "entrance": 3,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1459
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.554267,
+     55.87055
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340450,
+    "address": "Бескудниковский бульвар, дом 27, корпус 4",
+    "entrance": 4,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1460
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.557498,
+     55.868795
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 1958,
+    "address": "Бескудниковский бульвар, дом 28, корпус 1",
+    "entrance": 1,
+    "plot": 4,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 1461
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.557272,
+     55.869078
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 1959,
+    "address": "Бескудниковский бульвар, дом 28, корпус 2",
+    "entrance": 1,
+    "plot": 4,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 1462
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.557051,
+     55.869371
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 1960,
+    "address": "Бескудниковский бульвар, дом 28, корпус 3",
+    "entrance": 1,
+    "plot": 4,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 1463
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.556821,
+     55.869654
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 1961,
+    "address": "Бескудниковский бульвар, дом 28, корпус 4",
+    "entrance": 1,
+    "plot": 4,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 1464
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.558033,
+     55.868352
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340106,
+    "address": "Бескудниковский бульвар, дом 28, корпус 5",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 24,
+    "lifts": "4",
+    "garbage_chute": "есть",
+    "source_row": 1465
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.553523,
+     55.871239
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 1962,
+    "address": "Бескудниковский бульвар, дом 29, корпус 1",
+    "entrance": 1,
+    "plot": 4,
+    "floors": 15,
+    "lifts": "4",
+    "garbage_chute": "есть",
+    "source_row": 1466
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.556206,
+     55.870678
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340151,
+    "address": "Бескудниковский бульвар, дом 30, корпус 2",
+    "entrance": 1,
+    "plot": 4,
+    "floors": 24,
+    "lifts": "4",
+    "garbage_chute": "есть",
+    "source_row": 1467
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.557059,
+     55.870116
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340142,
+    "address": "Бескудниковский бульвар, дом 30, корпус 3",
+    "entrance": 1,
+    "plot": 4,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1468
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.557173,
+     55.870293
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340142,
+    "address": "Бескудниковский бульвар, дом 30, корпус 3",
+    "entrance": 2,
+    "plot": 4,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1469
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.557539,
+     55.870377
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340142,
+    "address": "Бескудниковский бульвар, дом 30, корпус 3",
+    "entrance": 3,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1470
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.558052,
+     55.87031
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340142,
+    "address": "Бескудниковский бульвар, дом 30, корпус 3",
+    "entrance": 4,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1471
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.55837,
+     55.870235
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340142,
+    "address": "Бескудниковский бульвар, дом 30, корпус 3",
+    "entrance": 5,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1472
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559234,
+     55.869595
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340143,
+    "address": "Бескудниковский бульвар, дом 30, корпус 4",
+    "entrance": 1,
+    "plot": 4,
+    "floors": 22,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 1473
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.558934,
+     55.869557
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340143,
+    "address": "Бескудниковский бульвар, дом 30, корпус 4",
+    "entrance": 2,
+    "plot": 4,
+    "floors": 22,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 1474
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.558766,
+     55.869738
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340143,
+    "address": "Бескудниковский бульвар, дом 30, корпус 4",
+    "entrance": 3,
+    "plot": 4,
+    "floors": 22,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 1475
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.553067,
+     55.871964
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 470058,
+    "address": "Бескудниковский бульвар, дом 31",
+    "entrance": 1,
+    "plot": 4,
+    "floors": 15,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1476
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.552916,
+     55.872138
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 470058,
+    "address": "Бескудниковский бульвар, дом 31",
+    "entrance": 2,
+    "plot": 4,
+    "floors": 15,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1477
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.552595,
+     55.87234
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 470058,
+    "address": "Бескудниковский бульвар, дом 31",
+    "entrance": 3,
+    "plot": 4,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1478
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.552255,
+     55.872411
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 470058,
+    "address": "Бескудниковский бульвар, дом 31",
+    "entrance": 4,
+    "plot": 4,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1479
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.551655,
+     55.872367
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 470058,
+    "address": "Бескудниковский бульвар, дом 31",
+    "entrance": 5,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1480
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.551451,
+     55.872334
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 470058,
+    "address": "Бескудниковский бульвар, дом 31",
+    "entrance": 6,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1481
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.555743,
+     55.871108
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 1968,
+    "address": "Бескудниковский бульвар, дом 32, корпус 1",
+    "entrance": 1,
+    "plot": 4,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 1482
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.555502,
+     55.871403
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 1969,
+    "address": "Бескудниковский бульвар, дом 32, корпус 2",
+    "entrance": 1,
+    "plot": 4,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 1483
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.555288,
+     55.871694
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 1970,
+    "address": "Бескудниковский бульвар, дом 32, корпус 3",
+    "entrance": 1,
+    "plot": 4,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 1484
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.555057,
+     55.87199
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 1971,
+    "address": "Бескудниковский бульвар, дом 32, корпус 4",
+    "entrance": 1,
+    "plot": 4,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 1485
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.557003,
+     55.871811
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340226,
+    "address": "Бескудниковский бульвар, дом 32, корпус 5",
+    "entrance": 1,
+    "plot": 4,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1486
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.556671,
+     55.87179
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340226,
+    "address": "Бескудниковский бульвар, дом 32, корпус 5",
+    "entrance": 2,
+    "plot": 4,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1487
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.556495,
+     55.871987
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340226,
+    "address": "Бескудниковский бульвар, дом 32, корпус 5",
+    "entrance": 3,
+    "plot": 4,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1488
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.554795,
+     55.872397
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340172,
+    "address": "Бескудниковский бульвар, дом 32, корпус 6",
+    "entrance": 1,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1489
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.555754,
+     55.872574
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340172,
+    "address": "Бескудниковский бульвар, дом 32, корпус 6",
+    "entrance": 2,
+    "plot": 4,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1490
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.556202,
+     55.872352
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340172,
+    "address": "Бескудниковский бульвар, дом 32, корпус 6",
+    "entrance": 3,
+    "plot": 4,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1491
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.556046,
+     55.872533
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340172,
+    "address": "Бескудниковский бульвар, дом 32, корпус 6",
+    "entrance": 4,
+    "plot": 4,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1492
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.555241,
+     55.872663
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340172,
+    "address": "Бескудниковский бульвар, дом 32, корпус 6",
+    "entrance": 5,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1493
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.554891,
+     55.87257
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340172,
+    "address": "Бескудниковский бульвар, дом 32, корпус 6",
+    "entrance": 6,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1494
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.553469,
+     55.873622
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75069,
+    "address": "Бескудниковский бульвар, дом 36, корпус 1",
+    "entrance": 1,
+    "plot": 4,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1495
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.553344,
+     55.873254
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75070,
+    "address": "Бескудниковский бульвар, дом 36, корпус 2",
+    "entrance": 1,
+    "plot": 4,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1496
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.554742,
+     55.874031
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 1978,
+    "address": "Бескудниковский бульвар, дом 36, корпус 3",
+    "entrance": 1,
+    "plot": 4,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1497
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.554649,
+     55.873616
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 1979,
+    "address": "Бескудниковский бульвар, дом 36, корпус 4",
+    "entrance": 1,
+    "plot": 4,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1498
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.55266,
+     55.874174
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340246,
+    "address": "Бескудниковский бульвар, дом 38, корпус 1",
+    "entrance": 1,
+    "plot": 4,
+    "floors": 24,
+    "lifts": "4",
+    "garbage_chute": "есть",
+    "source_row": 1499
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565244,
+     55.857053
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75021,
+    "address": "Бескудниковский бульвар, дом 4",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1500
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.56483,
+     55.857094
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75021,
+    "address": "Бескудниковский бульвар, дом 4",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1501
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.549335,
+     55.874252
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 1983,
+    "address": "Бескудниковский бульвар, дом 40, корпус 1",
+    "entrance": 1,
+    "plot": 4,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1502
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.550197,
+     55.874182
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 1984,
+    "address": "Бескудниковский бульвар, дом 40, корпус 2",
+    "entrance": 1,
+    "plot": 4,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1503
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.551105,
+     55.874122
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 1985,
+    "address": "Бескудниковский бульвар, дом 40, корпус 3",
+    "entrance": 1,
+    "plot": 4,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1504
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.545788,
+     55.873058
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 1987,
+    "address": "Бескудниковский бульвар, дом 45",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "нет",
+    "source_row": 1505
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.545819,
+     55.872918
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 1987,
+    "address": "Бескудниковский бульвар, дом 45",
+    "entrance": 2,
+    "plot": 5,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "нет",
+    "source_row": 1506
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.545859,
+     55.872766
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 1987,
+    "address": "Бескудниковский бульвар, дом 45",
+    "entrance": 3,
+    "plot": 5,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "нет",
+    "source_row": 1507
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.545887,
+     55.872601
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 1987,
+    "address": "Бескудниковский бульвар, дом 45",
+    "entrance": 4,
+    "plot": 5,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "нет",
+    "source_row": 1508
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.545937,
+     55.872425
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 1987,
+    "address": "Бескудниковский бульвар, дом 45",
+    "entrance": 5,
+    "plot": 5,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "нет",
+    "source_row": 1509
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.54596,
+     55.872283
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 1987,
+    "address": "Бескудниковский бульвар, дом 45",
+    "entrance": 6,
+    "plot": 5,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "нет",
+    "source_row": 1510
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.545219,
+     55.874844
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 1990,
+    "address": "Бескудниковский бульвар, дом 46, корпус 3",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "нет",
+    "source_row": 1511
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.544947,
+     55.874827
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 1990,
+    "address": "Бескудниковский бульвар, дом 46, корпус 3",
+    "entrance": 2,
+    "plot": 5,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "нет",
+    "source_row": 1512
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.544663,
+     55.874802
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 1990,
+    "address": "Бескудниковский бульвар, дом 46, корпус 3",
+    "entrance": 3,
+    "plot": 5,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "нет",
+    "source_row": 1513
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.544407,
+     55.874792
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 1990,
+    "address": "Бескудниковский бульвар, дом 46, корпус 3",
+    "entrance": 4,
+    "plot": 5,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "нет",
+    "source_row": 1514
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.545068,
+     55.873008
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 1991,
+    "address": "Бескудниковский бульвар, дом 47",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "нет",
+    "source_row": 1515
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.545083,
+     55.872868
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 1991,
+    "address": "Бескудниковский бульвар, дом 47",
+    "entrance": 2,
+    "plot": 5,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "нет",
+    "source_row": 1516
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.545137,
+     55.872666
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 1991,
+    "address": "Бескудниковский бульвар, дом 47",
+    "entrance": 3,
+    "plot": 5,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "нет",
+    "source_row": 1517
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.545175,
+     55.872509
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 1991,
+    "address": "Бескудниковский бульвар, дом 47",
+    "entrance": 4,
+    "plot": 5,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "нет",
+    "source_row": 1518
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.545206,
+     55.872357
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 1991,
+    "address": "Бескудниковский бульвар, дом 47",
+    "entrance": 5,
+    "plot": 5,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "нет",
+    "source_row": 1519
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.54524,
+     55.872205
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 1991,
+    "address": "Бескудниковский бульвар, дом 47",
+    "entrance": 6,
+    "plot": 5,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "нет",
+    "source_row": 1520
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.544335,
+     55.872941
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 1998,
+    "address": "Бескудниковский бульвар, дом 49",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "нет",
+    "source_row": 1521
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.544383,
+     55.87278
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 1998,
+    "address": "Бескудниковский бульвар, дом 49",
+    "entrance": 2,
+    "plot": 5,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "нет",
+    "source_row": 1522
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.544415,
+     55.872629
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 1998,
+    "address": "Бескудниковский бульвар, дом 49",
+    "entrance": 3,
+    "plot": 5,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "нет",
+    "source_row": 1523
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.544445,
+     55.872467
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 1998,
+    "address": "Бескудниковский бульвар, дом 49",
+    "entrance": 4,
+    "plot": 5,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "нет",
+    "source_row": 1524
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.544481,
+     55.872325
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 1998,
+    "address": "Бескудниковский бульвар, дом 49",
+    "entrance": 5,
+    "plot": 5,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "нет",
+    "source_row": 1525
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5445,
+     55.872151
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 1998,
+    "address": "Бескудниковский бульвар, дом 49",
+    "entrance": 6,
+    "plot": 5,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "нет",
+    "source_row": 1526
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560387,
+     55.860025
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 5001501,
+    "address": "Бескудниковский бульвар, дом 5",
+    "entrance": 1,
+    "plot": 8,
+    "floors": 18,
+    "lifts": "2",
+    "garbage_chute": "нет",
+    "source_row": 1527
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.56089,
+     55.86001
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 5001501,
+    "address": "Бескудниковский бульвар, дом 5",
+    "entrance": 2,
+    "plot": 8,
+    "floors": 11,
+    "lifts": "2",
+    "garbage_chute": "нет",
+    "source_row": 1528
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.561153,
+     55.85992
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 5001501,
+    "address": "Бескудниковский бульвар, дом 5",
+    "entrance": 3,
+    "plot": 8,
+    "floors": 11,
+    "lifts": "1",
+    "garbage_chute": "нет",
+    "source_row": 1529
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.561179,
+     55.859656
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 5001501,
+    "address": "Бескудниковский бульвар, дом 5",
+    "entrance": 4,
+    "plot": 8,
+    "floors": 15,
+    "lifts": "1",
+    "garbage_chute": "нет",
+    "source_row": 1530
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.561166,
+     55.859581
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 5001501,
+    "address": "Бескудниковский бульвар, дом 5",
+    "entrance": 5,
+    "plot": 8,
+    "floors": 8,
+    "lifts": "1",
+    "garbage_chute": "нет",
+    "source_row": 1531
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.561075,
+     55.859443
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 5001501,
+    "address": "Бескудниковский бульвар, дом 5",
+    "entrance": 6,
+    "plot": 8,
+    "floors": 8,
+    "lifts": "1",
+    "garbage_chute": "нет",
+    "source_row": 1532
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.539944,
+     55.873536
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 6519657,
+    "address": "Бескудниковский бульвар, дом 50/1",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 15,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1533
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.540293,
+     55.873703
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 6519657,
+    "address": "Бескудниковский бульвар, дом 50/1",
+    "entrance": 2,
+    "plot": 5,
+    "floors": 15,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1534
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.540211,
+     55.873771
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 6519657,
+    "address": "Бескудниковский бульвар, дом 50/1",
+    "entrance": 3,
+    "plot": 5,
+    "floors": 15,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1535
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.540219,
+     55.874128
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 6519657,
+    "address": "Бескудниковский бульвар, дом 50/1",
+    "entrance": 4,
+    "plot": 5,
+    "floors": 15,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1536
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.543602,
+     55.872917
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 2000,
+    "address": "Бескудниковский бульвар, дом 51",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "нет",
+    "source_row": 1537
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.543637,
+     55.872749
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 2000,
+    "address": "Бескудниковский бульвар, дом 51",
+    "entrance": 2,
+    "plot": 5,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "нет",
+    "source_row": 1538
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.543675,
+     55.872591
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 2000,
+    "address": "Бескудниковский бульвар, дом 51",
+    "entrance": 3,
+    "plot": 5,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "нет",
+    "source_row": 1539
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5437,
+     55.872458
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 2000,
+    "address": "Бескудниковский бульвар, дом 51",
+    "entrance": 4,
+    "plot": 5,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "нет",
+    "source_row": 1540
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.543737,
+     55.872257
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 2000,
+    "address": "Бескудниковский бульвар, дом 51",
+    "entrance": 5,
+    "plot": 5,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "нет",
+    "source_row": 1541
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.54378,
+     55.872104
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 2000,
+    "address": "Бескудниковский бульвар, дом 51",
+    "entrance": 6,
+    "plot": 5,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "нет",
+    "source_row": 1542
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.540222,
+     55.87247
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 2003,
+    "address": "Бескудниковский бульвар, дом 55, корпус 1",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1543
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.54025,
+     55.872046
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 2004,
+    "address": "Бескудниковский бульвар, дом 55, корпус 2",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1544
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.53939,
+     55.871531
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 2005,
+    "address": "Бескудниковский бульвар, дом 55, корпус 3",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1545
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.536693,
+     55.873916
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340292,
+    "address": "Бескудниковский бульвар, дом 56, корпус 1",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1546
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.536413,
+     55.874026
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340292,
+    "address": "Бескудниковский бульвар, дом 56, корпус 1",
+    "entrance": 2,
+    "plot": 5,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1547
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.53626,
+     55.874074
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340292,
+    "address": "Бескудниковский бульвар, дом 56, корпус 1",
+    "entrance": 3,
+    "plot": 5,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1548
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.538967,
+     55.872405
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 2007,
+    "address": "Бескудниковский бульвар, дом 57, корпус 1",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1549
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.538335,
+     55.871883
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 2008,
+    "address": "Бескудниковский бульвар, дом 57, корпус 2",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1550
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.538434,
+     55.871472
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 2009,
+    "address": "Бескудниковский бульвар, дом 57, корпус 3",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1551
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.535458,
+     55.874661
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340291,
+    "address": "Бескудниковский бульвар, дом 58, корпус 1",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1552
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.535334,
+     55.87487
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340291,
+    "address": "Бескудниковский бульвар, дом 58, корпус 1",
+    "entrance": 2,
+    "plot": 5,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1553
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.535317,
+     55.874998
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340291,
+    "address": "Бескудниковский бульвар, дом 58, корпус 1",
+    "entrance": 3,
+    "plot": 5,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1554
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.535539,
+     55.875182
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340291,
+    "address": "Бескудниковский бульвар, дом 58, корпус 1",
+    "entrance": 4,
+    "plot": 5,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1555
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.536567,
+     55.874562
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340301,
+    "address": "Бескудниковский бульвар, дом 58, корпус 2",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 24,
+    "lifts": "4",
+    "garbage_chute": "есть",
+    "source_row": 1556
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.536787,
+     55.874804
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340290,
+    "address": "Бескудниковский бульвар, дом 58, корпус 3",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1557
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.536675,
+     55.875015
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340290,
+    "address": "Бескудниковский бульвар, дом 58, корпус 3",
+    "entrance": 2,
+    "plot": 5,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1558
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.536577,
+     55.875191
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340290,
+    "address": "Бескудниковский бульвар, дом 58, корпус 3",
+    "entrance": 3,
+    "plot": 5,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1559
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.53606,
+     55.875287
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340290,
+    "address": "Бескудниковский бульвар, дом 58, корпус 3",
+    "entrance": 4,
+    "plot": 5,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1560
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565241,
+     55.857623
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75142,
+    "address": "Бескудниковский бульвар, дом 6, корпус 2",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1561
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565448,
+     55.857983
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75142,
+    "address": "Бескудниковский бульвар, дом 6, корпус 2",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1562
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565014,
+     55.858076
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75142,
+    "address": "Бескудниковский бульвар, дом 6, корпус 2",
+    "entrance": 3,
+    "plot": 3,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1563
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564624,
+     55.858105
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75142,
+    "address": "Бескудниковский бульвар, дом 6, корпус 2",
+    "entrance": 4,
+    "plot": 3,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1564
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564066,
+     55.857992
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75142,
+    "address": "Бескудниковский бульвар, дом 6, корпус 2",
+    "entrance": 5,
+    "plot": 3,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1565
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563909,
+     55.857741
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75142,
+    "address": "Бескудниковский бульвар, дом 6, корпус 2",
+    "entrance": 6,
+    "plot": 3,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1566
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563865,
+     55.85856
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75129,
+    "address": "Бескудниковский бульвар, дом 6, корпус 3",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1567
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563466,
+     55.858564
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75129,
+    "address": "Бескудниковский бульвар, дом 6, корпус 3",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1568
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563196,
+     55.858784
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75129,
+    "address": "Бескудниковский бульвар, дом 6, корпус 3",
+    "entrance": 3,
+    "plot": 3,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1569
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563211,
+     55.858998
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75129,
+    "address": "Бескудниковский бульвар, дом 6, корпус 3",
+    "entrance": 4,
+    "plot": 3,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1570
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.56356,
+     55.859323
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75129,
+    "address": "Бескудниковский бульвар, дом 6, корпус 3",
+    "entrance": 5,
+    "plot": 3,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1571
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563076,
+     55.859217
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75129,
+    "address": "Бескудниковский бульвар, дом 6, корпус 3",
+    "entrance": 6,
+    "plot": 3,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1572
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563096,
+     55.858491
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75129,
+    "address": "Бескудниковский бульвар, дом 6, корпус 3",
+    "entrance": 7,
+    "plot": 3,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1573
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564596,
+     55.859206
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75131,
+    "address": "Бескудниковский бульвар, дом 6, корпус 4",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1574
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564146,
+     55.859319
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75131,
+    "address": "Бескудниковский бульвар, дом 6, корпус 4",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1575
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564425,
+     55.858921
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75131,
+    "address": "Бескудниковский бульвар, дом 6, корпус 4",
+    "entrance": 3,
+    "plot": 3,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1576
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564356,
+     55.858711
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75131,
+    "address": "Бескудниковский бульвар, дом 6, корпус 4",
+    "entrance": 4,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1577
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564453,
+     55.858435
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75131,
+    "address": "Бескудниковский бульвар, дом 6, корпус 4",
+    "entrance": 5,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1578
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.55527,
+     55.863423
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340409,
+    "address": "Бескудниковский переулок, дом 1, корпус 1",
+    "entrance": 1,
+    "plot": 8,
+    "floors": 13,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1579
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.554923,
+     55.86334
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340409,
+    "address": "Бескудниковский переулок, дом 1, корпус 1",
+    "entrance": 2,
+    "plot": 8,
+    "floors": 13,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1580
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.555774,
+     55.863753
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340410,
+    "address": "Бескудниковский переулок, дом 1, корпус 2",
+    "entrance": 1,
+    "plot": 8,
+    "floors": 15,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1581
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.555575,
+     55.86357
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340410,
+    "address": "Бескудниковский переулок, дом 1, корпус 2",
+    "entrance": 2,
+    "plot": 8,
+    "floors": 15,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1582
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.555841,
+     55.864197
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340411,
+    "address": "Бескудниковский переулок, дом 1, корпус 3",
+    "entrance": 1,
+    "plot": 8,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1583
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.555882,
+     55.863984
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340411,
+    "address": "Бескудниковский переулок, дом 1, корпус 3",
+    "entrance": 2,
+    "plot": 8,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1584
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.550125,
+     55.874921
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340223,
+    "address": "Бескудниковский проезд, дом 2, корпус 1",
+    "entrance": 1,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1585
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.549795,
+     55.874831
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340223,
+    "address": "Бескудниковский проезд, дом 2, корпус 1",
+    "entrance": 2,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1586
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.550635,
+     55.875182
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340221,
+    "address": "Бескудниковский проезд, дом 2, корпус 2",
+    "entrance": 1,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1587
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.551058,
+     55.875135
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340221,
+    "address": "Бескудниковский проезд, дом 2, корпус 2",
+    "entrance": 2,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1588
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.551368,
+     55.87507
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340221,
+    "address": "Бескудниковский проезд, дом 2, корпус 2",
+    "entrance": 3,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1589
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.551528,
+     55.874877
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340221,
+    "address": "Бескудниковский проезд, дом 2, корпус 2",
+    "entrance": 4,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1590
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.551696,
+     55.874683
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340221,
+    "address": "Бескудниковский проезд, дом 2, корпус 2",
+    "entrance": 5,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1591
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.553389,
+     55.875399
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340224,
+    "address": "Бескудниковский проезд, дом 4, корпус 1",
+    "entrance": 1,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1592
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.553208,
+     55.875598
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340224,
+    "address": "Бескудниковский проезд, дом 4, корпус 1",
+    "entrance": 2,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1593
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.553168,
+     55.875754
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340224,
+    "address": "Бескудниковский проезд, дом 4, корпус 1",
+    "entrance": 3,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1594
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.553274,
+     55.875918
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340224,
+    "address": "Бескудниковский проезд, дом 4, корпус 1",
+    "entrance": 4,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1595
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.555416,
+     55.876
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340222,
+    "address": "Бескудниковский проезд, дом 4, корпус 2",
+    "entrance": 1,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1596
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.555087,
+     55.87609
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340222,
+    "address": "Бескудниковский проезд, дом 4, корпус 2",
+    "entrance": 2,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1597
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.553925,
+     55.875934
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340222,
+    "address": "Бескудниковский проезд, дом 4, корпус 2",
+    "entrance": 3,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1598
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.554294,
+     55.876026
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340222,
+    "address": "Бескудниковский проезд, дом 4, корпус 2",
+    "entrance": 4,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1599
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.55462,
+     55.876115
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340222,
+    "address": "Бескудниковский проезд, дом 4, корпус 2",
+    "entrance": 5,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1600
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.54566,
+     55.875705
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 6708,
+    "address": "Дмитровское шоссе, дом 101, корпус 1",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1601
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.545508,
+     55.876287
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 6709,
+    "address": "Дмитровское шоссе, дом 103",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1602
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.545487,
+     55.876825
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 6710,
+    "address": "Дмитровское шоссе, дом 105, корпус 1",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1603
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.544598,
+     55.876651
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 6711,
+    "address": "Дмитровское шоссе, дом 105, корпус 2",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1604
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.543705,
+     55.876505
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 6712,
+    "address": "Дмитровское шоссе, дом 105, корпус 3",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1605
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.542804,
+     55.87635
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 6713,
+    "address": "Дмитровское шоссе, дом 105, корпус 4",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1606
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.541896,
+     55.876177
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 6714,
+    "address": "Дмитровское шоссе, дом 105, корпус 5",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1607
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.54098,
+     55.876035
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 6715,
+    "address": "Дмитровское шоссе, дом 105, корпус 6",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1608
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562866,
+     55.855386
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 6670,
+    "address": "Дмитровское шоссе, дом 64, корпус 1",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1609
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562631,
+     55.856063
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 6671,
+    "address": "Дмитровское шоссе, дом 64, корпус 2",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1610
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562448,
+     55.856696
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 6669,
+    "address": "Дмитровское шоссе, дом 64, корпус 3",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1611
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564202,
+     55.85516
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75015,
+    "address": "Дмитровское шоссе, дом 64, корпус 4",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 1612
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.56381,
+     55.855194
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75015,
+    "address": "Дмитровское шоссе, дом 64, корпус 4",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 22,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 1613
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.56538,
+     55.855123
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75022,
+    "address": "Дмитровское шоссе, дом 64, корпус 5",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1614
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565112,
+     55.855155
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75022,
+    "address": "Дмитровское шоссе, дом 64, корпус 5",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1615
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564762,
+     55.855196
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75022,
+    "address": "Дмитровское шоссе, дом 64, корпус 5",
+    "entrance": 3,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1616
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.561198,
+     55.858079
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 6674,
+    "address": "Дмитровское шоссе, дом 66",
+    "entrance": 1,
+    "plot": 8,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1617
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.56078,
+     55.858052
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 6674,
+    "address": "Дмитровское шоссе, дом 66",
+    "entrance": 2,
+    "plot": 8,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1618
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.56049,
+     55.85803
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 6674,
+    "address": "Дмитровское шоссе, дом 66",
+    "entrance": 3,
+    "plot": 8,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1619
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560134,
+     55.8585
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 470085,
+    "address": "Дмитровское шоссе, дом 68",
+    "entrance": 1,
+    "plot": 8,
+    "floors": 18,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1620
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560044,
+     55.858543
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 470085,
+    "address": "Дмитровское шоссе, дом 68",
+    "entrance": 2,
+    "plot": 8,
+    "floors": 8,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1621
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560179,
+     55.858888
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 470085,
+    "address": "Дмитровское шоссе, дом 68",
+    "entrance": 3,
+    "plot": 8,
+    "floors": 8,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1622
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559324,
+     55.859027
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 5002997,
+    "address": "Дмитровское шоссе, дом 70",
+    "entrance": 1,
+    "plot": 8,
+    "floors": 8,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 1623
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559074,
+     55.859102
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 5002997,
+    "address": "Дмитровское шоссе, дом 70",
+    "entrance": 2,
+    "plot": 8,
+    "floors": 15,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1624
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.558752,
+     55.859268
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 5002997,
+    "address": "Дмитровское шоссе, дом 70",
+    "entrance": 3,
+    "plot": 8,
+    "floors": 15,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1625
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.558685,
+     55.859308
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 5002997,
+    "address": "Дмитровское шоссе, дом 70",
+    "entrance": 4,
+    "plot": 8,
+    "floors": 8,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1626
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.558776,
+     55.859449
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 5002997,
+    "address": "Дмитровское шоссе, дом 70",
+    "entrance": 5,
+    "plot": 8,
+    "floors": 15,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1627
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559205,
+     55.859716
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 5002997,
+    "address": "Дмитровское шоссе, дом 70",
+    "entrance": 6,
+    "plot": 8,
+    "floors": 15,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1628
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559477,
+     55.859852
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 5002997,
+    "address": "Дмитровское шоссе, дом 70",
+    "entrance": 7,
+    "plot": 8,
+    "floors": 15,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1629
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.557008,
+     55.860602
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 470059,
+    "address": "Дмитровское шоссе, дом 74, корпус 1",
+    "entrance": 1,
+    "plot": 8,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1630
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.556614,
+     55.860498
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 470059,
+    "address": "Дмитровское шоссе, дом 74, корпус 1",
+    "entrance": 2,
+    "plot": 8,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1631
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.556319,
+     55.860509
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 470059,
+    "address": "Дмитровское шоссе, дом 74, корпус 1",
+    "entrance": 3,
+    "plot": 8,
+    "floors": 15,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1632
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.55597,
+     55.860577
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 470059,
+    "address": "Дмитровское шоссе, дом 74, корпус 1",
+    "entrance": 4,
+    "plot": 8,
+    "floors": 15,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1633
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.555729,
+     55.860718
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 470059,
+    "address": "Дмитровское шоссе, дом 74, корпус 1",
+    "entrance": 5,
+    "plot": 8,
+    "floors": 13,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1634
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.555573,
+     55.860892
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 470059,
+    "address": "Дмитровское шоссе, дом 74, корпус 1",
+    "entrance": 6,
+    "plot": 8,
+    "floors": 13,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1635
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.556063,
+     55.861275
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 5001523,
+    "address": "Дмитровское шоссе, дом 74, корпус 2",
+    "entrance": 1,
+    "plot": 8,
+    "floors": 25,
+    "lifts": "4",
+    "garbage_chute": "есть",
+    "source_row": 1636
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.554227,
+     55.861217
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 6681,
+    "address": "Дмитровское шоссе, дом 76, корпус 1",
+    "entrance": 1,
+    "plot": 8,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1637
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.549664,
+     55.869373
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340417,
+    "address": "Дмитровское шоссе, дом 86",
+    "entrance": 1,
+    "plot": 4,
+    "floors": 25,
+    "lifts": "4",
+    "garbage_chute": "есть",
+    "source_row": 1638
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.548849,
+     55.869377
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340451,
+    "address": "Дмитровское шоссе, дом 86, корпус 6",
+    "entrance": 1,
+    "plot": 4,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1639
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.548844,
+     55.869468
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340451,
+    "address": "Дмитровское шоссе, дом 86, корпус 6",
+    "entrance": 2,
+    "plot": 4,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1640
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.548924,
+     55.869752
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340451,
+    "address": "Дмитровское шоссе, дом 86, корпус 6",
+    "entrance": 3,
+    "plot": 4,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1641
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.548981,
+     55.869817
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340451,
+    "address": "Дмитровское шоссе, дом 86, корпус 6",
+    "entrance": 4,
+    "plot": 4,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1642
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.549341,
+     55.870026
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340451,
+    "address": "Дмитровское шоссе, дом 86, корпус 6",
+    "entrance": 5,
+    "plot": 4,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1643
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.549486,
+     55.870064
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340451,
+    "address": "Дмитровское шоссе, дом 86, корпус 6",
+    "entrance": 6,
+    "plot": 4,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1644
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.550881,
+     55.872592
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 470057,
+    "address": "Дмитровское шоссе, дом 90, корпус 1",
+    "entrance": 1,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1645
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.550469,
+     55.872559
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 470057,
+    "address": "Дмитровское шоссе, дом 90, корпус 1",
+    "entrance": 2,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1648
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.550059,
+     55.872435
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 470057,
+    "address": "Дмитровское шоссе, дом 90, корпус 1",
+    "entrance": 3,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1646
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.549764,
+     55.8723
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 470057,
+    "address": "Дмитровское шоссе, дом 90, корпус 1",
+    "entrance": 4,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1647
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.549499,
+     55.872071
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 470057,
+    "address": "Дмитровское шоссе, дом 90, корпус 1",
+    "entrance": 5,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1649
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.549369,
+     55.871868
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 470057,
+    "address": "Дмитровское шоссе, дом 90, корпус 1",
+    "entrance": 6,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1650
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.54214,
+     55.870623
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 6612519,
+    "address": "Дмитровское шоссе, дом 93, корпус 2",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 1651
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.542601,
+     55.870388
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 6612519,
+    "address": "Дмитровское шоссе, дом 93, корпус 2",
+    "entrance": 2,
+    "plot": 5,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 1652
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.54287,
+     55.870313
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 6612519,
+    "address": "Дмитровское шоссе, дом 93, корпус 2",
+    "entrance": 3,
+    "plot": 5,
+    "floors": 11,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1653
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.543535,
+     55.870361
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 6612519,
+    "address": "Дмитровское шоссе, дом 93, корпус 2",
+    "entrance": 4,
+    "plot": 5,
+    "floors": 11,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1654
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.543621,
+     55.870644
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 6612519,
+    "address": "Дмитровское шоссе, дом 93, корпус 2",
+    "entrance": 5,
+    "plot": 5,
+    "floors": 10,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1655
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.543567,
+     55.870868
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 6612519,
+    "address": "Дмитровское шоссе, дом 93, корпус 2",
+    "entrance": 6,
+    "plot": 5,
+    "floors": 10,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1656
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.549206,
+     55.874824
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340247,
+    "address": "Дмитровское шоссе, дом 94, корпус 1",
+    "entrance": 1,
+    "plot": 4,
+    "floors": 24,
+    "lifts": "4",
+    "garbage_chute": "есть",
+    "source_row": 1657
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.546674,
+     55.87179
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 6698,
+    "address": "Дмитровское шоссе, дом 95, корпус 1",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "нет",
+    "source_row": 1658
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.54636,
+     55.871766
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 6698,
+    "address": "Дмитровское шоссе, дом 95, корпус 1",
+    "entrance": 2,
+    "plot": 5,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "нет",
+    "source_row": 1659
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.546028,
+     55.871747
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 6698,
+    "address": "Дмитровское шоссе, дом 95, корпус 1",
+    "entrance": 3,
+    "plot": 5,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "нет",
+    "source_row": 1660
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.545801,
+     55.871733
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 6698,
+    "address": "Дмитровское шоссе, дом 95, корпус 1",
+    "entrance": 4,
+    "plot": 5,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "нет",
+    "source_row": 1661
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.545531,
+     55.871719
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 6698,
+    "address": "Дмитровское шоссе, дом 95, корпус 1",
+    "entrance": 5,
+    "plot": 5,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "нет",
+    "source_row": 1662
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.545274,
+     55.871703
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 6698,
+    "address": "Дмитровское шоссе, дом 95, корпус 1",
+    "entrance": 6,
+    "plot": 5,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "нет",
+    "source_row": 1663
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.544949,
+     55.871562
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 6699,
+    "address": "Дмитровское шоссе, дом 95, корпус 2",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "нет",
+    "source_row": 1664
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.544638,
+     55.871537
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 6699,
+    "address": "Дмитровское шоссе, дом 95, корпус 2",
+    "entrance": 2,
+    "plot": 5,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "нет",
+    "source_row": 1665
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.544359,
+     55.87152
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 6699,
+    "address": "Дмитровское шоссе, дом 95, корпус 2",
+    "entrance": 3,
+    "plot": 5,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "нет",
+    "source_row": 1666
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.544094,
+     55.8715
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 6699,
+    "address": "Дмитровское шоссе, дом 95, корпус 2",
+    "entrance": 4,
+    "plot": 5,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "нет",
+    "source_row": 1667
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5485,
+     55.876285
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340284,
+    "address": "Дмитровское шоссе, дом 96, корпус 1",
+    "entrance": 1,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1668
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.548439,
+     55.876464
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340284,
+    "address": "Дмитровское шоссе, дом 96, корпус 1",
+    "entrance": 2,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1669
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.548381,
+     55.876653
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340284,
+    "address": "Дмитровское шоссе, дом 96, корпус 1",
+    "entrance": 3,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1670
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.548321,
+     55.876835
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340284,
+    "address": "Дмитровское шоссе, дом 96, корпус 1",
+    "entrance": 4,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1671
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.548273,
+     55.877016
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340284,
+    "address": "Дмитровское шоссе, дом 96, корпус 1",
+    "entrance": 5,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1672
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.548446,
+     55.877328
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340282,
+    "address": "Дмитровское шоссе, дом 96, корпус 3",
+    "entrance": 1,
+    "plot": 4,
+    "floors": 24,
+    "lifts": "4",
+    "garbage_chute": "есть",
+    "source_row": 1673
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.549379,
+     55.877222
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340285,
+    "address": "Дмитровское шоссе, дом 96, корпус 4",
+    "entrance": 1,
+    "plot": 4,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1674
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.54998,
+     55.876894
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340285,
+    "address": "Дмитровское шоссе, дом 96, корпус 4",
+    "entrance": 2,
+    "plot": 4,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1675
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.54981,
+     55.877052
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340285,
+    "address": "Дмитровское шоссе, дом 96, корпус 4",
+    "entrance": 3,
+    "plot": 4,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1676
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.549671,
+     55.877218
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340285,
+    "address": "Дмитровское шоссе, дом 96, корпус 4",
+    "entrance": 4,
+    "plot": 4,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1677
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.550584,
+     55.876071
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340281,
+    "address": "Дмитровское шоссе, дом 96, корпус 5",
+    "entrance": 1,
+    "plot": 4,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1678
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.550423,
+     55.876222
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340281,
+    "address": "Дмитровское шоссе, дом 96, корпус 5",
+    "entrance": 2,
+    "plot": 4,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1679
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.550267,
+     55.876392
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340281,
+    "address": "Дмитровское шоссе, дом 96, корпус 5",
+    "entrance": 3,
+    "plot": 4,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1680
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.550106,
+     55.876552
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340281,
+    "address": "Дмитровское шоссе, дом 96, корпус 5",
+    "entrance": 4,
+    "plot": 4,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1681
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.546562,
+     55.873086
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 6705,
+    "address": "Дмитровское шоссе, дом 97, корпус 1",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "нет",
+    "source_row": 1682
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.546602,
+     55.872916
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 6705,
+    "address": "Дмитровское шоссе, дом 97, корпус 1",
+    "entrance": 2,
+    "plot": 5,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "нет",
+    "source_row": 1683
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.546631,
+     55.872788
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 6705,
+    "address": "Дмитровское шоссе, дом 97, корпус 1",
+    "entrance": 3,
+    "plot": 5,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "нет",
+    "source_row": 1684
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.546664,
+     55.872607
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 6705,
+    "address": "Дмитровское шоссе, дом 97, корпус 1",
+    "entrance": 4,
+    "plot": 5,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "нет",
+    "source_row": 1685
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.546699,
+     55.872446
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 6705,
+    "address": "Дмитровское шоссе, дом 97, корпус 1",
+    "entrance": 5,
+    "plot": 5,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "нет",
+    "source_row": 1686
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.546723,
+     55.872287
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 6705,
+    "address": "Дмитровское шоссе, дом 97, корпус 1",
+    "entrance": 6,
+    "plot": 5,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "нет",
+    "source_row": 1687
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.546772,
+     55.872121
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 6705,
+    "address": "Дмитровское шоссе, дом 97, корпус 1",
+    "entrance": 7,
+    "plot": 5,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "нет",
+    "source_row": 1688
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.546799,
+     55.871965
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 6705,
+    "address": "Дмитровское шоссе, дом 97, корпус 1",
+    "entrance": 8,
+    "plot": 5,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "нет",
+    "source_row": 1689
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.546139,
+     55.87528
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 6706,
+    "address": "Дмитровское шоссе, дом 99, корпус 1",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "нет",
+    "source_row": 1690
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.546177,
+     55.875092
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 6706,
+    "address": "Дмитровское шоссе, дом 99, корпус 1",
+    "entrance": 2,
+    "plot": 5,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "нет",
+    "source_row": 1691
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.546251,
+     55.874925
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 6706,
+    "address": "Дмитровское шоссе, дом 99, корпус 1",
+    "entrance": 3,
+    "plot": 5,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "нет",
+    "source_row": 1692
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.546284,
+     55.874741
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 6706,
+    "address": "Дмитровское шоссе, дом 99, корпус 1",
+    "entrance": 4,
+    "plot": 5,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "нет",
+    "source_row": 1693
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.546308,
+     55.87463
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 6706,
+    "address": "Дмитровское шоссе, дом 99, корпус 1",
+    "entrance": 5,
+    "plot": 5,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "нет",
+    "source_row": 1694
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.546364,
+     55.874442
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 6706,
+    "address": "Дмитровское шоссе, дом 99, корпус 1",
+    "entrance": 6,
+    "plot": 5,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "нет",
+    "source_row": 1695
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.546426,
+     55.87427
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 6706,
+    "address": "Дмитровское шоссе, дом 99, корпус 1",
+    "entrance": 7,
+    "plot": 5,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "нет",
+    "source_row": 1696
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.546458,
+     55.874099
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 6706,
+    "address": "Дмитровское шоссе, дом 99, корпус 1",
+    "entrance": 8,
+    "plot": 5,
+    "floors": 5,
+    "lifts": "нет",
+    "garbage_chute": "нет",
+    "source_row": 1697
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565917,
+     55.855628
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 7137,
+    "address": "Дубнинская улица, дом 1",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1698
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565743,
+     55.863924
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75139,
+    "address": "Дубнинская улица, дом 27, корпус 1",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1699
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565276,
+     55.863872
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75139,
+    "address": "Дубнинская улица, дом 27, корпус 1",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1700
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564927,
+     55.863784
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75139,
+    "address": "Дубнинская улица, дом 27, корпус 1",
+    "entrance": 3,
+    "plot": 3,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1701
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564576,
+     55.863695
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75139,
+    "address": "Дубнинская улица, дом 27, корпус 1",
+    "entrance": 4,
+    "plot": 3,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1702
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564266,
+     55.863532
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75139,
+    "address": "Дубнинская улица, дом 27, корпус 1",
+    "entrance": 5,
+    "plot": 3,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1703
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563486,
+     55.86409
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75178,
+    "address": "Дубнинская улица, дом 27, корпус 2",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 22,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 1704
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563214,
+     55.864083
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75178,
+    "address": "Дубнинская улица, дом 27, корпус 2",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 22,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 1705
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563062,
+     55.864283
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75178,
+    "address": "Дубнинская улица, дом 27, корпус 2",
+    "entrance": 3,
+    "plot": 3,
+    "floors": 22,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 1706
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565031,
+     55.864671
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75149,
+    "address": "Дубнинская улица, дом 29, корпус 1",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1713
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565191,
+     55.864466
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75149,
+    "address": "Дубнинская улица, дом 29, корпус 1",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1707
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565356,
+     55.86426
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75149,
+    "address": "Дубнинская улица, дом 29, корпус 1",
+    "entrance": 3,
+    "plot": 3,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1708
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564894,
+     55.864837
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75149,
+    "address": "Дубнинская улица, дом 29, корпус 1",
+    "entrance": 4,
+    "plot": 3,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1709
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564427,
+     55.864902
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75149,
+    "address": "Дубнинская улица, дом 29, корпус 1",
+    "entrance": 5,
+    "plot": 3,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1710
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564078,
+     55.86482
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75149,
+    "address": "Дубнинская улица, дом 29, корпус 1",
+    "entrance": 6,
+    "plot": 3,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1711
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563726,
+     55.864726
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75149,
+    "address": "Дубнинская улица, дом 29, корпус 1",
+    "entrance": 7,
+    "plot": 3,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1712
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565117,
+     55.855976
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75016,
+    "address": "Дубнинская улица, дом 3",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1714
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564724,
+     55.856009
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75016,
+    "address": "Дубнинская улица, дом 3",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1715
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564357,
+     55.856048
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75016,
+    "address": "Дубнинская улица, дом 3",
+    "entrance": 3,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1716
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563793,
+     55.856003
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75016,
+    "address": "Дубнинская улица, дом 3",
+    "entrance": 4,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1717
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563736,
+     55.855771
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75016,
+    "address": "Дубнинская улица, дом 3",
+    "entrance": 5,
+    "plot": 3,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1718
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.561215,
+     55.865877
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340046,
+    "address": "Дубнинская улица, дом 35",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1719
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.561829,
+     55.865825
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340046,
+    "address": "Дубнинская улица, дом 35",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1720
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.561969,
+     55.865615
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340046,
+    "address": "Дубнинская улица, дом 35",
+    "entrance": 3,
+    "plot": 3,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1721
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563325,
+     55.866776
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340045,
+    "address": "Дубнинская улица, дом 37, корпус 1",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1722
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562969,
+     55.86669
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340045,
+    "address": "Дубнинская улица, дом 37, корпус 1",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1723
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562625,
+     55.866596
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340045,
+    "address": "Дубнинская улица, дом 37, корпус 1",
+    "entrance": 3,
+    "plot": 3,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1724
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562259,
+     55.866512
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340045,
+    "address": "Дубнинская улица, дом 37, корпус 1",
+    "entrance": 4,
+    "plot": 3,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1725
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562006,
+     55.866481
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340045,
+    "address": "Дубнинская улица, дом 37, корпус 1",
+    "entrance": 5,
+    "plot": 3,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1726
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.561324,
+     55.866884
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340082,
+    "address": "Дубнинская улица, дом 37, корпус 2",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 22,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 1727
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.561049,
+     55.866861
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340082,
+    "address": "Дубнинская улица, дом 37, корпус 2",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 22,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 1728
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560923,
+     55.867022
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340082,
+    "address": "Дубнинская улица, дом 37, корпус 2",
+    "entrance": 3,
+    "plot": 3,
+    "floors": 22,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 1729
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.561923,
+     55.867514
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340044,
+    "address": "Дубнинская улица, дом 39",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1730
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562286,
+     55.867614
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340044,
+    "address": "Дубнинская улица, дом 39",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1731
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562761,
+     55.867545
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340044,
+    "address": "Дубнинская улица, дом 39",
+    "entrance": 3,
+    "plot": 3,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1732
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562907,
+     55.867362
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340044,
+    "address": "Дубнинская улица, дом 39",
+    "entrance": 4,
+    "plot": 3,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1733
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563063,
+     55.867179
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340044,
+    "address": "Дубнинская улица, дом 39",
+    "entrance": 5,
+    "plot": 3,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1734
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559093,
+     55.868306
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340084,
+    "address": "Дубнинская улица, дом 43",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1735
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559437,
+     55.868399
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340084,
+    "address": "Дубнинская улица, дом 43",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1736
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559443,
+     55.868543
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340084,
+    "address": "Дубнинская улица, дом 43",
+    "entrance": 3,
+    "plot": 3,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1737
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.561169,
+     55.869571
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340124,
+    "address": "Дубнинская улица, дом 45, корпус 1",
+    "entrance": 1,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1738
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560818,
+     55.869475
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340124,
+    "address": "Дубнинская улица, дом 45, корпус 1",
+    "entrance": 2,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1739
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560472,
+     55.86939
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340124,
+    "address": "Дубнинская улица, дом 45, корпус 1",
+    "entrance": 3,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1740
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560129,
+     55.869309
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340124,
+    "address": "Дубнинская улица, дом 45, корпус 1",
+    "entrance": 4,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1741
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.55976,
+     55.869222
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340124,
+    "address": "Дубнинская улица, дом 45, корпус 1",
+    "entrance": 5,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1742
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560517,
+     55.870397
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340114,
+    "address": "Дубнинская улица, дом 47, корпус 1",
+    "entrance": 1,
+    "plot": 4,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1743
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560019,
+     55.870471
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340114,
+    "address": "Дубнинская улица, дом 47, корпус 1",
+    "entrance": 2,
+    "plot": 4,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1744
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559652,
+     55.870375
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340114,
+    "address": "Дубнинская улица, дом 47, корпус 1",
+    "entrance": 3,
+    "plot": 4,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1745
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559321,
+     55.870294
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340114,
+    "address": "Дубнинская улица, дом 47, корпус 1",
+    "entrance": 4,
+    "plot": 4,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1746
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565651,
+     55.856282
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75054,
+    "address": "Дубнинская улица, дом 5, корпус 1",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1747
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.566154,
+     55.85619
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75054,
+    "address": "Дубнинская улица, дом 5, корпус 1",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1748
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.566317,
+     55.856538
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75067,
+    "address": "Дубнинская улица, дом 5, корпус 2",
+    "entrance": 1,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1749
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.566497,
+     55.85683
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75067,
+    "address": "Дубнинская улица, дом 5, корпус 2",
+    "entrance": 2,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1750
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.566087,
+     55.856926
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 75067,
+    "address": "Дубнинская улица, дом 5, корпус 2",
+    "entrance": 3,
+    "plot": 3,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1751
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559043,
+     55.87233
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340206,
+    "address": "Дубнинская улица, дом 53, корпус 1",
+    "entrance": 1,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1752
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.558717,
+     55.872247
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340206,
+    "address": "Дубнинская улица, дом 53, корпус 1",
+    "entrance": 2,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1753
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.558399,
+     55.872177
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340206,
+    "address": "Дубнинская улица, дом 53, корпус 1",
+    "entrance": 3,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1754
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.558078,
+     55.872096
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340206,
+    "address": "Дубнинская улица, дом 53, корпус 1",
+    "entrance": 4,
+    "plot": 4,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1755
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.557764,
+     55.872011
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340206,
+    "address": "Дубнинская улица, дом 53, корпус 1",
+    "entrance": 5,
+    "plot": 4,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1756
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.558221,
+     55.873233
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340171,
+    "address": "Дубнинская улица, дом 53, корпус 2",
+    "entrance": 1,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1757
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.558398,
+     55.873027
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340171,
+    "address": "Дубнинская улица, дом 53, корпус 2",
+    "entrance": 2,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1758
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.558554,
+     55.872834
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340171,
+    "address": "Дубнинская улица, дом 53, корпус 2",
+    "entrance": 3,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1759
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.558727,
+     55.872625
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340171,
+    "address": "Дубнинская улица, дом 53, корпус 2",
+    "entrance": 4,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1760
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.557511,
+     55.872532
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340170,
+    "address": "Дубнинская улица, дом 53, корпус 3",
+    "entrance": 1,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1761
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.557381,
+     55.872692
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340170,
+    "address": "Дубнинская улица, дом 53, корпус 3",
+    "entrance": 2,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1762
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.55721,
+     55.872904
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340170,
+    "address": "Дубнинская улица, дом 53, корпус 3",
+    "entrance": 3,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1763
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.557161,
+     55.873087
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340170,
+    "address": "Дубнинская улица, дом 53, корпус 3",
+    "entrance": 4,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1764
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.557644,
+     55.873345
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340170,
+    "address": "Дубнинская улица, дом 53, корпус 3",
+    "entrance": 5,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1765
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.557283,
+     55.873258
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340170,
+    "address": "Дубнинская улица, дом 53, корпус 3",
+    "entrance": 6,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1766
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.556858,
+     55.87476
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 7234,
+    "address": "Дубнинская улица, дом 61",
+    "entrance": 1,
+    "plot": 4,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 1767
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.556966,
+     55.874628
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 7234,
+    "address": "Дубнинская улица, дом 61",
+    "entrance": 2,
+    "plot": 4,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 1768
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.557103,
+     55.874464
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 7234,
+    "address": "Дубнинская улица, дом 61",
+    "entrance": 3,
+    "plot": 4,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 1769
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.557258,
+     55.874268
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 7234,
+    "address": "Дубнинская улица, дом 61",
+    "entrance": 4,
+    "plot": 4,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 1770
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.557393,
+     55.874104
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 7234,
+    "address": "Дубнинская улица, дом 61",
+    "entrance": 5,
+    "plot": 4,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 1771
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.557534,
+     55.873946
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 7234,
+    "address": "Дубнинская улица, дом 61",
+    "entrance": 6,
+    "plot": 4,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 1772
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.556532,
+     55.875978
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 7242,
+    "address": "Дубнинская улица, дом 69, корпус 1",
+    "entrance": 1,
+    "plot": 4,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1773
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.556775,
+     55.877196
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 7243,
+    "address": "Дубнинская улица, дом 69, корпус 2",
+    "entrance": 1,
+    "plot": 4,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 1774
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.556778,
+     55.877028
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 7243,
+    "address": "Дубнинская улица, дом 69, корпус 2",
+    "entrance": 2,
+    "plot": 4,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 1775
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.556775,
+     55.876823
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 7243,
+    "address": "Дубнинская улица, дом 69, корпус 2",
+    "entrance": 3,
+    "plot": 4,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 1776
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.556779,
+     55.876628
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 7243,
+    "address": "Дубнинская улица, дом 69, корпус 2",
+    "entrance": 4,
+    "plot": 4,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 1777
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.556784,
+     55.876431
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 7243,
+    "address": "Дубнинская улица, дом 69, корпус 2",
+    "entrance": 5,
+    "plot": 4,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 1778
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.556785,
+     55.87626
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 7243,
+    "address": "Дубнинская улица, дом 69, корпус 2",
+    "entrance": 6,
+    "plot": 4,
+    "floors": 9,
+    "lifts": "1",
+    "garbage_chute": "есть",
+    "source_row": 1779
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.555836,
+     55.876535
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 7244,
+    "address": "Дубнинская улица, дом 69, корпус 3",
+    "entrance": 1,
+    "plot": 4,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1780
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.556981,
+     55.878558
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 7245,
+    "address": "Дубнинская улица, дом 71, корпус 1",
+    "entrance": 1,
+    "plot": 4,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1781
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.556577,
+     55.878281
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 7245,
+    "address": "Дубнинская улица, дом 71, корпус 1",
+    "entrance": 2,
+    "plot": 4,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1782
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.533942,
+     55.870947
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 6520002,
+    "address": "Коровинское шоссе, дом 12",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1783
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.533882,
+     55.87124
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 6520002,
+    "address": "Коровинское шоссе, дом 12",
+    "entrance": 2,
+    "plot": 5,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1784
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.534041,
+     55.871516
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 6520002,
+    "address": "Коровинское шоссе, дом 12",
+    "entrance": 3,
+    "plot": 5,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1785
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.541657,
+     55.868015
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 5326996,
+    "address": "Коровинское шоссе, дом 2В",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 24,
+    "lifts": "4",
+    "garbage_chute": "есть",
+    "source_row": 1786
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.539069,
+     55.869042
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 5274920,
+    "address": "Коровинское шоссе, дом 4А",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 24,
+    "lifts": "4",
+    "garbage_chute": "есть",
+    "source_row": 1787
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.539766,
+     55.869298
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 10989,
+    "address": "Коровинское шоссе, дом 6, корпус 1",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1788
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.536822,
+     55.869698
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 31408,
+    "address": "Коровинское шоссе, дом 6, корпус 2",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1789
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.537384,
+     55.87042
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 10990,
+    "address": "Коровинское шоссе, дом 6, корпус 3",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1790
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.552904,
+     55.867851
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340338,
+    "address": "Рогачёвский переулок, дом 4, корпус 1",
+    "entrance": 1,
+    "plot": 8,
+    "floors": 22,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 1791
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.552803,
+     55.867819
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340338,
+    "address": "Рогачёвский переулок, дом 4, корпус 1",
+    "entrance": 2,
+    "plot": 8,
+    "floors": 22,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 1792
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.553467,
+     55.86898
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340419,
+    "address": "Рогачёвский переулок, дом 7, корпус 1",
+    "entrance": 1,
+    "plot": 4,
+    "floors": 25,
+    "lifts": "4",
+    "garbage_chute": "есть",
+    "source_row": 1793
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.554603,
+     55.863879
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340395,
+    "address": "Селигерская улица, дом 12, корпус 2",
+    "entrance": 1,
+    "plot": 8,
+    "floors": 13,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1794
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.554634,
+     55.864286
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340395,
+    "address": "Селигерская улица, дом 12, корпус 2",
+    "entrance": 2,
+    "plot": 8,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1795
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.554338,
+     55.864111
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340395,
+    "address": "Селигерская улица, дом 12, корпус 2",
+    "entrance": 3,
+    "plot": 8,
+    "floors": 15,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1796
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.553504,
+     55.864911
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 23311,
+    "address": "Селигерская улица, дом 14",
+    "entrance": 1,
+    "plot": 8,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1797
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.553226,
+     55.866171
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340343,
+    "address": "Селигерская улица, дом 18, корпус 1",
+    "entrance": 1,
+    "plot": 8,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1798
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.552932,
+     55.866171
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340343,
+    "address": "Селигерская улица, дом 18, корпус 1",
+    "entrance": 2,
+    "plot": 8,
+    "floors": 15,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1799
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.55274,
+     55.866273
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340343,
+    "address": "Селигерская улица, дом 18, корпус 1",
+    "entrance": 3,
+    "plot": 8,
+    "floors": 13,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1800
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.552481,
+     55.867016
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340360,
+    "address": "Селигерская улица, дом 18, корпус 2",
+    "entrance": 1,
+    "plot": 8,
+    "floors": 13,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1801
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.552125,
+     55.866927
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340360,
+    "address": "Селигерская улица, дом 18, корпус 2",
+    "entrance": 2,
+    "plot": 8,
+    "floors": 13,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1802
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.553432,
+     55.867015
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340361,
+    "address": "Селигерская улица, дом 18, корпус 3",
+    "entrance": 1,
+    "plot": 8,
+    "floors": 15,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1803
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.553043,
+     55.867058
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340361,
+    "address": "Селигерская улица, дом 18, корпус 3",
+    "entrance": 2,
+    "plot": 8,
+    "floors": 15,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1804
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.554174,
+     55.866693
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340362,
+    "address": "Селигерская улица, дом 18, корпус 4",
+    "entrance": 1,
+    "plot": 8,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1805
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.553923,
+     55.866858
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340362,
+    "address": "Селигерская улица, дом 18, корпус 4",
+    "entrance": 2,
+    "plot": 8,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1806
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.556193,
+     55.862001
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 470054,
+    "address": "Селигерская улица, дом 2",
+    "entrance": 1,
+    "plot": 8,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1807
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.555738,
+     55.862114
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 470054,
+    "address": "Селигерская улица, дом 2",
+    "entrance": 2,
+    "plot": 8,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1808
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.555269,
+     55.862007
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 470054,
+    "address": "Селигерская улица, дом 2",
+    "entrance": 3,
+    "plot": 8,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1809
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.555366,
+     55.861733
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 470054,
+    "address": "Селигерская улица, дом 2",
+    "entrance": 4,
+    "plot": 8,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1810
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.551414,
+     55.867592
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 23314,
+    "address": "Селигерская улица, дом 22/2",
+    "entrance": 1,
+    "plot": 8,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1811
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.550328,
+     55.868792
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340418,
+    "address": "Селигерская улица, дом 26, корпус 1",
+    "entrance": 1,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1812
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.550162,
+     55.868676
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340418,
+    "address": "Селигерская улица, дом 26, корпус 1",
+    "entrance": 2,
+    "plot": 4,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1813
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.549898,
+     55.868659
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340418,
+    "address": "Селигерская улица, дом 26, корпус 1",
+    "entrance": 3,
+    "plot": 4,
+    "floors": 15,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1814
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.549684,
+     55.868753
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 340418,
+    "address": "Селигерская улица, дом 26, корпус 1",
+    "entrance": 4,
+    "plot": 4,
+    "floors": 13,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1815
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.548108,
+     55.868647
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 23316,
+    "address": "Селигерская улица, дом 28",
+    "entrance": 1,
+    "plot": 4,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1816
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.544506,
+     55.869047
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 5247654,
+    "address": "Селигерская улица, дом 32А",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 23,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 1817
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.544128,
+     55.869188
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 5247654,
+    "address": "Селигерская улица, дом 32А",
+    "entrance": 2,
+    "plot": 5,
+    "floors": 23,
+    "lifts": "3",
+    "garbage_chute": "есть",
+    "source_row": 1818
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.543349,
+     55.868417
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 23318,
+    "address": "Селигерская улица, дом 34",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1819
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.542445,
+     55.867994
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 23319,
+    "address": "Селигерская улица, дом 36",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 14,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1820
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.542654,
+     55.877056
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 4871,
+    "address": "улица 800-летия Москвы, дом 10",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1821
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.542257,
+     55.876991
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 4871,
+    "address": "улица 800-летия Москвы, дом 10",
+    "entrance": 2,
+    "plot": 5,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1822
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.541851,
+     55.876926
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 4871,
+    "address": "улица 800-летия Москвы, дом 10",
+    "entrance": 3,
+    "plot": 5,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1823
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.541436,
+     55.876857
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 4871,
+    "address": "улица 800-летия Москвы, дом 10",
+    "entrance": 4,
+    "plot": 5,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1824
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.541044,
+     55.876794
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 4871,
+    "address": "улица 800-летия Москвы, дом 10",
+    "entrance": 5,
+    "plot": 5,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1825
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.54063,
+     55.876711
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 4871,
+    "address": "улица 800-летия Москвы, дом 10",
+    "entrance": 6,
+    "plot": 5,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1826
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.544354,
+     55.877317
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 4882,
+    "address": "улица 800-летия Москвы, дом 12",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1827
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.543882,
+     55.877297
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 4882,
+    "address": "улица 800-летия Москвы, дом 12",
+    "entrance": 2,
+    "plot": 5,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1828
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.54352,
+     55.877232
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 4882,
+    "address": "улица 800-летия Москвы, дом 12",
+    "entrance": 3,
+    "plot": 5,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1829
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.543147,
+     55.877172
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 4882,
+    "address": "улица 800-летия Москвы, дом 12",
+    "entrance": 4,
+    "plot": 5,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1830
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.551725,
+     55.877456
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 7240,
+    "address": "улица 800-летия Москвы, дом 16, корпус 1",
+    "entrance": 1,
+    "plot": 4,
+    "floors": 12,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1831
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.535261,
+     55.875541
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 4863,
+    "address": "улица 800-летия Москвы, дом 4, корпус 1",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1832
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.535165,
+     55.875745
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 4863,
+    "address": "улица 800-летия Москвы, дом 4, корпус 1",
+    "entrance": 2,
+    "plot": 5,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1833
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.539378,
+     55.876509
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 4867,
+    "address": "улица 800-летия Москвы, дом 6",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1834
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.538992,
+     55.876443
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 4867,
+    "address": "улица 800-летия Москвы, дом 6",
+    "entrance": 2,
+    "plot": 5,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1835
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.538582,
+     55.876367
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 4867,
+    "address": "улица 800-летия Москвы, дом 6",
+    "entrance": 3,
+    "plot": 5,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1836
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.538175,
+     55.876298
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 4867,
+    "address": "улица 800-летия Москвы, дом 6",
+    "entrance": 4,
+    "plot": 5,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1837
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.537771,
+     55.876229
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 4867,
+    "address": "улица 800-летия Москвы, дом 6",
+    "entrance": 5,
+    "plot": 5,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1838
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.537361,
+     55.876159
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 4867,
+    "address": "улица 800-летия Москвы, дом 6",
+    "entrance": 6,
+    "plot": 5,
+    "floors": 16,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1839
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.539994,
+     55.876863
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 4869,
+    "address": "улица 800-летия Москвы, дом 8",
+    "entrance": 1,
+    "plot": 5,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1840
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.539627,
+     55.876797
+    ]
+   },
+   "properties": {
+    "district": "Бескудниковский",
+    "unom": 4869,
+    "address": "улица 800-летия Москвы, дом 8",
+    "entrance": 2,
+    "plot": 5,
+    "floors": 17,
+    "lifts": "2",
+    "garbage_chute": "есть",
+    "source_row": 1841
+   }
+  }
+ ]
+}
