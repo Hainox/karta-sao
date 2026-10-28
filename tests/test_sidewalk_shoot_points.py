@@ -22,7 +22,7 @@ def load(path):
 def test_points_sit_on_yard_sidewalks_not_on_odh(path):
     slug_dir = path.parent
     walks = load(slug_dir / "sidewalks.geojson")["features"]
-    yard_walks = unary_union([shape(f["geometry"]) for f in walks if f["properties"].get("parent_type_id") == 38])
+    yard_walks = unary_union([shape(f["geometry"]).buffer(0) for f in walks if f["properties"].get("parent_type_id") == 38])
     yards = STRtree([shape(f["geometry"]).buffer(0.00005) for f in load(slug_dir / "yards.geojson")["features"]])
     roads = STRtree([shape(f["geometry"]) for name in ("driveways", "odh")
                      for f in load(slug_dir / f"{name}.geojson")["features"]])
