@@ -21,3 +21,13 @@ test('цвет точки отражает статус фото и обновл
   assert.match(x.markers[0].el.style.cssText,/border-radius:50%/);
  }
 });
+
+test('единое управление показывает только выбранный вид площадок',async()=>{
+ const x=fake();
+ await x.layer.setKind('dp',true);
+ assert.equal(x.markers.length,1);
+ await x.layer.setKind('dp',false);
+ assert.equal(x.markers.length,0);
+ await x.layer.setKind('sp',true);
+ assert.equal(x.markers.length,0);
+});
