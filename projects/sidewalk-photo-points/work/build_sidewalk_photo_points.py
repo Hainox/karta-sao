@@ -55,6 +55,8 @@ MIN_WALL_M = 5                # короче — уступ, а не стена
 ROW_MIN_SPREAD_M = 10         # подъезды «в линию»: разброс вдоль оси не меньше
 ROW_MAX_WIDTH_M = 8           # и поперёк не больше
 OSM_DOOR_M = 25               # подъезд реестра ищем на стене OSM в этом радиусе
+END_CAP_M = 30                # точка — не дальше этого за первым/последним подъездом
+MIN_BEYOND_M = 6              # и не ближе этого
 RING_SHARE = 0.8              # доля периметра с тротуаром для «кругового» дома
 
 
@@ -143,32 +145,64 @@ def nearest_edge(poly, p):
     return a, b, d, axis
 
 
-def row_facade(bld, ents):
-    """Подъезды в одну линию вдоль оси дома — один фасад.
+def entrance_row(bld, ents, yard_walks):
+    """Линейный дом: подъезды стоят в одну линию.
 
-    Координаты подъездов часто стоят внутри контура, и ближайшая стена
-    обманывает. Тогда сторону даёт смещение линии подъездов от центра дома.
+    Фасад задаёт линия от первого подъезда к последнему (по номеру); если она
+    почти совпадает с осью дома — берём ось. Сторона подъездов — по стене дома,
+    у которой стоят подъезды, иначе по смещению линии от центра дома, а без
+    контура дома — по ближайшему дворовому тротуару.
     """
     if len(ents) < 2:
         return []
+    numbered = sorted(ents, key=lambda e: (e[1]["properties"].get("№ подъезда") or 0))
+    (p0, _), (p1, _) = numbered[0], numbered[-1]
+    length = math.dist((p0.x, p0.y), (p1.x, p1.y))
+    if length < ROW_MIN_SPREAD_M:
+        return []
+    ux, uy = (p1.x - p0.x) / length, (p1.y - p0.y) / length
+    if bld is not None:
+        for ax, ay in main_axes(bld):
+            dot = ux * ax + uy * ay
+            if abs(dot) >= math.cos(math.radians(FACADE_ANGLE_DEG)):
+                ux, uy = (ax, ay) if dot > 0 else (-ax, -ay)
+                break
+    nx, ny = uy, -ux
     mx = sum(pt.x for pt, _ in ents) / len(ents)
     my = sum(pt.y for pt, _ in ents) / len(ents)
-    for ux, uy in main_axes(bld):
-        nx, ny = uy, -ux
-        along = [(pt.x - mx) * ux + (pt.y - my) * uy for pt, _ in ents]
-        across = [(pt.x - mx) * nx + (pt.y - my) * ny for pt, _ in ents]
-        if max(along) - min(along) >= ROW_MIN_SPREAD_M and max(across) - min(across) <= ROW_MAX_WIDTH_M:
-            break
-    else:
+    across = [(pt.x - mx) * nx + (pt.y - my) * ny for pt, _ in ents]
+    if max(across) - min(across) > ROW_MAX_WIDTH_M:
         return []
-    c = bld.centroid
-    side = (mx - c.x) * nx + (my - c.y) * ny
-    if abs(side) < 1:
+    side = 0.0
+    if bld is not None:
+        for pt, _ in ents:
+            edge = nearest_edge(bld, pt)
+            if edge is None or edge[2] > ENTRANCE_TO_BUILDING_M:
+                continue
+            a, b, _, _ = edge
+            mid = ((a[0] + b[0]) / 2, (a[1] + b[1]) / 2)
+            outward = 1 if not bld.contains(Point(mid[0] + nx * 1.5, mid[1] + ny * 1.5)) else -1
+            # Стена вдоль фасада голосует за сторону; торцевые стены не в счёт.
+            ex, ey = b[0] - a[0], b[1] - a[1]
+            if abs(ex * ux + ey * uy) >= 0.8 * math.hypot(ex, ey):
+                side += outward
+        if side == 0:
+            c = bld.centroid
+            side = (mx - c.x) * nx + (my - c.y) * ny
+    else:
+        offs = []
+        for pt, _ in ents:
+            q = nearest_points(yard_walks, pt)[0]
+            if q.distance(pt) < 25:
+                offs.append((q.x - pt.x) * nx + (q.y - pt.y) * ny)
+        side = sorted(offs)[len(offs) // 2] if offs else 0.0
+    if side == 0:
         return []
     if side < 0:
         nx, ny = -nx, -ny
-    wall = max((vx - mx) * nx + (vy - my) * ny for vx, vy in bld.exterior.coords)
-    return [{"u": (ux, uy), "n": (nx, ny), "ox": mx + nx * wall, "oy": my + ny * wall, "ents": [r for _, r in ents]}]
+    # Тротуар ищем сразу от линии подъездов: у ступенчатого фасада он лежит ближе
+    # самого выступающего края дома; сам дом из полосы поиска вычитается.
+    return [{"u": (ux, uy), "n": (nx, ny), "ox": mx, "oy": my, "ents": list(ents)}]
 
 
 def build(slug):
@@ -216,89 +250,109 @@ def build(slug):
             idx = tree.query_nearest(pt, max_distance=ENTRANCE_TO_BUILDING_M)
             if len(idx):
                 votes[int(idx[0])] += 1
-        if not votes:
-            stats["no_building"] += 1
-            continue
-        bld = buildings[votes.most_common(1)[0][0]]
+        bld = buildings[votes.most_common(1)[0][0]] if votes else None
+        stats["no_building"] += bld is None
         address = recs[0]["properties"].get("Адрес", "")
 
-        # Подъезды по фасадам: ближайшее ребро контура, его направление и нормаль наружу.
         # Подъезд реестра → точка подъезда OSM на стене того же дома (по номеру, иначе ближайшая).
-        snapped = []
-        for pt, r in ents:
-            near = [(d, pt2, tags) for pt2, tags in osm_doors
-                    if (d := pt2.distance(pt)) < OSM_DOOR_M and bld.exterior.distance(pt2) < 1.5]
-            same = [x for x in near if str(x[2].get("ref", "")).strip() == str(r["properties"].get("№ подъезда"))]
-            best = min(same or near, key=lambda x: x[0], default=None)
-            snapped.append((best[1], r) if best else (pt, r))
-        on_wall = sum(1 for (a, _), (b, _) in zip(snapped, ents) if a is not b)
-        stats["entrances_on_osm_wall"] += on_wall
+        if bld is not None:
+            snapped = []
+            for pt, r in ents:
+                near = [(d, pt2, tags) for pt2, tags in osm_doors
+                        if (d := pt2.distance(pt)) < OSM_DOOR_M and bld.exterior.distance(pt2) < 1.5]
+                same = [x for x in near if str(x[2].get("ref", "")).strip() == str(r["properties"].get("№ подъезда"))]
+                best = min(same or near, key=lambda x: x[0], default=None)
+                snapped.append((best[1], r) if best else (pt, r))
+            stats["entrances_on_osm_wall"] += sum(1 for (a, _), (b, _) in zip(snapped, ents) if a is not b)
+            ents = snapped
         stats["entrances"] += len(ents)
-        ents = snapped
-        facades = [] if on_wall == len(ents) else row_facade(bld, ents)
-        for pt, r in ([] if facades else ents):
-            edge = nearest_edge(bld, pt)
-            if edge is None or edge[2] > ENTRANCE_TO_BUILDING_M:
-                continue
-            a, b, _, (ux, uy) = edge
-            nx, ny = uy, -ux
-            mid = ((a[0] + b[0]) / 2, (a[1] + b[1]) / 2)
-            if bld.contains(Point(mid[0] + nx * 1.5, mid[1] + ny * 1.5)):
-                nx, ny = -nx, -ny
-            foot = LineString([a, b]).interpolate(LineString([a, b]).project(pt))
-            ang = math.degrees(math.atan2(uy, ux)) % 180
-            for fac in facades:
-                dang = abs(fac["ang"] - ang)
-                dang = min(dang, 180 - dang)
-                off = (foot.x - fac["ox"]) * fac["n"][0] + (foot.y - fac["oy"]) * fac["n"][1]
-                if dang < FACADE_ANGLE_DEG and abs(off) < FACADE_OFFSET_M and fac["n"][0] * nx + fac["n"][1] * ny > 0:
-                    fac["ents"].append(r)
-                    break
-            else:
-                facades.append({"ang": ang, "u": (ux, uy), "n": (nx, ny), "ox": foot.x, "oy": foot.y, "ents": [r]})
+
+        # Обычный линейный дом: подъезды в одну линию — фасад задают первый и последний подъезд.
+        facades = entrance_row(bld, ents, yard_walks)
+        if facades:
+            stats["houses_row"] += 1
+        elif bld is not None:
+            # Нестандартный дом: подъезды по сторонам дома (ближайшая стена, нормаль наружу).
+            stats["houses_by_walls"] += 1
+            for pt, r in ents:
+                edge = nearest_edge(bld, pt)
+                if edge is None or edge[2] > ENTRANCE_TO_BUILDING_M:
+                    continue
+                a, b, _, (ux, uy) = edge
+                nx, ny = uy, -ux
+                mid = ((a[0] + b[0]) / 2, (a[1] + b[1]) / 2)
+                if bld.contains(Point(mid[0] + nx * 1.5, mid[1] + ny * 1.5)):
+                    nx, ny = -nx, -ny
+                foot = LineString([a, b]).interpolate(LineString([a, b]).project(pt))
+                ang = math.degrees(math.atan2(uy, ux)) % 180
+                for fac in facades:
+                    dang = abs(fac["ang"] - ang)
+                    dang = min(dang, 180 - dang)
+                    off = (foot.x - fac["ox"]) * fac["n"][0] + (foot.y - fac["oy"]) * fac["n"][1]
+                    if dang < FACADE_ANGLE_DEG and abs(off) < FACADE_OFFSET_M and fac["n"][0] * nx + fac["n"][1] * ny > 0:
+                        fac["ents"].append((pt, r))
+                        break
+                else:
+                    facades.append({"ang": ang, "u": (ux, uy), "n": (nx, ny), "ox": foot.x, "oy": foot.y, "ents": [(pt, r)]})
+        else:
+            stats["skipped_no_building_not_row"] += 1
 
         house_points = []
         for fac in facades:
             ux, uy = fac["u"]
             nx, ny = fac["n"]
             ox, oy = fac["ox"], fac["oy"]
-            along = []
-            for vx, vy in bld.exterior.coords:
-                t = (vx - ox) * nx + (vy - oy) * ny
-                if -30 <= t <= FACADE_OFFSET_M:
-                    along.append((vx - ox) * ux + (vy - oy) * uy)
-            amin, amax = min(along), max(along)
-            # Полоса перед фасадом в осях фасада → обратно в метры района.
-            band = box(amin - 12, 0.5, amax + 12, BAND_DEPTH_M)
+            # Первый и последний подъезд стороны по номеру; точки — за ними, у торцов дома.
+            numbered = sorted(fac["ents"], key=lambda e: (e[1]["properties"].get("№ подъезда") or 0))
+            first, last = numbered[0], numbered[-1]
+            proj = lambda pt: (pt.x - ox) * ux + (pt.y - oy) * uy
+            lo, hi = sorted((proj(first[0]), proj(last[0])))
+            start, end = lo - END_CAP_M, hi + END_CAP_M
+            if bld is not None:
+                along = [(vx - ox) * ux + (vy - oy) * uy for vx, vy in bld.exterior.coords
+                         if -30 <= (vx - ox) * nx + (vy - oy) * ny <= FACADE_OFFSET_M]
+                if along:
+                    start = max(start, min(along) - CORNER_OVERSHOOT_M)
+                    end = min(end, max(along) + CORNER_OVERSHOOT_M)
+            start, end = min(start, lo - MIN_BEYOND_M), max(end, hi + MIN_BEYOND_M)
+            band = box(start - 12, 0.5, end + 12, BAND_DEPTH_M)
             band = affinity.affine_transform(band, [ux, nx, uy, ny, ox, oy])
-            walk = yard_walks.intersection(band).difference(bld.buffer(0.5))
+            walk = yard_walks.intersection(band)
+            if bld is not None:
+                walk = walk.difference(bld.buffer(0.5))
             if walk.is_empty or walk.area < 15:
                 stats["facade_without_sidewalk"] += 1
                 continue
             offsets = []
-            for pt in (Point(L.xy(r["lon"], r["lat"])) for r in fac["ents"]):
+            for pt, _ in fac["ents"]:
                 q = nearest_points(walk, pt)[0]
                 offsets.append((q.x - ox) * nx + (q.y - oy) * ny)
             d = sorted(offsets)[len(offsets) // 2]
-            length = amax - amin
-            stops = [(amin - CORNER_OVERSHOOT_M, 1, "угол"), (amax + CORNER_OVERSHOOT_M, -1, "угол")]
+            n_first = first[1]["properties"].get("№ подъезда")
+            n_last = last[1]["properties"].get("№ подъезда")
+            first_end = start if proj(first[0]) <= proj(last[0]) else end
+            stops = [(start, 1, f"за подъездом {n_first if first_end == start else n_last}"),
+                     (end, -1, f"за подъездом {n_last if first_end == start else n_first}")]
+            length = end - start
             parts = math.ceil(length / LONG_FACADE_M)
             for k in range(1, parts):
-                stops.append((amin + length * k / parts, 1, "середина фасада"))
+                stops.append((start + length * k / parts, 1, "середина фасада"))
             for a, sign, role in stops:
                 target = Point(ox + ux * a + nx * d, oy + uy * a + ny * d)
                 q = target if walk.contains(target) else nearest_points(walk, target)[0]
                 if q.distance(target) > SNAP_MAX_M:
-                    stats["corner_far_from_sidewalk"] += 1
+                    stats["end_far_from_sidewalk"] += 1
                     continue
                 house_points.append({"xy": (q.x, q.y), "az": azimuth(ux * sign, uy * sign), "role": role,
                                      "weight": len(fac["ents"]),
-                                     "side": "подъезды " + entrance_range([r["properties"].get("№ подъезда") for r in fac["ents"]])})
+                                     "side": "подъезды " + entrance_range([r["properties"].get("№ подъезда") for _, r in fac["ents"]])})
 
         # Тротуар кругом дома: добавляем остальные углы описанного прямоугольника.
-        outer = bld.buffer(6).exterior
-        samples = [outer.interpolate(s) for s in range(0, int(outer.length), 5)]
-        if samples and house_points:
+        samples = []
+        if bld is not None:
+            outer = bld.buffer(6).exterior
+            samples = [outer.interpolate(s) for s in range(0, int(outer.length), 5)]
+        if samples and house_points and bld is not None:
             covered = sum(1 for s in samples if yard_walks.distance(s) < 5)
             if covered / len(samples) >= RING_SHARE:
                 rect = list(bld.minimum_rotated_rectangle.exterior.coords)[:4]

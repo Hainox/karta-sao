@@ -85,13 +85,13 @@ try {
   assert.deepEqual(history.rows.map((row) => row.status), ['rejected', 'rejected', 'accepted']);
   // Точки съёмки тротуаров: импорт слоёв атласа и слот фото «район загружает — префектура принимает».
   const sidewalkImport = run('scripts/import-sidewalk-photo-points.js', ['--source=../districts/layers', '--apply']);
-  assert.match(sidewalkImport, /новых: 5670; с ошибками: 0/);
+  assert.match(sidewalkImport, /новых: 5710; с ошибками: 0/);
   assert.match(run('scripts/import-sidewalk-photo-points.js', ['--source=../districts/layers']), /новых: 0;/);
   const sw = 'http://127.0.0.1:' + server.address().port + '/sidewalks';
   const swCall = (path, role, options = {}) => fetch(sw + path, { ...options, headers: { 'x-test-role': role, 'content-type': 'application/json', ...(options.headers || {}) } });
   assert.equal((await swCall('?district=' + encodeURIComponent('Аэропорт'), 'district')).status, 403);
   const swList = await (await swCall('?district=' + encodeURIComponent('Аэропорт'), 'admin')).json();
-  assert.equal(swList.points.length, 382);
+  assert.equal(swList.points.length, 386);
   const own = swList.points[0];
   assert.equal(own.photo_state, 'empty');
   const foreign = (await (await swCall('?district=' + encodeURIComponent('Сокол'), 'admin')).json()).points[0];
@@ -120,7 +120,15 @@ try {
   assert.equal((await adminSw.json()).status, 'accepted', 'снимок префектуры сразу принят');
   const swHistory = await pool.query('SELECT status FROM sidewalk_photo_slot_photos WHERE point_id=$1 ORDER BY uploaded_at', [own.id]);
   assert.deepEqual(swHistory.rows.map((row) => row.status), ['rejected', 'superseded', 'accepted']);
-  console.log('PASS: PostgreSQL migrations, import, slots, duplicate prevention, review, review queue and summary, sidewalk photo slots');
+  // Новая расстановка (--replace): точка с фото остаётся на месте, черновики без правок обновляются.
+  const before = (await pool.query('SELECT longitude, latitude, heading FROM sidewalk_photo_points WHERE id=$1', [own.id])).rows[0];
+  await pool.query("UPDATE sidewalk_photo_points SET heading = (heading + 90) % 360 WHERE id <> $1 AND updated_by IS NULL", [own.id]);
+  const replaced = run('scripts/import-sidewalk-photo-points.js', ['--source=../districts/layers', '--replace', '--apply']);
+  assert.match(replaced, /обновлено: 5709; снято: 0/);
+  assert.deepEqual((await pool.query('SELECT longitude, latitude, heading FROM sidewalk_photo_points WHERE id=$1', [own.id])).rows[0], before);
+  const drift = await pool.query("SELECT count(*)::int AS n FROM sidewalk_photo_points WHERE id <> $1 AND retired_at IS NULL", [own.id]);
+  assert.equal(drift.rows[0].n, 5709);
+  console.log('PASS: PostgreSQL migrations, import, slots, duplicate prevention, review, review queue and summary, sidewalk photo slots, sidewalk replace');
 } finally {
   if (server) await new Promise(resolve => server.close(resolve));
   await pool.end();

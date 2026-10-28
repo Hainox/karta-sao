@@ -115,6 +115,17 @@ $DC up -d photo-service
 
 Migration 017 used to fail on rerun with «more than one row returned by a subquery used as an expression» once a district point had three or more photos (returns for rework). Since 2026-10-28 it passes on such data and changes nothing there; that failure blocked every update of the service.
 
+### Re-placing the sidewalk points (`--replace`)
+
+When the atlas layers are rebuilt with a new placement, refresh `/tmp/sidewalk-layers` from `origin/main` (the `git archive … districts/layers` step above) and load them with `--replace`. Draft points that nobody edited and that have no photo move to the new place, extra untouched drafts are retired, and points the prefecture moved, rotated or photographed stay as they are; the dry run lists them:
+
+```sh
+$DC run --rm -v /tmp/sidewalk-layers:/sources:ro photo-service node scripts/import-sidewalk-photo-points.js --source=/sources/districts/layers --replace
+$DC run --rm -v /tmp/sidewalk-layers:/sources:ro photo-service node scripts/import-sidewalk-photo-points.js --source=/sources/districts/layers --replace --apply
+```
+
+No restart is needed.
+
 ### Sidewalk point photos (migration 021)
 
 Photos of the sidewalk shooting points live in the new `sidewalk_photo_slot_photos` table (one active photo per point, like playgrounds). Ship the files the same way as for migration 020 (`git archive origin/main photo-service/... | tar -x -C /opt/sao-photo-service`, after a copy of the replaced files), then:
