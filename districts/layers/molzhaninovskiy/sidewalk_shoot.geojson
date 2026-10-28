@@ -1,0 +1,768 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т11.001",
+    "district": "Молжаниновский",
+    "address": "Синявинская улица, дом 11, корпус 2",
+    "unom": 340424,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 178,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.3467102,
+     55.9493619
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т11.002",
+    "district": "Молжаниновский",
+    "address": "Синявинская улица, дом 11, корпус 2",
+    "unom": 340424,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 88,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.3463519,
+     55.9493334
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т11.003",
+    "district": "Молжаниновский",
+    "address": "Синявинская улица, дом 11, корпус 2",
+    "unom": 340424,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 358,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.3467599,
+     55.9490437
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т11.004",
+    "district": "Молжаниновский",
+    "address": "Синявинская улица, дом 11, корпус 2",
+    "unom": 340424,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 358,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.3463419,
+     55.9490387
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т11.005",
+    "district": "Молжаниновский",
+    "address": "Синявинская улица, дом 11, корпус 3",
+    "unom": 340425,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 230,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.3469828,
+     55.9489279
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т11.006",
+    "district": "Молжаниновский",
+    "address": "Синявинская улица, дом 11, корпус 3",
+    "unom": 340425,
+    "role": "угол",
+    "side": "подъезды 5–8",
+    "azimuth": 140,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.3459497,
+     55.9484834
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т11.007",
+    "district": "Молжаниновский",
+    "address": "Синявинская улица, дом 11, корпус 3",
+    "unom": 340425,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 50,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.3457706,
+     55.9483505
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т11.008",
+    "district": "Молжаниновский",
+    "address": "Синявинская улица, дом 11, корпус 4",
+    "unom": 340426,
+    "role": "угол",
+    "side": "подъезды 3–8",
+    "azimuth": 228,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.3457237,
+     55.947867
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т11.009",
+    "district": "Молжаниновский",
+    "address": "Синявинская улица, дом 11, корпус 3",
+    "unom": 340425,
+    "role": "угол",
+    "side": "подъезды 5–8",
+    "azimuth": 320,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.34722,
+     55.9477262
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т11.010",
+    "district": "Молжаниновский",
+    "address": "Синявинская улица, дом 11, корпус 11",
+    "unom": 340433,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 88,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.3485938,
+     55.9477123
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т11.011",
+    "district": "Молжаниновский",
+    "address": "Синявинская улица, дом 11, корпус 11",
+    "unom": 340433,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 178,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.3490177,
+     55.9477099
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т11.012",
+    "district": "Молжаниновский",
+    "address": "Синявинская улица, дом 11, корпус 3",
+    "unom": 340425,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 320,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.3468936,
+     55.9475593
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т11.013",
+    "district": "Молжаниновский",
+    "address": "Синявинская улица, дом 11, корпус 4",
+    "unom": 340426,
+    "role": "середина фасада",
+    "side": "подъезды 3–8",
+    "azimuth": 48,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.3448294,
+     55.9474215
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т11.014",
+    "district": "Молжаниновский",
+    "address": "Синявинская улица, дом 11, корпус 11",
+    "unom": 340433,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 358,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.3486361,
+     55.9474045
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т11.015",
+    "district": "Молжаниновский",
+    "address": "Синявинская улица, дом 11, корпус 12",
+    "unom": 340434,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 178,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.3495682,
+     55.9473872
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т11.016",
+    "district": "Молжаниновский",
+    "address": "Синявинская улица, дом 11, корпус 11",
+    "unom": 340433,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 358,
+    "status": "черновик",
+    "also_covers": "Синявинская улица, дом 11, корпус 12 (круговой тротуар)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.3491304,
+     55.9473629
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т11.017",
+    "district": "Молжаниновский",
+    "address": "Синявинская улица, дом 11, корпус 4",
+    "unom": 340426,
+    "role": "угол",
+    "side": "подъезды 9–11",
+    "azimuth": 138,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.3442132,
+     55.9471114
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т11.018",
+    "district": "Молжаниновский",
+    "address": "Синявинская улица, дом 11, корпус 12",
+    "unom": 340434,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 358,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.3492105,
+     55.9470913
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т11.019",
+    "district": "Молжаниновский",
+    "address": "Синявинская улица, дом 11, корпус 13",
+    "unom": 340435,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 137,
+    "status": "черновик",
+    "also_covers": "Синявинская улица, дом 11, корпус 12 (подъезды 1)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.3495931,
+     55.9470751
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т11.020",
+    "district": "Молжаниновский",
+    "address": "Синявинская улица, дом 11, корпус 10",
+    "unom": 340432,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 139,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.3471884,
+     55.9470054
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т11.021",
+    "district": "Молжаниновский",
+    "address": "Синявинская улица, дом 11, корпус 4",
+    "unom": 340426,
+    "role": "угол",
+    "side": "подъезды 3–8",
+    "azimuth": 48,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.3439481,
+     55.9469506
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т11.022",
+    "district": "Молжаниновский",
+    "address": "Синявинская улица, дом 11, корпус 10",
+    "unom": 340432,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 319,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.3479477,
+     55.9465181
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т11.023",
+    "district": "Молжаниновский",
+    "address": "Синявинская улица, дом 11, корпус 5",
+    "unom": 340427,
+    "role": "угол",
+    "side": "подъезды 2–5",
+    "azimuth": 137,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.3431519,
+     55.9464651
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т11.024",
+    "district": "Молжаниновский",
+    "address": "Синявинская улица, дом 11, корпус 4",
+    "unom": 340426,
+    "role": "угол",
+    "side": "подъезды 9–11",
+    "azimuth": 318,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.345274,
+     55.9464577
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т11.025",
+    "district": "Молжаниновский",
+    "address": "Синявинская улица, дом 11, корпус 4",
+    "unom": 340426,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 318,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.3449572,
+     55.9463458
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т11.026",
+    "district": "Молжаниновский",
+    "address": "Синявинская улица, дом 11, корпус 13",
+    "unom": 340435,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 317,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.3507721,
+     55.9462269
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т11.027",
+    "district": "Молжаниновский",
+    "address": "Синявинская улица, дом 11, корпус 5",
+    "unom": 340427,
+    "role": "угол",
+    "side": "подъезды 2–5",
+    "azimuth": 317,
+    "status": "черновик",
+    "also_covers": "Синявинская улица, дом 11, корпус 5 (подъезды 1)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.3443295,
+     55.9457991
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т11.028",
+    "district": "Молжаниновский",
+    "address": "Синявинская улица, дом 11, корпус 5",
+    "unom": 340427,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 47,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.3439835,
+     55.9456168
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т11.029",
+    "district": "Молжаниновский",
+    "address": "Синявинская улица, дом 11, корпус 7",
+    "unom": 340429,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 229,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.3457581,
+     55.9452308
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т11.030",
+    "district": "Молжаниновский",
+    "address": "Синявинская улица, дом 11, корпус 7",
+    "unom": 340429,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 229,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.3460844,
+     55.945031
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т11.031",
+    "district": "Молжаниновский",
+    "address": "Синявинская улица, дом 11, корпус 7",
+    "unom": 340429,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 49,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.3453543,
+     55.94503
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т11.032",
+    "district": "Молжаниновский",
+    "address": "Синявинская улица, дом 11, корпус 8",
+    "unom": 340430,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 229,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.3463007,
+     55.9449018
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т11.033",
+    "district": "Молжаниновский",
+    "address": "Синявинская улица, дом 11, корпус 7",
+    "unom": 340429,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 319,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.3456242,
+     55.9448003
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т11.034",
+    "district": "Молжаниновский",
+    "address": "Синявинская улица, дом 11, корпус 8",
+    "unom": 340430,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 49,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.3459053,
+     55.9447051
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т11.035",
+    "district": "Молжаниновский",
+    "address": "Синявинская улица, дом 11, корпус 8",
+    "unom": 340430,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 229,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.3466223,
+     55.9446961
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т11.036",
+    "district": "Молжаниновский",
+    "address": "Синявинская улица, дом 11, корпус 8",
+    "unom": 340430,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 319,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.3462029,
+     55.9444817
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т11.037",
+    "district": "Молжаниновский",
+    "address": "Синявинская улица, дом 11, корпус 16",
+    "unom": 340437,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 138,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.3468822,
+     55.9442786
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т11.038",
+    "district": "Молжаниновский",
+    "address": "Синявинская улица, дом 11, корпус 16",
+    "unom": 340437,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 318,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.348038,
+     55.9435605
+    ]
+   }
+  }
+ ]
+}

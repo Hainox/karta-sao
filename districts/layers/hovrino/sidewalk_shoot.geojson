@@ -1,0 +1,8941 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.001",
+    "district": "Ховрино",
+    "address": "улица Дыбенко, дом 44",
+    "unom": 7375,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 158,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4830379,
+     55.8784633
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.002",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 39, корпус 1",
+    "unom": 340243,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 163,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4873536,
+     55.8777172
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.003",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 39, корпус 1",
+    "unom": 340243,
+    "role": "угол",
+    "side": "подъезды 2–3",
+    "azimuth": 253,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4876242,
+     55.8776532
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.004",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 39, корпус 1",
+    "unom": 340243,
+    "role": "угол",
+    "side": "подъезды 2–3",
+    "azimuth": 73,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4864577,
+     55.8774572
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.005",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 39, корпус 1",
+    "unom": 340243,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 343,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4875251,
+     55.8774044
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.006",
+    "district": "Ховрино",
+    "address": "улица Дыбенко, дом 36, корпус 4",
+    "unom": 340148,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 242,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4860842,
+     55.8773025
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.007",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 39, корпус 1",
+    "unom": 340243,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 343,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4865567,
+     55.8772724
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.008",
+    "district": "Ховрино",
+    "address": "улица Дыбенко, дом 36, корпус 4",
+    "unom": 340148,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 62,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4855063,
+     55.8771787
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.009",
+    "district": "Ховрино",
+    "address": "улица Дыбенко, дом 36, корпус 3",
+    "unom": 340147,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 152,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4858123,
+     55.8769237
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.010",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 35, корпус 1",
+    "unom": 8260,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 154,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4899479,
+     55.8767169
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.011",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 35, корпус 1",
+    "unom": 8260,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 154,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4896584,
+     55.876656
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.012",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 37",
+    "unom": 8265,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 244,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.488418,
+     55.8764947
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.013",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 35, корпус 1",
+    "unom": 8260,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 244,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4902748,
+     55.8764006
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.014",
+    "district": "Ховрино",
+    "address": "улица Дыбенко, дом 36, корпус 1",
+    "unom": 340238,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 243,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4849084,
+     55.8763791
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.015",
+    "district": "Ховрино",
+    "address": "улица Дыбенко, дом 36, корпус 3",
+    "unom": 340147,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 332,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4863171,
+     55.8763183
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.016",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 35, корпус 1",
+    "unom": 8260,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 334,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4899388,
+     55.8762997
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.017",
+    "district": "Ховрино",
+    "address": "улица Дыбенко, дом 36, корпус 1",
+    "unom": 340238,
+    "role": "угол",
+    "side": "подъезды 2",
+    "azimuth": 243,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4850118,
+     55.8762169
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.018",
+    "district": "Ховрино",
+    "address": "улица Дыбенко, дом 36, корпус 1",
+    "unom": 340238,
+    "role": "угол",
+    "side": "подъезды 3",
+    "azimuth": 153,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4844054,
+     55.8762138
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.019",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 33, корпус 1",
+    "unom": 8254,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 155,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4911767,
+     55.8761944
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.020",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 37",
+    "unom": 8265,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 64,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4873105,
+     55.8761819
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.021",
+    "district": "Ховрино",
+    "address": "улица Дыбенко, дом 36, корпус 1",
+    "unom": 340238,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 63,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4842494,
+     55.876128
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.022",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 33, корпус 1",
+    "unom": 8254,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 155,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4908561,
+     55.8760129
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.023",
+    "district": "Ховрино",
+    "address": "улица Дыбенко, дом 34",
+    "unom": 7368,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 154,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4836597,
+     55.8760023
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.024",
+    "district": "Ховрино",
+    "address": "улица Дыбенко, дом 36, корпус 1",
+    "unom": 340238,
+    "role": "угол",
+    "side": "подъезды 2",
+    "azimuth": 63,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4842036,
+     55.8759868
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.025",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 35, корпус 2",
+    "unom": 8262,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 334,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.489927,
+     55.8757729
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.026",
+    "district": "Ховрино",
+    "address": "улица Дыбенко, дом 36, корпус 1",
+    "unom": 340238,
+    "role": "угол",
+    "side": "подъезды 3",
+    "azimuth": 333,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4848061,
+     55.8757643
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.027",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 33, корпус 1",
+    "unom": 8254,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 335,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4911713,
+     55.8757634
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.028",
+    "district": "Ховрино",
+    "address": "улица Дыбенко, дом 32, корпус 1",
+    "unom": 340198,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 154,
+    "status": "черновик",
+    "also_covers": "улица Дыбенко, дом 36, корпус 1 (круговой тротуар)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4853659,
+     55.8757586
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.029",
+    "district": "Ховрино",
+    "address": "улица Дыбенко, дом 32, корпус 1",
+    "unom": 340198,
+    "role": "угол",
+    "side": "подъезды 3",
+    "azimuth": 154,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4851618,
+     55.8756946
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.030",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 31, корпус 3",
+    "unom": 8250,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 161,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4915257,
+     55.875244
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.031",
+    "district": "Ховрино",
+    "address": "улица Дыбенко, дом 32, корпус 1",
+    "unom": 340198,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 334,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4858359,
+     55.8752163
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.032",
+    "district": "Ховрино",
+    "address": "улица Дыбенко, дом 32, корпус 1",
+    "unom": 340198,
+    "role": "угол",
+    "side": "подъезды 3",
+    "azimuth": 334,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4855624,
+     55.8751026
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.033",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 31, корпус 3",
+    "unom": 8250,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 341,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4917032,
+     55.8749152
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.034",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 31, корпус 2",
+    "unom": 8249,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 342,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4927626,
+     55.8743533
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.035",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 33, корпус 3",
+    "unom": 8256,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 243,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4887688,
+     55.8742248
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.036",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 25А",
+    "unom": 8241,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 161,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4951114,
+     55.874211
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.037",
+    "district": "Ховрино",
+    "address": "улица Дыбенко, дом 26, корпус 1",
+    "unom": 340197,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 245,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4863265,
+     55.8740841
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.038",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 33, корпус 3",
+    "unom": 8256,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 63,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4878701,
+     55.8739591
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.039",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 29",
+    "unom": 8247,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 160,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4926301,
+     55.8739429
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.040",
+    "district": "Ховрино",
+    "address": "улица Дыбенко, дом 26, корпус 1",
+    "unom": 340197,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 245,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4865534,
+     55.873923
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.041",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 25А",
+    "unom": 8241,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 341,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.49532,
+     55.8738405
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.042",
+    "district": "Ховрино",
+    "address": "улица Дыбенко, дом 26, корпус 1",
+    "unom": 340197,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 65,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4855958,
+     55.8738349
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.043",
+    "district": "Ховрино",
+    "address": "улица Дыбенко, дом 28",
+    "unom": 7363,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 152,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4840857,
+     55.8737911
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.044",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 29",
+    "unom": 8247,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 340,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4927075,
+     55.8737706
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.045",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 33, корпус 7",
+    "unom": 74173,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 242,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4875234,
+     55.8736158
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.046",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 23А",
+    "unom": 8236,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 161,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4966544,
+     55.8735831
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.047",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 23",
+    "unom": 74161,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 252,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4956382,
+     55.8735792
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.048",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 33, корпус 7",
+    "unom": 74173,
+    "role": "угол",
+    "side": "подъезды 2",
+    "azimuth": 152,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.48718,
+     55.8735698
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.049",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 25, корпус 1",
+    "unom": 340146,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 92,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4943019,
+     55.8734715
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.050",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 33, корпус 7",
+    "unom": 74173,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 62,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4870297,
+     55.8734618
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.051",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 25, корпус 1",
+    "unom": 340146,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 182,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4946776,
+     55.8734173
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.052",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 23",
+    "unom": 74161,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 72,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4948917,
+     55.8734171
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.053",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 23А",
+    "unom": 8236,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 341,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.496799,
+     55.8732349
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.054",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 23",
+    "unom": 74161,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 252,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.495946,
+     55.8732283
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.055",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 33, корпус 7",
+    "unom": 74173,
+    "role": "угол",
+    "side": "подъезды 2",
+    "azimuth": 332,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4876596,
+     55.8731506
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.056",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 23",
+    "unom": 74161,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 342,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4948855,
+     55.8731013
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.057",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 33, корпус 7",
+    "unom": 74173,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 332,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4873053,
+     55.8730246
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.058",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 25, корпус 1",
+    "unom": 340146,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 2,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4946516,
+     55.8728782
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.059",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 25, корпус 1",
+    "unom": 340146,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 2,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4942067,
+     55.8728409
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.060",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 27, корпус 4",
+    "unom": 8245,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 161,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4911825,
+     55.8728035
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.061",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 21",
+    "unom": 74119,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 159,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4971452,
+     55.8727759
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.062",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 23, корпус 1",
+    "unom": 74160,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 159,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4958476,
+     55.8727588
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.063",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 25, корпус 2",
+    "unom": 8238,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 161,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4945532,
+     55.8727354
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.064",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 25, корпус 2",
+    "unom": 8238,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 341,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4947587,
+     55.8725542
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.065",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 19",
+    "unom": 8227,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 160,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4983794,
+     55.8725119
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.066",
+    "district": "Ховрино",
+    "address": "Клинская улица, дом 18, корпус 2",
+    "unom": 340149,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 160,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4915323,
+     55.8722996
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.067",
+    "district": "Ховрино",
+    "address": "улица Дыбенко, дом 18, корпус 1",
+    "unom": 340093,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 152,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4870247,
+     55.8722886
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.068",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 19",
+    "unom": 8227,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 340,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4985404,
+     55.8721547
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.069",
+    "district": "Ховрино",
+    "address": "улица Дыбенко, дом 18, корпус 1",
+    "unom": 340093,
+    "role": "угол",
+    "side": "подъезды 2–3",
+    "azimuth": 242,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4875099,
+     55.872109
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.070",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 23, корпус 1",
+    "unom": 74160,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 339,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4962876,
+     55.8720617
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.071",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 21",
+    "unom": 74119,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 339,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4976742,
+     55.8719333
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.072",
+    "district": "Ховрино",
+    "address": "улица Дыбенко, дом 18, корпус 1",
+    "unom": 340093,
+    "role": "угол",
+    "side": "подъезды 2–3",
+    "azimuth": 62,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4867587,
+     55.8718564
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.073",
+    "district": "Ховрино",
+    "address": "улица Дыбенко, дом 18, корпус 1",
+    "unom": 340093,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 332,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4874259,
+     55.8718445
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.074",
+    "district": "Ховрино",
+    "address": "Клинская улица, дом 18, корпус 2",
+    "unom": 340149,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 340,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4919509,
+     55.8716558
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.075",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 21, корпус 2",
+    "unom": 340041,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 104,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4961969,
+     55.8716233
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.076",
+    "district": "Ховрино",
+    "address": "Клинская улица, дом 18, корпус 1",
+    "unom": 340150,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 251,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.492825,
+     55.8716064
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.077",
+    "district": "Ховрино",
+    "address": "улица Дыбенко, дом 16, корпус 1",
+    "unom": 340031,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 151,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.485578,
+     55.8715834
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.078",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 21, корпус 2",
+    "unom": 340041,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 284,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4967029,
+     55.8715516
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.079",
+    "district": "Ховрино",
+    "address": "Клинская улица, дом 14, корпус 1",
+    "unom": 340242,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 138,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4955935,
+     55.8714695
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.080",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 19, корпус 1",
+    "unom": 74121,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 106,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4972616,
+     55.8714562
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.081",
+    "district": "Ховрино",
+    "address": "Клинская улица, дом 18, корпус 1",
+    "unom": 340150,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 71,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4920035,
+     55.8714342
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.082",
+    "district": "Ховрино",
+    "address": "улица Дыбенко, дом 16, корпус 1",
+    "unom": 340031,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 61,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4849594,
+     55.8714035
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.083",
+    "district": "Ховрино",
+    "address": "улица Дыбенко, дом 16, корпус 1",
+    "unom": 340031,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 241,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4857522,
+     55.8713821
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.084",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 19, корпус 1",
+    "unom": 74121,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 286,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4979858,
+     55.8713386
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.085",
+    "district": "Ховрино",
+    "address": "Левобережная улица, дом 4, корпус 6",
+    "unom": 470006,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 149,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4769404,
+     55.8713309
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.086",
+    "district": "Ховрино",
+    "address": "улица Дыбенко, дом 14, корпус 1",
+    "unom": 340033,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 154,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4848866,
+     55.8712084
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.087",
+    "district": "Ховрино",
+    "address": "улица Дыбенко, дом 16, корпус 1",
+    "unom": 340031,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 61,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4851672,
+     55.8712013
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.088",
+    "district": "Ховрино",
+    "address": "Левобережная улица, дом 4, корпус 6",
+    "unom": 470006,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 59,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4767201,
+     55.8711951
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.089",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 17",
+    "unom": 75014,
+    "role": "угол",
+    "side": "подъезды 3–7",
+    "azimuth": 129,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5010963,
+     55.8711882
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.090",
+    "district": "Ховрино",
+    "address": "Левобережная улица, дом 4, корпус 16",
+    "unom": 470015,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 224,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4752811,
+     55.871187
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.091",
+    "district": "Ховрино",
+    "address": "улица Дыбенко, дом 14, корпус 1",
+    "unom": 340033,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 64,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.484493,
+     55.8711159
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.092",
+    "district": "Ховрино",
+    "address": "Клинская улица, дом 14, корпус 1",
+    "unom": 340242,
+    "role": "угол",
+    "side": "подъезды 4",
+    "azimuth": 228,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4955827,
+     55.8711094
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.093",
+    "district": "Ховрино",
+    "address": "Клинская улица, дом 14, корпус 1",
+    "unom": 340242,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 228,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4961251,
+     55.8710253
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.094",
+    "district": "Ховрино",
+    "address": "Левобережная улица, дом 4, корпус 16",
+    "unom": 470015,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 224,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4755749,
+     55.8710185
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.095",
+    "district": "Ховрино",
+    "address": "Левобережная улица, дом 4, корпус 16",
+    "unom": 470015,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 44,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4749253,
+     55.8709988
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.096",
+    "district": "Ховрино",
+    "address": "Левобережная улица, дом 4, корпус 5",
+    "unom": 470005,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 248,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.478773,
+     55.870912
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.097",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 17, корпус 3",
+    "unom": 74082,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 128,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.498712,
+     55.8708965
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.098",
+    "district": "Ховрино",
+    "address": "Левобережная улица, дом 4, корпус 3",
+    "unom": 470002,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 224,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4756199,
+     55.870851
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.099",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 17",
+    "unom": 75014,
+    "role": "середина фасада",
+    "side": "подъезды 3–7",
+    "azimuth": 309,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5018603,
+     55.870812
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.100",
+    "district": "Ховрино",
+    "address": "Левобережная улица, дом 4, корпус 16",
+    "unom": 470015,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 314,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4751803,
+     55.8708116
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.101",
+    "district": "Ховрино",
+    "address": "Клинская улица, дом 10, корпус 2",
+    "unom": 74091,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 196,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4969751,
+     55.8707918
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.102",
+    "district": "Ховрино",
+    "address": "Левобережная улица, дом 4, корпус 6",
+    "unom": 470006,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 329,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4775122,
+     55.8707849
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.103",
+    "district": "Ховрино",
+    "address": "улица Дыбенко, дом 14, корпус 2",
+    "unom": 340032,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 246,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4861943,
+     55.8707782
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.104",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 17, корпус 3",
+    "unom": 74082,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 308,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4991969,
+     55.8706896
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.105",
+    "district": "Ховрино",
+    "address": "Левобережная улица, дом 4, корпус 3",
+    "unom": 470002,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 224,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4759283,
+     55.8706887
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.106",
+    "district": "Ховрино",
+    "address": "Левобережная улица, дом 4, корпус 6",
+    "unom": 470006,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 329,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4772091,
+     55.8706833
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.107",
+    "district": "Ховрино",
+    "address": "Левобережная улица, дом 4, корпус 5",
+    "unom": 470005,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 248,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4788678,
+     55.8706798
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.108",
+    "district": "Ховрино",
+    "address": "Левобережная улица, дом 4, корпус 3",
+    "unom": 470002,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 44,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4753172,
+     55.8706766
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.109",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 28, корпус 3",
+    "unom": 74171,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 153,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4898538,
+     55.8706626
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.110",
+    "district": "Ховрино",
+    "address": "улица Дыбенко, дом 14, корпус 2",
+    "unom": 340032,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 66,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4855526,
+     55.8706241
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.111",
+    "district": "Ховрино",
+    "address": "Клинская улица, дом 14, корпус 1",
+    "unom": 340242,
+    "role": "угол",
+    "side": "подъезды 4",
+    "azimuth": 48,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4944996,
+     55.8705629
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.112",
+    "district": "Ховрино",
+    "address": "улица Дыбенко, дом 14, корпус 2",
+    "unom": 340032,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 246,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4863333,
+     55.870544
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.113",
+    "district": "Ховрино",
+    "address": "улица Дыбенко, дом 14, корпус 1",
+    "unom": 340033,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 334,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4854185,
+     55.8705437
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.114",
+    "district": "Ховрино",
+    "address": "Левобережная улица, дом 4, корпус 2",
+    "unom": 470003,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 223,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4759681,
+     55.8705255
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.115",
+    "district": "Ховрино",
+    "address": "Левобережная улица, дом 4, корпус 5",
+    "unom": 470005,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 68,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.476993,
+     55.8705089
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.116",
+    "district": "Ховрино",
+    "address": "Клинская улица, дом 10, корпус 4",
+    "unom": 340227,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 106,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4957806,
+     55.8704488
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.117",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 17",
+    "unom": 75014,
+    "role": "угол",
+    "side": "подъезды 3–7",
+    "azimuth": 309,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5025563,
+     55.870434
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.118",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 28, корпус 4",
+    "unom": 74172,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 153,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4889642,
+     55.8704217
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.119",
+    "district": "Ховрино",
+    "address": "Левобережная улица, дом 4, корпус 2",
+    "unom": 470003,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 43,
+    "status": "черновик",
+    "also_covers": "Левобережная улица, дом 4, корпус 3 (круговой тротуар)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4755406,
+     55.8703805
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.120",
+    "district": "Ховрино",
+    "address": "Клинская улица, дом 10, корпус 4",
+    "unom": 340227,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 286,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4962146,
+     55.8703794
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.121",
+    "district": "Ховрино",
+    "address": "улица Дыбенко, дом 14, корпус 2",
+    "unom": 340032,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 336,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4857829,
+     55.8703617
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.122",
+    "district": "Ховрино",
+    "address": "Левобережная улица, дом 4, корпус 2",
+    "unom": 470003,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 223,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.476268,
+     55.8703616
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.123",
+    "district": "Ховрино",
+    "address": "Клинская улица, дом 14, корпус 1",
+    "unom": 340242,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 318,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4947225,
+     55.8703135
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.124",
+    "district": "Ховрино",
+    "address": "Клинская улица, дом 10, корпус 3",
+    "unom": 10227,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 195,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4983605,
+     55.8703135
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.125",
+    "district": "Ховрино",
+    "address": "Клинская улица, дом 14, корпус 2",
+    "unom": 340257,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 160,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4950595,
+     55.8702953
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.126",
+    "district": "Ховрино",
+    "address": "Левобережная улица, дом 4, корпус 5",
+    "unom": 470005,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 338,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4770927,
+     55.8702944
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.127",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 17, корпус 4",
+    "unom": 74093,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 106,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5003857,
+     55.870198
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.128",
+    "district": "Ховрино",
+    "address": "Левобережная улица, дом 4, корпус 12",
+    "unom": 470042,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 250,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4796508,
+     55.8701756
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.129",
+    "district": "Ховрино",
+    "address": "Клинская улица, дом 16, корпус 1",
+    "unom": 340311,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 257,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4939028,
+     55.8701587
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.130",
+    "district": "Ховрино",
+    "address": "Клинская улица, дом 10, корпус 2",
+    "unom": 74091,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 16,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4966455,
+     55.8701549
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.131",
+    "district": "Ховрино",
+    "address": "Левобережная улица, дом 4, корпус 2",
+    "unom": 470003,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 313,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4759122,
+     55.8701431
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.132",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 17",
+    "unom": 75014,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 129,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.50162,
+     55.870096
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.133",
+    "district": "Ховрино",
+    "address": "Клинская улица, дом 16, корпус 1",
+    "unom": 340311,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 77,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4933569,
+     55.8700847
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.134",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 17",
+    "unom": 75014,
+    "role": "угол",
+    "side": "подъезды 2",
+    "azimuth": 309,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5022604,
+     55.8700783
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.135",
+    "district": "Ховрино",
+    "address": "Клинская улица, дом 4, корпус 3",
+    "unom": 74066,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 127,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4985666,
+     55.8700773
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.136",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 28, корпус 3",
+    "unom": 74171,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 243,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4907333,
+     55.8700552
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.137",
+    "district": "Ховрино",
+    "address": "Левобережная улица, дом 4, корпус 9",
+    "unom": 470009,
+    "role": "угол",
+    "side": "подъезды 6–7",
+    "azimuth": 96,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4799158,
+     55.8700439
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.138",
+    "district": "Ховрино",
+    "address": "Клинская улица, дом 10, корпус 1",
+    "unom": 340220,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 214,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4966971,
+     55.8700306
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.139",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 17, корпус 4",
+    "unom": 74093,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 286,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5013465,
+     55.8700037
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.140",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 28, корпус 3",
+    "unom": 74171,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 333,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4903612,
+     55.8699627
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.141",
+    "district": "Ховрино",
+    "address": "Клинская улица, дом 10, корпус 1",
+    "unom": 340220,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 214,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4971198,
+     55.8699317
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.142",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 17",
+    "unom": 75014,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 309,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5020211,
+     55.8699144
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.143",
+    "district": "Ховрино",
+    "address": "Левобережная улица, дом 4, корпус 9",
+    "unom": 470009,
+    "role": "угол",
+    "side": "подъезды 6–7",
+    "azimuth": 276,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4819109,
+     55.8698972
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.144",
+    "district": "Ховрино",
+    "address": "Клинская улица, дом 16, корпус 1",
+    "unom": 340311,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 257,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4940463,
+     55.8698501
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.145",
+    "district": "Ховрино",
+    "address": "Клинская улица, дом 16, корпус 1",
+    "unom": 340311,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 347,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.493522,
+     55.8698455
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.146",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 28, корпус 2",
+    "unom": 19727,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 153,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4900368,
+     55.8698366
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.147",
+    "district": "Ховрино",
+    "address": "Левобережная улица, дом 4, корпус 12",
+    "unom": 470042,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 70,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4781234,
+     55.8698159
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.148",
+    "district": "Ховрино",
+    "address": "Левобережная улица, дом 4, корпус 10",
+    "unom": 470010,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 151,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4806551,
+     55.8697742
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.149",
+    "district": "Ховрино",
+    "address": "Клинская улица, дом 2А, корпус 7",
+    "unom": 5186842,
+    "role": "угол",
+    "side": "подъезды 2–4",
+    "azimuth": 128,
+    "status": "черновик",
+    "also_covers": "Клинская улица, дом 2А, корпус 7 (подъезды 5)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5027652,
+     55.8697441
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.150",
+    "district": "Ховрино",
+    "address": "Клинская улица, дом 4, корпус 3",
+    "unom": 74066,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 307,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4993157,
+     55.8697401
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.151",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 28, корпус 4",
+    "unom": 74172,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 333,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4897106,
+     55.8697113
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.152",
+    "district": "Ховрино",
+    "address": "Левобережная улица, дом 4, корпус 15",
+    "unom": 470014,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 150,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4815033,
+     55.8696992
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.153",
+    "district": "Ховрино",
+    "address": "Левобережная улица, дом 4, корпус 10",
+    "unom": 470010,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 61,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4803191,
+     55.8696871
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.154",
+    "district": "Ховрино",
+    "address": "Клинская улица, дом 14, корпус 2",
+    "unom": 340257,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 340,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4954968,
+     55.8696278
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.155",
+    "district": "Ховрино",
+    "address": "Клинская улица, дом 10, корпус 1",
+    "unom": 340220,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 34,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4961812,
+     55.8696021
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.156",
+    "district": "Ховрино",
+    "address": "Левобережная улица, дом 4, корпус 10",
+    "unom": 470010,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 331,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4809627,
+     55.8695645
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.157",
+    "district": "Ховрино",
+    "address": "Клинская улица, дом 10, корпус 1",
+    "unom": 340220,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 304,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4964778,
+     55.8695373
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.158",
+    "district": "Ховрино",
+    "address": "улица Дыбенко, дом 6, корпус 1",
+    "unom": 74198,
+    "role": "угол",
+    "side": "подъезды 5–6",
+    "azimuth": 243,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4862399,
+     55.8694905
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.159",
+    "district": "Ховрино",
+    "address": "Левобережная улица, дом 4, корпус 11",
+    "unom": 470011,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 149,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4797814,
+     55.8694878
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.160",
+    "district": "Ховрино",
+    "address": "Левобережная улица, дом 4, корпус 14",
+    "unom": 470013,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 149,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.480969,
+     55.8694157
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.161",
+    "district": "Ховрино",
+    "address": "Клинская улица, дом 12",
+    "unom": 10229,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 121,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4952593,
+     55.8694152
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.162",
+    "district": "Ховрино",
+    "address": "Левобережная улица, дом 4, корпус 10",
+    "unom": 470010,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 331,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.480469,
+     55.8694019
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.163",
+    "district": "Ховрино",
+    "address": "Левобережная улица, дом 4, корпус 11",
+    "unom": 470011,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 59,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4793359,
+     55.8693762
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.164",
+    "district": "Ховрино",
+    "address": "Клинская улица, дом 2А, корпус 7",
+    "unom": 5186842,
+    "role": "угол",
+    "side": "подъезды 5",
+    "azimuth": 38,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5022317,
+     55.8693403
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.165",
+    "district": "Ховрино",
+    "address": "Левобережная улица, дом 4, корпус 11",
+    "unom": 470011,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 329,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4800884,
+     55.8692746
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.166",
+    "district": "Ховрино",
+    "address": "Левобережная улица, дом 4, корпус 15",
+    "unom": 470014,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 240,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4824,
+     55.8692649
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.167",
+    "district": "Ховрино",
+    "address": "Клинская улица, дом 2А, корпус 7",
+    "unom": 5186842,
+    "role": "середина фасада",
+    "side": "подъезды 2–4",
+    "azimuth": 308,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5038674,
+     55.869256
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.168",
+    "district": "Ховрино",
+    "address": "улица Дыбенко, дом 6, корпус 1",
+    "unom": 74198,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 153,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4853038,
+     55.869251
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.169",
+    "district": "Ховрино",
+    "address": "Клинская улица, дом 21",
+    "unom": 10236,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 244,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4934613,
+     55.8691733
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.170",
+    "district": "Ховрино",
+    "address": "Левобережная улица, дом 4, корпус 1",
+    "unom": 74109,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 149,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4771898,
+     55.8691719
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.171",
+    "district": "Ховрино",
+    "address": "Левобережная улица, дом 4, корпус 15",
+    "unom": 470014,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 330,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4820171,
+     55.8691569
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.172",
+    "district": "Ховрино",
+    "address": "Левобережная улица, дом 4, корпус 18",
+    "unom": 470017,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 149,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4801522,
+     55.8691278
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.173",
+    "district": "Ховрино",
+    "address": "улица Дыбенко, дом 6, корпус 1",
+    "unom": 74198,
+    "role": "угол",
+    "side": "подъезды 5–6",
+    "azimuth": 63,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4851219,
+     55.8691123
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.174",
+    "district": "Ховрино",
+    "address": "Левобережная улица, дом 4, корпус 11",
+    "unom": 470011,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 329,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4796127,
+     55.8691108
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.175",
+    "district": "Ховрино",
+    "address": "Левобережная улица, дом 4, корпус 18",
+    "unom": 470017,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 59,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4798401,
+     55.8690499
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.176",
+    "district": "Ховрино",
+    "address": "Клинская улица, дом 19",
+    "unom": 10235,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 121,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4942454,
+     55.8690339
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.177",
+    "district": "Ховрино",
+    "address": "улица Дыбенко, дом 2, корпус 1",
+    "unom": 74163,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 152,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4877982,
+     55.8690271
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.178",
+    "district": "Ховрино",
+    "address": "Клинская улица, дом 12",
+    "unom": 10229,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 301,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4963196,
+     55.8689879
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.179",
+    "district": "Ховрино",
+    "address": "Клинская улица, дом 4, корпус 1",
+    "unom": 10220,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 217,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5001137,
+     55.8689391
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.180",
+    "district": "Ховрино",
+    "address": "Левобережная улица, дом 4, корпус 18",
+    "unom": 470017,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 329,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4804186,
+     55.8688799
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.181",
+    "district": "Ховрино",
+    "address": "Клинская улица, дом 21",
+    "unom": 10236,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 64,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4921817,
+     55.8688155
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.182",
+    "district": "Ховрино",
+    "address": "Клинская улица, дом 2А, корпус 7",
+    "unom": 5186842,
+    "role": "угол",
+    "side": "подъезды 2–4",
+    "azimuth": 308,
+    "status": "черновик",
+    "also_covers": "Клинская улица, дом 2А, корпус 7 (подъезды 1)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5049666,
+     55.8687853
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.183",
+    "district": "Ховрино",
+    "address": "Левобережная улица, дом 4, корпус 18",
+    "unom": 470017,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 329,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4800675,
+     55.8687623
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.184",
+    "district": "Ховрино",
+    "address": "Левобережная улица, дом 4, корпус 22",
+    "unom": 470020,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 150,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4804668,
+     55.8687381
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.185",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 24, корпус 2",
+    "unom": 340312,
+    "role": "угол",
+    "side": "подъезды 4",
+    "azimuth": 153,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4940681,
+     55.8687323
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.186",
+    "district": "Ховрино",
+    "address": "Клинская улица, дом 19",
+    "unom": 10235,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 301,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.495133,
+     55.8687321
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.187",
+    "district": "Ховрино",
+    "address": "Левобережная улица, дом 4, корпус 14",
+    "unom": 470013,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 329,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4817618,
+     55.8686753
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.188",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 24, корпус 2",
+    "unom": 340312,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 153,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4938053,
+     55.8686489
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.189",
+    "district": "Ховрино",
+    "address": "улица Дыбенко, дом 6, корпус 2",
+    "unom": 74199,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 242,
+    "status": "черновик",
+    "also_covers": "улица Дыбенко, дом 6, корпус 1 (круговой тротуар)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4869995,
+     55.868637
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.190",
+    "district": "Ховрино",
+    "address": "Левобережная улица, дом 4, корпус 22",
+    "unom": 470020,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 150,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.480131,
+     55.868611
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.191",
+    "district": "Ховрино",
+    "address": "улица Дыбенко, дом 2, корпус 1",
+    "unom": 74163,
+    "role": "угол",
+    "side": "подъезды 3",
+    "azimuth": 62,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4878028,
+     55.8685315
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.192",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 28, корпус 1",
+    "unom": 74193,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 154,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4909462,
+     55.8685018
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.193",
+    "district": "Ховрино",
+    "address": "улица Дыбенко, дом 6, корпус 2",
+    "unom": 74199,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 242,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4871628,
+     55.8684916
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.194",
+    "district": "Ховрино",
+    "address": "улица Дыбенко, дом 2, корпус 1",
+    "unom": 74163,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 332,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4883614,
+     55.8684328
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.195",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 28, корпус 1",
+    "unom": 74193,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 64,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4906084,
+     55.868405
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.196",
+    "district": "Ховрино",
+    "address": "улица Дыбенко, дом 6, корпус 1",
+    "unom": 74198,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 333,
+    "status": "черновик",
+    "also_covers": "улица Дыбенко, дом 6, корпус 2 (подъезды 1–2)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4860661,
+     55.8683871
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.197",
+    "district": "Ховрино",
+    "address": "Клинская улица, дом 2А, корпус 7",
+    "unom": 5186842,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 38,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5044091,
+     55.8683761
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.198",
+    "district": "Ховрино",
+    "address": "Левобережная улица, дом 4, корпус 1",
+    "unom": 74109,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 329,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4781385,
+     55.8682657
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.199",
+    "district": "Ховрино",
+    "address": "улица Дыбенко, дом 6, корпус 2",
+    "unom": 74199,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 332,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4861931,
+     55.8682542
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.200",
+    "district": "Ховрино",
+    "address": "Левобережная улица, дом 4, корпус 22",
+    "unom": 470020,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 330,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4806171,
+     55.8682329
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.201",
+    "district": "Ховрино",
+    "address": "Клинская улица, дом 4, корпус 1",
+    "unom": 10220,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 37,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4990695,
+     55.8681734
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.202",
+    "district": "Ховрино",
+    "address": "Клинская улица, дом 17",
+    "unom": 10233,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 245,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4962446,
+     55.8680827
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.203",
+    "district": "Ховрино",
+    "address": "Клинская улица, дом 15",
+    "unom": 10231,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 122,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4969484,
+     55.8680741
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.204",
+    "district": "Ховрино",
+    "address": "Клинская улица, дом 17",
+    "unom": 10233,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 65,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4953109,
+     55.8678319
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.205",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 36",
+    "unom": 74076,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 153,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4882172,
+     55.8678208
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.206",
+    "district": "Ховрино",
+    "address": "Клинская улица, дом 15",
+    "unom": 10231,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 302,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4978375,
+     55.8677654
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.207",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 24, корпус 2",
+    "unom": 340312,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 333,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4946076,
+     55.8677435
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.208",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 28, корпус 1",
+    "unom": 74193,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 334,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4916033,
+     55.8677253
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.209",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 30",
+    "unom": 19731,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 152,
+    "status": "черновик",
+    "also_covers": "Петрозаводская улица, дом 28, корпус 1 (круговой тротуар)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.491289,
+     55.8676438
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.210",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 36",
+    "unom": 74076,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 333,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4886268,
+     55.8673657
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.211",
+    "district": "Ховрино",
+    "address": "Клинская улица, дом 11",
+    "unom": 10228,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 238,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4995348,
+     55.8669708
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.212",
+    "district": "Ховрино",
+    "address": "Клинская улица, дом 9",
+    "unom": 10224,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 121,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5002172,
+     55.8669553
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.213",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 22",
+    "unom": 19723,
+    "role": "середина фасада",
+    "side": "подъезды 1–6",
+    "azimuth": 154,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4966821,
+     55.8668814
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.214",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 22, корпус 1",
+    "unom": 74174,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 115,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4951043,
+     55.8667623
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.215",
+    "district": "Ховрино",
+    "address": "Клинская улица, дом 9",
+    "unom": 10224,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 301,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5010845,
+     55.8666616
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.216",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 19, корпус 1",
+    "unom": 19719,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 266,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4918142,
+     55.8666162
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.217",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 19, корпус 1",
+    "unom": 19719,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 86,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4906673,
+     55.8665689
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.218",
+    "district": "Ховрино",
+    "address": "улица Лавочкина, дом 56/23",
+    "unom": 12528,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 237,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4870694,
+     55.866498
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.219",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 22, корпус 1",
+    "unom": 74174,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 295,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4962441,
+     55.8664684
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.220",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 21",
+    "unom": 19722,
+    "role": "угол",
+    "side": "подъезды 1–8",
+    "azimuth": 147,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4877234,
+     55.8664539
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.221",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 22",
+    "unom": 19723,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 334,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4970978,
+     55.8663842
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.222",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 13, корпус 2",
+    "unom": 19709,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 104,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4916104,
+     55.8663028
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.223",
+    "district": "Ховрино",
+    "address": "улица Лавочкина, дом 56/23",
+    "unom": 12528,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 57,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4862167,
+     55.8661818
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.224",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 13, корпус 1",
+    "unom": 19708,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 106,
+    "status": "черновик",
+    "also_covers": "Петрозаводская улица, дом 13, корпус 2 (подъезды 1)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.492025,
+     55.8661692
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.225",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 17, корпус 1",
+    "unom": 19716,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 147,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4908954,
+     55.8661493
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.226",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 16",
+    "unom": 19715,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 154,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4996418,
+     55.8660953
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.227",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 13, корпус 1",
+    "unom": 19708,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 286,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4934082,
+     55.8659428
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.228",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 21",
+    "unom": 19722,
+    "role": "середина фасада",
+    "side": "подъезды 1–8",
+    "azimuth": 327,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4883387,
+     55.865857
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.229",
+    "district": "Ховрино",
+    "address": "Клинская улица, дом 5",
+    "unom": 10222,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 244,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5028061,
+     55.8658403
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.230",
+    "district": "Ховрино",
+    "address": "Клинская улица, дом 3",
+    "unom": 10219,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 122,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5035281,
+     55.865819
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.231",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 11, корпус 3",
+    "unom": 19706,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 299,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4957364,
+     55.86572
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.232",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 16",
+    "unom": 19715,
+    "role": "середина фасада",
+    "side": "подъезды 1–6",
+    "azimuth": 334,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4999661,
+     55.8657148
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.233",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 18, корпус 1",
+    "unom": 74194,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 122,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4984464,
+     55.8656946
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.234",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 9, корпус 1",
+    "unom": 19699,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 147,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4959373,
+     55.8656119
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.235",
+    "district": "Ховрино",
+    "address": "Клинская улица, дом 3",
+    "unom": 10219,
+    "role": "середина фасада",
+    "side": "подъезды 1–6",
+    "azimuth": 122,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5041131,
+     55.8656094
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.236",
+    "district": "Ховрино",
+    "address": "Клинская улица, дом 5",
+    "unom": 10222,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 64,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5018634,
+     55.8655852
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.237",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 15, корпус 1",
+    "unom": 19711,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 147,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4915394,
+     55.8655654
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.238",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 17, корпус 1",
+    "unom": 19716,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 327,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4916902,
+     55.8654071
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.239",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 18, корпус 1",
+    "unom": 74194,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 302,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4994815,
+     55.8653838
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.240",
+    "district": "Ховрино",
+    "address": "Клинская улица, дом 3",
+    "unom": 10219,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 302,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5049383,
+     55.8653306
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.241",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 7",
+    "unom": 19698,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 122,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4970683,
+     55.8653067
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.242",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 16",
+    "unom": 19715,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 334,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5003826,
+     55.8652295
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.243",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 21",
+    "unom": 19722,
+    "role": "угол",
+    "side": "подъезды 1–8",
+    "azimuth": 327,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4890181,
+     55.8651993
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.244",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 17, корпус 2",
+    "unom": 19717,
+    "role": "угол",
+    "side": "подъезды 5–10",
+    "azimuth": 237,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4909574,
+     55.8651962
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.245",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 10",
+    "unom": 19703,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 154,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5030262,
+     55.8651833
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.246",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 7",
+    "unom": 19698,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 302,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4976671,
+     55.8651088
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.247",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 9, корпус 2",
+    "unom": 19700,
+    "role": "середина фасада",
+    "side": "подъезды 5–10",
+    "azimuth": 237,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4948215,
+     55.8650543
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.248",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 75",
+    "unom": 27318,
+    "role": "угол",
+    "side": "подъезды 1–8",
+    "azimuth": 122,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5058932,
+     55.8649852
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.249",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 17, корпус 2",
+    "unom": 19717,
+    "role": "середина фасада",
+    "side": "подъезды 5–10",
+    "azimuth": 57,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4902027,
+     55.8649843
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.250",
+    "district": "Ховрино",
+    "address": "улица Лавочкина, дом 54, корпус 1",
+    "unom": 12526,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 236,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4878185,
+     55.864952
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.251",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 15, корпус 1",
+    "unom": 19711,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 327,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4923027,
+     55.8649483
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.252",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 12",
+    "unom": 19707,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 153,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5015126,
+     55.8649449
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.253",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 9, корпус 1",
+    "unom": 19699,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 327,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4967884,
+     55.8648709
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.254",
+    "district": "Ховрино",
+    "address": "улица Лавочкина, дом 52",
+    "unom": 12525,
+    "role": "угол",
+    "side": "подъезды 1–8",
+    "azimuth": 147,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4882115,
+     55.8648616
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.255",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 12",
+    "unom": 19707,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 333,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5016559,
+     55.8647737
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.256",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 9, корпус 2",
+    "unom": 19700,
+    "role": "угол",
+    "side": "подъезды 5–10",
+    "azimuth": 57,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4938262,
+     55.8646902
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.257",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 17, корпус 2",
+    "unom": 19717,
+    "role": "угол",
+    "side": "подъезды 5–10",
+    "azimuth": 57,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4893346,
+     55.8646634
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.258",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 10",
+    "unom": 19703,
+    "role": "середина фасада",
+    "side": "подъезды 1–6",
+    "azimuth": 334,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5032568,
+     55.8646598
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.259",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 5, корпус 1",
+    "unom": 19693,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 147,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4983427,
+     55.8645931
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.260",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 12, корпус 1",
+    "unom": 74196,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 124,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5016778,
+     55.8645859
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.261",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 15, корпус 2",
+    "unom": 19712,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 146,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4923849,
+     55.864551
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.262",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 75",
+    "unom": 27318,
+    "role": "середина фасада",
+    "side": "подъезды 1–8",
+    "azimuth": 302,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.507167,
+     55.8645428
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.263",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 3, корпус 2",
+    "unom": 19691,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 122,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4992913,
+     55.8645299
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.264",
+    "district": "Ховрино",
+    "address": "улица Лавочкина, дом 54, корпус 1",
+    "unom": 12526,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 56,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4867172,
+     55.8645135
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.265",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 73, корпус 3",
+    "unom": 74135,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 121,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5053516,
+     55.8644894
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.266",
+    "district": "Ховрино",
+    "address": "улица Лавочкина, дом 48, корпус 3",
+    "unom": 12522,
+    "role": "угол",
+    "side": "подъезды 15–18",
+    "azimuth": 147,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.491668,
+     55.8643444
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.267",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 73, корпус 3",
+    "unom": 74135,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 31,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5051387,
+     55.8643228
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.268",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 75",
+    "unom": 27318,
+    "role": "угол",
+    "side": "подъезды 1–8",
+    "azimuth": 302,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.508042,
+     55.8642497
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.269",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 15, корпус 2",
+    "unom": 19712,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 326,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4927149,
+     55.8642456
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.270",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 3, корпус 2",
+    "unom": 19691,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 302,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.500145,
+     55.8642338
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.271",
+    "district": "Ховрино",
+    "address": "улица Лавочкина, дом 52",
+    "unom": 12525,
+    "role": "середина фасада",
+    "side": "подъезды 1–8",
+    "azimuth": 147,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4887663,
+     55.8642181
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.272",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 12, корпус 1",
+    "unom": 74196,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 304,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5026775,
+     55.8642075
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.273",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 10",
+    "unom": 19703,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 334,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5036707,
+     55.8641859
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.274",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 73, корпус 2",
+    "unom": 74134,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 212,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5072406,
+     55.8640744
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.275",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 73, корпус 3",
+    "unom": 74135,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 301,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5067536,
+     55.8640335
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.276",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 5, корпус 3",
+    "unom": 19695,
+    "role": "угол",
+    "side": "подъезды 11–14",
+    "azimuth": 148,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4965919,
+     55.8640264
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.277",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 15, корпус 5",
+    "unom": 340232,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 170,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4938553,
+     55.8640028
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.278",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 73, корпус 2",
+    "unom": 74134,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 212,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5075513,
+     55.863981
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.279",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 3, корпус 1",
+    "unom": 19690,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 147,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5001432,
+     55.8639658
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.280",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 8",
+    "unom": 74142,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 133,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5034481,
+     55.8639545
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.281",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 5, корпус 4",
+    "unom": 19696,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 237,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4961408,
+     55.8639275
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.282",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 6",
+    "unom": 19697,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 154,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5050083,
+     55.8638762
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.283",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 1",
+    "unom": 19689,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 123,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.501202,
+     55.8638549
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.284",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 73, корпус 3",
+    "unom": 74135,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 301,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5065225,
+     55.8638508
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.285",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 8",
+    "unom": 74142,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 43,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5031338,
+     55.863849
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.286",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 5, корпус 1",
+    "unom": 19693,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 327,
+    "status": "черновик",
+    "also_covers": "Петрозаводская улица, дом 5, корпус 2 (подъезды 7–10)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4993125,
+     55.8637432
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.287",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 15, корпус 3",
+    "unom": 19713,
+    "role": "угол",
+    "side": "подъезды 6–9",
+    "azimuth": 146,
+    "status": "черновик",
+    "also_covers": "улица Лавочкина, дом 48, корпус 3 (подъезды 15–18)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4923123,
+     55.8637384
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.288",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 73, корпус 2",
+    "unom": 74134,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 32,
+    "status": "черновик",
+    "also_covers": "Фестивальная улица, дом 73, корпус 1 (подъезды 1)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5066935,
+     55.8637261
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.289",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 8",
+    "unom": 74142,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 313,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5040103,
+     55.8636622
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.290",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 73, корпус 1",
+    "unom": 74133,
+    "role": "угол",
+    "side": "подъезды 2",
+    "azimuth": 211,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5071776,
+     55.8636328
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.291",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 5, корпус 4",
+    "unom": 19696,
+    "role": "середина фасада",
+    "side": "подъезды 1–6",
+    "azimuth": 237,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4953294,
+     55.8635446
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.292",
+    "district": "Ховрино",
+    "address": "улица Лавочкина, дом 48, корпус 2",
+    "unom": 12521,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 237,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4918787,
+     55.863536
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.293",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 8",
+    "unom": 74142,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 313,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5037454,
+     55.8635332
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.294",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 73, корпус 2",
+    "unom": 74134,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 302,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5070852,
+     55.8635231
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.295",
+    "district": "Ховрино",
+    "address": "улица Лавочкина, дом 52",
+    "unom": 12525,
+    "role": "угол",
+    "side": "подъезды 1–8",
+    "azimuth": 327,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4895947,
+     55.8635084
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.296",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 15, корпус 5",
+    "unom": 340232,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 350,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4940122,
+     55.8635055
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.297",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 4",
+    "unom": 19692,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 154,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5045063,
+     55.8634574
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.298",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 1",
+    "unom": 19689,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 303,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5023143,
+     55.863454
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.299",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 3, корпус 1",
+    "unom": 19690,
+    "role": "середина фасада",
+    "side": "подъезды 1–6",
+    "azimuth": 327,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5008028,
+     55.8634524
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.300",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 5, корпус 3",
+    "unom": 19695,
+    "role": "угол",
+    "side": "подъезды 11–14",
+    "azimuth": 328,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4973145,
+     55.8633659
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.301",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 73, корпус 1",
+    "unom": 74133,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 31,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5062293,
+     55.8633471
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.302",
+    "district": "Ховрино",
+    "address": "улица Лавочкина, дом 48, корпус 2",
+    "unom": 12521,
+    "role": "середина фасада",
+    "side": "подъезды 1–6",
+    "azimuth": 57,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.490968,
+     55.8632671
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.303",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 5, корпус 4",
+    "unom": 19696,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 57,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4944809,
+     55.8632393
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.304",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 73, корпус 1",
+    "unom": 74133,
+    "role": "угол",
+    "side": "подъезды 2",
+    "azimuth": 31,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5065071,
+     55.8632309
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.305",
+    "district": "Ховрино",
+    "address": "улица Лавочкина, дом 50, корпус 1",
+    "unom": 12523,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 237,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4880776,
+     55.8631863
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.306",
+    "district": "Ховрино",
+    "address": "улица Лавочкина, дом 48, корпус 1",
+    "unom": 12520,
+    "role": "угол",
+    "side": "подъезды 1–8",
+    "azimuth": 147,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4886038,
+     55.8631713
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.307",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 4",
+    "unom": 19692,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 334,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.504765,
+     55.8630844
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.308",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 63, корпус 3",
+    "unom": 74188,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 237,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4978661,
+     55.8630763
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.309",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 15, корпус 3",
+    "unom": 19713,
+    "role": "угол",
+    "side": "подъезды 6–9",
+    "azimuth": 326,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4930754,
+     55.8630522
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.310",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 53, корпус 4",
+    "unom": 27304,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 147,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4929454,
+     55.86292
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.311",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 65",
+    "unom": 27315,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 148,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4989564,
+     55.8629128
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.312",
+    "district": "Ховрино",
+    "address": "Петрозаводская улица, дом 3, корпус 1",
+    "unom": 19690,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 327,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5013932,
+     55.8629102
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.313",
+    "district": "Ховрино",
+    "address": "улица Лавочкина, дом 48, корпус 2",
+    "unom": 12521,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 57,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4901552,
+     55.8629088
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.314",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 59, корпус 4",
+    "unom": 27312,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 148,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4942357,
+     55.8628826
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.315",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 63, корпус 3",
+    "unom": 74188,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 57,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4971558,
+     55.8627974
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.316",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 53, корпус 4",
+    "unom": 27304,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 327,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.493251,
+     55.8626116
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.317",
+    "district": "Ховрино",
+    "address": "улица Лавочкина, дом 44, корпус 3",
+    "unom": 74073,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 147,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4904084,
+     55.8626107
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.318",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 59, корпус 2",
+    "unom": 27310,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 146,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4957404,
+     55.8625319
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.319",
+    "district": "Ховрино",
+    "address": "улица Лавочкина, дом 48, корпус 1",
+    "unom": 12520,
+    "role": "середина фасада",
+    "side": "подъезды 1–8",
+    "azimuth": 147,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4893538,
+     55.862531
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.320",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 65",
+    "unom": 27315,
+    "role": "середина фасада",
+    "side": "подъезды 1–6",
+    "azimuth": 148,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4994219,
+     55.862482
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.321",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 61",
+    "unom": 27313,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 147,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4972999,
+     55.8623828
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.322",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 59, корпус 2",
+    "unom": 27310,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 326,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4959662,
+     55.8623539
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.323",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 67",
+    "unom": 27316,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 147,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.500745,
+     55.8623112
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.324",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 59, корпус 1",
+    "unom": 27309,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 237,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.496672,
+     55.862272
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.325",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 53, корпус 5",
+    "unom": 27305,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 237,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.494329,
+     55.8622552
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.326",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 53, корпус 2",
+    "unom": 27302,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 147,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.492766,
+     55.8622543
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.327",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 53, корпус 5",
+    "unom": 27305,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 57,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4937743,
+     55.8621296
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.328",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 65",
+    "unom": 27315,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 328,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4998652,
+     55.8620749
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.329",
+    "district": "Ховрино",
+    "address": "улица Лавочкина, дом 44, корпус 2",
+    "unom": 12517,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 237,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4922667,
+     55.8619853
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.330",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 59, корпус 1",
+    "unom": 27309,
+    "role": "середина фасада",
+    "side": "подъезды 1–6",
+    "azimuth": 237,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4958051,
+     55.8619591
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.331",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 63, корпус 1",
+    "unom": 27314,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 239,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4997738,
+     55.8619503
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.332",
+    "district": "Ховрино",
+    "address": "улица Лавочкина, дом 44, корпус 3",
+    "unom": 74073,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 327,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4911594,
+     55.8619274
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.333",
+    "district": "Ховрино",
+    "address": "улица Лавочкина, дом 46, корпус 2",
+    "unom": 12519,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 6,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4878898,
+     55.8619016
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.334",
+    "district": "Ховрино",
+    "address": "улица Лавочкина, дом 48, корпус 1",
+    "unom": 12520,
+    "role": "угол",
+    "side": "подъезды 1–8",
+    "azimuth": 327,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4900403,
+     55.8618714
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.335",
+    "district": "Ховрино",
+    "address": "Онежская улица, дом 57/34",
+    "unom": 17606,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 147,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.504583,
+     55.8617503
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.336",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 61",
+    "unom": 27313,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 327,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.497942,
+     55.8616852
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.337",
+    "district": "Ховрино",
+    "address": "улица Лавочкина, дом 46, корпус 1",
+    "unom": 12518,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 236,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4891083,
+     55.8616748
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.338",
+    "district": "Ховрино",
+    "address": "улица Лавочкина, дом 44, корпус 2",
+    "unom": 12517,
+    "role": "середина фасада",
+    "side": "подъезды 1–6",
+    "azimuth": 237,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4913166,
+     55.8616459
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.339",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 59, корпус 1",
+    "unom": 27309,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 57,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4949069,
+     55.8616298
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.340",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 67",
+    "unom": 27316,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 327,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5015937,
+     55.861621
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.341",
+    "district": "Ховрино",
+    "address": "улица Лавочкина, дом 44, корпус 1",
+    "unom": 12516,
+    "role": "угол",
+    "side": "подъезды 1–8",
+    "azimuth": 147,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4894774,
+     55.8615567
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.342",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 53, корпус 2",
+    "unom": 27302,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 327,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4935386,
+     55.8615433
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.343",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 63, корпус 1",
+    "unom": 27314,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 59,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4985373,
+     55.861537
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.344",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 32, корпус 1",
+    "unom": 340329,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 179,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5036794,
+     55.8614798
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.345",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 32, корпус 1",
+    "unom": 340329,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 179,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.504125,
+     55.8614747
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.346",
+    "district": "Ховрино",
+    "address": "улица Лавочкина, дом 44, корпус 2",
+    "unom": 12517,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 57,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4905898,
+     55.8613718
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.347",
+    "district": "Ховрино",
+    "address": "улица Лавочкина, дом 46, корпус 1",
+    "unom": 12518,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 56,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4881185,
+     55.8613014
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.348",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 53, корпус 6",
+    "unom": 27306,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 147,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4948475,
+     55.8612536
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.349",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 32, корпус 1",
+    "unom": 340329,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 269,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.504141,
+     55.8612202
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.350",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 32, корпус 1",
+    "unom": 340329,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 359,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5037037,
+     55.8612096
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.351",
+    "district": "Ховрино",
+    "address": "улица Лавочкина, дом 44, корпус 1",
+    "unom": 12516,
+    "role": "середина фасада",
+    "side": "подъезды 1–8",
+    "azimuth": 327,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4901446,
+     55.861001
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.352",
+    "district": "Ховрино",
+    "address": "Онежская улица, дом 57/34",
+    "unom": 17606,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 327,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5056947,
+     55.8607806
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.353",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 51, корпус 1",
+    "unom": 74189,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 147,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4937651,
+     55.8606539
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.354",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 24",
+    "unom": 27277,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 147,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5001071,
+     55.8606184
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.355",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 20, корпус 2",
+    "unom": 340109,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 162,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4993793,
+     55.8605302
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.356",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 30",
+    "unom": 27282,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 237,
+    "status": "черновик",
+    "also_covers": "Фестивальная улица, дом 30 (подъезды 1)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5037403,
+     55.8604751
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.357",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 20, корпус 2",
+    "unom": 340109,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 162,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4987692,
+     55.8603953
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.358",
+    "district": "Ховрино",
+    "address": "улица Лавочкина, дом 44, корпус 1",
+    "unom": 12516,
+    "role": "угол",
+    "side": "подъезды 1–8",
+    "azimuth": 327,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4908501,
+     55.8603934
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.359",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 51, корпус 1",
+    "unom": 74189,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 327,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4939746,
+     55.8603632
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.360",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 30, корпус 2",
+    "unom": 340309,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 237,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5046504,
+     55.860233
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.361",
+    "district": "Ховрино",
+    "address": "Онежская улица, дом 53, корпус 1",
+    "unom": 17601,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 146,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5066974,
+     55.8602223
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.362",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 24",
+    "unom": 27277,
+    "role": "середина фасада",
+    "side": "подъезды 1–6",
+    "azimuth": 147,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5007289,
+     55.8601771
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.363",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 20, корпус 2",
+    "unom": 340109,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 342,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4989455,
+     55.8600914
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.364",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 22, корпус 1",
+    "unom": 74197,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 147,
+    "status": "черновик",
+    "also_covers": "Фестивальная улица, дом 20, корпус 2 (круговой тротуар)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4996669,
+     55.8600852
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.365",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 30, корпус 2",
+    "unom": 340309,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 57,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5035547,
+     55.8598516
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.366",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 14",
+    "unom": 27259,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 147,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4953372,
+     55.8597683
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.367",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 24",
+    "unom": 27277,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 327,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5011142,
+     55.8597481
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.368",
+    "district": "Ховрино",
+    "address": "Онежская улица, дом 53, корпус 1",
+    "unom": 17601,
+    "role": "середина фасада",
+    "side": "подъезды 1–6",
+    "azimuth": 326,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5072594,
+     55.8597316
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.369",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 22, корпус 2",
+    "unom": 74201,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 147,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5005399,
+     55.8595002
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.370",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 18",
+    "unom": 27265,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 146,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.498299,
+     55.8594498
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.371",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 22, корпус 1",
+    "unom": 74197,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 327,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.500367,
+     55.8594388
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.372",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 14",
+    "unom": 27259,
+    "role": "середина фасада",
+    "side": "подъезды 1–6",
+    "azimuth": 147,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.495859,
+     55.8593138
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.373",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 22, корпус 2",
+    "unom": 74201,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 237,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5008572,
+     55.8592571
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.374",
+    "district": "Ховрино",
+    "address": "Онежская улица, дом 53, корпус 1",
+    "unom": 17601,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 326,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5078165,
+     55.8592392
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.375",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 22, корпус 2",
+    "unom": 74201,
+    "role": "угол",
+    "side": "подъезды 4–5",
+    "azimuth": 147,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4994692,
+     55.8591068
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.376",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 18",
+    "unom": 27265,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 326,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4987364,
+     55.85907
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.377",
+    "district": "Ховрино",
+    "address": "Онежская улица, дом 53, корпус 3",
+    "unom": 17603,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 57,
+    "status": "черновик",
+    "also_covers": "Онежская улица, дом 53, корпус 3 (подъезды 1)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5056561,
+     55.8589741
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.378",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 47",
+    "unom": 340102,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 244,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4865057,
+     55.8589394
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.379",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 14",
+    "unom": 27259,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 327,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4963542,
+     55.8588822
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.380",
+    "district": "Ховрино",
+    "address": "улица Ляпидевского, дом 16, корпус 1",
+    "unom": 74170,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 147,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4967957,
+     55.8588591
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.381",
+    "district": "Ховрино",
+    "address": "Онежская улица, дом 51, корпус 1",
+    "unom": 340308,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 237,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5067732,
+     55.8587404
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.382",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 22, корпус 2",
+    "unom": 74201,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 57,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4994573,
+     55.8587388
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.383",
+    "district": "Ховрино",
+    "address": "Онежская улица, дом 49",
+    "unom": 17599,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 238,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5088482,
+     55.8587117
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.384",
+    "district": "Ховрино",
+    "address": "улица Ляпидевского, дом 18",
+    "unom": 13597,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 238,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4948496,
+     55.8587073
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.385",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 22, корпус 2",
+    "unom": 74201,
+    "role": "угол",
+    "side": "подъезды 4–5",
+    "azimuth": 327,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.499943,
+     55.8586817
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.386",
+    "district": "Ховрино",
+    "address": "улица Ляпидевского, дом 16, корпус 1",
+    "unom": 74170,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 327,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4970679,
+     55.8586549
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.387",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 47",
+    "unom": 340102,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 64,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4854705,
+     55.8586496
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.388",
+    "district": "Ховрино",
+    "address": "улица Ляпидевского, дом 18",
+    "unom": 13597,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 58,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4945095,
+     55.8585852
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.389",
+    "district": "Ховрино",
+    "address": "улица Ляпидевского, дом 16",
+    "unom": 74169,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 247,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4960883,
+     55.8585312
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.390",
+    "district": "Ховрино",
+    "address": "Онежская улица, дом 51, корпус 1",
+    "unom": 340308,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 57,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5057328,
+     55.8583646
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.391",
+    "district": "Ховрино",
+    "address": "Онежская улица, дом 49",
+    "unom": 17599,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 58,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5076466,
+     55.8583487
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.392",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 22, корпус 5",
+    "unom": 27273,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 238,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5008671,
+     55.8583325
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.393",
+    "district": "Ховрино",
+    "address": "Онежская улица, дом 47",
+    "unom": 17598,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 238,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5094699,
+     55.8582787
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.394",
+    "district": "Ховрино",
+    "address": "улица Ляпидевского, дом 10, корпус 3",
+    "unom": 74083,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 236,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4995623,
+     55.8582408
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.395",
+    "district": "Ховрино",
+    "address": "улица Ляпидевского, дом 10, корпус 3",
+    "unom": 74083,
+    "role": "угол",
+    "side": "подъезды 2",
+    "azimuth": 146,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4990324,
+     55.858211
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.396",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 22, корпус 5",
+    "unom": 27273,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 58,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5005526,
+     55.858113
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.397",
+    "district": "Ховрино",
+    "address": "улица Ляпидевского, дом 16",
+    "unom": 74169,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 67,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4946466,
+     55.8580779
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.398",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 22, корпус 7",
+    "unom": 74125,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 148,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5038378,
+     55.8579801
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.399",
+    "district": "Ховрино",
+    "address": "улица Ляпидевского, дом 10, корпус 3",
+    "unom": 74083,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 56,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4988445,
+     55.8579398
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.400",
+    "district": "Ховрино",
+    "address": "Онежская улица, дом 47",
+    "unom": 17598,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 58,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.508259,
+     55.8578979
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.401",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 22, корпус 4",
+    "unom": 74126,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 237,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5031645,
+     55.8578392
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.402",
+    "district": "Ховрино",
+    "address": "Флотская улица, дом 17, корпус 2",
+    "unom": 27487,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 147,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.506516,
+     55.8578268
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.403",
+    "district": "Ховрино",
+    "address": "улица Ляпидевского, дом 14",
+    "unom": 13595,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 147,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4962365,
+     55.8577768
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.404",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 22, корпус 4",
+    "unom": 74126,
+    "role": "угол",
+    "side": "подъезды 5",
+    "azimuth": 147,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5016927,
+     55.8577415
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.405",
+    "district": "Ховрино",
+    "address": "Флотская улица, дом 17, корпус 1",
+    "unom": 27486,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 147,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5075943,
+     55.857695
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.406",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 22, корпус 7",
+    "unom": 74125,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 328,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5041551,
+     55.8576946
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.407",
+    "district": "Ховрино",
+    "address": "Флотская улица, дом 17, корпус 1",
+    "unom": 27486,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 57,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5071234,
+     55.8575563
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.408",
+    "district": "Ховрино",
+    "address": "Флотская улица, дом 17, корпус 2",
+    "unom": 27487,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 327,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5069178,
+     55.8574833
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.409",
+    "district": "Ховрино",
+    "address": "Флотская улица, дом 17, корпус 1",
+    "unom": 27486,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 237,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5078904,
+     55.8574786
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.410",
+    "district": "Ховрино",
+    "address": "Флотская улица, дом 13, корпус 5",
+    "unom": 27484,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 238,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5039605,
+     55.857442
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.411",
+    "district": "Ховрино",
+    "address": "улица Ляпидевского, дом 14",
+    "unom": 13595,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 327,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4966449,
+     55.8574173
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.412",
+    "district": "Ховрино",
+    "address": "Флотская улица, дом 17, корпус 1",
+    "unom": 27486,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 57,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5074153,
+     55.8573156
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.413",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 22, корпус 4",
+    "unom": 74126,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 57,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5016874,
+     55.8573032
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.414",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 22, корпус 4",
+    "unom": 74126,
+    "role": "угол",
+    "side": "подъезды 5",
+    "azimuth": 327,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5021654,
+     55.8572639
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.415",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 22, корпус 4",
+    "unom": 74126,
+    "role": "угол",
+    "side": "подъезды 4",
+    "azimuth": 57,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.501893,
+     55.8572401
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.416",
+    "district": "Ховрино",
+    "address": "улица Ляпидевского, дом 10, корпус 1",
+    "unom": 74167,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 147,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4988597,
+     55.8572077
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.417",
+    "district": "Ховрино",
+    "address": "Флотская улица, дом 13, корпус 5",
+    "unom": 27484,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 58,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5030952,
+     55.8571364
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.418",
+    "district": "Ховрино",
+    "address": "улица Ляпидевского, дом 10, корпус 1",
+    "unom": 74167,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 327,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4991072,
+     55.8570651
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.419",
+    "district": "Ховрино",
+    "address": "Флотская улица, дом 13, корпус 2",
+    "unom": 27481,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 238,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5046437,
+     55.8570593
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.420",
+    "district": "Ховрино",
+    "address": "улица Ляпидевского, дом 10",
+    "unom": 74168,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 248,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4979091,
+     55.856957
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.421",
+    "district": "Ховрино",
+    "address": "улица Ляпидевского, дом 6, корпус 3",
+    "unom": 74089,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 234,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5012175,
+     55.8568308
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.422",
+    "district": "Ховрино",
+    "address": "улица Ляпидевского, дом 8, корпус 2",
+    "unom": 13591,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 238,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4993912,
+     55.856776
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.423",
+    "district": "Ховрино",
+    "address": "Флотская улица, дом 13, корпус 2",
+    "unom": 27481,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 58,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5036033,
+     55.8566951
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.424",
+    "district": "Ховрино",
+    "address": "Флотская улица, дом 13, корпус 4",
+    "unom": 27483,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 236,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.502749,
+     55.8566932
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.425",
+    "district": "Ховрино",
+    "address": "улица Ляпидевского, дом 6, корпус 3",
+    "unom": 74089,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 234,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5013745,
+     55.8566695
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.426",
+    "district": "Ховрино",
+    "address": "улица Ляпидевского, дом 10",
+    "unom": 74168,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 68,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4967917,
+     55.8565922
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.427",
+    "district": "Ховрино",
+    "address": "Флотская улица, дом 13, корпус 4",
+    "unom": 27483,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 56,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5022751,
+     55.8565596
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.428",
+    "district": "Ховрино",
+    "address": "улица Ляпидевского, дом 6, корпус 3",
+    "unom": 74089,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 54,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5005148,
+     55.8565496
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.429",
+    "district": "Ховрино",
+    "address": "Флотская улица, дом 13, корпус 1",
+    "unom": 27480,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 237,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5050101,
+     55.856542
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.430",
+    "district": "Ховрино",
+    "address": "улица Ляпидевского, дом 6, корпус 3",
+    "unom": 74089,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 324,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5007945,
+     55.8565184
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.431",
+    "district": "Ховрино",
+    "address": "Флотская улица, дом 13, корпус 3",
+    "unom": 27482,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 145,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5021699,
+     55.856379
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.432",
+    "district": "Ховрино",
+    "address": "улица Ляпидевского, дом 8, корпус 2",
+    "unom": 13591,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 58,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4982467,
+     55.8563772
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.433",
+    "district": "Ховрино",
+    "address": "улица Ляпидевского, дом 6, корпус 2",
+    "unom": 13589,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 238,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4999651,
+     55.8563382
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.434",
+    "district": "Ховрино",
+    "address": "улица Ляпидевского, дом 8, корпус 1",
+    "unom": 13590,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 146,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4981423,
+     55.8560924
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.435",
+    "district": "Ховрино",
+    "address": "Флотская улица, дом 13, корпус 1",
+    "unom": 27480,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 57,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5034689,
+     55.8559737
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.436",
+    "district": "Ховрино",
+    "address": "улица Ляпидевского, дом 6, корпус 2",
+    "unom": 13589,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 58,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4987571,
+     55.8559191
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.437",
+    "district": "Ховрино",
+    "address": "улица Ляпидевского, дом 8, корпус 1",
+    "unom": 13590,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 326,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.498466,
+     55.8558092
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.438",
+    "district": "Ховрино",
+    "address": "улица Ляпидевского, дом 6, корпус 1",
+    "unom": 13588,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 56,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4983792,
+     55.8553453
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.439",
+    "district": "Ховрино",
+    "address": "улица Ляпидевского, дом 2, корпус 1",
+    "unom": 74051,
+    "role": "угол",
+    "side": "подъезды 2–3",
+    "azimuth": 239,
+    "status": "черновик",
+    "also_covers": "улица Ляпидевского, дом 2, корпус 1 (подъезды 1)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4998942,
+     55.8550811
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.440",
+    "district": "Ховрино",
+    "address": "улица Ляпидевского, дом 2, корпус 1",
+    "unom": 74051,
+    "role": "угол",
+    "side": "подъезды 2–3",
+    "azimuth": 59,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4991443,
+     55.8548158
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.441",
+    "district": "Ховрино",
+    "address": "улица Ляпидевского, дом 2",
+    "unom": 74050,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 158,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4989534,
+     55.8547417
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.442",
+    "district": "Ховрино",
+    "address": "улица Ляпидевского, дом 2, корпус 1",
+    "unom": 74051,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 329,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5003645,
+     55.8546489
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.443",
+    "district": "Ховрино",
+    "address": "улица Ляпидевского, дом 2",
+    "unom": 74050,
+    "role": "угол",
+    "side": "подъезды 3",
+    "azimuth": 158,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4986402,
+     55.8546251
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.444",
+    "district": "Ховрино",
+    "address": "Флотская улица, дом 9, корпус 1",
+    "unom": 74052,
+    "role": "угол",
+    "side": "подъезды 2–3",
+    "azimuth": 239,
+    "status": "черновик",
+    "also_covers": "Флотская улица, дом 9, корпус 1 (подъезды 1)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.50048,
+     55.8545423
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.445",
+    "district": "Ховрино",
+    "address": "Флотская улица, дом 9, корпус 1",
+    "unom": 74052,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 329,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5007749,
+     55.8542853
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.446",
+    "district": "Ховрино",
+    "address": "Флотская улица, дом 9, корпус 1",
+    "unom": 74052,
+    "role": "угол",
+    "side": "подъезды 2–3",
+    "azimuth": 59,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4995989,
+     55.8541727
+    ]
+   }
+  }
+ ]
+}

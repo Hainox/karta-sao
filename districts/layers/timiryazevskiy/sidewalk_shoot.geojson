@@ -1,0 +1,8650 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.001",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 54, корпус 2",
+    "unom": 6660,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 256,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5702877,
+     55.8484103
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.002",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 54, корпус 2",
+    "unom": 6660,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 76,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5693501,
+     55.8482784
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.003",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 65, корпус 1",
+    "unom": 6672,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 168,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5663721,
+     55.8481778
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.004",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 65, корпус 2",
+    "unom": 6673,
+    "role": "угол",
+    "side": "подъезды 4–5",
+    "azimuth": 257,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5655962,
+     55.8480648
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.005",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 65, корпус 2",
+    "unom": 6673,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 167,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.56528,
+     55.8480383
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.006",
+    "district": "Тимирязевский",
+    "address": "Локомотивный проезд, дом 31",
+    "unom": 13373,
+    "role": "угол",
+    "side": "подъезды 1, 3",
+    "azimuth": 255,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5726577,
+     55.8479907
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.007",
+    "district": "Тимирязевский",
+    "address": "Локомотивный проезд, дом 29",
+    "unom": 13372,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 165,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5725577,
+     55.847896
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.008",
+    "district": "Тимирязевский",
+    "address": "Локомотивный проезд, дом 31",
+    "unom": 13373,
+    "role": "угол",
+    "side": "подъезды 1, 3",
+    "azimuth": 75,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5716054,
+     55.8478367
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.009",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 63, корпус 1",
+    "unom": 6667,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 168,
+    "status": "черновик",
+    "also_covers": "Дмитровское шоссе, дом 65, корпус 1 (подъезды 1)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5666848,
+     55.8477894
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.010",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 52, корпус 2",
+    "unom": 6659,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 165,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5696748,
+     55.8477472
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.011",
+    "district": "Тимирязевский",
+    "address": "3-й Нижнелихоборский проезд, дом 13, корпус 2",
+    "unom": 13245,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 165,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5715096,
+     55.847509
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.012",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 65, корпус 2",
+    "unom": 6673,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 347,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5654312,
+     55.8474884
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.013",
+    "district": "Тимирязевский",
+    "address": "3-й Нижнелихоборский проезд, дом 15/27",
+    "unom": 13248,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 255,
+    "status": "черновик",
+    "also_covers": "Локомотивный проезд, дом 29 (подъезды 1–3)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5728922,
+     55.8473269
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.014",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 63, корпус 1",
+    "unom": 6667,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 348,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5668916,
+     55.8472637
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.015",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 52, корпус 2",
+    "unom": 6659,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 345,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5699219,
+     55.8472206
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.016",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 61, корпус 1",
+    "unom": 6666,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 168,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5669976,
+     55.8469467
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.017",
+    "district": "Тимирязевский",
+    "address": "3-й Нижнелихоборский проезд, дом 11",
+    "unom": 13244,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 255,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5708662,
+     55.8469216
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.018",
+    "district": "Тимирязевский",
+    "address": "3-й Нижнелихоборский проезд, дом 11",
+    "unom": 13244,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 75,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5697878,
+     55.8467601
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.019",
+    "district": "Тимирязевский",
+    "address": "3-й Нижнелихоборский проезд, дом 16/25",
+    "unom": 13371,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 256,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5731507,
+     55.8465256
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.020",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 61, корпус 1",
+    "unom": 6666,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 348,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5672243,
+     55.8464181
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.021",
+    "district": "Тимирязевский",
+    "address": "3-й Нижнелихоборский проезд, дом 16/25",
+    "unom": 13371,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 76,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5721291,
+     55.8463855
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.022",
+    "district": "Тимирязевский",
+    "address": "Локомотивный проезд, дом 23",
+    "unom": 13370,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 256,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5732996,
+     55.8462529
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.023",
+    "district": "Тимирязевский",
+    "address": "3-й Нижнелихоборский проезд, дом 14",
+    "unom": 13247,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 255,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5712646,
+     55.8462216
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.024",
+    "district": "Тимирязевский",
+    "address": "Локомотивный проезд, дом 23",
+    "unom": 13370,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 76,
+    "status": "черновик",
+    "also_covers": "3-й Нижнелихоборский проезд, дом 16, корпус 1 (подъезды 1–2)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5723725,
+     55.8461935
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.025",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 50, корпус 1",
+    "unom": 6655,
+    "role": "угол",
+    "side": "подъезды 2–5",
+    "azimuth": 168,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5693531,
+     55.8461176
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.026",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 50, корпус 1",
+    "unom": 6655,
+    "role": "угол",
+    "side": "подъезды 6",
+    "azimuth": 258,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5696389,
+     55.8461173
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.027",
+    "district": "Тимирязевский",
+    "address": "3-й Нижнелихоборский проезд, дом 14",
+    "unom": 13247,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 75,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5701743,
+     55.8460613
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.028",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 59, корпус 1",
+    "unom": 6665,
+    "role": "угол",
+    "side": "подъезды 3–5",
+    "azimuth": 168,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5674177,
+     55.8458475
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.029",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 59, корпус 1",
+    "unom": 6665,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 258,
+    "status": "черновик",
+    "also_covers": "Дмитровское шоссе, дом 59, корпус 1 (подъезды 2)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5677302,
+     55.8458474
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.030",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 59, корпус 1",
+    "unom": 6665,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 78,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5669391,
+     55.8457515
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.031",
+    "district": "Тимирязевский",
+    "address": "3-й Нижнелихоборский проезд, дом 8",
+    "unom": 13242,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 255,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5666483,
+     55.8455493
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.032",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 48, корпус 2",
+    "unom": 6654,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 258,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5714797,
+     55.8454612
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.033",
+    "district": "Тимирязевский",
+    "address": "3-й Нижнелихоборский проезд, дом 6",
+    "unom": 13241,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 256,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5657471,
+     55.8454439
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.034",
+    "district": "Тимирязевский",
+    "address": "3-й Нижнелихоборский проезд, дом 8",
+    "unom": 13242,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 75,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5659728,
+     55.8454404
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.035",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 48, корпус 2",
+    "unom": 6654,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 78,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5707725,
+     55.8453731
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.036",
+    "district": "Тимирязевский",
+    "address": "3-й Нижнелихоборский проезд, дом 6",
+    "unom": 13241,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 76,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5643695,
+     55.8453276
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.037",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 50, корпус 1",
+    "unom": 6655,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 258,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5700073,
+     55.8452796
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.038",
+    "district": "Тимирязевский",
+    "address": "3-й Нижнелихоборский проезд, дом 8А",
+    "unom": 13243,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 165,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5660852,
+     55.8452178
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.039",
+    "district": "Тимирязевский",
+    "address": "3-й Нижнелихоборский проезд, дом 4",
+    "unom": 13239,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 255,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5642852,
+     55.8451779
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.040",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 48, корпус 1",
+    "unom": 6653,
+    "role": "угол",
+    "side": "подъезды 1, 3",
+    "azimuth": 167,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5705381,
+     55.8451777
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.041",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 48, корпус 1",
+    "unom": 6653,
+    "role": "угол",
+    "side": "подъезды 2",
+    "azimuth": 167,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5702034,
+     55.845145
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.042",
+    "district": "Тимирязевский",
+    "address": "3-й Нижнелихоборский проезд, дом 4",
+    "unom": 13239,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 75,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563543,
+     55.8450596
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.043",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 50, корпус 1",
+    "unom": 6655,
+    "role": "угол",
+    "side": "подъезды 2–5",
+    "azimuth": 348,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5696245,
+     55.845056
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.044",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 59, корпус 1",
+    "unom": 6665,
+    "role": "угол",
+    "side": "подъезды 6",
+    "azimuth": 258,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5680731,
+     55.8450257
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.045",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 59, корпус 1",
+    "unom": 6665,
+    "role": "угол",
+    "side": "подъезды 6",
+    "azimuth": 78,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5672612,
+     55.8449273
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.046",
+    "district": "Тимирязевский",
+    "address": "3-й Нижнелихоборский проезд, дом 4А",
+    "unom": 13240,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 165,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5642309,
+     55.8448517
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.047",
+    "district": "Тимирязевский",
+    "address": "улица Линии Октябрьской Железной Дороги, дом 12",
+    "unom": 13237,
+    "role": "угол",
+    "side": "подъезды 5–6",
+    "azimuth": 228,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5626901,
+     55.8448491
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.048",
+    "district": "Тимирязевский",
+    "address": "3-й Нижнелихоборский проезд, дом 8А",
+    "unom": 13243,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 345,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5662766,
+     55.84484
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.049",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 59, корпус 1",
+    "unom": 6665,
+    "role": "угол",
+    "side": "подъезды 2",
+    "azimuth": 348,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5680903,
+     55.8448293
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.050",
+    "district": "Тимирязевский",
+    "address": "3-й Нижнелихоборский проезд, дом 2, корпус 1",
+    "unom": 13238,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 254,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5635477,
+     55.844819
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.051",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 59, корпус 1",
+    "unom": 6665,
+    "role": "угол",
+    "side": "подъезды 3–5",
+    "azimuth": 348,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5676635,
+     55.8447764
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.052",
+    "district": "Тимирязевский",
+    "address": "3-й Нижнелихоборский проезд, дом 2, корпус 1",
+    "unom": 13238,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 74,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563207,
+     55.8447628
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.053",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 48, корпус 1",
+    "unom": 6653,
+    "role": "угол",
+    "side": "подъезды 1, 3",
+    "azimuth": 347,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5707194,
+     55.8446702
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.054",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 57, корпус 1",
+    "unom": 6664,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 168,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5669399,
+     55.8445867
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.055",
+    "district": "Тимирязевский",
+    "address": "улица Линии Октябрьской Железной Дороги, дом 12",
+    "unom": 13237,
+    "role": "угол",
+    "side": "подъезды 5–6",
+    "azimuth": 48,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5622732,
+     55.8445863
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.056",
+    "district": "Тимирязевский",
+    "address": "улица Линии Октябрьской Железной Дороги, дом 12",
+    "unom": 13237,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 318,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5628611,
+     55.8442231
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.057",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 57, корпус 1",
+    "unom": 6664,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 348,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5671201,
+     55.8441939
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.058",
+    "district": "Тимирязевский",
+    "address": "Локомотивный проезд, дом 19А",
+    "unom": 13369,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 253,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5730266,
+     55.8441024
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.059",
+    "district": "Тимирязевский",
+    "address": "Локомотивный проезд, дом 19А",
+    "unom": 13369,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 73,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5724502,
+     55.8440047
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.060",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе 55 А",
+    "unom": 6602343,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 167,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5681015,
+     55.8439889
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.061",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 57, корпус 2",
+    "unom": 6663,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 168,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5664149,
+     55.8439418
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.062",
+    "district": "Тимирязевский",
+    "address": "улица Линии Октябрьской Железной Дороги, дом 10",
+    "unom": 17486,
+    "role": "угол",
+    "side": "подъезды 3–6",
+    "azimuth": 138,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5633613,
+     55.8438914
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.063",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 57, корпус 2",
+    "unom": 6663,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 348,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5664654,
+     55.8438224
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.064",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 55",
+    "unom": 5289117,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 256,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5665154,
+     55.8435562
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.065",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 44, корпус 1",
+    "unom": 6644,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 168,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5711883,
+     55.8435246
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.066",
+    "district": "Тимирязевский",
+    "address": "Локомотивный проезд, дом 15",
+    "unom": 13367,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 156,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5741772,
+     55.8434467
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.067",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 55",
+    "unom": 5289117,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 76,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5655861,
+     55.8434249
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.068",
+    "district": "Тимирязевский",
+    "address": "Локомотивный проезд, дом 15, корпус 2",
+    "unom": 13368,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 168,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5734276,
+     55.8433917
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.069",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе 55 А",
+    "unom": 6602343,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 347,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5683707,
+     55.8433212
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.070",
+    "district": "Тимирязевский",
+    "address": "улица Линии Октябрьской Железной Дороги, дом 6А",
+    "unom": 17485,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 167,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5665514,
+     55.8432698
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.071",
+    "district": "Тимирязевский",
+    "address": "Локомотивный проезд, дом 15",
+    "unom": 13367,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 336,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5744488,
+     55.8431175
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.072",
+    "district": "Тимирязевский",
+    "address": "улица Линии Октябрьской Железной Дороги, дом 6А",
+    "unom": 17485,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 347,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5668569,
+     55.8429546
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.073",
+    "district": "Тимирязевский",
+    "address": "Локомотивный проезд, дом 15, корпус 2",
+    "unom": 13368,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 348,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5735987,
+     55.8429481
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.074",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 44, корпус 1",
+    "unom": 6644,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 348,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5714258,
+     55.842916
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.075",
+    "district": "Тимирязевский",
+    "address": "улица Линии Октябрьской Железной Дороги, дом 6",
+    "unom": 17484,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 167,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5656979,
+     55.8428731
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.076",
+    "district": "Тимирязевский",
+    "address": "Локомотивный проезд, дом 13",
+    "unom": 13366,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 155,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5746876,
+     55.842804
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.077",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 42",
+    "unom": 6642,
+    "role": "угол",
+    "side": "подъезды 2–5",
+    "azimuth": 167,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5705591,
+     55.8427832
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.078",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 42",
+    "unom": 6642,
+    "role": "угол",
+    "side": "подъезды 6",
+    "azimuth": 257,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5710366,
+     55.8426782
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.079",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 51, корпус 1",
+    "unom": 6656,
+    "role": "угол",
+    "side": "подъезды 2–5",
+    "azimuth": 167,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.568408,
+     55.8426039
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.080",
+    "district": "Тимирязевский",
+    "address": "улица Линии Октябрьской Железной Дороги, дом 6",
+    "unom": 17484,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 347,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565922,
+     55.8422831
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.081",
+    "district": "Тимирязевский",
+    "address": "Локомотивный проезд, дом 13",
+    "unom": 13366,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 335,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5751562,
+     55.8422523
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.082",
+    "district": "Тимирязевский",
+    "address": "улица Линии Октябрьской Железной Дороги, дом 4",
+    "unom": 17482,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 168,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5667245,
+     55.8420379
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.083",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 42",
+    "unom": 6642,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 257,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5712928,
+     55.8419924
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.084",
+    "district": "Тимирязевский",
+    "address": "Локомотивный проезд, дом 11/10",
+    "unom": 13365,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 156,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5754533,
+     55.8418624
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.085",
+    "district": "Тимирязевский",
+    "address": "улица Линии Октябрьской Железной Дороги, дом 4",
+    "unom": 17482,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 348,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5668141,
+     55.8418417
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.086",
+    "district": "Тимирязевский",
+    "address": "Линейный проезд, дом 8",
+    "unom": 13116,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 257,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5750061,
+     55.8418337
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.087",
+    "district": "Тимирязевский",
+    "address": "Линейный проезд, дом 8",
+    "unom": 13116,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 77,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5738867,
+     55.8416965
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.088",
+    "district": "Тимирязевский",
+    "address": "Линейный пр., дом 8А",
+    "unom": 6501038,
+    "role": "угол",
+    "side": "подъезды 2",
+    "azimuth": 165,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5751466,
+     55.8415894
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.089",
+    "district": "Тимирязевский",
+    "address": "Линейный проезд, дом 6",
+    "unom": 13114,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 257,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5733161,
+     55.8415846
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.090",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 51, корпус 1",
+    "unom": 6656,
+    "role": "угол",
+    "side": "подъезды 2–5",
+    "azimuth": 347,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5688826,
+     55.8414948
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.091",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 51, корпус 1",
+    "unom": 6656,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 77,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5686835,
+     55.8414935
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.092",
+    "district": "Тимирязевский",
+    "address": "Линейный проезд, дом 6",
+    "unom": 13114,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 77,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5726082,
+     55.8414906
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.093",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 40, корпус 1",
+    "unom": 6639,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 239,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5720809,
+     55.8414703
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.094",
+    "district": "Тимирязевский",
+    "address": "Локомотивный проезд, дом 11/10",
+    "unom": 13365,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 336,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5758477,
+     55.8413706
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.095",
+    "district": "Тимирязевский",
+    "address": "Локомотивный проезд, дом 9",
+    "unom": 13363,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 155,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5760362,
+     55.8411664
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.096",
+    "district": "Тимирязевский",
+    "address": "Линейный пр., дом 8А",
+    "unom": 6501038,
+    "role": "угол",
+    "side": "подъезды 2",
+    "azimuth": 345,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5753621,
+     55.8411255
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.097",
+    "district": "Тимирязевский",
+    "address": "Линейный проезд, дом 6А",
+    "unom": 13115,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 150,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5737807,
+     55.8411123
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.098",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 40, корпус 1",
+    "unom": 6639,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 59,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5710056,
+     55.8411111
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.099",
+    "district": "Тимирязевский",
+    "address": "Линейный пр., дом 8А",
+    "unom": 6501038,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 345,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5747676,
+     55.8409484
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.100",
+    "district": "Тимирязевский",
+    "address": "Локомотивный проезд, дом 9А",
+    "unom": 13364,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 155,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5757373,
+     55.8408885
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.101",
+    "district": "Тимирязевский",
+    "address": "Линейный проезд, дом 6А",
+    "unom": 13115,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 330,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5742215,
+     55.8407213
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.102",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 36, корпус 1",
+    "unom": 6633,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 240,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5728789,
+     55.8406823
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.103",
+    "district": "Тимирязевский",
+    "address": "Локомотивный проезд, дом 9",
+    "unom": 13363,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 335,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5766106,
+     55.8404343
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.104",
+    "district": "Тимирязевский",
+    "address": "Локомотивный проезд, дом 9А",
+    "unom": 13364,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 335,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5761387,
+     55.8403912
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.105",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 34, корпус 1",
+    "unom": 6631,
+    "role": "угол",
+    "side": "подъезды 2–3",
+    "azimuth": 150,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5732376,
+     55.8403391
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.106",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 36, корпус 1",
+    "unom": 6633,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 60,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.571741,
+     55.8403114
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.107",
+    "district": "Тимирязевский",
+    "address": "Локомотивный проезд, дом 7",
+    "unom": 13362,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 158,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5767103,
+     55.8402616
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.108",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 32, корпус 3",
+    "unom": 6627,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 150,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5752003,
+     55.8397581
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.109",
+    "district": "Тимирязевский",
+    "address": "Локомотивный проезд, дом 7",
+    "unom": 13362,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 338,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5772216,
+     55.8396153
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.110",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 32, корпус 2",
+    "unom": 6626,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 150,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5747407,
+     55.8395135
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.111",
+    "district": "Тимирязевский",
+    "address": "Локомотивный проезд, дом 5",
+    "unom": 13361,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 226,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5772223,
+     55.8394861
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.112",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 34, корпус 1",
+    "unom": 6631,
+    "role": "угол",
+    "side": "подъезды 1, 4",
+    "azimuth": 330,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5736184,
+     55.8393465
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.113",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 32, корпус 3",
+    "unom": 6627,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 330,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5754921,
+     55.8392757
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.114",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 32, корпус 2",
+    "unom": 6626,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 330,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.575054,
+     55.8391881
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.115",
+    "district": "Тимирязевский",
+    "address": "Локомотивный проезд, дом 5",
+    "unom": 13361,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 46,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5764676,
+     55.8390898
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.116",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 30, корпус 1",
+    "unom": 6623,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 149,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5736516,
+     55.8387633
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.117",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 28",
+    "unom": 6621,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 240,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5753507,
+     55.8384279
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.118",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 28",
+    "unom": 6621,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 60,
+    "status": "черновик",
+    "also_covers": "Дмитровское шоссе, дом 30, корпус 1 (подъезды 1–4)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.574286,
+     55.838076
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.119",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 43, корпус 1",
+    "unom": 6643,
+    "role": "угол",
+    "side": "подъезды 1–10",
+    "azimuth": 178,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5713935,
+     55.8345906
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.120",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 45, корпус 1",
+    "unom": 6647,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 251,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5707927,
+     55.8344503
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.121",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 45, корпус 1",
+    "unom": 6647,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 71,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5697163,
+     55.8342401
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.122",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 45, корпус 2",
+    "unom": 6648,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 160,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5687202,
+     55.8340417
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.123",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 45, корпус 2",
+    "unom": 6648,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 340,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5689657,
+     55.8335721
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.124",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 43, корпус 1",
+    "unom": 6643,
+    "role": "середина фасада",
+    "side": "подъезды 1–10",
+    "azimuth": 178,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5714484,
+     55.8335228
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.125",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 45, корпус 3",
+    "unom": 6649,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 160,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5686834,
+     55.8334874
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.126",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 41, корпус 2",
+    "unom": 6641,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 180,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.568884,
+     55.832795
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.127",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 41, корпус 1",
+    "unom": 6640,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 249,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5715806,
+     55.8327087
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.128",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 41, корпус 1",
+    "unom": 6640,
+    "role": "середина фасада",
+    "side": "подъезды 1–6",
+    "azimuth": 249,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5705809,
+     55.8325685
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.129",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 39, корпус 1",
+    "unom": 6637,
+    "role": "угол",
+    "side": "подъезды 1–8",
+    "azimuth": 180,
+    "status": "черновик",
+    "also_covers": "Дмитровское шоссе, дом 41, корпус 1 (подъезды 1–6)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5696576,
+     55.8322523
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.130",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 41, корпус 2",
+    "unom": 6641,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 0,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5688864,
+     55.8322083
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.131",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 37, корпус 1",
+    "unom": 6635,
+    "role": "угол",
+    "side": "подъезды 1–10",
+    "azimuth": 180,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5714755,
+     55.8320699
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.132",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 39, корпус 1",
+    "unom": 6637,
+    "role": "середина фасада",
+    "side": "подъезды 1–8",
+    "azimuth": 180,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5696703,
+     55.8314359
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.133",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 39, корпус 2",
+    "unom": 6638,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 0,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5707513,
+     55.8311943
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.134",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 37, корпус 1",
+    "unom": 6635,
+    "role": "середина фасада",
+    "side": "подъезды 1–10",
+    "azimuth": 0,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5715412,
+     55.8309289
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.135",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 39, корпус 1",
+    "unom": 6637,
+    "role": "угол",
+    "side": "подъезды 1–8",
+    "azimuth": 0,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5695857,
+     55.8306412
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.136",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 33, корпус 2",
+    "unom": 6629,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 179,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.56889,
+     55.8302702
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.137",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 35, корпус 1",
+    "unom": 6632,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 251,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5715057,
+     55.8302538
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.138",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 35, корпус 1",
+    "unom": 6632,
+    "role": "середина фасада",
+    "side": "подъезды 1–6",
+    "azimuth": 71,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5705507,
+     55.8300217
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.139",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 35, корпус 1",
+    "unom": 6632,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 71,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5697036,
+     55.8298094
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.140",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 33, корпус 2",
+    "unom": 6629,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 359,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5689089,
+     55.8296628
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.141",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 33, корпус 6",
+    "unom": 51685,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 91,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5662229,
+     55.8291726
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.142",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 33, корпус 6",
+    "unom": 51685,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 271,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5670803,
+     55.829166
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.143",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 33, корпус 5",
+    "unom": 31520,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 90,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5675187,
+     55.8291226
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.144",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 33, корпус 1",
+    "unom": 6628,
+    "role": "середина фасада",
+    "side": "подъезды 1–8",
+    "azimuth": 358,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5697073,
+     55.8288767
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.145",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 33, корпус 7",
+    "unom": 61036,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 90,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5665354,
+     55.8284843
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.146",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 33, корпус 7",
+    "unom": 61036,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 270,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5674188,
+     55.8284812
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.147",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 33, корпус 4",
+    "unom": 6630,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 270,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5686838,
+     55.828368
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.148",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 33, корпус 4",
+    "unom": 6630,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 90,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5681267,
+     55.8282958
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.149",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 33, корпус 1",
+    "unom": 6628,
+    "role": "угол",
+    "side": "подъезды 1–8",
+    "azimuth": 358,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5696745,
+     55.8281458
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.150",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 27, корпус 3",
+    "unom": 6620,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 180,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5689779,
+     55.8277279
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.151",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 27, корпус 2",
+    "unom": 6619,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 251,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5715576,
+     55.8276071
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.152",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 27, корпус 2",
+    "unom": 6619,
+    "role": "середина фасада",
+    "side": "подъезды 1–6",
+    "azimuth": 251,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5706418,
+     55.8274413
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.153",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 27, корпус 2",
+    "unom": 6619,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 71,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5697141,
+     55.8272573
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.154",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 27, корпус 3",
+    "unom": 6620,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 0,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5690618,
+     55.8269382
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.155",
+    "district": "Тимирязевский",
+    "address": "Красностуденческий проезд, дом 2",
+    "unom": 11705,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 251,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5692576,
+     55.8262671
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.156",
+    "district": "Тимирязевский",
+    "address": "Красностуденческий проезд, дом 2",
+    "unom": 11705,
+    "role": "середина фасада",
+    "side": "подъезды 1–6",
+    "azimuth": 251,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5674963,
+     55.8259382
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.157",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 25, корпус 1",
+    "unom": 6618,
+    "role": "угол",
+    "side": "подъезды 2–5",
+    "azimuth": 171,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5711575,
+     55.8257632
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.158",
+    "district": "Тимирязевский",
+    "address": "Красностуденческий проезд, дом 2",
+    "unom": 11705,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 71,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5658327,
+     55.8255462
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.159",
+    "district": "Тимирязевский",
+    "address": "Красностуденческий проезд, дом 4",
+    "unom": 11707,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 252,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565033,
+     55.825463
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.160",
+    "district": "Тимирязевский",
+    "address": "Ивановская улица, дом 32",
+    "unom": 8550,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 161,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5690365,
+     55.8252589
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.161",
+    "district": "Тимирязевский",
+    "address": "Красностуденческий проезд, дом 4",
+    "unom": 11707,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 72,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5633436,
+     55.8251538
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.162",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 25, корпус 1",
+    "unom": 6618,
+    "role": "середина фасада",
+    "side": "подъезды 2–5",
+    "azimuth": 351,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.571347,
+     55.8250568
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.163",
+    "district": "Тимирязевский",
+    "address": "Ивановская улица, дом 32",
+    "unom": 8550,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 341,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5691074,
+     55.8250208
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.164",
+    "district": "Тимирязевский",
+    "address": "Красностуденческий проезд, дом 9",
+    "unom": 11709,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 162,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565074,
+     55.8246579
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.165",
+    "district": "Тимирязевский",
+    "address": "Красностуденческий проезд, дом 13",
+    "unom": 11711,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 163,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563913,
+     55.8243628
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.166",
+    "district": "Тимирязевский",
+    "address": "Ивановская улица, дом 36",
+    "unom": 8552,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 162,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5694724,
+     55.8243472
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.167",
+    "district": "Тимирязевский",
+    "address": "улица Немчинова, дом 2",
+    "unom": 16028,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 252,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5710698,
+     55.8243446
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.168",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 25, корпус 1",
+    "unom": 6618,
+    "role": "угол",
+    "side": "подъезды 2–5",
+    "azimuth": 351,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5715782,
+     55.8242847
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.169",
+    "district": "Тимирязевский",
+    "address": "Красностуденческий проезд, дом 13",
+    "unom": 11711,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 343,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5639611,
+     55.8242523
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.170",
+    "district": "Тимирязевский",
+    "address": "улица Немчинова, дом 2",
+    "unom": 16028,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 72,
+    "status": "черновик",
+    "also_covers": "Ивановская улица, дом 36 (подъезды 1–2)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.569589,
+     55.8241467
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.171",
+    "district": "Тимирязевский",
+    "address": "Красностуденческий проезд, дом 9",
+    "unom": 11709,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 342,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5654038,
+     55.8240962
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.172",
+    "district": "Тимирязевский",
+    "address": "Красностуденческий проезд, дом 19",
+    "unom": 11714,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 162,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5615226,
+     55.8240613
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.173",
+    "district": "Тимирязевский",
+    "address": "Красностуденческий проезд, дом 17",
+    "unom": 11713,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 342,
+    "status": "черновик",
+    "also_covers": "Красностуденческий проезд, дом 17 (подъезды 1)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5627675,
+     55.8240231
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.174",
+    "district": "Тимирязевский",
+    "address": "Красностуденческий проезд, дом 21",
+    "unom": 11715,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 163,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5605438,
+     55.8238695
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.175",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 23, корпус 1",
+    "unom": 6617,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 167,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5710088,
+     55.8238338
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.176",
+    "district": "Тимирязевский",
+    "address": "улица Немчинова, дом 12",
+    "unom": 16031,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 162,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5655908,
+     55.8238098
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.177",
+    "district": "Тимирязевский",
+    "address": "Красностуденческий проезд, дом 19",
+    "unom": 11714,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 342,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5617622,
+     55.8237795
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.178",
+    "district": "Тимирязевский",
+    "address": "Красностуденческий проезд, дом 23",
+    "unom": 11716,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 160,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5596119,
+     55.823688
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.179",
+    "district": "Тимирязевский",
+    "address": "Красностуденческий проезд, дом 21",
+    "unom": 11715,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 343,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5607007,
+     55.8235889
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.180",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 23, корпус 1",
+    "unom": 6617,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 347,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5711615,
+     55.8234664
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.181",
+    "district": "Тимирязевский",
+    "address": "Красностуденческий проезд, дом 23",
+    "unom": 11716,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 340,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5597795,
+     55.8233899
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.182",
+    "district": "Тимирязевский",
+    "address": "улица Немчинова, дом 1/25",
+    "unom": 51654,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 255,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5692122,
+     55.823296
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.183",
+    "district": "Тимирязевский",
+    "address": "улица Немчинова, дом 12",
+    "unom": 16031,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 342,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565898,
+     55.8232833
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.184",
+    "district": "Тимирязевский",
+    "address": "улица Немчинова, дом 1/25",
+    "unom": 51654,
+    "role": "угол",
+    "side": "подъезды 2",
+    "azimuth": 165,
+    "status": "черновик",
+    "also_covers": "улица Немчинова, дом 1/25 (подъезды 3)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.568735,
+     55.823277
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.185",
+    "district": "Тимирязевский",
+    "address": "улица Дубки, дом 13",
+    "unom": 7136,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 335,
+    "status": "черновик",
+    "also_covers": "улица Дубки, дом 13 (подъезды 1)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5621496,
+     55.8229938
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.186",
+    "district": "Тимирязевский",
+    "address": "улица Дубки, дом 11",
+    "unom": 7134,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 155,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.56133,
+     55.8229849
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.187",
+    "district": "Тимирязевский",
+    "address": "улица Немчинова, дом 1/25",
+    "unom": 51654,
+    "role": "угол",
+    "side": "подъезды 3",
+    "azimuth": 345,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5684947,
+     55.8229452
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.188",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 21, корпус 1",
+    "unom": 6615,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 167,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5714865,
+     55.8226512
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.189",
+    "district": "Тимирязевский",
+    "address": "Ивановская улица, дом 22",
+    "unom": 8548,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 167,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5709317,
+     55.8225733
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.190",
+    "district": "Тимирязевский",
+    "address": "Тимирязевская улица, дом 34, корпус 2",
+    "unom": 25919,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 207,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5606607,
+     55.8224154
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.191",
+    "district": "Тимирязевский",
+    "address": "улица Дубки, дом 11",
+    "unom": 7134,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 335,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5619156,
+     55.8222724
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.192",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 21, корпус 1",
+    "unom": 6615,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 347,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5716943,
+     55.8221152
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.193",
+    "district": "Тимирязевский",
+    "address": "Тимирязевская улица, дом 34, корпус 2",
+    "unom": 25919,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 27,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5603523,
+     55.822081
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.194",
+    "district": "Тимирязевский",
+    "address": "Ивановская улица, дом 22",
+    "unom": 8548,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 347,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5711477,
+     55.8220473
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.195",
+    "district": "Тимирязевский",
+    "address": "Тимирязевская улица, дом 34, корпус 1",
+    "unom": 25918,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 27,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5599229,
+     55.8219619
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.196",
+    "district": "Тимирязевский",
+    "address": "Тимирязевская улица, дом 32, корпус 2",
+    "unom": 25903,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 208,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5611984,
+     55.8217853
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.197",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 19, корпус 1",
+    "unom": 6613,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 167,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5719025,
+     55.8216347
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.198",
+    "district": "Тимирязевский",
+    "address": "Тимирязевская улица, дом 32, корпус 2",
+    "unom": 25903,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 28,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560868,
+     55.8214451
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.199",
+    "district": "Тимирязевский",
+    "address": "Тимирязевская улица, дом 30, корпус 2",
+    "unom": 25901,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 208,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5617272,
+     55.8211276
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.200",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 17, корпус 2",
+    "unom": 6612,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 166,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5725738,
+     55.8210634
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.201",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 19, корпус 1",
+    "unom": 6613,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 347,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5721483,
+     55.8210247
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.202",
+    "district": "Тимирязевский",
+    "address": "Ивановская улица, дом 18",
+    "unom": 8546,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 166,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5713993,
+     55.821003
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.203",
+    "district": "Тимирязевский",
+    "address": "улица Дубки, дом 7",
+    "unom": 7133,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 167,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5623928,
+     55.8208334
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.204",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 17, корпус 2",
+    "unom": 6612,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 346,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5726931,
+     55.8207996
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.205",
+    "district": "Тимирязевский",
+    "address": "Тимирязевская улица, дом 30, корпус 2",
+    "unom": 25901,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 28,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5614181,
+     55.8207865
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.206",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 17, корпус 1",
+    "unom": 6611,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 167,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5723905,
+     55.8204367
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.207",
+    "district": "Тимирязевский",
+    "address": "улица Дубки, дом 7",
+    "unom": 7133,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 347,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5623572,
+     55.8203688
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.208",
+    "district": "Тимирязевский",
+    "address": "Ивановская улица, дом 18",
+    "unom": 8546,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 346,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5715655,
+     55.8203213
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.209",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 17, корпус 1",
+    "unom": 6611,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 347,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5726193,
+     55.819896
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.210",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 15, корпус 2",
+    "unom": 6610,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 167,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5716923,
+     55.8194082
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.211",
+    "district": "Тимирязевский",
+    "address": "Ивановская улица, дом 14, корпус 2",
+    "unom": 8544,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 166,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.570399,
+     55.8191896
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.212",
+    "district": "Тимирязевский",
+    "address": "Ивановская улица, дом 14, корпус 1",
+    "unom": 8543,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 166,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5697493,
+     55.8189892
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.213",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 15, корпус 2",
+    "unom": 6610,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 347,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5720092,
+     55.8187215
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.214",
+    "district": "Тимирязевский",
+    "address": "Ивановская улица, дом 14, корпус 2",
+    "unom": 8544,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 346,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5706318,
+     55.8186486
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.215",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 13, корпус 2",
+    "unom": 6605,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 157,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5720366,
+     55.8184604
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.216",
+    "district": "Тимирязевский",
+    "address": "Ивановская улица, дом 14, корпус 1",
+    "unom": 8543,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 346,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5699866,
+     55.8184601
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.217",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 13, корпус 3",
+    "unom": 6606,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 157,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5715234,
+     55.8183359
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.218",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 13, корпус 4",
+    "unom": 6607,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 157,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5708948,
+     55.8181868
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.219",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 13, корпус 5",
+    "unom": 6608,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 157,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5702831,
+     55.8180299
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.220",
+    "district": "Тимирязевский",
+    "address": "улица Дубки, дом 4А",
+    "unom": 7132,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 337,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5689999,
+     55.8179011
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.221",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 13, корпус 2",
+    "unom": 6605,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 337,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5726076,
+     55.8178972
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.222",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 13, корпус 3",
+    "unom": 6606,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 337,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5719615,
+     55.8177443
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.223",
+    "district": "Тимирязевский",
+    "address": "улица Дубки, дом 3",
+    "unom": 7130,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 154,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5650502,
+     55.8176042
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.224",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 13, корпус 4",
+    "unom": 6607,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 337,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5713339,
+     55.8175916
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.225",
+    "district": "Тимирязевский",
+    "address": "улица Дубки, дом 2А",
+    "unom": 7129,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 157,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5693907,
+     55.8175878
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.226",
+    "district": "Тимирязевский",
+    "address": "Тимирязевская улица, дом 20, корпус 2",
+    "unom": 25895,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 155,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5646302,
+     55.8174849
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.227",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 13, корпус 5",
+    "unom": 6608,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 337,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5706997,
+     55.8173765
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.228",
+    "district": "Тимирязевский",
+    "address": "Тимирязевская улица, дом 20, корпус 1",
+    "unom": 25894,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 155,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5639818,
+     55.8173155
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.229",
+    "district": "Тимирязевский",
+    "address": "улица Дубки, дом 4",
+    "unom": 7131,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 337,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5664086,
+     55.8173124
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.230",
+    "district": "Тимирязевский",
+    "address": "улица Дубки, дом 3",
+    "unom": 7130,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 334,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5654459,
+     55.8171092
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.231",
+    "district": "Тимирязевский",
+    "address": "улица Дубки, дом 2А",
+    "unom": 7129,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 337,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5697704,
+     55.8170944
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.232",
+    "district": "Тимирязевский",
+    "address": "Тимирязевская улица, дом 20, корпус 2",
+    "unom": 25895,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 335,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5650937,
+     55.8169359
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.233",
+    "district": "Тимирязевский",
+    "address": "улица Дубки, дом 1",
+    "unom": 7127,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 154,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5656576,
+     55.8168779
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.234",
+    "district": "Тимирязевский",
+    "address": "Тимирязевская улица, дом 20, корпус 1",
+    "unom": 25894,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 335,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5643936,
+     55.8168238
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.235",
+    "district": "Тимирязевский",
+    "address": "Тимирязевская улица, дом 18, корпус 1",
+    "unom": 25891,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 155,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5645878,
+     55.8165941
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.236",
+    "district": "Тимирязевский",
+    "address": "улица Дубки, дом 1",
+    "unom": 7127,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 334,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5659474,
+     55.8165448
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.237",
+    "district": "Тимирязевский",
+    "address": "Тимирязевская улица, дом 18, корпус 1",
+    "unom": 25891,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 335,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5648705,
+     55.8162516
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.238",
+    "district": "Тимирязевский",
+    "address": "улица Костякова, дом 15",
+    "unom": 11265,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 157,
+    "status": "черновик",
+    "also_covers": "улица Костякова, дом 17, корпус 1 (подъезды 2–4)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5688305,
+     55.8157962
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.239",
+    "district": "Тимирязевский",
+    "address": "улица Костякова, дом 17, корпус 2",
+    "unom": 11267,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 246,
+    "status": "черновик",
+    "also_covers": "улица Костякова, дом 17, корпус 1 (подъезды 2–4)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5677638,
+     55.8155391
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.240",
+    "district": "Тимирязевский",
+    "address": "улица Костякова, дом 10",
+    "unom": 75045,
+    "role": "угол",
+    "side": "подъезды 7–8",
+    "azimuth": 247,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5720839,
+     55.8152415
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.241",
+    "district": "Тимирязевский",
+    "address": "улица Костякова, дом 17, корпус 2",
+    "unom": 11267,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 66,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5663851,
+     55.8151796
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.242",
+    "district": "Тимирязевский",
+    "address": "улица Костякова, дом 10",
+    "unom": 75045,
+    "role": "угол",
+    "side": "подъезды 9, 13",
+    "azimuth": 157,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5718139,
+     55.8151751
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.243",
+    "district": "Тимирязевский",
+    "address": "улица Костякова, дом 15",
+    "unom": 11265,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 337,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5694659,
+     55.8149774
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.244",
+    "district": "Тимирязевский",
+    "address": "улица Костякова, дом 10",
+    "unom": 75045,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 157,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5709365,
+     55.8149431
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.245",
+    "district": "Тимирязевский",
+    "address": "улица Костякова, дом 10",
+    "unom": 75045,
+    "role": "угол",
+    "side": "подъезды 7–8",
+    "azimuth": 67,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5706896,
+     55.8149128
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.246",
+    "district": "Тимирязевский",
+    "address": "улица Костякова, дом 13",
+    "unom": 11264,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 156,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5691124,
+     55.8147928
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.247",
+    "district": "Тимирязевский",
+    "address": "Тимирязевская улица, дом 25",
+    "unom": 25897,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 246,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5644331,
+     55.8147718
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.248",
+    "district": "Тимирязевский",
+    "address": "Тимирязевская улица, дом 25, корпус 2",
+    "unom": 25898,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 245,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565073,
+     55.8146329
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.249",
+    "district": "Тимирязевский",
+    "address": "улица Костякова, дом 10",
+    "unom": 75045,
+    "role": "середина фасада",
+    "side": "подъезды 9, 13",
+    "azimuth": 157,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5722462,
+     55.8146032
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.250",
+    "district": "Тимирязевский",
+    "address": "Тимирязевская улица, дом 25, корпус 2",
+    "unom": 25898,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 65,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5644864,
+     55.8145663
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.251",
+    "district": "Тимирязевский",
+    "address": "Астрадамская улица, дом 13",
+    "unom": 1007,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 156,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5623586,
+     55.814494
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.252",
+    "district": "Тимирязевский",
+    "address": "Тимирязевская улица, дом 25",
+    "unom": 25897,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 66,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5632592,
+     55.8144624
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.253",
+    "district": "Тимирязевский",
+    "address": "улица Костякова, дом 10",
+    "unom": 75045,
+    "role": "середина фасада",
+    "side": "подъезды 1–6",
+    "azimuth": 157,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.571358,
+     55.8144083
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.254",
+    "district": "Тимирязевский",
+    "address": "Астрадамская улица, дом 6",
+    "unom": 3,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 155,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5640046,
+     55.8144042
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.255",
+    "district": "Тимирязевский",
+    "address": "улица Костякова, дом 13",
+    "unom": 11264,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 336,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5694995,
+     55.8142961
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.256",
+    "district": "Тимирязевский",
+    "address": "улица Костякова, дом 11, корпус 1",
+    "unom": 11263,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 248,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5703318,
+     55.8142245
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.257",
+    "district": "Тимирязевский",
+    "address": "улица Костякова, дом 11, корпус 1",
+    "unom": 11263,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 68,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5699791,
+     55.8141427
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.258",
+    "district": "Тимирязевский",
+    "address": "Астрадамская улица, дом 15Б",
+    "unom": 1009,
+    "role": "угол",
+    "side": "подъезды 4–7",
+    "azimuth": 157,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5604018,
+     55.8139262
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.259",
+    "district": "Тимирязевский",
+    "address": "Тимирязевская улица, дом 14",
+    "unom": 25886,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 246,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5674977,
+     55.8138716
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.260",
+    "district": "Тимирязевский",
+    "address": "Астрадамская улица, дом 6",
+    "unom": 3,
+    "role": "середина фасада",
+    "side": "подъезды 1–6",
+    "azimuth": 155,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5644528,
+     55.8138683
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.261",
+    "district": "Тимирязевский",
+    "address": "Астрадамская улица, дом 13",
+    "unom": 1007,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 336,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5627673,
+     55.8138556
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.262",
+    "district": "Тимирязевский",
+    "address": "улица Костякова, дом 11",
+    "unom": 11262,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 156,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5698885,
+     55.8137946
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.263",
+    "district": "Тимирязевский",
+    "address": "Тимирязевская улица, дом 14",
+    "unom": 25886,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 66,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5669028,
+     55.8137188
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.264",
+    "district": "Тимирязевский",
+    "address": "Астрадамская улица, дом 11, корпус 2",
+    "unom": 15,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 155,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5624027,
+     55.8136783
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.265",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 7, корпус 2",
+    "unom": 6603,
+    "role": "угол",
+    "side": "подъезды 7",
+    "azimuth": 250,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5768424,
+     55.8136591
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.266",
+    "district": "Тимирязевский",
+    "address": "улица Вучетича, дом 28, корпус 4",
+    "unom": 5024,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 159,
+    "status": "черновик",
+    "also_covers": "улица Вучетича, дом 28, корпус 3 (подъезды 1–2)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5587271,
+     55.8136071
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.267",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 7, корпус 2",
+    "unom": 6603,
+    "role": "угол",
+    "side": "подъезды 3–6",
+    "azimuth": 340,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5765339,
+     55.8134306
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.268",
+    "district": "Тимирязевский",
+    "address": "Тимирязевская улица, дом 12",
+    "unom": 25884,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 245,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5680513,
+     55.8133919
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.269",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 7, корпус 2",
+    "unom": 6603,
+    "role": "угол",
+    "side": "подъезды 7",
+    "azimuth": 70,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5755377,
+     55.8133917
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.270",
+    "district": "Тимирязевский",
+    "address": "улица Вучетича, дом 28, корпус 2",
+    "unom": 5022,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 251,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.557684,
+     55.8133898
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.271",
+    "district": "Тимирязевский",
+    "address": "улица Вучетича, дом 28, корпус 1",
+    "unom": 5021,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 160,
+    "status": "черновик",
+    "also_covers": "улица Вучетича, дом 28, корпус 2 (подъезды 1–2)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5573752,
+     55.813342
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.272",
+    "district": "Тимирязевский",
+    "address": "Астрадамская улица, дом 15Б",
+    "unom": 1009,
+    "role": "угол",
+    "side": "подъезды 4–7",
+    "azimuth": 337,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5608718,
+     55.8133152
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.273",
+    "district": "Тимирязевский",
+    "address": "Астрадамская улица, дом 6",
+    "unom": 3,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 335,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5648264,
+     55.8133148
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.274",
+    "district": "Тимирязевский",
+    "address": "улица Костякова, дом 11",
+    "unom": 11262,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 336,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5702761,
+     55.8132988
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.275",
+    "district": "Тимирязевский",
+    "address": "улица Костякова, дом 9",
+    "unom": 11258,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 156,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5708221,
+     55.8132425
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.276",
+    "district": "Тимирязевский",
+    "address": "Астрадамская улица, дом 9, корпус 2",
+    "unom": 9,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 155,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5633067,
+     55.8132359
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.277",
+    "district": "Тимирязевский",
+    "address": "Тимирязевская улица, дом 12",
+    "unom": 25884,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 65,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5671118,
+     55.8131992
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.278",
+    "district": "Тимирязевский",
+    "address": "улица Вучетича, дом 28, корпус 4",
+    "unom": 5024,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 339,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5590781,
+     55.813082
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.279",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 5, корпус 1",
+    "unom": 6602,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 161,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5767266,
+     55.8130094
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.280",
+    "district": "Тимирязевский",
+    "address": "Тимирязевская улица, дом 19",
+    "unom": 25893,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 155,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565863,
+     55.8130021
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.281",
+    "district": "Тимирязевский",
+    "address": "Астрадамская улица, дом 9, корпус 1",
+    "unom": 8,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 154,
+    "status": "черновик",
+    "also_covers": "Астрадамская улица, дом 9, корпус 2 (подъезды 1)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5634525,
+     55.8129707
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.282",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 5, корпус 1",
+    "unom": 6602,
+    "role": "угол",
+    "side": "подъезды 10–13",
+    "azimuth": 161,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5762184,
+     55.8129417
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.283",
+    "district": "Тимирязевский",
+    "address": "улица Вучетича, дом 26",
+    "unom": 5020,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 161,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.55878,
+     55.8129039
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.284",
+    "district": "Тимирязевский",
+    "address": "Тимирязевская улица, дом 10/12",
+    "unom": 25881,
+    "role": "угол",
+    "side": "подъезды 8",
+    "azimuth": 245,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5685033,
+     55.8128661
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.285",
+    "district": "Тимирязевский",
+    "address": "Астрадамский проезд, дом 9",
+    "unom": 5115916,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 243,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5630798,
+     55.812794
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.286",
+    "district": "Тимирязевский",
+    "address": "Астрадамская улица, дом 4",
+    "unom": 1001,
+    "role": "угол",
+    "side": "подъезды 1–8",
+    "azimuth": 155,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5651965,
+     55.8127914
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.287",
+    "district": "Тимирязевский",
+    "address": "улица Вучетича, дом 28, корпус 1",
+    "unom": 5021,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 340,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5576253,
+     55.8127738
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.288",
+    "district": "Тимирязевский",
+    "address": "Тимирязевская улица, дом 10/12",
+    "unom": 25881,
+    "role": "угол",
+    "side": "подъезды 3–7",
+    "azimuth": 155,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5679941,
+     55.8127406
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.289",
+    "district": "Тимирязевский",
+    "address": "улица Вучетича, дом 24",
+    "unom": 5019,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 161,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5579821,
+     55.8127218
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.290",
+    "district": "Тимирязевский",
+    "address": "Астрадамская улица, дом 9Б",
+    "unom": 1004,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 155,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5616499,
+     55.8126639
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.291",
+    "district": "Тимирязевский",
+    "address": "Астрадамский проезд, дом 9",
+    "unom": 5115916,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 63,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562363,
+     55.8126164
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.292",
+    "district": "Тимирязевский",
+    "address": "Тимирязевская улица, дом 19",
+    "unom": 25893,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 335,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5662044,
+     55.8125972
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.293",
+    "district": "Тимирязевский",
+    "address": "улица Всеволода Вишневского, дом 10",
+    "unom": 3965,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 246,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5703377,
+     55.8125237
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.294",
+    "district": "Тимирязевский",
+    "address": "улица Костякова, дом 6/5",
+    "unom": 11255,
+    "role": "угол",
+    "side": "подъезды 5",
+    "azimuth": 248,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5741606,
+     55.8125061
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.295",
+    "district": "Тимирязевский",
+    "address": "Астрадамская улица, дом 7",
+    "unom": 470055,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 244,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.56392,
+     55.8124938
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.296",
+    "district": "Тимирязевский",
+    "address": "улица Костякова, дом 9",
+    "unom": 11258,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 336,
+    "status": "черновик",
+    "also_covers": "улица Всеволода Вишневского, дом 8 (подъезды 1–3)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5714547,
+     55.8124483
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.297",
+    "district": "Тимирязевский",
+    "address": "улица Костякова, дом 6/5",
+    "unom": 11255,
+    "role": "угол",
+    "side": "подъезды 7",
+    "azimuth": 158,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5736734,
+     55.8124124
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.298",
+    "district": "Тимирязевский",
+    "address": "улица Костякова, дом 6/5",
+    "unom": 11255,
+    "role": "угол",
+    "side": "подъезды 6",
+    "azimuth": 248,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5742664,
+     55.8123889
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.299",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 5, корпус 1",
+    "unom": 6602,
+    "role": "угол",
+    "side": "подъезды 6–9",
+    "azimuth": 251,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5776662,
+     55.8123606
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.300",
+    "district": "Тимирязевский",
+    "address": "Астрадамская улица, дом 7",
+    "unom": 470055,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 64,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5634425,
+     55.8123602
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.301",
+    "district": "Тимирязевский",
+    "address": "Астрадамская улица, дом 9Б",
+    "unom": 1004,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 335,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5619293,
+     55.8123309
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.302",
+    "district": "Тимирязевский",
+    "address": "Астрадамский проезд, дом 3",
+    "unom": 1012,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 161,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5595568,
+     55.8123275
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.303",
+    "district": "Тимирязевский",
+    "address": "улица Костякова, дом 6/5",
+    "unom": 11255,
+    "role": "угол",
+    "side": "подъезды 2–4",
+    "azimuth": 158,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5731187,
+     55.8122814
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.304",
+    "district": "Тимирязевский",
+    "address": "улица Всеволода Вишневского, дом 8",
+    "unom": 3961,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 66,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.570741,
+     55.8122706
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.305",
+    "district": "Тимирязевский",
+    "address": "Астрадамская улица, дом 7",
+    "unom": 470055,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 244,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5640788,
+     55.8122556
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.306",
+    "district": "Тимирязевский",
+    "address": "улица Всеволода Вишневского, дом 10",
+    "unom": 3965,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 66,
+    "status": "черновик",
+    "also_covers": "Тимирязевская улица, дом 10/12 (подъезды 9)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5691845,
+     55.8122538
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.307",
+    "district": "Тимирязевский",
+    "address": "Астрадамский проезд, дом 1",
+    "unom": 1011,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 161,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5589377,
+     55.8122079
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.308",
+    "district": "Тимирязевский",
+    "address": "Тимирязевская улица, дом 17, корпус 1",
+    "unom": 25889,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 65,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5663537,
+     55.8121779
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.309",
+    "district": "Тимирязевский",
+    "address": "улица Вучетича, дом 17, корпус 1",
+    "unom": 5014,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 162,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5569384,
+     55.8121618
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.310",
+    "district": "Тимирязевский",
+    "address": "Астрадамская улица, дом 4",
+    "unom": 1001,
+    "role": "середина фасада",
+    "side": "подъезды 1–8",
+    "azimuth": 335,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565748,
+     55.812133
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.311",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 5, корпус 1",
+    "unom": 6602,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 341,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5773544,
+     55.8121215
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.312",
+    "district": "Тимирязевский",
+    "address": "Астрадамская улица, дом 7",
+    "unom": 470055,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 334,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5636789,
+     55.8120867
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.313",
+    "district": "Тимирязевский",
+    "address": "улица Вучетича, дом 22",
+    "unom": 5018,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 161,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5580645,
+     55.8120349
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.314",
+    "district": "Тимирязевский",
+    "address": "улица Костякова, дом 7/7",
+    "unom": 11256,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 246,
+    "status": "черновик",
+    "also_covers": "улица Костякова, дом 7/7 (подъезды 5)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5720993,
+     55.8120201
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.315",
+    "district": "Тимирязевский",
+    "address": "Тимирязевская улица, дом 10/12",
+    "unom": 25881,
+    "role": "угол",
+    "side": "подъезды 2",
+    "azimuth": 245,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5692336,
+     55.8120118
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.316",
+    "district": "Тимирязевский",
+    "address": "Тимирязевская улица, дом 17А",
+    "unom": 25890,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 155,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5668077,
+     55.8120049
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.317",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 5, корпус 1",
+    "unom": 6602,
+    "role": "угол",
+    "side": "подъезды 10–13",
+    "azimuth": 341,
+    "status": "черновик",
+    "also_covers": "Дмитровское шоссе, дом 3, корпус 1 (подъезды 1–3)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5765829,
+     55.8120022
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.318",
+    "district": "Тимирязевский",
+    "address": "улица Костякова, дом 7/7",
+    "unom": 11256,
+    "role": "угол",
+    "side": "подъезды 2–4",
+    "azimuth": 156,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5718013,
+     55.8119764
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.319",
+    "district": "Тимирязевский",
+    "address": "Астрадамская улица, дом 7Б",
+    "unom": 5,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 155,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5617757,
+     55.8119727
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.320",
+    "district": "Тимирязевский",
+    "address": "улица Вучетича, дом 17, корпус 1",
+    "unom": 5014,
+    "role": "угол",
+    "side": "подъезды 3–4",
+    "azimuth": 72,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5565488,
+     55.8119179
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.321",
+    "district": "Тимирязевский",
+    "address": "Тимирязевская улица, дом 10/12",
+    "unom": 25881,
+    "role": "угол",
+    "side": "подъезды 9",
+    "azimuth": 335,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.569376,
+     55.8118417
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.322",
+    "district": "Тимирязевский",
+    "address": "улица Костякова, дом 7/7",
+    "unom": 11256,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 66,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5713591,
+     55.8118345
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.323",
+    "district": "Тимирязевский",
+    "address": "Астрадамская улица, дом 5",
+    "unom": 2,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 153,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5644492,
+     55.8118253
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.324",
+    "district": "Тимирязевский",
+    "address": "Астрадамский проезд, дом 3",
+    "unom": 1012,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 341,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5598626,
+     55.8118124
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.325",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 3, корпус 2",
+    "unom": 6601,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 157,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5750593,
+     55.8117374
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.326",
+    "district": "Тимирязевский",
+    "address": "Астрадамский проезд, дом 1",
+    "unom": 1011,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 341,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5592609,
+     55.8116932
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.327",
+    "district": "Тимирязевский",
+    "address": "Дмитровский проезд, дом 4, корпус 4",
+    "unom": 6590,
+    "role": "угол",
+    "side": "подъезды 13",
+    "azimuth": 252,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5780835,
+     55.8116077
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.328",
+    "district": "Тимирязевский",
+    "address": "Астрадамская улица, дом 5",
+    "unom": 2,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 333,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5646521,
+     55.8116024
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.329",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 1, корпус 1",
+    "unom": 6599,
+    "role": "угол",
+    "side": "подъезды 2–10",
+    "azimuth": 162,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5778568,
+     55.811534
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.330",
+    "district": "Тимирязевский",
+    "address": "улица Вучетича, дом 17, корпус 1",
+    "unom": 5014,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 342,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5573102,
+     55.81153
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.331",
+    "district": "Тимирязевский",
+    "address": "улица Вучетича, дом 22",
+    "unom": 5018,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 341,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5583839,
+     55.8115097
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.332",
+    "district": "Тимирязевский",
+    "address": "Астрадамская улица, дом 3",
+    "unom": 1000,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 155,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5643955,
+     55.8114652
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.333",
+    "district": "Тимирязевский",
+    "address": "Дмитровский проезд, дом 4, корпус 3",
+    "unom": 6589,
+    "role": "угол",
+    "side": "подъезды 10–11",
+    "azimuth": 161,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5772216,
+     55.8114343
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.334",
+    "district": "Тимирязевский",
+    "address": "улица Костякова, дом 6/5",
+    "unom": 11255,
+    "role": "угол",
+    "side": "подъезды 2–4",
+    "azimuth": 338,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5736075,
+     55.8114287
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.335",
+    "district": "Тимирязевский",
+    "address": "улица Вучетича, дом 15, корпус 1",
+    "unom": 5011,
+    "role": "угол",
+    "side": "подъезды 3–4",
+    "azimuth": 161,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5573729,
+     55.8114104
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.336",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 3, корпус 1",
+    "unom": 6600,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 341,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5769578,
+     55.8113633
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.337",
+    "district": "Тимирязевский",
+    "address": "Дмитровский проезд, дом 4, корпус 3",
+    "unom": 6589,
+    "role": "угол",
+    "side": "подъезды 12",
+    "azimuth": 251,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5773406,
+     55.8113376
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.338",
+    "district": "Тимирязевский",
+    "address": "Астрадамская улица, дом 7Б",
+    "unom": 5,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 335,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5623077,
+     55.8113268
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.339",
+    "district": "Тимирязевский",
+    "address": "Астрадамская улица, дом 5А",
+    "unom": 1002,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 155,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5630168,
+     55.8112769
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.340",
+    "district": "Тимирязевский",
+    "address": "улица Вучетича, дом 18, корпус 1",
+    "unom": 5015,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 161,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5587932,
+     55.8112117
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.341",
+    "district": "Тимирязевский",
+    "address": "Тимирязевская улица, дом 8, корпус 2",
+    "unom": 5005533,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 155,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5691728,
+     55.8111478
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.342",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 3, корпус 2",
+    "unom": 6601,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 337,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.575539,
+     55.8111472
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.343",
+    "district": "Тимирязевский",
+    "address": "улица Костякова, дом 7/7",
+    "unom": 11256,
+    "role": "угол",
+    "side": "подъезды 6",
+    "azimuth": 246,
+    "status": "черновик",
+    "also_covers": "улица Костякова, дом 7/7 (подъезды 5)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5728364,
+     55.8110746
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.344",
+    "district": "Тимирязевский",
+    "address": "Астрадамская улица, дом 3",
+    "unom": 1000,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 335,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5647878,
+     55.8110139
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.345",
+    "district": "Тимирязевский",
+    "address": "Дмитровский проезд, дом 4, корпус 2",
+    "unom": 470076,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 160,
+    "status": "черновик",
+    "also_covers": "Дмитровский проезд, дом 4, корпус 3 (подъезды 10–11)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5772688,
+     55.8109253
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.346",
+    "district": "Тимирязевский",
+    "address": "Астрадамская улица, дом 1, корпус 1",
+    "unom": 996,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 156,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565383,
+     55.810906
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.347",
+    "district": "Тимирязевский",
+    "address": "улица Костякова, дом 7/7",
+    "unom": 11256,
+    "role": "угол",
+    "side": "подъезды 6",
+    "azimuth": 66,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.572068,
+     55.8108846
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.348",
+    "district": "Тимирязевский",
+    "address": "улица Вучетича, дом 15, корпус 1",
+    "unom": 5011,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 71,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5571307,
+     55.8108664
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.349",
+    "district": "Тимирязевский",
+    "address": "Астрадамская улица, дом 1, корпус 2",
+    "unom": 997,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 155,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5645294,
+     55.8108162
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.350",
+    "district": "Тимирязевский",
+    "address": "Астрадамская улица, дом 5А",
+    "unom": 1002,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 335,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5634149,
+     55.810788
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.351",
+    "district": "Тимирязевский",
+    "address": "улица Костякова, дом 5",
+    "unom": 11254,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 156,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5727108,
+     55.8107592
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.352",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 1, корпус 1",
+    "unom": 6599,
+    "role": "середина фасада",
+    "side": "подъезды 2–10",
+    "azimuth": 342,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5783007,
+     55.8107508
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.353",
+    "district": "Тимирязевский",
+    "address": "улица Вучетича, дом 16",
+    "unom": 5012,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 162,
+    "status": "черновик",
+    "also_covers": "улица Вучетича, дом 16, корпус 1 (подъезды 1)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5603813,
+     55.8107274
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.354",
+    "district": "Тимирязевский",
+    "address": "улица Вучетича, дом 18, корпус 1",
+    "unom": 5015,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 341,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5589171,
+     55.8106481
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.355",
+    "district": "Тимирязевский",
+    "address": "Тимирязевская улица, дом 15",
+    "unom": 25887,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 154,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5677037,
+     55.8106367
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.356",
+    "district": "Тимирязевский",
+    "address": "Тимирязевская улица, дом 8, корпус 2",
+    "unom": 5005533,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 335,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.569631,
+     55.8105917
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.357",
+    "district": "Тимирязевский",
+    "address": "Астрадамская улица, дом 1, корпус 3",
+    "unom": 998,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 155,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5637098,
+     55.810575
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.358",
+    "district": "Тимирязевский",
+    "address": "улица Вучетича, дом 16, корпус 1",
+    "unom": 5013,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 70,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5599524,
+     55.810556
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.359",
+    "district": "Тимирязевский",
+    "address": "улица Вучетича, дом 13",
+    "unom": 5009,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 160,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.557724,
+     55.8104855
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.360",
+    "district": "Тимирязевский",
+    "address": "Астрадамская улица, дом 1, корпус 2",
+    "unom": 997,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 335,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5648079,
+     55.8104787
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.361",
+    "district": "Тимирязевский",
+    "address": "Тимирязевская улица, дом 6",
+    "unom": 25877,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 155,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5698388,
+     55.8104439
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.362",
+    "district": "Тимирязевский",
+    "address": "улица Костякова, дом 5",
+    "unom": 11254,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 336,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5729575,
+     55.8104427
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.363",
+    "district": "Тимирязевский",
+    "address": "Астрадамская улица, дом 1, корпус 1",
+    "unom": 996,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 336,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5657855,
+     55.8103933
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.364",
+    "district": "Тимирязевский",
+    "address": "Дмитровский проезд, дом 6, корпус 1",
+    "unom": 6592,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 157,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5761793,
+     55.8103254
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.365",
+    "district": "Тимирязевский",
+    "address": "Дмитровский проезд, дом 4",
+    "unom": 6587,
+    "role": "угол",
+    "side": "подъезды 2–4",
+    "azimuth": 164,
+    "status": "черновик",
+    "also_covers": "Дмитровский проезд, дом 4, корпус 2 (подъезды 1–2)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5777241,
+     55.8103118
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.366",
+    "district": "Тимирязевский",
+    "address": "улица Костякова, дом 2/6",
+    "unom": 6591,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 157,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5744532,
+     55.8103082
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.367",
+    "district": "Тимирязевский",
+    "address": "Астрадамская улица, дом 1, корпус 3",
+    "unom": 998,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 335,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5639537,
+     55.8102719
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.368",
+    "district": "Тимирязевский",
+    "address": "проезд Соломенной Сторожки, дом 6",
+    "unom": 24341,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 223,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5656056,
+     55.8101691
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.369",
+    "district": "Тимирязевский",
+    "address": "Дмитровский проезд, дом 6, корпус 2",
+    "unom": 6593,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 157,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5752933,
+     55.8101277
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.370",
+    "district": "Тимирязевский",
+    "address": "проезд Соломенной Сторожки, дом 3А",
+    "unom": 24338,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 157,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5666051,
+     55.8101136
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.371",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 1, корпус 1",
+    "unom": 6599,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 72,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5784751,
+     55.8101004
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.372",
+    "district": "Тимирязевский",
+    "address": "Дмитровское шоссе, дом 1, корпус 1",
+    "unom": 6599,
+    "role": "угол",
+    "side": "подъезды 2–10",
+    "azimuth": 342,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5787356,
+     55.8099956
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.373",
+    "district": "Тимирязевский",
+    "address": "проезд Соломенной Сторожки, дом 3А",
+    "unom": 24338,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 337,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5668235,
+     55.8099698
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.374",
+    "district": "Тимирязевский",
+    "address": "Тимирязевская улица, дом 13",
+    "unom": 25885,
+    "role": "середина фасада",
+    "side": "подъезды 1–6",
+    "azimuth": 335,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5676067,
+     55.8099347
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.375",
+    "district": "Тимирязевский",
+    "address": "Тимирязевская улица, дом 11, корпус 1",
+    "unom": 25883,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 244,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5687192,
+     55.809891
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.376",
+    "district": "Тимирязевский",
+    "address": "Дмитровский проезд, дом 4",
+    "unom": 6587,
+    "role": "угол",
+    "side": "подъезды 2–4",
+    "azimuth": 344,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5779345,
+     55.809865
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.377",
+    "district": "Тимирязевский",
+    "address": "Дмитровский проезд, дом 8",
+    "unom": 6594,
+    "role": "угол",
+    "side": "подъезды 3–5",
+    "azimuth": 157,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5734054,
+     55.809834
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.378",
+    "district": "Тимирязевский",
+    "address": "Тимирязевская улица, дом 11, корпус 1",
+    "unom": 25883,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 64,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.568411,
+     55.8098075
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.379",
+    "district": "Тимирязевский",
+    "address": "проезд Соломенной Сторожки, дом 6",
+    "unom": 24341,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 43,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5649347,
+     55.8097673
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.380",
+    "district": "Тимирязевский",
+    "address": "проезд Соломенной Сторожки, дом 5А",
+    "unom": 24340,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 153,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5660167,
+     55.8097463
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.381",
+    "district": "Тимирязевский",
+    "address": "проезд Соломенной Сторожки, дом 3",
+    "unom": 24337,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 156,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5663166,
+     55.8097112
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.382",
+    "district": "Тимирязевский",
+    "address": "Дмитровский проезд, дом 6, корпус 1",
+    "unom": 6592,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 337,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5766847,
+     55.809664
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.383",
+    "district": "Тимирязевский",
+    "address": "проезд Соломенной Сторожки, дом 5А",
+    "unom": 24340,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 333,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5662014,
+     55.8096043
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.384",
+    "district": "Тимирязевский",
+    "address": "Тимирязевская улица, дом 11",
+    "unom": 25882,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 156,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5688301,
+     55.8095921
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.385",
+    "district": "Тимирязевский",
+    "address": "Тимирязевская улица, дом 6",
+    "unom": 25877,
+    "role": "угол",
+    "side": "подъезды 1–5",
+    "azimuth": 335,
+    "status": "черновик",
+    "also_covers": "Тимирязевская улица, дом 4/12 (подъезды 4)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5704567,
+     55.8095426
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.386",
+    "district": "Тимирязевский",
+    "address": "проезд Соломенной Сторожки, дом 8",
+    "unom": 24342,
+    "role": "угол",
+    "side": "подъезды 2–3",
+    "azimuth": 224,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5643412,
+     55.809485
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.387",
+    "district": "Тимирязевский",
+    "address": "Дмитровский проезд, дом 6, корпус 2",
+    "unom": 6593,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 337,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5757697,
+     55.8094261
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.388",
+    "district": "Тимирязевский",
+    "address": "проезд Соломенной Сторожки, дом 12А",
+    "unom": 24345,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 157,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5620149,
+     55.8094157
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.389",
+    "district": "Тимирязевский",
+    "address": "проезд Соломенной Сторожки, дом 5",
+    "unom": 24339,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 156,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5659286,
+     55.809411
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.390",
+    "district": "Тимирязевский",
+    "address": "Тимирязевская улица, дом 13",
+    "unom": 25885,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 335,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5681086,
+     55.8093257
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.391",
+    "district": "Тимирязевский",
+    "address": "улица Костякова, дом 2/6",
+    "unom": 6591,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 337,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5752417,
+     55.8092975
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.392",
+    "district": "Тимирязевский",
+    "address": "Тимирязевская улица, дом 9",
+    "unom": 25880,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 153,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5679032,
+     55.8092959
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.393",
+    "district": "Тимирязевский",
+    "address": "проезд Соломенной Сторожки, дом 10",
+    "unom": 24343,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 225,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5633138,
+     55.8092837
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.394",
+    "district": "Тимирязевский",
+    "address": "улица Вучетича, дом 8",
+    "unom": 5002,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 159,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5607897,
+     55.8092575
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.395",
+    "district": "Тимирязевский",
+    "address": "проезд Соломенной Сторожки, дом 8",
+    "unom": 24342,
+    "role": "угол",
+    "side": "подъезды 2–3",
+    "azimuth": 44,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563949,
+     55.8092179
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.396",
+    "district": "Тимирязевский",
+    "address": "проезд Соломенной Сторожки, дом 3",
+    "unom": 24337,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 336,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5667083,
+     55.8092139
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.397",
+    "district": "Тимирязевский",
+    "address": "проезд Соломенной Сторожки, дом 12А",
+    "unom": 24345,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 337,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5620618,
+     55.8091996
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.398",
+    "district": "Тимирязевский",
+    "address": "улица Вучетича, дом 9, корпус 1",
+    "unom": 5003,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 161,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5586559,
+     55.8091728
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.399",
+    "district": "Тимирязевский",
+    "address": "улица Вучетича, дом 9, корпус 2",
+    "unom": 5004,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 161,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.558015,
+     55.8090303
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.400",
+    "district": "Тимирязевский",
+    "address": "проезд Соломенной Сторожки, дом 10",
+    "unom": 24343,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 45,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5628018,
+     55.8089982
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.401",
+    "district": "Тимирязевский",
+    "address": "проезд Соломенной Сторожки, дом 5",
+    "unom": 24339,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 336,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5663203,
+     55.8089139
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.402",
+    "district": "Тимирязевский",
+    "address": "Тимирязевская улица, дом 7",
+    "unom": 25878,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 161,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5693311,
+     55.8088925
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.403",
+    "district": "Тимирязевский",
+    "address": "Тимирязевская улица, дом 9",
+    "unom": 25880,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 333,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5684264,
+     55.8087009
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.404",
+    "district": "Тимирязевский",
+    "address": "Дмитровский проезд, дом 16, корпус 2",
+    "unom": 6596,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 156,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5658896,
+     55.8086786
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.405",
+    "district": "Тимирязевский",
+    "address": "улица Вучетича, дом 9, корпус 1",
+    "unom": 5003,
+    "role": "угол",
+    "side": "подъезды 3–4",
+    "azimuth": 71,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5584481,
+     55.8086674
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.406",
+    "district": "Тимирязевский",
+    "address": "Дмитровский проезд, дом 14",
+    "unom": 25876,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 254,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5696272,
+     55.8084862
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.407",
+    "district": "Тимирязевский",
+    "address": "Дмитровский проезд, дом 16, корпус 2",
+    "unom": 6596,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 246,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5664133,
+     55.808481
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.408",
+    "district": "Тимирязевский",
+    "address": "Дмитровский проезд, дом 16, корпус 2",
+    "unom": 6596,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 336,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5660641,
+     55.8083799
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.409",
+    "district": "Тимирязевский",
+    "address": "улица Вучетича, дом 7",
+    "unom": 5001,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 161,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5591514,
+     55.8083578
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.410",
+    "district": "Тимирязевский",
+    "address": "Тимирязевская улица, дом 7",
+    "unom": 25878,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 341,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.569675,
+     55.8083281
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.411",
+    "district": "Тимирязевский",
+    "address": "Дмитровский проезд, дом 16",
+    "unom": 6595,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 254,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.567647,
+     55.8082889
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.412",
+    "district": "Тимирязевский",
+    "address": "Дмитровский проезд, дом 14",
+    "unom": 25876,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 74,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.567872,
+     55.8081973
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.413",
+    "district": "Тимирязевский",
+    "address": "Дмитровский проезд, дом 16",
+    "unom": 6595,
+    "role": "середина фасада",
+    "side": "подъезды 1–6",
+    "azimuth": 254,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5664725,
+     55.8081258
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.414",
+    "district": "Тимирязевский",
+    "address": "Дмитровский проезд, дом 16",
+    "unom": 6595,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 74,
+    "status": "черновик",
+    "also_covers": "Дмитровский проезд, дом 18 (подъезды 1–6)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5654741,
+     55.8079363
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.415",
+    "district": "Тимирязевский",
+    "address": "улица Вучетича, дом 7",
+    "unom": 5001,
+    "role": "угол",
+    "side": "подъезды 1–2",
+    "azimuth": 341,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559402,
+     55.8078959
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.416",
+    "district": "Тимирязевский",
+    "address": "Дмитровский проезд, дом 18",
+    "unom": 6597,
+    "role": "середина фасада",
+    "side": "подъезды 1–6",
+    "azimuth": 73,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5642335,
+     55.8078004
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.417",
+    "district": "Тимирязевский",
+    "address": "Дмитровский проезд, дом 20, корпус 1",
+    "unom": 6598,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 253,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562587,
+     55.8077345
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.418",
+    "district": "Тимирязевский",
+    "address": "Дмитровский проезд, дом 20, корпус 1",
+    "unom": 6598,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 73,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562123,
+     55.8076566
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.419",
+    "district": "Тимирязевский",
+    "address": "улица Вучетича, дом 5",
+    "unom": 5000,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 161,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559467,
+     55.8076104
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.420",
+    "district": "Тимирязевский",
+    "address": "Дмитровский проезд, дом 18",
+    "unom": 6597,
+    "role": "угол",
+    "side": "подъезды 1–6",
+    "azimuth": 73,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5631922,
+     55.807553
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.421",
+    "district": "Тимирязевский",
+    "address": "Дмитровский проезд, дом 20, корпус 2",
+    "unom": 31403,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 254,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5622264,
+     55.8074384
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.422",
+    "district": "Тимирязевский",
+    "address": "Дмитровский проезд, дом 20, корпус 2",
+    "unom": 31403,
+    "role": "угол",
+    "side": "подъезды 1",
+    "azimuth": 74,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5618496,
+     55.8073382
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.423",
+    "district": "Тимирязевский",
+    "address": "Чуксин тупик, дом 2",
+    "unom": 29201,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 252,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5600187,
+     55.8071931
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.424",
+    "district": "Тимирязевский",
+    "address": "Чуксин тупик, дом 4",
+    "unom": 29203,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 342,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5585518,
+     55.8071725
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.425",
+    "district": "Тимирязевский",
+    "address": "Дмитровский проезд, дом 20, корпус 2",
+    "unom": 31403,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 254,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5624932,
+     55.8071535
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.426",
+    "district": "Тимирязевский",
+    "address": "Дмитровский проезд, дом 20, корпус 2",
+    "unom": 31403,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 344,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5618075,
+     55.8070417
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.427",
+    "district": "Тимирязевский",
+    "address": "Чуксин тупик, дом 2",
+    "unom": 29201,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 72,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5588748,
+     55.80692
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.428",
+    "district": "Тимирязевский",
+    "address": "Чуксин тупик, дом 5",
+    "unom": 29204,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 252,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5586784,
+     55.8063547
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.429",
+    "district": "Тимирязевский",
+    "address": "Чуксин тупик, дом 5",
+    "unom": 29204,
+    "role": "угол",
+    "side": "подъезды 1–4",
+    "azimuth": 72,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5576371,
+     55.8061603
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.430",
+    "district": "Тимирязевский",
+    "address": "Чуксин тупик, дом 7",
+    "unom": 29205,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 161,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5573882,
+     55.8059456
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т14.431",
+    "district": "Тимирязевский",
+    "address": "Чуксин тупик, дом 7",
+    "unom": 29205,
+    "role": "угол",
+    "side": "подъезды 1–3",
+    "azimuth": 341,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5576131,
+     55.8055938
+    ]
+   }
+  }
+ ]
+}
