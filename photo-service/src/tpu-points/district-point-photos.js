@@ -62,14 +62,14 @@ export function districtQueueFromRows(rows) {
   return { counts, pending, rework };
 }
 
-/** Точки для свода по фото въездных групп: состояние слота и последний снимок. */
-export function entrancePointsForReport(rows) {
+/** Точки для свода по оцифровке (въездные группы, ДП/СП): состояние слота и последний снимок. */
+export function slotPointsForReport(rows) {
   return rows.map((row) => {
     const state = pointState(row);
     return {
       district: row.district,
       label: row.label,
-      kind: null,
+      kind: row.kind ?? null,
       state: state.status,
       lastPhotoAt: state.photo?.uploaded_at || state.rejected?.uploaded_at || null,
       rejectedComment: state.rejected?.comment || '',
@@ -94,7 +94,7 @@ export function mountDistrictPointPhotoRoutes(router, { repository }) {
   router.get('/district-photos/report.xlsx', prefecture, async (req, res, next) => {
     try {
       const generatedAt = new Date();
-      const summary = summarizeDigitization({ points: entrancePointsForReport(await repository.listDistrictPointPhotoQueue()), generatedAt });
+      const summary = summarizeDigitization({ points: slotPointsForReport(await repository.listDistrictPointPhotoQueue()), generatedAt });
       const buffer = await buildDigitizationReport(summary, {
         title: 'Свод по фото въездных групп (точки съёмки)',
         note: 'Одна точка — один снимок. Закрыта — снимок принят префектурой; на доработке — снимок отклонён, точка ждёт нового.',

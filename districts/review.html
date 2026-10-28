@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light">
-  <title>Кабинет приёмки · Точки съёмки районов</title>
+  <title>Кабинет приёмки · Районные карты</title>
   <style>
     :root{--ink:#183c35;--muted:#687873;--line:#d9e0da;--paper:#f5f5ef;--panel:#fff;--green:#0c7a5a;--green-soft:#e7f3ed;--red:#d7193f;--red-soft:#fdecef;--blue:#2a6fdb;--amber:#d99a00}
     *{box-sizing:border-box}
@@ -34,6 +34,9 @@
     .toolbar label{display:grid;gap:4px;font-size:12px;font-weight:700;color:var(--muted)}
     .toolbar select{min-width:190px;padding:8px;border:1px solid #cbd9ce;border-radius:8px;background:#fff}
     .tabs{display:flex;gap:6px;margin-left:auto}
+    .modes{display:inline-flex;gap:4px;margin-bottom:14px;padding:4px;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+    .mode{padding:8px 16px;border:0;border-radius:9px;background:transparent;font-weight:800;color:var(--muted)}
+    .mode.active{background:var(--green);color:#fff}
     .tab{padding:8px 14px;border:1px solid var(--line);border-radius:999px;background:#fff;font-weight:700;color:var(--muted)}
     .tab.active{background:var(--ink);border-color:var(--ink);color:#fff}
     .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
@@ -81,24 +84,29 @@
 <body>
   <header class="topbar">
     <div>
-      <h1>Кабинет приёмки · Точки съёмки районов</h1>
-      <div class="subtitle">По одному фото на точку: принять снимок или вернуть району с комментарием. После решения кабинет сам открывает следующую точку.</div>
+      <h1>Кабинет приёмки · Районные карты</h1>
+      <div class="subtitle">Въездные группы и площадки ДП/СП: по одному фото на точку — принять или вернуть району с комментарием. После решения открывается следующая.</div>
     </div>
     <div class="session"><span id="sessionInfo"></span><button class="secondary" id="logout" type="button" hidden>Выйти</button><a href="index.html">Карты районов →</a></div>
   </header>
   <main>
     <form class="panel login" id="loginForm" hidden>
       <strong>Вход префектуры</strong>
-      <span class="status">Принимать и отклонять фото точек съёмки может только учётная запись префектуры.</span>
+      <span class="status">Принимать и отклонять фото районных карт может только учётная запись префектуры.</span>
       <input id="loginName" autocomplete="username" placeholder="Логин" required>
       <input id="loginPassword" type="password" autocomplete="current-password" placeholder="Пароль" required>
       <button class="primary" type="submit">Войти</button>
       <span class="status" id="loginStatus" role="status"></span>
     </form>
     <section id="workspace" hidden>
+      <div class="modes" role="tablist" aria-label="Оцифровка">
+        <button class="mode active" type="button" role="tab" data-mode="entrances">Въездные группы</button>
+        <button class="mode" type="button" role="tab" data-mode="playgrounds">ДП и СП</button>
+      </div>
       <div class="counts" id="counts"></div>
       <div class="toolbar">
         <label>Район<select id="districtFilter"><option value="">Все районы САО</option></select></label>
+        <label id="kindFilterBox" hidden>Вид площадки<select id="kindFilter"><option value="">Детские и спортивные</option><option value="dp">Детские площадки</option><option value="sp">Спортивные площадки</option></select></label>
         <div class="tabs" role="tablist">
           <button class="tab active" type="button" data-tab="pending" role="tab">На проверке</button>
           <button class="tab" type="button" data-tab="rework" role="tab">На доработке</button>
@@ -131,11 +139,31 @@
   (() => {
     'use strict';
     const api = window.TpuPhotoApi || window.ODHApi;
-    const endpoint = '/api/object-photo-points/district-photos';
+    // Две оцифровки одного кабинета: у каждой свой адрес очереди, снимка, решения и свода.
+    const MODES = {
+      entrances: {
+        base: '/api/object-photo-points/district-photos',
+        photo: (pointId, photoId) => '/api/object-photo-points/' + pointId + '/photos/' + photoId,
+        review: (photo) => '/photos/' + photo.id + '/review',
+        reportFile: 'Svod_foto_vezdnye_gruppy_SAO_',
+        noun: 'точек', open: 'Открыть точку →', title: (row) => 'Точка съёмки ' + row.label, snapshot: 'Снимок точки ',
+        describe: (row) => row.heading == null ? 'без направления' : 'направление ' + Math.round(Number(row.heading)) + '°',
+      },
+      playgrounds: {
+        base: '/api/object-photo-points/playgrounds',
+        photo: (pointId) => '/api/object-photo-points/playgrounds/' + pointId + '/photo',
+        review: (photo) => '/' + photo.point_id + '/review',
+        reportFile: 'Svod_foto_DP_SP_SAO_',
+        noun: 'площадок', open: 'Открыть площадку →', title: (row) => (KIND_NAMES[row.kind] || 'Площадка') + ': ' + row.label, snapshot: 'Снимок площадки ',
+        describe: (row) => KIND_NAMES[row.kind] || 'площадка',
+      },
+    };
+    const KIND_NAMES = { dp: 'Детская площадка', sp: 'Спортивная площадка' };
+    const mode = () => MODES[state.mode];
     const PAGE = 24;
     const el = (id) => document.getElementById(id);
     const make = (tag, className, text) => { const node = document.createElement(tag); if (className) node.className = className; if (text != null) node.textContent = text; return node; };
-    const state = { queue: null, tab: 'pending', shown: PAGE, urls: [], objectId: null, busy: false, revision: 0, angles: new Map(), photoViews: [], photoGeneration: 0 };
+    const state = { mode: location.hash === '#playgrounds' ? 'playgrounds' : 'entrances', queue: null, tab: 'pending', shown: PAGE, urls: [], objectId: null, busy: false, revision: 0, angles: new Map(), photoViews: [], photoGeneration: 0 };
     const DISTRICT_SLUGS = {
       'Аэропорт': 'aeroport', 'Беговой': 'begovoy', 'Бескудниковский': 'beskudnikovskiy',
       'Войковский': 'voykovskiy', 'Восточное Дегунино': 'vostochnoe-degunino',
@@ -147,8 +175,8 @@
     };
     const when = (value) => value ? new Date(value).toLocaleString('ru-RU', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }) : '';
 
-    async function json(path, options) { return (await api.request(endpoint + path, options)).json(); }
-    function photoPath(pointId, photoId) { return '/api/object-photo-points/' + pointId + '/photos/' + photoId; }
+    async function json(path, options) { return (await api.request(mode().base + path, options)).json(); }
+    function photoPath(pointId, photoId) { return mode().photo(pointId, photoId); }
     function setStatus(id, text, error = false) { el(id).textContent = text; el(id).classList.toggle('error', error); }
     function clearUrls() { state.photoGeneration++; if (el('photoViewer').open) el('photoViewer').close(); state.photoViews = []; state.urls.forEach(URL.revokeObjectURL); state.urls = []; }
 
@@ -187,11 +215,11 @@
     function renderCounts() {
       const c = state.queue.counts;
       const items = [
-        ['review', c.pending, 'точек на проверке'],
-        ['rework', c.rework, 'точек на доработке'],
-        ['closed', c.accepted, 'точек с принятым фото'],
-        ['empty', c.empty, 'точек без фото'],
-        ['total', c.total, 'всего точек в наборе'],
+        ['review', c.pending, mode().noun + ' на проверке'],
+        ['rework', c.rework, mode().noun + ' на доработке'],
+        ['closed', c.accepted, mode().noun + ' с принятым фото'],
+        ['empty', c.empty, mode().noun + ' без фото'],
+        ['total', c.total, 'всего ' + mode().noun + ' в наборе'],
       ];
       el('counts').replaceChildren(...items.map(([key, value, label]) => {
         const box = make('div', 'count count-' + key);
@@ -200,29 +228,33 @@
       }));
     }
 
-    function filteredRows(tab = state.tab) {
+    function matchesFilters(row) {
       const district = el('districtFilter').value;
-      return state.queue[tab].filter((row) => !district || row.district === district);
+      const kind = state.mode === 'playgrounds' ? el('kindFilter').value : '';
+      return (!district || row.district === district) && (!kind || row.kind === kind);
+    }
+
+    function filteredRows(tab = state.tab) {
+      return state.queue[tab].filter(matchesFilters);
     }
 
     function render() {
       const list = el('list');
       const all = filteredRows();
       const shown = all.slice(0, state.shown);
-      setStatus('listStatus', all.length ? `Точек: ${all.length.toLocaleString('ru-RU')}` + (state.tab === 'pending' ? ' · сначала те, что ждут дольше всех' : '') : '');
+      setStatus('listStatus', all.length ? `${state.mode === 'playgrounds' ? 'Площадок' : 'Точек'}: ${all.length.toLocaleString('ru-RU')}` + (state.tab === 'pending' ? ' · сначала те, что ждут дольше всех' : '') : '');
       list.replaceChildren(...shown.map((row) => {
         const button = make('button', 'object-row'); button.type = 'button';
         const info = make('div');
         const pill = make('span', 'pill ' + (state.tab === 'pending' ? 'review' : 'rework'), state.tab === 'pending' ? 'на проверке' : 'на доработке');
-        const heading = row.heading == null ? 'без направления' : 'направление ' + Math.round(Number(row.heading)) + '°';
-        const meta = make('div', 'meta', `${row.district} · ${heading} · ` + (state.tab === 'pending' ? 'загружено ' + when(row.uploaded_at) : 'отклонено ' + when(row.rejected_at)));
+        const meta = make('div', 'meta', `${row.district} · ${mode().describe(row)} · ` + (state.tab === 'pending' ? 'загружено ' + when(row.uploaded_at) : 'отклонено ' + when(row.rejected_at)));
         info.append(make('strong', '', row.label), meta);
         meta.prepend(pill);
-        button.append(info, make('span', 'open', 'Открыть точку →'));
+        button.append(info, make('span', 'open', mode().open));
         button.onclick = () => openPoint(row);
         return button;
       }));
-      if (!all.length) list.append(make('div', 'empty', state.tab === 'pending' ? 'Нет точек с фото на проверке.' : 'Нет точек на доработке.'));
+      if (!all.length) list.append(make('div', 'empty', state.tab === 'pending' ? `Нет ${mode().noun} с фото на проверке.` : `Нет ${mode().noun} на доработке.`));
       el('more').hidden = shown.length >= all.length;
     }
 
@@ -339,14 +371,14 @@
         return;
       }
       const { row, kind } = found;
-      el('objectTitle').textContent = 'Точка съёмки ' + row.label;
-      el('objectMeta').textContent = `${row.district} · ${row.heading == null ? 'без направления' : 'направление ' + Math.round(Number(row.heading)) + '°'}${row.longitude != null ? ' · ' + Number(row.latitude).toFixed(6) + ', ' + Number(row.longitude).toFixed(6) : ''}`;
+      el('objectTitle').textContent = mode().title(row);
+      el('objectMeta').textContent = `${row.district} · ${mode().describe(row)}${row.longitude != null ? ' · ' + Number(row.latitude).toFixed(6) + ', ' + Number(row.longitude).toFixed(6) : ''}`;
       el('objectMapLink').href = DISTRICT_SLUGS[row.district] ? DISTRICT_SLUGS[row.district] + '.html' : 'index.html';
       grid.replaceChildren(pointCard(row, kind));
       const pendingPhoto = kind === 'pending';
       setStatus('objectStatus', pendingPhoto ? 'Снимок ждёт решения: принять объект или вернуть на доработку с комментарием.' : 'Точка на доработке: ждём новый снимок от района.');
       el('acceptObject').hidden = !pendingPhoto;
-      el('acceptObject').onclick = pendingPhoto ? () => reviewPhotos([{ id: row.photo_id }], 'accepted', '') : null;
+      el('acceptObject').onclick = pendingPhoto ? () => reviewPhotos([{ id: row.photo_id, point_id: row.point_id }], 'accepted', '') : null;
       el('nextObject').hidden = state.tab !== 'pending' || pendingPhoto;
       lockReview(state.busy);
     }
@@ -354,7 +386,7 @@
     function pointCard(row, kind) {
       const node = make('article', 'card' + (kind === 'rework' ? ' rework' : ''));
       const body = make('div', 'body');
-      const title = make('h3', '', 'Снимок точки ');
+      const title = make('h3', '', mode().snapshot);
       body.append(title);
       if (kind === 'pending') {
         title.append(make('span', 'pill review', 'На проверке'));
@@ -362,7 +394,7 @@
         node.append(photoBox(row.point_id, { id: row.photo_id }, 'Фото точки ' + row.label), body);
         const actions = make('div', 'actions');
         const accept = make('button', 'primary', 'Принять'); accept.type = 'button';
-        accept.onclick = () => decide({ id: row.photo_id }, 'accepted', '');
+        accept.onclick = () => decide({ id: row.photo_id, point_id: row.point_id }, 'accepted', '');
         const reject = make('button', 'danger', 'Отклонить'); reject.type = 'button';
         actions.append(accept, reject);
         const form = make('form', 'reject-form'); form.hidden = true;
@@ -373,11 +405,12 @@
         form.append(comment, formActions);
         reject.onclick = () => { form.hidden = false; actions.hidden = true; comment.focus(); };
         cancel.onclick = () => { form.hidden = true; actions.hidden = false; };
-        form.onsubmit = (event) => { event.preventDefault(); const text = comment.value.trim(); if (text) decide({ id: row.photo_id }, 'rejected', text); };
+        form.onsubmit = (event) => { event.preventDefault(); const text = comment.value.trim(); if (text) decide({ id: row.photo_id, point_id: row.point_id }, 'rejected', text); };
         body.append(actions, form);
       } else if (kind === 'rework') {
         title.append(make('span', 'pill rework', 'На доработке'));
         if (row.photo_id) node.append(photoBox(row.point_id, { id: row.photo_id }, 'Отклонённое фото точки ' + row.label), body);
+        if (!row.photo_id) node.append(make('div', 'slot-empty-box', 'Отклонённый снимок снят со слота'), body);
         body.append(make('p', 'comment', 'Что исправить: ' + (row.rejected_comment || '—')), make('div', 'meta', 'Отклонено ' + when(row.rejected_at) + '. Ждём новое фото от района.'));
       }
       return node;
@@ -389,8 +422,7 @@
       if (revision !== state.revision) return;
       state.queue = queue;
       fillDistricts(); renderCounts(); render();
-      const district = el('districtFilter').value;
-      const next = queue.pending.find((row) => !district || row.district === district);
+      const next = queue.pending.find(matchesFilters);
       if (next) { await openPoint(next); return; }
       backToList();
       setStatus('listStatus', 'Все точки в выбранной очереди проверены.');
@@ -415,7 +447,7 @@
       try {
         for (const photo of photos) {
           if (revision !== state.revision) return;
-          await json('/photos/' + photo.id + '/review', { method: 'POST', body: JSON.stringify({ decision, comment }) });
+          await json(mode().review(photo), { method: 'POST', body: JSON.stringify({ decision, comment }) });
         }
         saved = true;
         if (revision !== state.revision) return;
@@ -464,6 +496,28 @@
     };
     el('logout').onclick = () => { api.clearSession(); backToList(); state.queue = null; el('list').replaceChildren(); showSession(); };
     el('districtFilter').onchange = () => { state.shown = PAGE; render(); };
+    el('kindFilter').onchange = () => { state.shown = PAGE; render(); };
+    function showMode() {
+      document.querySelectorAll('.mode').forEach((button) => {
+        const active = button.dataset.mode === state.mode;
+        button.classList.toggle('active', active);
+        button.setAttribute('aria-selected', String(active));
+      });
+      el('kindFilterBox').hidden = state.mode !== 'playgrounds';
+    }
+    document.querySelectorAll('.mode').forEach((button) => {
+      button.onclick = async () => {
+        if (state.busy || button.dataset.mode === state.mode) return;
+        state.mode = button.dataset.mode;
+        // Ссылку на кабинет можно передать сразу в нужном режиме: …/review.html#playgrounds
+        history.replaceState(null, '', state.mode === 'playgrounds' ? '#playgrounds' : location.pathname + location.search);
+        state.queue = null; state.shown = PAGE;
+        el('list').replaceChildren(); el('counts').replaceChildren();
+        showMode();
+        await load();
+      };
+    });
+    showMode();
     el('more').onclick = () => { state.shown += PAGE; render(); };
     // Свод по всем районам в формате сводки парковок: свод, точки и лист доработки.
     el('exportReport').onclick = async () => {
@@ -471,11 +525,11 @@
       button.disabled = true;
       setStatus('listStatus', 'Готовим свод по фото…');
       try {
-        const blob = await (await api.request(endpoint + '/report.xlsx')).blob();
+        const blob = await (await api.request(mode().base + '/report.xlsx')).blob();
         const day = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Moscow' }).format(new Date());
         const link = document.createElement('a');
         link.href = URL.createObjectURL(blob);
-        link.download = 'Svod_foto_vezdnye_gruppy_SAO_' + day + '.xlsx';
+        link.download = mode().reportFile + day + '.xlsx';
         link.click();
         setTimeout(() => URL.revokeObjectURL(link.href), 1000);
         setStatus('listStatus', 'Свод скачан.');

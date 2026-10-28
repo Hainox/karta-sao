@@ -1,6 +1,8 @@
 import crypto from 'node:crypto';
 import express from 'express';
 import { safePhotoFilename, validatePhotoUpload } from './photo-markers.js';
+import { districtQueueFromRows, slotPointsForReport } from './district-point-photos.js';
+import { buildDigitizationReport, summarizeDigitization } from '../digitization-report.js';
 
 const UUID=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const roles=new Set(['prefecture_admin','reviewer','district_editor']);
@@ -8,6 +10,29 @@ const pointQuery=`SELECT p.id,p.source_key,p.source_id,p.source_row,p.district,p
  COALESCE((SELECT f.status FROM playground_photo_slot_photos f WHERE f.point_id=p.id AND f.status IN ('pending','accepted') ORDER BY f.uploaded_at DESC LIMIT 1),
  (SELECT 'rework' FROM playground_photo_slot_photos f WHERE f.point_id=p.id AND f.status='rejected' ORDER BY f.reviewed_at DESC NULLS LAST LIMIT 1),'empty') AS photo_state
  FROM playground_photo_points p JOIN playground_photo_slots s ON s.point_id=p.id`;
+
+// Кабинет приёмки районных карт, режим «ДП и СП»: те же поля, что у очереди точек съёмки,
+// чтобы кабинет вёл обе оцифровки одним кодом. Подпись точки — адрес площадки.
+const queueQuery=`SELECT p.id AS point_id,COALESCE(NULLIF(p.address,''),'ID '||p.source_id) AS label,p.district,p.kind,
+ p.longitude,p.latitude,NULL::double precision AS heading,
+ f.id AS photo_id,f.status AS photo_status,f.uploaded_at,f.photo_filename,
+ r.id AS rejected_photo_id,r.review_comment AS rejected_comment,r.reviewed_at AS rejected_at,
+ r.uploaded_at AS rejected_uploaded_at,r.photo_filename AS rejected_photo_filename
+ FROM playground_photo_points p JOIN playground_photo_slots s ON s.point_id=p.id
+ LEFT JOIN LATERAL (SELECT t.id,t.status,t.uploaded_at,t.photo_filename FROM playground_photo_slot_photos t
+  WHERE t.point_id=p.id AND t.status IN ('pending','accepted') ORDER BY t.uploaded_at DESC LIMIT 1) f ON true
+ LEFT JOIN LATERAL (SELECT t.id,t.review_comment,t.reviewed_at,t.uploaded_at,t.photo_filename FROM playground_photo_slot_photos t
+  WHERE t.point_id=p.id AND t.status='rejected' ORDER BY t.reviewed_at DESC NULLS LAST LIMIT 1) r ON true`;
+export const PLAYGROUND_KINDS=Object.freeze({dp:'Детские площадки',sp:'Спортивные площадки'});
+
+/** Очередь кабинета по площадкам: как у точек съёмки, плюс вид площадки. */
+export function playgroundQueueFromRows(rows){
+ const kinds=new Map(rows.map(row=>[row.point_id,row.kind]));
+ const queue=districtQueueFromRows(rows);
+ const withKind=row=>({...row,kind:kinds.get(row.point_id)});
+ // Отклонённый снимок площадки сервер не отдаёт (GET /:id/photo — только активный).
+ return {counts:queue.counts,pending:queue.pending.map(withKind),rework:queue.rework.map(row=>({...withKind(row),photo_id:null}))};
+}
 
 export function createPlaygroundPhotoRouter({pool,authenticate}) {
  const router=express.Router();
@@ -21,6 +46,19 @@ export function createPlaygroundPhotoRouter({pool,authenticate}) {
   (req.user.role!=='district_editor'||req.user.district)?next():res.status(403).json({error:'Нет доступа.'}));
  router.param('id',(req,res,next,id)=>UUID.test(id)?next():res.status(400).json({error:'Неверный ID точки.'}));
  const permitted=(user,point)=>user.role!=='district_editor'||user.district===point.district;
+ const prefecture=(req,res,next)=>req.user.role==='prefecture_admin'?next():res.status(403).json({error:'Проверка доступна префектуре.'});
+ router.get('/queue',prefecture,async(req,res,next)=>{try{
+  res.set('Cache-Control','no-store').json(playgroundQueueFromRows((await pool.query(queueQuery)).rows));
+ }catch(e){next(e)}});
+ router.get('/report.xlsx',prefecture,async(req,res,next)=>{try{
+  const generatedAt=new Date();
+  const summary=summarizeDigitization({points:slotPointsForReport((await pool.query(queueQuery)).rows),kinds:PLAYGROUND_KINDS,generatedAt});
+  const buffer=await buildDigitizationReport(summary,{title:'Свод по фото детских и спортивных площадок',kinds:PLAYGROUND_KINDS,pointTitle:'Площадка',
+   note:'Одна площадка — один снимок. Закрыта — снимок принят префектурой; на доработке — снимок отклонён, площадка ждёт нового.'});
+  const day=new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Moscow'}).format(generatedAt);
+  res.set({'Content-Type':'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+   'Content-Disposition':`attachment; filename="Svod_foto_DP_SP_SAO_${day}.xlsx"`,'Cache-Control':'no-store'}).send(buffer);
+ }catch(e){next(e)}});
  router.get('/:id/photo',async(req,res,next)=>{try{
   const p=(await pool.query('SELECT id,district FROM playground_photo_points WHERE id=$1',[req.params.id])).rows[0];
   if(!p||!permitted(req.user,p))return res.status(404).json({error:'Точка не найдена.'});
