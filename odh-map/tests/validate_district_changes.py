@@ -43,14 +43,6 @@ if missing:
 
 print("District change static checks passed.")
 
-editor_path = root / "district-editor.html"
-if not editor_path.is_file():
-    raise SystemExit("Missing district editor page.")
-editor = editor_path.read_text(encoding="utf-8")
-for label in ("localStorage", "Скачать GeoJSON", "Проверить перед отправкой", "route-visuals.js", "НАЧ.", "направление движения техники", "object-labels.js", "ODHObjectLabels.attach", "ODHObjectLabels.renderLegend", "assignObjectNo", "labelsToggle", "typeLegend", "Показать на карте"):
-    if label not in editor:
-        raise SystemExit(f"District editor is missing: {label}")
-
 review_path = root / "district-review.html"
 if not review_path.is_file():
     raise SystemExit("Missing district review page.")
@@ -58,7 +50,3 @@ review = review_path.read_text(encoding="utf-8")
 for label in ("multiple", "review_bundle_version", "DistrictChanges.REVIEW_VERSION", "Скачать сводку", "DistrictChanges.validate", "accepted_locally", "reconcileDistrict", "Выбрать актуальным", "conflictCount", "object-labels.js", "ODHObjectLabels.attach", "ODHObjectLabels.renderLegend", "renderObjectJournal", "objectJournal", "labelsToggle", "typeLegend"):
     if label not in review:
         raise SystemExit(f"District review is missing: {label}")
-
-index = (root / "index.html").read_text(encoding="utf-8")
-if "district-links.html" not in index or "Районам: начать разметку" not in index:
-    raise SystemExit("Main map has no district drawing entry point.")

@@ -3,7 +3,7 @@ import { chromium } from 'playwright';
 
 const BASE = process.env.ATLAS_BASE || 'https://hainox.github.io/karta-sao';
 const targets = process.argv.slice(2);
-if (!targets.length) targets.push('/smm/');
+if (!targets.length) targets.push('/odh-map/');
 
 const browser = await chromium.launch({ channel: 'msedge', headless: true });
 const context = await browser.newContext({ viewport: { width: 1440, height: 900 } });
