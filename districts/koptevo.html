@@ -154,6 +154,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
 });
 </script>
 <link rel="stylesheet" href="../atlas-brand.css?v=20261021">
+<link rel="stylesheet" href="point-popover.css?v=20261028">
 </head>
 <body>
 <div class="app">
@@ -184,6 +185,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       <button id="shootPhotoReport" type="button" hidden>Excel: фото</button>
     </div>
     <div class="shoot-review-link"><a href="review.html">Кабинет приёмки фото →</a></div>
+    <div class="card" id="objectCard"></div>
     <div class="card" id="card"></div>
     <dialog id="photoViewer" class="photo-viewer" aria-modal="true">
       <div class="pv-stage" id="pvStage"><img id="pvImage" alt="Фото точки съёмки"></div>
@@ -197,8 +199,9 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
   </aside>
   <main id="map"></main>
 </div>
-<script src="playground-photo-layer.js?v=20261028-center"></script>
-<script src="sidewalk-shoot-layer.js?v=20261028-edit"></script>
+<script src="point-popover.js?v=20261028"></script>
+<script src="playground-photo-layer.js?v=20261028-popover"></script>
+<script src="sidewalk-shoot-layer.js?v=20261028-popover"></script>
 <script>
 (() => {
   const SLUG = 'koptevo';
@@ -266,8 +269,20 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       ['Источник', p.source],
     ].filter(([, v]) => v != null && v !== '').map(([k, v]) => `<div><strong>${k}:</strong> ${escapeHtml(v)}</div>`).join('');
     const title = p.object_type_name || p.district || 'Объект';
-    $('card').innerHTML = `<h2>${escapeHtml(title)}</h2>${rows || '<div>Подробностей в реестре нет.</div>'}`;
-    $('card').className = 'card open';
+    const geometry = item.feature?.geometry || item.geometry;
+    // Точка (площадка из таблицы) открывается окном у самой точки, площадные объекты — в левом меню.
+    if (geometry?.type === 'Point' && state.popover) {
+      state.popover.open({ coordinates: geometry.coordinates, kind: item.layerKey === 'sp_table' ? 'sp' : 'dp',
+        title: p.parent_object_name || title, subtitle: p.source_id ? 'ID в таблице ' + p.source_id : '' });
+      const facts = [['Тип', p.object_type_name], ['Балансодержатель', p.balance_holder], ['Год благоустройства', p.improvement_year],
+        ['Примечание', p.reference_note], ['Источник', p.source]].filter(([, v]) => v != null && v !== '');
+      $('card').innerHTML = facts.length
+        ? `<dl class="pin-facts">${facts.map(([k, v]) => `<dt>${k}</dt><dd>${escapeHtml(v)}</dd>`).join('')}</dl>`
+        : '<p class="pin-note">Подробностей в таблице нет.</p>';
+      return;
+    }
+    $('objectCard').innerHTML = `<h2>${escapeHtml(title)}</h2>${rows || '<div>Подробностей в реестре нет.</div>'}`;
+    $('objectCard').className = 'card open';
   }
 
   async function createMap() {
@@ -290,7 +305,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       const scale = Math.min(1, Math.max(0.25, 2 ** ((z - 18) / 2)));
       $('map').style.setProperty('--shoot-arrow-scale', scale.toFixed(3));
     };
-    state.map.addChild(new YMapListener({ layer: 'any', onClick: (_object, event) => handleMapClick(event && event.coordinates), onUpdate: ({ location }) => applyArrowScale(location && location.zoom) }));
+    state.map.addChild(new YMapListener({ layer: 'any', onClick: (_object, event) => handleMapClick(event && event.coordinates), onUpdate: ({ location }) => { applyArrowScale(location && location.zoom); state.popover?.reposition(); } }));
     applyArrowScale(state.map.zoom);
     let total = 0;
     for (const layer of LAYERS) {
@@ -307,8 +322,9 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       }
     }
     renderControls();
-    state.playgroundLayer = window.initPlaygroundPhotoLayer({ map: state.map, district: DISTRICT, apiRequest, getUser: () => state.photoUser, preparePointPhoto, escapeHtml, centerSelection });
-    state.sidewalkLayer = window.initSidewalkShootLayer({ map: state.map, slug: SLUG, district: DISTRICT, apiRequest, escapeHtml, centerSelection });
+    state.popover = window.createPointPopover({ map: state.map, card: $('card'), mapElement: $('map') });
+    state.playgroundLayer = window.initPlaygroundPhotoLayer({ map: state.map, district: DISTRICT, apiRequest, getUser: () => state.photoUser, preparePointPhoto, escapeHtml, centerSelection, popover: state.popover });
+    state.sidewalkLayer = window.initSidewalkShootLayer({ map: state.map, slug: SLUG, district: DISTRICT, apiRequest, escapeHtml, centerSelection, popover: state.popover, getUser: () => state.photoUser, preparePointPhoto });
     await loadPhotoPoints();
     renderShootMarkers();
     renderShootLogin();
@@ -734,11 +750,11 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     // Точки назначает и редактирует префектура; район отправляет только фото.
     const canEdit = isPrefecture() && state.serverOk && point.serverPoint && !point.prefectureArchive;
     const canDelete = isPrefecture() && state.serverOk && point.serverPoint && !point.prefectureArchive;
+    state.popover.open({ coordinates: [Number(point.lng), Number(point.lat)], kind: 'entrance', title: 'Точка ' + point.label,
+      subtitle: `${Number(point.lat).toFixed(6)}, ${Number(point.lng).toFixed(6)}`, heading: point.heading });
     $('card').innerHTML = `
-      <h2>Точка съёмки ${escapeHtml(point.label)}</h2>
-      <div><strong>Направление:</strong> ${heading}</div>
-      <div><strong>Координаты:</strong> ${Number(point.lat).toFixed(6)}, ${Number(point.lng).toFixed(6)}</div>
-      <div class="shoot-slot-chain" id="cardSlot" data-point-id="${escapeHtml(point.id)}"></div>
+      <dl class="pin-facts"><dt>Направление кадра</dt><dd>${heading}</dd>${point.note ? `<dt>Примечание</dt><dd>${escapeHtml(point.note)}</dd>` : ''}</dl>
+      <section class="pin-section"><h3>Фото</h3><div class="shoot-slot-chain" id="cardSlot" data-point-id="${escapeHtml(point.id)}"></div></section>
       ${canEdit ? `<form class="point-edit" id="pointEditForm">
         <label>Подпись точки<input name="label" maxlength="160" required value="${escapeHtml(point.label)}"></label>
         <div class="coordinate-fields">
@@ -753,9 +769,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       ${canEdit ? `<div class="card-actions">
         <button id="cardRotate" type="button">Изменить направление</button>
         ${canDelete ? '<button id="cardDelete" class="danger" type="button">Удалить точку</button>' : ''}
-        <button id="cardClose" type="button">Закрыть</button>
-      </div>` : `<div class="card-actions"><button id="cardClose" type="button">Закрыть</button></div>`}`;
-    $('card').className = 'card open';
+      </div>` : ''}`;
     if (canEdit) {
       $('cardRotate').addEventListener('click', () => beginRotation(point));
       $('pointEditForm').addEventListener('submit', (event) => savePointEdits(event, point));
@@ -772,7 +786,6 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
         }
       });
     }
-    $('cardClose').addEventListener('click', () => { $('card').className = 'card'; });
     await renderSlotChain(point);
   }
 
@@ -801,7 +814,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     }
     const slot = slotFromPhotos(photos);
     const upload = canUploadPoint(point) && !slot.active;
-    const parts = [`<div class="shoot-slot"><strong>Фото по точке · 1 слот</strong><br><span class="slot-pill ${slot.status}">${SLOT_LABELS[slot.status]}</span>`];
+    const parts = [`<div class="shoot-slot"><span class="slot-pill ${slot.status}">${SLOT_LABELS[slot.status]}</span>`];
     if (slot.active) {
       parts.push(`<div class="slot-meta">Снимок от ${formatWhen(slot.active.uploaded_at)}${slot.active.status === 'accepted' ? ' · принят ' + formatWhen(slot.active.reviewed_at) : ' · ждёт решения префектуры'}</div>`);
     }

@@ -1,0 +1,90 @@
+/* Мини-карточка точки на карте района. Цвета и шрифт — атласа (--ink, --accent,
+   Century Gothic); --kind — цвет слоя точки, тот же, что у маркера на карте. */
+.pin-anchor{position:relative;width:0;height:0}
+.pin-pop{--kind:#e0a800;--dx:0px;position:absolute;left:0;bottom:20px;width:344px;transform:translateX(calc(-50% + var(--dx)));color:var(--ink);font-family:inherit;cursor:auto;z-index:10}
+.pin-pop.below{bottom:auto;top:20px}
+.pin-card{position:relative;display:flex;flex-direction:column;max-height:var(--maxh,540px);border:1px solid #c9d4d6;border-radius:14px;background:#fff;box-shadow:0 18px 40px -18px rgba(16,38,54,.55),0 2px 6px rgba(16,38,54,.12);overflow:hidden}
+.pin-tail{position:absolute;left:calc(50% - var(--dx));bottom:-7px;width:14px;height:14px;margin-left:-7px;background:#fff;border-right:1px solid #c9d4d6;border-bottom:1px solid #c9d4d6;transform:rotate(45deg)}
+.pin-pop.below .pin-tail{bottom:auto;top:-7px;transform:rotate(225deg)}
+.pin-pop.enter{animation:pin-in .16s ease-out}
+@keyframes pin-in{from{opacity:0;translate:0 6px}to{opacity:1;translate:0 0}}
+@media (prefers-reduced-motion:reduce){.pin-pop.enter{animation:none}}
+
+.pin-head{display:flex;align-items:flex-start;gap:11px;padding:13px 12px 11px 14px;border-left:5px solid var(--kind);background:color-mix(in srgb,var(--kind) 9%,#fff)}
+.pin-dial{flex:0 0 46px;width:46px;height:46px;margin-top:1px}
+.pin-dial[hidden]{display:none}
+.pin-dial-ring{fill:#fff;stroke:#c9d4d6;stroke-width:1.5}
+.pin-dial-ticks{stroke:#9aa9ae;stroke-width:1.5;stroke-linecap:round}
+.pin-dial-n{font:800 7.5px/1 "Century Gothic",Inter,Arial,sans-serif;fill:#63747d;text-anchor:middle}
+.pin-dial-needle path{fill:var(--kind);stroke:var(--ink);stroke-width:1.2;stroke-linejoin:round}
+.pin-dial-needle{transition:transform .2s ease}
+.pin-dial-hub{fill:var(--ink)}
+.pin-titles{flex:1;min-width:0}
+.pin-kind{margin:0;color:color-mix(in srgb,var(--kind) 70%,var(--ink));font-size:12px;font-weight:800}
+.pin-head h2{margin:2px 0 0;font-size:16.5px;line-height:1.22;font-weight:800;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.pin-sub{margin:3px 0 0;color:var(--muted);font-size:12.5px;line-height:1.35}
+.pin-sub[hidden]{display:none}
+.pin-close{flex:0 0 30px;display:grid;place-items:center;width:30px;height:30px;margin:-4px -2px 0 0;border:0;border-radius:8px;background:transparent;color:var(--muted);cursor:pointer}
+.pin-close svg{width:14px;height:14px;stroke:currentColor;stroke-width:2;stroke-linecap:round}
+.pin-close:hover{background:rgba(16,38,54,.07);color:var(--ink)}
+.pin-close:focus-visible,.pin-body button:focus-visible,.pin-body input:focus-visible,.pin-drop:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.pin-body{overflow:auto;overscroll-behavior:contain;padding:4px 14px 14px}
+/* Карточка внутри окна теряет оформление левого меню: окно уже рамка. */
+.pin-body > .card{display:block;padding:0;border:0;border-radius:0;background:transparent}
+.pin-body > .card:not(.open){display:none}
+.pin-body > .card > div{font-size:13.5px;line-height:1.5}
+.pin-body > .card strong{color:#4b6168;font-weight:700}
+/* Сведения о точке: подпись слева, значение справа. */
+.pin-facts{display:grid;grid-template-columns:auto 1fr;gap:5px 12px;margin:8px 0 2px;font-size:13.5px;line-height:1.4}
+.pin-facts dt{color:var(--muted)}
+.pin-facts dd{margin:0;min-width:0;overflow-wrap:anywhere}
+.pin-section{margin-top:12px;padding-top:11px;border-top:1px solid #e5ecee}
+.pin-section > h3{display:flex;align-items:center;gap:8px;margin:0 0 8px;font-size:13.5px;font-weight:800}
+
+/* Фото: пунктирная зона загрузки, превью, статус. */
+.pin-drop{display:flex;align-items:center;gap:12px;width:100%;padding:12px;border:1.5px dashed #9fb3b6;border-radius:11px;background:#f6faf9;color:var(--ink);font:inherit;text-align:left;cursor:pointer}
+.pin-drop:hover,.pin-drop.over{border-color:var(--accent);background:var(--accent-soft)}
+.pin-drop svg{flex:0 0 34px;width:34px;height:34px;stroke:var(--accent);stroke-width:1.6;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.pin-drop b{display:block;font-size:13.5px}
+.pin-drop small{display:block;margin-top:2px;color:var(--muted);font-size:11.5px;line-height:1.35}
+.pin-drop[disabled]{opacity:.6;cursor:progress}
+.pin-shot{display:block;width:100%;max-height:220px;object-fit:cover;border:1px solid var(--line);border-radius:10px;background:#eef3f3;cursor:zoom-in}
+.pin-note{margin:6px 0 0;color:var(--muted);font-size:12px;line-height:1.4}
+.pin-note.bad{color:#a12a1a}
+.pin-return{margin:0 0 8px;padding:8px 10px;border-left:3px solid #c22545;border-radius:0 8px 8px 0;background:#fdf1f3;font-size:12.5px;line-height:1.4}
+.pin-actions{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
+.pin-actions button{min-height:32px;padding:5px 12px;border:1px solid #a9b8bc;border-radius:9px;background:#fff;color:var(--ink);font:inherit;font-size:12.5px;cursor:pointer}
+.pin-actions button:hover{border-color:var(--accent);color:var(--accent)}
+.pin-actions button.primary{border-color:var(--accent);background:var(--accent);color:#fff;font-weight:800}
+.pin-actions button.primary:hover{background:#0a6b66;color:#fff}
+.pin-actions button.danger{border-color:#e3b3ad;color:#a12a1a}
+.pin-actions button.danger:hover{border-color:#a12a1a}
+.pin-actions input{flex:1 1 160px;min-width:0;min-height:32px;padding:5px 9px;border:1px solid #a9b8bc;border-radius:9px;font:inherit;font-size:12.5px}
+
+/* Прежние блоки карточек внутри окна — в тех же пропорциях. */
+.pin-body .shoot-slot{padding:0;border:0;background:transparent}
+.pin-body .shoot-upload{margin-top:8px;padding:12px;border:1.5px dashed #9fb3b6;border-radius:11px;background:#f6faf9}
+.pin-body .shoot-upload p{margin:0 0 8px;color:var(--muted);font-size:11.5px;line-height:1.4}
+.pin-body .shoot-upload button{width:100%;min-height:34px;border-radius:9px}
+.pin-body .pg-controls .pin-drop{flex:1 1 100%}
+.pin-body .shoot-upload button,.pin-body .pg-controls button{min-height:32px;border-radius:9px}
+.pin-body .pg-controls{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.pin-body .pg-controls input[type=file]{flex:1 1 100%;font:inherit;font-size:12px}
+.pin-body .pg-controls input[type=file]::file-selector-button{margin-right:8px;padding:5px 10px;border:1.5px dashed #9fb3b6;border-radius:9px;background:#f6faf9;color:var(--ink);font:inherit;cursor:pointer}
+.pin-body .pg-photo img{border-radius:10px}
+.pin-body .point-edit{margin-top:12px;padding-top:11px;border-top:1px solid #e5ecee}
+.pin-body .card .card-actions{margin-top:12px}
+
+/* Узкий экран: нижняя панель на всю ширину. */
+.pin-pop.sheet{position:fixed;left:0;right:0;bottom:0;width:auto;transform:none;z-index:1000}
+.pin-pop.sheet .pin-card{max-height:72vh;border-radius:16px 16px 0 0;border-bottom:0}
+.pin-pop.sheet .pin-tail{display:none}
+.pin-pop.sheet.enter{animation:pin-up .18s ease-out}
+@keyframes pin-up{from{translate:0 24px;opacity:.4}to{translate:0 0;opacity:1}}
+@media (prefers-reduced-motion:reduce){.pin-pop.sheet.enter{animation:none}}
+
+/* Маркер тротуара окрашивается по фото, как точки въездных групп. */
+.shoot-marker.sidewalk-shoot[data-photo-state="pending"] .shoot-dot{background:#2a6fdb}
+.shoot-marker.sidewalk-shoot[data-photo-state="accepted"] .shoot-dot{background:#0c7a5a}
+.shoot-marker.sidewalk-shoot[data-photo-state="rework"] .shoot-dot{background:#d7193f}
