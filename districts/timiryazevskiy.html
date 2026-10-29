@@ -369,7 +369,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     renderShootLogin();
     const bounds = fitBounds();
     if (bounds) state.map.update({ location: { bounds } });
-    $('status').textContent = `Карта готова: ${total.toLocaleString('ru-RU')} объектов. Нажмите на объект, чтобы открыть сведения.`;
+    $('status').textContent = `Загружено объектов: ${total.toLocaleString('ru-RU')}. Нажмите на объект, чтобы открыть сведения.`;
   }
 
   function draw(key) {
@@ -799,9 +799,11 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     // Точки назначает и редактирует префектура; район отправляет только фото.
     const canEdit = isPrefecture() && state.serverOk && point.serverPoint && !point.prefectureArchive;
     const canDelete = isPrefecture() && state.serverOk && point.serverPoint && !point.prefectureArchive;
-    state.popover.open({ coordinates: [Number(point.lng), Number(point.lat)], kind: 'entrance', title: 'Точка ' + point.label,
+    // Окно у точки — districts/point-popover.js; без него карточка открывается в левой панели, как раньше.
+    if (state.popover) state.popover.open({ coordinates: [Number(point.lng), Number(point.lat)], kind: 'entrance', title: 'Точка ' + point.label,
       subtitle: `${Number(point.lat).toFixed(6)}, ${Number(point.lng).toFixed(6)}`, heading: point.heading });
-    $('card').innerHTML = `
+    else $('card').className = 'card open';
+    $('card').innerHTML = `${state.popover ? '' : `<h2>Точка ${escapeHtml(point.label)}</h2>`}
       <dl class="pin-facts"><dt>Направление кадра</dt><dd>${heading}</dd>${point.note ? `<dt>Примечание</dt><dd>${escapeHtml(point.note)}</dd>` : ''}</dl>
       <section class="pin-section"><h3>Фото</h3><div class="shoot-slot-chain" id="cardSlot" data-point-id="${escapeHtml(point.id)}"></div></section>
       ${canEdit ? `<form class="point-edit" id="pointEditForm">
@@ -1426,14 +1428,15 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     if (state.shootMode) setShootMode(false);
     if (state.dragMode) setDragMode(false);
   });
-  window.AtlasHud.sections($('layerControls').closest('.sidebar'));
-  window.AtlasHud.toast($('status'));
-  window.AtlasHud.flash($('shootHint'));
-  window.AtlasHud.viewMode($('viewToggle'), [$('shootToggle')]);
+  // Общая основа панелей подключается отдельным файлом; без неё карта работает как раньше.
+  window.AtlasHud?.sections($('layerControls').closest('.sidebar'));
+  window.AtlasHud?.toast($('status'));
+  window.AtlasHud?.flash($('shootHint'));
+  window.AtlasHud?.viewMode($('viewToggle'), [$('shootToggle')]);
 
   /* Сводка префектуры по оцифровкам района: въездные группы, площадки, тротуары. */
   const statesOf = async (response) => ((await response.json()).points || []);
-  state.summary = window.createPrefectureSummary({
+  state.summary = window.createPrefectureSummary?.({
     title: 'Сводка · ' + DISTRICT,
     storeKey: 'atlas-summary:district',
     sources: [
