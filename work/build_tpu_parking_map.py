@@ -17,6 +17,13 @@ ROOT = Path(__file__).resolve().parents[1]
 
 AVD_OWNER = 'АвД САО'
 
+# Объекты, снятые префектурой с оцифровки: при любой пересборке их нет ни на карте,
+# ни в каталоге фотослужбы (сводки и отчёты). Дата и причина — в ChangeLog.
+RETIRED_OBJECTS = {
+    'parking:1098294596',  # 2026-10-29: карман Молжаниновского, проезд от Старофилинской ул. до стр. 6А
+    'parking:1098294572',  # 2026-10-29: там же, второй карман
+}
+
 
 def responsible_for(holder, districts):
     """Photo responsibility follows the registry balance holder."""
@@ -116,6 +123,7 @@ def subtitle(records):
 
 def write_data(records, districts):
     """Refresh the page data block, district links and report catalog together."""
+    records = [r for r in records if r['id'] not in RETIRED_OBJECTS]
     data = {
         'datasetId': 'sao_tpu_parking', 'title': 'Оцифровка ТПУ и автомобильных парковок САО',
         'subtitle': subtitle(records),
@@ -280,5 +288,13 @@ def add_photo_assignments(markup):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('workbook', type=Path)
-    build(parser.parse_args().workbook)
+    parser.add_argument('workbook', type=Path, nargs='?')
+    parser.add_argument('--refresh', action='store_true', help='пересобрать из данных опубликованной страницы (без Excel), например после правки RETIRED_OBJECTS')
+    args = parser.parse_args()
+    if args.refresh:
+        data = page_data()
+        write_data(data['records'], data['districts'])
+    elif args.workbook:
+        build(args.workbook)
+    else:
+        parser.error('укажите workbook или --refresh')

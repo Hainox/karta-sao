@@ -43,17 +43,17 @@ test('последнее фото выбирается по времени, да
   assert.equal(summary.objectRows[0].lastPhotoAt, '2026-10-02T08:00:00.000Z');
 });
 
-test('книга Excel содержит четыре листа и все 4 002 объекта карты', async () => {
+test('книга Excel содержит четыре листа и все 4 000 объектов карты', async () => {
   // 29 ТПУ, 65 парковок с контуром и 3 908 парковок и карманов из выгрузки АСУ ОДХ.
-  assert.equal(TPU_OBJECTS.length, 4002);
+  assert.equal(TPU_OBJECTS.length, 4000);
   const book = new ExcelJS.Workbook();
   await book.xlsx.load(await buildTpuReport(summarizeTpu({ points: [], generatedAt: new Date('2026-10-06T12:00:00Z') })));
   assert.deepEqual(book.worksheets.map((s) => s.name), ['Сводка', 'Объекты', 'Точки', 'Динамика']);
-  assert.equal(book.getWorksheet('Объекты').rowCount, 4003);
+  assert.equal(book.getWorksheet('Объекты').rowCount, 4001);
   const overview = book.getWorksheet('Сводка');
   assert.equal(overview.getRow(overview.rowCount).getCell(1).value, 'Итого');
   assert.equal(overview.getRow(overview.rowCount).getCell(2).value, 29);
-  assert.equal(overview.getRow(overview.rowCount).getCell(3).value, 3973);
+  assert.equal(overview.getRow(overview.rowCount).getCell(3).value, 3971);
 });
 
 test('сводка по парковкам — отдельная книга по эталону префектуры', async () => {
@@ -76,7 +76,7 @@ test('сводка по парковкам — отдельная книга п�
   const итого = overview.getRow(overview.rowCount - 2);
   assert.equal(итого.getCell(1).value, 'Вид объекта');
   const rows = book.getWorksheet('Объекты');
-  assert.equal(rows.rowCount, 3974);
+  assert.equal(rows.rowCount, 3972);
   const types = new Set(rows.getColumn(1).values.slice(2));
   assert.deepEqual([...types].sort(), ['Парковка', 'Парковочный карман'], 'карман подписан своим типом, а не «Парковка»');
   assert.equal(book.getWorksheet('На доработке').getRow(2).getCell(1).value, 'Слотов на доработке нет.');
