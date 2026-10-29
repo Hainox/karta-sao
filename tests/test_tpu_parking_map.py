@@ -114,9 +114,10 @@ def test_parking_responsibility_follows_balance_holder_and_contours_fit_yandex()
 
 def test_asu_lots_and_pockets_from_export_are_points_with_their_district():
     asu = [r for r in data()['records'] if r.get('subkind')]
-    assert len(asu) == len({r['id'] for r in asu}) == 3908
+    # 2026-10-29 префектура сняла два кармана Молжаниновского (RETIRED_OBJECTS в сборке).
+    assert len(asu) == len({r['id'] for r in asu}) == 3906
     assert sum(r['subkind'] == 'lot' for r in asu) == 568
-    assert sum(r['subkind'] == 'pocket' for r in asu) == 3340
+    assert sum(r['subkind'] == 'pocket' for r in asu) == 3338
     assert sum(r['group'] == 'АвД САО' for r in asu) == 1692
     for record in asu:
         # Фотослужба принимает только виды tpu и parking: карман — подвид парковки.
@@ -132,7 +133,8 @@ def test_asu_lots_and_pockets_from_export_are_points_with_their_district():
     catalog = json.loads((ROOT / 'photo-service/src/tpu-points/tpu-objects.json').read_text(encoding='utf-8'))
     assert catalog == json.loads((ROOT / 'api/lib/tpu-objects.json').read_text(encoding='utf-8'))
     assert len(catalog) == len(data()['records'])
-    assert sum(o.get('type') == 'Парковочный карман' for o in catalog) == 3340
+    assert sum(o.get('type') == 'Парковочный карман' for o in catalog) == 3338
+    assert not {'parking:1098294596', 'parking:1098294572'} & {o['id'] for o in catalog}
 
 
 def test_object_card_has_photo_slots_and_status_colours():
