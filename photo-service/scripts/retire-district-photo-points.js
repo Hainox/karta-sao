@@ -11,6 +11,7 @@ import { photoServiceDatabaseConfig } from '../src/config.js';
 import { normalizeLogin } from '../src/auth.js';
 import { DISTRICTS } from '../src/tpu-points/validation.js';
 import { createObjectPhotoPointRepository } from '../src/tpu-points/object-photo-points.js';
+import { PREFECTURE_ARCHIVE_CUTOFF } from '../src/tpu-points/district-point-photos.js';
 
 const DATASET = 'sao_district_photo_points';
 // Номер района в подписи точки — порядковый номер в списке районов САО (как на картах районов).
@@ -33,23 +34,32 @@ export function parsePointLabels(text) {
   return { labels, problems };
 }
 
-/** Что снимать: активные точки по подписи и району; не найденные и с фото — отдельно. */
+/**
+ * Что снимать: активные точки рабочего слоя по подписи и району — те, что префектура видит
+ * на карте района. Архивные точки (до 23.10) и импортные наборы (NextGIS/GPKG) с теми же
+ * номерами на карте не показываются, поэтому не снимаются, а выводятся отдельно.
+ */
 export async function retirePlan(db, labels) {
   const { rows } = await db.query(`SELECT p.id, p.label, p.district, p.retired_at,
+      (p.created_at < ${PREFECTURE_ARCHIVE_CUTOFF} OR COALESCE(p.note, '') LIKE 'Источник:%') AS hidden,
       (SELECT count(*)::int FROM object_photo_point_photos f WHERE f.point_id = p.id AND f.status IN ('pending', 'accepted')) AS live_photos
     FROM object_photo_points p
     WHERE p.dataset_id = $1 AND p.label = ANY($2)`, [DATASET, labels.map((item) => item.label)]);
   const retire = [];
   const missing = [];
   const already = [];
+  const kept = [];
+  const doubled = [];
   for (const { label, district } of labels) {
     const own = rows.filter((row) => row.label === label && row.district === district);
-    const active = own.filter((row) => row.retired_at == null);
+    const active = own.filter((row) => row.retired_at == null && !row.hidden);
+    kept.push(...own.filter((row) => row.retired_at == null && row.hidden));
+    if (active.length > 1) doubled.push(label);
     if (active.length) retire.push(...active);
-    else if (own.length) already.push(label);
+    else if (own.some((row) => !row.hidden)) already.push(label);
     else missing.push(label);
   }
-  return { retire, missing, already, withPhotos: retire.filter((row) => row.live_photos > 0) };
+  return { retire, missing, already, kept, doubled, withPhotos: retire.filter((row) => row.live_photos > 0) };
 }
 
 async function main() {
@@ -69,6 +79,8 @@ async function main() {
     console.log(`Номеров в списке: ${labels.length}; к снятию: ${plan.retire.length}; уже сняты: ${plan.already.length}; не найдены: ${plan.missing.length}`);
     Object.entries(byDistrict).forEach(([district, n]) => console.log(`  ${district}: ${n}`));
     if (plan.withPhotos.length) console.log(`С фото на проверке или принятыми (фото останутся в базе): ${plan.withPhotos.map((row) => row.label).join(', ')}`);
+    if (plan.kept.length) console.log(`Архивные или импортные точки с теми же номерами (на карте не видны, не снимаются): ${plan.kept.length}`);
+    if (plan.doubled.length) console.log(`Несколько точек рабочего слоя под одним номером (снимаются все): ${plan.doubled.join(', ')}`);
     if (plan.already.length) console.log(`Уже сняты: ${plan.already.join(', ')}`);
     if (plan.missing.length) console.log(`Не найдены: ${plan.missing.join(', ')}`);
     problems.forEach((line) => console.log('  ' + line));
