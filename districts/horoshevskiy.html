@@ -41,10 +41,11 @@ h1{margin:2px 0 0;font-size:24px;line-height:1.15}
 .shoot-login{display:flex;flex-direction:column;gap:8px;padding:12px;border:1px solid var(--line);border-radius:12px;background:#fff;animation:hud-reveal .24s cubic-bezier(.2,.7,.2,1)}
 .shoot-login[hidden]{display:none}
 .shoot-login .row .hud-btn{flex:1}
-.hud-modes{display:flex;gap:6px;align-items:stretch}
+.hud-modes{display:flex;flex-wrap:wrap;gap:6px;align-items:stretch}
 .hud-modes[hidden]{display:none}
-.hud-modes .hud-seg{flex:1}
-.hand-toggle{min-height:auto;padding:6px 10px;font-size:13.5px;white-space:nowrap}
+.hud-modes .hud-seg{flex:1 1 230px;min-width:0}
+.hud-modes .hud-seg > button{min-width:0;padding:6px 4px}
+.hand-toggle{flex:1 1 100%;min-height:38px;padding:6px 10px;font-size:13.5px;white-space:nowrap}
 .hud-account .hud-btn{flex:0 0 auto;white-space:nowrap}
 .hand-toggle.active{border-color:var(--accent);background:var(--accent);color:#fff}
 .hand-toggle.active:hover{color:#fff}
@@ -200,7 +201,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     </div>
     <div class="hud-modes" id="modeBar" hidden>
       <div class="hud-seg" role="group" aria-label="Режим работы с точками"><button id="viewToggle" type="button" class="active" title="Смотреть и открывать карточки">Просмотр</button><button id="shootToggle" type="button" hidden title="Ставить новые точки">Разметка</button><button id="dragToggle" type="button" hidden title="Переносить точки">Перенос</button></div>
-      <button id="handToggle" class="hud-btn hand-toggle" type="button" hidden title="Двигать карту мышью, не трогая точки">✋ Рука</button>
+      <button id="handToggle" class="hud-btn hand-toggle" type="button" hidden title="Двигать карту мышью, не трогая точки">✋ Рука — двигать карту</button>
     </div>
     <div class="shoot-hint hud-callout" id="shootHint">Точки и направления назначает префектура. Район загружает снимки на назначенные точки.</div>
     <label class="layer-row off" id="shootLayerRow" hidden><input type="checkbox" id="shootLayerToggle"><span class="swatch" style="background:#ffcb00"></span><span class="label">Точки съёмки · въездные группы</span><span class="count" id="shootLayerCount">0</span></label>
