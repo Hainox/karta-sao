@@ -101,7 +101,7 @@
           onChange(points);
           renderMap(); renderList();
           message('Назначенных точек: ' + points.length);
-        } catch (error) { if (version === revision) message('Не удалось загрузить точки: ' + error.message, true); }
+        } catch (error) { if (version === revision) message('Не удалось загрузить точки: ' + (/fetch|network/i.test(error.message) ? 'нет связи с сервером' : error.message), true); }
       }
       async function showPhotos(point, target, version) {
         try {

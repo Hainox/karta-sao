@@ -9,7 +9,8 @@
    summary.setVisible(true);
 */
 (() => {
-  const STATES = [
+  // Состояния по умолчанию; первое — «готово» (его доля в процентах), последнее — «не начато».
+  const DEFAULT_STATES = [
     ['accepted', 'принято', 'var(--hud-ok)'],
     ['pending', 'на проверке', 'var(--hud-pending)'],
     ['rework', 'на доработке', 'var(--hud-rework)'],
@@ -19,11 +20,11 @@
   const ICON_CHEVRON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 15 6-6 6 6"/></svg>';
   const num = (n) => Number(n).toLocaleString('ru-RU');
 
-  function count(states) {
-    const counts = { total: 0, accepted: 0, pending: 0, rework: 0, empty: 0 };
-    for (const raw of states) {
-      const state = ['accepted', 'pending', 'rework'].includes(raw) ? raw : 'empty';
-      counts[state] += 1;
+  function count(values, STATES) {
+    const keys = STATES.map(([key]) => key);
+    const counts = Object.fromEntries([['total', 0], ...keys.map((key) => [key, 0])]);
+    for (const raw of values) {
+      counts[keys.includes(raw) ? raw : keys[keys.length - 1]] += 1;
       counts.total += 1;
     }
     return counts;
@@ -37,23 +38,24 @@
     return message.replace(/[<>&"]/g, '').slice(0, 120);
   }
 
-  function rowHtml(source, result) {
+  function rowHtml(source, result, STATES) {
     if (result.error) {
       return `<li class="hud-sum-row"><div class="line"><span class="name">${source.label}</span><span class="pct">—</span></div>
         <div class="legend"><span style="--dot:var(--hud-rework)">${errorText(result.error)}</span></div></li>`;
     }
     const c = result.counts;
     const share = (n) => (c.total ? (n / c.total) * 100 : 0);
-    const pct = c.total ? Math.round(share(c.accepted)) : 0;
-    const bar = STATES.slice(0, 3).map(([key]) => `<i class="${key}" style="width:${share(c[key]).toFixed(2)}%"></i>`).join('');
+    const done = STATES[0][0];
+    const pct = c.total ? Math.round(share(c[done])) : 0;
+    const bar = STATES.slice(0, -1).map(([key, , color]) => `<i style="width:${share(c[key]).toFixed(2)}%;background:${color}"></i>`).join('');
     const legend = STATES.map(([key, label, color]) => `<span style="--dot:${color}">${label} ${num(c[key])}</span>`).join('');
-    const title = `${source.label}: принято ${num(c.accepted)} из ${num(c.total)}`;
+    const title = `${source.label}: ${STATES[0][1]} ${num(c[done])} из ${num(c.total)}`;
     return `<li class="hud-sum-row" title="${title}"><div class="line"><span class="name">${source.label}</span>
       <span class="pct">${c.total ? pct + '%' : 'нет точек'}</span></div>
       <div class="hud-bar" role="img" aria-label="${title}">${bar}</div><div class="legend">${legend}</div></li>`;
   }
 
-  function createPrefectureSummary({ title = 'Сводка', sources = [], interval = 60000, storeKey = 'atlas-summary' } = {}) {
+  function createPrefectureSummary({ title = 'Сводка', sources = [], states = DEFAULT_STATES, interval = 60000, storeKey = 'atlas-summary', parent = null } = {}) {
     const box = document.createElement('section');
     box.className = 'hud-summary';
     box.hidden = true;
@@ -62,7 +64,9 @@
       <button type="button" class="hud-icon-btn" data-refresh title="Обновить сейчас" aria-label="Обновить сводку">${ICON_REFRESH}</button>
       <button type="button" class="hud-icon-btn" data-collapse title="Свернуть" aria-label="Свернуть сводку" aria-expanded="true">${ICON_CHEVRON}</button></header>
       <ul data-rows></ul><p class="hud-sum-note">Обновляется само раз в минуту. Видно только префектуре.</p>`;
-    document.body.appendChild(box);
+    // parent — блок карты, если карта не во весь экран: плашка встаёт в его угол.
+    if (parent) box.classList.add('inside');
+    (parent || document.body).appendChild(box);
     const rows = box.querySelector('[data-rows]');
     const time = box.querySelector('[data-time]');
     const collapseButton = box.querySelector('[data-collapse]');
@@ -89,13 +93,13 @@
       loading = true;
       box.classList.add('busy');
       const results = await Promise.all(sources.map(async (source) => {
-        try { return { counts: count(await source.load()) }; } catch (error) { return { error }; }
+        try { return { counts: count(await source.load(), states) }; } catch (error) { return { error }; }
       }));
       loading = false;
       lastLoad = Date.now();
       box.classList.remove('busy');
       if (!visible) return;
-      rows.innerHTML = sources.map((source, i) => rowHtml(source, results[i])).join('');
+      rows.innerHTML = sources.map((source, i) => rowHtml(source, results[i], states)).join('');
       time.textContent = 'обновлено ' + new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
     }
 
