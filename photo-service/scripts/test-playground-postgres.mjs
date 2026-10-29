@@ -87,13 +87,13 @@ try {
   assert.deepEqual(history.rows.map((row) => row.status), ['rejected', 'rejected', 'accepted']);
   // Точки съёмки тротуаров: импорт слоёв атласа и слот фото «район загружает — префектура принимает».
   const sidewalkImport = run('scripts/import-sidewalk-photo-points.js', ['--source=../districts/layers', '--apply']);
-  assert.match(sidewalkImport, /новых: 5710; с ошибками: 0/);
+  assert.match(sidewalkImport, /новых: 5768; с ошибками: 0/);
   assert.match(run('scripts/import-sidewalk-photo-points.js', ['--source=../districts/layers']), /новых: 0;/);
   const sw = 'http://127.0.0.1:' + server.address().port + '/sidewalks';
   const swCall = (path, role, options = {}) => fetch(sw + path, { ...options, headers: { 'x-test-role': role, 'content-type': 'application/json', ...(options.headers || {}) } });
   assert.equal((await swCall('?district=' + encodeURIComponent('Аэропорт'), 'district')).status, 403);
   const swList = await (await swCall('?district=' + encodeURIComponent('Аэропорт'), 'admin')).json();
-  assert.equal(swList.points.length, 386);
+  assert.equal(swList.points.length, 399);
   const own = swList.points[0];
   assert.equal(own.photo_state, 'empty');
   const foreign = (await (await swCall('?district=' + encodeURIComponent('Сокол'), 'admin')).json()).points[0];
@@ -128,16 +128,18 @@ try {
   const createdSw = await createSw('admin');
   assert.equal(createdSw.status, 201);
   const createdPoint = (await createdSw.json()).point;
-  assert.equal(createdPoint.point_no, 'Т1.' + String(swList.points.length + 1).padStart(3, '0'));
-  assert.equal((await (await createSw('admin')).json()).point.point_no, 'Т1.' + String(swList.points.length + 2).padStart(3, '0'));
+  // Номер — следующий за самым большим в районе (в слое номера идут с пропусками: новая расстановка с Т1.501).
+  const maxNo = Math.max(...swList.points.map((p) => Number(p.point_no.split('.')[1])));
+  assert.equal(createdPoint.point_no, 'Т1.' + String(maxNo + 1).padStart(3, '0'));
+  assert.equal((await (await createSw('admin')).json()).point.point_no, 'Т1.' + String(maxNo + 2).padStart(3, '0'));
   // Новая расстановка (--replace): точка с фото остаётся на месте, черновики без правок обновляются.
   const before = (await pool.query('SELECT longitude, latitude, heading FROM sidewalk_photo_points WHERE id=$1', [own.id])).rows[0];
   await pool.query("UPDATE sidewalk_photo_points SET heading = (heading + 90) % 360 WHERE id <> $1 AND updated_by IS NULL", [own.id]);
   const replaced = run('scripts/import-sidewalk-photo-points.js', ['--source=../districts/layers', '--replace', '--apply']);
-  assert.match(replaced, /обновлено: 5709; снято: 0/);
+  assert.match(replaced, /обновлено: 5767; снято: 0/);
   assert.deepEqual((await pool.query('SELECT longitude, latitude, heading FROM sidewalk_photo_points WHERE id=$1', [own.id])).rows[0], before);
   const drift = await pool.query("SELECT count(*)::int AS n FROM sidewalk_photo_points WHERE id <> $1 AND retired_at IS NULL", [own.id]);
-  assert.equal(drift.rows[0].n, 5709 + 2, 'две новые точки префектуры пережили замену расстановки');
+  assert.equal(drift.rows[0].n, 5767 + 2, 'две новые точки префектуры пережили замену расстановки');
   // Снятие точек въездных групп по списку номеров: только своего района, с записью в журнал.
   const listFile = join(tmpdir(), 'retire-test-' + process.pid + '.txt');
   writeFileSync(listFile, 'Точка съёмки 13.121\n13.999\n');
