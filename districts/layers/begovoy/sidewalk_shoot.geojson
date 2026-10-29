@@ -4,7 +4,427 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.001",
+    "point_no": "Т2.084",
+    "district": "Беговой",
+    "address": "Ленинградский проспект, дом 28",
+    "unom": 12651,
+    "role": "за подъездом 5",
+    "side": "подъезды 1–5",
+    "azimuth": 219,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.572143,
+     55.78397
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.089",
+    "district": "Беговой",
+    "address": "Ленинградский проспект, дом 28",
+    "unom": 12651,
+    "role": "за подъездом 9",
+    "side": "подъезды 6–9",
+    "azimuth": 39,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.572886,
+     55.78379
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.090",
+    "district": "Беговой",
+    "address": "улица Беговая 34",
+    "unom": 1651,
+    "role": "за подъездом 1",
+    "side": "подъезды 1–3",
+    "azimuth": 219,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565148,
+     55.784099
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.092",
+    "district": "Беговой",
+    "address": "улица Беговая 34",
+    "unom": 1651,
+    "role": "середина фасада",
+    "side": "подъезды 1–3",
+    "azimuth": 40,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564007,
+     55.783297
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.094",
+    "district": "Беговой",
+    "address": "Беговая аллея, д.3",
+    "unom": 1616,
+    "role": "за подъездом 7",
+    "side": "подъезды 1–7",
+    "azimuth": 219,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565841,
+     55.783639
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.095",
+    "district": "Беговой",
+    "address": "Ленинградский проспект, дом 26, корпус 1",
+    "unom": 12648,
+    "role": "за подъездом 3",
+    "side": "подъезды 1–3",
+    "azimuth": 39,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.573837,
+     55.783422
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.099",
+    "district": "Беговой",
+    "address": "улица Беговая 32",
+    "unom": 1650,
+    "role": "за подъездом 1",
+    "side": "подъезды 1–9",
+    "azimuth": 218,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563535,
+     55.783331
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.111",
+    "district": "Беговой",
+    "address": "Беговая аллея, д.3",
+    "unom": 1616,
+    "role": "за подъездом 1",
+    "side": "подъезды 1–7",
+    "azimuth": 39,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564127,
+     55.782456
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.121",
+    "district": "Беговой",
+    "address": "Ленинградский пр-т, д.19",
+    "unom": 12646,
+    "role": "за подъездом 1",
+    "side": "подъезды 1",
+    "azimuth": 102,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.569033,
+     55.781972
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.124",
+    "district": "Беговой",
+    "address": "улица Беговая 28",
+    "unom": 1649,
+    "role": "за подъездом 1",
+    "side": "подъезды 1–2",
+    "azimuth": 218,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.561631,
+     55.781779
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.125",
+    "district": "Беговой",
+    "address": "Беговая аллея, д.5, к.3",
+    "unom": 1619,
+    "role": "за подъездом 1",
+    "side": "подъезды 1",
+    "azimuth": 27,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565153,
+     55.781701
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.139",
+    "district": "Беговой",
+    "address": "улица Беговая 26",
+    "unom": 32085,
+    "role": "за подъездом 2",
+    "side": "подъезды 1–2",
+    "azimuth": 212,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560852,
+     55.781086
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.149",
+    "district": "Беговой",
+    "address": "улица Беговая 24",
+    "unom": 1648,
+    "role": "за подъездом 2",
+    "side": "подъезды 2–7",
+    "azimuth": 41,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560142,
+     55.780604
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.208",
+    "district": "Беговой",
+    "address": "улица Беговая 6",
+    "unom": 74099,
+    "role": "за подъездом 2",
+    "side": "подъезды 1–2",
+    "azimuth": 24,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.555786,
+     55.77595
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.212",
+    "district": "Беговой",
+    "address": "улица Беговая 6",
+    "unom": 74099,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 105,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.555294,
+     55.77599
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.213",
+    "district": "Беговой",
+    "address": "улицаСкаковая, д.7/21А",
+    "unom": 23821,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 142,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.568444,
+     55.782595
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.214",
+    "district": "Беговой",
+    "address": "Ленинградский пр-т, д.19",
+    "unom": 12646,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 218,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.569699,
+     55.782258
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.215",
+    "district": "Беговой",
+    "address": "Беговая аллея, д.5, к.3",
+    "unom": 1619,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 126,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564775,
+     55.781834
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.216",
+    "district": "Беговой",
+    "address": "улица Беговая 11",
+    "unom": 1635,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 26,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.558737,
+     55.779649
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.217",
+    "district": "Беговой",
+    "address": "улица Беговая 26",
+    "unom": 32085,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 217,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559917,
+     55.780562
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.501",
     "district": "Беговой",
     "address": "улица Нижняя Масловка, дом 5",
     "unom": 13948,
@@ -17,15 +437,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5840998,
-     55.7916694
+     37.5840655,
+     55.7916077
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.002",
+    "point_no": "Т2.502",
     "district": "Беговой",
     "address": "улица Нижняя Масловка, дом 5",
     "unom": 13948,
@@ -38,15 +458,35 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5826526,
-     55.7915643
+     37.5826557,
+     55.7915508
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.003",
+    "point_no": "Т2.503",
+    "district": "Беговой",
+    "address": "улица Нижняя Масловка, дом 5",
+    "unom": 13948,
+    "role": "середина фасада",
+    "side": "подъезды 1–5",
+    "azimuth": 263,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5833795,
+     55.7915487
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.504",
     "district": "Беговой",
     "address": "улица Нижняя Масловка, дом 5, корпус 3",
     "unom": 13947,
@@ -59,15 +499,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5815765,
-     55.7915251
+     37.5815111,
+     55.7915203
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.004",
+    "point_no": "Т2.505",
     "district": "Беговой",
     "address": "улица Нижняя Масловка, дом 5, корпус 2",
     "unom": 13946,
@@ -79,15 +519,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5824241,
-     55.7914887
+     37.5822989,
+     55.791508
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.005",
+    "point_no": "Т2.506",
     "district": "Беговой",
     "address": "улица Расковой, дом 33, корпус 2",
     "unom": 21655,
@@ -99,15 +539,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5760178,
-     55.7912509
+     37.5760173,
+     55.7912791
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.006",
+    "point_no": "Т2.507",
     "district": "Беговой",
     "address": "улица Нижняя Масловка, дом 11, корпус 1",
     "unom": 13955,
@@ -119,15 +559,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5756053,
-     55.7911713
+     37.5755939,
+     55.7912319
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.007",
+    "point_no": "Т2.508",
     "district": "Беговой",
     "address": "улица Нижняя Масловка, дом 11, корпус 1",
     "unom": 13955,
@@ -139,35 +579,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5752451,
-     55.7911419
+     37.5752321,
+     55.7912096
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.008",
-    "district": "Беговой",
-    "address": "улица Нижняя Масловка, дом 5, корпус 1",
-    "unom": 13945,
-    "role": "за подъездом 4",
-    "side": "подъезды 1–4",
-    "azimuth": 352,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5842041,
-     55.7910894
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т2.009",
+    "point_no": "Т2.509",
     "district": "Беговой",
     "address": "улица Расковой, дом 33, корпус 1",
     "unom": 21654,
@@ -180,15 +600,35 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5764015,
-     55.7910782
+     37.5763861,
+     55.7911186
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.010",
+    "point_no": "Т2.510",
+    "district": "Беговой",
+    "address": "улица Нижняя Масловка, дом 5, корпус 1",
+    "unom": 13945,
+    "role": "за подъездом 4",
+    "side": "подъезды 1–4",
+    "azimuth": 352,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.584117,
+     55.7910827
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.511",
     "district": "Беговой",
     "address": "улица Нижняя Масловка, дом 5, корпус 3",
     "unom": 13947,
@@ -200,15 +640,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5817085,
-     55.7910616
+     37.5816323,
+     55.791056
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.011",
+    "point_no": "Т2.512",
     "district": "Беговой",
     "address": "улица Нижняя Масловка, дом 5, корпус 2",
     "unom": 13946,
@@ -220,55 +660,36 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.582538,
-     55.7909848
+     37.5824193,
+     55.7909762
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.012",
-    "district": "Беговой",
-    "address": "улица Расковой, дом 33, корпус 1",
-    "unom": 21654,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–2",
-    "azimuth": 37,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5760303,
-     55.7907966
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т2.013",
+    "point_no": "Т2.513",
     "district": "Беговой",
     "address": "улица Расковой, дом 25",
     "unom": 21652,
     "role": "за подъездом 1",
     "side": "подъезды 1–2",
     "azimuth": 217,
-    "status": "черновик"
+    "status": "черновик",
+    "also_covers": "улица Расковой, дом 33, корпус 1 (подъезды 1–2)"
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.575726,
-     55.7907555
+     37.5756445,
+     55.7907899
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.014",
+    "point_no": "Т2.514",
     "district": "Беговой",
     "address": "Ленинградский пр 35",
     "unom": 12663,
@@ -281,15 +702,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5528531,
-     55.7905254
+     37.5527597,
+     55.7905673
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.015",
+    "point_no": "Т2.515",
     "district": "Беговой",
     "address": "улица Расковой, дом 25",
     "unom": 21652,
@@ -301,15 +722,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5752894,
-     55.7904166
+     37.5752015,
+     55.7904537
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.016",
+    "point_no": "Т2.516",
     "district": "Беговой",
     "address": "улица Правды, дом 33, строение 3",
     "unom": 20724,
@@ -321,15 +742,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5824368,
-     55.7902363
+     37.5824601,
+     55.7902578
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.017",
+    "point_no": "Т2.517",
     "district": "Беговой",
     "address": "Ленинградский пр 35",
     "unom": 12663,
@@ -341,15 +762,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5523966,
-     55.7901993
+     37.5522834,
+     55.790227
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.018",
+    "point_no": "Т2.518",
     "district": "Беговой",
     "address": "Ленинградский пр 35",
     "unom": 12663,
@@ -361,15 +782,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5526361,
-     55.7901322
+     37.5527174,
+     55.7900957
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.019",
+    "point_no": "Т2.519",
     "district": "Беговой",
     "address": "улица Правды, дом 33, строение 3",
     "unom": 20724,
@@ -381,15 +802,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5831261,
-     55.7899963
+     37.5832015,
+     55.7900317
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.020",
+    "point_no": "Т2.520",
     "district": "Беговой",
     "address": "улица Новая Башиловка, дом 14",
     "unom": 1579,
@@ -402,15 +823,35 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5726834,
-     55.7899159
+     37.5727669,
+     55.7898823
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.021",
+    "point_no": "Т2.521",
+    "district": "Беговой",
+    "address": "улица Новая Башиловка, дом 16",
+    "unom": 1580,
+    "role": "середина фасада",
+    "side": "подъезды 1–5",
+    "azimuth": 128,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5733647,
+     55.7896586
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.522",
     "district": "Беговой",
     "address": "улица Новая Башиловка, дом 16",
     "unom": 1580,
@@ -422,35 +863,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5739102,
-     55.7895001
+     37.5738503,
+     55.7894564
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.022",
-    "district": "Беговой",
-    "address": "улица Новая Башиловка, дом 14",
-    "unom": 1579,
-    "role": "середина фасада",
-    "side": "подъезды 1–8",
-    "azimuth": 38,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5719339,
-     55.7893484
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т2.023",
+    "point_no": "Т2.523",
     "district": "Беговой",
     "address": "улица Расковой, дом 11",
     "unom": 21637,
@@ -462,35 +883,55 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5728716,
-     55.789346
+     37.5728084,
+     55.7893724
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.024",
+    "point_no": "Т2.524",
+    "district": "Беговой",
+    "address": "улица Новая Башиловка, дом 14",
+    "unom": 1579,
+    "role": "середина фасада",
+    "side": "подъезды 1–8",
+    "azimuth": 38,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5720059,
+     55.7893165
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.525",
     "district": "Беговой",
     "address": "улица Расковой, дом 26/29",
     "unom": 21629,
-    "role": "угол (тротуар вокруг дома)",
-    "side": "круговой тротуар",
+    "role": "задняя сторона дома",
+    "side": "без подъездов",
     "azimuth": 124,
     "status": "черновик"
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5750108,
-     55.7892892
+     37.5750248,
+     55.789301
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.025",
+    "point_no": "Т2.526",
     "district": "Беговой",
     "address": "улица Расковой, дом 26/29",
     "unom": 21629,
@@ -502,15 +943,35 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5747481,
-     55.7891005
+     37.5746908,
+     55.7890562
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.026",
+    "point_no": "Т2.527",
+    "district": "Беговой",
+    "address": "улица Расковой, дом 26/29",
+    "unom": 21629,
+    "role": "задняя сторона дома",
+    "side": "без подъездов",
+    "azimuth": 124,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5756806,
+     55.7890383
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.528",
     "district": "Беговой",
     "address": "улица Расковой, дом 24А",
     "unom": 21651,
@@ -522,35 +983,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5748625,
-     55.7889908
+     37.5748715,
+     55.7889929
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.027",
-    "district": "Беговой",
-    "address": "Лениградский пр 33А",
-    "unom": 12661,
-    "role": "за подъездом 4",
-    "side": "подъезды 1–4",
-    "azimuth": 128,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5563101,
-     55.7889079
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т2.028",
+    "point_no": "Т2.529",
     "district": "Беговой",
     "address": "улица Расковой, дом 11",
     "unom": 21637,
@@ -562,15 +1003,55 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5722719,
-     55.7888855
+     37.5722082,
+     55.7889121
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.029",
+    "point_no": "Т2.530",
+    "district": "Беговой",
+    "address": "Лениградский пр 33А",
+    "unom": 12661,
+    "role": "за подъездом 4",
+    "side": "подъезды 1–4",
+    "azimuth": 128,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5562712,
+     55.7888796
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.531",
+    "district": "Беговой",
+    "address": "улица Расковой, дом 26/29",
+    "unom": 21629,
+    "role": "задняя сторона дома",
+    "side": "без подъездов",
+    "azimuth": 304,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5763546,
+     55.7887906
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.532",
     "district": "Беговой",
     "address": "улица Новая Башиловка, дом 14",
     "unom": 1579,
@@ -582,35 +1063,35 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5711497,
-     55.7888066
+     37.5712441,
+     55.7887648
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.030",
+    "point_no": "Т2.533",
     "district": "Беговой",
-    "address": "улица Расковой, дом 26/29",
-    "unom": 21629,
+    "address": "5-я улица Ямского Поля, дом 27",
+    "unom": 30546,
     "role": "угол (тротуар вокруг дома)",
     "side": "круговой тротуар",
-    "azimuth": 214,
+    "azimuth": 126,
     "status": "черновик"
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5762952,
-     55.7887402
+     37.5762838,
+     55.788669
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.031",
+    "point_no": "Т2.534",
     "district": "Беговой",
     "address": "улица Новая Башиловка, дом 12",
     "unom": 1578,
@@ -622,15 +1103,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5710222,
-     55.7886702
+     37.5711265,
+     55.7886359
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.032",
+    "point_no": "Т2.535",
     "district": "Беговой",
     "address": "улица Расковой, дом 26/29",
     "unom": 21629,
@@ -642,15 +1123,35 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5758884,
-     55.788608
+     37.5758791,
+     55.7886001
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.033",
+    "point_no": "Т2.536",
+    "district": "Беговой",
+    "address": "улица Расковой, дом 22, корпус 2",
+    "unom": 21648,
+    "role": "за подъездом 1",
+    "side": "подъезды 1–2",
+    "azimuth": 126,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5741509,
+     55.7885815
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.537",
     "district": "Беговой",
     "address": "улица Расковой, дом 24А",
     "unom": 21651,
@@ -670,87 +1171,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.034",
-    "district": "Беговой",
-    "address": "улица Расковой, дом 22, корпус 2",
-    "unom": 21648,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–2",
-    "azimuth": 126,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5740983,
-     55.7885411
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т2.035",
-    "district": "Беговой",
-    "address": "5-я улица Ямского Поля, дом 27",
-    "unom": 30546,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 126,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5761687,
-     55.7884781
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т2.036",
-    "district": "Беговой",
-    "address": "улица Новая Башиловка, дом 12",
-    "unom": 1578,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 37,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5706927,
-     55.7884184
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т2.037",
-    "district": "Беговой",
-    "address": "улица Расковой, дом 22, корпус 2",
-    "unom": 21648,
-    "role": "за подъездом 2",
-    "side": "подъезды 1–2",
-    "azimuth": 306,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5744873,
-     55.788379
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т2.038",
+    "point_no": "Т2.538",
     "district": "Беговой",
     "address": "улица Новая Башиловка, дом 10",
     "unom": 1577,
@@ -762,15 +1183,95 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5709221,
-     55.7883789
+     37.5709202,
+     55.7885134
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.039",
+    "point_no": "Т2.539",
+    "district": "Беговой",
+    "address": "5-я улица Ямского Поля, дом 27",
+    "unom": 30546,
+    "role": "за подъездом 1",
+    "side": "подъезды 1",
+    "azimuth": 126,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5760506,
+     55.7884481
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.540",
+    "district": "Беговой",
+    "address": "улица Расковой, дом 22, корпус 2",
+    "unom": 21648,
+    "role": "за подъездом 2",
+    "side": "подъезды 1–2",
+    "azimuth": 306,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5745397,
+     55.7884192
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.541",
+    "district": "Беговой",
+    "address": "5-я улица Ямского Поля, дом 27",
+    "unom": 30546,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 216,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5769449,
+     55.7883927
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.542",
+    "district": "Беговой",
+    "address": "улица Новая Башиловка, дом 12",
+    "unom": 1578,
+    "role": "за подъездом 1",
+    "side": "подъезды 1",
+    "azimuth": 37,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5707889,
+     55.788378
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.543",
     "district": "Беговой",
     "address": "5-я улица Ямского Поля, дом 23, корпус 1",
     "unom": 30544,
@@ -782,35 +1283,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.576855,
-     55.7883583
+     37.5767821,
+     55.7883057
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.040",
-    "district": "Беговой",
-    "address": "5-я улица Ямского Поля, дом 27",
-    "unom": 30546,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 306,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5766789,
-     55.7882626
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т2.041",
+    "point_no": "Т2.544",
     "district": "Беговой",
     "address": "улица Расковой, дом 22, корпус 1",
     "unom": 21647,
@@ -822,15 +1303,35 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5736772,
-     55.7882227
+     37.5736841,
+     55.788228
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.042",
+    "point_no": "Т2.545",
+    "district": "Беговой",
+    "address": "5-я улица Ямского Поля, дом 27",
+    "unom": 30546,
+    "role": "за подъездом 1",
+    "side": "подъезды 1",
+    "azimuth": 306,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5766325,
+     55.7882049
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.546",
     "district": "Беговой",
     "address": "улица Расковой, дом 7",
     "unom": 21633,
@@ -842,15 +1343,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5715171,
-     55.7881968
+     37.5714515,
+     55.7881481
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.043",
+    "point_no": "Т2.547",
     "district": "Беговой",
     "address": "улица Расковой, дом 22, корпус 1",
     "unom": 21647,
@@ -862,15 +1363,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.573988,
-     55.7880911
+     37.5740344,
+     55.7881267
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.044",
+    "point_no": "Т2.548",
     "district": "Беговой",
     "address": "улица Расковой, дом 5",
     "unom": 21632,
@@ -882,15 +1383,35 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5712417,
-     55.7879932
+     37.5713139,
+     55.788047
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.045",
+    "point_no": "Т2.549",
+    "district": "Беговой",
+    "address": "улица Новая Башиловка, дом 10",
+    "unom": 1577,
+    "role": "середина фасада",
+    "side": "подъезды 1–6",
+    "azimuth": 39,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.570299,
+     55.7880026
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.550",
     "district": "Беговой",
     "address": "5-я улица Ямского Поля, дом 23, корпус 1",
     "unom": 30544,
@@ -902,15 +1423,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5778377,
-     55.7879446
+     37.5777661,
+     55.7878902
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.046",
+    "point_no": "Т2.551",
     "district": "Беговой",
     "address": "улица Расковой, дом 7",
     "unom": 21633,
@@ -922,15 +1443,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5722936,
-     55.7878682
+     37.5722231,
+     55.7878157
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.047",
+    "point_no": "Т2.552",
     "district": "Беговой",
     "address": "улица Расковой, дом 22А",
     "unom": 21649,
@@ -942,15 +1463,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5740827,
-     55.7878092
+     37.5740544,
+     55.7877886
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.048",
+    "point_no": "Т2.553",
     "district": "Беговой",
     "address": "Лениградский пр 33А",
     "unom": 12661,
@@ -963,15 +1484,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5587977,
-     55.787752
+     37.5587878,
+     55.7877449
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.049",
+    "point_no": "Т2.554",
     "district": "Беговой",
     "address": "улица Расковой, дом 5",
     "unom": 21632,
@@ -983,56 +1504,75 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5720147,
-     55.7876617
+     37.5720566,
+     55.7876929
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.050",
+    "point_no": "Т2.555",
     "district": "Беговой",
-    "address": "улица Расковой, дом 3",
-    "unom": 21631,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–4",
-    "azimuth": 127,
+    "address": "5-я улица Ямского Поля, дом 23/25, корпус 2",
+    "unom": 30545,
+    "role": "середина фасада",
+    "side": "подъезды 5–9",
+    "azimuth": 217,
     "status": "черновик"
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5706796,
-     55.7875593
+     37.5768361,
+     55.7876779
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.051",
+    "point_no": "Т2.556",
+    "district": "Беговой",
+    "address": "улица Новая Башиловка, дом 8",
+    "unom": 1576,
+    "role": "задняя сторона дома",
+    "side": "без подъездов",
+    "azimuth": 218,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.569535,
+     55.7876496
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.557",
     "district": "Беговой",
     "address": "улица Новая Башиловка, дом 10",
     "unom": 1577,
     "role": "за подъездом 1",
     "side": "подъезды 1–6",
     "azimuth": 39,
-    "status": "черновик",
-    "also_covers": "улица Новая Башиловка, дом 8 (подъезды 1)"
+    "status": "черновик"
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5697529,
-     55.7875529
+     37.5696992,
+     55.7875772
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.052",
+    "point_no": "Т2.558",
     "district": "Беговой",
     "address": "улица Расковой, дом 16/26, корпус 3",
     "unom": 21644,
@@ -1044,15 +1584,55 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5756555,
-     55.7875044
+     37.575725,
+     55.7875537
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.053",
+    "point_no": "Т2.559",
+    "district": "Беговой",
+    "address": "улица Расковой, дом 3",
+    "unom": 21631,
+    "role": "за подъездом 1",
+    "side": "подъезды 1–4",
+    "azimuth": 127,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.570608,
+     55.787505
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.560",
+    "district": "Беговой",
+    "address": "улица Новая Башиловка, дом 8",
+    "unom": 1576,
+    "role": "за подъездом 1",
+    "side": "подъезды 1",
+    "azimuth": 218,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.569937,
+     55.7875007
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.561",
     "district": "Беговой",
     "address": "улица Расковой, дом 16/26, корпус 3",
     "unom": 21644,
@@ -1073,7 +1653,27 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.054",
+    "point_no": "Т2.562",
+    "district": "Беговой",
+    "address": "улица Новая Башиловка, дом 8",
+    "unom": 1576,
+    "role": "задняя сторона дома",
+    "side": "без подъездов",
+    "azimuth": 38,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5691654,
+     55.7873717
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.563",
     "district": "Беговой",
     "address": "5-я улица Ямского Поля, дом 23/25, корпус 2",
     "unom": 30545,
@@ -1085,35 +1685,56 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5763739,
-     55.7873869
+     37.5762694,
+     55.7872492
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.055",
+    "point_no": "Т2.564",
     "district": "Беговой",
-    "address": "улица Новая Башиловка, дом 8",
-    "unom": 1576,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 38,
+    "address": "улица Расковой, дом 16/26, корпус 2",
+    "unom": 21643,
+    "role": "за подъездом 4",
+    "side": "подъезды 4",
+    "azimuth": 218,
     "status": "черновик"
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5694807,
-     55.7872555
+     37.5748956,
+     55.787248
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.056",
+    "point_no": "Т2.565",
+    "district": "Беговой",
+    "address": "улица Новая Башиловка, дом 6",
+    "unom": 1575,
+    "role": "за подъездом 1",
+    "side": "подъезды 1–6",
+    "azimuth": 218,
+    "status": "черновик",
+    "also_covers": "улица Новая Башиловка, дом 8 (подъезды 1)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5696651,
+     55.78719
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.566",
     "district": "Беговой",
     "address": "улица Расковой, дом 3",
     "unom": 21631,
@@ -1125,35 +1746,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5714528,
-     55.7872322
+     37.5713815,
+     55.7871781
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.057",
-    "district": "Беговой",
-    "address": "улица Расковой, дом 16/26, корпус 2",
-    "unom": 21643,
-    "role": "за подъездом 4",
-    "side": "подъезды 4",
-    "azimuth": 218,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5749897,
-     55.7872068
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т2.058",
+    "point_no": "Т2.567",
     "district": "Беговой",
     "address": "улица Расковой, дом 16/26, корпус 2",
     "unom": 21643,
@@ -1165,35 +1766,35 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5753565,
-     55.7871806
+     37.5753762,
+     55.787172
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.059",
+    "point_no": "Т2.568",
     "district": "Беговой",
-    "address": "улица Новая Башиловка, дом 6",
-    "unom": 1575,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–6",
-    "azimuth": 218,
+    "address": "улица Расковой, дом 16/26, корпус 3",
+    "unom": 21644,
+    "role": "середина фасада",
+    "side": "подъезды 1–2, 5–6",
+    "azimuth": 309,
     "status": "черновик"
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5697193,
-     55.7871657
+     37.5758507,
+     55.7871332
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.060",
+    "point_no": "Т2.569",
     "district": "Беговой",
     "address": "улица Расковой, дом 16/26, корпус 1",
     "unom": 21641,
@@ -1205,15 +1806,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5723164,
-     55.787038
+     37.5723846,
+     55.7870852
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.061",
+    "point_no": "Т2.570",
     "district": "Беговой",
     "address": "улица Расковой, дом 16/26, корпус 3",
     "unom": 21644,
@@ -1225,15 +1826,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5768175,
-     55.786983
+     37.5768831,
+     55.7870295
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.062",
+    "point_no": "Т2.571",
     "district": "Беговой",
     "address": "улица Расковой, дом 16/26, корпус 2",
     "unom": 21643,
@@ -1245,15 +1846,55 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5744975,
-     55.786846
+     37.5744028,
+     55.7868875
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.063",
+    "point_no": "Т2.572",
+    "district": "Беговой",
+    "address": "улица Расковой, дом 16/26, корпус 1",
+    "unom": 21641,
+    "role": "середина фасада",
+    "side": "подъезды 1–2, 5–6",
+    "azimuth": 129,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5729732,
+     55.7868125
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.573",
+    "district": "Беговой",
+    "address": "улица Новая Башиловка, дом 6",
+    "unom": 1575,
+    "role": "середина фасада",
+    "side": "подъезды 1–6",
+    "azimuth": 218,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5691062,
+     55.7867902
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.574",
     "district": "Беговой",
     "address": "Лениградский пр 33 к 3",
     "unom": 12653,
@@ -1273,7 +1914,27 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.064",
+    "point_no": "Т2.575",
+    "district": "Беговой",
+    "address": "улица Расковой, дом 16/26, корпус 2",
+    "unom": 21643,
+    "role": "середина фасада",
+    "side": "подъезды 1–3, 5–6",
+    "azimuth": 218,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5747984,
+     55.7867493
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.576",
     "district": "Беговой",
     "address": "Лениградский пр 33 к 9",
     "unom": 12659,
@@ -1285,15 +1946,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5585134,
-     55.7867145
+     37.5585037,
+     55.7867269
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.065",
+    "point_no": "Т2.577",
     "district": "Беговой",
     "address": "улица Расковой, дом 1",
     "unom": 21630,
@@ -1305,15 +1966,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.570534,
-     55.7866706
+     37.5704541,
+     55.7867037
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.066",
+    "point_no": "Т2.578",
     "district": "Беговой",
     "address": "переулок Расковой, дом 24",
     "unom": 21645,
@@ -1325,36 +1986,75 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5741362,
-     55.7865875
+     37.5740461,
+     55.7866324
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.067",
+    "point_no": "Т2.579",
+    "district": "Беговой",
+    "address": "переулок Расковой, дом 24",
+    "unom": 21645,
+    "role": "за подъездом 3",
+    "side": "подъезды 2–3",
+    "azimuth": 128,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5735036,
+     55.7866026
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.580",
+    "district": "Беговой",
+    "address": "Лениградский пр 33 к 1",
+    "unom": 12652,
+    "role": "середина фасада",
+    "side": "подъезды 9–13",
+    "azimuth": 38,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5603267,
+     55.7865688
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.581",
     "district": "Беговой",
     "address": "улица Расковой, дом 16/26, корпус 1",
     "unom": 21641,
     "role": "за подъездом 1",
     "side": "подъезды 1–2, 5–6",
     "azimuth": 309,
-    "status": "черновик",
-    "also_covers": "переулок Расковой, дом 24 (подъезды 2–3)"
+    "status": "черновик"
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5734422,
-     55.7865293
+     37.5736316,
+     55.7865074
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.068",
+    "point_no": "Т2.582",
     "district": "Беговой",
     "address": "улица Новая Башиловка, дом 6",
     "unom": 1575,
@@ -1366,15 +2066,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5687256,
-     55.7864735
+     37.5686874,
+     55.7864906
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.069",
+    "point_no": "Т2.583",
     "district": "Беговой",
     "address": "улица Расковой, дом 16/26, корпус 2",
     "unom": 21643,
@@ -1386,15 +2086,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5742419,
-     55.7864463
+     37.5742497,
+     55.7864219
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.070",
+    "point_no": "Т2.584",
     "district": "Беговой",
     "address": "переулок Расковой, дом 24",
     "unom": 21645,
@@ -1406,15 +2106,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5738192,
-     55.7863599
+     37.5737252,
+     55.7864019
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.071",
+    "point_no": "Т2.585",
     "district": "Беговой",
     "address": "переулок Расковой, дом 24",
     "unom": 21645,
@@ -1426,15 +2126,35 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5741221,
-     55.7863309
+     37.5741281,
+     55.7863352
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.072",
+    "point_no": "Т2.586",
+    "district": "Беговой",
+    "address": "улица Расковой, дом 14",
+    "unom": 21640,
+    "role": "середина фасада",
+    "side": "подъезды 1–4",
+    "azimuth": 307,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5725812,
+     55.786321
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.587",
     "district": "Беговой",
     "address": "улица Расковой, дом 1",
     "unom": 21630,
@@ -1446,15 +2166,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5699504,
-     55.7862381
+     37.5698743,
+     55.7862696
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.073",
+    "point_no": "Т2.588",
     "district": "Беговой",
     "address": "улица Новая Башиловка, дом 4",
     "unom": 1574,
@@ -1466,55 +2186,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5686942,
-     55.7862038
+     37.5686697,
+     55.7861803
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.074",
-    "district": "Беговой",
-    "address": "Лениградский пр 33 к 1",
-    "unom": 12652,
-    "role": "за подъездом 9",
-    "side": "подъезды 9–13",
-    "azimuth": 38,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5598328,
-     55.7861242
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т2.075",
-    "district": "Беговой",
-    "address": "улица Расковой, дом 8",
-    "unom": 21634,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–2",
-    "azimuth": 218,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5707777,
-     55.7860611
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т2.076",
+    "point_no": "Т2.589",
     "district": "Беговой",
     "address": "улица Правды, дом 7/9, к.1",
     "unom": 20720,
@@ -1526,35 +2206,55 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5764004,
-     55.7860301
+     37.5763138,
+     55.786153
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.077",
+    "point_no": "Т2.590",
     "district": "Беговой",
-    "address": "улица Новая Башиловка, дом 4",
-    "unom": 1574,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 36,
+    "address": "Лениградский пр 33 к 1",
+    "unom": 12652,
+    "role": "за подъездом 9",
+    "side": "подъезды 9–13",
+    "azimuth": 38,
     "status": "черновик"
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.568461,
-     55.7860201
+     37.5596804,
+     55.7860966
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.078",
+    "point_no": "Т2.591",
+    "district": "Беговой",
+    "address": "улица Расковой, дом 8",
+    "unom": 21634,
+    "role": "за подъездом 1",
+    "side": "подъезды 1–2",
+    "azimuth": 218,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5707531,
+     55.7860948
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.592",
     "district": "Беговой",
     "address": "улица Расковой, дом 14",
     "unom": 21640,
@@ -1566,15 +2266,55 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5733625,
-     55.7859648
+     37.5734576,
+     55.786036
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.079",
+    "point_no": "Т2.593",
+    "district": "Беговой",
+    "address": "улица Новая Башиловка, дом 4",
+    "unom": 1574,
+    "role": "за подъездом 1",
+    "side": "подъезды 1",
+    "azimuth": 36,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5685267,
+     55.7859929
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.594",
+    "district": "Беговой",
+    "address": "Ленинградский проспект, дом 34",
+    "unom": 12662,
+    "role": "середина фасада",
+    "side": "подъезды 1–4",
+    "azimuth": 306,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5689422,
+     55.7859351
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.595",
     "district": "Беговой",
     "address": "улица Расковой, дом 1",
     "unom": 21630,
@@ -1586,15 +2326,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5692999,
-     55.7857306
+     37.569221,
+     55.7857633
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.080",
+    "point_no": "Т2.596",
     "district": "Беговой",
     "address": "улица Расковой, дом 8",
     "unom": 21634,
@@ -1606,15 +2346,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5702936,
-     55.7857081
+     37.5701993,
+     55.7856602
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.081",
+    "point_no": "Т2.597",
     "district": "Беговой",
     "address": "улица Правды, дом 1/2",
     "unom": 20713,
@@ -1626,15 +2366,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5726744,
-     55.7855931
+     37.5726806,
+     55.7855068
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.082",
+    "point_no": "Т2.598",
     "district": "Беговой",
     "address": "улица Правды, дом 1/2",
     "unom": 20713,
@@ -1646,15 +2386,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5738948,
-     55.7854671
+     37.5739571,
+     55.7854409
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.083",
+    "point_no": "Т2.599",
     "district": "Беговой",
     "address": "улица Правды, дом 1/2",
     "unom": 20713,
@@ -1666,15 +2406,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5735779,
-     55.7852134
+     37.5735066,
+     55.7851591
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.084",
+    "point_no": "Т2.600",
     "district": "Беговой",
     "address": "Ленинградский проспект, дом 28",
     "unom": 12651,
@@ -1686,15 +2426,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.572073,
-     55.784607
+     37.5721377,
+     55.7846008
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.085",
+    "point_no": "Т2.601",
     "district": "Беговой",
     "address": "улица Правды, дом 1/2",
     "unom": 20713,
@@ -1706,15 +2446,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5727635,
-     55.7845809
+     37.572818,
+     55.7845579
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.086",
+    "point_no": "Т2.602",
     "district": "Беговой",
     "address": "Ленинградский проспект, дом 28",
     "unom": 12651,
@@ -1726,15 +2466,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5717465,
-     55.7845506
+     37.5716168,
+     55.7845489
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.087",
+    "point_no": "Т2.603",
     "district": "Беговой",
     "address": "улица Правды, дом 3/1",
     "unom": 20716,
@@ -1746,15 +2486,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5766953,
-     55.7843885
+     37.5765787,
+     55.7844358
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.088",
+    "point_no": "Т2.604",
     "district": "Беговой",
     "address": "Ленинградский проспект, дом 28",
     "unom": 12651,
@@ -1766,15 +2506,75 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5726913,
-     55.7843293
+     37.5726187,
+     55.7843864
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.089",
+    "point_no": "Т2.605",
+    "district": "Беговой",
+    "address": "улица Правды, дом 3/1",
+    "unom": 20716,
+    "role": "задняя сторона дома",
+    "side": "без подъездов",
+    "azimuth": 216,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5771074,
+     55.784357
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.606",
+    "district": "Беговой",
+    "address": "улица Беговая 34",
+    "unom": 1651,
+    "role": "задняя сторона дома",
+    "side": "без подъездов",
+    "azimuth": 218,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5647855,
+     55.7843437
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.607",
+    "district": "Беговой",
+    "address": "улица Правды, дом 3/1",
+    "unom": 20716,
+    "role": "середина фасада",
+    "side": "подъезды 1–4",
+    "azimuth": 36,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5762235,
+     55.7841394
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.608",
     "district": "Беговой",
     "address": "Ленинградский проспект, дом 28",
     "unom": 12651,
@@ -1786,35 +2586,55 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5727188,
-     55.7841096
+     37.5726667,
+     55.7840727
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.090",
+    "point_no": "Т2.609",
+    "district": "Беговой",
+    "address": "улица Правды, дом 3/1",
+    "unom": 20716,
+    "role": "задняя сторона дома",
+    "side": "без подъездов",
+    "azimuth": 36,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5765619,
+     55.7839256
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.610",
     "district": "Беговой",
     "address": "улица Беговая 34",
     "unom": 1651,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–3",
+    "role": "задняя сторона дома",
+    "side": "без подъездов",
     "azimuth": 218,
     "status": "черновик"
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5651009,
-     55.7841091
+     37.5640301,
+     55.7838148
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.091",
+    "point_no": "Т2.611",
     "district": "Беговой",
     "address": "Ленинградский проспект, дом 28",
     "unom": 12651,
@@ -1826,35 +2646,35 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5709584,
-     55.7838131
+     37.5709782,
+     55.7837809
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.092",
+    "point_no": "Т2.612",
     "district": "Беговой",
-    "address": "улица Беговая 34",
-    "unom": 1651,
-    "role": "середина фасада",
+    "address": "улица Правды, дом 4",
+    "unom": 20717,
+    "role": "за подъездом 1",
     "side": "подъезды 1–3",
-    "azimuth": 218,
+    "azimuth": 238,
     "status": "черновик"
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5644817,
-     55.7836672
+     37.5772797,
+     55.783736
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.093",
+    "point_no": "Т2.613",
     "district": "Беговой",
     "address": "улица Правды, дом 3/1",
     "unom": 20716,
@@ -1866,55 +2686,35 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5757647,
-     55.7836506
+     37.5756465,
+     55.7836985
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.094",
+    "point_no": "Т2.614",
     "district": "Беговой",
-    "address": "Беговая аллея, д.3",
-    "unom": 1616,
-    "role": "за подъездом 7",
-    "side": "подъезды 1–7",
-    "azimuth": 219,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5660205,
-     55.7835904
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т2.095",
-    "district": "Беговой",
-    "address": "Ленинградский проспект, дом 26, корпус 1",
-    "unom": 12648,
-    "role": "за подъездом 3",
+    "address": "улица Беговая 34",
+    "unom": 1651,
+    "role": "середина фасада",
     "side": "подъезды 1–3",
-    "azimuth": 129,
+    "azimuth": 218,
     "status": "черновик"
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5720116,
-     55.7835471
+     37.564521,
+     55.7836496
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.096",
+    "point_no": "Т2.615",
     "district": "Беговой",
     "address": "Ленинградский проспект, дом 28",
     "unom": 12651,
@@ -1926,15 +2726,35 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5715342,
-     55.78354
+     37.5714457,
+     55.783557
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.097",
+    "point_no": "Т2.616",
+    "district": "Беговой",
+    "address": "Ленинградский проспект, дом 26, корпус 1",
+    "unom": 12648,
+    "role": "за подъездом 3",
+    "side": "подъезды 1–3",
+    "azimuth": 129,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5720858,
+     55.7835128
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.617",
     "district": "Беговой",
     "address": "улица Правды, дом 1",
     "unom": 20714,
@@ -1946,15 +2766,55 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5753591,
-     55.7834676
+     37.5753735,
+     55.7834842
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.098",
+    "point_no": "Т2.618",
+    "district": "Беговой",
+    "address": "улица Правды, дом 3/1",
+    "unom": 20716,
+    "role": "задняя сторона дома",
+    "side": "без подъездов",
+    "azimuth": 36,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5760426,
+     55.7834839
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.619",
+    "district": "Беговой",
+    "address": "улица Беговая 34",
+    "unom": 1651,
+    "role": "задняя сторона дома",
+    "side": "без подъездов",
+    "azimuth": 38,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.56354,
+     55.7834622
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.620",
     "district": "Беговой",
     "address": "1-й Боткинский дом 6",
     "unom": 2707,
@@ -1966,36 +2826,35 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.558695,
-     55.7833689
+     37.5587085,
+     55.7833785
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.099",
+    "point_no": "Т2.621",
     "district": "Беговой",
     "address": "улица Беговая 32",
     "unom": 1650,
     "role": "за подъездом 1",
     "side": "подъезды 1–9",
     "azimuth": 218,
-    "status": "черновик",
-    "also_covers": "улица Беговая 34 (подъезды 1–3)"
+    "status": "черновик"
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5637585,
-     55.7832692
+     37.5637379,
+     55.7832541
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.100",
+    "point_no": "Т2.622",
     "district": "Беговой",
     "address": "3-я улица Ямского Поля, дом 17",
     "unom": 30543,
@@ -2007,15 +2866,35 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5779361,
-     55.7831528
+     37.5780187,
+     55.7832075
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.101",
+    "point_no": "Т2.623",
+    "district": "Беговой",
+    "address": "Ленинградский проспект, дом 26, корпус 1",
+    "unom": 12648,
+    "role": "середина фасада",
+    "side": "подъезды 1–3",
+    "azimuth": 309,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5725065,
+     55.7831877
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.624",
     "district": "Беговой",
     "address": "улица Правды, дом 2А",
     "unom": 20715,
@@ -2027,35 +2906,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5760266,
-     55.7829893
+     37.5760019,
+     55.7830006
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.102",
-    "district": "Беговой",
-    "address": "Беговая аллея, д.3",
-    "unom": 1616,
-    "role": "середина фасада",
-    "side": "подъезды 1–7",
-    "azimuth": 39,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.565114,
-     55.7829618
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т2.103",
+    "point_no": "Т2.625",
     "district": "Беговой",
     "address": "3-я улица Ямского Поля, дом 17",
     "unom": 30543,
@@ -2067,15 +2926,35 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5785783,
-     55.7828412
+     37.5786349,
+     55.7829204
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.104",
+    "point_no": "Т2.626",
+    "district": "Беговой",
+    "address": "1-я Ямского поля ,дом 24",
+    "unom": 30541,
+    "role": "за подъездом 1",
+    "side": "подъезды 1",
+    "azimuth": 104,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5848319,
+     55.7828237
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.627",
     "district": "Беговой",
     "address": "1-я Ямского поля ,дом 24",
     "unom": 30541,
@@ -2087,23 +2966,22 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5852137,
-     55.7827278
+     37.585231,
+     55.7827662
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.105",
+    "point_no": "Т2.628",
     "district": "Беговой",
     "address": "1-я Ямского поля ,дом 24",
     "unom": 30541,
     "role": "за подъездом 2",
     "side": "подъезды 2–3",
     "azimuth": 194,
-    "status": "черновик",
-    "also_covers": "1-я Ямского поля ,дом 24 (подъезды 1)"
+    "status": "черновик"
    },
    "geometry": {
     "type": "Point",
@@ -2116,7 +2994,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.106",
+    "point_no": "Т2.629",
     "district": "Беговой",
     "address": "улицаСкаковая, д.4, к.1",
     "unom": 23819,
@@ -2128,15 +3006,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5664606,
-     55.7826246
+     37.5665513,
+     55.7825817
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.107",
+    "point_no": "Т2.630",
     "district": "Беговой",
     "address": "Беговая аллея, д.5, к.1",
     "unom": 1617,
@@ -2148,15 +3026,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5637196,
-     55.7825606
+     37.5636973,
+     55.782575
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.108",
+    "point_no": "Т2.631",
     "district": "Беговой",
     "address": "улица Правды, дом 2А",
     "unom": 20715,
@@ -2168,15 +3046,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.575305,
-     55.7824971
+     37.5752923,
+     55.7825029
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.109",
+    "point_no": "Т2.632",
     "district": "Беговой",
     "address": "1-й Боткинский 2/6",
     "unom": 2704,
@@ -2188,15 +3066,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5560961,
-     55.7824032
+     37.5560969,
+     55.7824036
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.110",
+    "point_no": "Т2.633",
     "district": "Беговой",
     "address": "улицаСкаковая, д.4, к.2",
     "unom": 23820,
@@ -2209,35 +3087,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5662183,
-     55.7823968
+     37.5662846,
+     55.7824008
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.111",
-    "district": "Беговой",
-    "address": "Беговая аллея, д.3",
-    "unom": 1616,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–7",
-    "azimuth": 39,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5642517,
-     55.7823325
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т2.112",
+    "point_no": "Т2.634",
     "district": "Беговой",
     "address": "1-й Боткинский 2/6",
     "unom": 2704,
@@ -2250,15 +3108,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5563112,
-     55.7822838
+     37.5563369,
+     55.7822974
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.113",
+    "point_no": "Т2.635",
     "district": "Беговой",
     "address": "Беговая аллея, д.5, к.2",
     "unom": 1618,
@@ -2270,15 +3128,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5642906,
-     55.7822236
+     37.5642252,
+     55.782254
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.114",
+    "point_no": "Т2.636",
     "district": "Беговой",
     "address": "Ленинградский проспект, дом 14, к5",
     "unom": 12643,
@@ -2290,35 +3148,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5794559,
-     55.7822135
+     37.5795597,
+     55.7821832
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.115",
-    "district": "Беговой",
-    "address": "улицаСкаковая, д.4, к.2",
-    "unom": 23820,
-    "role": "за подъездом 5",
-    "side": "подъезды 3–5",
-    "azimuth": 309,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5668658,
-     55.7820971
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т2.116",
+    "point_no": "Т2.637",
     "district": "Беговой",
     "address": "Беговая аллея, д.5, к.3",
     "unom": 1619,
@@ -2330,15 +3168,36 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5651185,
-     55.7820863
+     37.5650982,
+     55.7821101
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.117",
+    "point_no": "Т2.638",
+    "district": "Беговой",
+    "address": "улицаСкаковая, д.14",
+    "unom": 23825,
+    "role": "за подъездом 3",
+    "side": "подъезды 1–3",
+    "azimuth": 130,
+    "status": "черновик",
+    "also_covers": "улицаСкаковая, д.4, к.2 (подъезды 3–5)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5668497,
+     55.7820837
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.639",
     "district": "Беговой",
     "address": "Беговая аллея, д.5, к.1",
     "unom": 1617,
@@ -2350,15 +3209,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5629374,
-     55.7820351
+     37.5629117,
+     55.7820474
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.118",
+    "point_no": "Т2.640",
     "district": "Беговой",
     "address": "Ленинградский проспект, дом 14, к4",
     "unom": 12644,
@@ -2370,15 +3229,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5798726,
-     55.7819994
+     37.5797937,
+     55.7820213
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.119",
+    "point_no": "Т2.641",
     "district": "Беговой",
     "address": "улицаСкаковая, д.7/21А",
     "unom": 23821,
@@ -2390,35 +3249,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.56869,
-     55.781962
+     37.5687566,
+     55.7820011
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.120",
-    "district": "Беговой",
-    "address": "улицаСкаковая, д.14",
-    "unom": 23825,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 130,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5669371,
-     55.781949
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т2.121",
+    "point_no": "Т2.642",
     "district": "Беговой",
     "address": "Ленинградский пр-т, д.19",
     "unom": 12646,
@@ -2430,15 +3269,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5692323,
-     55.781946
+     37.5691897,
+     55.7819178
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.122",
+    "point_no": "Т2.643",
     "district": "Беговой",
     "address": "1-й Боткинский 2/6",
     "unom": 2704,
@@ -2450,35 +3289,35 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5556642,
-     55.7819037
+     37.5556968,
+     55.7818839
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.123",
+    "point_no": "Т2.644",
     "district": "Беговой",
-    "address": "1-я Ямского поля ,дом 24",
-    "unom": 30541,
-    "role": "за подъездом 3",
-    "side": "подъезды 2–3",
-    "azimuth": 14,
+    "address": "Беговая аллея, д.5, к.3",
+    "unom": 1619,
+    "role": "задняя сторона дома",
+    "side": "без подъездов",
+    "azimuth": 219,
     "status": "черновик"
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5843731,
-     55.7818248
+     37.5653084,
+     55.7818562
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.124",
+    "point_no": "Т2.645",
     "district": "Беговой",
     "address": "улица Беговая 28",
     "unom": 1649,
@@ -2490,55 +3329,35 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.561904,
-     55.781817
+     37.5619202,
+     55.7818294
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.125",
+    "point_no": "Т2.646",
     "district": "Беговой",
-    "address": "Беговая аллея, д.5, к.3",
-    "unom": 1619,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 39,
+    "address": "1-я Ямского поля ,дом 24",
+    "unom": 30541,
+    "role": "за подъездом 3",
+    "side": "подъезды 2–3",
+    "azimuth": 14,
     "status": "черновик"
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.564825,
-     55.7818066
+     37.5843683,
+     55.7818255
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.126",
-    "district": "Беговой",
-    "address": "Ленинградский проспект, дом 14, к5",
-    "unom": 12643,
-    "role": "за подъездом 14",
-    "side": "подъезды 14–16",
-    "azimuth": 27,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5790282,
-     55.781733
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т2.127",
+    "point_no": "Т2.647",
     "district": "Беговой",
     "address": "улицаСкаковая, д.14",
     "unom": 23825,
@@ -2550,15 +3369,35 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5674399,
-     55.7817141
+     37.5674738,
+     55.7817373
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.128",
+    "point_no": "Т2.648",
+    "district": "Беговой",
+    "address": "Ленинградский проспект, дом 14, к5",
+    "unom": 12643,
+    "role": "за подъездом 14",
+    "side": "подъезды 14–16",
+    "azimuth": 27,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5791251,
+     55.7817048
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.649",
     "district": "Беговой",
     "address": "улицаСкаковая, д.7/21А",
     "unom": 23821,
@@ -2578,7 +3417,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.129",
+    "point_no": "Т2.650",
     "district": "Беговой",
     "address": "Беговая аллея, д.9",
     "unom": 1621,
@@ -2590,15 +3429,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5628677,
-     55.7815877
+     37.5628306,
+     55.7816049
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.130",
+    "point_no": "Т2.651",
     "district": "Беговой",
     "address": "1-й Боткинский 2/6",
     "unom": 2704,
@@ -2610,35 +3449,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.556112,
-     55.7815354
+     37.5561784,
+     55.7815704
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.131",
-    "district": "Беговой",
-    "address": "Ленинградский проспект, дом 14, к4",
-    "unom": 12644,
-    "role": "за подъездом 11",
-    "side": "подъезды 11–13",
-    "azimuth": 26,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.579391,
-     55.7814434
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т2.132",
+    "point_no": "Т2.652",
     "district": "Беговой",
     "address": "улица Беговая 17 к 1",
     "unom": 1640,
@@ -2650,35 +3469,35 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5592232,
-     55.781439
+     37.5591292,
+     55.7814809
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.133",
+    "point_no": "Т2.653",
     "district": "Беговой",
-    "address": "улицаСкаковая, д.18",
-    "unom": 23828,
-    "role": "за подъездом 4",
-    "side": "подъезды 1–4",
-    "azimuth": 219,
+    "address": "Ленинградский проспект, дом 14, к4",
+    "unom": 12644,
+    "role": "за подъездом 11",
+    "side": "подъезды 11–13",
+    "azimuth": 26,
     "status": "черновик"
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5676811,
-     55.7813854
+     37.5792837,
+     55.7814531
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.134",
+    "point_no": "Т2.654",
     "district": "Беговой",
     "address": "Ленинградский пр-т, д.13, стр. 1А",
     "unom": 12641,
@@ -2690,15 +3509,35 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5729292,
-     55.7813218
+     37.5728603,
+     55.7813527
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.135",
+    "point_no": "Т2.655",
+    "district": "Беговой",
+    "address": "улицаСкаковая, д.18",
+    "unom": 23828,
+    "role": "за подъездом 4",
+    "side": "подъезды 1–4",
+    "azimuth": 219,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5677566,
+     55.7813513
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.656",
     "district": "Беговой",
     "address": "улица Беговая 28",
     "unom": 1649,
@@ -2710,15 +3549,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.560984,
-     55.7812346
+     37.5609354,
+     55.7811872
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.136",
+    "point_no": "Т2.657",
     "district": "Беговой",
     "address": "1-й Боткинский 2/6",
     "unom": 2704,
@@ -2730,15 +3569,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5568687,
-     55.7811906
+     37.5569014,
+     55.7811707
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.137",
+    "point_no": "Т2.658",
     "district": "Беговой",
     "address": "Ленинградский пр-т, д.13, стр.1",
     "unom": 12640,
@@ -2750,35 +3589,35 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5731435,
-     55.7811508
+     37.5730801,
+     55.7811061
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.138",
+    "point_no": "Т2.659",
     "district": "Беговой",
-    "address": "Ленинградский пр-т, д.13, стр. 1А",
-    "unom": 12641,
-    "role": "за подъездом 6",
-    "side": "подъезды 4–6",
-    "azimuth": 38,
+    "address": "улицаСкаковая, д.18А",
+    "unom": 23829,
+    "role": "за подъездом 1",
+    "side": "подъезды 1–4",
+    "azimuth": 129,
     "status": "черновик"
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5726135,
-     55.7810961
+     37.5672378,
+     55.7810479
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.139",
+    "point_no": "Т2.660",
     "district": "Беговой",
     "address": "улица Беговая 26",
     "unom": 32085,
@@ -2790,43 +3629,22 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5605404,
-     55.7810023
+     37.5606926,
+     55.7809768
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.140",
-    "district": "Беговой",
-    "address": "Скаковая аллея, д.9",
-    "unom": 23818,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 178,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5651257,
-     55.7809828
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т2.141",
+    "point_no": "Т2.661",
     "district": "Беговой",
     "address": "улицаСкаковая, д.18",
     "unom": 23828,
     "role": "за подъездом 1",
     "side": "подъезды 1–4",
     "azimuth": 39,
-    "status": "черновик",
-    "also_covers": "улицаСкаковая, д.18А (подъезды 1–4)"
+    "status": "черновик"
    },
    "geometry": {
     "type": "Point",
@@ -2839,27 +3657,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.142",
-    "district": "Беговой",
-    "address": "Ленинградский пр-т, д.13, стр.1",
-    "unom": 12640,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–3",
-    "azimuth": 309,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5737602,
-     55.7808699
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т2.143",
+    "point_no": "Т2.662",
     "district": "Беговой",
     "address": "Ленинградский проспект, дом 14, к1",
     "unom": 12642,
@@ -2871,15 +3669,35 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5772822,
-     55.7808351
+     37.5772617,
+     55.7808284
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.144",
+    "point_no": "Т2.663",
+    "district": "Беговой",
+    "address": "Ленинградский пр-т, д.13, стр.1",
+    "unom": 12640,
+    "role": "за подъездом 1",
+    "side": "подъезды 1–3",
+    "azimuth": 309,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5736969,
+     55.7808253
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.664",
     "district": "Беговой",
     "address": "Ленинградский проспект, дом 14, к1",
     "unom": 12642,
@@ -2891,15 +3709,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5776973,
-     55.7807882
+     37.5777283,
+     55.7807741
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.145",
+    "point_no": "Т2.665",
     "district": "Беговой",
     "address": "улица Беговая 13",
     "unom": 1636,
@@ -2911,15 +3729,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5575083,
-     55.7807103
+     37.5575372,
+     55.7807311
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.146",
+    "point_no": "Т2.666",
     "district": "Беговой",
     "address": "улицаСкаковая, д.18А",
     "unom": 23829,
@@ -2931,35 +3749,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5677751,
-     55.780679
+     37.567823,
+     55.7807125
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.147",
-    "district": "Беговой",
-    "address": "Ленинградский проспект, дом 14, к1",
-    "unom": 12642,
-    "role": "за подъездом 9",
-    "side": "подъезды 7–9",
-    "azimuth": 39,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5780104,
-     55.7806458
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т2.148",
+    "point_no": "Т2.667",
     "district": "Беговой",
     "address": "улица Беговая 13",
     "unom": 1636,
@@ -2971,36 +3769,35 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5580493,
-     55.7806304
+     37.5579554,
+     55.7806721
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.149",
+    "point_no": "Т2.668",
     "district": "Беговой",
-    "address": "улица Беговая 24",
-    "unom": 1648,
-    "role": "за подъездом 2",
-    "side": "подъезды 2–7",
-    "azimuth": 219,
-    "status": "черновик",
-    "also_covers": "улица Беговая 24 (подъезды 1); улица Беговая 26 (подъезды 1–2)"
+    "address": "Ленинградский проспект, дом 14, к1",
+    "unom": 12642,
+    "role": "за подъездом 9",
+    "side": "подъезды 7–9",
+    "azimuth": 39,
+    "status": "черновик"
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5600387,
-     55.7806292
+     37.5779792,
+     55.78066
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.150",
+    "point_no": "Т2.669",
     "district": "Беговой",
     "address": "Ленинградский пр-т, д.9",
     "unom": 12636,
@@ -3013,36 +3810,75 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5749914,
-     55.780534
+     37.5749959,
+     55.7805371
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.151",
+    "point_no": "Т2.670",
     "district": "Беговой",
     "address": "Ленинградский проспект, дом 12",
     "unom": 12639,
     "role": "за подъездом 4",
     "side": "подъезды 1–4",
     "azimuth": 129,
-    "status": "черновик",
-    "also_covers": "Ленинградский проспект, дом 14, к1 (подъезды 1, 10)"
+    "status": "черновик"
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5783844,
-     55.7804662
+     37.578436,
+     55.780502
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.152",
+    "point_no": "Т2.671",
+    "district": "Беговой",
+    "address": "Ленинградский проспект, дом 14, к1",
+    "unom": 12642,
+    "role": "за подъездом 10",
+    "side": "подъезды 1, 10",
+    "azimuth": 309,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5782203,
+     55.7804446
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.672",
+    "district": "Беговой",
+    "address": "Ленинградский проспект, дом 12",
+    "unom": 12639,
+    "role": "середина фасада",
+    "side": "подъезды 1–4",
+    "azimuth": 309,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5789398,
+     55.7802687
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.673",
     "district": "Беговой",
     "address": "Ленинградский пр-т, д.9",
     "unom": 12636,
@@ -3054,15 +3890,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5756837,
-     55.7802073
+     37.5756888,
+     55.7802108
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.153",
+    "point_no": "Т2.674",
     "district": "Беговой",
     "address": "Ленинградский пр-т, д.9",
     "unom": 12636,
@@ -3074,55 +3910,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5744493,
-     55.7801786
+     37.5743923,
+     55.7802055
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.154",
-    "district": "Беговой",
-    "address": "улица Беговая 11",
-    "unom": 1635,
-    "role": "угол (тротуар вокруг дома)",
-    "side": "круговой тротуар",
-    "azimuth": 114,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5570028,
-     55.7800812
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т2.155",
-    "district": "Беговой",
-    "address": "Ленинградский проспект, дом 12",
-    "unom": 12639,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–4",
-    "azimuth": 309,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5793376,
-     55.7800235
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т2.156",
+    "point_no": "Т2.675",
     "district": "Беговой",
     "address": "улица Беговая 11",
     "unom": 1635,
@@ -3134,15 +3930,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5571913,
-     55.7799571
+     37.5571172,
+     55.7800087
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.157",
+    "point_no": "Т2.676",
     "district": "Беговой",
     "address": "улица Беговая 11",
     "unom": 1635,
@@ -3154,15 +3950,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5573058,
-     55.7797147
+     37.5573163,
+     55.7797121
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.158",
+    "point_no": "Т2.677",
     "district": "Беговой",
     "address": "улицаСкаковая д.13, к.2",
     "unom": 23824,
@@ -3174,15 +3970,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5719682,
-     55.779599
+     37.5719762,
+     55.7795994
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.159",
+    "point_no": "Т2.678",
     "district": "Беговой",
     "address": "улица Беговая 11",
     "unom": 1635,
@@ -3194,15 +3990,35 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.556852,
-     55.7795348
+     37.5567768,
+     55.7795537
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.160",
+    "point_no": "Т2.679",
+    "district": "Беговой",
+    "address": "улица Беговая 11",
+    "unom": 1635,
+    "role": "середина фасада",
+    "side": "подъезды 3–6",
+    "azimuth": 204,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5570346,
+     55.7793318
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.680",
     "district": "Беговой",
     "address": "улицаСкаковая д.13, к.2",
     "unom": 23824,
@@ -3214,35 +4030,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5720234,
-     55.7792608
+     37.5721427,
+     55.779267
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.161",
-    "district": "Беговой",
-    "address": "Ленинградский пр-т, д.5, стр.2",
-    "unom": 12634,
-    "role": "за подъездом 5",
-    "side": "подъезды 1–5",
-    "azimuth": 219,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5770157,
-     55.7791728
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т2.162",
+    "point_no": "Т2.681",
     "district": "Беговой",
     "address": "улица Беговая 11",
     "unom": 1635,
@@ -3254,35 +4050,56 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5561648,
-     55.7791721
+     37.5562134,
+     55.7792339
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.163",
+    "point_no": "Т2.682",
     "district": "Беговой",
-    "address": "улица Беговая 11",
-    "unom": 1635,
-    "role": "за подъездом 7",
-    "side": "подъезды 7",
-    "azimuth": 294,
+    "address": "улицаСкаковая д.13, к.2",
+    "unom": 23824,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 355,
+    "status": "черновик",
+    "also_covers": "улицаСкаковая, д.13, к.1 (без подъездов)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5717418,
+     55.7791421
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.683",
+    "district": "Беговой",
+    "address": "Ленинградский пр-т, д.5, стр.2",
+    "unom": 12634,
+    "role": "за подъездом 5",
+    "side": "подъезды 1–5",
+    "azimuth": 219,
     "status": "черновик"
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5568061,
-     55.7790896
+     37.5771069,
+     55.7791309
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.164",
+    "point_no": "Т2.684",
     "district": "Беговой",
     "address": "Ленинградский проспект, дом 4/2",
     "unom": 12633,
@@ -3302,7 +4119,47 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.165",
+    "point_no": "Т2.685",
+    "district": "Беговой",
+    "address": "улица Беговая 11",
+    "unom": 1635,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 24,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5559588,
+     55.7789933
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.686",
+    "district": "Беговой",
+    "address": "улицаСкаковая, д.13, к.1",
+    "unom": 23823,
+    "role": "задняя сторона дома",
+    "side": "без подъездов",
+    "azimuth": 354,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5718839,
+     55.7789227
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.687",
     "district": "Беговой",
     "address": "улицаСкаковая, д.15, к.2",
     "unom": 23827,
@@ -3314,15 +4171,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5726423,
-     55.7789284
+     37.5725484,
+     55.7789208
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.166",
+    "point_no": "Т2.688",
     "district": "Беговой",
     "address": "улицаСкаковая, д.13, к.1",
     "unom": 23823,
@@ -3334,15 +4191,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5713746,
-     55.7788939
+     37.5713635,
+     55.7788795
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.167",
+    "point_no": "Т2.689",
     "district": "Беговой",
     "address": "улица Беговая 11",
     "unom": 1635,
@@ -3354,15 +4211,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5566345,
-     55.7788628
+     37.5566751,
+     55.7788525
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.168",
+    "point_no": "Т2.690",
     "district": "Беговой",
     "address": "Ленинградский проспект, дом 4/2",
     "unom": 12633,
@@ -3374,15 +4231,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5825805,
-     55.7787812
+     37.5826175,
+     55.7787639
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.169",
+    "point_no": "Т2.691",
     "district": "Беговой",
     "address": "улицаВерхняя, д.18",
     "unom": 3703,
@@ -3394,15 +4251,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5758375,
-     55.7787619
+     37.5758676,
+     55.778762
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.170",
+    "point_no": "Т2.692",
     "district": "Беговой",
     "address": "Ленинградский пр-т, д.5, стр.2",
     "unom": 12634,
@@ -3415,15 +4272,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5763826,
-     55.7786978
+     37.5764275,
+     55.778657
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.171",
+    "point_no": "Т2.693",
     "district": "Беговой",
     "address": "улицаСкаковая, д.15, к.1",
     "unom": 23826,
@@ -3435,15 +4292,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5722491,
-     55.7786447
+     37.5722464,
+     55.7786569
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.172",
+    "point_no": "Т2.694",
     "district": "Беговой",
     "address": "улицаВерхняя, д.18",
     "unom": 3703,
@@ -3455,35 +4312,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.575802,
-     55.7784399
+     37.5758709,
+     55.7784223
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.173",
-    "district": "Беговой",
-    "address": "Ленинградский пр-т, д.5, стр.3",
-    "unom": 12635,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–2",
-    "azimuth": 310,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5771369,
-     55.7784137
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т2.174",
+    "point_no": "Т2.695",
     "district": "Беговой",
     "address": "улица Беговая 20 к 1",
     "unom": 1644,
@@ -3495,55 +4332,36 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5577057,
-     55.7782678
+     37.5577023,
+     55.7782637
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.175",
-    "district": "Беговой",
-    "address": "улица Беговая 20 к 2",
-    "unom": 1645,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–2",
-    "azimuth": 115,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5575044,
-     55.7782455
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т2.176",
+    "point_no": "Т2.696",
     "district": "Беговой",
     "address": "улица Беговая 18 к 1",
     "unom": 1642,
     "role": "за подъездом 3",
     "side": "подъезды 1–3",
     "azimuth": 203,
-    "status": "черновик"
+    "status": "черновик",
+    "also_covers": "улица Беговая 20 к 2 (подъезды 1–2)"
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5572914,
-     55.7781369
+     37.5573573,
+     55.7781207
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.177",
+    "point_no": "Т2.697",
     "district": "Беговой",
     "address": "улица Беговая 20 к 2",
     "unom": 1645,
@@ -3555,15 +4373,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.558171,
-     55.7780577
+     37.5581084,
+     55.7779829
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.178",
+    "point_no": "Т2.698",
     "district": "Беговой",
     "address": "Ленинградский пр-т, д.1",
     "unom": 12631,
@@ -3575,15 +4393,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5798475,
-     55.7779382
+     37.579771,
+     55.777886
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.179",
+    "point_no": "Т2.699",
     "district": "Беговой",
     "address": "улица Беговая 18 к 2",
     "unom": 1643,
@@ -3595,35 +4413,35 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5578903,
-     55.7778422
+     37.5578858,
+     55.7778647
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.180",
+    "point_no": "Т2.700",
     "district": "Беговой",
     "address": "улица Беговая 18 к 2",
     "unom": 1643,
-    "role": "угол (тротуар вокруг дома)",
-    "side": "круговой тротуар",
+    "role": "задняя сторона дома",
+    "side": "без подъездов",
     "azimuth": 204,
     "status": "черновик"
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5583175,
-     55.7777414
+     37.5584127,
+     55.7777266
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.181",
+    "point_no": "Т2.701",
     "district": "Беговой",
     "address": "улица Беговая 16",
     "unom": 1639,
@@ -3636,15 +4454,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5570592,
-     55.7776874
+     37.5569718,
+     55.7777084
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.182",
+    "point_no": "Т2.702",
     "district": "Беговой",
     "address": "улицаСкаковая, д.34, к.2",
     "unom": 23831,
@@ -3656,15 +4474,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5722134,
-     55.7776373
+     37.5722029,
+     55.7776089
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.183",
+    "point_no": "Т2.703",
     "district": "Беговой",
     "address": "улицаСкаковая, д.34, к.3",
     "unom": 23832,
@@ -3676,15 +4494,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5716093,
-     55.7775726
+     37.571727,
+     55.7775766
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.184",
+    "point_no": "Т2.704",
     "district": "Беговой",
     "address": "улица Беговая 18 к 2",
     "unom": 1643,
@@ -3696,56 +4514,75 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5576392,
-     55.7774911
+     37.5575977,
+     55.7775009
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.185",
+    "point_no": "Т2.705",
     "district": "Беговой",
     "address": "улицаНижняя, д.3",
     "unom": 16150,
     "role": "за подъездом 1",
     "side": "подъезды 1–3",
     "azimuth": 223,
-    "status": "черновик",
-    "also_covers": "Ленинградский пр-т, д.1 (подъезды 5–6)"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5798474,
-     55.7774413
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т2.186",
-    "district": "Беговой",
-    "address": "улица Беговая 18 к 2",
-    "unom": 1643,
-    "role": "угол (тротуар вокруг дома)",
-    "side": "круговой тротуар",
-    "azimuth": 294,
     "status": "черновик"
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5580362,
-     55.7774007
+     37.5796555,
+     55.7774494
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.187",
+    "point_no": "Т2.706",
+    "district": "Беговой",
+    "address": "Ленинградский пр-т, д.1",
+    "unom": 12631,
+    "role": "за подъездом 6",
+    "side": "подъезды 5–6",
+    "azimuth": 40,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.579851,
+     55.7774389
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.707",
+    "district": "Беговой",
+    "address": "улица Беговая 18 к 2",
+    "unom": 1643,
+    "role": "задняя сторона дома",
+    "side": "без подъездов",
+    "azimuth": 24,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5581326,
+     55.7773728
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.708",
     "district": "Беговой",
     "address": "улица Беговая 14",
     "unom": 1637,
@@ -3758,76 +4595,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5567459,
-     55.7772747
+     37.5567587,
+     55.7772913
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.188",
-    "district": "Беговой",
-    "address": "улицаНижняя, д.4",
-    "unom": 16151,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 90,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5779021,
-     55.7772535
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т2.189",
-    "district": "Беговой",
-    "address": "улицаНижняя, д.4",
-    "unom": 16151,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 270,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5781157,
-     55.7772509
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т2.190",
-    "district": "Беговой",
-    "address": "улицаСкаковая, д.34, к.3",
-    "unom": 23832,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 357,
-    "status": "черновик",
-    "also_covers": "улицаСкаковая, д.34, к.4 (подъезды 1)"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5716426,
-     55.7772382
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т2.191",
+    "point_no": "Т2.709",
     "district": "Беговой",
     "address": "улица Поликарпова 8",
     "unom": 20462,
@@ -3839,15 +4615,55 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.552363,
-     55.7772308
+     37.5523807,
+     55.777251
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.192",
+    "point_no": "Т2.710",
+    "district": "Беговой",
+    "address": "улицаСкаковая, д.34, к.3",
+    "unom": 23832,
+    "role": "за подъездом 1",
+    "side": "подъезды 1",
+    "azimuth": 357,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5717622,
+     55.7772423
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.711",
+    "district": "Беговой",
+    "address": "улицаСкаковая, д.34, к.4",
+    "unom": 23833,
+    "role": "за подъездом 1",
+    "side": "подъезды 1",
+    "azimuth": 175,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5714796,
+     55.7772297
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.712",
     "district": "Беговой",
     "address": "улица Беговая 5",
     "unom": 1630,
@@ -3859,35 +4675,55 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5549692,
-     55.7772238
+     37.5549604,
+     55.7772259
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.193",
+    "point_no": "Т2.713",
     "district": "Беговой",
-    "address": "улицаНижняя, д.5",
-    "unom": 16152,
+    "address": "улицаНижняя, д.4",
+    "unom": 16151,
     "role": "за подъездом 1",
     "side": "подъезды 1",
-    "azimuth": 239,
+    "azimuth": 270,
     "status": "черновик"
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5794164,
-     55.7771255
+     37.5781155,
+     55.7772056
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.194",
+    "point_no": "Т2.714",
+    "district": "Беговой",
+    "address": "улицаНижняя, д.4",
+    "unom": 16151,
+    "role": "за подъездом 1",
+    "side": "подъезды 1",
+    "azimuth": 90,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5779017,
+     55.7771879
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.715",
     "district": "Беговой",
     "address": "улицаНижняя, д.3",
     "unom": 16150,
@@ -3899,15 +4735,35 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.579116,
-     55.7771176
+     37.5791337,
+     55.7771453
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.195",
+    "point_no": "Т2.716",
+    "district": "Беговой",
+    "address": "улицаНижняя, д.5",
+    "unom": 16152,
+    "role": "за подъездом 1",
+    "side": "подъезды 1",
+    "azimuth": 239,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5795018,
+     55.7770979
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.717",
     "district": "Беговой",
     "address": "улица Поликарпова 8",
     "unom": 20462,
@@ -3919,15 +4775,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5521801,
-     55.7770609
+     37.5520948,
+     55.7770797
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.196",
+    "point_no": "Т2.718",
     "district": "Беговой",
     "address": "улица Поликарпова 8",
     "unom": 20462,
@@ -3939,15 +4795,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5531752,
-     55.7769954
+     37.5532008,
+     55.7770187
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.197",
+    "point_no": "Т2.719",
     "district": "Беговой",
     "address": "улицаВерхняя, д.1",
     "unom": 3698,
@@ -3959,15 +4815,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5759629,
-     55.7769454
+     37.5759909,
+     55.7769181
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.198",
+    "point_no": "Т2.720",
     "district": "Беговой",
     "address": "улицаНижняя, д.7",
     "unom": 16154,
@@ -3979,35 +4835,55 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5783332,
-     55.7768989
+     37.5783548,
+     55.7769143
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.199",
+    "point_no": "Т2.721",
     "district": "Беговой",
-    "address": "улицаНижняя, д.5",
-    "unom": 16152,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 59,
+    "address": "улица Беговая 5",
+    "unom": 1630,
+    "role": "середина фасада",
+    "side": "подъезды 1–4",
+    "azimuth": 23,
     "status": "черновик"
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5786259,
-     55.776855
+     37.5546719,
+     55.7768686
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.200",
+    "point_no": "Т2.722",
+    "district": "Беговой",
+    "address": "улица Поликарпова 8",
+    "unom": 20462,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 297,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5530876,
+     55.776801
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.723",
     "district": "Беговой",
     "address": "улица Беговая 6 к 4",
     "unom": 1632,
@@ -4019,15 +4895,35 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5577684,
-     55.7767838
+     37.5577059,
+     55.7768005
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.201",
+    "point_no": "Т2.724",
+    "district": "Беговой",
+    "address": "улицаНижняя, д.5",
+    "unom": 16152,
+    "role": "за подъездом 1",
+    "side": "подъезды 1",
+    "azimuth": 59,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5786289,
+     55.7767996
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.725",
     "district": "Беговой",
     "address": "улица Беговая 10",
     "unom": 1634,
@@ -4039,15 +4935,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5562361,
-     55.7767646
+     37.5562425,
+     55.7767729
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.202",
+    "point_no": "Т2.726",
     "district": "Беговой",
     "address": "улицаНижняя, д.7",
     "unom": 16154,
@@ -4059,15 +4955,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5775485,
-     55.7766614
+     37.5775292,
+     55.7766816
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.203",
+    "point_no": "Т2.727",
     "district": "Беговой",
     "address": "улица Беговая 14",
     "unom": 1637,
@@ -4079,15 +4975,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5562569,
-     55.7766518
+     37.5562787,
+     55.7766463
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.204",
+    "point_no": "Т2.728",
     "district": "Беговой",
     "address": "улица Беговая 6",
     "unom": 74099,
@@ -4099,15 +4995,35 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5557986,
-     55.7764878
+     37.5557183,
+     55.7765081
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.205",
+    "point_no": "Т2.729",
+    "district": "Беговой",
+    "address": "улица Беговая 6",
+    "unom": 74099,
+    "role": "задняя сторона дома",
+    "side": "без подъездов",
+    "azimuth": 204,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.556159,
+     55.7764768
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т2.730",
     "district": "Беговой",
     "address": "улица Беговая 5",
     "unom": 1630,
@@ -4119,15 +5035,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5544149,
-     55.7764179
+     37.5543579,
+     55.7764318
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.206",
+    "point_no": "Т2.731",
     "district": "Беговой",
     "address": "улица Беговая 10",
     "unom": 1634,
@@ -4139,15 +5055,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5559983,
-     55.7763707
+     37.5559938,
+     55.7763566
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.207",
+    "point_no": "Т2.732",
     "district": "Беговой",
     "address": "улицаНижняя, д.11",
     "unom": 16156,
@@ -4159,15 +5075,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5766422,
-     55.7762792
+     37.5766815,
+     55.7762358
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.208",
+    "point_no": "Т2.733",
     "district": "Беговой",
     "address": "улица Беговая 6",
     "unom": 74099,
@@ -4179,15 +5095,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5554702,
-     55.7760691
+     37.5553754,
+     55.7760733
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.209",
+    "point_no": "Т2.734",
     "district": "Беговой",
     "address": "улицаНижняя, д.11",
     "unom": 16156,
@@ -4199,15 +5115,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5757811,
-     55.7760305
+     37.5758212,
+     55.7759862
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т2.210",
+    "point_no": "Т2.735",
     "district": "Беговой",
     "address": "улица Беговая 4",
     "unom": 1629,
@@ -4219,8 +5135,8 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5555434,
-     55.775751
+     37.5555757,
+     55.7757432
     ]
    }
   }

@@ -1,4 +1,9 @@
-"""Черновые точки съёмки тротуаров: только у домов внутри дворов, не на ОДХ."""
+"""Черновые точки съёмки тротуаров: внутри дворов, у дворовых тротуаров, не на ОДХ.
+
+Фотограф стоит на кромке дворового тротуара или на дворовом проезде за ней —
+так сотрудники префектуры переносили черновики. Точки с правками префектуры
+(prefecture_edit) поставлены людьми и проверяются только на номер и направление.
+"""
 import json
 from pathlib import Path
 
@@ -24,8 +29,8 @@ def test_points_sit_on_yard_sidewalks_not_on_odh(path):
     walks = load(slug_dir / "sidewalks.geojson")["features"]
     yard_walks = unary_union([shape(f["geometry"]).buffer(0) for f in walks if f["properties"].get("parent_type_id") == 38])
     yards = STRtree([shape(f["geometry"]).buffer(0.00005) for f in load(slug_dir / "yards.geojson")["features"]])
-    roads = STRtree([shape(f["geometry"]) for name in ("driveways", "odh")
-                     for f in load(slug_dir / f"{name}.geojson")["features"]])
+    driveways = unary_union([shape(f["geometry"]).buffer(0) for f in load(slug_dir / "driveways.geojson")["features"]])
+    odh = STRtree([shape(f["geometry"]) for f in load(slug_dir / "odh.geojson")["features"]])
     features = load(path)["features"]
     assert features
     numbers = [f["properties"]["point_no"] for f in features]
@@ -34,8 +39,11 @@ def test_points_sit_on_yard_sidewalks_not_on_odh(path):
     for f in features:
         pt = Point(f["geometry"]["coordinates"])
         p = f["properties"]
-        assert yard_walks.distance(pt) < tol, p["point_no"]
-        assert len(yards.query(pt, predicate="within")), p["point_no"]
-        assert not len(roads.query(pt, predicate="within")), p["point_no"]
         assert 0 <= p["azimuth"] < 360
         assert p["address"]
+        if p.get("prefecture_edit"):
+            continue
+        # На тротуаре или на дворовом проезде рядом с ним (не дальше ~9 м).
+        assert yard_walks.distance(pt) < tol or (driveways.distance(pt) < tol and yard_walks.distance(pt) < 0.00015), p["point_no"]
+        assert len(yards.query(pt, predicate="within")), p["point_no"]
+        assert not len(odh.query(pt, predicate="within")), p["point_no"]
