@@ -158,7 +158,23 @@ try {
   assert.deepEqual(logged.rows, [{ actor_user_id: 'test-admin' }]);
   assert.match(run('scripts/retire-district-photo-points.js', ['--list=' + listFile]), /к снятию: 0; уже сняты: 1; не найдены: 1/);
   unlinkSync(listFile);
-  console.log('PASS: PostgreSQL migrations, import, slots, duplicate prevention, review, review queue and summary, sidewalk photo slots, sidewalk replace, retire entrance points by list');
+  // Дашборд хаба: сводка и разрез по районам считаются реальным SQL по всем оцифровкам.
+  const { createDashboardApp } = await import('../src/dashboard.js');
+  const dash = createDashboardApp({ pool, currentUser: async () => ({ role: 'prefecture_admin' }), fetchImpl: async () => ({ ok: false }) });
+  const dashServer = await new Promise((resolve) => { const s = dash.listen(0, '127.0.0.1', () => resolve(s)); });
+  try {
+    const dashBase = 'http://127.0.0.1:' + dashServer.address().port + '/dashboard';
+    const dashSummary = await (await fetch(dashBase + '/summary')).json();
+    const byKey = Object.fromEntries(dashSummary.digitizations.map((row) => [row.key, row]));
+    assert.equal(byKey.playgrounds.total, 3042);
+    assert.ok(byKey.playgrounds.done >= 1 && byKey.playgrounds.rework >= 1, 'принятая и возвращённая площадки видны в сводке');
+    assert.equal(byKey.tpu.total, JSON.parse(readFileSync(new URL('../src/tpu-points/tpu-objects.json', import.meta.url), 'utf8')).length);
+    const dashDetails = await (await fetch(dashBase + '/details')).json();
+    assert.equal(dashDetails.byDistrict.playgrounds.reduce((sum, row) => sum + row.total, 0), 3042);
+    assert.ok(dashDetails.byDistrict.sidewalks.length > 0 && dashDetails.activity.length > 0);
+    assert.deepEqual((await (await fetch(dashBase + '/news')).json()).items, []);
+  } finally { await new Promise((resolve) => dashServer.close(resolve)); }
+  console.log('PASS: PostgreSQL migrations, import, slots, duplicate prevention, review, review queue and summary, sidewalk photo slots, sidewalk replace, retire entrance points by list, hub dashboard');
 } finally {
   if (server) await new Promise(resolve => server.close(resolve));
   await pool.end();

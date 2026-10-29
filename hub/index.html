@@ -25,6 +25,7 @@
   <style>
     :root { --ink:#102636; --muted:#4f626a; --line:#d7e0e2; --paper:#f7f5ef; --canvas:#dfe8e8; --panel:#fff; --accent:#0d827c; --accent-soft:#e8f5f2; --shadow:0 14px 36px rgba(16,38,54,.12); }
     * { box-sizing:border-box; }
+    [hidden] { display:none !important; }
     html, body { min-height:100%; margin:0; background:var(--canvas); color:var(--ink); font-family:"Century Gothic", Inter, Arial, sans-serif; font-size:16px; }
     .app { min-height:100vh; display:flex; flex-direction:column; }
     .topbar { position:sticky; top:0; z-index:10; display:flex; align-items:center; justify-content:space-between; gap:18px; min-height:68px; padding:10px 24px; background:rgba(247,245,239,.96); border-bottom:1px solid var(--line); backdrop-filter:blur(6px); }
@@ -82,12 +83,64 @@
     .print-box[open] .map-list { margin-top:14px; animation:rise .3s cubic-bezier(.2,.7,.2,1); }
     .no-results { margin:18px 0 0; padding:18px; border:1px dashed #b8c5c8; border-radius:14px; background:#fff; color:var(--muted); font-size:16px; text-align:center; }
     .is-filtered .catalog-section:not(.has-match), .is-filtered .hero .tasks { display:none; }
-    .is-filtered .map-card:not(.match) { display:none; }
+    .is-filtered .map-card:not(.match), .is-filtered .dash { display:none; }
     @keyframes rise { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:none; } }
     @media (max-width:900px) { .tasks { grid-template-columns:repeat(2,minmax(0,1fr)); } .map-list { grid-template-columns:repeat(2,minmax(0,1fr)); } .districts { grid-template-columns:repeat(2,minmax(0,1fr)); } }
     @media (max-width:600px) { .district-chip { justify-content:center; padding:10px 8px; font-size:15px; text-align:center; } .district-chip svg { display:none; } .topbar { flex-wrap:wrap; padding:10px 14px; } .search { flex-basis:100%; } .catalog { width:min(100% - 20px, 1080px); margin:12px auto 28px; } .hero, .catalog-section { padding:20px 16px; } .map-list, .map-list.two { grid-template-columns:1fr; } .task-tile { min-height:0; } }
     @media (max-width:380px) { .districts, .tasks { grid-template-columns:1fr; } .district-chip { min-height:48px; } }
     @media (prefers-reduced-motion:reduce) { *, *::before, *::after { animation:none !important; transition:none !important; } }
+
+    /* Сводка округа: погода, ход работ, новости; для префектуры — районы и лента дел. */
+    .dash { margin-top:18px; padding:24px 28px; background:rgba(255,255,255,.97); border:1px solid var(--line); border-radius:20px; }
+    .dash-head { display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:6px 16px; margin-bottom:14px; }
+    .dash-head h2 { margin:0; font-size:22px; }
+    .dash-head small { color:var(--muted); font-size:14px; font-variant-numeric:tabular-nums; }
+    .dash-grid { display:grid; grid-template-columns:minmax(0,.9fr) minmax(0,1.2fr) minmax(0,1.1fr); gap:12px; }
+    .dash-card { min-width:0; padding:18px; border:1px solid var(--line); border-radius:16px; background:linear-gradient(180deg,#fff,#f8fbfa); animation:rise .4s cubic-bezier(.2,.7,.2,1) both; }
+    .dash-card h3 { display:flex; align-items:center; gap:8px; margin:0 0 12px; font-size:17px; }
+    .dash-card .muted { color:var(--muted); font-size:14px; line-height:1.5; }
+    .weather-now { display:flex; align-items:center; gap:14px; }
+    .weather-now .icon { font-size:44px; line-height:1; }
+    .weather-now b { font-size:38px; font-variant-numeric:tabular-nums; }
+    .weather-now span { display:block; color:var(--muted); font-size:14.5px; }
+    .weather-days { display:grid; grid-template-columns:repeat(3,1fr); gap:6px; margin-top:14px; }
+    .weather-days div { padding:8px 6px; border-radius:10px; background:#eef4f3; text-align:center; font-size:13.5px; line-height:1.35; }
+    .weather-days b { display:block; font-size:15px; }
+    .weather-tip { margin:12px 0 0; padding:10px 12px; border-radius:10px; background:#fff6d6; color:#6b4e00; font-size:14px; line-height:1.45; }
+    .weather-tip.calm { background:#e8f5f2; color:#245e55; }
+    .work-row { display:block; padding:8px 0; color:inherit; text-decoration:none; border-bottom:1px solid #edf1f1; }
+    .work-row:last-child { border-bottom:0; }
+    .work-row:hover .work-name { color:var(--accent); }
+    .work-line { display:flex; align-items:baseline; gap:8px; }
+    .work-name { flex:1; font-weight:700; font-size:15px; }
+    .work-pct { font-weight:800; font-size:16px; font-variant-numeric:tabular-nums; }
+    .work-bar { display:flex; height:10px; margin-top:6px; border-radius:999px; background:#e8eef0; overflow:hidden; }
+    .work-bar i { display:block; height:100%; transition:width .6s cubic-bezier(.2,.7,.2,1); }
+    .work-legend { margin-top:5px; color:var(--muted); font-size:13px; font-variant-numeric:tabular-nums; }
+    .news-list { display:grid; gap:2px; margin:0; padding:0; list-style:none; }
+    .news-list a { display:block; padding:8px 10px; margin:0 -10px; border-radius:10px; color:var(--ink); font-size:15px; line-height:1.4; text-decoration:none; }
+    .news-list a:hover { background:var(--accent-soft); color:var(--accent); }
+    .news-list time { display:block; color:var(--muted); font-size:12.5px; }
+    .pref { margin-top:12px; padding:18px; border:1.5px dashed #b8c5c8; border-radius:16px; background:#fbfcfb; }
+    .pref-head { display:flex; flex-wrap:wrap; align-items:center; gap:10px; }
+    .pref-head h3 { flex:1; margin:0; font-size:17px; }
+    .pref button, .pref-login button { min-height:44px; padding:8px 16px; border:1px solid var(--accent); border-radius:10px; background:var(--accent); color:#fff; font:inherit; font-size:15px; font-weight:800; cursor:pointer; }
+    .pref button.ghost { background:#fff; color:var(--accent); }
+    .pref-login { display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
+    .pref-login input { flex:1 1 180px; min-height:44px; padding:8px 12px; border:1px solid #b8c5c8; border-radius:10px; font:inherit; font-size:15px; }
+    .pref-body { display:grid; grid-template-columns:minmax(0,1.6fr) minmax(0,1fr); gap:12px; margin-top:14px; }
+    .pref-table { width:100%; border-collapse:collapse; font-size:14px; font-variant-numeric:tabular-nums; }
+    .pref-table th { padding:6px 8px; color:var(--muted); font-size:12.5px; font-weight:700; text-align:right; }
+    .pref-table th:first-child, .pref-table td:first-child { text-align:left; }
+    .pref-table td { padding:7px 8px; border-top:1px solid #edf1f1; text-align:right; }
+    .pref-table .cell { display:inline-block; min-width:46px; padding:2px 6px; border-radius:7px; font-weight:700; }
+    .feed { display:grid; gap:8px; margin:0; padding:0; list-style:none; max-height:420px; overflow:auto; }
+    .feed li { padding:8px 10px; border-radius:10px; background:#fff; border:1px solid #edf1f1; font-size:14px; line-height:1.4; }
+    .feed time { display:block; color:var(--muted); font-size:12.5px; }
+    .feed b { font-weight:800; }
+    .dash-error { color:#8a3b1f; }
+    @media (max-width:980px) { .dash-grid { grid-template-columns:1fr 1fr; } .dash-grid .news-card { grid-column:1 / -1; } .pref-body { grid-template-columns:1fr; } }
+    @media (max-width:600px) { .dash { padding:20px 16px; } .dash-grid { grid-template-columns:1fr; } .pref-table th:nth-child(n+4), .pref-table td:nth-child(n+4) { display:none; } }
   </style>
 <link rel="stylesheet" href="../atlas-brand.css?v=20261021">
 </head>
@@ -108,6 +161,25 @@
         <a class="task-tile" href="../object-maps/tpu-parking.html"><span class="task-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" class="lucide lucide-bus-front" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M4 6 2 7" /> <path d="M10 6h4" /> <path d="m22 7-2-1" /> <rect width="16" height="16" x="4" y="3" rx="2" /> <path d="M4 11h16" /> <path d="M8 15h.01" /> <path d="M16 15h.01" /> <path d="M6 19v2" /> <path d="M18 21v-2" /> </svg></span><b>ТПУ и парковки</b><span>Фото по заданию в слоты объектов: районы и АвД САО.</span></a>
         <a class="task-tile" href="#review"><span class="task-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" class="lucide lucide-clipboard-check" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <rect width="8" height="4" x="8" y="2" rx="1" ry="1" /> <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" /> <path d="m9 14 2 2 4-4" /> </svg></span><b>Приёмка фото</b><span>Для префектуры: принять фото или вернуть на доработку.</span></a>
         </nav>
+      </section>
+
+
+      <section class="dash" id="dashboard" aria-labelledby="dash-title">
+        <div class="dash-head"><h2 id="dash-title">Сводка округа</h2><small id="dashDate"></small></div>
+        <div class="dash-grid">
+          <article class="dash-card" aria-labelledby="weather-title"><h3 id="weather-title">Погода в САО</h3><div id="weather"><p class="muted">Загружаем прогноз…</p></div></article>
+          <article class="dash-card" aria-labelledby="work-title"><h3 id="work-title">Ход работ</h3><div id="work"><p class="muted">Загружаем сводку…</p></div></article>
+          <article class="dash-card news-card" aria-labelledby="news-title"><h3 id="news-title">Новости округа</h3><div id="news"><p class="muted">Загружаем новости…</p></div></article>
+        </div>
+        <div class="pref" id="pref">
+          <div class="pref-head"><h3>Для префектуры: районы и что сейчас делается</h3><span id="prefWho" class="muted"></span><button type="button" id="prefLoginToggle">Войти</button><button type="button" class="ghost" id="prefLogout" hidden>Выйти</button></div>
+          <form class="pref-login" id="prefLogin" hidden><input id="prefName" placeholder="Логин префектуры" autocomplete="username" aria-label="Логин"><input id="prefPass" type="password" placeholder="Пароль" autocomplete="current-password" aria-label="Пароль"><button type="submit">Войти</button></form>
+          <p class="muted" id="prefNote">Разрез по районам и лента последних действий видны после входа учётной записью префектуры.</p>
+          <div class="pref-body" id="prefBody" hidden>
+            <div><table class="pref-table"><thead><tr><th>Район</th><th>Въездные группы</th><th>ДП/СП</th><th>Тротуары</th><th>ТПУ и парковки</th></tr></thead><tbody id="prefTable"></tbody></table></div>
+            <div><ul class="feed" id="feed"></ul></div>
+          </div>
+        </div>
       </section>
 
       <section class="catalog-section" id="district-maps" aria-labelledby="district-maps-heading">
@@ -271,6 +343,140 @@
       if (event.key === 'Enter') { const first = catalog.querySelector('.map-card.match'); if (first) first.click(); }
       if (event.key === 'Escape') { input.value = ''; input.dispatchEvent(new Event('input')); }
     });
+  })();
+  </script>
+  <script>
+  (() => {
+    // Сводка округа. Погода — Open-Meteo, остальное — фотослужба (/dashboard/*).
+    const API = 'https://obhod-sao.ru/photo-api';
+    const TOKEN_KEY = 'sao-photo-token';
+    const USER_KEY = 'sao-photo-user';
+    const $ = (id) => document.getElementById(id);
+    const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    const num = (n) => Number(n || 0).toLocaleString('ru-RU');
+    const pct = (part, total) => (total ? Math.round((part / total) * 100) : 0);
+    const COLORS = { done: '#0c7a5a', review: '#2a6fdb', progress: '#d99a00', rework: '#c22545' };
+    const store = {
+      get(k) { try { return sessionStorage.getItem(k); } catch (_) { return null; } },
+      set(k, v) { try { v == null ? sessionStorage.removeItem(k) : sessionStorage.setItem(k, v); } catch (_) {} },
+    };
+
+    $('dashDate').textContent = new Date().toLocaleDateString('ru-RU', { weekday: 'long', day: 'numeric', month: 'long' });
+
+    /* ---------- Погода и подсказка для работ ---------- */
+    const WMO = [[0, '☀️', 'ясно'], [2, '⛅', 'переменная облачность'], [3, '☁️', 'пасмурно'], [48, '🌫️', 'туман'], [57, '🌦️', 'морось'], [67, '🌧️', 'дождь'], [77, '❄️', 'снег'], [82, '🌧️', 'ливень'], [86, '🌨️', 'снегопад'], [99, '⛈️', 'гроза']];
+    const sky = (code) => WMO.find(([max]) => code <= max) || WMO[WMO.length - 1];
+    async function loadWeather() {
+      try {
+        const url = 'https://api.open-meteo.com/v1/forecast?latitude=55.86&longitude=37.53&current=temperature_2m,weather_code,wind_speed_10m'
+          + '&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,snowfall_sum&timezone=Europe%2FMoscow&forecast_days=3&wind_speed_unit=ms';
+        const data = await (await fetch(url)).json();
+        const [, icon, text] = sky(data.current.weather_code);
+        const d = data.daily;
+        const days = d.time.map((day, i) => `<div><b>${new Date(day).toLocaleDateString('ru-RU', { weekday: 'short' })}</b><span title="${sky(d.weather_code[i])[2]}">${sky(d.weather_code[i])[1]}</span> ${Math.round(d.temperature_2m_min[i])}…${Math.round(d.temperature_2m_max[i])}°</div>`).join('');
+        let tip = 'Погода подходит для выездов и фотофиксации.';
+        let calm = true;
+        if (d.snowfall_sum[0] > 0 || d.snowfall_sum[1] > 0) { tip = 'Ожидается снег: проверьте готовность уборочной техники и мест хранения СММ.'; calm = false; }
+        else if (d.temperature_2m_min[0] <= 0 && d.precipitation_probability_max[0] >= 40) { tip = 'Возможна гололедица: осадки при температуре около нуля.'; calm = false; }
+        else if (d.precipitation_probability_max[0] >= 60) { tip = 'Сегодня вероятен дождь: снимки могут получиться тёмными, планируйте съёмку на сухое время.'; calm = false; }
+        $('weather').innerHTML = `<div class="weather-now"><span class="icon" aria-hidden="true">${icon}</span><div><b>${Math.round(data.current.temperature_2m)}°</b><span>${text}, ветер ${Math.round(data.current.wind_speed_10m)} м/с</span></div></div>
+          <div class="weather-days">${days}</div><p class="weather-tip${calm ? ' calm' : ''}">${tip}</p>`;
+      } catch (_) {
+        $('weather').innerHTML = '<p class="muted dash-error">Прогноз сейчас недоступен.</p>';
+      }
+    }
+
+    /* ---------- Ход работ (открыто всем) ---------- */
+    function workRow(row) {
+      const done = pct(row.done, row.total);
+      const bar = ['done', 'review', 'progress', 'rework'].map((k) => `<i style="width:${row.total ? (row[k] / row.total) * 100 : 0}%;background:${COLORS[k]}"></i>`).join('');
+      const extra = [row.review && `на проверке ${num(row.review)}`, row.rework && `на доработке ${num(row.rework)}`, row.empty && `без фото ${num(row.empty)}`].filter(Boolean).join(' · ');
+      return `<a class="work-row" href="${esc(row.href)}"><span class="work-line"><span class="work-name">${esc(row.label)}</span><span class="work-pct">${done}%</span></span>
+        <span class="work-bar" role="img" aria-label="${esc(row.label)}: готово ${num(row.done)} из ${num(row.total)}">${bar}</span>
+        <span class="work-legend">готово ${num(row.done)} из ${num(row.total)}${extra ? ' · ' + extra : ''}</span></a>`;
+    }
+    async function loadWork() {
+      try {
+        const data = await (await fetch(API + '/dashboard/summary', { cache: 'no-store' })).json();
+        $('work').innerHTML = data.digitizations.map(workRow).join('') + `<p class="muted">обновлено ${new Date(data.updatedAt).toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' })}</p>`;
+      } catch (_) {
+        $('work').innerHTML = '<p class="muted dash-error">Сводка временно недоступна.</p>';
+      }
+    }
+
+    /* ---------- Новости ---------- */
+    async function loadNews() {
+      try {
+        const data = await (await fetch(API + '/dashboard/news')).json();
+        if (!data.items.length) throw new Error('empty');
+        const source = data.source === 'www.mos.ru' ? 'Новости Москвы с mos.ru — лента префектуры САО сейчас недоступна.' : 'Источник: ' + esc(data.source);
+        $('news').innerHTML = `<ul class="news-list">${data.items.slice(0, 5).map((n) => `<li><a href="${esc(n.link)}" target="_blank" rel="noopener">${n.date ? `<time datetime="${esc(n.date)}">${new Date(n.date).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long' })}</time>` : ''}${esc(n.title)}</a></li>`).join('')}</ul><p class="muted">${source}</p>`;
+      } catch (_) {
+        $('news').innerHTML = '<p class="muted">Новости сейчас недоступны. <a href="https://sao.mos.ru/" target="_blank" rel="noopener">Сайт префектуры САО →</a></p>';
+      }
+    }
+
+    /* ---------- Для префектуры: районы и лента дел ---------- */
+    const cell = (row) => {
+      if (!row || !row.total) return '<span class="cell">—</span>';
+      const value = pct(row.done, row.total);
+      const tone = value >= 80 ? '#e2f4ec' : value >= 40 ? '#fff3c4' : '#fdecef';
+      return `<span class="cell" style="background:${tone}" title="готово ${num(row.done)} из ${num(row.total)}${row.rework ? ', на доработке ' + num(row.rework) : ''}">${value}%</span>`;
+    };
+    const ago = (at) => {
+      const min = Math.round((Date.now() - new Date(at)) / 60000);
+      if (min < 1) return 'только что';
+      if (min < 60) return min + ' мин назад';
+      if (min < 24 * 60) return Math.round(min / 60) + ' ч назад';
+      return new Date(at).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long' });
+    };
+    async function loadDetails() {
+      const token = store.get(TOKEN_KEY);
+      const user = JSON.parse(store.get(USER_KEY) || 'null');
+      const pref = user && user.role === 'prefecture_admin' && token;
+      $('prefLoginToggle').hidden = Boolean(pref);
+      $('prefLogout').hidden = !pref;
+      $('prefWho').textContent = pref ? 'Вход: ' + (user.login || user.email || 'префектура') : '';
+      $('prefBody').hidden = !pref;
+      $('prefNote').hidden = Boolean(pref);
+      if (!pref) return;
+      try {
+        const response = await fetch(API + '/dashboard/details', { headers: { Authorization: 'Bearer ' + token }, cache: 'no-store' });
+        if (response.status === 401) { store.set(TOKEN_KEY, null); store.set(USER_KEY, null); $('prefNote').textContent = 'Вход истёк: сервер держит вход 8 часов. Войдите снова.'; return loadDetails(); }
+        const data = await response.json();
+        const by = data.byDistrict;
+        const names = [...new Set(['entrances', 'playgrounds', 'sidewalks', 'tpu'].flatMap((k) => by[k].map((r) => r.district)))];
+        const find = (k, d) => by[k].find((r) => r.district === d);
+        $('prefTable').innerHTML = names.map((d) => `<tr><td>${esc(d)}</td><td>${cell(find('entrances', d))}</td><td>${cell(find('playgrounds', d))}</td><td>${cell(find('sidewalks', d))}</td><td>${cell(find('tpu', d))}</td></tr>`).join('');
+        $('feed').innerHTML = data.activity.length
+          ? data.activity.map((a) => `<li><time datetime="${esc(a.at)}">${ago(a.at)}</time><b>${esc(a.who)}</b>: ${esc(a.what)}</li>`).join('')
+          : '<li>За неделю действий не было.</li>';
+      } catch (_) {
+        $('feed').innerHTML = '<li class="dash-error">Подробная сводка временно недоступна.</li>';
+      }
+    }
+    $('prefLoginToggle').addEventListener('click', () => { $('prefLogin').hidden = !$('prefLogin').hidden; if (!$('prefLogin').hidden) $('prefName').focus(); });
+    $('prefLogout').addEventListener('click', () => { store.set(TOKEN_KEY, null); store.set(USER_KEY, null); loadDetails(); });
+    $('prefLogin').addEventListener('submit', async (event) => {
+      event.preventDefault();
+      $('prefNote').hidden = false;
+      $('prefNote').textContent = 'Входим…';
+      try {
+        const response = await fetch(API + '/auth/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ login: $('prefName').value.trim(), password: $('prefPass').value }) });
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error(data.message || data.error || 'не удалось войти');
+        if (data.user?.role !== 'prefecture_admin') throw new Error('сводка по районам доступна только префектуре');
+        store.set(TOKEN_KEY, data.token); store.set(USER_KEY, JSON.stringify(data.user));
+        $('prefPass').value = ''; $('prefLogin').hidden = true;
+        loadDetails();
+      } catch (error) {
+        $('prefNote').textContent = 'Не удалось войти: ' + error.message;
+      }
+    });
+
+    loadWeather(); loadWork(); loadNews(); loadDetails();
+    // Раз в минуту обновляем ход работ и ленту, пока вкладка открыта.
+    setInterval(() => { if (!document.hidden) { loadWork(); loadDetails(); } }, 60000);
   })();
   </script>
 </body>

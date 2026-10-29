@@ -289,3 +289,15 @@ $DC up -d photo-service
 ```
 
 Until the restart the map answers «Точка тротуара не сохранена» when a new sidewalk point is placed; everything else keeps working.
+
+### Hub dashboard (`/dashboard/*`)
+
+The catalog page (hub) shows «Сводка округа». The photo service serves it: `GET /dashboard/summary` (open: totals per digitization), `GET /dashboard/news` (open: latest district news) and `GET /dashboard/details` (prefecture only: per-district table and the last week of `audit_log` as a «what is happening» feed). Answers are cached in memory for a minute (news for 20 minutes). No migration is needed; ship the files, rebuild and restart as above.
+
+News come from the first feed that answers, in this order: `https://sao.mos.ru/presscenter/news/rss/`, `https://sao.mos.ru/rss/`, the news page `https://sao.mos.ru/presscenter/news/`, then `https://www.mos.ru/rss` (city news, shown with a note that the SAO feed is unavailable). If the prefecture site has another address, set it in `.env` without a rebuild of the code:
+
+```sh
+SAO_NEWS_URLS=https://sao.mos.ru/<feed>,https://www.mos.ru/rss
+```
+
+Check what the server sees with `curl -s https://obhod-sao.ru/photo-api/dashboard/news | head -c 600` — the `source` field names the feed in use.

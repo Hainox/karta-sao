@@ -1,4 +1,5 @@
 import { createPhotoServicePointsAdapter } from './src/tpu-points/photo-service-points-adapter.js';
+import { createDashboardApp, DEFAULT_NEWS_URLS } from './src/dashboard.js';
 import { readFileSync } from 'node:fs';
 const tpuBoundary = JSON.parse(readFileSync(new URL('./src/tpu-points/sao_boundary_wgs84.geojson', import.meta.url), 'utf8'));
 import { createHash, randomUUID } from 'node:crypto';
@@ -48,6 +49,11 @@ const allowedOrigins = new Set((process.env.PHOTO_SERVICE_ALLOWED_ORIGINS || '')
 const pool = createDatabasePool({ ...photoServiceDatabaseConfig(process.env), max: 8, idleTimeoutMillis: 30000 });
 const loginThrottle = createLoginThrottle();
 const tpuPoints = createPhotoServicePointsAdapter({ pool, currentUser, boundary: tpuBoundary });
+// Дашборд округа в хабе: открытая сводка, новости и подробности для префектуры.
+const dashboard = createDashboardApp({
+  pool, currentUser,
+  newsUrls: process.env.SAO_NEWS_URLS ? process.env.SAO_NEWS_URLS.split(',').map((url) => url.trim()).filter(Boolean) : DEFAULT_NEWS_URLS,
+});
 
 function corsHeaders(request) {
   const origin = request?.headers?.origin;
@@ -634,6 +640,11 @@ async function handler(request, response) {
   }
   if (!originAllowed(request)) return sendError(response, request, 403, 'origin_not_allowed');
   const pathname = pathOf(request);
+  if (pathname.startsWith('/dashboard/')) {
+    for (const [key, value] of Object.entries(corsHeaders(request))) response.setHeader(key, value);
+    request.url = pathname + new URL(request.url, 'http://photo-service.local').search;
+    return dashboard(request, response);
+  }
   if (pathname === '/object-photo-points' || pathname.startsWith('/object-photo-points/')) {
     for (const [key, value] of Object.entries(corsHeaders(request))) response.setHeader(key, value);
     request.url = pathname + new URL(request.url, 'http://photo-service.local').search;
