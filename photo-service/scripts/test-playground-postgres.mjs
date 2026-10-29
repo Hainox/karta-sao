@@ -122,6 +122,14 @@ try {
   assert.equal((await adminSw.json()).status, 'accepted', 'снимок префектуры сразу принят');
   const swHistory = await pool.query('SELECT status FROM sidewalk_photo_slot_photos WHERE point_id=$1 ORDER BY uploaded_at', [own.id]);
   assert.deepEqual(swHistory.rows.map((row) => row.status), ['rejected', 'superseded', 'accepted']);
+  // Префектура ставит новую точку тротуара «Разметкой»: следующий номер района, район её не создаёт.
+  const createSw = (role) => swCall('', role, { method: 'POST', body: JSON.stringify({ district: 'Аэропорт', longitude: 37.5263, latitude: 55.8, heading: 45 }) });
+  assert.equal((await createSw('district')).status, 403);
+  const createdSw = await createSw('admin');
+  assert.equal(createdSw.status, 201);
+  const createdPoint = (await createdSw.json()).point;
+  assert.equal(createdPoint.point_no, 'Т1.' + String(swList.points.length + 1).padStart(3, '0'));
+  assert.equal((await (await createSw('admin')).json()).point.point_no, 'Т1.' + String(swList.points.length + 2).padStart(3, '0'));
   // Новая расстановка (--replace): точка с фото остаётся на месте, черновики без правок обновляются.
   const before = (await pool.query('SELECT longitude, latitude, heading FROM sidewalk_photo_points WHERE id=$1', [own.id])).rows[0];
   await pool.query("UPDATE sidewalk_photo_points SET heading = (heading + 90) % 360 WHERE id <> $1 AND updated_by IS NULL", [own.id]);
@@ -129,7 +137,7 @@ try {
   assert.match(replaced, /обновлено: 5709; снято: 0/);
   assert.deepEqual((await pool.query('SELECT longitude, latitude, heading FROM sidewalk_photo_points WHERE id=$1', [own.id])).rows[0], before);
   const drift = await pool.query("SELECT count(*)::int AS n FROM sidewalk_photo_points WHERE id <> $1 AND retired_at IS NULL", [own.id]);
-  assert.equal(drift.rows[0].n, 5709);
+  assert.equal(drift.rows[0].n, 5709 + 2, 'две новые точки префектуры пережили замену расстановки');
   // Снятие точек въездных групп по списку номеров: только своего района, с записью в журнал.
   const listFile = join(tmpdir(), 'retire-test-' + process.pid + '.txt');
   writeFileSync(listFile, 'Точка съёмки 13.121\n13.999\n');

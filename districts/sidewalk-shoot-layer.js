@@ -309,6 +309,14 @@ window.initSidewalkShootLayer = function ({ map, slug, district, apiRequest, esc
   }
 
   return {
+    /** Новая точка из «Разметки» префектуры: сервер выдаёт номер, слой включается и показывает её. */
+    async createPoint({ lng, lat, heading }) {
+      const response = await apiRequest(API, { method: 'POST', body: JSON.stringify({ district, longitude: lng, latitude: lat, heading }) });
+      const created = (await response.json()).point;
+      isOn = true;
+      await load();
+      return created;
+    },
     setVisible(on) {
       visible = Boolean(on);
       if (!visible) {

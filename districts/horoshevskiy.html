@@ -41,10 +41,13 @@ h1{margin:2px 0 0;font-size:24px;line-height:1.15}
 .shoot-login{display:flex;flex-direction:column;gap:8px;padding:12px;border:1px solid var(--line);border-radius:12px;background:#fff;animation:hud-reveal .24s cubic-bezier(.2,.7,.2,1)}
 .shoot-login[hidden]{display:none}
 .shoot-login .row .hud-btn{flex:1}
-.hud-modes{display:flex;gap:6px;align-items:stretch}
+.hud-modes{display:flex;flex-wrap:wrap;gap:6px;align-items:stretch}
 .hud-modes[hidden]{display:none}
-.hud-modes .hud-seg{flex:1}
-.hand-toggle{min-height:auto;padding:6px 10px;font-size:13.5px;white-space:nowrap}
+.hud-modes .hud-seg{flex:1 1 230px;min-width:0}
+.hud-modes .hud-seg > button{min-width:0;padding:6px 4px}
+.mark-target{flex:1 1 100%;align-items:center}
+.mark-target > span{padding:0 4px 0 8px;color:var(--hud-muted);font-size:13px;font-weight:700}
+.hand-toggle{flex:1 1 100%;min-height:38px;padding:6px 10px;font-size:13.5px;white-space:nowrap}
 .hud-account .hud-btn{flex:0 0 auto;white-space:nowrap}
 .hand-toggle.active{border-color:var(--accent);background:var(--accent);color:#fff}
 .hand-toggle.active:hover{color:#fff}
@@ -199,8 +202,9 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       <div class="status" id="shootLoginState"></div>
     </div>
     <div class="hud-modes" id="modeBar" hidden>
-      <div class="hud-seg" role="group" aria-label="Режим работы с точками"><button id="viewToggle" type="button" class="active" title="Смотреть и открывать карточки">Просмотр</button><button id="shootToggle" type="button" hidden title="Ставить новые точки">Разметка</button><button id="dragToggle" type="button" hidden title="Переносить точки">Перенос</button></div>
-      <button id="handToggle" class="hud-btn hand-toggle" type="button" hidden title="Двигать карту мышью, не трогая точки">✋ Рука</button>
+      <div class="hud-seg" role="group" aria-label="Режим работы с точками"><button id="viewToggle" type="button" class="active" title="Смотреть и открывать карточки">Просмотр</button><button id="shootToggle" type="button" hidden title="Ставить новые точки">Разметка</button></div>
+      <div class="hud-seg mark-target" id="markTarget" role="group" aria-label="Что ставим разметкой" hidden><span>Ставим:</span><button type="button" data-target="entrance" class="active">Въездные группы</button><button type="button" data-target="sidewalk">Тротуары</button></div>
+      <button id="handToggle" class="hud-btn hand-toggle" type="button" hidden title="Двигать карту мышью, не трогая точки">✋ Рука — двигать карту</button>
     </div>
     <div class="shoot-hint hud-callout" id="shootHint">Точки и направления назначает префектура. Район загружает снимки на назначенные точки.</div>
     <label class="layer-row off" id="shootLayerRow" hidden><input type="checkbox" id="shootLayerToggle"><span class="swatch" style="background:#ffcb00"></span><span class="label">Точки съёмки · въездные группы</span><span class="count" id="shootLayerCount">0</span></label>
@@ -231,10 +235,10 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
   <main id="map"></main>
 </div>
 <script src="../atlas-hud.js?v=20261028"></script>
-<script src="../atlas-summary.js?v=20261028"></script>
+<script src="../atlas-summary.js?v=20261029"></script>
 <script src="point-popover.js?v=20261028-doors"></script>
 <script src="playground-photo-layer.js?v=20261028-popover"></script>
-<script src="sidewalk-shoot-layer.js?v=20261028-popover"></script>
+<script src="sidewalk-shoot-layer.js?v=20261029-mark"></script>
 <script src="entrance-ref-layer.js?v=20261028"></script>
 <script>
 (() => {
@@ -488,6 +492,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     const token = sessionStorage.getItem(TOKEN_KEY);
     if (token) headers.set('Authorization', 'Bearer ' + token);
     const response = await fetch(API_BASE + path, { ...options, headers });
+    if (response.status === 401 && token) expireSession();
     if (!response.ok) {
       const body = await response.json().catch(() => ({}));
       throw new Error(body.message || body.error || 'Ошибка сервиса: ' + response.status);
@@ -610,6 +615,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       point.lat = Number(data.point.latitude);
       state.movePick = null;
       await reloadPhotoPoints();
+      if (state.dragMode) setDragMode(false);
       $('shootHint').textContent = `Точка «${point.label}» перенесена. Стрелка направления и фото слота сохранены.`;
     } catch (error) {
       $('shootHint').textContent = 'Точку не удалось перенести: ' + error.message;
@@ -808,13 +814,15 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
         <label>Примечание / источник<textarea name="note" maxlength="2000">${escapeHtml(point.note || '')}</textarea></label>
         <button type="submit">Сохранить изменения</button>
       </form>
-      <div class="edit-hint">Точку можно перетащить в режиме «Перенос», а направление — довернуть кликом по карте. Подпись, координаты, азимут и примечание сохраняются в фотослужбе.</div>` : ''}
+      <div class="edit-hint">«Перенести» — перетащите точку или кликните по карте, куда её поставить; «Изменить направление» — кликните в сторону съёмки. Подпись, координаты, азимут и примечание сохраняются в фотослужбе.</div>` : ''}
       ${canEdit ? `<div class="card-actions">
+        <button id="cardMove" type="button">Перенести</button>
         <button id="cardRotate" type="button">Изменить направление</button>
         ${canDelete ? '<button id="cardDelete" class="danger" type="button">Удалить точку</button>' : ''}
       </div>` : ''}`;
     if (canEdit) {
       $('cardRotate').addEventListener('click', () => beginRotation(point));
+      $('cardMove').addEventListener('click', () => beginMove(point));
       $('pointEditForm').addEventListener('submit', (event) => savePointEdits(event, point));
       if (canDelete) $('cardDelete').addEventListener('click', async () => {
         if (!confirm(`Удалить точку съёмки «${point.label}»?`)) return;
@@ -1059,6 +1067,23 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     }
   }
 
+  /* Вход на сервере живёт 8 часов, а вкладка помнит учётку дольше. Когда сервер
+     перестал принимать вход, сбрасываем его на карте и просим войти заново,
+     вместо того чтобы показывать «нет связи с сервером». */
+  function expireSession() {
+    sessionStorage.removeItem(TOKEN_KEY);
+    sessionStorage.removeItem(USER_KEY);
+    if (!state.photoUser) return;
+    state.photoUser = null;
+    if (state.shootMode) setShootMode(false);
+    if (state.dragMode) setDragMode(false);
+    renderShootLogin();
+    reloadPhotoPoints().finally(() => {
+      $('shootHint').textContent = 'Вход истёк: сервер держит вход 8 часов. Нажмите «Войти» и войдите снова.';
+      $('status').textContent = 'Вход истёк — войдите снова.';
+    });
+  }
+
   async function reloadPhotoPoints() {
     await loadPhotoPoints();
     renderShootMarkers();
@@ -1072,18 +1097,19 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     renderShootMarkers();
   }
 
-  /** Отдельный режим редактирования: перенос уже расставленных точек со стрелками. */
+  /** Перенос точки въездной группы из её карточки («Перенести»): точку можно перетащить
+      или кликнуть по карте, куда её поставить; после переноса режим выключается сам. */
   function setDragMode(on) {
     if (on && (!isPrefecture() || !state.serverOk)) return;
     if (on) setShootMode(false);
     state.dragMode = on;
     if (on) setHandMode(false, true);
     state.movePick = null;
-    $('dragToggle').classList.toggle('active', on);
     $('map').classList.toggle('dragmode', on);
+    syncHandToggle();
     state.points.forEach((point) => { try { point._marker?.update({ draggable: on && !state.handMode }); } catch (_) { /* маркер не создан */ } });
     $('shootHint').textContent = on
-      ? 'Режим переноса: перетащите точку в новое место (или кликните точку, затем кликните по карте). Стрелка направления и фото слота сохранятся. Карта при зажатой мыши не двигается — включите «Рука», чтобы переместить обзор.'
+      ? 'Перенос: перетащите точку в новое место или кликните по карте, куда её поставить. Стрелка направления и фото сохранятся. Отмена — «Просмотр» или Esc.'
       : `Точек съёмки: ${layerPointCount().toLocaleString('ru-RU')}. Префектура назначает точки, районы загружают фото.`;
   }
 
@@ -1122,6 +1148,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     state.picking = null;
     clearPreview();
     $('shootToggle').classList.toggle('active', on);
+    $('markTarget').hidden = !on || !state.sidewalkLayer;
     $('map').classList.toggle('marking', on);
     applyMapBehaviors();
     $('shootHint').textContent = on
@@ -1199,6 +1226,17 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       }
       return;
     }
+    if (state.markTarget === 'sidewalk') {
+      try {
+        const created = await state.sidewalkLayer.createPoint({ lng: picking.lng, lat: picking.lat, heading: picking.heading });
+        state.picking = null;
+        clearPreview();
+        $('shootHint').textContent = `Точка тротуара ${created.point_no} поставлена (направление ${created.heading}°). Ставьте следующую или нажмите «Просмотр».`;
+      } catch (error) {
+        $('shootHint').textContent = 'Точка тротуара не сохранена: ' + error.message;
+      }
+      return;
+    }
     const label = nextLabel();
     let point;
     try {
@@ -1232,6 +1270,14 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     } catch (error) {
       $('shootHint').textContent = 'Точка не сохранена: ' + error.message;
     }
+  }
+
+  function beginMove(point) {
+    if (!isPrefecture() || !state.serverOk || !point.serverPoint) return;
+    setDragMode(true);
+    state.movePick = { point };
+    state.popover?.close?.();
+    $('shootHint').textContent = `Точка «${point.label}»: перетащите её или кликните по карте, куда перенести. Отмена — «Просмотр» или Esc.`;
   }
 
   function beginRotation(point) {
@@ -1280,7 +1326,6 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     if (isDistrictEditor() && !state.shootLayerOn) setShootLayer(true);
     $('shootToggle').hidden = !isPrefecture();
     if (!isPrefecture() && state.shootMode) setShootMode(false);
-    $('dragToggle').hidden = !isPrefecture();
     $('modeBar').hidden = !isPrefecture();
     syncHandToggle();
     if (state.summary) state.summary.setVisible(isPrefecture());
@@ -1364,7 +1409,18 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     if (!editing && state.handMode) setHandMode(false, true);
   }
   new MutationObserver(syncHandToggle).observe($('shootToggle'), { attributes: true, attributeFilter: ['class'] });
-  new MutationObserver(syncHandToggle).observe($('dragToggle'), { attributes: true, attributeFilter: ['class'] });
+
+  /* Что ставит «Разметка»: точки въездных групп или точки тротуаров (слой префектуры). */
+  state.markTarget = 'entrance';
+  $('markTarget').querySelectorAll('button').forEach((button) => button.addEventListener('click', () => {
+    state.markTarget = button.dataset.target;
+    $('markTarget').querySelectorAll('button').forEach((b) => b.classList.toggle('active', b === button));
+    state.picking = null;
+    clearPreview();
+    $('shootHint').textContent = state.markTarget === 'sidewalk'
+      ? 'Ставим точки тротуаров. Шаг 1: кликните у дома со стороны подъездов. Шаг 2: кликните в сторону съёмки.'
+      : 'Ставим точки въездных групп. Шаг 1: кликните на карте в месте съёмки. Шаг 2: кликните в сторону съёмки.';
+  }));
 
   $('viewToggle').addEventListener('click', () => {
     if (state.shootMode) setShootMode(false);
@@ -1373,7 +1429,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
   window.AtlasHud.sections($('layerControls').closest('.sidebar'));
   window.AtlasHud.toast($('status'));
   window.AtlasHud.flash($('shootHint'));
-  window.AtlasHud.viewMode($('viewToggle'), [$('shootToggle'), $('dragToggle')]);
+  window.AtlasHud.viewMode($('viewToggle'), [$('shootToggle')]);
 
   /* Сводка префектуры по оцифровкам района: въездные группы, площадки, тротуары. */
   const statesOf = async (response) => ((await response.json()).points || []);
@@ -1402,17 +1458,6 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       return;
     }
     setShootMode(!state.shootMode);
-  });
-
-  $('dragToggle').addEventListener('click', () => {
-    if (!isPrefecture()) {
-      const box = $('shootLoginBox');
-      box.hidden = false;
-      $('shootLoginName').focus();
-      $('shootHint').textContent = 'Точки может переносить только префектура.';
-      return;
-    }
-    setDragMode(!state.dragMode);
   });
 
   $('handToggle').addEventListener('click', () => {
@@ -1450,6 +1495,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') {
       if (state.movePick) { state.movePick = null; }
+      if (state.dragMode) setDragMode(false);
       if (state.picking) { state.picking = null; clearPreview(); }
       if (state.shootMode) setShootMode(false);
       $('card').className = 'card';
