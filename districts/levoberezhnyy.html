@@ -10,20 +10,27 @@
 :root{--ink:#102636;--muted:#63747d;--line:#d7e0e2;--paper:#f7f5ef;--canvas:#dfe8e8;--panel:#fff;--accent:#0d827c;--accent-soft:#e8f5f2;}
 *{box-sizing:border-box}html,body{height:100%;margin:0}
 body{background:var(--canvas);color:var(--ink);font-family:"Century Gothic",Inter,Arial,sans-serif}
-.app{display:grid;grid-template-columns:340px minmax(0,1fr);height:100vh}
-.sidebar{min-width:0;display:flex;flex-direction:column;gap:12px;overflow:auto;padding:18px;background:var(--paper);border-right:1px solid var(--line)}
+.app{display:grid;grid-template-columns:360px minmax(0,1fr);height:100vh}
+.sidebar{min-width:0;display:flex;flex-direction:column;gap:12px;overflow:auto;padding:18px;background:var(--paper);border-right:1px solid var(--line);font-size:15px;scroll-behavior:smooth}
 .brand{display:flex;align-items:center;gap:10px}
 .brand-mark{display:grid;place-items:center;flex:0 0 40px;width:40px;height:40px;border-radius:10px;background:var(--ink);color:#f5c86a;font-weight:800}
 .brand b{font-size:17px}.brand small{display:block;color:var(--muted);font-size:11px;letter-spacing:.06em;text-transform:uppercase}
-.back{color:var(--accent);font-size:13px;font-weight:800;text-decoration:none}
+.back{color:var(--accent);font-size:14px;font-weight:800;text-decoration:none}
+.back:hover{text-decoration:underline}
+.hud-crumbs{display:flex;flex-wrap:wrap;gap:6px 16px}
+.hud-district{display:flex;flex-direction:column;gap:6px}
+.hud-switch > summary{display:inline-flex;align-items:center;gap:6px;min-height:34px;padding:4px 12px;border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--accent);font-size:13.5px;font-weight:800;list-style:none;cursor:pointer;transition:border-color .16s}
+.hud-switch > summary::-webkit-details-marker{display:none}
+.hud-switch > summary::after{content:"";width:7px;height:7px;margin-top:-3px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);transition:transform .24s cubic-bezier(.2,.7,.2,1)}
+.hud-switch[open] > summary::after{transform:rotate(-135deg);margin-top:3px}
+.hud-switch > summary:hover{border-color:var(--accent)}
+.hud-switch[open] > .dist-nav{margin-top:8px;animation:hud-reveal .24s cubic-bezier(.2,.7,.2,1)}
+.hud-lead{margin:0;color:#4f626a;font-size:14px;line-height:1.5}
 h1{margin:2px 0 0;font-size:24px;line-height:1.15}
-.dist-nav{display:flex;flex-wrap:wrap;gap:5px}
-.dist-link{display:inline-block;padding:4px 9px;border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--muted);font-size:12px;text-decoration:none}
+.dist-nav{display:flex;flex-wrap:wrap;gap:6px}
+.dist-link{display:inline-flex;align-items:center;min-height:34px;padding:4px 12px;border:1px solid var(--line);border-radius:999px;background:#fff;color:#33454d;font-size:13.5px;text-decoration:none;transition:border-color .16s,color .16s}
 .dist-link:hover{border-color:var(--accent);color:var(--accent)}
 .dist-link.active{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:800}
-.layers-head{display:flex;align-items:center;justify-content:space-between;margin-top:6px;gap:6px}
-.layers-head b{font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
-.layers-head .head-actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
 .layer-row{display:flex;align-items:center;gap:9px;padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:#fff;cursor:pointer;user-select:none}
 .layer-row+.layer-row{margin-top:6px}
 .layer-row input{accent-color:var(--accent)}
@@ -31,26 +38,35 @@ h1{margin:2px 0 0;font-size:24px;line-height:1.15}
 .layer-row .label{flex:1;font-size:14px;font-weight:700}
 .layer-row .count{color:var(--muted);font-size:12px;font-variant-numeric:tabular-nums}
 .layer-row.off .label{color:var(--muted);font-weight:400}
-.shoot-toggle{min-height:32px;padding:4px 12px;border:1px solid var(--accent);border-radius:9px;background:var(--accent-soft);color:var(--accent);font:inherit;font-size:13px;font-weight:800;cursor:pointer}
-.shoot-toggle.active{background:var(--accent);color:#fff}
-.shoot-login{display:flex;flex-direction:column;gap:6px;padding:10px;border:1px solid var(--line);border-radius:10px;background:#fff}
-.shoot-login input{min-height:32px;padding:5px 9px;border:1px solid var(--line);border-radius:8px;font:inherit;font-size:13px}
+.shoot-login{display:flex;flex-direction:column;gap:8px;padding:12px;border:1px solid var(--line);border-radius:12px;background:#fff;animation:hud-reveal .24s cubic-bezier(.2,.7,.2,1)}
+.shoot-login[hidden]{display:none}
+.shoot-login .row .hud-btn{flex:1}
+.hud-modes{display:flex;gap:6px;align-items:stretch}
+.hud-modes[hidden]{display:none}
+.hud-modes .hud-seg{flex:1}
+.hand-toggle{min-height:auto;padding:6px 10px;font-size:13.5px;white-space:nowrap}
+.hud-account .hud-btn{flex:0 0 auto;white-space:nowrap}
+.hand-toggle.active{border-color:var(--accent);background:var(--accent);color:#fff}
+.hand-toggle.active:hover{color:#fff}
+#shootDistrictGo[hidden]{display:none}
+.shoot-login input{min-height:40px;padding:6px 11px;border:1px solid #b8c5c8;border-radius:9px;font:inherit;font-size:14.5px}
 .shoot-login .row{display:flex;gap:6px}
-.shoot-login .row button{flex:1;min-height:30px;padding:4px 10px;border:1px solid #8a979c;border-radius:8px;background:#fff;color:var(--ink);font:inherit;font-size:12.5px;cursor:pointer}
-.shoot-login .row button.primary{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:800}
-.shoot-hint{margin-top:6px;padding:9px 11px;border:1px solid #cfe6df;border-radius:10px;background:#eff9f5;color:#27665a;font-size:12.5px;line-height:1.45}
+.shoot-hint:not(.hud-callout){margin:6px 2px 0 16px;padding-left:10px;border-left:2px solid var(--line);color:#4f626a;font-size:13px;line-height:1.45}
 .shoot-hint:empty{display:none}
 .shoot-list{display:flex;flex-direction:column;gap:5px;margin-top:6px;max-height:280px;overflow:auto}
 .trial-badge{display:inline-block;margin-top:3px;padding:1px 6px;border-radius:5px;background:#fff3c4;color:#7a5a00;font-size:10.5px;font-weight:800;letter-spacing:.04em}
 .layer-row .label .trial-badge{display:table}
-.shoot-list-box summary{cursor:pointer;font-size:12.5px;color:var(--muted)}
-.shoot-item{display:flex;align-items:center;gap:8px;padding:6px 9px;border:1px solid var(--line);border-radius:9px;background:#fff;font-size:13px;cursor:pointer}
+.shoot-list-box summary{display:flex;align-items:center;gap:8px;min-height:36px;cursor:pointer;font-size:14px;font-weight:700;color:#33454d;list-style:none}
+.shoot-list-box summary::-webkit-details-marker{display:none}
+.shoot-list-box summary::before{content:"";width:7px;height:7px;margin:0 3px 0 4px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .24s cubic-bezier(.2,.7,.2,1)}
+.shoot-list-box[open] summary::before{transform:rotate(45deg)}
+.shoot-list-box[open] .shoot-list{animation:hud-reveal .24s cubic-bezier(.2,.7,.2,1)}
+.shoot-item{display:flex;align-items:center;gap:8px;min-height:38px;padding:6px 10px;border:1px solid var(--line);border-radius:9px;background:#fff;font-size:14px;cursor:pointer;transition:border-color .16s,background .16s}
 .shoot-item:hover{border-color:var(--accent)}
 .shoot-item b{font-variant-numeric:tabular-nums}
 .shoot-item .deg{color:var(--muted);font-size:12px}
-.shoot-actions{display:flex;gap:8px}
-.shoot-actions button{flex:1;min-height:30px;padding:4px 10px;border:1px solid #8a979c;border-radius:8px;background:#fff;color:var(--ink);font:inherit;font-size:12px;cursor:pointer;text-align:center}
-.shoot-actions button:hover{border-color:var(--accent);color:var(--accent)}
+.shoot-actions{display:flex;flex-wrap:wrap;gap:8px}
+.shoot-actions .hud-btn{flex:1 1 30%;padding:8px 10px;font-size:13px}
 .shoot-gallery{display:grid;grid-template-columns:minmax(0,1fr);gap:6px;margin-top:6px}
 .shoot-gallery>div{min-width:0}
 .shoot-gallery img{width:100%;border:1px solid var(--line);border-radius:8px;background:#fff}
@@ -103,11 +119,11 @@ h1{margin:2px 0 0;font-size:24px;line-height:1.15}
 .shoot-item[data-state="pending"] .chip{background:#e3edfd;color:#1d4fa7}
 .shoot-item[data-state="accepted"] .chip{background:#e2f4ec;color:#0c7a5a}
 .shoot-item[data-state="rework"] .chip{background:#fdecef;color:#c22545}
-.shoot-review-link{margin-top:2px;font-size:12.5px}
+.shoot-review-link{margin-top:2px;font-size:14px}
 .shoot-review-link a{color:var(--accent);font-weight:800;text-decoration:none}
 .shoot-review-link a:hover{text-decoration:underline}
 .card{min-width:0;overflow-wrap:anywhere;display:none;padding:14px;border:1px solid var(--line);border-radius:12px;background:var(--accent-soft)}
-.card.open{display:block}
+.card.open{display:block;animation:hud-reveal .24s cubic-bezier(.2,.7,.2,1)}
 .card h2{margin:0 0 8px;font-size:17px}
 .card div{font-size:13.5px;line-height:1.55;margin-top:2px}
 .card strong{color:#315d59}
@@ -154,38 +170,52 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
 });
 </script>
 <link rel="stylesheet" href="../atlas-brand.css?v=20261021">
+<link rel="stylesheet" href="../atlas-hud.css?v=20261028">
 <link rel="stylesheet" href="point-popover.css?v=20261028-doors">
 </head>
 <body>
 <div class="app">
-  <aside class="sidebar">
+  <aside class="sidebar hud">
     <div class="brand"><span class="brand-mark atlas-emblem"><img src="../assets/sao-emblem.svg?v=20261021" alt="САО — Северный округ"></span><span><b>Городской атлас САО</b><small>Карта района</small></span></div>
-    <div><a class="back" href="index.html">← Все районы</a> · <a class="back" href="../hub/">Каталог</a></div>
-    <h1>Левобережный</h1>
-    <div>Граница муниципального округа, дворовые территории и слои благоустройства по данным АСУ ОДС.</div>
-    <nav class="dist-nav"><a class="dist-link" href="aeroport.html">Аэропорт</a><a class="dist-link" href="begovoy.html">Беговой</a><a class="dist-link" href="beskudnikovskiy.html">Бескудниковский</a><a class="dist-link" href="voykovskiy.html">Войковский</a><a class="dist-link" href="vostochnoe-degunino.html">Восточное Дегунино</a><a class="dist-link" href="golovinskiy.html">Головинский</a><a class="dist-link" href="dmitrovskiy.html">Дмитровский</a><a class="dist-link" href="zapadnoe-degunino.html">Западное Дегунино</a><a class="dist-link" href="koptevo.html">Коптево</a><a class="dist-link active" href="levoberezhnyy.html">Левобережный</a><a class="dist-link" href="molzhaninovskiy.html">Молжаниновский</a><a class="dist-link" href="savelovskiy.html">Савеловский</a><a class="dist-link" href="sokol.html">Сокол</a><a class="dist-link" href="timiryazevskiy.html">Тимирязевский</a><a class="dist-link" href="hovrino.html">Ховрино</a><a class="dist-link" href="horoshevskiy.html">Хорошевский</a></nav>
-    <div class="layers-head"><b>Слои</b><span class="status" id="layerTotal"></span></div>
-    <div id="layerControls"></div>
-    <div class="layers-head"><b>Точки съёмки</b><span class="head-actions"><button id="shootLogin" class="shoot-toggle" type="button">Вход</button><button id="shootToggle" class="shoot-toggle" type="button" hidden>Разметка</button><button id="dragToggle" class="shoot-toggle" type="button" hidden>Перенос</button><button id="handToggle" class="shoot-toggle" type="button" hidden>Рука</button></span></div>
-    <button id="shootDistrictGo" class="shoot-toggle" type="button">Войти как район без пароля</button>
+    <div class="hud-crumbs"><a class="back" href="index.html">← Все районы</a><a class="back" href="../hub/">Каталог карт</a></div>
+    <div class="hud-district">
+      <h1>Левобережный</h1>
+      <details class="hud-switch"><summary>Другой район</summary><nav class="dist-nav" aria-label="Карты районов"><a class="dist-link" href="aeroport.html">Аэропорт</a><a class="dist-link" href="begovoy.html">Беговой</a><a class="dist-link" href="beskudnikovskiy.html">Бескудниковский</a><a class="dist-link" href="voykovskiy.html">Войковский</a><a class="dist-link" href="vostochnoe-degunino.html">Восточное Дегунино</a><a class="dist-link" href="golovinskiy.html">Головинский</a><a class="dist-link" href="dmitrovskiy.html">Дмитровский</a><a class="dist-link" href="zapadnoe-degunino.html">Западное Дегунино</a><a class="dist-link" href="koptevo.html">Коптево</a><a class="dist-link active" href="levoberezhnyy.html">Левобережный</a><a class="dist-link" href="molzhaninovskiy.html">Молжаниновский</a><a class="dist-link" href="savelovskiy.html">Савеловский</a><a class="dist-link" href="sokol.html">Сокол</a><a class="dist-link" href="timiryazevskiy.html">Тимирязевский</a><a class="dist-link" href="hovrino.html">Ховрино</a><a class="dist-link" href="horoshevskiy.html">Хорошевский</a></nav></details>
+    </div>
+    <p class="hud-lead">Граница округа, дворы и слои благоустройства по данным АСУ ОДС.</p>
+    <details class="hud-section" data-hud-key="district-layers" open>
+      <summary><span class="hud-title">Слои карты</span><span class="hud-meta" id="layerTotal"></span><span class="hud-chev" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></span></summary>
+      <div class="hud-body"><div id="layerControls"></div></div>
+    </details>
+    <details class="hud-section" data-hud-key="district-shoot" open>
+      <summary><span class="hud-title"><b>Точки съёмки</b></span><span class="hud-chev" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></span></summary>
+      <div class="hud-body">
+    <div class="hud-account"><span class="avatar" id="shootAvatar" aria-hidden="true">?</span><span class="who" id="shootWho"><b>Гость</b>Только просмотр</span><button id="shootLogin" class="hud-btn" type="button">Войти</button></div>
+    <button id="shootDistrictGo" class="hud-btn primary" type="button">Войти как район без пароля</button>
     <div class="shoot-login" id="shootLoginBox" hidden>
-      <input id="shootLoginName" placeholder="Логин учётной записи" autocomplete="username">
-      <input id="shootLoginPass" type="password" placeholder="Пароль" autocomplete="current-password">
-      <div class="row"><button id="shootLoginGo" class="primary" type="button">Войти</button><button id="shootLogout" type="button" hidden>Выйти</button></div>
+      <input id="shootLoginName" placeholder="Логин учётной записи" autocomplete="username" aria-label="Логин">
+      <input id="shootLoginPass" type="password" placeholder="Пароль" autocomplete="current-password" aria-label="Пароль">
+      <div class="row"><button id="shootLoginGo" class="hud-btn primary" type="button">Войти</button><button id="shootLogout" class="hud-btn" type="button" hidden>Выйти</button></div>
       <div class="status" id="shootLoginState"></div>
     </div>
+    <div class="hud-modes" id="modeBar" hidden>
+      <div class="hud-seg" role="group" aria-label="Режим работы с точками"><button id="viewToggle" type="button" class="active" title="Смотреть и открывать карточки">Просмотр</button><button id="shootToggle" type="button" hidden title="Ставить новые точки">Разметка</button><button id="dragToggle" type="button" hidden title="Переносить точки">Перенос</button></div>
+      <button id="handToggle" class="hud-btn hand-toggle" type="button" hidden title="Двигать карту мышью, не трогая точки">✋ Рука</button>
+    </div>
+    <div class="shoot-hint hud-callout" id="shootHint">Точки и направления назначает префектура. Район загружает снимки на назначенные точки.</div>
     <label class="layer-row off" id="shootLayerRow" hidden><input type="checkbox" id="shootLayerToggle"><span class="swatch" style="background:#ffcb00"></span><span class="label">Точки съёмки · въездные группы</span><span class="count" id="shootLayerCount">0</span></label>
     <div id="playgroundPhotoLayer"></div>
     <div id="sidewalkShootLayer" hidden></div>
     <div id="entranceRefLayer" hidden></div>
     <details class="shoot-list-box"><summary>Список точек</summary><div class="shoot-list" id="shootList"></div></details>
-    <div class="shoot-hint" id="shootHint">Точки и направления назначает префектура. Район загружает снимки на назначенные точки.</div>
     <div class="shoot-actions">
-      <button id="shootExport" type="button">Выгрузить GeoJSON</button>
-      <button id="shootReport" type="button" hidden>Excel: точки</button>
-      <button id="shootPhotoReport" type="button" hidden>Excel: фото</button>
+      <button id="shootExport" class="hud-btn" type="button">Выгрузить GeoJSON</button>
+      <button id="shootReport" class="hud-btn" type="button" hidden>Excel: точки</button>
+      <button id="shootPhotoReport" class="hud-btn" type="button" hidden>Excel: фото</button>
     </div>
     <div class="shoot-review-link"><a href="review.html">Кабинет приёмки фото →</a></div>
+      </div>
+    </details>
     <div class="card" id="objectCard"></div>
     <div class="card" id="card"></div>
     <dialog id="photoViewer" class="photo-viewer" aria-modal="true">
@@ -200,6 +230,8 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
   </aside>
   <main id="map"></main>
 </div>
+<script src="../atlas-hud.js?v=20261028"></script>
+<script src="../atlas-summary.js?v=20261028"></script>
 <script src="point-popover.js?v=20261028-doors"></script>
 <script src="playground-photo-layer.js?v=20261028-popover"></script>
 <script src="sidewalk-shoot-layer.js?v=20261028-popover"></script>
@@ -333,7 +365,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     renderShootLogin();
     const bounds = fitBounds();
     if (bounds) state.map.update({ location: { bounds } });
-    $('status').textContent = `Загружено объектов: ${total.toLocaleString('ru-RU')}. Клик по объекту — карточка справа.`;
+    $('status').textContent = `Карта готова: ${total.toLocaleString('ru-RU')} объектов. Нажмите на объект, чтобы открыть сведения.`;
   }
 
   function draw(key) {
@@ -429,8 +461,16 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
           }
         }
         input.closest('.layer-row').classList.toggle('off', !layer.enabled);
+        renderLayerTotal();
       });
     });
+    renderLayerTotal();
+  }
+
+  /** «включено N из M» в заголовке раздела слоёв. */
+  function renderLayerTotal() {
+    const inputs = [...$('layerControls').querySelectorAll('input')];
+    $('layerTotal').textContent = `включено ${inputs.filter((i) => i.checked).length} из ${inputs.length}`;
   }
 
   /* ---------- Точки съёмки эталонных фото: сервер фотослужбы ---------- */
@@ -1241,9 +1281,16 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     $('shootToggle').hidden = !isPrefecture();
     if (!isPrefecture() && state.shootMode) setShootMode(false);
     $('dragToggle').hidden = !isPrefecture();
-    $('handToggle').hidden = !isPrefecture();
+    $('modeBar').hidden = !isPrefecture();
+    syncHandToggle();
+    if (state.summary) state.summary.setVisible(isPrefecture());
+    const who = isPrefecture() ? 'Префектура' : isDistrictEditor() ? DISTRICT : user ? 'Учётная запись' : 'Гость';
+    $('shootAvatar').textContent = who[0];
+    $('shootWho').innerHTML = `<b>${escapeHtml(who)}</b>${escapeHtml(isPrefecture()
+      ? 'Разметка точек, приёмка фото, отчёты'
+      : isDistrictEditor() ? 'Загрузка фото на назначенные точки' : user ? 'Просмотр точек' : 'Только просмотр')}`;
     if (user) {
-      box.hidden = false;
+      box.hidden = true;
       $('shootLoginName').hidden = true;
       $('shootLoginPass').hidden = true;
       $('shootLoginGo').hidden = true;
@@ -1251,7 +1298,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       $('shootLoginState').textContent = isPrefecture()
         ? `Вошли: ${user.login || user.email || 'префектура'} · приёмка фото и отчёты доступны.`
         : `Вошли: ${user.login || user.email || user.role} · выберите назначенную точку и загрузите фото.`;
-      $('shootLogin').textContent = 'Выход';
+      $('shootLogin').textContent = 'Выйти';
     } else {
       box.hidden = true;
       $('shootLoginName').hidden = false;
@@ -1259,7 +1306,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       $('shootLoginGo').hidden = false;
       $('shootLogout').hidden = true;
       $('shootLoginState').textContent = '';
-      $('shootLogin').textContent = 'Вход префектуры';
+      $('shootLogin').textContent = 'Войти';
     }
   }
 
@@ -1306,6 +1353,40 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     button.disabled = true;
     $('shootLoginBox').hidden = false;
     try { await loginToMap(DISTRICT); } finally { button.disabled = false; }
+  });
+
+  $('shootLogout').addEventListener('click', () => { if (state.photoUser) $('shootLogin').click(); });
+
+  /* «Рука» нужна только при правке: в просмотре карта и так двигается мышью. */
+  function syncHandToggle() {
+    const editing = state.shootMode || state.dragMode;
+    $('handToggle').hidden = !isPrefecture() || !editing;
+    if (!editing && state.handMode) setHandMode(false, true);
+  }
+  new MutationObserver(syncHandToggle).observe($('shootToggle'), { attributes: true, attributeFilter: ['class'] });
+  new MutationObserver(syncHandToggle).observe($('dragToggle'), { attributes: true, attributeFilter: ['class'] });
+
+  $('viewToggle').addEventListener('click', () => {
+    if (state.shootMode) setShootMode(false);
+    if (state.dragMode) setDragMode(false);
+  });
+  window.AtlasHud.sections($('layerControls').closest('.sidebar'));
+  window.AtlasHud.toast($('status'));
+  window.AtlasHud.flash($('shootHint'));
+  window.AtlasHud.viewMode($('viewToggle'), [$('shootToggle'), $('dragToggle')]);
+
+  /* Сводка префектуры по оцифровкам района: въездные группы, площадки, тротуары. */
+  const statesOf = async (response) => ((await response.json()).points || []);
+  state.summary = window.createPrefectureSummary({
+    title: 'Сводка · ' + DISTRICT,
+    storeKey: 'atlas-summary:district',
+    sources: [
+      { label: 'Въездные группы', load: async () => (await statesOf(await apiRequest(`/object-photo-points?dataset=${DATASET}&district=${encodeURIComponent(DISTRICT)}`)))
+        .filter((p) => !isGpkgPoint({ imported: p.imported === true || String(p.note || '').startsWith('Источник:'), label: p.label }))
+        .map((p) => p.photo_state) },
+      { label: 'Площадки ДП/СП', load: async () => (await statesOf(await apiRequest('/object-photo-points/playgrounds/public?district=' + encodeURIComponent(DISTRICT)))).map((p) => p.photo_state) },
+      { label: 'Тротуары', load: async () => (await statesOf(await apiRequest('/object-photo-points/sidewalks?district=' + encodeURIComponent(DISTRICT)))).map((p) => p.photo_state) },
+    ],
   });
 
   $('shootLoginPass').addEventListener('keydown', (event) => {

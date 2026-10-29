@@ -294,3 +294,22 @@ def test_points_open_in_popover_card():
         assert "popover: state.popover" in markup
     for layer in ("playground-photo-layer.js", "sidewalk-shoot-layer.js"):
         assert "popover.open(" in (DISTRICTS_PAGES / layer).read_text(encoding="utf-8")
+
+
+def test_district_pages_use_shared_hud_and_prefecture_summary():
+    """Панель карт районов стоит на общей основе атласа, а сводка видна только префектуре.
+
+    Режимы правки — один переключатель с «Просмотром»; «Рука» видна лишь во время правки.
+    """
+    template = (ROOT / "work" / "district_page_template.html").read_text(encoding="utf-8")
+    for markup in [template] + [(DISTRICTS_PAGES / f"{slug}.html").read_text(encoding="utf-8") for slug in SLUGS.values()]:
+        assert 'href="../atlas-hud.css' in markup and 'src="../atlas-hud.js' in markup and 'src="../atlas-summary.js' in markup
+        assert '<aside class="sidebar hud">' in markup
+        assert 'id="viewToggle"' in markup and 'id="modeBar"' in markup
+        assert "if (state.summary) state.summary.setVisible(isPrefecture());" in markup
+        assert "$('shootLogout').addEventListener('click'" in markup
+    for name in ("atlas-hud.css", "atlas-hud.js", "atlas-summary.js"):
+        assert (ROOT / name).exists(), name
+    css = (ROOT / "atlas-hud.css").read_text(encoding="utf-8")
+    assert ".hud-btn[hidden]{display:none}" in css
+    assert "prefers-reduced-motion" in css
