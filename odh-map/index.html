@@ -730,6 +730,18 @@
       }
     </style>
   <link rel="stylesheet" href="../atlas-brand.css?v=20261021">
+  <style>
+    /* Крупнее и спокойнее: читаемо в любом возрасте (как на остальных картах атласа). */
+    .search-result { font-size: 14px; min-height: 40px; }
+    .status-card { font-size: 14px; }
+    .layer-group-title { font-size: 14.5px; }
+    .layer-hint, .type-count { font-size: 12.5px; }
+    .layer-row { font-size: 14px; min-height: 40px; }
+    .layer-row input { width: 18px; height: 18px; }
+    .toggle-row { font-size: 14px; }
+    .sidebar :is(a, button, input, select, summary):focus-visible { outline: 3px solid #f2b705; outline-offset: 2px; }
+    @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+  </style>
 </head>
   <body>
     <main class="app">
