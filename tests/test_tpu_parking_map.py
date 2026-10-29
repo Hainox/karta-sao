@@ -166,3 +166,12 @@ def test_prefecture_downloads_slot_summary_excel():
     assignments = (ROOT / 'object-maps/photo-assignments.js').read_text(encoding='utf-8')
     assert "path: '/slots/report.xlsx'" in assignments
     assert 'button.hidden = !isPrefecture();' in assignments
+
+
+def test_tpu_page_uses_shared_hud_and_prefecture_summary():
+    """Карта ТПУ на общей основе панелей; выгрузки в меню «Выгрузить», сводка — только префектуре."""
+    markup = (ROOT / 'object-maps/tpu-parking.html').read_text(encoding='utf-8')
+    assert 'href="../atlas-hud.css' in markup and 'src="../atlas-summary.js' in markup
+    assert 'id="exportMenu"' in markup and 'id="exportCsv"' in markup and 'id="exportPhotos"' in markup
+    assert 'href="../hub/">← Каталог карт</a>' in markup
+    assert 'summary.setVisible(photoApi.user()?.role === "prefecture_admin")' in markup
