@@ -8,6 +8,7 @@ import { DISTRICTS } from './tpu-points/validation.js';
 import { PREFECTURE_ARCHIVE_CUTOFF } from './tpu-points/district-point-photos.js';
 import { createSlotRepository, objectsWithSlotCounts, slotSummary } from './tpu-points/object-slots.js';
 import { loadReportRows, reportPayload } from './reports.js';
+import { summarizeCoverage } from './report.js';
 
 const SLOT_DATASET = 'sao_tpu_parking';
 // Ленты по порядку: первая, что ответила и дала новости, идёт на дашборд.
@@ -27,7 +28,7 @@ const ENTRANCE_STATES = `SELECT p.district,
       ELSE 'empty'
     END AS state
   FROM object_photo_points p
-  WHERE p.dataset_id = 'sao_district_photo_points' AND p.retired_at IS NULL
+  WHERE p.dataset_id = 'sao_district_photo_points' AND p.retired_at IS NULL AND p.review_status = 'accepted'
     AND p.created_at >= ${PREFECTURE_ARCHIVE_CUTOFF} AND COALESCE(p.note, '') NOT LIKE 'Источник:%'`;
 
 const slotStateSql = (table) => `COALESCE(
@@ -101,6 +102,20 @@ export function activityItem(row) {
   return { at: row.created_at, who, what: (ACTIONS[row.action] || 'действие в фотослужбе') + decision };
 }
 
+/**
+ * Одно состояние на объект фотофиксации: готовый объект с ещё одним кадром на проверке
+ * остаётся «готов», иначе сумма состояний превысила бы число объектов.
+ */
+export function fixationState(object) {
+  const coverage = summarizeCoverage([{
+    objectType: object.objectType, confirmedPhotos: object.confirmedPhotos, pendingReviewPhotos: object.pendingReviewPhotos,
+    sourcePointCount: object.sourcePointCount, coveredPoints: object.coveredPoints,
+  }]);
+  if (coverage.completedObjects) return 'done';
+  if (coverage.pendingReviewObjects) return 'review';
+  return coverage.objectsWithPhoto ? 'progress' : 'empty';
+}
+
 const decode = (text) => String(text || '')
   .replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '$1')
   .replace(/<[^>]+>/g, '')
@@ -163,13 +178,8 @@ export function createDashboardApp({ pool, currentUser, fetchImpl = fetch, newsU
   }
 
   async function photoFixation() {
-    const payload = reportPayload(await loadReportRows(pool, { role: 'prefecture_admin' }));
-    const o = payload.overall;
-    const review = Math.min(o.pendingReviewObjects, o.totalObjects - o.completedObjects);
-    return {
-      total: o.totalObjects, done: o.completedObjects, review,
-      progress: Math.max(0, o.objectsWithPhoto - o.completedObjects - review), rework: 0, empty: o.objectsWithoutPhoto,
-    };
+    const { objects } = reportPayload(await loadReportRows(pool, { role: 'prefecture_admin' }));
+    return tally(objects.map(fixationState));
   }
 
   const summary = cached(60_000, async () => {

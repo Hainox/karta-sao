@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { activityItem, createDashboardApp, parseNews, tally, tallyByDistrict } from '../src/dashboard.js';
+import { activityItem, createDashboardApp, fixationState, parseNews, tally, tallyByDistrict } from '../src/dashboard.js';
 
 test('сводка считает готово, на проверке, в работе, на доработке и без фото', () => {
   assert.deepEqual(tally(['done', 'review', 'empty', 'rework', 'progress', 'странное']),
@@ -66,4 +66,12 @@ test('подробная сводка — только префектуре; н�
   assert.equal(news.body.source, 'www.mos.ru');
   assert.equal(news.body.items[0].title, 'Новость округа');
   assert.deepEqual(fetched, ['https://sao.mos.ru/first', 'https://www.mos.ru/rss']);
+});
+
+test('у объекта фотофиксации одно состояние: готовый с кадром на проверке остаётся готовым', () => {
+  const stop = (confirmedPhotos, pendingReviewPhotos) => ({ objectType: 'stop', confirmedPhotos, pendingReviewPhotos, sourcePointCount: 1, coveredPoints: confirmedPhotos ? 1 : 0 });
+  const states = [stop(1, 1), stop(0, 0), stop(0, 1)].map(fixationState);
+  assert.deepEqual(states, ['done', 'empty', 'review']);
+  const counts = tally(states);
+  assert.equal(counts.done + counts.review + counts.progress + counts.rework + counts.empty, counts.total);
 });
