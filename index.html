@@ -157,15 +157,33 @@
     }
   </style>
 <link rel="stylesheet" href="atlas-brand.css?v=20261021">
+<link rel="stylesheet" href="atlas-hud.css?v=20261029b">
+<style>
+  /* Крупнее и спокойнее: читаемо в любом возрасте (общая основа — atlas-hud.css). */
+  .brand small { font-size:12px; }
+  .topbar-meta { font-size:13px; } .atlas-link { font-size:14.5px; }
+  .eyebrow { font-size:12px; } h1 { font-size:27px; letter-spacing:-.02em; }
+  h2 { font-size:16px; } .intro { font-size:14.5px; line-height:1.5; } .hint { font-size:12px; letter-spacing:.04em; }
+  .field label { font-size:12.5px; letter-spacing:.04em; } select { font-size:15px; }
+  .layers { gap:6px; }
+  .layer-toggle { gap:11px; font-size:14.5px; padding:6px 12px; }
+  .layer-toggle:has(input:checked) { border-color:#9fd0c7; background:var(--hud-accent-soft); font-weight:700; }
+  .layer-swatch { flex-basis:12px; width:12px; height:12px; }
+  .layer-count { font-size:12.5px; } .layer-download { font-size:12.5px; }
+  .status { font-size:13.5px; } .printbtn, .file-label { font-size:13.5px; }
+  .details { font-size:14px; line-height:1.6; } .legend-title { font-size:13.5px; } .legend-button { font-size:13.5px; min-height:30px; }
+  .legend-code { font-size:12px; } .map-overlay { font-size:13.5px; } .map-overlay-title { font-size:11.5px; }
+  .details:not(:empty) { animation:hud-reveal var(--hud-mid) var(--hud-ease); }
+</style>
 </head>
 <body>
   <div class="app">
     <header class="topbar">
       <div class="brand"><span class="brand-mark atlas-emblem"><img src="assets/sao-emblem.svg?v=20261021" alt="САО — Северный округ"></span><span><strong>Городской атлас САО</strong><small>Районы · участки · объекты</small></span></div>
-      <div class="topbar-meta"><a class="atlas-link" href="hub/">← Городской атлас САО</a><span class="live-dot"></span><span>Данные доступны онлайн</span></div>
+      <div class="topbar-meta"><a class="atlas-link" href="hub/">← Каталог карт</a><span class="live-dot"></span><span>Данные доступны онлайн</span></div>
     </header>
     <main class="workspace">
-      <aside class="sidebar">
+      <aside class="sidebar hud">
         <div class="panel-heading"><div><span class="eyebrow">ОБЗОР ТЕРРИТОРИИ</span><h1>Районы и объекты</h1></div><button id="resetButton" class="icon-button" type="button" title="Сбросить фильтры">↺</button></div>
         <p class="intro">Выберите район, участок или слой — карта обновится сразу.</p>
 
@@ -385,7 +403,7 @@
           <input type="checkbox" data-layer="${key}" aria-label="${escapeHtml(layer.label)}" ${layer.enabled ? 'checked' : ''} ${layer.error || layer.loading ? 'disabled' : ''}>
           <span class="layer-swatch" style="background:${layer.color}"></span>
           <span>${escapeHtml(layer.label)}</span>
-          <span class="layer-count">${layer.error ? 'error' : layer.loading ? '...' : layer.lazy && !layer.records.length ? layer.expected : layer.records.length}</span>
+          <span class="layer-count">${layer.error ? 'нет данных' : layer.loading ? '…' : layer.lazy && !layer.records.length ? layer.expected : layer.records.length}</span>
           ${layer.kmlFile ? `<a class="layer-download" href="${escapeHtml(layer.kmlFile)}" download title="Download KML">KML</a>` : ''}
         </label>`).join('');
       $('layerControls').querySelectorAll('input[data-layer]').forEach((input) => input.addEventListener('change', async () => {

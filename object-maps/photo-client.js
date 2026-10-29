@@ -1695,7 +1695,7 @@ function shell() {
       <span class="pa-brand-mark" aria-hidden="true">⌖</span>
       <span><strong id="paTitle">Фотофиксация объектов САО</strong><small id="paSubtitle">Загружаем набор данных…</small></span>
     </div>
-    <a class="pa-atlas-link" href="../hub/">← Городской атлас</a>
+    <a class="pa-atlas-link" href="../hub/">← Каталог карт</a>
     <a class="pa-atlas-link" id="paMkdLink" href="./mkd.html" hidden>Первый этаж (МКД) →</a>
     <nav class="pa-datasets" id="paDatasets" role="tablist" aria-label="Набор объектов"></nav>
     <div class="pa-session">
@@ -1703,7 +1703,7 @@ function shell() {
         <label class="pa-sr" for="paLoginInput">Название района</label>
         <input id="paLoginInput" type="text" placeholder="Название района" autocomplete="username">
         <label class="pa-sr" for="paPasswordInput">Пароль только для префектуры</label>
-        <input id="paPasswordInput" type="password" placeholder="Пароль только префектуре" autocomplete="current-password">
+        <input id="paPasswordInput" type="password" placeholder="Пароль префектуры" autocomplete="current-password">
         <button type="submit" class="pa-btn pa-btn-primary" id="paLoginButton">Войти</button>
       </form>
       <button type="button" class="pa-btn" id="paLogoutButton" hidden>Выйти</button>
