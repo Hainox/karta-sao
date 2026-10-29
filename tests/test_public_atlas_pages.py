@@ -170,3 +170,14 @@ def test_smm_routes_and_district_markup_are_removed_from_the_atlas():
             assert link not in markup, (path, link)
     assert 'href="district-links.html"' not in page("odh-map/index.html")
     assert 'href="district-links.html"' not in page("odh-map/district-review.html")
+
+
+def test_hub_starts_with_tasks_and_compact_district_grid():
+    """Хаб «по задачам»: четыре плитки задач, районы — сетка кнопок, поиск, печатные формы свёрнуты."""
+    markup = page("hub/index.html")
+    assert markup.count('class="task-tile"') == 4
+    assert markup.count('class="map-card district-chip"') == 16
+    assert 'id="hubSearch"' in markup and 'id="noResults"' in markup
+    assert '<details class="catalog-section print-box"' in markup
+    for target in ("../districts/review.html", "../object-maps/tpu-review.html", "review-cabinet"):
+        assert target in markup

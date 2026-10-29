@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang="ru">
 <head>
-    <link rel="icon" href="../favicon.ico" sizes="any">
-    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="icon" href="../favicon.ico" sizes="any">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Городской атлас САО — каталог карт</title>
@@ -21,69 +21,138 @@
     ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
     OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
   -->
+
   <style>
-    :root { --ink:#102636; --muted:#63747d; --line:#d7e0e2; --paper:#f7f5ef; --canvas:#dfe8e8; --panel:#fff; --accent:#0d827c; --accent-soft:#e8f5f2; --shadow:0 14px 36px rgba(16,38,54,.12); }
+    :root { --ink:#102636; --muted:#4f626a; --line:#d7e0e2; --paper:#f7f5ef; --canvas:#dfe8e8; --panel:#fff; --accent:#0d827c; --accent-soft:#e8f5f2; --shadow:0 14px 36px rgba(16,38,54,.12); }
     * { box-sizing:border-box; }
-    html, body { min-height:100%; margin:0; background:var(--canvas); color:var(--ink); font-family:"Century Gothic", Inter, Arial, sans-serif; }
+    html, body { min-height:100%; margin:0; background:var(--canvas); color:var(--ink); font-family:"Century Gothic", Inter, Arial, sans-serif; font-size:16px; }
     .app { min-height:100vh; display:flex; flex-direction:column; }
-    .topbar { display:flex; align-items:center; justify-content:space-between; gap:18px; min-height:64px; padding:10px 24px; background:var(--paper); border-bottom:1px solid var(--line); }
-    .brand { display:flex; align-items:center; gap:10px; }
+    .topbar { position:sticky; top:0; z-index:10; display:flex; align-items:center; justify-content:space-between; gap:18px; min-height:68px; padding:10px 24px; background:rgba(247,245,239,.96); border-bottom:1px solid var(--line); backdrop-filter:blur(6px); }
+    .brand { display:flex; align-items:center; gap:10px; color:inherit; text-decoration:none; }
     .brand-mark { display:grid; place-items:center; flex:0 0 42px; width:42px; height:42px; overflow:hidden; border-radius:10px; }
     .brand-mark img { display:block; width:42px; height:42px; object-fit:contain; mix-blend-mode:multiply; }
     .brand strong { display:block; font-size:18px; line-height:1.1; }
-    .brand small, .topbar-meta { color:var(--muted); font-size:12px; letter-spacing:.06em; text-transform:uppercase; }
-    .brand small { display:block; margin-top:3px; }
-    .topbar-meta { white-space:nowrap; }
-    .catalog { width:min(100% - 32px, 1040px); margin:28px auto; padding:28px; background:rgba(255,255,255,.97); border:1px solid var(--line); border-radius:18px; box-shadow:var(--shadow); }
-    .eyebrow { margin:0; color:var(--accent); font-size:11px; font-weight:800; letter-spacing:.09em; text-transform:uppercase; }
-    h1 { margin:8px 0; font-size:clamp(25px,4vw,34px); line-height:1.1; }
-    .intro { max-width:780px; margin:0; color:var(--muted); font-size:16px; line-height:1.6; }
-    .catalog-section { margin-top:28px; }
-    .catalog-section h2 { margin:0 0 12px; font-size:21px; }
-    .map-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
-    .map-card { display:flex; flex-direction:column; min-height:190px; padding:20px; border:1px solid var(--line); border-radius:14px; background:var(--panel); color:inherit; text-decoration:none; transition:border-color .15s, transform .15s, box-shadow .15s; }
-    .map-card:hover, .map-card:focus-visible { border-color:var(--accent); box-shadow:0 8px 22px rgba(16,38,54,.1); transform:translateY(-2px); outline:none; }
+    .brand small { display:block; margin-top:3px; color:var(--muted); font-size:12px; letter-spacing:.06em; text-transform:uppercase; }
+    .search { position:relative; flex:0 1 380px; }
+    .search input { width:100%; min-height:46px; padding:10px 14px 10px 42px; border:1px solid #b8c5c8; border-radius:12px; background:#fff; font:inherit; font-size:16px; color:var(--ink); transition:border-color .16s, box-shadow .16s; }
+    .search input:focus { outline:none; border-color:var(--accent); box-shadow:0 0 0 4px rgba(13,130,124,.15); }
+    .search::before { content:""; position:absolute; left:15px; top:50%; width:13px; height:13px; margin-top:-9px; border:2.5px solid var(--muted); border-radius:50%; }
+    .search::after { content:""; position:absolute; left:28px; top:50%; width:8px; height:2.5px; margin-top:4px; background:var(--muted); border-radius:2px; transform:rotate(45deg); }
+    .catalog { width:min(100% - 32px, 1080px); margin:28px auto 40px; }
+    .hero { padding:30px 30px 26px; background:rgba(255,255,255,.97); border:1px solid var(--line); border-radius:20px; box-shadow:var(--shadow); }
+    .eyebrow { margin:0; color:var(--accent); font-size:12px; font-weight:800; letter-spacing:.09em; text-transform:uppercase; }
+    h1 { margin:8px 0 6px; font-size:clamp(26px,4vw,36px); line-height:1.1; }
+    .intro { max-width:780px; margin:0; color:var(--muted); font-size:16.5px; line-height:1.6; }
+    .tasks { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; margin-top:22px; }
+    .task-tile { min-width:0; display:flex; flex-direction:column; gap:6px; min-height:150px; padding:18px; border:1.5px solid var(--line); border-radius:16px; background:linear-gradient(180deg,#fff,#f6faf9); color:inherit; text-decoration:none; transition:border-color .16s, transform .2s cubic-bezier(.2,.7,.2,1), box-shadow .2s; animation:rise .4s cubic-bezier(.2,.7,.2,1) both; }
+    .task-tile:nth-child(2) { animation-delay:.05s; } .task-tile:nth-child(3) { animation-delay:.1s; } .task-tile:nth-child(4) { animation-delay:.15s; }
+    .task-tile:hover, .task-tile:focus-visible { border-color:var(--accent); transform:translateY(-3px); box-shadow:0 12px 26px rgba(16,38,54,.12); outline:none; }
+    .task-tile:focus-visible, .map-card:focus-visible { outline:3px solid #f2b705; outline-offset:2px; }
+    .task-icon { display:grid; place-items:center; width:46px; height:46px; margin-bottom:4px; border-radius:12px; background:var(--ink); color:#f5c86a; }
+    .task-icon svg { width:26px; height:26px; }
+    .task-tile b { font-size:18.5px; line-height:1.2; }
+    .task-tile span:last-child { color:var(--muted); font-size:14.5px; line-height:1.45; }
+    .catalog-section { margin-top:18px; padding:24px 28px; background:rgba(255,255,255,.97); border:1px solid var(--line); border-radius:20px; scroll-margin-top:84px; }
+    .catalog-section h2 { margin:0 0 6px; font-size:22px; }
+    .catalog-section > .intro { margin-bottom:14px; font-size:15.5px; }
+    .map-list { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+    .map-list.two { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .map-card { display:flex; flex-direction:column; min-height:170px; padding:18px; border:1px solid var(--line); border-radius:14px; background:var(--panel); color:inherit; text-decoration:none; transition:border-color .16s, transform .2s cubic-bezier(.2,.7,.2,1), box-shadow .2s; }
+    .map-card:hover { border-color:var(--accent); box-shadow:0 8px 22px rgba(16,38,54,.1); transform:translateY(-2px); }
     .card-top { display:flex; align-items:center; gap:10px; }
-    .card-icon { display:grid; place-items:center; flex:0 0 34px; width:34px; height:34px; border-radius:9px; background:var(--ink); color:#f5c86a; }
+    .card-icon { display:grid; place-items:center; flex:0 0 36px; width:36px; height:36px; border-radius:10px; background:var(--ink); color:#f5c86a; }
     .card-icon svg { display:block; width:22px; height:22px; flex:none; }
     .map-card h3 { margin:0; font-size:18px; line-height:1.25; }
-    .map-card p { margin:11px 0 0; color:var(--muted); font-size:15px; line-height:1.5; }
-    .data-scope { margin-top:auto; padding-top:13px; color:#47706b; font-size:12px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; }
-    .direct-link { margin-top:9px; color:var(--accent); font-size:15px; font-weight:800; }
-    .start-button { display:inline-flex; align-items:center; justify-content:center; min-height:52px; margin-top:16px; padding:0 18px; border-radius:10px; background:var(--accent); color:#fff; font-size:17px; font-weight:800; text-decoration:none; }.start-button:hover,.start-button:focus-visible { background:#096b66; outline:3px solid #aee2dc; outline-offset:3px; }
-    @media (max-width:780px) { .topbar { min-height:54px; padding:8px 14px; } .topbar-meta { display:none; } .catalog { width:min(100% - 24px, 1040px); margin:12px auto 24px; padding:20px; } .map-list { grid-template-columns:1fr; } }
+    .map-card p { margin:10px 0 0; color:var(--muted); font-size:15px; line-height:1.5; }
+    .data-scope { margin-top:auto; padding-top:12px; color:#3f6964; font-size:12.5px; font-weight:800; letter-spacing:.03em; text-transform:uppercase; }
+    .direct-link { margin-top:8px; color:var(--accent); font-size:15.5px; font-weight:800; }
+    .districts { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:8px; }
+    .district-chip { flex-direction:row; align-items:center; gap:10px; min-height:54px; padding:10px 14px; font-size:16px; font-weight:700; }
+    .district-chip svg { flex:0 0 20px; width:20px; height:20px; color:var(--accent); }
+    .district-chip span { min-width:0; line-height:1.25; }
+    .section-links { display:flex; flex-wrap:wrap; gap:8px 18px; margin-top:12px; font-size:15px; }
+    .section-links a { color:var(--accent); font-weight:800; text-decoration:none; }
+    .section-links a:hover { text-decoration:underline; }
+    .print-box > summary { display:flex; align-items:center; gap:12px; min-height:44px; list-style:none; cursor:pointer; }
+    .print-box > summary::-webkit-details-marker { display:none; }
+    .print-box > summary h2 { margin:0; flex:1; }
+    .print-box > summary .count { color:var(--muted); font-size:15px; }
+    .print-box > summary::after { content:""; width:9px; height:9px; margin:0 6px 4px 0; border-right:2.5px solid var(--muted); border-bottom:2.5px solid var(--muted); transform:rotate(45deg); transition:transform .24s cubic-bezier(.2,.7,.2,1); }
+    .print-box[open] > summary::after { transform:translateY(4px) rotate(-135deg); }
+    .print-box[open] .map-list { margin-top:14px; animation:rise .3s cubic-bezier(.2,.7,.2,1); }
+    .no-results { margin:18px 0 0; padding:18px; border:1px dashed #b8c5c8; border-radius:14px; background:#fff; color:var(--muted); font-size:16px; text-align:center; }
+    .is-filtered .catalog-section:not(.has-match), .is-filtered .hero .tasks { display:none; }
+    .is-filtered .map-card:not(.match) { display:none; }
+    @keyframes rise { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:none; } }
+    @media (max-width:900px) { .tasks { grid-template-columns:repeat(2,minmax(0,1fr)); } .map-list { grid-template-columns:repeat(2,minmax(0,1fr)); } .districts { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media (max-width:600px) { .district-chip { justify-content:center; padding:10px 8px; font-size:15px; text-align:center; } .district-chip svg { display:none; } .topbar { flex-wrap:wrap; padding:10px 14px; } .search { flex-basis:100%; } .catalog { width:min(100% - 20px, 1080px); margin:12px auto 28px; } .hero, .catalog-section { padding:20px 16px; } .map-list, .map-list.two { grid-template-columns:1fr; } .task-tile { min-height:0; } }
+    @media (max-width:380px) { .districts, .tasks { grid-template-columns:1fr; } .district-chip { min-height:48px; } }
+    @media (prefers-reduced-motion:reduce) { *, *::before, *::after { animation:none !important; transition:none !important; } }
   </style>
 <link rel="stylesheet" href="../atlas-brand.css?v=20261021">
 </head>
 <body>
   <div class="app">
     <header class="topbar">
-      <div class="brand"><span class="brand-mark atlas-emblem"><img src="../assets/sao-emblem.svg?v=20261021" alt="САО — Северный округ"></span><span><strong>Городской атлас САО</strong><small>Каталог карт и печатных форм</small></span></div>
-      <div class="topbar-meta">Выберите нужный формат работы</div>
+      <a class="brand" href="./"><span class="brand-mark atlas-emblem"><img src="../assets/sao-emblem.svg?v=20261021" alt="САО — Северный округ"></span><span><strong>Городской атлас САО</strong><small>Каталог карт и печатных форм</small></span></a>
+      <label class="search"><input id="hubSearch" type="search" placeholder="Найти карту или район" autocomplete="off" aria-label="Найти карту или район"></label>
     </header>
-    <main class="catalog">
-      <p class="eyebrow">Навигация по атласу</p>
-      <h1>Карты и печатные формы САО</h1>
-      <p class="intro">Откройте рабочую карту для анализа данных или отдельную форму для подготовки листа A3 и сохранения в PDF.</p>
+    <main class="catalog" id="catalog">
+      <section class="hero" aria-labelledby="hub-title">
+        <p class="eyebrow">Навигация по атласу</p>
+        <h1 id="hub-title">Что нужно сделать?</h1>
+        <p class="intro">Выберите задачу — откроется нужная карта. Ниже — карты всех районов, рабочие карты, кабинеты приёмки и печатные формы.</p>
+        <nav class="tasks" aria-label="Основные задачи">
+        <a class="task-tile" href="#district-maps"><span class="task-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" class="lucide lucide-map" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z" /> <path d="M15 5.764v15" /> <path d="M9 3.236v15" /> </svg></span><b>Карта района</b><span>Граница, дворы и слои благоустройства, точки съёмки района.</span></a>
+        <a class="task-tile" href="../object-maps/"><span class="task-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" class="lucide lucide-camera" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M13.997 4a2 2 0 0 1 1.76 1.05l.486.9A2 2 0 0 0 18.003 7H20a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1.997a2 2 0 0 0 1.759-1.048l.489-.904A2 2 0 0 1 10.004 4z" /> <circle cx="12" cy="13" r="3" /> </svg></span><b>Фотофиксация</b><span>Остановки, ПП и подъезды: съёмка по ведомости и с телефона.</span></a>
+        <a class="task-tile" href="../object-maps/tpu-parking.html"><span class="task-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" class="lucide lucide-bus-front" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M4 6 2 7" /> <path d="M10 6h4" /> <path d="m22 7-2-1" /> <rect width="16" height="16" x="4" y="3" rx="2" /> <path d="M4 11h16" /> <path d="M8 15h.01" /> <path d="M16 15h.01" /> <path d="M6 19v2" /> <path d="M18 21v-2" /> </svg></span><b>ТПУ и парковки</b><span>Фото по заданию в слоты объектов: районы и АвД САО.</span></a>
+        <a class="task-tile" href="#review"><span class="task-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" class="lucide lucide-clipboard-check" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <rect width="8" height="4" x="8" y="2" rx="1" ry="1" /> <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" /> <path d="m9 14 2 2 4-4" /> </svg></span><b>Приёмка фото</b><span>Для префектуры: принять фото или вернуть на доработку.</span></a>
+        </nav>
+      </section>
+
+      <section class="catalog-section" id="district-maps" aria-labelledby="district-maps-heading">
+        <h2 id="district-maps-heading">Карты районов</h2>
+        <p class="intro">Отдельная карта на каждый муниципальный округ: граница района, дворовые территории и слои благоустройства по данным АСУ ОДС, точки съёмки района.</p>
+        <div class="districts">
+          <a class="map-card district-chip" href="../districts/aeroport.html" data-search="аэропорт карта района"><svg aria-hidden="true" focusable="false" class="lucide lucide-map" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z" /> <path d="M15 5.764v15" /> <path d="M9 3.236v15" /> </svg><span>Аэропорт</span></a>
+          <a class="map-card district-chip" href="../districts/begovoy.html" data-search="беговой карта района"><svg aria-hidden="true" focusable="false" class="lucide lucide-map" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z" /> <path d="M15 5.764v15" /> <path d="M9 3.236v15" /> </svg><span>Беговой</span></a>
+          <a class="map-card district-chip" href="../districts/beskudnikovskiy.html" data-search="бескудниковский карта района"><svg aria-hidden="true" focusable="false" class="lucide lucide-map" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z" /> <path d="M15 5.764v15" /> <path d="M9 3.236v15" /> </svg><span>Бескудниковский</span></a>
+          <a class="map-card district-chip" href="../districts/voykovskiy.html" data-search="войковский карта района"><svg aria-hidden="true" focusable="false" class="lucide lucide-map" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z" /> <path d="M15 5.764v15" /> <path d="M9 3.236v15" /> </svg><span>Войковский</span></a>
+          <a class="map-card district-chip" href="../districts/vostochnoe-degunino.html" data-search="восточное дегунино карта района"><svg aria-hidden="true" focusable="false" class="lucide lucide-map" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z" /> <path d="M15 5.764v15" /> <path d="M9 3.236v15" /> </svg><span>Восточное Дегунино</span></a>
+          <a class="map-card district-chip" href="../districts/golovinskiy.html" data-search="головинский карта района"><svg aria-hidden="true" focusable="false" class="lucide lucide-map" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z" /> <path d="M15 5.764v15" /> <path d="M9 3.236v15" /> </svg><span>Головинский</span></a>
+          <a class="map-card district-chip" href="../districts/dmitrovskiy.html" data-search="дмитровский карта района"><svg aria-hidden="true" focusable="false" class="lucide lucide-map" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z" /> <path d="M15 5.764v15" /> <path d="M9 3.236v15" /> </svg><span>Дмитровский</span></a>
+          <a class="map-card district-chip" href="../districts/zapadnoe-degunino.html" data-search="западное дегунино карта района"><svg aria-hidden="true" focusable="false" class="lucide lucide-map" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z" /> <path d="M15 5.764v15" /> <path d="M9 3.236v15" /> </svg><span>Западное Дегунино</span></a>
+          <a class="map-card district-chip" href="../districts/koptevo.html" data-search="коптево карта района"><svg aria-hidden="true" focusable="false" class="lucide lucide-map" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z" /> <path d="M15 5.764v15" /> <path d="M9 3.236v15" /> </svg><span>Коптево</span></a>
+          <a class="map-card district-chip" href="../districts/levoberezhnyy.html" data-search="левобережный карта района"><svg aria-hidden="true" focusable="false" class="lucide lucide-map" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z" /> <path d="M15 5.764v15" /> <path d="M9 3.236v15" /> </svg><span>Левобережный</span></a>
+          <a class="map-card district-chip" href="../districts/molzhaninovskiy.html" data-search="молжаниновский карта района"><svg aria-hidden="true" focusable="false" class="lucide lucide-map" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z" /> <path d="M15 5.764v15" /> <path d="M9 3.236v15" /> </svg><span>Молжаниновский</span></a>
+          <a class="map-card district-chip" href="../districts/savelovskiy.html" data-search="савёловский карта района"><svg aria-hidden="true" focusable="false" class="lucide lucide-map" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z" /> <path d="M15 5.764v15" /> <path d="M9 3.236v15" /> </svg><span>Савёловский</span></a>
+          <a class="map-card district-chip" href="../districts/sokol.html" data-search="сокол карта района"><svg aria-hidden="true" focusable="false" class="lucide lucide-map" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z" /> <path d="M15 5.764v15" /> <path d="M9 3.236v15" /> </svg><span>Сокол</span></a>
+          <a class="map-card district-chip" href="../districts/timiryazevskiy.html" data-search="тимирязевский карта района"><svg aria-hidden="true" focusable="false" class="lucide lucide-map" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z" /> <path d="M15 5.764v15" /> <path d="M9 3.236v15" /> </svg><span>Тимирязевский</span></a>
+          <a class="map-card district-chip" href="../districts/hovrino.html" data-search="ховрино карта района"><svg aria-hidden="true" focusable="false" class="lucide lucide-map" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z" /> <path d="M15 5.764v15" /> <path d="M9 3.236v15" /> </svg><span>Ховрино</span></a>
+          <a class="map-card district-chip" href="../districts/horoshevskiy.html" data-search="хорошёвский карта района"><svg aria-hidden="true" focusable="false" class="lucide lucide-map" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z" /> <path d="M15 5.764v15" /> <path d="M9 3.236v15" /> </svg><span>Хорошёвский</span></a>
+        </div>
+        <div class="section-links"><a href="../districts/">Все районы списком →</a></div>
+      </section>
 
       <section class="catalog-section" aria-labelledby="interactive-heading">
         <h2 id="interactive-heading">Рабочие карты</h2>
+        <p class="intro">Сводные карты САО для анализа данных и выгрузок.</p>
         <div class="map-list">
-          <a class="map-card" href="../">
-            <span class="card-top"><span class="card-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" class="lucide lucide-house" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" /> <path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /> </svg></span><span><h3>Дворы и участки САО</h3></span></span>
+          <a class="map-card" href="../" data-search="дворы и участки сао районы, участки, места накопления отходов, детские и спортивные площадки, места хранения смм и слой урн сао. 2 294 дворовые территории · 16 районов">
+            <span class="card-top"><span class="card-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" class="lucide lucide-house" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" /> <path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /> </svg></span><h3>Дворы и участки САО</h3></span>
             <p>Районы, участки, места накопления отходов, детские и спортивные площадки, места хранения СММ и слой урн САО.</p>
             <span class="data-scope">2 294 дворовые территории · 16 районов</span>
             <span class="direct-link">Открыть рабочую карту →</span>
           </a>
-          <a class="map-card" href="../odh-map/">
-            <span class="card-top"><span class="card-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" class="lucide lucide-route" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <circle cx="6" cy="19" r="3" /> <path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15" /> <circle cx="18" cy="5" r="3" /> </svg></span><span><h3>ОДХ и очередность</h3></span></span>
-            <p>Дороги, первая очередь, граница САО, медучреждения и служебные слои. Выгрузка реестра объектов и отчёта по маршрутам в Excel и CSV.</p>
+          <a class="map-card" href="../odh-map/" data-search="одх и очередность дороги, первая очередь, граница сао, медучреждения и служебные слои. выгрузка реестра и отчёта по маршрутам в excel и csv. 688 объектов одх · 98 в первой очереди">
+            <span class="card-top"><span class="card-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" class="lucide lucide-route" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <circle cx="6" cy="19" r="3" /> <path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15" /> <circle cx="18" cy="5" r="3" /> </svg></span><h3>ОДХ и очередность</h3></span>
+            <p>Дороги, первая очередь, граница САО, медучреждения и служебные слои. Выгрузка реестра и отчёта по маршрутам в Excel и CSV.</p>
             <span class="data-scope">688 объектов ОДХ · 98 в первой очереди</span>
             <span class="direct-link">Открыть рабочую карту →</span>
           </a>
-          <a class="map-card" href="../odh-map/district-review.html">
-            <span class="card-top"><span class="card-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" class="lucide lucide-clipboard-check" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <rect width="8" height="4" x="8" y="2" rx="1" ry="1" /> <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" /> <path d="m9 14 2 2 4-4" /> </svg></span><span><h3>Правки и приёмка ОДХ</h3></span></span>
-            <p>Районные правки, приёмка в единой базе и фото-метки, которыми управляет только префектура. Объекты на карте подписаны кодом и номером, внизу — журнал объектов набора.</p>
+          <a class="map-card" href="../odh-map/district-review.html" data-search="правки и приёмка одх районные правки, приёмка в единой базе и фото-метки, которыми управляет префектура. 16 районов · единый защищённый контур">
+            <span class="card-top"><span class="card-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" class="lucide lucide-clipboard-check" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <rect width="8" height="4" x="8" y="2" rx="1" ry="1" /> <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" /> <path d="m9 14 2 2 4-4" /> </svg></span><h3>Правки и приёмка ОДХ</h3></span>
+            <p>Районные правки, приёмка в единой базе и фото-метки, которыми управляет префектура.</p>
             <span class="data-scope">16 районов · единый защищённый контур</span>
             <span class="direct-link">Открыть рабочий контур →</span>
           </a>
@@ -91,183 +160,118 @@
       </section>
 
       <section class="catalog-section" id="object-photo-maps" aria-labelledby="object-photo-maps-heading">
-        <h2 id="object-photo-maps-heading">Фотофиксация остановок, ПП и подъездов</h2>
-        <p class="intro">Районы снимают объекты по районной ведомости на компьютере или по маршрутной очереди на телефоне, префектура проверяет фото в своём кабинете приёмки. Фотографии уходят в общую защищённую службу, а не остаются в браузере.</p>
-        <div class="map-list">
-          <a class="map-card" href="../object-maps/">
-            <span class="card-top"><span class="card-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" class="lucide lucide-camera" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M13.997 4a2 2 0 0 1 1.76 1.05l.486.9A2 2 0 0 0 18.003 7H20a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1.997a2 2 0 0 0 1.759-1.048l.489-.904A2 2 0 0 1 10.004 4z" /> <circle cx="12" cy="13" r="3" /> </svg></span><span><h3>Фотофиксация объектов САО</h3></span></span>
+        <h2 id="object-photo-maps-heading">Фотофиксация и оцифровка</h2>
+        <p class="intro">Районы снимают объекты по районной ведомости на компьютере или по маршрутной очереди на телефоне. Фото уходят в общую защищённую службу.</p>
+        <div class="map-list two">
+          <a class="map-card" href="../object-maps/" data-search="фотофиксация объектов сао три набора на одной странице: остановки, пп и подъезды. вход по названию района, съёмка с gps, выгрузка excel и pdf. 811 остановок · 2 235 точек пп · 10 035 подъездов">
+            <span class="card-top"><span class="card-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" class="lucide lucide-camera" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M13.997 4a2 2 0 0 1 1.76 1.05l.486.9A2 2 0 0 0 18.003 7H20a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1.997a2 2 0 0 0 1.759-1.048l.489-.904A2 2 0 0 1 10.004 4z" /> <circle cx="12" cy="13" r="3" /> </svg></span><h3>Фотофиксация объектов САО</h3></span>
             <p>Три набора на одной странице: остановки, ПП и подъезды. Вход по названию района, съёмка с GPS, выгрузка Excel и PDF.</p>
             <span class="data-scope">811 остановок · 2 235 точек ПП · 10 035 подъездов</span>
             <span class="direct-link">Открыть фотофиксацию →</span>
           </a>
-          <a class="map-card" href="../review-cabinet/?api=https%3A%2F%2Fobhod-sao.ru%2Fphoto-api">
-            <span class="card-top"><span class="card-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" class="lucide lucide-clipboard-check" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <rect width="8" height="4" x="8" y="2" rx="1" ry="1" /> <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" /> <path d="m9 14 2 2 4-4" /> </svg></span><span><h3>Кабинет приёмки: остановки, ПП, подъезды</h3></span></span>
-            <p>Проверка фото остановок, ПП и подъездов: принять, вернуть на доработку с причиной, разобрать спорные фиксации, история проверок.</p>
-            <span class="data-scope">Вход учётной записью префектуры</span>
-            <span class="direct-link">Открыть кабинет приёмки →</span>
-          </a>
-        </div>
-      </section>
-
-      <section class="catalog-section" id="tpu-parking-maps" aria-labelledby="tpu-parking-maps-heading">
-        <h2 id="tpu-parking-maps-heading">Оцифровка ТПУ и автомобильных парковок</h2>
-        <p class="intro">Районы и АвД САО загружают фото по заданию в слоты своих объектов на карте, префектура проверяет их в отдельном кабинете приёмки: принимает или возвращает слот на доработку с комментарием.</p>
-        <div class="map-list">
-          <a class="map-card" href="../object-maps/tpu-parking.html">
-            <span class="card-top"><span class="card-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" class="lucide lucide-bus-front" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M4 6 2 7" /> <path d="M10 6h4" /> <path d="m22 7-2-1" /> <rect width="16" height="16" x="4" y="3" rx="2" /> <path d="M4 11h16" /> <path d="M8 15h.01" /> <path d="M16 15h.01" /> <path d="M6 19v2" /> <path d="M18 21v-2" /> </svg></span><span><h3>Карта ТПУ и парковок</h3></span></span>
-            <p>Контуры ТПУ и парковок, точки парковок и парковочных карманов из АСУ ОДХ. В карточке объекта — слоты фото по заданию, загрузка под учётной записью района или АвД.</p>
+          <a class="map-card" href="../object-maps/tpu-parking.html" data-search="карта тпу и парковок контуры тпу и парковок, точки парковок и карманов из асу одх. в карточке объекта — слоты фото по заданию. 29 тпу · 633 парковки · 3 338 карманов">
+            <span class="card-top"><span class="card-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" class="lucide lucide-bus-front" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M4 6 2 7" /> <path d="M10 6h4" /> <path d="m22 7-2-1" /> <rect width="16" height="16" x="4" y="3" rx="2" /> <path d="M4 11h16" /> <path d="M8 15h.01" /> <path d="M16 15h.01" /> <path d="M6 19v2" /> <path d="M18 21v-2" /> </svg></span><h3>Карта ТПУ и парковок</h3></span>
+            <p>Контуры ТПУ и парковок, точки парковок и карманов из АСУ ОДХ. В карточке объекта — слоты фото по заданию.</p>
             <span class="data-scope">29 ТПУ · 633 парковки · 3 338 карманов</span>
             <span class="direct-link">Открыть карту оцифровки →</span>
           </a>
-          <a class="map-card" href="../object-maps/tpu-review.html">
-            <span class="card-top"><span class="card-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" class="lucide lucide-clipboard-check" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <rect width="8" height="4" x="8" y="2" rx="1" ry="1" /> <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" /> <path d="m9 14 2 2 4-4" /> </svg></span><span><h3>Кабинет приёмки: ТПУ и парковки</h3></span></span>
-            <p>Очередь фото по заданию от районов и АвД САО: принять или вернуть слот на доработку с комментарием. Фильтры по району и виду объекта.</p>
+        </div>
+      </section>
+
+      <section class="catalog-section" id="review" aria-labelledby="review-heading">
+        <h2 id="review-heading">Приёмка фото</h2>
+        <p class="intro">Кабинеты префектуры: принять фото или вернуть на доработку с причиной. Вход учётной записью префектуры.</p>
+        <div class="map-list">
+          <a class="map-card" href="../review-cabinet/?api=https%3A%2F%2Fobhod-sao.ru%2Fphoto-api" data-search="остановки, пп, подъезды проверка фото фотофиксации, спорные фиксации, история проверок. вход учётной записью префектуры">
+            <span class="card-top"><span class="card-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" class="lucide lucide-clipboard-check" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <rect width="8" height="4" x="8" y="2" rx="1" ry="1" /> <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" /> <path d="m9 14 2 2 4-4" /> </svg></span><h3>Остановки, ПП, подъезды</h3></span>
+            <p>Проверка фото фотофиксации, спорные фиксации, история проверок.</p>
+            <span class="data-scope">Вход учётной записью префектуры</span>
+            <span class="direct-link">Открыть кабинет приёмки →</span>
+          </a>
+          <a class="map-card" href="../object-maps/tpu-review.html" data-search="тпу и парковки очередь фото по заданию от районов и авд сао. фильтры по району и виду объекта. вход учётной записью префектуры">
+            <span class="card-top"><span class="card-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" class="lucide lucide-clipboard-check" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <rect width="8" height="4" x="8" y="2" rx="1" ry="1" /> <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" /> <path d="m9 14 2 2 4-4" /> </svg></span><h3>ТПУ и парковки</h3></span>
+            <p>Очередь фото по заданию от районов и АвД САО. Фильтры по району и виду объекта.</p>
+            <span class="data-scope">Вход учётной записью префектуры</span>
+            <span class="direct-link">Открыть кабинет приёмки →</span>
+          </a>
+          <a class="map-card" href="../districts/review.html" data-search="точки съёмки районов фото въездных групп, площадок дп/сп и тротуаров с карт районов. вход учётной записью префектуры">
+            <span class="card-top"><span class="card-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" class="lucide lucide-clipboard-check" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <rect width="8" height="4" x="8" y="2" rx="1" ry="1" /> <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" /> <path d="m9 14 2 2 4-4" /> </svg></span><h3>Точки съёмки районов</h3></span>
+            <p>Фото въездных групп, площадок ДП/СП и тротуаров с карт районов.</p>
             <span class="data-scope">Вход учётной записью префектуры</span>
             <span class="direct-link">Открыть кабинет приёмки →</span>
           </a>
         </div>
       </section>
 
-      <section class="catalog-section" id="district-maps" aria-labelledby="district-maps-heading">
-        <h2 id="district-maps-heading">Карты районов</h2>
-        <p class="intro">Отдельная карта на каждый муниципальный округ: граница района, дворовые территории и слои благоустройства по данным АСУ ОДС — автопарковки, тропинки, тротуары, проезды, детские и спортивные площадки. Слои включаются и выключаются, по клику открывается карточка объекта.</p>
-        <a class="start-button" href="../districts/">Открыть список районов →</a>
+      <details class="catalog-section print-box" id="print" aria-labelledby="print-heading">
+        <summary><h2 id="print-heading">Печатные формы</h2><span class="count">5 форм · A3, A1, 1000 × 1400 мм</span></summary>
         <div class="map-list">
-          <a class="map-card" href="../districts/aeroport.html">
-            <span class="card-top"><span class="card-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" class="lucide lucide-map" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z" /> <path d="M15 5.764v15" /> <path d="M9 3.236v15" /> </svg></span><span><h3>Аэропорт</h3></span></span>
-            <p>Граница района, дворы и слои благоустройства.</p>
-            <span class="data-scope">Карта района · АСУ ОДС</span>
-            <span class="direct-link">Открыть карту →</span>
-          </a>
-          <a class="map-card" href="../districts/begovoy.html">
-            <span class="card-top"><span class="card-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" class="lucide lucide-map" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z" /> <path d="M15 5.764v15" /> <path d="M9 3.236v15" /> </svg></span><span><h3>Беговой</h3></span></span>
-            <p>Граница района, дворы и слои благоустройства.</p>
-            <span class="data-scope">Карта района · АСУ ОДС</span>
-            <span class="direct-link">Открыть карту →</span>
-          </a>
-          <a class="map-card" href="../districts/beskudnikovskiy.html">
-            <span class="card-top"><span class="card-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" class="lucide lucide-map" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z" /> <path d="M15 5.764v15" /> <path d="M9 3.236v15" /> </svg></span><span><h3>Бескудниковский</h3></span></span>
-            <p>Граница района, дворы и слои благоустройства.</p>
-            <span class="data-scope">Карта района · АСУ ОДС</span>
-            <span class="direct-link">Открыть карту →</span>
-          </a>
-          <a class="map-card" href="../districts/voykovskiy.html">
-            <span class="card-top"><span class="card-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" class="lucide lucide-map" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z" /> <path d="M15 5.764v15" /> <path d="M9 3.236v15" /> </svg></span><span><h3>Войковский</h3></span></span>
-            <p>Граница района, дворы и слои благоустройства.</p>
-            <span class="data-scope">Карта района · АСУ ОДС</span>
-            <span class="direct-link">Открыть карту →</span>
-          </a>
-          <a class="map-card" href="../districts/vostochnoe-degunino.html">
-            <span class="card-top"><span class="card-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" class="lucide lucide-map" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z" /> <path d="M15 5.764v15" /> <path d="M9 3.236v15" /> </svg></span><span><h3>Восточное Дегунино</h3></span></span>
-            <p>Граница района, дворы и слои благоустройства.</p>
-            <span class="data-scope">Карта района · АСУ ОДС</span>
-            <span class="direct-link">Открыть карту →</span>
-          </a>
-          <a class="map-card" href="../districts/golovinskiy.html">
-            <span class="card-top"><span class="card-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" class="lucide lucide-map" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z" /> <path d="M15 5.764v15" /> <path d="M9 3.236v15" /> </svg></span><span><h3>Головинский</h3></span></span>
-            <p>Граница района, дворы и слои благоустройства.</p>
-            <span class="data-scope">Карта района · АСУ ОДС</span>
-            <span class="direct-link">Открыть карту →</span>
-          </a>
-          <a class="map-card" href="../districts/dmitrovskiy.html">
-            <span class="card-top"><span class="card-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" class="lucide lucide-map" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z" /> <path d="M15 5.764v15" /> <path d="M9 3.236v15" /> </svg></span><span><h3>Дмитровский</h3></span></span>
-            <p>Граница района, дворы и слои благоустройства.</p>
-            <span class="data-scope">Карта района · АСУ ОДС</span>
-            <span class="direct-link">Открыть карту →</span>
-          </a>
-          <a class="map-card" href="../districts/zapadnoe-degunino.html">
-            <span class="card-top"><span class="card-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" class="lucide lucide-map" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z" /> <path d="M15 5.764v15" /> <path d="M9 3.236v15" /> </svg></span><span><h3>Западное Дегунино</h3></span></span>
-            <p>Граница района, дворы и слои благоустройства.</p>
-            <span class="data-scope">Карта района · АСУ ОДС</span>
-            <span class="direct-link">Открыть карту →</span>
-          </a>
-          <a class="map-card" href="../districts/koptevo.html">
-            <span class="card-top"><span class="card-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" class="lucide lucide-map" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z" /> <path d="M15 5.764v15" /> <path d="M9 3.236v15" /> </svg></span><span><h3>Коптево</h3></span></span>
-            <p>Граница района, дворы и слои благоустройства.</p>
-            <span class="data-scope">Карта района · АСУ ОДС</span>
-            <span class="direct-link">Открыть карту →</span>
-          </a>
-          <a class="map-card" href="../districts/levoberezhnyy.html">
-            <span class="card-top"><span class="card-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" class="lucide lucide-map" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z" /> <path d="M15 5.764v15" /> <path d="M9 3.236v15" /> </svg></span><span><h3>Левобережный</h3></span></span>
-            <p>Граница района, дворы и слои благоустройства.</p>
-            <span class="data-scope">Карта района · АСУ ОДС</span>
-            <span class="direct-link">Открыть карту →</span>
-          </a>
-          <a class="map-card" href="../districts/molzhaninovskiy.html">
-            <span class="card-top"><span class="card-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" class="lucide lucide-map" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z" /> <path d="M15 5.764v15" /> <path d="M9 3.236v15" /> </svg></span><span><h3>Молжаниновский</h3></span></span>
-            <p>Граница района, дворы и слои благоустройства.</p>
-            <span class="data-scope">Карта района · АСУ ОДС</span>
-            <span class="direct-link">Открыть карту →</span>
-          </a>
-          <a class="map-card" href="../districts/savelovskiy.html">
-            <span class="card-top"><span class="card-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" class="lucide lucide-map" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z" /> <path d="M15 5.764v15" /> <path d="M9 3.236v15" /> </svg></span><span><h3>Савеловский</h3></span></span>
-            <p>Граница района, дворы и слои благоустройства.</p>
-            <span class="data-scope">Карта района · АСУ ОДС</span>
-            <span class="direct-link">Открыть карту →</span>
-          </a>
-          <a class="map-card" href="../districts/sokol.html">
-            <span class="card-top"><span class="card-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" class="lucide lucide-map" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z" /> <path d="M15 5.764v15" /> <path d="M9 3.236v15" /> </svg></span><span><h3>Сокол</h3></span></span>
-            <p>Граница района, дворы и слои благоустройства.</p>
-            <span class="data-scope">Карта района · АСУ ОДС</span>
-            <span class="direct-link">Открыть карту →</span>
-          </a>
-          <a class="map-card" href="../districts/timiryazevskiy.html">
-            <span class="card-top"><span class="card-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" class="lucide lucide-map" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z" /> <path d="M15 5.764v15" /> <path d="M9 3.236v15" /> </svg></span><span><h3>Тимирязевский</h3></span></span>
-            <p>Граница района, дворы и слои благоустройства.</p>
-            <span class="data-scope">Карта района · АСУ ОДС</span>
-            <span class="direct-link">Открыть карту →</span>
-          </a>
-          <a class="map-card" href="../districts/hovrino.html">
-            <span class="card-top"><span class="card-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" class="lucide lucide-map" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z" /> <path d="M15 5.764v15" /> <path d="M9 3.236v15" /> </svg></span><span><h3>Ховрино</h3></span></span>
-            <p>Граница района, дворы и слои благоустройства.</p>
-            <span class="data-scope">Карта района · АСУ ОДС</span>
-            <span class="direct-link">Открыть карту →</span>
-          </a>
-          <a class="map-card" href="../districts/horoshevskiy.html">
-            <span class="card-top"><span class="card-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" class="lucide lucide-map" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z" /> <path d="M15 5.764v15" /> <path d="M9 3.236v15" /> </svg></span><span><h3>Хорошевский</h3></span></span>
-            <p>Граница района, дворы и слои благоустройства.</p>
-            <span class="data-scope">Карта района · АСУ ОДС</span>
-            <span class="direct-link">Открыть карту →</span>
-          </a>
-        </div>
-      </section>
-
-      <section class="catalog-section" aria-labelledby="print-heading">
-        <h2 id="print-heading">Печатные формы</h2>
-        <div class="map-list">
-          <a class="map-card" href="../yards-print/">
-            <span class="card-top"><span class="card-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" class="lucide lucide-printer" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" /> <path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6" /> <rect x="6" y="14" width="12" height="8" rx="1" /> </svg></span><span><h3>Дворы и участки — печать A3</h3></span></span>
-            <p>Карта дворовых территорий с фильтрами по району и участку для PDF. Книжная ориентация, тесная обрезка по границе САО.</p>
+          <a class="map-card" href="../yards-print/" data-search="дворы и участки — печать a3 карта дворовых территорий с фильтрами по району и участку для pdf. книжная форма a3 · дворы и объекты">
+            <span class="card-top"><span class="card-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" class="lucide lucide-printer" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" /> <path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6" /> <rect x="6" y="14" width="12" height="8" rx="1" /> </svg></span><h3>Дворы и участки — печать A3</h3></span>
+            <p>Карта дворовых территорий с фильтрами по району и участку для PDF.</p>
             <span class="data-scope">Книжная форма A3 · дворы и объекты</span>
             <span class="direct-link">Открыть печатную форму →</span>
           </a>
-          <a class="map-card" href="../yards-print/print-a1.html">
-            <span class="card-top"><span class="card-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" class="lucide lucide-printer" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" /> <path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6" /> <rect x="6" y="14" width="12" height="8" rx="1" /> </svg></span><span><h3>Дворы и участки — печать A1</h3></span></span>
+          <a class="map-card" href="../yards-print/print-a1.html" data-search="дворы и участки — печать a1 тот же лист для крупноформатной печати a1 (настенная карта, стенд). книжная форма a1 · дворы и объекты">
+            <span class="card-top"><span class="card-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" class="lucide lucide-printer" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" /> <path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6" /> <rect x="6" y="14" width="12" height="8" rx="1" /> </svg></span><h3>Дворы и участки — печать A1</h3></span>
             <p>Тот же лист для крупноформатной печати A1 (настенная карта, стенд).</p>
             <span class="data-scope">Книжная форма A1 · дворы и объекты</span>
             <span class="direct-link">Открыть печатную форму →</span>
           </a>
-          <a class="map-card" href="../odh-map/print-a3.html">
-            <span class="card-top"><span class="card-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" class="lucide lucide-printer" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" /> <path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6" /> <rect x="6" y="14" width="12" height="8" rx="1" /> </svg></span><span><h3>ОДХ — печать A3</h3></span></span>
-            <p>Отдельная форма для печати карты объектов дорожного хозяйства и PDF. Легенда и оформление — как в эталонной карте очерёдности.</p>
+          <a class="map-card" href="../odh-map/print-a3.html" data-search="одх — печать a3 карта объектов дорожного хозяйства для печати и pdf. легенда — как в эталонной карте очерёдности. книжная форма a3 · одх и очередность">
+            <span class="card-top"><span class="card-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" class="lucide lucide-printer" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" /> <path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6" /> <rect x="6" y="14" width="12" height="8" rx="1" /> </svg></span><h3>ОДХ — печать A3</h3></span>
+            <p>Карта объектов дорожного хозяйства для печати и PDF. Легенда — как в эталонной карте очерёдности.</p>
             <span class="data-scope">Книжная форма A3 · ОДХ и очередность</span>
             <span class="direct-link">Открыть печатную форму →</span>
           </a>
-          <a class="map-card" href="../odh-map/print-a1.html">
-            <span class="card-top"><span class="card-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" class="lucide lucide-printer" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" /> <path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6" /> <rect x="6" y="14" width="12" height="8" rx="1" /> </svg></span><span><h3>ОДХ — печать A1</h3></span></span>
+          <a class="map-card" href="../odh-map/print-a1.html" data-search="одх — печать a1 тот же лист для крупноформатной печати a1 (настенная карта, стенд). книжная форма a1 · одх и очередность">
+            <span class="card-top"><span class="card-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" class="lucide lucide-printer" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" /> <path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6" /> <rect x="6" y="14" width="12" height="8" rx="1" /> </svg></span><h3>ОДХ — печать A1</h3></span>
             <p>Тот же лист для крупноформатной печати A1 (настенная карта, стенд).</p>
             <span class="data-scope">Книжная форма A1 · ОДХ и очередность</span>
             <span class="direct-link">Открыть печатную форму →</span>
           </a>
-          <a class="map-card" href="../odh-map/print-1000x1400.html">
-            <span class="card-top"><span class="card-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" class="lucide lucide-printer" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" /> <path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6" /> <rect x="6" y="14" width="12" height="8" rx="1" /> </svg></span><span><h3>ОДХ — крупноформатная схема уборки</h3></span></span>
-            <p>Отдельный лист с очередями уборки улиц САО, векторными объектами и настройкой вида перед печатью в PDF.</p>
+          <a class="map-card" href="../odh-map/print-1000x1400.html" data-search="одх — крупноформатная схема уборки очереди уборки улиц сао, векторные объекты и настройка вида перед печатью в pdf. лист 1000 × 1400 мм · одх и очередность">
+            <span class="card-top"><span class="card-icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" class="lucide lucide-printer" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" /> <path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6" /> <rect x="6" y="14" width="12" height="8" rx="1" /> </svg></span><h3>ОДХ — крупноформатная схема уборки</h3></span>
+            <p>Очереди уборки улиц САО, векторные объекты и настройка вида перед печатью в PDF.</p>
             <span class="data-scope">Лист 1000 × 1400 мм · ОДХ и очередность</span>
             <span class="direct-link">Открыть крупноформатную форму →</span>
           </a>
         </div>
-      </section>
+      </details>
+      <p class="no-results" id="noResults" hidden>Ничего не нашлось. Попробуйте название района или слово «печать», «фото», «ОДХ».</p>
     </main>
   </div>
+  <script>
+  (() => {
+    // Поиск по каталогу: показывает подходящие карты и районы, остальное прячет.
+    const input = document.getElementById('hubSearch');
+    const catalog = document.getElementById('catalog');
+    const norm = (v) => String(v || '').toLowerCase().replace(/ё/g, 'е').trim();
+    const cards = [...catalog.querySelectorAll('.map-card')];
+    const sections = [...catalog.querySelectorAll('.catalog-section')];
+    input.addEventListener('input', () => {
+      const q = norm(input.value);
+      catalog.classList.toggle('is-filtered', Boolean(q));
+      let found = 0;
+      for (const card of cards) {
+        // Ищем по заголовку раздела, подписи и тексту карточки: «приёмка» найдёт все кабинеты приёмки.
+        const text = (card.closest('.catalog-section')?.querySelector('h2')?.textContent || '') + ' ' + (card.dataset.search || '') + ' ' + card.textContent;
+        const hit = q && norm(text).includes(q);
+        card.classList.toggle('match', Boolean(hit));
+        if (hit) found += 1;
+      }
+      for (const section of sections) {
+        const hit = Boolean(q) && section.querySelector('.map-card.match') != null;
+        section.classList.toggle('has-match', hit);
+        if (hit && section.tagName === 'DETAILS') section.open = true;
+      }
+      document.getElementById('noResults').hidden = !q || found > 0;
+    });
+    input.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') { const first = catalog.querySelector('.map-card.match'); if (first) first.click(); }
+      if (event.key === 'Escape') { input.value = ''; input.dispatchEvent(new Event('input')); }
+    });
+  })();
+  </script>
 </body>
 </html>
