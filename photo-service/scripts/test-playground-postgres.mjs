@@ -5,7 +5,9 @@ import pg from 'pg';
 import { photoServiceDatabaseConfig } from '../src/config.js';
 import { createPlaygroundPhotoRouter } from '../src/tpu-points/playground-photo.js';
 import { createSidewalkPointsRouter } from '../src/tpu-points/sidewalk-points.js';
-import { readFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, unlinkSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 
 assert.equal(process.env.PLAYGROUND_DISPOSABLE_DB, 'yes', 'Disposable database required');
 const pool = new pg.Pool(photoServiceDatabaseConfig(process.env));
@@ -128,7 +130,22 @@ try {
   assert.deepEqual((await pool.query('SELECT longitude, latitude, heading FROM sidewalk_photo_points WHERE id=$1', [own.id])).rows[0], before);
   const drift = await pool.query("SELECT count(*)::int AS n FROM sidewalk_photo_points WHERE id <> $1 AND retired_at IS NULL", [own.id]);
   assert.equal(drift.rows[0].n, 5709);
-  console.log('PASS: PostgreSQL migrations, import, slots, duplicate prevention, review, review queue and summary, sidewalk photo slots, sidewalk replace');
+  // Снятие точек въездных групп по списку номеров: только своего района, с записью в журнал.
+  const listFile = join(tmpdir(), 'retire-test-' + process.pid + '.txt');
+  writeFileSync(listFile, 'Точка съёмки 13.121\n13.999\n');
+  const pointRow = (id, district) => pool.query(`INSERT INTO object_photo_points (id,dataset_id,object_key,object_type,district,longitude,latitude,label,created_by,updated_by)
+    VALUES ($1,'sao_district_photo_points',$2,'district',$3,37.5,55.8,'13.121','test-admin','test-admin')`, [id, 'district:' + id, district]);
+  await pointRow('22222222-2222-4222-8222-222222222222', 'Сокол');
+  await pointRow('33333333-3333-4333-8333-333333333333', 'Коптево');
+  assert.match(run('scripts/retire-district-photo-points.js', ['--list=' + listFile]), /к снятию: 1; уже сняты: 0; не найдены: 1/);
+  assert.match(run('scripts/retire-district-photo-points.js', ['--list=' + listFile, '--actor=a@example.invalid', '--apply']), /Снято точек: 1\./);
+  const retired = await pool.query("SELECT district, retired_at IS NOT NULL AS gone FROM object_photo_points WHERE label = '13.121' ORDER BY district");
+  assert.deepEqual(retired.rows, [{ district: 'Коптево', gone: false }, { district: 'Сокол', gone: true }]);
+  const logged = await pool.query("SELECT actor_user_id FROM audit_log WHERE action = 'object_photo_point_retired' AND metadata->>'pointId' = '22222222-2222-4222-8222-222222222222'");
+  assert.deepEqual(logged.rows, [{ actor_user_id: 'test-admin' }]);
+  assert.match(run('scripts/retire-district-photo-points.js', ['--list=' + listFile]), /к снятию: 0; уже сняты: 1; не найдены: 1/);
+  unlinkSync(listFile);
+  console.log('PASS: PostgreSQL migrations, import, slots, duplicate prevention, review, review queue and summary, sidewalk photo slots, sidewalk replace, retire entrance points by list');
 } finally {
   if (server) await new Promise(resolve => server.close(resolve));
   await pool.end();

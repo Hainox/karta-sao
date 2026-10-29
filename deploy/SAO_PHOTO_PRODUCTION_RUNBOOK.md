@@ -262,3 +262,17 @@ Install `deploy/photo-service-cron.example` with executable scripts (`chmod 750 
 Проверка после развёртывания: Коптево входит без пароля, префектура без пароля получает 401, после районного входа доступны фотослоты, а назначение точек и приёмка недоступны. Слияние в main обновляет Pages, но само по себе не обновляет фотослужбу.
 
 Проверка зависимостей 2026-10-24: устранена GHSA-27r3-jxmh-p828 обновлением body-parser 2.3.0 → 2.4.0 и требуемого qs 6.16.0 → 6.16.1 в lockfile. npm audit не выявляет уязвимостей. Серверный скрипт меняет только вход; обновлённый lockfile устанавливается при полном развёртывании из репозитория.
+
+### Retiring entrance shooting points by a list (`scripts/retire-district-photo-points.js`)
+
+When the prefecture sends a list of entrance shooting points to delete («Точка съёмки 12.362», «9.215» — district number, dot, point number), put the list into `photo-service/scripts/retire-lists/` and ship the scripts as above. The script does what the «Удалить» button in the point card does: the point gets `retired_at`, its photos stay in the database, and every point is written to `audit_log` under the given prefecture account. A point is retired only in the district its number belongs to. The dry run lists how many points will go per district, numbers that were not found or are already retired, and points that still have a photo under review or accepted:
+
+```sh
+cd /opt/sao-photo-service/photo-service
+DC="docker compose -p sao-photo-service -f compose.yaml -f compose.recovery.yaml"
+$DC build photo-service
+$DC run --rm photo-service node scripts/retire-district-photo-points.js --list=scripts/retire-lists/2026-10-29-entrances.txt
+$DC run --rm photo-service node scripts/retire-district-photo-points.js --list=scripts/retire-lists/2026-10-29-entrances.txt --actor=PREFECTURE_LOGIN --apply
+```
+
+No restart is needed; the district maps stop showing the points on the next refresh.
