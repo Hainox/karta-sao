@@ -20,21 +20,25 @@ test('список на снятие от 2026-10-29 читается целик
   assert.deepEqual([count('Савеловский'), count('Беговой'), count('Коптево'), count('Восточное Дегунино'), count('Сокол'), count('Ховрино')], [12, 12, 38, 4, 19, 51]);
 });
 
-test('план снимает только активные точки своего района и отдельно показывает точки с фото', async () => {
+test('план снимает только активные точки рабочего слоя своего района; архив и импорт остаются', async () => {
   const rows = [
     { id: 'a', label: '12.362', district: 'Савеловский', retired_at: null, live_photos: 0 },
     { id: 'b', label: '12.362', district: 'Сокол', retired_at: null, live_photos: 0 },
     { id: 'c', label: '9.215', district: 'Коптево', retired_at: null, live_photos: 1 },
     { id: 'd', label: '2.640', district: 'Беговой', retired_at: new Date(), live_photos: 0 },
+    { id: 'e', label: '12.362', district: 'Савеловский', retired_at: null, hidden: true, live_photos: 0 },
+    { id: 'f', label: '13.40', district: 'Сокол', retired_at: null, hidden: true, live_photos: 0 },
   ];
   const db = { query: async (sql, [dataset, labels]) => {
     assert.equal(dataset, 'sao_district_photo_points');
     return { rows: rows.filter((row) => labels.includes(row.label)) };
   } };
-  const { labels } = parsePointLabels('12.362 9.215 2.640 5.489');
+  const { labels } = parsePointLabels('12.362 9.215 2.640 5.489 13.40');
   const plan = await retirePlan(db, labels);
   assert.deepEqual(plan.retire.map((row) => row.id), ['a', 'c']);
   assert.deepEqual(plan.withPhotos.map((row) => row.label), ['9.215']);
   assert.deepEqual(plan.already, ['2.640']);
-  assert.deepEqual(plan.missing, ['5.489']);
+  assert.deepEqual(plan.missing, ['5.489', '13.40']);
+  assert.deepEqual(plan.kept.map((row) => row.id), ['e', 'f'], 'архив и импорт с тем же номером не снимаются');
+  assert.deepEqual(plan.doubled, []);
 });

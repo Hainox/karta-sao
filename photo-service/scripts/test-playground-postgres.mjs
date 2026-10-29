@@ -137,10 +137,15 @@ try {
     VALUES ($1,'sao_district_photo_points',$2,'district',$3,37.5,55.8,'13.121','test-admin','test-admin')`, [id, 'district:' + id, district]);
   await pointRow('22222222-2222-4222-8222-222222222222', 'Сокол');
   await pointRow('33333333-3333-4333-8333-333333333333', 'Коптево');
-  assert.match(run('scripts/retire-district-photo-points.js', ['--list=' + listFile]), /к снятию: 1; уже сняты: 0; не найдены: 1/);
+  // Архивная точка префектуры (до 23.10) и импортная с тем же номером на карте не видны и остаются.
+  await pointRow('44444444-4444-4444-8444-444444444444', 'Сокол');
+  await pool.query("UPDATE object_photo_points SET created_at = TIMESTAMPTZ '2026-10-20 12:00:00+03' WHERE id = '44444444-4444-4444-8444-444444444444'");
+  await pointRow('55555555-5555-4555-8555-555555555555', 'Сокол');
+  await pool.query("UPDATE object_photo_points SET note = 'Источник: NextGIS' WHERE id = '55555555-5555-4555-8555-555555555555'");
+  assert.match(run('scripts/retire-district-photo-points.js', ['--list=' + listFile]), /к снятию: 1; уже сняты: 0; не найдены: 1[\s\S]*не снимаются\): 2/);
   assert.match(run('scripts/retire-district-photo-points.js', ['--list=' + listFile, '--actor=a@example.invalid', '--apply']), /Снято точек: 1\./);
-  const retired = await pool.query("SELECT district, retired_at IS NOT NULL AS gone FROM object_photo_points WHERE label = '13.121' ORDER BY district");
-  assert.deepEqual(retired.rows, [{ district: 'Коптево', gone: false }, { district: 'Сокол', gone: true }]);
+  const retired = await pool.query("SELECT id, retired_at IS NOT NULL AS gone FROM object_photo_points WHERE label = '13.121' ORDER BY id");
+  assert.deepEqual(retired.rows.map((row) => row.gone), [true, false, false, false]);
   const logged = await pool.query("SELECT actor_user_id FROM audit_log WHERE action = 'object_photo_point_retired' AND metadata->>'pointId' = '22222222-2222-4222-8222-222222222222'");
   assert.deepEqual(logged.rows, [{ actor_user_id: 'test-admin' }]);
   assert.match(run('scripts/retire-district-photo-points.js', ['--list=' + listFile]), /к снятию: 0; уже сняты: 1; не найдены: 1/);
