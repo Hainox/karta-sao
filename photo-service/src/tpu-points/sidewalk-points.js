@@ -39,6 +39,27 @@ export function validateSidewalkPatch(body, boundary) {
   return { value };
 }
 
+/** Новая точка, которую префектура ставит «Разметкой»: район, место и направление кадра. */
+export function validateSidewalkCreate(body, boundary) {
+  const { district, longitude, latitude, heading } = body || {};
+  if (!DISTRICTS.has(district)) return { error: 'Укажите район САО.' };
+  if (longitude === undefined || latitude === undefined || heading === undefined) return { error: 'Укажите место точки и направление кадра.' };
+  const { value, error } = validateSidewalkPatch({ longitude, latitude, heading }, boundary);
+  return error ? { error } : { value: { district, ...value } };
+}
+
+/** Следующий номер точки района: «Т1.386» после «Т1.385». Номера снятых точек не переиспользуются. */
+export function nextSidewalkPointNo(district, taken) {
+  const prefix = `Т${[...DISTRICTS].indexOf(district) + 1}.`;
+  let max = 0;
+  for (const no of taken) {
+    if (!no.startsWith(prefix)) continue;
+    const n = Number(no.slice(prefix.length));
+    if (Number.isInteger(n) && n > max) max = n;
+  }
+  return prefix + String(max + 1).padStart(3, '0');
+}
+
 export function createSidewalkPointsRouter({ pool, authenticate, boundary }) {
   const router = express.Router();
   router.use(authenticate, (req, res, next) => (req.user.role === 'prefecture_admin'
@@ -81,6 +102,26 @@ export function createSidewalkPointsRouter({ pool, authenticate, boundary }) {
     const { rows } = await client.query(sql, params);
     if (rows[0]) await audit(client, req, action, `sidewalk:${rows[0].point_no}`, { id: rows[0].id, ...req.body });
     return rows[0] || null;
+  });
+
+  router.post('/', prefecture, async (req, res, next) => {
+    try {
+      const { value, error } = validateSidewalkCreate(req.body, boundary);
+      if (error) return res.status(422).json({ error });
+      const point = await transaction(async (client) => {
+        // Номер выдаётся под блокировкой района: две одновременные разметки не получат один номер.
+        await client.query('SELECT pg_advisory_xact_lock(hashtext($1))', ['sidewalk_point_no:' + value.district]);
+        const prefix = `Т${[...DISTRICTS].indexOf(value.district) + 1}.`;
+        const taken = (await client.query('SELECT point_no FROM sidewalk_photo_points WHERE point_no LIKE $1', [prefix + '%'])).rows.map((r) => r.point_no);
+        const { rows } = await client.query(`INSERT INTO sidewalk_photo_points
+          (id, point_no, district, role, longitude, latitude, heading, status, updated_by)
+          VALUES ($1, $2, $3, 'добавлена префектурой', $4, $5, $6, 'черновик', $7) RETURNING ${COLUMNS}`,
+        [crypto.randomUUID(), nextSidewalkPointNo(value.district, taken), value.district, value.longitude, value.latitude, value.heading, req.user.sub]);
+        await audit(client, req, 'sidewalk_point_create', `sidewalk:${rows[0].point_no}`, { id: rows[0].id, ...value });
+        return rows[0];
+      });
+      res.status(201).json({ point: { ...point, photo_state: 'empty' } });
+    } catch (error) { next(error); }
   });
 
   router.patch('/:id', prefecture, async (req, res, next) => {

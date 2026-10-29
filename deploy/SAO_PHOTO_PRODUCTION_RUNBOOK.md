@@ -276,3 +276,16 @@ $DC run --rm photo-service node scripts/retire-district-photo-points.js --list=s
 ```
 
 No restart is needed; the district maps stop showing the points on the next refresh.
+
+### New sidewalk points from «Разметка» (`POST /object-photo-points/sidewalks`)
+
+Since 2026-10-29 the prefecture can place new sidewalk shooting points on the district maps («Разметка» → «Тротуары»). The service gives each new point the next free number of its district (`Т1.386` after `Т1.385`, numbers of retired points are never reused) and marks it as edited by the prefecture, so `--replace` never moves or retires it. No migration is needed; ship the files as above, then rebuild and restart:
+
+```sh
+cd /opt/sao-photo-service/photo-service
+DC="docker compose -p sao-photo-service -f compose.yaml -f compose.recovery.yaml"
+$DC build photo-service
+$DC up -d photo-service
+```
+
+Until the restart the map answers «Точка тротуара не сохранена» when a new sidewalk point is placed; everything else keeps working.
