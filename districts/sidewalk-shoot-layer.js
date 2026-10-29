@@ -4,7 +4,7 @@
 // при каждом входе и выходе. Точки берутся со службы фото, где префектура их
 // переносит, поворачивает и удаляет. Если служба недоступна или точки туда ещё
 // не загружены, показывается опубликованный файл слоя — без правок.
-window.initSidewalkShootLayer = function ({ map, slug, district, apiRequest, escapeHtml, centerSelection, popover, getUser, preparePointPhoto }) {
+window.initSidewalkShootLayer = function ({ map, slug, district, apiRequest, escapeHtml, centerSelection, popover, getUser, preparePointPhoto, editor }) {
   const container = document.getElementById('sidewalkShootLayer');
   const card = document.getElementById('card');
   const API = '/object-photo-points/sidewalks';
@@ -14,8 +14,8 @@ window.initSidewalkShootLayer = function ({ map, slug, district, apiRequest, esc
   let visible = false;
   let isOn = false;
   let current = null;
-  let movingId = null;
-  let suppressClick = false;
+  const keyOf = (point) => 'sw:' + point.id;
+  const canEdit = () => editable && getUser?.()?.role === 'prefecture_admin';
 
   const fromServer = (p) => ({ id: p.id, point_no: p.point_no, address: p.address, side: p.side, role: p.role,
     also_covers: p.also_covers, status: p.status, heading: Number(p.heading), lng: Number(p.longitude), lat: Number(p.latitude),
@@ -40,24 +40,28 @@ window.initSidewalkShootLayer = function ({ map, slug, district, apiRequest, esc
   function markerFor(point) {
     const el = document.createElement('button');
     el.type = 'button';
-    el.className = 'shoot-marker sidewalk-shoot' + (point.id === movingId ? ' moving' : '');
+    el.className = 'shoot-marker sidewalk-shoot';
     if (point.photo_state && point.photo_state !== 'empty') el.dataset.photoState = point.photo_state;
     el.title = `Тротуар ${point.point_no} · ${point.address} · ${point.heading}°`;
     el.innerHTML = '<span class="shoot-dot"></span>';
     el.append(arrowSvg(point.heading));
     point._arrow = el.lastChild;
+    point._element = el;
+    const key = keyOf(point);
     el.addEventListener('click', (event) => {
       event.stopPropagation();
-      if (suppressClick) { suppressClick = false; return; }
+      if (editor?.takeSuppressedClick(key)) return;
       centerSelection([point.lng, point.lat]);
       openCard(point);
     });
-    return new window.ymaps3.YMapMarker({
+    // Выбранную точку префектура тащит прямо мышью — ручки даёт districts/point-editor.js.
+    const marker = new window.ymaps3.YMapMarker({
       coordinates: [point.lng, point.lat],
-      draggable: point.id === movingId,
-      mapFollowsOnDrag: false,
-      onDragEnd: (coordinates) => { suppressClick = true; commitMove(point, coordinates); },
+      draggable: Boolean(editor?.isSelected(key)) && canEdit(),
+      ...(editor ? editor.dragHandlers(key) : {}),
     }, el);
+    editor?.attach(key, el, { coordinates: [point.lng, point.lat], heading: point.heading });
+    return marker;
   }
 
   function draw() {
@@ -79,71 +83,45 @@ window.initSidewalkShootLayer = function ({ map, slug, district, apiRequest, esc
     if (box) box.textContent = text;
   }
 
-  async function save(point, body, okText) {
-    setStatus('Сохраняем…');
-    try {
-      const response = await apiRequest(`${API}/${point.id}`, { method: 'PATCH', body: JSON.stringify(body) });
-      const photoState = point.photo_state;
-      Object.assign(point, fromServer((await response.json()).point), { photo_state: photoState });
-      redrawOne(point);
-      if (current === point) openCard(point, okText);
-      return true;
-    } catch (error) {
-      setStatus('Не сохранено: ' + error.message);
-      return false;
+  /** Правка из ручек на карте: перенос или поворот уходит на сервер сразу. */
+  async function save(point, body) {
+    const response = await apiRequest(`${API}/${point.id}`, { method: 'PATCH', body: JSON.stringify(body) });
+    const photoState = point.photo_state;
+    Object.assign(point, fromServer((await response.json()).point), { photo_state: photoState });
+    redrawOne(point);
+    if (current === point) {
+      const deg = card.querySelector('[data-sw-heading]');
+      if (deg) deg.textContent = point.heading + '°';
     }
-  }
-
-  async function commitMove(point, coordinates) {
-    const [lng, lat] = coordinates;
-    movingId = null;
-    const ok = await save(point, { longitude: lng, latitude: lat }, 'Точка перенесена.');
-    if (!ok) redrawOne(point);
   }
 
   function openCard(point, message = '') {
     current = point;
     const e = escapeHtml;
+    const editing = canEdit();
     popover.open({ coordinates: [point.lng, point.lat], kind: 'sidewalk', title: point.address || 'Точка ' + point.point_no,
-      subtitle: 'Точка ' + point.point_no + (point.status ? ', ' + point.status : ''), heading: point.heading });
+      subtitle: 'Точка ' + point.point_no + (point.status ? ', ' + point.status : ''), heading: point.heading, editing });
+    if (editing && editor) {
+      for (const p of points) if (p !== point) p._marker?.update?.({ draggable: false });
+      editor.select({ key: keyOf(point), coordinates: [point.lng, point.lat], heading: point.heading, element: point._element,
+        save: ({ coordinates, heading }) => save(point, coordinates ? { longitude: coordinates[0], latitude: coordinates[1] } : { heading }) });
+      point._marker?.update?.({ draggable: true });
+    }
     const facts = [
       ['Сторона', point.side],
       ['Место', point.role],
-      ['Направление кадра', point.heading + '°'],
+      ['Направление кадра', point.heading + '°', 'data-sw-heading'],
       ['Также снимает', point.also_covers],
-    ].filter(([, v]) => v != null && v !== '').map(([k, v]) => `<dt>${k}</dt><dd>${e(v)}</dd>`).join('');
-    const tools = editable ? `<section class="pin-section"><h3>Точка</h3>
-        <div class="pin-actions"><button type="button" data-sw="left" aria-label="Повернуть на ${STEP}° против часовой">⟲ ${STEP}°</button>
-        <input type="number" min="0" max="359" step="1" value="${point.heading}" data-sw="heading" aria-label="Направление кадра, градусы" style="flex:0 0 70px">
-        <button type="button" data-sw="right" aria-label="Повернуть на ${STEP}° по часовой">${STEP}° ⟳</button>
-        <button type="button" data-sw="save-heading" class="primary">Сохранить направление</button></div>
-        <div class="pin-actions"><button type="button" data-sw="move">${movingId === point.id ? 'Отменить перенос' : 'Перенести'}</button>
-        <button type="button" data-sw="delete" class="danger">Удалить точку</button></div>
+    ].filter(([, v]) => v != null && v !== '').map(([k, v, attr]) => `<dt>${k}</dt><dd${attr ? ' ' + attr : ''}>${e(v)}</dd>`).join('');
+    const tools = editing ? `<section class="pin-section"><h3>Точка</h3>
+        <ul class="pin-howto"><li><b>1</b>Перенести — тяните саму точку.</li><li><b>2</b>Повернуть — тяните круглую ручку на конце стрелки.</li><li><b>3</b>Сохраняется само, «Отменить» — внизу экрана.</li></ul>
+        <div class="pin-actions"><button type="button" data-sw="delete" class="danger">Удалить точку</button></div>
       </section>` : '';
     const photo = editable ? '<section class="pin-section" data-sw-photo><h3>Фото</h3><p class="pin-note">Загружаем…</p></section>' : '';
     card.innerHTML = `<dl class="pin-facts">${facts}</dl>${photo}${tools}<p class="pin-note" data-sw-status role="status">${e(message || (editable ? '' : 'Правки и фото недоступны: точки показаны из файла.'))}</p>`;
     if (!editable) return;
     renderPhoto(point);
-    const input = card.querySelector('[data-sw="heading"]');
-    const preview = (deg) => {
-      const heading = ((Math.round(deg) % 360) + 360) % 360;
-      input.value = heading;
-      if (point._arrow) point._arrow.style.transform = 'rotate(' + heading + 'deg)';
-      popover.setHeading(heading);
-    };
-    card.querySelector('[data-sw="left"]').addEventListener('click', () => preview(Number(input.value) - STEP));
-    card.querySelector('[data-sw="right"]').addEventListener('click', () => preview(Number(input.value) + STEP));
-    input.addEventListener('input', () => { if (input.value !== '') preview(Number(input.value)); });
-    card.querySelector('[data-sw="save-heading"]').addEventListener('click', () => {
-      const heading = Number(input.value);
-      if (!Number.isFinite(heading)) { setStatus('Введите направление от 0 до 359.'); return; }
-      save(point, { heading: ((Math.round(heading) % 360) + 360) % 360 }, 'Направление сохранено.');
-    });
-    card.querySelector('[data-sw="move"]').addEventListener('click', () => {
-      movingId = movingId === point.id ? null : point.id;
-      redrawOne(point);
-      openCard(point, movingId ? 'Перетащите точку на новое место: она сохранится сама.' : '');
-    });
+    if (!editing) return;
     card.querySelector('[data-sw="delete"]').addEventListener('click', async () => {
       if (!window.confirm(`Удалить точку ${point.point_no}? Номер больше не будет использован.`)) return;
       setStatus('Удаляем…');
@@ -153,6 +131,7 @@ window.initSidewalkShootLayer = function ({ map, slug, district, apiRequest, esc
         redrawOne(point);
         updateCount();
         current = null;
+        editor?.clear();
         popover.close();
       } catch (error) { setStatus('Не удалено: ' + error.message); }
     });
@@ -275,7 +254,7 @@ window.initSidewalkShootLayer = function ({ map, slug, district, apiRequest, esc
     check.addEventListener('change', () => {
       isOn = check.checked;
       check.closest('.layer-row').classList.toggle('off', !isOn);
-      if (!isOn) movingId = null;
+      if (!isOn) editor?.clear();
       draw();
     });
   }
@@ -292,7 +271,7 @@ window.initSidewalkShootLayer = function ({ map, slug, district, apiRequest, esc
     isOn = false;
     draw();
     isOn = wasOn;
-    let hint = 'Точка у угла дома со стороны подъездов, стрелка — куда смотрит кадр. Откройте точку, чтобы перенести, повернуть или удалить её.';
+    let hint = 'Точка у угла дома со стороны подъездов, стрелка — куда смотрит кадр. Нажмите на точку: её можно перетащить, а стрелку повернуть за ручку.';
     editable = false;
     try {
       const response = await apiRequest(`${API}?district=${encodeURIComponent(district)}`);
@@ -322,7 +301,7 @@ window.initSidewalkShootLayer = function ({ map, slug, district, apiRequest, esc
       if (!visible) {
         container.hidden = true;
         isOn = false;
-        movingId = null;
+        editor?.clear();
         draw();
         return;
       }

@@ -100,8 +100,8 @@ def test_pages_have_no_template_leftovers():
         assert "outline: { color: '#9a6400', width: 2.4 }" in html, \
             f"{slug}.html границы дворов не выделены тёмной обводкой"
         enabled = re.findall(r"\{ key: '(\w+)',[^}]*enabled: true", html)
-        assert enabled == ['boundary', 'yards'], \
-            f"{slug}.html по умолчанию включены {enabled}: включены должны быть только граница и дворы"
+        assert enabled == ['boundary'], \
+            f"{slug}.html по умолчанию включены {enabled}: при входе включена только граница района"
         assert "YMapListener({ layer: 'any', onClick" in html, \
             f"{slug}.html не ловит клики по карте для точек съёмки"
         assert "new YMapMarker({ coordinates" in html, \
@@ -259,16 +259,16 @@ def test_shooting_points_hint_counts_only_the_entrance_layer():
     for slug in SLUGS.values():
         html = (DISTRICTS_PAGES / f"{slug}.html").read_text(encoding="utf-8")
         assert "Точек съёмки: ${state.points.length}" not in html, slug
-        assert html.count("Точек съёмки: ${layerPointCount()") == 4, slug
+        assert html.count("Точек съёмки: ${layerPointCount()") == 2, slug
         assert "$('shootLayerCount').textContent = layerPointCount()" in html, slug
 
 
-def test_centering_only_in_view_or_hand_mode():
-    """Центрирование на объекте не срабатывает в «Разметке» и «Переносе», только в просмотре или с «Рукой».
+def test_centering_paused_while_placing_point():
+    """Центрирование на объекте не срабатывает, пока ставится новая точка: карта стоит под курсором.
 
     Правило одно на все слои: точки съёмки, площадки ДП/СП и тротуары центрируют карту через centerSelection.
     """
-    guard = "if ((state.shootMode || state.dragMode) && !state.handMode) return;"
+    guard = "if (state.shootMode) return;"
     template = (ROOT / "work" / "district_page_template.html").read_text(encoding="utf-8")
     for markup in [template] + [(DISTRICTS_PAGES / f"{slug}.html").read_text(encoding="utf-8") for slug in SLUGS.values()]:
         body = markup[markup.index("function centerSelection(coordinates) {"):]
@@ -299,20 +299,22 @@ def test_points_open_in_popover_card():
 def test_district_pages_use_shared_hud_and_prefecture_summary():
     """Панель карт районов стоит на общей основе атласа, а сводка видна только префектуре.
 
-    Режимы правки — один переключатель с «Просмотром»; «Рука» видна лишь во время правки.
+    Правка точек — ручками на карте; режимов «Просмотр/Разметка» и «Рука» больше нет.
     """
     template = (ROOT / "work" / "district_page_template.html").read_text(encoding="utf-8")
     for markup in [template] + [(DISTRICTS_PAGES / f"{slug}.html").read_text(encoding="utf-8") for slug in SLUGS.values()]:
         assert 'href="../atlas-hud.css' in markup and 'src="../atlas-hud.js' in markup and 'src="../atlas-summary.js' in markup
         assert '<aside class="sidebar hud">' in markup
-        assert 'id="viewToggle"' in markup and 'id="modeBar"' in markup
+        assert 'id="modeBar"' in markup and 'id="viewToggle"' not in markup and 'id="handToggle"' not in markup
         assert "if (state.summary) state.summary.setVisible(isPrefecture());" in markup
         assert "$('shootLogout').addEventListener('click'" in markup
         # Истёкший вход (сервер держит его 8 часов) сбрасывается, а не выдаётся за «нет связи».
         assert "if (response.status === 401 && token) expireSession();" in markup
-        # «Разметка» ставит и точки тротуаров; перенос — из карточки точки, отдельного режима в панели нет.
-        assert 'id="markTarget"' in markup and "state.sidewalkLayer.createPoint(" in markup
-        assert 'id="dragToggle"' not in markup and "$('cardMove').addEventListener('click', () => beginMove(point));" in markup
+        # Новые точки — кнопками «+ Въездная группа» и «+ Тротуар»; перенос и поворот — ручками на карте.
+        assert 'id="shootToggle"' in markup and 'id="sidewalkAdd"' in markup and "state.sidewalkLayer.createPoint(" in markup
+        assert 'src="point-editor.js' in markup and "state.editor.select({" in markup and "cardMove" not in markup
+        # Карта всегда двигается мышью, при входе слои сами не включаются.
+        assert "behaviors: editing" not in markup and "isDistrictEditor() && !state.shootLayerOn) setShootLayer(true)" not in markup
     for name in ("atlas-hud.css", "atlas-hud.js", "atlas-summary.js"):
         assert (ROOT / name).exists(), name
     css = (ROOT / "atlas-hud.css").read_text(encoding="utf-8")

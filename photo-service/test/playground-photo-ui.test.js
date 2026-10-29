@@ -19,8 +19,8 @@ test('цвет точки отражает статус фото и обновл
  const x=fake();x.container.input.checked=true;await x.container.input.onchange();
  for(const [state,color] of [['empty','#808080'],['pending','#f2c200'],['rework','#d93025'],['accepted','#16834c']]){
   x.point.photo_state=state;await x.layer.refresh();
-  assert.match(x.markers[0].el.style.cssText,new RegExp('background:'+color));
-  assert.match(x.markers[0].el.style.cssText,/border-radius:50%/);
+  assert.equal(x.markers[0].el.style.background,color);
+  assert.equal(x.markers[0].el.className,'pg-pin','круглая точка с увеличенной зоной клика — .pg-pin в point-popover.css');
  }
 });
 

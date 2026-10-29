@@ -82,8 +82,10 @@ window.createPointPopover = function ({ map, card, mapElement }) {
     if (!opened || shell.classList.contains('sheet') || !shell.parentElement) return;
     const box = (mapElement || document.body).getBoundingClientRect();
     const pointY = shell.parentElement.getBoundingClientRect().top;
-    const above = pointY - box.top - 34;
-    const below = box.bottom - pointY - 34;
+    // В правке окно отходит от точки дальше: вокруг неё ручка поворота стрелки.
+    const gap = shell.classList.contains('editing') ? 100 : 34;
+    const above = pointY - box.top - gap;
+    const below = box.bottom - pointY - gap;
     const natural = $('.pin-card').scrollHeight;
     const flip = above < Math.min(natural, 360) && below > above;
     shell.classList.toggle('below', flip);
@@ -108,7 +110,7 @@ window.createPointPopover = function ({ map, card, mapElement }) {
     }
   }
 
-  function open({ coordinates, kind, title, subtitle = '', heading = null }) {
+  function open({ coordinates, kind, title, subtitle = '', heading = null, editing = false }) {
     const meta = KINDS[kind] || KINDS.entrance;
     shell.style.setProperty('--kind', meta.color);
     $('.pin-kind').textContent = meta.label;
@@ -118,6 +120,8 @@ window.createPointPopover = function ({ map, card, mapElement }) {
     setHeading(heading);
     anchor = coordinates;
     opened = true;
+    shell.classList.toggle('editing', editing);
+    shell.classList.remove('dimmed');
     card.className = 'card open pin-content';
     mount();
     shell.classList.remove('enter');
@@ -126,10 +130,12 @@ window.createPointPopover = function ({ map, card, mapElement }) {
     requestAnimationFrame(fit);
   }
 
+  const closeHandlers = [];
   function close() {
     if (!opened) return;
     opened = false;
     unmount();
+    closeHandlers.forEach((fn) => fn());
     if (card.classList.contains('open')) card.className = 'card pin-content';
   }
 
@@ -140,5 +146,18 @@ window.createPointPopover = function ({ map, card, mapElement }) {
   }).observe(card, { attributes: true, attributeFilter: ['class'], childList: true, subtree: true });
   narrow.addEventListener('change', () => { if (opened) { mount(); requestAnimationFrame(fit); } });
 
-  return { open, close, setHeading, reposition: () => requestAnimationFrame(fit), isOpen: () => opened };
+  /** Пока точку тащат, окно прозрачно и не ловит мышь: видно, куда ставить. */
+  function setDimmed(on) {
+    shell.classList.toggle('dimmed', Boolean(on));
+  }
+
+  /** Точку перенесли — окно встаёт у её нового места. */
+  function setAnchor(coordinates) {
+    if (!opened || !Array.isArray(coordinates)) return;
+    anchor = coordinates;
+    if (marker) marker.update({ coordinates });
+    requestAnimationFrame(fit);
+  }
+
+  return { open, close, setHeading, setDimmed, setAnchor, onClose: (fn) => closeHandlers.push(fn), reposition: () => requestAnimationFrame(fit), isOpen: () => opened };
 };
