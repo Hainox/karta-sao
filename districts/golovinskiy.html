@@ -231,7 +231,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
   <main id="map"></main>
 </div>
 <script src="../atlas-hud.js?v=20261028"></script>
-<script src="../atlas-summary.js?v=20261028"></script>
+<script src="../atlas-summary.js?v=20261029"></script>
 <script src="point-popover.js?v=20261028-doors"></script>
 <script src="playground-photo-layer.js?v=20261028-popover"></script>
 <script src="sidewalk-shoot-layer.js?v=20261028-popover"></script>
@@ -488,6 +488,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     const token = sessionStorage.getItem(TOKEN_KEY);
     if (token) headers.set('Authorization', 'Bearer ' + token);
     const response = await fetch(API_BASE + path, { ...options, headers });
+    if (response.status === 401 && token) expireSession();
     if (!response.ok) {
       const body = await response.json().catch(() => ({}));
       throw new Error(body.message || body.error || 'Ошибка сервиса: ' + response.status);
@@ -1057,6 +1058,23 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       panel.appendChild(details);
       build(history, gallery);
     }
+  }
+
+  /* Вход на сервере живёт 8 часов, а вкладка помнит учётку дольше. Когда сервер
+     перестал принимать вход, сбрасываем его на карте и просим войти заново,
+     вместо того чтобы показывать «нет связи с сервером». */
+  function expireSession() {
+    sessionStorage.removeItem(TOKEN_KEY);
+    sessionStorage.removeItem(USER_KEY);
+    if (!state.photoUser) return;
+    state.photoUser = null;
+    if (state.shootMode) setShootMode(false);
+    if (state.dragMode) setDragMode(false);
+    renderShootLogin();
+    reloadPhotoPoints().finally(() => {
+      $('shootHint').textContent = 'Вход истёк: сервер держит вход 8 часов. Нажмите «Войти» и войдите снова.';
+      $('status').textContent = 'Вход истёк — войдите снова.';
+    });
   }
 
   async function reloadPhotoPoints() {

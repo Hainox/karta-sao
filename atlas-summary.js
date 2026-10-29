@@ -29,10 +29,18 @@
     return counts;
   }
 
+  /** Причина ошибки простыми словами: сеть, истёкший вход или ответ сервера. */
+  function errorText(error) {
+    const message = String(error && error.message || '');
+    if (!message || /fetch|network|load failed/i.test(message)) return 'нет связи с сервером';
+    if (/войдите/i.test(message)) return 'вход истёк — войдите снова';
+    return message.replace(/[<>&"]/g, '').slice(0, 120);
+  }
+
   function rowHtml(source, result) {
     if (result.error) {
       return `<li class="hud-sum-row"><div class="line"><span class="name">${source.label}</span><span class="pct">—</span></div>
-        <div class="legend"><span style="--dot:var(--hud-rework)">нет связи с сервером</span></div></li>`;
+        <div class="legend"><span style="--dot:var(--hud-rework)">${errorText(result.error)}</span></div></li>`;
     }
     const c = result.counts;
     const share = (n) => (c.total ? (n / c.total) * 100 : 0);

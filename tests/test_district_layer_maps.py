@@ -308,6 +308,8 @@ def test_district_pages_use_shared_hud_and_prefecture_summary():
         assert 'id="viewToggle"' in markup and 'id="modeBar"' in markup
         assert "if (state.summary) state.summary.setVisible(isPrefecture());" in markup
         assert "$('shootLogout').addEventListener('click'" in markup
+        # Истёкший вход (сервер держит его 8 часов) сбрасывается, а не выдаётся за «нет связи».
+        assert "if (response.status === 401 && token) expireSession();" in markup
     for name in ("atlas-hud.css", "atlas-hud.js", "atlas-summary.js"):
         assert (ROOT / name).exists(), name
     css = (ROOT / "atlas-hud.css").read_text(encoding="utf-8")
