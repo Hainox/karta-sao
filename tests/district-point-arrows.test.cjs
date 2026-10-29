@@ -4,7 +4,7 @@ const fs=require('node:fs');
 const path=require('node:path');
 const vm=require('node:vm');
 const source=fs.readFileSync(path.join(__dirname,'../work/district_page_template.html'),'utf8');
-const markerFunction=source.slice(source.indexOf('  function pointMarkerElement('),source.indexOf('  /* Режим переноса'));
+const markerFunction=source.slice(source.indexOf('  function pointMarkerElement('),source.indexOf('  /** Правка ручками на карте'));
 function marker(heading,preview=false){
   const element=()=>({children:[],dataset:{},style:{},attributes:{},setAttribute(k,v){this.attributes[k]=v;},addEventListener(){},append(child){this.children.push(child);}});
   const context={document:{createElement:element,createElementNS:element}};

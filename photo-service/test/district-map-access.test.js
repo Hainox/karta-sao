@@ -12,9 +12,9 @@ test('все карты районов сохраняют права редак�
 
   for (const page of pages) {
     const html = await readFile(join(districtPages, page), 'utf8');
-    assert.match(html, /const canEdit = isPrefecture\(\) && state.serverOk/, page + ': только префектура правит точки');
+    assert.match(html, /function canEditPoint\(point\) \{\s+return isPrefecture\(\) && state.serverOk/, page + ': только префектура правит точки');
     assert.match(html, /\$\('shootToggle'\)\.hidden = !isPrefecture\(\)/, page + ': районы без разметки');
-    assert.match(html, /if \(!state.shootMode \|\| !isPrefecture\(\)\) return/, page + ': право на постановку');
+    assert.match(html, /if \(!isPrefecture\(\) \|\| !state.serverOk[^\n]*return;\n\s+const \[lng, lat\] = coordinates;\n\s+if \(!state.shootMode\) return;/, page + ': право на постановку');
     assert.match(html, /Локальная точка не создаётся/, page + ': нет локальной псевдозаписи');
     assert.match(html, /Не создавайте её повторно/, page + ': после POST проверка чтения');
     assert.doesNotMatch(html, /district_photographer/, page + ': нет новой роли');
