@@ -181,3 +181,12 @@ def test_hub_starts_with_tasks_and_compact_district_grid():
     assert '<details class="catalog-section print-box"' in markup
     for target in ("../districts/review.html", "../object-maps/tpu-review.html", "review-cabinet"):
         assert target in markup
+
+
+def test_hub_dashboard_shows_public_summary_and_prefecture_details():
+    """Сводка округа: погода, ход работ и новости — всем; районы и лента дел — после входа префектуры."""
+    markup = page("hub/index.html")
+    for fragment in ('id="dashboard"', 'id="weather"', 'id="work"', 'id="news"', 'id="prefBody" hidden',
+                     "/dashboard/summary", "/dashboard/news", "/dashboard/details", "api.open-meteo.com"):
+        assert fragment in markup, fragment
+    assert "[hidden] { display:none !important; }" in markup
