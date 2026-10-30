@@ -1,6 +1,6 @@
 // Точки съёмки тротуаров у МКД: черновая расстановка из
 // projects/sidewalk-photo-points/work/build_sidewalk_photo_points.py.
-// Пока это тест, строку видит только префектура: страница вызывает setVisible
+// Свой район и префектура видят фотослой: страница вызывает setVisible
 // при каждом входе и выходе. Точки берутся со службы фото, где префектура их
 // переносит, поворачивает и удаляет. Если служба недоступна или точки туда ещё
 // не загружены, показывается опубликованный файл слоя — без правок.
@@ -249,7 +249,7 @@ window.initSidewalkShootLayer = function ({ map, slug, district, apiRequest, esc
   }
 
   function render(hint) {
-    container.innerHTML = '<label class="layer-row' + (isOn ? '' : ' off') + '"><input type="checkbox"' + (isOn ? ' checked' : '') + '><span class="swatch" style="background:#7b4fc9"></span><span class="label">Точки съёмки · тротуары (тест)</span><span class="count">' + points.length.toLocaleString('ru-RU') + '</span></label><div class="shoot-hint">' + escapeHtml(hint) + '</div>';
+    container.innerHTML = '<label class="layer-row' + (isOn ? '' : ' off') + '"><input type="checkbox"' + (isOn ? ' checked' : '') + '><span class="swatch" style="background:#7b4fc9"></span><span class="label">Точки съёмки · тротуары</span><span class="count">' + points.length.toLocaleString('ru-RU') + '</span></label><div class="shoot-hint">' + escapeHtml(hint) + '</div>';
     const check = container.querySelector('input');
     check.addEventListener('change', () => {
       isOn = check.checked;
@@ -265,13 +265,19 @@ window.initSidewalkShootLayer = function ({ map, slug, district, apiRequest, esc
     return ((await response.json()).features || []).map(fromFile);
   }
 
+  function canEditHint() {
+    return getUser?.()?.role === 'prefecture_admin'
+      ? 'Точка у угла дома со стороны подъездов, стрелка — куда смотрит кадр. Нажмите на точку: её можно перетащить, а стрелку повернуть за ручку.'
+      : 'Стрелка показывает направление кадра. Нажмите на точку и загрузите фото тротуара.';
+  }
+
   async function load() {
     // Повторный вход: старые маркеры снимаем до замены списка точек.
     const wasOn = isOn;
     isOn = false;
     draw();
     isOn = wasOn;
-    let hint = 'Точка у угла дома со стороны подъездов, стрелка — куда смотрит кадр. Нажмите на точку: её можно перетащить, а стрелку повернуть за ручку.';
+    let hint = canEditHint();
     editable = false;
     try {
       const response = await apiRequest(`${API}?district=${encodeURIComponent(district)}`);
@@ -297,6 +303,7 @@ window.initSidewalkShootLayer = function ({ map, slug, district, apiRequest, esc
       return created;
     },
     setVisible(on) {
+      if (on && !visible) isOn = true;
       visible = Boolean(on);
       if (!visible) {
         container.hidden = true;

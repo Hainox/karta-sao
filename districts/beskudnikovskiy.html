@@ -233,7 +233,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
 <script src="point-popover.js?v=20261029-edit"></script>
 <script src="point-editor.js?v=20261029-edit"></script>
 <script src="playground-photo-layer.js?v=20261029-edit"></script>
-<script src="sidewalk-shoot-layer.js?v=20261029-edit"></script>
+<script src="sidewalk-shoot-layer.js?v=20261030-fieldwork"></script>
 <script src="entrance-ref-layer.js?v=20261028"></script>
 <script>
 (() => {
@@ -250,11 +250,11 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     { key: 'yards',     label: 'Дворовые территории', color: '#e8b84a', enabled: false, outline: { color: '#9a6400', width: 2.4 } },
     { key: 'dp_table', label: 'Детские площадки — точки из таблицы', color: '#2e9e52', enabled: false },
     { key: 'sp_table', label: 'Спортивные площадки — точки из таблицы', color: '#1f78b4', enabled: false },
-    { key: 'dp',        label: 'Детские площадки', color: '#2e9e52', enabled: false },
-    { key: 'sp',        label: 'Спортивные площадки', color: '#1f78b4', enabled: false },
+    { key: 'dp',        label: 'Детские площадки', color: '#2e9e52', enabled: true },
+    { key: 'sp',        label: 'Спортивные площадки', color: '#1f78b4', enabled: true },
     { key: 'parking',   label: 'Автопарковки',        color: '#c2432e', enabled: false },
     { key: 'paths',     label: 'Тропинки',            color: '#8a6d3b', enabled: false },
-    { key: 'sidewalks', label: 'Тротуары',            color: '#b3a2c7', enabled: false },
+    { key: 'sidewalks', label: 'Тротуары',            color: '#b3a2c7', enabled: true },
     { key: 'driveways', label: 'Проезды',             color: '#7f6a5d', enabled: false },
     { key: 'odh',       label: 'Объекты ОДХ',         color: '#5f7f95', enabled: false },
   ];
@@ -360,6 +360,15 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     state.editor = window.createPointEditor?.({ map: state.map, popover: state.popover, host: document.body }) || null;
     state.popover.onClose?.(() => { state.editor?.clear(); state.points.forEach((p) => { try { p._marker?.update({ draggable: false }); } catch (_) { /* маркер не создан */ } }); });
     state.playgroundLayer = window.initPlaygroundPhotoLayer({ map: state.map, district: DISTRICT, apiRequest, getUser: () => state.photoUser, preparePointPhoto, escapeHtml, centerSelection, popover: state.popover });
+    for (const kind of ['dp', 'sp']) {
+      if (!state.layers[kind].config.enabled) continue;
+      try {
+        await state.playgroundLayer.setKind(kind, true);
+      } catch (error) {
+        draw(kind + '_table');
+        $('playgroundPhotoLayer').querySelector('[data-message]').textContent = 'Фото площадок временно недоступны; показаны точки из таблицы.';
+      }
+    }
     state.sidewalkLayer = window.initSidewalkShootLayer({ map: state.map, slug: SLUG, district: DISTRICT, apiRequest, escapeHtml, centerSelection, popover: state.popover, getUser: () => state.photoUser, preparePointPhoto, editor: state.editor });
     state.entranceLayer = window.initEntranceRefLayer({ map: state.map, slug: SLUG, escapeHtml, centerSelection, popover: state.popover });
     await loadPhotoPoints();
@@ -1248,10 +1257,9 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     $('shootReport').hidden = !isPrefecture();
     $('shootPhotoReport').hidden = !isPrefecture();
     $('shootLayerRow').hidden = !isPrefecture() && !isDistrictEditor();
-    // Тестовый слой тротуаров пока видит только префектура.
-    if (state.sidewalkLayer) state.sidewalkLayer.setVisible(isPrefecture());
+    if (state.sidewalkLayer) state.sidewalkLayer.setVisible(isPrefecture() || isDistrictEditor());
     if (state.entranceLayer) state.entranceLayer.setVisible(isPrefecture());
-    // При входе слои сами не включаются: на карте только граница района, остальное включает человек.
+    // Видимость фото тротуаров ограничена своим районом; правки — только префектуре.
     $('shootToggle').hidden = !isPrefecture();
     $('sidewalkAdd').hidden = !isPrefecture() || !state.sidewalkLayer;
     if (!isPrefecture() && state.shootMode) setShootMode(false);
