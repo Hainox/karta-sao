@@ -100,8 +100,8 @@ def test_pages_have_no_template_leftovers():
         assert "outline: { color: '#9a6400', width: 2.4 }" in html, \
             f"{slug}.html границы дворов не выделены тёмной обводкой"
         enabled = re.findall(r"\{ key: '(\w+)',[^}]*enabled: true", html)
-        assert enabled == ['boundary'], \
-            f"{slug}.html по умолчанию включены {enabled}: при входе включена только граница района"
+        assert enabled == ['boundary', 'dp', 'sp', 'sidewalks'], \
+            f"{slug}.html по умолчанию включены {enabled}: при входе нужны граница, ДП, СП и тротуары"
         assert "YMapListener({ layer: 'any', onClick" in html, \
             f"{slug}.html не ловит клики по карте для точек съёмки"
         assert "new YMapMarker({ coordinates" in html, \
