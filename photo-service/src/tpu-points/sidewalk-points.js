@@ -1,5 +1,5 @@
 // Точки съёмки тротуаров у МКД. Пока префектура согласовывает расстановку,
-// список точек видит и правит только она (перенос, направление кадра,
+// список точек видит свой район; правит только префектура (перенос, направление кадра,
 // удаление). Фото к точке загружает район своей точки или префектура: один
 // слот на точку, как у площадок ДП/СП. Каждое действие пишется в audit_log.
 import crypto from 'node:crypto';
@@ -88,9 +88,13 @@ export function createSidewalkPointsRouter({ pool, authenticate, boundary }) {
     } finally { client.release(); }
   };
 
-  router.get('/', prefecture, async (req, res, next) => {
+  router.get('/', async (req, res, next) => {
     try {
-      const district = typeof req.query.district === 'string' ? req.query.district.trim() : '';
+      const requestedDistrict = typeof req.query.district === 'string' ? req.query.district.trim() : '';
+      if (req.user.role === 'district_editor' && requestedDistrict && requestedDistrict !== req.user.district) {
+        return res.status(403).json({ error: 'Доступны только точки своего района.' });
+      }
+      const district = req.user.role === 'district_editor' ? req.user.district : requestedDistrict;
       if (!DISTRICTS.has(district)) return res.status(400).json({ error: 'Укажите район САО.' });
       const { rows } = await pool.query(`SELECT ${POINT_COLUMNS}, ${PHOTO_STATE} FROM sidewalk_photo_points p
         WHERE p.district = $1 AND p.retired_at IS NULL ORDER BY p.point_no`, [district]);
