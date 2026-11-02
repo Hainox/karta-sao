@@ -64,13 +64,34 @@ window.initSidewalkShootLayer = function ({ map, slug, district, apiRequest, esc
     return marker;
   }
 
+  function renderList() {
+    const box = container.querySelector('[data-sidewalk-list]');
+    if (!box) return;
+    box.closest('details').hidden = !isOn || !visible;
+    const sorted = [...points].sort((a,b) => String(a.point_no).localeCompare(String(b.point_no), 'ru', { numeric: true }));
+    box.replaceChildren();
+    for (const point of sorted) {
+      const row = document.createElement('button');
+      row.type = 'button'; row.className = 'shoot-item';
+      row.style.cssText = 'width:100%;text-align:left;background:white';
+      row.dataset.state = point.photo_state || 'empty';
+      row.innerHTML = '<b>' + escapeHtml(point.point_no) + '</b><span class="deg">' + Math.round(point.heading) + '°</span><span class="chip">' + (PHOTO_LABELS[point.photo_state || 'empty']) + '</span>';
+      row.title = point.address || '';
+      row.onclick = () => { centerSelection([point.lng, point.lat]); openCard(point); };
+      box.append(row);
+    }
+    if (!sorted.length) box.textContent = 'Точек пока нет.';
+  }
+
   function draw() {
+    renderList();
     for (const p of points) { if (p._marker) { try { map.removeChild(p._marker); } catch (_) { /* уже снят */ } p._marker = null; } }
     if (!isOn || !visible) return;
     for (const p of points) { p._marker = markerFor(p); map.addChild(p._marker); }
   }
 
   function redrawOne(point) {
+    renderList();
     if (point._marker) { try { map.removeChild(point._marker); } catch (_) { /* уже снят */ } }
     point._marker = null;
     if (!isOn || !visible || !points.includes(point)) return;
@@ -246,10 +267,11 @@ window.initSidewalkShootLayer = function ({ map, slug, district, apiRequest, esc
   function updateCount() {
     const count = container.querySelector('.count');
     if (count) count.textContent = points.length.toLocaleString('ru-RU');
+    renderList();
   }
 
   function render(hint) {
-    container.innerHTML = '<label class="layer-row' + (isOn ? '' : ' off') + '"><input type="checkbox"' + (isOn ? ' checked' : '') + '><span class="swatch" style="background:#f28c18"></span><span class="label">Точки съёмки · тротуары</span><span class="count">' + points.length.toLocaleString('ru-RU') + '</span></label><div class="shoot-hint">' + escapeHtml(hint) + '</div>';
+    container.innerHTML = '<label class="layer-row' + (isOn ? '' : ' off') + '"><input type="checkbox"' + (isOn ? ' checked' : '') + '><span class="swatch" style="background:#f28c18"></span><span class="label">Точки съёмки · тротуары</span><span class="count">' + points.length.toLocaleString('ru-RU') + '</span></label><div class="shoot-hint">' + escapeHtml(hint) + '</div><details class="shoot-list-box"><summary>Список точек · тротуары</summary><div class="shoot-list" data-sidewalk-list></div></details>';
     const check = container.querySelector('input');
     check.addEventListener('change', () => {
       isOn = check.checked;
