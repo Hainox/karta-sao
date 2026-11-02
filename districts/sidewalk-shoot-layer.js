@@ -303,6 +303,8 @@ window.initSidewalkShootLayer = function ({ map, slug, district, apiRequest, esc
       return created;
     },
     setVisible(on) {
+      // Временно скрыто от районов до завершения проверки расстановки.
+      on = Boolean(on) && getUser?.()?.role === 'prefecture_admin';
       if (on && !visible) isOn = true;
       visible = Boolean(on);
       if (!visible) {
