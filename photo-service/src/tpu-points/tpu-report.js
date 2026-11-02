@@ -136,14 +136,14 @@ async function buildParkingReport(summary, { mapUrl = 'https://hainox.github.io/
   book.creator = 'Фотослужба САО';
   book.created = summary.generatedAt;
 
-  const headers = ['Район / организация', 'Всего Объектов', 'Объектов закрыто', 'Объектов без фото', 'Обьектов на проверке', 'Обьектов на доработке ', '% принято', 'Последнее фото'];
-  const widths = [28, 12, undefined, undefined, 12.3, undefined, 10.6, 15.9];
+  const headers = ['Район / организация', 'Всего Объектов', 'Объектов закрыто', 'Объектов без фото', 'Обьектов на проверке', 'Обьектов на доработке ', '% принято'];
+  const widths = [28, 12, undefined, undefined, 12.3, undefined, 10.6];
   const overview = book.addWorksheet('Свод по районам');
   overview.columns = headers.map((header, i) => ({ header, width: widths[i] }));
   // Титул и пояснение — жёлтые строки в жирной рамке над шапкой (строки 1–2), шапка — строка 4.
   overview.spliceRows(1, 0, [`Свод по фото парковок на ${dateText(summary.generatedAt)}`], ['Слоты по заданию: принято — фото проверено префектурой; на доработке — фото отклонено, слот ждёт нового фото.'], []);
-  overview.mergeCells(1, 1, 1, 8);
-  overview.mergeCells(2, 1, 2, 8);
+  overview.mergeCells(1, 1, 1, 7);
+  overview.mergeCells(2, 1, 2, 7);
   const titleRow = overview.getRow(1);
   titleRow.font = { bold: true, size: 14 };
   titleRow.fill = YELLOW_FILL;
@@ -156,7 +156,7 @@ async function buildParkingReport(summary, { mapUrl = 'https://hainox.github.io/
   legendRow.height = 15.75;
 
   const writeRow = (label, tally, bold = false) => {
-    const row = overview.addRow([label, tally.count, tally.closed, tally.empty, tally.review, tally.rework, percent(tally.accepted, tally.required), dateText(tally.lastPhotoAt)]);
+    const row = overview.addRow([label, tally.count, tally.closed, tally.empty, tally.review, tally.rework, percent(tally.accepted, tally.required)]);
     row.getCell(7).numFmt = '0%';
     if (bold) row.font = { bold: true };
     return row;
@@ -167,21 +167,21 @@ async function buildParkingReport(summary, { mapUrl = 'https://hainox.github.io/
   overview.addRow([]);
   const breakdownHeaderRow = overview.addRow(['Вид объекта', ...headers.slice(1)]);
   breakdownHeaderRow.height = 32.1;
-  styleGreenHeader(overview, breakdownHeaderRow.number, 8);
+  styleGreenHeader(overview, breakdownHeaderRow.number, 7);
   for (const [type, label] of Object.entries(PARKING_TYPE_LABELS)) writeRow(label, parkingTally(summary.objectRows.filter((r) => (r.type || KIND[r.kind] || r.kind) === type)));
-  styleGreenHeader(overview, 4, 8);
-  frameRows(overview, 4, overview.rowCount, 8);
+  styleGreenHeader(overview, 4, 7);
+  frameRows(overview, 4, overview.rowCount, 7);
   overview.views = [{ state: 'frozen', ySplit: 4 }];
 
   const objects = book.addWorksheet('Объекты');
-  headerRow(objects, ['Вид', 'Название', 'ID', 'Ответственный', 'Фото требуется', 'Загружено', 'Принято', 'На проверке', 'На доработке', 'Статус', 'Последнее фото', 'На карте'], [10, 50, 14, 22, 11, 11, 10, 11, 12, 14, 17, 12]);
-  objects.autoFilter = { from: 'A1', to: 'L1' };
+  headerRow(objects, ['Вид', 'Название', 'ID', 'Ответственный', 'Фото требуется', 'Загружено', 'Принято', 'На проверке', 'На доработке', 'Статус', 'На карте'], [10, 50, 14, 22, 11, 11, 10, 11, 12, 14, 12]);
+  objects.autoFilter = { from: 'A1', to: 'K1' };
   for (const r of summary.objectRows) {
-    const row = objects.addRow([r.type || KIND[r.kind] || r.kind, r.label, r.sourceNumber, r.group, r.slotsRequired, r.slotsFilled, r.slotsAccepted, r.pendingSlots, r.reworkSlots, r.slotStatus, dateText(r.lastPhotoAt), { text: 'Открыть', hyperlink: `${mapUrl}?object=${encodeURIComponent(r.id)}` }]);
+    const row = objects.addRow([r.type || KIND[r.kind] || r.kind, r.label, r.sourceNumber, r.group, r.slotsRequired, r.slotsFilled, r.slotsAccepted, r.pendingSlots, r.reworkSlots, r.slotStatus, { text: 'Открыть', hyperlink: `${mapUrl}?object=${encodeURIComponent(r.id)}` }]);
     row.getCell(10).fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: SLOT_FILL[r.slotStatus] || 'FFE9ECEF' } };
-    row.getCell(12).font = { color: { argb: 'FF0C5AA6' } };
+    row.getCell(11).font = { color: { argb: 'FF0C5AA6' } };
   }
-  frameRows(objects, 2, objects.rowCount, 12);
+  frameRows(objects, 2, objects.rowCount, 11);
 
   const rework = book.addWorksheet('На доработке');
   headerRow(rework, ['Ответственный', 'Объект', 'Слот', 'Что исправить', 'Отклонено', 'На карте'], [25, 50, 8, 60, 17, 12]);
@@ -195,6 +195,12 @@ async function buildParkingReport(summary, { mapUrl = 'https://hainox.github.io/
   if (rework.rowCount < 2) rework.addRow(['Слотов на доработке нет.']);
   frameRows(rework, 2, rework.rowCount, 6);
 
+  // Единое выравнивание всех листов свода, включая заголовки и ссылки.
+  for (const sheet of book.worksheets) {
+    sheet.eachRow((row) => row.eachCell({ includeEmpty: true }, (cell) => {
+      cell.alignment = { ...cell.alignment, horizontal: 'center', vertical: 'middle' };
+    }));
+  }
   return Buffer.from(await book.xlsx.writeBuffer());
 }
 
@@ -211,14 +217,14 @@ export async function buildTpuReport(summary, options = {}) {
   const overview = book.addWorksheet('Сводка');
   // Сводка одного вида: один столбец «Объектов»; общая — отдельные столбцы ТПУ и парковок.
   const counts = summary.kind ? [['Объектов', 10, (r) => r[summary.kind]]] : [['ТПУ', 8, (r) => r.tpu], ['Парковки', 10, (r) => r.parking]];
-  headerRow(overview, ['Район / организация', ...counts.map((c) => c[0]), 'Объектов без точек', 'Точек съёмки', 'Отснято точек', '% отснято', 'Объектов готово', 'Последнее фото'], [26, ...counts.map((c) => c[1]), 12, 11, 11, 10, 11, 18]);
+  headerRow(overview, ['Район / организация', ...counts.map((c) => c[0]), 'Объектов без точек', 'Точек съёмки', 'Отснято точек', '% отснято', 'Объектов готово'], [26, ...counts.map((c) => c[1]), 12, 11, 11, 10, 11]);
   const title = summary.kind ? REPORT_KINDS[summary.kind].title : 'ТПУ и парковок';
   overview.spliceRows(1, 0, [`Сводка оцифровки ${title} САО на ${dateText(summary.generatedAt)}`], []);
   overview.getRow(1).font = { bold: true, size: 14 };
   overview.views = [{ state: 'frozen', ySplit: 3 }];
   const percentColumn = counts.length + 5;
   for (const r of [...summary.groupRows, summary.total]) {
-    const row = overview.addRow([r.group, ...counts.map((c) => c[2](r)), r.withoutPoints, r.points, r.shot, percent(r.shot, r.points), r.done, dateText(r.lastPhotoAt)]);
+    const row = overview.addRow([r.group, ...counts.map((c) => c[2](r)), r.withoutPoints, r.points, r.shot, percent(r.shot, r.points), r.done]);
     row.getCell(percentColumn).numFmt = '0%';
     if (r.group === 'Итого') row.font = { bold: true };
   }
@@ -226,25 +232,32 @@ export async function buildTpuReport(summary, options = {}) {
   overview.addConditionalFormatting({ ref: `${letter}4:${letter}${overview.rowCount}`, rules: [{ type: 'dataBar', cfvo: [{ type: 'num', value: 0 }, { type: 'num', value: 1 }], color: { argb: 'FF0C7A5A' } }] });
 
   const objects = book.addWorksheet('Объекты');
-  headerRow(objects, ['Тип', 'Название', 'ID', 'Ответственный', 'Район по контуру', 'Балансодержатель', 'Точек', 'Отснято', 'Статус', 'Последнее фото', 'На карте', 'Фото требуется', 'Фото принято', 'Проверка фото', 'Что исправить'], [10, 48, 13, 22, 20, 26, 8, 9, 12, 18, 12, 10, 10, 14, 40]);
+  headerRow(objects, ['Тип', 'Название', 'ID', 'Ответственный', 'Район по контуру', 'Балансодержатель', 'Точек', 'Отснято', 'Статус', 'На карте', 'Фото требуется', 'Фото принято', 'Проверка фото', 'Что исправить'], [10, 48, 13, 22, 20, 26, 8, 9, 12, 12, 10, 10, 14, 40]);
   for (const r of summary.objectRows) {
-    const row = objects.addRow([r.type || KIND[r.kind] || r.kind, r.label, r.sourceNumber, r.group, r.district, r.holder, r.points, r.shot, r.status, dateText(r.lastPhotoAt), { text: 'Открыть', hyperlink: `${mapUrl}?object=${encodeURIComponent(r.id)}` }, r.slotsRequired, r.slotsAccepted, r.slotStatus, r.slotComments]);
-    row.getCell(14).fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: SLOT_FILL[r.slotStatus] || 'FFE9ECEF' } };
+    const row = objects.addRow([r.type || KIND[r.kind] || r.kind, r.label, r.sourceNumber, r.group, r.district, r.holder, r.points, r.shot, r.status, { text: 'Открыть', hyperlink: `${mapUrl}?object=${encodeURIComponent(r.id)}` }, r.slotsRequired, r.slotsAccepted, r.slotStatus, r.slotComments]);
+    row.getCell(13).fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: SLOT_FILL[r.slotStatus] || 'FFE9ECEF' } };
     row.getCell(9).fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: STATUS_FILL[r.status] } };
-    row.getCell(11).font = { color: { argb: 'FF0C5AA6' }, underline: true };
+    row.getCell(10).font = { color: { argb: 'FF0C5AA6' }, underline: true };
   }
-  objects.autoFilter = { from: 'A1', to: 'O1' };
+  objects.autoFilter = { from: 'A1', to: 'N1' };
 
   const points = book.addWorksheet('Точки');
-  headerRow(points, ['Ответственный', 'Тип', 'Объект', 'Точка', 'Задание', 'Широта', 'Долгота', 'Направление, °', 'Фото текущего ракурса', 'Последнее фото', 'Назначена'], [22, 10, 44, 14, 36, 11, 11, 12, 12, 18, 18]);
+  headerRow(points, ['Ответственный', 'Тип', 'Объект', 'Точка', 'Задание', 'Широта', 'Долгота', 'Направление, °', 'Фото текущего ракурса', 'Назначена'], [22, 10, 44, 14, 36, 11, 11, 12, 12, 18]);
   for (const p of summary.pointRows) {
-    points.addRow([p.district, p.object.type || KIND[p.object.kind] || p.object.kind, p.object.label, p.label, p.note || '', Number(p.latitude), Number(p.longitude), p.heading == null ? '' : Math.round(Number(p.heading)), Number(p.photo_count) > 0 ? 'Да' : 'Нет', dateText(p.last_photo_at), dateText(p.created_at)]);
+    points.addRow([p.district, p.object.type || KIND[p.object.kind] || p.object.kind, p.object.label, p.label, p.note || '', Number(p.latitude), Number(p.longitude), p.heading == null ? '' : Math.round(Number(p.heading)), Number(p.photo_count) > 0 ? 'Да' : 'Нет', dateText(p.created_at)]);
   }
-  points.autoFilter = { from: 'A1', to: 'K1' };
+  points.autoFilter = { from: 'A1', to: 'J1' };
 
   const dynamics = book.addWorksheet('Динамика');
   headerRow(dynamics, ['Дата', 'Загружено фото', 'Точек с новыми фото'], [14, 16, 20]);
   for (const d of summary.dynamics) dynamics.addRow([d.date.split('-').reverse().join('.'), d.photos, d.points]);
 
+  // Единое выравнивание всех листов свода, включая заголовки и ссылки.
+  for (const sheet of book.worksheets) {
+    sheet.eachRow((row) => row.eachCell({ includeEmpty: true }, (cell) => {
+      cell.alignment = { ...cell.alignment, horizontal: 'center', vertical: 'middle' };
+    }));
+  }
   return Buffer.from(await book.xlsx.writeBuffer());
 }
+
