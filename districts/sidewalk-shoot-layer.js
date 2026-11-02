@@ -88,6 +88,8 @@ window.initSidewalkShootLayer = function ({ map, slug, district, apiRequest, esc
     for (const p of points) { if (p._marker) { try { map.removeChild(p._marker); } catch (_) { /* уже снят */ } p._marker = null; } }
     if (!isOn || !visible) return;
     for (const p of points) { p._marker = markerFor(p); map.addChild(p._marker); }
+    // Точки в одном месте разводим на экране, чтобы каждую можно было нажать.
+    window.spreadStackedPoints?.(points.map((p) => ({ lng: p.lng, lat: p.lat, heading: p.heading, element: p._element })));
   }
 
   function redrawOne(point) {

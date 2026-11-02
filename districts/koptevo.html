@@ -232,8 +232,9 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
 <script src="../atlas-summary.js?v=20261029b"></script>
 <script src="point-popover.js?v=20261029-edit"></script>
 <script src="point-editor.js?v=20261029-edit"></script>
+<script src="point-stack.js?v=20261102"></script>
 <script src="playground-photo-layer.js?v=20261102-lists"></script>
-<script src="sidewalk-shoot-layer.js?v=20261102-lists"></script>
+<script src="sidewalk-shoot-layer.js?v=20261102-stack"></script>
 <script src="entrance-ref-layer.js?v=20261028"></script>
 <script>
 (() => {
@@ -690,6 +691,9 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       point._element = element;
       state.map.addChild(marker);
     });
+    // Точки в одном месте разводим на экране, чтобы каждую можно было нажать.
+    window.spreadStackedPoints?.(state.points.filter((point) => point._element)
+      .map((point) => ({ lng: Number(point.lng), lat: Number(point.lat), heading: point.heading, element: point._element })));
     renderShootList();
   }
 
@@ -1410,4 +1414,3 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
 </script>
 </body>
 </html>
-
