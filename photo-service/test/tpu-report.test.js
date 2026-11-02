@@ -107,7 +107,7 @@ test('книга парковок оформлена по эталону: жёл
   const rows = book.getWorksheet('Объекты');
   const row = rows.getRow(2);
   assert.equal(row.getCell(10).fill.fgColor.argb, 'FFDCE8FB', 'статус слота окрашен по палитре эталона');
-  assert.match(row.getCell(12).hyperlink, /tpu-parking\.html\?object=parking%3A2$/, 'ссылка на карту ведёт на объект');
+  assert.match(row.getCell(11).hyperlink, /tpu-parking\.html\?object=parking%3A2$/, 'ссылка на карту ведёт на объект');
   const rework = book.getWorksheet('На доработке');
   assert.equal(rework.getRow(1).getCell(4).value, 'Что исправить');
   assert.equal(rework.views[0].ySplit, 1);
@@ -174,5 +174,6 @@ test('сводка ТПУ учитывает изменённое префект
   await book.xlsx.load(response.body);
   const sheet = book.getWorksheet('Объекты');
   const index = sheet.getColumn(3).values.indexOf('800905601');
-  assert.equal(sheet.getRow(index).getCell(12).value, 3);
+  assert.equal(sheet.getRow(index).getCell(11).value, 3);
 });
+
