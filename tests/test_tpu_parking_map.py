@@ -58,6 +58,15 @@ def test_map_loads_excel_parking_and_supports_district_photo_packages():
     assert 'photo-assignments.js' in markup
     assert 'id="assignmentAdd"' in markup
     assert 'id="assignmentLogin"' in markup
+    # Точки съёмки — как на картах районов: один клик ставит точку, точку тащат мышью,
+    # всё сохраняется само с «Отменить»; формы с кнопкой «Сохранить точку» нет,
+    # карточка объекта не перекрывает карту.
+    assert 'class="assignment-banner" id="assignmentPicker"' in markup and 'id="assignmentForm"' not in markup
+    assert '+ Поставить точку на карте' in markup
+    assert '.detail-backdrop{background:transparent;pointer-events:none}' in markup
+    script = (ROOT / 'object-maps/photo-assignments.js').read_text(encoding='utf-8')
+    assert "draggable: editable" in script and "marker.events.add('dragend'" in script
+    assert "saved('Точка поставлена'" in script and "method: 'DELETE'" in script
 
 
 def test_zip_preserves_photo_bytes_point_binding_and_heic_formats(tmp_path):
