@@ -6,6 +6,8 @@ import crypto from 'node:crypto';
 import express from 'express';
 import { DISTRICTS, isPointWithinBoundary } from './validation.js';
 import { safePhotoFilename, validatePhotoUpload } from './photo-markers.js';
+import { districtQueueFromRows, slotPointsForReport } from './district-point-photos.js';
+import { buildDigitizationReport, summarizeDigitization } from '../digitization-report.js';
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const COLUMNS = 'id, point_no, district, address, unom, role, side, also_covers, longitude, latitude, heading, status, updated_at';
@@ -60,6 +62,25 @@ export function nextSidewalkPointNo(district, taken) {
   return prefix + String(max + 1).padStart(3, '0');
 }
 
+export const sidewalkQueueQuery = `SELECT p.id AS point_id,
+  p.point_no || CASE WHEN COALESCE(p.address, '') = '' THEN '' ELSE ' · ' || p.address END AS label,
+  p.district, p.heading, p.longitude, p.latitude,
+  f.id AS photo_id, f.status AS photo_status, f.uploaded_at, f.photo_filename,
+  r.id AS rejected_photo_id, r.review_comment AS rejected_comment, r.reviewed_at AS rejected_at,
+  r.uploaded_at AS rejected_uploaded_at, r.photo_filename AS rejected_photo_filename
+  FROM sidewalk_photo_points p
+  LEFT JOIN LATERAL (SELECT t.id,t.status,t.uploaded_at,t.photo_filename FROM sidewalk_photo_slot_photos t
+    WHERE t.point_id=p.id AND t.status IN ('pending','accepted') ORDER BY t.uploaded_at DESC,t.id DESC LIMIT 1) f ON true
+  LEFT JOIN LATERAL (SELECT t.id,t.review_comment,t.reviewed_at,t.uploaded_at,t.photo_filename FROM sidewalk_photo_slot_photos t
+    WHERE t.point_id=p.id AND t.status='rejected' ORDER BY t.reviewed_at DESC NULLS LAST,t.id DESC LIMIT 1) r ON true
+  WHERE p.retired_at IS NULL`;
+
+export function sidewalkQueueFromRows(rows) {
+  const queue = districtQueueFromRows(rows);
+  // Как у ДП/СП: маршрут снимка отдаёт только действующее фото.
+  return { ...queue, rework: queue.rework.map(row => ({ ...row, photo_id: null })) };
+}
+
 export function createSidewalkPointsRouter({ pool, authenticate, boundary }) {
   const router = express.Router();
   router.use(authenticate, (req, res, next) => (req.user.role === 'prefecture_admin'
@@ -87,6 +108,24 @@ export function createSidewalkPointsRouter({ pool, authenticate, boundary }) {
       throw error;
     } finally { client.release(); }
   };
+
+  router.get('/queue', prefecture, async (req, res, next) => {
+    try { res.set('Cache-Control', 'private, no-store').json(sidewalkQueueFromRows((await pool.query(sidewalkQueueQuery)).rows)); }
+    catch (error) { next(error); }
+  });
+  router.get('/report.xlsx', prefecture, async (req, res, next) => {
+    try {
+      const generatedAt = new Date();
+      const summary = summarizeDigitization({ points: slotPointsForReport((await pool.query(sidewalkQueueQuery)).rows), generatedAt });
+      const buffer = await buildDigitizationReport(summary, {
+        title: 'Свод по фото тротуаров', pointTitle: 'Точка тротуара',
+        note: 'Одна точка тротуара — один снимок. Принято — фото принято префектурой; на доработке — ждёт нового снимка с исправлениями.',
+      });
+      const day = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Moscow' }).format(generatedAt);
+      res.set({ 'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        'Content-Disposition': `attachment; filename="Svod_foto_trotuary_SAO_${day}.xlsx"`, 'Cache-Control': 'private, no-store' }).send(buffer);
+    } catch (error) { next(error); }
+  });
 
   router.get('/', async (req, res, next) => {
     try {
@@ -242,3 +281,4 @@ export function createSidewalkPointsRouter({ pool, authenticate, boundary }) {
   });
   return router;
 }
+
