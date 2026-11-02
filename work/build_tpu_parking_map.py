@@ -211,6 +211,8 @@ def write_catalog(records):
     catalog = [{'id': r['id'], 'kind': r['kind'], 'label': r['label'], 'sourceNumber': r['sourceNumber'],
                 'group': r['group'], 'district': r['properties']['Район'],
                 'holder': r['properties']['Балансодержатель'],
+                # Метка объекта на карте: по ней называются снимки в архиве фото парковок.
+                'lat': round(float(r['lat']), 6), 'lon': round(float(r['lon']), 6),
                 **({'type': r['properties']['Тип']} if r.get('subkind') else {}),
                 # Слоты фото по заданию; без числа в источнике фотослужба считает один слот.
                 **({'photos': r['properties']['Фото по заданию']} if r['properties'].get('Фото по заданию') else {})} for r in records]

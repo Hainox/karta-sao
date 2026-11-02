@@ -58,6 +58,38 @@
           finally { button.disabled = false; button.textContent = report.label; }
         });
       }
+      // Архив фото парковок (ZIP): район → объект → «координаты объекта_N». Сервер
+      // собирает файл в фоне, кнопка ждёт готовности и скачивает его по билету.
+      const archiveButton = document.createElement('button');
+      archiveButton.type = 'button';
+      archiveButton.className = 'secondary-btn assignment-report';
+      archiveButton.id = 'assignmentParkingArchive';
+      const archiveLabel = 'Фото парковок (ZIP)';
+      archiveButton.textContent = archiveLabel;
+      archiveButton.hidden = true;
+      reportAnchor.after(archiveButton);
+      reportButtons.push(archiveButton);
+      archiveButton.addEventListener('click', async () => {
+        archiveButton.disabled = true;
+        archiveButton.textContent = 'Собираем архив…';
+        try {
+          let job = await (await api.request('/parking/photos.zip/prepare', { method: 'POST' })).json();
+          if (!job.total) throw new Error('по парковкам пока нет фото');
+          const jobId = job.id;
+          while (job.status === 'building') {
+            await new Promise((resolve) => setTimeout(resolve, 3000));
+            job = await (await api.request('/parking/photos.zip/prepare/' + jobId)).json();
+            archiveButton.textContent = 'Собираем архив: ' + (job.photos || 0) + ' из ' + job.total;
+          }
+          if (job.status !== 'ready') throw new Error(job.error || 'архив не собрался');
+          const link = document.createElement('a');
+          const base = typeof api.base === 'function' ? api.base() : api.base || '';
+          link.href = base + '/reports/photos.zip/file/' + encodeURIComponent(job.name) + '?ticket=' + encodeURIComponent(job.ticket);
+          document.body.append(link); link.click(); link.remove();
+          notify('Архив готов: ' + job.photos + ' фото.');
+        } catch (error) { notify('Не удалось собрать архив: ' + error.message, true); }
+        finally { archiveButton.disabled = false; archiveButton.textContent = archiveLabel; }
+      });
       async function request(path = '', options) {
         const response = await api.request(endpoint + path, options);
         return response.status === 204 ? null : response.json();
