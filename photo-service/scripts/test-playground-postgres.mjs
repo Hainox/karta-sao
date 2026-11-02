@@ -5,6 +5,8 @@ import pg from 'pg';
 import { photoServiceDatabaseConfig } from '../src/config.js';
 import { createPlaygroundPhotoRouter } from '../src/tpu-points/playground-photo.js';
 import { createSidewalkPointsRouter } from '../src/tpu-points/sidewalk-points.js';
+import { createObjectPositionsRouter, loadObjectPositions, withObjectPositions } from '../src/tpu-points/object-positions.js';
+import { SLOT_OBJECTS } from '../src/tpu-points/object-slots.js';
 import { readFileSync, writeFileSync, unlinkSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
@@ -33,6 +35,7 @@ try {
   app.use('/playgrounds', createPlaygroundPhotoRouter({ pool, authenticate }));
   const saoBoundary = JSON.parse(readFileSync(new URL('../src/tpu-points/sao_boundary_wgs84.geojson', import.meta.url), 'utf8'));
   app.use('/sidewalks', createSidewalkPointsRouter({ pool, authenticate, boundary: saoBoundary }));
+  app.use('/object-positions', createObjectPositionsRouter({ pool, authenticate, boundary: saoBoundary }));
   app.use((error, req, res, next) => { console.error(error); res.status(500).json({ error: 'test server error' }); });
   server = await new Promise(resolve => { const s = app.listen(0, '127.0.0.1', () => resolve(s)); });
   const base = 'http://127.0.0.1:' + server.address().port + '/playgrounds';
@@ -179,7 +182,20 @@ try {
     assert.ok(dashDetails.byDistrict.sidewalks.length > 0 && dashDetails.activity.length > 0);
     assert.deepEqual((await (await fetch(dashBase + '/news')).json()).items, []);
   } finally { await new Promise((resolve) => dashServer.close(resolve)); }
-  console.log('PASS: PostgreSQL migrations, import, slots, duplicate prevention, review, review queue and summary, sidewalk photo slots, sidewalk replace, retire entrance points by list, hub dashboard');
+  // Перенос маркера объекта ТПУ/парковки: место хранится, видно без входа, архив берёт его.
+  const positions = 'http://127.0.0.1:' + server.address().port + '/object-positions';
+  const movePosition = (body, role = 'admin') => fetch(positions + '/tpu:800905601', { method: 'PUT', headers: { 'x-test-role': role, 'content-type': 'application/json' }, body: JSON.stringify(body) });
+  assert.equal((await movePosition({ longitude: 37.4811, latitude: 55.8786 }, 'district')).status, 403);
+  assert.equal((await movePosition({ longitude: 30.3, latitude: 59.9 })).status, 422, 'вне САО не переносится');
+  assert.equal((await movePosition({ longitude: 37.4811, latitude: 55.8786 })).status, 200);
+  assert.equal((await movePosition({ longitude: 37.4812, latitude: 55.8787 })).status, 200, 'повторный перенос обновляет место');
+  const listed = (await (await fetch(positions)).json()).positions;
+  assert.deepEqual(listed.map((p) => [p.object_key, p.longitude, p.latitude]), [['tpu:800905601', 37.4812, 55.8787]]);
+  const placed = withObjectPositions(SLOT_OBJECTS, await loadObjectPositions(pool)).get('tpu:800905601');
+  assert.deepEqual([placed.lat, placed.lon, placed.sourceLat], [55.8787, 37.4812, 55.878427]);
+  assert.equal((await fetch(positions + '/tpu:800905601', { method: 'DELETE', headers: { 'x-test-role': 'admin' } })).status, 204);
+  assert.equal((await (await fetch(positions)).json()).positions.length, 0);
+  console.log('PASS: PostgreSQL migrations, import, slots, duplicate prevention, review, review queue and summary, sidewalk photo slots, sidewalk replace, retire entrance points by list, hub dashboard, TPU object positions');
 } finally {
   if (server) await new Promise(resolve => server.close(resolve));
   await pool.end();

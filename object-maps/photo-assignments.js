@@ -4,7 +4,7 @@
   // не запрашивается и не рисуется. Сохранённое ранее направление не стирается.
   const SHOW_DIRECTION = false;
   window.SaoPhotoAssignments = {
-    mount({ dataset, getMap, notify, openRecord, closeRecord, applyScope, onChange }) {
+    mount({ dataset, getMap, notify, openRecord, closeRecord, applyScope, onChange, placeRecord = () => {}, applyObjectPosition = null }) {
       const panel = document.getElementById('assignmentPanel');
       const session = document.getElementById('assignmentSession');
       const list = document.getElementById('assignmentList');
@@ -20,6 +20,7 @@
       let visibleObjects = null;
       const api = window.TpuPhotoApi || window.ODHApi;
       let markerLayout;
+      let objectLayout;
       const isPrefecture = () => api.user()?.role === 'prefecture_admin';
       const message = (text, error = false) => { status.textContent = text; if (error) notify(text, true); };
       const clearUrls = () => { urls.forEach(URL.revokeObjectURL); urls = []; };
@@ -145,6 +146,42 @@
           }
           layer.add(marker);
         }
+        // Маркер открытого объекта префектура тоже перетаскивает: место объекта
+        // сохраняется в фотослужбе и видно всем, как и перенос точек съёмки.
+        if (isPrefecture() && selected && !picking && applyObjectPosition) {
+          objectLayout ||= ymaps.templateLayoutFactory.createClass('<div class="object-handle"><span></span></div>');
+          const record = selected;
+          const handle = new ymaps.Placemark([Number(record.lat), Number(record.lon)], {
+            hintContent: 'Перетащите, чтобы перенести объект на карте',
+          }, { iconLayout: objectLayout, iconShape: { type: 'Circle', coordinates: [0, 0], radius: 22 }, zIndex: 2400, draggable: true });
+          handle.events.add('dragstart', () => dim(true));
+          handle.events.add('dragend', () => { dim(false); moveObject(record, handle.geometry.getCoordinates()); });
+          layer.add(handle);
+        }
+      }
+      async function moveObject(record, coordinates, { undo = true } = {}) {
+        const before = { lat: record.lat, lon: record.lon, moved: Boolean(record.moved) };
+        const path = '/object-positions/' + encodeURIComponent(record.id);
+        try {
+          await request(path, { method: 'PUT', body: JSON.stringify({ latitude: coordinates[0], longitude: coordinates[1] }) });
+          applyObjectPosition(record, coordinates[0], coordinates[1]);
+          placeRecord(record); renderMap(); renderList();
+          if (!undo) return;
+          saved('Объект «' + record.label + '» перенесён', async () => {
+            try {
+              if (before.moved) await moveObject(record, [before.lat, before.lon], { undo: false });
+              else await resetObject(record, { quiet: true });
+              saved('Вернули как было');
+            } catch (error) { notify('Не удалось вернуть: ' + error.message, true); }
+          });
+        } catch (error) { notify('Объект не перенесён: ' + error.message, true); placeRecord(record); renderMap(); }
+      }
+      async function resetObject(record, { quiet = false } = {}) {
+        await request('/object-positions/' + encodeURIComponent(record.id), { method: 'DELETE' });
+        if (record.sourceLat != null) { record.lat = record.sourceLat; record.lon = record.sourceLon; }
+        record.moved = false;
+        placeRecord(record); renderMap(); renderList();
+        if (!quiet) saved('Объект возвращён на исходное место');
       }
       async function move(point, coordinates) {
         const before = [Number(point.latitude), Number(point.longitude)];
@@ -224,8 +261,22 @@
         clearUrls(); list.replaceChildren();
         if (!selected) return;
         if (!api.user()) { const hint = document.createElement('p'); hint.textContent = 'Точки съёмки доступны на карте. Для отправки фото войдите в учётную запись.'; list.append(hint); }
+        if (isPrefecture() && applyObjectPosition) {
+          // Подсказка: сам объект тоже можно перенести; перенесённый — вернуть.
+          const where = document.createElement('p'); where.className = 'assignment-hint object-hint';
+          where.textContent = selected.moved ? 'Объект перенесён на карте префектурой. ' : 'Маркер объекта можно перетащить на карте — место сохранится само.';
+          if (selected.moved) {
+            const record = selected;
+            const back = button('Вернуть исходное место', async () => {
+              back.disabled = true;
+              try { await resetObject(record); } catch (error) { notify('Не удалось вернуть: ' + error.message, true); back.disabled = false; }
+            });
+            where.append(back);
+          }
+          list.append(where);
+        }
         const assigned = points.filter(point => point.object_key === selected.id);
-        if (!assigned.length) list.textContent = 'Точки съёмки ещё не назначены.';
+        if (!assigned.length) { const none = document.createElement('p'); none.textContent = 'Точки съёмки ещё не назначены.'; list.append(none); }
         assigned.forEach((point, index) => {
           const card = document.createElement('article'); card.className = 'assignment-card';
           const heading = document.createElement('strong'); heading.textContent = `${index + 1}. ${point.label}`;

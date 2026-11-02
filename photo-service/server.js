@@ -37,6 +37,7 @@ import {
 import { MKD_TYPE_FOLDERS } from './src/photos-archive.js';
 import { PARKING_ARCHIVE_PREFIX, loadParkingArchive } from './src/parking-archive.js';
 import { SLOT_OBJECTS } from './src/tpu-points/object-slots.js';
+import { loadObjectPositions, withObjectPositions } from './src/tpu-points/object-positions.js';
 
 const port = Number(process.env.PHOTO_SERVICE_PORT || 8788);
 const REVIEW_CLAIM_LEASE_SECONDS = 30 * 60;
@@ -830,7 +831,8 @@ async function handler(request, response) {
     // Собирается так же в фоне и скачивается по билету общей ссылкой /reports/photos.zip/file.
     if (pathname === '/parking/photos.zip/prepare' && request.method === 'POST') {
       if (!requirePrefecture(response, request, user)) return;
-      const { entries, folders } = await loadParkingArchive(pool, SLOT_OBJECTS);
+      // Имена кадров — по месту объекта на карте, с учётом переноса префектурой.
+      const { entries, folders } = await loadParkingArchive(pool, withObjectPositions(SLOT_OBJECTS, await loadObjectPositions(pool)));
       await prunePhotoArchiveFiles(archiveDir(process.env), 2, PARKING_ARCHIVE_PREFIX);
       const job = startPhotoArchiveJob({ rows: [], entries, folders, dir: archiveDir(process.env), prefix: PARKING_ARCHIVE_PREFIX, kind: 'parking' });
       return sendJson(response, 202, { id: job.id, status: job.status, total: entries.length }, request);
