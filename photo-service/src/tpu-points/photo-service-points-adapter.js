@@ -1,6 +1,7 @@
 import express from 'express';
 import { createPlaygroundPhotoRouter } from './playground-photo.js';
 import { createSidewalkPointsRouter } from './sidewalk-points.js';
+import { createObjectPositionsRouter } from './object-positions.js';
 import { createObjectPhotoPointRepository, createObjectPhotoPointsRouter } from './object-photo-points.js';
 
 // Mount into the existing photo service using its pool, sessions and audit log.
@@ -23,6 +24,7 @@ export function createPhotoServicePointsAdapter({ pool, currentUser, boundary })
   };
   app.use('/object-photo-points/playgrounds', createPlaygroundPhotoRouter({ pool, authenticate }));
   app.use('/object-photo-points/sidewalks', createSidewalkPointsRouter({ pool, authenticate, boundary }));
+  app.use('/object-photo-points/object-positions', createObjectPositionsRouter({ pool, authenticate, boundary }));
   app.use('/object-photo-points', createObjectPhotoPointsRouter({ repository, authenticate, boundary }));
   app.use((error, _req, res, _next) => {
     res.status(error.status || 500).json({ error: error.status ? error.message : 'Не удалось обработать запрос.' });

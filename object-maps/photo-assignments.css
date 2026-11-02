@@ -87,3 +87,11 @@
   #assignmentAdd{min-height:44px}
   .toast{bottom:auto;top:10px}
 }
+/* Ручка маркера открытого объекта: перетащить — перенести сам объект. */
+.object-handle{position:relative;left:-20px;top:-20px;width:40px;height:40px;border-radius:50%;border:3px solid #fff;background:#c66b42cc;box-shadow:0 0 0 3px #7a3818,0 3px 10px #0008;cursor:grab}
+.object-handle span{position:absolute;inset:12px;border-radius:50%;background:#fff}
+.object-handle::after{content:"";position:absolute;inset:-14px;border-radius:50%;border:2px dashed #7a3818;animation:assign-spin 8s linear infinite;pointer-events:none}
+@keyframes assign-spin{to{transform:rotate(360deg)}}
+.object-hint{margin:0 0 10px}
+.object-hint .secondary-btn{margin-left:6px;min-height:30px;padding:4px 10px;font-size:12px}
+@media (prefers-reduced-motion:reduce){.object-handle::after{animation:none}}
