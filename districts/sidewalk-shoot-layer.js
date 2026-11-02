@@ -33,7 +33,7 @@ window.initSidewalkShootLayer = function ({ map, slug, district, apiRequest, esc
     arrow.setAttribute('viewBox', '0 0 64 80');
     arrow.setAttribute('aria-hidden', 'true');
     arrow.style.transform = 'rotate(' + heading + 'deg)';
-    arrow.innerHTML = '<path d="M32 4 L14 26 L25 26 L25 70 L39 70 L39 26 L50 26 Z" fill="none" stroke="white" stroke-width="8" stroke-linejoin="round"/><path d="M32 4 L14 26 L25 26 L25 70 L39 70 L39 26 L50 26 Z" fill="#7b4fc9" stroke="#2c1563" stroke-width="3" stroke-linejoin="round"/>';
+    arrow.innerHTML = '<path d="M32 4 L14 26 L25 26 L25 70 L39 70 L39 26 L50 26 Z" fill="none" stroke="white" stroke-width="8" stroke-linejoin="round"/><path d="M32 4 L14 26 L25 26 L25 70 L39 70 L39 26 L50 26 Z" fill="#f28c18" stroke="#8a4300" stroke-width="3" stroke-linejoin="round"/>';
     return arrow;
   }
 
@@ -249,7 +249,7 @@ window.initSidewalkShootLayer = function ({ map, slug, district, apiRequest, esc
   }
 
   function render(hint) {
-    container.innerHTML = '<label class="layer-row' + (isOn ? '' : ' off') + '"><input type="checkbox"' + (isOn ? ' checked' : '') + '><span class="swatch" style="background:#7b4fc9"></span><span class="label">Точки съёмки · тротуары</span><span class="count">' + points.length.toLocaleString('ru-RU') + '</span></label><div class="shoot-hint">' + escapeHtml(hint) + '</div>';
+    container.innerHTML = '<label class="layer-row' + (isOn ? '' : ' off') + '"><input type="checkbox"' + (isOn ? ' checked' : '') + '><span class="swatch" style="background:#f28c18"></span><span class="label">Точки съёмки · тротуары</span><span class="count">' + points.length.toLocaleString('ru-RU') + '</span></label><div class="shoot-hint">' + escapeHtml(hint) + '</div>';
     const check = container.querySelector('input');
     check.addEventListener('change', () => {
       isOn = check.checked;
@@ -318,3 +318,4 @@ window.initSidewalkShootLayer = function ({ map, slug, district, apiRequest, esc
     },
   };
 };
+
