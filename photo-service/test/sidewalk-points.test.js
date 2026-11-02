@@ -85,13 +85,24 @@ test('проверяющий не допускается, район — тол�
   let passed = false;
   roleGuard({ user: { role: 'district_editor', district: 'Сокол' } }, res(), () => { passed = true; });
   assert.ok(passed, 'район проходит к фото своих точек');
-  // Пока префектура согласовывает точки, список, правка, удаление и приёмка — только у неё.
-  for (const [path, method] of [['/', 'get'], ['/', 'post'], ['/:id', 'patch'], ['/:id', 'delete'], ['/:id/review', 'post'], ['/:id/photo', 'delete']]) {
+  // Пока префектура согласовывает точки, правка, удаление и приёмка — только у неё.
+  for (const [path, method] of [['/', 'post'], ['/:id', 'patch'], ['/:id', 'delete'], ['/:id/review', 'post'], ['/:id/photo', 'delete']]) {
     const guard = x.router.stack.find((l) => l.route?.path === path && l.route.methods[method]).route.stack[0].handle;
     const gr = res();
     guard({ user: { role: 'district_editor', district: 'Сокол' } }, gr, () => assert.fail(`район прошёл ${method} ${path}`));
     assert.equal(gr.code, 403);
   }
+});
+
+test('район видит список только своих точек', async () => {
+  const x = setup();
+  const own = res();
+  await x.handler('/', 'get')(req(undefined, { user: { role: 'district_editor', district: 'Сокол' } }), own, (e) => { throw e; });
+  assert.equal(own.code, 200);
+  assert.deepEqual(x.calls.at(-1).params, ['Сокол']);
+  const foreign = res();
+  await x.handler('/', 'get')(req(undefined, { query: { district: 'Аэропорт' }, user: { role: 'district_editor', district: 'Сокол' } }), foreign, (e) => { throw e; });
+  assert.equal(foreign.code, 403);
 });
 
 test('импорт читает опубликованный слой района целиком', () => {
