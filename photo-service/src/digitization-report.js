@@ -106,12 +106,12 @@ export async function buildDigitizationReport(summary, {
   const kindTitle = kinds ? ['Вид'] : [];
 
   const pointsSheet = book.addWorksheet('Точки');
-  const pointTitles = ['Район', ...kindTitle, pointTitle, 'Статус', 'Последнее фото', 'На карте'];
-  pointsSheet.columns = [24, ...(kinds ? [22] : []), 40, 16, 17, 12].map((width) => ({ width }));
+  const pointTitles = ['Район', ...kindTitle, pointTitle, 'Статус', 'На карте'];
+  pointsSheet.columns = [24, ...(kinds ? [22] : []), 40, 16, 12].map((width) => ({ width }));
   header(pointsSheet, 1, pointTitles);
   const statusColumn = pointTitles.indexOf('Статус') + 1;
   for (const row of summary.pointRows) {
-    const excelRow = pointsSheet.addRow([row.district, ...kindColumn(row), row.label, DIGITIZATION_STATE_LABELS[row.state], dateText(row.lastPhotoAt), mapLink(row.district, mapUrl)]);
+    const excelRow = pointsSheet.addRow([row.district, ...kindColumn(row), row.label, DIGITIZATION_STATE_LABELS[row.state], mapLink(row.district, mapUrl)]);
     gridRow(excelRow, pointTitles.length);
     excelRow.getCell(statusColumn).fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: STATE_FILL[row.state] } };
     excelRow.getCell(pointTitles.length).font = LINK;
@@ -133,5 +133,12 @@ export async function buildDigitizationReport(summary, {
   if (reworkRows.length) rework.autoFilter = { from: 'A1', to: { row: 1, column: reworkTitles.length } };
   else gridRow(rework.addRow(['Точек на доработке нет.']), reworkTitles.length);
 
+  // Единое выравнивание всех листов свода, включая заголовки и ссылки.
+  for (const sheet of book.worksheets) {
+    sheet.eachRow((row) => row.eachCell({ includeEmpty: true }, (cell) => {
+      cell.alignment = { ...cell.alignment, horizontal: 'center', vertical: 'middle' };
+    }));
+  }
   return Buffer.from(await book.xlsx.writeBuffer());
 }
+

@@ -123,7 +123,7 @@ test('книга Excel: листы и оформление по образцу �
   assert.equal(row.getCell(3).value, '123');
   assert.equal(row.getCell(10).value, 'Закрыт');
   assert.equal(row.getCell(10).fill.fgColor.argb, 'FFD8F0DE');
-  assert.match(row.getCell(12).hyperlink, /object-maps\/stops\.html\?dataset=stops$/);
+  assert.match(row.getCell(11).hyperlink, /object-maps\/stops\.html\?dataset=stops$/);
   const reworkRow = objects.getRow(3);
   assert.equal(reworkRow.getCell(10).value, 'На доработке');
 
@@ -140,3 +140,4 @@ test('пустой лист «На доработке» объясняет, чт
   assert.equal(book.getWorksheet('На доработке').getRow(2).getCell(1).value, 'Точек на доработке нет.');
   assert.equal(book.getWorksheet('Объекты').getRow(2).getCell(10).value, 'Нет фото');
 });
+

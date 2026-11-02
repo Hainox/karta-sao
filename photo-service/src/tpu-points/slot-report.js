@@ -106,8 +106,8 @@ function titleBlock(sheet, columns, title, note) {
   sheet.getRow(1).height = 18.75;
 }
 
-const SUMMARY_TITLES = ['Объектов', 'Фото требуется', 'Фото загружено', 'Принято', 'На проверке', 'Слотов на доработке', 'Объектов закрыто', 'Объектов без фото', '% принято', 'Последнее фото'];
-const summaryValues = (r) => [r.objects, r.required, r.filled, r.accepted, r.pending, r.rework, r.closed, r.untouched, percent(r.accepted, r.required), dateText(r.lastPhotoAt)];
+const SUMMARY_TITLES = ['Объектов', 'Фото требуется', 'Фото загружено', 'Принято', 'На проверке', 'Слотов на доработке', 'Объектов закрыто', 'Объектов без фото', '% принято'];
+const summaryValues = (r) => [r.objects, r.required, r.filled, r.accepted, r.pending, r.rework, r.closed, r.untouched, percent(r.accepted, r.required)];
 
 export async function buildSlotReport(summary, { mapUrl = 'https://hainox.github.io/karta-sao/object-maps/tpu-parking.html' } = {}) {
   const book = new ExcelJS.Workbook();
@@ -138,16 +138,16 @@ export async function buildSlotReport(summary, { mapUrl = 'https://hainox.github
   overview.views = [{ state: 'frozen', ySplit: 4 }];
 
   const objects = book.addWorksheet('Объекты');
-  objects.columns = [10, 50, 14, 22, 11, 11, 10, 11, 12, 14, 17, 12].map((width) => ({ width }));
-  header(objects, 1, ['Вид', 'Название', 'ID', 'Ответственный', 'Фото требуется', 'Загружено', 'Принято', 'На проверке', 'На доработке', 'Статус', 'Последнее фото', 'На карте']);
+  objects.columns = [10, 50, 14, 22, 11, 11, 10, 11, 12, 14, 12].map((width) => ({ width }));
+  header(objects, 1, ['Вид', 'Название', 'ID', 'Ответственный', 'Фото требуется', 'Загружено', 'Принято', 'На проверке', 'На доработке', 'Статус', 'На карте']);
   for (const r of summary.objectRows) {
-    const row = objects.addRow([r.object.type || (r.kind === 'tpu' ? 'ТПУ' : 'Парковка'), r.object.label, r.object.sourceNumber, r.group, r.required, r.filled, r.accepted, r.pending, r.rework, r.statusLabel, dateText(r.lastPhotoAt), { text: 'Открыть', hyperlink: `${mapUrl}?object=${encodeURIComponent(r.id)}` }]);
-    gridRow(row, 12);
+    const row = objects.addRow([r.object.type || (r.kind === 'tpu' ? 'ТПУ' : 'Парковка'), r.object.label, r.object.sourceNumber, r.group, r.required, r.filled, r.accepted, r.pending, r.rework, r.statusLabel, { text: 'Открыть', hyperlink: `${mapUrl}?object=${encodeURIComponent(r.id)}` }]);
+    gridRow(row, 11);
     row.getCell(10).fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: STATUS_FILL[r.status] } };
-    row.getCell(12).font = LINK;
+    row.getCell(11).font = LINK;
   }
   objects.views = [{ state: 'frozen', ySplit: 1 }];
-  objects.autoFilter = { from: 'A1', to: 'L1' };
+  objects.autoFilter = { from: 'A1', to: 'K1' };
 
   const rework = book.addWorksheet('На доработке');
   rework.columns = [25, 50, 8, 60, 17, 12].map((width) => ({ width }));
@@ -161,5 +161,12 @@ export async function buildSlotReport(summary, { mapUrl = 'https://hainox.github
   if (summary.rework.length) rework.autoFilter = { from: 'A1', to: 'F1' };
   else gridRow(rework.addRow(['Слотов на доработке нет.']), 6);
 
+  // Единое выравнивание всех листов свода, включая заголовки и ссылки.
+  for (const sheet of book.worksheets) {
+    sheet.eachRow((row) => row.eachCell({ includeEmpty: true }, (cell) => {
+      cell.alignment = { ...cell.alignment, horizontal: 'center', vertical: 'middle' };
+    }));
+  }
   return Buffer.from(await book.xlsx.writeBuffer());
 }
+

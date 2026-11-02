@@ -252,11 +252,11 @@ export function titleBlock(sheet, columns, title, note) {
 // Шапка эталона: те же слова и порядок колонок, что в сводке по парковкам.
 export const SUMMARY_TITLES = Object.freeze([
   'Всего Объектов', 'Объектов закрыто', 'Объектов без фото',
-  'Обьектов на проверке', 'Обьектов на доработке ', '% принято', 'Последнее фото',
+  'Обьектов на проверке', 'Обьектов на доработке ', '% принято',
 ]);
 export const summaryValues = (row) => [
   row.objects, row.closed, row.empty, row.review, row.reworkObjects,
-  percent(row.accepted, row.required), dateText(row.lastPhotoAt),
+  percent(row.accepted, row.required),
 ];
 
 const MAP_PAGES = Object.freeze({
@@ -301,16 +301,16 @@ export async function buildReviewReport(summary, { mapUrl = 'https://hainox.gith
   overview.views = [{ state: 'frozen', ySplit: 4 }];
 
   const objects = book.addWorksheet('Объекты');
-  objects.columns = [26, 50, 28, 22, 12, 11, 10, 12, 12, 14, 17, 12].map((width) => ({ width }));
-  header(objects, 1, ['Вид', 'Название', 'ID', 'Ответственный', 'Фото требуется', 'Загружено', 'Принято', 'На проверке', 'На доработке', 'Статус', 'Последнее фото', 'На карте']);
+  objects.columns = [26, 50, 28, 22, 12, 11, 10, 12, 12, 14, 12].map((width) => ({ width }));
+  header(objects, 1, ['Вид', 'Название', 'ID', 'Ответственный', 'Фото требуется', 'Загружено', 'Принято', 'На проверке', 'На доработке', 'Статус', 'На карте']);
   for (const row of summary.objectRows) {
-    const excelRow = objects.addRow([row.typeLabel, row.label, row.id, row.group, row.required, row.filled, row.accepted, row.pending, row.rework, row.statusLabel, dateText(row.lastPhotoAt), mapLink(row, mapUrl)]);
-    gridRow(excelRow, 12);
+    const excelRow = objects.addRow([row.typeLabel, row.label, row.id, row.group, row.required, row.filled, row.accepted, row.pending, row.rework, row.statusLabel, mapLink(row, mapUrl)]);
+    gridRow(excelRow, 11);
     excelRow.getCell(10).fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: STATUS_FILL[row.status] } };
-    excelRow.getCell(12).font = LINK;
+    excelRow.getCell(11).font = LINK;
   }
   objects.views = [{ state: 'frozen', ySplit: 1 }];
-  objects.autoFilter = { from: 'A1', to: 'L1' };
+  objects.autoFilter = { from: 'A1', to: 'K1' };
 
   const rework = book.addWorksheet('На доработке');
   rework.columns = [26, 50, 10, 60, 17, 12].map((width) => ({ width }));
@@ -335,5 +335,12 @@ export async function buildReviewReport(summary, { mapUrl = 'https://hainox.gith
   if (reworkRows) rework.autoFilter = { from: 'A1', to: 'F1' };
   else gridRow(rework.addRow(['Точек на доработке нет.']), 6);
 
+  // Единое выравнивание всех листов свода, включая заголовки и ссылки.
+  for (const sheet of book.worksheets) {
+    sheet.eachRow((row) => row.eachCell({ includeEmpty: true }, (cell) => {
+      cell.alignment = { ...cell.alignment, horizontal: 'center', vertical: 'middle' };
+    }));
+  }
   return Buffer.from(await book.xlsx.writeBuffer());
 }
+

@@ -48,17 +48,17 @@ export async function buildDistrictPhotosReport(summary, { mapUrl = 'https://hai
   book.created = summary.generatedAt;
 
   const overview = book.addWorksheet('Сводка по районам');
-  headerRow(overview, ['Район', 'Принятых точек', 'Точек с фото', 'Загружено фото', 'Последнее фото'], [24, 18, 16, 18, 20]);
+  headerRow(overview, ['Район', 'Принятых точек', 'Точек с фото', 'Загружено фото'], [24, 18, 16, 18]);
   overview.spliceRows(1, 0, [`Сводка по фото на ${dateText(summary.generatedAt)}`], []);
   overview.getRow(1).font = { bold: true, size: 14 };
   overview.views = [{ state: 'frozen', ySplit: 3 }];
   for (const row of [...summary.districtRows, summary.total]) {
-    const excelRow = overview.addRow([row.district, row.acceptedPoints, row.pointsWithPhotos, row.photos, dateText(row.lastPhotoAt)]);
+    const excelRow = overview.addRow([row.district, row.acceptedPoints, row.pointsWithPhotos, row.photos]);
     if (row.district === 'Итого') excelRow.font = { bold: true };
   }
 
   const detail = book.addWorksheet('Фото по точкам');
-  headerRow(detail, ['Район', 'Точка', 'Статус точки', 'Количество фото', 'Последнее фото', 'Карта района'], [24, 14, 20, 16, 20, 18]);
+  headerRow(detail, ['Район', 'Точка', 'Статус точки', 'Количество фото', 'Карта района'], [24, 14, 20, 16, 18]);
   const slugs = {
     Аэропорт: 'aeroport', Беговой: 'begovoy', Бескудниковский: 'beskudnikovskiy', Войковский: 'voykovskiy',
     'Восточное Дегунино': 'vostochnoe-degunino', Головинский: 'golovinskiy', Дмитровский: 'dmitrovskiy',
@@ -68,9 +68,15 @@ export async function buildDistrictPhotosReport(summary, { mapUrl = 'https://hai
   };
   for (const point of summary.pointRows) {
     const status = { pending: 'На проверке', accepted: 'Принята', rework: 'На доработке' }[point.review_status] || 'Принята';
-    const row = detail.addRow([point.district, point.label, status, Number(point.photo_count || 0), dateText(point.last_photo_at), { text: 'Открыть', hyperlink: `${mapUrl}${slugs[point.district] || ''}.html` }]);
-    row.getCell(6).font = { color: { argb: 'FF0C5AA6' }, underline: true };
+    const row = detail.addRow([point.district, point.label, status, Number(point.photo_count || 0), { text: 'Открыть', hyperlink: `${mapUrl}${slugs[point.district] || ''}.html` }]);
+    row.getCell(5).font = { color: { argb: 'FF0C5AA6' }, underline: true };
   }
-  detail.autoFilter = { from: 'A1', to: 'F1' };
+  detail.autoFilter = { from: 'A1', to: 'E1' };
+  // Единое выравнивание всех листов свода, включая заголовки и ссылки.
+  for (const sheet of book.worksheets) {
+    sheet.eachRow((row) => row.eachCell({ includeEmpty: true }, (cell) => {
+      cell.alignment = { ...cell.alignment, horizontal: 'center', vertical: 'middle' };
+    }));
+  }
   return Buffer.from(await book.xlsx.writeBuffer());
 }
