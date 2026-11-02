@@ -49,7 +49,7 @@ test('книга Excel: свод по районам, точки и лист д�
   assert.deepEqual(rework.getRow(1).values.slice(1), ['Район', 'Точка', 'Что исправить', 'Отклонено', 'На карте']);
   assert.equal(rework.getRow(2).getCell(3).value, 'Не та сторона');
   assert.match(JSON.stringify(rework.getRow(2).getCell(5).value), /districts\/koptevo\.html/);
-  assert.deepEqual(book.getWorksheet('Точки').getRow(1).values.slice(1), ['Район', 'Точка', 'Статус', 'Последнее фото', 'На карте']);
+  assert.deepEqual(book.getWorksheet('Точки').getRow(1).values.slice(1), ['Район', 'Точка', 'Статус', 'На карте']);
 });
 
 test('строки очереди точек съёмки превращаются в точки свода', async () => {
@@ -63,3 +63,4 @@ test('строки очереди точек съёмки превращаютс
   assert.equal(points[1].rejectedComment, 'Темно');
   assert.equal(points[1].lastPhotoAt, '2026-10-27T07:00:00Z');
 });
+
