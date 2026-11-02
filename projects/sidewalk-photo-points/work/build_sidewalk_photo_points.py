@@ -1,13 +1,21 @@
 """Черновая расстановка точек съёмки тротуаров у МКД (тестовый вариант).
 
-Правила (по образцам префектуры):
-- точки ставятся только на тротуарах дворовых территорий (АСУ ОДС, тротуар
-  в составе двора, parent_type_id 38); тротуары ОДХ и проезжие части не берутся;
-- ориентир — сторона подъездов: для каждого фасада с подъездами точки
-  ставятся на тротуаре у двух углов дома, взгляд вдоль фасада, чтобы кадр
-  охватывал весь тротуар перед подъездами; длинный фасад делится
-  промежуточными точками;
-- если тротуар обходит дом кругом, добавляются точки у остальных углов.
+Правила (по образцам префектуры и по тому, как сотрудники правили черновики,
+выгрузка photo-service/scripts/export-sidewalk-edits.js → staff_edits.txt):
+- снимаются тротуары дворовых территорий (АСУ ОДС, тротуар в составе двора,
+  parent_type_id 38); тротуары ОДХ не берутся;
+- ориентир — сторона подъездов: для каждого фасада с подъездами две точки
+  у двух углов дома, взгляд вдоль фасада к дому, чтобы кадр охватывал весь
+  тротуар перед подъездами; длинный фасад делится промежуточными точками;
+- фотограф стоит не у стены, а на внешней кромке тротуара или на дворовом
+  проезде за ней (не на газоне и не на парковке), в 8–12 м от стены и в 6 м
+  за углом дома: так сотрудники переносили черновики (медиана — 9–11 м от стены);
+- если вдоль задней стороны дома тоже идёт дворовый тротуар, у неё ставятся
+  такие же две точки; если тротуар обходит дом кругом — точки у остальных углов;
+- с --staff правки префектуры сохраняются: перенесённые, повёрнутые
+  и добавленные точки входят в слой со своими номерами; рядом с ними (если взгляд
+  похожий) и там, где префектура точку удалила, новые не ставятся; новые точки нумеруются
+  с --first, чтобы не совпасть ни с одним выданным номером.
 
 Источники: подъезды — object-maps/data/entrances.json, контуры домов —
 OpenStreetMap (скачиваются заранее fetch_osm_buildings.py в
@@ -16,6 +24,7 @@ osm_buildings_<slug>.json); если в OSM подъезд отмечен точ
 тротуары и дворы — districts/layers/<slug>/.
 
 Запуск:  python3 build_sidewalk_photo_points.py dmitrovskiy
+         python3 build_sidewalk_photo_points.py aeroport --staff=staff_edits.txt --first=501
 Результат: districts/layers/<slug>/sidewalk_shoot.geojson
 """
 import json
@@ -47,9 +56,16 @@ ENTRANCE_TO_BUILDING_M = 12   # подъезд дальше — дом не на
 FACADE_ANGLE_DEG = 20         # подъезды на рёбрах с таким разбросом — один фасад
 FACADE_OFFSET_M = 15          # и не дальше друг от друга по нормали (ступенчатый фасад)
 BAND_DEPTH_M = 25             # полоса тротуара перед фасадом
-CORNER_OVERSHOOT_M = 4        # точка чуть за углом дома
+CORNER_OVERSHOOT_M = 6        # точка за углом дома
 SNAP_MAX_M = 15               # дальше от тротуара — точку не ставим
-LONG_FACADE_M = 120           # длиннее — добавляем промежуточные точки
+LONG_FACADE_M = 100           # длиннее — добавляем промежуточные точки
+CAMERA_MIN_M = 8              # фотограф не ближе этого к стене:
+CAMERA_MAX_M = 12             # внешняя кромка тротуара + 1 м, но в этих пределах
+CAMERA_TO_WALK_M = 8          # и не дальше этого от снимаемого тротуара
+BACK_SIDE_SHARE = 0.6         # доля задней стены с тротуаром — ставим точки и там
+STAFF_KEEP_M = 15             # ближе к точке префектуры с похожим взглядом (±60°) новую не ставим,
+STAFF_SAME_M = 6              # а ближе этого — при любом взгляде
+STAFF_DELETED_M = 12          # и ближе к удалённой префектурой
 MERGE_M = 12                  # ближе — одна точка
 MIN_WALL_M = 5                # короче — уступ, а не стена
 ROW_MIN_SPREAD_M = 10         # подъезды «в линию»: разброс вдоль оси не меньше
@@ -205,7 +221,20 @@ def entrance_row(bld, ents, yard_walks):
     return [{"u": (ux, uy), "n": (nx, ny), "ox": mx, "oy": my, "ents": list(ents)}]
 
 
-def build(slug):
+def read_staff_edits(path, district_no):
+    """Правки префектуры одного района из выгрузки export-sidewalk-edits.js:
+    {номер: (долгота, широта, направление, отметки)}; D — удалена, A — добавлена."""
+    edits = {}
+    for line in Path(path).read_text(encoding="utf-8").splitlines():
+        if not line.startswith("Т"):
+            continue
+        no, lng, lat, heading, flags = line.split(";")
+        if no[1:].split(".")[0] == district_no:
+            edits[no] = (float(lng), float(lat), int(heading), flags)
+    return edits
+
+
+def build(slug, staff=None, first_no=1):
     district = SLUGS[slug]
     layers = ROOT / "districts" / "layers" / slug
     boundary = shape(load(layers / "boundary.geojson")["features"][0]["geometry"])
@@ -220,6 +249,9 @@ def build(slug):
              for f in load(layers / f"{name}.geojson")["features"]]
     yard_walks = unary_union(sidewalks).buffer(0).difference(unary_union(roads).buffer(1))
     yards = unary_union([L.geom(shape(f["geometry"])) for f in load(layers / "yards.geojson")["features"]]).buffer(3)
+    driveways = unary_union([L.geom(shape(f["geometry"]).buffer(0)) for f in load(layers / "driveways.geojson")["features"]]).buffer(0)
+    odh = unary_union([L.geom(shape(f["geometry"]).buffer(0)) for f in load(layers / "odh.geojson")["features"]]).buffer(0)
+    parking = unary_union([L.geom(shape(f["geometry"]).buffer(0)) for f in load(layers / "parking.geojson")["features"]]).buffer(0)
 
     buildings = []
     for el in load(WORK / f"osm_buildings_{slug}.json")["elements"]:
@@ -231,6 +263,49 @@ def build(slug):
             continue
         buildings.append(poly.simplify(0.8))
     tree = STRtree(buildings)
+    bld_union = unary_union(buildings)
+
+    def camera(target, home, walk):
+        """Место фотографа: от target шагами по метру к home (точке на тротуаре), пока
+        место не окажется во дворе на тротуаре или дворовом проезде — не на газоне,
+        не в доме, не на ОДХ и не на парковке — и не дальше CAMERA_TO_WALK_M от
+        снимаемого тротуара walk. None — подходящего места нет."""
+        dist = target.distance(home)
+        for k in range(int(dist) + 1):
+            t = k / dist if dist else 0
+            q = Point(target.x + (home.x - target.x) * t, target.y + (home.y - target.y) * t)
+            if ((yard_walks.distance(q) < 0.5 or driveways.contains(q)) and walk.distance(q) <= CAMERA_TO_WALK_M
+                    and yards.contains(q) and boundary_m.contains(q) and not bld_union.intersects(q.buffer(0.7))
+                    and not odh.contains(q) and not parking.contains(q)):
+                return q
+        return None
+
+    def far_edge(walk, ox, oy, ux, uy, nx, ny, alongs, default):
+        """Внешняя кромка тротуара: медиана дальнего от фасада края по поперечным лучам."""
+        fars = []
+        for a in alongs:
+            sx, sy = ox + ux * a, oy + uy * a
+            hit = walk.intersection(LineString([(sx, sy), (sx + nx * BAND_DEPTH_M, sy + ny * BAND_DEPTH_M)]))
+            if not hit.is_empty:
+                fars.append(max((x - ox) * nx + (y - oy) * ny for g in getattr(hit, "geoms", [hit]) for x, y in g.coords))
+        return sorted(fars)[len(fars) // 2] if fars else default
+
+    def place(walk, ox, oy, ux, uy, nx, ny, a, d_walk, d_cam):
+        """Точка съёмки у отметки a вдоль фасада. Сначала — ближайшее место на тротуаре
+        (как раньше), затем фотограф отходит от стены до d_cam: на внешнюю кромку или
+        на проезд за ней; если там газон, пробуем сдвинуться на 3–6 м вдоль дома."""
+        home = Point(ox + ux * a + nx * d_walk, oy + uy * a + ny * d_walk)
+        base = home if walk.contains(home) else nearest_points(walk, home)[0]
+        if base.distance(home) > SNAP_MAX_M:
+            return None
+        off = (base.x - ox) * nx + (base.y - oy) * ny
+        for da in (0, -3, 3, -6, 6):
+            bx, by = base.x + ux * da, base.y + uy * da
+            q = camera(Point(bx + nx * max(d_cam - off, 0), by + ny * max(d_cam - off, 0)), Point(bx, by), walk)
+            if q is not None:
+                return q
+        return base
+
     osm_doors = [(Point(L.xy(e["lon"], e["lat"])), e["tags"]) for e in load(WORK / f"osm_buildings_{slug}.json").get("entrances", [])
                  if e["tags"].get("entrance") in ("staircase", "main", "yes")]
 
@@ -328,6 +403,7 @@ def build(slug):
                 q = nearest_points(walk, pt)[0]
                 offsets.append((q.x - ox) * nx + (q.y - oy) * ny)
             d = sorted(offsets)[len(offsets) // 2]
+            d_cam = min(max(far_edge(walk, ox, oy, ux, uy, nx, ny, [proj(pt) for pt, _ in fac["ents"]], d) + 1, CAMERA_MIN_M), CAMERA_MAX_M)
             n_first = first[1]["properties"].get("№ подъезда")
             n_last = last[1]["properties"].get("№ подъезда")
             first_end = start if proj(first[0]) <= proj(last[0]) else end
@@ -338,14 +414,44 @@ def build(slug):
             for k in range(1, parts):
                 stops.append((start + length * k / parts, 1, "середина фасада"))
             for a, sign, role in stops:
-                target = Point(ox + ux * a + nx * d, oy + uy * a + ny * d)
-                q = target if walk.contains(target) else nearest_points(walk, target)[0]
-                if q.distance(target) > SNAP_MAX_M:
+                q = place(walk, ox, oy, ux, uy, nx, ny, a, d, d_cam)
+                if q is None:
                     stats["end_far_from_sidewalk"] += 1
                     continue
                 house_points.append({"xy": (q.x, q.y), "az": azimuth(ux * sign, uy * sign), "role": role,
                                      "weight": len(fac["ents"]),
                                      "side": "подъезды " + entrance_range([r["properties"].get("№ подъезда") for _, r in fac["ents"]])})
+
+        # Задняя сторона линейного дома: если вдоль неё тоже идёт дворовый тротуар,
+        # сотрудники снимают и его — две точки за углами, взгляд вдоль стены.
+        if bld is not None and len(facades) == 1 and house_points:
+            ux, uy = facades[0]["u"]
+            nx, ny = -facades[0]["n"][0], -facades[0]["n"][1]
+            cx, cy = bld.centroid.x, bld.centroid.y
+            along = [(vx - cx) * ux + (vy - cy) * uy for vx, vy in bld.exterior.coords]
+            depth = max((vx - cx) * nx + (vy - cy) * ny for vx, vy in bld.exterior.coords)
+            s0, s1 = min(along), max(along)
+            band = affinity.affine_transform(box(s0 - 12, depth + 0.5, s1 + 12, depth + BAND_DEPTH_M), [ux, nx, uy, ny, cx, cy])
+            walk = yard_walks.intersection(band).difference(bld.buffer(0.5))
+            samples = [s0 + (s1 - s0) * k / 10 for k in range(11)]
+            covered = sum(1 for a in samples if not walk.intersection(LineString([
+                (cx + ux * a + nx * depth, cy + uy * a + ny * depth),
+                (cx + ux * a + nx * (depth + BAND_DEPTH_M), cy + uy * a + ny * (depth + BAND_DEPTH_M))])).is_empty)
+            if not walk.is_empty and walk.area >= 15 and covered / len(samples) >= BACK_SIDE_SHARE:
+                near = nearest_points(walk, Point(cx + nx * depth, cy + ny * depth))[0]
+                d = (near.x - cx) * nx + (near.y - cy) * ny
+                d_cam = depth + min(max(far_edge(walk, cx, cy, ux, uy, nx, ny, samples, d) - depth + 1, CAMERA_MIN_M), CAMERA_MAX_M)
+                start, end = s0 - CORNER_OVERSHOOT_M, s1 + CORNER_OVERSHOOT_M
+                stops = [(start, 1), (end, -1)]
+                parts = math.ceil((end - start) / LONG_FACADE_M)
+                stops += [(start + (end - start) * k / parts, 1) for k in range(1, parts)]
+                for a, sign in stops:
+                    q = place(walk, cx, cy, ux, uy, nx, ny, a, d, d_cam)
+                    if q is None:
+                        continue
+                    stats["back_side"] += 1
+                    house_points.append({"xy": (q.x, q.y), "az": azimuth(ux * sign, uy * sign), "role": "задняя сторона дома",
+                                         "weight": 0, "side": "без подъездов"})
 
         # Тротуар кругом дома: добавляем остальные углы описанного прямоугольника.
         samples = []
@@ -362,10 +468,12 @@ def build(slug):
                         continue
                     dx, dy = vx - cx, vy - cy
                     k = math.hypot(dx, dy) or 1
-                    target = Point(vx + dx / k * 6, vy + dy / k * 6)
-                    q = nearest_points(yard_walks, target)[0]
-                    if q.distance(target) > SNAP_MAX_M:
-                        continue
+                    home = Point(vx + dx / k * 6, vy + dy / k * 6)
+                    q = camera(Point(vx + dx / k * (CAMERA_MIN_M + 2), vy + dy / k * (CAMERA_MIN_M + 2)), home, yard_walks)
+                    if q is None:
+                        q = nearest_points(yard_walks, home)[0]
+                        if q.distance(home) > SNAP_MAX_M:
+                            continue
                     nxt = rect[(i + 1) % 4]
                     house_points.append({"xy": (q.x, q.y), "az": azimuth(nxt[0] - vx, nxt[1] - vy),
                                          "role": "угол (тротуар вокруг дома)", "side": "круговой тротуар"})
@@ -392,7 +500,32 @@ def build(slug):
 
     features = []
     points.sort(key=lambda p: (-p["xy"][1], p["xy"][0]))
-    for i, p in enumerate(points, 1):
+    kept = []
+    if staff:
+        # Правки префектуры: её точки остаются как есть, новые рядом с ними
+        # и на месте удалённых не ставятся.
+        old = {f["properties"]["point_no"]: f for f in load(layers / "sidewalk_shoot.geojson")["features"]}
+        live = {no: (L.xy(lng, lat), heading) for no, (lng, lat, heading, flags) in staff.items() if "D" not in flags}
+        turn = lambda a, b: min(abs(a - b) % 360, 360 - abs(a - b) % 360)
+        gone = [L.xy(lng, lat) for lng, lat, _, flags in staff.values() if "D" in flags]
+        before = len(points)
+        points = [p for p in points
+                  if all(math.dist(p["xy"], xy) >= (STAFF_KEEP_M if turn(p["az"], h) <= 60 else STAFF_SAME_M) for xy, h in live.values())
+                  and all(math.dist(p["xy"], xy) >= STAFF_DELETED_M for xy in gone)]
+        stats["skipped_near_staff_points"] = before - len(points)
+        for no, (lng, lat, heading, flags) in sorted(staff.items()):
+            if "D" in flags:
+                continue
+            base = old.get(no, {}).get("properties") or {}
+            nearest = min(points, key=lambda p: math.dist(p["xy"], live[no][0]), default=None)
+            kept.append({"type": "Feature", "properties": {
+                "point_no": no, "district": district,
+                "address": base.get("address") or (nearest["address"] if nearest else district),
+                "unom": base.get("unom", nearest["unom"] if nearest else ""),
+                "role": base.get("role") or "добавлена префектурой", "side": base.get("side", ""),
+                "azimuth": heading, "status": "черновик", "prefecture_edit": True,
+            }, "geometry": {"type": "Point", "coordinates": [lng, lat]}})
+    for i, p in enumerate(points, first_no):
         props = {
             "point_no": f"Т{DISTRICT_NOS[slug]}.{i:03d}",
             "district": district,
@@ -407,12 +540,16 @@ def build(slug):
             props["also_covers"] = "; ".join(p["also"])
         features.append({"type": "Feature", "properties": props,
                          "geometry": {"type": "Point", "coordinates": list(L.lonlat(*p["xy"]))}})
+    features = sorted(features + kept, key=lambda f: int(f["properties"]["point_no"].split(".")[1]))
     out = layers / "sidewalk_shoot.geojson"
     out.write_text(json.dumps({"type": "FeatureCollection", "features": features}, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
-    print(f"{district}: {len(features)} точек → {out.relative_to(ROOT)}")
+    print(f"{district}: {len(features)} точек (правки префектуры: {len(kept)}) → {out.relative_to(ROOT)}")
     print(dict(stats))
 
 
 if __name__ == "__main__":
-    for s in sys.argv[1:] or list(SLUGS):
-        build(s)
+    args = [a for a in sys.argv[1:] if not a.startswith("--")]
+    opts = dict(a[2:].split("=", 1) for a in sys.argv[1:] if a.startswith("--") and "=" in a)
+    for s in args or list(SLUGS):
+        staff = read_staff_edits(WORK / opts["staff"], DISTRICT_NOS[s]) if "staff" in opts else None
+        build(s, staff=staff, first_no=int(opts.get("first", 1)))
