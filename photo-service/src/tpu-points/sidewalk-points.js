@@ -118,8 +118,7 @@ export function createSidewalkPointsRouter({ pool, authenticate, boundary }) {
       const generatedAt = new Date();
       const summary = summarizeDigitization({ points: slotPointsForReport((await pool.query(sidewalkQueueQuery)).rows), generatedAt });
       const buffer = await buildDigitizationReport(summary, {
-        title: 'Свод по фото тротуаров', pointTitle: 'Точка тротуара',
-        note: 'Одна точка тротуара — один снимок. Принято — фото принято префектурой; на доработке — ждёт нового снимка с исправлениями.',
+        title: 'Оцифровка тротуаров ДТ', pointTitle: 'Точка тротуара',
       });
       const day = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Moscow' }).format(generatedAt);
       res.set({ 'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',

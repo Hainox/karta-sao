@@ -35,16 +35,25 @@ test('разбивка по видам появляется, только ког
 
 test('книга Excel: свод по районам, точки и лист доработки с причиной', async () => {
   const summary = summarizeDigitization({ points, generatedAt: new Date('2026-10-28T07:00:00Z') });
-  const buffer = await buildDigitizationReport(summary, { title: 'Свод по фото въездных групп', note: 'Пояснение' });
+  const buffer = await buildDigitizationReport(summary, { title: 'Оцифровка въездных групп' });
   const book = new ExcelJS.Workbook();
   await book.xlsx.load(buffer);
   assert.deepEqual(book.worksheets.map((sheet) => sheet.name), ['Свод по районам', 'Точки', 'На доработке']);
   const overview = book.getWorksheet('Свод по районам');
-  assert.match(String(overview.getCell('A1').value), /^Свод по фото въездных групп на 28\.10\.2026/);
-  assert.deepEqual(overview.getRow(4).values.slice(1, 4), ['Район', 'Всего Объектов', 'Объектов закрыто']);
-  const totalRow = overview.getRow(5 + 16);
+  // Форма по эталону префектуры: тёмно-зелёная строка названия на всю ширину,
+  // пять колонок, районы от лучшего процента принятых.
+  assert.equal(overview.getCell('A1').value, 'Оцифровка въездных групп');
+  assert.equal(overview.getCell('F1').master.address, 'A1');
+  assert.equal(overview.getCell('A1').fill.fgColor.argb, 'FF123A32');
+  assert.deepEqual(overview.getRow(2).values.slice(1), ['Район', 'Всего Объектов', 'Объектов без фото', 'Объектов закрыто', 'Обьектов на доработке ', '% принято']);
+  const totalRow = overview.getRow(3 + 16);
   assert.equal(totalRow.getCell(1).value, 'Итого по САО');
   assert.equal(totalRow.getCell(2).value, 4);
+  assert.equal(totalRow.getCell(6).numFmt, '0%');
+  const shares = [];
+  for (let row = 3; row < 3 + 16; row += 1) shares.push(overview.getRow(row).getCell(6).value);
+  assert.deepEqual(shares, [...shares].sort((a, b) => b - a), 'районы от большего процента к меньшему');
+  assert.equal(overview.views[0].ySplit, 2);
   const rework = book.getWorksheet('На доработке');
   assert.deepEqual(rework.getRow(1).values.slice(1), ['Район', 'Точка', 'Что исправить', 'Отклонено', 'На карте']);
   assert.equal(rework.getRow(2).getCell(3).value, 'Не та сторона');

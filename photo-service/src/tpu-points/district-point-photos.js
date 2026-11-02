@@ -103,8 +103,7 @@ export function mountDistrictPointPhotoRoutes(router, { repository }) {
       const generatedAt = new Date();
       const summary = summarizeDigitization({ points: slotPointsForReport(await repository.listDistrictPointPhotoQueue()), generatedAt });
       const buffer = await buildDigitizationReport(summary, {
-        title: 'Свод по фото въездных групп (точки съёмки)',
-        note: 'Одна точка — один снимок. Закрыта — снимок принят префектурой; на доработке — снимок отклонён, точка ждёт нового.',
+        title: 'Оцифровка въездных групп',
       });
       const day = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Moscow' }).format(generatedAt);
       res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
