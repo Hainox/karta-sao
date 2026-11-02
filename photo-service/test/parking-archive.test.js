@@ -71,7 +71,38 @@ test('архив собирается из байтов базы и раскла
     assert.equal(files['АвД САО/Подъезд к кладбищу (2)/55.910000, 37.520000_1.jpg'], 'CCC');
     const manifest = JSON.parse(files['manifest.json']);
     assert.deepEqual([manifest.selection.objects, manifest.selection.photos], [2, 3]);
-    assert.ok(manifest.files.every((file) => !('open' in file)), 'служебное open() в опись не попадает');
+    assert.ok(manifest.files.every((file) => !('read' in file)), 'служебное read() в опись не попадает');
     assert.ok(queries.filter((sql) => sql.includes('photo_bytes')).length === 3);
+  } finally { await rm(dir, { recursive: true, force: true }); }
+});
+
+test('кадры читаются строго по одному, нечитаемый кадр не роняет архив', async () => {
+  let active = 0;
+  let peak = 0;
+  let reads = 0;
+  const many = Array.from({ length: 40 }, (_, i) => photo('point', `p${i}`, i % 2 ? 'parking:1' : 'parking:2', new Date(Date.UTC(2026, 9, 1, 0, i)).toISOString()));
+  const pool = {
+    async query(sql, params = []) {
+      if (!sql.includes('photo_bytes')) return { rows: sql.includes('object_slot_photos') ? [] : many };
+      reads += 1;
+      active += 1;
+      peak = Math.max(peak, active);
+      await new Promise((resolve) => setTimeout(resolve, 2));
+      active -= 1;
+      if (params[0] === 'p7') throw new Error('timeout exceeded when trying to connect');
+      return { rows: [{ photo_bytes: Buffer.from(params[0]) }] };
+    },
+  };
+  const { entries, folders } = await loadParkingArchive(pool, objects);
+  const dir = await mkdtemp(join(tmpdir(), 'parking-archive-'));
+  try {
+    const result = await writePhotoArchive([], { entries, folders, dir, prefix: PARKING_ARCHIVE_PREFIX });
+    assert.equal(peak, 1, 'в базу одновременно идёт один запрос за байтами');
+    assert.equal(reads, 40);
+    assert.deepEqual([result.photos, result.total, result.skipped], [39, 40, 1]);
+    const listing = execFileSync('python3', ['-c', 'import sys,zipfile,json;z=zipfile.ZipFile(sys.argv[1]);print(json.dumps(json.loads(z.read("manifest.json"))))', join(dir, result.name)]);
+    const manifest = JSON.parse(listing);
+    assert.equal(manifest.files.length, 39);
+    assert.equal(manifest.skipped.length, 1);
   } finally { await rm(dir, { recursive: true, force: true }); }
 });
