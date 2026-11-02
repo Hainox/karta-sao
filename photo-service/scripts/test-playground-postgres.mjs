@@ -71,8 +71,9 @@ try {
   const { default: ExcelJS } = await import('exceljs');
   const book = new ExcelJS.Workbook();
   await book.xlsx.load(Buffer.from(await report.arrayBuffer()));
-  const totalRow = book.getWorksheet('Свод по районам').getRow(5 + 16);
-  assert.deepEqual(totalRow.values.slice(1, 7), ['Итого по САО', 3042, 1, 3040, 0, 1]);
+  // Свод по эталону: строка названия, шапка, 16 районов и итог; колонки — всего, без фото, закрыто, на доработке.
+  const totalRow = book.getWorksheet('Свод по районам').getRow(3 + 16);
+  assert.deepEqual(totalRow.values.slice(1, 6), ['Итого по САО', 3042, 3040, 1, 1]);
   // Миграции перезапускаются при каждой выкладке: районная точка с тремя
   // снимками (два возврата на доработку) не должна ронять повторный прогон.
   const districtPoint = '11111111-1111-4111-8111-111111111111';
