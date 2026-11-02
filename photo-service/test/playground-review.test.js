@@ -42,7 +42,7 @@ test('очередь и свод ДП/СП доступны только пре�
     const book = new ExcelJS.Workbook();
     await book.xlsx.load(Buffer.from(await response.arrayBuffer()));
     const overview = book.getWorksheet('Свод по районам');
-    assert.match(String(overview.getCell('A1').value), /^Свод по фото детских и спортивных площадок/);
+    assert.equal(overview.getCell('A1').value, 'Оцифровка детских и спортивных площадок');
     const kinds = [];
     overview.eachRow((row) => { if (['Детские площадки', 'Спортивные площадки'].includes(row.getCell(1).value)) kinds.push([row.getCell(1).value, row.getCell(2).value]); });
     assert.deepEqual(kinds, [['Детские площадки', 2], ['Спортивные площадки', 2]]);

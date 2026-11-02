@@ -53,8 +53,7 @@ export function createPlaygroundPhotoRouter({pool,authenticate}) {
  router.get('/report.xlsx',prefecture,async(req,res,next)=>{try{
   const generatedAt=new Date();
   const summary=summarizeDigitization({points:slotPointsForReport((await pool.query(queueQuery)).rows),kinds:PLAYGROUND_KINDS,generatedAt});
-  const buffer=await buildDigitizationReport(summary,{title:'Свод по фото детских и спортивных площадок',kinds:PLAYGROUND_KINDS,pointTitle:'Площадка',
-   note:'Одна площадка — один снимок. Закрыта — снимок принят префектурой; на доработке — снимок отклонён, площадка ждёт нового.'});
+  const buffer=await buildDigitizationReport(summary,{title:'Оцифровка детских и спортивных площадок',kinds:PLAYGROUND_KINDS,pointTitle:'Площадка'});
   const day=new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Moscow'}).format(generatedAt);
   res.set({'Content-Type':'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
    'Content-Disposition':`attachment; filename="Svod_foto_DP_SP_SAO_${day}.xlsx"`,'Cache-Control':'no-store'}).send(buffer);

@@ -187,10 +187,11 @@ test('свод Excel по слотам: районы, виды объектов,
   const totalRow = overview.getColumn(1).values.indexOf('Итого по САО');
   assert.equal(overview.getRow(totalRow).getCell(5).value, 2);
   // Оформление по эталону префектуры: жёлтая объединённая шапка, таблицы по центру в тонкой рамке.
-  assert.equal(overview.getCell('K1').master.address, 'A1');
+  // Колонки «Последнее фото» в своде больше нет: таблица занимает A:J.
+  assert.equal(overview.getCell('J1').master.address, 'A1');
   assert.equal(overview.getCell('A1').fill.fgColor.argb, 'FFFFFF00');
   assert.equal(overview.getCell('A1').border.top.style, 'medium');
-  assert.equal(overview.getRow(totalRow).getCell(11).border.right.style, 'thin');
+  assert.equal(overview.getRow(totalRow).getCell(10).border.right.style, 'thin');
   assert.equal(overview.getRow(totalRow).getCell(5).alignment.horizontal, 'center');
   assert.equal(book.getWorksheet('Объекты').getRow(2).getCell(2).border.left.style, 'thin');
 });
