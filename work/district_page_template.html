@@ -149,7 +149,7 @@ h1{margin:2px 0 0;font-size:24px;line-height:1.15}
 .shoot-arrow path{pointer-events:none}
 .shoot-marker.preview .shoot-dot{background:#fff;border-color:#ffcb00}
 .shoot-marker.archive .shoot-dot{background:#7b61a8;border-color:#fff;box-shadow:0 0 0 2px #4d3478,0 1px 4px #10263680}
-.shoot-marker.sidewalk-shoot .shoot-dot{left:-9px;top:-9px;width:18px;height:18px;background:#7b4fc9;border-color:#fff;box-shadow:0 0 0 2px #2c1563,0 1px 4px #10263680}
+.shoot-marker.sidewalk-shoot .shoot-dot{left:-9px;top:-9px;width:18px;height:18px;background:#f28c18;border-color:#fff;box-shadow:0 0 0 2px #8a4300,0 1px 4px #10263680}
 .card .sw-tools .row{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
 .card .sw-tools button{min-height:30px;padding:4px 10px;border:1px solid #8a979c;border-radius:8px;background:#fff;color:var(--ink);font:inherit;font-size:12.5px;cursor:pointer}
 .card .sw-tools button.primary{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:800}
@@ -205,7 +205,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     <div id="playgroundPhotoLayer"></div>
     <div id="sidewalkShootLayer" hidden></div>
     <div id="entranceRefLayer" hidden></div>
-    <details class="shoot-list-box"><summary>Список точек</summary><div class="shoot-list" id="shootList"></div></details>
+    <details class="shoot-list-box"><summary>Список точек · въездные группы</summary><div class="shoot-list" id="shootList"></div></details>
     <div class="shoot-actions">
       <button id="shootExport" class="hud-btn" type="button">Выгрузить GeoJSON</button>
       <button id="shootReport" class="hud-btn" type="button" hidden>Excel: точки</button>
@@ -232,8 +232,9 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
 <script src="../atlas-summary.js?v=20261029b"></script>
 <script src="point-popover.js?v=20261029-edit"></script>
 <script src="point-editor.js?v=20261029-edit"></script>
-<script src="playground-photo-layer.js?v=20261029-edit"></script>
-<script src="sidewalk-shoot-layer.js?v=20261030-fieldwork"></script>
+<script src="point-stack.js?v=20261102"></script>
+<script src="playground-photo-layer.js?v=20261102-lists"></script>
+<script src="sidewalk-shoot-layer.js?v=20261102-stack"></script>
 <script src="entrance-ref-layer.js?v=20261028"></script>
 <script>
 (() => {
@@ -690,6 +691,9 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       point._element = element;
       state.map.addChild(marker);
     });
+    // Точки в одном месте разводим на экране, чтобы каждую можно было нажать.
+    window.spreadStackedPoints?.(state.points.filter((point) => point._element)
+      .map((point) => ({ lng: Number(point.lng), lat: Number(point.lat), heading: point.heading, element: point._element })));
     renderShootList();
   }
 
