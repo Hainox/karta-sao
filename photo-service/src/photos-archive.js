@@ -149,7 +149,7 @@ export function photoArchiveManifest(rows, files, { exportedAt = new Date().toIS
     },
     folders: folders || archiveFolders(rows, typeFolders),
     // Ключ хранилища и способ чтения наружу не отдаём: они нужны только сервису.
-    files: files.map(({ storageKey, open, ...file }) => file),
+    files: files.map(({ storageKey, read, ...file }) => file),
     skipped
   };
 }
@@ -180,14 +180,15 @@ export async function writePhotoArchive(rows, options = {}) {
     typeFolders = TYPE_FOLDERS, prefix = ARCHIVE_PREFIX, folders = null,
   } = options;
   // Готовую раскладку передаёт раздел, чьи снимки лежат не в медиатоме, а в базе:
-  // у такого файла вместо ключа хранилища есть open(), отдающий поток байтов.
+  // у такого файла вместо ключа хранилища есть read(), отдающий байты кадра.
   const entries = options.entries || photoArchiveEntries(rows, typeFolders);
+  const fromDatabase = entries.some((entry) => entry.read);
 
   const present = [];
   const skipped = [];
   for (const entry of entries) {
     // Файл могли удалить после выборки: кадр пропускаем, но архив не роняем.
-    if (entry.open) { present.push(entry); continue; }
+    if (entry.read) { present.push(entry); continue; }
     try {
       await access(mediaPath(entry.storageKey, root));
       present.push(entry);
@@ -213,7 +214,9 @@ export async function writePhotoArchive(rows, options = {}) {
   // записанные байты. Своя очередь не годится — она наполняется одним махом, и
   // «упаковано 6270 из 6270» висело бы всё время сборки. Опись и папки идут
   // первыми, поэтому из счётчика записей их вычитаем: снаружи речь о снимках.
-  const leading = 1 + manifest.folders.length;
+  // Кадры из базы пакуются по одному, а опись ложится последней: в ней уже
+  // учтены кадры, которые не удалось прочитать.
+  const leading = (fromDatabase ? 0 : 1) + manifest.folders.length;
   if (onProgress) {
     archive.on('progress', (progress) => onProgress({
       photos: Math.max(0, Math.min(present.length, progress.entries.processed - leading)),
@@ -225,18 +228,50 @@ export async function writePhotoArchive(rows, options = {}) {
     // Первый отчёт отдаём сразу: столько снимков предстоит упаковать.
     onProgress({ photos: 0, total: present.length, bytes: 0 });
   }
-  archive.append(JSON.stringify(manifest, null, 2), { name: 'manifest.json' });
-  for (const folder of manifest.folders) archive.append('', { name: `${folder}/` });
-  for (const entry of present) archive.append(entry.open ? entry.open() : readMedia(entry.storageKey, root), { name: entry.path });
+  let packed = present;
+  if (fromDatabase) {
+    // Кадры из базы читаем строго по одному: если запросить все сразу, пул
+    // соединений переполнится, а упавший поток уронит весь сервис. Следующий
+    // кадр берём, только когда архиватор упаковал предыдущий, — в памяти
+    // одновременно лежит один снимок. Нечитаемый кадр не роняет архив: он
+    // уходит в «skipped» описи.
+    let processed = 0;
+    archive.on('entry', () => { processed += 1; });
+    const packedUntil = (count) => Promise.race([done, new Promise((resolve) => {
+      if (processed >= count) return resolve();
+      const check = () => { if (processed >= count) { archive.off('entry', check); resolve(); } };
+      archive.on('entry', check);
+    })]);
+    for (const folder of manifest.folders) archive.append('', { name: `${folder}/` });
+    packed = [];
+    for (const entry of present) {
+      let bytes;
+      try {
+        bytes = await entry.read();
+      } catch {
+        skipped.push(entry.path);
+        continue;
+      }
+      archive.append(bytes, { name: entry.path });
+      packed.push(entry);
+      await packedUntil(manifest.folders.length + packed.length);
+    }
+    const final = photoArchiveManifest(rows, packed, { exportedAt: manifest.exported_at, district, skipped, typeFolders, folders });
+    archive.append(JSON.stringify(final, null, 2), { name: 'manifest.json' });
+  } else {
+    archive.append(JSON.stringify(manifest, null, 2), { name: 'manifest.json' });
+    for (const folder of manifest.folders) archive.append('', { name: `${folder}/` });
+    for (const entry of present) archive.append(readMedia(entry.storageKey, root), { name: entry.path });
+  }
   await archive.finalize();
   await done;
 
   // Итоговый отчёт о ходе: архиватор шлёт событие «progress» раньше, чем поток
   // сбросит байты, поэтому последний отчёт мог показать ноль записанного.
-  if (onProgress) onProgress({ photos: present.length, total: present.length, bytes: output.bytesWritten });
+  if (onProgress) onProgress({ photos: packed.length, total: present.length, bytes: output.bytesWritten });
 
   const { size } = await stat(target);
-  return { name, bytes: size, photos: present.length, total: present.length, skipped: skipped.length };
+  return { name, bytes: size, photos: packed.length, total: present.length, skipped: skipped.length };
 }
 
 /** Убирает старые готовые архивы: держим только последние. Диск на сервере не бесконечен. */

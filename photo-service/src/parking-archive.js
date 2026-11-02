@@ -8,10 +8,9 @@
 // фото по назначенным точкам съёмки и фото по заданию (слоты объекта). Отклонённые
 // префектурой кадры в архив не идут, у точек — только кадры текущего ракурса.
 //
-// Раскладка — чистая функция, её проверяют тесты; байты читаются по одному
-// снимку прямо во время упаковки, чтобы гигабайты не лежали в памяти.
+// Раскладка — чистая функция, её проверяют тесты; байты читаются строго по одному
+// снимку во время упаковки: гигабайты не лежат в памяти, а пул базы не переполняется.
 
-import { Readable } from 'node:stream';
 import { safeSegment } from './photos-archive.js';
 
 export const PARKING_ARCHIVE_PREFIX = 'sao-parking';
@@ -94,17 +93,17 @@ const BYTES_SQL = {
   slot: 'SELECT photo_bytes FROM object_slot_photos WHERE id = $1',
 };
 
-/** Кадры парковок из базы и раскладка архива; байты каждого кадра читает open(). */
+/** Кадры парковок из базы и раскладка архива; байты кадра отдаёт read() по запросу архиватора. */
 export async function loadParkingArchive(pool, objects) {
   const [points, slots] = await Promise.all([pool.query(POINT_PHOTOS_SQL), pool.query(SLOT_PHOTOS_SQL)]);
   const layout = parkingArchiveLayout(objects, [...points.rows, ...slots.rows]);
   for (const entry of layout.entries) {
-    // Генератор ленивый: запрос в базу уходит, только когда архиватор дошёл до кадра.
-    entry.open = () => Readable.from((async function* read() {
+    // Запрос в базу уходит, только когда архиватор дошёл до этого кадра.
+    entry.read = async () => {
       const { rows } = await pool.query(BYTES_SQL[entry.source], [entry.photoId]);
       if (!rows[0]) throw new Error(`Фото ${entry.photoId} удалено во время сборки архива.`);
-      yield rows[0].photo_bytes;
-    })());
+      return rows[0].photo_bytes;
+    };
   }
   return layout;
 }
