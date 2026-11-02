@@ -19,7 +19,7 @@
     return response;
   }
   window.TpuPhotoApi = {
-    user, request,
+    user, request, base,
     clearSession() { sessionStorage.removeItem(tokenKey); sessionStorage.removeItem(userKey); },
     async login(login, password) {
       const response = await request('/auth/login', { method: 'POST', body: JSON.stringify({ login, password }) });

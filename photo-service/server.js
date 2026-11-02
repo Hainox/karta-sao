@@ -35,6 +35,8 @@ import {
   MKD_DATASET_ID, MKD_MESSAGES, mkdArchiveRows, mkdLimitVerdict, mkdPhotoPayload, mkdRouteVerdict, mkdSummary, mkdWriteVerdict,
 } from './src/mkd.js';
 import { MKD_TYPE_FOLDERS } from './src/photos-archive.js';
+import { PARKING_ARCHIVE_PREFIX, loadParkingArchive } from './src/parking-archive.js';
+import { SLOT_OBJECTS } from './src/tpu-points/object-slots.js';
 
 const port = Number(process.env.PHOTO_SERVICE_PORT || 8788);
 const REVIEW_CLAIM_LEASE_SECONDS = 30 * 60;
@@ -823,6 +825,26 @@ async function handler(request, response) {
         dir: archiveDir(process.env)
       });
       return sendJson(response, 202, { id: job.id, status: job.status, total: job.total }, request);
+    }
+    // Архив фото по оцифровке парковок: район → объект → «координаты объекта_N».
+    // Собирается так же в фоне и скачивается по билету общей ссылкой /reports/photos.zip/file.
+    if (pathname === '/parking/photos.zip/prepare' && request.method === 'POST') {
+      if (!requirePrefecture(response, request, user)) return;
+      const { entries, folders } = await loadParkingArchive(pool, SLOT_OBJECTS);
+      await prunePhotoArchiveFiles(archiveDir(process.env), 2, PARKING_ARCHIVE_PREFIX);
+      const job = startPhotoArchiveJob({ rows: [], entries, folders, dir: archiveDir(process.env), prefix: PARKING_ARCHIVE_PREFIX, kind: 'parking' });
+      return sendJson(response, 202, { id: job.id, status: job.status, total: entries.length }, request);
+    }
+    const parkingJobMatch = pathname.match(/^\/parking\/photos\.zip\/prepare\/([0-9a-f-]{36})$/);
+    if (parkingJobMatch && request.method === 'GET') {
+      if (!requirePrefecture(response, request, user)) return;
+      const job = photoArchiveJob(parkingJobMatch[1]);
+      if (!job || job.kind !== 'parking') return sendError(response, request, 404, 'archive_job_not_found');
+      return sendJson(response, 200, {
+        id: job.id, status: job.status, photos: job.photos, total: job.total, bytes: job.bytes, name: job.name,
+        error: job.error, startedAt: job.startedAt, finishedAt: job.finishedAt,
+        ticket: job.status === 'ready' ? job.ticket : null,
+      }, request);
     }
     const archiveJobMatch = pathname.match(/^\/reports\/photos\.zip\/prepare\/([0-9a-f-]{36})$/);
     if (archiveJobMatch && request.method === 'GET') {

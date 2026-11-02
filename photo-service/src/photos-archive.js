@@ -20,7 +20,8 @@ export const ARCHIVE_VERSION = 'sao_photo_archive_v1';
 // создании, но и при выдаче — по ней отсекаются любые чужие имена в каталоге.
 // Архив отдела МКД называется `sao-mkd-…`: у него своя очередь хранения, и
 // сборка одного раздела не удаляет готовый файл другого.
-export const ARCHIVE_FILE_PATTERN = /^sao-(photo|mkd)-\d{4}-\d{2}-\d{2}-[0-9a-f]{8}\.zip$/;
+// Архив фото парковок — `sao-parking-…`, тоже со своей очередью хранения.
+export const ARCHIVE_FILE_PATTERN = /^sao-(photo|mkd|parking)-\d{4}-\d{2}-\d{2}-[0-9a-f]{8}\.zip$/;
 const ARCHIVE_PREFIX = 'sao-photo';
 
 // Больше двух готовых архивов на диске не держим: каждый весит гигабайты.
@@ -134,20 +135,21 @@ export function photoArchiveEntries(rows, typeFolders = TYPE_FOLDERS) {
 }
 
 /** Опись архива: что именно лежит внутри — без неё архив нечем проверить. */
-export function photoArchiveManifest(rows, files, { exportedAt = new Date().toISOString(), district = null, skipped = [], typeFolders = TYPE_FOLDERS } = {}) {
+export function photoArchiveManifest(rows, files, { exportedAt = new Date().toISOString(), district = null, skipped = [], typeFolders = TYPE_FOLDERS, folders = null } = {}) {
   return {
     archive_version: ARCHIVE_VERSION,
     exported_at: exportedAt,
     selection: {
       district: district || 'весь САО',
-      objects: rows.length,
-      objects_with_photos: rows.filter((row) => Array.isArray(row.photos) && row.photos.length > 0).length,
+      // Раздел с готовой раскладкой строк не передаёт: объекты считаем по самим файлам.
+      objects: rows.length || new Set(files.map((file) => file.objectKey)).size,
+      objects_with_photos: rows.length ? rows.filter((row) => Array.isArray(row.photos) && row.photos.length > 0).length : new Set(files.map((file) => file.objectKey)).size,
       photos: files.length,
       skipped: skipped.length
     },
-    folders: archiveFolders(rows, typeFolders),
-    // Ключ хранилища наружу не отдаём: он нужен только сервису.
-    files: files.map(({ storageKey, ...file }) => file),
+    folders: folders || archiveFolders(rows, typeFolders),
+    // Ключ хранилища и способ чтения наружу не отдаём: они нужны только сервису.
+    files: files.map(({ storageKey, open, ...file }) => file),
     skipped
   };
 }
@@ -175,14 +177,17 @@ export function archiveName(exportedAt = new Date().toISOString(), prefix = ARCH
 export async function writePhotoArchive(rows, options = {}) {
   const {
     root = mediaRoot(), dir = archiveDir(), district = null, exportedAt, onProgress,
-    typeFolders = TYPE_FOLDERS, prefix = ARCHIVE_PREFIX,
+    typeFolders = TYPE_FOLDERS, prefix = ARCHIVE_PREFIX, folders = null,
   } = options;
-  const entries = photoArchiveEntries(rows, typeFolders);
+  // Готовую раскладку передаёт раздел, чьи снимки лежат не в медиатоме, а в базе:
+  // у такого файла вместо ключа хранилища есть open(), отдающий поток байтов.
+  const entries = options.entries || photoArchiveEntries(rows, typeFolders);
 
   const present = [];
   const skipped = [];
   for (const entry of entries) {
     // Файл могли удалить после выборки: кадр пропускаем, но архив не роняем.
+    if (entry.open) { present.push(entry); continue; }
     try {
       await access(mediaPath(entry.storageKey, root));
       present.push(entry);
@@ -191,7 +196,7 @@ export async function writePhotoArchive(rows, options = {}) {
     }
   }
 
-  const manifest = photoArchiveManifest(rows, present, { exportedAt, district, skipped, typeFolders });
+  const manifest = photoArchiveManifest(rows, present, { exportedAt, district, skipped, typeFolders, folders });
   const name = archiveName(exportedAt || manifest.exported_at, prefix);
   await mkdir(dir, { recursive: true });
   const target = join(dir, name);
@@ -222,7 +227,7 @@ export async function writePhotoArchive(rows, options = {}) {
   }
   archive.append(JSON.stringify(manifest, null, 2), { name: 'manifest.json' });
   for (const folder of manifest.folders) archive.append('', { name: `${folder}/` });
-  for (const entry of present) archive.append(readMedia(entry.storageKey, root), { name: entry.path });
+  for (const entry of present) archive.append(entry.open ? entry.open() : readMedia(entry.storageKey, root), { name: entry.path });
   await archive.finalize();
   await done;
 
@@ -267,7 +272,7 @@ export function startPhotoArchiveJob({ rows, ...options } = {}) {
     status: 'building',
     district: options.district || null,
     // Раздел задачи: статус сборки МКД спрашивают через свою ручку.
-    kind: options.prefix === 'sao-mkd' ? 'mkd' : 'photo',
+    kind: options.kind || (options.prefix === 'sao-mkd' ? 'mkd' : 'photo'),
     startedAt: new Date().toISOString(),
     finishedAt: null,
     photos: 0,
