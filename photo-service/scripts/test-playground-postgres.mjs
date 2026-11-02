@@ -91,7 +91,9 @@ try {
   assert.match(run('scripts/import-sidewalk-photo-points.js', ['--source=../districts/layers']), /новых: 0;/);
   const sw = 'http://127.0.0.1:' + server.address().port + '/sidewalks';
   const swCall = (path, role, options = {}) => fetch(sw + path, { ...options, headers: { 'x-test-role': role, 'content-type': 'application/json', ...(options.headers || {}) } });
-  assert.equal((await swCall('?district=' + encodeURIComponent('Аэропорт'), 'district')).status, 403);
+  // Район видит список своих точек, но не чужих.
+  assert.equal((await (await swCall('?district=' + encodeURIComponent('Аэропорт'), 'district')).json()).points.length, 386);
+  assert.equal((await swCall('?district=' + encodeURIComponent('Сокол'), 'district')).status, 403);
   const swList = await (await swCall('?district=' + encodeURIComponent('Аэропорт'), 'admin')).json();
   assert.equal(swList.points.length, 386);
   const own = swList.points[0];
