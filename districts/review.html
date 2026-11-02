@@ -85,7 +85,7 @@
   <header class="topbar">
     <div>
       <h1>Кабинет приёмки · Районные карты</h1>
-      <div class="subtitle">Въездные группы и площадки ДП/СП: по одному фото на точку — принять или вернуть району с комментарием. После решения открывается следующая.</div>
+      <div class="subtitle">Въездные группы, площадки ДП/СП и тротуары: по одному фото на точку — принять или вернуть району с комментарием. После решения открывается следующая.</div>
     </div>
     <div class="session"><span id="sessionInfo"></span><button class="secondary" id="logout" type="button" hidden>Выйти</button><a href="index.html">Карты районов →</a></div>
   </header>
@@ -102,6 +102,7 @@
       <div class="modes" role="tablist" aria-label="Оцифровка">
         <button class="mode active" type="button" role="tab" data-mode="entrances">Въездные группы</button>
         <button class="mode" type="button" role="tab" data-mode="playgrounds">ДП и СП</button>
+        <button class="mode" type="button" role="tab" data-mode="sidewalks">Тротуары</button>
       </div>
       <div class="counts" id="counts"></div>
       <div class="toolbar">
@@ -139,7 +140,7 @@
   (() => {
     'use strict';
     const api = window.TpuPhotoApi || window.ODHApi;
-    // Две оцифровки одного кабинета: у каждой свой адрес очереди, снимка, решения и свода.
+    // Три оцифровки одного кабинета: у каждой свой адрес очереди, снимка, решения и свода.
     const MODES = {
       entrances: {
         base: '/api/object-photo-points/district-photos',
@@ -158,12 +159,20 @@
         describe: (row) => KIND_NAMES[row.kind] || 'площадка',
       },
     };
+    MODES.sidewalks = {
+      base: '/api/object-photo-points/sidewalks',
+      photo: (pointId) => '/api/object-photo-points/sidewalks/' + pointId + '/photo',
+      review: (photo) => '/' + photo.point_id + '/review',
+      reportFile: 'Svod_foto_trotuary_SAO_',
+      noun: 'точек', open: 'Открыть точку →', title: (row) => 'Тротуар · ' + row.label, snapshot: 'Снимок тротуара ',
+      describe: (row) => row.heading == null ? 'без направления' : 'направление ' + Math.round(Number(row.heading)) + '°',
+    };
     const KIND_NAMES = { dp: 'Детская площадка', sp: 'Спортивная площадка' };
     const mode = () => MODES[state.mode];
     const PAGE = 24;
     const el = (id) => document.getElementById(id);
     const make = (tag, className, text) => { const node = document.createElement(tag); if (className) node.className = className; if (text != null) node.textContent = text; return node; };
-    const state = { mode: location.hash === '#playgrounds' ? 'playgrounds' : 'entrances', queue: null, tab: 'pending', shown: PAGE, urls: [], objectId: null, busy: false, revision: 0, angles: new Map(), photoViews: [], photoGeneration: 0 };
+    const state = { mode: ['playgrounds', 'sidewalks'].includes(location.hash.slice(1)) ? location.hash.slice(1) : 'entrances', queue: null, tab: 'pending', shown: PAGE, urls: [], objectId: null, busy: false, revision: 0, angles: new Map(), photoViews: [], photoGeneration: 0 };
     const DISTRICT_SLUGS = {
       'Аэропорт': 'aeroport', 'Беговой': 'begovoy', 'Бескудниковский': 'beskudnikovskiy',
       'Войковский': 'voykovskiy', 'Восточное Дегунино': 'vostochnoe-degunino',
@@ -510,7 +519,7 @@
         if (state.busy || button.dataset.mode === state.mode) return;
         state.mode = button.dataset.mode;
         // Ссылку на кабинет можно передать сразу в нужном режиме: …/review.html#playgrounds
-        history.replaceState(null, '', state.mode === 'playgrounds' ? '#playgrounds' : location.pathname + location.search);
+        history.replaceState(null, '', state.mode === 'entrances' ? location.pathname + location.search : '#' + state.mode);
         state.queue = null; state.shown = PAGE;
         el('list').replaceChildren(); el('counts').replaceChildren();
         showMode();
@@ -549,3 +558,4 @@
   </script>
 </body>
 </html>
+
