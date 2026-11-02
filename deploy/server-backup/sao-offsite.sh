@@ -23,7 +23,7 @@ upload() {
   rclone check "$(dirname "$f")" "$REMOTE/$1/$dir" --include '*.age' --one-way
   echo "  проверено: совпадает"
   rclone lsf --dirs-only "$REMOTE/$1/" | sort | head -n -"$2" | while read -r old; do
-    echo "  удаляю старую копию на Drive: $old"; rclone purge "$REMOTE/$1/$old"; done
+    echo "  удаляю старую копию на Drive: $old"; rclone purge --drive-use-trash=false "$REMOTE/$1/$old"; done
 }
 
 case "${1:-status}" in
