@@ -126,6 +126,19 @@ $DC run --rm -v /tmp/sidewalk-layers:/sources:ro photo-service node scripts/impo
 
 No restart is needed.
 
+### Retiring extra sidewalk points by the entrance rule (`scripts/retire-sidewalk-points.js`)
+
+A placement built with `--rule` (`build_sidewalk_photo_points.py hovrino --staff=staff_edits.txt --first=2001 --rule`) also writes `photo-service/scripts/retire-lists/sidewalk-rule-<slug>.txt`. It lists the prefecture's own points that the rule no longer needs. `--replace` never retires points the prefecture touched, so retire the listed points first. `--since` is the time of the `export-sidewalk-edits.js` run the placement was built from: points changed after it, and points with a photo under review or accepted, are kept and listed. Ship the files and refresh `/tmp/sidewalk-layers` as above, rebuild the image (the list lives in `scripts/`), then:
+
+```sh
+$DC run --rm photo-service node scripts/retire-sidewalk-points.js --list=scripts/retire-lists/sidewalk-rule-hovrino.txt --since=2026-11-02T00:00:00+03:00
+$DC run --rm photo-service node scripts/retire-sidewalk-points.js --list=scripts/retire-lists/sidewalk-rule-hovrino.txt --since=2026-11-02T00:00:00+03:00 --actor=PREFECTURE_LOGIN --apply
+$DC run --rm -v /tmp/sidewalk-layers:/sources:ro photo-service node scripts/import-sidewalk-photo-points.js --source=/sources/districts/layers --replace
+$DC run --rm -v /tmp/sidewalk-layers:/sources:ro photo-service node scripts/import-sidewalk-photo-points.js --source=/sources/districts/layers --replace --apply
+```
+
+A rerun of the retire step reports `к снятию: 0`.
+
 ### Sidewalk point photos (migration 021)
 
 Photos of the sidewalk shooting points live in the new `sidewalk_photo_slot_photos` table (one active photo per point, like playgrounds). Ship the files the same way as for migration 020 (`git archive origin/main photo-service/... | tar -x -C /opt/sao-photo-service`, after a copy of the replaced files), then:

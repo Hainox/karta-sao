@@ -17,6 +17,19 @@
   похожий) и там, где префектура точку удалила, новые не ставятся; новые точки нумеруются
   с --first, чтобы не совпасть ни с одним выданным номером.
 
+Правило по числу подъездов (--rule, с 03.11.2026; первым — Ховрино):
+- простой дом (все подъезды на одной стороне) с 1–3 подъездами — одна обзорная
+  точка перед подъездами, взгляд на дом (так ставили сотрудники Ховрино,
+  Дмитровского и Восточного Дегунино: 10–20 м от стены, напротив подъездов);
+- простой дом с 4 и больше подъездами — две точки у противоположных концов дома,
+  взгляд вдоль фасада; промежуточных точек, задней стороны и углов нет;
+- сложный дом (подъезды на разных сторонах) — как раньше;
+- с --staff точки префектуры заполняют места дома первыми: точки с фото остаются
+  всегда, из остальных — ближайшая к обзорной точке или пара самых дальних
+  друг от друга; лишние точки префектуры без фото попадают в список на снятие
+  (photo-service/scripts/retire-lists/sidewalk-rule-<slug>.txt; снимает
+  photo-service/scripts/retire-sidewalk-points.js).
+
 Источники: подъезды — object-maps/data/entrances.json, контуры домов —
 OpenStreetMap (скачиваются заранее fetch_osm_buildings.py в
 osm_buildings_<slug>.json); если в OSM подъезд отмечен точкой на стене дома,
@@ -25,6 +38,7 @@ osm_buildings_<slug>.json); если в OSM подъезд отмечен точ
 
 Запуск:  python3 build_sidewalk_photo_points.py dmitrovskiy
          python3 build_sidewalk_photo_points.py aeroport --staff=staff_edits.txt --first=501
+         python3 build_sidewalk_photo_points.py hovrino --staff=staff_edits.txt --first=2001 --rule
 Результат: districts/layers/<slug>/sidewalk_shoot.geojson
 """
 import json
@@ -74,6 +88,10 @@ OSM_DOOR_M = 25               # подъезд реестра ищем на ст
 END_CAP_M = 30                # точка — не дальше этого за первым/последним подъездом
 MIN_BEYOND_M = 6              # и не ближе этого
 RING_SHARE = 0.8              # доля периметра с тротуаром для «кругового» дома
+FEW_ENTRANCES = 3             # --rule: столько подъездов и меньше — одна обзорная точка
+OVERVIEW_MIN_M = 10           # обзорная точка — в 10–16 м от стены, напротив подъездов
+OVERVIEW_MAX_M = 16
+STAFF_HOUSE_M = 40            # точка префектуры относится к дому не дальше этого от стены
 
 
 class Local:
@@ -234,7 +252,68 @@ def read_staff_edits(path, district_no):
     return edits
 
 
-def build(slug, staff=None, first_no=1):
+def apply_rule(L, staff, live, points, house_slots, stats):
+    """Точки префектуры по правилу подъездов. Каждая живая точка относится к дому,
+    на который смотрит (первый дом по направлению кадра в STAFF_HOUSE_M), иначе — к
+    ближайшему не дальше STAFF_HOUSE_M. У простого дома на k мест (1 или 2) остаются:
+    все точки с фото, затем до k — ближайшая к черновой обзорной точке (k = 1) или
+    самые разнесённые вдоль фасада (k = 2, противоположные концы дома).
+    Остальные — на снятие. Черновые точки дома остаются, только если мест не хватило:
+    у k = 2 — самая дальняя от оставленной точки префектуры.
+    Возвращает (живые точки префектуры, номера на снятие, черновые точки)."""
+    homes = [(u, b, k) for u, (b, k, _) in house_slots.items()]
+    tree = STRtree([b for _, b, _ in homes])
+    by_house = defaultdict(list)
+    for no, (xy, heading) in live.items():
+        a = math.radians(heading)
+        ray = LineString([xy, (xy[0] + math.sin(a) * STAFF_HOUSE_M, xy[1] + math.cos(a) * STAFF_HOUSE_M)])
+        hits = [int(j) for j in tree.query(ray) if homes[int(j)][1].intersects(ray)]
+        if hits:
+            j = min(hits, key=lambda j: Point(xy).distance(homes[j][1]))
+        else:
+            near = tree.query_nearest(Point(xy), max_distance=STAFF_HOUSE_M)
+            if not len(near):
+                continue
+            j = int(near[0])
+        by_house[homes[j][0]].append(no)
+    drafts = defaultdict(list)
+    for p in points:
+        drafts[p["house"]].append(p)
+    retire, drop = [], set()
+    for unom, bld, k in homes:
+        mine = by_house.get(unom, [])
+        if k is None or not mine:
+            continue
+        keep = [no for no in mine if "P" in staff[no][3]]
+        rest = [no for no in mine if no not in keep]
+        ref = drafts[unom][0]["xy"] if drafts[unom] else bld.centroid.coords[0]
+        ux, uy = house_slots[unom][2]
+        along = lambda no: live[no][0][0] * ux + live[no][0][1] * uy
+        while len(keep) < k and rest:
+            if k == 1:
+                pick = min(rest, key=lambda no: math.dist(live[no][0], ref))
+            elif not keep:
+                pick = max(((a, b) for a in rest for b in rest if a < b), default=(rest[0], rest[0]),
+                           key=lambda ab: abs(along(ab[0]) - along(ab[1])))[0]
+            else:
+                pick = max(rest, key=lambda no: min(abs(along(no) - along(x)) for x in keep))
+            keep.append(pick)
+            rest.remove(pick)
+        retire += rest
+        stats["staff_retired_by_rule"] += len(rest)
+        free = k - len(keep)
+        own = drafts[unom]
+        if free <= 0:
+            drop.update(id(p) for p in own)
+        elif k == 2 and len(keep) == 1 and len(own) > 1:
+            far = max(own, key=lambda p: math.dist(p["xy"], live[keep[0]][0]))
+            drop.update(id(p) for p in own if p is not far)
+    live = {no: v for no, v in live.items() if no not in retire}
+    stats["drafts_dropped_by_staff"] = len(drop)
+    return live, retire, [p for p in points if id(p) not in drop]
+
+
+def build(slug, staff=None, first_no=1, rule=False):
     district = SLUGS[slug]
     layers = ROOT / "districts" / "layers" / slug
     boundary = shape(load(layers / "boundary.geojson")["features"][0]["geometry"])
@@ -317,6 +396,7 @@ def build(slug, staff=None, first_no=1):
         houses[p.get("УНОМ") or p.get("Адрес")].append(r)
 
     points, stats = [], Counter()
+    house_slots = {}   # --rule: дом → (контур, сколько точек: 1, 2 или None — сложный дом)
     for unom, recs in houses.items():
         stats["houses"] += 1
         ents = [(Point(L.xy(r["lon"], r["lat"])), r) for r in recs]
@@ -372,6 +452,10 @@ def build(slug, staff=None, first_no=1):
         else:
             stats["skipped_no_building_not_row"] += 1
 
+        simple = rule and len(facades) == 1
+        n_ents = len({r["properties"].get("№ подъезда") for _, r in ents})
+        if rule and bld is not None and facades:
+            house_slots[unom] = (bld, (1 if n_ents <= FEW_ENTRANCES else 2) if simple else None, facades[0]["u"])
         house_points = []
         for fac in facades:
             ux, uy = fac["u"]
@@ -404,13 +488,26 @@ def build(slug, staff=None, first_no=1):
                 offsets.append((q.x - ox) * nx + (q.y - oy) * ny)
             d = sorted(offsets)[len(offsets) // 2]
             d_cam = min(max(far_edge(walk, ox, oy, ux, uy, nx, ny, [proj(pt) for pt, _ in fac["ents"]], d) + 1, CAMERA_MIN_M), CAMERA_MAX_M)
+            if simple and n_ents <= FEW_ENTRANCES:
+                # Одна обзорная точка напротив середины подъездов, взгляд на дом.
+                mid = sum(proj(pt) for pt, _ in fac["ents"]) / len(fac["ents"])
+                d_view = min(max(d_cam + 2, OVERVIEW_MIN_M), OVERVIEW_MAX_M)
+                q = place(walk, ox, oy, ux, uy, nx, ny, mid, d, d_view)
+                if q is None:
+                    stats["end_far_from_sidewalk"] += 1
+                    continue
+                stats["overview"] += 1
+                house_points.append({"xy": (q.x, q.y), "az": azimuth(-nx, -ny), "role": "обзор подъездов",
+                                     "weight": len(fac["ents"]),
+                                     "side": "подъезды " + entrance_range([r["properties"].get("№ подъезда") for _, r in fac["ents"]])})
+                continue
             n_first = first[1]["properties"].get("№ подъезда")
             n_last = last[1]["properties"].get("№ подъезда")
             first_end = start if proj(first[0]) <= proj(last[0]) else end
             stops = [(start, 1, f"за подъездом {n_first if first_end == start else n_last}"),
                      (end, -1, f"за подъездом {n_last if first_end == start else n_first}")]
             length = end - start
-            parts = math.ceil(length / LONG_FACADE_M)
+            parts = 1 if simple else math.ceil(length / LONG_FACADE_M)
             for k in range(1, parts):
                 stops.append((start + length * k / parts, 1, "середина фасада"))
             for a, sign, role in stops:
@@ -424,7 +521,7 @@ def build(slug, staff=None, first_no=1):
 
         # Задняя сторона линейного дома: если вдоль неё тоже идёт дворовый тротуар,
         # сотрудники снимают и его — две точки за углами, взгляд вдоль стены.
-        if bld is not None and len(facades) == 1 and house_points:
+        if bld is not None and len(facades) == 1 and house_points and not simple:
             ux, uy = facades[0]["u"]
             nx, ny = -facades[0]["n"][0], -facades[0]["n"][1]
             cx, cy = bld.centroid.x, bld.centroid.y
@@ -458,7 +555,7 @@ def build(slug, staff=None, first_no=1):
         if bld is not None:
             outer = bld.buffer(6).exterior
             samples = [outer.interpolate(s) for s in range(0, int(outer.length), 5)]
-        if samples and house_points and bld is not None:
+        if samples and house_points and bld is not None and not simple:
             covered = sum(1 for s in samples if yard_walks.distance(s) < 5)
             if covered / len(samples) >= RING_SHARE:
                 rect = list(bld.minimum_rotated_rectangle.exterior.coords)[:4]
@@ -495,7 +592,7 @@ def build(slug, staff=None, first_no=1):
                     stats["merged"] += 1
                     break
             else:
-                points.append({**hp, "address": address, "unom": unom, "also": []})
+                points.append({**hp, "address": address, "unom": unom, "also": [], "house": unom})
         stats["houses_with_points"] += bool(house_points)
 
     features = []
@@ -508,13 +605,16 @@ def build(slug, staff=None, first_no=1):
         live = {no: (L.xy(lng, lat), heading) for no, (lng, lat, heading, flags) in staff.items() if "D" not in flags}
         turn = lambda a, b: min(abs(a - b) % 360, 360 - abs(a - b) % 360)
         gone = [L.xy(lng, lat) for lng, lat, _, flags in staff.values() if "D" in flags]
+        retire = []
+        if rule:
+            live, retire, points = apply_rule(L, staff, live, points, house_slots, stats)
         before = len(points)
         points = [p for p in points
                   if all(math.dist(p["xy"], xy) >= (STAFF_KEEP_M if turn(p["az"], h) <= 60 else STAFF_SAME_M) for xy, h in live.values())
                   and all(math.dist(p["xy"], xy) >= STAFF_DELETED_M for xy in gone)]
         stats["skipped_near_staff_points"] = before - len(points)
         for no, (lng, lat, heading, flags) in sorted(staff.items()):
-            if "D" in flags:
+            if "D" in flags or no not in live:
                 continue
             base = old.get(no, {}).get("properties") or {}
             nearest = min(points, key=lambda p: math.dist(p["xy"], live[no][0]), default=None)
@@ -544,6 +644,11 @@ def build(slug, staff=None, first_no=1):
     out = layers / "sidewalk_shoot.geojson"
     out.write_text(json.dumps({"type": "FeatureCollection", "features": features}, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     print(f"{district}: {len(features)} точек (правки префектуры: {len(kept)}) → {out.relative_to(ROOT)}")
+    if staff and rule:
+        lst = ROOT / "photo-service" / "scripts" / "retire-lists" / f"sidewalk-rule-{slug}.txt"
+        lst.write_text("# Лишние точки префектуры по правилу подъездов: снять (точки с фото сюда не попадают)\n"
+                       + "".join(no + "\n" for no in sorted(retire, key=lambda n: int(n.split(".")[1]))), encoding="utf-8")
+        print(f"к снятию: {len(retire)} → {lst.relative_to(ROOT)}")
     print(dict(stats))
 
 
@@ -552,4 +657,4 @@ if __name__ == "__main__":
     opts = dict(a[2:].split("=", 1) for a in sys.argv[1:] if a.startswith("--") and "=" in a)
     for s in args or list(SLUGS):
         staff = read_staff_edits(WORK / opts["staff"], DISTRICT_NOS[s]) if "staff" in opts else None
-        build(s, staff=staff, first_no=int(opts.get("first", 1)))
+        build(s, staff=staff, first_no=int(opts.get("first", 1)), rule="--rule" in sys.argv[1:])
