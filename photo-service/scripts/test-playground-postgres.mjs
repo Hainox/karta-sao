@@ -91,7 +91,7 @@ try {
   assert.deepEqual(history.rows.map((row) => row.status), ['rejected', 'rejected', 'accepted']);
   // Точки съёмки тротуаров: импорт слоёв атласа и слот фото «район загружает — префектура принимает».
   const sidewalkImport = run('scripts/import-sidewalk-photo-points.js', ['--source=../districts/layers', '--apply']);
-  assert.match(sidewalkImport, /новых: 5689; с ошибками: 0/);
+  assert.match(sidewalkImport, /новых: 5692; с ошибками: 0/);
   assert.match(run('scripts/import-sidewalk-photo-points.js', ['--source=../districts/layers']), /новых: 0;/);
   const sw = 'http://127.0.0.1:' + server.address().port + '/sidewalks';
   const swCall = (path, role, options = {}) => fetch(sw + path, { ...options, headers: { 'x-test-role': role, 'content-type': 'application/json', ...(options.headers || {}) } });
@@ -142,10 +142,10 @@ try {
   const before = (await pool.query('SELECT longitude, latitude, heading FROM sidewalk_photo_points WHERE id=$1', [own.id])).rows[0];
   await pool.query("UPDATE sidewalk_photo_points SET heading = (heading + 90) % 360 WHERE id <> $1 AND updated_by IS NULL", [own.id]);
   const replaced = run('scripts/import-sidewalk-photo-points.js', ['--source=../districts/layers', '--replace', '--apply']);
-  assert.match(replaced, /обновлено: 5688; снято: 0/);
+  assert.match(replaced, /обновлено: 5691; снято: 0/);
   assert.deepEqual((await pool.query('SELECT longitude, latitude, heading FROM sidewalk_photo_points WHERE id=$1', [own.id])).rows[0], before);
   const drift = await pool.query("SELECT count(*)::int AS n FROM sidewalk_photo_points WHERE id <> $1 AND retired_at IS NULL", [own.id]);
-  assert.equal(drift.rows[0].n, 5688 + 2, 'две новые точки префектуры пережили замену расстановки');
+  assert.equal(drift.rows[0].n, 5691 + 2, 'две новые точки префектуры пережили замену расстановки');
   // Снятие точек въездных групп по списку номеров: только своего района, с записью в журнал.
   const listFile = join(tmpdir(), 'retire-test-' + process.pid + '.txt');
   writeFileSync(listFile, 'Точка съёмки 13.121\n13.999\n');

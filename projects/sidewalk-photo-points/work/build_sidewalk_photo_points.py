@@ -23,7 +23,11 @@
   Дмитровского и Восточного Дегунино: 10–20 м от стены, напротив подъездов);
 - простой дом с 4 и больше подъездами — две точки у противоположных концов дома,
   взгляд вдоль фасада; промежуточных точек, задней стороны и углов нет;
-- сложный дом (подъезды на разных сторонах) — как раньше;
+- изогнутый или ступенчатый дом, где все подъезды смотрят в одну сторону (нормали
+  фасадов расходятся не больше чем на 60°), — тоже простой: у торцов всего дома;
+- сложный дом (подъезды на разных сторонах) — то же правило для каждой стороны
+  отдельно (у стороны с 1–3 подъездами — одна точка, с 4 и больше — две по концам);
+  задняя сторона без подъездов и углы у тротуара кругом дома — как раньше;
 - с --staff точки префектуры заполняют места дома первыми: точки с фото остаются
   всегда, из остальных — ближайшая к обзорной точке или пара самых дальних
   друг от друга; лишние точки префектуры без фото попадают в список на снятие
@@ -91,6 +95,7 @@ RING_SHARE = 0.8              # доля периметра с тротуаро�
 FEW_ENTRANCES = 3             # --rule: столько подъездов и меньше — одна обзорная точка
 OVERVIEW_MIN_M = 10           # обзорная точка — в 10–16 м от стены, напротив подъездов
 OVERVIEW_MAX_M = 16
+ONE_SIDE_COS = 0.5            # --rule: фасады с нормалями ближе 60° — одна сторона дома
 STAFF_HOUSE_M = 40            # точка префектуры относится к дому не дальше этого от стены
 
 
@@ -171,6 +176,14 @@ def nearest_edge(poly, p):
         if abs(axis[0] * ex + axis[1] * ey) / ln < math.cos(math.radians(FACADE_ANGLE_DEG)):
             continue
         walls.append((a, b, LineString([a, b]).distance(p), axis, ln))
+    if not walls or min(w[2] for w in walls) > ENTRANCE_TO_BUILDING_M:
+        # Г-образный дом: описанный прямоугольник косой, и стены вдоль его осей не идут.
+        # Тогда направление фасада — сама стена.
+        for a, b in zip(coords, coords[1:]):
+            ex, ey = b[0] - a[0], b[1] - a[1]
+            ln = math.hypot(ex, ey)
+            if ln >= MIN_WALL_M:
+                walls.append((a, b, LineString([a, b]).distance(p), (ex / ln, ey / ln), ln))
     if not walls:
         return None
     # Подъезд во внутреннем углу уступа: из почти равноудалённых стен берём длинную.
@@ -252,18 +265,22 @@ def read_staff_edits(path, district_no):
     return edits
 
 
-def apply_rule(L, staff, live, points, house_slots, stats):
+def apply_rule(L, staff, live, points, house_slots, stats, buildings=()):
     """Точки префектуры по правилу подъездов. Каждая живая точка относится к дому,
     на который смотрит (первый дом по направлению кадра в STAFF_HOUSE_M), иначе — к
-    ближайшему не дальше STAFF_HOUSE_M. У простого дома на k мест (1 или 2) остаются:
-    все точки с фото, затем до k — ближайшая к черновой обзорной точке (k = 1) или
-    самые разнесённые вдоль фасада (k = 2, противоположные концы дома).
-    Остальные — на снятие. Черновые точки дома остаются, только если мест не хватило:
-    у k = 2 — самая дальняя от оставленной точки префектуры.
+    ближайшему не дальше STAFF_HOUSE_M, а в доме — к стороне с ближайшим подъездом
+    (не дальше STAFF_HOUSE_M; дальше — точка не по правилу подъездов, она остаётся).
+    На стороне k мест (1 или 2): остаются все точки с фото, затем до k — ближайшая к
+    черновой обзорной точке (k = 1) или самые разнесённые вдоль стороны (k = 2, концы).
+    Остальные — на снятие. Черновые точки стороны остаются, только если мест не
+    хватило: у k = 2 — самая дальняя от оставленной точки префектуры.
+    Дом без подъездов в реестре: если у одного здания стоят три и больше точек
+    префектуры, остаются две крайние вдоль здания (и все с фото).
     Возвращает (живые точки префектуры, номера на снятие, черновые точки)."""
-    homes = [(u, b, k) for u, (b, k, _) in house_slots.items()]
-    tree = STRtree([b for _, b, _ in homes])
-    by_house = defaultdict(list)
+    homes = [(u, b) for u, (b, _) in house_slots.items()]
+    tree = STRtree([b for _, b in homes])
+    by_slot = defaultdict(list)
+    assigned = set()
     for no, (xy, heading) in live.items():
         a = math.radians(heading)
         ray = LineString([xy, (xy[0] + math.sin(a) * STAFF_HOUSE_M, xy[1] + math.cos(a) * STAFF_HOUSE_M)])
@@ -275,19 +292,23 @@ def apply_rule(L, staff, live, points, house_slots, stats):
             if not len(near):
                 continue
             j = int(near[0])
-        by_house[homes[j][0]].append(no)
+        unom = homes[j][0]
+        dist, gi = min((min(Point(xy).distance(pt) for pt in sl["ents"]), gi) for gi, sl in enumerate(house_slots[unom][1]))
+        if dist <= STAFF_HOUSE_M:
+            by_slot[(unom, gi)].append(no)
+            assigned.add(no)
     drafts = defaultdict(list)
     for p in points:
-        drafts[p["house"]].append(p)
+        if p.get("slot") is not None:
+            drafts[(p["house"], p["slot"])].append(p)
     retire, drop = [], set()
-    for unom, bld, k in homes:
-        mine = by_house.get(unom, [])
-        if k is None or not mine:
-            continue
+    for (unom, gi), mine in by_slot.items():
+        sl = house_slots[unom][1][gi]
+        k, (ux, uy) = sl["k"], sl["u"]
         keep = [no for no in mine if "P" in staff[no][3]]
         rest = [no for no in mine if no not in keep]
-        ref = drafts[unom][0]["xy"] if drafts[unom] else bld.centroid.coords[0]
-        ux, uy = house_slots[unom][2]
+        own = drafts[(unom, gi)]
+        ref = own[0]["xy"] if own else (sum(pt.x for pt in sl["ents"]) / len(sl["ents"]), sum(pt.y for pt in sl["ents"]) / len(sl["ents"]))
         along = lambda no: live[no][0][0] * ux + live[no][0][1] * uy
         while len(keep) < k and rest:
             if k == 1:
@@ -301,13 +322,30 @@ def apply_rule(L, staff, live, points, house_slots, stats):
             rest.remove(pick)
         retire += rest
         stats["staff_retired_by_rule"] += len(rest)
-        free = k - len(keep)
-        own = drafts[unom]
-        if free <= 0:
+        if k - len(keep) <= 0:
             drop.update(id(p) for p in own)
         elif k == 2 and len(keep) == 1 and len(own) > 1:
             far = max(own, key=lambda p: math.dist(p["xy"], live[keep[0]][0]))
             drop.update(id(p) for p in own if p is not far)
+    if buildings:
+        btree = STRtree(list(buildings))
+        by_bld = defaultdict(list)
+        for no, (xy, _) in live.items():
+            if no in assigned:
+                continue
+            j = btree.query_nearest(Point(xy), max_distance=25)
+            if len(j):
+                by_bld[int(j[0])].append(no)
+        for j, mine in by_bld.items():
+            if len(mine) < 3:
+                continue
+            ux, uy = max(main_axes(buildings[j]), key=lambda u: max((x * u[0] + y * u[1]) for x, y in buildings[j].exterior.coords)
+                         - min((x * u[0] + y * u[1]) for x, y in buildings[j].exterior.coords))
+            along = lambda no: live[no][0][0] * ux + live[no][0][1] * uy
+            ends = {min(mine, key=along), max(mine, key=along)}
+            rest = [no for no in mine if no not in ends and "P" not in staff[no][3]]
+            retire += rest
+            stats["staff_retired_no_entrances"] += len(rest)
     live = {no: v for no, v in live.items() if no not in retire}
     stats["drafts_dropped_by_staff"] = len(drop)
     return live, retire, [p for p in points if id(p) not in drop]
@@ -452,10 +490,20 @@ def build(slug, staff=None, first_no=1, rule=False):
         else:
             stats["skipped_no_building_not_row"] += 1
 
-        simple = rule and len(facades) == 1
+        # Изогнутый или ступенчатый дом с подъездами на одной стороне — тоже простой:
+        # нормали всех фасадов смотрят в одну сторону (расходятся не больше чем на 60°).
+        one_side = all(f["n"][0] * g["n"][0] + f["n"][1] * g["n"][1] >= ONE_SIDE_COS for f in facades for g in facades)
+        simple = rule and bool(facades) and one_side
         n_ents = len({r["properties"].get("№ подъезда") for _, r in ents})
+        # --rule: места под точки по сторонам дома. Простой дом — одна сторона, сложный —
+        # каждый фасад с подъездами отдельно; 1–3 подъезда стороны — 1 точка, больше — 2.
+        groups = ([facades] if one_side else [[f] for f in facades]) if rule and facades else []
+        fac_group = {id(f): gi for gi, g in enumerate(groups) for f in g}
+        slots = [{"ents": [pt for f in g for pt, _ in f["ents"]], "u": g[0]["u"],
+                  "k": 1 if len({r["properties"].get("№ подъезда") for f in g for _, r in f["ents"]}) <= FEW_ENTRANCES else 2}
+                 for g in groups]
         if rule and bld is not None and facades:
-            house_slots[unom] = (bld, (1 if n_ents <= FEW_ENTRANCES else 2) if simple else None, facades[0]["u"])
+            house_slots[unom] = (bld, slots)
         house_points = []
         for fac in facades:
             ux, uy = fac["u"]
@@ -488,7 +536,8 @@ def build(slug, staff=None, first_no=1, rule=False):
                 offsets.append((q.x - ox) * nx + (q.y - oy) * ny)
             d = sorted(offsets)[len(offsets) // 2]
             d_cam = min(max(far_edge(walk, ox, oy, ux, uy, nx, ny, [proj(pt) for pt, _ in fac["ents"]], d) + 1, CAMERA_MIN_M), CAMERA_MAX_M)
-            if simple and n_ents <= FEW_ENTRANCES:
+            gi = fac_group.get(id(fac))
+            if gi is not None and len(groups[gi]) == 1 and slots[gi]["k"] == 1:
                 # Одна обзорная точка напротив середины подъездов, взгляд на дом.
                 mid = sum(proj(pt) for pt, _ in fac["ents"]) / len(fac["ents"])
                 d_view = min(max(d_cam + 2, OVERVIEW_MIN_M), OVERVIEW_MAX_M)
@@ -498,7 +547,7 @@ def build(slug, staff=None, first_no=1, rule=False):
                     continue
                 stats["overview"] += 1
                 house_points.append({"xy": (q.x, q.y), "az": azimuth(-nx, -ny), "role": "обзор подъездов",
-                                     "weight": len(fac["ents"]),
+                                     "weight": len(fac["ents"]), "slot": gi,
                                      "side": "подъезды " + entrance_range([r["properties"].get("№ подъезда") for _, r in fac["ents"]])})
                 continue
             n_first = first[1]["properties"].get("№ подъезда")
@@ -507,7 +556,7 @@ def build(slug, staff=None, first_no=1, rule=False):
             stops = [(start, 1, f"за подъездом {n_first if first_end == start else n_last}"),
                      (end, -1, f"за подъездом {n_last if first_end == start else n_first}")]
             length = end - start
-            parts = 1 if simple else math.ceil(length / LONG_FACADE_M)
+            parts = 1 if rule else math.ceil(length / LONG_FACADE_M)
             for k in range(1, parts):
                 stops.append((start + length * k / parts, 1, "середина фасада"))
             for a, sign, role in stops:
@@ -516,8 +565,29 @@ def build(slug, staff=None, first_no=1, rule=False):
                     stats["end_far_from_sidewalk"] += 1
                     continue
                 house_points.append({"xy": (q.x, q.y), "az": azimuth(ux * sign, uy * sign), "role": role,
-                                     "weight": len(fac["ents"]),
+                                     "weight": len(fac["ents"]), "slot": gi,
                                      "side": "подъезды " + entrance_range([r["properties"].get("№ подъезда") for _, r in fac["ents"]])})
+
+        for gi, g in enumerate(groups):
+            if len(g) < 2:
+                continue
+            # Изогнутый дом: из концов всех его фасадов остаются два самых дальних
+            # друг от друга (концы дома), а у дома на 1–3 подъезда — ближайший к подъездам.
+            mine = [hp for hp in house_points if hp.get("slot") == gi]
+            keep = mine
+            if mine and slots[gi]["k"] == 1:
+                mx = sum(pt.x for pt in slots[gi]["ents"]) / len(slots[gi]["ents"])
+                my = sum(pt.y for pt in slots[gi]["ents"]) / len(slots[gi]["ents"])
+                keep = [min(mine, key=lambda hp: math.dist(hp["xy"], (mx, my)))]
+            elif len(mine) > 2:
+                keep = list(max(((a, b) for i, a in enumerate(mine) for b in mine[i + 1:]),
+                                key=lambda ab: math.dist(ab[0]["xy"], ab[1]["xy"])))
+            if len(keep) == 2:
+                (x0, y0), (x1, y1) = keep[0]["xy"], keep[1]["xy"]
+                ln = math.hypot(x1 - x0, y1 - y0) or 1
+                slots[gi]["u"] = ((x1 - x0) / ln, (y1 - y0) / ln)
+            house_points = [hp for hp in house_points if hp.get("slot") != gi or any(hp is x for x in keep)]
+            stats["houses_bent_simple"] += 1
 
         # Задняя сторона линейного дома: если вдоль неё тоже идёт дворовый тротуар,
         # сотрудники снимают и его — две точки за углами, взгляд вдоль стены.
@@ -607,7 +677,7 @@ def build(slug, staff=None, first_no=1, rule=False):
         gone = [L.xy(lng, lat) for lng, lat, _, flags in staff.values() if "D" in flags]
         retire = []
         if rule:
-            live, retire, points = apply_rule(L, staff, live, points, house_slots, stats)
+            live, retire, points = apply_rule(L, staff, live, points, house_slots, stats, buildings)
         before = len(points)
         points = [p for p in points
                   if all(math.dist(p["xy"], xy) >= (STAFF_KEEP_M if turn(p["az"], h) <= 60 else STAFF_SAME_M) for xy, h in live.values())
