@@ -38,7 +38,7 @@ const slotStateSql = (table) => `COALESCE(
     'empty') AS state`;
 
 const PLAYGROUND_STATES = `SELECT p.district, ${slotStateSql('playground_photo_slot_photos')}
-  FROM playground_photo_points p JOIN playground_photo_slots s ON s.point_id = p.id`;
+  FROM playground_photo_points p JOIN playground_photo_slots s ON s.point_id = p.id WHERE p.retired_at IS NULL`;
 const SIDEWALK_STATES = `SELECT p.district, ${slotStateSql('sidewalk_photo_slot_photos')}
   FROM sidewalk_photo_points p WHERE p.retired_at IS NULL`;
 

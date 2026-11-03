@@ -1,0 +1,2071 @@
+{
+ "rule": "одна площадка АСУ ОДС — одна точка фото",
+ "groups": [
+  {
+   "district": "Аэропорт",
+   "kind": "dp",
+   "contour_id": 122150352900027,
+   "contour_name": "Часовая ул. 10/1, 12, 14",
+   "keys": [
+    "aeroport:24",
+    "aeroport:25"
+   ]
+  },
+  {
+   "district": "Аэропорт",
+   "kind": "dp",
+   "contour_id": 122494124300027,
+   "contour_name": "Ильюшина Академика ул. 5; Планетная ул. 41, 43",
+   "keys": [
+    "aeroport:54",
+    "aeroport:57"
+   ]
+  },
+  {
+   "district": "Аэропорт",
+   "kind": "dp",
+   "contour_id": 123941248100027,
+   "contour_name": "Усиевича ул. 29 к.1, 29 к.2",
+   "keys": [
+    "aeroport:5",
+    "aeroport:118",
+    "aeroport:195"
+   ]
+  },
+  {
+   "district": "Аэропорт",
+   "kind": "dp",
+   "contour_id": 123005494500027,
+   "contour_name": "Часовая ул. 25 к.2",
+   "keys": [
+    "aeroport:72",
+    "aeroport:241"
+   ]
+  },
+  {
+   "district": "Аэропорт",
+   "kind": "dp",
+   "contour_id": 118824972900027,
+   "contour_name": "Усиевича ул. 1",
+   "keys": [
+    "aeroport:208",
+    "aeroport:225"
+   ]
+  },
+  {
+   "district": "Аэропорт",
+   "kind": "dp",
+   "contour_id": 122572048100027,
+   "contour_name": "Часовая ул. 23 к.1",
+   "keys": [
+    "aeroport:141",
+    "aeroport:190"
+   ]
+  },
+  {
+   "district": "Аэропорт",
+   "kind": "dp",
+   "contour_id": 124495935000027,
+   "contour_name": "Планетная ул. 29, 29 к.1, 29 к.2",
+   "keys": [
+    "aeroport:103",
+    "aeroport:131",
+    "aeroport:237"
+   ]
+  },
+  {
+   "district": "Аэропорт",
+   "kind": "sp",
+   "contour_id": 124612219100027,
+   "contour_name": "Масловка Верхн. ул. 25 к.1",
+   "keys": [
+    "aeroport:209",
+    "aeroport:212"
+   ]
+  },
+  {
+   "district": "Беговой",
+   "kind": "dp",
+   "contour_id": 121849105300027,
+   "contour_name": "Беговая аллея 9",
+   "keys": [
+    "begovoy:276",
+    "begovoy:252"
+   ]
+  },
+  {
+   "district": "Беговой",
+   "kind": "dp",
+   "contour_id": 133354282600027,
+   "contour_name": "Беговой проезд дом 7, дом 9",
+   "keys": [
+    "begovoy:338",
+    "begovoy:391"
+   ]
+  },
+  {
+   "district": "Беговой",
+   "kind": "dp",
+   "contour_id": 124465649000027,
+   "contour_name": "Беговая ул. 6 к.3",
+   "keys": [
+    "begovoy:319",
+    "begovoy:320"
+   ]
+  },
+  {
+   "district": "Беговой",
+   "kind": "dp",
+   "contour_id": 123842778100027,
+   "contour_name": "Скаковая ул. 18, 18А",
+   "keys": [
+    "begovoy:273",
+    "begovoy:274"
+   ]
+  },
+  {
+   "district": "Беговой",
+   "kind": "dp",
+   "contour_id": 133242290000027,
+   "contour_name": "Беговая улица дом 13",
+   "keys": [
+    "begovoy:287",
+    "begovoy:332"
+   ]
+  },
+  {
+   "district": "Беговой",
+   "kind": "sp",
+   "contour_id": 124405146600027,
+   "contour_name": "Правды ул. 11",
+   "keys": [
+    "begovoy:315",
+    "begovoy:316"
+   ]
+  },
+  {
+   "district": "Бескудниковский",
+   "kind": "dp",
+   "contour_id": 126722252700027,
+   "contour_name": "Дмитровское шоссе 105 к.5, 105 к.6",
+   "keys": [
+    "beskudnikovskiy:396",
+    "beskudnikovskiy:397"
+   ]
+  },
+  {
+   "district": "Бескудниковский",
+   "kind": "dp",
+   "contour_id": 126722517300027,
+   "contour_name": "Бескудниковский пер. 1 к.1, 1 к.2, 1 к.3",
+   "keys": [
+    "beskudnikovskiy:400",
+    "beskudnikovskiy:406",
+    "beskudnikovskiy:407",
+    "beskudnikovskiy:408"
+   ]
+  },
+  {
+   "district": "Бескудниковский",
+   "kind": "dp",
+   "contour_id": 126843602800027,
+   "contour_name": "Дмитровское шоссе 68",
+   "keys": [
+    "beskudnikovskiy:422",
+    "beskudnikovskiy:424"
+   ]
+  },
+  {
+   "district": "Бескудниковский",
+   "kind": "dp",
+   "contour_id": 126848213100027,
+   "contour_name": "Бескудниковский бульвар дом 15, корпус 1",
+   "keys": [
+    "beskudnikovskiy:427",
+    "beskudnikovskiy:428"
+   ]
+  },
+  {
+   "district": "Бескудниковский",
+   "kind": "dp",
+   "contour_id": 127007016200027,
+   "contour_name": "Дмитровское шоссе 86 к.6, 88 к.2",
+   "keys": [
+    "beskudnikovskiy:443",
+    "beskudnikovskiy:444"
+   ]
+  },
+  {
+   "district": "Бескудниковский",
+   "kind": "dp",
+   "contour_id": 127007018400027,
+   "contour_name": "Дмитровское шоссе 86 к.6, 88 к.2",
+   "keys": [
+    "beskudnikovskiy:445",
+    "beskudnikovskiy:446"
+   ]
+  },
+  {
+   "district": "Бескудниковский",
+   "kind": "dp",
+   "contour_id": 127009812000027,
+   "contour_name": "Бескудниковский бульв. 13",
+   "keys": [
+    "beskudnikovskiy:454",
+    "beskudnikovskiy:456"
+   ]
+  },
+  {
+   "district": "Бескудниковский",
+   "kind": "dp",
+   "contour_id": 127009814200027,
+   "contour_name": "Бескудниковский бульв. 13",
+   "keys": [
+    "beskudnikovskiy:451",
+    "beskudnikovskiy:452",
+    "beskudnikovskiy:453"
+   ]
+  },
+  {
+   "district": "Бескудниковский",
+   "kind": "dp",
+   "contour_id": 127016587600027,
+   "contour_name": "Селигерская ул. 22/2",
+   "keys": [
+    "beskudnikovskiy:469",
+    "beskudnikovskiy:470"
+   ]
+  },
+  {
+   "district": "Бескудниковский",
+   "kind": "dp",
+   "contour_id": 127145295100027,
+   "contour_name": "Селигерская ул. 26 к.1",
+   "keys": [
+    "beskudnikovskiy:481",
+    "beskudnikovskiy:482"
+   ]
+  },
+  {
+   "district": "Бескудниковский",
+   "kind": "dp",
+   "contour_id": 127180243100027,
+   "contour_name": "Дубнинская ул. 61",
+   "keys": [
+    "beskudnikovskiy:635",
+    "beskudnikovskiy:636"
+   ]
+  },
+  {
+   "district": "Бескудниковский",
+   "kind": "dp",
+   "contour_id": 127295253500027,
+   "contour_name": "Бескудниковский бульв. 5",
+   "keys": [
+    "beskudnikovskiy:489",
+    "beskudnikovskiy:490",
+    "beskudnikovskiy:491"
+   ]
+  },
+  {
+   "district": "Бескудниковский",
+   "kind": "dp",
+   "contour_id": 127467646000027,
+   "contour_name": "Бескудниковский бульв. 17 к.1, 19 к.1",
+   "keys": [
+    "beskudnikovskiy:521",
+    "beskudnikovskiy:525",
+    "beskudnikovskiy:526"
+   ]
+  },
+  {
+   "district": "Бескудниковский",
+   "kind": "dp",
+   "contour_id": 127528199200027,
+   "contour_name": "Восьмисотлетия Москвы ул. 4 к.2, 6",
+   "keys": [
+    "beskudnikovskiy:547",
+    "beskudnikovskiy:548",
+    "beskudnikovskiy:549"
+   ]
+  },
+  {
+   "district": "Бескудниковский",
+   "kind": "dp",
+   "contour_id": 127537455700027,
+   "contour_name": "Бескудниковский бульвар дом 21, корпус 2",
+   "keys": [
+    "beskudnikovskiy:552",
+    "beskudnikovskiy:559"
+   ]
+  },
+  {
+   "district": "Бескудниковский",
+   "kind": "dp",
+   "contour_id": 127572044000027,
+   "contour_name": "Бескудниковский проезд дом 4, корпус 1",
+   "keys": [
+    "beskudnikovskiy:573",
+    "beskudnikovskiy:574",
+    "beskudnikovskiy:571"
+   ]
+  },
+  {
+   "district": "Бескудниковский",
+   "kind": "dp",
+   "contour_id": 130567798100027,
+   "contour_name": "Дмитровское шоссе 96 к.1",
+   "keys": [
+    "beskudnikovskiy:587",
+    "beskudnikovskiy:589"
+   ]
+  },
+  {
+   "district": "Бескудниковский",
+   "kind": "dp",
+   "contour_id": 131694898400027,
+   "contour_name": "Бескудниковский бульв. 31",
+   "keys": [
+    "beskudnikovskiy:595",
+    "beskudnikovskiy:597",
+    "beskudnikovskiy:598"
+   ]
+  },
+  {
+   "district": "Бескудниковский",
+   "kind": "dp",
+   "contour_id": 131966261200027,
+   "contour_name": "Дмитровское шоссе 70",
+   "keys": [
+    "beskudnikovskiy:601",
+    "beskudnikovskiy:603"
+   ]
+  },
+  {
+   "district": "Бескудниковский",
+   "kind": "dp",
+   "contour_id": 132372525100027,
+   "contour_name": "Бескудниковский бульв. 11 к.1",
+   "keys": [
+    "beskudnikovskiy:612",
+    "beskudnikovskiy:613"
+   ]
+  },
+  {
+   "district": "Бескудниковский",
+   "kind": "dp",
+   "contour_id": 132430893000027,
+   "contour_name": "Дмитровское шоссе дом 93, корпус 2",
+   "keys": [
+    "beskudnikovskiy:643",
+    "beskudnikovskiy:644"
+   ]
+  },
+  {
+   "district": "Бескудниковский",
+   "kind": "dp",
+   "contour_id": 133195606200027,
+   "contour_name": "Бескудниковский бульвар дом 30, корпус 3",
+   "keys": [
+    "beskudnikovskiy:458",
+    "beskudnikovskiy:459"
+   ]
+  },
+  {
+   "district": "Бескудниковский",
+   "kind": "dp",
+   "contour_id": 127010773800027,
+   "contour_name": "Бескудниковский бульв. 30 к.3",
+   "keys": [
+    "beskudnikovskiy:460",
+    "beskudnikovskiy:461"
+   ]
+  },
+  {
+   "district": "Бескудниковский",
+   "kind": "sp",
+   "contour_id": 126843602600027,
+   "contour_name": "Дмитровское шоссе 68",
+   "keys": [
+    "beskudnikovskiy:421",
+    "beskudnikovskiy:423"
+   ]
+  },
+  {
+   "district": "Бескудниковский",
+   "kind": "sp",
+   "contour_id": 133070592000027,
+   "contour_name": "Бескудниковский проезд дом 2, корпус 2",
+   "keys": [
+    "beskudnikovskiy:439",
+    "beskudnikovskiy:478"
+   ]
+  },
+  {
+   "district": "Бескудниковский",
+   "kind": "sp",
+   "contour_id": 127016160200027,
+   "contour_name": "Дмитровское шоссе 74 к.1",
+   "keys": [
+    "beskudnikovskiy:580",
+    "beskudnikovskiy:462",
+    "beskudnikovskiy:463",
+    "beskudnikovskiy:468"
+   ]
+  },
+  {
+   "district": "Бескудниковский",
+   "kind": "sp",
+   "contour_id": 127295251900027,
+   "contour_name": "Бескудниковский бульв. 5",
+   "keys": [
+    "beskudnikovskiy:487",
+    "beskudnikovskiy:488"
+   ]
+  },
+  {
+   "district": "Бескудниковский",
+   "kind": "sp",
+   "contour_id": 127489971200027,
+   "contour_name": "Бескудниковский бульв. 25 к.4, 27 к.4",
+   "keys": [
+    "beskudnikovskiy:536",
+    "beskudnikovskiy:538"
+   ]
+  },
+  {
+   "district": "Бескудниковский",
+   "kind": "sp",
+   "contour_id": 127537459700027,
+   "contour_name": "Бескудниковский бульвар дом 21, корпус 2",
+   "keys": [
+    "beskudnikovskiy:555",
+    "beskudnikovskiy:558"
+   ]
+  },
+  {
+   "district": "Бескудниковский",
+   "kind": "sp",
+   "contour_id": 127567436700027,
+   "contour_name": "Дмитровское шоссе 74 к.2",
+   "keys": [
+    "beskudnikovskiy:569",
+    "beskudnikovskiy:570"
+   ]
+  },
+  {
+   "district": "Бескудниковский",
+   "kind": "sp",
+   "contour_id": 131694874000027,
+   "contour_name": "Бескудниковский бульв. 31",
+   "keys": [
+    "beskudnikovskiy:594",
+    "beskudnikovskiy:596",
+    "beskudnikovskiy:600"
+   ]
+  },
+  {
+   "district": "Войковский",
+   "kind": "dp",
+   "contour_id": 121729747900027,
+   "contour_name": "Зои и Александра Космодемьянских ул. 14/10",
+   "keys": [
+    "voykovskiy:680",
+    "voykovskiy:679"
+   ]
+  },
+  {
+   "district": "Войковский",
+   "kind": "dp",
+   "contour_id": 123315944400027,
+   "contour_name": "Войковский 1-й пр. 16А, 16 к.1, 16 к.2, 16 к.3",
+   "keys": [
+    "voykovskiy:713",
+    "voykovskiy:714",
+    "voykovskiy:715"
+   ]
+  },
+  {
+   "district": "Войковский",
+   "kind": "dp",
+   "contour_id": 127939312500027,
+   "contour_name": "Ленинградское шоссе 56",
+   "keys": [
+    "voykovskiy:779",
+    "voykovskiy:780"
+   ]
+  },
+  {
+   "district": "Войковский",
+   "kind": "dp",
+   "contour_id": 132658501000027,
+   "contour_name": "3-я Радиаторская улица дом 8",
+   "keys": [
+    "voykovskiy:667",
+    "voykovskiy:668"
+   ]
+  },
+  {
+   "district": "Войковский",
+   "kind": "dp",
+   "contour_id": 127939818100027,
+   "contour_name": "Ленинградское шоссе 52Б",
+   "keys": [
+    "voykovskiy:848",
+    "voykovskiy:733",
+    "voykovskiy:849"
+   ]
+  },
+  {
+   "district": "Войковский",
+   "kind": "dp",
+   "contour_id": 133959988700027,
+   "contour_name": "Ленинградское шоссе дом 34, корпус 1, дом 36, корпус 1, дом 38, корпус 1",
+   "keys": [
+    "voykovskiy:807",
+    "voykovskiy:808",
+    "voykovskiy:809"
+   ]
+  },
+  {
+   "district": "Войковский",
+   "kind": "dp",
+   "contour_id": 93407566600027,
+   "contour_name": "Войковский 5-й пр. 8, 8 к.1",
+   "keys": [
+    "voykovskiy:663",
+    "voykovskiy:823"
+   ]
+  },
+  {
+   "district": "Войковский",
+   "kind": "dp",
+   "contour_id": 123885990100027,
+   "contour_name": "Вокзальный пер. 10, 8 к.1, 8 к.2",
+   "keys": [
+    "voykovskiy:724",
+    "voykovskiy:725"
+   ]
+  },
+  {
+   "district": "Войковский",
+   "kind": "dp",
+   "contour_id": 133945958600027,
+   "contour_name": "Ленинградское шоссе дом 26, корпус 1, дом 28, корпус 1",
+   "keys": [
+    "voykovskiy:727",
+    "voykovskiy:666"
+   ]
+  },
+  {
+   "district": "Войковский",
+   "kind": "dp",
+   "contour_id": 122725174900027,
+   "contour_name": "Войковский 2-й пр. 7 к.1, 7 к.2; Радиаторская 3-я ул. 2, 4",
+   "keys": [
+    "voykovskiy:832",
+    "voykovskiy:662"
+   ]
+  },
+  {
+   "district": "Войковский",
+   "kind": "dp",
+   "contour_id": 121827132500027,
+   "contour_name": "Зои и Александра Космодемьянских ул. 17/2",
+   "keys": [
+    "voykovskiy:694",
+    "voykovskiy:695"
+   ]
+  },
+  {
+   "district": "Войковский",
+   "kind": "dp",
+   "contour_id": 124266807400027,
+   "contour_name": "Новоподмосковный 6-й пер. 10, 8",
+   "keys": [
+    "voykovskiy:744",
+    "voykovskiy:745"
+   ]
+  },
+  {
+   "district": "Войковский",
+   "kind": "dp",
+   "contour_id": 128748727200027,
+   "contour_name": "Волкова Космонавта ул. 15 к.1, 15 к.2, 15 к.3",
+   "keys": [
+    "voykovskiy:789",
+    "voykovskiy:790"
+   ]
+  },
+  {
+   "district": "Войковский",
+   "kind": "dp",
+   "contour_id": 128665361900027,
+   "contour_name": "Макарова Адмирала ул. 31, 33",
+   "keys": [
+    "voykovskiy:787",
+    "voykovskiy:788"
+   ]
+  },
+  {
+   "district": "Войковский",
+   "kind": "dp",
+   "contour_id": 124257085500027,
+   "contour_name": "Клары Цеткин ул. 29, 29 к.1, 31",
+   "keys": [
+    "voykovskiy:740",
+    "voykovskiy:741",
+    "voykovskiy:743"
+   ]
+  },
+  {
+   "district": "Войковский",
+   "kind": "dp",
+   "contour_id": 132814001500027,
+   "contour_name": "Нарвская улица дом 1А, корпус 1, дом 1А, корпус 2, дом 1А, корпус 3, дом 1А, корпус 4",
+   "keys": [
+    "voykovskiy:764",
+    "voykovskiy:765",
+    "voykovskiy:766",
+    "voykovskiy:756"
+   ]
+  },
+  {
+   "district": "Войковский",
+   "kind": "dp",
+   "contour_id": 126092070400027,
+   "contour_name": "Ленинградское шоссе 13 к.1, 13 к.2",
+   "keys": [
+    "voykovskiy:768",
+    "voykovskiy:767"
+   ]
+  },
+  {
+   "district": "Войковский",
+   "kind": "dp",
+   "contour_id": 126579230300027,
+   "contour_name": "Новоподмосковный 6-й пер. 1, 3, 5",
+   "keys": [
+    "voykovskiy:772",
+    "voykovskiy:774",
+    "voykovskiy:773",
+    "voykovskiy:776"
+   ]
+  },
+  {
+   "district": "Войковский",
+   "kind": "dp",
+   "contour_id": 134191044500027,
+   "contour_name": "Старопетровский проезд дом 12, корпус 3",
+   "keys": [
+    "voykovskiy:828",
+    "voykovskiy:654"
+   ]
+  },
+  {
+   "district": "Войковский",
+   "kind": "dp",
+   "contour_id": 134249890400027,
+   "contour_name": "Ленинградское шоссе дом 32, дом 34, корпус 2",
+   "keys": [
+    "voykovskiy:782",
+    "voykovskiy:783"
+   ]
+  },
+  {
+   "district": "Войковский",
+   "kind": "sp",
+   "contour_id": 134324700000027,
+   "contour_name": "улица Космонавта Волкова дом 5, корпус 2",
+   "keys": [
+    "voykovskiy:793",
+    "voykovskiy:648"
+   ]
+  },
+  {
+   "district": "Войковский",
+   "kind": "sp",
+   "contour_id": 114053930500027,
+   "contour_name": "Ленинградское шоссе 8 к.1, 8 к.2, 8 к.3",
+   "keys": [
+    "voykovskiy:650",
+    "voykovskiy:796"
+   ]
+  },
+  {
+   "district": "Войковский",
+   "kind": "sp",
+   "contour_id": 119603247500027,
+   "contour_name": "Нарвская ул. 1А к.1, 1А к.2, 1А к.3, 1А к.4",
+   "keys": [
+    "voykovskiy:754",
+    "voykovskiy:758"
+   ]
+  },
+  {
+   "district": "Восточное Дегунино",
+   "kind": "dp",
+   "contour_id": 132987802000027,
+   "contour_name": "Бескудниковский бульвар дом 8, корпус 3, дом 8, корпус 4",
+   "keys": [
+    "vostochnoe-degunino:865",
+    "vostochnoe-degunino:866"
+   ]
+  },
+  {
+   "district": "Восточное Дегунино",
+   "kind": "dp",
+   "contour_id": 131259793700027,
+   "contour_name": "Дубнинская улица дом 30, корпус 1, дом 30, корпус 2",
+   "keys": [
+    "vostochnoe-degunino:977",
+    "vostochnoe-degunino:976"
+   ]
+  },
+  {
+   "district": "Восточное Дегунино",
+   "kind": "dp",
+   "contour_id": 131231097500027,
+   "contour_name": "Дубнинская улица дом 32, корпус 1, дом 32, корпус 2, дом 32, корпус 3, дом 32, корпус 4",
+   "keys": [
+    "vostochnoe-degunino:970",
+    "vostochnoe-degunino:973"
+   ]
+  },
+  {
+   "district": "Восточное Дегунино",
+   "kind": "dp",
+   "contour_id": 133468188000027,
+   "contour_name": "Дубнинская улица дом 20, корпус 3, дом 20, корпус 4",
+   "keys": [
+    "vostochnoe-degunino:912",
+    "vostochnoe-degunino:911"
+   ]
+  },
+  {
+   "district": "Восточное Дегунино",
+   "kind": "dp",
+   "contour_id": 133149171900027,
+   "contour_name": "Керамический проезд дом 57, корпус 1, дом 57, корпус 3; улица 800-летия Москвы дом 30",
+   "keys": [
+    "vostochnoe-degunino:930",
+    "vostochnoe-degunino:929"
+   ]
+  },
+  {
+   "district": "Восточное Дегунино",
+   "kind": "dp",
+   "contour_id": 133238231100027,
+   "contour_name": "Дубнинская улица дом 22, корпус 4, дом 22, корпус 5, дом 22, корпус 6, дом 24, корпус 3, дом 24, корпус 5",
+   "keys": [
+    "vostochnoe-degunino:883",
+    "vostochnoe-degunino:886",
+    "vostochnoe-degunino:882",
+    "vostochnoe-degunino:887"
+   ]
+  },
+  {
+   "district": "Восточное Дегунино",
+   "kind": "dp",
+   "contour_id": 133243896100027,
+   "contour_name": "Дубнинская улица дом 30Б",
+   "keys": [
+    "vostochnoe-degunino:995",
+    "vostochnoe-degunino:997"
+   ]
+  },
+  {
+   "district": "Головинский",
+   "kind": "dp",
+   "contour_id": 132896255300027,
+   "contour_name": "Ленинградское шоссе дом 86, дом 88",
+   "keys": [
+    "golovinskiy:1017",
+    "golovinskiy:1018"
+   ]
+  },
+  {
+   "district": "Головинский",
+   "kind": "dp",
+   "contour_id": 129412259700027,
+   "contour_name": "Флотская ул. 16, 18",
+   "keys": [
+    "golovinskiy:1177",
+    "golovinskiy:1179"
+   ]
+  },
+  {
+   "district": "Головинский",
+   "kind": "dp",
+   "contour_id": 121912078500027,
+   "contour_name": "Лавочкина ул. 14, 16 к.1, 16 к.2, 18",
+   "keys": [
+    "golovinskiy:1025",
+    "golovinskiy:1183"
+   ]
+  },
+  {
+   "district": "Головинский",
+   "kind": "dp",
+   "contour_id": 132884581700027,
+   "contour_name": "Кронштадтский бульвар дом 17, корпус 3, дом 23, корпус 1, дом 23, корпус 2; Смольная улица дом 9",
+   "keys": [
+    "golovinskiy:1048",
+    "golovinskiy:1044"
+   ]
+  },
+  {
+   "district": "Головинский",
+   "kind": "dp",
+   "contour_id": 130674519600027,
+   "contour_name": "Солнечногорская ул. 23 к.1, 23 к.2",
+   "keys": [
+    "golovinskiy:1243",
+    "golovinskiy:1244"
+   ]
+  },
+  {
+   "district": "Головинский",
+   "kind": "dp",
+   "contour_id": 123901655000027,
+   "contour_name": "Флотская ул. 94, 96, 98",
+   "keys": [
+    "golovinskiy:1082",
+    "golovinskiy:1083",
+    "golovinskiy:1084"
+   ]
+  },
+  {
+   "district": "Головинский",
+   "kind": "sp",
+   "contour_id": 131598364900027,
+   "contour_name": "Сенежская улица дом 3, дом 5; Солнечногорская улица дом 5, корпус 1, дом 7, корпус 1; Флотская улица дом 74, дом 76",
+   "keys": [
+    "golovinskiy:1206",
+    "golovinskiy:1207"
+   ]
+  },
+  {
+   "district": "Дмитровский",
+   "kind": "dp",
+   "contour_id": 123966210200027,
+   "contour_name": "Долгопрудная ул. 13 к.1",
+   "keys": [
+    "dmitrovskiy:1410",
+    "dmitrovskiy:1412",
+    "dmitrovskiy:1411"
+   ]
+  },
+  {
+   "district": "Дмитровский",
+   "kind": "dp",
+   "contour_id": 133175625400027,
+   "contour_name": "Ангарская улица дом 53, корпус 1, дом 57, корпус 1",
+   "keys": [
+    "dmitrovskiy:1316",
+    "dmitrovskiy:1319"
+   ]
+  },
+  {
+   "district": "Дмитровский",
+   "kind": "dp",
+   "contour_id": 95484427200027,
+   "contour_name": "Ангарская ул. 45 к.4",
+   "keys": [
+    "dmitrovskiy:1395",
+    "dmitrovskiy:1378"
+   ]
+  },
+  {
+   "district": "Западное Дегунино",
+   "kind": "dp",
+   "contour_id": 123133806500027,
+   "contour_name": "Дмитровское шоссе 73Б",
+   "keys": [
+    "zapadnoe-degunino:1482",
+    "zapadnoe-degunino:1484"
+   ]
+  },
+  {
+   "district": "Западное Дегунино",
+   "kind": "dp",
+   "contour_id": 128816644000027,
+   "contour_name": "Базовская ул. 12; Новая ул. 9",
+   "keys": [
+    "zapadnoe-degunino:1588",
+    "zapadnoe-degunino:1615"
+   ]
+  },
+  {
+   "district": "Западное Дегунино",
+   "kind": "dp",
+   "contour_id": 133450582700027,
+   "contour_name": "Весенняя улица дом 20, дом 20А",
+   "keys": [
+    "zapadnoe-degunino:1446",
+    "zapadnoe-degunino:1447"
+   ]
+  },
+  {
+   "district": "Западное Дегунино",
+   "kind": "dp",
+   "contour_id": 124372359200027,
+   "contour_name": "Федоренко Маршала ул. 10 к.1",
+   "keys": [
+    "zapadnoe-degunino:1496",
+    "zapadnoe-degunino:1450"
+   ]
+  },
+  {
+   "district": "Западное Дегунино",
+   "kind": "dp",
+   "contour_id": 122803370400027,
+   "contour_name": "Ивана Сусанина ул. 4 к.7",
+   "keys": [
+    "zapadnoe-degunino:1471",
+    "zapadnoe-degunino:1472",
+    "zapadnoe-degunino:1570"
+   ]
+  },
+  {
+   "district": "Западное Дегунино",
+   "kind": "dp",
+   "contour_id": 123920315900027,
+   "contour_name": "Коровинское шоссе 23 к.2, 23 к.3",
+   "keys": [
+    "zapadnoe-degunino:1486",
+    "zapadnoe-degunino:1488"
+   ]
+  },
+  {
+   "district": "Западное Дегунино",
+   "kind": "dp",
+   "contour_id": 122509789700027,
+   "contour_name": "Ивана Сусанина ул. 6 к.4",
+   "keys": [
+    "zapadnoe-degunino:1467",
+    "zapadnoe-degunino:1632"
+   ]
+  },
+  {
+   "district": "Западное Дегунино",
+   "kind": "dp",
+   "contour_id": 122075329300027,
+   "contour_name": "Дегунинская ул. 15",
+   "keys": [
+    "zapadnoe-degunino:1448",
+    "zapadnoe-degunino:1567"
+   ]
+  },
+  {
+   "district": "Западное Дегунино",
+   "kind": "dp",
+   "contour_id": 122822656900027,
+   "contour_name": "Коровинское шоссе 3А к.1",
+   "keys": [
+    "zapadnoe-degunino:1634",
+    "zapadnoe-degunino:1651"
+   ]
+  },
+  {
+   "district": "Западное Дегунино",
+   "kind": "dp",
+   "contour_id": 126847721500027,
+   "contour_name": "Путейская ул. 2",
+   "keys": [
+    "zapadnoe-degunino:1519",
+    "zapadnoe-degunino:1521"
+   ]
+  },
+  {
+   "district": "Западное Дегунино",
+   "kind": "dp",
+   "contour_id": 127136922700027,
+   "contour_name": "Коровинское шоссе 13 к.2",
+   "keys": [
+    "zapadnoe-degunino:1548",
+    "zapadnoe-degunino:1547"
+   ]
+  },
+  {
+   "district": "Западное Дегунино",
+   "kind": "dp",
+   "contour_id": 127298998000027,
+   "contour_name": "Коровинское шоссе 9 к.2",
+   "keys": [
+    "zapadnoe-degunino:1579",
+    "zapadnoe-degunino:1580"
+   ]
+  },
+  {
+   "district": "Западное Дегунино",
+   "kind": "dp",
+   "contour_id": 127519587200027,
+   "contour_name": "Весенняя ул. 4; Талдомская ул. 11 к.1, 11 к.2, 11 к.3",
+   "keys": [
+    "zapadnoe-degunino:1602",
+    "zapadnoe-degunino:1600"
+   ]
+  },
+  {
+   "district": "Западное Дегунино",
+   "kind": "dp",
+   "contour_id": 127519589200027,
+   "contour_name": "Весенняя ул. 4; Талдомская ул. 11 к.1, 11 к.2, 11 к.3",
+   "keys": [
+    "zapadnoe-degunino:1604",
+    "zapadnoe-degunino:1601"
+   ]
+  },
+  {
+   "district": "Западное Дегунино",
+   "kind": "dp",
+   "contour_id": 131565256300027,
+   "contour_name": "Ангарская ул. 17",
+   "keys": [
+    "zapadnoe-degunino:1619",
+    "zapadnoe-degunino:1618"
+   ]
+  },
+  {
+   "district": "Западное Дегунино",
+   "kind": "dp",
+   "contour_id": 133576684200027,
+   "contour_name": "Базовская улица дом 24Б",
+   "keys": [
+    "zapadnoe-degunino:1655",
+    "zapadnoe-degunino:1656",
+    "zapadnoe-degunino:1653"
+   ]
+  },
+  {
+   "district": "Западное Дегунино",
+   "kind": "sp",
+   "contour_id": 128816624400027,
+   "contour_name": "Базовская ул. 12; Новая ул. 9",
+   "keys": [
+    "zapadnoe-degunino:1589",
+    "zapadnoe-degunino:1613"
+   ]
+  },
+  {
+   "district": "Западное Дегунино",
+   "kind": "sp",
+   "contour_id": 128050637400027,
+   "contour_name": "Новая ул. 1",
+   "keys": [
+    "zapadnoe-degunino:1607",
+    "zapadnoe-degunino:1544"
+   ]
+  },
+  {
+   "district": "Западное Дегунино",
+   "kind": "sp",
+   "contour_id": 133576686800027,
+   "contour_name": "Базовская улица дом 24Б",
+   "keys": [
+    "zapadnoe-degunino:1652",
+    "zapadnoe-degunino:1654"
+   ]
+  },
+  {
+   "district": "Коптево",
+   "kind": "dp",
+   "contour_id": 130556190500027,
+   "contour_name": "3-й Новомихалковский проезд дом 3; 4-й Новомихалковский проезд дом 1А; Большая Академическая улица дом 57А",
+   "keys": [
+    "koptevo:1863",
+    "koptevo:1864"
+   ]
+  },
+  {
+   "district": "Коптево",
+   "kind": "dp",
+   "contour_id": 124301471100027,
+   "contour_name": "Новомихалковский 1-й пр. 2 к.1",
+   "keys": [
+    "koptevo:1722",
+    "koptevo:1723"
+   ]
+  },
+  {
+   "district": "Коптево",
+   "kind": "dp",
+   "contour_id": 124295078600027,
+   "contour_name": "Клары Цеткин ул. 18Б к.1",
+   "keys": [
+    "koptevo:1720",
+    "koptevo:1719"
+   ]
+  },
+  {
+   "district": "Коптево",
+   "kind": "dp",
+   "contour_id": 132704265700027,
+   "contour_name": "Большая Академическая улица дом 37, дом 37, корпус 2, дом 39, корпус 3",
+   "keys": [
+    "koptevo:1780",
+    "koptevo:1781"
+   ]
+  },
+  {
+   "district": "Коптево",
+   "kind": "dp",
+   "contour_id": 124344508400027,
+   "contour_name": "Академическая Б. ул. 73 к.1, 73 к.2",
+   "keys": [
+    "koptevo:1783",
+    "koptevo:1784"
+   ]
+  },
+  {
+   "district": "Коптево",
+   "kind": "dp",
+   "contour_id": 123925728600027,
+   "contour_name": "Железняка Матроса бульв. 19, 21",
+   "keys": [
+    "koptevo:1701",
+    "koptevo:1702"
+   ]
+  },
+  {
+   "district": "Коптево",
+   "kind": "dp",
+   "contour_id": 124314701000027,
+   "contour_name": "Академическая Б. ул. 29А, 29Б",
+   "keys": [
+    "koptevo:1743",
+    "koptevo:1744"
+   ]
+  },
+  {
+   "district": "Коптево",
+   "kind": "dp",
+   "contour_id": 133887437200027,
+   "contour_name": "улица Лихоборские Бугры дом 10, корпус 1, дом 12",
+   "keys": [
+    "koptevo:1657",
+    "koptevo:1658"
+   ]
+  },
+  {
+   "district": "Коптево",
+   "kind": "dp",
+   "contour_id": 123054158800027,
+   "contour_name": "Приорова ул. 14, 14А, 16 к.1, 16 к.3",
+   "keys": [
+    "koptevo:1674",
+    "koptevo:1675"
+   ]
+  },
+  {
+   "district": "Коптево",
+   "kind": "dp",
+   "contour_id": 129445618100027,
+   "contour_name": "Новомихалковский 3-й пр. 15 к.1, 17, 17А; Рычагова Генерала ул. 3 к.1, 3 к.2",
+   "keys": [
+    "koptevo:1837",
+    "koptevo:1838",
+    "koptevo:1839"
+   ]
+  },
+  {
+   "district": "Коптево",
+   "kind": "dp",
+   "contour_id": 122019664300027,
+   "contour_name": "Коптевская ул. 20 к.1",
+   "keys": [
+    "koptevo:1886",
+    "koptevo:1885"
+   ]
+  },
+  {
+   "district": "Коптево",
+   "kind": "dp",
+   "contour_id": 132027958200027,
+   "contour_name": "Железняка Матроса бульв. 17/14; Коптевский бульв. 16 к.1, 16 к.2, 16 к.3, 18",
+   "keys": [
+    "koptevo:1871",
+    "koptevo:1872"
+   ]
+  },
+  {
+   "district": "Коптево",
+   "kind": "dp",
+   "contour_id": 132475923700027,
+   "contour_name": "проезд Черепановых дом 10",
+   "keys": [
+    "koptevo:1879",
+    "koptevo:1880"
+   ]
+  },
+  {
+   "district": "Коптево",
+   "kind": "sp",
+   "contour_id": 124309978600027,
+   "contour_name": "Приорова ул. 38, 38А, 40, 40 к.2, 42",
+   "keys": [
+    "koptevo:1736",
+    "koptevo:1737"
+   ]
+  },
+  {
+   "district": "Коптево",
+   "kind": "sp",
+   "contour_id": 123907067300027,
+   "contour_name": "Новомихалковский 3-й пр. 15 к.1, 17, 17А; Рычагова Генерала ул. 3 к.1, 3 к.2",
+   "keys": [
+    "koptevo:1689",
+    "koptevo:1690"
+   ]
+  },
+  {
+   "district": "Коптево",
+   "kind": "sp",
+   "contour_id": 132475929300027,
+   "contour_name": "проезд Черепановых дом 10",
+   "keys": [
+    "koptevo:1882",
+    "koptevo:1883"
+   ]
+  },
+  {
+   "district": "Левобережный",
+   "kind": "dp",
+   "contour_id": 122990066100027,
+   "contour_name": "Фестивальная ул. 41 к.1",
+   "keys": [
+    "levoberezhnyy:2062",
+    "levoberezhnyy:2061"
+   ]
+  },
+  {
+   "district": "Левобережный",
+   "kind": "dp",
+   "contour_id": 124629955500027,
+   "contour_name": "Беломорская ул. 16",
+   "keys": [
+    "levoberezhnyy:1966",
+    "levoberezhnyy:2000"
+   ]
+  },
+  {
+   "district": "Левобережный",
+   "kind": "dp",
+   "contour_id": 122723611800027,
+   "contour_name": "Ленинградское шоссе 118 к.1",
+   "keys": [
+    "levoberezhnyy:1946",
+    "levoberezhnyy:1947"
+   ]
+  },
+  {
+   "district": "Левобережный",
+   "kind": "dp",
+   "contour_id": 131292592400027,
+   "contour_name": "Ленинградское шоссе 108 к.1",
+   "keys": [
+    "levoberezhnyy:2019",
+    "levoberezhnyy:2018"
+   ]
+  },
+  {
+   "district": "Левобережный",
+   "kind": "dp",
+   "contour_id": 122062201500027,
+   "contour_name": "Беломорская ул. 5 к.3",
+   "keys": [
+    "levoberezhnyy:1940",
+    "levoberezhnyy:1941"
+   ]
+  },
+  {
+   "district": "Левобережный",
+   "kind": "dp",
+   "contour_id": 131622639100027,
+   "contour_name": "Смольная ул. 49",
+   "keys": [
+    "levoberezhnyy:2034",
+    "levoberezhnyy:1955",
+    "levoberezhnyy:2039"
+   ]
+  },
+  {
+   "district": "Левобережный",
+   "kind": "dp",
+   "contour_id": 121977435300027,
+   "contour_name": "Фестивальная ул. 3",
+   "keys": [
+    "levoberezhnyy:1928",
+    "levoberezhnyy:1927"
+   ]
+  },
+  {
+   "district": "Левобережный",
+   "kind": "sp",
+   "contour_id": 131636495600027,
+   "contour_name": "Смольная ул. 41, 43, 45",
+   "keys": [
+    "levoberezhnyy:2042",
+    "levoberezhnyy:2043"
+   ]
+  },
+  {
+   "district": "Савеловский",
+   "kind": "dp",
+   "contour_id": 122091057500027,
+   "contour_name": "Масловка Верхн. ул. 22",
+   "keys": [
+    "savelovskiy:2246",
+    "savelovskiy:2247"
+   ]
+  },
+  {
+   "district": "Савеловский",
+   "kind": "dp",
+   "contour_id": 122793229300027,
+   "contour_name": "Петровско-Разумовский Стар. пр. 5-13",
+   "keys": [
+    "savelovskiy:2137",
+    "savelovskiy:2138"
+   ]
+  },
+  {
+   "district": "Савеловский",
+   "kind": "dp",
+   "contour_id": 121962074700027,
+   "contour_name": "Масловка Нижн. ул. 18, 20; Петровско-Разумовский пр. 2",
+   "keys": [
+    "savelovskiy:2239",
+    "savelovskiy:2238"
+   ]
+  },
+  {
+   "district": "Савеловский",
+   "kind": "dp",
+   "contour_id": 124505533400027,
+   "contour_name": "Вятский 4-й пер. 18 к.2",
+   "keys": [
+    "savelovskiy:2182",
+    "savelovskiy:2180"
+   ]
+  },
+  {
+   "district": "Савеловский",
+   "kind": "dp",
+   "contour_id": 133047103100027,
+   "contour_name": "Башиловская улица дом 1, корпус 1, дом 1, корпус 2",
+   "keys": [
+    "savelovskiy:2202",
+    "savelovskiy:2203"
+   ]
+  },
+  {
+   "district": "Савеловский",
+   "kind": "dp",
+   "contour_id": 124466899800027,
+   "contour_name": "Башиловская ул. 29; Хуторская 2-я ул. 27",
+   "keys": [
+    "savelovskiy:2178",
+    "savelovskiy:2179"
+   ]
+  },
+  {
+   "district": "Савеловский",
+   "kind": "sp",
+   "contour_id": 133676171900027,
+   "contour_name": "Бутырская улица дом 65/68",
+   "keys": [
+    "savelovskiy:2197",
+    "savelovskiy:2198"
+   ]
+  },
+  {
+   "district": "Савеловский",
+   "kind": "sp",
+   "contour_id": 124165243900027,
+   "contour_name": "Вятский 4-й пер. 23; Полтавская ул. 18",
+   "keys": [
+    "savelovskiy:2160",
+    "savelovskiy:2124"
+   ]
+  },
+  {
+   "district": "Сокол",
+   "kind": "dp",
+   "contour_id": 124314039300027,
+   "contour_name": "Факультетский пер. 3, 8",
+   "keys": [
+    "sokol:2402",
+    "sokol:2403"
+   ]
+  },
+  {
+   "district": "Сокол",
+   "kind": "dp",
+   "contour_id": 123138156700027,
+   "contour_name": "Светлый пр. 10 к.3, 10 к.4, 8 к.3",
+   "keys": [
+    "sokol:2390",
+    "sokol:2392"
+   ]
+  },
+  {
+   "district": "Сокол",
+   "kind": "dp",
+   "contour_id": 134309357200027,
+   "contour_name": "Светлый проезд дом 4, корпус 1, дом 4, корпус 2, дом 6, корпус 1",
+   "keys": [
+    "sokol:2383",
+    "sokol:2346"
+   ]
+  },
+  {
+   "district": "Сокол",
+   "kind": "dp",
+   "contour_id": 123915374900027,
+   "contour_name": "Волоколамское шоссе 6",
+   "keys": [
+    "sokol:2394",
+    "sokol:2395"
+   ]
+  },
+  {
+   "district": "Сокол",
+   "kind": "sp",
+   "contour_id": 128280583500027,
+   "contour_name": "2-я Песчаная улица дом 8; Новопесчаная улица дом 19, корпус 1, дом 19, корпус 2, дом 19, корпус 3, дом 19, корпус 4",
+   "keys": [
+    "sokol:2363",
+    "sokol:2338"
+   ]
+  },
+  {
+   "district": "Тимирязевский",
+   "kind": "dp",
+   "contour_id": 122467341700027,
+   "contour_name": "Дубки ул. 3",
+   "keys": [
+    "timiryazevskiy:2446",
+    "timiryazevskiy:2605"
+   ]
+  },
+  {
+   "district": "Тимирязевский",
+   "kind": "dp",
+   "contour_id": 123958984900027,
+   "contour_name": "Тимирязевская ул. 18 к.1, 18 к.2",
+   "keys": [
+    "timiryazevskiy:2609",
+    "timiryazevskiy:2488"
+   ]
+  },
+  {
+   "district": "Тимирязевский",
+   "kind": "dp",
+   "contour_id": 122461019300027,
+   "contour_name": "Тимирязевская ул. 12",
+   "keys": [
+    "timiryazevskiy:2413",
+    "timiryazevskiy:2425"
+   ]
+  },
+  {
+   "district": "Тимирязевский",
+   "kind": "dp",
+   "contour_id": 124451665200027,
+   "contour_name": "Чуксин туп. 5, 7",
+   "keys": [
+    "timiryazevskiy:2616",
+    "timiryazevskiy:2496"
+   ]
+  },
+  {
+   "district": "Тимирязевский",
+   "kind": "dp",
+   "contour_id": 122417530700027,
+   "contour_name": "Астрадамская ул. 3, 5",
+   "keys": [
+    "timiryazevskiy:2416",
+    "timiryazevskiy:2549"
+   ]
+  },
+  {
+   "district": "Тимирязевский",
+   "kind": "dp",
+   "contour_id": 133388721200027,
+   "contour_name": "Астрадамская улица дом 7",
+   "keys": [
+    "timiryazevskiy:2487",
+    "timiryazevskiy:2550",
+    "timiryazevskiy:2560"
+   ]
+  },
+  {
+   "district": "Тимирязевский",
+   "kind": "dp",
+   "contour_id": 124456909900027,
+   "contour_name": "Всеволода Вишневского ул. 8; Костякова ул. 9",
+   "keys": [
+    "timiryazevskiy:2557",
+    "timiryazevskiy:2556"
+   ]
+  },
+  {
+   "district": "Тимирязевский",
+   "kind": "dp",
+   "contour_id": 133176263800027,
+   "contour_name": "Астрадамская улица дом 9, корпус 1, дом 9, корпус 2",
+   "keys": [
+    "timiryazevskiy:2472",
+    "timiryazevskiy:2585"
+   ]
+  },
+  {
+   "district": "Тимирязевский",
+   "kind": "dp",
+   "contour_id": 130560817500027,
+   "contour_name": "Вучетича ул. 28 к.1, 28 к.2, 28 к.3, 28 к.4",
+   "keys": [
+    "timiryazevskiy:2572",
+    "timiryazevskiy:2574"
+   ]
+  },
+  {
+   "district": "Тимирязевский",
+   "kind": "dp",
+   "contour_id": 122465557300027,
+   "contour_name": "Соломенной Сторожки пр. 10, 10А, 8",
+   "keys": [
+    "timiryazevskiy:2434",
+    "timiryazevskiy:2433"
+   ]
+  },
+  {
+   "district": "Тимирязевский",
+   "kind": "dp",
+   "contour_id": 132723472700027,
+   "contour_name": "Дмитровское шоссе дом 43, корпус 1",
+   "keys": [
+    "timiryazevskiy:2628",
+    "timiryazevskiy:2520"
+   ]
+  },
+  {
+   "district": "Тимирязевский",
+   "kind": "dp",
+   "contour_id": 132723399100027,
+   "contour_name": "Дмитровское шоссе дом 33, корпус 4, дом 33, корпус 5, дом 33, корпус 6, дом 33, корпус 7",
+   "keys": [
+    "timiryazevskiy:2427",
+    "timiryazevskiy:2516",
+    "timiryazevskiy:2517"
+   ]
+  },
+  {
+   "district": "Тимирязевский",
+   "kind": "dp",
+   "contour_id": 132723399200027,
+   "contour_name": "Дмитровское шоссе дом 33, корпус 4, дом 33, корпус 5, дом 33, корпус 6, дом 33, корпус 7",
+   "keys": [
+    "timiryazevskiy:2429",
+    "timiryazevskiy:2514"
+   ]
+  },
+  {
+   "district": "Тимирязевский",
+   "kind": "dp",
+   "contour_id": 132723414300027,
+   "contour_name": "Локомотивный проезд дом 7, дом 9, дом 9А",
+   "keys": [
+    "timiryazevskiy:2595",
+    "timiryazevskiy:2593",
+    "timiryazevskiy:2594"
+   ]
+  },
+  {
+   "district": "Тимирязевский",
+   "kind": "dp",
+   "contour_id": 132723481000027,
+   "contour_name": "Дмитровское шоссе дом 3, корпус 1, дом 3, корпус 2",
+   "keys": [
+    "timiryazevskiy:2548",
+    "timiryazevskiy:2547"
+   ]
+  },
+  {
+   "district": "Тимирязевский",
+   "kind": "dp",
+   "contour_id": 122469241500027,
+   "contour_name": "Дмитровское шоссе 38 к.1",
+   "keys": [
+    "timiryazevskiy:2602",
+    "timiryazevskiy:2614"
+   ]
+  },
+  {
+   "district": "Тимирязевский",
+   "kind": "dp",
+   "contour_id": 133088522100027,
+   "contour_name": "Красностуденческий проезд дом 4, корпус 2",
+   "keys": [
+    "timiryazevskiy:2607",
+    "timiryazevskiy:2608"
+   ]
+  },
+  {
+   "district": "Тимирязевский",
+   "kind": "dp",
+   "contour_id": 134219822400027,
+   "contour_name": "Дмитровское шоссе дом 7, корпус 1",
+   "keys": [
+    "timiryazevskiy:2460",
+    "timiryazevskiy:2459"
+   ]
+  },
+  {
+   "district": "Тимирязевский",
+   "kind": "dp",
+   "contour_id": 124454403700027,
+   "contour_name": "Дмитровское шоссе 59 к.1; Нижнелихоборский 3-й пр. 6, 8, 8А",
+   "keys": [
+    "timiryazevskiy:2532",
+    "timiryazevskiy:2534",
+    "timiryazevskiy:2533"
+   ]
+  },
+  {
+   "district": "Тимирязевский",
+   "kind": "dp",
+   "contour_id": 129245592700027,
+   "contour_name": "Вучетича ул. 5, 7; Чуксин туп. 2, 4",
+   "keys": [
+    "timiryazevskiy:2566",
+    "timiryazevskiy:2567",
+    "timiryazevskiy:2568"
+   ]
+  },
+  {
+   "district": "Тимирязевский",
+   "kind": "dp",
+   "contour_id": 133047850500027,
+   "contour_name": "Тимирязевская улица дом 30, корпус 1, дом 30, корпус 2, дом 32, корпус 1, дом 32, корпус 2",
+   "keys": [
+    "timiryazevskiy:2463",
+    "timiryazevskiy:2465"
+   ]
+  },
+  {
+   "district": "Тимирязевский",
+   "kind": "dp",
+   "contour_id": 132723451800027,
+   "contour_name": "Дмитровское шоссе дом 29, корпус 1, дом 31, дом 33, корпус 1",
+   "keys": [
+    "timiryazevskiy:2506",
+    "timiryazevskiy:2511"
+   ]
+  },
+  {
+   "district": "Тимирязевский",
+   "kind": "dp",
+   "contour_id": 132723451900027,
+   "contour_name": "Дмитровское шоссе дом 29, корпус 1, дом 31, дом 33, корпус 1",
+   "keys": [
+    "timiryazevskiy:2505",
+    "timiryazevskiy:2508"
+   ]
+  },
+  {
+   "district": "Тимирязевский",
+   "kind": "dp",
+   "contour_id": 132723448500027,
+   "contour_name": "Дмитровское шоссе дом 44, корпус 1, дом 44, корпус 2, дом 44, корпус 3",
+   "keys": [
+    "timiryazevskiy:2501",
+    "timiryazevskiy:2504"
+   ]
+  },
+  {
+   "district": "Тимирязевский",
+   "kind": "dp",
+   "contour_id": 133050957800027,
+   "contour_name": "Астрадамская улица дом 6, дом 6, корпус 1; Тимирязевская улица дом 23, дом 25, дом 25, корпус 2",
+   "keys": [
+    "timiryazevskiy:2537",
+    "timiryazevskiy:2535"
+   ]
+  },
+  {
+   "district": "Тимирязевский",
+   "kind": "sp",
+   "contour_id": 122462947400027,
+   "contour_name": "Дмитровское шоссе дом 33, корпус 4, дом 33, корпус 5, дом 33, корпус 6, дом 33, корпус 7",
+   "keys": [
+    "timiryazevskiy:2428",
+    "timiryazevskiy:2515"
+   ]
+  },
+  {
+   "district": "Ховрино",
+   "kind": "dp",
+   "contour_id": 124512763800027,
+   "contour_name": "Лавочкина ул. 40/49",
+   "keys": [
+    "hovrino:2822",
+    "hovrino:2820"
+   ]
+  },
+  {
+   "district": "Ховрино",
+   "kind": "dp",
+   "contour_id": 123940470500027,
+   "contour_name": "Петрозаводская ул. 18",
+   "keys": [
+    "hovrino:2901",
+    "hovrino:2769"
+   ]
+  },
+  {
+   "district": "Ховрино",
+   "kind": "dp",
+   "contour_id": 132330342000027,
+   "contour_name": "Ляпидевского ул. 2, 2 к.1; Флотская ул. 9 к.1",
+   "keys": [
+    "hovrino:2877",
+    "hovrino:2878"
+   ]
+  },
+  {
+   "district": "Ховрино",
+   "kind": "dp",
+   "contour_id": 124355942000027,
+   "contour_name": "Дыбенко ул. 30 к.2",
+   "keys": [
+    "hovrino:2790",
+    "hovrino:2893"
+   ]
+  },
+  {
+   "district": "Ховрино",
+   "kind": "dp",
+   "contour_id": 124376844500027,
+   "contour_name": "Онежская ул. 53 к.3",
+   "keys": [
+    "hovrino:2797",
+    "hovrino:2934"
+   ]
+  },
+  {
+   "district": "Ховрино",
+   "kind": "dp",
+   "contour_id": 133466998100027,
+   "contour_name": "Фестивальная улица дом 22, корпус 3",
+   "keys": [
+    "hovrino:2742",
+    "hovrino:2741"
+   ]
+  },
+  {
+   "district": "Ховрино",
+   "kind": "dp",
+   "contour_id": 133540952100027,
+   "contour_name": "Фестивальная улица дом 22, корпус 4",
+   "keys": [
+    "hovrino:2907",
+    "hovrino:2908"
+   ]
+  },
+  {
+   "district": "Ховрино",
+   "kind": "dp",
+   "contour_id": 122163552900027,
+   "contour_name": "Дыбенко ул. 22 к.1, 22 к.2",
+   "keys": [
+    "hovrino:2896",
+    "hovrino:2656"
+   ]
+  },
+  {
+   "district": "Ховрино",
+   "kind": "dp",
+   "contour_id": 122163554700027,
+   "contour_name": "Дыбенко ул. 22 к.1, 22 к.2",
+   "keys": [
+    "hovrino:2658",
+    "hovrino:2897"
+   ]
+  },
+  {
+   "district": "Ховрино",
+   "kind": "dp",
+   "contour_id": 114501166900027,
+   "contour_name": "Онежская ул. 53 к.1",
+   "keys": [
+    "hovrino:2926",
+    "hovrino:2925"
+   ]
+  },
+  {
+   "district": "Ховрино",
+   "kind": "dp",
+   "contour_id": 124510946200027,
+   "contour_name": "Фестивальная ул. 24 к.2",
+   "keys": [
+    "hovrino:2945",
+    "hovrino:2939"
+   ]
+  },
+  {
+   "district": "Ховрино",
+   "kind": "dp",
+   "contour_id": 133489605200027,
+   "contour_name": "улица Лавочкина дом 50, корпус 1",
+   "keys": [
+    "hovrino:2917",
+    "hovrino:2930"
+   ]
+  },
+  {
+   "district": "Ховрино",
+   "kind": "dp",
+   "contour_id": 122783575300027,
+   "contour_name": "Зеленоградская ул. 35 к.5",
+   "keys": [
+    "hovrino:2913",
+    "hovrino:2915",
+    "hovrino:2914"
+   ]
+  },
+  {
+   "district": "Ховрино",
+   "kind": "dp",
+   "contour_id": 123908042700027,
+   "contour_name": "Фестивальная ул. 59 к.1, 59 к.2, 59 к.3",
+   "keys": [
+    "hovrino:2876",
+    "hovrino:2758"
+   ]
+  },
+  {
+   "district": "Ховрино",
+   "kind": "dp",
+   "contour_id": 133385828600027,
+   "contour_name": "улица Дыбенко дом 14, корпус 1, дом 14, корпус 2, дом 16, корпус 1",
+   "keys": [
+    "hovrino:2736",
+    "hovrino:2734"
+   ]
+  },
+  {
+   "district": "Ховрино",
+   "kind": "sp",
+   "contour_id": 122784621000027,
+   "contour_name": "Петрозаводская ул. 24 к.2",
+   "keys": [
+    "hovrino:2862",
+    "hovrino:2731"
+   ]
+  },
+  {
+   "district": "Ховрино",
+   "kind": "sp",
+   "contour_id": 122038131700027,
+   "contour_name": "Петрозаводская ул. 5 к.1, 5 к.2",
+   "keys": [
+    "hovrino:2644",
+    "hovrino:2645"
+   ]
+  },
+  {
+   "district": "Ховрино",
+   "kind": "sp",
+   "contour_id": 133385739000027,
+   "contour_name": "улица Дыбенко дом 14, корпус 1, дом 14, корпус 2, дом 16, корпус 1",
+   "keys": [
+    "hovrino:2735",
+    "hovrino:2863"
+   ]
+  },
+  {
+   "district": "Ховрино",
+   "kind": "sp",
+   "contour_id": 122178039000027,
+   "contour_name": "Зеленоградская ул. 17 к.1",
+   "keys": [
+    "hovrino:2663",
+    "hovrino:2662"
+   ]
+  },
+  {
+   "district": "Ховрино",
+   "kind": "sp",
+   "contour_id": 123928781600027,
+   "contour_name": "Петрозаводская ул. 28 к.5",
+   "keys": [
+    "hovrino:2816",
+    "hovrino:2919"
+   ]
+  },
+  {
+   "district": "Ховрино",
+   "kind": "sp",
+   "contour_id": 134308611500027,
+   "contour_name": "улица Лавочкина дом 54, корпус 2",
+   "keys": [
+    "hovrino:2745",
+    "hovrino:2898"
+   ]
+  },
+  {
+   "district": "Хорошевский",
+   "kind": "dp",
+   "contour_id": 123030113800027,
+   "contour_name": "Хорошевский 1-й пр. 2/17, 4 к.1, 4 к.2, 4 к.3, 6",
+   "keys": [
+    "horoshevskiy:3053",
+    "horoshevskiy:3054"
+   ]
+  },
+  {
+   "district": "Хорошевский",
+   "kind": "dp",
+   "contour_id": 132081807700027,
+   "contour_name": "Полины Осипенко ул. 10 к.1",
+   "keys": [
+    "horoshevskiy:3188",
+    "horoshevskiy:3169"
+   ]
+  },
+  {
+   "district": "Хорошевский",
+   "kind": "dp",
+   "contour_id": 121401433900027,
+   "contour_name": "Хорошевское шоссе 43 к.А, 43 к.Б",
+   "keys": [
+    "horoshevskiy:2973",
+    "horoshevskiy:3129"
+   ]
+  },
+  {
+   "district": "Хорошевский",
+   "kind": "dp",
+   "contour_id": 121675497700027,
+   "contour_name": "Полины Осипенко ул. 16, 18 к.1, 18 к.2",
+   "keys": [
+    "horoshevskiy:2998",
+    "horoshevskiy:2999"
+   ]
+  },
+  {
+   "district": "Хорошевский",
+   "kind": "dp",
+   "contour_id": 121494969300027,
+   "contour_name": "Полины Осипенко ул. 20 к.1",
+   "keys": [
+    "horoshevskiy:2984",
+    "horoshevskiy:2986"
+   ]
+  },
+  {
+   "district": "Хорошевский",
+   "kind": "dp",
+   "contour_id": 122822963300027,
+   "contour_name": "Гризодубовой ул. 4 к.3; Ходынский бульв. 13",
+   "keys": [
+    "horoshevskiy:3035",
+    "horoshevskiy:3036",
+    "horoshevskiy:3039"
+   ]
+  },
+  {
+   "district": "Хорошевский",
+   "kind": "dp",
+   "contour_id": 122823500000027,
+   "contour_name": "Березовой Рощи пр. 10; Ходынский бульв. 19",
+   "keys": [
+    "horoshevskiy:3044",
+    "horoshevskiy:3045"
+   ]
+  },
+  {
+   "district": "Хорошевский",
+   "kind": "dp",
+   "contour_id": 121575576700027,
+   "contour_name": "Куусинена ул. 4 к.1, 4 к.2, 4 к.3",
+   "keys": [
+    "horoshevskiy:2992",
+    "horoshevskiy:2993"
+   ]
+  },
+  {
+   "district": "Хорошевский",
+   "kind": "dp",
+   "contour_id": 122824188300027,
+   "contour_name": "Куусинена ул. 4А к.5, 6 к.10, 6 к.11, 6 к.12",
+   "keys": [
+    "horoshevskiy:3049",
+    "horoshevskiy:3050"
+   ]
+  },
+  {
+   "district": "Хорошевский",
+   "kind": "dp",
+   "contour_id": 131606099800027,
+   "contour_name": "Микояна Авиаконструктора ул. 14 к.1, 14 к.2",
+   "keys": [
+    "horoshevskiy:3160",
+    "horoshevskiy:3157"
+   ]
+  },
+  {
+   "district": "Хорошевский",
+   "kind": "dp",
+   "contour_id": 125617286200027,
+   "contour_name": "Куусинена ул. 4А к.1, 4А к.2",
+   "keys": [
+    "horoshevskiy:3107",
+    "horoshevskiy:3108"
+   ]
+  },
+  {
+   "district": "Хорошевский",
+   "kind": "sp",
+   "contour_id": 121753283000027,
+   "contour_name": "Острякова ул. 6",
+   "keys": [
+    "horoshevskiy:3006",
+    "horoshevskiy:3011"
+   ]
+  },
+  {
+   "district": "Хорошевский",
+   "kind": "sp",
+   "contour_id": 124203696300027,
+   "contour_name": "Поликарпова ул. 19 к.1, 19 к.2",
+   "keys": [
+    "horoshevskiy:3082",
+    "horoshevskiy:3081"
+   ]
+  },
+  {
+   "district": "Хорошевский",
+   "kind": "sp",
+   "contour_id": 127072667800027,
+   "contour_name": "Магистральная 5-я ул. 18, 20",
+   "keys": [
+    "horoshevskiy:3110",
+    "horoshevskiy:2989"
+   ]
+  },
+  {
+   "district": "Хорошевский",
+   "kind": "sp",
+   "contour_id": 127872737700027,
+   "contour_name": "Хорошевский 2-й пр. 7А, 7Б",
+   "keys": [
+    "horoshevskiy:3118",
+    "horoshevskiy:3119"
+   ]
+  }
+ ]
+}
