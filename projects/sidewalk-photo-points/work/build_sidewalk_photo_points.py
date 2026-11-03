@@ -265,7 +265,7 @@ def read_staff_edits(path, district_no):
     return edits
 
 
-def apply_rule(L, staff, live, points, house_slots, stats):
+def apply_rule(L, staff, live, points, house_slots, stats, buildings=()):
     """Точки префектуры по правилу подъездов. Каждая живая точка относится к дому,
     на который смотрит (первый дом по направлению кадра в STAFF_HOUSE_M), иначе — к
     ближайшему не дальше STAFF_HOUSE_M, а в доме — к стороне с ближайшим подъездом
@@ -274,10 +274,13 @@ def apply_rule(L, staff, live, points, house_slots, stats):
     черновой обзорной точке (k = 1) или самые разнесённые вдоль стороны (k = 2, концы).
     Остальные — на снятие. Черновые точки стороны остаются, только если мест не
     хватило: у k = 2 — самая дальняя от оставленной точки префектуры.
+    Дом без подъездов в реестре: если у одного здания стоят три и больше точек
+    префектуры, остаются две крайние вдоль здания (и все с фото).
     Возвращает (живые точки префектуры, номера на снятие, черновые точки)."""
     homes = [(u, b) for u, (b, _) in house_slots.items()]
     tree = STRtree([b for _, b in homes])
     by_slot = defaultdict(list)
+    assigned = set()
     for no, (xy, heading) in live.items():
         a = math.radians(heading)
         ray = LineString([xy, (xy[0] + math.sin(a) * STAFF_HOUSE_M, xy[1] + math.cos(a) * STAFF_HOUSE_M)])
@@ -293,6 +296,7 @@ def apply_rule(L, staff, live, points, house_slots, stats):
         dist, gi = min((min(Point(xy).distance(pt) for pt in sl["ents"]), gi) for gi, sl in enumerate(house_slots[unom][1]))
         if dist <= STAFF_HOUSE_M:
             by_slot[(unom, gi)].append(no)
+            assigned.add(no)
     drafts = defaultdict(list)
     for p in points:
         if p.get("slot") is not None:
@@ -323,6 +327,25 @@ def apply_rule(L, staff, live, points, house_slots, stats):
         elif k == 2 and len(keep) == 1 and len(own) > 1:
             far = max(own, key=lambda p: math.dist(p["xy"], live[keep[0]][0]))
             drop.update(id(p) for p in own if p is not far)
+    if buildings:
+        btree = STRtree(list(buildings))
+        by_bld = defaultdict(list)
+        for no, (xy, _) in live.items():
+            if no in assigned:
+                continue
+            j = btree.query_nearest(Point(xy), max_distance=25)
+            if len(j):
+                by_bld[int(j[0])].append(no)
+        for j, mine in by_bld.items():
+            if len(mine) < 3:
+                continue
+            ux, uy = max(main_axes(buildings[j]), key=lambda u: max((x * u[0] + y * u[1]) for x, y in buildings[j].exterior.coords)
+                         - min((x * u[0] + y * u[1]) for x, y in buildings[j].exterior.coords))
+            along = lambda no: live[no][0][0] * ux + live[no][0][1] * uy
+            ends = {min(mine, key=along), max(mine, key=along)}
+            rest = [no for no in mine if no not in ends and "P" not in staff[no][3]]
+            retire += rest
+            stats["staff_retired_no_entrances"] += len(rest)
     live = {no: v for no, v in live.items() if no not in retire}
     stats["drafts_dropped_by_staff"] = len(drop)
     return live, retire, [p for p in points if id(p) not in drop]
@@ -654,7 +677,7 @@ def build(slug, staff=None, first_no=1, rule=False):
         gone = [L.xy(lng, lat) for lng, lat, _, flags in staff.values() if "D" in flags]
         retire = []
         if rule:
-            live, retire, points = apply_rule(L, staff, live, points, house_slots, stats)
+            live, retire, points = apply_rule(L, staff, live, points, house_slots, stats, buildings)
         before = len(points)
         points = [p for p in points
                   if all(math.dist(p["xy"], xy) >= (STAFF_KEEP_M if turn(p["az"], h) <= 60 else STAFF_SAME_M) for xy, h in live.values())
