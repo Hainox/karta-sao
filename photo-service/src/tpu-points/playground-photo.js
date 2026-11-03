@@ -9,7 +9,7 @@ const roles=new Set(['prefecture_admin','reviewer','district_editor']);
 const pointQuery=`SELECT p.id,p.source_key,p.source_id,p.source_row,p.district,p.district_code,p.kind,p.address,p.longitude,p.latitude,p.source_properties,
  COALESCE((SELECT f.status FROM playground_photo_slot_photos f WHERE f.point_id=p.id AND f.status IN ('pending','accepted') ORDER BY f.uploaded_at DESC LIMIT 1),
  (SELECT 'rework' FROM playground_photo_slot_photos f WHERE f.point_id=p.id AND f.status='rejected' ORDER BY f.reviewed_at DESC NULLS LAST LIMIT 1),'empty') AS photo_state
- FROM playground_photo_points p JOIN playground_photo_slots s ON s.point_id=p.id`;
+ FROM playground_photo_points p JOIN playground_photo_slots s ON s.point_id=p.id AND p.retired_at IS NULL`;
 
 // Кабинет приёмки районных карт, режим «ДП и СП»: те же поля, что у очереди точек съёмки,
 // чтобы кабинет вёл обе оцифровки одним кодом. Подпись точки — адрес площадки.
@@ -22,7 +22,8 @@ const queueQuery=`SELECT p.id AS point_id,COALESCE(NULLIF(p.address,''),'ID '||p
  LEFT JOIN LATERAL (SELECT t.id,t.status,t.uploaded_at,t.photo_filename FROM playground_photo_slot_photos t
   WHERE t.point_id=p.id AND t.status IN ('pending','accepted') ORDER BY t.uploaded_at DESC LIMIT 1) f ON true
  LEFT JOIN LATERAL (SELECT t.id,t.review_comment,t.reviewed_at,t.uploaded_at,t.photo_filename FROM playground_photo_slot_photos t
-  WHERE t.point_id=p.id AND t.status='rejected' ORDER BY t.reviewed_at DESC NULLS LAST LIMIT 1) r ON true`;
+  WHERE t.point_id=p.id AND t.status='rejected' ORDER BY t.reviewed_at DESC NULLS LAST LIMIT 1) r ON true
+ WHERE p.retired_at IS NULL`;
 export const PLAYGROUND_KINDS=Object.freeze({dp:'Детские площадки',sp:'Спортивные площадки'});
 
 /** Очередь кабинета по площадкам: как у точек съёмки, плюс вид площадки. */
@@ -59,7 +60,7 @@ export function createPlaygroundPhotoRouter({pool,authenticate}) {
    'Content-Disposition':`attachment; filename="Svod_foto_DP_SP_SAO_${day}.xlsx"`,'Cache-Control':'no-store'}).send(buffer);
  }catch(e){next(e)}});
  router.get('/:id/photo',async(req,res,next)=>{try{
-  const p=(await pool.query('SELECT id,district FROM playground_photo_points WHERE id=$1',[req.params.id])).rows[0];
+  const p=(await pool.query('SELECT id,district FROM playground_photo_points WHERE id=$1 AND retired_at IS NULL',[req.params.id])).rows[0];
   if(!p||!permitted(req.user,p))return res.status(404).json({error:'Точка не найдена.'});
   const f=(await pool.query(`SELECT id,status,photo_mime_type,photo_bytes,review_comment FROM playground_photo_slot_photos
     WHERE point_id=$1 AND status IN ('pending','accepted') ORDER BY uploaded_at DESC LIMIT 1`,[p.id])).rows[0];
@@ -73,7 +74,7 @@ export function createPlaygroundPhotoRouter({pool,authenticate}) {
   let c;
   try{
    c=await pool.connect();await c.query('BEGIN');
-   const p=(await c.query('SELECT id,district FROM playground_photo_points WHERE id=$1 FOR UPDATE',[req.params.id])).rows[0];
+   const p=(await c.query('SELECT id,district FROM playground_photo_points WHERE id=$1 AND retired_at IS NULL FOR UPDATE',[req.params.id])).rows[0];
    if(!p||!permitted(req.user,p)){await c.query('ROLLBACK');return res.status(404).json({error:'Точка не найдена.'})}
    const active=await c.query(`SELECT 1 FROM playground_photo_slot_photos WHERE point_id=$1 AND status IN ('pending','accepted')`,[p.id]);
    if(active.rowCount){await c.query('ROLLBACK');return res.status(409).json({error:'Слот уже занят.'})}

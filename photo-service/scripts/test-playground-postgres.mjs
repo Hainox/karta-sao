@@ -195,7 +195,17 @@ try {
   assert.deepEqual([placed.lat, placed.lon, placed.sourceLat], [55.8787, 37.4812, 55.878427]);
   assert.equal((await fetch(positions + '/tpu:800905601', { method: 'DELETE', headers: { 'x-test-role': 'admin' } })).status, 204);
   assert.equal((await (await fetch(positions)).json()).positions.length, 0);
-  console.log('PASS: PostgreSQL migrations, import, slots, duplicate prevention, review, review queue and summary, sidewalk photo slots, sidewalk replace, retire entrance points by list, hub dashboard, TPU object positions');
+  // Лишние точки площадок: одна площадка АСУ ОДС — одна точка; снятые не видны районам.
+  const dryRun = run('scripts/retire-duplicate-playground-points.js');
+  const toRetire = Number(dryRun.match(/к снятию: (\d+)/)[1]);
+  assert.ok(toRetire > 100, dryRun);
+  run('scripts/retire-duplicate-playground-points.js', ['--actor=a@example.invalid', '--apply']);
+  const retiredPlaygrounds = await pool.query('SELECT count(*)::int AS n FROM playground_photo_points WHERE retired_at IS NOT NULL');
+  assert.equal(retiredPlaygrounds.rows[0].n, toRetire);
+  assert.match(run('scripts/retire-duplicate-playground-points.js'), /к снятию: 0;/, 'повторный прогон ничего не снимает');
+  const publicAfter = await (await fetch(base + '/public?district=' + encodeURIComponent('Восточное Дегунино'))).json();
+  assert.ok(!publicAfter.points.some((p) => ['vostochnoe-degunino:882', 'vostochnoe-degunino:887'].includes(p.source_key) && p.photo_state === 'empty'), 'лишние точки Дубнинской 22 сняты');
+  console.log('PASS: PostgreSQL migrations, import, slots, duplicate prevention, review, review queue and summary, sidewalk photo slots, sidewalk replace, retire entrance points by list, hub dashboard, TPU object positions, playground duplicates');
 } finally {
   if (server) await new Promise(resolve => server.close(resolve));
   await pool.end();
