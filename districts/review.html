@@ -135,7 +135,7 @@
     <div id="photoStage" class="photo-stage"></div>
     <div id="viewerTools"></div>
   </dialog>
-  <script src="../odh-map/api-config.js"></script><script>if (["127.0.0.1", "localhost"].includes(location.hostname)) ODHApi.setBase("http://127.0.0.1:8789");</script><script src="../object-maps/tpu-photo-api.js"></script>
+  <script src="../odh-map/api-config.js"></script><script>if (["127.0.0.1", "localhost"].includes(location.hostname)) ODHApi.setBase("http://127.0.0.1:8789");</script><script src="../object-maps/tpu-photo-api.js"></script><script src="../object-maps/review-reasons.js"></script>
   <script>
   (() => {
     'use strict';
@@ -412,6 +412,7 @@
         const cancel = make('button', 'secondary', 'Отмена'); cancel.type = 'button';
         const formActions = make('div', 'actions'); formActions.append(send, cancel);
         form.append(comment, formActions);
+        window.ReviewReasons?.attach(comment, { load: () => api.request('/review/reasons').then((r) => r.json()).then((d) => d.reasons) });
         reject.onclick = () => { form.hidden = false; actions.hidden = true; comment.focus(); };
         cancel.onclick = () => { form.hidden = true; actions.hidden = false; };
         form.onsubmit = (event) => { event.preventDefault(); const text = comment.value.trim(); if (text) decide({ id: row.photo_id, point_id: row.point_id }, 'rejected', text); };
