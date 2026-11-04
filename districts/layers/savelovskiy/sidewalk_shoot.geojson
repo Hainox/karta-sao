@@ -4,86 +4,6 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т12.001",
-    "district": "Савеловский",
-    "address": "Бутырская улица, дом 95",
-    "unom": 3104,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 161,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5802605,
-     55.8076133
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.002",
-    "district": "Савеловский",
-    "address": "Бутырская улица, дом 97",
-    "unom": 3105,
-    "role": "за подъездом 6",
-    "side": "подъезды 2–6",
-    "azimuth": 251,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5805399,
-     55.8076105
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.003",
-    "district": "Савеловский",
-    "address": "Бутырская улица, дом 97",
-    "unom": 3105,
-    "role": "середина фасада",
-    "side": "подъезды 2–6",
-    "azimuth": 71,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5795211,
-     55.8074821
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.004",
-    "district": "Савеловский",
-    "address": "Бутырская улица, дом 97",
-    "unom": 3105,
-    "role": "за подъездом 2",
-    "side": "подъезды 2–6",
-    "azimuth": 71,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5786764,
-     55.8073121
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
     "point_no": "Т12.005",
     "district": "Савеловский",
     "address": "2-я Хуторская улица, дом 6/14, корпус 3",
@@ -91,94 +11,14 @@
     "role": "за подъездом 1",
     "side": "подъезды 1",
     "azimuth": 162,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5768104,
-     55.8071174
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.006",
-    "district": "Савеловский",
-    "address": "Вятская улица, дом 53",
-    "unom": 5080,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–4",
-    "azimuth": 161,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5792141,
-     55.8068976
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.007",
-    "district": "Савеловский",
-    "address": "Бутырская улица, дом 89, корпус 2",
-    "unom": 3101,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–4",
-    "azimuth": 161,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5800428,
-     55.8068542
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.008",
-    "district": "Савеловский",
-    "address": "2-я Хуторская улица, дом 11",
-    "unom": 28176,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 252,
     "status": "черновик",
-    "also_covers": "2-я Хуторская улица, дом 11 (подъезды 1)"
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5779282,
-     55.8066984
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.009",
-    "district": "Савеловский",
-    "address": "2-я Хуторская улица, дом 9",
-    "unom": 28175,
-    "role": "за подъездом 2",
-    "side": "подъезды 1–2",
-    "azimuth": 162,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5788078,
-     55.806679
+     37.576864,
+     55.807145
     ]
    }
   },
@@ -192,256 +32,14 @@
     "role": "за подъездом 1",
     "side": "подъезды 1–3",
     "azimuth": 251,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5741476,
-     55.8066474
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.011",
-    "district": "Савеловский",
-    "address": "Башиловская улица, дом 32",
-    "unom": 1606,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 155,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5729965,
-     55.8065565
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.012",
-    "district": "Савеловский",
-    "address": "2-я Хуторская улица, дом 22",
-    "unom": 28182,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 71,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.573339,
-     55.8064934
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.013",
-    "district": "Савеловский",
-    "address": "2-я Хуторская улица, дом 9",
-    "unom": 28175,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–2",
-    "azimuth": 342,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5789082,
-     55.806493
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.014",
-    "district": "Савеловский",
-    "address": "Вятская улица, дом 53",
-    "unom": 5080,
-    "role": "за подъездом 4",
-    "side": "подъезды 1–4",
-    "azimuth": 341,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5795316,
-     55.8063772
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.015",
-    "district": "Савеловский",
-    "address": "Бутырская улица, дом 89, корпус 2",
-    "unom": 3101,
-    "role": "за подъездом 4",
-    "side": "подъезды 1–4",
-    "azimuth": 341,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5803883,
-     55.8062877
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.016",
-    "district": "Савеловский",
-    "address": "Башиловская улица, дом 32",
-    "unom": 1606,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–3",
-    "azimuth": 335,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5732617,
-     55.8062254
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.017",
-    "district": "Савеловский",
-    "address": "Вятская улица, дом 51",
-    "unom": 5079,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–4",
-    "azimuth": 162,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5797054,
-     55.8060471
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.018",
-    "district": "Савеловский",
-    "address": "2-я Хуторская улица, дом 19, корпус 1",
-    "unom": 28180,
-    "role": "за подъездом 2",
-    "side": "подъезды 1–2",
-    "azimuth": 252,
     "status": "черновик",
-    "also_covers": "2-я Хуторская улица, дом 19, корпус 2 (подъезды 1)"
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5748319,
-     55.8059803
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.019",
-    "district": "Савеловский",
-    "address": "2-я Хуторская улица, дом 19, корпус 1",
-    "unom": 28180,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–2",
-    "azimuth": 72,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5742216,
-     55.8058763
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.020",
-    "district": "Савеловский",
-    "address": "1-я Хуторская улица, дом 14",
-    "unom": 28164,
-    "role": "за подъездом 4",
-    "side": "подъезды 1–4",
-    "azimuth": 162,
-    "status": "черновик",
-    "also_covers": "2-й Хуторской переулок, дом 4/13 (подъезды 1–3)"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5775613,
-     55.805823
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.021",
-    "district": "Савеловский",
-    "address": "1-я Хуторская улица, дом 10, корпус 3",
-    "unom": 28163,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 343,
-    "status": "черновик",
-    "also_covers": "1-я Хуторская улица, дом 10, корпус 3 (подъезды 1)"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.577735,
-     55.8057572
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.022",
-    "district": "Савеловский",
-    "address": "2-я Хуторская улица, дом 27",
-    "unom": 28183,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–6",
-    "azimuth": 252,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5723399,
-     55.8056305
+     37.57411,
+     55.806728
     ]
    }
   },
@@ -455,173 +53,14 @@
     "role": "за подъездом 2",
     "side": "подъезды 1–2",
     "azimuth": 72,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5745608,
-     55.805537
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.024",
-    "district": "Савеловский",
-    "address": "Вятская улица, дом 51",
-    "unom": 5079,
-    "role": "за подъездом 4",
-    "side": "подъезды 1–4",
-    "azimuth": 342,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5800093,
-     55.8055292
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.025",
-    "district": "Савеловский",
-    "address": "1-я Хуторская улица, дом 10, корпус 2",
-    "unom": 28186,
-    "role": "за подъездом 2",
-    "side": "подъезды 1–2",
-    "azimuth": 162,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5781549,
-     55.8055258
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.026",
-    "district": "Савеловский",
-    "address": "2-я Хуторская улица, дом 27",
-    "unom": 28183,
-    "role": "середина фасада",
-    "side": "подъезды 1–6",
-    "azimuth": 252,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5714315,
-     55.8054651
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.027",
-    "district": "Савеловский",
-    "address": "1-я Хуторская улица, дом 16/26, корпус 2",
-    "unom": 28166,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–2",
-    "azimuth": 252,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5755812,
-     55.8053239
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.028",
-    "district": "Савеловский",
-    "address": "1-я Хуторская улица, дом 10, корпус 2",
-    "unom": 28186,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–2",
-    "azimuth": 342,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5782927,
-     55.8052762
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.029",
-    "district": "Савеловский",
-    "address": "2-я Хуторская улица, дом 27",
-    "unom": 28183,
-    "role": "за подъездом 6",
-    "side": "подъезды 1–6",
-    "azimuth": 72,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5703597,
-     55.8052689
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.030",
-    "district": "Савеловский",
-    "address": "1-я Хуторская улица, дом 16/26, корпус 2",
-    "unom": 28166,
-    "role": "за подъездом 2",
-    "side": "подъезды 1–2",
-    "azimuth": 72,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.574784,
-     55.8051742
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.031",
-    "district": "Савеловский",
-    "address": "1-я Хуторская улица, дом 14",
-    "unom": 28164,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–4",
-    "azimuth": 342,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5778509,
-     55.8050676
+     37.574598,
+     55.805577
     ]
    }
   },
@@ -635,53 +74,14 @@
     "role": "за подъездом 1",
     "side": "подъезды 1–3",
     "azimuth": 163,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5728583,
-     55.8047733
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.033",
-    "district": "Савеловский",
-    "address": "1-я Хуторская улица, дом 7",
-    "unom": 28158,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–4",
-    "azimuth": 248,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5729827,
-     55.8043938
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.034",
-    "district": "Савеловский",
-    "address": "Башиловская улица, дом 27",
-    "unom": 1603,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 343,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5731167,
-     55.8043064
+     37.572748,
+     55.80478
     ]
    }
   },
@@ -695,13 +95,14 @@
     "role": "за подъездом 1",
     "side": "подъезды 1–3",
     "azimuth": 158,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5710669,
-     55.8042411
+     37.570985,
+     55.804248
     ]
    }
   },
@@ -715,13 +116,14 @@
     "role": "за подъездом 4",
     "side": "подъезды 1–4",
     "azimuth": 68,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5718947,
-     55.8040883
+     37.571825,
+     55.804162
     ]
    }
   },
@@ -735,33 +137,14 @@
     "role": "за подъездом 4",
     "side": "подъезды 3–4",
     "azimuth": 159,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.570247,
-     55.8040194
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.038",
-    "district": "Савеловский",
-    "address": "1-я Хуторская улица, дом 5",
-    "unom": 28156,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 338,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5713215,
-     55.803892
+     37.570345,
+     55.804063
     ]
    }
   },
@@ -775,154 +158,14 @@
     "role": "за подъездом 1",
     "side": "подъезды 1–2",
     "azimuth": 249,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5709659,
-     55.8038831
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.040",
-    "district": "Савеловский",
-    "address": "Петровско-Разумовский проезд, дом 24, корпус 19",
-    "unom": 19678,
-    "role": "за подъездом 6",
-    "side": "подъезды 1–6",
-    "azimuth": 134,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5656274,
-     55.8038793
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.041",
-    "district": "Савеловский",
-    "address": "1-я Хуторская улица, дом 5А",
-    "unom": 28157,
-    "role": "за подъездом 2",
-    "side": "подъезды 1–2",
-    "azimuth": 69,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.570141,
-     55.8037009
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.042",
-    "district": "Савеловский",
-    "address": "Петровско-Разумовский проезд, дом 24, корпус 5",
-    "unom": 19674,
-    "role": "за подъездом 17",
-    "side": "подъезды 16–17",
-    "azimuth": 236,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.565425,
-     55.8036448
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.043",
-    "district": "Савеловский",
-    "address": "Башиловская улица, дом 25",
-    "unom": 28162,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–4",
-    "azimuth": 162,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5733751,
-     55.8036369
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.044",
-    "district": "Савеловский",
-    "address": "Петровско-Разумовский проезд, дом 24, корпус 4",
-    "unom": 19673,
-    "role": "за подъездом 15",
-    "side": "подъезды 14–15",
-    "azimuth": 243,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5645254,
-     55.8033439
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.045",
-    "district": "Савеловский",
-    "address": "улица Юннатов, дом 17, корпус 2",
-    "unom": 30240,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–3",
-    "azimuth": 148,
     "status": "черновик",
-    "also_covers": "улица Юннатов, дом 17, корпус 4 (подъезды 1–3)"
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.557033,
-     55.8033375
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.046",
-    "district": "Савеловский",
-    "address": "Петровско-Разумовский проезд, дом 24, корпус 19",
-    "unom": 19678,
-    "role": "середина фасада",
-    "side": "подъезды 1–6",
-    "azimuth": 314,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5665985,
-     55.8033337
+     37.570937,
+     55.803936
     ]
    }
   },
@@ -936,13 +179,14 @@
     "role": "за подъездом 18",
     "side": "подъезды 18–20",
     "azimuth": 147,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5655108,
-     55.8033328
+     37.565544,
+     55.803211
     ]
    }
   },
@@ -956,53 +200,14 @@
     "role": "за подъездом 4",
     "side": "подъезды 1–4",
     "azimuth": 162,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.571199,
-     55.8032568
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.049",
-    "district": "Савеловский",
-    "address": "Петровско-Разумовский проезд, дом 24, корпус 4",
-    "unom": 19673,
-    "role": "за подъездом 14",
-    "side": "подъезды 14–15",
-    "azimuth": 63,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5637936,
-     55.8031324
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.050",
-    "district": "Савеловский",
-    "address": "Башиловская улица, дом 25",
-    "unom": 28162,
-    "role": "за подъездом 4",
-    "side": "подъезды 1–4",
-    "azimuth": 342,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.573665,
-     55.8031184
+     37.5713,
+     55.803297
     ]
    }
   },
@@ -1016,13 +221,14 @@
     "role": "за подъездом 1",
     "side": "подъезды 1–2",
     "azimuth": 239,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5681676,
-     55.8030424
+     37.568148,
+     55.803083
     ]
    }
   },
@@ -1036,134 +242,14 @@
     "role": "за подъездом 1",
     "side": "подъезды 1–3",
     "azimuth": 56,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5560993,
-     55.8030098
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.053",
-    "district": "Савеловский",
-    "address": "Петровско-Разумовский проезд, дом 24, корпус 3",
-    "unom": 19672,
-    "role": "за подъездом 11",
-    "side": "подъезды 9–11",
-    "azimuth": 151,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5644003,
-     55.8030096
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.054",
-    "district": "Савеловский",
-    "address": "Петровско-Разумовский проезд, дом 24, корпус 17",
-    "unom": 19676,
-    "role": "за подъездом 2",
-    "side": "подъезды 1–2",
-    "azimuth": 59,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5678661,
-     55.802943
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.055",
-    "district": "Савеловский",
-    "address": "Петровско-Разумовский проезд, дом 24, корпус 4",
-    "unom": 19673,
-    "role": "за подъездом 12",
-    "side": "подъезды 12–13",
-    "azimuth": 333,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5640345,
-     55.8029299
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.056",
-    "district": "Савеловский",
-    "address": "Петровско-Разумовский проезд, дом 24, корпус 19",
-    "unom": 19678,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–6",
-    "azimuth": 314,
     "status": "черновик",
-    "also_covers": "Петровско-Разумовский проезд, дом 24, корпус 18 (подъезды 1–2)"
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5674573,
-     55.8029205
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.057",
-    "district": "Савеловский",
-    "address": "улица Юннатов, дом 17, корпус 3",
-    "unom": 30242,
-    "role": "за подъездом 2",
-    "side": "подъезды 1–2",
-    "azimuth": 147,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5564716,
-     55.8029181
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.058",
-    "district": "Савеловский",
-    "address": "Петровско-Разумовский проезд, дом 24, корпус 15",
-    "unom": 19675,
-    "role": "за подъездом 20",
-    "side": "подъезды 18–20",
-    "azimuth": 327,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5660412,
-     55.8028712
+     37.556146,
+     55.802997
     ]
    }
   },
@@ -1177,13 +263,14 @@
     "role": "за подъездом 1",
     "side": "подъезды 1–5",
     "azimuth": 163,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5738944,
-     55.8027677
+     37.573818,
+     55.802754
     ]
    }
   },
@@ -1197,53 +284,14 @@
     "role": "за подъездом 2",
     "side": "подъезды 1–2",
     "azimuth": 60,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5671731,
-     55.8027192
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.061",
-    "district": "Савеловский",
-    "address": "улица Юннатов, дом 17, корпус 1",
-    "unom": 30241,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–3",
-    "azimuth": 237,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5580529,
-     55.8026457
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.062",
-    "district": "Савеловский",
-    "address": "улица Юннатов, дом 17, корпус 2",
-    "unom": 30240,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 328,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5578437,
-     55.8026198
+     37.567098,
+     55.802745
     ]
    }
   },
@@ -1256,54 +304,15 @@
     "unom": 19680,
     "role": "за подъездом 1",
     "side": "подъезды 1",
-    "azimuth": 172,
-    "status": "черновик"
+    "azimuth": 145,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5625769,
-     55.8026065
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.064",
-    "district": "Савеловский",
-    "address": "1-я Хуторская улица, дом 8, корпус 1",
-    "unom": 28159,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–4",
-    "azimuth": 342,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5716392,
-     55.8025805
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.065",
-    "district": "Савеловский",
-    "address": "Петровско-Разумовский проезд, дом 24, корпус 1",
-    "unom": 19670,
-    "role": "за подъездом 3",
-    "side": "подъезды 3–4",
-    "azimuth": 239,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.566564,
-     55.8025497
+     37.562577,
+     55.802607
     ]
    }
   },
@@ -1317,13 +326,14 @@
     "role": "за подъездом 3",
     "side": "подъезды 1–3",
     "azimuth": 145,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5542959,
-     55.8024779
+     37.554407,
+     55.802514
     ]
    }
   },
@@ -1337,13 +347,14 @@
     "role": "за подъездом 1",
     "side": "подъезды 1–2",
     "azimuth": 327,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.556974,
-     55.8024678
+     37.55704,
+     55.802506
     ]
    }
   },
@@ -1357,13 +368,14 @@
     "role": "за подъездом 1",
     "side": "подъезды 1–2",
     "azimuth": 194,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5719277,
-     55.8024278
+     37.57195,
+     55.802386
     ]
    }
   },
@@ -1376,14 +388,15 @@
     "unom": 4948,
     "role": "за подъездом 1",
     "side": "подъезды 1",
-    "azimuth": 144,
-    "status": "черновик"
+    "azimuth": 64,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.555246,
-     55.8024044
+     37.555211,
+     55.802342
     ]
    }
   },
@@ -1397,154 +410,14 @@
     "role": "за подъездом 2",
     "side": "подъезды 1–2",
     "azimuth": 239,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5679635,
-     55.8023181
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.071",
-    "district": "Савеловский",
-    "address": "улица 8 Марта, дом 8, корпус 2",
-    "unom": 4948,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 324,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5553644,
-     55.8023068
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.072",
-    "district": "Савеловский",
-    "address": "Петровско-Разумовский проезд, дом 24, корпус 1",
-    "unom": 19670,
-    "role": "за подъездом 4",
-    "side": "подъезды 3–4",
-    "azimuth": 59,
     "status": "черновик",
-    "also_covers": "Петровско-Разумовский проезд, дом 24, корпус 2 (подъезды 5–6)"
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5658116,
-     55.8022984
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.073",
-    "district": "Савеловский",
-    "address": "Петровско-Разумовский проезд, дом 25, корпус 1",
-    "unom": 31718,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–5",
-    "azimuth": 151,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5633619,
-     55.802256
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.074",
-    "district": "Савеловский",
-    "address": "Башиловская улица, дом 23, корпус 3",
-    "unom": 1600,
-    "role": "угол (тротуар вокруг дома)",
-    "side": "круговой тротуар",
-    "azimuth": 89,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5726508,
-     55.8022523
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.075",
-    "district": "Савеловский",
-    "address": "Башиловская улица, дом 23, корпус 3",
-    "unom": 1600,
-    "role": "угол (тротуар вокруг дома)",
-    "side": "круговой тротуар",
-    "azimuth": 179,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5732971,
-     55.8022235
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.076",
-    "district": "Савеловский",
-    "address": "1-я Хуторская улица, дом 4, корпус 1",
-    "unom": 19668,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–2",
-    "azimuth": 59,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.567668,
-     55.8022177
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.077",
-    "district": "Савеловский",
-    "address": "Петровско-Разумовский проезд, дом 24, корпус 2",
-    "unom": 19671,
-    "role": "за подъездом 8",
-    "side": "подъезды 7–8",
-    "azimuth": 152,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.564667,
-     55.8022115
+     37.56807,
+     55.80235
     ]
    }
   },
@@ -1558,33 +431,14 @@
     "role": "за подъездом 5",
     "side": "подъезды 1–5",
     "azimuth": 151,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5629819,
-     55.8021543
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.079",
-    "district": "Савеловский",
-    "address": "улица Юннатов, дом 15, корпус 1",
-    "unom": 30237,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–3",
-    "azimuth": 148,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5583632,
-     55.8021469
+     37.563182,
+     55.802237
     ]
    }
   },
@@ -1597,54 +451,15 @@
     "unom": 5086,
     "role": "за подъездом 1",
     "side": "подъезды 1",
-    "azimuth": 153,
-    "status": "черновик"
+    "azimuth": 330,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
      37.568686,
      55.802043
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.081",
-    "district": "Савеловский",
-    "address": "Башиловская улица, дом 23, корпус 3",
-    "unom": 1600,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 269,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5733051,
-     55.8020137
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.082",
-    "district": "Савеловский",
-    "address": "Башиловская улица, дом 23, корпус 3",
-    "unom": 1600,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 89,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5725963,
-     55.8019891
     ]
    }
   },
@@ -1658,194 +473,14 @@
     "role": "за подъездом 5",
     "side": "подъезды 1–5",
     "azimuth": 151,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.562405,
-     55.8019624
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.084",
-    "district": "Савеловский",
-    "address": "улица 8 Марта, дом 8, корпус 1",
-    "unom": 22553,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–3",
-    "azimuth": 325,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5550426,
-     55.8019276
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.085",
-    "district": "Савеловский",
-    "address": "Башиловская улица, дом 23, корпус 1",
-    "unom": 1598,
-    "role": "за подъездом 5",
-    "side": "подъезды 1–5",
-    "azimuth": 343,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5743614,
-     55.8019024
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.086",
-    "district": "Савеловский",
-    "address": "Башиловская улица, дом 23, корпус 4",
-    "unom": 1601,
-    "role": "за подъездом 2",
-    "side": "подъезды 1–2",
-    "azimuth": 14,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5717554,
-     55.8018923
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.087",
-    "district": "Савеловский",
-    "address": "Башиловская улица, дом 23, корпус 2",
-    "unom": 1599,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–2",
-    "azimuth": 178,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5735103,
-     55.8018693
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.088",
-    "district": "Савеловский",
-    "address": "улица Юннатов, дом 14",
-    "unom": 30236,
-    "role": "за подъездом 2",
-    "side": "подъезды 1–2",
-    "azimuth": 148,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5599949,
-     55.8018371
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.089",
-    "district": "Савеловский",
-    "address": "Петровско-Разумовский проезд, дом 24, корпус 2",
-    "unom": 19671,
-    "role": "за подъездом 7",
-    "side": "подъезды 7–8",
-    "azimuth": 332,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5650326,
-     55.8018208
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.090",
-    "district": "Савеловский",
-    "address": "Башиловская улица, дом 21",
-    "unom": 1597,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–4",
-    "azimuth": 163,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5742944,
-     55.8017601
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.091",
-    "district": "Савеловский",
-    "address": "1-я Хуторская улица, дом 2, корпус 2",
-    "unom": 19663,
-    "role": "за подъездом 10",
-    "side": "подъезды 10",
-    "azimuth": 330,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5671264,
-     55.8017585
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.092",
-    "district": "Савеловский",
-    "address": "улица Юннатов, дом 15, корпус 1",
-    "unom": 30237,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 328,
     "status": "черновик",
-    "also_covers": "улица Юннатов, дом 15, корпус 2 (подъезды 4–6)"
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.558813,
-     55.8017414
+     37.562479,
+     55.801994
     ]
    }
   },
@@ -1858,14 +493,15 @@
     "unom": 19663,
     "role": "за подъездом 7",
     "side": "подъезды 7–9",
-    "azimuth": 60,
-    "status": "черновик"
+    "azimuth": 63,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5663889,
-     55.8016977
+     37.566472,
+     55.80179
     ]
    }
   },
@@ -1879,73 +515,14 @@
     "role": "за подъездом 11",
     "side": "подъезды 11–13",
     "azimuth": 240,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5669171,
-     55.8016968
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.095",
-    "district": "Савеловский",
-    "address": "1-я Хуторская улица, дом 2, корпус 1",
-    "unom": 19662,
-    "role": "за подъездом 17",
-    "side": "подъезды 15–17",
-    "azimuth": 241,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5661231,
-     55.8016934
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.096",
-    "district": "Савеловский",
-    "address": "улица 8 Марта, дом 6",
-    "unom": 4946,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–4",
-    "azimuth": 145,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5553205,
-     55.8016433
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.097",
-    "district": "Савеловский",
-    "address": "4-й Вятский переулок, дом 22Б",
-    "unom": 5086,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 333,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5688656,
-     55.8016264
+     37.56691,
+     55.801708
     ]
    }
   },
@@ -1959,173 +536,14 @@
     "role": "за подъездом 5",
     "side": "подъезды 1–5",
     "azimuth": 331,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5639756,
-     55.8016219
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.099",
-    "district": "Савеловский",
-    "address": "Бутырская улица, дом 65/68",
-    "unom": 3092,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–2",
-    "azimuth": 84,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5819721,
-     55.8015574
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.100",
-    "district": "Савеловский",
-    "address": "4-й Вятский переулок, дом 24, корпус 3",
-    "unom": 19666,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–3",
-    "azimuth": 150,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5675508,
-     55.8015415
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.101",
-    "district": "Савеловский",
-    "address": "Петровско-Разумовский проезд, дом 25, корпус 2",
-    "unom": 19687,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–5",
-    "azimuth": 331,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5636814,
-     55.8015349
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.102",
-    "district": "Савеловский",
-    "address": "улица Юннатов, дом 15, корпус 2",
-    "unom": 30238,
-    "role": "за подъездом 6",
-    "side": "подъезды 4–6",
-    "azimuth": 59,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5580676,
-     55.801497
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.103",
-    "district": "Савеловский",
-    "address": "1-я Хуторская улица, дом 2, корпус 3",
-    "unom": 19667,
-    "role": "за подъездом 13",
-    "side": "подъезды 11–13",
-    "azimuth": 60,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5662381,
-     55.8014798
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.104",
-    "district": "Савеловский",
-    "address": "1-я Хуторская улица, дом 2, корпус 1",
-    "unom": 19662,
-    "role": "за подъездом 14",
-    "side": "подъезды 14",
-    "azimuth": 151,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5653586,
-     55.8014666
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.105",
-    "district": "Савеловский",
-    "address": "Петровско-Разумовский проезд, дом 25, корпус 3",
-    "unom": 19688,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–5",
-    "azimuth": 331,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5630166,
-     55.8013338
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.106",
-    "district": "Савеловский",
-    "address": "4-й Вятский переулок, дом 24, корпус 3",
-    "unom": 19666,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 330,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5678632,
-     55.8012288
+     37.563797,
+     55.801608
     ]
    }
   },
@@ -2139,133 +557,14 @@
     "role": "за подъездом 14",
     "side": "подъезды 14",
     "azimuth": 331,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5656351,
-     55.8012042
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.108",
-    "district": "Савеловский",
-    "address": "4-й Вятский переулок, дом 20",
-    "unom": 5083,
-    "role": "за подъездом 4",
-    "side": "подъезды 1–4",
-    "azimuth": 171,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5701202,
-     55.8011506
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.109",
-    "district": "Савеловский",
-    "address": "Петровско-Разумовский проезд, дом 22, корпус 8",
-    "unom": 19661,
-    "role": "за подъездом 29",
-    "side": "подъезды 27–29",
-    "azimuth": 152,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5659726,
-     55.8010761
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.110",
-    "district": "Савеловский",
-    "address": "улица 8 Марта, дом 6",
-    "unom": 4946,
-    "role": "за подъездом 4",
-    "side": "подъезды 1–4",
-    "azimuth": 325,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5563366,
-     55.8010398
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.111",
-    "district": "Савеловский",
-    "address": "4-й Вятский переулок, дом 14",
-    "unom": 5082,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 261,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5745042,
-     55.8009946
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.112",
-    "district": "Савеловский",
-    "address": "4-й Вятский переулок, дом 24, корпус 2",
-    "unom": 19665,
-    "role": "за подъездом 4",
-    "side": "подъезды 4–6",
-    "azimuth": 150,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.568149,
-     55.8009475
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.113",
-    "district": "Савеловский",
-    "address": "Петровско-Разумовский проезд, дом 22, корпус 11",
-    "unom": 19664,
-    "role": "за подъездом 24",
-    "side": "подъезды 24–26",
-    "azimuth": 241,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5676119,
-     55.8009403
+     37.565711,
+     55.801234
     ]
    }
   },
@@ -2278,94 +577,15 @@
     "unom": 5082,
     "role": "за подъездом 1",
     "side": "подъезды 1",
-    "azimuth": 81,
-    "status": "черновик"
+    "azimuth": 80,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5737806,
-     55.8009233
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.115",
-    "district": "Савеловский",
-    "address": "Башиловская улица, дом 21",
-    "unom": 1597,
-    "role": "за подъездом 4",
-    "side": "подъезды 1–4",
-    "azimuth": 343,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5745887,
-     55.8008454
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.116",
-    "district": "Савеловский",
-    "address": "Старый Петровско-Разумовский проезд, дом 6, корпус 3",
-    "unom": 19684,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 149,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5587188,
-     55.8007617
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.117",
-    "district": "Савеловский",
-    "address": "Петровско-Разумовский проезд, дом 22, корпус 11",
-    "unom": 19664,
-    "role": "за подъездом 26",
-    "side": "подъезды 24–26",
-    "azimuth": 61,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5669717,
-     55.8007376
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.118",
-    "district": "Савеловский",
-    "address": "4-й Вятский переулок, дом 24, корпус 2",
-    "unom": 19665,
-    "role": "за подъездом 6",
-    "side": "подъезды 4–6",
-    "azimuth": 330,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5684014,
-     55.8006995
+     37.573789,
+     55.800978
     ]
    }
   },
@@ -2379,73 +599,14 @@
     "role": "за подъездом 1",
     "side": "подъезды 1",
     "azimuth": 175,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5748896,
-     55.8006367
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.120",
-    "district": "Савеловский",
-    "address": "4-й Вятский переулок, дом 27",
-    "unom": 5088,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–4",
-    "azimuth": 263,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5740151,
-     55.8005018
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.121",
-    "district": "Савеловский",
-    "address": "4-й Вятский переулок, дом 24, корпус 1",
-    "unom": 19660,
-    "role": "за подъездом 21",
-    "side": "подъезды 21–23",
-    "azimuth": 261,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.568696,
-     55.8004931
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.122",
-    "district": "Савеловский",
-    "address": "4-й Вятский переулок, дом 20",
-    "unom": 5083,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–4",
-    "azimuth": 351,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.570308,
-     55.800441
+     37.57494,
+     55.800592
     ]
    }
   },
@@ -2458,34 +619,15 @@
     "unom": 19684,
     "role": "за подъездом 1",
     "side": "подъезды 1",
-    "azimuth": 329,
-    "status": "черновик"
+    "azimuth": 346,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5589166,
-     55.8004253
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.124",
-    "district": "Савеловский",
-    "address": "4-й Вятский переулок, дом 27",
-    "unom": 5088,
-    "role": "за подъездом 4",
-    "side": "подъезды 1–4",
-    "azimuth": 83,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5727751,
-     55.8004137
+     37.558862,
+     55.800479
     ]
    }
   },
@@ -2499,13 +641,14 @@
     "role": "за подъездом 23",
     "side": "подъезды 21–23",
     "azimuth": 81,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5677728,
-     55.8003873
+     37.567768,
+     55.800435
     ]
    }
   },
@@ -2519,74 +662,14 @@
     "role": "за подъездом 1",
     "side": "подъезды 1–5",
     "azimuth": 174,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5751294,
-     55.800374
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.127",
-    "district": "Савеловский",
-    "address": "4-й Вятский переулок, дом 23",
-    "unom": 5087,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–4",
-    "azimuth": 173,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5740785,
-     55.8003035
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.128",
-    "district": "Савеловский",
-    "address": "4-й Вятский переулок, дом 35",
-    "unom": 74131,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 170,
     "status": "черновик",
-    "also_covers": "4-й Вятский переулок, дом 37 (подъезды 1)"
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.570934,
-     55.8002963
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.129",
-    "district": "Савеловский",
-    "address": "4-й Вятский переулок, дом 33/47",
-    "unom": 5089,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 173,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5722014,
-     55.8002892
+     37.575091,
+     55.800369
     ]
    }
   },
@@ -2599,34 +682,15 @@
     "unom": 19659,
     "role": "за подъездом 20",
     "side": "подъезды 18–20",
-    "azimuth": 81,
-    "status": "черновик"
+    "azimuth": 108,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5663486,
-     55.8002738
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.131",
-    "district": "Савеловский",
-    "address": "4-й Вятский переулок, дом 21",
-    "unom": 5084,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 355,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.57502,
-     55.8002602
+     37.566464,
+     55.800373
     ]
    }
   },
@@ -2640,33 +704,14 @@
     "role": "за подъездом 5",
     "side": "подъезды 1–5",
     "azimuth": 240,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5607816,
-     55.8001358
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.133",
-    "district": "Савеловский",
-    "address": "Полтавская улица, дом 18",
-    "unom": 20496,
-    "role": "за подъездом 7",
-    "side": "подъезды 4–7",
-    "azimuth": 173,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5730633,
-     55.8000415
+     37.5607,
+     55.800193
     ]
    }
   },
@@ -2681,214 +726,13 @@
     "side": "подъезды 1",
     "azimuth": 350,
     "status": "черновик",
-    "also_covers": "4-й Вятский переулок, дом 37 (подъезды 1)"
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5712497,
-     55.7999613
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.135",
-    "district": "Савеловский",
-    "address": "Петровско-Разумовский проезд, дом 20",
-    "unom": 19658,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 151,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5669867,
-     55.7998315
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.136",
-    "district": "Савеловский",
-    "address": "Старый Петровско-Разумовский проезд, дом 5-13",
-    "unom": 19681,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–5",
-    "azimuth": 60,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5595741,
-     55.799749
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.137",
-    "district": "Савеловский",
-    "address": "Петровско-Разумовский проезд, дом 20",
-    "unom": 19658,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 331,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5671001,
-     55.7997184
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.138",
-    "district": "Савеловский",
-    "address": "улица Юннатов, дом 6, корпус 1",
-    "unom": 30231,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 149,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5624079,
-     55.7996146
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.139",
-    "district": "Савеловский",
-    "address": "4-й Вятский переулок, дом 23",
-    "unom": 5087,
-    "role": "за подъездом 4",
-    "side": "подъезды 1–4",
-    "azimuth": 353,
-    "status": "черновик",
-    "also_covers": "Полтавская улица, дом 18 (подъезды 2–3)"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5742375,
-     55.7995855
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.140",
-    "district": "Савеловский",
-    "address": "Башиловская улица, дом 19",
-    "unom": 1596,
-    "role": "за подъездом 5",
-    "side": "подъезды 1–5",
-    "azimuth": 354,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5752415,
-     55.7995436
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.141",
-    "district": "Савеловский",
-    "address": "Бутырская улица, дом 21",
-    "unom": 3087,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–3",
-    "azimuth": 177,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5828939,
-     55.7994971
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.142",
-    "district": "Савеловский",
-    "address": "Петровско-Разумовский проезд, дом 18",
-    "unom": 19656,
-    "role": "за подъездом 5",
-    "side": "подъезды 1–5",
-    "azimuth": 151,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5673807,
-     55.7994155
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.143",
-    "district": "Савеловский",
-    "address": "Полтавская улица, дом 18",
-    "unom": 20496,
-    "role": "за подъездом 3",
-    "side": "подъезды 2–3",
-    "azimuth": 83,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5729207,
-     55.799368
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.144",
-    "district": "Савеловский",
-    "address": "Старый Петровско-Разумовский проезд, дом 15-17",
-    "unom": 19686,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–3",
-    "azimuth": 240,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5591048,
-     55.7993111
+     37.571186,
+     55.799974
     ]
    }
   },
@@ -2902,33 +746,14 @@
     "role": "за подъездом 2",
     "side": "подъезды 1–2",
     "azimuth": 173,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5688257,
-     55.7993032
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.146",
-    "district": "Савеловский",
-    "address": "Петровско-Разумовский проезд, дом 18А",
-    "unom": 19657,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–2",
-    "azimuth": 353,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5688841,
-     55.7990988
+     37.56889,
+     55.799326
     ]
    }
   },
@@ -2942,393 +767,14 @@
     "role": "за подъездом 2",
     "side": "подъезды 1–2",
     "azimuth": 174,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5732973,
-     55.79907
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.148",
-    "district": "Савеловский",
-    "address": "Башиловская улица, дом 17",
-    "unom": 74054,
-    "role": "за подъездом 2",
-    "side": "подъезды 1–2",
-    "azimuth": 174,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5753915,
-     55.7990469
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.149",
-    "district": "Савеловский",
-    "address": "улица Юннатов, дом 6, корпус 1",
-    "unom": 30231,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–3",
-    "azimuth": 329,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5631038,
-     55.7990185
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.150",
-    "district": "Савеловский",
-    "address": "Башиловская улица, дом 17",
-    "unom": 74054,
-    "role": "за подъездом 5",
-    "side": "подъезды 5–6",
-    "azimuth": 174,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5746991,
-     55.7990051
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.151",
-    "district": "Савеловский",
-    "address": "улица Верхняя Масловка, дом 28, корпус 2",
-    "unom": 340249,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 148,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5587333,
-     55.7989298
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.152",
-    "district": "Савеловский",
-    "address": "Башиловская улица, дом 17",
-    "unom": 74054,
-    "role": "за подъездом 3",
-    "side": "подъезды 3–4",
-    "azimuth": 264,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5756167,
-     55.7989289
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.153",
-    "district": "Савеловский",
-    "address": "улица Верхняя Масловка, дом 28, корпус 2",
-    "unom": 340249,
-    "role": "угол (тротуар вокруг дома)",
-    "side": "круговой тротуар",
-    "azimuth": 58,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5583596,
-     55.7987841
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.154",
-    "district": "Савеловский",
-    "address": "Бутырская улица, дом 21",
-    "unom": 3087,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 357,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5829719,
-     55.7987765
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.155",
-    "district": "Савеловский",
-    "address": "Башиловская улица, дом 17",
-    "unom": 74054,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–2",
-    "azimuth": 354,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5754459,
-     55.7987237
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.156",
-    "district": "Савеловский",
-    "address": "Петровско-Разумовский проезд, дом 16, корпус 2",
-    "unom": 19653,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–3",
-    "azimuth": 264,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5699926,
-     55.7987011
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.157",
-    "district": "Савеловский",
-    "address": "Башиловская улица, дом 17",
-    "unom": 74054,
-    "role": "за подъездом 6",
-    "side": "подъезды 5–6",
-    "azimuth": 354,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5747492,
-     55.7986824
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.158",
-    "district": "Савеловский",
-    "address": "улица Верхняя Масловка, дом 28, корпус 2",
-    "unom": 340249,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 328,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5590493,
-     55.7986708
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.159",
-    "district": "Савеловский",
-    "address": "Полтавская улица, дом 16, корпус 1",
-    "unom": 20494,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–2",
-    "azimuth": 354,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5733731,
-     55.7986481
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.160",
-    "district": "Савеловский",
-    "address": "Петровско-Разумовский проезд, дом 16, корпус 2",
-    "unom": 19653,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 84,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5685242,
-     55.7986157
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.161",
-    "district": "Савеловский",
-    "address": "Петровско-Разумовский проезд, дом 18",
-    "unom": 19656,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–5",
-    "azimuth": 331,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5682312,
-     55.798542
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.162",
-    "district": "Савеловский",
-    "address": "улица Верхняя Масловка, дом 28, корпус 2",
-    "unom": 340249,
-    "role": "угол (тротуар вокруг дома)",
-    "side": "круговой тротуар",
-    "azimuth": 328,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5586417,
-     55.798532
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.163",
-    "district": "Савеловский",
-    "address": "Мирской переулок, дом 4",
-    "unom": 14603,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–3",
-    "azimuth": 242,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5672645,
-     55.7983755
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.164",
-    "district": "Савеловский",
-    "address": "Петровско-Разумовский проезд, дом 16",
-    "unom": 19652,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–4",
-    "azimuth": 173,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5702768,
-     55.7982855
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.165",
-    "district": "Савеловский",
-    "address": "Писцовая улица, дом 16, корпус 4",
-    "unom": 19868,
-    "role": "за подъездом 4",
-    "side": "подъезды 1–4",
-    "azimuth": 174,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5708324,
-     55.7982365
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.166",
-    "district": "Савеловский",
-    "address": "Бутырская улица, дом 15",
-    "unom": 3085,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–3",
-    "azimuth": 177,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5830567,
-     55.797976
+     37.573359,
+     55.799076
     ]
    }
   },
@@ -3341,94 +787,15 @@
     "unom": 19863,
     "role": "за подъездом 5",
     "side": "подъезды 5",
-    "azimuth": 264,
-    "status": "черновик"
+    "azimuth": 259,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5750104,
-     55.7978812
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.168",
-    "district": "Савеловский",
-    "address": "Писцовая улица, дом 14",
-    "unom": 19863,
-    "role": "за подъездом 5",
-    "side": "подъезды 5",
-    "azimuth": 84,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5747501,
-     55.797873
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.169",
-    "district": "Савеловский",
-    "address": "Мишина улица, дом 39",
-    "unom": 14853,
-    "role": "за подъездом 4",
-    "side": "подъезды 1–4",
-    "azimuth": 148,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5609792,
-     55.7977953
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.170",
-    "district": "Савеловский",
-    "address": "Петровско-Разумовский проезд, дом 16",
-    "unom": 19652,
-    "role": "за подъездом 5",
-    "side": "подъезды 5–9",
-    "azimuth": 263,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5706333,
-     55.7977213
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.171",
-    "district": "Савеловский",
-    "address": "Петровско-Разумовский проезд, дом 16",
-    "unom": 19652,
-    "role": "за подъездом 9",
-    "side": "подъезды 5–9",
-    "azimuth": 83,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5690578,
-     55.7976441
+     37.575164,
+     55.797906
     ]
    }
   },
@@ -3441,34 +808,15 @@
     "unom": 1593,
     "role": "за подъездом 3",
     "side": "подъезды 3–4",
-    "azimuth": 84,
-    "status": "черновик"
+    "azimuth": 263,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5767832,
-     55.7976035
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.173",
-    "district": "Савеловский",
-    "address": "улица Верхняя Масловка, дом 24",
-    "unom": 13938,
-    "role": "за подъездом 2",
-    "side": "подъезды 2",
-    "azimuth": 149,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5599221,
-     55.7975739
+     37.577326,
+     55.797667
     ]
    }
   },
@@ -3482,53 +830,14 @@
     "role": "за подъездом 4",
     "side": "подъезды 1–4",
     "azimuth": 353,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5703621,
-     55.7975577
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.175",
-    "district": "Савеловский",
-    "address": "Башиловская улица, дом 13",
-    "unom": 1591,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–3",
-    "azimuth": 174,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5755909,
-     55.7975153
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.176",
-    "district": "Савеловский",
-    "address": "Писцовая улица, дом 9-11",
-    "unom": 19861,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–3",
-    "azimuth": 263,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5725513,
-     55.7973146
+     37.570296,
+     55.797713
     ]
    }
   },
@@ -3542,234 +851,14 @@
     "role": "за подъездом 1",
     "side": "подъезды 1–4",
     "azimuth": 328,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5615343,
-     55.7972769
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.178",
-    "district": "Савеловский",
-    "address": "Писцовая улица, дом 9-11",
-    "unom": 19861,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 83,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5719372,
-     55.7972661
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.179",
-    "district": "Савеловский",
-    "address": "Мирской переулок, дом 3",
-    "unom": 14602,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 175,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.566691,
-     55.7971967
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.180",
-    "district": "Савеловский",
-    "address": "улица Верхняя Масловка, дом 24",
-    "unom": 13938,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 239,
     "status": "черновик",
-    "also_covers": "улица Верхняя Масловка, дом 24 (подъезды 2)"
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5604876,
-     55.7971506
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.181",
-    "district": "Савеловский",
-    "address": "Бутырская улица, дом 15",
-    "unom": 3085,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 357,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5831602,
-     55.7971214
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.182",
-    "district": "Савеловский",
-    "address": "Башиловская улица, дом 13",
-    "unom": 1591,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 354,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5757217,
-     55.7970939
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.183",
-    "district": "Савеловский",
-    "address": "Петровско-Разумовский проезд, дом 13, корпус 1",
-    "unom": 19649,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 176,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5682189,
-     55.7970426
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.184",
-    "district": "Савеловский",
-    "address": "2-я улица Бебеля, дом 38, корпус 3",
-    "unom": 1613,
-    "role": "за подъездом 8",
-    "side": "подъезды 6–8",
-    "azimuth": 174,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5705085,
-     55.7970351
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.185",
-    "district": "Савеловский",
-    "address": "Полтавская улица, дом 39-41",
-    "unom": 20499,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 174,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5726928,
-     55.7969731
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.186",
-    "district": "Савеловский",
-    "address": "Мишина улица, дом 38",
-    "unom": 14852,
-    "role": "за подъездом 2",
-    "side": "подъезды 2",
-    "azimuth": 238,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.563327,
-     55.7969666
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.187",
-    "district": "Савеловский",
-    "address": "Петровско-Разумовский проезд, дом 13, корпус 2",
-    "unom": 19650,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 85,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5670423,
-     55.7969369
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.188",
-    "district": "Савеловский",
-    "address": "Башиловская улица, дом 10",
-    "unom": 1589,
-    "role": "за подъездом 7",
-    "side": "подъезды 1–7",
-    "azimuth": 174,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5769303,
-     55.7969289
+     37.561596,
+     55.797298
     ]
    }
   },
@@ -3783,33 +872,14 @@
     "role": "за подъездом 3",
     "side": "подъезды 1–3",
     "azimuth": 87,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5825063,
-     55.7968926
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.190",
-    "district": "Савеловский",
-    "address": "Бутырская улица, дом 19",
-    "unom": 3086,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–3",
-    "azimuth": 267,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5833431,
-     55.7968635
+     37.582538,
+     55.796946
     ]
    }
   },
@@ -3823,53 +893,14 @@
     "role": "за подъездом 4",
     "side": "подъезды 4–5",
     "azimuth": 328,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5629222,
-     55.7967649
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.192",
-    "district": "Савеловский",
-    "address": "Петровско-Разумовский проезд, дом 13, корпус 1",
-    "unom": 19649,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 356,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5682552,
-     55.7967262
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.193",
-    "district": "Савеловский",
-    "address": "Мишина улица, дом 34, корпус 1",
-    "unom": 14850,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–3",
-    "azimuth": 239,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5642952,
-     55.7966406
+     37.562766,
+     55.796896
     ]
    }
   },
@@ -3883,13 +914,14 @@
     "role": "за подъездом 4",
     "side": "подъезды 1–4",
     "azimuth": 174,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5752004,
-     55.7965019
+     37.575332,
+     55.796537
     ]
    }
   },
@@ -3902,135 +934,15 @@
     "unom": 19647,
     "role": "за подъездом 1",
     "side": "подъезды 1–3",
-    "azimuth": 177,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5675052,
-     55.7964769
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.196",
-    "district": "Савеловский",
-    "address": "Полтавская улица, дом 35",
-    "unom": 20498,
-    "role": "за подъездом 6",
-    "side": "подъезды 1–6",
-    "azimuth": 174,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5723772,
-     55.7964593
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.197",
-    "district": "Савеловский",
-    "address": "Бутырская улица, дом 11",
-    "unom": 3084,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–3",
-    "azimuth": 177,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5831647,
-     55.7963981
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.198",
-    "district": "Савеловский",
-    "address": "Башиловская улица, дом 10",
-    "unom": 1589,
-    "role": "середина фасада",
-    "side": "подъезды 1–7",
-    "azimuth": 354,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5770385,
-     55.7963733
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.199",
-    "district": "Савеловский",
-    "address": "Мишина улица, дом 34, корпус 1",
-    "unom": 14850,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 59,
+    "azimuth": 182,
     "status": "черновик",
-    "also_covers": "Мишина улица, дом 34, корпус 2 (подъезды 4–5)"
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5633357,
-     55.7963067
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.200",
-    "district": "Савеловский",
-    "address": "Башиловская улица, дом 9",
-    "unom": 1588,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–3",
-    "azimuth": 174,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5757031,
-     55.7961951
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.201",
-    "district": "Савеловский",
-    "address": "Петровско-Разумовский проезд, дом 11А",
-    "unom": 19647,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 357,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5675465,
-     55.7961124
+     37.567442,
+     55.796504
     ]
    }
   },
@@ -4044,53 +956,14 @@
     "role": "за подъездом 5",
     "side": "подъезды 1–5",
     "azimuth": 178,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5693928,
-     55.7961046
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.203",
-    "district": "Савеловский",
-    "address": "Мишина улица, дом 34, корпус 2",
-    "unom": 14851,
-    "role": "за подъездом 5",
-    "side": "подъезды 4–5",
-    "azimuth": 328,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5636141,
-     55.7960617
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.204",
-    "district": "Савеловский",
-    "address": "3-я улица Бебеля, дом 34",
-    "unom": 1615,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–4",
-    "azimuth": 354,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5753014,
-     55.7960063
+     37.56931,
+     55.796118
     ]
    }
   },
@@ -4104,13 +977,14 @@
     "role": "за подъездом 1",
     "side": "подъезды 1–4",
     "azimuth": 144,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5638118,
-     55.7959373
+     37.563827,
+     55.796023
     ]
    }
   },
@@ -4124,33 +998,14 @@
     "role": "за подъездом 1",
     "side": "подъезды 1–7",
     "azimuth": 354,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.577134,
-     55.7958917
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.207",
-    "district": "Савеловский",
-    "address": "Башиловская улица, дом 9",
-    "unom": 1588,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 354,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5757729,
-     55.7958217
+     37.577214,
+     55.7959
     ]
    }
   },
@@ -4163,54 +1018,15 @@
     "unom": 1614,
     "role": "за подъездом 7",
     "side": "подъезды 1–7",
-    "azimuth": 173,
-    "status": "черновик"
+    "azimuth": 353,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5707661,
-     55.7957354
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.209",
-    "district": "Савеловский",
-    "address": "Башиловская улица, дом 7",
-    "unom": 1586,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–4",
-    "azimuth": 174,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5759919,
-     55.7957265
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.210",
-    "district": "Савеловский",
-    "address": "Петровско-Разумовский проезд, дом 9, строение 1",
-    "unom": 19645,
-    "role": "за подъездом 2",
-    "side": "подъезды 1–2",
-    "azimuth": 178,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5679619,
-     55.7957205
+     37.570976,
+     55.794873
     ]
    }
   },
@@ -4224,193 +1040,14 @@
     "role": "за подъездом 4",
     "side": "подъезды 1–4",
     "azimuth": 173,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5754983,
-     55.7956946
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.212",
-    "district": "Савеловский",
-    "address": "Башиловская улица, дом 8",
-    "unom": 1587,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 174,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5770125,
-     55.7956943
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.213",
-    "district": "Савеловский",
-    "address": "Полтавская улица, дом 35",
-    "unom": 20498,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–6",
-    "azimuth": 354,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5725577,
-     55.7956196
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.214",
-    "district": "Савеловский",
-    "address": "Полтавская улица, дом 6",
-    "unom": 31235,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 264,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5743784,
-     55.7955983
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.215",
-    "district": "Савеловский",
-    "address": "Бутырская улица, дом 11",
-    "unom": 3084,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 357,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5833116,
-     55.7955888
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.216",
-    "district": "Савеловский",
-    "address": "улица Верхняя Масловка, дом 20",
-    "unom": 31389,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 238,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5627404,
-     55.7955868
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.217",
-    "district": "Савеловский",
-    "address": "Башиловская улица, дом 8",
-    "unom": 1587,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 354,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5770903,
-     55.7955733
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.218",
-    "district": "Савеловский",
-    "address": "Мишина улица, дом 29",
-    "unom": 14848,
-    "role": "за подъездом 4",
-    "side": "подъезды 1–4",
-    "azimuth": 143,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5634585,
-     55.7955677
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.219",
-    "district": "Савеловский",
-    "address": "Полтавская улица, дом 6",
-    "unom": 31235,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 84,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5737336,
-     55.7955608
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.220",
-    "district": "Савеловский",
-    "address": "Башиловская улица, дом 6",
-    "unom": 1585,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 175,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5768747,
-     55.7955558
+     37.575649,
+     55.795719
     ]
    }
   },
@@ -4424,134 +1061,14 @@
     "role": "за подъездом 1",
     "side": "подъезды 1–3",
     "azimuth": 174,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.572981,
-     55.7955085
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.222",
-    "district": "Савеловский",
-    "address": "Мишина улица, дом 28",
-    "unom": 14847,
-    "role": "за подъездом 4",
-    "side": "подъезды 1–4",
-    "azimuth": 324,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5645895,
-     55.7954395
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.223",
-    "district": "Савеловский",
-    "address": "2-я Квесисская улица, дом 22",
-    "unom": 9936,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 174,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5737777,
-     55.7953136
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.224",
-    "district": "Савеловский",
-    "address": "Петровско-Разумовский проезд, дом 12",
-    "unom": 19648,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–5",
-    "azimuth": 358,
     "status": "черновик",
-    "also_covers": "Петровско-Разумовский проезд, дом 10 (подъезды 1–4)"
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5694877,
-     55.7952966
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.225",
-    "district": "Савеловский",
-    "address": "2-я Квесисская улица, дом 24, корпус 2",
-    "unom": 9939,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 352,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5720945,
-     55.7952702
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.226",
-    "district": "Савеловский",
-    "address": "Петровско-Разумовский проезд, дом 9, строение 1",
-    "unom": 19645,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–2",
-    "azimuth": 358,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5680327,
-     55.7952689
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.227",
-    "district": "Савеловский",
-    "address": "Мишина улица, дом 22",
-    "unom": 14844,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 243,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5672997,
-     55.7952
+     37.572922,
+     55.795537
     ]
    }
   },
@@ -4565,154 +1082,14 @@
     "role": "за подъездом 4",
     "side": "подъезды 1–4",
     "azimuth": 354,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5760938,
-     55.7951882
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.229",
-    "district": "Савеловский",
-    "address": "2-я Квесисская улица, дом 9",
-    "unom": 9931,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–4",
-    "azimuth": 174,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5815413,
-     55.7951581
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.230",
-    "district": "Савеловский",
-    "address": "2-я Квесисская улица, дом 18",
-    "unom": 9934,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–4",
-    "azimuth": 353,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5756087,
-     55.7951539
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.231",
-    "district": "Савеловский",
-    "address": "Бутырская улица, дом 9, корпус 1",
-    "unom": 74019,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 263,
     "status": "черновик",
-    "also_covers": "Бутырская улица, дом 9, корпус 2 (подъезды 4–6)"
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5835808,
-     55.7951267
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.232",
-    "district": "Савеловский",
-    "address": "Полтавская улица, дом 33",
-    "unom": 20497,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 354,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5730275,
-     55.7951261
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.233",
-    "district": "Савеловский",
-    "address": "Мишина улица, дом 29",
-    "unom": 14848,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–4",
-    "azimuth": 323,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.564047,
-     55.7951158
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.234",
-    "district": "Савеловский",
-    "address": "Башиловская улица, дом 6",
-    "unom": 1585,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 355,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5769445,
-     55.7951129
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.235",
-    "district": "Савеловский",
-    "address": "Мишина улица, дом 16",
-    "unom": 14843,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 243,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5664671,
-     55.7951019
+     37.576079,
+     55.795175
     ]
    }
   },
@@ -4726,53 +1103,14 @@
     "role": "за подъездом 1",
     "side": "подъезды 1–4",
     "azimuth": 173,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5804584,
-     55.7951015
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.237",
-    "district": "Савеловский",
-    "address": "Бутырская улица, дом 9, корпус 1",
-    "unom": 74019,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–3",
-    "azimuth": 83,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5826194,
-     55.7950908
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.238",
-    "district": "Савеловский",
-    "address": "Мишина улица, дом 22",
-    "unom": 14844,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 63,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5668877,
-     55.7950733
+     37.580618,
+     55.795113
     ]
    }
   },
@@ -4785,34 +1123,15 @@
     "unom": 9936,
     "role": "за подъездом 1",
     "side": "подъезды 1",
-    "azimuth": 354,
-    "status": "черновик"
+    "azimuth": 71,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5738242,
-     55.795067
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.240",
-    "district": "Савеловский",
-    "address": "2-я Квесисская улица, дом 11",
-    "unom": 9932,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–4",
-    "azimuth": 174,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5808703,
-     55.7950435
+     37.573618,
+     55.795083
     ]
    }
   },
@@ -4825,34 +1144,15 @@
     "unom": 9929,
     "role": "за подъездом 4",
     "side": "подъезды 1–4",
-    "azimuth": 173,
-    "status": "черновик"
+    "azimuth": 174,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5798107,
-     55.7949695
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.242",
-    "district": "Савеловский",
-    "address": "Мишина улица, дом 12",
-    "unom": 14842,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–4",
-    "azimuth": 179,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5668399,
-     55.7949506
+     37.579898,
+     55.795033
     ]
    }
   },
@@ -4865,14 +1165,15 @@
     "unom": 9938,
     "role": "за подъездом 1",
     "side": "подъезды 1",
-    "azimuth": 354,
-    "status": "черновик"
+    "azimuth": 170,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5720909,
-     55.7949361
+     37.572016,
+     55.795152
     ]
    }
   },
@@ -4886,94 +1187,14 @@
     "role": "за подъездом 1",
     "side": "подъезды 1",
     "azimuth": 63,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5656152,
-     55.7948528
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.245",
-    "district": "Савеловский",
-    "address": "Башиловская улица, дом 3, корпус 1",
-    "unom": 1583,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–6",
-    "azimuth": 173,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.576203,
-     55.7947961
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.246",
-    "district": "Савеловский",
-    "address": "2-я улица Бебеля, дом 26",
-    "unom": 1614,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–7",
-    "azimuth": 353,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5708925,
-     55.7947918
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.247",
-    "district": "Савеловский",
-    "address": "Бутырская улица, дом 7",
-    "unom": 3081,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–4",
-    "azimuth": 173,
     "status": "черновик",
-    "also_covers": "Бутырская улица, дом 9, корпус 2 (подъезды 4–6)"
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5836559,
-     55.7947483
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.248",
-    "district": "Савеловский",
-    "address": "2-я Квесисская улица, дом 23",
-    "unom": 9937,
-    "role": "за подъездом 5",
-    "side": "подъезды 1–5",
-    "azimuth": 263,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5760773,
-     55.7946627
+     37.565615,
+     55.794897
     ]
    }
   },
@@ -4987,93 +1208,14 @@
     "role": "за подъездом 1",
     "side": "подъезды 1–4",
     "azimuth": 359,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
      37.569616,
-     55.7946295
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.250",
-    "district": "Савеловский",
-    "address": "2-я Квесисская улица, дом 23",
-    "unom": 9937,
-    "role": "середина фасада",
-    "side": "подъезды 1–5",
-    "azimuth": 83,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5749896,
-     55.7945871
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.251",
-    "district": "Савеловский",
-    "address": "Полтавская улица, дом 4",
-    "unom": 20493,
-    "role": "за подъездом 2",
-    "side": "подъезды 1–2",
-    "azimuth": 173,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5741731,
-     55.7945275
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.252",
-    "district": "Савеловский",
-    "address": "Мишина улица, дом 27",
-    "unom": 14846,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 324,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5642688,
-     55.7944866
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.253",
-    "district": "Савеловский",
-    "address": "Мишина улица, дом 23",
-    "unom": 14845,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–3",
-    "azimuth": 234,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5650091,
-     55.7944667
+     55.794629
     ]
    }
   },
@@ -5087,33 +1229,14 @@
     "role": "за подъездом 4",
     "side": "подъезды 1–4",
     "azimuth": 354,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5816839,
-     55.7944615
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.255",
-    "district": "Савеловский",
-    "address": "2-я Квесисская улица, дом 15",
-    "unom": 9929,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–4",
-    "azimuth": 353,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5799255,
-     55.7944292
+     37.581633,
+     55.794476
     ]
    }
   },
@@ -5127,53 +1250,14 @@
     "role": "за подъездом 4",
     "side": "подъезды 1–4",
     "azimuth": 354,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5809905,
-     55.7944232
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.257",
-    "district": "Савеловский",
-    "address": "1-я улица Бебеля, дом 7",
-    "unom": 1609,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–4",
-    "azimuth": 172,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5716887,
-     55.7943981
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.258",
-    "district": "Савеловский",
-    "address": "2-я Квесисская улица, дом 13",
-    "unom": 9933,
-    "role": "за подъездом 4",
-    "side": "подъезды 1–4",
-    "azimuth": 353,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5806212,
-     55.7943928
+     37.580847,
+     55.794417
     ]
    }
   },
@@ -5187,33 +1271,14 @@
     "role": "за подъездом 4",
     "side": "подъезды 1–4",
     "azimuth": 173,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5712195,
-     55.7943618
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.260",
-    "district": "Савеловский",
-    "address": "Вятская улица, дом 16",
-    "unom": 5076,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 174,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5829327,
-     55.7943503
+     37.571388,
+     55.794402
     ]
    }
   },
@@ -5227,24 +1292,3305 @@
     "role": "за подъездом 1",
     "side": "подъезды 1",
     "azimuth": 263,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5733191,
-     55.7943013
+     37.573381,
+     55.794338
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т12.262",
+    "point_no": "Т12.269",
+    "district": "Савеловский",
+    "address": "Мишина улица, дом 4",
+    "unom": 14841,
+    "role": "за подъездом 1",
+    "side": "подъезды 1",
+    "azimuth": 181,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.567357,
+     55.794096
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.272",
+    "district": "Савеловский",
+    "address": "улица Верхняя Масловка, дом 16",
+    "unom": 13934,
+    "role": "за подъездом 1",
+    "side": "подъезды 1",
+    "azimuth": 54,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563889,
+     55.793993
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.276",
+    "district": "Савеловский",
+    "address": "1-я улица Бебеля, дом 7",
+    "unom": 1609,
+    "role": "за подъездом 4",
+    "side": "подъезды 1–4",
+    "azimuth": 352,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.57156,
+     55.79384
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.287",
+    "district": "Савеловский",
+    "address": "улица Верхняя Масловка, дом 12",
+    "unom": 31716,
+    "role": "за подъездом 1",
+    "side": "подъезды 1–4",
+    "azimuth": 34,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.56539,
+     55.793442
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.299",
+    "district": "Савеловский",
+    "address": "1-я улица Бебеля, дом 3А",
+    "unom": 1608,
+    "role": "за подъездом 4",
+    "side": "подъезды 1–4",
+    "azimuth": 174,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.571683,
+     55.793102
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.300",
+    "district": "Савеловский",
+    "address": "улица Нижняя Масловка, дом 6, корпус 2",
+    "unom": 13951,
+    "role": "за подъездом 1",
+    "side": "подъезды 1",
+    "azimuth": 304,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.581128,
+     55.792997
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.306",
+    "district": "Савеловский",
+    "address": "Петровско-Разумовский проезд, дом 4",
+    "unom": 19638,
+    "role": "за подъездом 3",
+    "side": "подъезды 1–3",
+    "azimuth": 173,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.57015,
+     55.792859
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.308",
+    "district": "Савеловский",
+    "address": "Полтавская улица, дом 2",
+    "unom": 20492,
+    "role": "середина фасада",
+    "side": "подъезды 1–6",
+    "azimuth": 354,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.574754,
+     55.792283
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.309",
+    "district": "Савеловский",
+    "address": "1-я улица Бебеля, дом 3",
+    "unom": 1607,
+    "role": "за подъездом 4",
+    "side": "подъезды 1–4",
+    "azimuth": 353,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.571925,
+     55.792492
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.315",
+    "district": "Савеловский",
+    "address": "Башиловская улица, дом 1, корпус 1",
+    "unom": 1581,
+    "role": "за подъездом 6",
+    "side": "подъезды 1–6",
+    "azimuth": 353,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.576615,
+     55.792275
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.324",
+    "district": "Савеловский",
+    "address": "улица Нижняя Масловка, дом 18",
+    "unom": 13958,
+    "role": "за подъездом 1",
+    "side": "подъезды 1–4",
+    "azimuth": 266,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.572503,
+     55.792042
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.325",
+    "district": "Савеловский",
+    "address": "улица Верхняя Масловка, дом 2",
+    "unom": 13924,
+    "role": "за подъездом 1",
+    "side": "подъезды 1",
+    "azimuth": 353,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.568907,
+     55.792006
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.330",
+    "district": "Савеловский",
+    "address": "улица Юннатов, дом 15, корпус 1",
+    "unom": 30237,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 323,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.556071,
+     55.801133
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.331",
+    "district": "Савеловский",
+    "address": "улица Юннатов, дом 15, корпус 1",
+    "unom": 30237,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 234,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.555724,
+     55.801612
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.335",
+    "district": "Савеловский",
+    "address": "улица Юннатов, дом 15, корпус 1",
+    "unom": 30237,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 58,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.556889,
+     55.802275
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.337",
+    "district": "Савеловский",
+    "address": "улица Юннатов, дом 15, корпус 1",
+    "unom": 30237,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 327,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.557889,
+     55.802674
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.341",
+    "district": "Савеловский",
+    "address": "улица Верхняя Масловка, дом 28, корпус 2",
+    "unom": 340249,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 142,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.558241,
+     55.79998
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.342",
+    "district": "Савеловский",
+    "address": "улица Верхняя Масловка, дом 28, корпус 2",
+    "unom": 340249,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 62,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.557223,
+     55.79958
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.345",
+    "district": "Савеловский",
+    "address": "улица Верхняя Масловка, дом 28, корпус 2",
+    "unom": 340249,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 331,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559605,
+     55.799176
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.346",
+    "district": "Савеловский",
+    "address": "улица Верхняя Масловка, дом 28, корпус 2",
+    "unom": 340249,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 155,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.558956,
+     55.799536
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.347",
+    "district": "Савеловский",
+    "address": "улица Верхняя Масловка, дом 28, корпус 2",
+    "unom": 340249,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 147,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562446,
+     55.799422
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.349",
+    "district": "Савеловский",
+    "address": "улица Верхняя Масловка, дом 28, корпус 2",
+    "unom": 340249,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 54,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562886,
+     55.799436
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.352",
+    "district": "Савеловский",
+    "address": "Мишина улица, дом 38",
+    "unom": 14852,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 329,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560471,
+     55.797182
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.355",
+    "district": "Савеловский",
+    "address": "Мишина улица, дом 29",
+    "unom": 14848,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 61,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562205,
+     55.795407
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.356",
+    "district": "Савеловский",
+    "address": "Мишина улица, дом 27",
+    "unom": 14846,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 55,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564371,
+     55.794099
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.359",
+    "district": "Савеловский",
+    "address": "улица Верхняя Масловка, дом 6",
+    "unom": 13928,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 59,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.567568,
+     55.792643
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.360",
+    "district": "Савеловский",
+    "address": "улица Верхняя Масловка, дом 6",
+    "unom": 13928,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 81,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.568569,
+     55.792813
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.361",
+    "district": "Савеловский",
+    "address": "Петровско-Разумовский проезд, дом 8",
+    "unom": 19643,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 352,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.570125,
+     55.79195
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.363",
+    "district": "Савеловский",
+    "address": "Петровско-Разумовский проезд, дом 8",
+    "unom": 19643,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 175,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.570491,
+     55.792339
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.364",
+    "district": "Савеловский",
+    "address": "2-я улица Бебеля, дом 26",
+    "unom": 1614,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 262,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.571685,
+     55.795746
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.365",
+    "district": "Савеловский",
+    "address": "Башиловская улица, дом 9",
+    "unom": 1588,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 170,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.574862,
+     55.795673
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.366",
+    "district": "Савеловский",
+    "address": "Башиловская улица, дом 9",
+    "unom": 1588,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 196,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.574536,
+     55.79558
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.370",
+    "district": "Савеловский",
+    "address": "Полтавская улица, дом 4",
+    "unom": 20493,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 28,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.574708,
+     55.794994
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.373",
+    "district": "Савеловский",
+    "address": "Башиловская улица, дом 13",
+    "unom": 1591,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 353,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.576884,
+     55.79732
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.374",
+    "district": "Савеловский",
+    "address": "Башиловская улица, дом 17",
+    "unom": 74054,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 353,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.57375,
+     55.798663
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.377",
+    "district": "Савеловский",
+    "address": "Полтавская улица, дом 47, корпус 1",
+    "unom": 74122,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 83,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.57323,
+     55.799375
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.378",
+    "district": "Савеловский",
+    "address": "Полтавская улица, дом 47, корпус 1",
+    "unom": 74122,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 351,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.573232,
+     55.799375
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.379",
+    "district": "Савеловский",
+    "address": "Башиловская улица, дом 19",
+    "unom": 1596,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 351,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.574198,
+     55.799584
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.384",
+    "district": "Савеловский",
+    "address": "2-я Хуторская улица, дом 19, корпус 1",
+    "unom": 28180,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 244,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.573926,
+     55.805745
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.385",
+    "district": "Савеловский",
+    "address": "Вятская улица, дом 51",
+    "unom": 5079,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 346,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.581843,
+     55.804624
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.387",
+    "district": "Савеловский",
+    "address": "Бутырская улица, дом 65/68",
+    "unom": 3092,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 172,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.582666,
+     55.801963
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.389",
+    "district": "Савеловский",
+    "address": "Бутырская улица, дом 3",
+    "unom": 3075,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 351,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.583899,
+     55.793497
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.391",
+    "district": "Савеловский",
+    "address": "Петровско-Разумовский проезд, дом 24, корпус 2",
+    "unom": 19671,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 148,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.566269,
+     55.802772
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.392",
+    "district": "Савеловский",
+    "address": "Петровско-Разумовский проезд, дом 24, корпус 4",
+    "unom": 19673,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 152,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5644,
+     55.803007
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.396",
+    "district": "Савеловский",
+    "address": "Петровско-Разумовский проезд, дом 24, корпус 4",
+    "unom": 19673,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 142,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.56606,
+     55.80367
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.401",
+    "district": "Савеловский",
+    "address": "Вятская улица, дом 51",
+    "unom": 5079,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 78,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.580967,
+     55.805051
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.402",
+    "district": "Савеловский",
+    "address": "Вятская улица, дом 51",
+    "unom": 5079,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 349,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.582262,
+     55.80471
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.404",
+    "district": "Савеловский",
+    "address": "Башиловская улица, дом 9",
+    "unom": 1588,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 83,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.576727,
+     55.795565
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.406",
+    "district": "Савеловский",
+    "address": "2-я Квесисская улица, дом 23",
+    "unom": 9937,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 33,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.576804,
+     55.795204
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.408",
+    "district": "Савеловский",
+    "address": "Мишина улица, дом 29",
+    "unom": 14848,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 67,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565006,
+     55.795448
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.410",
+    "district": "Савеловский",
+    "address": "Мишина улица, дом 22",
+    "unom": 14844,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 269,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.56621,
+     55.795835
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.411",
+    "district": "Савеловский",
+    "address": "Мишина улица, дом 29",
+    "unom": 14848,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 61,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.56482,
+     55.795663
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.417",
+    "district": "Савеловский",
+    "address": "Мирской переулок, дом 3",
+    "unom": 14602,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 61,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.566468,
+     55.797418
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.418",
+    "district": "Савеловский",
+    "address": "Петровско-Разумовский проезд, дом 16",
+    "unom": 19652,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 242,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.567772,
+     55.797824
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.419",
+    "district": "Савеловский",
+    "address": "Петровско-Разумовский проезд, дом 16",
+    "unom": 19652,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 153,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.568688,
+     55.798072
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.420",
+    "district": "Савеловский",
+    "address": "Петровско-Разумовский проезд, дом 16",
+    "unom": 19652,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 151,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.568541,
+     55.798496
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.422",
+    "district": "Савеловский",
+    "address": "Петровско-Разумовский проезд, дом 16",
+    "unom": 19652,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 81,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.56894,
+     55.798621
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.425",
+    "district": "Савеловский",
+    "address": "Писцовая улица, дом 16, корпус 4",
+    "unom": 19868,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 178,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.571338,
+     55.798363
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.426",
+    "district": "Савеловский",
+    "address": "2-я улица Бебеля, дом 38, корпус 3",
+    "unom": 1613,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 354,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.570919,
+     55.797604
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.427",
+    "district": "Савеловский",
+    "address": "Писцовая улица, дом 9-11",
+    "unom": 19861,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 352,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.571489,
+     55.797633
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.428",
+    "district": "Савеловский",
+    "address": "Писцовая улица, дом 9-11",
+    "unom": 19861,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 352,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.572016,
+     55.797675
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.429",
+    "district": "Савеловский",
+    "address": "Писцовая улица, дом 16, корпус 4",
+    "unom": 19868,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 173,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.571841,
+     55.798439
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.430",
+    "district": "Савеловский",
+    "address": "Полтавская улица, дом 47, корпус 1",
+    "unom": 74122,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 170,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.572357,
+     55.798468
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.431",
+    "district": "Савеловский",
+    "address": "Писцовая улица, дом 9-11",
+    "unom": 19861,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 354,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.572514,
+     55.797712
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.432",
+    "district": "Савеловский",
+    "address": "Полтавская улица, дом 47, корпус 1",
+    "unom": 74122,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 352,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.572368,
+     55.798516
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.433",
+    "district": "Савеловский",
+    "address": "Полтавская улица, дом 47, корпус 1",
+    "unom": 74122,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 90,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.571771,
+     55.798818
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.435",
+    "district": "Савеловский",
+    "address": "Полтавская улица, дом 47, корпус 1",
+    "unom": 74122,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 89,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.571264,
+     55.799304
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.438",
+    "district": "Савеловский",
+    "address": "4-й Вятский переулок, дом 37",
+    "unom": 5090,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 172,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.570707,
+     55.799526
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.441",
+    "district": "Савеловский",
+    "address": "4-й Вятский переулок, дом 27",
+    "unom": 5088,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 264,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.572314,
+     55.79995
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.442",
+    "district": "Савеловский",
+    "address": "4-й Вятский переулок, дом 37",
+    "unom": 5090,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 171,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.571445,
+     55.799861
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.444",
+    "district": "Савеловский",
+    "address": "4-й Вятский переулок, дом 20",
+    "unom": 5083,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 81,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.571048,
+     55.800755
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.446",
+    "district": "Савеловский",
+    "address": "4-й Вятский переулок, дом 20",
+    "unom": 5083,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 266,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.571681,
+     55.801179
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.448",
+    "district": "Савеловский",
+    "address": "4-й Вятский переулок, дом 20",
+    "unom": 5083,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 262,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.570824,
+     55.801354
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.452",
+    "district": "Савеловский",
+    "address": "4-й Вятский переулок, дом 20",
+    "unom": 5083,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 84,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.569879,
+     55.801506
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.456",
+    "district": "Савеловский",
+    "address": "4-й Вятский переулок, дом 20",
+    "unom": 5083,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 86,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.56966,
+     55.802142
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.457",
+    "district": "Савеловский",
+    "address": "4-й Вятский переулок, дом 24, корпус 3",
+    "unom": 19666,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 331,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.569125,
+     55.802158
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.460",
+    "district": "Савеловский",
+    "address": "Башиловская улица, дом 23, корпус 3",
+    "unom": 1600,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 339,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.572049,
+     55.802778
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.461",
+    "district": "Савеловский",
+    "address": "Башиловская улица, дом 25",
+    "unom": 28162,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 160,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.572498,
+     55.803571
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.462",
+    "district": "Савеловский",
+    "address": "Башиловская улица, дом 25",
+    "unom": 28162,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 265,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.573282,
+     55.803153
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.464",
+    "district": "Савеловский",
+    "address": "улица Верхняя Масловка, дом 28, корпус 2",
+    "unom": 340249,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 144,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562068,
+     55.798758
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.465",
+    "district": "Савеловский",
+    "address": "Мишина улица, дом 34, корпус 1",
+    "unom": 14850,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 150,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.56551,
+     55.796865
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.466",
+    "district": "Савеловский",
+    "address": "2-я Хуторская улица, дом 19, корпус 1",
+    "unom": 28180,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 74,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.574924,
+     55.804732
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.470",
+    "district": "Савеловский",
+    "address": "1-я Хуторская улица, дом 10, корпус 2",
+    "unom": 28186,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 162,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.577686,
+     55.805742
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.473",
+    "district": "Савеловский",
+    "address": "Вятская улица, дом 51",
+    "unom": 5079,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 253,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.579145,
+     55.806109
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.474",
+    "district": "Савеловский",
+    "address": "Вятская улица, дом 51",
+    "unom": 5079,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 338,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.580906,
+     55.806137
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.476",
+    "district": "Савеловский",
+    "address": "улица Верхняя Масловка, дом 28, корпус 2",
+    "unom": 340249,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 64,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.557063,
+     55.799939
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.477",
+    "district": "Савеловский",
+    "address": "Петровско-Разумовский проезд, дом 20",
+    "unom": 19658,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 326,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.566623,
+     55.800615
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.478",
+    "district": "Савеловский",
+    "address": "1-я Хуторская улица, дом 10, корпус 2",
+    "unom": 28186,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 161,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.576748,
+     55.805379
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.479",
+    "district": "Савеловский",
+    "address": "2-я Хуторская улица, дом 19, корпус 1",
+    "unom": 28180,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 158,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.573563,
+     55.805371
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.480",
+    "district": "Савеловский",
+    "address": "2-я Хуторская улица, дом 19, корпус 1",
+    "unom": 28180,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 68,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.574475,
+     55.806762
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.481",
+    "district": "Савеловский",
+    "address": "Вятская улица, дом 51",
+    "unom": 5079,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 159,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.579408,
+     55.805791
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.482",
+    "district": "Савеловский",
+    "address": "4-й Вятский переулок, дом 20",
+    "unom": 5083,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 329,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.569619,
+     55.802318
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.483",
+    "district": "Савеловский",
+    "address": "Петровско-Разумовский проезд, дом 24, корпус 2",
+    "unom": 19671,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 311,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.567212,
+     55.802987
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.484",
+    "district": "Савеловский",
+    "address": "улица Юннатов, дом 14",
+    "unom": 30236,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 153,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.561649,
+     55.800303
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.486",
+    "district": "Савеловский",
+    "address": "Башиловская улица, дом 13",
+    "unom": 1591,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 173,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.575447,
+     55.797036
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.487",
+    "district": "Савеловский",
+    "address": "Мирской переулок, дом 3",
+    "unom": 14602,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 249,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.567273,
+     55.798166
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.488",
+    "district": "Савеловский",
+    "address": "Мирской переулок, дом 3",
+    "unom": 14602,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 60,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565438,
+     55.797618
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.489",
+    "district": "Савеловский",
+    "address": "Мирской переулок, дом 3",
+    "unom": 14602,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 243,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565316,
+     55.798136
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.490",
+    "district": "Савеловский",
+    "address": "Мишина улица, дом 34, корпус 1",
+    "unom": 14850,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 333,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564752,
+     55.797388
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.491",
+    "district": "Савеловский",
+    "address": "Мишина улица, дом 38",
+    "unom": 14852,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 327,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.561488,
+     55.796174
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.3001",
+    "district": "Савеловский",
+    "address": "Бутырская улица, дом 95",
+    "unom": 3104,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 1",
+    "azimuth": 161,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.580147,
+     55.8075915
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.3002",
+    "district": "Савеловский",
+    "address": "Бутырская улица, дом 97",
+    "unom": 3105,
+    "role": "за подъездом 2",
+    "side": "подъезды 2–6",
+    "azimuth": 71,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5787062,
+     55.8072619
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.3003",
+    "district": "Савеловский",
+    "address": "Вятская улица, дом 53",
+    "unom": 5080,
+    "role": "за подъездом 1",
+    "side": "подъезды 1–4",
+    "azimuth": 161,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5791058,
+     55.8068763
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.3004",
+    "district": "Савеловский",
+    "address": "Бутырская улица, дом 89, корпус 2",
+    "unom": 3101,
+    "role": "за подъездом 1",
+    "side": "подъезды 1–4",
+    "azimuth": 161,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5798783,
+     55.8068221
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.3005",
+    "district": "Савеловский",
+    "address": "2-я Хуторская улица, дом 11",
+    "unom": 28176,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 1",
+    "azimuth": 252,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5779259,
+     55.8067023
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.3006",
+    "district": "Савеловский",
+    "address": "Вятская улица, дом 51",
+    "unom": 5079,
+    "role": "за подъездом 1",
+    "side": "подъезды 1–4",
+    "azimuth": 162,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5795918,
+     55.8060257
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.3007",
+    "district": "Савеловский",
+    "address": "2-я Хуторская улица, дом 19, корпус 1",
+    "unom": 28180,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 1–2",
+    "azimuth": 72,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5742535,
+     55.8058205
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.3008",
+    "district": "Савеловский",
+    "address": "1-я Хуторская улица, дом 10, корпус 2",
+    "unom": 28186,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 1–2",
+    "azimuth": 342,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5782877,
+     55.8052753
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.3009",
+    "district": "Савеловский",
+    "address": "2-я Хуторская улица, дом 27",
+    "unom": 28183,
+    "role": "за подъездом 6",
+    "side": "подъезды 1–6",
+    "azimuth": 72,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5703316,
+     55.8052605
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.3010",
+    "district": "Савеловский",
+    "address": "Башиловская улица, дом 25",
+    "unom": 28162,
+    "role": "за подъездом 1",
+    "side": "подъезды 1–4",
+    "azimuth": 162,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5733015,
+     55.8036237
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.3011",
+    "district": "Савеловский",
+    "address": "Петровско-Разумовский проезд, дом 24, корпус 4",
+    "unom": 19673,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 12–13",
+    "azimuth": 333,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564154,
+     55.8029647
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.3012",
+    "district": "Савеловский",
+    "address": "Петровско-Разумовский проезд, дом 24, корпус 2",
+    "unom": 19671,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 5–6",
+    "azimuth": 242,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5657996,
+     55.8023013
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.3013",
+    "district": "Савеловский",
+    "address": "улица Юннатов, дом 15, корпус 1",
+    "unom": 30237,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 1–3",
+    "azimuth": 148,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5582875,
+     55.8021199
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.3014",
+    "district": "Савеловский",
+    "address": "Башиловская улица, дом 23, корпус 3",
+    "unom": 1600,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 1",
+    "azimuth": 89,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.572565,
+     55.8019742
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.3015",
+    "district": "Савеловский",
+    "address": "Башиловская улица, дом 23, корпус 2",
+    "unom": 1599,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 1–2",
+    "azimuth": 178,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5735715,
+     55.8018894
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.3016",
+    "district": "Савеловский",
+    "address": "улица Юннатов, дом 14",
+    "unom": 30236,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 1–2",
+    "azimuth": 148,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5600658,
+     55.8018647
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.3017",
+    "district": "Савеловский",
+    "address": "Башиловская улица, дом 21",
+    "unom": 1597,
+    "role": "за подъездом 1",
+    "side": "подъезды 1–4",
+    "azimuth": 163,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5741942,
+     55.8017436
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.3018",
+    "district": "Савеловский",
+    "address": "1-я Хуторская улица, дом 2, корпус 1",
+    "unom": 19662,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 15–17",
+    "azimuth": 241,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5661684,
+     55.8016822
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.3019",
+    "district": "Савеловский",
+    "address": "Бутырская улица, дом 65/68",
+    "unom": 3092,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 1–2",
+    "azimuth": 84,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5819646,
+     55.8015985
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.3020",
+    "district": "Савеловский",
+    "address": "4-й Вятский переулок, дом 24, корпус 3",
+    "unom": 19666,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 1–3",
+    "azimuth": 150,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5674594,
+     55.8015119
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.3021",
+    "district": "Савеловский",
+    "address": "4-й Вятский переулок, дом 20",
+    "unom": 5083,
+    "role": "за подъездом 4",
+    "side": "подъезды 1–4",
+    "azimuth": 171,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5702972,
+     55.8011839
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.3022",
+    "district": "Савеловский",
+    "address": "4-й Вятский переулок, дом 24, корпус 2",
+    "unom": 19665,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 4–6",
+    "azimuth": 150,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5680572,
+     55.8009177
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.3023",
+    "district": "Савеловский",
+    "address": "4-й Вятский переулок, дом 27",
+    "unom": 5088,
+    "role": "за подъездом 4",
+    "side": "подъезды 1–4",
+    "azimuth": 83,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5727627,
+     55.8004674
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.3024",
+    "district": "Савеловский",
+    "address": "4-й Вятский переулок, дом 20",
+    "unom": 5083,
+    "role": "за подъездом 1",
+    "side": "подъезды 1–4",
+    "azimuth": 351,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5704945,
+     55.8004386
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.3025",
+    "district": "Савеловский",
+    "address": "Петровско-Разумовский проезд, дом 20",
+    "unom": 19658,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 1",
+    "azimuth": 151,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5670827,
+     55.7998619
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.3026",
+    "district": "Савеловский",
+    "address": "4-й Вятский переулок, дом 37",
+    "unom": 5090,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 1",
+    "azimuth": 352,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5710458,
+     55.7998564
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.3027",
+    "district": "Савеловский",
+    "address": "Петровско-Разумовский проезд, дом 18",
+    "unom": 19656,
+    "role": "за подъездом 5",
+    "side": "подъезды 1–5",
+    "azimuth": 151,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5674437,
+     55.7994352
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.3028",
+    "district": "Савеловский",
+    "address": "Башиловская улица, дом 19",
+    "unom": 1596,
+    "role": "за подъездом 5",
+    "side": "подъезды 1–5",
+    "azimuth": 354,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5751597,
+     55.7993759
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.3029",
+    "district": "Савеловский",
+    "address": "Полтавская улица, дом 47, корпус 1",
+    "unom": 74122,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 288,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5717219,
+     55.7991125
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.3030",
+    "district": "Савеловский",
+    "address": "Бутырская улица, дом 21",
+    "unom": 3087,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 1–3",
+    "azimuth": 357,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.582861,
+     55.7987728
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.3031",
+    "district": "Савеловский",
+    "address": "Башиловская улица, дом 17",
+    "unom": 74054,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 1–2",
+    "azimuth": 354,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5753279,
+     55.7987172
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.3032",
+    "district": "Савеловский",
+    "address": "улица Верхняя Масловка, дом 28, корпус 2",
+    "unom": 340249,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 1",
+    "azimuth": 328,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5591036,
+     55.7986901
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.3033",
+    "district": "Савеловский",
+    "address": "Петровско-Разумовский проезд, дом 16",
+    "unom": 19652,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 15",
+    "azimuth": 240,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5690401,
+     55.7985612
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.3034",
+    "district": "Савеловский",
+    "address": "Петровско-Разумовский проезд, дом 16",
+    "unom": 19652,
+    "role": "за подъездом 1",
+    "side": "подъезды 1–4",
+    "azimuth": 173,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5700944,
+     55.7982729
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.3035",
+    "district": "Савеловский",
+    "address": "Писцовая улица, дом 16, корпус 4",
+    "unom": 19868,
+    "role": "за подъездом 4",
+    "side": "подъезды 1–4",
+    "azimuth": 174,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5707451,
+     55.7982311
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.3036",
+    "district": "Савеловский",
+    "address": "Бутырская улица, дом 15",
+    "unom": 3085,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 1–3",
+    "azimuth": 177,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5829654,
+     55.7979729
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.3037",
+    "district": "Савеловский",
+    "address": "Петровско-Разумовский проезд, дом 16",
+    "unom": 19652,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 10–11, 13",
+    "azimuth": 332,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5691922,
+     55.7976458
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.3038",
+    "district": "Савеловский",
+    "address": "Башиловская улица, дом 13",
+    "unom": 1591,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 1–3",
+    "azimuth": 174,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5755584,
+     55.7975135
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.3039",
+    "district": "Савеловский",
+    "address": "Писцовая улица, дом 9-11",
+    "unom": 19861,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 1–3",
+    "azimuth": 263,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.572533,
+     55.7974052
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.3040",
+    "district": "Савеловский",
+    "address": "Мирской переулок, дом 3",
+    "unom": 14602,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 1",
+    "azimuth": 175,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5666279,
+     55.7971936
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.3041",
+    "district": "Савеловский",
+    "address": "2-я улица Бебеля, дом 38, корпус 3",
+    "unom": 1613,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 6–8",
+    "azimuth": 174,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5705853,
+     55.7970127
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.3042",
+    "district": "Савеловский",
+    "address": "Мишина улица, дом 38",
+    "unom": 14852,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 2",
+    "azimuth": 238,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5633091,
+     55.7969827
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.3043",
+    "district": "Савеловский",
+    "address": "Полтавская улица, дом 39-41",
+    "unom": 20499,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 1–3",
+    "azimuth": 174,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5725736,
+     55.7969659
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.3044",
+    "district": "Савеловский",
+    "address": "Петровско-Разумовский проезд, дом 13, корпус 2",
+    "unom": 19650,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 1",
+    "azimuth": 85,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.567041,
+     55.7969459
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.3045",
+    "district": "Савеловский",
+    "address": "Мишина улица, дом 38",
+    "unom": 14852,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 4–5",
+    "azimuth": 328,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5629971,
+     55.7968237
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.3046",
+    "district": "Савеловский",
+    "address": "Мишина улица, дом 34, корпус 1",
+    "unom": 14850,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 1–3",
+    "azimuth": 239,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564347,
+     55.7965925
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.3047",
+    "district": "Савеловский",
+    "address": "Полтавская улица, дом 35",
+    "unom": 20498,
+    "role": "за подъездом 6",
+    "side": "подъезды 1–6",
+    "azimuth": 174,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5722853,
+     55.7964537
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.3048",
+    "district": "Савеловский",
+    "address": "Бутырская улица, дом 11",
+    "unom": 3084,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 1–3",
+    "azimuth": 177,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5831264,
+     55.7963971
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.3049",
+    "district": "Савеловский",
+    "address": "Башиловская улица, дом 9",
+    "unom": 1588,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 1–3",
+    "azimuth": 174,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5756066,
+     55.7961892
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.3050",
+    "district": "Савеловский",
+    "address": "Мишина улица, дом 29",
+    "unom": 14848,
+    "role": "за подъездом 4",
+    "side": "подъезды 1–4",
+    "azimuth": 143,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5633281,
+     55.7957455
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.3051",
+    "district": "Савеловский",
+    "address": "2-я улица Бебеля, дом 26",
+    "unom": 1614,
+    "role": "за подъездом 7",
+    "side": "подъезды 1–7",
+    "azimuth": 173,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5708086,
+     55.7957383
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.3052",
+    "district": "Савеловский",
+    "address": "2-я Квесисская улица, дом 24, корпус 2",
+    "unom": 9939,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 1",
+    "azimuth": 352,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5720879,
+     55.795297
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.3053",
+    "district": "Савеловский",
+    "address": "Петровско-Разумовский проезд, дом 9, строение 1",
+    "unom": 19645,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 1–2",
+    "azimuth": 358,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5680945,
+     55.7952659
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.3054",
+    "district": "Савеловский",
+    "address": "Мишина улица, дом 22",
+    "unom": 14844,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 1",
+    "azimuth": 243,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5673365,
+     55.7951774
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.3055",
+    "district": "Савеловский",
+    "address": "Мишина улица, дом 29",
+    "unom": 14848,
+    "role": "за подъездом 1",
+    "side": "подъезды 1–4",
+    "azimuth": 323,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5641666,
+     55.7951659
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.3056",
+    "district": "Савеловский",
+    "address": "Бутырская улица, дом 7",
+    "unom": 3081,
+    "role": "за подъездом 1",
+    "side": "подъезды 1–4",
+    "azimuth": 173,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5835652,
+     55.7947602
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.3057",
+    "district": "Савеловский",
+    "address": "2-я Квесисская улица, дом 23",
+    "unom": 9937,
+    "role": "за подъездом 5",
+    "side": "подъезды 1–5",
+    "azimuth": 263,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.57609,
+     55.7946509
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.3058",
+    "district": "Савеловский",
+    "address": "Полтавская улица, дом 4",
+    "unom": 20493,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 1–2",
+    "azimuth": 173,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.574296,
+     55.7945364
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.3059",
+    "district": "Савеловский",
+    "address": "Мишина улица, дом 27",
+    "unom": 14846,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 1",
+    "azimuth": 324,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5641729,
+     55.7944478
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т12.3060",
     "district": "Савеловский",
     "address": "Башиловская улица, дом 3, корпус 2",
     "unom": 1584,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1",
     "azimuth": 173,
     "status": "черновик"
@@ -5252,15 +4598,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5752644,
-     55.7942931
+     37.5752338,
+     55.7943092
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т12.263",
+    "point_no": "Т12.3061",
     "district": "Савеловский",
     "address": "Петровско-Разумовский проезд, дом 8",
     "unom": 19643,
@@ -5281,27 +4627,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т12.264",
-    "district": "Савеловский",
-    "address": "2-я Квесисская улица, дом 25",
-    "unom": 9940,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 83,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5725247,
-     55.7942463
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.265",
+    "point_no": "Т12.3062",
     "district": "Савеловский",
     "address": "Петровско-Разумовский проезд, дом 5",
     "unom": 19640,
@@ -5313,121 +4639,19 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.56846,
-     55.7941633
+     37.5684521,
+     55.7941626
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т12.266",
-    "district": "Савеловский",
-    "address": "Башиловская улица, дом 3, корпус 1",
-    "unom": 1583,
-    "role": "середина фасада",
-    "side": "подъезды 1–6",
-    "azimuth": 173,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5763069,
-     55.7941478
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.267",
-    "district": "Савеловский",
-    "address": "Мишина улица, дом 12",
-    "unom": 14842,
-    "role": "за подъездом 4",
-    "side": "подъезды 1–4",
-    "azimuth": 359,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5669023,
-     55.7941024
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.268",
-    "district": "Савеловский",
-    "address": "Мишина улица, дом 23",
-    "unom": 14845,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 54,
-    "status": "черновик",
-    "also_covers": "улица Верхняя Масловка, дом 16 (подъезды 1)"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5642308,
-     55.7941017
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.269",
-    "district": "Савеловский",
-    "address": "Мишина улица, дом 4",
-    "unom": 14841,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 181,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5674132,
-     55.794101
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.270",
-    "district": "Савеловский",
-    "address": "Бутырская улица, дом 7",
-    "unom": 3081,
-    "role": "за подъездом 4",
-    "side": "подъезды 1–4",
-    "azimuth": 353,
-    "status": "черновик",
-    "also_covers": "Бутырская улица, дом 5 (подъезды 1–3)"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5837982,
-     55.794067
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.271",
+    "point_no": "Т12.3063",
     "district": "Савеловский",
     "address": "Вятская улица, дом 16",
     "unom": 5076,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1",
     "azimuth": 354,
     "status": "черновик"
@@ -5435,156 +4659,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5831152,
-     55.7940455
+     37.5831226,
+     55.7940459
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т12.272",
-    "district": "Савеловский",
-    "address": "улица Верхняя Масловка, дом 16",
-    "unom": 13934,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 54,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5638522,
-     55.7940276
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.273",
-    "district": "Савеловский",
-    "address": "улица Верхняя Масловка, дом 12",
-    "unom": 31716,
-    "role": "за подъездом 4",
-    "side": "подъезды 1–4",
-    "azimuth": 214,
-    "status": "черновик",
-    "also_covers": "улица Верхняя Масловка, дом 10 (подъезды 5–7)"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5659496,
-     55.7939934
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.274",
-    "district": "Савеловский",
-    "address": "улица Верхняя Масловка, дом 16",
-    "unom": 13934,
-    "role": "угол (тротуар вокруг дома)",
-    "side": "круговой тротуар",
-    "azimuth": 234,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5645896,
-     55.7939698
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.275",
-    "district": "Савеловский",
-    "address": "Башиловская улица, дом 3, корпус 2",
-    "unom": 1584,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 353,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5753362,
-     55.7939643
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.276",
-    "district": "Савеловский",
-    "address": "1-я улица Бебеля, дом 7",
-    "unom": 1609,
-    "role": "за подъездом 4",
-    "side": "подъезды 1–4",
-    "azimuth": 352,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5718127,
-     55.7938583
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.277",
-    "district": "Савеловский",
-    "address": "1-я улица Бебеля, дом 7А",
-    "unom": 1610,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–4",
-    "azimuth": 353,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5713487,
-     55.7938247
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.278",
-    "district": "Савеловский",
-    "address": "Мишина улица, дом 4",
-    "unom": 14841,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 1,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5674118,
-     55.7937983
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.279",
+    "point_no": "Т12.3064",
     "district": "Савеловский",
     "address": "Вятская улица, дом 3",
     "unom": 5075,
@@ -5596,35 +4679,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5821444,
-     55.7937821
+     37.5821322,
+     55.7938382
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т12.280",
-    "district": "Савеловский",
-    "address": "улица Верхняя Масловка, дом 16",
-    "unom": 13934,
-    "role": "угол (тротуар вокруг дома)",
-    "side": "круговой тротуар",
-    "azimuth": 324,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5641685,
-     55.79378
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.281",
+    "point_no": "Т12.3065",
     "district": "Савеловский",
     "address": "Петровско-Разумовский проезд, дом 8",
     "unom": 19643,
@@ -5637,15 +4700,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5700798,
-     55.7937228
+     37.570079,
+     55.7937227
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т12.282",
+    "point_no": "Т12.3066",
     "district": "Савеловский",
     "address": "Башиловская улица, дом 3, корпус 1",
     "unom": 1583,
@@ -5657,56 +4720,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5763843,
-     55.7937219
+     37.5762595,
+     55.7937131
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т12.283",
-    "district": "Савеловский",
-    "address": "улица Верхняя Масловка, дом 8",
-    "unom": 13930,
-    "role": "за подъездом 8",
-    "side": "подъезды 8–11",
-    "azimuth": 214,
-    "status": "черновик",
-    "also_covers": "улица Верхняя Масловка, дом 10 (подъезды 5–7)"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5667478,
-     55.7936957
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.284",
-    "district": "Савеловский",
-    "address": "Вятская улица, дом 3",
-    "unom": 5075,
-    "role": "за подъездом 4",
-    "side": "подъезды 1–4",
-    "azimuth": 83,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.580879,
-     55.7936797
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.285",
+    "point_no": "Т12.3067",
     "district": "Савеловский",
     "address": "улица Нижняя Масловка, дом 8",
     "unom": 13952,
@@ -5718,76 +4740,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5791731,
-     55.7936488
+     37.5791993,
+     55.7936509
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т12.286",
-    "district": "Савеловский",
-    "address": "Башиловская улица, дом 1, корпус 1",
-    "unom": 1581,
-    "role": "угол (тротуар вокруг дома)",
-    "side": "круговой тротуар",
-    "azimuth": 173,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.576696,
-     55.7934631
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.287",
-    "district": "Савеловский",
-    "address": "улица Верхняя Масловка, дом 12",
-    "unom": 31716,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–4",
-    "azimuth": 34,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5653291,
-     55.793429
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.288",
-    "district": "Савеловский",
-    "address": "Бутырская улица, дом 3",
-    "unom": 3075,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–4",
-    "azimuth": 263,
-    "status": "черновик",
-    "also_covers": "Бутырская улица, дом 5 (подъезды 1–3)"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.584005,
-     55.7934256
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.289",
+    "point_no": "Т12.3068",
     "district": "Савеловский",
     "address": "Башиловская улица, дом 1, корпус 1",
     "unom": 1581,
@@ -5799,15 +4760,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5763565,
-     55.7934149
+     37.576329,
+     55.7934129
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т12.290",
+    "point_no": "Т12.3069",
     "district": "Савеловский",
     "address": "Вятская улица, дом 1",
     "unom": 5074,
@@ -5819,55 +4780,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5820625,
-     55.7933957
+     37.5819763,
+     55.7933974
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т12.291",
-    "district": "Савеловский",
-    "address": "улица Верхняя Масловка, дом 6",
-    "unom": 13928,
-    "role": "за подъездом 4",
-    "side": "подъезды 1–4",
-    "azimuth": 212,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5678311,
-     55.7933754
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.292",
-    "district": "Савеловский",
-    "address": "Петровско-Разумовский проезд, дом 5",
-    "unom": 19640,
-    "role": "за подъездом 5",
-    "side": "подъезды 1–5",
-    "azimuth": 351,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5686438,
-     55.7933571
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.293",
+    "point_no": "Т12.3070",
     "district": "Савеловский",
     "address": "Бутырская улица, дом 3",
     "unom": 3075,
@@ -5879,75 +4800,35 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5828361,
-     55.7933442
+     37.5828051,
+     55.7933892
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т12.294",
+    "point_no": "Т12.3071",
     "district": "Савеловский",
-    "address": "Башиловская улица, дом 1, корпус 2",
-    "unom": 1582,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 173,
+    "address": "улица Верхняя Масловка, дом 6",
+    "unom": 13928,
+    "role": "за подъездом 4",
+    "side": "подъезды 1–4",
+    "azimuth": 212,
     "status": "черновик"
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5752917,
-     55.7933308
+     37.5678851,
+     55.7933775
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т12.295",
-    "district": "Савеловский",
-    "address": "Полтавская улица, дом 2",
-    "unom": 20492,
-    "role": "за подъездом 6",
-    "side": "подъезды 1–6",
-    "azimuth": 174,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5745006,
-     55.7932845
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.296",
-    "district": "Савеловский",
-    "address": "улица Нижняя Масловка, дом 6, корпус 2",
-    "unom": 13951,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 174,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5809131,
-     55.7932601
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.297",
+    "point_no": "Т12.3072",
     "district": "Савеловский",
     "address": "улица Верхняя Масловка, дом 8",
     "unom": 13930,
@@ -5959,79 +4840,19 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5661555,
-     55.7932201
+     37.5660579,
+     55.7932573
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т12.298",
-    "district": "Савеловский",
-    "address": "1-я улица Бебеля, дом 3",
-    "unom": 1607,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–4",
-    "azimuth": 173,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5719679,
-     55.7930964
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.299",
-    "district": "Савеловский",
-    "address": "1-я улица Бебеля, дом 3А",
-    "unom": 1608,
-    "role": "за подъездом 4",
-    "side": "подъезды 1–4",
-    "azimuth": 174,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5715837,
-     55.7930687
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.300",
-    "district": "Савеловский",
-    "address": "улица Нижняя Масловка, дом 6, корпус 2",
-    "unom": 13951,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 354,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5809613,
-     55.7930138
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.301",
+    "point_no": "Т12.3073",
     "district": "Савеловский",
     "address": "Башиловская улица, дом 1, корпус 2",
     "unom": 1582,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1",
     "azimuth": 353,
     "status": "черновик"
@@ -6039,257 +4860,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5752353,
-     55.7929576
+     37.5751973,
+     55.7929406
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т12.302",
-    "district": "Савеловский",
-    "address": "улица Нижняя Масловка, дом 8",
-    "unom": 13952,
-    "role": "середина фасада",
-    "side": "подъезды 1–8",
-    "azimuth": 352,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5793473,
-     55.7929502
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.303",
-    "district": "Савеловский",
-    "address": "Башиловская улица, дом 1, корпус 1",
-    "unom": 1581,
-    "role": "середина фасада",
-    "side": "подъезды 1–6",
-    "azimuth": 173,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.576592,
-     55.79289
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.304",
-    "district": "Савеловский",
-    "address": "Петровско-Разумовский проезд, дом 4А",
-    "unom": 19639,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–3",
-    "azimuth": 173,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5703945,
-     55.7928377
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.305",
-    "district": "Савеловский",
-    "address": "улица Верхняя Масловка, дом 4",
-    "unom": 13926,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 172,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5675269,
-     55.7928161
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.306",
-    "district": "Савеловский",
-    "address": "Петровско-Разумовский проезд, дом 4",
-    "unom": 19638,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 173,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5699677,
-     55.7928104
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.307",
-    "district": "Савеловский",
-    "address": "улица Верхняя Масловка, дом 6",
-    "unom": 13928,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–4",
-    "azimuth": 32,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5671204,
-     55.7927716
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.308",
-    "district": "Савеловский",
-    "address": "Полтавская улица, дом 2",
-    "unom": 20492,
-    "role": "середина фасада",
-    "side": "подъезды 1–6",
-    "azimuth": 354,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5745592,
-     55.7925877
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.309",
-    "district": "Савеловский",
-    "address": "1-я улица Бебеля, дом 3",
-    "unom": 1607,
-    "role": "за подъездом 4",
-    "side": "подъезды 1–4",
-    "azimuth": 353,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5720808,
-     55.7925558
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.310",
-    "district": "Савеловский",
-    "address": "1-я улица Бебеля, дом 3А",
-    "unom": 1608,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–4",
-    "azimuth": 354,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5716873,
-     55.7925329
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.311",
-    "district": "Савеловский",
-    "address": "улица Нижняя Масловка, дом 6, корпус 1",
-    "unom": 13950,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–8",
-    "azimuth": 263,
-    "status": "черновик",
-    "also_covers": "Вятская улица, дом 1 (подъезды 1–5)"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5822942,
-     55.7925318
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.312",
-    "district": "Савеловский",
-    "address": "Петровско-Разумовский проезд, дом 4А",
-    "unom": 19639,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 353,
-    "status": "черновик",
-    "also_covers": "Петровско-Разумовский проезд, дом 2 (подъезды 1)"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5703865,
-     55.7924666
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.313",
-    "district": "Савеловский",
-    "address": "улица Нижняя Масловка, дом 6, корпус 1",
-    "unom": 13950,
-    "role": "середина фасада",
-    "side": "подъезды 1–8",
-    "azimuth": 263,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5809002,
-     55.792466
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.314",
+    "point_no": "Т12.3074",
     "district": "Савеловский",
     "address": "улица Нижняя Масловка, дом 6, корпус 1",
     "unom": 13950,
@@ -6301,115 +4880,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5798253,
-     55.7924103
+     37.5795117,
+     55.7924277
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т12.315",
-    "district": "Савеловский",
-    "address": "Башиловская улица, дом 1, корпус 1",
-    "unom": 1581,
-    "role": "за подъездом 6",
-    "side": "подъезды 1–6",
-    "azimuth": 353,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5767236,
-     55.7923262
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.316",
-    "district": "Савеловский",
-    "address": "Петровско-Разумовский проезд, дом 4",
-    "unom": 19638,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–3",
-    "azimuth": 353,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5700456,
-     55.7923187
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.317",
-    "district": "Савеловский",
-    "address": "улица Нижняя Масловка, дом 8",
-    "unom": 13952,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–8",
-    "azimuth": 352,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5795014,
-     55.7922797
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.318",
-    "district": "Савеловский",
-    "address": "улица Верхняя Масловка, дом 2",
-    "unom": 13924,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 173,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5689719,
-     55.7922505
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.319",
-    "district": "Савеловский",
-    "address": "улица Нижняя Масловка, дом 14",
-    "unom": 13956,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–6",
-    "azimuth": 266,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5769567,
-     55.7922141
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.320",
+    "point_no": "Т12.3075",
     "district": "Савеловский",
     "address": "улица Нижняя Масловка, дом 14",
     "unom": 13956,
@@ -6423,186 +4902,6 @@
     "coordinates": [
      37.5747436,
      55.7922022
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.321",
-    "district": "Савеловский",
-    "address": "улица Нижняя Масловка, дом 14",
-    "unom": 13956,
-    "role": "середина фасада",
-    "side": "подъезды 1–6",
-    "azimuth": 266,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5759751,
-     55.7921819
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.322",
-    "district": "Савеловский",
-    "address": "улица Нижняя Масловка, дом 20",
-    "unom": 13960,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 172,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.570886,
-     55.7921221
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.323",
-    "district": "Савеловский",
-    "address": "улица Нижняя Масловка, дом 20",
-    "unom": 13960,
-    "role": "угол (тротуар вокруг дома)",
-    "side": "круговой тротуар",
-    "azimuth": 82,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5704779,
-     55.7921191
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.324",
-    "district": "Савеловский",
-    "address": "улица Нижняя Масловка, дом 18",
-    "unom": 13958,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–4",
-    "azimuth": 266,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5725034,
-     55.7920116
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.325",
-    "district": "Савеловский",
-    "address": "улица Верхняя Масловка, дом 2",
-    "unom": 13924,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 353,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5689642,
-     55.7920017
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.326",
-    "district": "Савеловский",
-    "address": "Петровско-Разумовский проезд, дом 2",
-    "unom": 19635,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 352,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5704996,
-     55.7919719
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.327",
-    "district": "Савеловский",
-    "address": "улица Нижняя Масловка, дом 18",
-    "unom": 13958,
-    "role": "за подъездом 4",
-    "side": "подъезды 1–4",
-    "azimuth": 86,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5712262,
-     55.7919499
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.328",
-    "district": "Савеловский",
-    "address": "улица Нижняя Масловка, дом 20",
-    "unom": 13960,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 352,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5709952,
-     55.7918083
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т12.329",
-    "district": "Савеловский",
-    "address": "улица Нижняя Масловка, дом 20",
-    "unom": 13960,
-    "role": "угол (тротуар вокруг дома)",
-    "side": "круговой тротуар",
-    "azimuth": 352,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5705652,
-     55.7917775
     ]
    }
   }

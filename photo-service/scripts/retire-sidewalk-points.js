@@ -6,8 +6,10 @@
 // По умолчанию — сухой прогон.
 //
 //   node scripts/retire-sidewalk-points.js --list=scripts/retire-lists/sidewalk-rule-hovrino.txt --since=2026-11-02T00:00:00+03:00
+//   node scripts/retire-sidewalk-points.js --list=scripts/retire-lists --since=…   (все sidewalk-rule-*.txt папки)
 //   node scripts/retire-sidewalk-points.js --list=… --since=… --actor=ЛОГИН_ПРЕФЕКТУРЫ --apply
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync, statSync } from 'node:fs';
+import { join } from 'node:path';
 import { Pool } from 'pg';
 import { photoServiceDatabaseConfig } from '../src/config.js';
 import { normalizeLogin } from '../src/auth.js';
@@ -40,6 +42,13 @@ export function sidewalkRetirePlan(numbers, rows, since) {
   return plan;
 }
 
+/** Текст списка: файл или все sidewalk-rule-*.txt из папки. */
+export function listText(path) {
+  if (!statSync(path).isDirectory()) return readFileSync(path, 'utf8');
+  return readdirSync(path).filter((name) => /^sidewalk-rule-.+\.txt$/.test(name)).sort()
+    .map((name) => readFileSync(join(path, name), 'utf8')).join('\n');
+}
+
 async function main() {
   const arg = (name) => process.argv.find((a) => a.startsWith(`--${name}=`))?.slice(name.length + 3);
   const apply = process.argv.includes('--apply');
@@ -48,7 +57,7 @@ async function main() {
     console.error('Usage: node scripts/retire-sidewalk-points.js --list=FILE --since=ISO-время-выгрузки [--actor=ЛОГИН --apply]');
     process.exit(2);
   }
-  const numbers = parseSidewalkList(readFileSync(arg('list'), 'utf8'));
+  const numbers = parseSidewalkList(listText(arg('list')));
   const pool = new Pool({ ...photoServiceDatabaseConfig(process.env), max: 2 });
   try {
     const { rows } = await pool.query(`SELECT p.id, p.point_no, p.district, p.retired_at, p.updated_at, p.created_at,

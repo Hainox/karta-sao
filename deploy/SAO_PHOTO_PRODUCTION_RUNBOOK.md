@@ -139,6 +139,8 @@ $DC run --rm -v /tmp/sidewalk-layers:/sources:ro photo-service node scripts/impo
 
 A rerun of the retire step reports `к снятию: 0`.
 
+Since 2026-11-04 every district is built with `--rule` and has its own `sidewalk-rule-<slug>.txt`; pass the folder to retire all of them at once (`--list=scripts/retire-lists` reads every `sidewalk-rule-*.txt`). Each line ends with the reason after `#`. Points outside the ASU ODS yard territories (gated housing estates with their own management company, private and military land) and points at OSM private houses or military buildings are retired too.
+
 ### Sidewalk point photos (migration 021)
 
 Photos of the sidewalk shooting points live in the new `sidewalk_photo_slot_photos` table (one active photo per point, like playgrounds). Ship the files the same way as for migration 020 (`git archive origin/main photo-service/... | tar -x -C /opt/sao-photo-service`, after a copy of the replaced files), then:
