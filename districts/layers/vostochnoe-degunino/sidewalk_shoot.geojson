@@ -11,33 +11,14 @@
     "role": "за подъездом 2",
     "side": "подъезды 1–2",
     "azimuth": 180,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5587829,
-     55.8939327
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.002",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 48, корпус 2",
-    "unom": 7229,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–2",
-    "azimuth": 179,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5598978,
-     55.8938579
+     37.558783,
+     55.893933
     ]
    }
   },
@@ -51,93 +32,14 @@
     "role": "за подъездом 2",
     "side": "подъезды 1–2",
     "azimuth": 359,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5600092,
-     55.8934093
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.004",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 50",
-    "unom": 31399,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–2",
-    "azimuth": 0,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5588276,
-     55.893347
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.005",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 48, корпус 1",
-    "unom": 7228,
-    "role": "за подъездом 2",
-    "side": "подъезды 1–2",
-    "azimuth": 180,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5601594,
-     55.8932646
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.006",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 46",
-    "unom": 7223,
-    "role": "за подъездом 7",
-    "side": "подъезды 1–7",
-    "azimuth": 180,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5588156,
-     55.8931091
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.007",
-    "district": "Восточное Дегунино",
-    "address": "Керамический проезд, дом 77, корпус 1",
-    "unom": 9976,
-    "role": "за подъездом 2",
-    "side": "подъезды 1–2",
-    "azimuth": 181,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5617332,
-     55.8931082
+     37.560009,
+     55.893409
     ]
    }
   },
@@ -151,33 +53,14 @@
     "role": "за подъездом 1",
     "side": "подъезды 1–2",
     "azimuth": 0,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5601641,
-     55.8928483
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.009",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 46, корпус 1",
-    "unom": 7224,
-    "role": "за подъездом 2",
-    "side": "подъезды 1–2",
-    "azimuth": 180,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5603083,
-     55.892723
+     37.560164,
+     55.892848
     ]
    }
   },
@@ -192,53 +75,13 @@
     "side": "подъезды 1–2",
     "azimuth": 1,
     "status": "черновик",
-    "also_covers": "Керамический проезд, дом 77, корпус 2 (подъезды 1–2)"
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5617788,
-     55.8927009
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.011",
-    "district": "Восточное Дегунино",
-    "address": "Керамический проезд, дом 75, корпус 1",
-    "unom": 9975,
-    "role": "за подъездом 2",
-    "side": "подъезды 1–2",
-    "azimuth": 180,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5634398,
-     55.8924274
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.012",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 46",
-    "unom": 7223,
-    "role": "середина фасада",
-    "side": "подъезды 1–7",
-    "azimuth": 0,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5588265,
-     55.8922102
+     37.561779,
+     55.892701
     ]
    }
   },
@@ -252,13 +95,14 @@
     "role": "за подъездом 1",
     "side": "подъезды 1–2",
     "azimuth": 0,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5603221,
-     55.8921786
+     37.560322,
+     55.892179
     ]
    }
   },
@@ -272,13 +116,14 @@
     "role": "за подъездом 1",
     "side": "подъезды 1–2",
     "azimuth": 0,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5619333,
-     55.8921647
+     37.561933,
+     55.892165
     ]
    }
   },
@@ -292,33 +137,14 @@
     "role": "за подъездом 1",
     "side": "подъезды 1–2",
     "azimuth": 0,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5634441,
-     55.8921099
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.016",
-    "district": "Восточное Дегунино",
-    "address": "Керамический проезд, дом 73, корпус 1",
-    "unom": 9974,
-    "role": "за подъездом 2",
-    "side": "подъезды 1–2",
-    "azimuth": 180,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5636329,
-     55.8919439
+     37.563444,
+     55.89211
     ]
    }
   },
@@ -332,33 +158,14 @@
     "role": "за подъездом 1",
     "side": "подъезды 1–2",
     "azimuth": 0,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5636384,
-     55.8915267
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.018",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 46",
-    "unom": 7223,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–7",
-    "azimuth": 0,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5588622,
-     55.8913438
+     37.563638,
+     55.891527
     ]
    }
   },
@@ -372,33 +179,14 @@
     "role": "за подъездом 1",
     "side": "подъезды 1–10",
     "azimuth": 180,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
      37.562692,
-     55.8908362
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.020",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 42",
-    "unom": 7219,
-    "role": "за подъездом 2",
-    "side": "подъезды 1–2",
-    "azimuth": 217,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.559262,
-     55.8901388
+     55.890836
     ]
    }
   },
@@ -412,13 +200,14 @@
     "role": "середина фасада",
     "side": "подъезды 1–10",
     "azimuth": 180,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5627103,
-     55.8898844
+     37.56271,
+     55.889884
     ]
    }
   },
@@ -431,14 +220,15 @@
     "unom": 7219,
     "role": "за подъездом 1",
     "side": "подъезды 1–2",
-    "azimuth": 37,
-    "status": "черновик"
+    "azimuth": 7,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5585727,
-     55.8895533
+     37.558941,
+     55.889584
     ]
    }
   },
@@ -452,13 +242,14 @@
     "role": "за подъездом 10",
     "side": "подъезды 1–10",
     "azimuth": 0,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5627318,
-     55.8889333
+     37.562732,
+     55.888933
     ]
    }
   },
@@ -472,13 +263,14 @@
     "role": "середина фасада",
     "side": "подъезды 1–8",
     "azimuth": 270,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5614006,
-     55.8887283
+     37.561401,
+     55.888728
     ]
    }
   },
@@ -492,13 +284,14 @@
     "role": "за подъездом 1",
     "side": "подъезды 1–8",
     "azimuth": 270,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5631634,
-     55.8887262
+     37.563163,
+     55.888726
     ]
    }
   },
@@ -512,13 +305,14 @@
     "role": "за подъездом 8",
     "side": "подъезды 1–8",
     "azimuth": 90,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5596489,
-     55.8887189
+     37.559649,
+     55.888719
     ]
    }
   },
@@ -532,13 +326,14 @@
     "role": "за подъездом 7",
     "side": "подъезды 1–7",
     "azimuth": 180,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5589411,
-     55.8886974
+     37.558941,
+     55.888697
     ]
    }
   },
@@ -551,14 +346,15 @@
     "unom": 9970,
     "role": "за подъездом 1",
     "side": "подъезды 1",
-    "azimuth": 180,
-    "status": "черновик"
+    "azimuth": 15,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5628255,
-     55.8880797
+     37.562648,
+     55.887742
     ]
    }
   },
@@ -571,74 +367,15 @@
     "unom": 9971,
     "role": "за подъездом 1",
     "side": "подъезды 1",
-    "azimuth": 0,
-    "status": "черновик"
+    "azimuth": 165,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5634433,
-     55.8879052
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.030",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 38, корпус 1",
-    "unom": 7215,
-    "role": "середина фасада",
-    "side": "подъезды 1–7",
-    "azimuth": 0,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5589563,
-     55.8878309
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.031",
-    "district": "Восточное Дегунино",
-    "address": "Керамический проезд, дом 65, корпус 2",
-    "unom": 9969,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 0,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5636086,
-     55.8875128
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.032",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 36, корпус 4",
-    "unom": 7213,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 180,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5598885,
-     55.8871757
+     37.56343,
+     55.888273
     ]
    }
   },
@@ -652,13 +389,14 @@
     "role": "за подъездом 1",
     "side": "подъезды 1",
     "azimuth": 0,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
      37.563122,
-     55.8869712
+     55.886971
     ]
    }
   },
@@ -672,33 +410,14 @@
     "role": "за подъездом 1",
     "side": "подъезды 1–7",
     "azimuth": 0,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5589821,
+     37.558982,
      55.88694
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.035",
-    "district": "Восточное Дегунино",
-    "address": "Керамический проезд, дом 63, корпус 2",
-    "unom": 9967,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 180,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5632218,
-     55.8868449
     ]
    }
   },
@@ -712,12 +431,13 @@
     "role": "за подъездом 1",
     "side": "подъезды 1",
     "azimuth": 0,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5598866,
+     37.559887,
      55.886763
     ]
    }
@@ -732,73 +452,14 @@
     "role": "за подъездом 1",
     "side": "подъезды 1",
     "azimuth": 180,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5596877,
-     55.8867572
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.038",
-    "district": "Восточное Дегунино",
-    "address": "Керамический проезд, дом 63, корпус 1",
-    "unom": 9966,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 180,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5626387,
-     55.8865353
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.039",
-    "district": "Восточное Дегунино",
-    "address": "Керамический проезд, дом 63, корпус 2",
-    "unom": 9967,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 0,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5632315,
-     55.8864726
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.040",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 36, корпус 3",
-    "unom": 7212,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 0,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5596267,
-     55.8864571
+     37.559688,
+     55.886757
     ]
    }
   },
@@ -811,74 +472,15 @@
     "unom": 7211,
     "role": "за подъездом 2",
     "side": "подъезды 1–2",
-    "azimuth": 217,
-    "status": "черновик"
+    "azimuth": 187,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5593162,
+     37.559316,
      55.886377
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.042",
-    "district": "Восточное Дегунино",
-    "address": "Керамический проезд, дом 61, корпус 2",
-    "unom": 9965,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 180,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5634243,
-     55.8862457
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.043",
-    "district": "Восточное Дегунино",
-    "address": "Керамический проезд, дом 63, корпус 1",
-    "unom": 9966,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 0,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5625845,
-     55.8861486
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.044",
-    "district": "Восточное Дегунино",
-    "address": "Керамический проезд, дом 63, корпус 1",
-    "unom": 9966,
-    "role": "угол (тротуар вокруг дома)",
-    "side": "круговой тротуар",
-    "azimuth": 270,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5629429,
-     55.8861261
     ]
    }
   },
@@ -891,174 +493,15 @@
     "unom": 7211,
     "role": "за подъездом 1",
     "side": "подъезды 1–2",
-    "azimuth": 37,
-    "status": "черновик"
+    "azimuth": 7,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5587924,
-     55.8859974
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.046",
-    "district": "Восточное Дегунино",
-    "address": "Керамический проезд, дом 61, корпус 1",
-    "unom": 9964,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 180,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5629723,
-     55.8859193
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.047",
-    "district": "Восточное Дегунино",
-    "address": "Керамический проезд, дом 61, корпус 2",
-    "unom": 9965,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 0,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.563412,
-     55.8858339
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.048",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 34",
-    "unom": 7210,
-    "role": "за подъездом 7",
-    "side": "подъезды 1–7",
-    "azimuth": 180,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5590704,
-     55.885633
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.049",
-    "district": "Восточное Дегунино",
-    "address": "Керамический проезд, дом 61, корпус 1",
-    "unom": 9964,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 0,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5629666,
-     55.8855142
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.050",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 34",
-    "unom": 7210,
-    "role": "середина фасада",
-    "side": "подъезды 1–7",
-    "azimuth": 0,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5590106,
-     55.8847694
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.051",
-    "district": "Восточное Дегунино",
-    "address": "улица 800-летия Москвы, дом 11, корпус 7",
-    "unom": 4879,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–6",
-    "azimuth": 267,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.564575,
-     55.884371
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.052",
-    "district": "Восточное Дегунино",
-    "address": "улица 800-летия Москвы, дом 11, корпус 7",
-    "unom": 4879,
-    "role": "за подъездом 6",
-    "side": "подъезды 1–6",
-    "azimuth": 87,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5623322,
-     55.8842869
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.053",
-    "district": "Восточное Дегунино",
-    "address": "улица 800-летия Москвы, дом 11, корпус 7",
-    "unom": 4879,
-    "role": "середина фасада",
-    "side": "подъезды 1–6",
-    "azimuth": 267,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5633016,
-     55.8842579
+     37.559297,
+     55.885936
     ]
    }
   },
@@ -1071,755 +514,15 @@
     "unom": 4878,
     "role": "за подъездом 1",
     "side": "подъезды 1",
-    "azimuth": 178,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5651226,
-     55.8841679
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.055",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 32, корпус 4",
-    "unom": 7209,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 180,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5598891,
-     55.8841071
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.056",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 34",
-    "unom": 7210,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–7",
-    "azimuth": 0,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5589999,
-     55.8839121
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.057",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 32, корпус 4",
-    "unom": 7209,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 0,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5599243,
-     55.8837424
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.058",
-    "district": "Восточное Дегунино",
-    "address": "улица 800-летия Москвы, дом 11, корпус 5",
-    "unom": 4877,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 177,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5648899,
-     55.8836605
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.059",
-    "district": "Восточное Дегунино",
-    "address": "улица 800-летия Москвы, дом 11, корпус 8",
-    "unom": 4880,
-    "role": "за подъездом 4",
-    "side": "подъезды 1–4",
-    "azimuth": 177,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5625479,
-     55.8836383
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.060",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 32, корпус 3",
-    "unom": 7208,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 0,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5596757,
-     55.8834385
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.061",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 32, корпус 2",
-    "unom": 7207,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 180,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5593469,
-     55.8833872
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.062",
-    "district": "Восточное Дегунино",
-    "address": "улица 800-летия Москвы, дом 11, корпус 5",
-    "unom": 4877,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 357,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5648027,
-     55.8833706
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.063",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 32, корпус 7",
-    "unom": 340049,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 270,
+    "azimuth": 268,
     "status": "черновик",
-    "also_covers": "Дубнинская улица, дом 32, корпус 8 (подъезды 1)"
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5606298,
-     55.8833392
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.064",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 32, корпус 7",
-    "unom": 340049,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 90,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5601956,
-     55.8832822
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.065",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 32, корпус 1",
-    "unom": 7206,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 180,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5587524,
-     55.8832579
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.066",
-    "district": "Восточное Дегунино",
-    "address": "улица 800-летия Москвы, дом 11, корпус 4",
-    "unom": 4876,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 176,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5647501,
-     55.8832283
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.067",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 32, корпус 8",
-    "unom": 340080,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 270,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5611141,
-     55.883206
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.068",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 32, корпус 2",
-    "unom": 7207,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 0,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5592979,
-     55.8830939
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.069",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 32, корпус 9",
-    "unom": 340081,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 1,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5615643,
-     55.8830141
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.070",
-    "district": "Восточное Дегунино",
-    "address": "улица 800-летия Москвы, дом 11, корпус 8",
-    "unom": 4880,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–4",
-    "azimuth": 357,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5626409,
-     55.883012
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.071",
-    "district": "Восточное Дегунино",
-    "address": "улица 800-летия Москвы, дом 11, корпус 4",
-    "unom": 4876,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 356,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5646294,
-     55.8829222
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.072",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 32, корпус 6",
-    "unom": 75090,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 181,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5609832,
-     55.8828513
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.073",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 32, корпус 1",
-    "unom": 7206,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 0,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5588163,
-     55.8828007
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.074",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 73, корпус 6",
-    "unom": 7250,
-    "role": "за подъездом 4",
-    "side": "подъезды 1–4",
-    "azimuth": 108,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5549364,
-     55.882786
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.075",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 32, корпус 6",
-    "unom": 75090,
-    "role": "за подъездом 3",
-    "side": "подъезды 3",
-    "azimuth": 181,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5613615,
-     55.8827272
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.076",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 30, корпус 2",
-    "unom": 7205,
-    "role": "за подъездом 8",
-    "side": "подъезды 1–8",
-    "azimuth": 180,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5585647,
-     55.8826429
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.077",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 73, корпус 3",
-    "unom": 7248,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–4",
-    "azimuth": 214,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5546656,
-     55.8825596
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.078",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 73, корпус 6",
-    "unom": 7250,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–4",
-    "azimuth": 288,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5562987,
-     55.8825546
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.079",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 32, корпус 6",
-    "unom": 75090,
-    "role": "за подъездом 2",
-    "side": "подъезды 2",
-    "azimuth": 271,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5609138,
-     55.8825429
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.080",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 32, корпус 6",
-    "unom": 75090,
-    "role": "за подъездом 2",
-    "side": "подъезды 2",
-    "azimuth": 91,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5604294,
-     55.8825403
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.081",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 73, корпус 1",
-    "unom": 7246,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–8",
-    "azimuth": 179,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5565403,
-     55.8824781
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.082",
-    "district": "Восточное Дегунино",
-    "address": "улица 800-летия Москвы, дом 11, корпус 3",
-    "unom": 4875,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 357,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5643386,
-     55.8824521
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.083",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 32, корпус 6",
-    "unom": 75090,
-    "role": "за подъездом 3",
-    "side": "подъезды 3",
-    "azimuth": 1,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5612535,
-     55.8824025
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.084",
-    "district": "Восточное Дегунино",
-    "address": "улица 800-летия Москвы, дом 11, корпус 2",
-    "unom": 4874,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 177,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5641986,
-     55.8822314
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.085",
-    "district": "Восточное Дегунино",
-    "address": "улица 800-летия Москвы, дом 11, корпус 2",
-    "unom": 4874,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 357,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5641697,
-     55.8819387
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.086",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 73, корпус 3",
-    "unom": 7248,
-    "role": "за подъездом 4",
-    "side": "подъезды 1–4",
-    "azimuth": 34,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5538728,
-     55.8818728
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.087",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 30, корпус 2",
-    "unom": 7205,
-    "role": "середина фасада",
-    "side": "подъезды 1–8",
-    "azimuth": 0,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5585041,
-     55.8818576
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.088",
-    "district": "Восточное Дегунино",
-    "address": "улица 800-летия Москвы, дом 11, корпус 1",
-    "unom": 4873,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 176,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5644503,
-     55.8817391
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.089",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 73, корпус 1",
-    "unom": 7246,
-    "role": "середина фасада",
-    "side": "подъезды 1–8",
-    "azimuth": 179,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5565562,
-     55.8817127
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.090",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 73, корпус 4",
-    "unom": 7249,
-    "role": "за подъездом 6",
-    "side": "подъезды 1–6",
-    "azimuth": 165,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5539233,
-     55.8817126
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.091",
-    "district": "Восточное Дегунино",
-    "address": "улица 800-летия Москвы, дом 11, корпус 1",
-    "unom": 4873,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 356,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.564474,
-     55.881408
+     37.565661,
+     55.884103
     ]
    }
   },
@@ -1832,14 +535,15 @@
     "unom": 4872,
     "role": "за подъездом 1",
     "side": "подъезды 1",
-    "azimuth": 178,
-    "status": "черновик"
+    "azimuth": 268,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5648363,
-     55.8812845
+     37.565164,
+     55.88115
     ]
    }
   },
@@ -1852,14 +556,15 @@
     "unom": 7249,
     "role": "середина фасада",
     "side": "подъезды 1–6",
-    "azimuth": 345,
-    "status": "черновик"
+    "azimuth": 75,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5542347,
-     55.8811714
+     37.55317,
+     55.880048
     ]
    }
   },
@@ -1874,13 +579,13 @@
     "side": "подъезды 1–8",
     "azimuth": 0,
     "status": "черновик",
-    "also_covers": "Дубнинская улица, дом 30, корпус 1 (подъезды 1–2)"
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5583519,
-     55.8810023
+     37.558587,
+     55.881014
     ]
    }
   },
@@ -1894,53 +599,14 @@
     "role": "за подъездом 1",
     "side": "подъезды 1–4",
     "azimuth": 263,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5635557,
-     55.8809843
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.096",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 73, корпус 1",
-    "unom": 7246,
-    "role": "за подъездом 8",
-    "side": "подъезды 1–8",
-    "azimuth": 359,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5565832,
-     55.8809377
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.097",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 73, корпус 2",
-    "unom": 7247,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 223,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.556425,
-     55.8808555
+     37.563542,
+     55.881034
     ]
    }
   },
@@ -1955,24 +621,2640 @@
     "side": "подъезды 1–8",
     "azimuth": 263,
     "status": "черновик",
-    "also_covers": "улица 800-летия Москвы, дом 9 (подъезды 1–4)"
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5622423,
-     55.880835
+     37.562024,
+     55.880935
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.099",
+    "point_no": "Т5.101",
+    "district": "Восточное Дегунино",
+    "address": "улица 800-летия Москвы, дом 7, корпус 1",
+    "unom": 4868,
+    "role": "середина фасада",
+    "side": "подъезды 1–8",
+    "azimuth": 83,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559352,
+     55.880733
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.103",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 73, корпус 2",
+    "unom": 7247,
+    "role": "за подъездом 1",
+    "side": "подъезды 1",
+    "azimuth": 253,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.555701,
+     55.880491
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.104",
+    "district": "Восточное Дегунино",
+    "address": "улица 800-летия Москвы, дом 7, корпус 1",
+    "unom": 4868,
+    "role": "за подъездом 8",
+    "side": "подъезды 1–8",
+    "azimuth": 308,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.55921,
+     55.880683
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.106",
+    "district": "Восточное Дегунино",
+    "address": "улица 800-летия Москвы, дом 3, корпус 1",
+    "unom": 4861,
+    "role": "за подъездом 1",
+    "side": "подъезды 1–6",
+    "azimuth": 253,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.552559,
+     55.879958
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.108",
+    "district": "Восточное Дегунино",
+    "address": "улица 800-летия Москвы, дом 26, корпус 1",
+    "unom": 31507,
+    "role": "за подъездом 5",
+    "side": "подъезды 1–5",
+    "azimuth": 90,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559298,
+     55.879903
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.109",
+    "district": "Восточное Дегунино",
+    "address": "улица 800-летия Москвы, дом 26, корпус 1",
+    "unom": 31507,
+    "role": "за подъездом 1",
+    "side": "подъезды 1–5",
+    "azimuth": 270,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.561024,
+     55.879896
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.114",
+    "district": "Восточное Дегунино",
+    "address": "улица 800-летия Москвы, дом 3, корпус 1",
+    "unom": 4861,
+    "role": "за подъездом 6",
+    "side": "подъезды 1–6",
+    "azimuth": 73,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.550591,
+     55.879606
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.117",
+    "district": "Восточное Дегунино",
+    "address": "улица 800-летия Москвы, дом 26, корпус 1",
+    "unom": 31507,
+    "role": "за подъездом 7",
+    "side": "подъезды 6–7",
+    "azimuth": 0,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560869,
+     55.879212
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.118",
+    "district": "Восточное Дегунино",
+    "address": "Керамический проезд, дом 57, корпус 1",
+    "unom": 51691,
+    "role": "за подъездом 1",
+    "side": "подъезды 1–3",
+    "azimuth": 180,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565946,
+     55.879151
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.129",
+    "district": "Восточное Дегунино",
+    "address": "улица 800-летия Москвы, дом 26, корпус 2",
+    "unom": 31508,
+    "role": "за подъездом 1",
+    "side": "подъезды 1",
+    "azimuth": 269,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560298,
+     55.878511
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.130",
+    "district": "Восточное Дегунино",
+    "address": "улица 800-летия Москвы, дом 26, корпус 2",
+    "unom": 31508,
+    "role": "за подъездом 1",
+    "side": "подъезды 1",
+    "azimuth": 89,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559292,
+     55.8783
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.134",
+    "district": "Восточное Дегунино",
+    "address": "Керамический проезд, дом 55, корпус 1",
+    "unom": 51782,
+    "role": "за подъездом 1",
+    "side": "подъезды 1–3",
+    "azimuth": 172,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.56607,
+     55.878126
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.136",
+    "district": "Восточное Дегунино",
+    "address": "улица 800-летия Москвы, дом 14",
+    "unom": 4883,
+    "role": "за подъездом 4",
+    "side": "подъезды 1–4",
+    "azimuth": 65,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.548098,
+     55.878057
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.146",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 28, корпус 1",
+    "unom": 7198,
+    "role": "за подъездом 4",
+    "side": "подъезды 1–4",
+    "azimuth": 156,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559017,
+     55.876276
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.147",
+    "district": "Восточное Дегунино",
+    "address": "Керамический проезд, дом 51, корпус 1",
+    "unom": 31537,
+    "role": "за подъездом 1",
+    "side": "подъезды 1–3",
+    "azimuth": 250,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.566469,
+     55.875976
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.150",
+    "district": "Восточное Дегунино",
+    "address": "Керамический проезд, дом 53, корпус 1",
+    "unom": 51781,
+    "role": "за подъездом 4",
+    "side": "подъезды 1–4",
+    "azimuth": 348,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.566876,
+     55.875974
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.156",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 26, корпус 3",
+    "unom": 7194,
+    "role": "за подъездом 4",
+    "side": "подъезды 1–4",
+    "azimuth": 50,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560642,
+     55.875453
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.157",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 28, корпус 1",
+    "unom": 7198,
+    "role": "за подъездом 1",
+    "side": "подъезды 1–4",
+    "azimuth": 336,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559655,
+     55.875474
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.158",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 26, корпус 1",
+    "unom": 75048,
+    "role": "за подъездом 5",
+    "side": "подъезды 2–5",
+    "azimuth": 247,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559983,
+     55.87533
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.159",
+    "district": "Восточное Дегунино",
+    "address": "Керамический проезд, дом 49, корпус 1",
+    "unom": 51780,
+    "role": "за подъездом 1",
+    "side": "подъезды 1–4",
+    "azimuth": 68,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.566887,
+     55.875072
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.160",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 26, корпус 5",
+    "unom": 7196,
+    "role": "за подъездом 1",
+    "side": "подъезды 1–4",
+    "azimuth": 250,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562344,
+     55.875204
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.163",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 26, корпус 1",
+    "unom": 75048,
+    "role": "за подъездом 6",
+    "side": "подъезды 6",
+    "azimuth": 157,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559916,
+     55.875004
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.165",
+    "district": "Восточное Дегунино",
+    "address": "Керамический проезд, дом 49, корпус 1",
+    "unom": 51780,
+    "role": "середина фасада",
+    "side": "подъезды 1–4",
+    "azimuth": 347,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.567445,
+     55.874652
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.166",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 26, корпус 1",
+    "unom": 75048,
+    "role": "за подъездом 1",
+    "side": "подъезды 1",
+    "azimuth": 247,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560555,
+     55.874674
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.167",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 26, корпус 1",
+    "unom": 75048,
+    "role": "за подъездом 1",
+    "side": "подъезды 1",
+    "azimuth": 337,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.55996,
+     55.874401
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.169",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 24, корпус 2",
+    "unom": 7188,
+    "role": "за подъездом 1",
+    "side": "подъезды 1–4",
+    "azimuth": 250,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.561898,
+     55.874209
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.171",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 24, корпус 4",
+    "unom": 7191,
+    "role": "за подъездом 4",
+    "side": "подъезды 1–4",
+    "azimuth": 70,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5622,
+     55.874191
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.178",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 24, корпус 1",
+    "unom": 7187,
+    "role": "за подъездом 1",
+    "side": "подъезды 1–4",
+    "azimuth": 336,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.561643,
+     55.872918
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.179",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 22, корпус 6",
+    "unom": 340278,
+    "role": "за подъездом 1",
+    "side": "подъезды 1",
+    "azimuth": 247,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.561923,
+     55.872865
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.180",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 24, корпус 5",
+    "unom": 7192,
+    "role": "за подъездом 8",
+    "side": "подъезды 1–8",
+    "azimuth": 337,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564502,
+     55.872748
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.187",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 22, корпус 3",
+    "unom": 7186,
+    "role": "за подъездом 1",
+    "side": "подъезды 1–4",
+    "azimuth": 246,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565403,
+     55.87224
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.188",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 22, корпус 4",
+    "unom": 340276,
+    "role": "за подъездом 1",
+    "side": "подъезды 1",
+    "azimuth": 247,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562429,
+     55.872181
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.192",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 22, корпус 3",
+    "unom": 7186,
+    "role": "за подъездом 4",
+    "side": "подъезды 1–4",
+    "azimuth": 66,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564018,
+     55.871886
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.218",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 14, корпус 4",
+    "unom": 7170,
+    "role": "за подъездом 1",
+    "side": "подъезды 1",
+    "azimuth": 165,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.570813,
+     55.867879
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.224",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 14, корпус 2",
+    "unom": 7168,
+    "role": "за подъездом 1",
+    "side": "подъезды 1",
+    "azimuth": 256,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.570998,
+     55.867315
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.225",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 14, корпус 3",
+    "unom": 7169,
+    "role": "за подъездом 1",
+    "side": "подъезды 1",
+    "azimuth": 345,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.570945,
+     55.866759
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.230",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 12, корпус 4",
+    "unom": 7165,
+    "role": "за подъездом 1",
+    "side": "подъезды 1–6",
+    "azimuth": 247,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.569756,
+     55.86651
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.231",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 12, корпус 4",
+    "unom": 7165,
+    "role": "середина фасада",
+    "side": "подъезды 1–6",
+    "azimuth": 67,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.567738,
+     55.866026
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.233",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 12, корпус 4",
+    "unom": 7165,
+    "role": "за подъездом 6",
+    "side": "подъезды 1–6",
+    "azimuth": 157,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.567195,
+     55.865918
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.236",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 12, корпус 3",
+    "unom": 7164,
+    "role": "за подъездом 8",
+    "side": "подъезды 1–8",
+    "azimuth": 346,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.570634,
+     55.864951
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.237",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 12, корпус 2",
+    "unom": 7163,
+    "role": "середина фасада",
+    "side": "подъезды 1–6",
+    "azimuth": 251,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.570522,
+     55.864871
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.240",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 10, корпус 3",
+    "unom": 7159,
+    "role": "за подъездом 1",
+    "side": "подъезды 1–5",
+    "azimuth": 252,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.57101,
+     55.86418
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.244",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 10, корпус 5",
+    "unom": 7161,
+    "role": "за подъездом 8",
+    "side": "подъезды 1–8",
+    "azimuth": 164,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.572544,
+     55.863675
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.246",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 10, корпус 2",
+    "unom": 7158,
+    "role": "за подъездом 9",
+    "side": "подъезды 1–9",
+    "azimuth": 154,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.568896,
+     55.863656
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.249",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 10, корпус 1",
+    "unom": 7157,
+    "role": "середина фасада",
+    "side": "подъезды 1–5, 8–10",
+    "azimuth": 345,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.568129,
+     55.862427
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.252",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 10, корпус 2",
+    "unom": 7158,
+    "role": "за подъездом 1",
+    "side": "подъезды 1–9",
+    "azimuth": 353,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.569945,
+     55.861722
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.259",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 17, корпус 2",
+    "unom": 75123,
+    "role": "за подъездом 3",
+    "side": "подъезды 3",
+    "azimuth": 74,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565078,
+     55.861123
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.262",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 17, корпус 1",
+    "unom": 75124,
+    "role": "за подъездом 1",
+    "side": "подъезды 1",
+    "azimuth": 83,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.566414,
+     55.861279
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.264",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 15, корпус 2",
+    "unom": 75120,
+    "role": "за подъездом 1",
+    "side": "подъезды 1–2",
+    "azimuth": 345,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565641,
+     55.860994
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.278",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 15, корпус 1",
+    "unom": 75111,
+    "role": "за подъездом 2",
+    "side": "подъезды 1–2",
+    "azimuth": 356,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.567009,
+     55.860324
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.291",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 4, корпус 4",
+    "unom": 7148,
+    "role": "за подъездом 1",
+    "side": "подъезды 1",
+    "azimuth": 173,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.572056,
+     55.859037
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.308",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 2, корпус 2",
+    "unom": 7139,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 80,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.567359,
+     55.855711
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.311",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 2, корпус 2",
+    "unom": 7139,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 170,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.568783,
+     55.856277
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.314",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 2, корпус 6",
+    "unom": 75060,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 0,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.56907,
+     55.856932
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.315",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 2, корпус 6",
+    "unom": 75060,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 172,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.568735,
+     55.858407
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.317",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 4, корпус 3",
+    "unom": 7147,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 339,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.570727,
+     55.858967
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.318",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 13",
+    "unom": 75092,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 164,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.570263,
+     55.860594
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.319",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 4, корпус 3",
+    "unom": 7147,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 78,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.570971,
+     55.859677
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.320",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 4, корпус 3",
+    "unom": 7147,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 262,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.572371,
+     55.859785
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.321",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 4, корпус 3",
+    "unom": 7147,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 188,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.572857,
+     55.860829
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.322",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 4, корпус 3",
+    "unom": 7147,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 0,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.573059,
+     55.861032
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.323",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 10, корпус 4",
+    "unom": 7160,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 178,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.57301,
+     55.86206
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.325",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 10, корпус 2",
+    "unom": 7158,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 165,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.567708,
+     55.863364
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.327",
+    "district": "Восточное Дегунино",
+    "address": "Бескудниковский бульвар, дом 8, корпус 3",
+    "unom": 75087,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 342,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564243,
+     55.861076
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.328",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 15, корпус 2",
+    "unom": 75120,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 0,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.566922,
+     55.860753
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.329",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 10, корпус 2",
+    "unom": 7158,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 343,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.568358,
+     55.86435
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.331",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 20, корпус 4",
+    "unom": 7183,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 246,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564679,
+     55.871248
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.332",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 20, корпус 4",
+    "unom": 7183,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 77,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.567168,
+     55.872122
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.333",
+    "district": "Восточное Дегунино",
+    "address": "Керамический проезд, дом 45, корпус 1",
+    "unom": 51690,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 346,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.568649,
+     55.871848
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.334",
+    "district": "Восточное Дегунино",
+    "address": "Керамический проезд, дом 47, корпус 1",
+    "unom": 51779,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 65,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.566061,
+     55.87368
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.335",
+    "district": "Восточное Дегунино",
+    "address": "Керамический проезд, дом 47, корпус 1",
+    "unom": 51779,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 155,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.567602,
+     55.873891
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.336",
+    "district": "Восточное Дегунино",
+    "address": "Керамический проезд, дом 51, корпус 2",
+    "unom": 31538,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 345,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565541,
+     55.874624
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.337",
+    "district": "Восточное Дегунино",
+    "address": "Керамический проезд, дом 51, корпус 2",
+    "unom": 31538,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 253,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.566601,
+     55.875183
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.340",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 24, корпус 5",
+    "unom": 7192,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 247,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.56287,
+     55.87353
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.341",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 24, корпус 3",
+    "unom": 340163,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 244,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563022,
+     55.873282
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.342",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 24, корпус 3",
+    "unom": 340163,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 334,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563055,
+     55.872645
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.344",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 24, корпус 5",
+    "unom": 7192,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 247,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.563375,
+     55.874437
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.345",
+    "district": "Восточное Дегунино",
+    "address": "Керамический проезд, дом 51, корпус 2",
+    "unom": 31538,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 336,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564927,
+     55.875976
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.346",
+    "district": "Восточное Дегунино",
+    "address": "Керамический проезд, дом 53, корпус 1",
+    "unom": 51781,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 257,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564827,
+     55.876951
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.348",
+    "district": "Восточное Дегунино",
+    "address": "Керамический проезд, дом 53, корпус 1",
+    "unom": 51781,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 357,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.565904,
+     55.878211
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.349",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 30Б",
+    "unom": 31526,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 356,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.56416,
+     55.878182
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.350",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 30Б",
+    "unom": 31526,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 267,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564511,
+     55.879445
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.351",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 30Б",
+    "unom": 31526,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 5,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564123,
+     55.878974
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.352",
+    "district": "Восточное Дегунино",
+    "address": "улица 800-летия Москвы, дом 11, корпус 1",
+    "unom": 4873,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 270,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564438,
+     55.879778
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.353",
+    "district": "Восточное Дегунино",
+    "address": "улица 800-летия Москвы, дом 11, корпус 1",
+    "unom": 4873,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 89,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564768,
+     55.879625
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.354",
+    "district": "Восточное Дегунино",
+    "address": "Керамический проезд, дом 53, корпус 1",
+    "unom": 51781,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 299,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.566423,
+     55.87946
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.355",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 26, корпус 4",
+    "unom": 7195,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 97,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560938,
+     55.876985
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.356",
+    "district": "Восточное Дегунино",
+    "address": "улица 800-летия Москвы, дом 20",
+    "unom": 4886,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 256,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.556276,
+     55.879702
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.358",
+    "district": "Восточное Дегунино",
+    "address": "улица 800-летия Москвы, дом 11, корпус 1",
+    "unom": 4873,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 81,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562182,
+     55.880947
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.359",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 32, корпус 1",
+    "unom": 7206,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 87,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.558984,
+     55.882609
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.361",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 32, корпус 5",
+    "unom": 75106,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 179,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559591,
+     55.882275
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.363",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 46",
+    "unom": 7223,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 177,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559805,
+     55.890878
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.365",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 46",
+    "unom": 7223,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 178,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.558132,
+     55.889533
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.369",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 46",
+    "unom": 7223,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 179,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559843,
+     55.889476
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.370",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 46",
+    "unom": 7223,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 270,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.55973,
+     55.889527
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.373",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 24, корпус 1",
+    "unom": 7187,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 90,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560694,
+     55.87372
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.3001",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 46",
+    "unom": 7223,
+    "role": "за подъездом 7",
+    "side": "подъезды 1–7",
+    "azimuth": 180,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5588714,
+     55.8931093
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.3002",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 46",
+    "unom": 7223,
+    "role": "за подъездом 1",
+    "side": "подъезды 1–7",
+    "azimuth": 0,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5588926,
+     55.8913258
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.3003",
+    "district": "Восточное Дегунино",
+    "address": "Керамический проезд, дом 63, корпус 1",
+    "unom": 9966,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 1",
+    "azimuth": 0,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5625191,
+     55.8861247
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.3004",
+    "district": "Восточное Дегунино",
+    "address": "Керамический проезд, дом 61, корпус 2",
+    "unom": 9965,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 1",
+    "azimuth": 0,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5635091,
+     55.8858239
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.3005",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 34",
+    "unom": 7210,
+    "role": "за подъездом 7",
+    "side": "подъезды 1–7",
+    "azimuth": 180,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5590952,
+     55.8856512
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.3006",
+    "district": "Восточное Дегунино",
+    "address": "улица 800-летия Москвы, дом 11, корпус 7",
+    "unom": 4879,
+    "role": "за подъездом 1",
+    "side": "подъезды 1–6",
+    "azimuth": 267,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5645721,
+     55.8844004
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.3007",
+    "district": "Восточное Дегунино",
+    "address": "улица 800-летия Москвы, дом 11, корпус 7",
+    "unom": 4879,
+    "role": "за подъездом 6",
+    "side": "подъезды 1–6",
+    "azimuth": 87,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.562328,
+     55.8843298
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.3008",
+    "district": "Восточное Дегунино",
+    "address": "улица 800-летия Москвы, дом 11, корпус 6",
+    "unom": 4878,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 1",
+    "azimuth": 178,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5651259,
+     55.8841946
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.3009",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 32, корпус 4",
+    "unom": 7209,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 1",
+    "azimuth": 180,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5600733,
+     55.884107
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.3010",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 34",
+    "unom": 7210,
+    "role": "за подъездом 1",
+    "side": "подъезды 1–7",
+    "azimuth": 0,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559112,
+     55.8839066
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.3011",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 32, корпус 3",
+    "unom": 7208,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 1",
+    "azimuth": 0,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.559761,
+     55.883413
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.3012",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 32, корпус 7",
+    "unom": 340049,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 1",
+    "azimuth": 270,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.560629,
+     55.8832732
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.3013",
+    "district": "Восточное Дегунино",
+    "address": "улица 800-летия Москвы, дом 11, корпус 4",
+    "unom": 4876,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 1",
+    "azimuth": 176,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5647569,
+     55.8832451
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.3014",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 32, корпус 8",
+    "unom": 340080,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 1",
+    "azimuth": 90,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5606212,
+     55.8831499
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.3015",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 32, корпус 9",
+    "unom": 340081,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 1",
+    "azimuth": 1,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.561567,
+     55.8830141
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.3016",
+    "district": "Восточное Дегунино",
+    "address": "улица 800-летия Москвы, дом 11, корпус 8",
+    "unom": 4880,
+    "role": "за подъездом 1",
+    "side": "подъезды 1–4",
+    "azimuth": 357,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5626825,
+     55.8830132
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.3017",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 32, корпус 6",
+    "unom": 75090,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 1",
+    "azimuth": 181,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5608971,
+     55.8828558
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.3018",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 73, корпус 6",
+    "unom": 7250,
+    "role": "за подъездом 4",
+    "side": "подъезды 1–4",
+    "azimuth": 108,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5549728,
+     55.8828507
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.3019",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 32, корпус 1",
+    "unom": 7206,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 1",
+    "azimuth": 0,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5587898,
+     55.8827293
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.3020",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 30, корпус 2",
+    "unom": 7205,
+    "role": "за подъездом 8",
+    "side": "подъезды 1–8",
+    "azimuth": 180,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5586133,
+     55.8826431
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.3021",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 73, корпус 6",
+    "unom": 7250,
+    "role": "за подъездом 1",
+    "side": "подъезды 1–4",
+    "azimuth": 288,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5563605,
+     55.8826014
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.3022",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 73, корпус 3",
+    "unom": 7248,
+    "role": "за подъездом 1",
+    "side": "подъезды 1–4",
+    "azimuth": 214,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5546593,
+     55.8825838
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.3023",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 32, корпус 6",
+    "unom": 75090,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 2",
+    "azimuth": 271,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5609144,
+     55.8825663
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.3024",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 73, корпус 1",
+    "unom": 7246,
+    "role": "за подъездом 1",
+    "side": "подъезды 1–8",
+    "azimuth": 179,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5565081,
+     55.8824995
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.3025",
+    "district": "Восточное Дегунино",
+    "address": "улица 800-летия Москвы, дом 11, корпус 3",
+    "unom": 4875,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 1",
+    "azimuth": 357,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5644068,
+     55.8824389
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.3026",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 32, корпус 5",
+    "unom": 75106,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 2",
+    "azimuth": 179,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5600236,
+     55.8821701
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.3027",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 73, корпус 3",
+    "unom": 7248,
+    "role": "за подъездом 4",
+    "side": "подъезды 1–4",
+    "azimuth": 34,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5538208,
+     55.8818767
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.3028",
+    "district": "Восточное Дегунино",
+    "address": "улица 800-летия Москвы, дом 11, корпус 1",
+    "unom": 4873,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 1",
+    "azimuth": 176,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.564458,
+     55.8817892
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.3029",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 73, корпус 4",
+    "unom": 7249,
+    "role": "за подъездом 6",
+    "side": "подъезды 1–6",
+    "azimuth": 165,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5540201,
+     55.8817278
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.3030",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 73, корпус 1",
+    "unom": 7246,
+    "role": "за подъездом 8",
+    "side": "подъезды 1–8",
+    "azimuth": 359,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5565407,
+     55.8809374
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.3031",
     "district": "Восточное Дегунино",
     "address": "улица 800-летия Москвы, дом 1, корпус 4",
     "unom": 4858,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1",
     "azimuth": 163,
     "status": "черновик"
@@ -1988,47 +3270,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.100",
-    "district": "Восточное Дегунино",
-    "address": "улица 800-летия Москвы, дом 11",
-    "unom": 4872,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 358,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5647142,
-     55.8807836
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.101",
-    "district": "Восточное Дегунино",
-    "address": "улица 800-летия Москвы, дом 7, корпус 1",
-    "unom": 4868,
-    "role": "середина фасада",
-    "side": "подъезды 1–8",
-    "azimuth": 263,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5607416,
-     55.8807643
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.102",
+    "point_no": "Т5.3032",
     "district": "Восточное Дегунино",
     "address": "Дубнинская улица, дом 73, корпус 4",
     "unom": 7249,
@@ -2040,257 +3282,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5545137,
-     55.8806112
+     37.5545721,
+     55.8806016
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.103",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 73, корпус 2",
-    "unom": 7247,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 43,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5559014,
-     55.8805337
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.104",
-    "district": "Восточное Дегунино",
-    "address": "улица 800-летия Москвы, дом 7, корпус 1",
-    "unom": 4868,
-    "role": "за подъездом 8",
-    "side": "подъезды 1–8",
-    "azimuth": 83,
-    "status": "черновик",
-    "also_covers": "Дубнинская улица, дом 30, корпус 1 (подъезды 1–2)"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5593001,
-     55.8805314
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.105",
-    "district": "Восточное Дегунино",
-    "address": "улица 800-летия Москвы, дом 1, корпус 4",
-    "unom": 4858,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 343,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5493026,
-     55.880438
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.106",
-    "district": "Восточное Дегунино",
-    "address": "улица 800-летия Москвы, дом 3, корпус 1",
-    "unom": 4861,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–6",
-    "azimuth": 253,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5526355,
-     55.8798999
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.107",
-    "district": "Восточное Дегунино",
-    "address": "улица 800-летия Москвы, дом 26, корпус 1",
-    "unom": 31507,
-    "role": "середина фасада",
-    "side": "подъезды 1–5",
-    "azimuth": 90,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5603001,
-     55.8798122
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.108",
-    "district": "Восточное Дегунино",
-    "address": "улица 800-летия Москвы, дом 26, корпус 1",
-    "unom": 31507,
-    "role": "за подъездом 5",
-    "side": "подъезды 1–5",
-    "azimuth": 90,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5592826,
-     55.879812
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.109",
-    "district": "Восточное Дегунино",
-    "address": "улица 800-летия Москвы, дом 26, корпус 1",
-    "unom": 31507,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–5",
-    "azimuth": 270,
-    "status": "черновик",
-    "also_covers": "улица 800-летия Москвы, дом 26, корпус 1 (подъезды 6–7)"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5612229,
-     55.8798018
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.110",
-    "district": "Восточное Дегунино",
-    "address": "улица 800-летия Москвы, дом 24",
-    "unom": 31866,
-    "role": "угол (тротуар вокруг дома)",
-    "side": "круговой тротуар",
-    "azimuth": 109,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5588338,
-     55.8797741
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.111",
-    "district": "Восточное Дегунино",
-    "address": "улица 800-летия Москвы, дом 3, корпус 1",
-    "unom": 4861,
-    "role": "середина фасада",
-    "side": "подъезды 1–6",
-    "azimuth": 253,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5516405,
-     55.8797298
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.112",
-    "district": "Восточное Дегунино",
-    "address": "улица 800-летия Москвы, дом 24",
-    "unom": 31866,
-    "role": "за подъездом 2",
-    "side": "подъезды 1–2",
-    "azimuth": 199,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5593401,
-     55.8796605
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.113",
-    "district": "Восточное Дегунино",
-    "address": "улица 800-летия Москвы, дом 1, корпус 1",
-    "unom": 4857,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 164,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5498823,
-     55.8796338
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.114",
-    "district": "Восточное Дегунино",
-    "address": "улица 800-летия Москвы, дом 3, корпус 1",
-    "unom": 4861,
-    "role": "за подъездом 6",
-    "side": "подъезды 1–6",
-    "azimuth": 73,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5506389,
-     55.8795167
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.115",
+    "point_no": "Т5.3033",
     "district": "Восточное Дегунино",
     "address": "улица 800-летия Москвы, дом 20",
     "unom": 4886,
@@ -2302,19 +3302,19 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5556129,
-     55.8793085
+     37.5556253,
+     55.8793402
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.116",
+    "point_no": "Т5.3034",
     "district": "Восточное Дегунино",
     "address": "улица 800-летия Москвы, дом 1, корпус 1",
     "unom": 4857,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1",
     "azimuth": 344,
     "status": "черновик"
@@ -2322,99 +3322,19 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5499709,
-     55.8792225
+     37.5499965,
+     55.8792079
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.117",
-    "district": "Восточное Дегунино",
-    "address": "улица 800-летия Москвы, дом 26, корпус 1",
-    "unom": 31507,
-    "role": "за подъездом 7",
-    "side": "подъезды 6–7",
-    "azimuth": 0,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5610258,
-     55.8792089
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.118",
-    "district": "Восточное Дегунино",
-    "address": "Керамический проезд, дом 57, корпус 1",
-    "unom": 51691,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–3",
-    "azimuth": 180,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5659457,
-     55.8791513
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.119",
-    "district": "Восточное Дегунино",
-    "address": "улица 800-летия Москвы, дом 26, корпус 1",
-    "unom": 31507,
-    "role": "угол (тротуар вокруг дома)",
-    "side": "круговой тротуар",
-    "azimuth": 0,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5592725,
-     55.8791223
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.120",
-    "district": "Восточное Дегунино",
-    "address": "улица 800-летия Москвы, дом 24",
-    "unom": 31866,
-    "role": "угол (тротуар вокруг дома)",
-    "side": "круговой тротуар",
-    "azimuth": 19,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5584303,
-     55.8791157
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.121",
+    "point_no": "Т5.3035",
     "district": "Восточное Дегунино",
     "address": "улица 800-летия Москвы, дом 18",
     "unom": 4885,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–2",
     "azimuth": 253,
     "status": "черновик"
@@ -2422,197 +3342,95 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5530306,
-     55.87911
+     37.5530186,
+     55.8791529
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.122",
-    "district": "Восточное Дегунино",
-    "address": "улица 800-летия Москвы, дом 20",
-    "unom": 4886,
-    "role": "середина фасада",
-    "side": "подъезды 1–6",
-    "azimuth": 253,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5543752,
-     55.8791093
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.123",
-    "district": "Восточное Дегунино",
-    "address": "улица 800-летия Москвы, дом 24",
-    "unom": 31866,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–2",
-    "azimuth": 19,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5589567,
-     55.879033
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.124",
+    "point_no": "Т5.3036",
     "district": "Восточное Дегунино",
     "address": "улица 800-летия Москвы, дом 26, корпус 2",
     "unom": 31508,
-    "role": "за подъездом 4",
-    "side": "подъезды 3–4",
-    "azimuth": 179,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.559779,
-     55.8789764
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.125",
-    "district": "Восточное Дегунино",
-    "address": "улица 800-летия Москвы, дом 18",
-    "unom": 4885,
-    "role": "за подъездом 2",
-    "side": "подъезды 1–2",
-    "azimuth": 73,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5521219,
-     55.8789613
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.126",
-    "district": "Восточное Дегунино",
-    "address": "улица 800-летия Москвы, дом 20",
-    "unom": 4886,
-    "role": "за подъездом 6",
-    "side": "подъезды 1–6",
-    "azimuth": 73,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5530176,
-     55.8788864
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.127",
-    "district": "Восточное Дегунино",
-    "address": "улица 800-летия Москвы, дом 16",
-    "unom": 4884,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–6",
-    "azimuth": 253,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5523565,
-     55.8787581
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.128",
-    "district": "Восточное Дегунино",
-    "address": "улица 800-летия Москвы, дом 16",
-    "unom": 4884,
-    "role": "середина фасада",
-    "side": "подъезды 1–6",
-    "azimuth": 253,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5511201,
-     55.878525
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.129",
-    "district": "Восточное Дегунино",
-    "address": "улица 800-летия Москвы, дом 26, корпус 2",
-    "unom": 31508,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 269,
-    "status": "черновик",
-    "also_covers": "улица 800-летия Москвы, дом 26, корпус 2 (подъезды 2)"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5603709,
-     55.8783488
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.130",
-    "district": "Восточное Дегунино",
-    "address": "улица 800-летия Москвы, дом 26, корпус 2",
-    "unom": 31508,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
     "azimuth": 89,
-    "status": "черновик",
-    "also_covers": "улица 800-летия Москвы, дом 26, корпус 2 (подъезды 2)"
+    "status": "черновик"
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5594493,
-     55.878338
+     37.5595031,
+     55.878975
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.131",
+    "point_no": "Т5.3037",
+    "district": "Восточное Дегунино",
+    "address": "улица 800-летия Москвы, дом 20",
+    "unom": 4886,
+    "role": "за подъездом 6",
+    "side": "подъезды 1–6",
+    "azimuth": 73,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5530393,
+     55.8788936
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.3038",
+    "district": "Восточное Дегунино",
+    "address": "улица 800-летия Москвы, дом 16",
+    "unom": 4884,
+    "role": "за подъездом 1",
+    "side": "подъезды 1–6",
+    "azimuth": 253,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5523569,
+     55.8787924
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.3039",
+    "district": "Восточное Дегунино",
+    "address": "улица 800-летия Москвы, дом 14",
+    "unom": 4883,
+    "role": "за подъездом 1",
+    "side": "подъезды 1–4",
+    "azimuth": 245,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5495629,
+     55.8783764
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.3040",
     "district": "Восточное Дегунино",
     "address": "улица 800-летия Москвы, дом 16",
     "unom": 4884,
@@ -2624,116 +3442,35 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5500301,
-     55.8783338
+     37.5500075,
+     55.8783743
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.132",
-    "district": "Восточное Дегунино",
-    "address": "улица 800-летия Москвы, дом 14",
-    "unom": 4883,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–4",
-    "azimuth": 245,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5496012,
-     55.8783075
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.133",
+    "point_no": "Т5.3041",
     "district": "Восточное Дегунино",
     "address": "улица 800-летия Москвы, дом 26, корпус 2",
     "unom": 31508,
-    "role": "за подъездом 3",
-    "side": "подъезды 3–4",
-    "azimuth": 359,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5598079,
-     55.8782278
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.134",
-    "district": "Восточное Дегунино",
-    "address": "Керамический проезд, дом 55, корпус 1",
-    "unom": 51782,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–3",
-    "azimuth": 172,
-    "status": "черновик",
-    "also_covers": "Керамический проезд, дом 57, корпус 1 (подъезды 1–3)"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5660703,
-     55.8781257
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.135",
-    "district": "Восточное Дегунино",
-    "address": "улица 800-летия Москвы, дом 14",
-    "unom": 4883,
     "role": "угол (тротуар вокруг дома)",
     "side": "круговой тротуар",
-    "azimuth": 245,
+    "azimuth": 269,
     "status": "черновик"
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5496639,
-     55.8781173
+     37.5604877,
+     55.8782272
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.136",
-    "district": "Восточное Дегунино",
-    "address": "улица 800-летия Москвы, дом 14",
-    "unom": 4883,
-    "role": "за подъездом 4",
-    "side": "подъезды 1–4",
-    "azimuth": 65,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5480568,
-     55.8779171
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.137",
+    "point_no": "Т5.3042",
     "district": "Восточное Дегунино",
     "address": "Дубнинская улица, дом 30Б",
     "unom": 31526,
@@ -2745,115 +3482,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5614438,
-     55.8779037
+     37.5614475,
+     55.8779219
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.138",
-    "district": "Восточное Дегунино",
-    "address": "улица 800-летия Москвы, дом 14",
-    "unom": 4883,
-    "role": "угол (тротуар вокруг дома)",
-    "side": "круговой тротуар",
-    "azimuth": 335,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5481978,
-     55.8776787
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.139",
-    "district": "Восточное Дегунино",
-    "address": "Керамический проезд, дом 55, корпус 1",
-    "unom": 51782,
-    "role": "угол (тротуар вокруг дома)",
-    "side": "круговой тротуар",
-    "azimuth": 262,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5666694,
-     55.8771906
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.140",
-    "district": "Восточное Дегунино",
-    "address": "Керамический проезд, дом 55, корпус 1",
-    "unom": 51782,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 352,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5662281,
-     55.8771712
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.141",
-    "district": "Восточное Дегунино",
-    "address": "Керамический проезд, дом 53, корпус 1",
-    "unom": 51781,
-    "role": "угол (тротуар вокруг дома)",
-    "side": "круговой тротуар",
-    "azimuth": 168,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5667674,
-     55.8769776
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.142",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 30Б",
-    "unom": 31526,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–4",
-    "azimuth": 359,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5614312,
-     55.8769702
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.143",
+    "point_no": "Т5.3043",
     "district": "Восточное Дегунино",
     "address": "Керамический проезд, дом 53, корпус 1",
     "unom": 51781,
@@ -2865,15 +3502,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5664652,
-     55.8769589
+     37.5663403,
+     55.8769453
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.144",
+    "point_no": "Т5.3044",
     "district": "Восточное Дегунино",
     "address": "Дубнинская улица, дом 26, корпус 4",
     "unom": 7195,
@@ -2885,139 +3522,19 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5616323,
-     55.8764403
+     37.5615156,
+     55.8764228
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.145",
-    "district": "Восточное Дегунино",
-    "address": "Керамический проезд, дом 53, корпус 1",
-    "unom": 51781,
-    "role": "середина фасада",
-    "side": "подъезды 1–4",
-    "azimuth": 168,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5666778,
-     55.8763865
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.146",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 28, корпус 1",
-    "unom": 7198,
-    "role": "за подъездом 4",
-    "side": "подъезды 1–4",
-    "azimuth": 156,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5588543,
-     55.8762433
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.147",
-    "district": "Восточное Дегунино",
-    "address": "Керамический проезд, дом 51, корпус 1",
-    "unom": 31537,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–3",
-    "azimuth": 250,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5665316,
-     55.8758709
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.148",
-    "district": "Восточное Дегунино",
-    "address": "Керамический проезд, дом 53, корпус 1",
-    "unom": 51781,
-    "role": "угол (тротуар вокруг дома)",
-    "side": "круговой тротуар",
-    "azimuth": 258,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5671464,
-     55.8758615
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.149",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 26, корпус 2",
-    "unom": 7193,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–2",
-    "azimuth": 245,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5610634,
-     55.875834
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.150",
-    "district": "Восточное Дегунино",
-    "address": "Керамический проезд, дом 53, корпус 1",
-    "unom": 51781,
-    "role": "за подъездом 4",
-    "side": "подъезды 1–4",
-    "azimuth": 348,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5669019,
-     55.875786
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.151",
+    "point_no": "Т5.3045",
     "district": "Восточное Дегунино",
     "address": "Керамический проезд, дом 51, корпус 2",
     "unom": 31538,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–2",
     "azimuth": 249,
     "status": "черновик"
@@ -3025,95 +3542,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5649109,
-     55.8757143
+     37.5649022,
+     55.8757579
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.152",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 26, корпус 4",
-    "unom": 7195,
-    "role": "середина фасада",
-    "side": "подъезды 1–8",
-    "azimuth": 156,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5622212,
-     55.8756933
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.153",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 26, корпус 2",
-    "unom": 7193,
-    "role": "за подъездом 2",
-    "side": "подъезды 1–2",
-    "azimuth": 65,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5603637,
-     55.8756479
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.154",
-    "district": "Восточное Дегунино",
-    "address": "Керамический проезд, дом 51, корпус 1",
-    "unom": 31537,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 70,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5654345,
-     55.8756441
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.155",
-    "district": "Восточное Дегунино",
-    "address": "Керамический проезд, дом 51, корпус 2",
-    "unom": 31538,
-    "role": "за подъездом 2",
-    "side": "подъезды 1–2",
-    "azimuth": 69,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5638151,
-     55.8755107
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.156",
+    "point_no": "Т5.3046",
     "district": "Восточное Дегунино",
     "address": "Дубнинская улица, дом 26, корпус 3",
     "unom": 7194,
@@ -3125,115 +3562,35 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5606417,
-     55.8754527
+     37.5605962,
+     55.8756742
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.157",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 28, корпус 1",
-    "unom": 7198,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–4",
-    "azimuth": 336,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5594718,
-     55.8754384
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.158",
+    "point_no": "Т5.3047",
     "district": "Восточное Дегунино",
     "address": "Дубнинская улица, дом 26, корпус 1",
     "unom": 75048,
-    "role": "за подъездом 5",
-    "side": "подъезды 2–5",
-    "azimuth": 157,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 67,
     "status": "черновик"
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5597005,
-     55.8752301
+     37.5593886,
+     55.8751841
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.159",
-    "district": "Восточное Дегунино",
-    "address": "Керамический проезд, дом 49, корпус 1",
-    "unom": 51780,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–4",
-    "azimuth": 167,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5672018,
-     55.8751791
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.160",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 26, корпус 5",
-    "unom": 7196,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–4",
-    "azimuth": 250,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5624076,
-     55.8751431
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.161",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 26, корпус 1",
-    "unom": 75048,
-    "role": "за подъездом 6",
-    "side": "подъезды 6",
-    "azimuth": 247,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5600525,
-     55.8751001
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.162",
+    "point_no": "Т5.3048",
     "district": "Восточное Дегунино",
     "address": "Дубнинская улица, дом 26, корпус 4",
     "unom": 7195,
@@ -3245,35 +3602,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.56267,
-     55.8750101
+     37.562661,
+     55.874988
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.163",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 26, корпус 1",
-    "unom": 75048,
-    "role": "за подъездом 6",
-    "side": "подъезды 6",
-    "azimuth": 67,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5595756,
-     55.874986
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.164",
+    "point_no": "Т5.3049",
     "district": "Восточное Дегунино",
     "address": "Дубнинская улица, дом 26, корпус 3",
     "unom": 7194,
@@ -3286,155 +3623,35 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5612069,
-     55.8748886
+     37.5612318,
+     55.8748951
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.165",
-    "district": "Восточное Дегунино",
-    "address": "Керамический проезд, дом 49, корпус 1",
-    "unom": 51780,
-    "role": "середина фасада",
-    "side": "подъезды 1–4",
-    "azimuth": 167,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5674452,
-     55.8746521
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.166",
+    "point_no": "Т5.3050",
     "district": "Восточное Дегунино",
     "address": "Дубнинская улица, дом 26, корпус 1",
     "unom": 75048,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 247,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5606701,
-     55.8745707
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.167",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 26, корпус 1",
-    "unom": 75048,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 67,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5599604,
-     55.8744008
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.168",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 26, корпус 1",
-    "unom": 75048,
-    "role": "за подъездом 2",
-    "side": "подъезды 2–5",
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
     "azimuth": 337,
     "status": "черновик"
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5603679,
-     55.8743422
+     37.5601096,
+     55.874241
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.169",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 24, корпус 2",
-    "unom": 7188,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–4",
-    "azimuth": 250,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5619973,
-     55.8741504
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.170",
-    "district": "Восточное Дегунино",
-    "address": "Керамический проезд, дом 49, корпус 1",
-    "unom": 51780,
-    "role": "за подъездом 4",
-    "side": "подъезды 1–4",
-    "azimuth": 347,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5676689,
-     55.8741209
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.171",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 24, корпус 4",
-    "unom": 7191,
-    "role": "за подъездом 4",
-    "side": "подъезды 1–4",
-    "azimuth": 70,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5622842,
-     55.8740763
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.172",
+    "point_no": "Т5.3051",
     "district": "Восточное Дегунино",
     "address": "Дубнинская улица, дом 24, корпус 5",
     "unom": 7192,
@@ -3446,35 +3663,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5634717,
-     55.8740696
+     37.5634598,
+     55.8740668
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.173",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 24, корпус 2",
-    "unom": 7188,
-    "role": "за подъездом 4",
-    "side": "подъезды 1–4",
-    "azimuth": 70,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5606146,
-     55.8739136
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.174",
+    "point_no": "Т5.3052",
     "district": "Восточное Дегунино",
     "address": "Дубнинская улица, дом 24, корпус 1",
     "unom": 7187,
@@ -3486,39 +3683,19 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5608542,
-     55.8737002
+     37.5609642,
+     55.8737275
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.175",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 24, корпус 5",
-    "unom": 7192,
-    "role": "середина фасада",
-    "side": "подъезды 1–8",
-    "azimuth": 157,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5640727,
-     55.8733953
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.176",
+    "point_no": "Т5.3053",
     "district": "Восточное Дегунино",
     "address": "Керамический проезд, дом 47, корпус 1",
     "unom": 51779,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–3",
     "azimuth": 166,
     "status": "черновик"
@@ -3526,15 +3703,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5679722,
-     55.8733167
+     37.5678681,
+     55.8733209
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.177",
+    "point_no": "Т5.3054",
     "district": "Восточное Дегунино",
     "address": "Дубнинская улица, дом 24, корпус 3",
     "unom": 340163,
@@ -3546,95 +3723,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5642707,
-     55.8728426
+     37.5642514,
+     55.8728945
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.178",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 24, корпус 1",
-    "unom": 7187,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–4",
-    "azimuth": 336,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5615279,
-     55.872841
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.179",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 22, корпус 6",
-    "unom": 340278,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 247,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5618905,
-     55.8727469
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.180",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 24, корпус 5",
-    "unom": 7192,
-    "role": "за подъездом 8",
-    "side": "подъезды 1–8",
-    "azimuth": 337,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5644034,
-     55.8726994
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.181",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 22, корпус 6",
-    "unom": 340278,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 67,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5614435,
-     55.8726438
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.182",
+    "point_no": "Т5.3055",
     "district": "Восточное Дегунино",
     "address": "Дубнинская улица, дом 20, корпус 1",
     "unom": 7180,
@@ -3646,155 +3743,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5601631,
-     55.8725813
+     37.5601539,
+     55.8726339
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.183",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 24, корпус 3",
-    "unom": 340163,
-    "role": "за подъездом 5",
-    "side": "подъезды 1–5",
-    "azimuth": 66,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.562964,
-     55.8725577
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.184",
-    "district": "Восточное Дегунино",
-    "address": "Керамический проезд, дом 47, корпус 1",
-    "unom": 51779,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 346,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.568332,
-     55.8724829
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.185",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 22, корпус 5",
-    "unom": 340277,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 247,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5621691,
-     55.8724122
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.186",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 22, корпус 5",
-    "unom": 340277,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 67,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5618389,
-     55.8723428
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.187",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 22, корпус 3",
-    "unom": 7186,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–4",
-    "azimuth": 246,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5653295,
-     55.8721482
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.188",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 22, корпус 4",
-    "unom": 340276,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 247,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5624488,
-     55.8720587
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.189",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 22, корпус 4",
-    "unom": 340276,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 67,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5621229,
-     55.8719847
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.190",
+    "point_no": "Т5.3056",
     "district": "Восточное Дегунино",
     "address": "Дубнинская улица, дом 22, корпус 2",
     "unom": 7185,
@@ -3806,15 +3763,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5637093,
-     55.8719382
+     37.5636649,
+     55.8719945
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.191",
+    "point_no": "Т5.3057",
     "district": "Восточное Дегунино",
     "address": "Дубнинская улица, дом 20, корпус 4",
     "unom": 7183,
@@ -3826,75 +3783,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5652848,
-     55.8718691
+     37.5651797,
+     55.8718427
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.192",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 22, корпус 3",
-    "unom": 7186,
-    "role": "за подъездом 4",
-    "side": "подъезды 1–4",
-    "azimuth": 66,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5640542,
-     55.8717883
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.193",
-    "district": "Восточное Дегунино",
-    "address": "Керамический проезд, дом 45, корпус 1",
-    "unom": 51690,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–4",
-    "azimuth": 166,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5686702,
-     55.871784
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.194",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 20, корпус 1",
-    "unom": 7180,
-    "role": "середина фасада",
-    "side": "подъезды 1–10",
-    "azimuth": 336,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5608728,
-     55.8716882
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.195",
+    "point_no": "Т5.3058",
     "district": "Восточное Дегунино",
     "address": "Дубнинская улица, дом 22, корпус 2",
     "unom": 7185,
@@ -3906,15 +3803,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5624218,
-     55.8716593
+     37.5623914,
+     55.8716604
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.196",
+    "point_no": "Т5.3059",
     "district": "Восточное Дегунино",
     "address": "Дубнинская улица, дом 22, корпус 1",
     "unom": 7184,
@@ -3926,55 +3823,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5626554,
-     55.8714716
+     37.5626813,
+     55.8714787
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.197",
-    "district": "Восточное Дегунино",
-    "address": "Керамический проезд, дом 45, корпус 1",
-    "unom": 51690,
-    "role": "середина фасада",
-    "side": "подъезды 1–4",
-    "azimuth": 166,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5688996,
-     55.8712553
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.198",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 20, корпус 4",
-    "unom": 7183,
-    "role": "середина фасада",
-    "side": "подъезды 1–8",
-    "azimuth": 156,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5658479,
-     55.8711547
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.199",
+    "point_no": "Т5.3060",
     "district": "Восточное Дегунино",
     "address": "Дубнинская улица, дом 20, корпус 1",
     "unom": 7180,
@@ -3986,15 +3843,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5615764,
-     55.8707948
+     37.5616291,
+     55.8707877
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.200",
+    "point_no": "Т5.3061",
     "district": "Восточное Дегунино",
     "address": "Керамический проезд, дом 45, корпус 1",
     "unom": 51690,
@@ -4006,15 +3863,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5691338,
-     55.8707155
+     37.5690134,
+     55.8706974
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.201",
+    "point_no": "Т5.3062",
     "district": "Восточное Дегунино",
     "address": "Дубнинская улица, дом 22, корпус 1",
     "unom": 7184,
@@ -4026,15 +3883,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5632743,
-     55.870669
+     37.56342,
+     55.8706508
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.202",
+    "point_no": "Т5.3063",
     "district": "Восточное Дегунино",
     "address": "Дубнинская улица, дом 20, корпус 3",
     "unom": 7182,
@@ -4046,35 +3903,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5659438,
-     55.8706087
+     37.5660177,
+     55.8706437
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.203",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 20, корпус 4",
-    "unom": 7183,
-    "role": "за подъездом 8",
-    "side": "подъезды 1–8",
-    "azimuth": 336,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5662806,
-     55.8705066
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.204",
+    "point_no": "Т5.3064",
     "district": "Восточное Дегунино",
     "address": "Дубнинская улица, дом 20, корпус 2",
     "unom": 7181,
@@ -4086,15 +3923,35 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.563463,
-     55.8704747
+     37.5634847,
+     55.8704999
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.205",
+    "point_no": "Т5.3065",
+    "district": "Восточное Дегунино",
+    "address": "Дубнинская улица, дом 20, корпус 4",
+    "unom": 7183,
+    "role": "за подъездом 8",
+    "side": "подъезды 1–8",
+    "azimuth": 336,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.566247,
+     55.8704981
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.3066",
     "district": "Восточное Дегунино",
     "address": "Дубнинская улица, дом 20, корпус 3",
     "unom": 7182,
@@ -4106,19 +3963,19 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5647336,
-     55.8702979
+     37.5647249,
+     55.870309
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.206",
+    "point_no": "Т5.3067",
     "district": "Восточное Дегунино",
     "address": "Дубнинская улица, дом 18, корпус 1",
     "unom": 7179,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1",
     "azimuth": 346,
     "status": "черновик"
@@ -4134,27 +3991,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.207",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 20, корпус 2",
-    "unom": 7181,
-    "role": "середина фасада",
-    "side": "подъезды 1–8",
-    "azimuth": 336,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5639971,
-     55.8697757
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.208",
+    "point_no": "Т5.3068",
     "district": "Восточное Дегунино",
     "address": "Дубнинская улица, дом 16, корпус 1",
     "unom": 7171,
@@ -4166,15 +4003,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5623509,
-     55.8697622
+     37.5624381,
+     55.8697925
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.209",
+    "point_no": "Т5.3069",
     "district": "Восточное Дегунино",
     "address": "Дубнинская улица, дом 16, корпус 6",
     "unom": 7176,
@@ -4186,15 +4023,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5694106,
-     55.8697461
+     37.5695709,
+     55.8697702
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.210",
+    "point_no": "Т5.3070",
     "district": "Восточное Дегунино",
     "address": "Дубнинская улица, дом 20, корпус 2",
     "unom": 7181,
@@ -4206,55 +4043,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5645551,
-     55.8690798
+     37.5646128,
+     55.8690745
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.211",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 16, корпус 6",
-    "unom": 7176,
-    "role": "середина фасада",
-    "side": "подъезды 1–10",
-    "azimuth": 345,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5698318,
-     55.8688632
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.212",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 16, корпус 1",
-    "unom": 7171,
-    "role": "середина фасада",
-    "side": "подъезды 1–10",
-    "azimuth": 336,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5630772,
-     55.8688434
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.213",
+    "point_no": "Т5.3071",
     "district": "Восточное Дегунино",
     "address": "Дубнинская улица, дом 16, корпус 2",
     "unom": 7172,
@@ -4266,19 +4063,19 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5649834,
-     55.8685581
+     37.5650314,
+     55.8685881
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.214",
+    "point_no": "Т5.3072",
     "district": "Восточное Дегунино",
     "address": "Дубнинская улица, дом 16, корпус 4",
     "unom": 7174,
-    "role": "за подъездом 2",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–2",
     "azimuth": 336,
     "status": "черновик"
@@ -4286,15 +4083,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5683369,
-     55.8680996
+     37.5683275,
+     55.8680971
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.215",
+    "point_no": "Т5.3073",
     "district": "Восточное Дегунино",
     "address": "Дубнинская улица, дом 16, корпус 3",
     "unom": 7173,
@@ -4306,15 +4103,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5695859,
-     55.8679976
+     37.5695409,
+     55.8680592
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.216",
+    "point_no": "Т5.3074",
     "district": "Восточное Дегунино",
     "address": "Дубнинская улица, дом 16, корпус 1",
     "unom": 7171,
@@ -4326,15 +4123,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5637792,
-     55.8679588
+     37.5638889,
+     55.8679866
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.217",
+    "point_no": "Т5.3075",
     "district": "Восточное Дегунино",
     "address": "Дубнинская улица, дом 16, корпус 6",
     "unom": 7176,
@@ -4346,115 +4143,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.570285,
-     55.8678853
+     37.5704606,
+     55.8679083
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.218",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 14, корпус 4",
-    "unom": 7170,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 165,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5707442,
-     55.8677381
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.219",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 16, корпус 2",
-    "unom": 7172,
-    "role": "середина фасада",
-    "side": "подъезды 1–10",
-    "azimuth": 336,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5656299,
-     55.8677046
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.220",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 16, корпус 3",
-    "unom": 7173,
-    "role": "середина фасада",
-    "side": "подъезды 1–8",
-    "azimuth": 246,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5682661,
-     55.8676568
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.221",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 14, корпус 3",
-    "unom": 7169,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 165,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5707616,
-     55.8675342
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.222",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 14, корпус 4",
-    "unom": 7170,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 345,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5708915,
-     55.8674078
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.223",
+    "point_no": "Т5.3076",
     "district": "Восточное Дегунино",
     "address": "Дубнинская улица, дом 16, корпус 3",
     "unom": 7173,
@@ -4466,55 +4163,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5668197,
-     55.8673652
+     37.566807,
+     55.8673783
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.224",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 14, корпус 2",
-    "unom": 7168,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 166,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5706887,
-     55.8672523
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.225",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 14, корпус 3",
-    "unom": 7169,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 345,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5707902,
-     55.8670239
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.226",
+    "point_no": "Т5.3077",
     "district": "Восточное Дегунино",
     "address": "Дубнинская улица, дом 14, корпус 1",
     "unom": 7167,
@@ -4526,15 +4183,15 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5645061,
-     55.8669901
+     37.5646015,
+     55.8670167
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.227",
+    "point_no": "Т5.3078",
     "district": "Восточное Дегунино",
     "address": "Дубнинская улица, дом 16, корпус 2",
     "unom": 7172,
@@ -4546,240 +4203,60 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5664037,
-     55.8668095
+     37.5664406,
+     55.8668078
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.228",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 14, корпус 2",
-    "unom": 7168,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 346,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5707424,
-     55.8667172
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.229",
+    "point_no": "Т5.3079",
     "district": "Восточное Дегунино",
     "address": "Дубнинская улица, дом 12, корпус 3",
     "unom": 7164,
     "role": "за подъездом 1",
     "side": "подъезды 1–8",
     "azimuth": 166,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5700524,
-     55.8664878
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.230",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 12, корпус 4",
-    "unom": 7165,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–6",
-    "azimuth": 247,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5698609,
-     55.8664336
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.231",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 12, корпус 4",
-    "unom": 7165,
-    "role": "середина фасада",
-    "side": "подъезды 1–6",
-    "azimuth": 247,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5688308,
-     55.8662317
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.232",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 14, корпус 1",
-    "unom": 7167,
-    "role": "середина фасада",
-    "side": "подъезды 1–10",
-    "azimuth": 336,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5651807,
-     55.8661129
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.233",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 12, корпус 4",
-    "unom": 7165,
-    "role": "за подъездом 6",
-    "side": "подъезды 1–6",
-    "azimuth": 67,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5678234,
-     55.8659791
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.234",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 12, корпус 3",
-    "unom": 7164,
-    "role": "середина фасада",
-    "side": "подъезды 1–8",
-    "azimuth": 166,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5704525,
-     55.8655851
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.235",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 14, корпус 1",
-    "unom": 7167,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–10",
-    "azimuth": 336,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5660054,
-     55.8651925
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.236",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 12, корпус 3",
-    "unom": 7164,
-    "role": "за подъездом 8",
-    "side": "подъезды 1–8",
-    "azimuth": 346,
     "status": "черновик",
-    "also_covers": "Дубнинская улица, дом 12, корпус 2 (подъезды 1–6)"
+    "also_covers": "Дубнинская улица, дом 12, корпус 4 (подъезды 1–6)"
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.570819,
-     55.864819
+     37.5699301,
+     55.8664701
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.237",
+    "point_no": "Т5.3080",
     "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 12, корпус 2",
-    "unom": 7163,
-    "role": "середина фасада",
-    "side": "подъезды 1–6",
-    "azimuth": 251,
+    "address": "Дубнинская улица, дом 14, корпус 1",
+    "unom": 7167,
+    "role": "за подъездом 1",
+    "side": "подъезды 1–10",
+    "azimuth": 336,
     "status": "черновик"
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5696449,
-     55.8645922
+     37.5660882,
+     55.8651404
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.238",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 12, корпус 2",
-    "unom": 7163,
-    "role": "за подъездом 6",
-    "side": "подъезды 1–6",
-    "azimuth": 71,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5682947,
-     55.8643542
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.239",
+    "point_no": "Т5.3081",
     "district": "Восточное Дегунино",
     "address": "Дубнинская улица, дом 10, корпус 4",
     "unom": 7160,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1",
     "azimuth": 161,
     "status": "черновик"
@@ -4787,481 +4264,59 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.572247,
-     55.864348
+     37.5722506,
+     55.8643486
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.240",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 10, корпус 3",
-    "unom": 7159,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–5",
-    "azimuth": 252,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5711292,
-     55.8640279
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.241",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 10, корпус 4",
-    "unom": 7160,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 341,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5724901,
-     55.8639599
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.242",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 10, корпус 3",
-    "unom": 7159,
-    "role": "середина фасада",
-    "side": "подъезды 1–5",
-    "azimuth": 72,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5702163,
-     55.8638557
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.243",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 10, корпус 3",
-    "unom": 7159,
-    "role": "за подъездом 5",
-    "side": "подъезды 1–5",
-    "azimuth": 72,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5695359,
-     55.8637278
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.244",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 10, корпус 5",
-    "unom": 7161,
-    "role": "за подъездом 8",
-    "side": "подъезды 1–8",
-    "azimuth": 164,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5724057,
-     55.8636747
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.245",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 10, корпус 2",
-    "unom": 7158,
-    "role": "за подъездом 10",
-    "side": "подъезды 10",
-    "azimuth": 73,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5686577,
-     55.8635503
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.246",
+    "point_no": "Т5.3082",
     "district": "Восточное Дегунино",
     "address": "Дубнинская улица, дом 10, корпус 2",
     "unom": 7158,
     "role": "за подъездом 9",
     "side": "подъезды 1–9",
     "azimuth": 163,
-    "status": "черновик",
-    "also_covers": "Дубнинская улица, дом 10, корпус 2 (подъезды 10)"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.568946,
-     55.8635254
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.247",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 10, корпус 5",
-    "unom": 7161,
-    "role": "середина фасада",
-    "side": "подъезды 1–8",
-    "azimuth": 344,
     "status": "черновик"
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5725733,
-     55.8629242
+     37.5690457,
+     55.8635421
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.248",
+    "point_no": "Т5.3083",
     "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 10, корпус 2",
-    "unom": 7158,
-    "role": "середина фасада",
-    "side": "подъезды 1–9",
-    "azimuth": 343,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5696233,
-     55.8626577
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.249",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 10, корпус 1",
-    "unom": 7157,
-    "role": "середина фасада",
-    "side": "подъезды 1–5, 8–10",
-    "azimuth": 345,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.567896,
-     55.8624094
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.250",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 10, корпус 5",
-    "unom": 7161,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–8",
-    "azimuth": 344,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5729962,
-     55.8622013
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.251",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 8, корпус 1",
-    "unom": 7156,
-    "role": "за подъездом 6",
-    "side": "подъезды 1–6",
-    "azimuth": 172,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5726564,
-     55.8620444
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.252",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 10, корпус 2",
-    "unom": 7158,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–9",
-    "azimuth": 343,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5699452,
-     55.8617216
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.253",
-    "district": "Восточное Дегунино",
-    "address": "Бескудниковский бульвар, дом 8, корпус 4",
-    "unom": 75088,
+    "address": "Дубнинская улица, дом 17, корпус 2",
+    "unom": 75123,
     "role": "угол (тротуар вокруг дома)",
     "side": "круговой тротуар",
-    "azimuth": 164,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5644062,
-     55.8615353
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.254",
-    "district": "Восточное Дегунино",
-    "address": "Бескудниковский бульвар, дом 8, корпус 4",
-    "unom": 75088,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 115,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.563607,
-     55.8615147
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.255",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 8, корпус 1",
-    "unom": 7156,
-    "role": "середина фасада",
-    "side": "подъезды 1–6",
-    "azimuth": 352,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5727914,
-     55.8615074
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.256",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 10, корпус 1",
-    "unom": 7157,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–5, 8–10",
-    "azimuth": 345,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5683311,
-     55.8614359
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.257",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 17, корпус 2",
-    "unom": 75123,
-    "role": "за подъездом 3",
-    "side": "подъезды 3",
-    "azimuth": 254,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5656069,
-     55.8614104
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.258",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 17, корпус 2",
-    "unom": 75123,
-    "role": "за подъездом 2",
-    "side": "подъезды 1–2",
-    "azimuth": 164,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5658782,
-     55.8613872
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.259",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 17, корпус 2",
-    "unom": 75123,
-    "role": "за подъездом 3",
-    "side": "подъезды 3",
     "azimuth": 74,
     "status": "черновик"
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5649909,
-     55.8613166
+     37.5649326,
+     55.8613373
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.260",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 17, корпус 1",
-    "unom": 75124,
-    "role": "за подъездом 2",
-    "side": "подъезды 2–3",
-    "azimuth": 173,
-    "status": "черновик",
-    "also_covers": "Дубнинская улица, дом 17, корпус 1 (подъезды 1)"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5670952,
-     55.861249
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.261",
-    "district": "Восточное Дегунино",
-    "address": "Бескудниковский бульвар, дом 8, корпус 4",
-    "unom": 75088,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–3",
-    "azimuth": 295,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5647046,
-     55.8612235
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.262",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 17, корпус 1",
-    "unom": 75124,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 83,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5664667,
-     55.8612084
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.263",
+    "point_no": "Т5.3084",
     "district": "Восточное Дегунино",
     "address": "Бескудниковский бульвар, дом 8, корпус 3",
     "unom": 75087,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–2",
     "azimuth": 180,
     "status": "черновик"
@@ -5269,19 +4324,19 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5645001,
-     55.8611103
+     37.5643907,
+     55.8610929
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.264",
+    "point_no": "Т5.3085",
     "district": "Восточное Дегунино",
     "address": "Дубнинская улица, дом 15, корпус 2",
     "unom": 75120,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–2",
     "azimuth": 180,
     "status": "черновик"
@@ -5297,290 +4352,47 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.265",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 17, корпус 2",
-    "unom": 75123,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–2",
-    "azimuth": 344,
-    "status": "черновик",
-    "also_covers": "Дубнинская улица, дом 15, корпус 2 (круговой тротуар)"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.566143,
-     55.8609779
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.266",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 8, корпус 1",
-    "unom": 7156,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–6",
-    "azimuth": 352,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5729538,
-     55.8609704
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.267",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 6, корпус 3",
-    "unom": 7152,
-    "role": "за подъездом 6",
-    "side": "подъезды 1–6",
-    "azimuth": 179,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5725543,
-     55.8609167
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.268",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 15, корпус 1",
-    "unom": 75111,
-    "role": "угол (тротуар вокруг дома)",
-    "side": "круговой тротуар",
-    "azimuth": 176,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5673773,
-     55.8608187
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.269",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 15, корпус 1",
-    "unom": 75111,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–2",
-    "azimuth": 176,
-    "status": "черновик",
-    "also_covers": "Дубнинская улица, дом 17, корпус 1 (подъезды 2–3)"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5670295,
-     55.8607879
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.270",
-    "district": "Восточное Дегунино",
-    "address": "Бескудниковский бульвар, дом 8, корпус 3",
-    "unom": 75087,
-    "role": "за подъездом 2",
-    "side": "подъезды 1–2",
-    "azimuth": 0,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5644233,
-     55.8605752
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.271",
+    "point_no": "Т5.3086",
     "district": "Восточное Дегунино",
     "address": "Бескудниковский бульвар, дом 8, корпус 2",
     "unom": 75082,
-    "role": "за подъездом 3",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 2–3",
+    "azimuth": 270,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5648475,
+     55.8606076
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т5.3087",
+    "district": "Восточное Дегунино",
+    "address": "Бескудниковский бульвар, дом 8, корпус 2",
+    "unom": 75082,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
     "azimuth": 90,
     "status": "черновик"
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.563968,
-     55.860541
+     37.5638676,
+     55.8605791
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.272",
-    "district": "Восточное Дегунино",
-    "address": "Бескудниковский бульвар, дом 8, корпус 2",
-    "unom": 75082,
-    "role": "за подъездом 2",
-    "side": "подъезды 2–3",
-    "azimuth": 270,
-    "status": "черновик",
-    "also_covers": "Бескудниковский бульвар, дом 8, корпус 3 (круговой тротуар)"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5648374,
-     55.8605295
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.273",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 15, корпус 2",
-    "unom": 75120,
-    "role": "угол (тротуар вокруг дома)",
-    "side": "круговой тротуар",
-    "azimuth": 270,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5662546,
-     55.860493
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.274",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 6, корпус 3",
-    "unom": 7152,
-    "role": "середина фасада",
-    "side": "подъезды 1–6",
-    "azimuth": 359,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5725686,
-     55.8604926
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.275",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 15, корпус 2",
-    "unom": 75120,
-    "role": "за подъездом 2",
-    "side": "подъезды 1–2",
-    "azimuth": 0,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5657941,
-     55.8604924
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.276",
-    "district": "Восточное Дегунино",
-    "address": "Бескудниковский бульвар, дом 8, корпус 2",
-    "unom": 75082,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 180,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5644285,
-     55.8603614
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.277",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 15, корпус 1",
-    "unom": 75111,
-    "role": "угол (тротуар вокруг дома)",
-    "side": "круговой тротуар",
-    "azimuth": 266,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5674574,
-     55.8603527
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.278",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 15, корпус 1",
-    "unom": 75111,
-    "role": "за подъездом 2",
-    "side": "подъезды 1–2",
-    "azimuth": 356,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5670997,
-     55.8602621
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.279",
+    "point_no": "Т5.3088",
     "district": "Восточное Дегунино",
     "address": "Дубнинская улица, дом 13",
     "unom": 75092,
@@ -5593,14 +4405,14 @@
     "type": "Point",
     "coordinates": [
      37.5675377,
-     55.860111
+     55.8601243
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.280",
+    "point_no": "Т5.3089",
     "district": "Восточное Дегунино",
     "address": "Дубнинская улица, дом 13",
     "unom": 75092,
@@ -5612,39 +4424,19 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5658313,
-     55.8600997
+     37.5658226,
+     55.8601228
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.281",
+    "point_no": "Т5.3090",
     "district": "Восточное Дегунино",
     "address": "Бескудниковский бульвар, дом 8, корпус 2",
     "unom": 75082,
-    "role": "угол (тротуар вокруг дома)",
-    "side": "круговой тротуар",
-    "azimuth": 0,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5639786,
-     55.8600957
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.282",
-    "district": "Восточное Дегунино",
-    "address": "Бескудниковский бульвар, дом 8, корпус 2",
-    "unom": 75082,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1",
     "azimuth": 0,
     "status": "черновик"
@@ -5652,60 +4444,40 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.564468,
-     55.8600906
+     37.5644109,
+     55.8600905
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.283",
+    "point_no": "Т5.3091",
     "district": "Восточное Дегунино",
     "address": "Бескудниковский бульвар, дом 8, корпус 1",
     "unom": 75098,
-    "role": "за подъездом 2",
-    "side": "подъезды 2–3",
-    "azimuth": 269,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 89,
     "status": "черновик",
     "also_covers": "Бескудниковский бульвар, дом 8, корпус 2 (круговой тротуар)"
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5648644,
-     55.8599929
+     37.5638651,
+     55.8599777
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.284",
-    "district": "Восточное Дегунино",
-    "address": "Бескудниковский бульвар, дом 8, корпус 1",
-    "unom": 75098,
-    "role": "за подъездом 3",
-    "side": "подъезды 2–3",
-    "azimuth": 89,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5639581,
-     55.8599757
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.285",
+    "point_no": "Т5.3092",
     "district": "Восточное Дегунино",
     "address": "Дубнинская улица, дом 13",
     "unom": 75092,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–2",
     "azimuth": 180,
     "status": "черновик"
@@ -5721,171 +4493,31 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.286",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 6, корпус 3",
-    "unom": 7152,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–6",
-    "azimuth": 359,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5726516,
-     55.8598645
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.287",
-    "district": "Восточное Дегунино",
-    "address": "Бескудниковский бульвар, дом 8, корпус 1",
-    "unom": 75098,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 179,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5643602,
-     55.8598061
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.288",
-    "district": "Восточное Дегунино",
-    "address": "Бескудниковский бульвар, дом 8, корпус 1",
-    "unom": 75098,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 359,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.564447,
-     55.8594767
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.289",
-    "district": "Восточное Дегунино",
-    "address": "Бескудниковский бульвар, дом 8, корпус 1",
-    "unom": 75098,
-    "role": "угол (тротуар вокруг дома)",
-    "side": "круговой тротуар",
-    "azimuth": 269,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5648785,
-     55.8594703
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.290",
+    "point_no": "Т5.3093",
     "district": "Восточное Дегунино",
     "address": "Дубнинская улица, дом 13",
     "unom": 75092,
-    "role": "за подъездом 2",
-    "side": "подъезды 1–2",
-    "azimuth": 0,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 270,
     "status": "черновик"
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5671426,
-     55.8593881
+     37.567536,
+     55.8593337
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.291",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 4, корпус 4",
-    "unom": 7148,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 173,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5717513,
-     55.8589972
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.292",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 4, корпус 4",
-    "unom": 7148,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 353,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5718488,
-     55.8585886
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.293",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 2, корпус 7",
-    "unom": 75059,
-    "role": "за подъездом 2",
-    "side": "подъезды 1–2",
-    "azimuth": 172,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5682044,
-     55.8583608
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.294",
+    "point_no": "Т5.3094",
     "district": "Восточное Дегунино",
     "address": "Дубнинская улица, дом 4, корпус 3",
     "unom": 7147,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1",
     "azimuth": 171,
     "status": "черновик"
@@ -5901,91 +4533,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.295",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 4, корпус 3",
-    "unom": 7147,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 351,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5714513,
-     55.8580062
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.296",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 2, корпус 7",
-    "unom": 75059,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–2",
-    "azimuth": 352,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5683453,
-     55.8578723
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.297",
+    "point_no": "Т5.3095",
     "district": "Восточное Дегунино",
     "address": "Дубнинская улица, дом 2, корпус 6",
     "unom": 75060,
-    "role": "за подъездом 3",
-    "side": "подъезды 2–3",
-    "azimuth": 173,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5680605,
-     55.8578436
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.298",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 4, корпус 2",
-    "unom": 7146,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 173,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5708498,
-     55.857765
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.299",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 2, корпус 6",
-    "unom": 75060,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1",
     "azimuth": 263,
     "status": "черновик"
@@ -5993,99 +4545,19 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5685977,
-     55.8573646
+     37.5685788,
+     55.8574509
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.300",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 4, корпус 2",
-    "unom": 7146,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 353,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5708983,
-     55.8573588
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.301",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 2, корпус 6",
-    "unom": 75060,
-    "role": "за подъездом 4",
-    "side": "подъезды 4",
-    "azimuth": 263,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5685954,
-     55.8571773
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.302",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 2, корпус 6",
-    "unom": 75060,
-    "role": "за подъездом 2",
-    "side": "подъезды 2–3",
-    "azimuth": 353,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5682078,
-     55.8571702
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.303",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 2, корпус 6",
-    "unom": 75060,
-    "role": "за подъездом 4",
-    "side": "подъезды 4",
-    "azimuth": 83,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5678323,
-     55.8571144
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.304",
+    "point_no": "Т5.3096",
     "district": "Восточное Дегунино",
     "address": "Дубнинская улица, дом 2, корпус 3",
     "unom": 7140,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1",
     "azimuth": 172,
     "status": "черновик"
@@ -6093,49 +4565,28 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5677771,
-     55.8568197
+     37.5678899,
+     55.8568281
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т5.305",
+    "point_no": "Т5.3097",
     "district": "Восточное Дегунино",
     "address": "Дубнинская улица, дом 2, корпус 2",
     "unom": 7139,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1",
     "azimuth": 172,
-    "status": "черновик",
-    "also_covers": "Дубнинская улица, дом 2, корпус 3 (подъезды 1)"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5677149,
-     55.8564266
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т5.306",
-    "district": "Восточное Дегунино",
-    "address": "Дубнинская улица, дом 2, корпус 2",
-    "unom": 7139,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 352,
     "status": "черновик"
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5677092,
-     55.8560103
+     37.5677276,
+     55.8564276
     ]
    }
   }

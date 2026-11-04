@@ -193,27 +193,6 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.321",
-    "district": "Аэропорт",
-    "address": "Красноармейская улица, дом 10, корпус 2",
-    "unom": 11441,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 315,
-    "status": "черновик",
-    "prefecture_edit": true
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.547022,
-     55.798841
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
     "point_no": "Т1.322",
     "district": "Аэропорт",
     "address": "Красноармейская улица, дом 6, корпус 2",
@@ -676,31 +655,242 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.501",
+    "point_no": "Т1.548",
     "district": "Аэропорт",
-    "address": "2-й Амбулаторный проезд, дом 21/8",
-    "unom": 483,
-    "role": "за подъездом 2",
-    "side": "подъезды 1–2",
-    "azimuth": 187,
-    "status": "черновик"
+    "address": "Малый Коптевский проезд, дом 4",
+    "unom": 10916,
+    "role": "за подъездом 1",
+    "side": "подъезды 1–4",
+    "azimuth": 204,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5270887,
-     55.8124653
+     37.532864,
+     55.809566
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.502",
+    "point_no": "Т1.552",
+    "district": "Аэропорт",
+    "address": "Малый Коптевский проезд, дом 4",
+    "unom": 10916,
+    "role": "за подъездом 4",
+    "side": "подъезды 1–4",
+    "azimuth": 24,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.532554,
+     55.809181
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т1.586",
+    "district": "Аэропорт",
+    "address": "улица Асеева, дом 8",
+    "unom": 991,
+    "role": "за подъездом 8",
+    "side": "подъезды 1–8",
+    "azimuth": 206,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.531293,
+     55.807641
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т1.600",
+    "district": "Аэропорт",
+    "address": "улица Асеева, дом 8",
+    "unom": 991,
+    "role": "середина фасада",
+    "side": "подъезды 1–8",
+    "azimuth": 26,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.530869,
+     55.807156
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т1.603",
+    "district": "Аэропорт",
+    "address": "Шебашёвский проезд, дом 8, корпус 1",
+    "unom": 29338,
+    "role": "за подъездом 4",
+    "side": "подъезды 4",
+    "azimuth": 115,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.531921,
+     55.807044
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т1.612",
+    "district": "Аэропорт",
+    "address": "Шебашёвский проезд, дом 5",
+    "unom": 29335,
+    "role": "за подъездом 3",
+    "side": "подъезды 1–3",
+    "azimuth": 206,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.531229,
+     55.806745
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т1.616",
+    "district": "Аэропорт",
+    "address": "Шебашёвский проезд, дом 8, корпус 1",
+    "unom": 29338,
+    "role": "за подъездом 1",
+    "side": "подъезды 1–3",
+    "azimuth": 25,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.532036,
+     55.806666
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т1.619",
+    "district": "Аэропорт",
+    "address": "улица Асеева, дом 8",
+    "unom": 991,
+    "role": "за подъездом 1",
+    "side": "подъезды 1–8",
+    "azimuth": 26,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.530247,
+     55.806546
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т1.625",
+    "district": "Аэропорт",
+    "address": "Шебашёвский проезд, дом 5",
+    "unom": 29335,
+    "role": "за подъездом 1",
+    "side": "подъезды 1–3",
+    "azimuth": 26,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.530903,
+     55.806422
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т1.632",
+    "district": "Аэропорт",
+    "address": "Шебашёвский проезд, дом 4, корпус 1",
+    "unom": 29333,
+    "role": "за подъездом 1",
+    "side": "подъезды 1",
+    "azimuth": 205,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.531675,
+     55.806259
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т1.636",
+    "district": "Аэропорт",
+    "address": "Шебашёвский проезд, дом 4, корпус 2",
+    "unom": 29334,
+    "role": "за подъездом 8",
+    "side": "подъезды 6–8",
+    "azimuth": 207,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.532502,
+     55.806125
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т1.3001",
     "district": "Аэропорт",
     "address": "2-й Амбулаторный проезд, дом 19",
     "unom": 482,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–2",
     "azimuth": 187,
     "status": "черновик"
@@ -716,51 +906,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.503",
-    "district": "Аэропорт",
-    "address": "2-й Амбулаторный проезд, дом 17",
-    "unom": 481,
-    "role": "за подъездом 2",
-    "side": "подъезды 1–2",
-    "azimuth": 187,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5283593,
-     55.812362
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.504",
-    "district": "Аэропорт",
-    "address": "2-й Амбулаторный проезд, дом 13",
-    "unom": 479,
-    "role": "за подъездом 2",
-    "side": "подъезды 1–2",
-    "azimuth": 187,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5297917,
-     55.812284
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.505",
+    "point_no": "Т1.3002",
     "district": "Аэропорт",
     "address": "2-й Амбулаторный проезд, дом 11",
     "unom": 478,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–2",
     "azimuth": 187,
     "status": "черновик"
@@ -776,11 +926,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.506",
+    "point_no": "Т1.3003",
     "district": "Аэропорт",
     "address": "2-й Амбулаторный проезд, дом 21/8",
     "unom": 483,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–2",
     "azimuth": 7,
     "status": "черновик"
@@ -796,31 +946,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.507",
-    "district": "Аэропорт",
-    "address": "2-й Амбулаторный проезд, дом 19",
-    "unom": 482,
-    "role": "за подъездом 2",
-    "side": "подъезды 1–2",
-    "azimuth": 7,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5272667,
-     55.8120654
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.508",
+    "point_no": "Т1.3004",
     "district": "Аэропорт",
     "address": "2-й Амбулаторный проезд, дом 17",
     "unom": 481,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–2",
     "azimuth": 7,
     "status": "черновик"
@@ -836,31 +966,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.509",
+    "point_no": "Т1.3005",
     "district": "Аэропорт",
     "address": "3-й Балтийский переулок, дом 6, корпус 2",
     "unom": 74067,
-    "role": "за подъездом 2",
-    "side": "подъезды 1–2",
-    "azimuth": 97,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5276967,
-     55.8119658
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.510",
-    "district": "Аэропорт",
-    "address": "3-й Балтийский переулок, дом 6, корпус 2",
-    "unom": 74067,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–2",
     "azimuth": 277,
     "status": "черновик"
@@ -876,11 +986,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.511",
+    "point_no": "Т1.3006",
     "district": "Аэропорт",
     "address": "2-й Амбулаторный проезд, дом 13",
     "unom": 479,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–2",
     "azimuth": 7,
     "status": "черновик"
@@ -896,32 +1006,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.512",
-    "district": "Аэропорт",
-    "address": "2-й Амбулаторный проезд, дом 11",
-    "unom": 478,
-    "role": "за подъездом 2",
-    "side": "подъезды 1–2",
-    "azimuth": 7,
-    "status": "черновик",
-    "also_covers": "3-й Балтийский переулок, дом 6, корпус 3 (подъезды 1–2)"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5300814,
-     55.8118523
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.513",
+    "point_no": "Т1.3007",
     "district": "Аэропорт",
     "address": "3-й Балтийский переулок, дом 6, корпус 3",
     "unom": 74061,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–2",
     "azimuth": 278,
     "status": "черновик"
@@ -937,11 +1026,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.514",
+    "point_no": "Т1.3008",
     "district": "Аэропорт",
     "address": "3-й Балтийский переулок, дом 4, корпус 2",
     "unom": 1419,
-    "role": "за подъездом 3",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–3",
     "azimuth": 25,
     "status": "черновик"
@@ -957,7 +1046,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.515",
+    "point_no": "Т1.3009",
     "district": "Аэропорт",
     "address": "1-й Амбулаторный проезд, дом 5, корпус 2",
     "unom": 474,
@@ -977,89 +1066,47 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.516",
-    "district": "Аэропорт",
-    "address": "1-й Амбулаторный проезд, дом 5, корпус 2",
-    "unom": 474,
-    "role": "середина фасада",
-    "side": "подъезды 1–6",
-    "azimuth": 269,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5356843,
-     55.8112889
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.517",
-    "district": "Аэропорт",
-    "address": "1-й Амбулаторный проезд, дом 7, корпус 3",
-    "unom": 477,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 89,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5334424,
-     55.8112647
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.518",
+    "point_no": "Т1.3010",
     "district": "Аэропорт",
     "address": "1-й Амбулаторный проезд, дом 5, корпус 2",
     "unom": 474,
     "role": "за подъездом 6",
     "side": "подъезды 1–6",
     "azimuth": 89,
-    "status": "черновик",
-    "also_covers": "1-й Амбулаторный проезд, дом 5, корпус 1 (подъезды 1–3)"
+    "status": "черновик"
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5348046,
-     55.811229
+     37.534759,
+     55.8112829
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.519",
+    "point_no": "Т1.3011",
     "district": "Аэропорт",
     "address": "1-й Амбулаторный проезд, дом 7, корпус 3",
     "unom": 477,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–3",
     "azimuth": 269,
-    "status": "черновик",
-    "also_covers": "1-й Амбулаторный проезд, дом 5, корпус 1 (без подъездов)"
+    "status": "черновик"
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5342738,
-     55.8112229
+     37.5342724,
+     55.8112713
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.520",
+    "point_no": "Т1.3012",
     "district": "Аэропорт",
     "address": "3-й Балтийский переулок, дом 4, корпус 4",
     "unom": 1421,
@@ -1079,11 +1126,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.521",
+    "point_no": "Т1.3013",
     "district": "Аэропорт",
     "address": "1-й Балтийский переулок, дом 3/25",
     "unom": 1401,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1",
     "azimuth": 205,
     "status": "черновик"
@@ -1099,7 +1146,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.522",
+    "point_no": "Т1.3014",
     "district": "Аэропорт",
     "address": "Балтийская улица, дом 10, корпус 1",
     "unom": 1398,
@@ -1119,94 +1166,71 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.523",
-    "district": "Аэропорт",
-    "address": "1-й Амбулаторный проезд, дом 7, корпус А",
-    "unom": 475,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 180,
-    "status": "черновик",
-    "also_covers": "1-й Амбулаторный проезд, дом 7, корпус Б (подъезды 4–6)"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5328885,
-     55.811052
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.524",
+    "point_no": "Т1.3015",
     "district": "Аэропорт",
     "address": "1-й Амбулаторный проезд, дом 7, корпус Б",
     "unom": 476,
-    "role": "за подъездом 6",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 4–6",
-    "azimuth": 90,
+    "azimuth": 270,
     "status": "черновик"
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5322681,
-     55.8109932
+     37.532999,
+     55.810993
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.525",
+    "point_no": "Т1.3016",
     "district": "Аэропорт",
-    "address": "Большой Коптевский проезд, дом 14, корпус 1",
-    "unom": 10912,
-    "role": "за подъездом 3",
+    "address": "Большой Коптевский проезд, дом 14, корпус 2",
+    "unom": 10913,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 1–2",
+    "azimuth": 131,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.537932,
+     55.8109197
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т1.3017",
+    "district": "Аэропорт",
+    "address": "Большой Коптевский проезд, дом 14, корпус 3",
+    "unom": 10914,
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–3",
-    "azimuth": 221,
-    "status": "черновик",
-    "also_covers": "Большой Коптевский проезд, дом 14, корпус 2 (подъезды 1–2)"
+    "azimuth": 220,
+    "status": "черновик"
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5380659,
-     55.8109261
+     37.5383491,
+     55.8107411
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.526",
-    "district": "Аэропорт",
-    "address": "1-й Балтийский переулок, дом 3/25",
-    "unom": 1401,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 25,
-    "status": "черновик",
-    "also_covers": "Часовая улица, дом 25, корпус 2 (без подъездов)"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5182197,
-     55.8108887
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.527",
+    "point_no": "Т1.3018",
     "district": "Аэропорт",
     "address": "улица Сперанского, дом 6",
     "unom": 24478,
-    "role": "за подъездом 2",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–2",
     "azimuth": 204,
     "status": "черновик"
@@ -1222,11 +1246,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.528",
+    "point_no": "Т1.3019",
     "district": "Аэропорт",
     "address": "Часовая улица, дом 25, корпус 2",
     "unom": 28356,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1",
     "azimuth": 25,
     "status": "черновик"
@@ -1242,28 +1266,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.529",
-    "district": "Аэропорт",
-    "address": "Большой Коптевский проезд, дом 14, корпус 3",
-    "unom": 10914,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–3",
-    "azimuth": 220,
-    "status": "черновик",
-    "also_covers": "Большой Коптевский проезд, дом 14, корпус 2 (подъезды 1–2)"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5383954,
-     55.8106921
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.530",
+    "point_no": "Т1.3020",
     "district": "Аэропорт",
     "address": "Малый Коптевский проезд, дом 7",
     "unom": 10919,
@@ -1283,11 +1286,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.531",
+    "point_no": "Т1.3021",
     "district": "Аэропорт",
     "address": "1-й Амбулаторный проезд, дом 5, корпус 1",
     "unom": 473,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–3",
     "azimuth": 359,
     "status": "черновик"
@@ -1303,68 +1306,27 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.532",
+    "point_no": "Т1.3022",
     "district": "Аэропорт",
-    "address": "Большой Коптевский проезд, дом 12, корпус 1",
-    "unom": 10910,
-    "role": "за подъездом 3",
+    "address": "Большой Коптевский проезд, дом 14, корпус 1",
+    "unom": 10912,
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–3",
-    "azimuth": 220,
-    "status": "черновик",
-    "also_covers": "Большой Коптевский проезд, дом 14, корпус 1 (подъезды 1–3)"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5375918,
-     55.81062
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.533",
-    "district": "Аэропорт",
-    "address": "Часовая улица, дом 25, корпус 2",
-    "unom": 28356,
-    "role": "задняя сторона дома",
-    "side": "без подъездов",
-    "azimuth": 25,
+    "azimuth": 41,
     "status": "черновик"
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5181021,
-     55.8105814
+     37.5375976,
+     55.810617
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.534",
-    "district": "Аэропорт",
-    "address": "1-й Амбулаторный проезд, дом 5, корпус 1",
-    "unom": 473,
-    "role": "задняя сторона дома",
-    "side": "без подъездов",
-    "azimuth": 359,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5343556,
-     55.8105656
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.535",
+    "point_no": "Т1.3023",
     "district": "Аэропорт",
     "address": "Балтийская улица, дом 10, корпус 1",
     "unom": 1398,
@@ -1384,11 +1346,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.536",
+    "point_no": "Т1.3024",
     "district": "Аэропорт",
     "address": "Большой Коптевский проезд, дом 14, корпус 4",
     "unom": 10915,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–3",
     "azimuth": 221,
     "status": "черновик"
@@ -1404,11 +1366,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.537",
+    "point_no": "Т1.3025",
     "district": "Аэропорт",
     "address": "1-й Амбулаторный проезд, дом 7, корпус А",
     "unom": 475,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–3",
     "azimuth": 0,
     "status": "черновик"
@@ -1424,15 +1386,14 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.538",
+    "point_no": "Т1.3026",
     "district": "Аэропорт",
     "address": "Большой Коптевский проезд, дом 12, корпус 2",
     "unom": 10911,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–3",
     "azimuth": 220,
-    "status": "черновик",
-    "also_covers": "Большой Коптевский проезд, дом 14, корпус 3 (подъезды 1–3)"
+    "status": "черновик"
    },
    "geometry": {
     "type": "Point",
@@ -1445,31 +1406,31 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.539",
+    "point_no": "Т1.3027",
     "district": "Аэропорт",
-    "address": "Большой Коптевский проезд, дом 14, корпус 4",
-    "unom": 10915,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 41,
+    "address": "Часовая улица, дом 23, корпус 1",
+    "unom": 340236,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 2",
+    "azimuth": 117,
     "status": "черновик"
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5386127,
-     55.8102552
+     37.5214849,
+     55.8102563
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.540",
+    "point_no": "Т1.3028",
     "district": "Аэропорт",
     "address": "Большой Коптевский проезд, дом 12, корпус 1",
     "unom": 10910,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–3",
     "azimuth": 40,
     "status": "черновик"
@@ -1485,11 +1446,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.541",
+    "point_no": "Т1.3029",
     "district": "Аэропорт",
     "address": "1-й Балтийский переулок, дом 3/25",
     "unom": 1401,
-    "role": "за подъездом 3",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 3",
     "azimuth": 115,
     "status": "черновик"
@@ -1505,11 +1466,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.542",
+    "point_no": "Т1.3030",
     "district": "Аэропорт",
     "address": "Часовая улица, дом 21А",
     "unom": 28354,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–3",
     "azimuth": 204,
     "status": "черновик"
@@ -1525,31 +1486,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.543",
-    "district": "Аэропорт",
-    "address": "Большой Коптевский проезд, дом 12, корпус 2",
-    "unom": 10911,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 40,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5372182,
-     55.8099904
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.544",
+    "point_no": "Т1.3031",
     "district": "Аэропорт",
     "address": "Часовая улица, дом 18",
     "unom": 28351,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–3",
     "azimuth": 205,
     "status": "черновик"
@@ -1565,31 +1506,31 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.545",
+    "point_no": "Т1.3032",
     "district": "Аэропорт",
-    "address": "1-й Балтийский переулок, дом 3/25",
-    "unom": 1401,
-    "role": "за подъездом 3",
+    "address": "Часовая улица, дом 23, корпус 1",
+    "unom": 340236,
+    "role": "обзор подъездов с угла",
     "side": "подъезды 3",
-    "azimuth": 295,
+    "azimuth": 296,
     "status": "черновик"
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5184627,
-     55.809846
+     37.5217754,
+     55.8098031
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.546",
+    "point_no": "Т1.3033",
     "district": "Аэропорт",
     "address": "Часовая улица, дом 19А",
     "unom": 28353,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–3",
     "azimuth": 204,
     "status": "черновик"
@@ -1605,91 +1546,31 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.547",
+    "point_no": "Т1.3034",
     "district": "Аэропорт",
-    "address": "Часовая улица, дом 21А",
-    "unom": 28354,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 24,
+    "address": "Часовая улица, дом 23, корпус 1",
+    "unom": 340236,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 1",
+    "azimuth": 340,
     "status": "черновик"
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5231827,
-     55.8095743
+     37.521769,
+     55.8095913
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.548",
-    "district": "Аэропорт",
-    "address": "Малый Коптевский проезд, дом 4",
-    "unom": 10916,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–4",
-    "azimuth": 204,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5328637,
-     55.8095659
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.549",
-    "district": "Аэропорт",
-    "address": "Часовая улица, дом 19А",
-    "unom": 28353,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 24,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5241807,
-     55.8093284
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.550",
-    "district": "Аэропорт",
-    "address": "Часовая улица, дом 18",
-    "unom": 28351,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 25,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.528761,
-     55.8093104
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.551",
+    "point_no": "Т1.3035",
     "district": "Аэропорт",
     "address": "2-й Балтийский переулок, дом 5",
     "unom": 1416,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–3",
     "azimuth": 206,
     "status": "черновик"
@@ -1705,31 +1586,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.552",
-    "district": "Аэропорт",
-    "address": "Малый Коптевский проезд, дом 4",
-    "unom": 10916,
-    "role": "за подъездом 4",
-    "side": "подъезды 1–4",
-    "azimuth": 24,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5325541,
-     55.809181
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.553",
+    "point_no": "Т1.3036",
     "district": "Аэропорт",
     "address": "1-й Балтийский переулок, дом 4",
     "unom": 1402,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–3",
     "azimuth": 205,
     "status": "черновик"
@@ -1745,7 +1606,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.554",
+    "point_no": "Т1.3037",
     "district": "Аэропорт",
     "address": "2-й Балтийский переулок, дом 6",
     "unom": 1417,
@@ -1765,34 +1626,15 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.555",
-    "district": "Аэропорт",
-    "address": "2-й Балтийский переулок, дом 5",
-    "unom": 1416,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 26,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5238053,
-     55.808841
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.556",
+    "point_no": "Т1.3038",
     "district": "Аэропорт",
     "address": "Часовая улица, дом 19, корпус 3",
     "unom": 340237,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1",
     "azimuth": 226,
-    "status": "черновик"
+    "status": "черновик",
+    "also_covers": "Часовая улица, дом 19, корпус 3 (подъезды 3)"
    },
    "geometry": {
     "type": "Point",
@@ -1805,11 +1647,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.557",
+    "point_no": "Т1.3039",
     "district": "Аэропорт",
     "address": "улица Черняховского, дом 17, корпус 4",
     "unom": 28813,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–3",
     "azimuth": 225,
     "status": "черновик"
@@ -1825,91 +1667,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.558",
-    "district": "Аэропорт",
-    "address": "улица Самеда Вургуна, дом 11",
-    "unom": 5050404,
-    "role": "задняя сторона дома",
-    "side": "без подъездов",
-    "azimuth": 204,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5269168,
-     55.8086939
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.559",
-    "district": "Аэропорт",
-    "address": "1-й Балтийский переулок, дом 4",
-    "unom": 1402,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 25,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5183986,
-     55.8086926
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.560",
-    "district": "Аэропорт",
-    "address": "Часовая улица, дом 19, корпус 3",
-    "unom": 340237,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 46,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5215932,
-     55.8085886
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.561",
-    "district": "Аэропорт",
-    "address": "улица Самеда Вургуна, дом 11",
-    "unom": 5050404,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 204,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5272339,
-     55.8085553
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.562",
+    "point_no": "Т1.3040",
     "district": "Аэропорт",
     "address": "Часовая улица, дом 10/1",
     "unom": 28346,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–3",
     "azimuth": 221,
     "status": "черновик"
@@ -1925,7 +1687,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.563",
+    "point_no": "Т1.3041",
     "district": "Аэропорт",
     "address": "Балтийская улица, дом 6, корпус 3",
     "unom": 1397,
@@ -1945,27 +1707,27 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.564",
+    "point_no": "Т1.3042",
     "district": "Аэропорт",
-    "address": "Часовая улица, дом 12",
-    "unom": 28347,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 115,
+    "address": "Часовая улица, дом 19, корпус 3",
+    "unom": 340237,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 2",
+    "azimuth": 294,
     "status": "черновик"
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5317519,
-     55.8084281
+     37.5221551,
+     55.8084137
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.565",
+    "point_no": "Т1.3043",
     "district": "Аэропорт",
     "address": "Большой Коптевский проезд, дом 4",
     "unom": 10906,
@@ -1985,32 +1747,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.566",
+    "point_no": "Т1.3044",
     "district": "Аэропорт",
     "address": "улица Самеда Вургуна, дом 11",
     "unom": 5050404,
-    "role": "задняя сторона дома",
-    "side": "без подъездов",
-    "azimuth": 24,
-    "status": "черновик",
-    "also_covers": "улица Самеда Вургуна, дом 7 (без подъездов)"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5265507,
-     55.8083683
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.567",
-    "district": "Аэропорт",
-    "address": "улица Самеда Вургуна, дом 11",
-    "unom": 5050404,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1",
     "azimuth": 24,
     "status": "черновик",
@@ -2027,15 +1768,14 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.568",
+    "point_no": "Т1.3045",
     "district": "Аэропорт",
     "address": "улица Черняховского, дом 15, корпус 4",
     "unom": 28809,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–3",
     "azimuth": 225,
-    "status": "черновик",
-    "also_covers": "улица Черняховского, дом 17, корпус 4 (подъезды 1–3)"
+    "status": "черновик"
    },
    "geometry": {
     "type": "Point",
@@ -2048,7 +1788,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.569",
+    "point_no": "Т1.3046",
     "district": "Аэропорт",
     "address": "2-й Балтийский переулок, дом 6",
     "unom": 1417,
@@ -2068,11 +1808,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.570",
+    "point_no": "Т1.3047",
     "district": "Аэропорт",
     "address": "Часовая улица, дом 12",
     "unom": 28347,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–3",
     "azimuth": 295,
     "status": "черновик"
@@ -2088,51 +1828,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.571",
-    "district": "Аэропорт",
-    "address": "Часовая улица, дом 10/1",
-    "unom": 28346,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 41,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5323637,
-     55.808115
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.572",
-    "district": "Аэропорт",
-    "address": "улица Самеда Вургуна, дом 7",
-    "unom": 5032442,
-    "role": "задняя сторона дома",
-    "side": "без подъездов",
-    "azimuth": 25,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.526299,
-     55.8080744
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.573",
+    "point_no": "Т1.3048",
     "district": "Аэропорт",
     "address": "Часовая улица, дом 9",
     "unom": 28345,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–3",
     "azimuth": 115,
     "status": "черновик"
@@ -2148,31 +1848,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.574",
-    "district": "Аэропорт",
-    "address": "улица Самеда Вургуна, дом 7",
-    "unom": 5032442,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 25,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5268118,
-     55.8080334
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.575",
+    "point_no": "Т1.3049",
     "district": "Аэропорт",
     "address": "Часовая улица, дом 8",
     "unom": 28344,
-    "role": "за подъездом 2",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–2",
     "azimuth": 114,
     "status": "черновик"
@@ -2188,27 +1868,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.576",
-    "district": "Аэропорт",
-    "address": "Часовая улица, дом 6, корпус 2",
-    "unom": 28341,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 219,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5349088,
-     55.8080047
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.577",
+    "point_no": "Т1.3050",
     "district": "Аэропорт",
     "address": "Большой Коптевский проезд, дом 4",
     "unom": 10906,
@@ -2228,27 +1888,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.578",
-    "district": "Аэропорт",
-    "address": "2-й Балтийский переулок, дом 4А",
-    "unom": 1415,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 206,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5244186,
-     55.8079217
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.579",
+    "point_no": "Т1.3051",
     "district": "Аэропорт",
     "address": "Балтийская улица, дом 6, корпус 3",
     "unom": 1397,
@@ -2268,91 +1908,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.580",
-    "district": "Аэропорт",
-    "address": "Часовая улица, дом 9",
-    "unom": 28345,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 295,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5320515,
-     55.8078795
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.581",
-    "district": "Аэропорт",
-    "address": "улица Черняховского, дом 15, корпус 4",
-    "unom": 28809,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 45,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5356651,
-     55.8078165
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.582",
-    "district": "Аэропорт",
-    "address": "Часовая улица, дом 6, корпус 1",
-    "unom": 28340,
-    "role": "за подъездом 2",
-    "side": "подъезды 1–2",
-    "azimuth": 113,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5341519,
-     55.8078003
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.583",
-    "district": "Аэропорт",
-    "address": "Часовая улица, дом 7, корпус 1",
-    "unom": 28342,
-    "role": "задняя сторона дома",
-    "side": "без подъездов",
-    "azimuth": 115,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5327874,
-     55.8076931
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.584",
+    "point_no": "Т1.3052",
     "district": "Аэропорт",
     "address": "Часовая улица, дом 6, корпус 2",
     "unom": 28341,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–3",
     "azimuth": 39,
     "status": "черновик"
@@ -2368,51 +1928,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.585",
-    "district": "Аэропорт",
-    "address": "улица Усиевича, дом 18",
-    "unom": 26871,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 114,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5214013,
-     55.8076736
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.586",
-    "district": "Аэропорт",
-    "address": "улица Асеева, дом 8",
-    "unom": 991,
-    "role": "за подъездом 8",
-    "side": "подъезды 1–8",
-    "azimuth": 206,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5312935,
-     55.8076408
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.587",
+    "point_no": "Т1.3053",
     "district": "Аэропорт",
     "address": "Часовая улица, дом 6, корпус 1",
     "unom": 28340,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–2",
     "azimuth": 293,
     "status": "черновик"
@@ -2428,11 +1948,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.588",
+    "point_no": "Т1.3054",
     "district": "Аэропорт",
     "address": "2-й Балтийский переулок, дом 1/18, корпус А",
     "unom": 1412,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–2",
     "azimuth": 114,
     "status": "черновик",
@@ -2449,11 +1969,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.589",
+    "point_no": "Т1.3055",
     "district": "Аэропорт",
     "address": "Часовая улица, дом 7, корпус 2",
     "unom": 28343,
-    "role": "за подъездом 4",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 4–5",
     "azimuth": 206,
     "status": "черновик"
@@ -2469,31 +1989,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.590",
+    "point_no": "Т1.3056",
     "district": "Аэропорт",
     "address": "Часовая улица, дом 7, корпус 1",
     "unom": 28342,
-    "role": "задняя сторона дома",
-    "side": "без подъездов",
-    "azimuth": 295,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5335677,
-     55.8074868
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.591",
-    "district": "Аэропорт",
-    "address": "Часовая улица, дом 7, корпус 1",
-    "unom": 28342,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–3",
     "azimuth": 115,
     "status": "черновик"
@@ -2509,31 +2009,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.592",
-    "district": "Аэропорт",
-    "address": "Ленинградский проспект, дом 78, корпус 5",
-    "unom": 12716,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 114,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5137047,
-     55.8074729
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.593",
+    "point_no": "Т1.3057",
     "district": "Аэропорт",
     "address": "Часовая улица, дом 4, корпус 2",
     "unom": 28336,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1",
     "azimuth": 115,
     "status": "черновик"
@@ -2549,52 +2029,31 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.594",
+    "point_no": "Т1.3058",
     "district": "Аэропорт",
-    "address": "2-й Балтийский переулок, дом 1/18, корпус А",
-    "unom": 1412,
-    "role": "за подъездом 2",
-    "side": "подъезды 1–2",
-    "azimuth": 294,
-    "status": "черновик",
-    "also_covers": "2-й Балтийский переулок, дом 1/18, корпус Б (подъезды 3–4)"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5226285,
-     55.8073491
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.595",
-    "district": "Аэропорт",
-    "address": "Часовая улица, дом 7, корпус 1",
-    "unom": 28342,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 295,
+    "address": "2-й Балтийский переулок, дом 1/18, корпус Б",
+    "unom": 1411,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 3–4",
+    "azimuth": 26,
     "status": "черновик"
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5333646,
-     55.8073195
+     37.5225244,
+     55.8073263
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.596",
+    "point_no": "Т1.3059",
     "district": "Аэропорт",
     "address": "Ленинградский проспект, дом 78, корпус 5",
     "unom": 12716,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1",
     "azimuth": 294,
     "status": "черновик"
@@ -2610,87 +2069,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.597",
-    "district": "Аэропорт",
-    "address": "2-й Балтийский переулок, дом 2",
-    "unom": 4996,
-    "role": "за подъездом 2",
-    "side": "подъезды 1–2",
-    "azimuth": 207,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5239249,
-     55.8073128
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.598",
-    "district": "Аэропорт",
-    "address": "улица Усиевича, дом 29, корпус 2",
-    "unom": 74190,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 117,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.518192,
-     55.8071832
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.599",
-    "district": "Аэропорт",
-    "address": "Часовая улица, дом 7, корпус 2",
-    "unom": 28343,
-    "role": "за подъездом 5",
-    "side": "подъезды 4–5",
-    "azimuth": 26,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5331413,
-     55.8071789
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.600",
-    "district": "Аэропорт",
-    "address": "улица Асеева, дом 8",
-    "unom": 991,
-    "role": "середина фасада",
-    "side": "подъезды 1–8",
-    "azimuth": 26,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5308694,
-     55.8071559
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.601",
+    "point_no": "Т1.3060",
     "district": "Аэропорт",
     "address": "Часовая улица, дом 5А",
     "unom": 28339,
@@ -2710,7 +2089,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.602",
+    "point_no": "Т1.3061",
     "district": "Аэропорт",
     "address": "улица Усиевича, дом 16",
     "unom": 26869,
@@ -2730,47 +2109,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.603",
-    "district": "Аэропорт",
-    "address": "Шебашёвский проезд, дом 8, корпус 1",
-    "unom": 29338,
-    "role": "за подъездом 4",
-    "side": "подъезды 4",
-    "azimuth": 115,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5319213,
-     55.8070444
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.604",
-    "district": "Аэропорт",
-    "address": "Планетная улица, дом 40",
-    "unom": 19937,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 124,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5399909,
-     55.8069832
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.605",
+    "point_no": "Т1.3062",
     "district": "Аэропорт",
     "address": "Шебашёвский проезд, дом 7",
     "unom": 29337,
@@ -2790,11 +2129,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.606",
+    "point_no": "Т1.3063",
     "district": "Аэропорт",
     "address": "улица Усиевича, дом 25, корпус 3",
     "unom": 26877,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–2",
     "azimuth": 205,
     "status": "черновик"
@@ -2810,11 +2149,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.607",
+    "point_no": "Т1.3064",
     "district": "Аэропорт",
     "address": "улица Усиевича, дом 29, корпус 2",
     "unom": 74190,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–3",
     "azimuth": 297,
     "status": "черновик"
@@ -2830,11 +2169,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.608",
+    "point_no": "Т1.3065",
     "district": "Аэропорт",
     "address": "улица Самеда Вургуна, дом 1",
     "unom": 1413,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–2",
     "azimuth": 206,
     "status": "черновик"
@@ -2850,31 +2189,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.609",
-    "district": "Аэропорт",
-    "address": "улица Усиевича, дом 16",
-    "unom": 26869,
-    "role": "середина фасада",
-    "side": "подъезды 1–4",
-    "azimuth": 295,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5244087,
-     55.8068574
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.610",
+    "point_no": "Т1.3066",
     "district": "Аэропорт",
     "address": "2-й Балтийский переулок, дом 2",
     "unom": 4996,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–2",
     "azimuth": 27,
     "status": "черновик"
@@ -2890,11 +2209,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.611",
+    "point_no": "Т1.3067",
     "district": "Аэропорт",
     "address": "Ленинградский проспект, дом 78, корпус 1",
     "unom": 12712,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1",
     "azimuth": 205,
     "status": "черновик"
@@ -2910,27 +2229,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.612",
-    "district": "Аэропорт",
-    "address": "Шебашёвский проезд, дом 5",
-    "unom": 29335,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 206,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5312288,
-     55.8067448
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.613",
+    "point_no": "Т1.3068",
     "district": "Аэропорт",
     "address": "Ленинградский проспект, дом 74, корпус 6",
     "unom": 12703,
@@ -2950,11 +2249,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.614",
+    "point_no": "Т1.3069",
     "district": "Аэропорт",
     "address": "Планетная улица, дом 38",
     "unom": 19936,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–3",
     "azimuth": 214,
     "status": "черновик",
@@ -2971,47 +2270,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.615",
-    "district": "Аэропорт",
-    "address": "улица Усиевича, дом 27, корпус 2",
-    "unom": 340074,
-    "role": "за подъездом 2",
-    "side": "подъезды 1–2",
-    "azimuth": 114,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5200746,
-     55.8066746
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.616",
-    "district": "Аэропорт",
-    "address": "Шебашёвский проезд, дом 8, корпус 1",
-    "unom": 29338,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–3",
-    "azimuth": 25,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.532036,
-     55.8066661
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.617",
+    "point_no": "Т1.3070",
     "district": "Аэропорт",
     "address": "улица Усиевича, дом 16",
     "unom": 26869,
@@ -3031,7 +2290,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.618",
+    "point_no": "Т1.3071",
     "district": "Аэропорт",
     "address": "Часовая улица, дом 5А",
     "unom": 28339,
@@ -3051,31 +2310,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.619",
-    "district": "Аэропорт",
-    "address": "улица Асеева, дом 8",
-    "unom": 991,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–8",
-    "azimuth": 26,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.530247,
-     55.8065462
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.620",
+    "point_no": "Т1.3072",
     "district": "Аэропорт",
     "address": "улица Усиевича, дом 27, корпус 2",
     "unom": 340074,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–2",
     "azimuth": 294,
     "status": "черновик"
@@ -3091,11 +2330,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.621",
+    "point_no": "Т1.3073",
     "district": "Аэропорт",
     "address": "Ленинградский проспект, дом 78, корпус 3",
     "unom": 12714,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1",
     "azimuth": 25,
     "status": "черновик"
@@ -3111,51 +2350,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.622",
-    "district": "Аэропорт",
-    "address": "улица Усиевича, дом 27, корпус 2",
-    "unom": 340074,
-    "role": "угол (тротуар вокруг дома)",
-    "side": "круговой тротуар",
-    "azimuth": 24,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5198253,
-     55.8064605
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.623",
-    "district": "Аэропорт",
-    "address": "улица Самеда Вургуна, дом 1",
-    "unom": 1413,
-    "role": "за подъездом 2",
-    "side": "подъезды 1–2",
-    "azimuth": 26,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5250472,
-     55.806458
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.624",
+    "point_no": "Т1.3074",
     "district": "Аэропорт",
     "address": "улица Черняховского, дом 13",
     "unom": 28806,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1",
     "azimuth": 303,
     "status": "черновик"
@@ -3171,31 +2370,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.625",
-    "district": "Аэропорт",
-    "address": "Шебашёвский проезд, дом 5",
-    "unom": 29335,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–3",
-    "azimuth": 26,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5309028,
-     55.8064219
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.626",
+    "point_no": "Т1.3075",
     "district": "Аэропорт",
     "address": "Ленинградский проспект, дом 74, корпус 5",
     "unom": 12702,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1",
     "azimuth": 114,
     "status": "черновик"
@@ -3211,27 +2390,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.627",
-    "district": "Аэропорт",
-    "address": "улица Усиевича, дом 27, корпус 2",
-    "unom": 340074,
-    "role": "угол (тротуар вокруг дома)",
-    "side": "круговой тротуар",
-    "azimuth": 294,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5207487,
-     55.8063898
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.628",
+    "point_no": "Т1.3076",
     "district": "Аэропорт",
     "address": "улица Черняховского, дом 12",
     "unom": 28805,
@@ -3251,7 +2410,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.629",
+    "point_no": "Т1.3077",
     "district": "Аэропорт",
     "address": "Планетная улица, дом 49",
     "unom": 19944,
@@ -3271,11 +2430,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.630",
+    "point_no": "Т1.3078",
     "district": "Аэропорт",
     "address": "улица Академика Ильюшина, дом 16",
     "unom": 340100,
-    "role": "за подъездом 3",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 3–5",
     "azimuth": 235,
     "status": "черновик"
@@ -3291,212 +2450,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.631",
-    "district": "Аэропорт",
-    "address": "Ленинградский проспект, дом 74, корпус 5",
-    "unom": 12702,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 294,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5183116,
-     55.8062833
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.632",
-    "district": "Аэропорт",
-    "address": "Шебашёвский проезд, дом 4, корпус 1",
-    "unom": 29333,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 205,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5316753,
-     55.8062591
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.633",
-    "district": "Аэропорт",
-    "address": "улица Черняховского, дом 11, корпус 2",
-    "unom": 28804,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 214,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5359132,
-     55.806244
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.634",
-    "district": "Аэропорт",
-    "address": "Планетная улица, дом 38",
-    "unom": 19936,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 34,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5400681,
-     55.8062375
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.635",
-    "district": "Аэропорт",
-    "address": "улица Усиевича, дом 25, корпус 3",
-    "unom": 26877,
-    "role": "за подъездом 2",
-    "side": "подъезды 1–2",
-    "azimuth": 25,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.521392,
-     55.8061848
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.636",
-    "district": "Аэропорт",
-    "address": "Шебашёвский проезд, дом 4, корпус 2",
-    "unom": 29334,
-    "role": "за подъездом 8",
-    "side": "подъезды 6–8",
-    "azimuth": 207,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5325017,
-     55.8061247
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.637",
-    "district": "Аэропорт",
-    "address": "Ленинградский проспект, дом 74, корпус 2",
-    "unom": 12699,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 205,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.516997,
-     55.8060731
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.638",
-    "district": "Аэропорт",
-    "address": "улица Черняховского, дом 11, корпус 1",
-    "unom": 28803,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 213,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.536048,
-     55.8060615
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.639",
-    "district": "Аэропорт",
-    "address": "улица Академика Ильюшина, дом 14",
-    "unom": 8803,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 235,
-    "status": "черновик",
-    "also_covers": "улица Академика Ильюшина, дом 16 (подъезды 3–5)"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5465325,
-     55.8060499
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.640",
-    "district": "Аэропорт",
-    "address": "улица Черняховского, дом 11, корпус 1",
-    "unom": 28803,
-    "role": "задняя сторона дома",
-    "side": "без подъездов",
-    "azimuth": 213,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5364918,
-     55.8059658
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.641",
+    "point_no": "Т1.3079",
     "district": "Аэропорт",
     "address": "Ленинградский проспект, дом 78, корпус 1",
     "unom": 12712,
-    "role": "за подъездом 9",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 9",
     "azimuth": 25,
     "status": "черновик"
@@ -3512,11 +2470,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.642",
+    "point_no": "Т1.3080",
     "district": "Аэропорт",
     "address": "улица Черняховского, дом 11, корпус 2",
     "unom": 28804,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–3",
     "azimuth": 34,
     "status": "черновик"
@@ -3532,27 +2490,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.643",
-    "district": "Аэропорт",
-    "address": "улица Академика Ильюшина, дом 12",
-    "unom": 5017268,
-    "role": "задняя сторона дома",
-    "side": "без подъездов",
-    "azimuth": 235,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5454824,
-     55.8058367
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.644",
+    "point_no": "Т1.3081",
     "district": "Аэропорт",
     "address": "Планетная улица, дом 47, корпус 1",
     "unom": 19942,
@@ -3573,11 +2511,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.645",
+    "point_no": "Т1.3082",
     "district": "Аэропорт",
     "address": "Ленинградский проспект, дом 74, корпус 1",
     "unom": 12698,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1",
     "azimuth": 205,
     "status": "черновик"
@@ -3593,11 +2531,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.646",
+    "point_no": "Т1.3083",
     "district": "Аэропорт",
     "address": "Шебашёвский проезд, дом 4, корпус 2",
     "unom": 29334,
-    "role": "за подъездом 5",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 5",
     "azimuth": 297,
     "status": "черновик"
@@ -3613,11 +2551,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.647",
+    "point_no": "Т1.3084",
     "district": "Аэропорт",
     "address": "улица Черняховского, дом 11, корпус 1",
     "unom": 28803,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–3",
     "azimuth": 33,
     "status": "черновик"
@@ -3633,11 +2571,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.648",
+    "point_no": "Т1.3085",
     "district": "Аэропорт",
     "address": "улица Усиевича, дом 23",
     "unom": 26874,
-    "role": "за подъездом 5",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 5–7",
     "azimuth": 206,
     "status": "черновик"
@@ -3653,11 +2591,31 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.649",
+    "point_no": "Т1.3086",
+    "district": "Аэропорт",
+    "address": "улица Академика Ильюшина, дом 14",
+    "unom": 8803,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 1–3",
+    "azimuth": 55,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5456415,
+     55.805701
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т1.3087",
     "district": "Аэропорт",
     "address": "улица Асеева, дом 2",
     "unom": 989,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–2",
     "azimuth": 25,
     "status": "черновик"
@@ -3673,11 +2631,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.650",
+    "point_no": "Т1.3088",
     "district": "Аэропорт",
     "address": "Ленинградский проспект, дом 74, корпус 2",
     "unom": 12699,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1",
     "azimuth": 25,
     "status": "черновик"
@@ -3693,7 +2651,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.651",
+    "point_no": "Т1.3089",
     "district": "Аэропорт",
     "address": "Ленинградский проспект, дом 74, корпус 4",
     "unom": 12701,
@@ -3714,28 +2672,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.652",
-    "district": "Аэропорт",
-    "address": "улица Академика Ильюшина, дом 12",
-    "unom": 5017268,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 235,
-    "status": "черновик",
-    "also_covers": "улица Академика Ильюшина, дом 14 (подъезды 1–3)"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5457385,
-     55.8056218
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.653",
+    "point_no": "Т1.3090",
     "district": "Аэропорт",
     "address": "улица Усиевича, дом 25, корпус 1",
     "unom": 26875,
@@ -3755,31 +2692,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.654",
-    "district": "Аэропорт",
-    "address": "улица Черняховского, дом 11, корпус 1",
-    "unom": 28803,
-    "role": "задняя сторона дома",
-    "side": "без подъездов",
-    "azimuth": 33,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5360085,
-     55.8055655
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.655",
+    "point_no": "Т1.3091",
     "district": "Аэропорт",
     "address": "Планетная улица, дом 43",
     "unom": 19940,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–3",
     "azimuth": 217,
     "status": "черновик"
@@ -3795,11 +2712,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.656",
+    "point_no": "Т1.3092",
     "district": "Аэропорт",
     "address": "улица 8 Марта, дом 15А",
     "unom": 4953,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–3",
     "azimuth": 98,
     "status": "черновик"
@@ -3815,87 +2732,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.657",
-    "district": "Аэропорт",
-    "address": "Ленинградский проспект, дом 74, корпус 3",
-    "unom": 12700,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 25,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5181416,
-     55.8054155
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.658",
-    "district": "Аэропорт",
-    "address": "улица Усиевича, дом 23",
-    "unom": 26874,
-    "role": "середина фасада",
-    "side": "подъезды 5–7",
-    "azimuth": 26,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5255056,
-     55.8054087
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.659",
-    "district": "Аэропорт",
-    "address": "улица Академика Ильюшина, дом 12",
-    "unom": 5017268,
-    "role": "задняя сторона дома",
-    "side": "без подъездов",
-    "azimuth": 55,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5443789,
-     55.8053972
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.660",
-    "district": "Аэропорт",
-    "address": "улица Усиевича, дом 21",
-    "unom": 26873,
-    "role": "за подъездом 2",
-    "side": "подъезды 1–2",
-    "azimuth": 115,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5269795,
-     55.8053919
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.661",
+    "point_no": "Т1.3093",
     "district": "Аэропорт",
     "address": "улица Лизы Чайкиной, дом 6",
     "unom": 28285,
@@ -3915,7 +2752,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.662",
+    "point_no": "Т1.3094",
     "district": "Аэропорт",
     "address": "улица Усиевича, дом 23",
     "unom": 26874,
@@ -3935,7 +2772,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.663",
+    "point_no": "Т1.3095",
     "district": "Аэропорт",
     "address": "улица 8 Марта, дом 15",
     "unom": 4952,
@@ -3955,11 +2792,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.664",
+    "point_no": "Т1.3096",
     "district": "Аэропорт",
     "address": "улица Черняховского, дом 8",
     "unom": 28796,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–2",
     "azimuth": 213,
     "status": "черновик"
@@ -3975,11 +2812,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.665",
+    "point_no": "Т1.3097",
     "district": "Аэропорт",
     "address": "Ленинградский проспект, дом 74, корпус 1",
     "unom": 12698,
-    "role": "за подъездом 9",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 9",
     "azimuth": 205,
     "status": "черновик"
@@ -3995,7 +2832,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.666",
+    "point_no": "Т1.3098",
     "district": "Аэропорт",
     "address": "Планетная улица, дом 47, корпус 1",
     "unom": 19942,
@@ -4016,11 +2853,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.667",
+    "point_no": "Т1.3099",
     "district": "Аэропорт",
     "address": "улица Усиевича, дом 21",
     "unom": 26873,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–2",
     "azimuth": 295,
     "status": "черновик"
@@ -4036,11 +2873,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.668",
+    "point_no": "Т1.3100",
     "district": "Аэропорт",
     "address": "улица Черняховского, дом 9, корпус 3",
     "unom": 28800,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1",
     "azimuth": 26,
     "status": "черновик"
@@ -4056,7 +2893,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.669",
+    "point_no": "Т1.3101",
     "district": "Аэропорт",
     "address": "улица Коккинаки, дом 8",
     "unom": 10437,
@@ -4076,31 +2913,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.670",
-    "district": "Аэропорт",
-    "address": "улица Черняховского, дом 9, корпус 1",
-    "unom": 28798,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 207,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5341501,
-     55.8051882
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.671",
+    "point_no": "Т1.3102",
     "district": "Аэропорт",
     "address": "улица Академика Ильюшина, дом 12",
     "unom": 5017268,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–3",
     "azimuth": 55,
     "status": "черновик"
@@ -4116,31 +2933,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.672",
-    "district": "Аэропорт",
-    "address": "улица Усиевича, дом 23",
-    "unom": 26874,
-    "role": "середина фасада",
-    "side": "подъезды 8–11",
-    "azimuth": 296,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5249294,
-     55.8051807
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.673",
+    "point_no": "Т1.3103",
     "district": "Аэропорт",
     "address": "улица Черняховского, дом 8",
     "unom": 28796,
-    "role": "за подъездом 3",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 3",
     "azimuth": 123,
     "status": "черновик"
@@ -4156,31 +2953,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.674",
-    "district": "Аэропорт",
-    "address": "улица Усиевича, дом 4",
-    "unom": 26860,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 205,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5333598,
-     55.8051203
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.675",
+    "point_no": "Т1.3104",
     "district": "Аэропорт",
     "address": "улица Черняховского, дом 9, корпус 2",
     "unom": 28799,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1",
     "azimuth": 27,
     "status": "черновик"
@@ -4196,31 +2973,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.676",
-    "district": "Аэропорт",
-    "address": "улица Лизы Чайкиной, дом 6",
-    "unom": 28285,
-    "role": "середина фасада",
-    "side": "подъезды 1–5",
-    "azimuth": 25,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5268063,
-     55.8049635
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.677",
+    "point_no": "Т1.3105",
     "district": "Аэропорт",
     "address": "улица Академика Ильюшина, дом 5",
     "unom": 8799,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–3",
     "azimuth": 217,
     "status": "черновик"
@@ -4236,51 +2993,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.678",
-    "district": "Аэропорт",
-    "address": "улица Черняховского, дом 8",
-    "unom": 28796,
-    "role": "за подъездом 2",
-    "side": "подъезды 1–2",
-    "azimuth": 33,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5365853,
-     55.8049407
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.679",
-    "district": "Аэропорт",
-    "address": "улица 8 Марта, дом 15",
-    "unom": 4952,
-    "role": "середина фасада",
-    "side": "подъезды 1–5",
-    "azimuth": 324,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5497538,
-     55.8048719
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.680",
+    "point_no": "Т1.3106",
     "district": "Аэропорт",
     "address": "улица Коккинаки, дом 6",
     "unom": 74068,
-    "role": "за подъездом 2",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 2",
     "azimuth": 144,
     "status": "черновик"
@@ -4296,51 +3013,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.681",
-    "district": "Аэропорт",
-    "address": "улица Усиевича, дом 23",
-    "unom": 26874,
-    "role": "за подъездом 7",
-    "side": "подъезды 5–7",
-    "azimuth": 26,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5251613,
-     55.804855
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.682",
-    "district": "Аэропорт",
-    "address": "Планетная улица, дом 43",
-    "unom": 19940,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 37,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5389862,
-     55.8048457
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.683",
+    "point_no": "Т1.3107",
     "district": "Аэропорт",
     "address": "улица Черняховского, дом 9, корпус 1",
     "unom": 28798,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1",
     "azimuth": 27,
     "status": "черновик"
@@ -4356,27 +3033,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.684",
-    "district": "Аэропорт",
-    "address": "Планетная улица, дом 47, корпус 2",
-    "unom": 19943,
-    "role": "за подъездом 6",
-    "side": "подъезды 5–6",
-    "azimuth": 38,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.537761,
-     55.8048132
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.685",
+    "point_no": "Т1.3108",
     "district": "Аэропорт",
     "address": "улица Коккинаки, дом 1",
     "unom": 19932,
@@ -4396,28 +3053,27 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.686",
+    "point_no": "Т1.3109",
     "district": "Аэропорт",
-    "address": "улица Усиевича, дом 2",
-    "unom": 26858,
-    "role": "за подъездом 3",
+    "address": "улица Усиевича, дом 4",
+    "unom": 26860,
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–3",
-    "azimuth": 114,
-    "status": "черновик",
-    "also_covers": "улица Усиевича, дом 4 (подъезды 1–3)"
+    "azimuth": 25,
+    "status": "черновик"
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5329112,
-     55.8046296
+     37.5329563,
+     55.8045818
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.687",
+    "point_no": "Т1.3110",
     "district": "Аэропорт",
     "address": "улица Черняховского, дом 6/40",
     "unom": 28794,
@@ -4437,27 +3093,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.688",
-    "district": "Аэропорт",
-    "address": "улица Коккинаки, дом 6",
-    "unom": 74068,
-    "role": "за подъездом 2",
-    "side": "подъезды 2",
-    "azimuth": 324,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5475092,
-     55.8044245
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.689",
+    "point_no": "Т1.3111",
     "district": "Аэропорт",
     "address": "улица Лизы Чайкиной, дом 4, корпус 1",
     "unom": 28283,
@@ -4477,27 +3113,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.690",
-    "district": "Аэропорт",
-    "address": "улица Академика Ильюшина, дом 5",
-    "unom": 8799,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 37,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5402211,
-     55.8043197
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.691",
+    "point_no": "Т1.3112",
     "district": "Аэропорт",
     "address": "улица Коккинаки, дом 1",
     "unom": 19932,
@@ -4517,11 +3133,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.692",
+    "point_no": "Т1.3113",
     "district": "Аэропорт",
     "address": "улица Академика Ильюшина, дом 3",
     "unom": 8796,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–3",
     "azimuth": 217,
     "status": "черновик"
@@ -4537,11 +3153,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.693",
+    "point_no": "Т1.3114",
     "district": "Аэропорт",
     "address": "улица Усиевича, дом 2",
     "unom": 26858,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–3",
     "azimuth": 294,
     "status": "черновик"
@@ -4557,7 +3173,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.694",
+    "point_no": "Т1.3115",
     "district": "Аэропорт",
     "address": "Красноармейская улица, дом 38",
     "unom": 11459,
@@ -4577,11 +3193,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.695",
+    "point_no": "Т1.3116",
     "district": "Аэропорт",
     "address": "улица Черняховского, дом 6/40",
     "unom": 28794,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1",
     "azimuth": 124,
     "status": "черновик"
@@ -4597,11 +3213,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.696",
+    "point_no": "Т1.3117",
     "district": "Аэропорт",
     "address": "улица Лизы Чайкиной, дом 4, корпус 2",
     "unom": 28284,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–2",
     "azimuth": 115,
     "status": "черновик"
@@ -4617,87 +3233,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.697",
-    "district": "Аэропорт",
-    "address": "улица Лизы Чайкиной, дом 4, корпус 1",
-    "unom": 28283,
-    "role": "середина фасада",
-    "side": "подъезды 1–5",
-    "azimuth": 205,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5257936,
-     55.803919
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.698",
-    "district": "Аэропорт",
-    "address": "улица 8 Марта, дом 13",
-    "unom": 4951,
-    "role": "середина фасада",
-    "side": "подъезды 1–5",
-    "azimuth": 145,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5510933,
-     55.8038485
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.699",
-    "district": "Аэропорт",
-    "address": "улица Черняховского, дом 6/40",
-    "unom": 28794,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 304,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5356196,
-     55.8038098
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.700",
-    "district": "Аэропорт",
-    "address": "улица Академика Ильюшина, дом 3",
-    "unom": 8796,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 37,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5391907,
-     55.8037546
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.701",
+    "point_no": "Т1.3118",
     "district": "Аэропорт",
     "address": "Красноармейская улица, дом 36",
     "unom": 11458,
@@ -4717,11 +3253,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.702",
+    "point_no": "Т1.3119",
     "district": "Аэропорт",
     "address": "улица Академика Ильюшина, дом 6",
     "unom": 8800,
-    "role": "за подъездом 2",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 2",
     "azimuth": 219,
     "status": "черновик"
@@ -4737,11 +3273,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.703",
+    "point_no": "Т1.3120",
     "district": "Аэропорт",
     "address": "улица Академика Ильюшина, дом 1, корпус 1",
     "unom": 8795,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–3",
     "azimuth": 124,
     "status": "черновик"
@@ -4757,11 +3293,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.704",
+    "point_no": "Т1.3121",
     "district": "Аэропорт",
     "address": "улица Коккинаки, дом 2",
     "unom": 19928,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–3",
     "azimuth": 316,
     "status": "черновик"
@@ -4777,7 +3313,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.705",
+    "point_no": "Т1.3122",
     "district": "Аэропорт",
     "address": "Красноармейская улица, дом 38",
     "unom": 11459,
@@ -4797,31 +3333,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.706",
-    "district": "Аэропорт",
-    "address": "улица Лизы Чайкиной, дом 4, корпус 2",
-    "unom": 28284,
-    "role": "за подъездом 2",
-    "side": "подъезды 1–2",
-    "azimuth": 295,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5277261,
-     55.8036148
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.707",
+    "point_no": "Т1.3123",
     "district": "Аэропорт",
     "address": "Планетная улица, дом 33",
     "unom": 19934,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–3",
     "azimuth": 133,
     "status": "черновик"
@@ -4837,7 +3353,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.708",
+    "point_no": "Т1.3124",
     "district": "Аэропорт",
     "address": "улица 8 Марта, дом 11",
     "unom": 4950,
@@ -4857,11 +3373,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.709",
+    "point_no": "Т1.3125",
     "district": "Аэропорт",
     "address": "Ленинградский проспект, дом 66",
     "unom": 12691,
-    "role": "за подъездом 10",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 10",
     "azimuth": 114,
     "status": "черновик"
@@ -4877,11 +3393,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.710",
+    "point_no": "Т1.3126",
     "district": "Аэропорт",
     "address": "улица Академика Ильюшина, дом 6",
     "unom": 8800,
-    "role": "за подъездом 3",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 3–4",
     "azimuth": 129,
     "status": "черновик"
@@ -4897,7 +3413,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.711",
+    "point_no": "Т1.3127",
     "district": "Аэропорт",
     "address": "улица Академика Ильюшина, дом 1, корпус 2",
     "unom": 8794,
@@ -4917,47 +3433,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.712",
-    "district": "Аэропорт",
-    "address": "Ленинградский проспект, дом 66, корпус 2",
-    "unom": 340339,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 113,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5267258,
-     55.8035122
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.713",
-    "district": "Аэропорт",
-    "address": "Ленинградский проспект, дом 66",
-    "unom": 12691,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 204,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5251187,
-     55.8034697
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.714",
+    "point_no": "Т1.3128",
     "district": "Аэропорт",
     "address": "улица Лизы Чайкиной, дом 4, корпус 1",
     "unom": 28283,
@@ -4977,31 +3453,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.715",
-    "district": "Аэропорт",
-    "address": "улица Академика Ильюшина, дом 1, корпус 1",
-    "unom": 8795,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 304,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.538686,
-     55.8034118
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.716",
+    "point_no": "Т1.3129",
     "district": "Аэропорт",
     "address": "Ленинградский проспект, дом 66, корпус 2",
     "unom": 340339,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1",
     "azimuth": 293,
     "status": "черновик"
@@ -5017,48 +3473,27 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.717",
+    "point_no": "Т1.3130",
     "district": "Аэропорт",
-    "address": "Планетная улица, дом 35",
-    "unom": 19935,
-    "role": "за подъездом 2",
-    "side": "подъезды 1–2",
-    "azimuth": 224,
+    "address": "улица Академика Ильюшина, дом 6",
+    "unom": 8800,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 1",
+    "azimuth": 39,
     "status": "черновик"
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5429226,
-     55.8033955
+     37.5397765,
+     55.8033911
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.718",
-    "district": "Аэропорт",
-    "address": "улица Академика Ильюшина, дом 6",
-    "unom": 8800,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 39,
-    "status": "черновик",
-    "also_covers": "улица Академика Ильюшина, дом 4, корпус 1 (круговой тротуар)"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5398134,
-     55.8033734
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.719",
+    "point_no": "Т1.3131",
     "district": "Аэропорт",
     "address": "улица 8 Марта, дом 13",
     "unom": 4951,
@@ -5078,27 +3513,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.720",
-    "district": "Аэропорт",
-    "address": "улица Академика Ильюшина, дом 6",
-    "unom": 8800,
-    "role": "за подъездом 4",
-    "side": "подъезды 3–4",
-    "azimuth": 309,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5410112,
-     55.8032749
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.721",
+    "point_no": "Т1.3132",
     "district": "Аэропорт",
     "address": "Красноармейская улица, дом 36",
     "unom": 11458,
@@ -5118,11 +3533,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.722",
+    "point_no": "Т1.3133",
     "district": "Аэропорт",
     "address": "Планетная улица, дом 31",
     "unom": 19933,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–2",
     "azimuth": 224,
     "status": "черновик"
@@ -5138,47 +3553,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.723",
-    "district": "Аэропорт",
-    "address": "Планетная улица, дом 33",
-    "unom": 19934,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 313,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5436881,
-     55.8031874
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.724",
-    "district": "Аэропорт",
-    "address": "улица Академика Ильюшина, дом 1, корпус 2",
-    "unom": 8794,
-    "role": "середина фасада",
-    "side": "подъезды 4–8",
-    "azimuth": 214,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5382906,
-     55.8031846
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.725",
+    "point_no": "Т1.3134",
     "district": "Аэропорт",
     "address": "улица Академика Ильюшина, дом 4, корпус 1",
     "unom": 8797,
@@ -5198,11 +3573,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.726",
+    "point_no": "Т1.3135",
     "district": "Аэропорт",
     "address": "Планетная улица, дом 35",
     "unom": 19935,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–2",
     "azimuth": 44,
     "status": "черновик"
@@ -5218,31 +3593,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.727",
-    "district": "Аэропорт",
-    "address": "улица 8 Марта, дом 9",
-    "unom": 4949,
-    "role": "за подъездом 4",
-    "side": "подъезды 3–4",
-    "azimuth": 145,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5505888,
-     55.8031048
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.728",
+    "point_no": "Т1.3136",
     "district": "Аэропорт",
     "address": "Ленинградский проспект, дом 66",
     "unom": 12691,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1",
     "azimuth": 24,
     "status": "черновик"
@@ -5258,7 +3613,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.729",
+    "point_no": "Т1.3137",
     "district": "Аэропорт",
     "address": "Планетная улица, дом 24",
     "unom": 19924,
@@ -5278,47 +3633,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.730",
-    "district": "Аэропорт",
-    "address": "улица 8 Марта, дом 11",
-    "unom": 4950,
-    "role": "середина фасада",
-    "side": "подъезды 1–5",
-    "azimuth": 326,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5519386,
-     55.8029875
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.731",
-    "district": "Аэропорт",
-    "address": "Планетная улица, дом 31",
-    "unom": 19933,
-    "role": "за подъездом 2",
-    "side": "подъезды 1–2",
-    "azimuth": 44,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5428761,
-     55.802939
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.732",
+    "point_no": "Т1.3138",
     "district": "Аэропорт",
     "address": "Планетная улица, дом 29, корпус 1",
     "unom": 19929,
@@ -5338,27 +3653,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.733",
-    "district": "Аэропорт",
-    "address": "улица Академика Ильюшина, дом 4, корпус 1",
-    "unom": 8797,
-    "role": "угол (тротуар вокруг дома)",
-    "side": "круговой тротуар",
-    "azimuth": 40,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5390795,
-     55.8028551
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.734",
+    "point_no": "Т1.3139",
     "district": "Аэропорт",
     "address": "улица Академика Ильюшина, дом 1, корпус 2",
     "unom": 8794,
@@ -5378,11 +3673,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.735",
+    "point_no": "Т1.3140",
     "district": "Аэропорт",
     "address": "Планетная улица, дом 29, корпус 2",
     "unom": 19931,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1",
     "azimuth": 264,
     "status": "черновик"
@@ -5398,31 +3693,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.736",
-    "district": "Аэропорт",
-    "address": "Планетная улица, дом 29, корпус 2",
-    "unom": 19931,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 84,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5434327,
-     55.8027505
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.737",
+    "point_no": "Т1.3141",
     "district": "Аэропорт",
     "address": "улица Черняховского, дом 4",
     "unom": 28790,
-    "role": "за подъездом 6",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 6",
     "azimuth": 214,
     "status": "черновик",
@@ -5439,28 +3714,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.738",
-    "district": "Аэропорт",
-    "address": "Планетная улица, дом 24",
-    "unom": 19924,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–4",
-    "azimuth": 56,
-    "status": "черновик",
-    "also_covers": "Планетная улица, дом 22 (подъезды 1–3)"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5471276,
-     55.8027273
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.739",
+    "point_no": "Т1.3142",
     "district": "Аэропорт",
     "address": "улица Академика Ильюшина, дом 4, корпус 1",
     "unom": 8797,
@@ -5481,11 +3735,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.740",
+    "point_no": "Т1.3143",
     "district": "Аэропорт",
     "address": "улица 8 Марта, дом 9",
     "unom": 4949,
-    "role": "за подъездом 3",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 3–4",
     "azimuth": 325,
     "status": "черновик"
@@ -5501,11 +3755,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.741",
+    "point_no": "Т1.3144",
     "district": "Аэропорт",
     "address": "4-я улица 8 Марта, дом 4, корпус 2",
     "unom": 4959,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1",
     "azimuth": 325,
     "status": "черновик"
@@ -5521,7 +3775,27 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.742",
+    "point_no": "Т1.3145",
+    "district": "Аэропорт",
+    "address": "Планетная улица, дом 24",
+    "unom": 19924,
+    "role": "за подъездом 1",
+    "side": "подъезды 1–4",
+    "azimuth": 56,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5471871,
+     55.8026763
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т1.3146",
     "district": "Аэропорт",
     "address": "улица 8 Марта, дом 7/5",
     "unom": 4947,
@@ -5541,7 +3815,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.743",
+    "point_no": "Т1.3147",
     "district": "Аэропорт",
     "address": "улица Черняховского, дом 4",
     "unom": 28790,
@@ -5561,7 +3835,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.744",
+    "point_no": "Т1.3148",
     "district": "Аэропорт",
     "address": "Планетная улица, дом 29",
     "unom": 19930,
@@ -5582,87 +3856,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.745",
-    "district": "Аэропорт",
-    "address": "улица 8 Марта, дом 9",
-    "unom": 4949,
-    "role": "за подъездом 2",
-    "side": "подъезды 1–2",
-    "azimuth": 235,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5510253,
-     55.8025208
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.746",
-    "district": "Аэропорт",
-    "address": "улица Черняховского, дом 4",
-    "unom": 28790,
-    "role": "за подъездом 7",
-    "side": "подъезды 7",
-    "azimuth": 34,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.533734,
-     55.8024555
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.747",
-    "district": "Аэропорт",
-    "address": "Планетная улица, дом 29, корпус 2",
-    "unom": 19931,
-    "role": "задняя сторона дома",
-    "side": "без подъездов",
-    "azimuth": 264,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5439933,
-     55.8024005
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.748",
-    "district": "Аэропорт",
-    "address": "Планетная улица, дом 29, корпус 2",
-    "unom": 19931,
-    "role": "задняя сторона дома",
-    "side": "без подъездов",
-    "azimuth": 84,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5435814,
-     55.802386
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.749",
+    "point_no": "Т1.3149",
     "district": "Аэропорт",
     "address": "Планетная улица, дом 20",
     "unom": 19921,
@@ -5683,51 +3877,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.750",
-    "district": "Аэропорт",
-    "address": "Красноармейская улица, дом 32",
-    "unom": 11457,
-    "role": "середина фасада",
-    "side": "подъезды 3–7",
-    "azimuth": 303,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5395165,
-     55.8023147
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.751",
-    "district": "Аэропорт",
-    "address": "улица Черняховского, дом 4",
-    "unom": 28790,
-    "role": "за подъездом 6",
-    "side": "подъезды 6",
-    "azimuth": 34,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5335208,
-     55.8022841
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.752",
+    "point_no": "Т1.3150",
     "district": "Аэропорт",
     "address": "улица 8 Марта, дом 9",
     "unom": 4949,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–2",
     "azimuth": 55,
     "status": "черновик"
@@ -5743,27 +3897,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.753",
-    "district": "Аэропорт",
-    "address": "улица 8 Марта, дом 7/5",
-    "unom": 4947,
-    "role": "середина фасада",
-    "side": "подъезды 1–5",
-    "azimuth": 234,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5524061,
-     55.8022583
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.754",
+    "point_no": "Т1.3151",
     "district": "Аэропорт",
     "address": "Планетная улица, дом 29",
     "unom": 19930,
@@ -5783,48 +3917,27 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.755",
+    "point_no": "Т1.3152",
     "district": "Аэропорт",
     "address": "Красноармейская улица, дом 32",
     "unom": 11457,
     "role": "за подъездом 7",
     "side": "подъезды 3–7",
     "azimuth": 303,
-    "status": "черновик",
-    "also_covers": "Красноармейская улица, дом 30 (подъезды 1–2)"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5403345,
-     55.8020369
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.756",
-    "district": "Аэропорт",
-    "address": "улица Черняховского, дом 4",
-    "unom": 28790,
-    "role": "середина фасада",
-    "side": "подъезды 1–5",
-    "azimuth": 214,
     "status": "черновик"
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5336508,
-     55.8020272
+     37.540331,
+     55.8020793
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.757",
+    "point_no": "Т1.3153",
     "district": "Аэропорт",
     "address": "улица 8 Марта, дом 7/5",
     "unom": 4947,
@@ -5844,27 +3957,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.758",
-    "district": "Аэропорт",
-    "address": "Старый Зыковский проезд, дом 3",
-    "unom": 8527,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 224,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.543785,
-     55.8018752
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.759",
+    "point_no": "Т1.3154",
     "district": "Аэропорт",
     "address": "Планетная улица, дом 18",
     "unom": 19919,
@@ -5884,7 +3977,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.760",
+    "point_no": "Т1.3155",
     "district": "Аэропорт",
     "address": "Планетная улица, дом 16",
     "unom": 19917,
@@ -5904,11 +3997,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.761",
+    "point_no": "Т1.3156",
     "district": "Аэропорт",
     "address": "Красноармейская улица, дом 30",
     "unom": 11456,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–2",
     "azimuth": 303,
     "status": "черновик"
@@ -5924,31 +4017,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.762",
-    "district": "Аэропорт",
-    "address": "Красноармейская улица, дом 28",
-    "unom": 11454,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 224,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5414769,
-     55.8016696
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.763",
+    "point_no": "Т1.3157",
     "district": "Аэропорт",
     "address": "Старый Зыковский проезд, дом 6, корпус 1",
     "unom": 8530,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–3",
     "azimuth": 224,
     "status": "черновик"
@@ -5964,7 +4037,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.764",
+    "point_no": "Т1.3158",
     "district": "Аэропорт",
     "address": "Старый Зыковский проезд, дом 4",
     "unom": 8528,
@@ -5984,7 +4057,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.765",
+    "point_no": "Т1.3159",
     "district": "Аэропорт",
     "address": "улица Черняховского, дом 4",
     "unom": 28790,
@@ -6004,11 +4077,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.766",
+    "point_no": "Т1.3160",
     "district": "Аэропорт",
     "address": "Красноармейская улица, дом 28",
     "unom": 11454,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1",
     "azimuth": 44,
     "status": "черновик"
@@ -6024,7 +4097,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.767",
+    "point_no": "Т1.3161",
     "district": "Аэропорт",
     "address": "Планетная улица, дом 16",
     "unom": 19917,
@@ -6044,7 +4117,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.768",
+    "point_no": "Т1.3162",
     "district": "Аэропорт",
     "address": "Планетная улица, дом 14",
     "unom": 19915,
@@ -6064,11 +4137,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.769",
+    "point_no": "Т1.3163",
     "district": "Аэропорт",
     "address": "Красноармейская улица, дом 24",
     "unom": 11449,
-    "role": "за подъездом 2",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–2",
     "azimuth": 122,
     "status": "черновик"
@@ -6084,7 +4157,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.770",
+    "point_no": "Т1.3164",
     "district": "Аэропорт",
     "address": "Ленинградский проспект, дом 62",
     "unom": 12689,
@@ -6104,71 +4177,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.771",
-    "district": "Аэропорт",
-    "address": "Ленинградский проспект, дом 62",
-    "unom": 12689,
-    "role": "за подъездом 13",
-    "side": "подъезды 13",
-    "azimuth": 217,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5327393,
-     55.8013051
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.772",
-    "district": "Аэропорт",
-    "address": "1-я Аэропортовская улица, дом 6",
-    "unom": 1041,
-    "role": "середина фасада",
-    "side": "подъезды 1–3",
-    "azimuth": 14,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5369202,
-     55.8012795
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.773",
-    "district": "Аэропорт",
-    "address": "Старый Зыковский проезд, дом 6, корпус 1",
-    "unom": 8530,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 44,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.544984,
-     55.8012027
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.774",
+    "point_no": "Т1.3165",
     "district": "Аэропорт",
     "address": "Старый Зыковский проезд, дом 3",
     "unom": 8527,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–3",
     "azimuth": 44,
     "status": "черновик"
@@ -6184,7 +4197,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.775",
+    "point_no": "Т1.3166",
     "district": "Аэропорт",
     "address": "Старый Зыковский проезд, дом 4",
     "unom": 8528,
@@ -6204,7 +4217,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.776",
+    "point_no": "Т1.3167",
     "district": "Аэропорт",
     "address": "Планетная улица, дом 14",
     "unom": 19915,
@@ -6224,31 +4237,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.777",
-    "district": "Аэропорт",
-    "address": "Старый Зыковский проезд, дом 6, корпус 2",
-    "unom": 8531,
-    "role": "за подъездом 2",
-    "side": "подъезды 1–2",
-    "azimuth": 139,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5458372,
-     55.8010379
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.778",
+    "point_no": "Т1.3168",
     "district": "Аэропорт",
     "address": "Авиационный переулок, дом 8",
     "unom": 159,
-    "role": "за подъездом 6",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 6–7",
     "azimuth": 130,
     "status": "черновик"
@@ -6264,11 +4257,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.779",
+    "point_no": "Т1.3169",
     "district": "Аэропорт",
     "address": "Ленинградский проспект, дом 62",
     "unom": 12689,
-    "role": "за подъездом 13",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 13",
     "azimuth": 37,
     "status": "черновик"
@@ -6284,31 +4277,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.780",
-    "district": "Аэропорт",
-    "address": "Ленинградский проспект, дом 62",
-    "unom": 12689,
-    "role": "середина фасада",
-    "side": "подъезды 2–3, 11–12",
-    "azimuth": 307,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5332559,
-     55.8008412
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.781",
+    "point_no": "Т1.3170",
     "district": "Аэропорт",
     "address": "Старый Зыковский проезд, дом 6, корпус 2",
     "unom": 8531,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–2",
     "azimuth": 319,
     "status": "черновик"
@@ -6324,68 +4297,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.782",
-    "district": "Аэропорт",
-    "address": "Красноармейская улица, дом 20",
-    "unom": 11445,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 132,
-    "status": "черновик",
-    "also_covers": "Красноармейская улица, дом 22 (подъезды 1–2)"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.54355,
-     55.8007228
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.783",
-    "district": "Аэропорт",
-    "address": "Авиационный переулок, дом 8",
-    "unom": 159,
-    "role": "середина фасада",
-    "side": "подъезды 1–5",
-    "azimuth": 40,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5406985,
-     55.800688
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.784",
-    "district": "Аэропорт",
-    "address": "Авиационный переулок, дом 8",
-    "unom": 159,
-    "role": "за подъездом 7",
-    "side": "подъезды 6–7",
-    "azimuth": 310,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5413863,
-     55.8006836
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.785",
+    "point_no": "Т1.3171",
     "district": "Аэропорт",
     "address": "Планетная улица, дом 12",
     "unom": 19913,
@@ -6405,11 +4317,31 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.786",
+    "point_no": "Т1.3172",
+    "district": "Аэропорт",
+    "address": "Красноармейская улица, дом 22",
+    "unom": 11447,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 1–2",
+    "azimuth": 45,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5434733,
+     55.8006752
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т1.3173",
     "district": "Аэропорт",
     "address": "Ленинградский проспект, дом 62",
     "unom": 12689,
-    "role": "за подъездом 9",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 8–9",
     "azimuth": 37,
     "status": "черновик"
@@ -6425,11 +4357,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.787",
+    "point_no": "Т1.3174",
     "district": "Аэропорт",
     "address": "1-я Аэропортовская улица, дом 6",
     "unom": 1041,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–3",
     "azimuth": 14,
     "status": "черновик"
@@ -6445,11 +4377,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.788",
+    "point_no": "Т1.3175",
     "district": "Аэропорт",
     "address": "Эльдорадовский переулок, дом 7",
     "unom": 19920,
-    "role": "за подъездом 3",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 3",
     "azimuth": 228,
     "status": "черновик"
@@ -6465,31 +4397,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.789",
-    "district": "Аэропорт",
-    "address": "Ленинградский проспект, дом 62",
-    "unom": 12689,
-    "role": "середина фасада",
-    "side": "подъезды 2–3, 11–12",
-    "azimuth": 307,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5338212,
-     55.8005971
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.790",
+    "point_no": "Т1.3176",
     "district": "Аэропорт",
     "address": "Красноармейская улица, дом 20",
     "unom": 11445,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–3",
     "azimuth": 312,
     "status": "черновик"
@@ -6505,11 +4417,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.791",
+    "point_no": "Т1.3177",
     "district": "Аэропорт",
     "address": "Ленинградский проспект, дом 60А",
     "unom": 12688,
-    "role": "за подъездом 2",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–2",
     "azimuth": 218,
     "status": "черновик"
@@ -6525,11 +4437,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.792",
+    "point_no": "Т1.3178",
     "district": "Аэропорт",
     "address": "Ленинградский проспект, дом 62",
     "unom": 12689,
-    "role": "за подъездом 4",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 4–5",
     "azimuth": 37,
     "status": "черновик"
@@ -6545,7 +4457,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.793",
+    "point_no": "Т1.3179",
     "district": "Аэропорт",
     "address": "Авиационный переулок, дом 8",
     "unom": 159,
@@ -6565,7 +4477,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.794",
+    "point_no": "Т1.3180",
     "district": "Аэропорт",
     "address": "Красноармейская улица, дом 16",
     "unom": 11444,
@@ -6585,51 +4497,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.795",
-    "district": "Аэропорт",
-    "address": "Планетная улица, дом 17",
-    "unom": 19918,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 228,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5492076,
-     55.80011
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.796",
-    "district": "Аэропорт",
-    "address": "Ленинградский проспект, дом 62",
-    "unom": 12689,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 217,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5347894,
-     55.8000925
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.797",
+    "point_no": "Т1.3181",
     "district": "Аэропорт",
     "address": "Планетная улица, дом 15",
     "unom": 19916,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–2",
     "azimuth": 139,
     "status": "черновик"
@@ -6645,11 +4517,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.798",
+    "point_no": "Т1.3182",
     "district": "Аэропорт",
     "address": "Ленинградский проспект, дом 62",
     "unom": 12689,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1",
     "azimuth": 37,
     "status": "черновик"
@@ -6665,7 +4537,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.799",
+    "point_no": "Т1.3183",
     "district": "Аэропорт",
     "address": "улица Константина Симонова, дом 5, корпус 2",
     "unom": 23593,
@@ -6686,7 +4558,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.800",
+    "point_no": "Т1.3184",
     "district": "Аэропорт",
     "address": "Красноармейская улица, дом 16",
     "unom": 11444,
@@ -6706,15 +4578,14 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.801",
+    "point_no": "Т1.3185",
     "district": "Аэропорт",
-    "address": "Планетная улица, дом 15",
-    "unom": 19916,
-    "role": "за подъездом 2",
-    "side": "подъезды 1–2",
-    "azimuth": 319,
-    "status": "черновик",
-    "also_covers": "Планетная улица, дом 13 (подъезды 1)"
+    "address": "Планетная улица, дом 13",
+    "unom": 19914,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 1",
+    "azimuth": 137,
+    "status": "черновик"
    },
    "geometry": {
     "type": "Point",
@@ -6727,11 +4598,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.802",
+    "point_no": "Т1.3186",
     "district": "Аэропорт",
     "address": "Планетная улица, дом 17",
     "unom": 19918,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–3",
     "azimuth": 48,
     "status": "черновик"
@@ -6747,11 +4618,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.803",
+    "point_no": "Т1.3187",
     "district": "Аэропорт",
     "address": "Ленинградский проспект, дом 60, корпус 1",
     "unom": 12686,
-    "role": "за подъездом 3",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–3",
     "azimuth": 313,
     "status": "черновик"
@@ -6767,31 +4638,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.804",
-    "district": "Аэропорт",
-    "address": "Планетная улица, дом 13",
-    "unom": 19914,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 317,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5493763,
-     55.7996119
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.805",
+    "point_no": "Т1.3188",
     "district": "Аэропорт",
     "address": "Ленинградский проспект, дом 60, корпус 2",
     "unom": 12687,
-    "role": "за подъездом 3",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 3–5",
     "azimuth": 122,
     "status": "черновик"
@@ -6807,7 +4658,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.806",
+    "point_no": "Т1.3189",
     "district": "Аэропорт",
     "address": "улица Константина Симонова, дом 5, корпус 3",
     "unom": 23594,
@@ -6827,7 +4678,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.807",
+    "point_no": "Т1.3190",
     "district": "Аэропорт",
     "address": "улица Константина Симонова, дом 5, корпус 2",
     "unom": 23593,
@@ -6847,7 +4698,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.808",
+    "point_no": "Т1.3191",
     "district": "Аэропорт",
     "address": "улица Константина Симонова, дом 5, корпус 1",
     "unom": 23592,
@@ -6867,11 +4718,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.809",
+    "point_no": "Т1.3192",
     "district": "Аэропорт",
     "address": "Планетная улица, дом 9",
     "unom": 19911,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1",
     "azimuth": 139,
     "status": "черновик"
@@ -6887,15 +4738,14 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.810",
+    "point_no": "Т1.3193",
     "district": "Аэропорт",
     "address": "Планетная улица, дом 7",
     "unom": 19909,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–2",
     "azimuth": 139,
-    "status": "черновик",
-    "also_covers": "Планетная улица, дом 9 (подъезды 1)"
+    "status": "черновик"
    },
    "geometry": {
     "type": "Point",
@@ -6908,11 +4758,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.811",
+    "point_no": "Т1.3194",
     "district": "Аэропорт",
     "address": "Красноармейская улица, дом 8, корпус 3",
     "unom": 11438,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–3",
     "azimuth": 136,
     "status": "черновик"
@@ -6928,7 +4778,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.812",
+    "point_no": "Т1.3195",
     "district": "Аэропорт",
     "address": "улица Константина Симонова, дом 5, корпус 1",
     "unom": 23592,
@@ -6948,7 +4798,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.813",
+    "point_no": "Т1.3196",
     "district": "Аэропорт",
     "address": "улица Константина Симонова, дом 8, корпус 2",
     "unom": 23598,
@@ -6968,31 +4818,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.814",
-    "district": "Аэропорт",
-    "address": "Красноармейская улица, дом 10, корпус 2",
-    "unom": 11441,
-    "role": "задняя сторона дома",
-    "side": "без подъездов",
-    "azimuth": 135,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5463443,
-     55.7988812
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.815",
+    "point_no": "Т1.3197",
     "district": "Аэропорт",
     "address": "улица Верхняя Масловка, дом 29",
     "unom": 13944,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–3",
     "azimuth": 239,
     "status": "черновик"
@@ -7008,31 +4838,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.816",
-    "district": "Аэропорт",
-    "address": "Красноармейская улица, дом 8, корпус 3",
-    "unom": 11438,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 316,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5488809,
-     55.7987788
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.817",
+    "point_no": "Т1.3198",
     "district": "Аэропорт",
     "address": "Красноармейская улица, дом 10, корпус 2",
     "unom": 11441,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1",
     "azimuth": 315,
     "status": "черновик"
@@ -7048,15 +4858,14 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.818",
+    "point_no": "Т1.3199",
     "district": "Аэропорт",
     "address": "Красноармейская улица, дом 9",
     "unom": 11439,
     "role": "за подъездом 1",
     "side": "подъезды 1–4",
     "azimuth": 133,
-    "status": "черновик",
-    "also_covers": "улица Степана Супруна, дом 12, корпус 1 (без подъездов)"
+    "status": "черновик"
    },
    "geometry": {
     "type": "Point",
@@ -7069,47 +4878,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.819",
-    "district": "Аэропорт",
-    "address": "Красноармейская улица, дом 10, корпус 2",
-    "unom": 11441,
-    "role": "задняя сторона дома",
-    "side": "без подъездов",
-    "azimuth": 315,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.547002,
-     55.7985207
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.820",
-    "district": "Аэропорт",
-    "address": "Новый Зыковский проезд, дом 3",
-    "unom": 8525,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 329,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5543367,
-     55.7985056
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.821",
+    "point_no": "Т1.3200",
     "district": "Аэропорт",
     "address": "улица Константина Симонова, дом 8, корпус 2",
     "unom": 23598,
@@ -7129,7 +4898,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.822",
+    "point_no": "Т1.3201",
     "district": "Аэропорт",
     "address": "улица Степана Супруна, дом 12, корпус 1",
     "unom": 25238,
@@ -7149,11 +4918,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.823",
+    "point_no": "Т1.3202",
     "district": "Аэропорт",
     "address": "Планетная улица, дом 2",
     "unom": 19904,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1",
     "azimuth": 228,
     "status": "черновик"
@@ -7169,32 +4938,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.824",
-    "district": "Аэропорт",
-    "address": "улица Верхняя Масловка, дом 27, корпус 1",
-    "unom": 13941,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 148,
-    "status": "черновик",
-    "also_covers": "улица Верхняя Масловка, дом 29 (подъезды 4–5)"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5571176,
-     55.7983394
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.825",
+    "point_no": "Т1.3203",
     "district": "Аэропорт",
     "address": "Ленинградский проспект, дом 54/1",
     "unom": 12681,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–3",
     "azimuth": 128,
     "status": "черновик"
@@ -7210,51 +4958,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.826",
-    "district": "Аэропорт",
-    "address": "улица Константина Симонова, дом 6",
-    "unom": 23595,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 310,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5421711,
-     55.7982804
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.827",
-    "district": "Аэропорт",
-    "address": "улица Степана Супруна, дом 12, корпус 1",
-    "unom": 25238,
-    "role": "задняя сторона дома",
-    "side": "без подъездов",
-    "azimuth": 41,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5451486,
-     55.7982296
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.828",
+    "point_no": "Т1.3204",
     "district": "Аэропорт",
     "address": "Красноармейская улица, дом 7",
     "unom": 11435,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1",
     "azimuth": 135,
     "status": "черновик"
@@ -7270,72 +4978,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.829",
-    "district": "Аэропорт",
-    "address": "улица Степана Супруна, дом 12, корпус 1",
-    "unom": 25238,
-    "role": "середина фасада",
-    "side": "подъезды 1–4",
-    "azimuth": 41,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5454705,
-     55.7980484
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.830",
-    "district": "Аэропорт",
-    "address": "Ленинградский проспект, дом 54/1",
-    "unom": 12681,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 308,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5400332,
-     55.7977973
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.831",
-    "district": "Аэропорт",
-    "address": "улица Степана Супруна, дом 12, корпус 1",
-    "unom": 25238,
-    "role": "задняя сторона дома",
-    "side": "без подъездов",
-    "azimuth": 41,
-    "status": "черновик",
-    "also_covers": "улица Степана Супруна, дом 12, корпус 2 (без подъездов)"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5445061,
-     55.7977761
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.832",
+    "point_no": "Т1.3205",
     "district": "Аэропорт",
     "address": "улица Степана Супруна, дом 12, корпус 3",
     "unom": 25240,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–3",
     "azimuth": 218,
     "status": "черновик"
@@ -7351,11 +4998,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.833",
+    "point_no": "Т1.3206",
     "district": "Аэропорт",
     "address": "Красноармейская улица, дом 2, корпус 2",
     "unom": 11431,
-    "role": "за подъездом 4",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 4",
     "azimuth": 138,
     "status": "черновик"
@@ -7371,73 +5018,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.834",
-    "district": "Аэропорт",
-    "address": "улица Верхняя Масловка, дом 27, корпус 1",
-    "unom": 13941,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–3",
-    "azimuth": 328,
-    "status": "черновик",
-    "also_covers": "улица Верхняя Масловка, дом 25, корпус 1 (без подъездов)"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5578152,
-     55.7976823
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.835",
+    "point_no": "Т1.3207",
     "district": "Аэропорт",
     "address": "улица Степана Супруна, дом 12, корпус 2",
     "unom": 25239,
-    "role": "задняя сторона дома",
-    "side": "без подъездов",
-    "azimuth": 40,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5443517,
-     55.79766
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.836",
-    "district": "Аэропорт",
-    "address": "Красноармейская улица, дом 2, корпус 2",
-    "unom": 11431,
-    "role": "за подъездом 3",
-    "side": "подъезды 2–3",
-    "azimuth": 138,
-    "status": "черновик",
-    "also_covers": "Красноармейская улица, дом 2, корпус 2 (подъезды 5)"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5513558,
-     55.7975146
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.837",
-    "district": "Аэропорт",
-    "address": "улица Степана Супруна, дом 12, корпус 2",
-    "unom": 25239,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1",
     "azimuth": 40,
     "status": "черновик"
@@ -7453,67 +5038,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.838",
-    "district": "Аэропорт",
-    "address": "улица Верхняя Масловка, дом 25, корпус 1",
-    "unom": 340357,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 316,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.559034,
-     55.7973905
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.839",
-    "district": "Аэропорт",
-    "address": "улица Степана Супруна, дом 12, корпус 3",
-    "unom": 25240,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 38,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5451923,
-     55.7973652
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.840",
-    "district": "Аэропорт",
-    "address": "улица Верхняя Масловка, дом 25, корпус 1",
-    "unom": 340357,
-    "role": "задняя сторона дома",
-    "side": "без подъездов",
-    "azimuth": 136,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5583551,
-     55.7973646
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.841",
+    "point_no": "Т1.3208",
     "district": "Аэропорт",
     "address": "Красноармейская улица, дом 5",
     "unom": 11432,
@@ -7534,31 +5059,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.842",
-    "district": "Аэропорт",
-    "address": "улица Пилота Нестерова, дом 7",
-    "unom": 16050,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 218,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.546452,
-     55.7973308
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.843",
+    "point_no": "Т1.3209",
     "district": "Аэропорт",
     "address": "Красноармейская улица, дом 2, корпус 2",
     "unom": 11431,
-    "role": "за подъездом 5",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 5",
     "azimuth": 318,
     "status": "черновик"
@@ -7574,11 +5079,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.844",
+    "point_no": "Т1.3210",
     "district": "Аэропорт",
     "address": "Красноармейская улица, дом 2, корпус 2",
     "unom": 11431,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1",
     "azimuth": 138,
     "status": "черновик"
@@ -7594,11 +5099,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.845",
+    "point_no": "Т1.3211",
     "district": "Аэропорт",
     "address": "Красноармейская улица, дом 2, корпус 2",
     "unom": 11431,
-    "role": "за подъездом 2",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 2–3",
     "azimuth": 318,
     "status": "черновик"
@@ -7614,47 +5119,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.846",
-    "district": "Аэропорт",
-    "address": "улица Пилота Нестерова, дом 7",
-    "unom": 16050,
-    "role": "задняя сторона дома",
-    "side": "без подъездов",
-    "azimuth": 218,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5468045,
-     55.79717
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.847",
-    "district": "Аэропорт",
-    "address": "улица Степана Супруна, дом 4",
-    "unom": 25237,
-    "role": "середина фасада",
-    "side": "подъезды 1–5",
-    "azimuth": 308,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.544801,
-     55.7970707
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.848",
+    "point_no": "Т1.3212",
     "district": "Аэропорт",
     "address": "улица Верхняя Масловка, дом 23",
     "unom": 13937,
@@ -7674,11 +5139,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.849",
+    "point_no": "Т1.3213",
     "district": "Аэропорт",
     "address": "Красноармейская улица, дом 2, корпус 1",
     "unom": 11430,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–3",
     "azimuth": 135,
     "status": "черновик"
@@ -7694,11 +5159,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.850",
+    "point_no": "Т1.3214",
     "district": "Аэропорт",
     "address": "улица Пилота Нестерова, дом 7",
     "unom": 16050,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–3",
     "azimuth": 38,
     "status": "черновик"
@@ -7714,71 +5179,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.851",
+    "point_no": "Т1.3215",
     "district": "Аэропорт",
     "address": "улица Пилота Нестерова, дом 9",
     "unom": 16051,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 217,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5468558,
-     55.7967779
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.852",
-    "district": "Аэропорт",
-    "address": "улица Пилота Нестерова, дом 7",
-    "unom": 16050,
-    "role": "задняя сторона дома",
-    "side": "без подъездов",
-    "azimuth": 38,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5462128,
-     55.7967133
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.853",
-    "district": "Аэропорт",
-    "address": "улица Верхняя Масловка, дом 23",
-    "unom": 13937,
-    "role": "середина фасада",
-    "side": "подъезды 1–6",
-    "azimuth": 329,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5594359,
-     55.7966922
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.854",
-    "district": "Аэропорт",
-    "address": "улица Пилота Нестерова, дом 9",
-    "unom": 16051,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–3",
     "azimuth": 37,
     "status": "черновик"
@@ -7794,27 +5199,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.855",
-    "district": "Аэропорт",
-    "address": "Ленинградский проспект, дом 48",
-    "unom": 12672,
-    "role": "за подъездом 5",
-    "side": "подъезды 4–5",
-    "azimuth": 218,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5444201,
-     55.7962666
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.856",
+    "point_no": "Т1.3216",
     "district": "Аэропорт",
     "address": "улица Верхняя Масловка, дом 23",
     "unom": 13937,
@@ -7835,31 +5220,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.857",
-    "district": "Аэропорт",
-    "address": "Петровско-Разумовская аллея, дом 16",
-    "unom": 19632,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–3",
-    "azimuth": 328,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5596978,
-     55.7959008
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.858",
+    "point_no": "Т1.3217",
     "district": "Аэропорт",
     "address": "Ленинградский проспект, дом 48",
     "unom": 12672,
-    "role": "за подъездом 4",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 4–5",
     "azimuth": 38,
     "status": "черновик"
@@ -7875,51 +5240,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.859",
-    "district": "Аэропорт",
-    "address": "улица Верхняя Масловка, дом 21",
-    "unom": 13935,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 329,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5602538,
-     55.7958313
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.860",
-    "district": "Аэропорт",
-    "address": "Ленинградский проспект, дом 44",
-    "unom": 12666,
-    "role": "за подъездом 9",
-    "side": "подъезды 8–9",
-    "azimuth": 218,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5464921,
-     55.795455
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.861",
+    "point_no": "Т1.3218",
     "district": "Аэропорт",
     "address": "улица Серёгина, дом 3",
     "unom": 23420,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1",
     "azimuth": 216,
     "status": "черновик"
@@ -7935,11 +5260,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.862",
+    "point_no": "Т1.3219",
     "district": "Аэропорт",
     "address": "Ленинградский проспект, дом 44",
     "unom": 12666,
-    "role": "за подъездом 8",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 8–9",
     "azimuth": 38,
     "status": "черновик"
@@ -7955,51 +5280,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.863",
+    "point_no": "Т1.3220",
     "district": "Аэропорт",
     "address": "Ленинградский проспект, дом 44",
     "unom": 12666,
-    "role": "середина фасада",
-    "side": "подъезды 2–7",
-    "azimuth": 128,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5467569,
-     55.7949293
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.864",
-    "district": "Аэропорт",
-    "address": "Ленинградский проспект, дом 44",
-    "unom": 12666,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 218,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5475428,
-     55.794764
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.865",
-    "district": "Аэропорт",
-    "address": "Ленинградский проспект, дом 44",
-    "unom": 12666,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1",
     "azimuth": 38,
     "status": "черновик"
@@ -8015,31 +5300,11 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т1.866",
-    "district": "Аэропорт",
-    "address": "улица Верхняя Масловка, дом 11",
-    "unom": 13933,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 214,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5639439,
-     55.7930349
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т1.867",
+    "point_no": "Т1.3221",
     "district": "Аэропорт",
     "address": "улица Верхняя Масловка, дом 7",
     "unom": 13929,
-    "role": "за подъездом 1",
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1",
     "azimuth": 304,
     "status": "черновик"
