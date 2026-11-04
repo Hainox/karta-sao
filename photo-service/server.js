@@ -740,6 +740,12 @@ async function handler(request, response) {
     }
     if (pathname === '/review/claim' && request.method === 'POST') return handleReviewClaim(request, response, user);
     if (pathname === '/review/history' && request.method === 'GET') return handleReviewHistory(request, response, user);
+    // Частые причины возврата на доработку для выпадающего списка во всех кабинетах приёмки.
+    if (pathname === '/review/reasons' && request.method === 'GET') {
+      if (!requirePrefecture(response, request, user)) return;
+      const { loadReviewReasons } = await import('./src/review-reasons.js');
+      return sendJson(response, 200, { reasons: await loadReviewReasons(pool) }, request);
+    }
     if (pathname === '/review/queue' && request.method === 'GET') {
       if (!requirePrefecture(response, request, user)) return;
       const url = new URL(request.url, 'http://photo-service.local');
