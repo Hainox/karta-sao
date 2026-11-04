@@ -96,6 +96,7 @@ FEW_ENTRANCES = 3             # --rule: столько подъездов и м�
 OVERVIEW_MIN_M = 10           # обзорная точка — в 10–16 м от стены, напротив подъездов
 OVERVIEW_MAX_M = 16
 ONE_SIDE_COS = 0.5            # --rule: фасады с нормалями ближе 60° — одна сторона дома
+PRIVATE_HOUSES = {"house", "detached", "semidetached_house", "bungalow", "cabin", "farm", "terrace"}
 STAFF_HOUSE_M = 40            # точка префектуры относится к дому не дальше этого от стены
 
 
@@ -265,7 +266,7 @@ def read_staff_edits(path, district_no):
     return edits
 
 
-def apply_rule(L, staff, live, points, house_slots, stats, buildings=()):
+def apply_rule(L, staff, live, points, house_slots, stats, buildings=(), tags=(), registry=frozenset(), yards=None, doors=()):
     """Точки префектуры по правилу подъездов. Каждая живая точка относится к дому,
     на который смотрит (первый дом по направлению кадра в STAFF_HOUSE_M), иначе — к
     ближайшему не дальше STAFF_HOUSE_M, а в доме — к стороне с ближайшим подъездом
@@ -276,7 +277,20 @@ def apply_rule(L, staff, live, points, house_slots, stats, buildings=()):
     хватило: у k = 2 — самая дальняя от оставленной точки префектуры.
     Дом без подъездов в реестре: если у одного здания стоят три и больше точек
     префектуры, остаются две крайние вдоль здания (и все с фото).
+    У такого здания число подъездов берётся по точкам подъездов OSM на его стене:
+    1–3 подъезда — остаётся одна точка (ближайшая к середине подъездов); иначе — две крайние.
+    Не оцифровываются (снимаются, кроме точек с фото): точки вне дворовых территорий
+    АСУ ОДС (ЖК со своей управляющей компанией, частные и военные территории), у частных
+    домов (OSM building=house, detached и т. п.) и у военных объектов.
+    Реестр подъездов неполный (не все МКД района), поэтому дом не из реестра — не повод
+    снимать точку.
+    Причина снятия — в reasons.
     Возвращает (живые точки префектуры, номера на снятие, черновые точки)."""
+    reasons = {}
+    for no, (xy, _) in live.items():
+        if yards is not None and "P" not in staff[no][3] and not yards.contains(Point(xy)):
+            reasons[no] = "вне дворовых территорий АСУ ОДС"
+    live = {no: v for no, v in live.items() if no not in reasons}
     homes = [(u, b) for u, (b, _) in house_slots.items()]
     tree = STRtree([b for _, b in homes])
     by_slot = defaultdict(list)
@@ -321,6 +335,7 @@ def apply_rule(L, staff, live, points, house_slots, stats, buildings=()):
             keep.append(pick)
             rest.remove(pick)
         retire += rest
+        reasons.update((no, f"лишняя: у стороны дома {'1–3 подъезда — одна точка' if k == 1 else '4+ подъездов — две по концам'}") for no in rest)
         stats["staff_retired_by_rule"] += len(rest)
         if k - len(keep) <= 0:
             drop.update(id(p) for p in own)
@@ -334,9 +349,31 @@ def apply_rule(L, staff, live, points, house_slots, stats, buildings=()):
             if no in assigned:
                 continue
             j = btree.query_nearest(Point(xy), max_distance=25)
-            if len(j):
-                by_bld[int(j[0])].append(no)
+            if not len(j):
+                continue
+            j = int(j[0])
+            t = tags[j] if j < len(tags) else {}
+            if "P" not in staff[no][3] and j not in registry:
+                if t.get("building") in PRIVATE_HOUSES:
+                    reasons[no] = "частный дом"
+                elif t.get("military") or t.get("building") in ("military", "barracks"):
+                    reasons[no] = "военный объект"
+                if no in reasons:
+                    continue
+            by_bld[j].append(no)
         for j, mine in by_bld.items():
+            mine = [no for no in mine if no not in reasons]
+            ring = buildings[j].exterior
+            own_doors = [d for d in doors if ring.distance(d) < 1.5]
+            if 1 <= len(own_doors) <= FEW_ENTRANCES and len(mine) > 1:
+                mx = sum(d.x for d in own_doors) / len(own_doors)
+                my = sum(d.y for d in own_doors) / len(own_doors)
+                keep = min(mine, key=lambda no: math.dist(live[no][0], (mx, my)))
+                rest = [no for no in mine if no != keep and "P" not in staff[no][3]]
+                retire += rest
+                reasons.update((no, f"лишняя: у дома {len(own_doors)} подъезда по OSM — одна точка") for no in rest)
+                stats["staff_retired_no_entrances"] += len(rest)
+                continue
             if len(mine) < 3:
                 continue
             ux, uy = max(main_axes(buildings[j]), key=lambda u: max((x * u[0] + y * u[1]) for x, y in buildings[j].exterior.coords)
@@ -345,10 +382,15 @@ def apply_rule(L, staff, live, points, house_slots, stats, buildings=()):
             ends = {min(mine, key=along), max(mine, key=along)}
             rest = [no for no in mine if no not in ends and "P" not in staff[no][3]]
             retire += rest
+            reasons.update((no, "лишняя у здания без подъездов в реестре") for no in rest)
             stats["staff_retired_no_entrances"] += len(rest)
+    for no in reasons:
+        if no not in retire:
+            retire.append(no)
+            stats["staff_retired_excluded"] += 1
     live = {no: v for no, v in live.items() if no not in retire}
     stats["drafts_dropped_by_staff"] = len(drop)
-    return live, retire, [p for p in points if id(p) not in drop]
+    return live, retire, [p for p in points if id(p) not in drop], reasons
 
 
 def build(slug, staff=None, first_no=1, rule=False):
@@ -370,7 +412,7 @@ def build(slug, staff=None, first_no=1, rule=False):
     odh = unary_union([L.geom(shape(f["geometry"]).buffer(0)) for f in load(layers / "odh.geojson")["features"]]).buffer(0)
     parking = unary_union([L.geom(shape(f["geometry"]).buffer(0)) for f in load(layers / "parking.geojson")["features"]]).buffer(0)
 
-    buildings = []
+    buildings, tags = [], []
     for el in load(WORK / f"osm_buildings_{slug}.json")["elements"]:
         geom = el.get("geometry") or []
         if len(geom) < 4 or geom[0] != geom[-1]:
@@ -379,7 +421,9 @@ def build(slug, staff=None, first_no=1, rule=False):
         if poly.is_empty or poly.area < 60 or poly.geom_type != "Polygon":
             continue
         buildings.append(poly.simplify(0.8))
+        tags.append(el.get("tags") or {})
     tree = STRtree(buildings)
+    registry = set()   # контуры домов из реестра МКД
     bld_union = unary_union(buildings)
 
     def camera(target, home, walk):
@@ -444,6 +488,7 @@ def build(slug, staff=None, first_no=1, rule=False):
             if len(idx):
                 votes[int(idx[0])] += 1
         bld = buildings[votes.most_common(1)[0][0]] if votes else None
+        registry.update(votes)
         stats["no_building"] += bld is None
         address = recs[0]["properties"].get("Адрес", "")
 
@@ -675,9 +720,10 @@ def build(slug, staff=None, first_no=1, rule=False):
         live = {no: (L.xy(lng, lat), heading) for no, (lng, lat, heading, flags) in staff.items() if "D" not in flags}
         turn = lambda a, b: min(abs(a - b) % 360, 360 - abs(a - b) % 360)
         gone = [L.xy(lng, lat) for lng, lat, _, flags in staff.values() if "D" in flags]
-        retire = []
+        retire, reasons = [], {}
         if rule:
-            live, retire, points = apply_rule(L, staff, live, points, house_slots, stats, buildings)
+            live, retire, points, reasons = apply_rule(L, staff, live, points, house_slots, stats,
+                                                       buildings, tags, registry, yards, [d for d, _ in osm_doors])
         before = len(points)
         points = [p for p in points
                   if all(math.dist(p["xy"], xy) >= (STAFF_KEEP_M if turn(p["az"], h) <= 60 else STAFF_SAME_M) for xy, h in live.values())
@@ -716,8 +762,10 @@ def build(slug, staff=None, first_no=1, rule=False):
     print(f"{district}: {len(features)} точек (правки префектуры: {len(kept)}) → {out.relative_to(ROOT)}")
     if staff and rule:
         lst = ROOT / "photo-service" / "scripts" / "retire-lists" / f"sidewalk-rule-{slug}.txt"
-        lst.write_text("# Лишние точки префектуры по правилу подъездов: снять (точки с фото сюда не попадают)\n"
-                       + "".join(no + "\n" for no in sorted(retire, key=lambda n: int(n.split(".")[1]))), encoding="utf-8")
+        lst.write_text("# Лишние точки префектуры по правилу подъездов и не входящие в оцифровку: снять\n"
+                       "# (точки с фото сюда не попадают). После # — причина.\n"
+                       + "".join(f"{no}  # {reasons.get(no, '')}\n" for no in sorted(retire, key=lambda n: int(n.split(".")[1]))),
+                       encoding="utf-8")
         print(f"к снятию: {len(retire)} → {lst.relative_to(ROOT)}")
     print(dict(stats))
 
