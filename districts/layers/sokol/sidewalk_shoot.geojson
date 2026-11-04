@@ -4,66 +4,6 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т13.001",
-    "district": "Сокол",
-    "address": "Светлый проезд, дом 10, корпус 4",
-    "unom": 22806,
-    "role": "за подъездом 10",
-    "side": "подъезды 10–12",
-    "azimuth": 158,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.4907044,
-     55.8144833
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.002",
-    "district": "Сокол",
-    "address": "Светлый проезд, дом 10, корпус 3",
-    "unom": 22805,
-    "role": "за подъездом 9",
-    "side": "подъезды 7–9",
-    "azimuth": 158,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.4901242,
-     55.8143505
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.003",
-    "district": "Сокол",
-    "address": "Светлый проезд, дом 10, корпус 2",
-    "unom": 22804,
-    "role": "за подъездом 4",
-    "side": "подъезды 4–6",
-    "azimuth": 158,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.4888809,
-     55.814068
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
     "point_no": "Т13.004",
     "district": "Сокол",
     "address": "Светлый проезд, дом 6, корпус 4",
@@ -71,13 +11,14 @@
     "role": "за подъездом 4",
     "side": "подъезды 4",
     "azimuth": 158,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.4919678,
-     55.8139957
+     37.491868,
+     55.81415
     ]
    }
   },
@@ -91,456 +32,14 @@
     "role": "за подъездом 3",
     "side": "подъезды 1–3",
     "azimuth": 158,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.4883112,
-     55.8139388
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.006",
-    "district": "Сокол",
-    "address": "Светлый проезд, дом 10, корпус 4",
-    "unom": 22806,
-    "role": "за подъездом 12",
-    "side": "подъезды 10–12",
-    "azimuth": 338,
     "status": "черновик",
-    "also_covers": "Светлый проезд, дом 8, корпус 3 (подъезды 3)"
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.4911041,
-     55.8139377
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.007",
-    "district": "Сокол",
-    "address": "Светлый проезд, дом 10, корпус 3",
-    "unom": 22805,
-    "role": "за подъездом 7",
-    "side": "подъезды 7–9",
-    "azimuth": 338,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.4905037,
-     55.8138021
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.008",
-    "district": "Сокол",
-    "address": "Светлый проезд, дом 8, корпус 3",
-    "unom": 22802,
-    "role": "за подъездом 3",
-    "side": "подъезды 3",
-    "azimuth": 338,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.4910423,
-     55.8137816
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.009",
-    "district": "Сокол",
-    "address": "Светлый проезд, дом 8, корпус 2",
-    "unom": 22801,
-    "role": "за подъездом 2",
-    "side": "подъезды 2",
-    "azimuth": 158,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.4900227,
-     55.8137449
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.010",
-    "district": "Сокол",
-    "address": "Светлый проезд, дом 6, корпус 4",
-    "unom": 22799,
-    "role": "за подъездом 4",
-    "side": "подъезды 4",
-    "azimuth": 338,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.4921737,
-     55.8137111
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.011",
-    "district": "Сокол",
-    "address": "улица Константина Царёва, дом 18",
-    "unom": 28197,
-    "role": "за подъездом 2",
-    "side": "подъезды 1–2",
-    "azimuth": 152,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.497554,
-     55.8136823
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.012",
-    "district": "Сокол",
-    "address": "Светлый проезд, дом 6, корпус 3",
-    "unom": 22798,
-    "role": "за подъездом 3",
-    "side": "подъезды 3",
-    "azimuth": 158,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.4911782,
-     55.8136001
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.013",
-    "district": "Сокол",
-    "address": "Светлый проезд, дом 8, корпус 2",
-    "unom": 22801,
-    "role": "за подъездом 2",
-    "side": "подъезды 2",
-    "azimuth": 338,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.4901442,
-     55.8135753
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.014",
-    "district": "Сокол",
-    "address": "Светлый проезд, дом 10, корпус 2",
-    "unom": 22804,
-    "role": "за подъездом 6",
-    "side": "подъезды 4–6",
-    "azimuth": 338,
-    "status": "черновик",
-    "also_covers": "Светлый проезд, дом 8, корпус 1 (подъезды 1)"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.4892453,
-     55.8135631
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.015",
-    "district": "Сокол",
-    "address": "Светлый проезд, дом 4, корпус 4",
-    "unom": 22795,
-    "role": "за подъездом 10",
-    "side": "подъезды 10–12",
-    "azimuth": 158,
-    "status": "черновик",
-    "also_covers": "Светлый проезд, дом 6, корпус 3 (подъезды 3)"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.4914167,
-     55.8135011
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.016",
-    "district": "Сокол",
-    "address": "Светлый проезд, дом 8, корпус 1",
-    "unom": 22800,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 338,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.489186,
-     55.813443
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.017",
-    "district": "Сокол",
-    "address": "Светлый проезд, дом 6, корпус 2",
-    "unom": 22797,
-    "role": "за подъездом 2",
-    "side": "подъезды 2",
-    "azimuth": 158,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.4902742,
-     55.8133924
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.018",
-    "district": "Сокол",
-    "address": "Светлый проезд, дом 4, корпус 3",
-    "unom": 22794,
-    "role": "за подъездом 9",
-    "side": "подъезды 7–9",
-    "azimuth": 158,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.4907899,
-     55.8133638
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.019",
-    "district": "Сокол",
-    "address": "Светлый проезд, дом 10, корпус 1",
-    "unom": 22803,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–3",
-    "azimuth": 338,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.4887146,
-     55.8133614
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.020",
-    "district": "Сокол",
-    "address": "улица Константина Царёва, дом 18",
-    "unom": 28197,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–2",
-    "azimuth": 332,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.4979835,
-     55.8132301
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.021",
-    "district": "Сокол",
-    "address": "Светлый проезд, дом 6, корпус 2",
-    "unom": 22797,
-    "role": "за подъездом 2",
-    "side": "подъезды 2",
-    "azimuth": 338,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.4904029,
-     55.8132122
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.022",
-    "district": "Сокол",
-    "address": "Светлый проезд, дом 6, корпус 1",
-    "unom": 22796,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 158,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.4893541,
-     55.8131841
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.023",
-    "district": "Сокол",
-    "address": "Светлый проезд, дом 4, корпус 2",
-    "unom": 22793,
-    "role": "за подъездом 4",
-    "side": "подъезды 4–6",
-    "azimuth": 158,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.4895944,
-     55.8131043
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.024",
-    "district": "Сокол",
-    "address": "Светлый проезд, дом 6, корпус 1",
-    "unom": 22796,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 338,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.4894769,
-     55.8130122
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.025",
-    "district": "Сокол",
-    "address": "Светлый проезд, дом 4, корпус 1",
-    "unom": 22792,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 158,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.4889857,
-     55.8129891
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.026",
-    "district": "Сокол",
-    "address": "Светлый проезд, дом 4, корпус 4",
-    "unom": 22795,
-    "role": "за подъездом 12",
-    "side": "подъезды 10–12",
-    "azimuth": 338,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.4918086,
-     55.8129564
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.027",
-    "district": "Сокол",
-    "address": "Светлый проезд, дом 4, корпус 3",
-    "unom": 22794,
-    "role": "за подъездом 7",
-    "side": "подъезды 7–9",
-    "azimuth": 338,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.4912234,
-     55.8128253
+     37.488375,
+     55.813892
     ]
    }
   },
@@ -554,175 +53,14 @@
     "role": "за подъездом 6",
     "side": "подъезды 4–6",
     "azimuth": 338,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.4898744,
-     55.8125273
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.029",
-    "district": "Сокол",
-    "address": "Светлый проезд, дом 4, корпус 1",
-    "unom": 22792,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–3",
-    "azimuth": 338,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.4893995,
-     55.8124185
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.030",
-    "district": "Сокол",
-    "address": "Факультетский переулок, дом 7",
-    "unom": 27055,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 199,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.4920514,
-     55.8119741
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.031",
-    "district": "Сокол",
-    "address": "Факультетский переулок, дом 8",
-    "unom": 27056,
-    "role": "за подъездом 2",
-    "side": "подъезды 1–2",
-    "azimuth": 201,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.4952916,
-     55.811972
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.032",
-    "district": "Сокол",
-    "address": "Факультетский переулок, дом 6",
-    "unom": 340201,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–2",
-    "azimuth": 201,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.4968368,
-     55.8116832
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.033",
-    "district": "Сокол",
-    "address": "Факультетский переулок, дом 4",
-    "unom": 27054,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–2",
-    "azimuth": 21,
     "status": "черновик",
-    "also_covers": "Факультетский переулок, дом 6 (круговой тротуар)"
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.497123,
-     55.8116213
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.034",
-    "district": "Сокол",
-    "address": "Факультетский переулок, дом 7",
-    "unom": 27055,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 19,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.491766,
-     55.8115974
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.035",
-    "district": "Сокол",
-    "address": "Факультетский переулок, дом 8",
-    "unom": 27056,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–2",
-    "azimuth": 21,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.4950201,
-     55.8115776
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.036",
-    "district": "Сокол",
-    "address": "улица Константина Царёва, дом 4",
-    "unom": 28193,
-    "role": "за подъездом 4",
-    "side": "подъезды 1–4",
-    "azimuth": 198,
-    "status": "черновик",
-    "also_covers": "улица Константина Царёва, дом 6 (подъезды 1–4)"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.4917974,
-     55.8113673
+     37.48998,
+     55.81255
     ]
    }
   },
@@ -736,153 +74,14 @@
     "role": "за подъездом 2",
     "side": "подъезды 1–2",
     "azimuth": 21,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.4965148,
-     55.8112291
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.038",
-    "district": "Сокол",
-    "address": "Факультетский переулок, дом 6",
-    "unom": 340201,
-    "role": "угол (тротуар вокруг дома)",
-    "side": "круговой тротуар",
-    "azimuth": 291,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.4968743,
-     55.8111521
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.039",
-    "district": "Сокол",
-    "address": "улица Константина Царёва, дом 6",
-    "unom": 28194,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–4",
-    "azimuth": 288,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.4934301,
-     55.8110662
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.040",
-    "district": "Сокол",
-    "address": "Волоколамское шоссе, дом 16Б, корпус 3",
-    "unom": 4677,
-    "role": "за подъездом 4",
-    "side": "подъезды 1–4",
-    "azimuth": 198,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.4926999,
-     55.8109517
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.041",
-    "district": "Сокол",
-    "address": "Волоколамское шоссе, дом 16Б, корпус 2",
-    "unom": 4676,
-    "role": "за подъездом 4",
-    "side": "подъезды 1–4",
-    "azimuth": 198,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.4931671,
-     55.8109089
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.042",
-    "district": "Сокол",
-    "address": "улица Константина Царёва, дом 4",
-    "unom": 28193,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–4",
-    "azimuth": 18,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.4914088,
-     55.8106981
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.043",
-    "district": "Сокол",
-    "address": "Волоколамское шоссе, дом 16Б, корпус 3",
-    "unom": 4677,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–4",
-    "azimuth": 18,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.4924252,
-     55.8104915
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.044",
-    "district": "Сокол",
-    "address": "Волоколамское шоссе, дом 16Б, корпус 2",
-    "unom": 4676,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–4",
-    "azimuth": 18,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.492859,
-     55.810374
+     37.49644,
+     55.811274
     ]
    }
   },
@@ -895,14 +94,15 @@
     "unom": 4679,
     "role": "за подъездом 1",
     "side": "подъезды 1",
-    "azimuth": 19,
-    "status": "черновик"
+    "azimuth": 332,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.4909312,
-     55.8102481
+     37.491146,
+     55.810237
     ]
    }
   },
@@ -915,74 +115,15 @@
     "unom": 4678,
     "role": "за подъездом 1",
     "side": "подъезды 1",
-    "azimuth": 20,
-    "status": "черновик"
+    "azimuth": 250,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.4916426,
-     55.8100887
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.047",
-    "district": "Сокол",
-    "address": "Волоколамское шоссе, дом 14",
-    "unom": 4673,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–2",
-    "azimuth": 198,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.4934625,
-     55.8100777
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.048",
-    "district": "Сокол",
-    "address": "Волоколамское шоссе, дом 16",
-    "unom": 4675,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 20,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.4925873,
-     55.8098874
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.049",
-    "district": "Сокол",
-    "address": "Волоколамское шоссе, дом 14",
-    "unom": 4673,
-    "role": "за подъездом 5",
-    "side": "подъезды 5",
-    "azimuth": 198,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.4946833,
-     55.8098469
+     37.492093,
+     55.810334
     ]
    }
   },
@@ -995,94 +136,15 @@
     "unom": 4673,
     "role": "за подъездом 6",
     "side": "подъезды 6",
-    "azimuth": 198,
-    "status": "черновик"
+    "azimuth": 20,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.4949406,
-     55.8097994
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.051",
-    "district": "Сокол",
-    "address": "Волоколамское шоссе, дом 14",
-    "unom": 4673,
-    "role": "за подъездом 3",
-    "side": "подъезды 3–4",
-    "azimuth": 108,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.4932949,
-     55.8097883
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.052",
-    "district": "Сокол",
-    "address": "Волоколамское шоссе, дом 14",
-    "unom": 4673,
-    "role": "за подъездом 4",
-    "side": "подъезды 3–4",
-    "azimuth": 288,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.4945193,
-     55.8095627
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.053",
-    "district": "Сокол",
-    "address": "Волоколамское шоссе, дом 14",
-    "unom": 4673,
-    "role": "за подъездом 6",
-    "side": "подъезды 6",
-    "azimuth": 18,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.4947954,
-     55.8094106
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.054",
-    "district": "Сокол",
-    "address": "Волоколамское шоссе, дом 8",
-    "unom": 4670,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 198,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.4986295,
-     55.8091575
+     37.494796,
+     55.809401
     ]
    }
   },
@@ -1095,15 +157,15 @@
     "unom": 4670,
     "role": "за подъездом 2",
     "side": "подъезды 2–3",
-    "azimuth": 108,
+    "azimuth": 197,
     "status": "черновик",
-    "also_covers": "Волоколамское шоссе, дом 8 (подъезды 1)"
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.4985539,
-     55.8090263
+     37.498668,
+     55.809257
     ]
    }
   },
@@ -1117,13 +179,14 @@
     "role": "за подъездом 4",
     "side": "подъезды 4",
     "azimuth": 198,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5001009,
-     55.8089263
+     37.500197,
+     55.808988
     ]
    }
   },
@@ -1137,54 +200,14 @@
     "role": "за подъездом 6",
     "side": "подъезды 6",
     "azimuth": 108,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5013854,
-     55.8087431
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.058",
-    "district": "Сокол",
-    "address": "Волоколамское шоссе, дом 8",
-    "unom": 4670,
-    "role": "за подъездом 3",
-    "side": "подъезды 2–3",
-    "azimuth": 288,
     "status": "черновик",
-    "also_covers": "Волоколамское шоссе, дом 8 (подъезды 4)"
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.4999936,
-     55.8087127
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.059",
-    "district": "Сокол",
-    "address": "Волоколамское шоссе, дом 6",
-    "unom": 4666,
-    "role": "за подъездом 6",
-    "side": "подъезды 6",
-    "azimuth": 288,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5018479,
-     55.8086598
+     37.501396,
+     55.808785
     ]
    }
   },
@@ -1197,14 +220,15 @@
     "unom": 4666,
     "role": "за подъездом 5",
     "side": "подъезды 5",
-    "azimuth": 198,
-    "status": "черновик"
+    "azimuth": 108,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5014408,
-     55.8086047
+     37.500314,
+     55.808542
     ]
    }
   },
@@ -1217,135 +241,15 @@
     "unom": 12717,
     "role": "за подъездом 5",
     "side": "подъезды 2–5",
-    "azimuth": 335,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5053177,
-     55.8084175
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.062",
-    "district": "Сокол",
-    "address": "Волоколамское шоссе, дом 13",
-    "unom": 4672,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 199,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.4951247,
-     55.8082964
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.063",
-    "district": "Сокол",
-    "address": "Волоколамское шоссе, дом 13",
-    "unom": 4672,
-    "role": "за подъездом 2",
-    "side": "подъезды 2–5",
-    "azimuth": 109,
+    "azimuth": 238,
     "status": "черновик",
-    "also_covers": "Волоколамское шоссе, дом 15/22 (подъезды 1)"
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.4947811,
-     55.8081798
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.064",
-    "district": "Сокол",
-    "address": "Волоколамское шоссе, дом 13",
-    "unom": 4672,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 19,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.4950267,
-     55.808131
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.065",
-    "district": "Сокол",
-    "address": "Волоколамское шоссе, дом 13",
-    "unom": 4672,
-    "role": "за подъездом 6",
-    "side": "подъезды 6",
-    "azimuth": 199,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.4965968,
-     55.8080043
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.066",
-    "district": "Сокол",
-    "address": "Волоколамское шоссе, дом 13",
-    "unom": 4672,
-    "role": "середина фасада",
-    "side": "подъезды 2–5",
-    "azimuth": 109,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.4957787,
-     55.807987
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.067",
-    "district": "Сокол",
-    "address": "Волоколамское шоссе, дом 13",
-    "unom": 4672,
-    "role": "за подъездом 5",
-    "side": "подъезды 2–5",
-    "azimuth": 289,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.49678,
-     55.8078007
+     37.505865,
+     55.808518
     ]
    }
   },
@@ -1358,74 +262,15 @@
     "unom": 4667,
     "role": "за подъездом 5",
     "side": "подъезды 1–5",
-    "azimuth": 106,
-    "status": "черновик"
+    "azimuth": 110,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.4997954,
-     55.8073879
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.069",
-    "district": "Сокол",
-    "address": "Волоколамское шоссе, дом 3",
-    "unom": 4665,
-    "role": "за подъездом 6",
-    "side": "подъезды 6–7",
-    "azimuth": 199,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5023377,
-     55.8071393
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.070",
-    "district": "Сокол",
-    "address": "Волоколамское шоссе, дом 7",
-    "unom": 4667,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–5",
-    "azimuth": 286,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.501402,
-     55.8071117
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.071",
-    "district": "Сокол",
-    "address": "Волоколамское шоссе, дом 3",
-    "unom": 4665,
-    "role": "за подъездом 5",
-    "side": "подъезды 3–5",
-    "azimuth": 109,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5017166,
-     55.807026
+     37.49983,
+     55.807458
     ]
    }
   },
@@ -1438,14 +283,15 @@
     "unom": 4665,
     "role": "за подъездом 2",
     "side": "подъезды 1–2",
-    "azimuth": 199,
-    "status": "черновик"
+    "azimuth": 193,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5030407,
-     55.807005
+     37.502983,
+     55.806795
     ]
    }
   },
@@ -1459,13 +305,14 @@
     "role": "за подъездом 4",
     "side": "подъезды 1–4",
     "azimuth": 105,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.4999105,
-     55.8068304
+     37.499796,
+     55.806922
     ]
    }
   },
@@ -1479,53 +326,14 @@
     "role": "за подъездом 7",
     "side": "подъезды 6–7",
     "azimuth": 19,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.502118,
-     55.806771
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.075",
-    "district": "Сокол",
-    "address": "Волоколамское шоссе, дом 7А",
-    "unom": 4669,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–4",
-    "azimuth": 285,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5007861,
-     55.806698
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.076",
-    "district": "Сокол",
-    "address": "Волоколамское шоссе, дом 3",
-    "unom": 4665,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–2",
-    "azimuth": 19,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5028164,
-     55.8066378
+     37.501841,
+     55.806718
     ]
    }
   },
@@ -1538,54 +346,15 @@
     "unom": 4668,
     "role": "за подъездом 1",
     "side": "подъезды 1",
-    "azimuth": 196,
-    "status": "черновик"
+    "azimuth": 194,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.4992959,
-     55.8065618
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.078",
-    "district": "Сокол",
-    "address": "Волоколамское шоссе, дом 7Б",
-    "unom": 4668,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 16,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.4992809,
-     55.8063937
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.079",
-    "district": "Сокол",
-    "address": "Волоколамское шоссе, дом 1, корпус А",
-    "unom": 4664,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 5,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5039477,
-     55.8056974
+     37.49928,
+     55.806572
     ]
    }
   },
@@ -1598,14 +367,15 @@
     "unom": 18448,
     "role": "за подъездом 3",
     "side": "подъезды 1–3",
-    "azimuth": 153,
-    "status": "черновик"
+    "azimuth": 158,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.4961492,
-     55.8054896
+     37.49622,
+     55.805554
     ]
    }
   },
@@ -1618,14 +388,15 @@
     "unom": 12710,
     "role": "за подъездом 9",
     "side": "подъезды 9–12",
-    "azimuth": 204,
-    "status": "черновик"
+    "azimuth": 116,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5085512,
-     55.8054101
+     37.50844,
+     55.805387
     ]
    }
   },
@@ -1639,13 +410,14 @@
     "role": "за подъездом 3",
     "side": "подъезды 1–3",
     "azimuth": 150,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.4990374,
-     55.8053497
+     37.498941,
+     55.805385
     ]
    }
   },
@@ -1658,34 +430,15 @@
     "unom": 12705,
     "role": "за подъездом 14",
     "side": "подъезды 14–17",
-    "azimuth": 205,
-    "status": "черновик"
+    "azimuth": 118,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5111418,
-     55.8051898
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.084",
-    "district": "Сокол",
-    "address": "улица Панфилова, дом 14",
-    "unom": 18448,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–3",
-    "azimuth": 333,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.496465,
-     55.8051587
+     37.511035,
+     55.80522
     ]
    }
   },
@@ -1698,54 +451,15 @@
     "unom": 12711,
     "role": "за подъездом 8",
     "side": "подъезды 5–8",
-    "azimuth": 24,
-    "status": "черновик"
+    "azimuth": 202,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5066026,
-     55.8051218
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.086",
-    "district": "Сокол",
-    "address": "улица Врубеля, дом 10",
-    "unom": 4979,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–3",
-    "azimuth": 330,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.4994655,
-     55.8048815
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.087",
-    "district": "Сокол",
-    "address": "Ленинградский проспект, дом 75, корпус 1",
-    "unom": 12704,
-    "role": "середина фасада",
-    "side": "подъезды 1–10",
-    "azimuth": 295,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5123699,
-     55.8048691
+     37.507105,
+     55.80573
     ]
    }
   },
@@ -1758,54 +472,15 @@
     "unom": 12710,
     "role": "за подъездом 12",
     "side": "подъезды 9–12",
-    "azimuth": 24,
-    "status": "черновик"
+    "azimuth": 26,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5081065,
-     55.8047831
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.089",
-    "district": "Сокол",
-    "address": "Ленинградский проспект, дом 75, корпус 1Б",
-    "unom": 12705,
-    "role": "середина фасада",
-    "side": "подъезды 14–17",
-    "azimuth": 205,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5106677,
-     55.8046261
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.090",
-    "district": "Сокол",
-    "address": "Ленинградский проспект, дом 75, корпус 1А",
-    "unom": 12706,
-    "role": "за подъездом 11",
-    "side": "подъезды 11–13",
-    "azimuth": 205,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5135458,
-     55.8045631
+     37.508203,
+     55.804747
     ]
    }
   },
@@ -1818,54 +493,15 @@
     "unom": 12707,
     "role": "за подъездом 4",
     "side": "подъезды 1–4",
-    "azimuth": 115,
-    "status": "черновик"
+    "azimuth": 292,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5110458,
-     55.804249
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.092",
-    "district": "Сокол",
-    "address": "Малый Песчаный переулок, дом 2",
-    "unom": 19567,
-    "role": "за подъездом 7",
-    "side": "подъезды 1–7",
-    "azimuth": 144,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5061919,
-     55.8041647
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.093",
-    "district": "Сокол",
-    "address": "Ленинградский проспект, дом 75Б",
-    "unom": 12707,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–4",
-    "azimuth": 295,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5121572,
-     55.8039133
+     37.512213,
+     55.803947
     ]
    }
   },
@@ -1878,14 +514,15 @@
     "unom": 12696,
     "role": "за подъездом 3",
     "side": "подъезды 3",
-    "azimuth": 115,
-    "status": "черновик"
+    "azimuth": 216,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5159381,
-     55.803913
+     37.516331,
+     55.803836
     ]
    }
   },
@@ -1899,13 +536,14 @@
     "role": "за подъездом 13",
     "side": "подъезды 11–13",
     "azimuth": 25,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5130068,
-     55.8039003
+     37.512736,
+     55.803893
     ]
    }
   },
@@ -1918,54 +556,15 @@
     "unom": 18446,
     "role": "за подъездом 1",
     "side": "подъезды 1",
-    "azimuth": 153,
-    "status": "черновик"
+    "azimuth": 240,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.4968137,
-     55.8037746
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.097",
-    "district": "Сокол",
-    "address": "Ленинградский проспект, дом 71, корпус В",
-    "unom": 12697,
-    "role": "за подъездом 6",
-    "side": "подъезды 6",
-    "azimuth": 205,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5162328,
-     55.8037643
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.098",
-    "district": "Сокол",
-    "address": "Ленинградский проспект, дом 71, корпус Г",
-    "unom": 12696,
-    "role": "за подъездом 3",
-    "side": "подъезды 3",
-    "azimuth": 295,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5165568,
-     55.8037493
+     37.497228,
+     55.803628
     ]
    }
   },
@@ -1978,94 +577,15 @@
     "unom": 18446,
     "role": "за подъездом 2",
     "side": "подъезды 2–4",
-    "azimuth": 153,
-    "status": "черновик"
+    "azimuth": 322,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.4965611,
-     55.8036862
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.100",
-    "district": "Сокол",
-    "address": "Ленинградский проспект, дом 71, корпус В",
-    "unom": 12697,
-    "role": "за подъездом 6",
-    "side": "подъезды 6",
-    "azimuth": 25,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5160714,
-     55.8035712
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.101",
-    "district": "Сокол",
-    "address": "Ленинградский проспект, дом 69, строение 2",
-    "unom": 74030,
-    "role": "за подъездом 12",
-    "side": "подъезды 12",
-    "azimuth": 205,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5171672,
-     55.8035283
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.102",
-    "district": "Сокол",
-    "address": "Малый Песчаный переулок, дом 2",
-    "unom": 19567,
-    "role": "середина фасада",
-    "side": "подъезды 1–7",
-    "azimuth": 324,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5069606,
-     55.8035166
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.103",
-    "district": "Сокол",
-    "address": "Ленинградский проспект, дом 69, строение 1",
-    "unom": 74029,
-    "role": "за подъездом 8",
-    "side": "подъезды 1–3, 6–8",
-    "azimuth": 205,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5179952,
-     55.8034412
+     37.497216,
+     55.803199
     ]
    }
   },
@@ -2078,54 +598,15 @@
     "unom": 324,
     "role": "за подъездом 6",
     "side": "подъезды 6–7",
-    "azimuth": 115,
-    "status": "черновик"
+    "azimuth": 121,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5100415,
-     55.8033652
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.105",
-    "district": "Сокол",
-    "address": "Ленинградский проспект, дом 69, строение 2",
-    "unom": 74030,
-    "role": "за подъездом 12",
-    "side": "подъезды 12",
-    "azimuth": 25,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5169848,
-     55.8033062
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.106",
-    "district": "Сокол",
-    "address": "улица Алабяна, дом 3, корпус 2",
-    "unom": 324,
-    "role": "за подъездом 7",
-    "side": "подъезды 6–7",
-    "azimuth": 295,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5102903,
-     55.8032908
+     37.509715,
+     55.803458
     ]
    }
   },
@@ -2138,14 +619,15 @@
     "unom": 325,
     "role": "за подъездом 8",
     "side": "подъезды 8–13",
-    "azimuth": 206,
-    "status": "черновик"
+    "azimuth": 199,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5109659,
-     55.8032892
+     37.510779,
+     55.803324
     ]
    }
   },
@@ -2158,34 +640,15 @@
     "unom": 19541,
     "role": "за подъездом 1",
     "side": "подъезды 1",
-    "azimuth": 148,
-    "status": "черновик"
+    "azimuth": 331,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5143033,
-     55.8032795
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.109",
-    "district": "Сокол",
-    "address": "улица Алабяна, дом 3, корпус 1",
-    "unom": 323,
-    "role": "середина фасада",
-    "side": "подъезды 1–5",
-    "azimuth": 27,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5093032,
-     55.8032176
+     37.514372,
+     55.803128
     ]
    }
   },
@@ -2199,53 +662,14 @@
     "role": "за подъездом 1",
     "side": "подъезды 1–7",
     "azimuth": 324,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.507673,
-     55.8031283
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.111",
-    "district": "Сокол",
-    "address": "Ленинградский проспект, дом 69, строение 1",
-    "unom": 74029,
-    "role": "середина фасада",
-    "side": "подъезды 1–3, 6–8",
-    "azimuth": 25,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5174966,
-     55.8028066
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.112",
-    "district": "Сокол",
-    "address": "Песчаная улица, дом 8",
-    "unom": 19542,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 151,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5142009,
-     55.8027442
+     37.507422,
+     55.803316
     ]
    }
   },
@@ -2259,13 +683,14 @@
     "role": "за подъездом 1",
     "side": "подъезды 1–5",
     "azimuth": 27,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5088638,
-     55.8027295
+     37.508864,
+     55.802729
     ]
    }
   },
@@ -2278,14 +703,15 @@
     "unom": 19542,
     "role": "за подъездом 1",
     "side": "подъезды 1",
-    "azimuth": 331,
-    "status": "черновик"
+    "azimuth": 1,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5143408,
-     55.802558
+     37.514289,
+     55.802301
     ]
    }
   },
@@ -2298,54 +724,15 @@
     "unom": 326,
     "role": "за подъездом 5",
     "side": "подъезды 1–5",
-    "azimuth": 115,
-    "status": "черновик"
+    "azimuth": 116,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.508316,
-     55.8024532
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.116",
-    "district": "Сокол",
-    "address": "улица Алабяна, дом 3, корпус 3",
-    "unom": 325,
-    "role": "за подъездом 13",
-    "side": "подъезды 8–13",
-    "azimuth": 26,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5101784,
-     55.8023665
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.117",
-    "district": "Сокол",
-    "address": "Ленинградский проспект, дом 69, строение 1",
-    "unom": 74029,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–3, 6–8",
-    "azimuth": 25,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5170002,
-     55.8022237
+     37.508571,
+     55.80246
     ]
    }
   },
@@ -2359,53 +746,14 @@
     "role": "за подъездом 2",
     "side": "подъезды 1–2",
     "azimuth": 115,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5163727,
-     55.8022198
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.119",
-    "district": "Сокол",
-    "address": "Новопесчаная улица, дом 2А",
-    "unom": 26648,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–2",
-    "azimuth": 295,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.516906,
-     55.8020806
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.120",
-    "district": "Сокол",
-    "address": "улица Алабяна, дом 5",
-    "unom": 326,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–5",
-    "azimuth": 295,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5101047,
-     55.8019516
+     37.516373,
+     55.80222
     ]
    }
   },
@@ -2418,14 +766,15 @@
     "unom": 18444,
     "role": "за подъездом 9",
     "side": "подъезды 7–9",
-    "azimuth": 181,
-    "status": "черновик"
+    "azimuth": 247,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.4984974,
-     55.8016345
+     37.498512,
+     55.80148
     ]
    }
   },
@@ -2439,13 +788,14 @@
     "role": "за подъездом 6",
     "side": "подъезды 4–6",
     "azimuth": 204,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.515789,
-     55.8014741
+     37.515965,
+     55.801608
     ]
    }
   },
@@ -2458,95 +808,15 @@
     "unom": 19544,
     "role": "за подъездом 1",
     "side": "подъезды 1",
-    "azimuth": 177,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.509072,
-     55.8014513
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.124",
-    "district": "Сокол",
-    "address": "Песчаный переулок, дом 2/11",
-    "unom": 19544,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 357,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5092056,
-     55.8012107
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.125",
-    "district": "Сокол",
-    "address": "улица Панфилова, дом 4, корпус 3",
-    "unom": 18444,
-    "role": "за подъездом 7",
-    "side": "подъезды 7–9",
-    "azimuth": 1,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.4985057,
-     55.8010758
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.126",
-    "district": "Сокол",
-    "address": "Новопесчаная улица, дом 6, корпус 2",
-    "unom": 26655,
-    "role": "за подъездом 4",
-    "side": "подъезды 4–6",
-    "azimuth": 24,
+    "azimuth": 145,
     "status": "черновик",
-    "also_covers": "Новопесчаная улица, дом 8, корпус 3 (подъезды 13–15)"
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5156109,
-     55.801035
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.127",
-    "district": "Сокол",
-    "address": "Новопесчаная улица, дом 6, корпус 1",
-    "unom": 26654,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 25,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5159033,
-     55.8009999
+     37.509023,
+     55.801483
     ]
    }
   },
@@ -2559,14 +829,15 @@
     "unom": 19546,
     "role": "за подъездом 1",
     "side": "подъезды 1",
-    "azimuth": 358,
-    "status": "черновик"
+    "azimuth": 355,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5078636,
-     55.8009658
+     37.507874,
+     55.800708
     ]
    }
   },
@@ -2580,54 +851,14 @@
     "role": "за подъездом 1",
     "side": "подъезды 1–7",
     "azimuth": 185,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5095388,
-     55.8008831
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.130",
-    "district": "Сокол",
-    "address": "улица Алабяна, дом 10, корпус 6",
-    "unom": 334,
-    "role": "за подъездом 4",
-    "side": "подъезды 4–7",
-    "azimuth": 106,
     "status": "черновик",
-    "also_covers": "улица Алабяна, дом 10, корпус 5 (подъезды 2–3)"
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.502354,
-     55.8008688
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.131",
-    "district": "Сокол",
-    "address": "Чапаевский переулок, дом 8",
-    "unom": 28314,
-    "role": "за подъездом 3",
-    "side": "подъезды 3",
-    "azimuth": 189,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5190467,
-     55.8008203
+     37.509399,
+     55.800987
     ]
    }
   },
@@ -2641,33 +872,14 @@
     "role": "за подъездом 3",
     "side": "подъезды 1–3",
     "azimuth": 205,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5173623,
-     55.8007238
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.133",
-    "district": "Сокол",
-    "address": "улица Алабяна, дом 10, корпус 1",
-    "unom": 329,
-    "role": "за подъездом 8",
-    "side": "подъезды 8–9",
-    "azimuth": 122,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.503565,
-     55.8006887
+     37.517362,
+     55.800724
     ]
    }
   },
@@ -2681,53 +893,14 @@
     "role": "за подъездом 1",
     "side": "подъезды 1–2",
     "azimuth": 99,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5185575,
-     55.8006887
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.135",
-    "district": "Сокол",
-    "address": "улица Панфилова, дом 4, корпус 1",
-    "unom": 18442,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 127,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.4988388,
-     55.8006878
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.136",
-    "district": "Сокол",
-    "address": "Новопесчаная улица, дом 8, корпус 3",
-    "unom": 26659,
-    "role": "за подъездом 15",
-    "side": "подъезды 13–15",
-    "azimuth": 25,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5153719,
-     55.8006592
+     37.518424,
+     55.800685
     ]
    }
   },
@@ -2740,14 +913,15 @@
     "unom": 18443,
     "role": "за подъездом 4",
     "side": "подъезды 4–6",
-    "azimuth": 334,
-    "status": "черновик"
+    "azimuth": 332,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.4989811,
-     55.8005209
+     37.499035,
+     55.80059
     ]
    }
   },
@@ -2760,54 +934,15 @@
     "unom": 330,
     "role": "за подъездом 10",
     "side": "подъезды 10–13",
-    "azimuth": 225,
-    "status": "черновик"
+    "azimuth": 210,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.503903,
-     55.8004432
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.139",
-    "district": "Сокол",
-    "address": "улица Алабяна, дом 11",
-    "unom": 335,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 181,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5064724,
-     55.8004352
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.140",
-    "district": "Сокол",
-    "address": "улица Алабяна, дом 10, корпус 1",
-    "unom": 329,
-    "role": "за подъездом 9",
-    "side": "подъезды 8–9",
-    "azimuth": 302,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5043856,
-     55.8004152
+     37.503983,
+     55.800553
     ]
    }
   },
@@ -2821,73 +956,14 @@
     "role": "за подъездом 3",
     "side": "подъезды 3",
     "azimuth": 9,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5189189,
-     55.8003694
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.142",
-    "district": "Сокол",
-    "address": "Новопесчаная улица, дом 9",
-    "unom": 26660,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–3",
-    "azimuth": 25,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5169516,
-     55.8003396
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.143",
-    "district": "Сокол",
-    "address": "Песчаный переулок, дом 4",
-    "unom": 19553,
-    "role": "середина фасада",
-    "side": "подъезды 1–7",
-    "azimuth": 185,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5094501,
-     55.8003161
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.144",
-    "district": "Сокол",
-    "address": "улица Панфилова, дом 4, корпус 1",
-    "unom": 18442,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–3",
-    "azimuth": 307,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.499593,
-     55.8002336
+     37.518704,
+     55.799882
     ]
    }
   },
@@ -2901,13 +977,14 @@
     "role": "за подъездом 7",
     "side": "подъезды 7–10",
     "azimuth": 354,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5149094,
-     55.8002012
+     37.514946,
+     55.800362
     ]
    }
   },
@@ -2920,14 +997,15 @@
     "unom": 331,
     "role": "за подъездом 15",
     "side": "подъезды 14–15",
-    "azimuth": 134,
-    "status": "черновик"
+    "azimuth": 307,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.502768,
-     55.8001681
+     37.503015,
+     55.800019
     ]
    }
   },
@@ -2940,14 +1018,15 @@
     "unom": 335,
     "role": "за подъездом 1",
     "side": "подъезды 1",
-    "azimuth": 1,
-    "status": "черновик"
+    "azimuth": 0,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5063932,
-     55.8000622
+     37.506372,
+     55.800073
     ]
    }
   },
@@ -2960,94 +1039,15 @@
     "unom": 18440,
     "role": "за подъездом 7",
     "side": "подъезды 6–7",
-    "azimuth": 244,
-    "status": "черновик"
+    "azimuth": 111,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5001035,
-     55.8000118
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.149",
-    "district": "Сокол",
-    "address": "улица Панфилова, дом 2, корпус 4",
-    "unom": 18441,
-    "role": "за подъездом 8",
-    "side": "подъезды 8–9",
-    "azimuth": 81,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.4997651,
-     55.799955
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.150",
-    "district": "Сокол",
-    "address": "улица Алабяна, дом 12, корпус 4",
-    "unom": 339,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–2",
-    "azimuth": 123,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5011806,
-     55.7999288
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.151",
-    "district": "Сокол",
-    "address": "улица Алабяна, дом 10, корпус 2",
-    "unom": 330,
-    "role": "за подъездом 13",
-    "side": "подъезды 10–13",
-    "azimuth": 45,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.502985,
-     55.7999237
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.152",
-    "district": "Сокол",
-    "address": "улица Алабяна, дом 10, корпус 3",
-    "unom": 331,
-    "role": "за подъездом 14",
-    "side": "подъезды 14–15",
-    "azimuth": 314,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5033371,
-     55.7998624
+     37.500775,
+     55.800076
     ]
    }
   },
@@ -3060,14 +1060,15 @@
     "unom": 18439,
     "role": "за подъездом 5",
     "side": "подъезды 3–5",
-    "azimuth": 154,
-    "status": "черновик"
+    "azimuth": 65,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.4995538,
-     55.7998615
+     37.499678,
+     55.799884
     ]
    }
   },
@@ -3080,94 +1081,15 @@
     "unom": 336,
     "role": "за подъездом 3",
     "side": "подъезды 3–4",
-    "azimuth": 134,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5018663,
-     55.7997712
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.155",
-    "district": "Сокол",
-    "address": "улица Алабяна, дом 12, корпус 4",
-    "unom": 339,
-    "role": "за подъездом 2",
-    "side": "подъезды 1–2",
-    "azimuth": 303,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5021245,
-     55.7996341
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.156",
-    "district": "Сокол",
-    "address": "улица Алабяна, дом 12, корпус 2",
-    "unom": 337,
-    "role": "за подъездом 5",
-    "side": "подъезды 5–7",
     "azimuth": 224,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5022448,
-     55.7994968
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.157",
-    "district": "Сокол",
-    "address": "улица Алабяна, дом 17, корпус 1",
-    "unom": 341,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 176,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5046826,
-     55.7994927
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.158",
-    "district": "Сокол",
-    "address": "улица Алабяна, дом 12, корпус 3",
-    "unom": 336,
-    "role": "за подъездом 4",
-    "side": "подъезды 3–4",
-    "azimuth": 314,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5023524,
-     55.7993805
+     37.50221,
+     55.79952
     ]
    }
   },
@@ -3180,154 +1102,15 @@
     "unom": 26665,
     "role": "за подъездом 12",
     "side": "подъезды 12–13",
-    "azimuth": 179,
-    "status": "черновик"
+    "azimuth": 198,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5169596,
-     55.7993205
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.160",
-    "district": "Сокол",
-    "address": "Новопесчаная улица, дом 13, корпус 3",
-    "unom": 26665,
-    "role": "за подъездом 8",
-    "side": "подъезды 8–11",
-    "azimuth": 89,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5161168,
-     55.7992883
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.161",
-    "district": "Сокол",
-    "address": "Новопесчаная улица, дом 13, корпус 2",
-    "unom": 26662,
-    "role": "за подъездом 6",
-    "side": "подъезды 6–7",
-    "azimuth": 237,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5163215,
-     55.7992874
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.162",
-    "district": "Сокол",
-    "address": "улица Панфилова, дом 2, корпус 1",
-    "unom": 18438,
-    "role": "за подъездом 2",
-    "side": "подъезды 1–2",
-    "azimuth": 127,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.4999475,
-     55.7992472
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.163",
-    "district": "Сокол",
-    "address": "улица Алабяна, дом 17, корпус 2",
-    "unom": 342,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 178,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5048335,
-     55.7992404
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.164",
-    "district": "Сокол",
-    "address": "улица Алабяна, дом 17, корпус 1",
-    "unom": 341,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 356,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5045944,
-     55.7992322
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.165",
-    "district": "Сокол",
-    "address": "улица Панфилова, дом 2, корпус 2",
-    "unom": 18439,
-    "role": "за подъездом 3",
-    "side": "подъезды 3–5",
-    "azimuth": 334,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5001255,
-     55.7991945
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.166",
-    "district": "Сокол",
-    "address": "Новопесчаная улица, дом 13, корпус 1",
-    "unom": 26663,
-    "role": "за подъездом 4",
-    "side": "подъезды 4",
-    "azimuth": 205,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5158755,
-     55.7991945
+     37.516892,
+     55.799
     ]
    }
   },
@@ -3340,14 +1123,15 @@
     "unom": 19555,
     "role": "за подъездом 1",
     "side": "подъезды 1–6",
-    "azimuth": 283,
-    "status": "черновик"
+    "azimuth": 280,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5093888,
-     55.7991375
+     37.509492,
+     55.799222
     ]
    }
   },
@@ -3360,35 +1144,15 @@
     "unom": 26662,
     "role": "за подъездом 7",
     "side": "подъезды 6–7",
-    "azimuth": 57,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5157711,
-     55.7990952
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.169",
-    "district": "Сокол",
-    "address": "Новопесчаная улица, дом 13, корпус 4",
-    "unom": 26664,
-    "role": "за подъездом 14",
-    "side": "подъезды 14–16",
-    "azimuth": 205,
+    "azimuth": 30,
     "status": "черновик",
-    "also_covers": "Новопесчаная улица, дом 13, корпус 3 (подъезды 12–13)"
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5169641,
-     55.7990178
+     37.515839,
+     55.799029
     ]
    }
   },
@@ -3401,14 +1165,15 @@
     "unom": 342,
     "role": "за подъездом 1",
     "side": "подъезды 1",
-    "azimuth": 358,
-    "status": "черновик"
+    "azimuth": 186,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5048527,
-     55.7990044
+     37.504943,
+     55.79928
     ]
    }
   },
@@ -3421,54 +1186,15 @@
     "unom": 18438,
     "role": "за подъездом 1",
     "side": "подъезды 1–2",
-    "azimuth": 307,
-    "status": "черновик"
+    "azimuth": 327,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5005625,
-     55.7989847
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.172",
-    "district": "Сокол",
-    "address": "улица Алабяна, дом 12, корпус 2",
-    "unom": 337,
-    "role": "за подъездом 7",
-    "side": "подъезды 5–7",
-    "azimuth": 44,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5013513,
-     55.7989789
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.173",
-    "district": "Сокол",
-    "address": "улица Алабяна, дом 15",
-    "unom": 340,
-    "role": "угол (тротуар вокруг дома)",
-    "side": "круговой тротуар",
-    "azimuth": 184,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5056755,
-     55.7988248
+     37.500309,
+     55.799211
     ]
    }
   },
@@ -3481,34 +1207,15 @@
     "unom": 340,
     "role": "за подъездом 8",
     "side": "подъезды 1–2, 7–8",
-    "azimuth": 184,
-    "status": "черновик"
+    "azimuth": 21,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5052151,
-     55.7988162
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.175",
-    "district": "Сокол",
-    "address": "Чапаевский переулок, дом 12, корпус 1",
-    "unom": 28316,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–4",
-    "azimuth": 10,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5186143,
-     55.7987795
+     37.505062,
+     55.798613
     ]
    }
   },
@@ -3522,13 +1229,14 @@
     "role": "за подъездом 1",
     "side": "подъезды 1–3",
     "azimuth": 295,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5160079,
-     55.7987658
+     37.516064,
+     55.798792
     ]
    }
   },
@@ -3541,34 +1249,15 @@
     "unom": 344,
     "role": "за подъездом 2",
     "side": "подъезды 2",
-    "azimuth": 177,
-    "status": "черновик"
+    "azimuth": 123,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5036637,
-     55.7987349
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.178",
-    "district": "Сокол",
-    "address": "Новопесчаная улица, дом 13, корпус 1",
-    "unom": 26663,
-    "role": "за подъездом 4",
-    "side": "подъезды 4",
-    "azimuth": 25,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.515497,
-     55.7987276
+     37.503357,
+     55.798821
     ]
    }
   },
@@ -3581,14 +1270,15 @@
     "unom": 19561,
     "role": "за подъездом 1",
     "side": "подъезды 1",
-    "azimuth": 171,
-    "status": "черновик"
+    "azimuth": 232,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5069639,
-     55.798663
+     37.507123,
+     55.798542
     ]
    }
   },
@@ -3602,13 +1292,14 @@
     "role": "за подъездом 17",
     "side": "подъезды 17",
     "azimuth": 115,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5164455,
-     55.7986411
+     37.516381,
+     55.79871
     ]
    }
   },
@@ -3621,14 +1312,15 @@
     "unom": 343,
     "role": "за подъездом 1",
     "side": "подъезды 1",
-    "azimuth": 356,
-    "status": "черновик"
+    "azimuth": 124,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5037181,
-     55.7985342
+     37.503461,
+     55.798654
     ]
    }
   },
@@ -3641,34 +1333,15 @@
     "unom": 19558,
     "role": "за подъездом 6",
     "side": "подъезды 1–6",
-    "azimuth": 103,
-    "status": "черновик"
+    "azimuth": 105,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5079495,
-     55.7984567
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.183",
-    "district": "Сокол",
-    "address": "Новопесчаная улица, дом 13, корпус 4",
-    "unom": 26664,
-    "role": "за подъездом 16",
-    "side": "подъезды 14–16",
-    "azimuth": 25,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5165268,
-     55.7984465
+     37.507649,
+     55.798523
     ]
    }
   },
@@ -3682,53 +1355,14 @@
     "role": "за подъездом 7",
     "side": "подъезды 7–9",
     "azimuth": 194,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5075393,
-     55.7983926
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.185",
-    "district": "Сокол",
-    "address": "улица Алабяна, дом 19, корпус 2",
-    "unom": 344,
-    "role": "за подъездом 2",
-    "side": "подъезды 2",
-    "azimuth": 357,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5039217,
-     55.7983903
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.186",
-    "district": "Сокол",
-    "address": "улица Алабяна, дом 15",
-    "unom": 340,
-    "role": "за подъездом 6",
-    "side": "подъезды 3–6",
-    "azimuth": 184,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5055219,
-     55.7982772
+     37.507582,
+     55.798524
     ]
    }
   },
@@ -3741,14 +1375,15 @@
     "unom": 345,
     "role": "за подъездом 1",
     "side": "подъезды 1",
-    "azimuth": 359,
-    "status": "черновик"
+    "azimuth": 261,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5031538,
-     55.798256
+     37.503524,
+     55.798335
     ]
    }
   },
@@ -3762,33 +1397,14 @@
     "role": "за подъездом 1",
     "side": "подъезды 1–6",
     "azimuth": 283,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5096508,
-     55.7982315
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.189",
-    "district": "Сокол",
-    "address": "Песчаный переулок, дом 14, корпус 3",
-    "unom": 19560,
-    "role": "за подъездом 17",
-    "side": "подъезды 10–17",
-    "azimuth": 191,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5070398,
-     55.7980265
+     37.509537,
+     55.798285
     ]
    }
   },
@@ -3801,34 +1417,15 @@
     "unom": 340,
     "role": "середина фасада",
     "side": "подъезды 1–2, 7–8",
-    "azimuth": 4,
-    "status": "черновик"
+    "azimuth": 189,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5050274,
-     55.7979505
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.191",
-    "district": "Сокол",
-    "address": "Песчаный переулок, дом 14, корпус 2",
-    "unom": 19559,
-    "role": "за подъездом 9",
-    "side": "подъезды 7–9",
-    "azimuth": 14,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5073304,
-     55.797902
+     37.505524,
+     55.798307
     ]
    }
   },
@@ -3841,14 +1438,15 @@
     "unom": 347,
     "role": "за подъездом 10",
     "side": "подъезды 1–10",
-    "azimuth": 158,
-    "status": "черновик"
+    "azimuth": 153,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5030568,
-     55.7977849
+     37.502977,
+     55.797914
     ]
    }
   },
@@ -3861,34 +1459,15 @@
     "unom": 26674,
     "role": "за подъездом 14",
     "side": "подъезды 14",
-    "azimuth": 206,
-    "status": "черновик"
+    "azimuth": 118,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5159109,
-     55.7976932
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.194",
-    "district": "Сокол",
-    "address": "Новопесчаная улица, дом 17, корпус 4",
-    "unom": 26674,
-    "role": "за подъездом 12",
-    "side": "подъезды 12–13",
-    "azimuth": 116,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5154944,
-     55.7976617
+     37.515119,
+     55.797716
     ]
    }
   },
@@ -3901,54 +1480,15 @@
     "unom": 340,
     "role": "середина фасада",
     "side": "подъезды 3–6",
-    "azimuth": 4,
-    "status": "черновик"
+    "azimuth": 176,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5055016,
-     55.7975854
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.196",
-    "district": "Сокол",
-    "address": "Чапаевский переулок, дом 16",
-    "unom": 28320,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–3",
-    "azimuth": 189,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5182067,
-     55.797503
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.197",
-    "district": "Сокол",
-    "address": "Новопесчаная улица, дом 17, корпус 4",
-    "unom": 26674,
-    "role": "за подъездом 13",
-    "side": "подъезды 12–13",
-    "azimuth": 296,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5160422,
-     55.7975011
+     37.505486,
+     55.797872
     ]
    }
   },
@@ -3961,74 +1501,15 @@
     "unom": 19563,
     "role": "за подъездом 5",
     "side": "подъезды 1–5",
-    "azimuth": 102,
-    "status": "черновик"
+    "azimuth": 280,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5083516,
-     55.7974621
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.199",
-    "district": "Сокол",
-    "address": "Песчаный переулок, дом 14, корпус 3",
-    "unom": 19560,
-    "role": "середина фасада",
-    "side": "подъезды 10–17",
-    "azimuth": 11,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5068051,
-     55.7973537
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.200",
-    "district": "Сокол",
-    "address": "Песчаный переулок, дом 18, корпус 2",
-    "unom": 19564,
-    "role": "за подъездом 6",
-    "side": "подъезды 6–7",
-    "azimuth": 193,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.507943,
-     55.7973414
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.201",
-    "district": "Сокол",
-    "address": "Песчаный переулок, дом 18, корпус 1",
-    "unom": 19563,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–5",
-    "azimuth": 282,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5097157,
-     55.7973355
+     37.509791,
+     55.797362
     ]
    }
   },
@@ -4041,54 +1522,15 @@
     "unom": 26674,
     "role": "за подъездом 14",
     "side": "подъезды 14",
-    "azimuth": 26,
-    "status": "черновик"
+    "azimuth": 206,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5155455,
-     55.7972746
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.203",
-    "district": "Сокол",
-    "address": "улица Алабяна, дом 15",
-    "unom": 340,
-    "role": "середина фасада",
-    "side": "подъезды 1–2, 7–8",
-    "azimuth": 4,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5049936,
-     55.7972138
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.204",
-    "district": "Сокол",
-    "address": "Песчаный переулок, дом 18, корпус 2",
-    "unom": 19564,
-    "role": "за подъездом 7",
-    "side": "подъезды 6–7",
-    "azimuth": 13,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5078645,
-     55.7971447
+     37.515404,
+     55.797258
     ]
    }
   },
@@ -4101,14 +1543,15 @@
     "unom": 5310,
     "role": "за подъездом 1",
     "side": "подъезды 1–2",
-    "azimuth": 206,
-    "status": "черновик"
+    "azimuth": 296,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5154187,
-     55.7971163
+     37.514672,
+     55.797053
     ]
    }
   },
@@ -4122,13 +1565,14 @@
     "role": "за подъездом 3",
     "side": "подъезды 3",
     "azimuth": 114,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5118874,
-     55.7970118
+     37.511857,
+     55.797003
     ]
    }
   },
@@ -4141,34 +1585,15 @@
     "unom": 347,
     "role": "середина фасада",
     "side": "подъезды 1–10",
-    "azimuth": 338,
-    "status": "черновик"
+    "azimuth": 320,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.503563,
-     55.7969193
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.208",
-    "district": "Сокол",
-    "address": "улица Алабяна, дом 15",
-    "unom": 340,
-    "role": "за подъездом 3",
-    "side": "подъезды 3–6",
-    "azimuth": 4,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5054942,
-     55.7968838
+     37.503677,
+     55.796942
     ]
    }
   },
@@ -4182,13 +1607,14 @@
     "role": "за подъездом 3",
     "side": "подъезды 1–3",
     "azimuth": 9,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.518011,
-     55.7968229
+     37.517895,
+     55.796895
     ]
    }
   },
@@ -4202,13 +1628,14 @@
     "role": "за подъездом 1",
     "side": "подъезды 1",
     "azimuth": 114,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5118222,
-     55.7967749
+     37.511645,
+     55.796772
     ]
    }
   },
@@ -4221,14 +1648,15 @@
     "unom": 5308,
     "role": "за подъездом 4",
     "side": "подъезды 2–4",
-    "azimuth": 117,
-    "status": "черновик"
+    "azimuth": 206,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5158206,
-     55.7967452
+     37.516241,
+     55.796783
     ]
    }
   },
@@ -4242,13 +1670,14 @@
     "role": "за подъездом 10",
     "side": "подъезды 10–17",
     "azimuth": 11,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5065921,
-     55.7967302
+     37.506592,
+     55.79673
     ]
    }
   },
@@ -4262,13 +1691,14 @@
     "role": "за подъездом 1",
     "side": "подъезды 1",
     "azimuth": 207,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5168987,
-     55.7965882
+     37.516899,
+     55.796588
     ]
    }
   },
@@ -4282,13 +1712,14 @@
     "role": "за подъездом 1",
     "side": "подъезды 1–2",
     "azimuth": 100,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5174721,
-     55.7965364
+     37.517472,
+     55.796536
     ]
    }
   },
@@ -4301,54 +1732,15 @@
     "unom": 340,
     "role": "за подъездом 1",
     "side": "подъезды 1–2, 7–8",
-    "azimuth": 4,
-    "status": "черновик"
+    "azimuth": 18,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5048732,
-     55.7964247
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.216",
-    "district": "Сокол",
-    "address": "улица Алабяна, дом 15",
-    "unom": 340,
-    "role": "угол (тротуар вокруг дома)",
-    "side": "круговой тротуар",
-    "azimuth": 274,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5053168,
-     55.7963371
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.217",
-    "district": "Сокол",
-    "address": "улица Алабяна, дом 15",
-    "unom": 340,
-    "role": "угол (тротуар вокруг дома)",
-    "side": "круговой тротуар",
-    "azimuth": 4,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.504378,
-     55.7962701
+     37.504704,
+     55.796535
     ]
    }
   },
@@ -4361,14 +1753,15 @@
     "unom": 26668,
     "role": "за подъездом 1",
     "side": "подъезды 1–3",
-    "azimuth": 81,
-    "status": "черновик"
+    "azimuth": 60,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.510876,
-     55.7961174
+     37.510994,
+     55.796044
     ]
    }
   },
@@ -4382,13 +1775,14 @@
     "role": "за подъездом 4",
     "side": "подъезды 4–6",
     "azimuth": 205,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5116936,
-     55.7960999
+     37.511694,
+     55.7961
     ]
    }
   },
@@ -4401,54 +1795,15 @@
     "unom": 347,
     "role": "за подъездом 1",
     "side": "подъезды 1–10",
-    "azimuth": 338,
-    "status": "черновик"
+    "azimuth": 331,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5041373,
-     55.7960966
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.221",
-    "district": "Сокол",
-    "address": "улица Сальвадора Альенде, дом 3",
-    "unom": 22590,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–3",
-    "azimuth": 232,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5108007,
-     55.7959517
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.222",
-    "district": "Сокол",
-    "address": "Новопесчаная улица, дом 19, корпус 2",
-    "unom": 26679,
-    "role": "за подъездом 7",
-    "side": "подъезды 5–7",
-    "azimuth": 204,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5129655,
-     55.7957537
+     37.504209,
+     55.796168
     ]
    }
   },
@@ -4461,14 +1816,15 @@
     "unom": 5316,
     "role": "за подъездом 1",
     "side": "подъезды 1–4",
-    "azimuth": 179,
-    "status": "черновик"
+    "azimuth": 205,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5136934,
-     55.7957256
+     37.513773,
+     55.795561
     ]
    }
   },
@@ -4481,14 +1837,15 @@
     "unom": 8510,
     "role": "за подъездом 1",
     "side": "подъезды 1",
-    "azimuth": 249,
-    "status": "черновик"
+    "azimuth": 163,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5047674,
-     55.79572
+     37.504576,
+     55.796041
     ]
    }
   },
@@ -4501,74 +1858,15 @@
     "unom": 22591,
     "role": "за подъездом 4",
     "side": "подъезды 2–4",
-    "azimuth": 61,
-    "status": "черновик"
+    "azimuth": 68,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5062831,
-     55.795707
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.226",
-    "district": "Сокол",
-    "address": "Новопесчаная улица, дом 19, корпус 3",
-    "unom": 26676,
-    "role": "за подъездом 11",
-    "side": "подъезды 9–11",
-    "azimuth": 294,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5136104,
-     55.7956237
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.227",
-    "district": "Сокол",
-    "address": "улица Зорге, дом 34",
-    "unom": 8510,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 69,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5042649,
-     55.7955677
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.228",
-    "district": "Сокол",
-    "address": "улица Зорге, дом 32",
-    "unom": 8509,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–5",
-    "azimuth": 241,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.505826,
-     55.7955586
+     37.506259,
+     55.795766
     ]
    }
   },
@@ -4581,14 +1879,15 @@
     "unom": 26676,
     "role": "за подъездом 8",
     "side": "подъезды 8",
-    "azimuth": 24,
-    "status": "черновик"
+    "azimuth": 116,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5127905,
-     55.7955282
+     37.512975,
+     55.795768
     ]
    }
   },
@@ -4602,13 +1901,14 @@
     "role": "за подъездом 3",
     "side": "подъезды 1–3",
     "azimuth": 52,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5098119,
-     55.7955205
+     37.509812,
+     55.795521
     ]
    }
   },
@@ -4621,14 +1921,15 @@
     "unom": 26670,
     "role": "за подъездом 6",
     "side": "подъезды 4–6",
-    "azimuth": 25,
-    "status": "черновик"
+    "azimuth": 288,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5111295,
-     55.7954061
+     37.51113,
+     55.795406
     ]
    }
   },
@@ -4642,13 +1943,14 @@
     "role": "за подъездом 4",
     "side": "подъезды 4–6",
     "azimuth": 115,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
      37.514659,
-     55.7953249
+     55.795325
     ]
    }
   },
@@ -4662,34 +1964,14 @@
     "role": "за подъездом 1",
     "side": "подъезды 1",
     "azimuth": 202,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5095187,
-     55.7952975
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.234",
-    "district": "Сокол",
-    "address": "2-я Песчаная улица, дом 8",
-    "unom": 5316,
-    "role": "за подъездом 4",
-    "side": "подъезды 1–4",
-    "azimuth": 359,
     "status": "черновик",
-    "also_covers": "Новопесчаная улица, дом 19, корпус 4 (подъезды 12–15)"
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5137889,
-     55.7952248
+     37.509477,
+     55.7953
     ]
    }
   },
@@ -4702,14 +1984,15 @@
     "unom": 8509,
     "role": "за подъездом 5",
     "side": "подъезды 1–5",
-    "azimuth": 61,
-    "status": "черновик"
+    "azimuth": 64,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5045252,
-     55.7951575
+     37.504527,
+     55.795218
     ]
    }
   },
@@ -4724,13 +2007,13 @@
     "side": "подъезды 5–7",
     "azimuth": 24,
     "status": "черновик",
-    "also_covers": "Новопесчаная улица, дом 19, корпус 1 (подъезды 4)"
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
      37.512491,
-     55.7951495
+     55.79515
     ]
    }
   },
@@ -4743,54 +2026,15 @@
     "unom": 26675,
     "role": "за подъездом 1",
     "side": "подъезды 1–3",
-    "azimuth": 205,
-    "status": "черновик"
+    "azimuth": 174,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5109319,
-     55.7951046
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.238",
-    "district": "Сокол",
-    "address": "2-я Песчаная улица, дом 6, корпус 2",
-    "unom": 5313,
-    "role": "за подъездом 6",
-    "side": "подъезды 4–6",
-    "azimuth": 295,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5157377,
-     55.7950461
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.239",
-    "district": "Сокол",
-    "address": "улица Сальвадора Альенде, дом 5",
-    "unom": 22593,
-    "role": "за подъездом 1",
-    "side": "подъезды 1",
-    "azimuth": 22,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5093261,
-     55.7950292
+     37.510614,
+     55.795048
     ]
    }
   },
@@ -4803,35 +2047,15 @@
     "unom": 5315,
     "role": "за подъездом 13",
     "side": "подъезды 10–13",
-    "azimuth": 205,
+    "azimuth": 26,
     "status": "черновик",
-    "also_covers": "2-я Песчаная улица, дом 6, корпус 1 (подъезды 1–3)"
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5144602,
-     55.7950242
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.241",
-    "district": "Сокол",
-    "address": "2-я Песчаная улица, дом 6, корпус 4",
-    "unom": 5315,
-    "role": "угол (тротуар вокруг дома)",
-    "side": "круговой тротуар",
-    "azimuth": 115,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5140999,
-     55.7950031
+     37.5145,
+     55.795019
     ]
    }
   },
@@ -4845,33 +2069,14 @@
     "role": "за подъездом 1",
     "side": "подъезды 1–3",
     "azimuth": 294,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5128278,
-     55.7949271
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.243",
-    "district": "Сокол",
-    "address": "2-я Песчаная улица, дом 4",
-    "unom": 5309,
-    "role": "за подъездом 2",
-    "side": "подъезды 2–4",
-    "azimuth": 114,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5162053,
-     55.7948424
+     37.513212,
+     55.794933
     ]
    }
   },
@@ -4884,34 +2089,15 @@
     "unom": 12473,
     "role": "за подъездом 4",
     "side": "подъезды 1–4",
-    "azimuth": 166,
-    "status": "черновик"
+    "azimuth": 164,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5092951,
-     55.7948193
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.245",
-    "district": "Сокол",
-    "address": "Новопесчаная улица, дом 19, корпус 4",
-    "unom": 26678,
-    "role": "за подъездом 15",
-    "side": "подъезды 12–15",
-    "azimuth": 50,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5128829,
-     55.7947452
+     37.509329,
+     55.794926
     ]
    }
   },
@@ -4924,34 +2110,15 @@
     "unom": 5314,
     "role": "за подъездом 9",
     "side": "подъезды 7–9",
-    "azimuth": 25,
-    "status": "черновик"
+    "azimuth": 205,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5154852,
-     55.794735
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.247",
-    "district": "Сокол",
-    "address": "Новопесчаная улица, дом 18",
-    "unom": 26675,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 25,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5105247,
-     55.7946127
+     37.515655,
+     55.795092
     ]
    }
   },
@@ -4964,14 +2131,15 @@
     "unom": 5311,
     "role": "за подъездом 1",
     "side": "подъезды 1–2",
-    "azimuth": 205,
-    "status": "черновик"
+    "azimuth": 28,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5153265,
-     55.7946054
+     37.515105,
+     55.794407
     ]
    }
   },
@@ -4984,34 +2152,15 @@
     "unom": 5306,
     "role": "за подъездом 5",
     "side": "подъезды 1–5",
-    "azimuth": 115,
-    "status": "черновик"
+    "azimuth": 116,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5176184,
-     55.7945767
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.250",
-    "district": "Сокол",
-    "address": "2-я Песчаная улица, дом 6, корпус 3",
-    "unom": 5311,
-    "role": "угол (тротуар вокруг дома)",
-    "side": "круговой тротуар",
-    "azimuth": 205,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.51564,
-     55.7945294
+     37.517785,
+     55.794491
     ]
    }
   },
@@ -5025,13 +2174,14 @@
     "role": "за подъездом 5",
     "side": "подъезды 5",
     "azimuth": 24,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5169442,
-     55.7945074
+     37.516915,
+     55.794516
     ]
    }
   },
@@ -5044,114 +2194,15 @@
     "unom": 22594,
     "role": "за подъездом 1",
     "side": "подъезды 1–3",
-    "azimuth": 85,
-    "status": "черновик"
+    "azimuth": 59,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5072166,
-     55.7944858
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.253",
-    "district": "Сокол",
-    "address": "улица Куусинена, дом 25",
-    "unom": 12485,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–3",
-    "azimuth": 167,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5080914,
-     55.7944677
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.254",
-    "district": "Сокол",
-    "address": "2-я Песчаная улица, дом 6, корпус 4",
-    "unom": 5315,
-    "role": "за подъездом 10",
-    "side": "подъезды 10–13",
-    "azimuth": 25,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5139735,
-     55.7944251
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.255",
-    "district": "Сокол",
-    "address": "2-я Песчаная улица, дом 2, корпус 4",
-    "unom": 5307,
-    "role": "за подъездом 16",
-    "side": "подъезды 14–16",
-    "azimuth": 204,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5178084,
-     55.7943881
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.256",
-    "district": "Сокол",
-    "address": "улица Куусинена, дом 12",
-    "unom": 12473,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–4",
-    "azimuth": 346,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.509468,
-     55.7943676
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.257",
-    "district": "Сокол",
-    "address": "2-я Песчаная улица, дом 6, корпус 4",
-    "unom": 5315,
-    "role": "угол (тротуар вокруг дома)",
-    "side": "круговой тротуар",
-    "azimuth": 295,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.514386,
-     55.7943566
+     37.507301,
+     55.794419
     ]
    }
   },
@@ -5165,33 +2216,14 @@
     "role": "за подъездом 6",
     "side": "подъезды 6–8",
     "azimuth": 205,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5183932,
-     55.7943295
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.259",
-    "district": "Сокол",
-    "address": "3-я Песчаная улица, дом 5, корпус 3",
-    "unom": 19552,
-    "role": "за подъездом 12",
-    "side": "подъезды 10–12",
-    "azimuth": 205,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.513936,
-     55.7942881
+     37.518393,
+     55.79433
     ]
    }
   },
@@ -5204,95 +2236,15 @@
     "unom": 26682,
     "role": "за подъездом 1",
     "side": "подъезды 1–3",
-    "azimuth": 24,
+    "azimuth": 341,
     "status": "черновик",
-    "also_covers": "Новопесчаная улица, дом 23, корпус 2 (подъезды 12–13)"
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5117575,
-     55.7942731
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.261",
-    "district": "Сокол",
-    "address": "2-я Песчаная улица, дом 6, корпус 3",
-    "unom": 5311,
-    "role": "угол (тротуар вокруг дома)",
-    "side": "круговой тротуар",
-    "azimuth": 25,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5146971,
-     55.7942378
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.262",
-    "district": "Сокол",
-    "address": "3-я Песчаная улица, дом 5, корпус 4",
-    "unom": 19549,
-    "role": "за подъездом 14",
-    "side": "подъезды 14–16",
-    "azimuth": 145,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5141587,
-     55.7942281
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.263",
-    "district": "Сокол",
-    "address": "2-я Песчаная улица, дом 6, корпус 3",
-    "unom": 5311,
-    "role": "за подъездом 2",
-    "side": "подъезды 1–2",
-    "azimuth": 25,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5150758,
-     55.7941403
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.264",
-    "district": "Сокол",
-    "address": "Новопесчаная улица, дом 23, корпус 1",
-    "unom": 26685,
-    "role": "за подъездом 14",
-    "side": "подъезды 14–15",
-    "azimuth": 139,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.512039,
-     55.7939855
+     37.512045,
+     55.794399
     ]
    }
   },
@@ -5306,33 +2258,14 @@
     "role": "за подъездом 14",
     "side": "подъезды 14–16",
     "azimuth": 24,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5174923,
-     55.7939836
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.266",
-    "district": "Сокол",
-    "address": "Новопесчаная улица, дом 20/10, корпус 1",
-    "unom": 26681,
-    "role": "за подъездом 2",
-    "side": "подъезды 1–2",
-    "azimuth": 24,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.509935,
-     55.7939789
+     37.517452,
+     55.793923
     ]
    }
   },
@@ -5347,13 +2280,13 @@
     "side": "подъезды 10–12",
     "azimuth": 25,
     "status": "черновик",
-    "also_covers": "3-я Песчаная улица, дом 5, корпус 2 (подъезды 8–9)"
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.513614,
-     55.7939015
+     37.513595,
+     55.793714
     ]
    }
   },
@@ -5366,34 +2299,15 @@
     "unom": 26688,
     "role": "за подъездом 11",
     "side": "подъезды 10–11",
-    "azimuth": 172,
-    "status": "черновик"
+    "azimuth": 116,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5113494,
-     55.7938653
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.269",
-    "district": "Сокол",
-    "address": "2-я Песчаная улица, дом 2, корпус 3",
-    "unom": 5304,
-    "role": "за подъездом 13",
-    "side": "подъезды 13",
-    "azimuth": 163,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5173177,
-     55.7938433
+     37.511487,
+     55.793981
     ]
    }
   },
@@ -5406,74 +2320,15 @@
     "unom": 5305,
     "role": "за подъездом 8",
     "side": "подъезды 6–8",
-    "azimuth": 25,
-    "status": "черновик"
+    "azimuth": 263,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
      37.517946,
-     55.7937766
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.271",
-    "district": "Сокол",
-    "address": "улица Куусинена, дом 25",
-    "unom": 12485,
-    "role": "за подъездом 3",
-    "side": "подъезды 1–3",
-    "azimuth": 347,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5083966,
-     55.7937296
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.272",
-    "district": "Сокол",
-    "address": "2-я Песчаная улица, дом 2, корпус 3",
-    "unom": 5304,
-    "role": "за подъездом 12",
-    "side": "подъезды 9–12",
-    "azimuth": 73,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5171372,
-     55.7936814
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.273",
-    "district": "Сокол",
-    "address": "Новопесчаная улица, дом 26",
-    "unom": 26693,
-    "role": "за подъездом 5",
-    "side": "подъезды 5",
-    "azimuth": 69,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5059175,
-     55.793664
+     55.793777
     ]
    }
   },
@@ -5487,13 +2342,14 @@
     "role": "за подъездом 2",
     "side": "подъезды 1–2",
     "azimuth": 73,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.508016,
-     55.7936477
+     37.508024,
+     55.793684
     ]
    }
   },
@@ -5507,73 +2363,14 @@
     "role": "за подъездом 1",
     "side": "подъезды 1–2",
     "azimuth": 253,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5077896,
-     55.7936029
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.276",
-    "district": "Сокол",
-    "address": "3-я Песчаная улица, дом 3",
-    "unom": 19548,
-    "role": "за подъездом 2",
-    "side": "подъезды 2–5",
-    "azimuth": 252,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5168183,
-     55.7935572
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.277",
-    "district": "Сокол",
-    "address": "3-я Песчаная улица, дом 5, корпус 4",
-    "unom": 19549,
-    "role": "за подъездом 16",
-    "side": "подъезды 14–16",
-    "azimuth": 325,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5150267,
-     55.7935375
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.278",
-    "district": "Сокол",
-    "address": "Новопесчаная улица, дом 23, корпус 1",
-    "unom": 26685,
-    "role": "за подъездом 15",
-    "side": "подъезды 14–15",
-    "azimuth": 319,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5127172,
-     55.7935182
+     37.507725,
+     55.793637
     ]
    }
   },
@@ -5586,95 +2383,15 @@
     "unom": 26688,
     "role": "за подъездом 10",
     "side": "подъезды 10–11",
-    "azimuth": 352,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5113952,
-     55.793481
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.280",
-    "district": "Сокол",
-    "address": "Новопесчаная улица, дом 24",
-    "unom": 26692,
-    "role": "за подъездом 2",
-    "side": "подъезды 1–2",
-    "azimuth": 73,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.506868,
-     55.7934292
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.281",
-    "district": "Сокол",
-    "address": "3-я Песчаная улица, дом 3",
-    "unom": 19548,
-    "role": "за подъездом 5",
-    "side": "подъезды 2–5",
-    "azimuth": 72,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5155674,
-     55.7933556
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.282",
-    "district": "Сокол",
-    "address": "3-я Песчаная улица, дом 5, корпус 2",
-    "unom": 19551,
-    "role": "угол (тротуар вокруг дома)",
-    "side": "круговой тротуар",
-    "azimuth": 350,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.513472,
-     55.7932822
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.283",
-    "district": "Сокол",
-    "address": "3-я Песчаная улица, дом 5, корпус 2",
-    "unom": 19551,
-    "role": "за подъездом 8",
-    "side": "подъезды 8–9",
-    "azimuth": 350,
+    "azimuth": 339,
     "status": "черновик",
-    "also_covers": "3-я Песчаная улица, дом 5, корпус 1 (подъезды 7)"
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5137903,
-     55.7932342
+     37.51153,
+     55.793325
     ]
    }
   },
@@ -5688,13 +2405,14 @@
     "role": "за подъездом 1",
     "side": "подъезды 1–2",
     "azimuth": 162,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.512677,
-     55.7931853
+     37.512443,
+     55.793504
     ]
    }
   },
@@ -5707,14 +2425,15 @@
     "unom": 12484,
     "role": "за подъездом 2",
     "side": "подъезды 1–2",
-    "azimuth": 252,
-    "status": "черновик"
+    "azimuth": 343,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5087298,
-     55.7931849
+     37.50859,
+     55.792721
     ]
    }
   },
@@ -5727,54 +2446,15 @@
     "unom": 19550,
     "role": "за подъездом 7",
     "side": "подъезды 7",
-    "azimuth": 343,
-    "status": "черновик"
+    "azimuth": 338,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5138951,
-     55.7930461
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.287",
-    "district": "Сокол",
-    "address": "3-я Песчаная улица, дом 5, корпус 1",
-    "unom": 19550,
-    "role": "за подъездом 6",
-    "side": "подъезды 2–6",
-    "azimuth": 73,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5136349,
-     55.7929986
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т13.288",
-    "district": "Сокол",
-    "address": "Новопесчаная улица, дом 25/23",
-    "unom": 12484,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–2",
-    "azimuth": 72,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5077276,
-     55.7929965
+     37.513957,
+     55.793081
     ]
    }
   },
@@ -5788,13 +2468,14 @@
     "role": "за подъездом 3",
     "side": "подъезды 1–3",
     "azimuth": 163,
-    "status": "черновик"
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5064069,
-     55.7929549
+     37.506471,
+     55.79298
     ]
    }
   },
@@ -5807,14 +2488,15 @@
     "unom": 26689,
     "role": "за подъездом 6",
     "side": "подъезды 5–6",
-    "azimuth": 162,
-    "status": "черновик"
+    "azimuth": 340,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5117308,
-     55.7928862
+     37.511913,
+     55.792735
     ]
    }
   },
@@ -5827,54 +2509,2865 @@
     "unom": 26690,
     "role": "за подъездом 3",
     "side": "подъезды 3–4",
-    "azimuth": 253,
-    "status": "черновик"
+    "azimuth": 245,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5127078,
-     55.792838
+     37.512761,
+     55.792934
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т13.292",
+    "point_no": "Т13.306",
     "district": "Сокол",
-    "address": "Новопесчаная улица, дом 23, корпус 6",
-    "unom": 26690,
-    "role": "за подъездом 4",
-    "side": "подъезды 3–4",
-    "azimuth": 73,
-    "status": "черновик"
+    "address": "улица Константина Царёва, дом 6",
+    "unom": 28194,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 19,
+    "status": "черновик",
+    "prefecture_edit": true
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5117758,
-     55.7926797
+     37.495232,
+     55.810747
     ]
    }
   },
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т13.293",
+    "point_no": "Т13.308",
     "district": "Сокол",
-    "address": "улица Зорге, дом 28",
-    "unom": 8508,
-    "role": "за подъездом 1",
+    "address": "улица Константина Царёва, дом 6",
+    "unom": 28194,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 106,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.494192,
+     55.811273
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.310",
+    "district": "Сокол",
+    "address": "Светлый проезд, дом 6, корпус 4",
+    "unom": 22799,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 201,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.496236,
+     55.813639
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.311",
+    "district": "Сокол",
+    "address": "улица Константина Царёва, дом 6",
+    "unom": 28194,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 167,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.49832,
+     55.812893
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.312",
+    "district": "Сокол",
+    "address": "улица Константина Царёва, дом 6",
+    "unom": 28194,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 170,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.497178,
+     55.812143
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.314",
+    "district": "Сокол",
+    "address": "улица Константина Царёва, дом 6",
+    "unom": 28194,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 22,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.497436,
+     55.811003
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.315",
+    "district": "Сокол",
+    "address": "Волоколамское шоссе, дом 6",
+    "unom": 4666,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 197,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.497512,
+     55.809623
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.317",
+    "district": "Сокол",
+    "address": "Волоколамское шоссе, дом 6",
+    "unom": 4666,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 107,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.497144,
+     55.80917
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.319",
+    "district": "Сокол",
+    "address": "Волоколамское шоссе, дом 6",
+    "unom": 4666,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 65,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.505144,
+     55.808513
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.320",
+    "district": "Сокол",
+    "address": "Волоколамское шоссе, дом 6",
+    "unom": 4666,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 154,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.504913,
+     55.809119
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.321",
+    "district": "Сокол",
+    "address": "Волоколамское шоссе, дом 6",
+    "unom": 4666,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 63,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.504339,
+     55.80897
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.327",
+    "district": "Сокол",
+    "address": "Волоколамское шоссе, дом 6",
+    "unom": 4666,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 156,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.495978,
+     55.804804
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.329",
+    "district": "Сокол",
+    "address": "Малый Песчаный переулок, дом 2",
+    "unom": 19567,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 153,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.497701,
+     55.803109
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.332",
+    "district": "Сокол",
+    "address": "Песчаный переулок, дом 14, корпус 1",
+    "unom": 19558,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 281,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.501301,
+     55.799031
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.333",
+    "district": "Сокол",
+    "address": "Малый Песчаный переулок, дом 2",
+    "unom": 19567,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 113,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.50519,
+     55.804711
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.335",
+    "district": "Сокол",
+    "address": "Малый Песчаный переулок, дом 2",
+    "unom": 19567,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 30,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.506019,
+     55.805291
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.338",
+    "district": "Сокол",
+    "address": "Ленинградский проспект, дом 75, корпус 1Б",
+    "unom": 12705,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 200,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.509177,
+     55.805186
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.339",
+    "district": "Сокол",
+    "address": "Ленинградский проспект, дом 75Б",
+    "unom": 12707,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 25,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.508634,
+     55.804648
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.343",
+    "district": "Сокол",
+    "address": "Ленинградский проспект, дом 75Б",
+    "unom": 12707,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 28,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.510323,
+     55.80442
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.345",
+    "district": "Сокол",
+    "address": "Ленинградский проспект, дом 75Б",
+    "unom": 12707,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 203,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.513489,
+     55.804595
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.347",
+    "district": "Сокол",
+    "address": "улица Алабяна, дом 3, корпус 2",
+    "unom": 324,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 28,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.511804,
+     55.803263
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.350",
+    "district": "Сокол",
+    "address": "Песчаный переулок, дом 14, корпус 1",
+    "unom": 19558,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 8,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.509142,
+     55.799597
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.351",
+    "district": "Сокол",
+    "address": "Песчаный переулок, дом 14, корпус 1",
+    "unom": 19558,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 298,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.51014,
+     55.799217
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.353",
+    "district": "Сокол",
+    "address": "Песчаный переулок, дом 14, корпус 1",
+    "unom": 19558,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 107,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.507894,
+     55.799424
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.355",
+    "district": "Сокол",
+    "address": "Песчаный переулок, дом 14, корпус 1",
+    "unom": 19558,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 14,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.507247,
+     55.798721
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.357",
+    "district": "Сокол",
+    "address": "Песчаный переулок, дом 14, корпус 1",
+    "unom": 19558,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 241,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.510378,
+     55.79709
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.358",
+    "district": "Сокол",
+    "address": "Песчаный переулок, дом 14, корпус 1",
+    "unom": 19558,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 191,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.509707,
+     55.797158
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.359",
+    "district": "Сокол",
+    "address": "Песчаный переулок, дом 14, корпус 1",
+    "unom": 19558,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 215,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.506927,
+     55.796531
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.360",
+    "district": "Сокол",
+    "address": "Песчаный переулок, дом 14, корпус 1",
+    "unom": 19558,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 169,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.507168,
+     55.796375
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.364",
+    "district": "Сокол",
+    "address": "Песчаный переулок, дом 14, корпус 1",
+    "unom": 19558,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 158,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.503681,
+     55.796946
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.366",
+    "district": "Сокол",
+    "address": "Песчаный переулок, дом 14, корпус 1",
+    "unom": 19558,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 259,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.503695,
+     55.798085
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.367",
+    "district": "Сокол",
+    "address": "Песчаный переулок, дом 14, корпус 1",
+    "unom": 19558,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 40,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.505352,
+     55.799573
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.368",
+    "district": "Сокол",
+    "address": "Песчаный переулок, дом 14, корпус 1",
+    "unom": 19558,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 315,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.505627,
+     55.799393
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.370",
+    "district": "Сокол",
+    "address": "Песчаная улица, дом 13",
+    "unom": 19546,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 135,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.505641,
+     55.799831
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.371",
+    "district": "Сокол",
+    "address": "Песчаная улица, дом 13",
+    "unom": 19546,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 176,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.507117,
+     55.800977
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.373",
+    "district": "Сокол",
+    "address": "Новопесчаная улица, дом 17, корпус 4",
+    "unom": 26674,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 208,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.512741,
+     55.796928
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.377",
+    "district": "Сокол",
+    "address": "Новопесчаная улица, дом 19, корпус 1",
+    "unom": 26677,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 25,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.511266,
+     55.795166
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.381",
+    "district": "Сокол",
+    "address": "Новопесчаная улица, дом 23, корпус 5",
+    "unom": 26689,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 165,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.509647,
+     55.79422
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.382",
+    "district": "Сокол",
+    "address": "Новопесчаная улица, дом 23, корпус 5",
+    "unom": 26689,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 112,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.509958,
+     55.794304
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.385",
+    "district": "Сокол",
+    "address": "Новопесчаная улица, дом 23, корпус 5",
+    "unom": 26689,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 249,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.514955,
+     55.79329
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.387",
+    "district": "Сокол",
+    "address": "Новопесчаная улица, дом 19, корпус 1",
+    "unom": 26677,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 165,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.514581,
+     55.793816
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.389",
+    "district": "Сокол",
+    "address": "Новопесчаная улица, дом 19, корпус 1",
+    "unom": 26677,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 109,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.514075,
+     55.794081
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.391",
+    "district": "Сокол",
+    "address": "Новопесчаная улица, дом 19, корпус 1",
+    "unom": 26677,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 114,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.514196,
+     55.794671
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.395",
+    "district": "Сокол",
+    "address": "Новопесчаная улица, дом 19, корпус 1",
+    "unom": 26677,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 23,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.51637,
+     55.794661
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.397",
+    "district": "Сокол",
+    "address": "Новопесчаная улица, дом 19, корпус 1",
+    "unom": 26677,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 295,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.516994,
+     55.794716
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.402",
+    "district": "Сокол",
+    "address": "Новопесчаная улица, дом 23, корпус 5",
+    "unom": 26689,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 340,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.507678,
+     55.792746
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.403",
+    "district": "Сокол",
+    "address": "Новопесчаная улица, дом 23, корпус 5",
+    "unom": 26689,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 229,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.506304,
+     55.793917
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.404",
+    "district": "Сокол",
+    "address": "Новопесчаная улица, дом 23, корпус 5",
+    "unom": 26689,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 160,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.505909,
+     55.793791
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.406",
+    "district": "Сокол",
+    "address": "Новопесчаная улица, дом 23, корпус 5",
+    "unom": 26689,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 224,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.506559,
+     55.793535
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.415",
+    "district": "Сокол",
+    "address": "Песчаный переулок, дом 14, корпус 1",
+    "unom": 19558,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 176,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.505544,
+     55.797309
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.416",
+    "district": "Сокол",
+    "address": "Песчаный переулок, дом 14, корпус 1",
+    "unom": 19558,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 193,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.504998,
+     55.798464
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.417",
+    "district": "Сокол",
+    "address": "Песчаный переулок, дом 14, корпус 1",
+    "unom": 19558,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 85,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.505861,
+     55.799179
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.420",
+    "district": "Сокол",
+    "address": "Песчаная улица, дом 13",
+    "unom": 19546,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 16,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.502182,
+     55.800424
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.425",
+    "district": "Сокол",
+    "address": "Малый Песчаный переулок, дом 2",
+    "unom": 19567,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 244,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.498425,
+     55.804098
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.427",
+    "district": "Сокол",
+    "address": "Волоколамское шоссе, дом 6",
+    "unom": 4666,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 59,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.494574,
+     55.806398
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.428",
+    "district": "Сокол",
+    "address": "Волоколамское шоссе, дом 6",
+    "unom": 4666,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 121,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.495535,
+     55.807671
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.433",
+    "district": "Сокол",
+    "address": "Волоколамское шоссе, дом 6",
+    "unom": 4666,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 287,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.496395,
+     55.807847
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.435",
+    "district": "Сокол",
+    "address": "улица Константина Царёва, дом 6",
+    "unom": 28194,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 333,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.492293,
+     55.807962
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.436",
+    "district": "Сокол",
+    "address": "Волоколамское шоссе, дом 16Б, корпус 2",
+    "unom": 4676,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 41,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.491898,
+     55.808754
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.437",
+    "district": "Сокол",
+    "address": "улица Константина Царёва, дом 6",
+    "unom": 28194,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 109,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.492448,
+     55.809033
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.440",
+    "district": "Сокол",
+    "address": "улица Константина Царёва, дом 6",
+    "unom": 28194,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 289,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.494075,
+     55.808612
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.441",
+    "district": "Сокол",
+    "address": "улица Константина Царёва, дом 6",
+    "unom": 28194,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 16,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.494227,
+     55.808355
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.443",
+    "district": "Сокол",
+    "address": "улица Константина Царёва, дом 6",
+    "unom": 28194,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 196,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.493572,
+     55.810061
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.444",
+    "district": "Сокол",
+    "address": "Малый Песчаный переулок, дом 2",
+    "unom": 19567,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 199,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.504021,
+     55.806208
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.447",
+    "district": "Сокол",
+    "address": "Малый Песчаный переулок, дом 2",
+    "unom": 19567,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 23,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.504506,
+     55.805581
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.449",
+    "district": "Сокол",
+    "address": "Малый Песчаный переулок, дом 2",
+    "unom": 19567,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 111,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.506396,
+     55.805911
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.450",
+    "district": "Сокол",
+    "address": "Малый Песчаный переулок, дом 2",
+    "unom": 19567,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 25,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.506499,
+     55.805191
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.451",
+    "district": "Сокол",
+    "address": "Новопесчаная улица, дом 17, корпус 4",
+    "unom": 26674,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 95,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.518399,
+     55.798978
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.453",
+    "district": "Сокол",
+    "address": "Чапаевский переулок, дом 8",
+    "unom": 28314,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 92,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.518291,
+     55.799281
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.454",
+    "district": "Сокол",
+    "address": "Чапаевский переулок, дом 8",
+    "unom": 28314,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 273,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.518253,
+     55.799275
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.456",
+    "district": "Сокол",
+    "address": "Новопесчаная улица, дом 17, корпус 4",
+    "unom": 26674,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 278,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.518146,
+     55.798997
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.457",
+    "district": "Сокол",
+    "address": "Новопесчаная улица, дом 8, корпус 1",
+    "unom": 26657,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 87,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.516329,
+     55.799254
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.460",
+    "district": "Сокол",
+    "address": "Новопесчаная улица, дом 8, корпус 1",
+    "unom": 26657,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 269,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.517123,
+     55.799945
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.463",
+    "district": "Сокол",
+    "address": "Новопесчаная улица, дом 8, корпус 1",
+    "unom": 26657,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 202,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.51661,
+     55.800345
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.465",
+    "district": "Сокол",
+    "address": "Чапаевский переулок, дом 8",
+    "unom": 28314,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 207,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.517328,
+     55.801196
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.468",
+    "district": "Сокол",
+    "address": "Ленинградский проспект, дом 69, строение 1",
+    "unom": 74029,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 207,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.51776,
+     55.801738
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.469",
+    "district": "Сокол",
+    "address": "Ленинградский проспект, дом 69, строение 1",
+    "unom": 74029,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 23,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.516427,
+     55.80159
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.472",
+    "district": "Сокол",
+    "address": "Ленинградский проспект, дом 69, строение 1",
+    "unom": 74029,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 26,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.516017,
+     55.801678
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.473",
+    "district": "Сокол",
+    "address": "Ленинградский проспект, дом 69, строение 1",
+    "unom": 74029,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 206,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.516367,
+     55.801522
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.474",
+    "district": "Сокол",
+    "address": "Новопесчаная улица, дом 8, корпус 1",
+    "unom": 26657,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 28,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.515208,
+     55.800686
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.475",
+    "district": "Сокол",
+    "address": "Новопесчаная улица, дом 8, корпус 1",
+    "unom": 26657,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 264,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.515213,
+     55.800959
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.477",
+    "district": "Сокол",
+    "address": "Новопесчаная улица, дом 8, корпус 2",
+    "unom": 26658,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 88,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.514852,
+     55.800288
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.478",
+    "district": "Сокол",
+    "address": "Новопесчаная улица, дом 8, корпус 1",
+    "unom": 26657,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 203,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.515579,
+     55.800571
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.481",
+    "district": "Сокол",
+    "address": "Чапаевский переулок, дом 8",
+    "unom": 28314,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 271,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.518541,
+     55.800051
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.483",
+    "district": "Сокол",
+    "address": "Ленинградский проспект, дом 69, строение 1",
+    "unom": 74029,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 203,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.518735,
+     55.803418
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.484",
+    "district": "Сокол",
+    "address": "Ленинградский проспект, дом 69, строение 1",
+    "unom": 74029,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 121,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.519116,
+     55.803001
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.486",
+    "district": "Сокол",
+    "address": "Ленинградский проспект, дом 69, строение 1",
+    "unom": 74029,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 25,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.515464,
+     55.80374
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.487",
+    "district": "Сокол",
+    "address": "Ленинградский проспект, дом 69, строение 1",
+    "unom": 74029,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 115,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.515635,
+     55.803982
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.488",
+    "district": "Сокол",
+    "address": "Ленинградский проспект, дом 69, строение 1",
+    "unom": 74029,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 27,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.516401,
+     55.803536
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.489",
+    "district": "Сокол",
+    "address": "Ленинградский проспект, дом 69, строение 1",
+    "unom": 74029,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 26,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.516844,
+     55.80362
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.493",
+    "district": "Сокол",
+    "address": "Ленинградский проспект, дом 69, строение 1",
+    "unom": 74029,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 28,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.517158,
+     55.802019
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.494",
+    "district": "Сокол",
+    "address": "Ленинградский проспект, дом 69, строение 1",
+    "unom": 74029,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 66,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.514467,
+     55.802826
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.499",
+    "district": "Сокол",
+    "address": "Волоколамское шоссе, дом 16Б, корпус 2",
+    "unom": 4676,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 16,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.492644,
+     55.810352
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.500",
+    "district": "Сокол",
+    "address": "Волоколамское шоссе, дом 6",
+    "unom": 4666,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 288,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.498602,
+     55.808848
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.501",
+    "district": "Сокол",
+    "address": "Ленинградский проспект, дом 75, корпус 1Б",
+    "unom": 12705,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 118,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.512366,
+     55.80486
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.502",
+    "district": "Сокол",
+    "address": "Ленинградский проспект, дом 69, строение 1",
+    "unom": 74029,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 203,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.518354,
+     55.803457
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.503",
+    "district": "Сокол",
+    "address": "Ленинградский проспект, дом 69, строение 1",
+    "unom": 74029,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 6,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.519359,
+     55.802522
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.504",
+    "district": "Сокол",
+    "address": "Новопесчаная улица, дом 17, корпус 4",
+    "unom": 26674,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 25,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.514499,
+     55.797422
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.505",
+    "district": "Сокол",
+    "address": "Новопесчаная улица, дом 17, корпус 4",
+    "unom": 26674,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 118,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.516103,
+     55.796591
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.506",
+    "district": "Сокол",
+    "address": "Новопесчаная улица, дом 17, корпус 4",
+    "unom": 26674,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 121,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.517355,
+     55.796238
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.507",
+    "district": "Сокол",
+    "address": "Новопесчаная улица, дом 17, корпус 4",
+    "unom": 26674,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 12,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.517728,
+     55.796135
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.508",
+    "district": "Сокол",
+    "address": "Новопесчаная улица, дом 19, корпус 1",
+    "unom": 26677,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 161,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.515741,
+     55.793602
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.510",
+    "district": "Сокол",
+    "address": "Новопесчаная улица, дом 19, корпус 1",
+    "unom": 26677,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 23,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.512533,
+     55.794199
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.512",
+    "district": "Сокол",
+    "address": "Песчаный переулок, дом 14, корпус 1",
+    "unom": 19558,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 16,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.507768,
+     55.797096
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.513",
+    "district": "Сокол",
+    "address": "Песчаный переулок, дом 14, корпус 1",
+    "unom": 19558,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 280,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.510208,
+     55.798485
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.514",
+    "district": "Сокол",
+    "address": "Песчаный переулок, дом 14, корпус 1",
+    "unom": 19558,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 182,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.504642,
+     55.799469
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.516",
+    "district": "Сокол",
+    "address": "Песчаный переулок, дом 14, корпус 1",
+    "unom": 19558,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 189,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.507056,
+     55.798046
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.517",
+    "district": "Сокол",
+    "address": "Песчаный переулок, дом 14, корпус 1",
+    "unom": 19558,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 177,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.504981,
+     55.797279
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.518",
+    "district": "Сокол",
+    "address": "Новопесчаная улица, дом 19, корпус 1",
+    "unom": 26677,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 69,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.516056,
+     55.793454
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.3001",
+    "district": "Сокол",
+    "address": "Светлый проезд, дом 10, корпус 4",
+    "unom": 22806,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 10–12",
+    "azimuth": 158,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4906447,
+     55.8144695
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.3002",
+    "district": "Сокол",
+    "address": "Светлый проезд, дом 10, корпус 2",
+    "unom": 22804,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 4–6",
+    "azimuth": 158,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4888153,
+     55.8140528
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.3003",
+    "district": "Сокол",
+    "address": "Светлый проезд, дом 6, корпус 4",
+    "unom": 22799,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 4",
+    "azimuth": 158,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4920789,
+     55.8140213
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.3004",
+    "district": "Сокол",
+    "address": "Светлый проезд, дом 6, корпус 2",
+    "unom": 22797,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 2",
+    "azimuth": 338,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4904384,
+     55.8132203
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.3005",
+    "district": "Сокол",
+    "address": "Светлый проезд, дом 6, корпус 1",
+    "unom": 22796,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 1",
+    "azimuth": 158,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4894059,
+     55.8131959
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.3006",
+    "district": "Сокол",
+    "address": "Светлый проезд, дом 4, корпус 3",
+    "unom": 22794,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 7–9",
+    "azimuth": 338,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4912828,
+     55.8128391
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.3007",
+    "district": "Сокол",
+    "address": "Светлый проезд, дом 4, корпус 1",
+    "unom": 22792,
+    "role": "обзор подъездов с угла",
     "side": "подъезды 1–3",
-    "azimuth": 343,
+    "azimuth": 338,
     "status": "черновик"
    },
    "geometry": {
     "type": "Point",
     "coordinates": [
-     37.5066478,
-     55.7925066
+     37.4894632,
+     55.8124333
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.3008",
+    "district": "Сокол",
+    "address": "Волоколамское шоссе, дом 16Б, корпус 3",
+    "unom": 4677,
+    "role": "за подъездом 4",
+    "side": "подъезды 1–4",
+    "azimuth": 198,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4929333,
+     55.8111534
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.3009",
+    "district": "Сокол",
+    "address": "Волоколамское шоссе, дом 16Б, корпус 2",
+    "unom": 4676,
+    "role": "за подъездом 4",
+    "side": "подъезды 1–4",
+    "azimuth": 198,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4931354,
+     55.8111157
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.3010",
+    "district": "Сокол",
+    "address": "улица Константина Царёва, дом 6",
+    "unom": 28194,
+    "role": "за подъездом 1",
+    "side": "подъезды 1–4",
+    "azimuth": 288,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.4934576,
+     55.8110557
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.3011",
+    "district": "Сокол",
+    "address": "Волоколамское шоссе, дом 6",
+    "unom": 4666,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 5",
+    "azimuth": 198,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5013248,
+     55.8086261
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.3012",
+    "district": "Сокол",
+    "address": "Ленинградский проспект, дом 75, корпус 1Б",
+    "unom": 12705,
+    "role": "за подъездом 14",
+    "side": "подъезды 14–17",
+    "azimuth": 205,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5111482,
+     55.8051618
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.3013",
+    "district": "Сокол",
+    "address": "Ленинградский проспект, дом 75Б",
+    "unom": 12707,
+    "role": "за подъездом 4",
+    "side": "подъезды 1–4",
+    "azimuth": 115,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5110922,
+     55.8043057
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.3014",
+    "district": "Сокол",
+    "address": "Малый Песчаный переулок, дом 2",
+    "unom": 19567,
+    "role": "за подъездом 7",
+    "side": "подъезды 1–7",
+    "azimuth": 144,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5062292,
+     55.8041802
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.3015",
+    "district": "Сокол",
+    "address": "улица Алабяна, дом 3, корпус 2",
+    "unom": 324,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 6–7",
+    "azimuth": 115,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5100062,
+     55.8033232
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.3016",
+    "district": "Сокол",
+    "address": "Ленинградский проспект, дом 69, строение 1",
+    "unom": 74029,
+    "role": "за подъездом 1",
+    "side": "подъезды 1–3, 6–8",
+    "azimuth": 25,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5169642,
+     55.8022933
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.3017",
+    "district": "Сокол",
+    "address": "улица Алабяна, дом 5",
+    "unom": 326,
+    "role": "за подъездом 1",
+    "side": "подъезды 1–5",
+    "azimuth": 295,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5102229,
+     55.8019666
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.3018",
+    "district": "Сокол",
+    "address": "Песчаная улица, дом 13",
+    "unom": 19546,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 1",
+    "azimuth": 358,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5078505,
+     55.8009474
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.3019",
+    "district": "Сокол",
+    "address": "Чапаевский переулок, дом 8",
+    "unom": 28314,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 3",
+    "azimuth": 189,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5190306,
+     55.8008217
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.3020",
+    "district": "Сокол",
+    "address": "Новопесчаная улица, дом 8, корпус 1",
+    "unom": 26657,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 1–3",
+    "azimuth": 205,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5156915,
+     55.800732
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.3021",
+    "district": "Сокол",
+    "address": "Новопесчаная улица, дом 8, корпус 1",
+    "unom": 26657,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 4–5",
+    "azimuth": 263,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5154443,
+     55.8002828
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.3022",
+    "district": "Сокол",
+    "address": "Новопесчаная улица, дом 8, корпус 2",
+    "unom": 26658,
+    "role": "за подъездом 7",
+    "side": "подъезды 7–10",
+    "azimuth": 354,
+    "status": "черновик",
+    "also_covers": "Новопесчаная улица, дом 8, корпус 1 (подъезды 6)"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5150003,
+     55.8002082
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.3023",
+    "district": "Сокол",
+    "address": "Песчаный переулок, дом 14, корпус 1",
+    "unom": 19558,
+    "role": "за подъездом 6",
+    "side": "подъезды 1–6",
+    "azimuth": 103,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5079278,
+     55.7984848
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.3024",
+    "district": "Сокол",
+    "address": "Новопесчаная улица, дом 17, корпус 4",
+    "unom": 26674,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 206,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.516266,
+     55.7976742
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.3025",
+    "district": "Сокол",
+    "address": "Новопесчаная улица, дом 17, корпус 4",
+    "unom": 26674,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 12–13",
+    "azimuth": 116,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5154423,
+     55.7976029
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.3026",
+    "district": "Сокол",
+    "address": "Новопесчаная улица, дом 17, корпус 4",
+    "unom": 26674,
+    "role": "угол (тротуар вокруг дома)",
+    "side": "круговой тротуар",
+    "azimuth": 296,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5157741,
+     55.7971584
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.3027",
+    "district": "Сокол",
+    "address": "Новопесчаная улица, дом 19, корпус 1",
+    "unom": 26677,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 1–3",
+    "azimuth": 294,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5128751,
+     55.7949881
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т13.3028",
+    "district": "Сокол",
+    "address": "Новопесчаная улица, дом 23, корпус 5",
+    "unom": 26689,
+    "role": "обзор подъездов с угла",
+    "side": "подъезды 5–6",
+    "azimuth": 162,
+    "status": "черновик"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5118399,
+     55.7929158
     ]
    }
   }
