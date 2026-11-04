@@ -22,3 +22,15 @@ test('sidewalkRetirePlan keeps points with photos and points changed after the e
   assert.deepEqual(plan.already, ['Т15.4']);
   assert.deepEqual(plan.missing, ['Т15.5']);
 });
+
+test('listText reads every sidewalk-rule list of a folder', async () => {
+  const { mkdtempSync, writeFileSync } = await import('node:fs');
+  const { tmpdir } = await import('node:os');
+  const { join } = await import('node:path');
+  const { listText } = await import('../scripts/retire-sidewalk-points.js');
+  const dir = mkdtempSync(join(tmpdir(), 'retire-'));
+  writeFileSync(join(dir, 'sidewalk-rule-a.txt'), 'Т1.001  # лишняя\n');
+  writeFileSync(join(dir, 'sidewalk-rule-b.txt'), 'Т2.002\n');
+  writeFileSync(join(dir, 'other.txt'), 'Т3.003\n');
+  assert.deepEqual(parseSidewalkList(listText(dir)), ['Т1.001', 'Т2.002']);
+});

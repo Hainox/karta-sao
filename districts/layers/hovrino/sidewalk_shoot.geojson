@@ -445,6 +445,27 @@
   {
    "type": "Feature",
    "properties": {
+    "point_no": "Т15.189",
+    "district": "Ховрино",
+    "address": "Клинская улица, дом 19",
+    "unom": 10235,
+    "role": "за подъездом 1",
+    "side": "подъезды 1–4",
+    "azimuth": 209,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.495221,
+     55.868884
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
     "point_no": "Т15.190",
     "district": "Ховрино",
     "address": "Левобережная улица, дом 4, корпус 9",
@@ -481,6 +502,27 @@
     "coordinates": [
      37.48035,
      55.868398
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.205",
+    "district": "Ховрино",
+    "address": "Клинская улица, дом 15",
+    "unom": 10231,
+    "role": "за подъездом 4",
+    "side": "подъезды 1–4",
+    "azimuth": 213,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.497131,
+     55.868214
     ]
    }
   },
@@ -613,6 +655,27 @@
   {
    "type": "Feature",
    "properties": {
+    "point_no": "Т15.232",
+    "district": "Ховрино",
+    "address": "Клинская улица, дом 3",
+    "unom": 10219,
+    "role": "за подъездом 6",
+    "side": "подъезды 1–6",
+    "azimuth": 208,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.503633,
+     55.865908
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
     "point_no": "Т15.237",
     "district": "Ховрино",
     "address": "Клинская улица, дом 5",
@@ -712,6 +775,27 @@
     "coordinates": [
      37.50297,
      55.86511
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.250",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 75",
+    "unom": 27318,
+    "role": "за подъездом 8",
+    "side": "подъезды 1–8",
+    "azimuth": 210,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.506209,
+     55.865031
     ]
    }
   },
@@ -1161,8 +1245,8 @@
    "properties": {
     "point_no": "Т15.465",
     "district": "Ховрино",
-    "address": "Зеленоградская улица, дом 39, корпус 1",
-    "unom": 340243,
+    "address": "улица Дыбенко, дом 32, корпус 1",
+    "unom": 340198,
     "role": "добавлена префектурой",
     "side": "",
     "azimuth": 116,
@@ -1390,6 +1474,27 @@
   {
    "type": "Feature",
    "properties": {
+    "point_no": "Т15.486",
+    "district": "Ховрино",
+    "address": "Зеленоградская улица, дом 35, корпус 2",
+    "unom": 8262,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 156,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.489038,
+     55.875369
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
     "point_no": "Т15.487",
     "district": "Ховрино",
     "address": "улица Дыбенко, дом 32, корпус 1",
@@ -1455,8 +1560,8 @@
    "properties": {
     "point_no": "Т15.495",
     "district": "Ховрино",
-    "address": "Зеленоградская улица, дом 33, корпус 3",
-    "unom": 8256,
+    "address": "улица Дыбенко, дом 32, корпус 1",
+    "unom": 340198,
     "role": "добавлена префектурой",
     "side": "",
     "azimuth": 156,
@@ -2337,8 +2442,8 @@
    "properties": {
     "point_no": "Т15.584",
     "district": "Ховрино",
-    "address": "Клинская улица, дом 15",
-    "unom": 10231,
+    "address": "Петрозаводская улица, дом 24, корпус 2",
+    "unom": 340312,
     "role": "добавлена префектурой",
     "side": "",
     "azimuth": 248,
@@ -2946,8 +3051,8 @@
    "properties": {
     "point_no": "Т15.647",
     "district": "Ховрино",
-    "address": "Фестивальная улица, дом 75",
-    "unom": 27318,
+    "address": "Петрозаводская улица, дом 1",
+    "unom": 19689,
     "role": "добавлена префектурой",
     "side": "",
     "azimuth": 238,
@@ -2988,8 +3093,8 @@
    "properties": {
     "point_no": "Т15.655",
     "district": "Ховрино",
-    "address": "Фестивальная улица, дом 22, корпус 7",
-    "unom": 74125,
+    "address": "Фестивальная улица, дом 22, корпус 4",
+    "unom": 74126,
     "role": "добавлена префектурой",
     "side": "",
     "azimuth": 327,
@@ -3009,8 +3114,8 @@
    "properties": {
     "point_no": "Т15.656",
     "district": "Ховрино",
-    "address": "Фестивальная улица, дом 22, корпус 4",
-    "unom": 74126,
+    "address": "Фестивальная улица, дом 22, корпус 2",
+    "unom": 74201,
     "role": "добавлена префектурой",
     "side": "",
     "azimuth": 147,
@@ -3030,8 +3135,8 @@
    "properties": {
     "point_no": "Т15.657",
     "district": "Ховрино",
-    "address": "Фестивальная улица, дом 22, корпус 4",
-    "unom": 74126,
+    "address": "Фестивальная улица, дом 22, корпус 2",
+    "unom": 74201,
     "role": "добавлена префектурой",
     "side": "",
     "azimuth": 149,
@@ -3093,8 +3198,8 @@
    "properties": {
     "point_no": "Т15.660",
     "district": "Ховрино",
-    "address": "Фестивальная улица, дом 22, корпус 2",
-    "unom": 74201,
+    "address": "Фестивальная улица, дом 24",
+    "unom": 27277,
     "role": "добавлена префектурой",
     "side": "",
     "azimuth": 309,
@@ -3114,8 +3219,8 @@
    "properties": {
     "point_no": "Т15.663",
     "district": "Ховрино",
-    "address": "Фестивальная улица, дом 63, корпус 1",
-    "unom": 27314,
+    "address": "Фестивальная улица, дом 24",
+    "unom": 27277,
     "role": "добавлена префектурой",
     "side": "",
     "azimuth": 61,
@@ -3127,6 +3232,27 @@
     "coordinates": [
      37.501363,
      55.860449
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "point_no": "Т15.665",
+    "district": "Ховрино",
+    "address": "Фестивальная улица, дом 24",
+    "unom": 27277,
+    "role": "добавлена префектурой",
+    "side": "",
+    "azimuth": 311,
+    "status": "черновик",
+    "prefecture_edit": true
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5013,
+     55.860428
     ]
    }
   },
@@ -3450,8 +3576,8 @@
    "properties": {
     "point_no": "Т15.698",
     "district": "Ховрино",
-    "address": "улица Ляпидевского, дом 10, корпус 1",
-    "unom": 74167,
+    "address": "улица Ляпидевского, дом 8, корпус 2",
+    "unom": 13591,
     "role": "добавлена префектурой",
     "side": "",
     "azimuth": 327,
@@ -3471,8 +3597,8 @@
    "properties": {
     "point_no": "Т15.700",
     "district": "Ховрино",
-    "address": "улица Ляпидевского, дом 16, корпус 1",
-    "unom": 74170,
+    "address": "улица Ляпидевского, дом 16",
+    "unom": 74169,
     "role": "добавлена префектурой",
     "side": "",
     "azimuth": 149,
@@ -3513,8 +3639,8 @@
    "properties": {
     "point_no": "Т15.703",
     "district": "Ховрино",
-    "address": "улица Ляпидевского, дом 18",
-    "unom": 13597,
+    "address": "Фестивальная улица, дом 14",
+    "unom": 27259,
     "role": "добавлена префектурой",
     "side": "",
     "azimuth": 331,
@@ -5697,26 +5823,6 @@
    "properties": {
     "point_no": "Т15.3044",
     "district": "Ховрино",
-    "address": "Клинская улица, дом 19",
-    "unom": 10235,
-    "role": "за подъездом 1",
-    "side": "подъезды 1–4",
-    "azimuth": 301,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.4951869,
-     55.8687823
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т15.3045",
-    "district": "Ховрино",
     "address": "Клинская улица, дом 2А, корпус 7",
     "unom": 5186842,
     "role": "угол (тротуар вокруг дома)",
@@ -5735,7 +5841,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3046",
+    "point_no": "Т15.3045",
     "district": "Ховрино",
     "address": "улица Дыбенко, дом 6, корпус 1",
     "unom": 74198,
@@ -5755,7 +5861,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3047",
+    "point_no": "Т15.3046",
     "district": "Ховрино",
     "address": "Клинская улица, дом 4, корпус 1",
     "unom": 10220,
@@ -5775,27 +5881,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3048",
-    "district": "Ховрино",
-    "address": "Клинская улица, дом 15",
-    "unom": 10231,
-    "role": "за подъездом 4",
-    "side": "подъезды 1–4",
-    "azimuth": 122,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.4969666,
-     55.8680908
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т15.3049",
+    "point_no": "Т15.3047",
     "district": "Ховрино",
     "address": "Петрозаводская улица, дом 21",
     "unom": 19722,
@@ -5815,7 +5901,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3050",
+    "point_no": "Т15.3048",
     "district": "Ховрино",
     "address": "улица Лавочкина, дом 56/23",
     "unom": 12528,
@@ -5835,7 +5921,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3051",
+    "point_no": "Т15.3049",
     "district": "Ховрино",
     "address": "Петрозаводская улица, дом 17, корпус 1",
     "unom": 19716,
@@ -5855,7 +5941,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3052",
+    "point_no": "Т15.3050",
     "district": "Ховрино",
     "address": "Петрозаводская улица, дом 13, корпус 2",
     "unom": 19709,
@@ -5875,7 +5961,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3053",
+    "point_no": "Т15.3051",
     "district": "Ховрино",
     "address": "Петрозаводская улица, дом 13, корпус 1",
     "unom": 19708,
@@ -5895,7 +5981,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3054",
+    "point_no": "Т15.3052",
     "district": "Ховрино",
     "address": "Петрозаводская улица, дом 11, корпус 3",
     "unom": 19706,
@@ -5915,7 +6001,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3055",
+    "point_no": "Т15.3053",
     "district": "Ховрино",
     "address": "Петрозаводская улица, дом 9, корпус 1",
     "unom": 19699,
@@ -5935,7 +6021,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3056",
+    "point_no": "Т15.3054",
     "district": "Ховрино",
     "address": "Петрозаводская улица, дом 17, корпус 1",
     "unom": 19716,
@@ -5955,7 +6041,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3057",
+    "point_no": "Т15.3055",
     "district": "Ховрино",
     "address": "Петрозаводская улица, дом 11, корпус 2",
     "unom": 19705,
@@ -5975,7 +6061,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3058",
+    "point_no": "Т15.3056",
     "district": "Ховрино",
     "address": "Петрозаводская улица, дом 9, корпус 2",
     "unom": 19700,
@@ -5995,7 +6081,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3059",
+    "point_no": "Т15.3057",
     "district": "Ховрино",
     "address": "Петрозаводская улица, дом 21",
     "unom": 19722,
@@ -6015,7 +6101,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3060",
+    "point_no": "Т15.3058",
     "district": "Ховрино",
     "address": "Петрозаводская улица, дом 17, корпус 2",
     "unom": 19717,
@@ -6035,7 +6121,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3061",
+    "point_no": "Т15.3059",
     "district": "Ховрино",
     "address": "Петрозаводская улица, дом 7",
     "unom": 19698,
@@ -6055,27 +6141,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3062",
-    "district": "Ховрино",
-    "address": "Фестивальная улица, дом 75",
-    "unom": 27318,
-    "role": "за подъездом 8",
-    "side": "подъезды 1–8",
-    "azimuth": 122,
-    "status": "черновик"
-   },
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     37.5059594,
-     55.8650482
-    ]
-   }
-  },
-  {
-   "type": "Feature",
-   "properties": {
-    "point_no": "Т15.3063",
+    "point_no": "Т15.3060",
     "district": "Ховрино",
     "address": "улица Лавочкина, дом 54, корпус 1",
     "unom": 12526,
@@ -6095,7 +6161,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3064",
+    "point_no": "Т15.3061",
     "district": "Ховрино",
     "address": "улица Лавочкина, дом 52",
     "unom": 12525,
@@ -6115,7 +6181,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3065",
+    "point_no": "Т15.3062",
     "district": "Ховрино",
     "address": "Петрозаводская улица, дом 9, корпус 1",
     "unom": 19699,
@@ -6135,7 +6201,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3066",
+    "point_no": "Т15.3063",
     "district": "Ховрино",
     "address": "Петрозаводская улица, дом 15, корпус 1",
     "unom": 19711,
@@ -6155,7 +6221,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3067",
+    "point_no": "Т15.3064",
     "district": "Ховрино",
     "address": "Петрозаводская улица, дом 9, корпус 2",
     "unom": 19700,
@@ -6175,7 +6241,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3068",
+    "point_no": "Т15.3065",
     "district": "Ховрино",
     "address": "Петрозаводская улица, дом 17, корпус 2",
     "unom": 19717,
@@ -6195,7 +6261,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3069",
+    "point_no": "Т15.3066",
     "district": "Ховрино",
     "address": "Петрозаводская улица, дом 5, корпус 1",
     "unom": 19693,
@@ -6215,7 +6281,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3070",
+    "point_no": "Т15.3067",
     "district": "Ховрино",
     "address": "улица Лавочкина, дом 54, корпус 1",
     "unom": 12526,
@@ -6235,7 +6301,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3071",
+    "point_no": "Т15.3068",
     "district": "Ховрино",
     "address": "Петрозаводская улица, дом 15, корпус 4",
     "unom": 19714,
@@ -6255,7 +6321,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3072",
+    "point_no": "Т15.3069",
     "district": "Ховрино",
     "address": "Петрозаводская улица, дом 3, корпус 2",
     "unom": 19691,
@@ -6275,7 +6341,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3073",
+    "point_no": "Т15.3070",
     "district": "Ховрино",
     "address": "Петрозаводская улица, дом 15, корпус 2",
     "unom": 19712,
@@ -6295,7 +6361,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3074",
+    "point_no": "Т15.3071",
     "district": "Ховрино",
     "address": "Петрозаводская улица, дом 5, корпус 3",
     "unom": 19695,
@@ -6315,7 +6381,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3075",
+    "point_no": "Т15.3072",
     "district": "Ховрино",
     "address": "Петрозаводская улица, дом 3, корпус 1",
     "unom": 19690,
@@ -6335,7 +6401,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3076",
+    "point_no": "Т15.3073",
     "district": "Ховрино",
     "address": "Петрозаводская улица, дом 5, корпус 4",
     "unom": 19696,
@@ -6355,7 +6421,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3077",
+    "point_no": "Т15.3074",
     "district": "Ховрино",
     "address": "Петрозаводская улица, дом 15, корпус 3",
     "unom": 19713,
@@ -6376,7 +6442,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3078",
+    "point_no": "Т15.3075",
     "district": "Ховрино",
     "address": "Петрозаводская улица, дом 1",
     "unom": 19689,
@@ -6396,7 +6462,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3079",
+    "point_no": "Т15.3076",
     "district": "Ховрино",
     "address": "улица Лавочкина, дом 48, корпус 2",
     "unom": 12521,
@@ -6416,7 +6482,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3080",
+    "point_no": "Т15.3077",
     "district": "Ховрино",
     "address": "улица Лавочкина, дом 52",
     "unom": 12525,
@@ -6436,7 +6502,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3081",
+    "point_no": "Т15.3078",
     "district": "Ховрино",
     "address": "Петрозаводская улица, дом 5, корпус 4",
     "unom": 19696,
@@ -6456,7 +6522,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3082",
+    "point_no": "Т15.3079",
     "district": "Ховрино",
     "address": "улица Лавочкина, дом 50, корпус 1",
     "unom": 12523,
@@ -6476,7 +6542,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3083",
+    "point_no": "Т15.3080",
     "district": "Ховрино",
     "address": "Петрозаводская улица, дом 5, корпус 3",
     "unom": 19695,
@@ -6496,7 +6562,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3084",
+    "point_no": "Т15.3081",
     "district": "Ховрино",
     "address": "улица Лавочкина, дом 48, корпус 1",
     "unom": 12520,
@@ -6516,7 +6582,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3085",
+    "point_no": "Т15.3082",
     "district": "Ховрино",
     "address": "Петрозаводская улица, дом 15, корпус 3",
     "unom": 19713,
@@ -6536,7 +6602,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3086",
+    "point_no": "Т15.3083",
     "district": "Ховрино",
     "address": "Фестивальная улица, дом 63, корпус 3",
     "unom": 74188,
@@ -6556,7 +6622,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3087",
+    "point_no": "Т15.3084",
     "district": "Ховрино",
     "address": "улица Лавочкина, дом 48, корпус 2",
     "unom": 12521,
@@ -6576,7 +6642,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3088",
+    "point_no": "Т15.3085",
     "district": "Ховрино",
     "address": "Петрозаводская улица, дом 3, корпус 1",
     "unom": 19690,
@@ -6596,7 +6662,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3089",
+    "point_no": "Т15.3086",
     "district": "Ховрино",
     "address": "Фестивальная улица, дом 65",
     "unom": 27315,
@@ -6616,7 +6682,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3090",
+    "point_no": "Т15.3087",
     "district": "Ховрино",
     "address": "Фестивальная улица, дом 59, корпус 3",
     "unom": 27311,
@@ -6636,7 +6702,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3091",
+    "point_no": "Т15.3088",
     "district": "Ховрино",
     "address": "Фестивальная улица, дом 59, корпус 4",
     "unom": 27312,
@@ -6656,7 +6722,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3092",
+    "point_no": "Т15.3089",
     "district": "Ховрино",
     "address": "Фестивальная улица, дом 53, корпус 4",
     "unom": 27304,
@@ -6676,7 +6742,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3093",
+    "point_no": "Т15.3090",
     "district": "Ховрино",
     "address": "Фестивальная улица, дом 59, корпус 2",
     "unom": 27310,
@@ -6696,7 +6762,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3094",
+    "point_no": "Т15.3091",
     "district": "Ховрино",
     "address": "Фестивальная улица, дом 61",
     "unom": 27313,
@@ -6716,7 +6782,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3095",
+    "point_no": "Т15.3092",
     "district": "Ховрино",
     "address": "Фестивальная улица, дом 67",
     "unom": 27316,
@@ -6736,7 +6802,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3096",
+    "point_no": "Т15.3093",
     "district": "Ховрино",
     "address": "Фестивальная улица, дом 59, корпус 1",
     "unom": 27309,
@@ -6756,7 +6822,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3097",
+    "point_no": "Т15.3094",
     "district": "Ховрино",
     "address": "Фестивальная улица, дом 53, корпус 2",
     "unom": 27302,
@@ -6776,7 +6842,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3098",
+    "point_no": "Т15.3095",
     "district": "Ховрино",
     "address": "улица Лавочкина, дом 44, корпус 3",
     "unom": 74073,
@@ -6796,7 +6862,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3099",
+    "point_no": "Т15.3096",
     "district": "Ховрино",
     "address": "Фестивальная улица, дом 53, корпус 5",
     "unom": 27305,
@@ -6816,7 +6882,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3100",
+    "point_no": "Т15.3097",
     "district": "Ховрино",
     "address": "Фестивальная улица, дом 63, корпус 1",
     "unom": 27314,
@@ -6836,7 +6902,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3101",
+    "point_no": "Т15.3098",
     "district": "Ховрино",
     "address": "улица Лавочкина, дом 44, корпус 2",
     "unom": 12517,
@@ -6856,7 +6922,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3102",
+    "point_no": "Т15.3099",
     "district": "Ховрино",
     "address": "улица Лавочкина, дом 46, корпус 2",
     "unom": 12519,
@@ -6876,7 +6942,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3103",
+    "point_no": "Т15.3100",
     "district": "Ховрино",
     "address": "улица Лавочкина, дом 48, корпус 1",
     "unom": 12520,
@@ -6896,7 +6962,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3104",
+    "point_no": "Т15.3101",
     "district": "Ховрино",
     "address": "Онежская улица, дом 57/34",
     "unom": 17606,
@@ -6916,7 +6982,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3105",
+    "point_no": "Т15.3102",
     "district": "Ховрино",
     "address": "улица Лавочкина, дом 46, корпус 1",
     "unom": 12518,
@@ -6936,7 +7002,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3106",
+    "point_no": "Т15.3103",
     "district": "Ховрино",
     "address": "Фестивальная улица, дом 61",
     "unom": 27313,
@@ -6956,7 +7022,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3107",
+    "point_no": "Т15.3104",
     "district": "Ховрино",
     "address": "Фестивальная улица, дом 59, корпус 1",
     "unom": 27309,
@@ -6976,7 +7042,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3108",
+    "point_no": "Т15.3105",
     "district": "Ховрино",
     "address": "улица Лавочкина, дом 44, корпус 1",
     "unom": 12516,
@@ -6996,7 +7062,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3109",
+    "point_no": "Т15.3106",
     "district": "Ховрино",
     "address": "Фестивальная улица, дом 53, корпус 2",
     "unom": 27302,
@@ -7016,7 +7082,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3110",
+    "point_no": "Т15.3107",
     "district": "Ховрино",
     "address": "улица Лавочкина, дом 44, корпус 2",
     "unom": 12517,
@@ -7036,7 +7102,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3111",
+    "point_no": "Т15.3108",
     "district": "Ховрино",
     "address": "улица Лавочкина, дом 46, корпус 1",
     "unom": 12518,
@@ -7056,7 +7122,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3112",
+    "point_no": "Т15.3109",
     "district": "Ховрино",
     "address": "Фестивальная улица, дом 53, корпус 6",
     "unom": 27306,
@@ -7076,7 +7142,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3113",
+    "point_no": "Т15.3110",
     "district": "Ховрино",
     "address": "Онежская улица, дом 57/34",
     "unom": 17606,
@@ -7096,7 +7162,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3114",
+    "point_no": "Т15.3111",
     "district": "Ховрино",
     "address": "Фестивальная улица, дом 51, корпус 1",
     "unom": 74189,
@@ -7116,7 +7182,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3115",
+    "point_no": "Т15.3112",
     "district": "Ховрино",
     "address": "улица Лавочкина, дом 44, корпус 1",
     "unom": 12516,
@@ -7136,7 +7202,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3116",
+    "point_no": "Т15.3113",
     "district": "Ховрино",
     "address": "Фестивальная улица, дом 14",
     "unom": 27259,
@@ -7156,7 +7222,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3117",
+    "point_no": "Т15.3114",
     "district": "Ховрино",
     "address": "Фестивальная улица, дом 22, корпус 2",
     "unom": 74201,
@@ -7176,7 +7242,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3118",
+    "point_no": "Т15.3115",
     "district": "Ховрино",
     "address": "Фестивальная улица, дом 14",
     "unom": 27259,
@@ -7196,7 +7262,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3119",
+    "point_no": "Т15.3116",
     "district": "Ховрино",
     "address": "Фестивальная улица, дом 47",
     "unom": 340102,
@@ -7216,7 +7282,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3120",
+    "point_no": "Т15.3117",
     "district": "Ховрино",
     "address": "улица Ляпидевского, дом 16, корпус 1",
     "unom": 74170,
@@ -7236,7 +7302,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3121",
+    "point_no": "Т15.3118",
     "district": "Ховрино",
     "address": "Фестивальная улица, дом 22, корпус 2",
     "unom": 74201,
@@ -7256,7 +7322,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3122",
+    "point_no": "Т15.3119",
     "district": "Ховрино",
     "address": "улица Ляпидевского, дом 18",
     "unom": 13597,
@@ -7276,7 +7342,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3123",
+    "point_no": "Т15.3120",
     "district": "Ховрино",
     "address": "улица Ляпидевского, дом 16",
     "unom": 74169,
@@ -7296,7 +7362,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3124",
+    "point_no": "Т15.3121",
     "district": "Ховрино",
     "address": "улица Ляпидевского, дом 10, корпус 3",
     "unom": 74083,
@@ -7316,7 +7382,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3125",
+    "point_no": "Т15.3122",
     "district": "Ховрино",
     "address": "улица Ляпидевского, дом 16",
     "unom": 74169,
@@ -7336,7 +7402,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3126",
+    "point_no": "Т15.3123",
     "district": "Ховрино",
     "address": "Фестивальная улица, дом 22, корпус 7",
     "unom": 74125,
@@ -7356,7 +7422,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3127",
+    "point_no": "Т15.3124",
     "district": "Ховрино",
     "address": "Фестивальная улица, дом 22, корпус 4",
     "unom": 74126,
@@ -7376,7 +7442,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3128",
+    "point_no": "Т15.3125",
     "district": "Ховрино",
     "address": "Фестивальная улица, дом 22, корпус 4",
     "unom": 74126,
@@ -7396,7 +7462,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3129",
+    "point_no": "Т15.3126",
     "district": "Ховрино",
     "address": "улица Ляпидевского, дом 14",
     "unom": 13595,
@@ -7416,7 +7482,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3130",
+    "point_no": "Т15.3127",
     "district": "Ховрино",
     "address": "Флотская улица, дом 17, корпус 1",
     "unom": 27486,
@@ -7436,7 +7502,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3131",
+    "point_no": "Т15.3128",
     "district": "Ховрино",
     "address": "Фестивальная улица, дом 22, корпус 4",
     "unom": 74126,
@@ -7456,7 +7522,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3132",
+    "point_no": "Т15.3129",
     "district": "Ховрино",
     "address": "Флотская улица, дом 13, корпус 5",
     "unom": 27484,
@@ -7476,7 +7542,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3133",
+    "point_no": "Т15.3130",
     "district": "Ховрино",
     "address": "улица Ляпидевского, дом 10, корпус 1",
     "unom": 74167,
@@ -7496,7 +7562,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3134",
+    "point_no": "Т15.3131",
     "district": "Ховрино",
     "address": "улица Ляпидевского, дом 8, корпус 2",
     "unom": 13591,
@@ -7516,7 +7582,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3135",
+    "point_no": "Т15.3132",
     "district": "Ховрино",
     "address": "улица Ляпидевского, дом 10",
     "unom": 74168,
@@ -7536,7 +7602,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3136",
+    "point_no": "Т15.3133",
     "district": "Ховрино",
     "address": "улица Ляпидевского, дом 8, корпус 2",
     "unom": 13591,
@@ -7556,7 +7622,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3137",
+    "point_no": "Т15.3134",
     "district": "Ховрино",
     "address": "Флотская улица, дом 13, корпус 3",
     "unom": 27482,
@@ -7576,7 +7642,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3138",
+    "point_no": "Т15.3135",
     "district": "Ховрино",
     "address": "улица Ляпидевского, дом 8, корпус 1",
     "unom": 13590,
@@ -7596,7 +7662,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3139",
+    "point_no": "Т15.3136",
     "district": "Ховрино",
     "address": "улица Ляпидевского, дом 2, корпус 1",
     "unom": 74051,
@@ -7616,7 +7682,7 @@
   {
    "type": "Feature",
    "properties": {
-    "point_no": "Т15.3140",
+    "point_no": "Т15.3137",
     "district": "Ховрино",
     "address": "улица Ляпидевского, дом 2, корпус 1",
     "unom": 74051,

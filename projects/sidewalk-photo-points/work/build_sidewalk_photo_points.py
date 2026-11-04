@@ -19,8 +19,8 @@
 
 Правило по числу подъездов (--rule, с 03.11.2026; первым — Ховрино):
 - простой дом (все подъезды на одной стороне) с 1–3 подъездами — одна обзорная
-  точка перед подъездами, взгляд на дом (так ставили сотрудники Ховрино,
-  Дмитровского и Восточного Дегунино: 10–20 м от стены, напротив подъездов);
+  точка у угла дома за первым подъездом, взгляд вдоль фасада на все подъезды
+  (с 04.11.2026; точки напротив дома, глядящие в стену, префектура сочла лишними);
 - простой дом с 4 и больше подъездами — две точки у противоположных концов дома,
   взгляд вдоль фасада; промежуточных точек, задней стороны и углов нет;
 - изогнутый или ступенчатый дом, где все подъезды смотрят в одну сторону (нормали
@@ -93,8 +93,6 @@ END_CAP_M = 30                # точка — не дальше этого за
 MIN_BEYOND_M = 6              # и не ближе этого
 RING_SHARE = 0.8              # доля периметра с тротуаром для «кругового» дома
 FEW_ENTRANCES = 3             # --rule: столько подъездов и меньше — одна обзорная точка
-OVERVIEW_MIN_M = 10           # обзорная точка — в 10–16 м от стены, напротив подъездов
-OVERVIEW_MAX_M = 16
 ONE_SIDE_COS = 0.5            # --rule: фасады с нормалями ближе 60° — одна сторона дома
 PRIVATE_HOUSES = {"house", "detached", "semidetached_house", "bungalow", "cabin", "farm", "terrace"}
 STAFF_HOUSE_M = 40            # точка префектуры относится к дому не дальше этого от стены
@@ -266,6 +264,12 @@ def read_staff_edits(path, district_no):
     return edits
 
 
+def along_view(heading, ux, uy):
+    """На сколько градусов взгляд кадра отклоняется от направления стороны дома (в любую сторону)."""
+    d = abs(heading - azimuth(ux, uy)) % 180
+    return min(d, 180 - d)
+
+
 def apply_rule(L, staff, live, points, house_slots, stats, buildings=(), tags=(), registry=frozenset(), yards=None, doors=()):
     """Точки префектуры по правилу подъездов. Каждая живая точка относится к дому,
     на который смотрит (первый дом по направлению кадра в STAFF_HOUSE_M), иначе — к
@@ -326,7 +330,9 @@ def apply_rule(L, staff, live, points, house_slots, stats, buildings=(), tags=()
         along = lambda no: live[no][0][0] * ux + live[no][0][1] * uy
         while len(keep) < k and rest:
             if k == 1:
-                pick = min(rest, key=lambda no: math.dist(live[no][0], ref))
+                # Точка с угла, глядящая вдоль стороны дома, а не в стену (так задумано
+                # правилом); из таких — ближайшая к черновой обзорной точке.
+                pick = min(rest, key=lambda no: (along_view(live[no][1], ux, uy) > 35, math.dist(live[no][0], ref)))
             elif not keep:
                 pick = max(((a, b) for a in rest for b in rest if a < b), default=(rest[0], rest[0]),
                            key=lambda ab: abs(along(ab[0]) - along(ab[1])))[0]
@@ -368,7 +374,9 @@ def apply_rule(L, staff, live, points, house_slots, stats, buildings=(), tags=()
             if 1 <= len(own_doors) <= FEW_ENTRANCES and len(mine) > 1:
                 mx = sum(d.x for d in own_doors) / len(own_doors)
                 my = sum(d.y for d in own_doors) / len(own_doors)
-                keep = min(mine, key=lambda no: math.dist(live[no][0], (mx, my)))
+                bx, by = max(main_axes(buildings[j]), key=lambda u: max((x * u[0] + y * u[1]) for x, y in ring.coords)
+                             - min((x * u[0] + y * u[1]) for x, y in ring.coords))
+                keep = min(mine, key=lambda no: (along_view(live[no][1], bx, by) > 35, math.dist(live[no][0], (mx, my))))
                 rest = [no for no in mine if no != keep and "P" not in staff[no][3]]
                 retire += rest
                 reasons.update((no, f"лишняя: у дома {len(own_doors)} подъезда по OSM — одна точка") for no in rest)
@@ -582,19 +590,6 @@ def build(slug, staff=None, first_no=1, rule=False):
             d = sorted(offsets)[len(offsets) // 2]
             d_cam = min(max(far_edge(walk, ox, oy, ux, uy, nx, ny, [proj(pt) for pt, _ in fac["ents"]], d) + 1, CAMERA_MIN_M), CAMERA_MAX_M)
             gi = fac_group.get(id(fac))
-            if gi is not None and len(groups[gi]) == 1 and slots[gi]["k"] == 1:
-                # Одна обзорная точка напротив середины подъездов, взгляд на дом.
-                mid = sum(proj(pt) for pt, _ in fac["ents"]) / len(fac["ents"])
-                d_view = min(max(d_cam + 2, OVERVIEW_MIN_M), OVERVIEW_MAX_M)
-                q = place(walk, ox, oy, ux, uy, nx, ny, mid, d, d_view)
-                if q is None:
-                    stats["end_far_from_sidewalk"] += 1
-                    continue
-                stats["overview"] += 1
-                house_points.append({"xy": (q.x, q.y), "az": azimuth(-nx, -ny), "role": "обзор подъездов",
-                                     "weight": len(fac["ents"]), "slot": gi,
-                                     "side": "подъезды " + entrance_range([r["properties"].get("№ подъезда") for _, r in fac["ents"]])})
-                continue
             n_first = first[1]["properties"].get("№ подъезда")
             n_last = last[1]["properties"].get("№ подъезда")
             first_end = start if proj(first[0]) <= proj(last[0]) else end
@@ -604,14 +599,23 @@ def build(slug, staff=None, first_no=1, rule=False):
             parts = 1 if rule else math.ceil(length / LONG_FACADE_M)
             for k in range(1, parts):
                 stops.append((start + length * k / parts, 1, "середина фасада"))
+            one = gi is not None and len(groups[gi]) == 1 and slots[gi]["k"] == 1
+            if one:
+                # 1–3 подъезда: одна обзорная точка — у угла дома за первым подъездом,
+                # взгляд вдоль фасада на все подъезды; не встала — с другого угла.
+                stops.sort(key=lambda st: st[0] != first_end)
             for a, sign, role in stops:
                 q = place(walk, ox, oy, ux, uy, nx, ny, a, d, d_cam)
                 if q is None:
                     stats["end_far_from_sidewalk"] += 1
                     continue
-                house_points.append({"xy": (q.x, q.y), "az": azimuth(ux * sign, uy * sign), "role": role,
+                house_points.append({"xy": (q.x, q.y), "az": azimuth(ux * sign, uy * sign),
+                                     "role": "обзор подъездов с угла" if one else role,
                                      "weight": len(fac["ents"]), "slot": gi,
                                      "side": "подъезды " + entrance_range([r["properties"].get("№ подъезда") for _, r in fac["ents"]])})
+                if one:
+                    stats["overview"] += 1
+                    break
 
         for gi, g in enumerate(groups):
             if len(g) < 2:
