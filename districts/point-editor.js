@@ -146,7 +146,7 @@ window.createPointEditor = function ({ map, popover, host = document.body }) {
   function select(next) {
     flushKeys();
     clear();
-    target = { ...next, coordinates: [...next.coordinates], heading: next.heading == null ? null : norm(next.heading) };
+    target = { ...next, coordinates: [...next.coordinates], heading: next.heading == null ? null : next.preciseHeading ? next.heading : norm(next.heading) };
     target.element?.classList.add('selected');
     addKnob();
   }
@@ -161,7 +161,7 @@ window.createPointEditor = function ({ map, popover, host = document.body }) {
     if (!target || target.key !== key) return;
     target.element = element;
     if (fresh.coordinates) target.coordinates = [...fresh.coordinates];
-    if (fresh.heading != null) target.heading = norm(fresh.heading);
+    if (fresh.heading != null) target.heading = target.preciseHeading ? fresh.heading : norm(fresh.heading);
     element.classList.add('selected');
     if (!knob) addKnob(); else paint();
   }

@@ -15,3 +15,6 @@ projects/_local-backups/
 dev/.commandcode/
 notify/data/
 work/.photo-cache/
+
+# Закрытый тестовый каталог тротуаров — только на сервере фотослужбы.
+/photo-service/assets/sidewalk-test-points.json
