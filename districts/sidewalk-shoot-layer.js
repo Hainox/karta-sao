@@ -8,6 +8,7 @@ window.initSidewalkShootLayer = function ({ map, slug, district, apiRequest, esc
   const container = document.getElementById('sidewalkShootLayer');
   const card = document.getElementById('card');
   const API = '/object-photo-points/sidewalks';
+  const testLayer = initSidewalkTestLayer({ container, map, card, district, apiRequest, centerSelection, popover, getUser, editor, arrowSvg });
   const STEP = 15;
   let points = [];
   let editable = false;
@@ -27,13 +28,13 @@ window.initSidewalkShootLayer = function ({ map, slug, district, apiRequest, esc
     side: f.properties.side, role: f.properties.role, also_covers: f.properties.also_covers, status: f.properties.status,
     heading: Number(f.properties.azimuth), lng: f.geometry.coordinates[0], lat: f.geometry.coordinates[1] });
 
-  function arrowSvg(heading) {
+  function arrowSvg(heading, fill = '#f28c18', outline = '#8a4300') {
     const arrow = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     arrow.setAttribute('class', 'shoot-arrow');
     arrow.setAttribute('viewBox', '0 0 64 80');
     arrow.setAttribute('aria-hidden', 'true');
     arrow.style.transform = 'rotate(' + heading + 'deg)';
-    arrow.innerHTML = '<path d="M32 4 L14 26 L25 26 L25 70 L39 70 L39 26 L50 26 Z" fill="none" stroke="white" stroke-width="8" stroke-linejoin="round"/><path d="M32 4 L14 26 L25 26 L25 70 L39 70 L39 26 L50 26 Z" fill="#f28c18" stroke="#8a4300" stroke-width="3" stroke-linejoin="round"/>';
+    arrow.innerHTML = `<path d="M32 4 L14 26 L25 26 L25 70 L39 70 L39 26 L50 26 Z" fill="none" stroke="white" stroke-width="8" stroke-linejoin="round"/><path d="M32 4 L14 26 L25 26 L25 70 L39 70 L39 26 L50 26 Z" fill="${fill}" stroke="${outline}" stroke-width="3" stroke-linejoin="round"/>`;
     return arrow;
   }
 
@@ -327,6 +328,7 @@ window.initSidewalkShootLayer = function ({ map, slug, district, apiRequest, esc
       return created;
     },
     setVisible(on) {
+      testLayer.setVisible(on);
       if (on && !visible) isOn = true;
       visible = Boolean(on);
       if (!visible) {
@@ -341,3 +343,185 @@ window.initSidewalkShootLayer = function ({ map, slug, district, apiRequest, esc
   };
 };
 
+
+// Независимый закрытый тестовый набор. Маркер указывает место съёмки;
+// направление появляется только после выбора одного из кадров в карточке.
+function initSidewalkTestLayer({ container, map, card, district, apiRequest, centerSelection, popover, getUser, editor, arrowSvg }) {
+  const node = (tag, text, className) => {
+    const element = document.createElement(tag);
+    if (text) element.textContent = text;
+    if (className) element.className = className;
+    return element;
+  };
+  const allowed = () => getUser?.()?.role === 'prefecture_admin';
+  const layer = node('div');
+  layer.hidden = true;
+  layer.id = 'sidewalkTestLayer';
+  const checkbox = node('input');
+  checkbox.type = 'checkbox';
+  const label = node('label', '', 'layer-row off');
+  const swatch = node('span', '', 'swatch');
+  swatch.style.background = '#176bb0';
+  const count = node('span', '—', 'count');
+  label.append(checkbox, swatch, node('span', 'Точки съёмки · тротуары 2.0 (тест)', 'label'), count);
+  const hint = node('div', 'Только префектура. Выберите точку и фотослот, чтобы увидеть направление.', 'shoot-hint');
+  hint.setAttribute('role', 'status');
+  const list = node('details', '', 'shoot-list-box');
+  list.hidden = true;
+  const search = node('input');
+  search.type = 'search';
+  search.placeholder = 'ID точки или улица';
+  search.setAttribute('aria-label', 'Поиск тестовой точки тротуара');
+  const results = node('div', '', 'shoot-list');
+  const more = node('button', 'Показать ещё');
+  more.type = 'button';
+  list.append(node('summary', 'Список точек · тротуары 2.0'), search, results, more);
+  layer.append(label, hint, list);
+  container.after(layer);
+
+  let points = [];
+  let markers = new Map();
+  let selection = null;
+  let request = null;
+  let limit = 80;
+
+  function clearSelection() {
+    selection?.arrow?.remove();
+    selection = null;
+  }
+  popover.onClose(clearSelection);
+  new MutationObserver(() => {
+    if (selection && !card.contains(selection.content)) clearSelection();
+  }).observe(card, { childList: true });
+
+  function openPoint(point) {
+    if (!allowed() || !checkbox.checked) return;
+    clearSelection();
+    editor?.clear();
+    centerSelection(point.coordinates);
+    popover.open({ coordinates: point.coordinates, kind: 'sidewalk', title: point.street,
+      subtitle: 'Тротуары 2.0 · тест · ' + point.id });
+    const content = node('section', '', 'pin-section');
+    content.append(node('h3', 'Фотослоты · ' + point.slots.length));
+    content.append(node('p', 'Задание ' + point.taskId + ' · ' + point.balance, 'pin-note'));
+    const status = node('p', 'Выберите фотослот для показа стрелки.', 'pin-note');
+    status.setAttribute('role', 'status');
+    const buttons = node('div', '', 'pin-actions');
+    const format = new Intl.NumberFormat('ru-RU', { maximumFractionDigits: 8 });
+    const slotButtons = point.slots.map((slot, index) => {
+      const button = node('button', 'Фотослот ' + (index + 1) + ' · ' + format.format(slot.azimuth) + '°');
+      button.type = 'button';
+      button.setAttribute('aria-pressed', 'false');
+      button.addEventListener('click', () => {
+        if (selection?.content !== content || !allowed()) return;
+        selection.arrow?.remove();
+        const arrow = arrowSvg(slot.azimuth, '#176bb0', '#103a64');
+        arrow.style.scale = 'max(var(--shoot-arrow-scale,.35),.75)';
+        arrow.dataset.slotId = slot.id;
+        markers.get(point.id)?.element.append(arrow);
+        selection.arrow = arrow;
+        popover.setHeading(slot.azimuth);
+        for (const other of slotButtons) {
+          other.setAttribute('aria-pressed', String(other === button));
+          other.classList.toggle('primary', other === button);
+        }
+        status.textContent = 'Кадр ' + slot.id + ' · направление ' + format.format(slot.azimuth) + '°';
+      });
+      return button;
+    });
+    buttons.append(...slotButtons);
+    content.append(buttons, status);
+    selection = { content, arrow: null };
+    card.replaceChildren(content);
+  }
+
+  function draw() {
+    const next = new Map();
+    for (const point of points) {
+      const element = node('button', '', 'shoot-marker');
+      element.type = 'button';
+      element.title = 'Тротуары 2.0 · ' + point.id + ' · ' + point.street;
+      element.setAttribute('aria-label', element.title);
+      const dot = node('span', '', 'shoot-dot');
+      dot.style.cssText = 'left:-7px;top:-7px;width:14px;height:14px;background:#176bb0;border-color:#fff;box-shadow:0 0 0 2px #103a64';
+      element.append(dot);
+      element.addEventListener('click', (event) => { event.stopPropagation(); openPoint(point); });
+      const marker = new window.ymaps3.YMapMarker({ coordinates: point.coordinates, zIndex: 40 }, element);
+      map.addChild(marker);
+      next.set(point.id, { marker, element });
+    }
+    markers = next;
+  }
+
+  function renderList() {
+    const query = search.value.trim().toLocaleLowerCase('ru');
+    const matched = points.filter(point => (point.id + ' ' + point.street + ' ' + point.taskId).toLocaleLowerCase('ru').includes(query));
+    results.replaceChildren(...matched.slice(0, limit).map(point => {
+      const row = node('button', '', 'shoot-item');
+      row.type = 'button';
+      row.style.cssText = 'width:100%;text-align:left;background:white';
+      row.append(node('b', point.id), node('span', point.street));
+      row.addEventListener('click', () => openPoint(point));
+      return row;
+    }));
+    if (!matched.length) results.textContent = 'Точки не найдены.';
+    more.hidden = matched.length <= limit;
+  }
+
+  function stop() {
+    request?.abort();
+    request = null;
+    if (selection && card.contains(selection.content)) popover.close();
+    clearSelection();
+    for (const { marker } of markers.values()) map.removeChild(marker);
+    markers.clear();
+    list.hidden = true;
+    results.replaceChildren();
+  }
+
+  checkbox.addEventListener('change', async () => {
+    label.classList.toggle('off', !checkbox.checked);
+    stop();
+    if (!checkbox.checked || !allowed()) return;
+    const controller = new AbortController();
+    request = controller;
+    hint.textContent = 'Загружаем тестовые точки…';
+    try {
+      const response = await apiRequest('/object-photo-points/sidewalk-test?district=' + encodeURIComponent(district), { signal: controller.signal });
+      const payload = await response.json();
+      if (request !== controller || !allowed() || !checkbox.checked) return;
+      points = payload.points;
+      count.textContent = points.length.toLocaleString('ru-RU');
+      hint.textContent = points.reduce((total, point) => total + point.slots.length, 0).toLocaleString('ru-RU')
+        + ' фотослотов. Стрелка появится после выбора кадра.';
+      search.value = '';
+      limit = 80;
+      list.hidden = false;
+      renderList();
+      draw();
+    } catch (error) {
+      if (request !== controller) return;
+      hint.textContent = 'Тестовый слой не загружен: ' + error.message;
+      checkbox.checked = false;
+      label.classList.add('off');
+    } finally {
+      if (request === controller) request = null;
+    }
+  });
+  search.addEventListener('input', () => { limit = 80; renderList(); });
+  more.addEventListener('click', () => { limit += 80; renderList(); });
+
+  return {
+    setVisible(visible) {
+      layer.hidden = !visible || !allowed();
+      if (layer.hidden) {
+        stop();
+        checkbox.checked = false;
+        label.classList.add('off');
+        points = [];
+        count.textContent = '—';
+        hint.textContent = 'Только префектура. Выберите точку и фотослот, чтобы увидеть направление.';
+      }
+    },
+  };
+}

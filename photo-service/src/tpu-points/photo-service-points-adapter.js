@@ -1,5 +1,6 @@
 import express from 'express';
 import { createPlaygroundPhotoRouter } from './playground-photo.js';
+import { createSidewalkTestLayerRouter } from './sidewalk-test-layer.js';
 import { createSidewalkPointsRouter } from './sidewalk-points.js';
 import { createObjectPositionsRouter } from './object-positions.js';
 import { createObjectPhotoPointRepository, createObjectPhotoPointsRouter } from './object-photo-points.js';
@@ -23,6 +24,7 @@ export function createPhotoServicePointsAdapter({ pool, currentUser, boundary })
     } catch (error) { next(error); }
   };
   app.use('/object-photo-points/playgrounds', createPlaygroundPhotoRouter({ pool, authenticate }));
+  app.use('/object-photo-points/sidewalk-test', createSidewalkTestLayerRouter({ authenticate }));
   app.use('/object-photo-points/sidewalks', createSidewalkPointsRouter({ pool, authenticate, boundary }));
   app.use('/object-photo-points/object-positions', createObjectPositionsRouter({ pool, authenticate, boundary }));
   app.use('/object-photo-points', createObjectPhotoPointsRouter({ repository, authenticate, boundary }));

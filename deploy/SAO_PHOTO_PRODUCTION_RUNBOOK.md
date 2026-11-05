@@ -316,3 +316,19 @@ SAO_NEWS_URLS=https://sao.mos.ru/<feed>,https://www.mos.ru/rss
 ```
 
 Check what the server sees with `curl -s https://obhod-sao.ru/photo-api/dashboard/news | head -c 600` — the `source` field names the feed in use.
+
+### Закрытый слой «Тротуары 2.0»
+
+Префектура включает слой на карте нужного района. Маркеры показывают место съёмки;
+в карточке кнопки фотослотов показывают вектор соответствующего кадра. В тесте
+доступен просмотр разметки: загрузка снимков и открытие слоя районам — отдельный
+этап. Старый слой и его снимки не используются.
+
+Из таблицы «Тротуары 2.0» сформируйте каталог скриптом
+`projects/sidewalk-photo-points/work/build_sidewalk_test_catalog.py ВХОД.xlsx КАТАЛОГ.json`.
+Сохраните его на сервере как `photo-service/assets/sidewalk-test-points.json`.
+Каталог не коммитить и не выкладывать в GitHub Pages. Он читается из образа
+фотослужбы, доступ проверяется на сервере по сессии префектуры. Для установки
+пересоберите и перезапустите только `photo-service` с обоими compose-файлами,
+без миграций. Проверьте `/photo-api/healthz`, ответ 401 без сессии и ответ 403
+с районной сессией на `/photo-api/object-photo-points/sidewalk-test?district=Аэропорт`.
