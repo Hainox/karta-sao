@@ -8,7 +8,7 @@ window.initSidewalkShootLayer = function ({ map, slug, district, apiRequest, esc
   const container = document.getElementById('sidewalkShootLayer');
   const card = document.getElementById('card');
   const API = '/object-photo-points/sidewalks';
-  const testLayer = initSidewalkTestLayer({ container, map, card, district, apiRequest, centerSelection, popover, getUser, editor, arrowSvg });
+  const testLayer = initSidewalkTestLayer({ container, map, card, district, apiRequest, centerSelection, popover, getUser, editor, arrowSvg, preparePointPhoto });
   const STEP = 15;
   let points = [];
   let editable = false;
@@ -59,7 +59,7 @@ window.initSidewalkShootLayer = function ({ map, slug, district, apiRequest, esc
     const marker = new window.ymaps3.YMapMarker({
       coordinates: [point.lng, point.lat],
       draggable: Boolean(editor?.isSelected(key)) && canEdit(),
-      ...(editor ? editor.dragHandlers(key) : {}),
+      ...(editor && canEdit() ? editor.dragHandlers(key) : {}),
     }, el);
     editor?.attach(key, el, { coordinates: [point.lng, point.lat], heading: point.heading });
     return marker;
@@ -274,7 +274,7 @@ window.initSidewalkShootLayer = function ({ map, slug, district, apiRequest, esc
   }
 
   function render(hint) {
-    container.innerHTML = '<label class="layer-row' + (isOn ? '' : ' off') + '"><input type="checkbox"' + (isOn ? ' checked' : '') + '><span class="swatch" style="background:#f28c18"></span><span class="label">Точки съёмки · тротуары</span><span class="count">' + points.length.toLocaleString('ru-RU') + '</span></label><div class="shoot-hint">' + escapeHtml(hint) + '</div><details class="shoot-list-box"><summary>Список точек · тротуары</summary><div class="shoot-list" data-sidewalk-list></div></details>';
+    container.innerHTML = '<label class="layer-row' + (isOn ? '' : ' off') + '"><input type="checkbox"' + (isOn ? ' checked' : '') + '><span class="swatch" style="background:#f28c18"></span><span class="label">Тротуары Дворы</span><span class="count">' + points.length.toLocaleString('ru-RU') + '</span></label><div class="shoot-hint">' + escapeHtml(hint) + '</div><details class="shoot-list-box"><summary>Список точек · Тротуары Дворы</summary><div class="shoot-list" data-sidewalk-list></div></details>';
     const check = container.querySelector('input');
     check.addEventListener('change', () => {
       isOn = check.checked;
@@ -346,7 +346,7 @@ window.initSidewalkShootLayer = function ({ map, slug, district, apiRequest, esc
 
 // Независимый закрытый тестовый набор. Маркер указывает место съёмки;
 // направление появляется только после выбора одного из кадров в карточке.
-function initSidewalkTestLayer({ container, map, card, district, apiRequest, centerSelection, popover, getUser, editor, arrowSvg }) {
+function initSidewalkTestLayer({ container, map, card, district, apiRequest, centerSelection, popover, getUser, editor, arrowSvg, preparePointPhoto }) {
   const node = (tag, text, className) => {
     const element = document.createElement(tag);
     if (text) element.textContent = text;
@@ -354,7 +354,11 @@ function initSidewalkTestLayer({ container, map, card, district, apiRequest, cen
     return element;
   };
   const keyOf = (point) => 'sidewalk-test:' + point.id;
-  const allowed = () => getUser?.()?.role === 'prefecture_admin';
+  const canEdit = () => getUser?.()?.role === 'prefecture_admin';
+  const canUpload = () => getUser?.()?.role === 'district_editor' && getUser?.()?.district === district;
+  const allowed = () => canEdit() || canUpload();
+  const base = '/object-photo-points/sidewalk-test';
+  const framePath = slot => base + '/district/frames/' + encodeURIComponent(slot.id);
   const layer = node('div');
   layer.hidden = true;
   layer.id = 'sidewalkTestLayer';
@@ -364,8 +368,8 @@ function initSidewalkTestLayer({ container, map, card, district, apiRequest, cen
   const swatch = node('span', '', 'swatch');
   swatch.style.background = '#176bb0';
   const count = node('span', '—', 'count');
-  label.append(checkbox, swatch, node('span', 'Точки съёмки · тротуары 2.0 (тест)', 'label'), count);
-  const hint = node('div', 'Только префектура. Выберите точку и фотослот, чтобы увидеть направление.', 'shoot-hint');
+  label.append(checkbox, swatch, node('span', 'Тротуары ОДХ', 'label'), count);
+  const hint = node('div', 'Выберите точку и фотослот, чтобы увидеть направление.', 'shoot-hint');
   hint.setAttribute('role', 'status');
   const list = node('details', '', 'shoot-list-box');
   list.hidden = true;
@@ -379,7 +383,7 @@ function initSidewalkTestLayer({ container, map, card, district, apiRequest, cen
   const flagTitle = node('h4', 'На проверку: нет тротуара');
   const more = node('button', 'Показать ещё');
   more.type = 'button';
-  list.append(node('summary', 'Список точек · тротуары 2.0'), search, results, flagTitle, flagged, more);
+  list.append(node('summary', 'Список точек · Тротуары ОДХ'), search, results, flagTitle, flagged, more);
   layer.append(label, hint, list);
   container.after(layer);
 
@@ -393,6 +397,7 @@ function initSidewalkTestLayer({ container, map, card, district, apiRequest, cen
   function clearSelection() {
     if (!selection) return;
     selection.arrow?.remove();
+    if (selection.photoUrl) URL.revokeObjectURL(selection.photoUrl);
     markers.get(selection.point.id)?.marker.update({ draggable: false, zIndex: 40 });
     if (editor?.isSelected(keyOf(selection.point))) editor.clear();
     selection = null;
@@ -403,14 +408,14 @@ function initSidewalkTestLayer({ container, map, card, district, apiRequest, cen
   }).observe(card, { childList: true });
 
   function bindEditor(point, slot) {
-    if (!editor || !allowed()) return;
+    if (!editor || !canEdit()) return;
     const view = markers.get(point.id);
     const key = keyOf(point);
     let target;
     editor.select({
       key, coordinates: point.coordinates, heading: slot?.azimuth, preciseHeading: true, element: view.element,
       async save({ coordinates, heading }) {
-        if (!allowed()) throw new Error('Доступ к редактированию закрыт.');
+        if (!canEdit()) throw new Error('Доступ к редактированию закрыт.');
         try {
           const change = coordinates ? { coordinates } : { slotId: slot.id, azimuth: heading };
           const response = await apiRequest('/object-photo-points/sidewalk-test/' + encodeURIComponent(point.id), {
@@ -450,7 +455,7 @@ function initSidewalkTestLayer({ container, map, card, district, apiRequest, cen
     dot.style.background = point.noSidewalk ? '#a83d13' : '#176bb0';
     dot.style.boxShadow = '0 0 0 2px ' + (point.noSidewalk ? '#6a2b14' : '#103a64');
     dot.textContent = point.noSidewalk ? '!' : '';
-    element.title = 'Тротуары 2.0 · ' + point.id + ' · ' + point.street + (point.noSidewalk ? ' · Нет тротуара' : '');
+    element.title = 'Тротуары ОДХ · ' + point.id + ' · ' + point.street + (point.noSidewalk ? ' · Нет тротуара' : '');
     element.setAttribute('aria-label', element.title);
   }
 
@@ -460,14 +465,64 @@ function initSidewalkTestLayer({ container, map, card, district, apiRequest, cen
     editor?.clear();
     centerSelection(point.coordinates);
     popover.open({ coordinates: point.coordinates, kind: 'sidewalk', title: point.street,
-      subtitle: 'Тротуары 2.0 · тест · ' + point.id });
+      subtitle: 'Тротуары ОДХ · ' + point.id });
     const content = node('section', '', 'pin-section');
     content.append(node('h3', 'Фотослоты · ' + point.slots.length));
     content.append(node('p', 'Задание ' + point.taskId + ' · ' + point.balance, 'pin-note'));
-    if (editor) content.append(node('p', 'Перетащите маркер, чтобы перенести точку. Для поворота выберите фотослот и потяните за ручку стрелки. Правки сохраняются автоматически.', 'pin-note'));
+    if (editor && canEdit()) content.append(node('p', 'Перетащите маркер, чтобы перенести точку. Для поворота выберите фотослот и потяните за ручку стрелки. Правки сохраняются автоматически.', 'pin-note'));
     const status = node('p', 'Выберите фотослот для показа стрелки.', 'pin-note');
     status.setAttribute('role', 'status');
     const buttons = node('div', '', 'pin-actions');
+    const photoPanel = node('div');
+    function showPhoto(slot) {
+      if (selection.photoUrl) URL.revokeObjectURL(selection.photoUrl);
+      selection.photoUrl = null;
+      photoPanel.replaceChildren();
+      if (!canUpload()) return;
+      const statuses = { empty: 'Нет фото', pending: 'На проверке', accepted: 'Принято', rework: 'На доработке' };
+      const info = node('p', statuses[slot.status] || statuses.empty, 'pin-note');
+      photoPanel.append(info);
+      if (slot.comment) photoPanel.append(node('p', 'Что исправить: ' + slot.comment, 'pin-note'));
+      if (slot.photoId) {
+        const preview = node('div');
+        photoPanel.append(preview);
+        apiRequest(framePath(slot) + '/photos/' + encodeURIComponent(slot.photoId))
+          .then(response => response.blob()).then(blob => {
+            if (!preview.isConnected || selection?.slot !== slot) return;
+            selection.photoUrl = URL.createObjectURL(blob);
+            const image = node('img');
+            image.alt = 'Фото выбранного слота';
+            image.style.maxWidth = '100%';
+            image.src = selection.photoUrl;
+            preview.append(image);
+          }).catch(() => { preview.textContent = 'Не удалось открыть фото.'; });
+      }
+      if (point.noSidewalk || !['empty', 'rework'].includes(slot.status || 'empty')) return;
+      const input = node('input');
+      input.type = 'file';
+      input.accept = 'image/jpeg,image/png,image/webp';
+      input.hidden = true;
+      const upload = node('button', 'Загрузить фото', 'primary');
+      upload.type = 'button';
+      upload.addEventListener('click', () => input.click());
+      input.addEventListener('change', async () => {
+        if (!input.files[0] || !canUpload() || selection?.slot !== slot) return;
+        upload.disabled = true;
+        info.textContent = 'Отправляем фото…';
+        try {
+          const file = await preparePointPhoto(input.files[0]);
+          if (!canUpload()) return;
+          const response = await apiRequest(framePath(slot) + '/photo', {
+            method: 'PUT', headers: { 'Content-Type': file.type, 'X-Photo-Filename': encodeURIComponent(file.name) }, body: file,
+          });
+          const { photo } = await response.json();
+          Object.assign(slot, { status: photo.status, photoId: photo.id, comment: '' });
+          if (selection?.slot === slot) showPhoto(slot);
+        } catch (error) { info.textContent = 'Фото не отправлено: ' + error.message; }
+        finally { upload.disabled = false; input.value = ''; }
+      });
+      photoPanel.append(input, upload);
+    }
     const format = new Intl.NumberFormat('ru-RU', { maximumFractionDigits: 8 });
     const slotButtons = point.slots.map((slot, index) => {
       const button = node('button', 'Фотослот ' + (index + 1) + ' · ' + format.format(slot.azimuth) + '°');
@@ -489,6 +544,7 @@ function initSidewalkTestLayer({ container, map, card, district, apiRequest, cen
           other.classList.toggle('primary', other === button);
         }
         status.textContent = 'Кадр ' + slot.id + ' · направление ' + format.format(slot.azimuth) + '°';
+        showPhoto(slot);
       });
       return button;
     });
@@ -515,13 +571,14 @@ function initSidewalkTestLayer({ container, map, card, district, apiRequest, cen
         point.noSidewalk = saved.noSidewalk === true;
         paintMark(live);
         updateMark();
+        if (selection?.point === point && selection.slot) showPhoto(selection.slot);
         renderList();
       } catch (error) { markStatus.textContent = 'Пометка не сохранена: ' + error.message; }
       finally { mark.disabled = false; }
     });
     const markActions = node('div', '', 'pin-actions');
     markActions.append(mark);
-    content.append(buttons, status, markActions, markStatus);
+    content.append(buttons, status, photoPanel, markActions, markStatus);
     selection = { point, content, arrow: null, slot: null, refresh() {
       point.slots.forEach((slot, index) => {
         slotButtons[index].textContent = 'Фотослот ' + (index + 1) + ' · ' + format.format(slot.azimuth) + '°';
@@ -546,7 +603,7 @@ function initSidewalkTestLayer({ container, map, card, district, apiRequest, cen
         if (!editor?.takeSuppressedClick(key)) openPoint(point);
       });
       const marker = new window.ymaps3.YMapMarker({ coordinates: point.coordinates, zIndex: 40,
-        ...(editor ? editor.dragHandlers(key) : {}) }, element);
+        ...(editor && canEdit() ? editor.dragHandlers(key) : {}) }, element);
       map.addChild(marker);
       const view = { marker, element, point };
       next.set(point.id, view);
@@ -562,7 +619,7 @@ function initSidewalkTestLayer({ container, map, card, district, apiRequest, cen
       const row = node('button', '', 'shoot-item');
       row.type = 'button';
       row.style.cssText = 'width:100%;text-align:left;background:white';
-      row.append(node('b', point.id), node('span', point.street));
+      row.append(node('b', point.id), node('span', point.street + (point.district !== district ? ' · ' + point.district : '')));
       row.addEventListener('click', () => openPoint(point));
       return row;
     };
@@ -593,9 +650,9 @@ function initSidewalkTestLayer({ container, map, card, district, apiRequest, cen
     if (!checkbox.checked || !allowed()) return;
     const controller = new AbortController();
     request = controller;
-    hint.textContent = 'Загружаем тестовые точки…';
+    hint.textContent = 'Загружаем точки ОДХ…';
     try {
-      const response = await apiRequest('/object-photo-points/sidewalk-test?district=' + encodeURIComponent(district), { signal: controller.signal });
+      const response = await apiRequest(base + (canEdit() ? '?district=' + encodeURIComponent(district) : '/district'), { signal: controller.signal });
       const payload = await response.json();
       if (request !== controller || !allowed() || !checkbox.checked) return;
       points = payload.points;
@@ -614,7 +671,7 @@ function initSidewalkTestLayer({ container, map, card, district, apiRequest, cen
       }
     } catch (error) {
       if (request !== controller) return;
-      hint.textContent = 'Тестовый слой не загружен: ' + error.message;
+      hint.textContent = 'Слой ОДХ не загружен: ' + error.message;
       checkbox.checked = false;
       label.classList.add('off');
     } finally {
@@ -637,7 +694,7 @@ function initSidewalkTestLayer({ container, map, card, district, apiRequest, cen
         label.classList.add('off');
         points = [];
         count.textContent = '—';
-        hint.textContent = 'Только префектура. Выберите точку и фотослот, чтобы увидеть направление.';
+        hint.textContent = 'Выберите точку и фотослот, чтобы увидеть направление.';
       }
     },
   };

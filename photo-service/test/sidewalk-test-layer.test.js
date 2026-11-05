@@ -74,7 +74,7 @@ test('АвД получает только свои точки из разных
   const dir = await mkdtemp(join(tmpdir(), 'sidewalk-avd-'));
   const catalogPath = join(dir, 'catalog.json');
   const second = { ...point, id: 'AVD-P02', district: 'Коптево', slots: [{ id: 'AVD-P02-F01', azimuth: 0 }] };
-  const other = { ...point, id: 'DISTRICT-P01', balance: 'Аэропорт', slots: [{ id: 'DISTRICT-P01-F01', azimuth: 90 }] };
+  const other = { ...point, id: 'DISTRICT-P01', district: 'Коптево', balance: 'Аэропорт', slots: [{ id: 'DISTRICT-P01-F01', azimuth: 90 }] };
   await writeFile(catalogPath, JSON.stringify({ version: 1, points: [point, second, other] }));
   const dbCalls = [];
   const pool = { async query(sql, args) { dbCalls.push({ sql, args }); return { rows: [] }; } };
@@ -127,6 +127,17 @@ test('АвД получает только свои точки из разных
     assert.deepEqual((await (await request('/no-sidewalk', 'pref')).json()).points.map(p => p.id), [point.id]);
     assert.equal((await patch(point.id, 'avd', { noSidewalk: false })).status, 200);
     assert.equal(dbCalls.length, 1, 'запрещённые обращения к чужим слотам не читают БД');
+    assert.equal((await request('/district')).status, 401);
+    assert.equal((await request('/district', 'avd')).status, 403);
+    const own = await request('/district?district=Коптево', 'district');
+    assert.equal(own.status, 200);
+    assert.deepEqual((await own.json()).points.map(p => [p.id, p.district, p.slots[0].status]), [[other.id, 'Коптево', 'empty']]);
+    const jpg = { method: 'PUT', headers: { 'Content-Type': 'image/jpeg' }, body: Buffer.from([255, 216, 255, 217]) };
+    assert.equal((await request('/district/frames/' + point.slots[0].id + '/photo', 'district', jpg)).status, 404);
+    assert.equal((await request('/district/queue', 'district')).status, 403);
+    assert.equal((await patch(other.id, 'district', { noSidewalk: true })).status, 200);
+    assert.equal((await request('/district/frames/' + other.slots[0].id + '/photo', 'district', jpg)).status, 409);
+    assert.equal((await patch(other.id, 'district', { noSidewalk: false })).status, 200);
   } finally {
     await new Promise(resolve => server.close(resolve));
     await rm(dir, { recursive: true, force: true });

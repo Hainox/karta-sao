@@ -102,11 +102,12 @@
       <div class="modes" role="tablist" aria-label="Оцифровка">
         <button class="mode active" type="button" role="tab" data-mode="entrances">Въездные группы</button>
         <button class="mode" type="button" role="tab" data-mode="playgrounds">ДП и СП</button>
-        <button class="mode" type="button" role="tab" data-mode="sidewalks">Тротуары</button>
-        <button class="mode" type="button" role="tab" data-mode="avd-sidewalks">Тротуары 2.0 · АвД САО</button>
+        <button class="mode" type="button" role="tab" data-mode="sidewalks">Тротуары Дворы</button>
+        <button class="mode" type="button" role="tab" data-mode="odh-sidewalks">Тротуары ОДХ · районы</button>
+        <button class="mode" type="button" role="tab" data-mode="avd-sidewalks">Тротуары ОДХ · АвД САО</button>
       </div>
       <details class="panel" id="noSidewalkGroup" hidden>
-        <summary>Тротуары 2.0 · на проверку: нет тротуара</summary>
+        <summary>Тротуары ОДХ · на проверку: нет тротуара</summary>
         <p class="status" id="noSidewalkStatus" role="status"></p>
         <div class="objects" id="noSidewalkList"></div>
         <button class="secondary" id="refreshNoSidewalk" type="button">Обновить список</button>
@@ -181,10 +182,16 @@
       photo: (frame, photo) => avdBase + avdFramePhoto(frame, photo),
       review: (photo) => avdFramePhoto(photo.point_id, photo.id) + '/review',
       noun: 'кадров', listNoun: 'Кадров', open: 'Открыть кадр →',
-      title: (row) => 'Тротуары 2.0 · ' + row.label, snapshot: 'Кадр АвД САО ',
+      title: (row) => 'Тротуары ОДХ · ' + row.label, snapshot: 'Кадр АвД САО ',
       describe: (row) => 'направление ' + Number(row.heading).toLocaleString('ru-RU') + '°',
       mapLink: (row) => DISTRICT_SLUGS[row.district] + '.html?sidewalkTest=' + encodeURIComponent(row.source_point_id),
     };
+    const odhBase = '/api/object-photo-points/sidewalk-test/district';
+    MODES['odh-sidewalks'] = {
+      ...MODES['avd-sidewalks'], base: odhBase, snapshot: 'Кадр тротуара ОДХ ',
+      photo: (frame, photo) => odhBase + avdFramePhoto(frame, photo),
+    };
+    const showsNoSidewalk = () => ['sidewalks', 'odh-sidewalks', 'avd-sidewalks'].includes(state.mode);
     const KIND_NAMES = { dp: 'Детская площадка', sp: 'Спортивная площадка' };
     const mode = () => MODES[state.mode];
     const PAGE = 24;
@@ -224,13 +231,13 @@
       const run = ++noSidewalkGeneration;
       const list = el('noSidewalkList');
       list.replaceChildren();
-      if (state.mode !== 'sidewalks' || api.user()?.role !== 'prefecture_admin') return;
+      if (!showsNoSidewalk() || api.user()?.role !== 'prefecture_admin') return;
       const status = el('noSidewalkStatus');
       status.textContent = 'Загружаем помеченные точки…';
       try {
         const response = await api.request('/api/object-photo-points/sidewalk-test/no-sidewalk');
         const { points } = await response.json();
-        if (run !== noSidewalkGeneration || state.mode !== 'sidewalks' || api.user()?.role !== 'prefecture_admin') return;
+        if (run !== noSidewalkGeneration || !showsNoSidewalk() || api.user()?.role !== 'prefecture_admin') return;
         status.textContent = points.length ? 'Помечено точек: ' + points.length.toLocaleString('ru-RU') : 'Помеченных точек нет.';
         list.replaceChildren(...points.map(point => {
           const row = make('div', 'row');
@@ -244,7 +251,7 @@
           return row;
         }));
       } catch (error) {
-        if (run === noSidewalkGeneration && state.mode === 'sidewalks' && api.user()?.role === 'prefecture_admin') {
+        if (run === noSidewalkGeneration && showsNoSidewalk() && api.user()?.role === 'prefecture_admin') {
           status.textContent = 'Не удалось загрузить помеченные точки: ' + error.message;
         }
       }
@@ -439,7 +446,7 @@
       const pendingPhoto = kind === 'pending';
       setStatus('objectStatus', pendingPhoto ? 'Снимок ждёт решения: принять или вернуть на доработку с комментарием.' : 'Снимок на доработке: ждём новую фотографию.');
       el('acceptObject').hidden = !pendingPhoto;
-      el('acceptObject').textContent = state.mode === 'avd-sidewalks' ? 'Принять кадр' : 'Принять объект';
+      el('acceptObject').textContent = ['avd-sidewalks', 'odh-sidewalks'].includes(state.mode) ? 'Принять кадр' : 'Принять объект';
       el('acceptObject').onclick = pendingPhoto ? () => reviewPhotos([{ id: row.photo_id, point_id: row.point_id }], 'accepted', '') : null;
       el('nextObject').hidden = state.tab !== 'pending' || pendingPhoto;
       lockReview(state.busy);
@@ -568,8 +575,8 @@
       });
       el('kindFilterBox').hidden = state.mode !== 'playgrounds';
       el('exportReport').hidden = !mode().reportFile;
-      el('noSidewalkGroup').hidden = state.mode !== 'sidewalks';
-      if (state.mode !== 'sidewalks') {
+      el('noSidewalkGroup').hidden = !showsNoSidewalk();
+      if (!showsNoSidewalk()) {
         noSidewalkGeneration++;
         el('noSidewalkGroup').open = false;
         el('noSidewalkList').replaceChildren();

@@ -4,7 +4,7 @@ import { dirname, join } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { DISTRICTS, isPointWithinBoundary } from './validation.js';
 import { mediaRoot } from '../storage.js';
-import { createAvdSidewalkPhotosRouter, isAvdSidewalkEditor, isAvdSidewalkPoint } from './avd-sidewalk-photos.js';
+import { createAvdSidewalkPhotosRouter, districtOwnsSidewalk, isDistrictSidewalkEditor, isAvdSidewalkEditor, isAvdSidewalkPoint } from './avd-sidewalk-photos.js';
 
 const DEFAULT_CATALOG = new URL('../../assets/sidewalk-test-points.json', import.meta.url);
 
@@ -15,6 +15,8 @@ function indexCatalog({ version, points }) {
   const slotIds = new Set();
   const avdPoints = [];
   const avdFrames = new Map();
+  const districtPoints = [];
+  const districtFrames = new Map();
   for (const point of points) {
     const { id, district, coordinates, slots } = point;
     if (typeof id !== 'string' || !id || byId.has(id) || !DISTRICTS.has(district)
@@ -23,17 +25,17 @@ function indexCatalog({ version, points }) {
         || !Array.isArray(slots) || ![1, 2].includes(slots.length)) throw new Error('Некорректная тестовая точка.');
     byId.set(id, point);
     const avd = isAvdSidewalkPoint(point);
-    if (avd) avdPoints.push(point);
+    (avd ? avdPoints : districtPoints).push(point);
     for (const { id: slotId, azimuth } of slots) {
       if (typeof slotId !== 'string' || !slotId || slotIds.has(slotId)
           || !Number.isFinite(azimuth) || azimuth < 0 || azimuth >= 360) throw new Error('Некорректный фотослот.');
       slotIds.add(slotId);
-      if (avd) avdFrames.set(slotId, point);
+      (avd ? avdFrames : districtFrames).set(slotId, point);
     }
     if (!districts.has(district)) districts.set(district, []);
     districts.get(district).push(point);
   }
-  return { districts, byId, avdPoints, avdFrames };
+  return { districts, byId, avdPoints, avdFrames, districtPoints, districtFrames };
 }
 
 const mergePoint = (point, edit) => ({
@@ -87,7 +89,9 @@ export function createSidewalkTestLayerRouter({ authenticate, boundary, pool, ca
     } catch (error) { next(error); }
   });
 
-  router.use('/avd', createAvdSidewalkPhotosRouter({ authenticate, pool, loadCatalog, loadEdits, mergePoint }));
+  const photos = { authenticate, pool, loadCatalog, loadEdits, mergePoint };
+  router.use('/avd', createAvdSidewalkPhotosRouter(photos));
+  router.use('/district', createAvdSidewalkPhotosRouter({ ...photos, scope: 'district' }));
 
   router.patch('/:pointId', authenticate, async (req, res, next) => {
     const { coordinates, slotId, azimuth, noSidewalk } = req.body || {};
@@ -96,8 +100,9 @@ export function createSidewalkTestLayerRouter({ authenticate, boundary, pool, ca
     const rotate = keys.length === 2 && keys.includes('slotId') && keys.includes('azimuth');
     const mark = keys.length === 1 && keys[0] === 'noSidewalk' && typeof noSidewalk === 'boolean';
     const avd = isAvdSidewalkEditor(req.user);
+    const district = isDistrictSidewalkEditor(req.user);
     res.set('Cache-Control', 'private, no-store');
-    if (req.user.role !== 'prefecture_admin' && !(avd && mark)) {
+    if (req.user.role !== 'prefecture_admin' && !((avd || district) && mark)) {
       return res.status(403).json({ error: 'Геометрию и направления меняет только префектура.' });
     }
     if (move) {
@@ -112,6 +117,9 @@ export function createSidewalkTestLayerRouter({ authenticate, boundary, pool, ca
     try {
       const { byId } = await loadCatalog();
       const point = byId.get(req.params.pointId);
+      if (district && point && !districtOwnsSidewalk(req.user, point)) {
+        return res.status(403).json({ error: 'Точка закреплена за другим исполнителем.' });
+      }
       if (!point || (avd && !isAvdSidewalkPoint(point)) || (rotate && !point.slots.some(slot => slot.id === slotId))) {
         return res.status(404).json({ error: 'Точка или её фотослот не найдены.' });
       }
