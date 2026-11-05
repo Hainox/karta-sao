@@ -4,6 +4,7 @@
 // исправить. Кабинет ведёт по точкам бесконечный поток: проверил — открыт
 // следующий, пока очередь не кончится.
 import express from 'express';
+import { acceptedPhotoBytes, mountAcceptedPhotoExport } from './accepted-photo-export.js';
 import { validateReview } from './object-slots.js';
 import { buildDigitizationReport, summarizeDigitization } from '../digitization-report.js';
 
@@ -98,6 +99,11 @@ export function mountDistrictPointPhotoRoutes(router, { repository }) {
     } catch (error) { next(error); }
   });
 
+  mountAcceptedPhotoExport(router, {
+    path: '/district-photos/accepted.xlsx', prefecture, category: 'Въездные группы',
+    loadRows: () => repository.listDistrictPointPhotoQueue(), loadPhoto: row => repository.getAcceptedDistrictPhotoBytes(row),
+  });
+
   router.get('/district-photos/report.xlsx', prefecture, async (req, res, next) => {
     try {
       const generatedAt = new Date();
@@ -126,16 +132,17 @@ export function mountDistrictPointPhotoRoutes(router, { repository }) {
 
 export function createDistrictPointPhotoRepository(pool, write) {
   return {
+    getAcceptedDistrictPhotoBytes: row => acceptedPhotoBytes(pool, row, 'object_photo_point_photos'),
     async listDistrictPointPhotoQueue() {
       const { rows } = await pool.query(`
         SELECT p.id AS point_id, p.label, p.district, p.heading, p.longitude, p.latitude,
-               f.id AS photo_id, f.status AS photo_status, f.uploaded_at, f.photo_filename,
+               f.id AS photo_id, f.status AS photo_status, f.uploaded_at, f.photo_filename, f.reviewed_at,
                r.id AS rejected_photo_id, r.review_comment AS rejected_comment,
                r.reviewed_at AS rejected_at, r.uploaded_at AS rejected_uploaded_at,
                r.photo_filename AS rejected_photo_filename
         FROM object_photo_points p
         LEFT JOIN LATERAL (
-          SELECT t.id, t.status, t.uploaded_at, t.photo_filename
+          SELECT t.id, t.status, t.uploaded_at, t.photo_filename, t.reviewed_at
           FROM object_photo_point_photos t
           WHERE t.point_id = p.id AND t.dataset_id = 'sao_district_photo_points'
             AND t.status IN ('pending', 'accepted')

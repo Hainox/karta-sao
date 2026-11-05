@@ -1,3 +1,4 @@
+import { acceptedPhotoBytes, mountAcceptedPhotoExport } from './accepted-photo-export.js';
 import crypto from 'node:crypto';
 import express from 'express';
 import { safePhotoFilename, validatePhotoUpload } from './photo-markers.js';
@@ -13,13 +14,13 @@ const pointQuery=`SELECT p.id,p.source_key,p.source_id,p.source_row,p.district,p
 
 // Кабинет приёмки районных карт, режим «ДП и СП»: те же поля, что у очереди точек съёмки,
 // чтобы кабинет вёл обе оцифровки одним кодом. Подпись точки — адрес площадки.
-const queueQuery=`SELECT p.id AS point_id,COALESCE(NULLIF(p.address,''),'ID '||p.source_id) AS label,p.district,p.kind,
+const queueQuery=`SELECT p.id AS point_id,COALESCE(NULLIF(p.address,''),'ID '||p.source_id) AS label,p.district,p.kind,p.source_id AS object_id,
  p.longitude,p.latitude,NULL::double precision AS heading,
- f.id AS photo_id,f.status AS photo_status,f.uploaded_at,f.photo_filename,
+ f.id AS photo_id,f.status AS photo_status,f.uploaded_at,f.photo_filename,f.reviewed_at,
  r.id AS rejected_photo_id,r.review_comment AS rejected_comment,r.reviewed_at AS rejected_at,
  r.uploaded_at AS rejected_uploaded_at,r.photo_filename AS rejected_photo_filename
  FROM playground_photo_points p JOIN playground_photo_slots s ON s.point_id=p.id
- LEFT JOIN LATERAL (SELECT t.id,t.status,t.uploaded_at,t.photo_filename FROM playground_photo_slot_photos t
+ LEFT JOIN LATERAL (SELECT t.id,t.status,t.uploaded_at,t.photo_filename,t.reviewed_at FROM playground_photo_slot_photos t
   WHERE t.point_id=p.id AND t.status IN ('pending','accepted') ORDER BY t.uploaded_at DESC LIMIT 1) f ON true
  LEFT JOIN LATERAL (SELECT t.id,t.review_comment,t.reviewed_at,t.uploaded_at,t.photo_filename FROM playground_photo_slot_photos t
   WHERE t.point_id=p.id AND t.status='rejected' ORDER BY t.reviewed_at DESC NULLS LAST LIMIT 1) r ON true
@@ -28,9 +29,9 @@ export const PLAYGROUND_KINDS=Object.freeze({dp:'Детские площадки
 
 /** Очередь кабинета по площадкам: как у точек съёмки, плюс вид площадки. */
 export function playgroundQueueFromRows(rows){
- const kinds=new Map(rows.map(row=>[row.point_id,row.kind]));
+ const metadata=new Map(rows.map(row=>[row.point_id,{kind:row.kind,object_id:row.object_id}]));
  const queue=districtQueueFromRows(rows);
- const withKind=row=>({...row,kind:kinds.get(row.point_id)});
+ const withKind=row=>({...row,...metadata.get(row.point_id)});
  // Отклонённый снимок площадки сервер не отдаёт (GET /:id/photo — только активный).
  return {counts:queue.counts,pending:queue.pending.map(withKind),rework:queue.rework.map(row=>({...withKind(row),photo_id:null}))};
 }
@@ -51,6 +52,11 @@ export function createPlaygroundPhotoRouter({pool,authenticate}) {
  router.get('/queue',prefecture,async(req,res,next)=>{try{
   res.set('Cache-Control','no-store').json(playgroundQueueFromRows((await pool.query(queueQuery)).rows));
  }catch(e){next(e)}});
+  mountAcceptedPhotoExport(router, {
+    prefecture, category: 'Площадки ДП/СП', allowKind: true,
+    loadRows: async () => (await pool.query(queueQuery)).rows,
+    loadPhoto: row => acceptedPhotoBytes(pool, row, 'playground_photo_slot_photos'),
+  });
  router.get('/report.xlsx',prefecture,async(req,res,next)=>{try{
   const generatedAt=new Date();
   const summary=summarizeDigitization({points:slotPointsForReport((await pool.query(queueQuery)).rows),kinds:PLAYGROUND_KINDS,generatedAt});

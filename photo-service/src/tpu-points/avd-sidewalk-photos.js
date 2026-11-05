@@ -1,3 +1,4 @@
+import { acceptedPhotoBytes, mountAcceptedPhotoExport } from './accepted-photo-export.js';
 import express from 'express';
 import { randomUUID } from 'node:crypto';
 import { DISTRICTS } from './validation.js';
@@ -77,23 +78,32 @@ export function createAvdSidewalkPhotosRouter({ authenticate, pool, loadCatalog,
     } catch (error) { next(error); }
   });
 
+  async function loadQueueRows(req) {
+    const [catalog, edits, photos] = await Promise.all([loadCatalog(), loadEdits(), currentPhotos()]);
+    const rows = pointsFor(catalog, req).flatMap(source => {
+      const point = mergePoint(source, edits.get(source.id));
+      return point.slots.flatMap((slot, index) => {
+        const photo = photos.get(slot.id);
+        if (point.noSidewalk && !photo) return [];
+        const active = photo && photo.status !== 'rejected' ? photo : null;
+        const rejected = photo?.status === 'rejected' ? photo : null;
+        return [{ point_id: slot.id, label: point.street + ' · ' + point.id + ' · кадр ' + (index + 1),
+          district: point.district, object_id: point.id, heading: slot.azimuth, longitude: point.coordinates[0], latitude: point.coordinates[1],
+          photo_id: active?.id, photo_status: active?.status, uploaded_at: active?.uploaded_at, photo_filename: active?.photo_filename, reviewed_at: active?.reviewed_at,
+          rejected_photo_id: rejected?.id, rejected_comment: rejected?.review_comment, rejected_at: rejected?.reviewed_at,
+          rejected_uploaded_at: rejected?.uploaded_at, rejected_photo_filename: rejected?.photo_filename }];
+      });
+    });
+    return { catalog, rows };
+  }
+  mountAcceptedPhotoExport(router, {
+    prefecture: prefectureOnly, category: isDistrict ? 'Тротуары ОДХ' : 'Тротуары ОДХ · АвД САО',
+    loadRows: async req => (await loadQueueRows(req)).rows,
+    loadPhoto: row => acceptedPhotoBytes(pool, row, 'avd_sidewalk_test_photos', 'frame_id'),
+  });
   router.get('/queue', prefectureOnly, async (req, res, next) => {
     try {
-      const [catalog, edits, photos] = await Promise.all([loadCatalog(), loadEdits(), currentPhotos()]);
-      const rows = pointsFor(catalog, req).flatMap(source => {
-        const point = mergePoint(source, edits.get(source.id));
-        return point.slots.flatMap((slot, index) => {
-          const photo = photos.get(slot.id);
-          if (point.noSidewalk && !photo) return [];
-          const active = photo && photo.status !== 'rejected' ? photo : null;
-          const rejected = photo?.status === 'rejected' ? photo : null;
-          return [{ point_id: slot.id, label: point.street + ' · ' + point.id + ' · кадр ' + (index + 1),
-            district: point.district, heading: slot.azimuth, longitude: point.coordinates[0], latitude: point.coordinates[1],
-            photo_id: active?.id, photo_status: active?.status, uploaded_at: active?.uploaded_at, photo_filename: active?.photo_filename,
-            rejected_photo_id: rejected?.id, rejected_comment: rejected?.review_comment, rejected_at: rejected?.reviewed_at,
-            rejected_uploaded_at: rejected?.uploaded_at, rejected_photo_filename: rejected?.photo_filename }];
-        });
-      });
+      const { catalog, rows } = await loadQueueRows(req);
       const queue = districtQueueFromRows(rows);
       const withPoint = row => ({ ...row, source_point_id: framesFor(catalog).get(row.point_id).id });
       res.json({ ...queue, pending: queue.pending.map(withPoint), rework: queue.rework.map(withPoint) });

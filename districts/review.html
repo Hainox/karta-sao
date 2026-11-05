@@ -40,9 +40,24 @@
     .tab{padding:8px 14px;border:1px solid var(--line);border-radius:999px;background:#fff;font-weight:700;color:var(--muted)}
     .tab.active{background:var(--ink);border-color:var(--ink);color:#fff}
     .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+    .review-detail{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;align-items:start}
+    .review-detail .grid{grid-template-columns:minmax(0,1fr)}
+    .review-map-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+    .review-map-head strong{margin-right:auto}
+    .review-bearing{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+    .review-bearing .arrow{display:inline-block;color:#1662be;font-size:22px;line-height:1}
+    .review-map-canvas{width:100%;height:320px;background:#eef2ee;border-radius:9px;overflow:hidden}
+    @media(max-width:760px){.review-detail{grid-template-columns:minmax(0,1fr)}.review-map-canvas{height:260px}}
     .card{display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}
     .card .photo{display:block;aspect-ratio:4/3;background:#e9eee9;color:var(--muted);font-size:12px;text-align:center}
     .photo-panel{margin:0}
+    .reference{padding:8px 12px 12px;border-top:1px solid var(--line);font-size:13px}
+    .reference summary{cursor:pointer;font-weight:700}
+    .reference input{max-width:100%}
+    .compare-photos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:start}
+    .compare-photos figure{margin:0;min-width:0}
+    .compare-photos figcaption{padding:5px 8px;background:#edf3ef;font-size:12px}
+    .compare-photos .reference-photo{width:100%;aspect-ratio:4/3;object-fit:contain;background:#e9eee9;display:block}
     .card .photo,.photo-stage{position:relative;overflow:hidden}
     .photo img,.photo-stage img{position:absolute;left:50%;top:50%;object-fit:contain;display:block;transform:translate(-50%,-50%) rotate(var(--photo-angle,0deg))}
     .photo-tools{display:flex;gap:6px;align-items:center;flex-wrap:wrap;padding:8px}
@@ -120,6 +135,9 @@
           <button class="tab active" type="button" data-tab="pending" role="tab">На проверке</button>
           <button class="tab" type="button" data-tab="rework" role="tab">На доработке</button>
         </div>
+        <label>Фото загружены с<input id="photoFrom" type="date"></label>
+        <label>По<input id="photoTo" type="date"></label>
+        <button class="secondary" id="exportAccepted" type="button">Выгрузить принятые фото</button>
         <button class="secondary" id="exportReport" type="button">Excel: свод по фото</button>
       </div>
       <p class="status" id="listStatus" role="status"></p>
@@ -135,7 +153,19 @@
       <p class="status" id="acceptObjectHint"></p>
       <button class="secondary" id="nextObject" type="button" hidden>Следующая точка →</button>
       <button class="secondary" id="retryObject" type="button" hidden>Повторить загрузку точки</button>
-      <div class="grid" id="slotGrid"></div>
+      <div class="review-detail">
+        <div class="grid" id="slotGrid"></div>
+        <aside class="panel" id="reviewMap" aria-label="Место и направление съёмки" hidden>
+          <div class="review-map-head"><strong>Место съёмки</strong>
+            <button class="secondary" data-map="open" type="button" hidden>Открыть панораму</button>
+            <button class="secondary" data-map="back" type="button" hidden>К мини-карте</button>
+          </div>
+          <div class="review-bearing"><span class="arrow" data-map="arrow" aria-hidden="true">↑</span><span data-map="bearing"></span></div>
+          <div class="review-map-canvas" data-map="map" aria-label="Мини-карта"></div>
+          <div class="review-map-canvas" data-map="pano" aria-label="Панорама Яндекса" hidden></div>
+          <p class="status" data-map="detail"></p><p class="status" data-map="status" role="status"></p>
+        </aside>
+      </div>
     </section>
   </main>
   <dialog id="photoViewer" class="photo-viewer" aria-labelledby="photoViewerTitle">
@@ -148,6 +178,16 @@
   (() => {
     'use strict';
     const api = window.TpuPhotoApi || window.ODHApi;
+    let reviewMap, mapGeneration = 0;
+    function clearReviewMap() { mapGeneration++; reviewMap?.destroy(); reviewMap = null; }
+    async function openReviewMap(row) {
+      const generation = mapGeneration;
+      try {
+        const { mountReviewMap } = await import('./review-map.mjs?v=20261105');
+        if (generation !== mapGeneration) return null;
+        return (reviewMap = mountReviewMap(document.getElementById('reviewMap'), row));
+      } catch { return null; }
+    }
     // Оцифровки одного кабинета: у каждой свой адрес очереди, снимка, решения и свода.
     const MODES = {
       entrances: {
@@ -273,7 +313,7 @@
     function fillDistricts() {
       const select = el('districtFilter');
       const current = select.value;
-      const groups = new Set([...state.queue.pending, ...state.queue.rework].map((row) => row.district));
+      const groups = new Set([...Object.keys(DISTRICT_SLUGS), ...state.queue.pending.map(row => row.district), ...state.queue.rework.map(row => row.district)]);
       select.replaceChildren(new Option('Все районы САО', ''));
       for (const group of [...groups].sort((a, b) => a.localeCompare(b, 'ru'))) select.append(new Option(group, group));
       if (current && !groups.has(current)) select.append(new Option(current, current));
@@ -369,12 +409,13 @@
       fitPhoto(view);
     }
 
-    function photoBox(pointId, photo, label) {
+    function photoBox(pointId, photo, label, capture) {
       const generation = state.photoGeneration;
       const panel = make('figure', 'photo-panel');
       const box = make('a', 'photo placeholder', 'Загружаем фото…');
       panel.append(box);
       api.request(photoPath(pointId, photo.id)).then((response) => response.blob()).then((blob) => {
+        capture?.then(map => map?.readPhoto(blob)).catch(() => {});
         if (generation !== state.photoGeneration || !box.isConnected) return;
         const url = URL.createObjectURL(blob); state.urls.push(url);
         const image = make('img'); image.src = url; image.alt = label;
@@ -410,6 +451,7 @@
 
     async function renderPoint() {
       const revision = state.revision;
+      clearReviewMap();
       clearUrls();
       el('acceptObject').hidden = true;
       el('nextObject').hidden = true;
@@ -442,7 +484,7 @@
       el('objectTitle').textContent = mode().title(row);
       el('objectMeta').textContent = `${row.district} · ${mode().describe(row)}${row.longitude != null ? ' · ' + Number(row.latitude).toFixed(6) + ', ' + Number(row.longitude).toFixed(6) : ''}`;
       el('objectMapLink').href = mode().mapLink?.(row) || (DISTRICT_SLUGS[row.district] ? DISTRICT_SLUGS[row.district] + '.html' : 'index.html');
-      grid.replaceChildren(pointCard(row, kind));
+      grid.replaceChildren(pointCard(row, kind, openReviewMap(row)));
       const pendingPhoto = kind === 'pending';
       setStatus('objectStatus', pendingPhoto ? 'Снимок ждёт решения: принять или вернуть на доработку с комментарием.' : 'Снимок на доработке: ждём новую фотографию.');
       el('acceptObject').hidden = !pendingPhoto;
@@ -452,7 +494,42 @@
       lockReview(state.busy);
     }
 
-    function pointCard(row, kind) {
+    function addReferenceComparison(node, original, row) {
+      const details = make('details', 'reference');
+      const hint = make('p', 'meta', 'Выберите снимок той же площадки из «Север ЖКХ». ID площадки: ' + (row.object_id || 'не указан') + '. Файл останется в браузере.');
+      const input = make('input'); input.type = 'file'; input.accept = 'image/jpeg,image/png,image/webp';
+      input.setAttribute('aria-label', 'Снимок площадки из Север ЖКХ');
+      const reset = make('button', 'secondary', 'Убрать снимок'); reset.type = 'button'; reset.hidden = true;
+      const message = make('p', 'meta'); message.setAttribute('role', 'status');
+      const group = make('div'); original.replaceWith(group); group.append(original);
+      const local = make('figure'); local.hidden = true;
+      const title = make('figcaption', '', 'Фото на приёмке'); title.hidden = true; original.prepend(title);
+      const picture = make('img', 'reference-photo'); picture.alt = 'Снимок для сравнения из Север ЖКХ';
+      local.append(make('figcaption', '', 'Север ЖКХ · выбранный снимок'), picture); group.append(local);
+      let referenceUrl;
+      const clear = () => {
+        if (referenceUrl) { URL.revokeObjectURL(referenceUrl); state.urls = state.urls.filter(url => url !== referenceUrl); }
+        referenceUrl = null; picture.removeAttribute('src'); input.value = '';
+        reset.hidden = title.hidden = local.hidden = true; group.classList.remove('compare-photos'); message.textContent = '';
+        state.photoViews.forEach(fitPhoto);
+      };
+      reset.onclick = clear;
+      input.onchange = () => {
+        const file = input.files[0];
+        if (!file) return;
+        clear();
+        if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type) || file.size > 40 * 1024 * 1024) {
+          message.textContent = 'Выберите фото JPEG, PNG или WEBP до 40 МБ.'; return;
+        }
+        referenceUrl = URL.createObjectURL(file); state.urls.push(referenceUrl);
+        picture.src = referenceUrl; reset.hidden = title.hidden = local.hidden = false;
+        group.classList.add('compare-photos'); state.photoViews.forEach(fitPhoto);
+      };
+      picture.onerror = () => { clear(); message.textContent = 'Не удалось открыть выбранное фото.'; };
+      details.append(make('summary', '', 'Сравнить с фото из «Север ЖКХ»'), hint, input, reset, message); node.append(details);
+    }
+
+    function pointCard(row, kind, capture) {
       const node = make('article', 'card' + (kind === 'rework' ? ' rework' : ''));
       const body = make('div', 'body');
       const title = make('h3', '', mode().snapshot);
@@ -460,7 +537,9 @@
       if (kind === 'pending') {
         title.append(make('span', 'pill review', 'На проверке'));
         body.append(make('div', 'meta', 'Загружено ' + when(row.uploaded_at) + (row.photo_filename ? ' · ' + row.photo_filename : '')));
-        node.append(photoBox(row.point_id, { id: row.photo_id }, 'Фото точки ' + row.label), body);
+        const original = photoBox(row.point_id, { id: row.photo_id }, 'Фото точки ' + row.label, capture);
+        node.append(original, body);
+        if (state.mode === 'playgrounds') addReferenceComparison(node, original, row);
         const actions = make('div', 'actions');
         const accept = make('button', 'primary', 'Принять'); accept.type = 'button';
         accept.onclick = () => decide({ id: row.photo_id, point_id: row.point_id }, 'accepted', '');
@@ -479,7 +558,7 @@
         body.append(actions, form);
       } else if (kind === 'rework') {
         title.append(make('span', 'pill rework', 'На доработке'));
-        if (row.photo_id) node.append(photoBox(row.point_id, { id: row.photo_id }, 'Отклонённое фото точки ' + row.label), body);
+        if (row.photo_id) node.append(photoBox(row.point_id, { id: row.photo_id }, 'Отклонённое фото точки ' + row.label, capture), body);
         if (!row.photo_id) node.append(make('div', 'slot-empty-box', 'Отклонённый снимок снят со слота'), body);
         body.append(make('p', 'comment', 'Что исправить: ' + (row.rejected_comment || '—')), make('div', 'meta', 'Отклонено ' + when(row.rejected_at) + '. Ждём новое фото.'));
       }
@@ -499,7 +578,7 @@
     }
 
     function backToList() {
-      state.objectId = null; state.revision++; clearUrls(); state.angles.clear();
+      state.objectId = null; state.revision++; clearReviewMap(); clearUrls(); state.angles.clear();
       el('slotGrid').replaceChildren();
       el('objectView').hidden = true; el('workspace').hidden = false;
     }
@@ -612,6 +691,29 @@
         setStatus('listStatus', 'Свод скачан.');
       } catch (error) {
         setStatus('listStatus', 'Не удалось выгрузить свод: ' + error.message, true);
+      } finally { button.disabled = false; }
+    };
+    el('exportAccepted').onclick = async () => {
+      const button = el('exportAccepted');
+      const params = new URLSearchParams();
+      if (el('districtFilter').value) params.set('district', el('districtFilter').value);
+      if (state.mode === 'playgrounds' && el('kindFilter').value) params.set('kind', el('kindFilter').value);
+      if (el('photoFrom').value) params.set('from', el('photoFrom').value);
+      if (el('photoTo').value) params.set('to', el('photoTo').value);
+      button.disabled = true;
+      setStatus('listStatus', 'Готовим Excel с принятыми фотографиями…');
+      try {
+        const response = await api.request(mode().base + '/accepted.xlsx?' + params);
+        if (response.status === 204) { setStatus('listStatus', 'По выбранным фильтрам принятых фото нет.'); return; }
+        const url = URL.createObjectURL(await response.blob());
+        const link = make('a');
+        link.href = url;
+        link.download = 'Принятые фото — ' + new Date().toISOString().slice(0, 10) + '.xlsx';
+        link.click();
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+        setStatus('listStatus', 'Выгрузка скачана.');
+      } catch (error) {
+        setStatus('listStatus', 'Не удалось выгрузить принятые фото: ' + error.message, true);
       } finally { button.disabled = false; }
     };
     document.querySelectorAll('.tab').forEach((tab) => {

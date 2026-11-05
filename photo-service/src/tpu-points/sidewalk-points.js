@@ -1,3 +1,4 @@
+import { acceptedPhotoBytes, mountAcceptedPhotoExport } from './accepted-photo-export.js';
 // Точки съёмки тротуаров у МКД. Пока префектура согласовывает расстановку,
 // список точек видит свой район; правит только префектура (перенос, направление кадра,
 // удаление). Фото к точке загружает район своей точки или префектура: один
@@ -64,12 +65,12 @@ export function nextSidewalkPointNo(district, taken) {
 
 export const sidewalkQueueQuery = `SELECT p.id AS point_id,
   p.point_no || CASE WHEN COALESCE(p.address, '') = '' THEN '' ELSE ' · ' || p.address END AS label,
-  p.district, p.heading, p.longitude, p.latitude,
-  f.id AS photo_id, f.status AS photo_status, f.uploaded_at, f.photo_filename,
+  p.district, p.heading, p.longitude, p.latitude, p.point_no AS object_id,
+  f.id AS photo_id, f.status AS photo_status, f.uploaded_at, f.photo_filename, f.reviewed_at,
   r.id AS rejected_photo_id, r.review_comment AS rejected_comment, r.reviewed_at AS rejected_at,
   r.uploaded_at AS rejected_uploaded_at, r.photo_filename AS rejected_photo_filename
   FROM sidewalk_photo_points p
-  LEFT JOIN LATERAL (SELECT t.id,t.status,t.uploaded_at,t.photo_filename FROM sidewalk_photo_slot_photos t
+  LEFT JOIN LATERAL (SELECT t.id,t.status,t.uploaded_at,t.photo_filename,t.reviewed_at FROM sidewalk_photo_slot_photos t
     WHERE t.point_id=p.id AND t.status IN ('pending','accepted') ORDER BY t.uploaded_at DESC,t.id DESC LIMIT 1) f ON true
   LEFT JOIN LATERAL (SELECT t.id,t.review_comment,t.reviewed_at,t.uploaded_at,t.photo_filename FROM sidewalk_photo_slot_photos t
     WHERE t.point_id=p.id AND t.status='rejected' ORDER BY t.reviewed_at DESC NULLS LAST,t.id DESC LIMIT 1) r ON true
@@ -112,6 +113,11 @@ export function createSidewalkPointsRouter({ pool, authenticate, boundary }) {
   router.get('/queue', prefecture, async (req, res, next) => {
     try { res.set('Cache-Control', 'private, no-store').json(sidewalkQueueFromRows((await pool.query(sidewalkQueueQuery)).rows)); }
     catch (error) { next(error); }
+  });
+  mountAcceptedPhotoExport(router, {
+    prefecture, category: 'Тротуары Дворы', allowKind: false,
+    loadRows: async () => (await pool.query(sidewalkQueueQuery)).rows,
+    loadPhoto: row => acceptedPhotoBytes(pool, row, 'sidewalk_photo_slot_photos'),
   });
   router.get('/report.xlsx', prefecture, async (req, res, next) => {
     try {
