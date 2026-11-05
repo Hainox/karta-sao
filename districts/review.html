@@ -104,6 +104,12 @@
         <button class="mode" type="button" role="tab" data-mode="playgrounds">ДП и СП</button>
         <button class="mode" type="button" role="tab" data-mode="sidewalks">Тротуары</button>
       </div>
+      <details class="panel" id="noSidewalkGroup" hidden>
+        <summary>Тротуары 2.0 · на проверку: нет тротуара</summary>
+        <p class="status" id="noSidewalkStatus" role="status"></p>
+        <div class="objects" id="noSidewalkList"></div>
+        <button class="secondary" id="refreshNoSidewalk" type="button">Обновить список</button>
+      </details>
       <div class="counts" id="counts"></div>
       <div class="toolbar">
         <label>Район<select id="districtFilter"><option value="">Все районы САО</option></select></label>
@@ -200,6 +206,40 @@
       if (user && !prefecture) el('loginStatus').textContent = 'Эта учётная запись не может принимать фото. Войдите учётной записью префектуры.';
       if (prefecture) load();
     }
+
+    let noSidewalkGeneration = 0;
+    async function loadNoSidewalk() {
+      const run = ++noSidewalkGeneration;
+      const list = el('noSidewalkList');
+      list.replaceChildren();
+      if (state.mode !== 'sidewalks' || api.user()?.role !== 'prefecture_admin') return;
+      const status = el('noSidewalkStatus');
+      status.textContent = 'Загружаем помеченные точки…';
+      try {
+        const response = await api.request('/api/object-photo-points/sidewalk-test/no-sidewalk');
+        const { points } = await response.json();
+        if (run !== noSidewalkGeneration || state.mode !== 'sidewalks' || api.user()?.role !== 'prefecture_admin') return;
+        status.textContent = points.length ? 'Помечено точек: ' + points.length.toLocaleString('ru-RU') : 'Помеченных точек нет.';
+        list.replaceChildren(...points.map(point => {
+          const row = make('div', 'row');
+          row.append(make('span', '', point.district + ' · ' + point.street + ' · ' + point.id + ' · Нет тротуара'));
+          const slug = DISTRICT_SLUGS[point.district];
+          if (slug) {
+            const link = make('a', 'secondary', 'На карте →');
+            link.href = slug + '.html?sidewalkTest=' + encodeURIComponent(point.id);
+            row.append(link);
+          }
+          return row;
+        }));
+      } catch (error) {
+        if (run === noSidewalkGeneration && state.mode === 'sidewalks' && api.user()?.role === 'prefecture_admin') {
+          status.textContent = 'Не удалось загрузить помеченные точки: ' + error.message;
+        }
+      }
+    }
+
+    el('noSidewalkGroup').ontoggle = () => { if (el('noSidewalkGroup').open) loadNoSidewalk(); };
+    el('refreshNoSidewalk').onclick = loadNoSidewalk;
 
     async function load() {
       setStatus('listStatus', 'Загружаем очередь…');
@@ -504,7 +544,7 @@
       try { await api.login(el('loginName').value.trim(), el('loginPassword').value); el('loginPassword').value = ''; el('loginStatus').textContent = ''; showSession(); }
       catch (error) { el('loginStatus').textContent = 'Вход не выполнен: ' + error.message; }
     };
-    el('logout').onclick = () => { api.clearSession(); backToList(); state.queue = null; el('list').replaceChildren(); showSession(); };
+    el('logout').onclick = () => { api.clearSession(); noSidewalkGeneration++; el('noSidewalkGroup').open = false; el('noSidewalkList').replaceChildren(); backToList(); state.queue = null; el('list').replaceChildren(); showSession(); };
     el('districtFilter').onchange = () => { state.shown = PAGE; render(); };
     el('kindFilter').onchange = () => { state.shown = PAGE; render(); };
     function showMode() {
@@ -514,6 +554,12 @@
         button.setAttribute('aria-selected', String(active));
       });
       el('kindFilterBox').hidden = state.mode !== 'playgrounds';
+      el('noSidewalkGroup').hidden = state.mode !== 'sidewalks';
+      if (state.mode !== 'sidewalks') {
+        noSidewalkGeneration++;
+        el('noSidewalkGroup').open = false;
+        el('noSidewalkList').replaceChildren();
+      }
     }
     document.querySelectorAll('.mode').forEach((button) => {
       button.onclick = async () => {

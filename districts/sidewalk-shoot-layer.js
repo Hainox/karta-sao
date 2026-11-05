@@ -353,6 +353,7 @@ function initSidewalkTestLayer({ container, map, card, district, apiRequest, cen
     if (className) element.className = className;
     return element;
   };
+  const keyOf = (point) => 'sidewalk-test:' + point.id;
   const allowed = () => getUser?.()?.role === 'prefecture_admin';
   const layer = node('div');
   layer.hidden = true;
@@ -373,9 +374,12 @@ function initSidewalkTestLayer({ container, map, card, district, apiRequest, cen
   search.placeholder = 'ID точки или улица';
   search.setAttribute('aria-label', 'Поиск тестовой точки тротуара');
   const results = node('div', '', 'shoot-list');
+  const flagged = node('div', '', 'shoot-list');
+  flagged.dataset.noSidewalkGroup = '';
+  const flagTitle = node('h4', 'На проверку: нет тротуара');
   const more = node('button', 'Показать ещё');
   more.type = 'button';
-  list.append(node('summary', 'Список точек · тротуары 2.0'), search, results, more);
+  list.append(node('summary', 'Список точек · тротуары 2.0'), search, results, flagTitle, flagged, more);
   layer.append(label, hint, list);
   container.after(layer);
 
@@ -384,15 +388,71 @@ function initSidewalkTestLayer({ container, map, card, district, apiRequest, cen
   let selection = null;
   let request = null;
   let limit = 80;
+  let linkedPoint = new URLSearchParams(location.search).get('sidewalkTest');
 
   function clearSelection() {
-    selection?.arrow?.remove();
+    if (!selection) return;
+    selection.arrow?.remove();
+    markers.get(selection.point.id)?.marker.update({ draggable: false, zIndex: 40 });
+    if (editor?.isSelected(keyOf(selection.point))) editor.clear();
     selection = null;
   }
   popover.onClose(clearSelection);
   new MutationObserver(() => {
     if (selection && !card.contains(selection.content)) clearSelection();
   }).observe(card, { childList: true });
+
+  function bindEditor(point, slot) {
+    if (!editor || !allowed()) return;
+    const view = markers.get(point.id);
+    const key = keyOf(point);
+    let target;
+    editor.select({
+      key, coordinates: point.coordinates, heading: slot?.azimuth, preciseHeading: true, element: view.element,
+      async save({ coordinates, heading }) {
+        if (!allowed()) throw new Error('Доступ к редактированию закрыт.');
+        try {
+          const change = coordinates ? { coordinates } : { slotId: slot.id, azimuth: heading };
+          const response = await apiRequest('/object-photo-points/sidewalk-test/' + encodeURIComponent(point.id), {
+            method: 'PATCH', body: JSON.stringify(change),
+          });
+          const updated = (await response.json()).point;
+          const live = markers.get(point.id);
+          const item = live?.point || point;
+          item.coordinates = updated.coordinates;
+          for (const frame of item.slots) frame.azimuth = updated.slots.find(value => value.id === frame.id).azimuth;
+          if (coordinates) live?.marker.update({ coordinates: item.coordinates });
+          if (selection?.point.id === point.id) {
+            if (coordinates) popover.setAnchor(item.coordinates);
+            selection.refresh();
+            const active = selection.slot;
+            if (editor.current() !== target && editor.isSelected(key) && (coordinates || active?.id === slot?.id)) {
+              editor.attach(key, live.element, { coordinates: item.coordinates, heading: active?.azimuth });
+            }
+          }
+        } catch (error) {
+          if (coordinates) {
+            const live = markers.get(point.id);
+            live?.marker.update({ coordinates: live.point.coordinates });
+          }
+          throw error;
+        }
+      },
+    });
+    target = editor.current();
+    view.marker.update({ draggable: true, zIndex: 45 });
+  }
+
+  function paintMark(view) {
+    const { element, point } = view;
+    element.dataset.noSidewalk = String(Boolean(point.noSidewalk));
+    const dot = element.querySelector('.shoot-dot');
+    dot.style.background = point.noSidewalk ? '#a83d13' : '#176bb0';
+    dot.style.boxShadow = '0 0 0 2px ' + (point.noSidewalk ? '#6a2b14' : '#103a64');
+    dot.textContent = point.noSidewalk ? '!' : '';
+    element.title = 'Тротуары 2.0 · ' + point.id + ' · ' + point.street + (point.noSidewalk ? ' · Нет тротуара' : '');
+    element.setAttribute('aria-label', element.title);
+  }
 
   function openPoint(point) {
     if (!allowed() || !checkbox.checked) return;
@@ -404,6 +464,7 @@ function initSidewalkTestLayer({ container, map, card, district, apiRequest, cen
     const content = node('section', '', 'pin-section');
     content.append(node('h3', 'Фотослоты · ' + point.slots.length));
     content.append(node('p', 'Задание ' + point.taskId + ' · ' + point.balance, 'pin-note'));
+    if (editor) content.append(node('p', 'Перетащите маркер, чтобы перенести точку. Для поворота выберите фотослот и потяните за ручку стрелки. Правки сохраняются автоматически.', 'pin-note'));
     const status = node('p', 'Выберите фотослот для показа стрелки.', 'pin-note');
     status.setAttribute('role', 'status');
     const buttons = node('div', '', 'pin-actions');
@@ -420,7 +481,9 @@ function initSidewalkTestLayer({ container, map, card, district, apiRequest, cen
         arrow.dataset.slotId = slot.id;
         markers.get(point.id)?.element.append(arrow);
         selection.arrow = arrow;
+        selection.slot = slot;
         popover.setHeading(slot.azimuth);
+        bindEditor(point, slot);
         for (const other of slotButtons) {
           other.setAttribute('aria-pressed', String(other === button));
           other.classList.toggle('primary', other === button);
@@ -430,9 +493,43 @@ function initSidewalkTestLayer({ container, map, card, district, apiRequest, cen
       return button;
     });
     buttons.append(...slotButtons);
-    content.append(buttons, status);
-    selection = { content, arrow: null };
+    const mark = node('button');
+    mark.type = 'button';
+    const markStatus = node('p', '', 'pin-note');
+    markStatus.setAttribute('role', 'status');
+    const updateMark = () => {
+      mark.textContent = point.noSidewalk ? 'Снять пометку «Нет тротуара»' : 'Нет тротуара';
+      markStatus.textContent = point.noSidewalk ? 'Помечено: нет тротуара · на проверку' : '';
+    };
+    updateMark();
+    mark.addEventListener('click', async () => {
+      if (!allowed() || mark.disabled) return;
+      mark.disabled = true;
+      try {
+        const response = await apiRequest('/object-photo-points/sidewalk-test/' + encodeURIComponent(point.id), {
+          method: 'PATCH', body: JSON.stringify({ noSidewalk: !point.noSidewalk }),
+        });
+        const { point: saved } = await response.json();
+        const live = markers.get(point.id);
+        if (live?.point !== point) return;
+        point.noSidewalk = saved.noSidewalk === true;
+        paintMark(live);
+        updateMark();
+        renderList();
+      } catch (error) { markStatus.textContent = 'Пометка не сохранена: ' + error.message; }
+      finally { mark.disabled = false; }
+    });
+    const markActions = node('div', '', 'pin-actions');
+    markActions.append(mark);
+    content.append(buttons, status, markActions, markStatus);
+    selection = { point, content, arrow: null, slot: null, refresh() {
+      point.slots.forEach((slot, index) => {
+        slotButtons[index].textContent = 'Фотослот ' + (index + 1) + ' · ' + format.format(slot.azimuth) + '°';
+      });
+      if (this.slot) status.textContent = 'Кадр ' + this.slot.id + ' · направление ' + format.format(this.slot.azimuth) + '°';
+    } };
     card.replaceChildren(content);
+    bindEditor(point);
   }
 
   function draw() {
@@ -440,15 +537,20 @@ function initSidewalkTestLayer({ container, map, card, district, apiRequest, cen
     for (const point of points) {
       const element = node('button', '', 'shoot-marker');
       element.type = 'button';
-      element.title = 'Тротуары 2.0 · ' + point.id + ' · ' + point.street;
-      element.setAttribute('aria-label', element.title);
       const dot = node('span', '', 'shoot-dot');
-      dot.style.cssText = 'left:-7px;top:-7px;width:14px;height:14px;background:#176bb0;border-color:#fff;box-shadow:0 0 0 2px #103a64';
+      dot.style.cssText = 'left:-8px;top:-8px;width:16px;height:16px;border-color:#fff;color:white;font:bold 11px/12px sans-serif;text-align:center';
       element.append(dot);
-      element.addEventListener('click', (event) => { event.stopPropagation(); openPoint(point); });
-      const marker = new window.ymaps3.YMapMarker({ coordinates: point.coordinates, zIndex: 40 }, element);
+      const key = keyOf(point);
+      element.addEventListener('click', (event) => {
+        event.stopPropagation();
+        if (!editor?.takeSuppressedClick(key)) openPoint(point);
+      });
+      const marker = new window.ymaps3.YMapMarker({ coordinates: point.coordinates, zIndex: 40,
+        ...(editor ? editor.dragHandlers(key) : {}) }, element);
       map.addChild(marker);
-      next.set(point.id, { marker, element });
+      const view = { marker, element, point };
+      next.set(point.id, view);
+      paintMark(view);
     }
     markers = next;
   }
@@ -456,16 +558,21 @@ function initSidewalkTestLayer({ container, map, card, district, apiRequest, cen
   function renderList() {
     const query = search.value.trim().toLocaleLowerCase('ru');
     const matched = points.filter(point => (point.id + ' ' + point.street + ' ' + point.taskId).toLocaleLowerCase('ru').includes(query));
-    results.replaceChildren(...matched.slice(0, limit).map(point => {
+    const makeRow = (point) => {
       const row = node('button', '', 'shoot-item');
       row.type = 'button';
       row.style.cssText = 'width:100%;text-align:left;background:white';
       row.append(node('b', point.id), node('span', point.street));
       row.addEventListener('click', () => openPoint(point));
       return row;
-    }));
-    if (!matched.length) results.textContent = 'Точки не найдены.';
-    more.hidden = matched.length <= limit;
+    };
+    const regular = matched.filter(point => !point.noSidewalk);
+    const review = matched.filter(point => point.noSidewalk);
+    results.replaceChildren(...regular.slice(0, limit).map(makeRow));
+    if (!regular.length) results.textContent = 'Нет обычных точек по запросу.';
+    flagTitle.textContent = 'На проверку: нет тротуара · ' + review.length.toLocaleString('ru-RU');
+    flagged.replaceChildren(...review.slice(0, limit).map(makeRow));
+    more.hidden = Math.max(regular.length, review.length) <= limit;
   }
 
   function stop() {
@@ -477,6 +584,7 @@ function initSidewalkTestLayer({ container, map, card, district, apiRequest, cen
     markers.clear();
     list.hidden = true;
     results.replaceChildren();
+    flagged.replaceChildren();
   }
 
   checkbox.addEventListener('change', async () => {
@@ -499,6 +607,11 @@ function initSidewalkTestLayer({ container, map, card, district, apiRequest, cen
       list.hidden = false;
       renderList();
       draw();
+      if (linkedPoint) {
+        const point = markers.get(linkedPoint)?.point;
+        linkedPoint = null;
+        if (point) openPoint(point);
+      }
     } catch (error) {
       if (request !== controller) return;
       hint.textContent = 'Тестовый слой не загружен: ' + error.message;
@@ -514,6 +627,10 @@ function initSidewalkTestLayer({ container, map, card, district, apiRequest, cen
   return {
     setVisible(visible) {
       layer.hidden = !visible || !allowed();
+      if (!layer.hidden && linkedPoint && !checkbox.checked) {
+        checkbox.checked = true;
+        checkbox.dispatchEvent(new Event('change'));
+      }
       if (layer.hidden) {
         stop();
         checkbox.checked = false;
