@@ -1,0 +1,144 @@
+import express from 'express';
+import { randomUUID } from 'node:crypto';
+import { isAutodorAccount } from '../scope.js';
+import { safePhotoFilename, validatePhotoUpload } from './photo-markers.js';
+import { validateReview } from './object-slots.js';
+import { districtQueueFromRows } from './district-point-photos.js';
+
+const UUID = /^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i;
+const noFrame = (res) => res.status(404).json({ error: 'Фотослот не найден.' });
+export const isAvdSidewalkEditor = (user) => user.role === 'district_editor' && isAutodorAccount(user.district);
+// «Баланс» из последнего Excel. Правило для остановок и ДЭУ здесь не применяется.
+export const isAvdSidewalkPoint = (point) => isAutodorAccount(point.balance);
+const isPrefecture = (req) => req.user.role === 'prefecture_admin';
+
+export function createAvdSidewalkPhotosRouter({ authenticate, pool, loadCatalog, loadEdits, mergePoint }) {
+  const router = express.Router();
+  router.use(authenticate, (req, res, next) => {
+    res.set('Cache-Control', 'private, no-store');
+    if (isPrefecture(req) || isAvdSidewalkEditor(req.user)) return next();
+    res.status(403).json({ error: 'Точки АвД САО доступны только АвД и префектуре.' });
+  });
+  const prefectureOnly = (req, res, next) => isPrefecture(req)
+    ? next() : res.status(403).json({ error: 'Снимки проверяет префектура.' });
+  const avdOnly = (req, res, next) => isAvdSidewalkEditor(req.user)
+    ? next() : res.status(403).json({ error: 'Фотослот заполняет АвД САО.' });
+
+  const findFrame = async (id) => (await loadCatalog()).avdFrames.get(id);
+  const currentPhotos = async () => {
+    const { rows } = await pool.query(`SELECT DISTINCT ON (frame_id)
+      frame_id, id, status, photo_filename, uploaded_at, review_comment, reviewed_at
+      FROM avd_sidewalk_test_photos ORDER BY frame_id, (status <> 'rejected') DESC, uploaded_at DESC, id DESC`);
+    return new Map(rows.map(row => [row.frame_id, row]));
+  };
+  const audit = (client, req, action, pointId, metadata) => client.query(
+    'INSERT INTO audit_log (actor_user_id, action, object_key, metadata) VALUES ($1,$2,$3,$4::jsonb)',
+    [req.user.id, action, 'sidewalk-test:' + pointId, JSON.stringify(metadata)]);
+  async function transaction(operation) {
+    const client = await pool.connect();
+    try {
+      await client.query('BEGIN');
+      const result = await operation(client);
+      await client.query('COMMIT');
+      return result;
+    } catch (error) {
+      await client.query('ROLLBACK');
+      throw error;
+    } finally {
+      client.release();
+    }
+  }
+
+  router.get('/', async (_req, res, next) => {
+    try {
+      const [{ avdPoints }, edits, photos] = await Promise.all([loadCatalog(), loadEdits(), currentPhotos()]);
+      const points = avdPoints.map(source => {
+        const point = mergePoint(source, edits.get(source.id));
+        return { ...point, slots: point.slots.map(slot => {
+          const photo = photos.get(slot.id);
+          return { ...slot, status: photo?.status === 'rejected' ? 'rework' : photo?.status || 'empty',
+            photoId: photo?.id || null, comment: photo?.status === 'rejected' ? photo.review_comment : '' };
+        }) };
+      });
+      res.json({ points });
+    } catch (error) { next(error); }
+  });
+
+  router.get('/queue', prefectureOnly, async (_req, res, next) => {
+    try {
+      const [{ avdPoints, avdFrames }, edits, photos] = await Promise.all([loadCatalog(), loadEdits(), currentPhotos()]);
+      const rows = avdPoints.flatMap(source => {
+        const point = mergePoint(source, edits.get(source.id));
+        return point.slots.flatMap((slot, index) => {
+          const photo = photos.get(slot.id);
+          if (point.noSidewalk && !photo) return [];
+          const active = photo && photo.status !== 'rejected' ? photo : null;
+          const rejected = photo?.status === 'rejected' ? photo : null;
+          return [{ point_id: slot.id, label: point.street + ' · ' + point.id + ' · кадр ' + (index + 1),
+            district: point.district, heading: slot.azimuth, longitude: point.coordinates[0], latitude: point.coordinates[1],
+            photo_id: active?.id, photo_status: active?.status, uploaded_at: active?.uploaded_at, photo_filename: active?.photo_filename,
+            rejected_photo_id: rejected?.id, rejected_comment: rejected?.review_comment, rejected_at: rejected?.reviewed_at,
+            rejected_uploaded_at: rejected?.uploaded_at, rejected_photo_filename: rejected?.photo_filename }];
+        });
+      });
+      const queue = districtQueueFromRows(rows);
+      const withPoint = row => ({ ...row, source_point_id: avdFrames.get(row.point_id).id });
+      res.json({ ...queue, pending: queue.pending.map(withPoint), rework: queue.rework.map(withPoint) });
+    } catch (error) { next(error); }
+  });
+
+  router.get('/frames/:frameId/photos/:photoId', async (req, res, next) => {
+    try {
+      const { frameId, photoId } = req.params;
+      if (!UUID.test(photoId) || !await findFrame(frameId)) return noFrame(res);
+      const { rows } = await pool.query('SELECT photo_bytes, photo_mime_type FROM avd_sidewalk_test_photos WHERE frame_id = $1 AND id = $2', [frameId, photoId]);
+      if (!rows[0]) return res.status(404).json({ error: 'Фото не найдено.' });
+      res.set('X-Content-Type-Options', 'nosniff').type(rows[0].photo_mime_type).send(rows[0].photo_bytes);
+    } catch (error) { next(error); }
+  });
+
+  router.put('/frames/:frameId/photo', avdOnly, express.raw({ type: ['image/jpeg', 'image/png', 'image/webp'], limit: '5mb' }), async (req, res, next) => {
+    try {
+      const { frameId } = req.params;
+      const point = await findFrame(frameId);
+      if (!point) return noFrame(res);
+      if ((await loadEdits()).get(point.id)?.noSidewalk) return res.status(409).json({ error: 'Точка помечена «Нет тротуара».' });
+      const valid = validatePhotoUpload(req.body, req.get('content-type'));
+      if (!valid.valid) return res.status(422).json({ error: valid.error });
+      const photo = await transaction(async client => {
+        const { rows } = await client.query(`INSERT INTO avd_sidewalk_test_photos
+          (id, frame_id, status, photo_bytes, photo_mime_type, photo_filename, photo_size, uploaded_by)
+          VALUES ($1,$2,'pending',$3,$4,$5,$6,$7) RETURNING id, status`,
+        [randomUUID(), frameId, req.body, valid.mimeType, safePhotoFilename(req.get('x-photo-filename')), req.body.length, req.user.id]);
+        await audit(client, req, 'avd_sidewalk_photo_uploaded', point.id, { frameId, photoId: rows[0].id });
+        return rows[0];
+      });
+      res.status(201).json({ photo });
+    } catch (error) {
+      if (error.code === '23505') return res.status(409).json({ error: 'В этом фотослоте уже есть снимок.' });
+      next(error);
+    }
+  });
+
+  router.post('/frames/:frameId/photos/:photoId/review', prefectureOnly, async (req, res, next) => {
+    try {
+      const { frameId, photoId } = req.params;
+      const point = await findFrame(frameId);
+      if (!point || !UUID.test(photoId)) return noFrame(res);
+      const validation = validateReview(req.body);
+      if (!validation.valid) return res.status(422).json({ error: validation.error });
+      const { decision, comment } = validation.value;
+      const photo = await transaction(async client => {
+        const { rows } = await client.query(`UPDATE avd_sidewalk_test_photos
+          SET status = $3, review_comment = $4, reviewed_by = $5, reviewed_at = now()
+          WHERE frame_id = $1 AND id = $2 AND status = 'pending' RETURNING id, status`,
+        [frameId, photoId, decision, comment, req.user.id]);
+        if (rows[0]) await audit(client, req, 'avd_sidewalk_photo_reviewed', point.id, { frameId, photoId, decision });
+        return rows[0];
+      });
+      if (!photo) return res.status(409).json({ error: 'Снимок уже проверен или не относится к этому фотослоту.' });
+      res.json({ photo });
+    } catch (error) { next(error); }
+  });
+  return router;
+}

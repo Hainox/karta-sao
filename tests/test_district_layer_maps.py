@@ -320,3 +320,11 @@ def test_district_pages_use_shared_hud_and_prefecture_summary():
     css = (ROOT / "atlas-hud.css").read_text(encoding="utf-8")
     assert ".hud-btn[hidden]{display:none}" in css
     assert "prefers-reduced-motion" in css
+
+
+def test_avd_has_own_catalog_entry_and_keeps_all_district_links():
+    catalog = (DISTRICTS_PAGES / "index.html").read_text(encoding="utf-8")
+    assert re.search(r'href="avd-sao/"[^>]*>\s*<b>АвД САО</b>', catalog)
+    assert (DISTRICTS_PAGES / "avd-sao" / "index.html").is_file()
+    for slug in SLUGS.values():
+        assert f'href="{slug}.html"' in catalog
