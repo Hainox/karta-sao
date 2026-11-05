@@ -1,5 +1,6 @@
 import express from 'express';
 import { randomUUID } from 'node:crypto';
+import { DISTRICTS } from './validation.js';
 import { isAutodorAccount } from '../scope.js';
 import { safePhotoFilename, validatePhotoUpload } from './photo-markers.js';
 import { validateReview } from './object-slots.js';
@@ -10,21 +11,33 @@ const noFrame = (res) => res.status(404).json({ error: 'Фотослот не н
 export const isAvdSidewalkEditor = (user) => user.role === 'district_editor' && isAutodorAccount(user.district);
 // «Баланс» из последнего Excel. Правило для остановок и ДЭУ здесь не применяется.
 export const isAvdSidewalkPoint = (point) => isAutodorAccount(point.balance);
+const districtOwner = balance => balance === 'ГБУ «Жилищник района Ховрино»' ? 'Ховрино' : balance;
+export const isDistrictSidewalkEditor = user => user.role === 'district_editor' && DISTRICTS.has(user.district);
+export const districtOwnsSidewalk = (user, point) => isDistrictSidewalkEditor(user) && districtOwner(point.balance) === user.district;
 const isPrefecture = (req) => req.user.role === 'prefecture_admin';
 
-export function createAvdSidewalkPhotosRouter({ authenticate, pool, loadCatalog, loadEdits, mergePoint }) {
+export function createAvdSidewalkPhotosRouter({ authenticate, pool, loadCatalog, loadEdits, mergePoint, scope = 'avd' }) {
   const router = express.Router();
+  const isDistrict = scope === 'district';
+  const isEditor = isDistrict ? isDistrictSidewalkEditor : isAvdSidewalkEditor;
+  const pointsFor = (catalog, req) => isDistrict
+    ? catalog.districtPoints.filter(point => isPrefecture(req) || districtOwnsSidewalk(req.user, point))
+    : catalog.avdPoints;
+  const framesFor = catalog => isDistrict ? catalog.districtFrames : catalog.avdFrames;
   router.use(authenticate, (req, res, next) => {
     res.set('Cache-Control', 'private, no-store');
-    if (isPrefecture(req) || isAvdSidewalkEditor(req.user)) return next();
-    res.status(403).json({ error: 'Точки АвД САО доступны только АвД и префектуре.' });
+    if (isPrefecture(req) || isEditor(req.user)) return next();
+    res.status(403).json({ error: 'Нет доступа к этому набору точек.' });
   });
   const prefectureOnly = (req, res, next) => isPrefecture(req)
     ? next() : res.status(403).json({ error: 'Снимки проверяет префектура.' });
-  const avdOnly = (req, res, next) => isAvdSidewalkEditor(req.user)
-    ? next() : res.status(403).json({ error: 'Фотослот заполняет АвД САО.' });
+  const editorOnly = (req, res, next) => isEditor(req.user)
+    ? next() : res.status(403).json({ error: 'Фотослот заполняет ответственный за точку.' });
 
-  const findFrame = async (id) => (await loadCatalog()).avdFrames.get(id);
+  const findFrame = async (id, req) => {
+    const point = framesFor(await loadCatalog()).get(id);
+    return point && (!isDistrict || isPrefecture(req) || districtOwnsSidewalk(req.user, point)) ? point : null;
+  };
   const currentPhotos = async () => {
     const { rows } = await pool.query(`SELECT DISTINCT ON (frame_id)
       frame_id, id, status, photo_filename, uploaded_at, review_comment, reviewed_at
@@ -49,10 +62,10 @@ export function createAvdSidewalkPhotosRouter({ authenticate, pool, loadCatalog,
     }
   }
 
-  router.get('/', async (_req, res, next) => {
+  router.get('/', async (req, res, next) => {
     try {
-      const [{ avdPoints }, edits, photos] = await Promise.all([loadCatalog(), loadEdits(), currentPhotos()]);
-      const points = avdPoints.map(source => {
+      const [catalog, edits, photos] = await Promise.all([loadCatalog(), loadEdits(), currentPhotos()]);
+      const points = pointsFor(catalog, req).map(source => {
         const point = mergePoint(source, edits.get(source.id));
         return { ...point, slots: point.slots.map(slot => {
           const photo = photos.get(slot.id);
@@ -64,10 +77,10 @@ export function createAvdSidewalkPhotosRouter({ authenticate, pool, loadCatalog,
     } catch (error) { next(error); }
   });
 
-  router.get('/queue', prefectureOnly, async (_req, res, next) => {
+  router.get('/queue', prefectureOnly, async (req, res, next) => {
     try {
-      const [{ avdPoints, avdFrames }, edits, photos] = await Promise.all([loadCatalog(), loadEdits(), currentPhotos()]);
-      const rows = avdPoints.flatMap(source => {
+      const [catalog, edits, photos] = await Promise.all([loadCatalog(), loadEdits(), currentPhotos()]);
+      const rows = pointsFor(catalog, req).flatMap(source => {
         const point = mergePoint(source, edits.get(source.id));
         return point.slots.flatMap((slot, index) => {
           const photo = photos.get(slot.id);
@@ -82,7 +95,7 @@ export function createAvdSidewalkPhotosRouter({ authenticate, pool, loadCatalog,
         });
       });
       const queue = districtQueueFromRows(rows);
-      const withPoint = row => ({ ...row, source_point_id: avdFrames.get(row.point_id).id });
+      const withPoint = row => ({ ...row, source_point_id: framesFor(catalog).get(row.point_id).id });
       res.json({ ...queue, pending: queue.pending.map(withPoint), rework: queue.rework.map(withPoint) });
     } catch (error) { next(error); }
   });
@@ -90,17 +103,17 @@ export function createAvdSidewalkPhotosRouter({ authenticate, pool, loadCatalog,
   router.get('/frames/:frameId/photos/:photoId', async (req, res, next) => {
     try {
       const { frameId, photoId } = req.params;
-      if (!UUID.test(photoId) || !await findFrame(frameId)) return noFrame(res);
+      if (!UUID.test(photoId) || !await findFrame(frameId, req)) return noFrame(res);
       const { rows } = await pool.query('SELECT photo_bytes, photo_mime_type FROM avd_sidewalk_test_photos WHERE frame_id = $1 AND id = $2', [frameId, photoId]);
       if (!rows[0]) return res.status(404).json({ error: 'Фото не найдено.' });
       res.set('X-Content-Type-Options', 'nosniff').type(rows[0].photo_mime_type).send(rows[0].photo_bytes);
     } catch (error) { next(error); }
   });
 
-  router.put('/frames/:frameId/photo', avdOnly, express.raw({ type: ['image/jpeg', 'image/png', 'image/webp'], limit: '5mb' }), async (req, res, next) => {
+  router.put('/frames/:frameId/photo', editorOnly, express.raw({ type: ['image/jpeg', 'image/png', 'image/webp'], limit: '5mb' }), async (req, res, next) => {
     try {
       const { frameId } = req.params;
-      const point = await findFrame(frameId);
+      const point = await findFrame(frameId, req);
       if (!point) return noFrame(res);
       if ((await loadEdits()).get(point.id)?.noSidewalk) return res.status(409).json({ error: 'Точка помечена «Нет тротуара».' });
       const valid = validatePhotoUpload(req.body, req.get('content-type'));
@@ -123,7 +136,7 @@ export function createAvdSidewalkPhotosRouter({ authenticate, pool, loadCatalog,
   router.post('/frames/:frameId/photos/:photoId/review', prefectureOnly, async (req, res, next) => {
     try {
       const { frameId, photoId } = req.params;
-      const point = await findFrame(frameId);
+      const point = await findFrame(frameId, req);
       if (!point || !UUID.test(photoId)) return noFrame(res);
       const validation = validateReview(req.body);
       if (!validation.valid) return res.status(422).json({ error: validation.error });
