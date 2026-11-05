@@ -103,6 +103,7 @@
         <button class="mode active" type="button" role="tab" data-mode="entrances">Въездные группы</button>
         <button class="mode" type="button" role="tab" data-mode="playgrounds">ДП и СП</button>
         <button class="mode" type="button" role="tab" data-mode="sidewalks">Тротуары</button>
+        <button class="mode" type="button" role="tab" data-mode="avd-sidewalks">Тротуары 2.0 · АвД САО</button>
       </div>
       <details class="panel" id="noSidewalkGroup" hidden>
         <summary>Тротуары 2.0 · на проверку: нет тротуара</summary>
@@ -146,7 +147,7 @@
   (() => {
     'use strict';
     const api = window.TpuPhotoApi || window.ODHApi;
-    // Три оцифровки одного кабинета: у каждой свой адрес очереди, снимка, решения и свода.
+    // Оцифровки одного кабинета: у каждой свой адрес очереди, снимка, решения и свода.
     const MODES = {
       entrances: {
         base: '/api/object-photo-points/district-photos',
@@ -173,12 +174,23 @@
       noun: 'точек', open: 'Открыть точку →', title: (row) => 'Тротуар · ' + row.label, snapshot: 'Снимок тротуара ',
       describe: (row) => row.heading == null ? 'без направления' : 'направление ' + Math.round(Number(row.heading)) + '°',
     };
+    const avdBase = '/api/object-photo-points/sidewalk-test/avd';
+    const avdFramePhoto = (frame, photo) => '/frames/' + encodeURIComponent(frame) + '/photos/' + encodeURIComponent(photo);
+    MODES['avd-sidewalks'] = {
+      base: avdBase,
+      photo: (frame, photo) => avdBase + avdFramePhoto(frame, photo),
+      review: (photo) => avdFramePhoto(photo.point_id, photo.id) + '/review',
+      noun: 'кадров', listNoun: 'Кадров', open: 'Открыть кадр →',
+      title: (row) => 'Тротуары 2.0 · ' + row.label, snapshot: 'Кадр АвД САО ',
+      describe: (row) => 'направление ' + Number(row.heading).toLocaleString('ru-RU') + '°',
+      mapLink: (row) => DISTRICT_SLUGS[row.district] + '.html?sidewalkTest=' + encodeURIComponent(row.source_point_id),
+    };
     const KIND_NAMES = { dp: 'Детская площадка', sp: 'Спортивная площадка' };
     const mode = () => MODES[state.mode];
     const PAGE = 24;
     const el = (id) => document.getElementById(id);
     const make = (tag, className, text) => { const node = document.createElement(tag); if (className) node.className = className; if (text != null) node.textContent = text; return node; };
-    const state = { mode: ['playgrounds', 'sidewalks'].includes(location.hash.slice(1)) ? location.hash.slice(1) : 'entrances', queue: null, tab: 'pending', shown: PAGE, urls: [], objectId: null, busy: false, revision: 0, angles: new Map(), photoViews: [], photoGeneration: 0 };
+    const state = { mode: Object.hasOwn(MODES, location.hash.slice(1)) ? location.hash.slice(1) : 'entrances', queue: null, tab: 'pending', shown: PAGE, urls: [], objectId: null, busy: false, revision: 0, angles: new Map(), photoViews: [], photoGeneration: 0 };
     const DISTRICT_SLUGS = {
       'Аэропорт': 'aeroport', 'Беговой': 'begovoy', 'Бескудниковский': 'beskudnikovskiy',
       'Войковский': 'voykovskiy', 'Восточное Дегунино': 'vostochnoe-degunino',
@@ -291,7 +303,7 @@
       const list = el('list');
       const all = filteredRows();
       const shown = all.slice(0, state.shown);
-      setStatus('listStatus', all.length ? `${state.mode === 'playgrounds' ? 'Площадок' : 'Точек'}: ${all.length.toLocaleString('ru-RU')}` + (state.tab === 'pending' ? ' · сначала те, что ждут дольше всех' : '') : '');
+      setStatus('listStatus', all.length ? `${mode().listNoun || (state.mode === 'playgrounds' ? 'Площадок' : 'Точек')}: ${all.length.toLocaleString('ru-RU')}` + (state.tab === 'pending' ? ' · сначала те, что ждут дольше всех' : '') : '');
       list.replaceChildren(...shown.map((row) => {
         const button = make('button', 'object-row'); button.type = 'button';
         const info = make('div');
@@ -422,11 +434,12 @@
       const { row, kind } = found;
       el('objectTitle').textContent = mode().title(row);
       el('objectMeta').textContent = `${row.district} · ${mode().describe(row)}${row.longitude != null ? ' · ' + Number(row.latitude).toFixed(6) + ', ' + Number(row.longitude).toFixed(6) : ''}`;
-      el('objectMapLink').href = DISTRICT_SLUGS[row.district] ? DISTRICT_SLUGS[row.district] + '.html' : 'index.html';
+      el('objectMapLink').href = mode().mapLink?.(row) || (DISTRICT_SLUGS[row.district] ? DISTRICT_SLUGS[row.district] + '.html' : 'index.html');
       grid.replaceChildren(pointCard(row, kind));
       const pendingPhoto = kind === 'pending';
-      setStatus('objectStatus', pendingPhoto ? 'Снимок ждёт решения: принять объект или вернуть на доработку с комментарием.' : 'Точка на доработке: ждём новый снимок от района.');
+      setStatus('objectStatus', pendingPhoto ? 'Снимок ждёт решения: принять или вернуть на доработку с комментарием.' : 'Снимок на доработке: ждём новую фотографию.');
       el('acceptObject').hidden = !pendingPhoto;
+      el('acceptObject').textContent = state.mode === 'avd-sidewalks' ? 'Принять кадр' : 'Принять объект';
       el('acceptObject').onclick = pendingPhoto ? () => reviewPhotos([{ id: row.photo_id, point_id: row.point_id }], 'accepted', '') : null;
       el('nextObject').hidden = state.tab !== 'pending' || pendingPhoto;
       lockReview(state.busy);
@@ -447,7 +460,7 @@
         const reject = make('button', 'danger', 'Отклонить'); reject.type = 'button';
         actions.append(accept, reject);
         const form = make('form', 'reject-form'); form.hidden = true;
-        const comment = make('textarea'); comment.placeholder = 'Что не так и что исправить — комментарий увидит район'; comment.maxLength = 2000; comment.required = true;
+        const comment = make('textarea'); comment.placeholder = 'Что не так и что исправить — комментарий увидит исполнитель'; comment.maxLength = 2000; comment.required = true;
         const send = make('button', 'danger', 'Отправить на доработку'); send.type = 'submit';
         const cancel = make('button', 'secondary', 'Отмена'); cancel.type = 'button';
         const formActions = make('div', 'actions'); formActions.append(send, cancel);
@@ -461,7 +474,7 @@
         title.append(make('span', 'pill rework', 'На доработке'));
         if (row.photo_id) node.append(photoBox(row.point_id, { id: row.photo_id }, 'Отклонённое фото точки ' + row.label), body);
         if (!row.photo_id) node.append(make('div', 'slot-empty-box', 'Отклонённый снимок снят со слота'), body);
-        body.append(make('p', 'comment', 'Что исправить: ' + (row.rejected_comment || '—')), make('div', 'meta', 'Отклонено ' + when(row.rejected_at) + '. Ждём новое фото от района.'));
+        body.append(make('p', 'comment', 'Что исправить: ' + (row.rejected_comment || '—')), make('div', 'meta', 'Отклонено ' + when(row.rejected_at) + '. Ждём новое фото.'));
       }
       return node;
     }
@@ -554,6 +567,7 @@
         button.setAttribute('aria-selected', String(active));
       });
       el('kindFilterBox').hidden = state.mode !== 'playgrounds';
+      el('exportReport').hidden = !mode().reportFile;
       el('noSidewalkGroup').hidden = state.mode !== 'sidewalks';
       if (state.mode !== 'sidewalks') {
         noSidewalkGeneration++;

@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>АвД САО — карта округа</title>
+  <link rel="icon" href="../../favicon.ico" sizes="any">
+  <style>
+    :root{--ink:#102636;--muted:#52656f;--paper:#f7f5ef;--canvas:#dfe8e8;--accent:#0b756f;--line:#d7e0e2}
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--canvas);color:var(--ink);font:15px/1.45 "Century Gothic",Inter,Arial,sans-serif}
+    .app{display:grid;grid-template-columns:310px minmax(0,1fr);height:100dvh}
+    aside{overflow:auto;padding:20px;background:var(--paper);border-right:1px solid var(--line)}
+    a{color:var(--accent);font-weight:700} h1{margin:12px 0 2px;font-size:26px} p{margin:0 0 12px}
+    .muted{color:var(--muted)}
+    section,details{margin:14px 0;padding:12px;background:#fff;border:1px solid var(--line);border-radius:12px}
+    button,select{font:inherit;color:inherit;background:#fff;border:1px solid #aab9be;border-radius:8px;padding:7px 10px}
+    button,summary{cursor:pointer;font-weight:700}
+    button:disabled{cursor:wait}
+    .primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+    #accountStatus{margin:8px 0 0}
+    #workLink{display:block;margin-top:8px}
+    #workLink[hidden]{display:none}
+    .layer{display:flex;align-items:center;gap:7px;margin:7px 0}
+    .layer input{accent-color:var(--accent)}
+    .swatch{width:10px;height:10px;border-radius:50%;flex:none}
+    .map-wrap{position:relative;min-height:0}
+    #map{height:100%;width:100%}
+    .zoom{position:absolute;z-index:2;right:12px;top:12px;display:flex;gap:5px}
+    #mapStatus{position:absolute;z-index:2;left:12px;bottom:26px;margin:0;max-width:calc(100% - 24px);padding:7px 10px;background:#fff;border-radius:8px}
+    #district{display:block;width:100%;margin:5px 0 8px}
+    #sidewalks h2{font-size:17px;margin:0 0 6px}
+    #sidewalks input[type="search"]{width:100%;padding:7px 9px;border:1px solid #aab9be;border-radius:8px;font:inherit}
+    #avdList{display:grid;gap:5px;max-height:170px;overflow:auto;margin:6px 0}
+    #avdList button{text-align:left;font-size:13px}
+    #avdPoint{padding-top:8px;border-top:1px solid var(--line)}
+    #avdPoint h3{margin:0 0 4px;font-size:15px}
+    #avdPoint button{margin:3px 3px 3px 0}
+    #avdPoint input[type="file"]{max-width:100%;margin:8px 0;font:inherit}
+    #avdPoint img{display:block;max-width:100%;max-height:180px;border-radius:8px;margin:6px 0}
+    .avd-dot{position:relative;display:grid;place-items:center;transform:translate(-50%,-50%);width:19px;height:19px;padding:0;border:2px solid white;border-radius:50%;background:#176bb0;color:white;box-shadow:0 0 0 1px #13374d}
+    .avd-dot.flagged{background:#a83d13}
+    .avd-arrow{display:block;pointer-events:none;width:52px;height:52px;margin:-26px 0 0 -26px}
+    @media(max-width:740px){
+      .app{height:auto;grid-template-columns:1fr}
+      aside{border-right:0;border-bottom:1px solid var(--line)}
+      .map-wrap{height:65dvh;min-height:360px}
+    }
+  </style>
+  <script defer src="../../object-maps/tpu-photo-api.js?v=20261102"></script>
+  <script type="module" src="map.mjs"></script>
+</head>
+<body>
+<main class="app">
+  <aside>
+    <a href="../">← Карты районов</a>
+    <h1>АвД САО</h1>
+    <p class="muted">Единая карта 16 районов Северного округа</p>
+    <section aria-label="Учётная запись">
+      <button id="login" class="primary" type="button" disabled>Войти как АвД САО</button>
+      <p id="accountStatus" class="muted" role="status">Вход без пароля</p>
+      <a id="workLink" href="../../object-maps/tpu-parking.html?district=%D0%90%D0%B2%D0%94%20%D0%A1%D0%90%D0%9E" hidden>ТПУ и парковки · фотофиксация →</a>
+    </section>
+    <label for="district">Показать на карте</label>
+    <select id="district" disabled><option value="">Весь округ</option></select>
+    <section id="sidewalks" aria-label="Оцифровка тротуаров" hidden>
+      <h2>Тротуары 2.0 · АвД САО</h2>
+      <p id="avdStatus" class="muted" role="status"></p>
+      <button id="avdRetry" type="button" hidden>Загрузить точки повторно</button>
+      <div id="avdControls" hidden>
+        <label class="layer"><input id="avdLayer" type="checkbox" checked> Точки съёмки на карте</label>
+        <label for="avdSearch">Улица или ID точки</label>
+        <input id="avdSearch" type="search">
+        <div id="avdList"></div>
+        <button id="avdMore" type="button" hidden>Ещё точки</button>
+      </div>
+      <div id="avdPoint" hidden></div>
+    </section>
+    <details>
+      <summary>Слои АСУ ОДС</summary>
+      <div id="layers"></div>
+    </details>
+    <section id="selection" aria-label="Сведения об объекте" hidden>
+      <strong id="selectionTitle"></strong>
+      <div id="selectionDetails" class="muted"></div>
+    </section>
+  </aside>
+  <div class="map-wrap">
+    <div id="map" aria-label="Карта Северного административного округа"></div>
+    <div class="zoom">
+      <button id="zoomOut" type="button" aria-label="Отдалить" disabled>−</button>
+      <button id="zoomIn" type="button" aria-label="Приблизить" disabled>+</button>
+    </div>
+    <p id="mapStatus" role="status">Загружаем карту…</p>
+  </div>
+</main>
+</body>
+</html>
