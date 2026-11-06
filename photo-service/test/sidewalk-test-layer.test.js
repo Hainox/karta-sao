@@ -15,14 +15,17 @@ test('закрытый слой отдаёт отдельные азимуты �
   const catalogPath = join(dir, 'catalog.json');
   await writeFile(catalogPath, JSON.stringify({ version: 1, points: [point, { ...point, id: 'P02', district: 'Коптево', slots: [{ id: 'P02-F01', azimuth: 0, sidewalkIds: '10001' }] }] }));
   const editsPath = join(dir, 'edits.json');
+  const photoRows = [];
   const app = express();
   app.use(express.json());
-  const makeRouter = () => createSidewalkTestLayerRouter({ catalogPath, editsPath, authenticate: (req, res, next) => {
-    const role = req.get('x-test-role');
-    if (!role) return res.sendStatus(401);
-    req.user = { role, district: 'Аэропорт' };
-    next();
-  } });
+  const makeRouter = () => createSidewalkTestLayerRouter({ catalogPath, editsPath,
+    pool: { async query() { return { rows: photoRows }; } },
+    authenticate: (req, res, next) => {
+      const role = req.get('x-test-role');
+      if (!role) return res.sendStatus(401);
+      req.user = { role, district: 'Аэропорт' };
+      next();
+    } });
   let router = makeRouter();
   app.use((req, res, next) => router(req, res, next));
   const server = app.listen(0);
@@ -36,7 +39,21 @@ test('закрытый слой отдаёт отдельные азимуты �
     const response = await get('prefecture_admin');
     assert.equal(response.status, 200);
     assert.equal(response.headers.get('cache-control'), 'private, no-store');
-    assert.deepEqual((await response.json()).points, [point]);
+    const view = (await response.json()).points;
+    assert.equal(view.length, 1);
+    assert.equal(view[0].id, point.id);
+    // Слою нужны статусы кадров: префектурная карта красит маркеры по ним.
+    assert.deepEqual(view[0].slots.map(s => [s.id, s.azimuth, s.status, s.photoId]), [
+      ['AVD-P01-F01', 24.9, 'empty', null], ['AVD-P01-F02', 204.9, 'empty', null],
+    ]);
+    // Загруженный кадр приходит в тот же обзор: «на проверке», отклонённый — «на доработке» с причиной.
+    photoRows.push({ frame_id: 'AVD-P01-F01', id: 'photo-1', status: 'pending', review_comment: null, uploaded_at: '2026-11-06T10:00:00Z', reviewed_at: null });
+    assert.equal((await (await get('prefecture_admin')).json()).points[0].slots[0].status, 'pending');
+    photoRows[0].status = 'rejected';
+    photoRows[0].review_comment = 'тротуар снят не по стрелке';
+    const reworked = (await (await get('prefecture_admin')).json()).points[0];
+    assert.equal(reworked.slots[0].status, 'rework');
+    assert.equal(reworked.slots[0].comment, 'тротуар снят не по стрелке');
     const patch = (body, role = 'prefecture_admin') => fetch(root + '/AVD-P01', {
       method: 'PATCH', headers: { 'Content-Type': 'application/json', 'x-test-role': role }, body: JSON.stringify(body),
     });

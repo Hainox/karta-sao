@@ -161,6 +161,7 @@ export function mountAvdSidewalks({ map, ymaps, api }) {
           });
           const { photo } = await response.json();
           Object.assign(slot, { photoId: photo.id, status: photo.status, comment: '' });
+          repaintPoint(point);
           if (selected === point && form.isConnected) openPoint(point, slot.id, false);
         } catch (error) { feedback.textContent = 'Фото не отправлено: ' + error.message; }
         finally { submit.disabled = false; }
@@ -200,12 +201,41 @@ export function mountAvdSidewalks({ map, ymaps, api }) {
     markers = [];
   }
 
+  // Цвет маркера — сводный по кадрам: красный — доработка, жёлтый — на
+  // проверке, зелёный — принято; «!» остаётся у пометки «Нет тротуара» без
+  // кадров. Статусы приходят от сервера в каждом слоте.
+  const DOT_CLASSES = { rework: 'rework', pending: 'pending', accepted: 'accepted' };
+  function photoState(point) {
+    const statuses = point.slots.map(slot => slot.status || 'empty');
+    if (statuses.includes('rework')) return 'rework';
+    if (statuses.includes('pending')) return 'pending';
+    if (statuses.includes('accepted')) return 'accepted';
+    return 'empty';
+  }
+  const STATE_TITLES = { rework: ' · На доработке', pending: ' · На проверке', accepted: ' · Принято' };
+
+  function paintDot(dot, point) {
+    const state = photoState(point);
+    dot.className = 'avd-dot' + (DOT_CLASSES[state] ? ' ' + DOT_CLASSES[state] : '')
+      + (point.noSidewalk && state === 'empty' ? ' flagged' : '');
+    dot.textContent = point.noSidewalk ? '!' : '';
+    dot.title = point.street + ' · ' + point.id + (point.noSidewalk && state === 'empty' ? ' · Нет тротуара' : STATE_TITLES[state] || '');
+    dot.setAttribute('aria-label', dot.title);
+  }
+
   function makeMarker(point) {
     const dot = button(point.noSidewalk ? '!' : '', (event) => { event.stopPropagation(); openPoint(point); });
-    dot.className = 'avd-dot' + (point.noSidewalk ? ' flagged' : '');
-    dot.title = point.street + ' · ' + point.id;
-    dot.setAttribute('aria-label', dot.title + (point.noSidewalk ? ' · Нет тротуара' : ''));
+    dot.dataset.pointId = point.id;
+    paintDot(dot, point);
     return new YMapMarker({ coordinates: point.coordinates, zIndex: 40 }, dot);
+  }
+
+  function repaintPoint(point) {
+    // Кластерная отрисовка создаёт маркеры по мере показа — там обновляем
+    // только видимые точечные маркеры, остальным хватит перерисовки draw().
+    for (const marker of markers) {
+      if (marker.element?.dataset?.pointId === point.id) paintDot(marker.element, point);
+    }
   }
 
   async function draw() {

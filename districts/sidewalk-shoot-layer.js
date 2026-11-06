@@ -448,14 +448,38 @@ function initSidewalkTestLayer({ container, map, card, district, apiRequest, cen
     view.marker.update({ draggable: true, zIndex: 45 });
   }
 
+  // Цвет точки — сводный по кадрам: красный — есть кадр на доработке, жёлтый —
+  // есть кадр на проверке, зелёный — все кадры приняты, синий — кадров нет.
+  // Пометка «Нет тротуара» без кадров остаётся коричневой с «!» — при появлении
+  // кадров точка красится по состоянию кадров, «!» в заливке сохраняется.
+  const STATE_COLORS = Object.freeze({
+    rework: ['#d7193f', '#8f1227', '· На доработке'],
+    pending: ['#ffcb00', '#8a6d00', '· На проверке'],
+    accepted: ['#0c7a5a', '#075842', '· Принято'],
+    empty: point => point.noSidewalk
+      ? ['#a83d13', '#6a2b14', '· Нет тротуара']
+      : ['#176bb0', '#103a64', ''],
+  });
+  function photoState(point) {
+    const statuses = point.slots.map(slot => slot.status || 'empty');
+    if (statuses.includes('rework')) return 'rework';
+    if (statuses.includes('pending')) return 'pending';
+    if (statuses.includes('accepted')) return 'accepted';
+    return 'empty';
+  }
+
   function paintMark(view) {
     const { element, point } = view;
-    element.dataset.noSidewalk = String(Boolean(point.noSidewalk));
+    const state = photoState(point);
+    const [background, ring, label] = typeof STATE_COLORS[state] === 'function'
+      ? STATE_COLORS[state](point) : STATE_COLORS[state];
+    element.dataset.noSidewalk = String(point.noSidewalk === true);
+    element.dataset.photoState = state;
     const dot = element.querySelector('.shoot-dot');
-    dot.style.background = point.noSidewalk ? '#a83d13' : '#176bb0';
-    dot.style.boxShadow = '0 0 0 2px ' + (point.noSidewalk ? '#6a2b14' : '#103a64');
+    dot.style.background = background;
+    dot.style.boxShadow = '0 0 0 2px ' + ring;
     dot.textContent = point.noSidewalk ? '!' : '';
-    element.title = 'Тротуары ОДХ · ' + point.id + ' · ' + point.street + (point.noSidewalk ? ' · Нет тротуара' : '');
+    element.title = 'Тротуары ОДХ · ' + point.id + ' · ' + point.street + (label ? ' ' + label : '');
     element.setAttribute('aria-label', element.title);
   }
 
@@ -518,6 +542,8 @@ function initSidewalkTestLayer({ container, map, card, district, apiRequest, cen
           });
           const { photo } = await response.json();
           Object.assign(slot, { status: photo.status, photoId: photo.id, comment: '' });
+          const live = markers.get(point.id);
+          if (live) paintMark(live);
           if (selection?.slot === slot) showPhoto(slot);
         } catch (error) { info.textContent = 'Фото не отправлено: ' + error.message; }
         finally { upload.disabled = false; input.value = ''; }

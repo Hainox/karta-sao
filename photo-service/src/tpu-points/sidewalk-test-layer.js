@@ -4,7 +4,7 @@ import { dirname, join } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { DISTRICTS, isPointWithinBoundary } from './validation.js';
 import { mediaRoot } from '../storage.js';
-import { createAvdSidewalkPhotosRouter, districtOwnsSidewalk, isDistrictSidewalkEditor, isAvdSidewalkEditor, isAvdSidewalkPoint } from './avd-sidewalk-photos.js';
+import { createAvdSidewalkPhotosRouter, districtOwnsSidewalk, loadSidewalkPhotos, sidewalkSlotStatus, isAvdSidewalkEditor, isAvdSidewalkPoint, isDistrictSidewalkEditor } from './avd-sidewalk-photos.js';
 
 const DEFAULT_CATALOG = new URL('../../assets/sidewalk-test-points.json', import.meta.url);
 
@@ -72,7 +72,11 @@ export function createSidewalkTestLayerRouter({ authenticate, boundary, pool, ca
     if (!DISTRICTS.has(district)) return res.status(400).json({ error: 'Укажите район САО.' });
     try {
       const [{ districts }, edits] = await Promise.all([loadCatalog(), loadEdits()]);
-      res.json({ points: (districts.get(district) || []).map(point => mergePoint(point, edits.get(point.id))) });
+      const photos = pool ? await loadSidewalkPhotos(pool) : new Map();
+      res.json({ points: (districts.get(district) || []).map(point => {
+        const merged = mergePoint(point, edits.get(point.id));
+        return { ...merged, slots: merged.slots.map(slot => sidewalkSlotStatus(slot, photos.get(slot.id))) };
+      }) });
     } catch (error) { next(error); }
   });
 

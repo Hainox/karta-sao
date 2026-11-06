@@ -18,6 +18,19 @@ export const isDistrictSidewalkEditor = user => user.role === 'district_editor' 
 export const districtOwnsSidewalk = (user, point) => isDistrictSidewalkEditor(user) && districtOwner(point.balance) === user.district;
 const isPrefecture = (req) => req.user.role === 'prefecture_admin';
 
+/** Последнее действующее фото каждого слота: отклонённая пересдача сбрасывает «пусто». */
+export const loadSidewalkPhotos = async pool => {
+  const { rows } = await pool.query(`SELECT DISTINCT ON (frame_id)
+    frame_id, id, status, photo_filename, uploaded_at, review_comment, reviewed_at
+    FROM avd_sidewalk_test_photos ORDER BY frame_id, (status <> 'rejected') DESC, uploaded_at DESC, id DESC`);
+  return new Map(rows.map(row => [row.frame_id, row]));
+};
+/** Статус слота для слоя и карты: отклонённое фото показывает «на доработке». */
+export const sidewalkSlotStatus = (slot, photo) => ({ ...slot,
+  status: photo?.status === 'rejected' ? 'rework' : photo?.status || 'empty',
+  photoId: photo?.id || null,
+  comment: photo?.status === 'rejected' ? photo.review_comment || '' : '' });
+
 export function createAvdSidewalkPhotosRouter({ authenticate, pool, loadCatalog, loadEdits, mergePoint, scope = 'avd' }) {
   const router = express.Router();
   const isDistrict = scope === 'district';
@@ -44,12 +57,7 @@ export function createAvdSidewalkPhotosRouter({ authenticate, pool, loadCatalog,
     const point = framesFor(await loadCatalog()).get(id);
     return point && (!isDistrict || isPrefecture(req) || districtOwnsSidewalk(req.user, point)) ? point : null;
   };
-  const currentPhotos = async () => {
-    const { rows } = await pool.query(`SELECT DISTINCT ON (frame_id)
-      frame_id, id, status, photo_filename, uploaded_at, review_comment, reviewed_at
-      FROM avd_sidewalk_test_photos ORDER BY frame_id, (status <> 'rejected') DESC, uploaded_at DESC, id DESC`);
-    return new Map(rows.map(row => [row.frame_id, row]));
-  };
+  const currentPhotos = async () => loadSidewalkPhotos(pool);
   const audit = (client, req, action, pointId, metadata) => client.query(
     'INSERT INTO audit_log (actor_user_id, action, object_key, metadata) VALUES ($1,$2,$3,$4::jsonb)',
     [req.user.id, action, 'sidewalk-test:' + pointId, JSON.stringify(metadata)]);
@@ -73,11 +81,7 @@ export function createAvdSidewalkPhotosRouter({ authenticate, pool, loadCatalog,
       const [catalog, edits, photos] = await Promise.all([loadCatalog(), loadEdits(), currentPhotos()]);
       const points = pointsFor(catalog, req).map(source => {
         const point = mergePoint(source, edits.get(source.id));
-        return { ...point, slots: point.slots.map(slot => {
-          const photo = photos.get(slot.id);
-          return { ...slot, status: photo?.status === 'rejected' ? 'rework' : photo?.status || 'empty',
-            photoId: photo?.id || null, comment: photo?.status === 'rejected' ? photo.review_comment : '' };
-        }) };
+        return { ...point, slots: point.slots.map(slot => sidewalkSlotStatus(slot, photos.get(slot.id))) };
       });
       res.json({ points });
     } catch (error) { next(error); }
