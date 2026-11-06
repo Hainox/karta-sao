@@ -132,7 +132,7 @@ export function mountAvdSidewalks({ map, ymaps, api }) {
             target.replaceChildren(image);
           }).catch(() => { target.textContent = 'Не удалось открыть снимок.'; });
       }
-      if (point.noSidewalk || !['empty', 'rework'].includes(slot.status)) return;
+      if (!['empty', 'rework'].includes(slot.status)) return;
       const form = element('form');
       const input = element('input');
       input.type = 'file';

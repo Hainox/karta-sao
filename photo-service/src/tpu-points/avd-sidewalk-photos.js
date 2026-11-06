@@ -5,7 +5,8 @@ import { DISTRICTS } from './validation.js';
 import { isAutodorAccount } from '../scope.js';
 import { safePhotoFilename, validatePhotoUpload } from './photo-markers.js';
 import { validateReview } from './object-slots.js';
-import { districtQueueFromRows } from './district-point-photos.js';
+import { districtQueueFromRows, slotPointsForReport } from './district-point-photos.js';
+import { buildDigitizationReport, summarizeDigitization } from '../digitization-report.js';
 
 const UUID = /^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i;
 const noFrame = (res) => res.status(404).json({ error: 'Фотослот не найден.' });
@@ -89,6 +90,7 @@ export function createAvdSidewalkPhotosRouter({ authenticate, pool, loadCatalog,
         const rejected = photo?.status === 'rejected' ? photo : null;
         return [{ point_id: slot.id, label: point.street + ' · ' + point.id + ' · кадр ' + (index + 1),
           district: point.district, object_id: point.id, heading: slot.azimuth, longitude: point.coordinates[0], latitude: point.coordinates[1],
+          no_sidewalk: point.noSidewalk === true,
           photo_id: active?.id, photo_status: active?.status, uploaded_at: active?.uploaded_at, photo_filename: active?.photo_filename, reviewed_at: active?.reviewed_at,
           rejected_photo_id: rejected?.id, rejected_comment: rejected?.review_comment, rejected_at: rejected?.reviewed_at,
           rejected_uploaded_at: rejected?.uploaded_at, rejected_photo_filename: rejected?.photo_filename }];
@@ -105,8 +107,26 @@ export function createAvdSidewalkPhotosRouter({ authenticate, pool, loadCatalog,
     try {
       const { catalog, rows } = await loadQueueRows(req);
       const queue = districtQueueFromRows(rows);
-      const withPoint = row => ({ ...row, source_point_id: framesFor(catalog).get(row.point_id).id });
+      const noSidewalk = new Map(rows.map(row => [row.point_id, row.no_sidewalk]));
+      const withPoint = row => ({ ...row, source_point_id: framesFor(catalog).get(row.point_id).id, no_sidewalk: noSidewalk.get(row.point_id) === true });
       res.json({ ...queue, pending: queue.pending.map(withPoint), rework: queue.rework.map(withPoint) });
+    } catch (error) { next(error); }
+  });
+
+  // Свод по районам — та же книга Excel, что у въездных групп, ДП/СП и тротуаров
+  // дворов: лист «Свод по районам», «Точки» и «На доработке» с причиной возврата.
+  router.get('/report.xlsx', prefectureOnly, async (req, res, next) => {
+    try {
+      const generatedAt = new Date();
+      const summary = summarizeDigitization({ points: slotPointsForReport((await loadQueueRows(req)).rows), generatedAt });
+      const buffer = await buildDigitizationReport(summary, {
+        title: isDistrict ? 'Оцифровка тротуаров ОДХ' : 'Оцифровка тротуаров ОДХ · АвД САО',
+        pointTitle: 'Кадр',
+      });
+      const day = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Moscow' }).format(generatedAt);
+      res.set({ 'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        'Content-Disposition': `attachment; filename="Svod_foto_trotuary_odh${isDistrict ? '' : '_avd'}_SAO_${day}.xlsx"`,
+        'Cache-Control': 'private, no-store' }).send(buffer);
     } catch (error) { next(error); }
   });
 
@@ -125,7 +145,7 @@ export function createAvdSidewalkPhotosRouter({ authenticate, pool, loadCatalog,
       const { frameId } = req.params;
       const point = await findFrame(frameId, req);
       if (!point) return noFrame(res);
-      if ((await loadEdits()).get(point.id)?.noSidewalk) return res.status(409).json({ error: 'Точка помечена «Нет тротуара».' });
+      // Пометка «Нет тротуара» загрузке кадра не мешает — приёмка видит её отдельной меткой.
       const valid = validatePhotoUpload(req.body, req.get('content-type'));
       if (!valid.valid) return res.status(422).json({ error: valid.error });
       const photo = await transaction(async client => {

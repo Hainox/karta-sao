@@ -89,7 +89,7 @@
     .object-row strong{display:block;font-size:14px}
     .object-row .open{color:var(--green);font-weight:700;white-space:nowrap}
     .pill{display:inline-block;margin-right:6px;padding:1px 8px;border-radius:999px;font-size:11px;font-weight:800;color:#fff}
-    .pill.review{background:var(--blue)}.pill.rework{background:var(--red)}.pill.accepted{background:var(--green)}.pill.empty{background:#9aa8a3}
+    .pill.review{background:var(--blue)}.pill.rework{background:var(--red)}.pill.accepted{background:var(--green)}.pill.empty{background:#9aa8a3}.pill.flagged{background:#a83d13}
     .object-head{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:12px}
     .object-head h2{margin:4px 0 2px;font-size:18px}
     .slot-empty-box{display:grid;place-items:center;min-height:70px;background:#eef1ee;color:var(--muted);font-size:13px}
@@ -221,6 +221,7 @@
       base: avdBase,
       photo: (frame, photo) => avdBase + avdFramePhoto(frame, photo),
       review: (photo) => avdFramePhoto(photo.point_id, photo.id) + '/review',
+      reportFile: 'Svod_foto_trotuary_odh_avd_SAO_',
       noun: 'кадров', listNoun: 'Кадров', open: 'Открыть кадр →',
       title: (row) => 'Тротуары ОДХ · ' + row.label, snapshot: 'Кадр АвД САО ',
       describe: (row) => 'направление ' + Number(row.heading).toLocaleString('ru-RU') + '°',
@@ -229,6 +230,7 @@
     const odhBase = '/api/object-photo-points/sidewalk-test/district';
     MODES['odh-sidewalks'] = {
       ...MODES['avd-sidewalks'], base: odhBase, snapshot: 'Кадр тротуара ОДХ ',
+      reportFile: 'Svod_foto_trotuary_odh_SAO_',
       photo: (frame, photo) => odhBase + avdFramePhoto(frame, photo),
     };
     const showsNoSidewalk = () => ['sidewalks', 'odh-sidewalks', 'avd-sidewalks'].includes(state.mode);
@@ -358,6 +360,7 @@
         const meta = make('div', 'meta', `${row.district} · ${mode().describe(row)} · ` + (state.tab === 'pending' ? 'загружено ' + when(row.uploaded_at) : 'отклонено ' + when(row.rejected_at)));
         info.append(make('strong', '', row.label), meta);
         meta.prepend(pill);
+        if (row.no_sidewalk) meta.append(make('span', 'pill flagged', 'НЕТ ТРОТУАРА'));
         button.append(info, make('span', 'open', mode().open));
         button.onclick = () => openPoint(row);
         return button;
@@ -534,6 +537,7 @@
       const body = make('div', 'body');
       const title = make('h3', '', mode().snapshot);
       body.append(title);
+      if (row.no_sidewalk) title.append(make('span', 'pill flagged', 'НЕТ ТРОТУАРА'));
       if (kind === 'pending') {
         title.append(make('span', 'pill review', 'На проверке'));
         body.append(make('div', 'meta', 'Загружено ' + when(row.uploaded_at) + (row.photo_filename ? ' · ' + row.photo_filename : '')));

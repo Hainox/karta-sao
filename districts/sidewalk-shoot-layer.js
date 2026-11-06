@@ -497,7 +497,8 @@ function initSidewalkTestLayer({ container, map, card, district, apiRequest, cen
             preview.append(image);
           }).catch(() => { preview.textContent = 'Не удалось открыть фото.'; });
       }
-      if (point.noSidewalk || !['empty', 'rework'].includes(slot.status || 'empty')) return;
+      // Метка «Нет тротуара» не прячет загрузку: кадр уходит в приёмку с меткой.
+      if (!['empty', 'rework'].includes(slot.status || 'empty')) return;
       const input = node('input');
       input.type = 'file';
       input.accept = 'image/jpeg,image/png,image/webp';
