@@ -118,8 +118,7 @@
         <button class="mode active" type="button" role="tab" data-mode="entrances">Въездные группы</button>
         <button class="mode" type="button" role="tab" data-mode="playgrounds">ДП и СП</button>
         <button class="mode" type="button" role="tab" data-mode="sidewalks">Тротуары Дворы</button>
-        <button class="mode" type="button" role="tab" data-mode="odh-sidewalks">Тротуары ОДХ · районы</button>
-        <button class="mode" type="button" role="tab" data-mode="avd-sidewalks">Тротуары ОДХ · АвД САО</button>
+        <button class="mode" type="button" role="tab" data-mode="odh-sidewalks">Тротуары ОДХ</button>
       </div>
       <details class="panel" id="noSidewalkGroup" hidden>
         <summary>Тротуары ОДХ · на проверку: нет тротуара</summary>
@@ -215,31 +214,37 @@
       noun: 'точек', open: 'Открыть точку →', title: (row) => 'Тротуар · ' + row.label, snapshot: 'Снимок тротуара ',
       describe: (row) => row.heading == null ? 'без направления' : 'направление ' + Math.round(Number(row.heading)) + '°',
     };
-    const avdBase = '/api/object-photo-points/sidewalk-test/avd';
-    const avdFramePhoto = (frame, photo) => '/frames/' + encodeURIComponent(frame) + '/photos/' + encodeURIComponent(photo);
-    MODES['avd-sidewalks'] = {
-      base: avdBase,
-      photo: (frame, photo) => avdBase + avdFramePhoto(frame, photo),
-      review: (photo) => avdFramePhoto(photo.point_id, photo.id) + '/review',
-      reportFile: 'Svod_foto_trotuary_odh_avd_SAO_',
-      noun: 'кадров', listNoun: 'Кадров', open: 'Открыть кадр →',
-      title: (row) => 'Тротуары ОДХ · ' + row.label, snapshot: 'Кадр АвД САО ',
-      describe: (row) => 'направление ' + Number(row.heading).toLocaleString('ru-RU') + '°',
-      mapLink: (row) => DISTRICT_SLUGS[row.district] + '.html?sidewalkTest=' + encodeURIComponent(row.source_point_id),
-    };
     const odhBase = '/api/object-photo-points/sidewalk-test/district';
+    const avdFramePhoto = (frame, photo) => '/frames/' + encodeURIComponent(frame) + '/photos/' + encodeURIComponent(photo);
+    // Единый режим тротуаров ОДХ: кадры АвД САО работают по всему округу и в
+    // приёмке идут одной очередью с районом-строкой «АВД САО».
     MODES['odh-sidewalks'] = {
-      ...MODES['avd-sidewalks'], base: odhBase, snapshot: 'Кадр тротуара ОДХ ',
-      reportFile: 'Svod_foto_trotuary_odh_SAO_',
+      base: odhBase,
       photo: (frame, photo) => odhBase + avdFramePhoto(frame, photo),
+      review: (photo) => avdFramePhoto(photo.point_id, photo.id) + '/review',
+      reportFile: 'Svod_foto_trotuary_odh_SAO_',
+      noun: 'кадров', listNoun: 'Кадров', open: 'Открыть кадр →',
+      title: (row) => 'Тротуары ОДХ · ' + row.label, snapshot: 'Кадр тротуара ОДХ ',
+      describe: (row) => 'направление ' + Number(row.heading).toLocaleString('ru-RU') + '°',
+      mapLink: (row) => (row.district === 'АВД САО' ? 'avd-sao/index.html' : DISTRICT_SLUGS[row.district] + '.html')
+        + '?sidewalkTest=' + encodeURIComponent(row.source_point_id),
     };
-    const showsNoSidewalk = () => ['sidewalks', 'odh-sidewalks', 'avd-sidewalks'].includes(state.mode);
+    const showsNoSidewalk = () => ['sidewalks', 'odh-sidewalks'].includes(state.mode);
     const KIND_NAMES = { dp: 'Детская площадка', sp: 'Спортивная площадка' };
     const mode = () => MODES[state.mode];
     const PAGE = 24;
     const el = (id) => document.getElementById(id);
     const make = (tag, className, text) => { const node = document.createElement(tag); if (className) node.className = className; if (text != null) node.textContent = text; return node; };
-    const state = { mode: Object.hasOwn(MODES, location.hash.slice(1)) ? location.hash.slice(1) : 'entrances', queue: null, tab: 'pending', shown: PAGE, urls: [], objectId: null, busy: false, revision: 0, angles: new Map(), photoViews: [], photoGeneration: 0 };
+    // Таб «АвД САО» убрали: старые ссылки с #avd-sidewalks ведут в общий режим тротуаров ОДХ.
+    const modeFromHash = () => {
+      const hash = location.hash.slice(1);
+      return Object.hasOwn(MODES, hash) ? hash : hash === 'avd-sidewalks' ? 'odh-sidewalks' : 'entrances';
+    };
+    const state = { mode: modeFromHash(), queue: null, tab: 'pending', shown: PAGE, urls: [], objectId: null, busy: false, revision: 0, angles: new Map(), photoViews: [], photoGeneration: 0 };
+    // Выравниваем адрес по выбранному режиму: #avd-sidewalks становится #odh-sidewalks, мусорный чистится.
+    if (location.hash.slice(1) !== state.mode) {
+      history.replaceState(null, '', state.mode === 'entrances' ? location.pathname + location.search : '#' + state.mode);
+    }
     const DISTRICT_SLUGS = {
       'Аэропорт': 'aeroport', 'Беговой': 'begovoy', 'Бескудниковский': 'beskudnikovskiy',
       'Войковский': 'voykovskiy', 'Восточное Дегунино': 'vostochnoe-degunino',
@@ -491,7 +496,7 @@
       const pendingPhoto = kind === 'pending';
       setStatus('objectStatus', pendingPhoto ? 'Снимок ждёт решения: принять или вернуть на доработку с комментарием.' : 'Снимок на доработке: ждём новую фотографию.');
       el('acceptObject').hidden = !pendingPhoto;
-      el('acceptObject').textContent = ['avd-sidewalks', 'odh-sidewalks'].includes(state.mode) ? 'Принять кадр' : 'Принять объект';
+      el('acceptObject').textContent = state.mode === 'odh-sidewalks' ? 'Принять кадр' : 'Принять объект';
       el('acceptObject').onclick = pendingPhoto ? () => reviewPhotos([{ id: row.photo_id, point_id: row.point_id }], 'accepted', '') : null;
       el('nextObject').hidden = state.tab !== 'pending' || pendingPhoto;
       lockReview(state.busy);

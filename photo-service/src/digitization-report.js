@@ -25,6 +25,7 @@ export const DIGITIZATION_STATE_LABELS = Object.freeze({
 // Цвета статусов — те же, что в сводке фотофиксации.
 const STATE_FILL = { empty: STATUS_FILL.empty, pending: STATUS_FILL.review, accepted: STATUS_FILL.closed, rework: STATUS_FILL.rework };
 const DISTRICT_SLUGS = Object.freeze({
+  'АВД САО': 'avd-sao/index',
   'Аэропорт': 'aeroport', 'Беговой': 'begovoy', 'Бескудниковский': 'beskudnikovskiy',
   'Войковский': 'voykovskiy', 'Восточное Дегунино': 'vostochnoe-degunino',
   'Головинский': 'golovinskiy', 'Дмитровский': 'dmitrovskiy',
@@ -57,8 +58,10 @@ const tally = (rows, label) => {
 /**
  * Чистый расчёт свода. points: [{ district, label, kind, state, lastPhotoAt,
  * rejectedComment, rejectedAt }], state ∈ empty | pending | accepted | rework.
- * Все 16 районов идут строками даже без точек; kinds — подписи видов для
- * разбивки (например, детские и спортивные площадки), без них разбивки нет.
+ * Все 16 районов идут строками даже без точек; районы из точек сверх 16 (как
+ * «АВД САО» в наборе тротуаров ОДХ) добавляются отдельными строками. kinds —
+ * подписи видов для разбивки (например, детские и спортивные площадки),
+ * без них разбивки нет.
  */
 export function summarizeDigitization({ points = [], kinds = null, generatedAt = new Date() } = {}) {
   const pointRows = points
@@ -67,7 +70,9 @@ export function summarizeDigitization({ points = [], kinds = null, generatedAt =
       || byName(String(left.kind || ''), String(right.kind || ''))
       || byName(String(left.label), String(right.label)));
   // Районы — от большего процента принятых к меньшему, при равенстве по алфавиту.
-  const districtRows = [...DISTRICTS].sort(byName)
+  const districtNames = new Set([...DISTRICTS]);
+  for (const row of pointRows) districtNames.add(row.district);
+  const districtRows = [...districtNames].sort(byName)
     .map((district) => tally(pointRows.filter((row) => row.district === district), district))
     .sort((left, right) => share(right) - share(left) || byName(left.label, right.label));
   const kindRows = kinds

@@ -159,13 +159,17 @@ test('АвД получает только свои точки из разных
     // И здесь пометка не блокирует кадр: слот точки «Нет тротуара» принимает фото.
     assert.equal((await request('/district/frames/' + other.slots[0].id + '/photo', 'district', jpg)).status, 201);
     assert.equal((await patch(other.id, 'district', { noSidewalk: false })).status, 200);
+    // Общая очередь приёмки: кадры АвД префектура видит отдельной строкой-районом «АВД САО».
+    const common = await (await request('/district/queue', 'pref')).json();
+    assert.deepEqual(common.pending.map(row => [row.label, row.district, row.source_point_id]),
+      [['Переулок · AVD-P01 · кадр 1', 'АВД САО', point.id]]);
   } finally {
     await new Promise(resolve => server.close(resolve));
     await rm(dir, { recursive: true, force: true });
   }
 });
 
-test('своды Excel по тротуарам ОДХ: районы и АвД получают отдельные книги как у въездных групп', async () => {
+test('свод Excel по тротуарам ОДХ: одна книга, кадры АвД идут строкой «АВД САО»', async () => {
   const dir = await mkdtemp(join(tmpdir(), 'sidewalk-report-'));
   const catalogPath = join(dir, 'catalog.json');
   await writeFile(catalogPath, JSON.stringify({ version: 1, points: [
@@ -175,8 +179,8 @@ test('своды Excel по тротуарам ОДХ: районы и АвД п
   const pool = { async query(sql) {
     if (!/avd_sidewalk_test_photos/.test(sql)) return { rows: [] };
     return { rows: [
-      { frame_id: 'AVD-P01-F01', id: '1', status: 'accepted', uploaded_at: '2026-11-05T10:00:00Z', reviewed_at: '2026-11-05T11:00:00Z', review_comment: null },
-      { frame_id: 'DISTRICT-P01-F01', id: '2', status: 'rejected', uploaded_at: '2026-11-05T09:00:00Z', reviewed_at: '2026-11-05T10:00:00Z', review_comment: 'исправить' },
+      { frame_id: 'AVD-P01-F01', id: '1', status: 'rejected', uploaded_at: '2026-11-05T10:00:00Z', reviewed_at: '2026-11-05T11:00:00Z', review_comment: 'исправить' },
+      { frame_id: 'DISTRICT-P01-F01', id: '2', status: 'accepted', uploaded_at: '2026-11-05T09:00:00Z', reviewed_at: '2026-11-05T10:00:00Z', review_comment: null },
     ] };
   } };
   const app = express();
@@ -201,24 +205,28 @@ test('своды Excel по тротуарам ОДХ: районы и АвД п
     return { response, book };
   };
   try {
-    for (const path of ['/avd/report.xlsx', '/district/report.xlsx']) {
-      assert.equal((await workbook(path, 'avd')).response.status, 403, 'свод видит только префектура');
-      assert.equal((await workbook(path, 'district')).response.status, 403);
-    }
-    const avd = await workbook('/avd/report.xlsx');
-    assert.match(avd.response.headers.get('content-type'), /spreadsheetml/);
-    assert.match(avd.response.headers.get('content-disposition'), /Svod_foto_trotuary_odh_avd_SAO_/);
-    assert.deepEqual(avd.book.worksheets.map(w => w.name), ['Свод по районам', 'Точки', 'На доработке']);
-    assert.equal(avd.book.getWorksheet('Свод по районам').getCell('A1').value, 'Оцифровка тротуаров ОДХ · АвД САО');
-    // Два слота точки АвД: один принятый кадр и один без фото.
-    assert.equal(avd.book.getWorksheet('Точки').rowCount, 3);
-    assert.equal(avd.book.getWorksheet('На доработке').getCell('A2').value, 'Точек на доработке нет.');
+    // Отдельный свод АвД больше не существует: книга одна — на весь набор тротуаров ОДХ.
+    assert.equal((await workbook('/avd/report.xlsx', 'avd')).response.status, 404);
+    assert.equal((await workbook('/district/report.xlsx', 'avd')).response.status, 403, 'свод видит только префектура');
+    assert.equal((await workbook('/district/report.xlsx', 'district')).response.status, 403);
     const odh = await workbook('/district/report.xlsx');
+    assert.match(odh.response.headers.get('content-type'), /spreadsheetml/);
     assert.match(odh.response.headers.get('content-disposition'), /Svod_foto_trotuary_odh_SAO_/);
+    assert.deepEqual(odh.book.worksheets.map(w => w.name), ['Свод по районам', 'Точки', 'На доработке']);
     assert.equal(odh.book.getWorksheet('Свод по районам').getCell('A1').value, 'Оцифровка тротуаров ОДХ');
-    assert.equal(odh.book.getWorksheet('На доработке').getCell('B2').value, 'Улица · DISTRICT-P01 · кадр 1');
-    // Возврат района пришёл в лист доработки с причиной.
-    assert.equal(odh.book.getWorksheet('На доработке').getCell('C2').value, 'исправить');
+    // Сумма сводит оба набора: Коптево закрыто, у АлВД - отклонённый кадр и пустой второй слот
+    const districts = odh.book.getWorksheet('Свод по районам');
+    const labels = [];
+    districts.eachRow((row, number) => { if (number > 2) labels.push(String(row.getCell(1).value)); });
+    assert.ok(labels.includes('АВД САО'), 'кадры АвД идут собственным районом');
+    assert.ok(labels.includes('Коптево'));
+    // Точки: два кадра АвД-точки и кадр Коптева плюс шапка.
+    assert.equal(odh.book.getWorksheet('Точки').rowCount, 4);
+    // Возврат АвД-кадра в лист доработки с причиной.
+    const rework = odh.book.getWorksheet('На доработке');
+    assert.equal(rework.getCell('A2').value, 'АВД САО');
+    assert.equal(rework.getCell('B2').value, 'Переулок · AVD-P01 · кадр 1');
+    assert.equal(rework.getCell('C2').value, 'исправить');
   } finally {
     await new Promise(resolve => server.close(resolve));
     await rm(dir, { recursive: true, force: true });

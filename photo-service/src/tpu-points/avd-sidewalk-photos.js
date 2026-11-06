@@ -25,7 +25,11 @@ export function createAvdSidewalkPhotosRouter({ authenticate, pool, loadCatalog,
   const pointsFor = (catalog, req) => isDistrict
     ? catalog.districtPoints.filter(point => isPrefecture(req) || districtOwnsSidewalk(req.user, point))
     : catalog.avdPoints;
-  const framesFor = catalog => isDistrict ? catalog.districtFrames : catalog.avdFrames;
+  // Приёмка работает с единым набором: у префектуры согласован поиск по кадрам
+  // обоих скоупов (обзор, проверка снимков среди районных и АвД-точек).
+  const framesFor = catalog => isDistrict
+    ? new Map([...catalog.districtFrames, ...catalog.avdFrames])
+    : catalog.avdFrames;
   router.use(authenticate, (req, res, next) => {
     res.set('Cache-Control', 'private, no-store');
     if (isPrefecture(req) || isEditor(req.user)) return next();
@@ -81,15 +85,19 @@ export function createAvdSidewalkPhotosRouter({ authenticate, pool, loadCatalog,
 
   async function loadQueueRows(req) {
     const [catalog, edits, photos] = await Promise.all([loadCatalog(), loadEdits(), currentPhotos()]);
-    const rows = pointsFor(catalog, req).flatMap(source => {
+    // Приёмка — один набор: у префектуры кадры АвД (они работают по всему округу)
+    // идут той же очередью и в своде выглядят отдельной строкой «АВД САО» — 17-й район.
+    const sources = isDistrict && isPrefecture(req) ? [...catalog.districtPoints, ...catalog.avdPoints] : pointsFor(catalog, req);
+    const rows = sources.flatMap(source => {
       const point = mergePoint(source, edits.get(source.id));
+      const district = isDistrict && isAvdSidewalkPoint(point) ? 'АВД САО' : point.district;
       return point.slots.flatMap((slot, index) => {
         const photo = photos.get(slot.id);
         if (point.noSidewalk && !photo) return [];
         const active = photo && photo.status !== 'rejected' ? photo : null;
         const rejected = photo?.status === 'rejected' ? photo : null;
         return [{ point_id: slot.id, label: point.street + ' · ' + point.id + ' · кадр ' + (index + 1),
-          district: point.district, object_id: point.id, heading: slot.azimuth, longitude: point.coordinates[0], latitude: point.coordinates[1],
+          district, object_id: point.id, heading: slot.azimuth, longitude: point.coordinates[0], latitude: point.coordinates[1],
           no_sidewalk: point.noSidewalk === true,
           photo_id: active?.id, photo_status: active?.status, uploaded_at: active?.uploaded_at, photo_filename: active?.photo_filename, reviewed_at: active?.reviewed_at,
           rejected_photo_id: rejected?.id, rejected_comment: rejected?.review_comment, rejected_at: rejected?.reviewed_at,
@@ -115,17 +123,19 @@ export function createAvdSidewalkPhotosRouter({ authenticate, pool, loadCatalog,
 
   // Свод по районам — та же книга Excel, что у въездных групп, ДП/СП и тротуаров
   // дворов: лист «Свод по районам», «Точки» и «На доработке» с причиной возврата.
-  router.get('/report.xlsx', prefectureOnly, async (req, res, next) => {
+  // Книга одна на весь набор тротуаров ОДХ: кадры АвД входят строкой «АВД САО»,
+  // поэтому отдельный скоуп-свод не строится.
+  if (isDistrict) router.get('/report.xlsx', prefectureOnly, async (req, res, next) => {
     try {
       const generatedAt = new Date();
       const summary = summarizeDigitization({ points: slotPointsForReport((await loadQueueRows(req)).rows), generatedAt });
       const buffer = await buildDigitizationReport(summary, {
-        title: isDistrict ? 'Оцифровка тротуаров ОДХ' : 'Оцифровка тротуаров ОДХ · АвД САО',
+        title: 'Оцифровка тротуаров ОДХ',
         pointTitle: 'Кадр',
       });
       const day = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Moscow' }).format(generatedAt);
       res.set({ 'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-        'Content-Disposition': `attachment; filename="Svod_foto_trotuary_odh${isDistrict ? '' : '_avd'}_SAO_${day}.xlsx"`,
+        'Content-Disposition': `attachment; filename="Svod_foto_trotuary_odh_SAO_${day}.xlsx"`,
         'Cache-Control': 'private, no-store' }).send(buffer);
     } catch (error) { next(error); }
   });
