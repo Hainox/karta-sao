@@ -1,4 +1,5 @@
 import { acceptedPhotoBytes, mountAcceptedPhotoExport } from './accepted-photo-export.js';
+import { createCanvas, loadImage } from '@napi-rs/canvas';
 import express from 'express';
 import { randomUUID } from 'node:crypto';
 import { DISTRICTS } from './validation.js';
@@ -17,6 +18,23 @@ const districtOwner = balance => balance === 'ГБУ «Жилищник райо
 export const isDistrictSidewalkEditor = user => user.role === 'district_editor' && DISTRICTS.has(user.district);
 export const districtOwnsSidewalk = (user, point) => isDistrictSidewalkEditor(user) && districtOwner(point.balance) === user.district;
 const isPrefecture = (req) => req.user.role === 'prefecture_admin';
+
+// Кабинет приёмки листает кадры подряд: полный снимок (в среднем 2,7 МБ) на
+// каждый переход — это секунды ожидания. Для решения «принять / вернуть»
+// достаточно 1600 px по длинной стороне; оригинал открывается отдельной кнопкой.
+export const PREVIEW_MAX = 1600;
+const PREVIEW_QUALITY = 78;
+
+/** Уменьшает кадр до PREVIEW_MAX по длинной стороне и пережимает в JPEG. */
+export async function renderPreview(bytes, { max = PREVIEW_MAX, quality = PREVIEW_QUALITY } = {}) {
+  const image = await loadImage(Buffer.from(bytes));
+  const scale = Math.min(1, max / Math.max(image.width, image.height));
+  const width = Math.max(1, Math.round(image.width * scale));
+  const height = Math.max(1, Math.round(image.height * scale));
+  const canvas = createCanvas(width, height);
+  canvas.getContext('2d').drawImage(image, 0, 0, width, height);
+  return { bytes: canvas.toBuffer('image/jpeg', quality), width, height };
+}
 
 /** Последнее действующее фото каждого слота: отклонённая пересдача сбрасывает «пусто». */
 export const loadSidewalkPhotos = async pool => {
@@ -150,7 +168,44 @@ export function createAvdSidewalkPhotosRouter({ authenticate, pool, loadCatalog,
       if (!UUID.test(photoId) || !await findFrame(frameId, req)) return noFrame(res);
       const { rows } = await pool.query('SELECT photo_bytes, photo_mime_type FROM avd_sidewalk_test_photos WHERE frame_id = $1 AND id = $2', [frameId, photoId]);
       if (!rows[0]) return res.status(404).json({ error: 'Фото не найдено.' });
-      res.set('X-Content-Type-Options', 'nosniff').type(rows[0].photo_mime_type).send(rows[0].photo_bytes);
+      // photo_id неизменяем: один и тот же URL всегда отдаёт один и тот же файл,
+      // поэтому браузер может держать его сутки и не качать при возврате назад.
+      res.set('Cache-Control', 'private, max-age=86400, immutable')
+        .set('X-Content-Type-Options', 'nosniff').type(rows[0].photo_mime_type).send(rows[0].photo_bytes);
+    } catch (error) { next(error); }
+  });
+
+  // Превью для листания кадров: 1600 px вместо полного снимка. Первый запрос
+  // сжимает и кладёт в таблицу, дальше отдаётся из неё.
+  router.get('/frames/:frameId/photos/:photoId/preview', async (req, res, next) => {
+    try {
+      const { frameId, photoId } = req.params;
+      if (!UUID.test(photoId) || !await findFrame(frameId, req)) return noFrame(res);
+      const cached = await pool.query(
+        'SELECT photo_bytes, photo_mime_type FROM avd_sidewalk_test_photo_previews WHERE photo_id = $1', [photoId]);
+      if (cached.rows[0]) {
+        return res.set('Cache-Control', 'private, max-age=86400, immutable')
+          .set('X-Content-Type-Options', 'nosniff')
+          .type(cached.rows[0].photo_mime_type).send(cached.rows[0].photo_bytes);
+      }
+      const { rows } = await pool.query(
+        'SELECT photo_bytes FROM avd_sidewalk_test_photos WHERE frame_id = $1 AND id = $2', [frameId, photoId]);
+      if (!rows[0]) return res.status(404).json({ error: 'Фото не найдено.' });
+      let preview;
+      try {
+        preview = await renderPreview(rows[0].photo_bytes);
+      } catch {
+        // Битый файл не должен ломать приёмку: отдаём оригинал как есть.
+        return res.set('Cache-Control', 'private, max-age=3600')
+          .set('X-Content-Type-Options', 'nosniff').type('image/jpeg').send(rows[0].photo_bytes);
+      }
+      await pool.query(
+        `INSERT INTO avd_sidewalk_test_photo_previews (photo_id, photo_bytes, photo_mime_type, photo_size, width, height)
+         VALUES ($1,$2,'image/jpeg',$3,$4,$5) ON CONFLICT (photo_id) DO NOTHING`,
+        [photoId, preview.bytes, preview.bytes.length, preview.width, preview.height]);
+      res.set('Cache-Control', 'private, max-age=86400, immutable')
+        .set('X-Content-Type-Options', 'nosniff')
+        .type('image/jpeg').send(preview.bytes);
     } catch (error) { next(error); }
   });
 

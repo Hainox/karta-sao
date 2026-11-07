@@ -221,6 +221,7 @@
     MODES['odh-sidewalks'] = {
       base: odhBase,
       photo: (frame, photo) => odhBase + avdFramePhoto(frame, photo),
+      preview: (frame, photo) => odhBase + avdFramePhoto(frame, photo) + '/preview',
       review: (photo) => avdFramePhoto(photo.point_id, photo.id) + '/review',
       reportFile: 'Svod_foto_trotuary_odh_SAO_',
       noun: 'кадров', listNoun: 'Кадров', open: 'Открыть кадр →',
@@ -367,7 +368,7 @@
         meta.prepend(pill);
         if (row.no_sidewalk) meta.append(make('span', 'pill flagged', 'НЕТ ТРОТУАРА'));
         button.append(info, make('span', 'open', mode().open));
-        button.onclick = () => openPoint(row);
+        button.onclick = () => openPoint(row, state.tab);
         return button;
       }));
       if (!all.length) list.append(make('div', 'empty', state.tab === 'pending' ? `Нет ${mode().noun} с фото на проверке.` : `Нет ${mode().noun} на доработке.`));
@@ -422,12 +423,27 @@
       const panel = make('figure', 'photo-panel');
       const box = make('a', 'photo placeholder', 'Загружаем фото…');
       panel.append(box);
-      api.request(photoPath(pointId, photo.id)).then((response) => response.blob()).then((blob) => {
+      // Листание идёт по превью 1600 px: полный кадр — 2,7 МБ, превью — ~300 КБ.
+      const source = mode().preview ? mode().preview(pointId, photo.id) : photoPath(pointId, photo.id);
+      api.request(source).then((response) => response.blob()).then((blob) => {
         capture?.then(map => map?.readPhoto(blob)).catch(() => {});
         if (generation !== state.photoGeneration || !box.isConnected) return;
         const url = URL.createObjectURL(blob); state.urls.push(url);
         const image = make('img'); image.src = url; image.alt = label;
         const { tools, view } = photoTools(photo.id, image, box);
+        if (mode().preview) {
+          const original = make('button', 'secondary', 'Оригинал'); original.type = 'button';
+          original.title = 'Открыть полный снимок';
+          original.onclick = async () => {
+            original.disabled = true;
+            try {
+              const full = await (await api.request(photoPath(pointId, photo.id))).blob();
+              const fullUrl = URL.createObjectURL(full); state.urls.push(fullUrl);
+              openPhoto(pointId, photo, label, fullUrl);
+            } catch (_) { original.disabled = false; }
+          };
+          tools.append(original);
+        }
         box.href = url; box.classList.remove('placeholder'); box.replaceChildren(image);
         box.onclick = event => { event.preventDefault(); openPhoto(pointId, photo, label, url); };
         panel.append(tools);
@@ -448,16 +464,46 @@
       return from(state.queue.pending, 'pending') || from(state.queue.rework, 'rework') || null;
     }
 
-    async function openPoint(row) {
+    // Очередь тянется один раз: при переходе «кадр → кадр» она берётся из памяти,
+    // а проверенная строка убирается локально. Раньше на один кадр уходило
+    // два-три запроса по 1,8 МБ.
+    async function refreshQueue() {
+      state.queue = await json('/queue');
+      fillDistricts(); renderCounts(); render();
+      return state.queue;
+    }
+
+    function dropPendingRow(pointId, decision) {
+      const queue = state.queue; if (!queue) return;
+      const index = queue.pending.findIndex(row => row.point_id === pointId);
+      if (index < 0) return;
+      queue.pending.splice(index, 1);
+      queue.counts.pending = Math.max(0, queue.counts.pending - 1);
+      if (decision === 'accepted') queue.counts.accepted += 1;
+      else if (decision === 'rejected') queue.counts.rework += 1;
+      renderCounts(); render();
+    }
+
+    // Заранее качаем превью следующего кадра: к моменту перехода оно уже в кэше.
+    function prefetchNext(current) {
+      if (!mode().preview || !state.queue) return;
+      const list = state.queue.pending.filter(matchesFilters);
+      const index = list.findIndex(row => row.point_id === (current?.point_id || state.objectId));
+      const next = index >= 0 ? list[index + 1] : list[0];
+      if (!next?.photo_id) return;
+      api.request(mode().preview(next.point_id, next.photo_id)).then(response => response.blob()).catch(() => {});
+    }
+
+    async function openPoint(row, kind = 'pending') {
       if (state.objectId !== row.point_id) state.angles.clear();
       state.objectId = row.point_id;
       state.revision++;
       el('workspace').hidden = true; el('objectView').hidden = false;
       window.scrollTo({ top: 0 });
-      await renderPoint();
+      await renderPoint({ row, kind });
     }
 
-    async function renderPoint() {
+    async function renderPoint(found) {
       const revision = state.revision;
       clearReviewMap();
       clearUrls();
@@ -470,9 +516,11 @@
       const grid = el('slotGrid');
       grid.replaceChildren();
       setStatus('objectStatus', 'Загружаем точку…');
-      let queue;
-      try { queue = await json('/queue'); }
-      catch (error) {
+      try {
+        if (!state.queue) await refreshQueue();
+        if (!found) found = currentRow(state.objectId);
+        if (!found) { await refreshQueue(); found = currentRow(state.objectId); }
+      } catch (error) {
         if (revision === state.revision) {
           setStatus('objectStatus', 'Не удалось открыть точку: ' + error.message, true);
           el('retryObject').hidden = false;
@@ -480,9 +528,6 @@
         throw error;
       }
       if (revision !== state.revision) return;
-      state.queue = queue;
-      fillDistricts(); renderCounts(); render();
-      const found = currentRow(state.objectId);
       if (!found) {
         setStatus('objectStatus', 'Снимок этой точки уже проверен: он принят или ждёт новой пересдачи.');
         el('nextObject').hidden = state.tab !== 'pending';
@@ -493,6 +538,7 @@
       el('objectMeta').textContent = `${row.district} · ${mode().describe(row)}${row.longitude != null ? ' · ' + Number(row.latitude).toFixed(6) + ', ' + Number(row.longitude).toFixed(6) : ''}`;
       el('objectMapLink').href = mode().mapLink?.(row) || (DISTRICT_SLUGS[row.district] ? DISTRICT_SLUGS[row.district] + '.html' : 'index.html');
       grid.replaceChildren(pointCard(row, kind, openReviewMap(row)));
+      prefetchNext(row);
       const pendingPhoto = kind === 'pending';
       setStatus('objectStatus', pendingPhoto ? 'Снимок ждёт решения: принять или вернуть на доработку с комментарием.' : 'Снимок на доработке: ждём новую фотографию.');
       el('acceptObject').hidden = !pendingPhoto;
@@ -576,11 +622,14 @@
 
     async function nextPoint() {
       const revision = state.revision;
-      const queue = await json('/queue');
-      if (revision !== state.revision) return;
-      state.queue = queue;
-      fillDistricts(); renderCounts(); render();
-      const next = queue.pending.find(matchesFilters);
+      if (!state.queue) await refreshQueue();
+      let next = state.queue.pending.find(matchesFilters);
+      if (!next) {
+        // Возможно, районы уже загрузили новые кадры: обновляем очередь один раз.
+        await refreshQueue();
+        if (revision !== state.revision) return;
+        next = state.queue.pending.find(matchesFilters);
+      }
       if (next) { await openPoint(next); return; }
       backToList();
       setStatus('listStatus', 'Все точки в выбранной очереди проверены.');
@@ -609,11 +658,9 @@
         }
         saved = true;
         if (revision !== state.revision) return;
-        await renderPoint();
-        if (state.tab === 'pending') {
-          const found = currentRow(state.objectId);
-          if (!found || found.kind !== 'pending') await nextPoint();
-        }
+        dropPendingRow(state.objectId, decision);
+        if (state.tab === 'pending') await nextPoint();
+        else await renderPoint();
       } catch (error) {
         if (revision !== state.revision) return;
         if (!saved) { try { await renderPoint(); } catch (_) {} }
@@ -628,7 +675,7 @@
     el('retryObject').onclick = async () => {
       if (state.busy) return;
       lockReview(true);
-      try { await renderPoint(); }
+      try { await refreshQueue(); await renderPoint(); }
       catch (error) { setStatus('objectStatus', 'Не удалось обновить кабинет: ' + error.message, true); }
       finally { lockReview(false); }
     };
