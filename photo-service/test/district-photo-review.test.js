@@ -160,8 +160,8 @@ test('свод по фото въездных групп выгружается 
     const overview = book.getWorksheet('Свод по районам');
     assert.equal(overview.getCell('A1').value, 'Оцифровка въездных групп');
     const airport = overview.getRow(overview.getColumn(1).values.indexOf('Аэропорт'));
-    // Всего, без фото, закрыто, на доработке.
-    assert.deepEqual(airport.values.slice(1, 6), ['Аэропорт', 4, 0, 1, 1]);
+    // Всего, без фото, закрыто, на проверке, на доработке.
+    assert.deepEqual(airport.values.slice(1, 7), ['Аэропорт', 4, 0, 1, 2, 1]);
     assert.equal(book.getWorksheet('На доработке').getRow(2).getCell(3).value, 'Снимок без клумбы в кадре');
   });
   for (const role of ['district_editor', 'reviewer']) {

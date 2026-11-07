@@ -41,17 +41,24 @@ test('книга Excel: свод по районам, точки и лист д�
   assert.deepEqual(book.worksheets.map((sheet) => sheet.name), ['Свод по районам', 'Точки', 'На доработке']);
   const overview = book.getWorksheet('Свод по районам');
   // Форма по эталону префектуры: тёмно-зелёная строка названия на всю ширину,
-  // пять колонок, районы от лучшего процента принятых.
+  // шесть колонок, районы от лучшего процента принятых.
   assert.equal(overview.getCell('A1').value, 'Оцифровка въездных групп');
-  assert.equal(overview.getCell('F1').master.address, 'A1');
+  assert.equal(overview.getCell('G1').master.address, 'A1');
   assert.equal(overview.getCell('A1').fill.fgColor.argb, 'FF123A32');
-  assert.deepEqual(overview.getRow(2).values.slice(1), ['Район', 'Всего Объектов', 'Объектов без фото', 'Объектов закрыто', 'Обьектов на доработке ', '% принято']);
+  assert.deepEqual(overview.getRow(2).values.slice(1), ['Район', 'Всего Объектов', 'Объектов без фото', 'Объектов закрыто', 'Объектов на проверке', 'Обьектов на доработке ', '% принято']);
   const totalRow = overview.getRow(3 + 16);
   assert.equal(totalRow.getCell(1).value, 'Итого по САО');
   assert.equal(totalRow.getCell(2).value, 4);
-  assert.equal(totalRow.getCell(6).numFmt, '0%');
+  assert.equal(totalRow.getCell(7).numFmt, '0%');
+  // Кадр, который загрузили и ещё не приняли, виден отдельной колонкой:
+  // иначе строка района не сходится (всего ≠ без фото + закрыто + на доработке).
+  const koptevoRow = overview.getRow(3 + summary.districtRows.findIndex((row) => row.label === 'Коптево'));
+  assert.deepEqual(
+    [koptevoRow.getCell(2).value, koptevoRow.getCell(3).value, koptevoRow.getCell(4).value, koptevoRow.getCell(5).value, koptevoRow.getCell(6).value],
+    [3, 0, 1, 1, 1],
+  );
   const shares = [];
-  for (let row = 3; row < 3 + 16; row += 1) shares.push(overview.getRow(row).getCell(6).value);
+  for (let row = 3; row < 3 + 16; row += 1) shares.push(overview.getRow(row).getCell(7).value);
   assert.deepEqual(shares, [...shares].sort((a, b) => b - a), 'районы от большего процента к меньшему');
   assert.equal(overview.views[0].ySplit, 2);
   const rework = book.getWorksheet('На доработке');
