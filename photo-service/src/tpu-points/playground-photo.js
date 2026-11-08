@@ -1,6 +1,7 @@
 import { acceptedPhotoBytes, mountAcceptedPhotoExport } from './accepted-photo-export.js';
 import crypto from 'node:crypto';
 import express from 'express';
+import { resizeJpeg } from '../image-resize.js';
 import { safePhotoFilename, validatePhotoUpload } from './photo-markers.js';
 import { districtQueueFromRows, slotPointsForReport } from './district-point-photos.js';
 import { buildDigitizationReport, summarizeDigitization } from '../digitization-report.js';
@@ -43,6 +44,28 @@ export function createPlaygroundPhotoRouter({pool,authenticate}) {
   if(!district)return res.status(400).json({error:'Укажите район.'});
   const result=await pool.query(pointQuery+' WHERE p.district=$1 ORDER BY p.kind,p.source_row',[district]);
   res.set('Cache-Control','no-store').json({points:result.rows});
+ }catch(e){next(e)}});
+ // Превью по токену — единственный маршрут без сессии. Google Sheets =IMAGE()
+ // не умеет заголовок Authorization, поэтому ссылка сама является пропуском.
+ // Токен неугадываемый и отзывается через revoked_at; оригинал не отдаётся.
+ router.get('/photo-thumb/:token',async(req,res,next)=>{try{
+  const token=String(req.params.token||'').replace(/\.jpg$/i,'');
+  if(!/^[0-9a-f]{32}$/.test(token))return res.status(404).json({error:'Фото не найдено.'});
+  const {rows}=await pool.query(`SELECT t.photo_id,f.photo_bytes FROM photo_public_tokens t
+   JOIN playground_photo_slot_photos f ON f.id=t.photo_id
+   WHERE t.token=$1 AND t.revoked_at IS NULL`,[token]);
+  if(!rows[0])return res.status(404).json({error:'Фото не найдено.'});
+  const cached=await pool.query('SELECT photo_bytes,photo_mime_type FROM playground_photo_thumbs WHERE photo_id=$1',[rows[0].photo_id]);
+  let thumb=cached.rows[0];
+  if(!thumb){
+   const preview=await resizeJpeg(rows[0].photo_bytes,{max:320,quality:80});
+   await pool.query(`INSERT INTO playground_photo_thumbs (photo_id,photo_bytes,photo_mime_type,photo_size,width,height)
+    VALUES ($1,$2,'image/jpeg',$3,$4,$5) ON CONFLICT (photo_id) DO NOTHING`,
+    [rows[0].photo_id,preview.bytes,preview.bytes.length,preview.width,preview.height]);
+   thumb={photo_bytes:preview.bytes,photo_mime_type:'image/jpeg'};
+  }
+  res.set('Cache-Control','public, max-age=86400, immutable').set('X-Robots-Tag','noindex')
+   .type(thumb.photo_mime_type).send(thumb.photo_bytes);
  }catch(e){next(e)}});
  router.use(authenticate,(req,res,next)=>roles.has(req.user.role)&&
   (req.user.role!=='district_editor'||req.user.district)?next():res.status(403).json({error:'Нет доступа.'}));

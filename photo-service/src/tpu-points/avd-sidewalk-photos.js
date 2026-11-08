@@ -1,6 +1,6 @@
 import { acceptedPhotoBytes, mountAcceptedPhotoExport } from './accepted-photo-export.js';
-import { createCanvas, loadImage } from '@napi-rs/canvas';
 import express from 'express';
+import { resizeJpeg } from '../image-resize.js';
 import { randomUUID } from 'node:crypto';
 import { DISTRICTS } from './validation.js';
 import { isAutodorAccount } from '../scope.js';
@@ -26,14 +26,8 @@ export const PREVIEW_MAX = 1600;
 const PREVIEW_QUALITY = 78;
 
 /** Уменьшает кадр до PREVIEW_MAX по длинной стороне и пережимает в JPEG. */
-export async function renderPreview(bytes, { max = PREVIEW_MAX, quality = PREVIEW_QUALITY } = {}) {
-  const image = await loadImage(Buffer.from(bytes));
-  const scale = Math.min(1, max / Math.max(image.width, image.height));
-  const width = Math.max(1, Math.round(image.width * scale));
-  const height = Math.max(1, Math.round(image.height * scale));
-  const canvas = createCanvas(width, height);
-  canvas.getContext('2d').drawImage(image, 0, 0, width, height);
-  return { bytes: canvas.toBuffer('image/jpeg', quality), width, height };
+export async function renderPreview(bytes, options = {}) {
+  return resizeJpeg(bytes, { max: PREVIEW_MAX, quality: PREVIEW_QUALITY, ...options });
 }
 
 /** Последнее действующее фото каждого слота: отклонённая пересдача сбрасывает «пусто». */
