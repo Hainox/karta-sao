@@ -25,6 +25,7 @@ from openpyxl.utils import get_column_letter
 ROOT = Path(__file__).resolve().parent
 TEMPLATE = ROOT / "svod-dp-sp-szhkh.xlsx"
 THUMB = "https://obhod-sao.ru/photo-api/object-photo-points/playgrounds/photo-thumb/"
+SEVER_THUMB = "https://obhod-sao.ru/photo-api/object-photo-points/playgrounds/sever-thumb/"
 MAP = "https://hainox.github.io/karta-sao/districts/"
 MSK = ZoneInfo("Europe/Moscow")
 KINDS = {"dp": "ДП", "sp": "СП"}
@@ -73,13 +74,23 @@ def read_sever(path):
     return latest
 
 
+def read_sever_tokens(path):
+    """ID площадки → токен снимка из «Север ЖКХ»."""
+    text = path.read_text(encoding="utf-8-sig")
+    return {row["object_id"].strip(): row["token"].strip()
+            for row in csv.DictReader(io.StringIO(text))
+            if row.get("object_id") and row.get("token")}
+
+
 def main():
     csv_path = Path(sys.argv[1])
     sever_path = Path(sys.argv[2])
-    out_path = Path(sys.argv[3])
+    tokens_path = Path(sys.argv[3])
+    out_path = Path(sys.argv[4])
 
     rows = read_rows(csv_path)
     sever = read_sever(sever_path)
+    tokens = read_sever_tokens(tokens_path)
     wb = load_workbook(TEMPLATE)
 
     refs = wb["Справочники"]
@@ -110,12 +121,16 @@ def main():
         reg.cell(row=r, column=14, value="есть" if found else "нет")
         reg.cell(row=r, column=15, value=found["task"] if found else None)
         reg.cell(row=r, column=16, value=parse_day(found["date"]) if found and found["date"] else None)
+        sever_token = tokens.get(str(row["source_id"]).strip())
+        reg.cell(row=r, column=17, value=SEVER_THUMB + sever_token if sever_token else None)
 
     # --- Сверка: срез 300 принятых, понемногу с каждого района -----------
     sv = wb["Сверка"]
     accepted = [row for row in rows if row["state"] == "accepted" and row["token"]]
     by_district = {}
-    for row in sorted(accepted, key=lambda item: (item["kind"], item["address"] or "")):
+    for row in sorted(accepted, key=lambda item: (
+            0 if tokens.get(str(item["source_id"]).strip()) else 1,
+            item["kind"], item["address"] or "")):
         by_district.setdefault(row["district"], []).append(row)
     slice_rows = []
     for offset in range(20):
@@ -133,6 +148,9 @@ def main():
         sv.cell(row=r, column=4, value=row["address"])
         sv.cell(row=r, column=5, value=KIND_LABELS.get(row["kind"], row["kind"]))
         sv.cell(row=r, column=6, value=str(row["source_id"]))
+        sever_token = tokens.get(str(row["source_id"]).strip())
+        sv.cell(row=r, column=7, value='=IMAGE("{}",4,160,120)'.format(SEVER_THUMB + sever_token)
+                if sever_token else None)
         sv.cell(row=r, column=8, value='=IMAGE("{}",4,160,120)'.format(THUMB + row["token"]))
         sv.cell(row=r, column=9, value="Принято")
         sv.cell(row=r, column=10, value="—")
@@ -178,7 +196,10 @@ def main():
     counts = Counter(row["state"] for row in rows)
     print("rows:", len(rows), dict(counts))
     print("sever matched:", sum(1 for row in rows if sever.get(str(row["source_id"]).strip())))
-    print("accepted in Сверка:", min(300, len(accepted)), "| rework:", len(rework))
+    print("sever photos:", sum(1 for row in rows if tokens.get(str(row["source_id"]).strip())))
+    print("accepted in Сверка:", min(300, len(slice_rows)),
+          "| с фото СЖКХ:", sum(1 for row in slice_rows[:300] if tokens.get(str(row["source_id"]).strip())),
+          "| rework:", len(rework))
     print("saved:", out_path, out_path.stat().st_size, "bytes")
 
 
