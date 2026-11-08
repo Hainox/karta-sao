@@ -103,6 +103,55 @@ export function createPlaygroundPhotoRouter({pool,authenticate}) {
   const {rows}=await pool.query(sheetQuery);
   res.set('Cache-Control','no-store').json({generated_at:new Date().toISOString(),rows});
  }catch(e){next(e)}});
+ // Решения из таблицы. «Принято (сверка)» — только запись в историю.
+ // «Вернуть на доработку» — реальный отзыв принятого снимка: слот освобождается,
+ // район видит объект в «На доработке» и обязан переснять. Отзыв адресуется
+ // photo_id, поэтому устаревшая строка не тронет уже переснятый кадр.
+ router.post('/sheet-decisions',prefecture,async(req,res,next)=>{try{
+  const list=Array.isArray(req.body?.decisions)?req.body.decisions.slice(0,100):[];
+  if(!list.length)return res.status(422).json({error:'Нет решений.'});
+  const results=[];
+  for(const item of list){
+   const clientId=String(item&&item.client_id||'').slice(0,80);
+   const pointId=String(item&&item.point_id||'');
+   const photoId=item&&item.photo_id?String(item.photo_id):null;
+   const decision=String(item&&item.decision||'');
+   if(!clientId||!UUID.test(pointId)||!['accepted_crosscheck','rework'].includes(decision)){
+    results.push({client_id:clientId,applied:false,error:'bad_request'});continue;
+   }
+   const reviewedBy=String(item.reviewed_by||'sheet').slice(0,200);
+   const reviewedAt=item.reviewed_at?new Date(item.reviewed_at):new Date();
+   if(decision==='accepted_crosscheck'){
+    const saved=await pool.query(`INSERT INTO playground_sheet_reviews
+      (client_id,point_id,photo_id,decision,reason,comment,reviewed_by,reviewed_at,applied_at,applied_by)
+      VALUES ($1,$2,$3,$4,$5,$6,$7,$8,now(),$9) ON CONFLICT (client_id) DO NOTHING RETURNING id`,
+      [clientId,pointId,photoId&&UUID.test(photoId)?photoId:null,decision,item.reason||null,item.comment||null,reviewedBy,reviewedAt,req.user.sub]);
+    results.push({client_id:clientId,applied:true,duplicate:saved.rowCount===0});continue;
+   }
+   if(!photoId||!UUID.test(photoId)){results.push({client_id:clientId,applied:false,error:'photo_required'});continue}
+   const client=await pool.connect();
+   try{
+    await client.query('BEGIN');
+    const revoked=await client.query(`UPDATE playground_photo_slot_photos
+      SET status='rejected',review_comment=$3,reviewed_by=$4,reviewed_at=now()
+      WHERE id=$1 AND point_id=$2 AND status='accepted' RETURNING id`,
+      [photoId,pointId,String(item.comment||item.reason||'Возврат из таблицы').slice(0,2000),req.user.sub]);
+    if(!revoked.rowCount){
+     await client.query('ROLLBACK');
+     results.push({client_id:clientId,applied:false,error:'photo_not_accepted'});continue;
+    }
+    await client.query('INSERT INTO audit_log (actor_user_id, action, object_key, metadata) VALUES ($1,$2,$3,$4::jsonb)',
+      [req.user.sub,'playground_photo_revoked',pointId,JSON.stringify({photoId,reason:item.reason||null,comment:item.comment||null,source:'sheet',clientId})]);
+    await client.query(`INSERT INTO playground_sheet_reviews
+      (client_id,point_id,photo_id,decision,reason,comment,reviewed_by,reviewed_at,applied_at,applied_by)
+      VALUES ($1,$2,$3,$4,$5,$6,$7,$8,now(),$9) ON CONFLICT (client_id) DO NOTHING`,
+      [clientId,pointId,photoId,decision,item.reason||null,item.comment||null,reviewedBy,reviewedAt,req.user.sub]);
+    await client.query('COMMIT');
+    results.push({client_id:clientId,applied:true});
+   }catch(error){await client.query('ROLLBACK');throw error}finally{client.release()}
+  }
+  res.json({applied:results.filter(row=>row.applied).length,skipped:results.filter(row=>!row.applied).length,results});
+ }catch(e){next(e)}});
   mountAcceptedPhotoExport(router, {
     prefecture, category: 'Площадки ДП/СП', allowKind: true,
     loadRows: async () => (await pool.query(queueQuery)).rows,

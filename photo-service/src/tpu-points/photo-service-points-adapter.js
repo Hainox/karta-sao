@@ -14,7 +14,7 @@ export function createPhotoServicePointsAdapter({ pool, currentUser, boundary })
   });
   const app = express();
   app.disable('x-powered-by');
-  app.use(express.json({ limit: '32kb' }));
+  app.use(express.json({ limit: '256kb' }));
   const authenticate = async (req, res, next) => {
     try {
       const user = await currentUser(req);
