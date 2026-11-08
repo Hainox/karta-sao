@@ -84,6 +84,25 @@ export function createPlaygroundPhotoRouter({pool,authenticate}) {
  router.get('/queue',prefecture,async(req,res,next)=>{try{
   res.set('Cache-Control','no-store').json(playgroundQueueFromRows((await pool.query(queueQuery)).rows));
  }catch(e){next(e)}});
+ // Полный срез для Google-таблицы: одна строка = площадка, плюс токены обоих
+ // снимков. Токены, а не готовые URL: базовый адрес знает скрипт таблицы.
+ const sheetQuery=`SELECT p.id AS point_id,p.source_id,p.district,p.kind,p.address,p.latitude,p.longitude,
+  COALESCE(a.status,'empty') AS photo_state,a.id AS photo_id,a.uploaded_at,a.reviewed_at,a.review_comment,
+  r.review_comment AS rejected_comment,r.reviewed_at AS rejected_at,
+  t.token AS photo_token,s.token AS sever_token,s.object_id AS sever_object_id
+  FROM playground_photo_points p
+  LEFT JOIN LATERAL (SELECT f.id,f.status,f.uploaded_at,f.reviewed_at,f.review_comment FROM playground_photo_slot_photos f
+   WHERE f.point_id=p.id AND f.status IN ('pending','accepted') ORDER BY f.uploaded_at DESC LIMIT 1) a ON true
+  LEFT JOIN LATERAL (SELECT f.review_comment,f.reviewed_at FROM playground_photo_slot_photos f
+   WHERE f.point_id=p.id AND f.status='rejected' ORDER BY f.reviewed_at DESC NULLS LAST LIMIT 1) r ON true
+  LEFT JOIN LATERAL (SELECT token FROM photo_public_tokens WHERE photo_id=a.id AND revoked_at IS NULL LIMIT 1) t ON true
+  LEFT JOIN LATERAL (SELECT token,object_id FROM sever_photo_thumbs WHERE object_id=p.source_id AND revoked_at IS NULL LIMIT 1) s ON true
+  WHERE p.retired_at IS NULL
+  ORDER BY p.district,p.kind,p.source_row`;
+ router.get('/sheet.json',prefecture,async(req,res,next)=>{try{
+  const {rows}=await pool.query(sheetQuery);
+  res.set('Cache-Control','no-store').json({generated_at:new Date().toISOString(),rows});
+ }catch(e){next(e)}});
   mountAcceptedPhotoExport(router, {
     prefecture, category: 'Площадки ДП/СП', allowKind: true,
     loadRows: async () => (await pool.query(queueQuery)).rows,
