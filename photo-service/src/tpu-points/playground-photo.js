@@ -67,6 +67,15 @@ export function createPlaygroundPhotoRouter({pool,authenticate}) {
   res.set('Cache-Control','public, max-age=86400, immutable').set('X-Robots-Tag','noindex')
    .type(thumb.photo_mime_type).send(thumb.photo_bytes);
  }catch(e){next(e)}});
+ // Снимок того же объекта из выгрузки «Север ЖКХ» — вторая картинка в строке.
+ router.get('/sever-thumb/:token',async(req,res,next)=>{try{
+  const token=String(req.params.token||'').replace(/\.jpg$/i,'');
+  if(!/^[0-9a-f]{32}$/.test(token))return res.status(404).json({error:'Фото не найдено.'});
+  const {rows}=await pool.query('SELECT photo_bytes FROM sever_photo_thumbs WHERE token=$1 AND revoked_at IS NULL',[token]);
+  if(!rows[0])return res.status(404).json({error:'Фото не найдено.'});
+  res.set('Cache-Control','public, max-age=86400, immutable').set('X-Robots-Tag','noindex')
+   .type('image/jpeg').send(rows[0].photo_bytes);
+ }catch(e){next(e)}});
  router.use(authenticate,(req,res,next)=>roles.has(req.user.role)&&
   (req.user.role!=='district_editor'||req.user.district)?next():res.status(403).json({error:'Нет доступа.'}));
  router.param('id',(req,res,next,id)=>UUID.test(id)?next():res.status(400).json({error:'Неверный ID точки.'}));

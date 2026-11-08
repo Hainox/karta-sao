@@ -78,3 +78,19 @@ test('второй запрос берёт превью из таблицы и �
   assert.ok(queries.some((sql) => sql.includes('FROM playground_photo_thumbs')));
   assert.ok(!queries.some((sql) => sql.includes('INSERT INTO playground_photo_thumbs')), 'повторно не вставляет');
 });
+
+test('снимок Север ЖКХ отдаётся по токену без сессии', async () => {
+  const pool = {
+    query: async (sql) => (sql.includes('FROM sever_photo_thumbs')
+      ? { rows: [{ photo_bytes: jpeg() }] }
+      : { rows: [], rowCount: 1 }),
+  };
+  const router = createPlaygroundPhotoRouter({ pool, authenticate: (_q, _s, next) => next() });
+  const index = router.stack.findIndex((layer) => layer.route?.path === '/sever-thumb/:token');
+  assert.ok(index >= 0, 'маршрут снимка СЖКХ зарегистрирован');
+  const handler = router.stack[index].route.stack.at(-1).handle;
+  const res = response();
+  await handler({ params: { token: TOKEN } }, res, (error) => { throw error; });
+  assert.equal(res.headers['Cache-Control'], 'public, max-age=86400, immutable');
+  assert.equal(res.body.subarray(0, 2).toString('hex'), 'ffd8');
+});
