@@ -138,6 +138,7 @@
         <label>По<input id="photoTo" type="date"></label>
         <button class="secondary" id="exportAccepted" type="button">Выгрузить принятые фото</button>
         <button class="secondary" id="exportReport" type="button">Excel: свод по фото</button>
+        <button class="secondary" id="exportArchive" type="button">Архив фото (ZIP)</button>
       </div>
       <p class="status" id="listStatus" role="status"></p>
       <div class="objects" id="list"></div>
@@ -748,6 +749,34 @@
       } catch (error) {
         setStatus('listStatus', 'Не удалось выгрузить свод: ' + error.message, true);
       } finally { button.disabled = false; }
+    };
+    // Архив фото текущей оцифровки: район → объект → «координаты_N». Сервер
+    // собирает файл в фоне, кнопка ждёт готовности и скачивает его по билету.
+    el('exportArchive').onclick = async () => {
+      const button = el('exportArchive');
+      const params = new URLSearchParams();
+      if (el('districtFilter').value) params.set('district', el('districtFilter').value);
+      const label = button.textContent;
+      button.disabled = true;
+      setStatus('listStatus', 'Собираем архив фото… это может занять несколько минут.');
+      try {
+        let job = await (await api.request(mode().base + '/photos.zip/prepare?' + params, { method: 'POST' })).json();
+        const jobId = job.id;
+        while (job.status === 'building') {
+          await new Promise((resolve) => setTimeout(resolve, 3000));
+          job = await (await api.request(mode().base + '/photos.zip/prepare/' + jobId)).json();
+          button.textContent = 'Собираем архив: ' + Number(job.photos || 0).toLocaleString('ru-RU') + ' из ' + Number(job.total || 0).toLocaleString('ru-RU');
+        }
+        if (job.status !== 'ready') throw new Error(job.error || 'архив не собрался');
+        const base = typeof api.base === 'function' ? api.base() : api.base || '';
+        const link = make('a');
+        link.href = base + '/reports/photos.zip/file/' + encodeURIComponent(job.name) + '?ticket=' + encodeURIComponent(job.ticket);
+        document.body.append(link); link.click(); link.remove();
+        const megabytes = Math.max(1, Math.round(Number(job.bytes) / 1024 / 1024));
+        setStatus('listStatus', 'Архив готов: ' + Number(job.photos).toLocaleString('ru-RU') + ' фото, ' + megabytes + ' МБ.');
+      } catch (error) {
+        setStatus('listStatus', 'Не удалось собрать архив: ' + error.message, true);
+      } finally { button.disabled = false; button.textContent = label; }
     };
     el('exportAccepted').onclick = async () => {
       const button = el('exportAccepted');

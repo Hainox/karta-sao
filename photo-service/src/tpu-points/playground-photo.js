@@ -5,6 +5,7 @@ import { resizeJpeg } from '../image-resize.js';
 import { safePhotoFilename, validatePhotoUpload } from './photo-markers.js';
 import { districtQueueFromRows, slotPointsForReport } from './district-point-photos.js';
 import { buildDigitizationReport, summarizeDigitization } from '../digitization-report.js';
+import { mountDistrictPhotoArchive } from './district-archive.js';
 
 const UUID=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const roles=new Set(['prefecture_admin','reviewer','district_editor']);
@@ -81,6 +82,12 @@ export function createPlaygroundPhotoRouter({pool,authenticate}) {
  router.param('id',(req,res,next,id)=>UUID.test(id)?next():res.status(400).json({error:'Неверный ID точки.'}));
  const permitted=(user,point)=>user.role!=='district_editor'||user.district===point.district;
  const prefecture=(req,res,next)=>req.user.role==='prefecture_admin'?next():res.status(403).json({error:'Проверка доступна префектуре.'});
+ // Архив фото площадок: район → площадка с ID → «координаты_N».
+ mountDistrictPhotoArchive(router, {
+  prefecture, prefix: 'sao-district-playgrounds',
+  loadRows: async () => (await pool.query(queueQuery)).rows,
+  loadPhoto: entry => pool.query('SELECT photo_bytes FROM playground_photo_slot_photos WHERE id = $1 AND point_id = $2', [entry.photoId, entry.pointId]).then(result => result.rows[0]?.photo_bytes),
+ });
  router.get('/queue',prefecture,async(req,res,next)=>{try{
   res.set('Cache-Control','no-store').json(playgroundQueueFromRows((await pool.query(queueQuery)).rows));
  }catch(e){next(e)}});

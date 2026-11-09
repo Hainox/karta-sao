@@ -7,6 +7,7 @@ import express from 'express';
 import { acceptedPhotoBytes, mountAcceptedPhotoExport } from './accepted-photo-export.js';
 import { validateReview } from './object-slots.js';
 import { buildDigitizationReport, summarizeDigitization } from '../digitization-report.js';
+import { mountDistrictPhotoArchive } from './district-archive.js';
 
 export const DISTRICT_DATASET = 'sao_district_photo_points';
 // Московское время: точки, созданные раньше этой границы, видит только префектура в архивном слое.
@@ -91,6 +92,12 @@ const REVIEW_COLUMNS = 'id, point_id, uploaded_by, uploaded_at, status, review_c
 /** Маршруты кабинета и методы хранилища; write — общая транзакция аудита. */
 export function mountDistrictPointPhotoRoutes(router, { repository }) {
   const prefecture = (req, res, next) => req.user.role === 'prefecture_admin' ? next() : res.status(403).json({ error: 'Фото точек съёмки проверяет только префектура.' });
+  // Архив фото въездных групп: район → объект → «координаты_N», как у ТПУ и парковок.
+  mountDistrictPhotoArchive(router, {
+    prefecture, prefix: 'sao-district-entrances', pathPrefix: '/district-photos',
+    loadRows: () => repository.listDistrictPointPhotoQueue(),
+    loadPhoto: entry => repository.getDistrictArchivePhotoBytes(entry),
+  });
 
   router.get('/district-photos/queue', prefecture, async (req, res, next) => {
     try {
@@ -133,6 +140,9 @@ export function mountDistrictPointPhotoRoutes(router, { repository }) {
 export function createDistrictPointPhotoRepository(pool, write) {
   return {
     getAcceptedDistrictPhotoBytes: row => acceptedPhotoBytes(pool, row, 'object_photo_point_photos'),
+    getDistrictArchivePhotoBytes: ({ photoId, pointId }) => pool
+      .query('SELECT photo_bytes FROM object_photo_point_photos WHERE id = $1 AND point_id = $2', [photoId, pointId])
+      .then(result => result.rows[0]?.photo_bytes),
     async listDistrictPointPhotoQueue() {
       const { rows } = await pool.query(`
         SELECT p.id AS point_id, p.label, p.district, p.heading, p.longitude, p.latitude,

@@ -8,6 +8,7 @@ import { safePhotoFilename, validatePhotoUpload } from './photo-markers.js';
 import { validateReview } from './object-slots.js';
 import { districtQueueFromRows, slotPointsForReport } from './district-point-photos.js';
 import { buildDigitizationReport, summarizeDigitization } from '../digitization-report.js';
+import { mountDistrictPhotoArchive } from './district-archive.js';
 
 const UUID = /^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i;
 const noFrame = (res) => res.status(404).json({ error: 'Фотослот не найден.' });
@@ -64,6 +65,12 @@ export function createAvdSidewalkPhotosRouter({ authenticate, pool, loadCatalog,
     ? next() : res.status(403).json({ error: 'Снимки проверяет префектура.' });
   const editorOnly = (req, res, next) => isEditor(req.user)
     ? next() : res.status(403).json({ error: 'Фотослот заполняет ответственный за точку.' });
+  // Архив кадров тротуаров ОДХ: район (включая «АВД САО») → кадр → «координаты_N».
+  if (isDistrict) mountDistrictPhotoArchive(router, {
+    prefecture: prefectureOnly, prefix: 'sao-district-odh', allowAvd: true,
+    loadRows: async req => (await loadQueueRows(req)).rows,
+    loadPhoto: entry => pool.query('SELECT photo_bytes FROM avd_sidewalk_test_photos WHERE id = $1 AND frame_id = $2', [entry.photoId, entry.pointId]).then(result => result.rows[0]?.photo_bytes),
+  });
 
   const findFrame = async (id, req) => {
     const point = framesFor(await loadCatalog()).get(id);

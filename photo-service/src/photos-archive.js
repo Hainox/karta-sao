@@ -21,7 +21,9 @@ export const ARCHIVE_VERSION = 'sao_photo_archive_v1';
 // Архив отдела МКД называется `sao-mkd-…`: у него своя очередь хранения, и
 // сборка одного раздела не удаляет готовый файл другого.
 // Архив фото парковок — `sao-parking-…`, тоже со своей очередью хранения.
-export const ARCHIVE_FILE_PATTERN = /^sao-(photo|mkd|parking)-\d{4}-\d{2}-\d{2}-[0-9a-f]{8}\.zip$/;
+// Архивы кабинета приёмки — `sao-district-…`: у каждого раздела своя очередь
+// хранения, поэтому сборка одного раздела не удаляет готовый файл другого.
+export const ARCHIVE_FILE_PATTERN = /^sao-(photo|mkd|parking|district-[a-z-]+)-\d{4}-\d{2}-\d{2}-[0-9a-f]{8}\.zip$/;
 const ARCHIVE_PREFIX = 'sao-photo';
 
 // Больше двух готовых архивов на диске не держим: каждый весит гигабайты.

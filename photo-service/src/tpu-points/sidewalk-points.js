@@ -9,6 +9,7 @@ import { DISTRICTS, isPointWithinBoundary } from './validation.js';
 import { safePhotoFilename, validatePhotoUpload } from './photo-markers.js';
 import { districtQueueFromRows, slotPointsForReport } from './district-point-photos.js';
 import { buildDigitizationReport, summarizeDigitization } from '../digitization-report.js';
+import { mountDistrictPhotoArchive } from './district-archive.js';
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const COLUMNS = 'id, point_no, district, address, unom, role, side, also_covers, longitude, latitude, heading, status, updated_at';
@@ -92,6 +93,12 @@ export function createSidewalkPointsRouter({ pool, authenticate, boundary }) {
     ? next() : res.status(403).json({ error: 'Точки съёмки тротуаров пока доступны только префектуре.' });
   // Фото: префектура — любая точка, район — только точки своего района.
   const permitted = (user, point) => user.role === 'prefecture_admin' || user.district === point.district;
+  // Архив фото тротуаров дворов: район → точка «Т1.386 · адрес» → «координаты_N».
+  mountDistrictPhotoArchive(router, {
+    prefecture, prefix: 'sao-district-sidewalks',
+    loadRows: async () => (await pool.query(sidewalkQueueQuery)).rows,
+    loadPhoto: entry => pool.query('SELECT photo_bytes FROM sidewalk_photo_slot_photos WHERE id = $1 AND point_id = $2', [entry.photoId, entry.pointId]).then(result => result.rows[0]?.photo_bytes),
+  });
 
   const audit = (client, req, action, objectKey, metadata) => client.query(
     'INSERT INTO audit_log (actor_user_id, action, object_key, metadata) VALUES ($1,$2,$3,$4::jsonb)',
