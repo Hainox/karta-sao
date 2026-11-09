@@ -22,5 +22,21 @@ window.initPlaygroundPhotoLayer=function({map,district,apiRequest,getUser,prepar
   if(user?.role==='prefecture_admin'&&p.photo_state==='pending'){const comment=document.createElement('input');comment.placeholder='Причина возврата';controls.appendChild(comment);for(const [name,decision] of [['Принять','accepted'],['Вернуть','rejected']]){const button=document.createElement('button');button.type='button';button.textContent=name;button.addEventListener('click',async()=>{button.disabled=true;try{await apiRequest('/object-photo-points/playgrounds/'+p.id+'/review',{method:'POST',body:JSON.stringify({decision,comment:comment.value})});await refresh();if(current===p.id){let q=points.find(x=>x.id===p.id);if(q)await open(q)}}catch(error){status.textContent='Не удалось сохранить решение: '+error.message}finally{button.disabled=false}});controls.appendChild(button)}}
  }
  container.innerHTML='<label class="layer-row off"><input type="checkbox"><span class="swatch" style="background:#808080"></span><span class="label">Фото площадок ДП/СП</span><span class="count" data-count>—</span></label><div class="shoot-hint">Серый — нет фото · жёлтый — на проверке · красный — на доработке · зелёный — принято</div><div class="shoot-hint" data-message></div><details class="shoot-list-box" hidden><summary>Список точек · площадки ДП/СП</summary><div class="shoot-list" data-playground-list></div></details>';
- const check=container.querySelector('input'),message=container.querySelector('[data-message]');check.addEventListener('change',async()=>{isOn=check.checked || Boolean(enabledKinds?.size);check.closest('.layer-row').classList.toggle('off',!check.checked);if(!isOn){renderList();clearMarkers();return}message.textContent='Загружаем точки…';try{await refresh();message.textContent='Одна точка — один фотослот.'}catch(error){message.textContent='Не удалось загрузить точки площадок: '+error.message;check.checked=false;isOn=false;renderList();clearMarkers()}});return {refresh, async setKind(kind,on){if(!enabledKinds)enabledKinds=new Set();if(on)enabledKinds.add(kind);else enabledKinds.delete(kind);isOn=check.checked || enabledKinds.size>0;if(!isOn){renderList();clearMarkers();return}await refresh()}};
+ // Переход по ссылке из таблицы сверки: ?playground=<point_id>. Слой включается,
+ // карта подводится к точке с приближением, карточка открывается как при клике.
+ async function focus(id){
+  if(!id)return false;
+  if(!points.length)await refresh();
+  let point=points.find(p=>p.id===id);
+  if(!point){await refresh();point=points.find(p=>p.id===id)}
+  if(!point)return false;
+  if(!isOn){check.checked=true;check.closest('.layer-row').classList.remove('off');isOn=true}
+  if(enabledKinds)enabledKinds.add(point.kind);
+  draw();
+  const coordinates=[Number(point.longitude),Number(point.latitude)];
+  if(coordinates.every(Number.isFinite))centerSelection(coordinates,20);
+  await open(point);
+  return true;
+ }
+ const check=container.querySelector('input'),message=container.querySelector('[data-message]');check.addEventListener('change',async()=>{isOn=check.checked || Boolean(enabledKinds?.size);check.closest('.layer-row').classList.toggle('off',!check.checked);if(!isOn){renderList();clearMarkers();return}message.textContent='Загружаем точки…';try{await refresh();message.textContent='Одна точка — один фотослот.'}catch(error){message.textContent='Не удалось загрузить точки площадок: '+error.message;check.checked=false;isOn=false;renderList();clearMarkers()}});return {refresh, focus, async setKind(kind,on){if(!enabledKinds)enabledKinds=new Set();if(on)enabledKinds.add(kind);else enabledKinds.delete(kind);isOn=check.checked || enabledKinds.size>0;if(!isOn){renderList();clearMarkers();return}await refresh()}};
 };

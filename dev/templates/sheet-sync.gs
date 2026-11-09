@@ -24,7 +24,8 @@ var CFG = {
   log: 'Журнал',
   state: '_state',
   viewRows: 300,
-  perDistrict: 20
+  perDistrict: 20,
+  mapBase: 'https://hainox.github.io/karta-sao/districts/'
 };
 
 function onOpen() {
@@ -227,9 +228,18 @@ function refreshView() {
   var height = Math.max(values.length, CFG.viewRows);
   view.getRange(8, 1, height, 12).clearContent();
   view.getRange(8, 15, height, 2).clearContent();
+  // «На карте» (N) ведёт на точку, а не на район: карта подведёт к площадке
+  // с приближением и откроет её карточку. Район и point_id берутся по скрытой O.
+  view.getRange(8, 14, height, 1).clearContent();
   if (values.length) {
     view.getRange(8, 1, values.length, 12).setValues(values);
     view.getRange(8, 7, values.length, 2).setFormulas(photos);
+    view.getRange(8, 14, values.length, 1).setFormulas(slice.map(function (row, index) {
+      var at = index + 8;
+      return ['=IF($O' + at + '="","",IFERROR(HYPERLINK("' + CFG.mapBase + '"&' +
+        'VLOOKUP(VLOOKUP($O' + at + ',Реестр!$A:$C,3,FALSE),Справочники!$C$2:$E$17,3,FALSE)&' +
+        '".html?playground="&$O' + at + ',"На карте"),""))'];
+    }));
     view.getRange(8, 15, values.length, 2).setValues(slice.map(function (row) {
       return [row[0], row[11]];
     }));

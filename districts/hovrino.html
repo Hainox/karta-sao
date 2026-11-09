@@ -233,7 +233,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
 <script src="point-popover.js?v=20261029-edit"></script>
 <script src="point-editor.js?v=20261029-edit"></script>
 <script src="point-stack.js?v=20261102"></script>
-<script src="playground-photo-layer.js?v=20261102-lists"></script>
+<script src="playground-photo-layer.js?v=20261109-point"></script>
 <script src="sidewalk-shoot-layer.js?v=20261105-odh"></script>
 <script src="entrance-ref-layer.js?v=20261028"></script>
 <script>
@@ -271,7 +271,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
 
   /** Центрирование на выбранном объекте; пока ставится новая точка, карта стоит на месте,
       иначе она уезжает из-под курсора между двумя кликами. */
-  function centerSelection(coordinates) {
+  function centerSelection(coordinates, zoom) {
     if (!state.map || !Array.isArray(coordinates)) return;
     if (state.shootMode) return;
     let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
@@ -283,7 +283,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       } else value.forEach(visit);
     }
     visit(coordinates);
-    if (Number.isFinite(minX)) state.map.update({ location: { center: [(minX + maxX) / 2, (minY + maxY) / 2], zoom: state.map.zoom }, duration: 300 });
+    if (Number.isFinite(minX)) state.map.update({ location: { center: [(minX + maxX) / 2, (minY + maxY) / 2], zoom: Number.isFinite(zoom) ? zoom : state.map.zoom }, duration: 300 });
   }
 
   function showCard(item) {
@@ -378,6 +378,18 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     const bounds = fitBounds();
     if (bounds) state.map.update({ location: { bounds } });
     $('status').textContent = `Загружено объектов: ${total.toLocaleString('ru-RU')}. Нажмите на объект, чтобы открыть сведения.`;
+    // Ссылка из таблицы сверки: ?playground=<point_id> подводит карту к самой точке,
+    // приближает её и открывает карточку — не только карту района.
+    const linkedPlayground = new URLSearchParams(location.search).get('playground');
+    if (linkedPlayground) {
+      try {
+        $('status').textContent = await state.playgroundLayer.focus(linkedPlayground)
+          ? 'Открыта площадка по ссылке из таблицы сверки.'
+          : 'Площадка из ссылки не найдена в этом районе.';
+      } catch (error) {
+        $('status').textContent = 'Не удалось открыть площадку по ссылке: ' + error.message;
+      }
+    }
   }
 
   function draw(key) {

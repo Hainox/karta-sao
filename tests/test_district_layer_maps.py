@@ -271,12 +271,29 @@ def test_centering_paused_while_placing_point():
     guard = "if (state.shootMode) return;"
     template = (ROOT / "work" / "district_page_template.html").read_text(encoding="utf-8")
     for markup in [template] + [(DISTRICTS_PAGES / f"{slug}.html").read_text(encoding="utf-8") for slug in SLUGS.values()]:
-        body = markup[markup.index("function centerSelection(coordinates) {"):]
+        body = markup[markup.index("function centerSelection(coordinates, zoom) {"):]
         assert guard in body[:body.index("\n  }\n")]
         assert "preparePointPhoto, escapeHtml, centerSelection" in markup
     layer = (DISTRICTS_PAGES / "playground-photo-layer.js").read_text(encoding="utf-8")
     assert "map.update({location:{center" not in layer
     assert "centerSelection(coordinates)" in layer
+
+
+def test_sheet_map_link_focuses_point_and_opens_card():
+    """Ссылка «На карте» из «Сверки» открывает площадку, а не только район.
+
+    Карта читает ?playground=<point_id>: включает слой фото площадок, подводит карту
+    к точке с приближением и открывает её карточку. Шаблон и 16 страниц должны
+    совпадать, чтобы пересборка не потеряла переход.
+    """
+    template = (ROOT / "work" / "district_page_template.html").read_text(encoding="utf-8")
+    for markup in [template] + [(DISTRICTS_PAGES / f"{slug}.html").read_text(encoding="utf-8") for slug in SLUGS.values()]:
+        assert "new URLSearchParams(location.search).get('playground')" in markup
+        assert "state.playgroundLayer.focus(linkedPlayground)" in markup
+        assert "function centerSelection(coordinates, zoom) {" in markup
+    layer = (DISTRICTS_PAGES / "playground-photo-layer.js").read_text(encoding="utf-8")
+    assert "async function focus(id)" in layer
+    assert "centerSelection(coordinates,20)" in layer
 
 
 def test_points_open_in_popover_card():

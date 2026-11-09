@@ -358,10 +358,11 @@ def build_review(ws):
         ws.cell(row=row, column=13, value=(
             '=IF($O{0}="","",IFERROR(VLOOKUP($O{0},Реестр!$A:$X,24,FALSE),""))'
         ).format(row))
+        # Ссылка ведёт на точку, а не на район: карта подведёт к площадке и откроет её карточку.
         ws.cell(row=row, column=14, value=(
             '=IF($O{0}="","",IFERROR(HYPERLINK("{1}"&'
             'VLOOKUP(VLOOKUP($O{0},Реестр!$A:$C,3,FALSE),Справочники!$C$2:$E$17,3,FALSE)&'
-            '".html","На карте"),""))'
+            '".html?playground="&$O{0},"На карте"),""))'
         ).format(row, MAP_BASE))
         ws.row_dimensions[row].height = 110
 
