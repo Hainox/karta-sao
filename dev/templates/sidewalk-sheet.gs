@@ -142,8 +142,8 @@ function sidewalkForgetToken_() {
  */
 function sidewalkLogin_() {
   var props = PropertiesService.getScriptProperties();
-  var login = props.getProperty('SAO_LOGIN');
-  var password = props.getProperty('SAO_PASSWORD');
+  var login = String(props.getProperty('SAO_LOGIN') || '').trim();
+  var password = String(props.getProperty('SAO_PASSWORD') || '').trim();
   if (!login || !password) {
     throw new Error('Нет действующего SAO_TOKEN. Задайте SAO_LOGIN и SAO_PASSWORD '
       + '(служебная учётка) в свойствах скрипта.');
