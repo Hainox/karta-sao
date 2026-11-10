@@ -97,36 +97,64 @@ function pathOf(request) {
 async function serveArchiveFile(request, response, name) {
   if (!ARCHIVE_FILE_PATTERN.test(name)) return sendError(response, request, 400, 'invalid_archive_name');
   const target = join(archiveDir(process.env), name);
-  let size = 0;
+  let info;
   try {
-    size = (await stat(target)).size;
+    info = await stat(target);
   } catch {
     return sendError(response, request, 404, 'archive_not_found');
   }
+  const size = info.size;
+  // Archive names are unique and their completed contents are immutable.
+  // Browsers need a stable validator to resume instead of restarting from zero.
+  const etag = `"${name}-${size}-${info.mtimeMs}"`;
+  const modified = info.mtime.toUTCString();
   const headers = {
     'Content-Type': 'application/zip',
     'Content-Disposition': `attachment; filename="${name}"`,
     'Accept-Ranges': 'bytes',
+    ETag: etag,
+    'Last-Modified': modified,
     'Cache-Control': 'private, no-store',
     ...corsHeaders(request)
   };
-  const range = /^bytes=(\d*)-(\d*)$/.exec(String(request.headers.range || ''));
-  const start = range && range[1] ? Number(range[1]) : 0;
-  const end = range && range[2] ? Math.min(Number(range[2]), size - 1) : size - 1;
-  if (range && (start >= size || start > end)) {
-    response.writeHead(416, { ...headers, 'Content-Range': `bytes */${size}` });
+  if (request.method === 'HEAD') {
+    response.writeHead(200, { ...headers, 'Content-Length': size });
     return response.end();
   }
+  const ifRange = request.headers['if-range'];
+  const range = (!ifRange || ifRange === etag || ifRange === modified)
+    ? /^bytes=(\d*)-(\d*)$/.exec(String(request.headers.range || ''))
+    : null;
+  let start = 0;
+  let end = size - 1;
   if (range) {
+    if (range[1]) {
+      start = Number(range[1]);
+      if (range[2]) end = Math.min(Number(range[2]), size - 1);
+    } else if (range[2]) {
+      const suffix = Number(range[2]);
+      start = Math.max(0, size - suffix);
+    }
+    if ((!range[1] && !range[2]) || !Number.isSafeInteger(start)
+        || !Number.isSafeInteger(end) || start >= size || start > end) {
+      response.writeHead(416, { ...headers, 'Content-Range': `bytes */${size}` });
+      return response.end();
+    }
     response.writeHead(206, {
       ...headers,
       'Content-Range': `bytes ${start}-${end}/${size}`,
       'Content-Length': end - start + 1
     });
-    return createReadStream(target, { start, end }).on('error', () => response.destroy()).pipe(response);
+  } else {
+    response.writeHead(200, { ...headers, 'Content-Length': size });
   }
-  response.writeHead(200, { ...headers, 'Content-Length': size });
-  return createReadStream(target).on('error', () => response.destroy()).pipe(response);
+  const stream = range ? createReadStream(target, { start, end }) : createReadStream(target);
+  // An interrupted client must release its file descriptor and stop reading.
+  const stop = () => stream.destroy();
+  response.once('close', stop);
+  stream.once('close', () => response.off('close', stop));
+  stream.once('error', () => response.destroy());
+  stream.pipe(response);
 }
 
 function originAllowed(request) {
@@ -668,7 +696,7 @@ async function handler(request, response) {
     // Готовый архив по билету: ссылку открывает браузер, а cookie с чужого сайта
     // может не дойти. Поэтому здесь только билет, выданный вместе с задачей сборки.
     const archiveFileMatch = pathname.match(/^\/reports\/photos\.zip\/file\/([A-Za-z0-9._-]{1,80})$/);
-    if (archiveFileMatch && request.method === 'GET') {
+    if (archiveFileMatch && ['GET', 'HEAD'].includes(request.method)) {
       const url = new URL(request.url, 'http://photo-service.local');
       const job = photoArchiveByTicket(url.searchParams.get('ticket'));
       if (!job || job.name !== archiveFileMatch[1]) return sendError(response, request, 404, 'archive_not_found');
