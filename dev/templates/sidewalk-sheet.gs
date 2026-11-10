@@ -509,6 +509,9 @@ function sidewalkWriteSet_(book, setName, rows, drafts) {
   var config = SIDEWALK_SETS[setName];
   var sheet = book.getSheetByName(config.sheet);
   if (!sheet) throw new Error('Нет листа «' + config.sheet + '». Сначала выполните sidewalkSetup.');
+  // В локалях с десятичной запятой (ru_RU и др.) аргументы формулы
+  // разделяются точкой с запятой; запятая даёт #ERROR!.
+  var sep = sidewalkFormulaSeparator_(book);
 
   var last = sheet.getLastRow();
   var clearRows = Math.max(last - SIDEWALK_CFG.firstRow + 1, rows.length, 1);
@@ -579,8 +582,10 @@ function sidewalkWriteSet_(book, setName, rows, drafts) {
 
     // URL вписан в формулу, а не взят из скрытой колонки: так сортировка
     // фильтром не подменит фото соседней строкой.
-    photoFormulas.push([photoUrl ? '=IMAGE("' + sidewalkFormulaText_(photoUrl) + '",4,160,120)' : '']);
-    mapFormulas.push([mapUrl ? '=HYPERLINK("' + sidewalkFormulaText_(mapUrl) + '","На карте")' : '']);
+    photoFormulas.push([photoUrl ? '=IMAGE("' + sidewalkFormulaText_(photoUrl) + '"'
+      + sep + '4' + sep + '160' + sep + '120)' : '']);
+    mapFormulas.push([mapUrl ? '=HYPERLINK("' + sidewalkFormulaText_(mapUrl) + '"'
+      + sep + '"На карте")' : '']);
 
     counts.photo += row.photo_id ? 1 : 0;
     counts[status === 'Принято' ? 'accepted' : status === 'На проверке' ? 'pending'
@@ -830,6 +835,21 @@ function sidewalkKey_(setName, pointId, photoId) {
 
 function sidewalkFormulaText_(value) {
   return String(value).replace(/"/g, '""');
+}
+
+/**
+ * Разделитель аргументов формулы по локали книги: в ru_RU, de_DE и других
+ * локалях с десятичной запятой это «;», в en_US — «,». Определяем по
+ * десятичному разделителю, а не по списку стран.
+ */
+function sidewalkFormulaSeparator_(book) {
+  var locale = '';
+  try { locale = String(book.getSpreadsheetLocale() || '').replace(/_/g, '-'); } catch (_) { /* старые версии */ }
+  try {
+    return (1.5).toLocaleString(locale || 'en-US').indexOf(',') >= 0 ? ';' : ',';
+  } catch (_) {
+    return ',';
+  }
 }
 
 function sidewalkMoscow_(date) {
