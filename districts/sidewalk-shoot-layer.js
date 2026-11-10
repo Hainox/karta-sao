@@ -15,6 +15,9 @@ window.initSidewalkShootLayer = function ({ map, slug, district, apiRequest, esc
   let visible = false;
   let isOn = false;
   let current = null;
+  // Ссылка из таблицы проверки: ?sidewalk=<id точки> сразу включает слой и
+  // открывает карточку. Для ОДХ такой же приём сделан в тестовом слое.
+  let linkedPoint = new URLSearchParams(location.search).get('sidewalk');
   const keyOf = (point) => 'sw:' + point.id;
   const canEdit = () => editable && getUser?.()?.role === 'prefecture_admin';
 
@@ -316,6 +319,15 @@ window.initSidewalkShootLayer = function ({ map, slug, district, apiRequest, esc
     container.hidden = !visible || !points.length;
     render(hint);
     draw();
+    if (linkedPoint && visible && isOn) {
+      // Ищем по id точки; point_no — запасной вариант для файла слоя.
+      const target = points.find((p) => p.id === linkedPoint || p.point_no === linkedPoint);
+      linkedPoint = null;
+      if (target) {
+        centerSelection([target.lng, target.lat]);
+        openCard(target);
+      }
+    }
   }
 
   return {

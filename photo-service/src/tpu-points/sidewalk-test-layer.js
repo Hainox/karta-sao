@@ -5,6 +5,7 @@ import { randomUUID } from 'node:crypto';
 import { DISTRICTS, isPointWithinBoundary } from './validation.js';
 import { mediaRoot } from '../storage.js';
 import { createAvdSidewalkPhotosRouter, districtOwnsSidewalk, loadSidewalkPhotos, sidewalkSlotStatus, isAvdSidewalkEditor, isAvdSidewalkPoint, isDistrictSidewalkEditor } from './avd-sidewalk-photos.js';
+import { createSidewalkSheetRouter } from './sidewalk-sheet.js';
 
 const DEFAULT_CATALOG = new URL('../../assets/sidewalk-test-points.json', import.meta.url);
 
@@ -38,7 +39,7 @@ function indexCatalog({ version, points }) {
   return { districts, byId, avdPoints, avdFrames, districtPoints, districtFrames };
 }
 
-const mergePoint = (point, edit) => ({
+export const mergePoint = (point, edit) => ({
   ...point,
   coordinates: edit?.coordinates || point.coordinates,
   ...(edit?.noSidewalk ? { noSidewalk: true } : {}),
@@ -96,6 +97,9 @@ export function createSidewalkTestLayerRouter({ authenticate, boundary, pool, ca
   const photos = { authenticate, pool, loadCatalog, loadEdits, mergePoint };
   router.use('/avd', createAvdSidewalkPhotosRouter(photos));
   router.use('/district', createAvdSidewalkPhotosRouter({ ...photos, scope: 'district' }));
+  // Отдельная Google-таблица проверки тротуаров: оба набора в одном месте,
+  // потому что кадры ОДХ живут в каталоге и правках этого слоя, а дворы — в SQL.
+  router.use('/sheet', createSidewalkSheetRouter({ pool, authenticate, loadCatalog, loadEdits, mergePoint }));
 
   router.patch('/:pointId', authenticate, async (req, res, next) => {
     const { coordinates, slotId, azimuth, noSidewalk } = req.body || {};

@@ -31,6 +31,8 @@ export function pointState(row) {
     id: row.photo_id,
     status: row.photo_status,
     uploaded_at: row.uploaded_at,
+    reviewed_at: row.reviewed_at,
+    review_comment: row.review_comment,
     photo_filename: row.photo_filename,
   } : null;
   const rejected = (row.rejected_comment || row.rejected_at || row.rejected_photo_id) ? {

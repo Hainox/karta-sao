@@ -44,6 +44,32 @@ export const sidewalkSlotStatus = (slot, photo) => ({ ...slot,
   photoId: photo?.id || null,
   comment: photo?.status === 'rejected' ? photo.review_comment || '' : '' });
 
+/**
+ * Строки фотослотов: одна строка на кадр. Очередь кабинета пропускает кадр
+ * «Нет тротуара», у которого ещё нет снимка; в таблице проверки такая строка
+ * нужна, чтобы пометка была видна, поэтому её включают только для выгрузки.
+ */
+export function sidewalkFrameRows(sources, { edits, photos, mergePoint, isDistrict, includeNoSidewalk = false }) {
+  return sources.flatMap(source => {
+    const point = mergePoint(source, edits.get(source.id));
+    const district = isDistrict && isAvdSidewalkPoint(point) ? 'АВД САО' : point.district;
+    return point.slots.flatMap((slot, index) => {
+      const photo = photos.get(slot.id);
+      if (point.noSidewalk && !photo && !includeNoSidewalk) return [];
+      const active = photo && photo.status !== 'rejected' ? photo : null;
+      const rejected = photo?.status === 'rejected' ? photo : null;
+      return [{ point_id: slot.id, label: point.street + ' · ' + point.id + ' · кадр ' + (index + 1),
+        district, district_raw: point.district, object_id: point.id, heading: slot.azimuth, longitude: point.coordinates[0], latitude: point.coordinates[1],
+        frame: index + 1, street: point.street || '',
+        no_sidewalk: point.noSidewalk === true,
+        photo_id: active?.id, photo_status: active?.status, uploaded_at: active?.uploaded_at, photo_filename: active?.photo_filename,
+        reviewed_at: active?.reviewed_at, photo_review_comment: active?.review_comment ?? '',
+        rejected_photo_id: rejected?.id, rejected_comment: rejected?.review_comment, rejected_at: rejected?.reviewed_at,
+        rejected_uploaded_at: rejected?.uploaded_at, rejected_photo_filename: rejected?.photo_filename }];
+    });
+  });
+}
+
 export function createAvdSidewalkPhotosRouter({ authenticate, pool, loadCatalog, loadEdits, mergePoint, scope = 'avd' }) {
   const router = express.Router();
   const isDistrict = scope === 'district';
@@ -111,22 +137,7 @@ export function createAvdSidewalkPhotosRouter({ authenticate, pool, loadCatalog,
     // Приёмка — один набор: у префектуры кадры АвД (они работают по всему округу)
     // идут той же очередью и в своде выглядят отдельной строкой «АВД САО» — 17-й район.
     const sources = isDistrict && isPrefecture(req) ? [...catalog.districtPoints, ...catalog.avdPoints] : pointsFor(catalog, req);
-    const rows = sources.flatMap(source => {
-      const point = mergePoint(source, edits.get(source.id));
-      const district = isDistrict && isAvdSidewalkPoint(point) ? 'АВД САО' : point.district;
-      return point.slots.flatMap((slot, index) => {
-        const photo = photos.get(slot.id);
-        if (point.noSidewalk && !photo) return [];
-        const active = photo && photo.status !== 'rejected' ? photo : null;
-        const rejected = photo?.status === 'rejected' ? photo : null;
-        return [{ point_id: slot.id, label: point.street + ' · ' + point.id + ' · кадр ' + (index + 1),
-          district, object_id: point.id, heading: slot.azimuth, longitude: point.coordinates[0], latitude: point.coordinates[1],
-          no_sidewalk: point.noSidewalk === true,
-          photo_id: active?.id, photo_status: active?.status, uploaded_at: active?.uploaded_at, photo_filename: active?.photo_filename, reviewed_at: active?.reviewed_at,
-          rejected_photo_id: rejected?.id, rejected_comment: rejected?.review_comment, rejected_at: rejected?.reviewed_at,
-          rejected_uploaded_at: rejected?.uploaded_at, rejected_photo_filename: rejected?.photo_filename }];
-      });
-    });
+    const rows = sidewalkFrameRows(sources, { edits, photos, mergePoint, isDistrict });
     return { catalog, rows };
   }
   mountAcceptedPhotoExport(router, {
