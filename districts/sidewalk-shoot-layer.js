@@ -324,7 +324,7 @@ window.initSidewalkShootLayer = function ({ map, slug, district, apiRequest, esc
       const target = points.find((p) => p.id === linkedPoint || p.point_no === linkedPoint);
       linkedPoint = null;
       if (target) {
-        centerSelection([target.lng, target.lat]);
+        centerSelection([target.lng, target.lat], 18);
         openCard(target);
       }
     }
@@ -495,11 +495,11 @@ function initSidewalkTestLayer({ container, map, card, district, apiRequest, cen
     element.setAttribute('aria-label', element.title);
   }
 
-  function openPoint(point) {
+  function openPoint(point, zoom) {
     if (!allowed() || !checkbox.checked) return;
     clearSelection();
     editor?.clear();
-    centerSelection(point.coordinates);
+    centerSelection(point.coordinates, zoom);
     popover.open({ coordinates: point.coordinates, kind: 'sidewalk', title: point.street,
       subtitle: 'Тротуары ОДХ · ' + point.id });
     const content = node('section', '', 'pin-section');
@@ -706,7 +706,7 @@ function initSidewalkTestLayer({ container, map, card, district, apiRequest, cen
       if (linkedPoint) {
         const point = markers.get(linkedPoint)?.point;
         linkedPoint = null;
-        if (point) openPoint(point);
+        if (point) openPoint(point, 18);
       }
     } catch (error) {
       if (request !== controller) return;
