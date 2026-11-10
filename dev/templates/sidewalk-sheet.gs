@@ -3,17 +3,20 @@
  *
  * Это не вкладки книги ДП/СП. Скрипт можно добавить отдельным файлом в уже
  * существующий проект Apps Script книги ДП/СП: он не определяет onOpen и не
- * трогает её функции, а работает с новой книгой через openById. Секрет
- * SAO_TOKEN остаётся в свойствах существующего проекта и никуда не копируется.
+ * трогает её функции, а работает с новой книгой через openById. Служебный
+ * доступ хранится только в свойствах скрипта: SAO_LOGIN и SAO_PASSWORD (вход
+ * с автообновлением сессии) или готовый SAO_TOKEN.
  *
  * Установка:
  *   1. Создать новую Google-таблицу (пустую).
  *   2. Вставить её ID из адресной строки в SIDEWALK_CFG.bookId ниже.
- *   3. В редакторе Apps Script выполнить sidewalkSetup — создать листы,
+ *   3. В «Настройках проекта» → «Свойства скрипта» задать SAO_LOGIN и
+ *      SAO_PASSWORD служебной учётной записи (или готовый SAO_TOKEN).
+ *   4. В редакторе Apps Script выполнить sidewalkSetup — создать листы,
  *      шапки, проверку ввода, фильтр и оформление.
- *   4. Выполнить sidewalkSync — заполнить оба листа.
- *   5. При желании добавить в существующий onOpen вызов sidewalkAddMenu().
- *   6. Выполнить sidewalkInstallTriggers — обновление и отправка каждые 10 мин.
+ *   5. Выполнить sidewalkSync — заполнить оба листа.
+ *   6. При желании добавить в существующий onOpen вызов sidewalkAddMenu().
+ *   7. Выполнить sidewalkInstallTriggers — обновление и отправка каждые 10 мин.
  *
  * Что делает:
  *   • «Тротуары ОДХ» — одна строка на кадр фотослота, включая кадры без фото
@@ -32,6 +35,7 @@ var SIDEWALK_CFG = {
   // ДП/СП по ошибке.
   bookId: '',
   api: 'https://obhod-sao.ru/photo-api/object-photo-points/sidewalk-test/sheet',
+  authApi: 'https://obhod-sao.ru/photo-api',
   mapBase: 'https://hainox.github.io/karta-sao/districts/',
   headerRow: 5,
   firstRow: 6,
@@ -115,9 +119,66 @@ function sidewalkBook_() {
 }
 
 function sidewalkToken_() {
-  var value = PropertiesService.getScriptProperties().getProperty('SAO_TOKEN');
-  if (!value) throw new Error('Не задан SAO_TOKEN в свойствах скрипта.');
-  return value;
+  var props = PropertiesService.getScriptProperties();
+  var value = props.getProperty('SAO_TOKEN');
+  var expires = Number(props.getProperty('SAO_TOKEN_EXPIRES') || 0);
+  // Срок задаётся только для токена, полученного входом. Токен, вписанный
+  // вручную, используем, пока сервер его принимает.
+  if (value && (!expires || expires > Date.now() + 60000)) return value;
+  return sidewalkLogin_();
+}
+
+/** Сбрасывает кэш токена: следующий запрос войдёт заново по SAO_LOGIN. */
+function sidewalkForgetToken_() {
+  var props = PropertiesService.getScriptProperties();
+  props.deleteProperty('SAO_TOKEN');
+  props.deleteProperty('SAO_TOKEN_EXPIRES');
+}
+
+/**
+ * Вход служебной учёткой. Пароль хранится только в свойствах скрипта, не в
+ * листах и не в коде. Сессия живёт 8 часов; кэшируем на 7, чтобы обновить
+ * заранее. Логин и пароль не попадают в сообщения об ошибках.
+ */
+function sidewalkLogin_() {
+  var props = PropertiesService.getScriptProperties();
+  var login = props.getProperty('SAO_LOGIN');
+  var password = props.getProperty('SAO_PASSWORD');
+  if (!login || !password) {
+    throw new Error('Нет действующего SAO_TOKEN. Задайте SAO_LOGIN и SAO_PASSWORD '
+      + '(служебная учётка) в свойствах скрипта.');
+  }
+  var response = UrlFetchApp.fetch(SIDEWALK_CFG.authApi + '/auth/login', {
+    method: 'post',
+    contentType: 'application/json',
+    payload: JSON.stringify({ login: login, password: password }),
+    muteHttpExceptions: true
+  });
+  var code = response.getResponseCode();
+  if (code !== 200) {
+    throw new Error('Вход не выполнен: HTTP ' + code + ' ' + response.getContentText().slice(0, 200));
+  }
+  var body;
+  try { body = JSON.parse(response.getContentText()); } catch (_) { body = {}; }
+  if (!body.token) throw new Error('Вход не выполнен: служба не вернула токен.');
+  props.setProperty('SAO_TOKEN', body.token);
+  props.setProperty('SAO_TOKEN_EXPIRES', String(Date.now() + 7 * 60 * 60 * 1000));
+  return body.token;
+}
+
+/**
+ * Запрос с Bearer-токеном. На 401 один раз сбрасывает кэш и входит заново:
+ * сессия могла истечь между проверкой срока и запросом.
+ */
+function sidewalkAuthorizedFetch_(url, options) {
+  var opts = options || {};
+  opts.headers = Object.assign({}, opts.headers || {}, { Authorization: 'Bearer ' + sidewalkToken_() });
+  opts.muteHttpExceptions = true;
+  var response = UrlFetchApp.fetch(url, opts);
+  if (response.getResponseCode() !== 401) return response;
+  sidewalkForgetToken_();
+  opts.headers.Authorization = 'Bearer ' + sidewalkToken_();
+  return UrlFetchApp.fetch(url, opts);
 }
 
 function sidewalkNotify_(message) {
@@ -347,10 +408,7 @@ function sidewalkSync() {
 }
 
 function sidewalkFetch_(setName) {
-  var response = UrlFetchApp.fetch(SIDEWALK_CFG.api + '/sheet.json?set=' + encodeURIComponent(setName), {
-    headers: { Authorization: 'Bearer ' + sidewalkToken_() },
-    muteHttpExceptions: true
-  });
+  var response = sidewalkAuthorizedFetch_(SIDEWALK_CFG.api + '/sheet.json?set=' + encodeURIComponent(setName), {});
   var code = response.getResponseCode();
   if (code !== 200) throw new Error('HTTP ' + code + ': ' + response.getContentText().slice(0, 300));
   return JSON.parse(response.getContentText());
@@ -678,12 +736,10 @@ function sidewalkPushSet_(book, setName, drafts, started) {
     var chunk = batch.slice(offset, offset + SIDEWALK_CFG.chunk);
     var response;
     try {
-      response = UrlFetchApp.fetch(SIDEWALK_CFG.api + '/sheet-decisions', {
+      response = sidewalkAuthorizedFetch_(SIDEWALK_CFG.api + '/sheet-decisions', {
         method: 'post',
         contentType: 'application/json',
-        headers: { Authorization: 'Bearer ' + sidewalkToken_() },
-        payload: JSON.stringify({ set: setName, decisions: chunk.map(function (item) { return item.payload; }) }),
-        muteHttpExceptions: true
+        payload: JSON.stringify({ set: setName, decisions: chunk.map(function (item) { return item.payload; }) })
       });
     } catch (error) {
       chunk.forEach(function (item) {
