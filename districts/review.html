@@ -572,7 +572,7 @@
       setStatus('objectStatus', pendingPhoto ? 'Снимок ждёт решения: принять или вернуть на доработку с комментарием.'
         : emptyPoint ? 'Фото ещё не загружено: загрузите снимок — он встанет на проверку.' : 'Снимок на доработке: ждём новую фотографию.');
       el('acceptObject').hidden = !pendingPhoto;
-      el('acceptObject').textContent = state.mode === 'odh-sidewalks' ? 'Принять кадр' : 'Принять объект';
+      el('acceptObject').textContent = state.mode === 'odh-sidewalks' ? 'Принять кадр' : state.mode === 'paths' ? 'Принять фото' : 'Принять объект';
       el('acceptObject').onclick = pendingPhoto ? () => reviewPhotos([{ id: row.photo_id, point_id: row.point_id }], 'accepted', '') : null;
       el('nextObject').hidden = !((state.tab === 'pending' && !pendingPhoto) || state.tab === 'empty');
       lockReview(state.busy);
