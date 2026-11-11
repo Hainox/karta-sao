@@ -738,12 +738,11 @@
       lockReview(true);
       status.textContent = 'Загружаем фото…';
       try {
-        const response = await json(mode().upload(row.point_id), {
+        const data = await json(mode().upload(row.point_id), {
           method: 'PUT',
           headers: { 'Content-Type': file.type, 'X-Photo-Filename': encodeURIComponent(file.name) },
           body: file,
         });
-        const data = await response.json();
         if (revision !== state.revision) return;
         // Не перезапрашиваем весь каталог (12 тысяч строк) ради одной загрузки:
         // переносим точку из «Без фото»/«На доработке» в «На проверке» локально.
