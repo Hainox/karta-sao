@@ -86,49 +86,65 @@ function sidewalkFixFormulas() {
     'Тротуары', 6);
 }
 
-/** Страница в «Сверке фото»: H3, всего страниц — из строки «Найдено … из N». */
-function sidewalkPage_(delta) {
+/**
+ * Показывает в «Сверке фото» все строки сразу — без страниц.
+ *
+ * Снимает из формулы списка (K7) ограничение «limit 100 offset …», меняет
+ * подпись счётчика и растягивает формулы строки 7 на весь список. Фильтры
+ * B3/D3/F3 продолжают работать: при их смене список пересчитывается сам.
+ * Запускать один раз; повторный запуск безопасен.
+ */
+function sidewalkShowAllRows() {
   var book = SpreadsheetApp.getActive();
   var sheet = book.getSheetByName('Сверка фото');
   if (!sheet) throw new Error('Нет листа «Сверка фото».');
-  var cell = sheet.getRange('H3');
-  var page = Math.max(1, Math.round(Number(cell.getValue()) || 1));
-  var info = String(sheet.getRange('A5').getDisplayValue() || '');
-  var match = info.match(/из\s+(\d+)/i);
-  var pages = match ? Math.max(1, Number(match[1])) : page;
-  var next = Math.min(Math.max(1, page + delta), Math.max(pages, 1));
-  if (next !== page) cell.setValue(next);
-  return next;
-}
 
-function sidewalkPageNext() { sidewalkPage_(1); }
-function sidewalkPagePrev() { sidewalkPage_(-1); }
+  var cell = sheet.getRange('K7');
+  var formula = cell.getFormula();
+  if (!formula) throw new Error('В K7 нет формулы списка.');
 
-function sidewalkPageFirst() {
-  var sheet = SpreadsheetApp.getActive().getSheetByName('Сверка фото');
-  if (sheet) sheet.getRange('H3').setValue(1);
-}
+  // Ограничение страницы: "select * limit 100 offset "&MAX(0,($H$3-1)*100)
+  var updated = formula.replace(/"select \* limit 100 offset "&MAX\(0,\(\$H\$3-1\)\*100\)/, '"select * limit 2000"');
+  if (updated === formula) {
+    // Уже без страниц — не ошибка.
+    if (formula.indexOf('limit 100') < 0 && formula.indexOf('offset') < 0) {
+      SpreadsheetApp.getActive().toast('Страницы уже убраны', 'Сверка фото', 4);
+      return;
+    }
+    throw new Error('Не нашёл ограничение страницы в формуле K7.');
+  }
+  cell.setFormula(updated);
 
-function sidewalkPageLast() {
-  var book = SpreadsheetApp.getActive();
-  var sheet = book.getSheetByName('Сверка фото');
-  if (!sheet) return;
-  var info = String(sheet.getRange('A5').getDisplayValue() || '');
-  var match = info.match(/из\s+(\d+)/i);
-  if (match) sheet.getRange('H3').setValue(Math.max(1, Number(match[1])));
+  // Счётчик: убираем «Страница X из Y».
+  var counter = sheet.getRange('A5');
+  var a5 = counter.getFormula();
+  var tail = '" · Страница "';
+  var position = a5.indexOf(tail);
+  if (position >= 0) {
+    counter.setFormula(a5.slice(0, position)
+      + '" · все строки. Решения — по ссылке «К решению».")');
+  }
+
+  // Формулы строки 7 — на весь список, иначе ниже 100-й строки будет пусто.
+  var wanted = 2007;
+  if (sheet.getMaxRows() < wanted) {
+    sheet.insertRowsAfter(sheet.getMaxRows(), wanted - sheet.getMaxRows());
+  }
+  sheet.getRange('A7:J7').copyTo(sheet.getRange(7, 1, 2000, 10),
+    SpreadsheetApp.CopyPasteType.PASTE_FORMULA, false);
+
+  // Номер страницы больше не нужен.
+  sheet.getRange('G3:H3').clearContent();
+
+  SpreadsheetApp.getActive().toast('Страницы убраны: список идёт сплошной лентой', 'Сверка фото', 5);
 }
 
 /** Меню. Вызывать из onOpen или один раз из редактора. */
 function sidewalkFixMenu() {
   SpreadsheetApp.getUi().createMenu('Тротуары · сервис')
+    .addItem('Показать все строки без страниц', 'sidewalkShowAllRows')
     .addItem('Починить формулы (#ERROR!)', 'sidewalkFixFormulas')
-    .addSeparator()
     .addItem('Покрасить «% принято»', 'applyPercentColors')
-    .addSeparator()
-    .addItem('◀ Предыдущая страница', 'sidewalkPagePrev')
-    .addItem('Следующая страница ▶', 'sidewalkPageNext')
-    .addItem('Первая страница', 'sidewalkPageFirst')
-    .addItem('Последняя страница', 'sidewalkPageLast')
     .addToUi();
 }
 
