@@ -50,6 +50,7 @@ var PATH_DECISIONS = ['Принять', 'Проверено', 'Вернуть н
 function onOpen() {
   SpreadsheetApp.getUi().createMenu('Дорожки')
     .addItem('Обновить сейчас', 'pathSync')
+    .addItem('Полная пересборка', 'pathSyncFull')
     .addItem('Отправить решения', 'pathPush')
     .addSeparator()
     .addItem('Настроить книгу', 'pathSetup')
@@ -180,6 +181,11 @@ function pathSync() {
   } finally {
     lock.releaseLock();
   }
+}
+
+function pathSyncFull() {
+  PropertiesService.getScriptProperties().deleteProperty('PATH_LAST_SYNC');
+  pathSync();
 }
 
 function pathToken_() {
@@ -561,8 +567,7 @@ function pathPercentColors_(sheet, range) {
   });
   [
     { min: 0.9995, color: '#00B050' },
-    { min: 0.8, color: '#A5D6A7' },
-    { min: 0.7, color: '#FFF59D' },
+    { min: 0.8, color: '#FFF59D' },
     { min: 0.6, color: '#FDD835' },
     { min: 0.4, color: '#FF8A65' },
     { min: 0.2, color: '#E53935' }
