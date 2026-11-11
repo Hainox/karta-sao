@@ -132,6 +132,7 @@ test('срез и решения доступны только префекту�
   await serve(pool, 'prefecture_admin', async (url) => {
     const sheet = await (await fetch(`${url}/sheet.json`)).json();
     assert.equal(sheet.rows.length, 1);
+    assert.equal(sheet.full, true);
     assert.equal(sheet.rows[0].photo_state, 'empty');
     const thumb = await fetch(`${url}/photo-thumb/${'a'.repeat(32)}`);
     assert.equal(thumb.status, 200);
@@ -142,5 +143,29 @@ test('срез и решения доступны только префекту�
   });
   await serve(pool, 'prefecture_admin', async (url) => {
     assert.equal((await fetch(`${url}/photo-thumb/not-a-token`)).status, 404);
+  });
+});
+
+test('инкрементальный срез отдаёт только изменившиеся строки', async () => {
+  const pool = {
+    async query(sql) {
+      if (sql.includes('retired_at >')) return { rows: [], rowCount: 0 };
+      if (sql.includes('FROM pedestrian_path_points')) {
+        return {
+          rows: [
+            { ...base, updated_at: '2026-11-10T00:00:00Z' },
+            { ...base, point_id: 'p2', updated_at: '2026-11-11T10:00:00Z' },
+          ],
+          rowCount: 2,
+        };
+      }
+      return { rows: [], rowCount: 0 };
+    },
+  };
+  await serve(pool, 'prefecture_admin', async (url) => {
+    const sheet = await (await fetch(`${url}/sheet.json?since=2026-11-11T09:00:00Z`)).json();
+    assert.equal(sheet.full, false);
+    assert.deepEqual(sheet.rows.map((row) => row.point_id), ['p2']);
+    assert.deepEqual(sheet.removed, []);
   });
 });

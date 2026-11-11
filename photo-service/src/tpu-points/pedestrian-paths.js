@@ -15,7 +15,7 @@ import { safePhotoFilename, validatePhotoUpload } from './photo-markers.js';
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 export const PATH_QUEUE_SQL = `SELECT p.id AS point_id, p.point_no, p.path_id, p.ordinal, p.district, p.address,
-  p.longitude, p.latitude, p.route_m, p.area, p.coating,
+  p.longitude, p.latitude, p.route_m, p.area, p.coating, p.updated_at,
   f.id AS photo_id, f.status AS photo_status, f.uploaded_at, f.photo_filename, f.reviewed_at, f.review_comment,
   r.id AS rejected_photo_id, r.review_comment AS rejected_comment, r.reviewed_at AS rejected_at,
   r.uploaded_at AS rejected_uploaded_at, r.photo_filename AS rejected_photo_filename

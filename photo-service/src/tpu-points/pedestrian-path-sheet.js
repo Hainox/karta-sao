@@ -16,6 +16,7 @@ export const PATH_DECISIONS = Object.freeze(['accepted', 'verified', 'rework']);
 const THUMB_QUALITY = 80;
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const TOKEN = /^[0-9a-f]{32}$/;
+const INCREMENTAL_LIMIT = 500;
 const DISTRICT_SLUGS = Object.freeze({
   'Аэропорт': 'aeroport', 'Беговой': 'begovoy', 'Бескудниковский': 'beskudnikovskiy',
   'Войковский': 'voykovskiy', 'Восточное Дегунино': 'vostochnoe-degunino',
@@ -50,6 +51,7 @@ export function pathSheetRows(rows) {
       coating: row.coating || '',
       longitude: row.longitude,
       latitude: row.latitude,
+      updated_at: row.updated_at || null,
       map_url: mapUrl,
       photo_state: state.status,
       photo_id: photo?.id || null,
@@ -228,10 +230,35 @@ export function createPedestrianPathSheetRouter({ pool, authenticate }) {
 
   router.get('/sheet.json', async (req, res, next) => {
     try {
-      const rows = pathSheetRows((await pool.query(PATH_QUEUE_SQL)).rows);
+      // Время снимаем до запроса: всё, что изменится после него, попадёт
+      // в следующий срез. Минута перекрытия спасает от расхождения часов.
+      const generatedAt = new Date();
+      const rawSince = String(req.query.since || '');
+      const since = rawSince ? new Date(rawSince) : null;
+      const validSince = since && !Number.isNaN(since.getTime()) ? since : null;
+      const all = pathSheetRows((await pool.query(PATH_QUEUE_SQL)).rows);
+      let rows = all;
+      let full = true;
+      let removed = [];
+      if (validSince) {
+        const threshold = validSince.getTime() - 60000;
+        const changed = all.filter((row) => [
+          row.updated_at, row.uploaded_at, row.reviewed_at, row.rejected_at,
+        ].filter(Boolean).some((value) => new Date(value).getTime() > threshold));
+        full = changed.length > INCREMENTAL_LIMIT;
+        if (!full) {
+          rows = changed;
+          const retired = await pool.query('SELECT id FROM pedestrian_path_points WHERE retired_at > $1', [validSince]);
+          removed = retired.rows.map((row) => row.id);
+          if (removed.length) full = true;
+        }
+        if (full) rows = all;
+      }
       res.set('Cache-Control', 'private, no-store').json({
-        generated_at: new Date().toISOString(),
+        generated_at: generatedAt.toISOString(),
+        full,
         rows: await attachPathPhotoTokens(pool, rows),
+        removed: full ? [] : removed,
       });
     } catch (error) { next(error); }
   });
