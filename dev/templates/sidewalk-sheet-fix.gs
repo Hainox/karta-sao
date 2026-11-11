@@ -123,9 +123,79 @@ function sidewalkFixMenu() {
   SpreadsheetApp.getUi().createMenu('Тротуары · сервис')
     .addItem('Починить формулы (#ERROR!)', 'sidewalkFixFormulas')
     .addSeparator()
+    .addItem('Покрасить «% принято»', 'applyPercentColors')
+    .addSeparator()
     .addItem('◀ Предыдущая страница', 'sidewalkPagePrev')
     .addItem('Следующая страница ▶', 'sidewalkPageNext')
     .addItem('Первая страница', 'sidewalkPageFirst')
     .addItem('Последняя страница', 'sidewalkPageLast')
     .addToUi();
+}
+
+/**
+ * Цветовая шкала для колонок «% принято» во всех сводках книги.
+ * 100 % — зелёный, 80–99 % — светло-зелёный, 60–80 % — оттенки жёлтого,
+ * ниже 60 % — оттенки красного. Повторный запуск заменяет только правила
+ * на этой колонке, остальное форматирование листа не трогает.
+ */
+function applyPercentColors() {
+  var book = SpreadsheetApp.getActive();
+  var bands = [
+    { min: 0.9995, color: '#00B050' },
+    { min: 0.8, color: '#A5D6A7' },
+    { min: 0.7, color: '#FFF59D' },
+    { min: 0.6, color: '#FDD835' },
+    { min: 0.4, color: '#FF8A65' },
+    { min: 0.2, color: '#E53935' }
+  ];
+  var touched = 0;
+
+  book.getSheets().forEach(function (sheet) {
+    var values = sheet.getDataRange().getValues();
+    if (!values.length) return;
+    var headerRow = -1;
+    var column = -1;
+    for (var r = 0; r < Math.min(values.length, 20) && headerRow < 0; r += 1) {
+      for (var c = 0; c < values[r].length; c += 1) {
+        var text = String(values[r][c] == null ? '' : values[r][c]).trim().toLowerCase();
+        if (text.indexOf('% принято') === 0) { headerRow = r; column = c; break; }
+      }
+    }
+    if (column < 0) return;
+
+    var last = headerRow;
+    for (var i = headerRow + 1; i < values.length; i += 1) {
+      var value = values[i][column];
+      if (value === '' || value === null) break;
+      last = i;
+    }
+    if (last <= headerRow) return;
+
+    var range = sheet.getRange(headerRow + 2, column + 1, last - headerRow, 1);
+
+    var rules = sheet.getConditionalFormatRules().filter(function (rule) {
+      return !rule.getRanges().some(function (existing) {
+        return !(existing.getLastRow() < range.getRow() || existing.getRow() > range.getLastRow()
+          || existing.getLastColumn() < range.getColumn() || existing.getColumn() > range.getLastColumn());
+      });
+    });
+
+    bands.forEach(function (band) {
+      rules.push(SpreadsheetApp.newConditionalFormatRule()
+        .whenNumberGreaterThanOrEqualTo(band.min)
+        .setBackground(band.color)
+        .setRanges([range])
+        .build());
+    });
+    rules.push(SpreadsheetApp.newConditionalFormatRule()
+      .whenNumberLessThan(0.2)
+      .setBackground('#B71C1C')
+      .setRanges([range])
+      .build());
+
+    sheet.setConditionalFormatRules(rules);
+    touched += 1;
+  });
+
+  book.toast('Покрашено сводок: ' + touched, 'Проценты', 5);
 }
