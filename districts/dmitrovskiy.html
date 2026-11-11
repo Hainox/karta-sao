@@ -258,6 +258,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     { key: 'sidewalks', label: 'Тротуары',            color: '#b3a2c7', enabled: true },
     { key: 'driveways', label: 'Проезды',             color: '#7f6a5d', enabled: false },
     { key: 'odh',       label: 'Объекты ОДХ',         color: '#5f7f95', enabled: false },
+    { key: 'peshehodnye_dorozhki', label: 'Пешеходные дорожки · АСУ ОДС', color: '#2a6a2a', enabled: false, prefectureOnly: true },
   ];
   const state = { map: null, layers: {}, shootMode: false, shootLayerOn: false, picking: null, points: [], serverOk: false, photoUser: readUser(), photoAngles: new Map(), activePhoto: null };
   const $ = (id) => document.getElementById(id);
@@ -343,6 +344,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     applyArrowScale(state.map.zoom);
     let total = 0;
     for (const layer of LAYERS) {
+      if (layer.prefectureOnly && !isPrefecture()) continue;
       try {
         const resp = await fetch(`layers/${SLUG}/${layer.key}.geojson`, { cache: 'no-store' });
         if (!resp.ok) throw new Error(`${layer.key}: HTTP ${resp.status}`);
@@ -390,6 +392,22 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
         $('status').textContent = 'Не удалось открыть площадку по ссылке: ' + error.message;
       }
     }
+  }
+
+  /** Догружает слой по требованию: файл префектуры не качается остальным. */
+  async function ensureLayer(key) {
+    if (state.layers[key]) return state.layers[key];
+    const layer = LAYERS.find((item) => item.key === key);
+    if (!layer) return null;
+    try {
+      const resp = await fetch(`layers/${SLUG}/${layer.key}.geojson`, { cache: 'no-store' });
+      if (!resp.ok) throw new Error(`${layer.key}: HTTP ${resp.status}`);
+      const data = await resp.json();
+      state.layers[key] = { config: layer, features: data.features || [], drawn: false };
+    } catch (error) {
+      state.layers[key] = { config: layer, features: [], drawn: false, error: error.message };
+    }
+    return state.layers[key];
   }
 
   function draw(key) {
@@ -457,7 +475,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
 
   function renderControls() {
     const box = $('layerControls');
-    box.innerHTML = LAYERS.filter(layer => !['dp_table', 'sp_table'].includes(layer.key)).map((layer) => {
+    box.innerHTML = LAYERS.filter(layer => !['dp_table', 'sp_table'].includes(layer.key) && (!layer.prefectureOnly || isPrefecture())).map((layer) => {
       const entry = state.layers[layer.key];
       const count = entry ? entry.features.length : 0;
       const off = !layer.enabled;
@@ -472,7 +490,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       input.addEventListener('change', async () => {
         const layer = LAYERS.find((l) => l.key === input.dataset.key);
         layer.enabled = input.checked;
-        if (layer.enabled) draw(layer.key); else undraw(layer.key);
+        if (layer.enabled) { await ensureLayer(layer.key); draw(layer.key); } else undraw(layer.key);
         if (layer.key === 'dp' || layer.key === 'sp') {
           const fallback = layer.key + '_table';
           if (!layer.enabled) undraw(fallback);
@@ -1334,6 +1352,8 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       sessionStorage.setItem(TOKEN_KEY, data.token);
       sessionStorage.setItem(USER_KEY, JSON.stringify(data.user));
       state.photoUser = data.user;
+      if (isPrefecture()) { await ensureLayer('peshehodnye_dorozhki'); }
+      renderControls();
       $('shootLoginPass').value = '';
       renderShootLogin();
       await reloadPhotoPoints();
