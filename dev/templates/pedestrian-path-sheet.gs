@@ -67,7 +67,9 @@ function onEdit(event) {
   var range = event && event.range;
   if (!range || range.getSheet().getName() !== PATH_CFG.registry) return;
   if (range.getColumn() < 18 || range.getColumn() > 20 || range.getRow() < 2) return;
-  range.getSheet().getRange(range.getRow(), 21).clearContent();
+  var first = range.getRow();
+  var count = Math.max(range.getNumRows(), 1);
+  range.getSheet().getRange(first, 21, count, 1).clearContent();
 }
 
 /* ---------- настройка книги ---------- */
@@ -77,6 +79,9 @@ function pathSetup() {
   var registry = pathEnsureSheet_(book, PATH_CFG.registry);
   if (registry.getMaxRows() < PATH_CFG.maxRows) {
     registry.insertRowsAfter(registry.getMaxRows(), PATH_CFG.maxRows - registry.getMaxRows());
+  }
+  if (registry.getMaxColumns() < 24) {
+    registry.insertColumnsAfter(registry.getMaxColumns(), 24 - registry.getMaxColumns());
   }
   pathHeader_(registry, PATH_HEADERS, 24);
   registry.setFrozenRows(1);
