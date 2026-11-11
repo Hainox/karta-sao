@@ -17,6 +17,7 @@ import { DISTRICTS } from './validation.js';
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 export const PATH_QUEUE_SQL = `SELECT p.id AS point_id, p.point_no, p.path_id, p.ordinal, p.district, p.address,
   p.longitude, p.latitude, p.route_m, p.area, p.coating, p.updated_at,
+  p.popular, p.popular_rank, p.popular_score,
   f.id AS photo_id, f.status AS photo_status, f.uploaded_at, f.photo_filename, f.reviewed_at, f.review_comment,
   r.id AS rejected_photo_id, r.review_comment AS rejected_comment, r.reviewed_at AS rejected_at,
   r.uploaded_at AS rejected_uploaded_at, r.photo_filename AS rejected_photo_filename
@@ -35,6 +36,7 @@ export const PATH_QUEUE_SQL = `SELECT p.id AS point_id, p.point_no, p.path_id, p
 /** Точки одного района для слоя на карте: координаты и состояние съёмки. */
 export const PATH_DISTRICT_POINTS_SQL = `SELECT p.id AS point_id, p.point_no, p.path_id, p.ordinal,
   p.district, p.address, p.longitude, p.latitude, p.route_m, p.area,
+  p.popular, p.popular_rank, p.popular_score,
   COALESCE(a.status, CASE WHEN r.id IS NOT NULL THEN 'rework' ELSE 'empty' END) AS photo_state
   FROM pedestrian_path_points p
   LEFT JOIN LATERAL (SELECT t.status FROM pedestrian_path_photos t
@@ -63,6 +65,7 @@ export function pedestrianQueueFromRows(rows) {
     return source ? {
       ...row, point_no: source.point_no, path_id: source.path_id, ordinal: source.ordinal,
       route_m: source.route_m, area: source.area, coating: source.coating, address: source.address,
+      popular: source.popular === true, popular_rank: source.popular_rank, popular_score: source.popular_score,
     } : row;
   };
   queue.pending = queue.pending.map(enrich);
@@ -74,6 +77,7 @@ export function pedestrianQueueFromRows(rows) {
       district: row.district, heading: null, longitude: row.longitude, latitude: row.latitude,
       route_m: row.route_m, area: row.area, ordinal: row.ordinal, coating: row.coating,
       address: row.address, photo_id: null,
+      popular: row.popular === true, popular_rank: row.popular_rank, popular_score: row.popular_score,
     }));
   return queue;
 }

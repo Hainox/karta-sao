@@ -38,9 +38,12 @@ for (const feature of data.features || []) {
     route_m: p.route_m ?? null,
     area: p.area ?? null,
     coating: String(p.coating || '').slice(0, 120),
+    popular: p.popular === true,
+    popular_rank: p.popular_rank ?? null,
+    popular_score: p.popular_score ?? null,
   });
 }
-const summary = { source, points: rows.length, problems: problems.length, apply: args.includes('--apply') };
+const summary = { source, points: rows.length, popular: rows.filter((row) => row.popular).length, problems: problems.length, apply: args.includes('--apply') };
 problems.slice(0, 20).forEach((line) => console.log('  ' + line));
 if (!summary.apply) {
   console.log(JSON.stringify(summary, null, 2));
@@ -58,15 +61,18 @@ try {
   let updated = 0;
   for (const row of rows) {
     const result = await client.query(`INSERT INTO pedestrian_path_points
-      (id, point_no, path_id, ogh_id, ordinal, district, address, longitude, latitude, route_m, area, coating)
-      VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)
+      (id, point_no, path_id, ogh_id, ordinal, district, address, longitude, latitude, route_m, area, coating, popular, popular_rank, popular_score)
+      VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15)
       ON CONFLICT (point_no) DO UPDATE SET path_id = EXCLUDED.path_id, ogh_id = EXCLUDED.ogh_id,
         ordinal = EXCLUDED.ordinal, district = EXCLUDED.district, address = EXCLUDED.address,
         longitude = EXCLUDED.longitude, latitude = EXCLUDED.latitude, route_m = EXCLUDED.route_m,
-        area = EXCLUDED.area, coating = EXCLUDED.coating, retired_at = NULL, updated_at = now()
+        area = EXCLUDED.area, coating = EXCLUDED.coating, popular = EXCLUDED.popular,
+        popular_rank = EXCLUDED.popular_rank, popular_score = EXCLUDED.popular_score,
+        retired_at = NULL, updated_at = now()
       RETURNING (xmax = 0) AS inserted`,
     [crypto.randomUUID(), row.point_no, row.path_id, row.ogh_id, row.ordinal, row.district,
-      row.address, row.longitude, row.latitude, row.route_m, row.area, row.coating]);
+      row.address, row.longitude, row.latitude, row.route_m, row.area, row.coating,
+      row.popular, row.popular_rank, row.popular_score]);
     if (result.rows[0]?.inserted) inserted++;
     else updated++;
   }

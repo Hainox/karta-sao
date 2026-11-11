@@ -262,6 +262,8 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     { key: 'odh',       label: 'Объекты ОДХ',         color: '#5f7f95', enabled: false },
     { key: 'peshehodnye_dorozhki', label: 'Пешеходные дорожки · АСУ ОДС', color: '#2a6a2a', enabled: false, prefectureOnly: true, load: 'pedestrian-paths' },
     { key: 'path_points', label: 'Точки съёмки · дорожки', color: '#e07b00', enabled: false, prefectureOnly: true, load: 'path-points' },
+    { key: 'popular_paths', label: 'Самые проходные дорожки', color: '#c2185b', enabled: true, prefectureOnly: true, load: 'popular-paths', outline: { color: '#8e0038', width: 2.4 } },
+    { key: 'popular_path_points', label: 'Точки съёмки · популярные', color: '#c2185b', enabled: false, prefectureOnly: true, load: 'popular-points' },
   ];
   const PATH_POINT_COLORS = { empty: '#e07b00', pending: '#1f78b4', accepted: '#2e9e52', rework: '#c2432e' };
   const PATH_POINT_LABELS = { empty: 'Нет фото', pending: 'На проверке', accepted: 'Принято', rework: 'На доработке' };
@@ -301,6 +303,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       ['Площадь, м²', p.total_area != null ? Number(p.total_area).toLocaleString('ru-RU') : null],
       ['В составе', p.source_id ? null : p.parent_object_name],
       ['Статус', p.object_status_name],
+      ['Популярная', p.popular ? 'да, №' + p.popular_rank : null],
       ['Адрес', p.source_id ? p.parent_object_name : null],
       ['ID в таблице', p.source_id],
       ['Балансодержатель', p.balance_holder],
@@ -321,6 +324,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
         ['Площадь, м²', p.area != null ? Number(p.area).toLocaleString('ru-RU') : null],
         ['Точка вдоль трассы', p.ordinal],
         ['ID дорожки', p.path_id],
+        ['Популярная', p.popular ? 'да, №' + p.popular_rank : null],
       ].filter(([, v]) => v != null && v !== '');
       $('card').innerHTML = `<dl class="pin-facts">${facts.map(([k, v]) => `<dt>${k}</dt><dd>${escapeHtml(v)}</dd>`).join('')}</dl>`;
       return;
@@ -435,6 +439,16 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
         },
       })).filter((feature) => feature.geometry.coordinates.every(Number.isFinite));
     }
+    if (layer.load === 'popular-paths') {
+      const base = await ensureLayer('peshehodnye_dorozhki');
+      return (base?.features || []).filter((feature) => feature.properties?.popular === true)
+        .map((feature) => ({ ...feature, properties: { ...feature.properties } }));
+    }
+    if (layer.load === 'popular-points') {
+      const base = await ensureLayer('path_points');
+      return (base?.features || []).filter((feature) => feature.properties?.popular === true)
+        .map((feature) => ({ ...feature, properties: { ...feature.properties, color: layer.color } }));
+    }
     if (layer.load === 'pedestrian-paths') {
       const resp = await apiRequest('/object-photo-points/pedestrian-paths/' + SLUG);
       if (!resp.ok) throw new Error(`${layer.key}: HTTP ${resp.status}`);
@@ -478,7 +492,8 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
           ? `${markerStatus} · ${feature.properties?.parent_object_name || ''}`
           : (feature.properties?.object_type_name || 'Площадка');
         marker.setAttribute('aria-label', marker.title + (feature.properties?.point_no ? ' · ' + feature.properties.point_no : ''));
-        Object.assign(marker.style, { width: isPathPoint ? '13px' : '16px', height: isPathPoint ? '13px' : '16px', borderRadius: '50%', border: '2px solid white', background: markerColor, boxShadow: '0 1px 5px #0009', cursor: 'pointer', transform: 'translate(-50%, -50%)', padding: '0' });
+        const popular = isPathPoint && feature.properties?.popular;
+        Object.assign(marker.style, { width: isPathPoint ? '13px' : '16px', height: isPathPoint ? '13px' : '16px', borderRadius: '50%', border: '2px solid white', background: markerColor, boxShadow: popular ? '0 0 0 2px #c2185b, 0 1px 5px #0009' : '0 1px 5px #0009', cursor: 'pointer', transform: 'translate(-50%, -50%)', padding: '0' });
         marker.addEventListener('click', (event) => { event.stopPropagation(); showCard(item); });
         const child = new window.ymaps3.YMapMarker({ coordinates: feature.geometry.coordinates }, marker);
         feature._ymapFeature = child;
@@ -547,7 +562,8 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       legend.innerHTML = '<span><i style="background:#e07b00"></i>нет фото</span>'
         + '<span><i style="background:#1f78b4"></i>на проверке</span>'
         + '<span><i style="background:#2e9e52"></i>принято</span>'
-        + '<span><i style="background:#c2432e"></i>на доработке</span>';
+        + '<span><i style="background:#c2432e"></i>на доработке</span>'
+        + '<span><i style="background:#c2185b"></i>популярная</span>';
       box.append(legend);
     }
     box.querySelectorAll('input').forEach((input) => {
@@ -1450,6 +1466,10 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       if (isPrefecture()) {
         await ensureLayer('peshehodnye_dorozhki');
         await ensureLayer('path_points');
+        await ensureLayer('popular_paths');
+        await ensureLayer('popular_path_points');
+        if (state.layers.popular_paths?.config.enabled) draw('popular_paths');
+        if (state.layers.popular_path_points?.config.enabled) draw('popular_path_points');
       }
       renderControls();
       $('shootLoginPass').value = '';

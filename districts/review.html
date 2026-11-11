@@ -91,7 +91,7 @@
     .object-row strong{display:block;font-size:14px}
     .object-row .open{color:var(--green);font-weight:700;white-space:nowrap}
     .pill{display:inline-block;margin-right:6px;padding:1px 8px;border-radius:999px;font-size:11px;font-weight:800;color:#fff}
-    .pill.review{background:var(--blue)}.pill.rework{background:var(--red)}.pill.accepted{background:var(--green)}.pill.empty{background:#9aa8a3}.pill.flagged{background:#a83d13}
+    .pill.review{background:var(--blue)}.pill.rework{background:var(--red)}.pill.accepted{background:var(--green)}.pill.empty{background:#9aa8a3}.pill.flagged{background:#a83d13}.pill.popular{background:#c2185b}
     .object-head{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:12px}
     .object-head h2{margin:4px 0 2px;font-size:18px}
     .slot-empty-box{display:grid;place-items:center;min-height:70px;background:#eef1ee;color:var(--muted);font-size:13px}
@@ -133,6 +133,7 @@
       <div class="toolbar">
         <label>Район<select id="districtFilter"><option value="">Все районы САО</option></select></label>
         <label id="kindFilterBox" hidden>Вид площадки<select id="kindFilter"><option value="">Детские и спортивные</option><option value="dp">Детские площадки</option><option value="sp">Спортивные площадки</option></select></label>
+        <label id="popularFilterBox" hidden><input type="checkbox" id="popularFilter"> Только популярные</label>
         <div class="tabs" role="tablist">
           <button class="tab active" type="button" data-tab="pending" role="tab">На проверке</button>
           <button class="tab" type="button" data-tab="rework" role="tab">На доработке</button>
@@ -368,7 +369,9 @@
     function matchesFilters(row) {
       const district = el('districtFilter').value;
       const kind = state.mode === 'playgrounds' ? el('kindFilter').value : '';
-      return (!district || row.district === district) && (!kind || row.kind === kind);
+      const popularOnly = state.mode === 'paths' && el('popularFilter').checked;
+      return (!district || row.district === district) && (!kind || row.kind === kind)
+        && (!popularOnly || row.popular === true);
     }
 
     function filteredRows(tab = state.tab) {
@@ -393,6 +396,7 @@
         const meta = make('div', 'meta', `${row.district} · ${mode().describe(row)}${row.point_no ? ' · ' + row.point_no : ''} · ` + whenText);
         info.append(make('strong', '', row.label), meta);
         meta.prepend(pill);
+        if (row.popular) meta.append(make('span', 'pill popular', 'популярная'));
         if (row.no_sidewalk) meta.append(make('span', 'pill flagged', 'НЕТ ТРОТУАРА'));
         button.append(info, make('span', 'open', mode().open));
         button.onclick = () => openPoint(row, state.tab);
@@ -634,6 +638,7 @@
       const body = make('div', 'body');
       const title = make('h3', '', mode().snapshot);
       body.append(title);
+      if (row.popular) title.append(make('span', 'pill popular', 'популярная'));
       if (row.no_sidewalk) title.append(make('span', 'pill flagged', 'НЕТ ТРОТУАРА'));
       if (kind === 'pending') {
         title.append(make('span', 'pill review', 'На проверке'));
@@ -797,6 +802,7 @@
     el('logout').onclick = () => { api.clearSession(); noSidewalkGeneration++; el('noSidewalkGroup').open = false; el('noSidewalkList').replaceChildren(); backToList(); state.queue = null; el('list').replaceChildren(); showSession(); };
     el('districtFilter').onchange = () => { state.shown = PAGE; render(); };
     el('kindFilter').onchange = () => { state.shown = PAGE; render(); };
+    el('popularFilter').onchange = () => { state.shown = PAGE; render(); };
     function showMode() {
       document.querySelectorAll('.mode').forEach((button) => {
         const active = button.dataset.mode === state.mode;
@@ -807,6 +813,7 @@
       if (emptyTab) emptyTab.hidden = !mode().emptyTab;
       if (!mode().emptyTab && state.tab === 'empty') setTab('pending');
       el('kindFilterBox').hidden = state.mode !== 'playgrounds';
+      el('popularFilterBox').hidden = state.mode !== 'paths';
       el('exportReport').hidden = !mode().reportFile;
       el('noSidewalkGroup').hidden = !showsNoSidewalk();
       if (!showsNoSidewalk()) {
