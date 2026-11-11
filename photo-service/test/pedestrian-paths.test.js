@@ -160,3 +160,32 @@ test('приёмка: без причины возврата нельзя, пр�
     assert.equal((await review(base, { decision: 'accepted' })).status, 409);
   });
 });
+
+test('слой точек района: только префектура и известный район', async () => {
+  const pool = {
+    async query(sql) {
+      if (sql.includes('WHERE p.district = $1')) {
+        return {
+          rows: [{
+            point_id: POINT, point_no: 'ПД-1-01', path_id: 1, ordinal: 1, district: 'Коптево',
+            address: 'Коптевская ул. 1', longitude: 37.57, latitude: 55.83, route_m: 40, area: 21,
+            photo_state: 'empty',
+          }],
+          rowCount: 1,
+        };
+      }
+      return { rows: [], rowCount: 0 };
+    },
+  };
+  await serve(pool, 'prefecture_admin', async (base) => {
+    const data = await (await fetch(`${base}/shoot-points?district=Коптево`)).json();
+    assert.equal(data.points.length, 1);
+    assert.equal(data.points[0].photo_state, 'empty');
+  });
+  await serve(pool, 'district_editor', async (base) => {
+    assert.equal((await fetch(`${base}/shoot-points?district=Коптево`)).status, 403);
+  });
+  await serve(pool, 'prefecture_admin', async (base) => {
+    assert.equal((await fetch(`${base}/shoot-points?district=Неизвестно`)).status, 400);
+  });
+});

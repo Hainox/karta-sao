@@ -12,6 +12,7 @@ import { buildDigitizationReport, summarizeDigitization } from '../digitization-
 import { mountDistrictPhotoArchive } from './district-archive.js';
 import { districtQueueFromRows, pointState } from './district-point-photos.js';
 import { safePhotoFilename, validatePhotoUpload } from './photo-markers.js';
+import { DISTRICTS } from './validation.js';
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 export const PATH_QUEUE_SQL = `SELECT p.id AS point_id, p.point_no, p.path_id, p.ordinal, p.district, p.address,
@@ -30,6 +31,20 @@ export const PATH_QUEUE_SQL = `SELECT p.id AS point_id, p.point_no, p.path_id, p
     ORDER BY t.reviewed_at DESC NULLS LAST, t.id DESC LIMIT 1) r ON true
   WHERE p.retired_at IS NULL
   ORDER BY p.district, p.point_no`;
+
+/** Точки одного района для слоя на карте: координаты и состояние съёмки. */
+export const PATH_DISTRICT_POINTS_SQL = `SELECT p.id AS point_id, p.point_no, p.path_id, p.ordinal,
+  p.district, p.address, p.longitude, p.latitude, p.route_m, p.area,
+  COALESCE(a.status, CASE WHEN r.id IS NOT NULL THEN 'rework' ELSE 'empty' END) AS photo_state
+  FROM pedestrian_path_points p
+  LEFT JOIN LATERAL (SELECT t.status FROM pedestrian_path_photos t
+    WHERE t.point_id = p.id AND t.status IN ('pending', 'accepted')
+    ORDER BY t.uploaded_at DESC, t.id DESC LIMIT 1) a ON true
+  LEFT JOIN LATERAL (SELECT t.id FROM pedestrian_path_photos t
+    WHERE t.point_id = p.id AND t.status = 'rejected'
+    ORDER BY t.reviewed_at DESC NULLS LAST, t.id DESC LIMIT 1) r ON true
+  WHERE p.district = $1 AND p.retired_at IS NULL
+  ORDER BY p.point_no`;
 
 /** Подпись точки: адрес и, если точек несколько, номер вдоль трассы. */
 export function pathLabel(row) {
@@ -107,6 +122,17 @@ export function createPedestrianPathsRouter({ pool, authenticate }) {
   router.get('/queue', async (req, res, next) => {
     try {
       res.set('Cache-Control', 'no-store').json(pedestrianQueueFromRows((await pool.query(PATH_QUEUE_SQL)).rows));
+    } catch (error) { next(error); }
+  });
+
+  // Слой точек съёмки для карты района: только координаты и состояние.
+  // Очередь кабинета для карты слишком тяжёлая — здесь один район.
+  router.get('/shoot-points', async (req, res, next) => {
+    try {
+      const district = String(req.query.district || '').trim();
+      if (!DISTRICTS.has(district)) return res.status(400).json({ error: 'Неизвестный район.' });
+      const { rows } = await pool.query(PATH_DISTRICT_POINTS_SQL, [district]);
+      res.set('Cache-Control', 'private, no-store').json({ district, points: rows });
     } catch (error) { next(error); }
   });
 

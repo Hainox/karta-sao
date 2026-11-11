@@ -38,6 +38,8 @@ h1{margin:2px 0 0;font-size:24px;line-height:1.15}
 .layer-row .label{flex:1;font-size:14px;font-weight:700}
 .layer-row .count{color:var(--muted);font-size:12px;font-variant-numeric:tabular-nums}
 .layer-row.off .label{color:var(--muted);font-weight:400}
+.path-point-legend{display:flex;flex-wrap:wrap;gap:8px 12px;margin:8px 2px 0;font-size:11px;color:var(--muted)}
+.path-point-legend i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px;vertical-align:middle}
 .shoot-login{display:flex;flex-direction:column;gap:8px;padding:12px;border:1px solid var(--line);border-radius:12px;background:#fff;animation:hud-reveal .24s cubic-bezier(.2,.7,.2,1)}
 .shoot-login[hidden]{display:none}
 .shoot-login .row .hud-btn{flex:1}
@@ -258,8 +260,11 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     { key: 'sidewalks', label: 'Тротуары',            color: '#b3a2c7', enabled: true },
     { key: 'driveways', label: 'Проезды',             color: '#7f6a5d', enabled: false },
     { key: 'odh',       label: 'Объекты ОДХ',         color: '#5f7f95', enabled: false },
-    { key: 'peshehodnye_dorozhki', label: 'Пешеходные дорожки · АСУ ОДС', color: '#2a6a2a', enabled: false, prefectureOnly: true },
+    { key: 'peshehodnye_dorozhki', label: 'Пешеходные дорожки · АСУ ОДС', color: '#2a6a2a', enabled: false, prefectureOnly: true, load: 'pedestrian-paths' },
+    { key: 'path_points', label: 'Точки съёмки · дорожки', color: '#e07b00', enabled: false, prefectureOnly: true, load: 'path-points' },
   ];
+  const PATH_POINT_COLORS = { empty: '#e07b00', pending: '#1f78b4', accepted: '#2e9e52', rework: '#c2432e' };
+  const PATH_POINT_LABELS = { empty: 'Нет фото', pending: 'На проверке', accepted: 'Принято', rework: 'На доработке' };
   const state = { map: null, layers: {}, shootMode: false, shootLayerOn: false, picking: null, points: [], serverOk: false, photoUser: readUser(), photoAngles: new Map(), activePhoto: null };
   const $ = (id) => document.getElementById(id);
   const escapeHtml = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
@@ -305,6 +310,21 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     ].filter(([, v]) => v != null && v !== '').map(([k, v]) => `<div><strong>${k}:</strong> ${escapeHtml(v)}</div>`).join('');
     const title = p.object_type_name || p.district || 'Объект';
     const geometry = item.feature?.geometry || item.geometry;
+    if (geometry?.type === 'Point' && item.layerKey === 'path_points') {
+      const status = p.status_label || 'Нет фото';
+      state.popover.open({ coordinates: geometry.coordinates, kind: 'path',
+        title: p.parent_object_name || 'Точка съёмки', subtitle: (p.point_no || '') + ' · ' + status });
+      const facts = [
+        ['Статус', status],
+        ['Номер точки', p.point_no],
+        ['Длина трассы, м', p.route_m != null ? Number(p.route_m).toLocaleString('ru-RU') : null],
+        ['Площадь, м²', p.area != null ? Number(p.area).toLocaleString('ru-RU') : null],
+        ['Точка вдоль трассы', p.ordinal],
+        ['ID дорожки', p.path_id],
+      ].filter(([, v]) => v != null && v !== '');
+      $('card').innerHTML = `<dl class="pin-facts">${facts.map(([k, v]) => `<dt>${k}</dt><dd>${escapeHtml(v)}</dd>`).join('')}</dl>`;
+      return;
+    }
     // Точка (площадка из таблицы) открывается окном у самой точки, площадные объекты — в левом меню.
     if (geometry?.type === 'Point' && state.popover) {
       state.popover.open({ coordinates: geometry.coordinates, kind: item.layerKey === 'sp_table' ? 'sp' : 'dp',
@@ -346,12 +366,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     for (const layer of LAYERS) {
       if (layer.prefectureOnly && !isPrefecture()) continue;
       try {
-        const resp = layer.prefectureOnly
-        ? await apiRequest('/object-photo-points/pedestrian-paths/' + SLUG)
-        : await fetch(`layers/${SLUG}/${layer.key}.geojson`, { cache: 'no-store' });
-        if (!resp.ok) throw new Error(`${layer.key}: HTTP ${resp.status}`);
-        const data = await resp.json();
-        const features = data.features || [];
+        const features = await loadLayerData(layer);
         state.layers[layer.key] = { config: layer, features, drawn: false };
         total += features.length;
         if (layer.enabled) draw(layer.key);
@@ -399,18 +414,46 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     }
   }
 
+  /** Загружает данные слоя: статику, полигоны дорожек или точки съёмки. */
+  async function loadLayerData(layer) {
+    if (layer.load === 'path-points') {
+      const resp = await apiRequest('/object-photo-points/pedestrian-paths/shoot-points?district=' + encodeURIComponent(DISTRICT));
+      if (!resp.ok) throw new Error(`${layer.key}: HTTP ${resp.status}`);
+      const data = await resp.json();
+      return (data.points || []).map((point) => ({
+        type: 'Feature',
+        geometry: { type: 'Point', coordinates: [Number(point.longitude), Number(point.latitude)] },
+        properties: {
+          ...point,
+          kind: 'path',
+          status_label: PATH_POINT_LABELS[point.photo_state] || 'Нет фото',
+          color: PATH_POINT_COLORS[point.photo_state] || layer.color,
+          object_type_name: 'Пешеходная дорожка',
+          parent_object_name: point.address || '',
+          source_id: point.point_no,
+          source: 'АСУ ОДС',
+        },
+      })).filter((feature) => feature.geometry.coordinates.every(Number.isFinite));
+    }
+    if (layer.load === 'pedestrian-paths') {
+      const resp = await apiRequest('/object-photo-points/pedestrian-paths/' + SLUG);
+      if (!resp.ok) throw new Error(`${layer.key}: HTTP ${resp.status}`);
+      const data = await resp.json();
+      return data.features || [];
+    }
+    const resp = await fetch(`layers/${SLUG}/${layer.key}.geojson`, { cache: 'no-store' });
+    if (!resp.ok) throw new Error(`${layer.key}: HTTP ${resp.status}`);
+    const data = await resp.json();
+    return data.features || [];
+  }
+
   /** Догружает слой по требованию: файл префектуры не качается остальным. */
   async function ensureLayer(key) {
     if (state.layers[key]) return state.layers[key];
     const layer = LAYERS.find((item) => item.key === key);
     if (!layer) return null;
     try {
-      const resp = layer.prefectureOnly
-        ? await apiRequest('/object-photo-points/pedestrian-paths/' + SLUG)
-        : await fetch(`layers/${SLUG}/${layer.key}.geojson`, { cache: 'no-store' });
-      if (!resp.ok) throw new Error(`${layer.key}: HTTP ${resp.status}`);
-      const data = await resp.json();
-      state.layers[key] = { config: layer, features: data.features || [], drawn: false };
+      state.layers[key] = { config: layer, features: await loadLayerData(layer), drawn: false };
     } catch (error) {
       state.layers[key] = { config: layer, features: [], drawn: false, error: error.message };
     }
@@ -428,9 +471,14 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       if (feature.geometry?.type === 'Point') {
         const marker = document.createElement('button');
         marker.type = 'button';
-        marker.title = feature.properties?.object_type_name || 'Площадка';
-        marker.setAttribute('aria-label', marker.title + ': ' + (feature.properties?.parent_object_name || ''));
-        Object.assign(marker.style, { width: '16px', height: '16px', borderRadius: '50%', border: '2px solid white', background: cfg.color, boxShadow: '0 1px 5px #0009', cursor: 'pointer', transform: 'translate(-50%, -50%)', padding: '0' });
+        const isPathPoint = feature.properties?.kind === 'path';
+        const markerColor = feature.properties?.color || cfg.color;
+        const markerStatus = feature.properties?.status_label;
+        marker.title = markerStatus
+          ? `${markerStatus} · ${feature.properties?.parent_object_name || ''}`
+          : (feature.properties?.object_type_name || 'Площадка');
+        marker.setAttribute('aria-label', marker.title + (feature.properties?.point_no ? ' · ' + feature.properties.point_no : ''));
+        Object.assign(marker.style, { width: isPathPoint ? '13px' : '16px', height: isPathPoint ? '13px' : '16px', borderRadius: '50%', border: '2px solid white', background: markerColor, boxShadow: '0 1px 5px #0009', cursor: 'pointer', transform: 'translate(-50%, -50%)', padding: '0' });
         marker.addEventListener('click', (event) => { event.stopPropagation(); showCard(item); });
         const child = new window.ymaps3.YMapMarker({ coordinates: feature.geometry.coordinates }, marker);
         feature._ymapFeature = child;
@@ -493,6 +541,15 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
         <span class="count">${count.toLocaleString('ru-RU')}</span>
       </label>`;
     }).join('');
+    if (state.layers.path_points) {
+      const legend = document.createElement('div');
+      legend.className = 'path-point-legend';
+      legend.innerHTML = '<span><i style="background:#e07b00"></i>нет фото</span>'
+        + '<span><i style="background:#1f78b4"></i>на проверке</span>'
+        + '<span><i style="background:#2e9e52"></i>принято</span>'
+        + '<span><i style="background:#c2432e"></i>на доработке</span>';
+      box.append(legend);
+    }
     box.querySelectorAll('input').forEach((input) => {
       input.addEventListener('change', async () => {
         const layer = LAYERS.find((l) => l.key === input.dataset.key);
@@ -522,24 +579,32 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     $('layerTotal').textContent = `включено ${inputs.filter((i) => i.checked).length} из ${inputs.length}`;
   }
 
-  // Ссылка из кабинета приёмки: ?path=<id дорожки>&lat=&lng= — включаем слой
-  // дорожек, показываем полигон и место съёмки. Работает только у префектуры:
-  // остальным слой не отдаётся.
+  // Ссылка из кабинета приёмки: ?path=<id дорожки>&point=<id точки> — включаем
+  // слой дорожек и слой точек, показываем полигон и саму точку съёмки.
+  // Работает только у префектуры: остальным эти слои не отдаются.
   function focusPathFromQuery() {
     const params = new URLSearchParams(location.search);
     const pathId = params.get('path');
     if (!pathId || !isPrefecture()) return false;
     const entry = state.layers.peshehodnye_dorozhki;
-    if (!entry || entry.drawn) return false;
+    const points = state.layers.path_points;
+    if (!entry) return false;
     const feature = entry.features.find((item) => String(item.properties?.id) === String(pathId));
     if (!feature) return false;
-    entry.config.enabled = true;
-    draw('peshehodnye_dorozhki');
+    if (!entry.drawn) { entry.config.enabled = true; draw('peshehodnye_dorozhki'); }
+    if (points && !points.drawn) { points.config.enabled = true; draw('path_points'); }
     renderControls();
+    const pointId = params.get('point');
+    const point = pointId && points?.features.find((item) => String(item.properties?.point_id) === String(pointId));
+    if (point) {
+      state.map.update({ location: { center: point.geometry.coordinates, zoom: 18 }, duration: 300 });
+      showCard({ feature: point, layerKey: 'path_points' });
+      return true;
+    }
     const lat = Number(params.get('lat')), lng = Number(params.get('lng'));
     if (Number.isFinite(lat) && Number.isFinite(lng)) {
       state.map.update({ location: { center: [lng, lat], zoom: 18 }, duration: 300 });
-      state.popover?.open({ coordinates: [lng, lat], title: 'Точка съёмки', subtitle: 'Пешеходная дорожка АСУ ОДС' });
+      state.popover?.open({ coordinates: [lng, lat], kind: 'path', title: 'Точка съёмки', subtitle: 'Пешеходная дорожка АСУ ОДС' });
     }
     showCard({ feature, layerKey: 'peshehodnye_dorozhki' });
     return true;
@@ -1382,7 +1447,10 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       sessionStorage.setItem(TOKEN_KEY, data.token);
       sessionStorage.setItem(USER_KEY, JSON.stringify(data.user));
       state.photoUser = data.user;
-      if (isPrefecture()) { await ensureLayer('peshehodnye_dorozhki'); }
+      if (isPrefecture()) {
+        await ensureLayer('peshehodnye_dorozhki');
+        await ensureLayer('path_points');
+      }
       renderControls();
       $('shootLoginPass').value = '';
       renderShootLogin();

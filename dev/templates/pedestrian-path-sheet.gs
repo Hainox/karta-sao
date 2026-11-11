@@ -179,7 +179,9 @@ function pathSync() {
     var total = pathRegistryCount_();
     pathWriteState_(total, data.generated_at);
     props.setProperty('PATH_LAST_SYNC', String(data.generated_at || new Date().toISOString()));
-    pathLog_(started, 'sync', written, 0, data.full || !since ? 'full' : 'incremental');
+    var note = (data.full || !since) ? 'полный срез'
+      : (written ? 'изменений: ' + written : 'изменений нет');
+    pathLog_(started, 'sync', total, 0, note);
   } catch (error) {
     pathLog_(started, 'sync', 0, 1, String(error && error.message || error).slice(0, 400));
     throw error;
