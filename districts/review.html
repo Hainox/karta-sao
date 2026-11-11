@@ -249,7 +249,7 @@
       describe: (row) => row.route_m ? 'трасса ' + Math.round(Number(row.route_m)).toLocaleString('ru-RU') + ' м' : 'дорожка',
       mapLink: (row) => (DISTRICT_SLUGS[row.district] || 'index') + '.html?path=' + encodeURIComponent(row.path_id)
         + '&point=' + encodeURIComponent(row.point_id) + '&lat=' + Number(row.latitude).toFixed(6) + '&lng=' + Number(row.longitude).toFixed(6),
-      emptyTab: true, upload: true,
+      emptyTab: true, canUpload: true,
     };
     const showsNoSidewalk = () => ['sidewalks', 'odh-sidewalks'].includes(state.mode);
     const KIND_NAMES = { dp: 'Детская площадка', sp: 'Спортивная площадка' };
@@ -613,7 +613,7 @@
       details.append(make('summary', '', 'Сравнить с фото из «Север ЖКХ»'), hint, input, reset, message); node.append(details);
     }
 
-    /** Загрузка фото точки: доступна только там, где mode().upload задан. */
+    /** Загрузка фото точки: доступна только там, где mode().canUpload задан. */
     function uploadForm(row, hint) {
       const form = make('form', 'upload-form');
       const input = make('input'); input.type = 'file'; input.accept = 'image/jpeg,image/png,image/webp'; input.required = true;
@@ -662,12 +662,12 @@
         if (row.photo_id) node.append(photoBox(row.point_id, { id: row.photo_id }, 'Отклонённое фото точки ' + row.label, capture), body);
         if (!row.photo_id) node.append(make('div', 'slot-empty-box', 'Отклонённый снимок снят со слота'), body);
         body.append(make('p', 'comment', 'Что исправить: ' + (row.rejected_comment || '—')), make('div', 'meta', 'Отклонено ' + when(row.rejected_at) + '. Ждём новое фото.'));
-        if (mode().upload) body.append(uploadForm(row, 'Новый снимок заменит возвращённый.'));
+        if (mode().canUpload) body.append(uploadForm(row, 'Новый снимок заменит возвращённый.'));
       } else if (kind === 'empty') {
         node.append(body);
         title.append(make('span', 'pill empty', 'Без фото'));
         body.append(make('div', 'meta', 'Фото ещё не загружено.'));
-        if (mode().upload) body.append(uploadForm(row, 'Снимите дорожку и загрузите кадр — он встанет на проверку.'));
+        if (mode().canUpload) body.append(uploadForm(row, 'Снимите дорожку и загрузите кадр — он встанет на проверку.'));
         else body.append(make('div', 'slot-empty-box', 'Ждём фото от района'));
       }
       return node;
@@ -726,7 +726,7 @@
       await reviewPhotos([photo], decision, comment);
     }
 
-    // Загрузка доступна только в режимах с mode().upload (сейчас — дорожки).
+    // Загрузка доступна только в режимах с mode().canUpload (сейчас — дорожки).
     // Новый кадр всегда встаёт на проверку, даже если его загрузила префектура:
     // приёмка остаётся отдельным шагом, как у остальных оцифровок.
     async function uploadPhoto(row, file, status) {
