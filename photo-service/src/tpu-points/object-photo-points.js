@@ -97,6 +97,20 @@ export function validateObjectPhotoPoint(input, boundary) {
 
 export function createObjectPhotoPointsRouter({ repository, authenticate, boundary }) {
   const router = express.Router();
+  // Слой АСУ ОДС «Пешеходные дорожки» — следующий объект оцифровки. Публично
+  // GeoJSON не отдаётся: только префектуре и только по её сессии.
+  router.get('/pedestrian-paths/:slug', authenticate, async (req, res) => {
+    if (req.user.role !== 'prefecture_admin') return res.status(403).json({ error: 'Слой доступен префектуре.' });
+    const slug = String(req.params.slug || '').replace(/[^a-z0-9_-]/gi, '');
+    if (!slug) return res.status(404).json({ error: 'Слой не найден.' });
+    try {
+      const file = new URL(`../../assets/pedestrian-paths/${slug}.geojson`, import.meta.url);
+      const body = readFileSync(file, 'utf8');
+      res.set('Cache-Control', 'private, no-store').type('application/geo+json').send(body);
+    } catch {
+      res.status(404).json({ error: 'Слой не найден.' });
+    }
+  });
   router.get('/public', async (req, res, next) => {
     try {
       const dataset = req.query.dataset === 'sao_district_photo_points' ? 'sao_district_photo_points' : 'sao_tpu_parking';

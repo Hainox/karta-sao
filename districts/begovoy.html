@@ -346,7 +346,9 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     for (const layer of LAYERS) {
       if (layer.prefectureOnly && !isPrefecture()) continue;
       try {
-        const resp = await fetch(`layers/${SLUG}/${layer.key}.geojson`, { cache: 'no-store' });
+        const resp = layer.prefectureOnly
+        ? await apiRequest('/object-photo-points/pedestrian-paths/' + SLUG)
+        : await fetch(`layers/${SLUG}/${layer.key}.geojson`, { cache: 'no-store' });
         if (!resp.ok) throw new Error(`${layer.key}: HTTP ${resp.status}`);
         const data = await resp.json();
         const features = data.features || [];
