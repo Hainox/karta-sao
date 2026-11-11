@@ -14,7 +14,7 @@ import { districtQueueFromRows, pointState } from './district-point-photos.js';
 import { safePhotoFilename, validatePhotoUpload } from './photo-markers.js';
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
-const QUEUE_SQL = `SELECT p.id AS point_id, p.point_no, p.path_id, p.ordinal, p.district, p.address,
+export const PATH_QUEUE_SQL = `SELECT p.id AS point_id, p.point_no, p.path_id, p.ordinal, p.district, p.address,
   p.longitude, p.latitude, p.route_m, p.area, p.coating,
   f.id AS photo_id, f.status AS photo_status, f.uploaded_at, f.photo_filename, f.reviewed_at, f.review_comment,
   r.id AS rejected_photo_id, r.review_comment AS rejected_comment, r.reviewed_at AS rejected_at,
@@ -94,26 +94,26 @@ export function createPedestrianPathsRouter({ pool, authenticate }) {
 
   mountDistrictPhotoArchive(router, {
     prefecture, prefix: 'sao-pedestrian-paths',
-    loadRows: async () => (await pool.query(QUEUE_SQL)).rows,
+    loadRows: async () => (await pool.query(PATH_QUEUE_SQL)).rows,
     loadPhoto: (entry) => pool.query('SELECT photo_bytes FROM pedestrian_path_photos WHERE id = $1 AND point_id = $2', [entry.photoId, entry.pointId])
       .then((result) => result.rows[0]?.photo_bytes),
   });
   mountAcceptedPhotoExport(router, {
     prefecture, category: 'Пешеходные дорожки',
-    loadRows: async () => (await pool.query(QUEUE_SQL)).rows,
+    loadRows: async () => (await pool.query(PATH_QUEUE_SQL)).rows,
     loadPhoto: (row) => acceptedPhotoBytes(pool, row, 'pedestrian_path_photos'),
   });
 
   router.get('/queue', async (req, res, next) => {
     try {
-      res.set('Cache-Control', 'no-store').json(pedestrianQueueFromRows((await pool.query(QUEUE_SQL)).rows));
+      res.set('Cache-Control', 'no-store').json(pedestrianQueueFromRows((await pool.query(PATH_QUEUE_SQL)).rows));
     } catch (error) { next(error); }
   });
 
   router.get('/report.xlsx', async (req, res, next) => {
     try {
       const generatedAt = new Date();
-      const points = pathReportPoints((await pool.query(QUEUE_SQL)).rows);
+      const points = pathReportPoints((await pool.query(PATH_QUEUE_SQL)).rows);
       const summary = summarizeDigitization({ points, generatedAt });
       const buffer = await buildDigitizationReport(summary, {
         title: 'Пешеходные дорожки · АСУ ОДС',
