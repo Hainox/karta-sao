@@ -503,7 +503,11 @@ function pathPushLocked_() {
     }
   }
   pathWriteResults_(sheet, results);
-  pathLog_(started, 'push', batch.length, 0, 'OK');
+  var errors = results.filter(function (row) {
+    var value = String(row[0] || '');
+    return value !== '' && value !== 'OK';
+  }).length;
+  pathLog_(started, 'push', batch.length, errors, errors ? 'есть ошибки' : 'OK');
 }
 
 function pathWriteResults_(sheet, results) {
