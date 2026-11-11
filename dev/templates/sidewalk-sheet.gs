@@ -839,14 +839,17 @@ function sidewalkFormulaText_(value) {
 
 /**
  * Разделитель аргументов формулы по локали книги: в ru_RU, de_DE и других
- * локалях с десятичной запятой это «;», в en_US — «,». Определяем по
- * десятичному разделителю, а не по списку стран.
+ * локалях с десятичной запятой это «;», в en_US — «,». Список стран надёжнее
+ * toLocaleString: в Apps Script он может вернуть «1.5» даже для ru-RU, и тогда
+ * получаются формулы с запятой и #ERROR! во всей книге.
  */
 function sidewalkFormulaSeparator_(book) {
   var locale = '';
-  try { locale = String(book.getSpreadsheetLocale() || '').replace(/_/g, '-'); } catch (_) { /* старые версии */ }
+  try { locale = String(book.getSpreadsheetLocale() || '').toLowerCase(); } catch (_) { /* старые версии */ }
+  var commaDecimal = /^(ru|uk|be|de|fr|es|it|pt|nl|pl|cs|sk|hu|ro|bg|tr|fi|sv|da|nb|lt|lv|et|el|hr|sl|sr|kk|az|hy|ka|uz|ky|tg|mk|bs|sq|is)/;
+  if (commaDecimal.test(locale)) return ';';
   try {
-    return (1.5).toLocaleString(locale || 'en-US').indexOf(',') >= 0 ? ';' : ',';
+    return (1.5).toLocaleString(locale.replace(/_/g, '-') || 'en-US').indexOf(',') >= 0 ? ';' : ',';
   } catch (_) {
     return ',';
   }
