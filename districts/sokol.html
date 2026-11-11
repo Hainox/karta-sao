@@ -394,6 +394,9 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
         $('status').textContent = 'Не удалось открыть площадку по ссылке: ' + error.message;
       }
     }
+    if (focusPathFromQuery()) {
+      $('status').textContent = 'Открыта пешеходная дорожка по ссылке из кабинета приёмки.';
+    }
   }
 
   /** Догружает слой по требованию: файл префектуры не качается остальным. */
@@ -515,6 +518,29 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
   function renderLayerTotal() {
     const inputs = [...$('layerControls').querySelectorAll('input')];
     $('layerTotal').textContent = `включено ${inputs.filter((i) => i.checked).length} из ${inputs.length}`;
+  }
+
+  // Ссылка из кабинета приёмки: ?path=<id дорожки>&lat=&lng= — включаем слой
+  // дорожек, показываем полигон и место съёмки. Работает только у префектуры:
+  // остальным слой не отдаётся.
+  function focusPathFromQuery() {
+    const params = new URLSearchParams(location.search);
+    const pathId = params.get('path');
+    if (!pathId || !isPrefecture()) return false;
+    const entry = state.layers.peshehodnye_dorozhki;
+    if (!entry || entry.drawn) return false;
+    const feature = entry.features.find((item) => String(item.properties?.id) === String(pathId));
+    if (!feature) return false;
+    entry.config.enabled = true;
+    draw('peshehodnye_dorozhki');
+    renderControls();
+    const lat = Number(params.get('lat')), lng = Number(params.get('lng'));
+    if (Number.isFinite(lat) && Number.isFinite(lng)) {
+      state.map.update({ location: { center: [lng, lat], zoom: 18 }, duration: 300 });
+      state.popover?.open({ coordinates: [lng, lat], title: 'Точка съёмки', subtitle: 'Пешеходная дорожка АСУ ОДС' });
+    }
+    showCard({ feature, layerKey: 'peshehodnye_dorozhki' });
+    return true;
   }
 
   /* ---------- Точки съёмки эталонных фото: сервер фотослужбы ---------- */
@@ -1362,6 +1388,9 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       $('shootHint').textContent = isPrefecture()
         ? 'Вход выполнен. Нажмите на точку, чтобы перенести или повернуть её, или «+ Въездная группа», чтобы поставить новую.'
         : 'Вход выполнен. Выберите назначенную префектурой точку и отправьте фотографию.';
+      if (isPrefecture() && focusPathFromQuery()) {
+        $('shootHint').textContent = 'Открыта пешеходная дорожка по ссылке из кабинета приёмки.';
+      }
     } catch (error) {
       $('shootLoginState').textContent = 'Не удалось войти: ' + error.message;
     }
