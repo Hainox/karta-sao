@@ -103,15 +103,35 @@ function sidewalkShowAllRows() {
   var formula = cell.getFormula();
   if (!formula) throw new Error('В K7 нет формулы списка.');
 
-  // Ограничение страницы: "select * limit 100 offset "&MAX(0,($H$3-1)*100)
-  var updated = formula.replace(/"select \* limit 100 offset "&MAX\(0,\(\$H\$3-1\)\*100\)/, '"select * limit 2000"');
+  // Ограничение страницы в формуле списка. В книге с десятичной запятой
+  // аргументы разделены «;», поэтому проверяем оба варианта и оба вида кавычек.
+  var candidates = [
+    '"select * limit 100 offset "&MAX(0,($H$3-1)*100)',
+    '"select * limit 100 offset "&MAX(0;($H$3-1)*100)',
+    '""select * limit 100 offset ""&MAX(0,($H$3-1)*100)',
+    '""select * limit 100 offset ""&MAX(0;($H$3-1)*100)'
+  ];
+  var updated = formula;
+  for (var index = 0; index < candidates.length; index += 1) {
+    if (updated.indexOf(candidates[index]) >= 0) {
+      updated = updated.replace(candidates[index],
+        formula.indexOf('""select') >= 0 ? '""select * limit 2000""' : '"select * limit 2000"');
+      break;
+    }
+  }
+  if (updated === formula) {
+    updated = formula.replace(/"select \* limit 100 offset "&MAX\(0[,;]\(\$H\$3-1\)\*100\)/,
+      '"select * limit 2000"');
+  }
   if (updated === formula) {
     // Уже без страниц — не ошибка.
     if (formula.indexOf('limit 100') < 0 && formula.indexOf('offset') < 0) {
       SpreadsheetApp.getActive().toast('Страницы уже убраны', 'Сверка фото', 4);
       return;
     }
-    throw new Error('Не нашёл ограничение страницы в формуле K7.');
+    var at = formula.indexOf('limit');
+    throw new Error('Не нашёл ограничение страницы. Фрагмент: '
+      + formula.slice(Math.max(0, at - 20), at + 70));
   }
   cell.setFormula(updated);
 
