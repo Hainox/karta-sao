@@ -664,6 +664,7 @@
         body.append(make('p', 'comment', 'Что исправить: ' + (row.rejected_comment || '—')), make('div', 'meta', 'Отклонено ' + when(row.rejected_at) + '. Ждём новое фото.'));
         if (mode().upload) body.append(uploadForm(row, 'Новый снимок заменит возвращённый.'));
       } else if (kind === 'empty') {
+        node.append(body);
         title.append(make('span', 'pill empty', 'Без фото'));
         body.append(make('div', 'meta', 'Фото ещё не загружено.'));
         if (mode().upload) body.append(uploadForm(row, 'Снимите дорожку и загрузите кадр — он встанет на проверку.'));
