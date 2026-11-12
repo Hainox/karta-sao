@@ -871,6 +871,25 @@
       button.disabled = true;
       setStatus('listStatus', 'Собираем архив фото… это может занять несколько минут.');
       try {
+        // Большой архив (тротуары — гигабайты) сохраняем потоком на диск через
+        // File System Access API. Обычная ссылка на cross-origin ZIP уходит
+        // навигацией и на obhod-sao.ru попадает в приложение «Обход площадок».
+        // Спрашиваем файл сразу, пока живёт жест пользователя.
+        let saveHandle = null;
+        if (typeof window.showSaveFilePicker === 'function') {
+          setStatus('listStatus', 'Выберите, куда сохранить архив…');
+          try {
+            saveHandle = await window.showSaveFilePicker({
+              suggestedName: 'sao-archive-' + new Date().toISOString().slice(0, 10) + '.zip',
+              types: [{ description: 'ZIP-архив', accept: { 'application/zip': ['.zip'] } }],
+            });
+          } catch (error) {
+            if (error.name === 'AbortError') return;
+            saveHandle = null;
+          }
+          if (generation !== state.archiveGeneration) return;
+          setStatus('listStatus', 'Собираем архив фото… это может занять несколько минут.');
+        }
         const prepareResponse = await api.request(mode().base + '/photos.zip/prepare?' + params, { method: 'POST' });
         let job = await prepareResponse.json();
         const jobId = job.id;
@@ -904,12 +923,20 @@
           || (['localhost', '127.0.0.1'].includes(location.hostname)
             ? preparedBase
             : 'https://obhod-sao.ru/photo-api');
-        const link = make('a');
-        link.href = apiBase + '/reports/photos.zip/file/' + encodeURIComponent(job.name) + '?ticket=' + encodeURIComponent(job.ticket);
-        link.download = job.name;
-        document.body.append(link); link.click(); link.remove();
+        const fileUrl = apiBase + '/reports/photos.zip/file/' + encodeURIComponent(job.name) + '?ticket=' + encodeURIComponent(job.ticket);
         const megabytes = Math.max(1, Math.round(Number(job.bytes) / 1024 / 1024));
-        setStatus('listStatus', 'Архив готов: ' + Number(job.photos).toLocaleString('ru-RU') + ' фото, ' + megabytes + ' МБ.');
+        if (saveHandle) {
+          const response = await fetch(fileUrl);
+          if (!response.ok || !response.body) throw new Error('фотослужба не отдала файл (' + response.status + ')');
+          await response.body.pipeTo(await saveHandle.createWritable());
+          setStatus('listStatus', 'Архив сохранён: ' + saveHandle.name + ' — ' + Number(job.photos).toLocaleString('ru-RU') + ' фото, ' + megabytes + ' МБ.');
+        } else {
+          const link = make('a');
+          link.href = fileUrl;
+          link.download = job.name;
+          document.body.append(link); link.click(); link.remove();
+          setStatus('listStatus', 'Архив готов: ' + Number(job.photos).toLocaleString('ru-RU') + ' фото, ' + megabytes + ' МБ.');
+        }
       } catch (error) {
         if (generation === state.archiveGeneration) setStatus('listStatus', 'Не удалось собрать архив: ' + error.message, true);
       } finally {
