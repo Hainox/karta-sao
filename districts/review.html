@@ -864,7 +864,8 @@
       button.disabled = true;
       setStatus('listStatus', 'Собираем архив фото… это может занять несколько минут.');
       try {
-        let job = await (await api.request(mode().base + '/photos.zip/prepare?' + params, { method: 'POST' })).json();
+        const prepareResponse = await api.request(mode().base + '/photos.zip/prepare?' + params, { method: 'POST' });
+        let job = await prepareResponse.json();
         const jobId = job.id;
         while (job.status === 'building') {
           await new Promise((resolve) => setTimeout(resolve, 3000));
@@ -872,9 +873,19 @@
           button.textContent = 'Собираем архив: ' + Number(job.photos || 0).toLocaleString('ru-RU') + ' из ' + Number(job.total || 0).toLocaleString('ru-RU');
         }
         if (job.status !== 'ready') throw new Error(job.error || 'архив не собрался');
-        const base = typeof api.base === 'function' ? api.base() : api.base || '';
+        // Абсолютный адрес фотослужбы. Раньше при пустом/относительном api.base
+        // ссылка становилась относительной и браузер уходил на GitHub Pages
+        // вместо скачивания ZIP. Берём origin из ответа на prepare.
+        const prepareUrl = new URL(prepareResponse.url, location.href);
+        const marker = '/object-photo-points/';
+        const markerAt = prepareUrl.pathname.indexOf(marker);
+        const configured = typeof api.base === 'function' ? api.base() : api.base;
+        const apiBase = markerAt >= 0
+          ? prepareUrl.origin + prepareUrl.pathname.slice(0, markerAt)
+          : (/^https?:\/\//i.test(configured || '') ? configured : prepareUrl.origin);
         const link = make('a');
-        link.href = base + '/reports/photos.zip/file/' + encodeURIComponent(job.name) + '?ticket=' + encodeURIComponent(job.ticket);
+        link.href = apiBase + '/reports/photos.zip/file/' + encodeURIComponent(job.name) + '?ticket=' + encodeURIComponent(job.ticket);
+        link.download = job.name;
         document.body.append(link); link.click(); link.remove();
         const megabytes = Math.max(1, Math.round(Number(job.bytes) / 1024 / 1024));
         setStatus('listStatus', 'Архив готов: ' + Number(job.photos).toLocaleString('ru-RU') + ' фото, ' + megabytes + ' МБ.');
