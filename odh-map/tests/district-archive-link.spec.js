@@ -34,3 +34,24 @@ test('архив фото скачивается по абсолютной сс�
   expect(download.suggestedFilename()).toBe('sao-photos-test.zip');
   expect(new URL(page.url()).pathname).toBe('/districts/review.html');
 });
+
+test('смена вкладки сбрасывает прогресс старого архива', async ({ page }) => {
+  await page.addInitScript(() => sessionStorage.setItem('odh-map-api-user-v1', JSON.stringify({ role: 'prefecture_admin' })));
+  await page.route('**/api/object-photo-points/**', async (route) => {
+    const pathname = new URL(route.request().url()).pathname;
+    if (pathname.endsWith('/queue')) {
+      return route.fulfill({ json: { counts: { total: 0, empty: 0, pending: 0, accepted: 0, rework: 0 }, pending: [], rework: [] } });
+    }
+    if (pathname.endsWith('/photos.zip/prepare') || pathname.endsWith('/photos.zip/prepare/job-slow')) {
+      return route.fulfill({ status: 202, json: { id: 'job-slow', status: 'building', photos: 0, total: 4666 } });
+    }
+    return route.fulfill({ status: 404, json: {} });
+  });
+  await page.goto('http://127.0.0.1:8766/districts/review.html');
+  const archive = page.getByRole('button', { name: 'Архив фото (ZIP)' });
+  await archive.click();
+  await page.getByRole('tab', { name: 'Тротуары Дворы' }).click();
+  await page.waitForTimeout(3500);
+  await expect(page.getByRole('button', { name: 'Архив фото (ZIP)' })).toBeEnabled();
+  await expect(page.locator('#listStatus')).not.toContainText('Собираем архив');
+});

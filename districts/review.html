@@ -263,7 +263,7 @@
       const hash = location.hash.slice(1);
       return Object.hasOwn(MODES, hash) ? hash : hash === 'avd-sidewalks' ? 'odh-sidewalks' : 'entrances';
     };
-    const state = { mode: modeFromHash(), queue: null, tab: 'pending', shown: PAGE, urls: [], objectId: null, busy: false, revision: 0, angles: new Map(), photoViews: [], photoGeneration: 0 };
+    const state = { mode: modeFromHash(), queue: null, tab: 'pending', shown: PAGE, urls: [], objectId: null, busy: false, revision: 0, angles: new Map(), photoViews: [], photoGeneration: 0, archiveGeneration: 0 };
     // Выравниваем адрес по выбранному режиму: #avd-sidewalks становится #odh-sidewalks, мусорный чистится.
     if (location.hash.slice(1) !== state.mode) {
       history.replaceState(null, '', state.mode === 'entrances' ? location.pathname + location.search : '#' + state.mode);
@@ -814,6 +814,12 @@
       if (!mode().emptyTab && state.tab === 'empty') setTab('pending');
       el('kindFilterBox').hidden = state.mode !== 'playgrounds';
       el('popularFilterBox').hidden = state.mode !== 'paths';
+      // Сборка архива принадлежит вкладке, на которой её запустили. При смене
+      // вкладки старый опрос прекращаем и возвращаем кнопке обычный вид, иначе
+      // на «Тротуарах» висел прогресс «139 из 4 466» от въездных групп.
+      state.archiveGeneration += 1;
+      el('exportArchive').disabled = false;
+      el('exportArchive').textContent = 'Архив фото (ZIP)';
       el('exportReport').hidden = !mode().reportFile;
       el('noSidewalkGroup').hidden = !showsNoSidewalk();
       if (!showsNoSidewalk()) {
@@ -861,6 +867,7 @@
       const params = new URLSearchParams();
       if (el('districtFilter').value) params.set('district', el('districtFilter').value);
       const label = button.textContent;
+      const generation = ++state.archiveGeneration;
       button.disabled = true;
       setStatus('listStatus', 'Собираем архив фото… это может занять несколько минут.');
       try {
@@ -869,9 +876,12 @@
         const jobId = job.id;
         while (job.status === 'building') {
           await new Promise((resolve) => setTimeout(resolve, 3000));
+          if (generation !== state.archiveGeneration) return;
           job = await (await api.request(mode().base + '/photos.zip/prepare/' + jobId)).json();
+          if (generation !== state.archiveGeneration) return;
           button.textContent = 'Собираем архив: ' + Number(job.photos || 0).toLocaleString('ru-RU') + ' из ' + Number(job.total || 0).toLocaleString('ru-RU');
         }
+        if (generation !== state.archiveGeneration) return;
         if (job.status !== 'ready') throw new Error(job.error || 'архив не собрался');
         // Абсолютный адрес фотослужбы. Раньше при пустом/относительном api.base
         // ссылка становилась относительной и браузер уходил на GitHub Pages
@@ -890,8 +900,10 @@
         const megabytes = Math.max(1, Math.round(Number(job.bytes) / 1024 / 1024));
         setStatus('listStatus', 'Архив готов: ' + Number(job.photos).toLocaleString('ru-RU') + ' фото, ' + megabytes + ' МБ.');
       } catch (error) {
-        setStatus('listStatus', 'Не удалось собрать архив: ' + error.message, true);
-      } finally { button.disabled = false; button.textContent = label; }
+        if (generation === state.archiveGeneration) setStatus('listStatus', 'Не удалось собрать архив: ' + error.message, true);
+      } finally {
+        if (generation === state.archiveGeneration) { button.disabled = false; button.textContent = label; }
+      }
     };
     el('exportAccepted').onclick = async () => {
       const button = el('exportAccepted');
