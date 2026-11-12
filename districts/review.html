@@ -892,13 +892,18 @@
         const preparedBase = markerAt >= 0
           ? prepareUrl.origin + prepareUrl.pathname.slice(0, markerAt)
           : prepareUrl.origin;
-        // На GitHub Pages кабинет и фотослужба — разные сайты. Если api.base
-        // оказался относительным, prepare-запрос ушёл на hainox.github.io;
-        // ссылка на файл тогда ведёт в атлас. Принудительно берём фотослужбу.
-        const sameOrigin = new URL(preparedBase).origin === location.origin;
-        const apiBase = sameOrigin && /(^|\.)github\.io$/i.test(location.hostname)
-          ? 'https://obhod-sao.ru/photo-api'
-          : preparedBase;
+        // Ссылка на файл всегда должна вести в фотослужбу, а не в атлас.
+        // Берём абсолютный api.base, если он указывает на /photo-api; иначе
+        // на production-хостах — известный адрес фотослужбы, а на localhost —
+        // адрес из prepare-запроса.
+        const configured = typeof api.base === 'function' ? api.base() : api.base;
+        const configuredBase = /^https?:\/\/[^/]+\/photo-api\/?$/i.test(configured || '')
+          ? configured.replace(/\/+$/, '')
+          : '';
+        const apiBase = configuredBase
+          || (['localhost', '127.0.0.1'].includes(location.hostname)
+            ? preparedBase
+            : 'https://obhod-sao.ru/photo-api');
         const link = make('a');
         link.href = apiBase + '/reports/photos.zip/file/' + encodeURIComponent(job.name) + '?ticket=' + encodeURIComponent(job.ticket);
         link.download = job.name;
