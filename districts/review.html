@@ -889,10 +889,16 @@
         const prepareUrl = new URL(prepareResponse.url, location.href);
         const marker = '/object-photo-points/';
         const markerAt = prepareUrl.pathname.indexOf(marker);
-        const configured = typeof api.base === 'function' ? api.base() : api.base;
-        const apiBase = markerAt >= 0
+        const preparedBase = markerAt >= 0
           ? prepareUrl.origin + prepareUrl.pathname.slice(0, markerAt)
-          : (/^https?:\/\//i.test(configured || '') ? configured : prepareUrl.origin);
+          : prepareUrl.origin;
+        // На GitHub Pages кабинет и фотослужба — разные сайты. Если api.base
+        // оказался относительным, prepare-запрос ушёл на hainox.github.io;
+        // ссылка на файл тогда ведёт в атлас. Принудительно берём фотослужбу.
+        const sameOrigin = new URL(preparedBase).origin === location.origin;
+        const apiBase = sameOrigin && /(^|\.)github\.io$/i.test(location.hostname)
+          ? 'https://obhod-sao.ru/photo-api'
+          : preparedBase;
         const link = make('a');
         link.href = apiBase + '/reports/photos.zip/file/' + encodeURIComponent(job.name) + '?ticket=' + encodeURIComponent(job.ticket);
         link.download = job.name;
