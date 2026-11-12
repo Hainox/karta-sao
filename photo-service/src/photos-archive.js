@@ -204,7 +204,10 @@ export async function writePhotoArchive(rows, options = {}) {
   await mkdir(dir, { recursive: true });
   const target = join(dir, name);
   const output = createWriteStream(target, { flags: 'wx' });
-  const archive = archiver('zip', { zlib: { level: 6 } });
+  // Снимки — уже сжатые JPEG/PNG/WebP, поэтому store (level 0) быстрее и не
+  // тратит CPU впустую. forceZip64 обязателен: архивы тротуаров и ОДХ
+  // переваливают за 4 ГБ, без ZIP64 центральный каталог обрезается.
+  const archive = archiver('zip', { zlib: { level: 0 }, forceZip64: true });
   const done = new Promise((resolve, reject) => {
     output.once('close', resolve);
     output.once('error', reject);
