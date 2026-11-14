@@ -51,7 +51,7 @@ for (const viewport of [{ width: 1280, height: 800 }, { width: 390, height: 844 
 
     await page.locator('#list .object-row').first().click();
     await expect(page.locator('#objectTitle')).toHaveText('Детская площадка: Коптевская ул., 30');
-    await expect(page.locator('#slotGrid img')).toHaveCount(1);
+    await expect(page.locator('#slotGrid .photo img')).toHaveCount(1);
     await page.locator('#slotGrid').getByRole('button', { name: 'Принять' }).click();
     await expect(page.locator('#objectTitle')).toHaveText('Спортивная площадка: Коптевская ул., 32');
     expect(reviews).toEqual([{ pointId: 'pg-1', decision: 'accepted', comment: '' }]);

@@ -414,7 +414,7 @@ function initSidewalkTestLayer({ container, map, card, district, apiRequest, cen
     if (editor?.isSelected(keyOf(selection.point))) editor.clear();
     selection = null;
   }
-  popover.onClose(clearSelection);
+  popover.onClose?.(clearSelection);
   new MutationObserver(() => {
     if (selection && !card.contains(selection.content)) clearSelection();
   }).observe(card, { childList: true });

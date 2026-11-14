@@ -34,7 +34,7 @@
     .toolbar label{display:grid;gap:4px;font-size:12px;font-weight:700;color:var(--muted)}
     .toolbar select{min-width:190px;padding:8px;border:1px solid #cbd9ce;border-radius:8px;background:#fff}
     .tabs{display:flex;gap:6px;margin-left:auto}
-    .modes{display:inline-flex;gap:4px;margin-bottom:14px;padding:4px;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+    .modes{display:flex;flex-wrap:wrap;gap:4px;max-width:100%;margin-bottom:14px;padding:4px;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
     .mode{padding:8px 16px;border:0;border-radius:9px;background:transparent;font-weight:800;color:var(--muted)}
     .mode.active{background:var(--green);color:#fff}
     .tab{padding:8px 14px;border:1px solid var(--line);border-radius:999px;background:#fff;font-weight:700;color:var(--muted)}
@@ -724,6 +724,7 @@
         if (revision !== state.revision) return;
         if (!saved) { try { await renderPoint(); } catch (_) {} }
         setStatus('objectStatus', (saved ? 'Решение сохранено. Не удалось обновить кабинет: ' : 'Не удалось сохранить решение: ') + error.message, true);
+        if (saved) el('retryObject').hidden = false;
       } finally { lockReview(false); }
     }
 

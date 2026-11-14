@@ -76,7 +76,8 @@ for (const viewport of [{ width: 1280, height: 800 }, { width: 390, height: 844 
 }
 
 test('ошибка очереди после сохранения: повтор перехода без второго POST', async ({ page }) => {
-  const control = await cabinet(page, { count: 2, rework: 0, accepted: 0, empty: 0 });
+  // Одна точка в очереди: после сохранения кэш пуст, и кабинет обязан перезапросить очередь.
+  const control = await cabinet(page, { count: 1, rework: 0, accepted: 0, empty: 0 });
   control.failQueue = true;
   await page.getByRole('button', { name: 'Принять', exact: true }).click();
   await expect(page.locator('#objectStatus')).toContainText('Решение сохранено.');
@@ -85,7 +86,7 @@ test('ошибка очереди после сохранения: повтор 
   await page.getByRole('button', { name: 'Повторить загрузку точки' }).click();
   await expect(page.locator('#objectStatus')).toContainText('Снимок этой точки уже проверен');
   await page.getByRole('button', { name: 'Следующая точка' }).click();
-  await expect(page.locator('#objectTitle')).toHaveText('Точка съёмки 1.2');
+  await expect(page.locator('#listStatus')).toHaveText('Все точки в выбранной очереди проверены.');
   expect(control.writes).toBe(1);
 });
 
