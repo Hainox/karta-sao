@@ -582,8 +582,7 @@ function sidewalkWriteSet_(book, setName, rows, drafts) {
 
     // URL вписан в формулу, а не взят из скрытой колонки: так сортировка
     // фильтром не подменит фото соседней строкой.
-    photoFormulas.push([photoUrl ? '=IMAGE("' + sidewalkFormulaText_(photoUrl) + '"'
-      + sep + '4' + sep + '160' + sep + '120)' : '']);
+    photoFormulas.push([photoUrl ? '=IMAGE("' + sidewalkFormulaText_(photoUrl) + '")' : '']);
     mapFormulas.push([mapUrl ? '=HYPERLINK("' + sidewalkFormulaText_(mapUrl) + '"'
       + sep + '"На карте")' : '']);
 

@@ -32,6 +32,7 @@ function onOpen() {
   SpreadsheetApp.getUi().createMenu('ДП/СП')
     .addItem('Обновить сейчас', 'syncSheet')
     .addItem('Пересобрать «Сверку»', 'refreshView')
+    .addItem('Починить формулы (#ERROR!)', 'fixImageFormulas')
     .addItem('Отправить решения', 'pushDecisions')
     .addSeparator()
     .addItem('Покрасить «% принято»', 'applyPercentColors')
@@ -239,6 +240,7 @@ function logRow(started, added, errors, message) {
  */
 function refreshView() {
   var book = SpreadsheetApp.getActive();
+  var sep = sheetFormulaSeparator_(book);
   var registry = book.getSheetByName(CFG.registry);
   var view = book.getSheetByName(CFG.view);
   var last = registry.getLastRow();
@@ -289,8 +291,10 @@ function refreshView() {
       row[1], '', '', row[7], saved.decision, saved.reason, saved.comment
     ]);
     photos.push([
-      row[16] ? '=IMAGE("' + row[16] + '",4,160,120)' : '',
-      row[12] ? '=IMAGE("' + row[12] + '",4,160,120)' : ''
+      // Без режима и размеров: в локали с десятичной запятой аргументы через
+      // запятую давали #ERROR!, а размер картинки и так задаёт ячейка.
+      row[16] ? '=IMAGE("' + row[16] + '")' : '',
+      row[12] ? '=IMAGE("' + row[12] + '")' : ''
     ]);
   });
 
@@ -305,14 +309,118 @@ function refreshView() {
     view.getRange(8, 7, values.length, 2).setFormulas(photos);
     view.getRange(8, 14, values.length, 1).setFormulas(slice.map(function (row, index) {
       var at = index + 8;
-      return ['=IF($O' + at + '="","",IFERROR(HYPERLINK("' + CFG.mapBase + '"&' +
-        'VLOOKUP(VLOOKUP($O' + at + ',Реестр!$A:$C,3,FALSE),Справочники!$C$2:$E$17,3,FALSE)&' +
-        '".html?playground="&$O' + at + ',"На карте"),""))'];
+      return ['=IF($O' + at + '=""' + sep + '""' + sep + 'IFERROR(HYPERLINK("' + CFG.mapBase + '"&' +
+        'VLOOKUP(VLOOKUP($O' + at + sep + "'Реестр'!$A:$C" + sep + '3' + sep + 'FALSE)' + sep +
+        "'Справочники'!$C$2:$E$17" + sep + '3' + sep + 'FALSE)&' +
+        '".html?playground="&$O' + at + sep + '"На карте")' + sep + '""))'];
     }));
     view.getRange(8, 15, values.length, 2).setValues(slice.map(function (row) {
       return [row[0], row[11]];
     }));
   }
+}
+
+/**
+ * Разделитель аргументов формулы по локали книги. В ru_RU, de_DE и других
+ * локалях с десятичной запятой это «;», в en_US — «,». Список стран надёжнее
+ * toLocaleString: в Apps Script он может вернуть «1.5» даже для ru-RU.
+ */
+function sheetFormulaSeparator_(book) {
+  var locale = '';
+  try { locale = String(book.getSpreadsheetLocale() || '').toLowerCase(); } catch (_) {}
+  var commaDecimal = /^(ru|uk|be|de|fr|es|it|pt|nl|pl|cs|sk|hu|ro|bg|tr|fi|sv|da|nb|lt|lv|et|el|hr|sl|sr|kk|az|hy|ka|uz|ky|tg|mk|bs|sq|is)/;
+  if (commaDecimal.test(locale)) return ';';
+  try {
+    return (1.5).toLocaleString(locale.replace(/_/g, '-') || 'en-US').indexOf(',') >= 0 ? ';' : ',';
+  } catch (_) {
+    return ',';
+  }
+}
+
+/** Меняет только разделители аргументов, не трогая запятые внутри строк. */
+function sheetFormulaSeparators_(formula, separator) {
+  var out = '';
+  var quoted = false;
+  for (var index = 0; index < formula.length; index += 1) {
+    var symbol = formula.charAt(index);
+    if (symbol === '"') {
+      if (quoted && formula.charAt(index + 1) === '"') {
+        out += '""';
+        index += 1;
+        continue;
+      }
+      quoted = !quoted;
+      out += symbol;
+    } else if (symbol === ',' && !quoted) {
+      out += separator;
+    } else {
+      out += symbol;
+    }
+  }
+  return out;
+}
+
+/**
+ * Разовая починка формул, которые уже лежат в книге:
+ *   • =IMAGE("url",4,160,120) и =IMAGE("url";4;160;120) → =IMAGE("url");
+ *   • «На карте» переписывается с разделителем локали и с именами листов
+ *     в кавычках, иначе в книге с десятичной запятой она даёт #ERROR!.
+ * Повторный запуск безопасен: исправленные формулы не меняются.
+ */
+function fixImageFormulas() {
+  var book = SpreadsheetApp.getActive();
+  var separator = sheetFormulaSeparator_(book);
+  var photos = 0;
+  var maps = 0;
+
+  book.getSheets().forEach(function (sheet) {
+    // Листы на «_» — архивные копии: их не переписываем, иначе теряется смысл снимка.
+    if (sheet.getName().charAt(0) === '_') return;
+    var lastRow = sheet.getLastRow();
+    var lastCol = sheet.getLastColumn();
+    if (!lastRow || !lastCol) return;
+    var formulas = sheet.getRange(1, 1, lastRow, lastCol).getFormulas();
+    for (var row = 0; row < formulas.length; row += 1) {
+      for (var col = 0; col < formulas[row].length; col += 1) {
+        var formula = formulas[row][col];
+        if (!formula) continue;
+        var next = formula;
+        if (/^=IMAGE\(/i.test(next)) {
+          // Убираем необязательные режим и размеры: в ru_RU запятые внутри
+          // аргументов дают #ERROR!, а размер картинки задаёт ячейка.
+          next = next.replace(/[,;]\s*4\s*[,;]\s*160\s*[,;]\s*120\s*\)\s*$/, ')');
+          if (next !== formula) {
+            sheet.getRange(row + 1, col + 1).setFormula(next);
+            photos += 1;
+          }
+        } else if (/^=IF\(/i.test(next) && /HYPERLINK\(/i.test(next) && /VLOOKUP\(/i.test(next)) {
+          next = sheetFormulaSeparators_(next, separator)
+            .replace(/(^|[^'А-Яа-яЁёA-Za-z0-9_])Реестр!/g, "$1'Реестр'!")
+            .replace(/(^|[^'А-Яа-яЁёA-Za-z0-9_])Справочники!/g, "$1'Справочники'!");
+          if (next !== formula) {
+            sheet.getRange(row + 1, col + 1).setFormula(next);
+            maps += 1;
+          }
+        }
+      }
+    }
+  });
+
+  SpreadsheetApp.flush();
+  var left = 0;
+  book.getSheets().forEach(function (sheet) {
+    // Архивные снимки на «_» остаются с #ERROR! намеренно — их не считаем.
+    if (sheet.getName().charAt(0) === '_') return;
+    var range = sheet.getDataRange();
+    if (!range.getNumRows() || !range.getNumColumns()) return;
+    range.getDisplayValues().forEach(function (row) {
+      row.forEach(function (value) { if (value === '#ERROR!') left += 1; });
+    });
+  });
+
+  var message = 'Исправлено: фото — ' + photos + ', «На карте» — ' + maps;
+  if (left) message += '. Осталось #ERROR!: ' + left;
+  book.toast(message, 'Формулы', 10);
 }
 
 /**

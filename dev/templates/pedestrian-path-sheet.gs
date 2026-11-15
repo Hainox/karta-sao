@@ -273,7 +273,7 @@ function pathWriteRegistry_(rows) {
     ]);
     var photoUrl = row.photo_token ? PATH_CFG.api + '/photo-thumb/' + row.photo_token : '';
     photos.push([photoUrl
-      ? '=IMAGE("' + photoUrl + '"' + separator + '4' + separator + '160' + separator + '120)'
+      ? '=IMAGE("' + photoUrl + '")'
       : '']);
     maps.push([row.map_url
       ? '=HYPERLINK("' + String(row.map_url).replace(/"/g, '""') + '"' + separator + '"На карте")'
@@ -337,7 +337,7 @@ function pathApplyChanges_(rows) {
     sheet.getRange(rowNumber, 1, 1, 17).setValues(values);
     var photoUrl = row.photo_token ? PATH_CFG.api + '/photo-thumb/' + row.photo_token : '';
     sheet.getRange(rowNumber, 13).setFormula(photoUrl
-      ? '=IMAGE("' + photoUrl + '"' + separator + '4' + separator + '160' + separator + '120)' : '');
+      ? '=IMAGE("' + photoUrl + '")' : '');
     sheet.getRange(rowNumber, 17).setFormula(row.map_url
       ? '=HYPERLINK("' + String(row.map_url).replace(/"/g, '""') + '"' + separator + '"На карте")' : '');
     sheet.getRange(rowNumber, 18, 1, 4).setValues([saved]);
