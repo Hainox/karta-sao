@@ -6,7 +6,9 @@ const base='/object-photo-points/dpsp',flow=base+'/workflow';
 const API='https://obhod-sao.ru/photo-api';
 const review=document.body.dataset.review==='true';
 let token=localStorage.getItem('saoPhotoToken')||localStorage.getItem('sao-photo-token')||'';
-let queue=review?'review':'work',rows=[],current=null,types=[],busy=false,listSeq=0,detailSeq=0,urls=[];
+const incoming=new URLSearchParams(location.search);
+let linkedSite=/^[0-9a-f-]{36}$/i.test(incoming.get('site')||'')?incoming.get('site'):null;
+let queue=review?(incoming.get('queue')==='accepted'?'accepted':'review'):'work',rows=[],current=null,types=[],busy=false,listSeq=0,detailSeq=0,urls=[];
 const kind=k=>k==='dp'?'Детская площадка':'Спортивная площадка';
 const conditions={ok:'Исправно',repair:'Требует ремонта',broken:'Неисправно'};
 function message(text){$('message').textContent=text||'';}
@@ -52,7 +54,7 @@ async function loadQueue(){
  if(current&&!rows.some(r=>r.point_id===current.point_id))clearDetail();
  renderQueue();
 }
-async function resetQueue(){if(busy)return;message('Загружаем список…');clearDetail();try{await loadQueue();message('');}catch(e){message(e.message);}}
+async function resetQueue(){if(busy)return;message('Загружаем список…');clearDetail();try{await loadQueue();message('');if(linkedSite){const id=linkedSite;linkedSite=null;if(rows.some(r=>r.point_id===id))await openSite(id);else message('Площадка уже в другой очереди или недоступна.');}}catch(e){message(e.message);}}
 async function openSite(id,allowBusy=false){
  if(busy&&!allowBusy)return;
  const seq=++detailSeq;clearImages();$('detail').replaceChildren(make('div','Загружаем карточку…','empty'));
@@ -139,7 +141,7 @@ function renderDetail(d,w,seq){
 $('loginForm').onsubmit=async e=>{e.preventDefault();try{const res=await fetch(API+'/auth/login',{method:'POST',credentials:'include',headers:{'Content-Type':'application/json'},body:JSON.stringify({login:$('email').value,email:$('email').value,password:$('password').value})});const d=await res.json();if(!res.ok||!d.token)throw Error(d.error||d.message||'Не удалось войти');token=d.token;localStorage.setItem('saoPhotoToken',token);appView(d.user||{});await dictionaries();await resetQueue();}catch(e){loginView(e.message);}};
 $('logout').onclick=async()=>{try{await req('/auth/logout',{method:'POST'});}catch{}token='';localStorage.removeItem('saoPhotoToken');localStorage.removeItem('sao-photo-token');clearDetail();loginView();};
 $('refresh').onclick=resetQueue;$('district').onchange=resetQueue;$('kind').onchange=resetQueue;
-if(review){const setQueue=q=>{if(busy)return;queue=q;$('reviewQueue').classList.toggle('primary',q==='review');$('acceptedQueue').classList.toggle('primary',q==='accepted');resetQueue();};$('reviewQueue').onclick=()=>setQueue('review');$('acceptedQueue').onclick=()=>setQueue('accepted');}
+if(review){$('reviewQueue').classList.toggle('primary',queue==='review');$('acceptedQueue').classList.toggle('primary',queue==='accepted');const setQueue=q=>{if(busy)return;queue=q;$('reviewQueue').classList.toggle('primary',q==='review');$('acceptedQueue').classList.toggle('primary',q==='accepted');resetQueue();};$('reviewQueue').onclick=()=>setQueue('review');$('acceptedQueue').onclick=()=>setQueue('accepted');}
 $('closeViewer').onclick=()=>$('viewer').close();$('viewer').onclose=()=>$('largePhoto').removeAttribute('src');
 (async()=>{try{if(!token){loginView();return;}const d=await api('/auth/me');appView(d.user||{});await dictionaries();await resetQueue();}catch(e){loginView(e.message);}})();
 })();
