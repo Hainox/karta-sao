@@ -1,0 +1,66 @@
+import assert from 'node:assert/strict';
+import express from 'express';
+import pg from 'pg';
+import {execFileSync} from 'node:child_process';
+import {photoServiceDatabaseConfig} from '../src/config.js';
+import {createDpspMafRouter} from '../src/tpu-points/dpsp-maf.js';
+assert.equal(process.env.PLAYGROUND_DISPOSABLE_DB,'yes','Disposable database required');
+const pool=new pg.Pool(photoServiceDatabaseConfig(process.env));
+let server;
+try {
+ execFileSync(process.execPath,['scripts/migrate.js']);
+ const point=(await pool.query("SELECT id FROM playground_photo_points WHERE retired_at IS NULL AND kind='dp' ORDER BY id LIMIT 1")).rows[0].id;
+ const legacy=async()=>JSON.stringify((await pool.query("SELECT id,status,encode(photo_bytes,'hex') AS bytes FROM playground_photo_slot_photos ORDER BY id")).rows);
+ const before=await legacy();
+ const app=express();app.use(express.json());
+ app.use('/dpsp',createDpspMafRouter({pool,authenticate(req,res,next){
+  if(!req.get('x-role'))return res.sendStatus(401);
+  req.user={sub:'test-admin',role:req.get('x-role'),district:'Аэропорт'};next();
+ }}));
+ app.use((e,req,res,next)=>res.status(e.status||500).json({error:e.message}));
+ server=app.listen(0,'0.0.0.0');await new Promise(r=>server.once('listening',r));
+ const base='http://127.0.0.1:'+server.address().port+'/dpsp';
+ const call=(path,method='GET',body,role='prefecture_admin')=>fetch(base+path,{method,headers:{...(role?{'x-role':role}:{}),'content-type':'application/json'},...(body===undefined?{}:{body:JSON.stringify(body)})});
+ const w='/workflow/sites/'+point;
+ assert.equal((await call('/workflow/sites','GET',undefined,null)).status,401);
+ for(const role of ['district_editor','reviewer'])assert.equal((await call('/workflow/sites','GET',undefined,role)).status,403);
+ assert.equal((await call(w+'/submit','POST',{})).status,422);
+ const png=Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jM1kAAAAASUVORK5CYII=','base64');
+ const upload=(path)=>fetch(base+path,{method:'PUT',headers:{'x-role':'prefecture_admin','content-type':'image/png'},body:png});
+ assert.equal((await upload(w+'/photos')).status,201);
+ assert.equal((await call(w+'/submit','POST',{})).status,422);
+ const type=(await pool.query("SELECT code FROM dpsp_maf_types WHERE kind='dp' OR kind IS NULL ORDER BY sort LIMIT 1")).rows[0].code;
+ const added=await call('/sites/'+point+'/maf','POST',{type_code:type,quantity:1,condition:'ok',comment:'Disposable integration test'});
+ assert.equal(added.status,201);const item=await added.json();
+ const maf=item.id||item.item?.id;
+ assert.ok(maf,JSON.stringify(item));
+ assert.equal((await call(w+'/submit','POST',{})).status,422);
+ assert.equal((await upload('/maf/'+maf+'/photo')).status,201);
+ assert.equal((await call(w+'/submit','POST',{})).status,200);
+ assert.ok(!(await (await call('/workflow/sites')).json()).sites.some(p=>p.point_id===point));
+ assert.ok((await (await call('/workflow/sites?queue=review')).json()).sites.some(p=>p.point_id===point));
+ assert.equal((await upload(w+'/photos')).status,409);
+ assert.equal((await call('/maf/'+maf,'PATCH',{quantity:2})).status,409);
+ const client=await pool.connect();
+ try {
+  await client.query('BEGIN');
+  await assert.rejects(client.query('UPDATE dpsp_maf_items SET quantity=2 WHERE id=$1',[maf]),e=>e.code==='55000');
+  await client.query('ROLLBACK');
+ }finally{client.release();}
+ assert.equal((await call(w+'/decision','POST',{decision:'rework',comment:''})).status,422);
+ assert.equal((await call(w+'/decision','POST',{decision:'rework',comment:'Переснять обзор'})).status,200);
+ assert.ok((await (await call('/workflow/sites')).json()).sites.some(p=>p.point_id===point&&p.review_comment==='Переснять обзор'));
+ assert.equal((await upload(w+'/photos')).status,201);
+ assert.equal((await call(w+'/submit','POST',{})).status,200);
+ assert.equal((await call(w+'/decision','POST',{decision:'accepted',comment:''})).status,200);
+ assert.ok((await (await call('/workflow/sites?queue=accepted')).json()).sites.some(p=>p.point_id===point));
+ assert.equal((await call(w+'/decision','POST',{decision:'rework',comment:'Повтор'})).status,409);
+ const sheet=await (await call('/workflow/sheet.json')).json();
+ assert.ok(sheet.sites.some(p=>p.point_id===point&&p.state==='accepted'&&p.capture_count===2));
+ assert.ok(sheet.maf.some(p=>p.maf_id===maf&&p.photo_token));
+ assert.equal(sheet.photos.filter(p=>p.point_id===point).length,2);
+ const token=sheet.photos.find(p=>p.point_id===point).photo_token;
+ assert.equal((await fetch(base+'/capture-thumb/'+token+'.jpg')).status,200);
+ assert.equal(await legacy(),before,'Old photos and review results are unchanged');
+ console.log('PASS: DP/SP PostgreSQL auth, overview photos, MAF photo requirement, submit, SQL locks, return, resubmit, accept, sheet snapshot, thumbnails, legacy preservation');
+} finally {if(server)await new Promise(r=>server.close(r));await pool.end();}

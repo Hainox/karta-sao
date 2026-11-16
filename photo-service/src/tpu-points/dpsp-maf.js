@@ -1,5 +1,6 @@
 import crypto from 'node:crypto';
 import express from 'express';
+import { createDpspCaptureRouter, captureThumbnailHandler } from './dpsp-capture.js';
 import { resizeJpeg } from '../image-resize.js';
 import { safePhotoFilename, validatePhotoUpload } from './photo-markers.js';
 
@@ -113,6 +114,7 @@ function parseMafInput(body,{partial=false}={}){
 
 export function createDpspMafRouter({pool,authenticate}) {
  const router=express.Router();
+ router.get('/capture-thumb/:token',captureThumbnailHandler(pool));
  // Превью по токену — единственный маршрут без сессии: Google Sheets =IMAGE()
  // не умеет заголовок Authorization. Токен неугадываемый и отзывается.
  router.get('/photo-thumb/:token',async(req,res,next)=>{try{
@@ -135,6 +137,7 @@ export function createDpspMafRouter({pool,authenticate}) {
  }catch(e){next(e)}});
  // Только префектура: районные учётки в оцифровке МАФ не участвуют.
  router.use(authenticate,(req,res,next)=>req.user.role==='prefecture_admin'?next():res.status(403).json({error:'Кабинет оцифровки доступен префектуре.'}));
+ router.use('/workflow',createDpspCaptureRouter({pool}));
  router.param('id',(req,res,next,id)=>UUID.test(id)?next():res.status(400).json({error:'Неверный ID.'}));
  const audit=(client,userId,action,objectKey,metadata)=>client.query(
   'INSERT INTO audit_log (actor_user_id,action,object_key,metadata) VALUES ($1,$2,$3,$4::jsonb)',
@@ -252,5 +255,6 @@ export function createDpspMafRouter({pool,authenticate}) {
    dictionaries:await dictionaries(pool),
   });
  }catch(e){next(e)}});
+ router.use((err,_req,res,next)=>err.code==='55000'?res.status(409).json({error:'Объект уже передан на приёмку. Обновите список.'}):next(err));
  return router;
 }
