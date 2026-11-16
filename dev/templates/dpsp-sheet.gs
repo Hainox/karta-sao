@@ -11,7 +11,8 @@
  *        SAO_LOGIN    = логин служебной учётки префектуры
  *        SAO_PASSWORD = пароль служебной учётки
  *      Скрипт сам обновляет токен по логину/паролю, когда сессия истекает (8 часов).
- *   3. Перезагрузить таблицу → меню «ДП/СП · Оцифровка» → «Собрать структуру».
+ *   3. Перезагрузить таблицу → меню «ДП/СП · Оцифровка» → «Собрать структуру нового цикла».
+ *      Существующие листы и ручные решения не изменяются. Новый цикл обновляется отдельно.
  *   4. «Обновить сейчас» — залить данные. Затем «Включить автообновление (10 мин)».
  *
  * Структура: площадка — родительский объект (лист «Площадки»), МАФ — дочерние
@@ -32,25 +33,16 @@ var CFG = {
 
 function onOpen() {
   SpreadsheetApp.getUi().createMenu('ДП/СП · Оцифровка')
-    .addItem('Собрать структуру', 'installSheets')
+    .addItem('Собрать структуру нового цикла', 'installCaptureSheets')
     .addItem('Обновить сейчас', 'syncSheet')
-    .addItem('Пересобрать «Сверку»', 'refreshCrossMenu')
     .addSeparator()
-    .addItem('Покрасить «% оцифровки»', 'applyPercentColors')
     .addItem('Включить автообновление (10 мин)', 'installTriggers')
     .addItem('Выключить автообновление', 'removeTriggers')
     .addToUi();
 }
 
-// Фильтры B1/B2 на «Сверке» пересобирают вид сразу после изменения.
-function onEdit(e) {
-  var range = e && e.range;
-  if (!range) return;
-  if (range.getSheet().getName() !== CFG.sheets.cross) return;
-  if (range.getRow() > 2 || range.getColumn() !== 2) return;
-  rebuildCross({ sites: readSitesSheet(), maf: readMafSheet() }, range.getSheet());
-}
-
+// Старые листы — архив прежней сверки. Правки в них больше не запускают
+// пересборку нового цикла и не теряются при переключении очередей.
 /* ---------------- Сеть и авторизация ---------------- */
 
 function credentials() {
@@ -247,7 +239,7 @@ function installCrossFilters() {
 
 /* ---------------- Синхронизация ---------------- */
 
-function syncSheet() {
+function legacySyncSheet() {
   var lock = LockService.getDocumentLock();
   if (!lock.tryLock(30000)) return;
   var started = new Date();
@@ -500,4 +492,192 @@ function applyPercentColors() {
     touched += 1;
   });
   book.toast('Покрашено диапазонов: ' + touched, 'Проценты', 5);
+}
+
+/* ---------------- Новая фотофиксация и приёмка ---------------- */
+
+// Названия выделены в собственное пространство, чтобы не перезаписать
+// прежние Площадки / МАФ / Сверку, включая ручные решения операторов.
+var CAPTURE = {
+  base: 'https://hainox.github.io/karta-sao/',
+  mapBase: 'https://hainox.github.io/karta-sao/districts/',
+  names: {summary:'Свод · новый цикл',all:'Площадки · новый цикл',work:'В работе · ДПСП',
+    submitted:'Отработанные · ДПСП',accepted:'Принятые · ДПСП',rework:'На доработке · ДПСП',
+    photos:'Фото площадок · ДПСП',maf:'МАФ · новый цикл',log:'Журнал · новый цикл'},
+  labels:{work:'Неотработано',submitted:'На приёмке',accepted:'Принято',rework:'На доработке'}
+};
+
+function captureText(value) {
+  var t = String(value == null ? '' : value);
+  // Данные адресов и комментариев не должны интерпретироваться как формулы.
+  return /^[=+\-@]/.test(t) ? "'" + t : t;
+}
+function captureDate(value) {
+  var dt=value?new Date(value):null;
+  return dt && !isNaN(dt.getTime()) ? Utilities.formatDate(dt,'Europe/Moscow','yyyy-MM-dd HH:mm:ss') : '';
+}
+function captureDistrict(name) {
+  return String(name || '').replace('Савёловский','Савеловский').replace('Хорошёвский','Хорошевский');
+}
+function captureId(value) {
+  var id=String(value||'');
+  if (!/^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i.test(id)) throw new Error('Некорректный ID в срезе нового цикла');
+  return id;
+}
+function capturePreview(token, isMaf) {
+  return /^[0-9a-f]{32}$/i.test(String(token||''))?
+    '=IMAGE("'+CFG.api+(isMaf?'/photo-thumb/':'/capture-thumb/')+token+'.jpg")':'';
+}
+function captureCabinetLink(site) {
+  var id=captureId(site.point_id);
+  var review=site.state==='submitted'||site.state==='accepted';
+  return CAPTURE.base + (review?'dp-sp-review/':'dp-sp-cabinet/')+'?site='+encodeURIComponent(id)
+      +(site.state==='accepted'?'&queue=accepted':'');
+}
+function captureMapLink(site,slugs) {
+  var slug=slugs[captureDistrict(site.district)];
+  return slug && /^[a-z0-9-]+$/.test(slug)?CAPTURE.mapBase+slug+'.html?playground='+encodeURIComponent(captureId(site.point_id)):'';
+}
+
+function captureSheetSpecs() {
+  var sites={headers:['№','Район','Вид','Адрес площадки','ID площадки','Этап','Новых фото','МАФ, записей','МАФ, шт.','МАФ с фото','Передано (МСК)','Решение (МСК)','Комментарий приёмки','На карте','В кабинете','site_id'],
+    widths:[55,145,70,330,125,145,90,100,90,95,160,160,340,105,130,150],hidden:[16]};
+  return {
+    all:sites,work:sites,submitted:sites,accepted:sites,rework:sites,
+    summary:{headers:['Район','Всего','Неотработано','На доработке','На приёмке','Принято','Отработано','% отработано','Новых фото','МАФ, записей','МАФ, шт.','МАФ с фото'],
+      widths:[155,95,120,120,110,100,110,125,105,115,100,110],hidden:[]},
+    photos:{headers:['№','Район','Вид','Адрес площадки','ID площадки','Этап','Кадр','Имя файла','Загружено (МСК)','Фото площадки','На карте','В кабинете','site_id','photo_id'],
+      widths:[55,145,70,320,130,145,65,200,165,210,105,130,150,150],hidden:[13,14]},
+    maf:{headers:['№','Район','Вид','Адрес площадки','ID площадки','Этап','Тип МАФ','Кол-во','Состояние','Комментарий','Фото МАФ','Обновлено (МСК)','На карте','В кабинете','site_id','maf_id'],
+      widths:[55,145,70,320,130,145,200,75,150,320,210,165,105,130,150,150],hidden:[15,16]},
+    log:{headers:['Время (МСК)','Результат','Площадок','Обзорных фото','МАФ','Комментарий'],widths:[170,115,95,110,90,400],hidden:[]}
+  };
+}
+function captureEnsureSheet(key) {
+  var spec=captureSheetSpecs()[key];
+  var book=SpreadsheetApp.getActive();
+  var sheet=book.getSheetByName(CAPTURE.names[key])||book.insertSheet(CAPTURE.names[key]);
+  if(sheet.getMaxColumns()<spec.headers.length)sheet.insertColumnsAfter(sheet.getMaxColumns(),spec.headers.length-sheet.getMaxColumns());
+  var header=sheet.getRange(1,1,1,spec.headers.length);
+  header.setValues([spec.headers]).setBackground('#123d33').setFontColor('#ffffff').setFontWeight('bold')
+    .setHorizontalAlignment('center').setVerticalAlignment('middle').setWrap(true);
+  sheet.setRowHeight(1,40);sheet.setFrozenRows(1);
+  spec.widths.forEach(function(width,i){sheet.setColumnWidth(i+1,width);});
+  spec.hidden.forEach(function(col){sheet.hideColumns(col);});
+  return sheet;
+}
+function installCaptureSheets() {
+  Object.keys(captureSheetSpecs()).forEach(captureEnsureSheet);
+  SpreadsheetApp.getActive().toast('Новые листы готовы. Старые листы сохранены.','ДП/СП',6);
+}
+function captureRichLinks(col) {
+  return col.map(function(item){
+    return [SpreadsheetApp.newRichTextValue().setText(item.url?item.label:'—')
+      .setLinkUrl(item.url||null).build()];
+  });
+}
+function captureWrite(key, rows, linkCols, imageCol, imageFormulas) {
+  var spec=captureSheetSpecs()[key],sheet=captureEnsureSheet(key);
+  var old=Math.max(0,sheet.getLastRow()-1);
+  ensureCapacity(sheet,Math.max(2,rows.length+1));
+  if(rows.length){
+    var body=sheet.getRange(2,1,rows.length,spec.headers.length);
+    body.setValues(rows).setVerticalAlignment('middle').setHorizontalAlignment('center').setWrap(true);
+    sheet.setRowHeights(2,rows.length,imageCol?152:54);
+    Object.keys(linkCols||{}).forEach(function(index){
+      sheet.getRange(2,Number(index),rows.length,1).setRichTextValues(captureRichLinks(linkCols[index]));
+    });
+    if(imageCol)sheet.getRange(2,imageCol,rows.length,1).setFormulas(imageFormulas.map(function(f){return [f];}));
+  }
+  if(old>rows.length)sheet.getRange(rows.length+2,1,old-rows.length,spec.headers.length).clearContent();
+  if(key==='summary'&&rows.length){
+    sheet.getRange(2,8,rows.length,1).setNumberFormat('0.0%');
+    sheet.getRange(rows.length+1,1,1,spec.headers.length).setFontWeight('bold').setBackground('#e7f4ee');
+    if(rows.length>1)sheet.getRange(2,1,rows.length-1,spec.headers.length).setFontWeight('normal').setBackground('#ffffff');
+  }
+  return sheet;
+}
+function captureBuild(data,dictionaries) {
+  if(!data||!Array.isArray(data.sites)||!Array.isArray(data.photos)||!Array.isArray(data.maf)||!data.generated_at)
+    throw new Error('Сервер не вернул полный срез. Листы не обновлены.');
+  var parents=Object.create(null), photosBy=Object.create(null), mafBy=Object.create(null), slugs=Object.create(null), districts=Object.create(null);
+  (dictionaries.districts||[]).forEach(function(d){var key=captureDistrict(d.name);slugs[key]=d.slug;districts[key]=true;});
+  data.sites.forEach(function(s){
+    var id=captureId(s.point_id);
+    if(parents[id]||!Object.prototype.hasOwnProperty.call(CAPTURE.labels,s.state))throw new Error('Повтор или неизвестный этап площадки');
+    parents[id]=s;photosBy[id]=[];mafBy[id]=[];districts[captureDistrict(s.district)]=true;
+  });
+  var seen=Object.create(null);
+  data.photos.forEach(function(p){var id=captureId(p.photo_id),parent=captureId(p.point_id);if(seen[id]||!parents[parent])throw new Error('Повтор или потерянная связь фото');seen[id]=true;photosBy[parent].push(p);});
+  seen=Object.create(null);
+  data.maf.forEach(function(m){var id=captureId(m.maf_id),parent=captureId(m.point_id);if(seen[id]||!parents[parent])throw new Error('Повтор или потерянная связь МАФ');seen[id]=true;mafBy[parent].push(m);});
+  data.sites.forEach(function(s){
+    if(Number(s.capture_count)!==photosBy[s.point_id].length||Number(s.maf_count)!==mafBy[s.point_id].length)throw new Error('Несогласованные количества в срезе');
+  });
+  function quantities(site){
+    var maf=mafBy[site.point_id];
+    return [maf.length,maf.reduce(function(sum,m){return sum+Number(m.quantity||0);},0),maf.filter(function(m){return !!m.photo_id;}).length];
+  }
+  function links(site){
+    return [{label:'На карте',url:captureMapLink(site,slugs)},{label:'В кабинете',url:captureCabinetLink(site)}];
+  }
+  function siteTable(items){
+    var table={rows:[],links:{14:[],15:[]}};
+    items.forEach(function(site,i){
+      var counts=quantities(site),link=links(site);
+      table.rows.push([i+1,captureText(site.district),kindLabel(site.kind),captureText(site.address),captureText(site.source_id),
+        CAPTURE.labels[site.state],photosBy[site.point_id].length,counts[0],counts[1],counts[2],
+        captureDate(site.submitted_at),captureDate(site.reviewed_at),captureText(site.review_comment),'','',site.point_id]);
+      table.links[14].push(link[0]);table.links[15].push(link[1]);
+    });return table;
+  }
+  var summary=[],total=[0,0,0,0,0,0,0,0,0,0];
+  Object.keys(districts).sort(function(a,b){return a.localeCompare(b,'ru');}).forEach(function(d){
+    var sites=data.sites.filter(function(s){return captureDistrict(s.district)===d;});
+    var counts=[sites.length,0,0,0,0,0,0,0,0,0];
+    sites.forEach(function(site){
+      counts[{work:1,rework:2,submitted:3,accepted:4}[site.state]]+=1;
+      counts[6]+=photosBy[site.point_id].length;
+      var q=quantities(site);counts[7]+=q[0];counts[8]+=q[1];counts[9]+=q[2];
+    });
+    counts[5]=counts[3]+counts[4];counts.forEach(function(value,i){total[i]+=value;});
+    summary.push([d,counts[0],counts[1],counts[2],counts[3],counts[4],counts[5],counts[0]?counts[5]/counts[0]:0,counts[6],counts[7],counts[8],counts[9]]);
+  });
+  summary.push(['ИТОГО',total[0],total[1],total[2],total[3],total[4],total[5],total[0]?total[5]/total[0]:0,total[6],total[7],total[8],total[9]]);
+  var photoTable={rows:[],links:{11:[],12:[]},images:[]},mafTable={rows:[],links:{13:[],14:[]},images:[]};
+  data.sites.forEach(function(site){
+    var link=links(site),preamble=[captureText(site.district),kindLabel(site.kind),captureText(site.address),captureText(site.source_id),CAPTURE.labels[site.state]];
+    photosBy[site.point_id].forEach(function(p,i){
+      photoTable.rows.push([photoTable.rows.length+1].concat(preamble,[i+1,captureText(p.photo_filename),captureDate(p.uploaded_at),'','','',site.point_id,p.photo_id]));
+      photoTable.links[11].push(link[0]);photoTable.links[12].push(link[1]);photoTable.images.push(capturePreview(p.photo_token,false));
+    });
+    mafBy[site.point_id].forEach(function(m){
+      mafTable.rows.push([mafTable.rows.length+1].concat(preamble,[captureText(m.type_label),Number(m.quantity||0),CONDITIONS[m.condition]||captureText(m.condition),captureText(m.comment),'',captureDate(m.updated_at),'','',site.point_id,m.maf_id]));
+      mafTable.links[13].push(link[0]);mafTable.links[14].push(link[1]);mafTable.images.push(capturePreview(m.photo_token,true));
+    });
+  });
+  return {summary:summary,all:siteTable(data.sites),
+    work:siteTable(data.sites.filter(function(s){return s.state==='work';})),
+    submitted:siteTable(data.sites.filter(function(s){return s.state==='submitted';})),
+    accepted:siteTable(data.sites.filter(function(s){return s.state==='accepted';})),
+    rework:siteTable(data.sites.filter(function(s){return s.state==='rework';})),photos:photoTable,maf:mafTable};
+}
+function captureLog(status,data,note){
+  captureEnsureSheet('log').appendRow([captureDate(new Date()),status,data?data.sites.length:0,data?data.photos.length:0,data?data.maf.length:0,captureText(note||'')]);
+}
+function syncSheet(){
+  var lock=LockService.getDocumentLock();
+  if(!lock.tryLock(30000))return;
+  var data=null;
+  try{
+    // Получаем и проверяем полный снимок прежде, чем менять действующие листы.
+    data=fetchJson('/workflow/sheet.json');
+    var dict=fetchJson('/dictionaries'),out=captureBuild(data,dict);
+    ['all','work','submitted','accepted','rework'].forEach(function(key){captureWrite(key,out[key].rows,out[key].links);});
+    captureWrite('photos',out.photos.rows,out.photos.links,10,out.photos.images);
+    captureWrite('maf',out.maf.rows,out.maf.links,11,out.maf.images);
+    captureWrite('summary',out.summary,{});
+    captureLog('OK',data,'Срез сервера: '+captureDate(data.generated_at));
+  }catch(e){captureLog('Ошибка',null,String(e&&e.message||e).slice(0,350));throw e;}
+  finally{lock.releaseLock();}
 }
