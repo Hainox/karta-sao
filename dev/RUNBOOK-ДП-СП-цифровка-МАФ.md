@@ -48,7 +48,7 @@ $DC up -d photo-service
 curl -s https://obhod-sao.ru/photo-api/healthz | head -c 200          # database=connected
 curl -s -o /dev/null -w '%{http_code}\n' https://obhod-sao.ru/photo-api/object-photo-points/dpsp/summary   # 401 без сессии
 curl -s -o /dev/null -w '%{http_code}\n' https://obhod-sao.ru/photo-api/object-photo-points/dpsp/summary \
-  -H "Authorization: Bearer <токен префектуры>"                        # 200, totals: sites ≈ 3 092
+  -H "Authorization: Bearer <токен префектуры>"                        # 200, totals: sites = число неснятых точек базы
 ```
 
 После входа служебной учётки в кабинете должен открыться справочник
@@ -103,9 +103,16 @@ merge в `main` = выкладка (как у остальных страниц 
 
 Проверки после установки:
 
-- «Свод» B9 (всего площадок) ≈ 3 092 (2 254 ДП + 838 СП), B5 = «ok»;
+- «Свод» B9 (всего площадок) равен числу строк `playground_photo_points`
+  с `retired_at IS NULL`; на 16.11.2026 — 2 833 (2 043 ДП + 790 СП), B5 = «ok».
+  Контуры корневой карты (3 092) и исходные точки фотофиксации (3 042) —
+  разные наборы; 209 исходных точек сняты. Подробная сверка и списки:
+  `projects/playground-photo-points/work/reconciliation-DP-SP-2026-11-16.md`;
 - «Сверка» заполнена, у строк есть кнопка-ссылка «На карте»;
-- в колонке «Фото площадки» видно превью, а не ошибку `#N/A`.
+- в колонке «Фото площадки» видно целое превью с сохранением пропорций:
+  `IMAGE(...;1)`, строки по 160 px, колонка I — 220 px. Ссылки площадок
+  используют `/object-photo-points/playgrounds/photo-thumb/`, ссылки МАФ —
+  `/object-photo-points/dpsp/photo-thumb/`.
 
 ## 5. Эксплуатация и откат
 

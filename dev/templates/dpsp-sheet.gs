@@ -20,6 +20,7 @@
 
 var CFG = {
   api: 'https://obhod-sao.ru/photo-api/object-photo-points/dpsp',
+  playgroundApi: 'https://obhod-sao.ru/photo-api/object-photo-points/playgrounds',
   apiLogin: 'https://obhod-sao.ru/photo-api/auth/login',
   mapBase: 'https://hainox.github.io/karta-sao/districts/',
   sheets: { summary: 'Свод', sites: 'Площадки', maf: 'МАФ', cross: 'Сверка', dict: 'Справочники', log: 'Журнал', state: '_state' },
@@ -94,8 +95,8 @@ function fetchJson(path) {
   throw new Error('HTTP 401 после обновления токена');
 }
 
-function thumb(tokenValue) {
-  return tokenValue ? CFG.api + '/photo-thumb/' + tokenValue + '.jpg' : '';
+function thumb(tokenValue, api) {
+  return tokenValue ? (api || CFG.api) + '/photo-thumb/' + tokenValue + '.jpg' : '';
 }
 
 /* ---------------- Служебные листы ---------------- */
@@ -205,7 +206,7 @@ function installSummarySheet() {
 }
 
 function installCrossSheet() {
-  var sheet = ensureSheet(CFG.sheets.cross, null, [40, 130, 60, 300, 110, 340, 80, 130, 150, 130, 170, 220, 170, 130, 0, 90], [15]);
+  var sheet = ensureSheet(CFG.sheets.cross, null, [40, 130, 60, 300, 110, 340, 80, 130, 220, 130, 170, 220, 170, 130, 0, 90], [15]);
   ensureCapacity(sheet, CFG.sitesCap + 10);
   sheet.getRange('B1').setValue('Все районы').setBackground('#e7f4ee');
   sheet.getRange('A1').setValue('Район:').setFontWeight('bold');
@@ -291,7 +292,7 @@ function writeSites(sites) {
       stateLabel(site.photo_state), site.maf_count || 0,
       site.checked_at ? new Date(site.checked_at) : '',
       site.last_maf_at ? new Date(site.last_maf_at) : '',
-      thumb(site.photo_token)
+      thumb(site.photo_token, CFG.playgroundApi)
     ];
   });
   return writeTable(sheet, rows, 13);
@@ -396,7 +397,7 @@ function rebuildCross(data, sheet) {
       site.checked_at ? site.checked_at : ''
     ]);
     formulas.push([
-      site.photo_url ? '=IMAGE(VLOOKUP($O' + row + ';Площадки!$A:$M;13;FALSE);4;160;120)' : '',
+      site.photo_url ? '=IMAGE(VLOOKUP($O' + row + ';Площадки!$A:$M;13;FALSE);1)' : '',
       past.decision || '—', past.reason || '', past.comment || '',
       past.who || '', past.when || '', site.site_id,
       mapUrl ? '=HYPERLINK("' + mapUrl + '";"На карте")' : ''
@@ -405,6 +406,8 @@ function rebuildCross(data, sheet) {
   });
   writeTable(sheet, rows, 8, 7);
   if (formulas.length) {
+    sheet.setRowHeights(7, formulas.length, 160);
+    sheet.setColumnWidth(9, 220);
     sheet.getRange(7, 9, formulas.length, 7).setValues(formulas.map(function (f) {
       return [f[0], f[1], f[2], f[3], f[4], f[5], f[6]];
     }));
