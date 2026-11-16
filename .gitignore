@@ -24,3 +24,6 @@ dev/templates/*.xlsx
 
 # Слой пешеходных дорожек АСУ ОДС — только на сервере фотослужбы.
 /photo-service/assets/pedestrian-paths/
+
+# Runtime catalog; generated from the supplied QGIS source on the server.
+photo-service/assets/yard-path-points.json
