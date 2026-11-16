@@ -53,3 +53,15 @@ DO $$ BEGIN
      FOR EACH ROW EXECUTE FUNCTION dpsp_capture_guard_maf();
  END IF;
 END $$;
+
+-- Отзываемые ссылки на миниатюры для Google Sheets; полный снимок остаётся закрытым.
+CREATE TABLE IF NOT EXISTS dpsp_capture_photo_tokens (
+  token text PRIMARY KEY CHECK (token ~ '^[0-9a-f]{32}$'),
+  photo_id uuid NOT NULL UNIQUE REFERENCES dpsp_capture_photos(id),
+  created_at timestamptz NOT NULL DEFAULT now(),
+  revoked_at timestamptz
+);
+CREATE TABLE IF NOT EXISTS dpsp_capture_photo_thumbs (
+  photo_id uuid PRIMARY KEY REFERENCES dpsp_capture_photos(id),
+  photo_bytes bytea NOT NULL
+);
