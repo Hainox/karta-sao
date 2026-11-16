@@ -1,5 +1,6 @@
 import express from 'express';
 import { createPlaygroundPhotoRouter } from './playground-photo.js';
+import { createDpspMafRouter } from './dpsp-maf.js';
 import { createPedestrianPathsRouter } from './pedestrian-paths.js';
 import { createPedestrianPathSheetRouter } from './pedestrian-path-sheet.js';
 import { createSidewalkTestLayerRouter } from './sidewalk-test-layer.js';
@@ -26,6 +27,7 @@ export function createPhotoServicePointsAdapter({ pool, currentUser, boundary })
     } catch (error) { next(error); }
   };
   app.use('/object-photo-points/playgrounds', createPlaygroundPhotoRouter({ pool, authenticate }));
+  app.use('/object-photo-points/dpsp', createDpspMafRouter({ pool, authenticate }));
   app.use('/object-photo-points/pedestrian-paths', createPedestrianPathsRouter({ pool, authenticate }));
   app.use('/object-photo-points/pedestrian-path-sheet', createPedestrianPathSheetRouter({ pool, authenticate }));
   app.use('/object-photo-points/sidewalk-test', createSidewalkTestLayerRouter({ authenticate, boundary, pool }));
