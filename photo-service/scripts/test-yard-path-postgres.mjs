@@ -1,0 +1,41 @@
+import assert from 'node:assert/strict';
+import express from 'express';
+import pg from 'pg';
+import {execFileSync} from 'node:child_process';
+import {readFileSync} from 'node:fs';
+import {photoServiceDatabaseConfig} from '../src/config.js';
+import {createYardPathLayerRouter} from '../src/tpu-points/yard-path-layer.js';
+assert.equal(process.env.PLAYGROUND_DISPOSABLE_DB,'yes');
+const pool=new pg.Pool(photoServiceDatabaseConfig(process.env));let server;
+try {
+ execFileSync(process.execPath,['scripts/migrate.js']);
+ const catalog=JSON.parse(readFileSync('assets/yard-path-points.json'));
+ const point=catalog.points.find(p=>p.district==='Аэропорт');const frame=point.slots[0].id;
+ const foreign=catalog.points.find(p=>p.district!=='Аэропорт').slots[0].id;
+ const app=express();app.use(express.json());
+ app.use(createYardPathLayerRouter({pool,authenticate(req,res,next){
+  const role=req.get('x-role');if(!role)return res.sendStatus(401);
+  req.user={id:role==='district_editor'?'test-district':'test-admin',sub:'test-admin',role,district:'Аэропорт'};next();
+ }}));app.use((e,req,res,next)=>res.status(e.status||500).json({error:e.message}));
+ server=app.listen(0);await new Promise(r=>server.once('listening',r));
+ const base='http://127.0.0.1:'+server.address().port;
+ const call=(path,role='prefecture_admin',method='GET',body)=>fetch(base+path,{method,headers:{'x-role':role,'content-type':'application/json'},...(body===undefined?{}:{body:JSON.stringify(body)})});
+ const png=Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jM1kAAAAASUVORK5CYII=','base64');
+ const upload=f=>fetch(base+'/district/frames/'+f+'/photo',{method:'PUT',headers:{'x-role':'district_editor','content-type':'image/png'},body:png});
+ assert.equal((await upload(foreign)).status,404);
+ const path='/district/frames/'+frame;
+ const first=await upload(frame);assert.equal(first.status,201);const a=(await first.json()).photo;
+ assert.equal((await upload(frame)).status,409);
+ const review=(photo,decision,comment,role='prefecture_admin')=>call(path+'/photos/'+photo+'/review',role,'POST',{decision,comment});
+ assert.equal((await review(a.id,'accepted','','district_editor')).status,403);
+ assert.equal((await review(a.id,'rejected','')).status,422);
+ assert.equal((await review(a.id,'rejected','Переснять')).status,200);
+ const second=await upload(frame);assert.equal(second.status,201);const b=(await second.json()).photo;
+ assert.equal((await review(b.id,'accepted','')).status,200);
+ assert.equal((await upload(frame)).status,409);
+ assert.equal((await call(path+'/photos/'+b.id+'/preview')).status,200);
+ const report=await call('/district/report.xlsx');assert.equal(report.status,200);assert.ok((await report.arrayBuffer()).byteLength>1000);
+ assert.equal((await call('/district/queue','district_editor')).status,403);
+ assert.deepEqual((await pool.query('SELECT status FROM yard_path_slot_photos WHERE frame_id=$1 ORDER BY uploaded_at',[frame])).rows.map(p=>p.status),['rejected','accepted']);
+ console.log('PASS: yard-path PostgreSQL upload, district isolation, duplicate protection, review, reshoot history, accepted photo protection, preview and Excel');
+}finally{if(server)await new Promise(r=>server.close(r));await pool.end();}
