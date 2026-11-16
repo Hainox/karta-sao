@@ -133,7 +133,8 @@ async function stubApi(page) {
 
 async function openMap(page) {
   await page.goto(baseURL);
-  await expect(page.locator('#export-register')).toBeEnabled();
+  // Карта тянет внешние слои: под параллельной нагрузкой 10 секунд мало.
+  await expect(page.locator('#export-register')).toBeEnabled({ timeout: 30_000 });
 }
 
 /** Вход префектуры и загрузка объектов ровно теми же шагами, что делает человек. */

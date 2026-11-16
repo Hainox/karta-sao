@@ -23,15 +23,21 @@ var CFG = {
   rework: 'На доработке',
   log: 'Журнал',
   state: '_state',
-  viewRows: 300,
+  // В живой таблице уже больше 1 500 строк: меньшее значение обрежет «Сверку».
+  viewRows: 3000,
   perDistrict: 20,
-  mapBase: 'https://hainox.github.io/karta-sao/districts/'
+  mapBase: 'https://hainox.github.io/karta-sao/districts/',
+  // Адреса в «Сверке» ведут в операторский кабинет СЕВЕР ЖКХ. Глубокой ссылки
+  // на конкретный адрес кабинет не даёт: район и адрес выбираются на месте.
+  // Punycode: HYPERLINK/rich-text не всегда принимает кириллический домен.
+  sever: 'https://xn----ctbibgy3be7b.xn--p1ai/operator'
 };
 
 function onOpen() {
   SpreadsheetApp.getUi().createMenu('ДП/СП')
     .addItem('Обновить сейчас', 'syncSheet')
     .addItem('Пересобрать «Сверку»', 'refreshView')
+    .addItem('Адреса → ссылки СЕВЕР ЖКХ', 'linkAddresses')
     .addItem('Отправить решения', 'pushDecisions')
     .addSeparator()
     .addItem('Покрасить «% принято»', 'applyPercentColors')
@@ -233,6 +239,38 @@ function logRow(started, added, errors, message) {
   if (sheet.getLastRow() > 2000) sheet.deleteRows(2, sheet.getLastRow() - 2000);
 }
 
+/** Адрес как текст со ссылкой на СЕВЕР ЖКХ (без формулы, чтобы не ловить #ERROR!). */
+function addressRichText(address) {
+  var text = String(address || '').replace(/\s+/g, ' ').trim();
+  return SpreadsheetApp.newRichTextValue()
+    .setText(text)
+    .setLinkUrl(text ? CFG.sever : null)
+    .build();
+}
+
+/**
+ * Превращает адреса в «Сверке» в ссылки на СЕВЕР ЖКХ.
+ * Адрес берётся из «Реестра» по point_id из скрытой колонки O, поэтому
+ * функция заодно восстанавливает ячейки, если в D уже стоит #ERROR!.
+ */
+function linkAddresses() {
+  var book = SpreadsheetApp.getActive();
+  var registry = book.getSheetByName(CFG.registry);
+  var sheet = book.getSheetByName(CFG.view);
+  if (!registry || !sheet) return;
+  var last = sheet.getLastRow();
+  if (last < 8) return;
+  var data = registry.getRange(2, 1, Math.max(registry.getLastRow() - 1, 1), 17).getValues();
+  var addressByPoint = {};
+  data.forEach(function (row) {
+    if (row[0]) addressByPoint[row[0]] = row[4];
+  });
+  var pointIds = sheet.getRange(8, 15, last - 7, 1).getDisplayValues();
+  sheet.getRange(8, 4, last - 7, 1).setRichTextValues(pointIds.map(function (row) {
+    return [addressRichText(addressByPoint[row[0]])];
+  }));
+}
+
 /**
  * Пересобирает «Сверку» по фильтрам B1 (район) и B2 (статус).
  * Решения и комментарии проверяющего переносятся по point_id.
@@ -302,6 +340,11 @@ function refreshView() {
   view.getRange(8, 14, height, 1).clearContent();
   if (values.length) {
     view.getRange(8, 1, values.length, 12).setValues(values);
+    // Адрес (D) — текст со ссылкой в СЕВЕР ЖКХ. Rich text, а не формула:
+    // формулы ломаются на кириллическом домене и дают #ERROR!.
+    view.getRange(8, 4, values.length, 1).setRichTextValues(values.map(function (row) {
+      return [addressRichText(row[3])];
+    }));
     view.getRange(8, 7, values.length, 2).setFormulas(photos);
     view.getRange(8, 14, values.length, 1).setFormulas(slice.map(function (row, index) {
       var at = index + 8;
