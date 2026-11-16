@@ -1,6 +1,6 @@
 import crypto from 'node:crypto';
 import express from 'express';
-import { createDpspCaptureRouter } from './dpsp-capture.js';
+import { createDpspCaptureRouter, captureThumbnailHandler } from './dpsp-capture.js';
 import { resizeJpeg } from '../image-resize.js';
 import { safePhotoFilename, validatePhotoUpload } from './photo-markers.js';
 
@@ -114,6 +114,7 @@ function parseMafInput(body,{partial=false}={}){
 
 export function createDpspMafRouter({pool,authenticate}) {
  const router=express.Router();
+ router.get('/capture-thumb/:token',captureThumbnailHandler(pool));
  // Превью по токену — единственный маршрут без сессии: Google Sheets =IMAGE()
  // не умеет заголовок Authorization. Токен неугадываемый и отзывается.
  router.get('/photo-thumb/:token',async(req,res,next)=>{try{
