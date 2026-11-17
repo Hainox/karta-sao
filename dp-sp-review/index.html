@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Приёмка ДП/СП и МАФ · САО</title><link rel="stylesheet" href="../dp-sp-cabinet/cabinet.css?v=20261116"></head>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Приёмка ДП/СП и МАФ · САО</title><link rel="stylesheet" href="../dp-sp-cabinet/cabinet.css?v=20261117-mobile"></head>
 <body data-review="true">
 <div class="login" id="login" hidden><form id="loginForm"><h2>Кабинет приёмки</h2><p>Доступ только для префектуры.</p><div class="field"><label for="email">Логин</label><input id="email" required autocomplete="username"></div><div class="field"><label for="password">Пароль</label><input id="password" type="password" required autocomplete="current-password"></div><p><button class="btn primary">Войти</button></p><div class="notice" id="loginMsg" role="status"></div></form></div>
-<header class="top" id="top" hidden><div><h1>Приёмка ДП/СП и МАФ · САО</h1><p id="userLine"></p></div><div><a class="navlink" href="../dp-sp-cabinet/">К оцифровке →</a><button id="logout" type="button">Выйти</button></div></header>
+<header class="top" id="top" hidden><div><h1>Приёмка ДП/СП и МАФ · САО</h1><p id="userLine"></p></div><details class="account-menu"><summary>Кабинет</summary><div class="account-options"><a class="navlink" href="../dp-sp-cabinet/">К оцифровке →</a><button id="logout" type="button">Выйти</button></div></details></header>
 <main class="app" id="main" hidden>
 <div class="buttons"><button class="btn primary" id="reviewQueue">Отработанные · на приёмке</button><button class="btn" id="acceptedQueue">Принятые</button></div>
 <section class="filters"><div class="field"><label for="district">Район</label><select id="district"><option value="">Все районы</option></select></div><div class="field"><label for="kind">Вид площадки</label><select id="kind"><option value="">ДП и СП</option><option value="dp">Детские</option><option value="sp">Спортивные</option></select></div><button class="sync" id="refresh">Обновить</button></section>
 <div class="summary"><span class="chip"><b id="queueCount">0</b> в выбранном списке</span><span id="message" class="chip" role="status"></span></div>
 <section class="layout"><aside class="queue"><div class="queue-head"><strong>Отработанные площадки</strong></div><div id="queue" class="queue-list"></div></aside><article id="detail" class="detail"><div class="empty">Выберите площадку</div></article></section></main>
 <dialog id="viewer"><button type="button" class="btn" id="closeViewer">Закрыть фото</button><img id="largePhoto" alt="Фотография полностью"></dialog>
-<script src="../dp-sp-cabinet/cabinet.js?v=20261116"></script></body></html>
+<script src="../dp-sp-cabinet/cabinet.js?v=20261117-mobile"></script></body></html>
