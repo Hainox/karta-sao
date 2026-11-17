@@ -1,0 +1,210 @@
+﻿id,source_key,source_id,kind,district,address,retired_at,retirement_source,retirement_reason,kept_source_key
+2897873c-856c-51bb-b30d-965d83e1eacf,aeroport:25,902900321,dp,Аэропорт,"Часовая ул. 10/1, 12, 14",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,aeroport:24
+34df77f0-a002-5263-9cd9-9a38d98cd2dd,aeroport:57,1041208892,dp,Аэропорт,"Ильюшина Академика ул. 5; Планетная ул. 41, 43",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,aeroport:54
+983998b7-a906-5121-b39c-d19a3e171ca0,aeroport:118,1139664222,dp,Аэропорт,"Усиевича ул. 27 к.1, 27 к.2",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,aeroport:5
+2b93e24b-6934-5da7-a8de-5dc182bbec86,aeroport:131,1258456328,dp,Аэропорт,"Планетная ул. 20, 22, 24",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,aeroport:103
+fa0767c0-8a14-506d-89ff-d7fe077bed41,aeroport:190,1195973635,dp,Аэропорт,Часовая ул. 23 к.1,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,aeroport:141
+e825cb78-376b-58f1-a2e5-d230333efd3d,aeroport:195,1144168342,dp,Аэропорт,"Усиевича ул. 29 к.1, 29 к.2",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,aeroport:5
+be02aca2-cf25-5636-8d38-9d7c33ed632c,aeroport:225,1188249729,dp,Аэропорт,Усиевича ул. 1,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,aeroport:208
+7ee09ec7-3476-5e35-acbf-52aa398a487c,aeroport:237,1148182252,dp,Аэропорт,Планетная ул. 26,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,aeroport:103
+a58094ca-d76b-53a2-a3f9-e1798c170f16,aeroport:241,1326541531,dp,Аэропорт,Часовая улица дом 27,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,aeroport:72
+d79154e4-6f38-5c19-bce6-fc5190db7758,begovoy:276,1060144440,dp,Беговой,Скаковая аллея 9,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,begovoy:252
+ac4bd93c-abe9-5bc7-9e89-a89717a36276,begovoy:287,1171605399,dp,Беговой,Беговая ул. 17 к.1,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,begovoy:332
+c29a2964-a966-51a0-879b-30c0024d52af,begovoy:320,1183331555,dp,Беговой,Беговая ул. 6 к.3,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,begovoy:319
+84a10d66-3908-5d48-9dba-88a742849d1c,begovoy:338,1188179999,dp,Беговой,Беговая ул. 15,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,begovoy:391
+0e82b038-81c3-518e-b372-a36a1c5856c3,beskudnikovskiy:397,1267222527,dp,Бескудниковский,"Дмитровское шоссе 105 к.5, 105 к.6",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,beskudnikovskiy:396
+95cba1b9-ffbc-5b12-95cc-955b7ba4c4de,beskudnikovskiy:406,1267588980,dp,Бескудниковский,Селигерская ул. 2,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,beskudnikovskiy:400
+d44f7c66-574d-5849-9a6e-7667a3a10f1f,beskudnikovskiy:407,1267588990,dp,Бескудниковский,Селигерская ул. 2,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,beskudnikovskiy:400
+8e79a69c-6862-5a83-84da-76ae3954e4df,beskudnikovskiy:408,1267589001,dp,Бескудниковский,Селигерская ул. 2,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,beskudnikovskiy:400
+6e0313be-7eb4-5a58-94d4-81a68fbbb99d,beskudnikovskiy:424,1268436036,dp,Бескудниковский,Дмитровское шоссе 68,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,beskudnikovskiy:422
+920c8d2f-832f-57d2-9f1d-9ce181bdf12f,beskudnikovskiy:428,1268482139,dp,Бескудниковский,Бескудниковский бульв. 15 к.1,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,beskudnikovskiy:427
+cf64defc-14cf-5d6a-a224-73f4444da549,beskudnikovskiy:444,1270070178,dp,Бескудниковский,"Дмитровское шоссе 86 к.6, 88 к.2",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,beskudnikovskiy:443
+459f58fd-42e3-510d-bb7b-b18cfd971211,beskudnikovskiy:446,1270070184,dp,Бескудниковский,"Дмитровское шоссе 86 к.6, 88 к.2",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,beskudnikovskiy:445
+c6b3d98b-0270-568f-a299-d10af298fc29,beskudnikovskiy:452,1270098120,dp,Бескудниковский,Бескудниковский бульв. 13,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,beskudnikovskiy:451
+0cbc2708-5d79-5b82-a63f-b2f11af68ffb,beskudnikovskiy:453,1270098122,dp,Бескудниковский,Бескудниковский бульв. 13,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,beskudnikovskiy:451
+20f93b3f-2817-5485-83bf-8625dc46d151,beskudnikovskiy:456,1270098142,dp,Бескудниковский,Бескудниковский бульв. 13,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,beskudnikovskiy:454
+bb92c573-3f1a-56ec-9cbc-3c05da49e33b,beskudnikovskiy:458,1270107708,dp,Бескудниковский,Бескудниковский бульв. 30 к.3,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,beskudnikovskiy:459
+c230e9fa-fd6a-5629-b3a6-c575ab711dac,beskudnikovskiy:460,1270107736,dp,Бескудниковский,Бескудниковский бульв. 30 к.3,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,beskudnikovskiy:461
+3ee6136e-7212-5e05-8406-b9a9eba036aa,beskudnikovskiy:470,1270165878,dp,Бескудниковский,Селигерская ул. 22/2,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,beskudnikovskiy:469
+19615970-99d5-5062-8d9c-ad8d2c9c5549,beskudnikovskiy:482,1271452957,dp,Бескудниковский,Селигерская ул. 26 к.1,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,beskudnikovskiy:481
+86a1d66b-ef06-582e-ae35-0416a05b5fbc,beskudnikovskiy:490,1272952535,dp,Бескудниковский,Бескудниковский бульв. 5,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,beskudnikovskiy:489
+341182a0-9751-53c8-afd0-2e1e2521df9f,beskudnikovskiy:491,1272952567,dp,Бескудниковский,Бескудниковский бульв. 5,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,beskudnikovskiy:489
+bd017409-7c9d-55cf-8382-aebeb4a38446,beskudnikovskiy:525,1274676616,dp,Бескудниковский,"Бескудниковский бульв. 17 к.1, 19 к.1",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,beskudnikovskiy:521
+9357bce0-3c1d-54d5-8a2c-58aa63a68680,beskudnikovskiy:526,1274676630,dp,Бескудниковский,"Бескудниковский бульв. 17 к.1, 19 к.1",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,beskudnikovskiy:521
+35ece763-bf1a-5143-9d76-72a61b8968e5,beskudnikovskiy:548,1275282060,dp,Бескудниковский,"Восьмисотлетия Москвы ул. 4 к.2, 6",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,beskudnikovskiy:547
+634dab67-400b-5c0e-8896-2d7d2887cd32,beskudnikovskiy:549,1275282102,dp,Бескудниковский,"Восьмисотлетия Москвы ул. 4 к.2, 6",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,beskudnikovskiy:547
+c86f98aa-21c0-5d89-bd86-8fa792b46de7,beskudnikovskiy:559,1275374649,dp,Бескудниковский,Бескудниковский бульв. 21 к.2,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,beskudnikovskiy:552
+7f493815-ab0d-5a79-8b5a-7138020bfa93,beskudnikovskiy:571,1275720440,dp,Бескудниковский,"Бескудниковский проезд дом 4, корпус 1",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,beskudnikovskiy:573
+8bd6bd43-88a3-5160-bd17-1ed87fe07cfd,beskudnikovskiy:574,1275720484,dp,Бескудниковский,"Бескудниковский проезд дом 4, корпус 1",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,beskudnikovskiy:573
+3a8525ea-e3b7-5917-905e-ebae56b43625,beskudnikovskiy:589,1305677981,dp,Бескудниковский,Дмитровское шоссе 96 к.1,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,beskudnikovskiy:587
+e1c1326f-0cc8-5fe1-9d73-31b5348048fd,beskudnikovskiy:597,1316948970,dp,Бескудниковский,Бескудниковский бульв. 31,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,beskudnikovskiy:595
+6a591681-8eb5-5c90-b951-11f4a35f6bc1,beskudnikovskiy:598,1316948984,dp,Бескудниковский,Бескудниковский бульв. 31,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,beskudnikovskiy:595
+a3bb1d04-4de3-5308-a93a-f2ec54baa99f,beskudnikovskiy:603,1319662612,dp,Бескудниковский,Дмитровское шоссе 70,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,beskudnikovskiy:601
+b20cefe8-c5d8-57a9-b1a2-a6628ac1eebf,beskudnikovskiy:613,1323725253,dp,Бескудниковский,Бескудниковский бульв. 11 к.1,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,beskudnikovskiy:612
+fc16201c-7057-54c1-b0a5-495d89a89d58,beskudnikovskiy:636,1271802439,dp,Бескудниковский,Дубнинская ул. 61,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,beskudnikovskiy:635
+eaa4b79c-5aa6-5201-bcfe-9d12afe2dd2d,beskudnikovskiy:644,1324308930,dp,Бескудниковский,"Дмитровское шоссе дом 93, корпус 2",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,beskudnikovskiy:643
+c3dae383-2723-524d-abfb-44bd9db73744,voykovskiy:654,894970164,dp,Войковский,Старопетровский пр. 10Б,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,voykovskiy:828
+6fc5447d-7784-508a-8019-9082d765b2cb,voykovskiy:662,885271201,dp,Войковский,Войковский 2-й пр. 5,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,voykovskiy:832
+5a4e6946-8513-5680-bb2f-35c648d4a4c5,voykovskiy:666,952459625,dp,Войковский,"Ленинградское шоссе 26 к.2, 26 к.3",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,voykovskiy:727
+58a05ac4-fb3e-503b-823b-a0500128e2b1,voykovskiy:679,890821459,dp,Войковский,"Зои и Александра Космодемьянских ул. 16 к.1, 16 к.2",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,voykovskiy:680
+ce69d9dc-9d19-5e49-9636-95d72ae0d3ea,voykovskiy:695,1147972359,dp,Войковский,Зои и Александра Космодемьянских ул. 17/2,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,voykovskiy:694
+3f3c5671-237a-587c-bd39-71f92683aa5b,voykovskiy:714,890759574,dp,Войковский,"Войковский 1-й пр. 16А, 16 к.1, 16 к.2, 16 к.3",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,voykovskiy:713
+4bca8ec8-e40a-52f7-a61c-d942eaf1ebae,voykovskiy:715,890759576,dp,Войковский,"Войковский 1-й пр. 16А, 16 к.1, 16 к.2, 16 к.3",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,voykovskiy:713
+99dc74ac-2aef-5938-acf4-d8b1dc4f7f6f,voykovskiy:725,1139916542,dp,Войковский,"Вокзальный пер. 10, 8 к.1, 8 к.2",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,voykovskiy:724
+d2d8c4c3-1b3d-5f58-a91a-7cce1bf7578b,voykovskiy:733,909497856,dp,Войковский,Ленинградское шоссе 52,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,voykovskiy:848
+d3df1c17-cd55-5e2c-9d9a-25af4fa53820,voykovskiy:741,1191665429,dp,Войковский,"Клары Цеткин ул. 29, 29 к.1, 31",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,voykovskiy:740
+14f6e33f-4220-5c2f-8573-6f8327af3881,voykovskiy:743,1191665449,dp,Войковский,"Клары Цеткин ул. 29, 29 к.1, 31",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,voykovskiy:740
+d1eb7715-ca1a-53cd-bdda-f14971b2fcf2,voykovskiy:745,1176615698,dp,Войковский,"Новоподмосковный 6-й пер. 10, 8",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,voykovskiy:744
+a1ed3206-a587-590b-b6e0-39da0e2cd77b,voykovskiy:756,1196032489,dp,Войковский,"Нарвская ул. 1А к.1, 1А к.2, 1А к.3, 1А к.4",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,voykovskiy:764
+b62bfa5a-43d0-5320-aca7-2f47be85ffd8,voykovskiy:765,1196032549,dp,Войковский,"Нарвская ул. 1А к.1, 1А к.2, 1А к.3, 1А к.4",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,voykovskiy:764
+ea96f607-f90b-5ba5-9496-510f9e69c288,voykovskiy:766,1196032563,dp,Войковский,"Нарвская ул. 1А к.1, 1А к.2, 1А к.3, 1А к.4",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,voykovskiy:764
+d18be3be-3c7d-5cd2-a4d1-3633c69b9dd8,voykovskiy:767,1260920704,dp,Войковский,"Ленинградское шоссе 13 к.1, 13 к.2",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,voykovskiy:768
+182f740b-c8d2-5322-bdff-41646df7c26d,voykovskiy:773,1265792295,dp,Войковский,"Новоподмосковный 6-й пер. 1, 3, 5",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,voykovskiy:772
+5224c4e8-901d-5ede-8dc0-1dfefe78a3a7,voykovskiy:774,1265792303,dp,Войковский,"Новоподмосковный 6-й пер. 1, 3, 5",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,voykovskiy:772
+bfbdcf61-72ef-5f35-a5f1-730f5d7affe9,voykovskiy:776,1265792313,dp,Войковский,"Новоподмосковный 6-й пер. 1, 3, 5",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,voykovskiy:772
+f80bc860-bf39-5210-8f60-dcc2f75ce4a0,voykovskiy:780,908875173,dp,Войковский,Ленинградское шоссе 56,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,voykovskiy:779
+cd41c945-4450-5ced-9c34-589478ea5c37,voykovskiy:783,1031562034,dp,Войковский,"Ленинградское шоссе 32, 34 к.2",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,voykovskiy:782
+582c0939-872e-5262-8479-4b78249d4c2b,voykovskiy:788,1191375582,dp,Войковский,"Макарова Адмирала ул. 31, 33",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,voykovskiy:787
+abdf51c4-e338-5c4e-a6b2-4ab3582c1a17,voykovskiy:790,1190955108,dp,Войковский,"Волкова Космонавта ул. 15 к.1, 15 к.2, 15 к.3",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,voykovskiy:789
+9b70dc09-7984-5031-90b0-10041998f2f5,voykovskiy:808,923385193,dp,Войковский,"Ленинградское шоссе 34 к.1, 36 к.1, 38 к.1",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,voykovskiy:807
+d59b31ca-1847-5a97-bfee-f1223afd3876,voykovskiy:809,923385197,dp,Войковский,"Ленинградское шоссе 34 к.1, 36 к.1, 38 к.1",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,voykovskiy:807
+81d4eed8-3e1c-5da3-ade2-9a48d78f62a3,voykovskiy:823,934075666,dp,Войковский,"Войковский 5-й пр. 8, 8 к.1",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,voykovskiy:663
+a62f295a-3d55-544c-a38f-a11423324245,voykovskiy:849,910564785,dp,Войковский,Ленинградское шоссе 52Б,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,voykovskiy:848
+a3eec761-0e04-5646-8967-e10ebaae5bbc,vostochnoe-degunino:865,1050613854,dp,Восточное Дегунино,"Бескудниковский бульв. 8 к.3, 8 к.4",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,vostochnoe-degunino:866
+6811ca2f-6736-573a-b8cb-21436ccd79a6,vostochnoe-degunino:882,970987193,dp,Восточное Дегунино,"Дубнинская ул. 22 к.4, 22 к.5, 22 к.6, 24 к.3, 24 к.5",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,vostochnoe-degunino:883
+c762f67c-968e-552c-b25a-e559e33225d4,vostochnoe-degunino:886,970987215,dp,Восточное Дегунино,"Дубнинская ул. 22 к.4, 22 к.5, 22 к.6, 24 к.3, 24 к.5",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,vostochnoe-degunino:883
+86b527ee-bef5-56c4-b8a5-246a0e1e2894,vostochnoe-degunino:887,970987229,dp,Восточное Дегунино,"Дубнинская ул. 22 к.4, 22 к.5, 22 к.6, 24 к.3, 24 к.5",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,vostochnoe-degunino:883
+cbed1db2-ef6e-500d-85d3-e275d79df0d5,vostochnoe-degunino:930,1176175422,dp,Восточное Дегунино,"Восьмисотлетия Москвы ул. 30; Керамический пр. 57 к.1, 57 к.3",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,vostochnoe-degunino:929
+dba448d3-4d21-5d62-8403-d93783244bd4,vostochnoe-degunino:995,1194265204,dp,Восточное Дегунино,Дубнинская ул. 30Б,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,vostochnoe-degunino:997
+5824e45b-cc01-559e-b786-46e59675335e,golovinskiy:1018,929561372,dp,Головинский,"Ленинградское шоссе 86, 88",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,golovinskiy:1017
+0db14a5b-cd9c-55fa-a281-6f6db547d081,golovinskiy:1044,1140090756,dp,Головинский,"Кронштадтский бульв. 17 к.3, 23 к.1, 23 к.2; Смольная ул. 9",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,golovinskiy:1048
+bc3e8723-4113-5d08-8616-82fe3b3e432b,golovinskiy:1083,1181497886,dp,Головинский,"Флотская ул. 94, 96, 98",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,golovinskiy:1082
+c6409888-945f-5313-81d4-8c2bf813480d,golovinskiy:1084,1181497888,dp,Головинский,"Флотская ул. 94, 96, 98",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,golovinskiy:1082
+451861b9-fbce-53af-8e40-26e21533ec32,golovinskiy:1179,932038415,dp,Головинский,"Флотская ул. 16, 18",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,golovinskiy:1177
+be52f810-5d75-53d8-a759-24166984ec41,golovinskiy:1183,930105175,dp,Головинский,"Лавочкина ул. 20, 22, 24, 26, 28/42",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,golovinskiy:1025
+446ae35f-a03d-5df5-bebb-802856ca387f,golovinskiy:1244,933963567,dp,Головинский,"1-й Лихачёвский переулок дом 4А, дом 4, корпус 2, дом 4, корпус 2А, дом 4, корпус 3, дом 6",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,golovinskiy:1243
+aacbdd47-e24f-5e9b-8edd-f0ec7bb940ab,dmitrovskiy:1319,1183338927,dp,Дмитровский,"Ангарская ул. 53 к.1, 57 к.1",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,dmitrovskiy:1316
+27d7bfee-550d-5d1b-9eba-e120a596547f,dmitrovskiy:1378,954844272,dp,Дмитровский,Ангарская ул. 45 к.4,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,dmitrovskiy:1395
+4c50dbaf-7232-5330-a78c-0c8e9ae4f65e,dmitrovskiy:1404,944020704,dp,Дмитровский,Карельский бульв. 3 к.3,2026-11-11T06:53:44.233694+00:00,manual-actualize,актуализация 11.11.2026: дубль или реновация,
+7824a77b-a7b5-582e-8e75-64a4ddf03af8,dmitrovskiy:1411,943627347,dp,Дмитровский,Долгопрудная ул. 13 к.1,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,dmitrovskiy:1410
+e869f634-f2c2-5c98-aa59-f69d5c118157,dmitrovskiy:1412,943627345,dp,Дмитровский,Долгопрудная ул. 13 к.1,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,dmitrovskiy:1410
+ca4db742-0f73-5fee-822b-3c2eb80a7105,zapadnoe-degunino:1447,1128552733,dp,Западное Дегунино,"Весенняя ул. 20, 20А",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,zapadnoe-degunino:1446
+62f4006d-1fb4-5882-ba98-d7f45ed0ed6b,zapadnoe-degunino:1450,1116753191,dp,Западное Дегунино,Федоренко Маршала ул. 10 к.2,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,zapadnoe-degunino:1496
+ec769d4f-b83f-5188-a901-8241bb900c98,zapadnoe-degunino:1472,1149910754,dp,Западное Дегунино,Ивана Сусанина ул. 4 к.7,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,zapadnoe-degunino:1471
+ed21ffbc-bb0b-545c-a8bf-5f54baac9eeb,zapadnoe-degunino:1484,1033110913,dp,Западное Дегунино,Дмитровское шоссе 73Б,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,zapadnoe-degunino:1482
+244c9449-7fe1-59d8-bba7-30eb8c6ceebe,zapadnoe-degunino:1488,1150352270,dp,Западное Дегунино,"Коровинское шоссе 23 к.2, 23 к.3",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,zapadnoe-degunino:1486
+fbc82aad-7fa7-5f88-b3c7-b974e0b8d8bf,zapadnoe-degunino:1521,1268477215,dp,Западное Дегунино,Путейская ул. 2,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,zapadnoe-degunino:1519
+4ffe136b-57b8-5725-b969-a40d0dd0b397,zapadnoe-degunino:1547,1271369227,dp,Западное Дегунино,Коровинское шоссе 13 к.2,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,zapadnoe-degunino:1548
+d0fa5358-9ef6-5f85-9b11-8270aab527f7,zapadnoe-degunino:1567,1272020485,dp,Западное Дегунино,"Дегунинская ул. 13 к.1, 13 к.2",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,zapadnoe-degunino:1448
+8769d3d1-9231-567d-9c27-6ee149a0ceaa,zapadnoe-degunino:1570,1272217194,dp,Западное Дегунино,"Ивана Сусанина ул. 4 к.1, 4 к.2, 4 к.3, 4 к.4",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,zapadnoe-degunino:1471
+009c150c-1b7a-500f-aca5-06b401a260c2,zapadnoe-degunino:1580,1272990026,dp,Западное Дегунино,Коровинское шоссе 9 к.2,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,zapadnoe-degunino:1579
+4d72053e-a349-5b68-8e14-53495aed357a,zapadnoe-degunino:1600,1275195872,dp,Западное Дегунино,"Весенняя ул. 4; Талдомская ул. 11 к.1, 11 к.2, 11 к.3",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,zapadnoe-degunino:1602
+82528ff2-a6a4-566c-93cc-cb9c0151aa1f,zapadnoe-degunino:1601,1275195884,dp,Западное Дегунино,"Весенняя ул. 4; Талдомская ул. 11 к.1, 11 к.2, 11 к.3",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,zapadnoe-degunino:1604
+9114a4a0-46ea-5fe3-8ff8-c2268934e706,zapadnoe-degunino:1615,1116227224,dp,Западное Дегунино,Базовская ул. 12; Новая ул. 9,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,zapadnoe-degunino:1588
+4606f0ba-b743-5f6c-a34d-fd40ba5698be,zapadnoe-degunino:1618,1280655517,dp,Западное Дегунино,Ангарская ул. 17,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,zapadnoe-degunino:1619
+8b0ec176-0fbf-5d13-b8f9-b3568324695c,zapadnoe-degunino:1632,1155511143,dp,Западное Дегунино,Ивана Сусанина ул. 6 к.2,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,zapadnoe-degunino:1467
+7f70bf09-8775-5e63-9776-a748bc1d2cc8,zapadnoe-degunino:1653,1323753696,dp,Западное Дегунино,Базовская улица дом 24Б,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,zapadnoe-degunino:1655
+0787cbbb-ebc3-5742-a722-a7758c108a1d,zapadnoe-degunino:1656,1323753926,dp,Западное Дегунино,Базовская улица дом 24Б,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,zapadnoe-degunino:1655
+18d7fabf-c233-501b-95f2-9b4c7e494a03,koptevo:1658,1104136872,dp,Коптево,"Лихоборские Бугры ул. 10 к.1, 12",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,koptevo:1657
+e2916da3-ff37-5745-bfc7-3184763e3d90,koptevo:1675,1137479452,dp,Коптево,"Приорова ул. 14, 14А, 16 к.1, 16 к.3",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,koptevo:1674
+fecf535b-3926-5372-954a-2a4f3a6c4b46,koptevo:1702,1087090217,dp,Коптево,"Железняка Матроса бульв. 19, 21",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,koptevo:1701
+02c413c8-dd72-52a0-b836-9ceeefb235cd,koptevo:1719,882892635,dp,Коптево,Клары Цеткин ул. 18Б к.1,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,koptevo:1720
+1b9909b3-c2bd-5f86-b33a-497928e43949,koptevo:1722,872411713,dp,Коптево,Новомихалковский 1-й пр. 2 к.1,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,koptevo:1723
+2c1170f3-5704-5759-a783-78a5ca4025a6,koptevo:1744,1087500364,dp,Коптево,"Академическая Б. ул. 29А, 29Б",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,koptevo:1743
+1a6ebd57-f50c-5290-99aa-90c877ea2349,koptevo:1781,913100141,dp,Коптево,"Академическая Б. ул. 37, 37 к.2, 39 к.3",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,koptevo:1780
+947fe492-f956-5da5-9989-df903082b64d,koptevo:1784,992687600,dp,Коптево,"Академическая Б. ул. 73 к.1, 73 к.2",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,koptevo:1783
+e1b56d39-fd4f-5568-a061-376ade14b6f3,koptevo:1837,1191697812,dp,Коптево,"Новомихалковский 3-й пр. 15 к.1, 17, 17А; Рычагова Генерала ул. 3 к.1, 3 к.2",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,koptevo:1839
+db999480-756f-5c58-9ad5-7051a975b54c,koptevo:1838,1191697798,dp,Коптево,"Новомихалковский 3-й пр. 15 к.1, 17, 17А; Рычагова Генерала ул. 3 к.1, 3 к.2",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,koptevo:1839
+81e89120-f899-5fca-9a5a-5ae4c8493360,koptevo:1863,872400279,dp,Коптево,Академическая Б. ул. 57А; Новомихалковский 3-й пр. 3; Новомихалковский 4-й пр. 1А,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,koptevo:1864
+e9aa47a6-1b86-5b4c-8928-490f66f2a901,koptevo:1872,1282339846,dp,Коптево,"Железняка Матроса бульв. 17/14; Коптевский бульв. 16 к.1, 16 к.2, 16 к.3, 18",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,koptevo:1871
+8efa6593-fc11-51e0-9ae1-749fd7a68e53,koptevo:1880,1324759237,dp,Коптево,проезд Черепановых дом 10,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,koptevo:1879
+25c1d8c7-5aaa-5caa-aa43-9453beb5de7b,koptevo:1885,1192676292,dp,Коптево,Коптевская ул. 20 к.1,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,koptevo:1886
+39f88053-d904-50be-ae1d-c24074b71ff9,levoberezhnyy:1927,1035120970,dp,Левобережный,Фестивальная ул. 3,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,levoberezhnyy:1928
+736940eb-ec61-59c4-8301-12928e27b620,levoberezhnyy:1941,1022802980,dp,Левобережный,Беломорская ул. 5 к.3,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,levoberezhnyy:1940
+72caaf62-e8da-5325-b045-9163fb329097,levoberezhnyy:1947,1019083121,dp,Левобережный,Ленинградское шоссе 118 к.1,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,levoberezhnyy:1946
+052ba6bf-232c-506e-90a1-a4352201822b,levoberezhnyy:1955,1019082600,dp,Левобережный,Ленинградское шоссе 120 к.3,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,levoberezhnyy:2034
+c0a9eadc-0d77-528b-8647-8e727b735b84,levoberezhnyy:2000,1017429460,dp,Левобережный,Беломорская ул. 16,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,levoberezhnyy:1966
+46492bf4-5780-504c-8a7d-f3d80ae825e6,levoberezhnyy:2018,1019095871,dp,Левобережный,Ленинградское шоссе 108 к.1,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,levoberezhnyy:2019
+e2a6dcc8-d16a-518b-86c6-692b3f40216d,levoberezhnyy:2039,1030576524,dp,Левобережный,Смольная ул. 49,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,levoberezhnyy:2034
+4ecb6f78-40cd-5336-a433-5b1d03aa744c,levoberezhnyy:2061,997512383,dp,Левобережный,Фестивальная ул. 41 к.1,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,levoberezhnyy:2062
+f89a3257-6df4-57a6-a6bc-9fcf274f9e87,savelovskiy:2137,982833838,dp,Савеловский,Петровско-Разумовский Стар. пр. 5-13,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,savelovskiy:2138
+0341421b-ee47-5807-8527-4fc7376336b0,savelovskiy:2142,982103461,dp,Савеловский,Хуторской 2-й пер. 4/13,2026-11-11T06:53:44.233694+00:00,manual-actualize,актуализация 11.11.2026: дубль или реновация,
+85425168-9350-5055-b2be-6ae1585d7296,savelovskiy:2246,957382748,dp,Савеловский,Масловка Верхн. ул. 22,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,savelovskiy:2247
+3f915c71-0075-5308-b3ab-0624c6af8600,savelovskiy:2252,1026617869,dp,Савеловский,Писцовая ул. 16 к.2,2026-11-06T10:37:35.504322+00:00,manual-retire,,
+21146270-6094-5465-818b-365c4d6777cf,sokol:2346,1116698411,dp,Сокол,"Светлый пр. 10 к.1, 10 к.2, 8 к.1, 8 к.2",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,sokol:2383
+b97425c8-48be-5b6b-9184-16cd284e85f9,sokol:2392,1060695976,dp,Сокол,"Светлый пр. 10 к.3, 10 к.4, 8 к.3",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,sokol:2390
+2ac7c0a2-97ff-58f2-960f-7e6590e747f9,sokol:2395,1153925072,dp,Сокол,Волоколамское шоссе 6,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,sokol:2394
+2f939ed6-edfe-504e-a69b-9c7bda7bb307,sokol:2403,988321122,dp,Сокол,"Факультетский пер. 3, 8",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,sokol:2402
+2a709d4f-292d-5467-b0a5-d6a567412095,timiryazevskiy:2433,933112578,dp,Тимирязевский,Вучетича ул. 8; Соломенной Сторожки пр. 12А,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,timiryazevskiy:2434
+5c12134f-f699-5dc2-9ff5-942bd6ace519,timiryazevskiy:2496,911525844,dp,Тимирязевский,"Чуксин туп. 5, 7",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,timiryazevskiy:2616
+02dd062c-7187-540d-b325-d78a1aa9a6e0,timiryazevskiy:2504,1193808131,dp,Тимирязевский,"Дмитровское шоссе 44 к.1, 44 к.2, 44 к.3",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,timiryazevskiy:2501
+6df7bd02-4a18-52f4-a75a-990ffba46437,timiryazevskiy:2508,1193264623,dp,Тимирязевский,"Дмитровское шоссе 29 к.1, 31, 33 к.1",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,timiryazevskiy:2505
+905c5562-4e0b-52a1-983b-48f844442994,timiryazevskiy:2520,1023393598,dp,Тимирязевский,Дмитровское шоссе 43 к.1,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,timiryazevskiy:2628
+fa58b631-6f4a-5e6d-aecc-60065603af38,timiryazevskiy:2549,927320820,dp,Тимирязевский,"Астрадамская ул. 4; Тимирязевская ул. 17А, 17 к.1, 19",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,timiryazevskiy:2416
+8b84e055-c7f3-5f17-864e-d04d9958c70c,timiryazevskiy:2550,927320822,dp,Тимирязевский,"Астрадамская ул. 4; Тимирязевская ул. 17А, 17 к.1, 19",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,timiryazevskiy:2487
+5ca853dc-4802-59a8-aeab-07a6b9ee6dcb,timiryazevskiy:2560,933669050,dp,Тимирязевский,Астрадамская ул. 7,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,timiryazevskiy:2487
+42a9b2f6-8972-5a21-a3f1-dc8926f49de0,timiryazevskiy:2567,1154531138,dp,Тимирязевский,"Вучетича ул. 5, 7; Чуксин туп. 2, 4",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,timiryazevskiy:2566
+30f3b844-161a-5906-b585-87f004f2ec0d,timiryazevskiy:2568,1154531144,dp,Тимирязевский,"Вучетича ул. 5, 7; Чуксин туп. 2, 4",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,timiryazevskiy:2566
+9681b9a9-6036-5263-983b-a1259a30f21c,timiryazevskiy:2574,953105385,dp,Тимирязевский,"Вучетича ул. 28 к.1, 28 к.2, 28 к.3, 28 к.4",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,timiryazevskiy:2572
+c567471b-d481-5cce-99d1-e2dbc73f8016,timiryazevskiy:2585,1325441987,dp,Тимирязевский,Астрадамская улица дом 9Б,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,timiryazevskiy:2472
+4d8f0f17-665b-5460-9d6e-25e86a1c12c5,timiryazevskiy:2593,1025951311,dp,Тимирязевский,"Локомотивный пр. 7, 9, 9А",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,timiryazevskiy:2595
+e4d06dd5-99df-52be-a54b-09b0db03e300,timiryazevskiy:2594,1025951349,dp,Тимирязевский,"Локомотивный пр. 7, 9, 9А",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,timiryazevskiy:2595
+1345685e-2c2b-5f49-a5df-db33260757f9,timiryazevskiy:2608,1106725504,dp,Тимирязевский,Красностуденческий пр. 4 к.2,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,timiryazevskiy:2607
+5a1386b7-7cb1-5aa5-803d-232a6278c811,timiryazevskiy:2614,1163429076,dp,Тимирязевский,"Дмитровское шоссе 36 к.2, 40 к.1; Линейный пр. 6, 6А",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,timiryazevskiy:2602
+e7b8e598-506b-5b69-803f-dd1cfef49981,hovrino:2656,1086630639,dp,Ховрино,"Дыбенко ул. 22 к.1, 22 к.2",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,hovrino:2896
+b124ac2c-206b-5a63-bcc0-8b4de34c40d4,hovrino:2734,1087784845,dp,Ховрино,"Дыбенко ул. 14 к.1, 14 к.2, 16 к.1",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,hovrino:2736
+bdad5277-8374-591c-b6d5-3e788faf54fb,hovrino:2741,934192988,dp,Ховрино,Фестивальная ул. 22 к.3,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,hovrino:2742
+7740ff04-8486-5ef5-9a48-37b1f9c6b8b1,hovrino:2758,1191672254,dp,Ховрино,"Фестивальная ул. 59 к.1, 59 к.2, 59 к.3",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,hovrino:2876
+10f8ed61-f88d-51c2-89b0-b6404e0b6b03,hovrino:2769,917639597,dp,Ховрино,Петрозаводская ул. 18,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,hovrino:2901
+5d32654f-6857-563f-b92d-593402045ca6,hovrino:2820,917590202,dp,Ховрино,Лавочкина ул. 40/49,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,hovrino:2822
+79efca96-3ed9-5d09-9d09-045975331e6e,hovrino:2878,917662131,dp,Ховрино,"Ляпидевского ул. 2, 2 к.1; Флотская ул. 9 к.1",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,hovrino:2877
+43fb69f7-cfe9-517b-b5af-0ca47c59e731,hovrino:2893,919156280,dp,Ховрино,"улица Дыбенко дом 26, корпус 1",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,hovrino:2790
+108d8bf0-f878-5bb4-8b8d-e9aefc4512fb,hovrino:2897,918552390,dp,Ховрино,"Дыбенко ул. 22 к.3, 26 к.3",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,hovrino:2658
+c8908054-6bd5-5ee3-ae65-6854f68b53bc,hovrino:2908,934681886,dp,Ховрино,Фестивальная ул. 22 к.4,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,hovrino:2907
+40623e86-09bf-535d-a602-af91e3ce8680,hovrino:2914,1180647964,dp,Ховрино,Зеленоградская ул. 35 к.5,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,hovrino:2913
+b3e50be6-40ae-519f-afeb-5d536a8be466,hovrino:2915,1180647968,dp,Ховрино,Зеленоградская ул. 35 к.5,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,hovrino:2913
+2d801177-99c8-5878-ae90-5424554f661e,hovrino:2925,1145011417,dp,Ховрино,Онежская ул. 53 к.1,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,hovrino:2926
+ead5c94a-7021-5d01-82b8-71520f802ec9,hovrino:2930,1163127170,dp,Ховрино,Лавочкина ул. 50 к.1,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,hovrino:2917
+1da3c92b-b1c3-5884-a06b-c9517053b2f1,hovrino:2934,1141526478,dp,Ховрино,Онежская ул. 51 к.1,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,hovrino:2797
+188fa8ba-d570-59ba-ba14-d9c31067bcaf,hovrino:2939,1149932148,dp,Ховрино,Фестивальная ул. 24 к.2,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,hovrino:2945
+0d1a3c81-e760-543c-b8cb-2d447e0cca0a,horoshevskiy:3035,986636994,dp,Хорошевский,Гризодубовой ул. 4 к.3; Ходынский бульв. 13,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,horoshevskiy:3039
+08714d2b-f892-5b14-be5f-018450051bad,horoshevskiy:3036,986636998,dp,Хорошевский,Гризодубовой ул. 4 к.3; Ходынский бульв. 13,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,horoshevskiy:3039
+68306e75-8f46-52f6-b92d-d6e87ffc7545,horoshevskiy:3049,1043117878,dp,Хорошевский,"Куусинена ул. 4А к.5, 6 к.10, 6 к.11, 6 к.12",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,horoshevskiy:3050
+83fb8043-79f7-528e-b8d0-4c2787a68883,horoshevskiy:3054,920342917,dp,Хорошевский,"Хорошевский 1-й пр. 2/17, 4 к.1, 4 к.2, 4 к.3, 6",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,horoshevskiy:3053
+ba320308-1b97-57be-8374-cb06a5394f2e,horoshevskiy:3129,1309461682,dp,Хорошевский,"Хорошевское шоссе 39 к.1, 39 к.2, 41 к.Г, 41 к.Е, 43 к.В",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,horoshevskiy:2973
+58f2b219-beaf-5654-be8f-57dbd4a835f5,horoshevskiy:3157,1189563161,dp,Хорошевский,"Микояна Авиаконструктора ул. 14 к.1, 14 к.2",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,horoshevskiy:3160
+18f536a9-05d2-512b-9376-4f2c06b66d61,horoshevskiy:3169,979085685,dp,Хорошевский,Полины Осипенко ул. 10 к.1,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,horoshevskiy:3188
+1b0c1229-c184-5c59-b3b2-5c3b4514055b,aeroport:212,1137385186,sp,Аэропорт,Масловка Верхн. ул. 25 к.1,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,aeroport:209
+0fe5ecc7-f851-5327-a47d-048c2bb34018,beskudnikovskiy:423,1268436034,sp,Бескудниковский,Дмитровское шоссе 68,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,beskudnikovskiy:421
+b893f78d-98ec-5855-b45d-0cc7dad91770,beskudnikovskiy:462,1270161602,sp,Бескудниковский,Дмитровское шоссе 74 к.1,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,beskudnikovskiy:580
+c606cdca-8cda-537b-9e84-a91017bbb5f1,beskudnikovskiy:463,1270161610,sp,Бескудниковский,Дмитровское шоссе 74 к.1,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,beskudnikovskiy:580
+5eb5b33b-a339-5b66-925b-7dcfe26a8d71,beskudnikovskiy:468,1270161642,sp,Бескудниковский,Дмитровское шоссе 74 к.1,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,beskudnikovskiy:580
+97cdd52d-d0fd-5c57-ad94-991e97e7fafa,beskudnikovskiy:478,1271386998,sp,Бескудниковский,Дубнинская ул. 29 к.1,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,beskudnikovskiy:439
+aa16c29d-0a2e-5c0f-ad0c-ffe72108b5c2,beskudnikovskiy:488,1272952519,sp,Бескудниковский,Бескудниковский бульв. 5,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,beskudnikovskiy:487
+0350484b-4ead-511d-b9df-481ea39b3c4c,beskudnikovskiy:538,1274899742,sp,Бескудниковский,"Бескудниковский бульв. 25 к.4, 27 к.4",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,beskudnikovskiy:536
+4d58eea0-44dc-54bf-935f-442d46ff2b87,beskudnikovskiy:558,1275374639,sp,Бескудниковский,Бескудниковский бульв. 21 к.2,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,beskudnikovskiy:555
+f71b4192-a460-50de-9f94-88543e655449,beskudnikovskiy:570,1275674371,sp,Бескудниковский,Дмитровское шоссе 74 к.2,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,beskudnikovskiy:569
+c09cbc6f-f02a-5ebb-b7a0-76e796585a85,beskudnikovskiy:596,1316948740,sp,Бескудниковский,Бескудниковский бульв. 31,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,beskudnikovskiy:594
+b56537cd-724a-548c-bf51-392f42160f6a,beskudnikovskiy:600,1316949308,sp,Бескудниковский,Бескудниковский бульв. 31,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,beskudnikovskiy:594
+1ae13673-ab26-506a-8a27-b920db1d92cb,voykovskiy:648,939893602,sp,Войковский,Волкова Космонавта ул. 5 к.2,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,voykovskiy:793
+b6e05d86-7e08-55ab-820c-3d0403532b3d,voykovskiy:758,1196032507,sp,Войковский,"Нарвская ул. 1А к.1, 1А к.2, 1А к.3, 1А к.4",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,voykovskiy:754
+c4288a84-b6a5-5487-a7f6-8e4352deb6de,voykovskiy:796,1140539305,sp,Войковский,"Ленинградское шоссе 8 к.1, 8 к.2, 8 к.3",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,voykovskiy:650
+785539bf-a558-5cc0-9d05-4a1804aa397b,vostochnoe-degunino:877,1154451017,sp,Восточное Дегунино,Дубнинская ул. 12 к.3,2026-11-11T06:53:44.233694+00:00,manual-actualize,актуализация 11.11.2026: дубль или реновация,
+9bd22068-dd2d-5302-8b3f-9d072d716de4,golovinskiy:1207,1315983651,sp,Головинский,"Сенежская ул. 3, 5; Солнечногорская ул. 5 к.1, 7 к.1; Флотская ул. 74, 76",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,golovinskiy:1206
+301f4399-409d-51bf-9ec1-61be189225c7,dmitrovskiy:1289,1070551167,sp,Дмитровский,Карельский бульв. 5,2026-11-11T06:53:44.233694+00:00,manual-actualize,актуализация 11.11.2026: дубль или реновация,
+026289ab-5540-5bd3-8a7c-c81298d73e14,zapadnoe-degunino:1544,1269716160,sp,Западное Дегунино,Новая ул. 1,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,zapadnoe-degunino:1607
+c5d65e7b-02db-5f06-8f2e-d1900ac4f241,zapadnoe-degunino:1613,1116227228,sp,Западное Дегунино,Базовская ул. 12; Новая ул. 9,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,zapadnoe-degunino:1589
+33989ba0-6049-5889-9b6a-1e4792391d11,zapadnoe-degunino:1654,1323753698,sp,Западное Дегунино,Базовская улица дом 24Б,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,zapadnoe-degunino:1652
+cad2b65b-b745-5cfe-a3b7-cff29a4a9bd0,koptevo:1689,1191697864,sp,Коптево,"Новомихалковский 3-й пр. 15 к.1, 17, 17А; Рычагова Генерала ул. 3 к.1, 3 к.2",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,koptevo:1690
+0573715a-d415-57dc-a522-db3f954798c6,koptevo:1737,1137461846,sp,Коптево,"Приорова ул. 38, 38А, 40, 40 к.2, 42",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,koptevo:1736
+a31cf82a-3bdd-5491-9241-48c65a1037b5,koptevo:1883,1324759293,sp,Коптево,проезд Черепановых дом 10,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,koptevo:1882
+9e5160b7-6ce6-5cab-a325-570b6c8a5b4b,levoberezhnyy:2043,1027558706,sp,Левобережный,"Смольная ул. 41, 43, 45",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,levoberezhnyy:2042
+624a0ae9-370b-575d-9469-def9d3079875,savelovskiy:2198,987085429,sp,Савеловский,Бутырская ул. 65/68,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,savelovskiy:2197
+7e17a32f-6780-5e6a-b6b8-5c1b0b113603,timiryazevskiy:2515,1185982525,sp,Тимирязевский,"Дмитровское шоссе 33 к.2, 35 к.1, 37 к.1, 39 к.1, 39 к.2",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,timiryazevskiy:2428
+dc4ffa12-b182-50f1-9a58-d4b1f327e9a7,hovrino:2645,980663550,sp,Ховрино,"Петрозаводская ул. 5 к.1, 5 к.2",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,hovrino:2644
+fe158d7f-9e97-5f0f-9f91-509b83e89032,hovrino:2662,1143751731,sp,Ховрино,Зеленоградская ул. 17 к.1,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,hovrino:2663
+6a00af18-5feb-5450-8002-8843e372cf3c,hovrino:2731,968220782,sp,Ховрино,Петрозаводская ул. 24 к.2,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,hovrino:2862
+15274a6f-936c-53d5-b3f1-46896eb0838d,hovrino:2863,1087784883,sp,Ховрино,"Дыбенко ул. 14 к.1, 14 к.2, 16 к.1",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,hovrino:2735
+2395f0e1-7fc4-53b7-a5f4-df9085ffdf4a,hovrino:2898,918621300,sp,Ховрино,Лавочкина ул. 56/23,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,hovrino:2745
+c3b28810-70bc-5e84-a934-8ccab937b2bf,hovrino:2919,1146115217,sp,Ховрино,Петрозаводская ул. 28 к.5,2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,hovrino:2816
+d3b997f2-47ad-5691-a047-fa5946dd3015,horoshevskiy:3081,1193274101,sp,Хорошевский,"Поликарпова ул. 19 к.1, 19 к.2",2026-11-03T11:11:27.551248+00:00,retire-duplicate-playground-points,,horoshevskiy:3082

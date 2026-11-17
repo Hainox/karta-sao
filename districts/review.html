@@ -122,6 +122,7 @@
         <button class="mode" type="button" role="tab" data-mode="sidewalks">Тротуары Дворы</button>
         <button class="mode" type="button" role="tab" data-mode="odh-sidewalks">Тротуары ОДХ</button>
         <button class="mode" type="button" role="tab" data-mode="paths">Пешеходные дорожки</button>
+        <button class="mode" type="button" role="tab" data-mode="yard-paths">Дворовые дорожки</button>
       </div>
       <details class="panel" id="noSidewalkGroup" hidden>
         <summary>Тротуары ОДХ · на проверку: нет тротуара</summary>
@@ -252,7 +253,18 @@
         + '&point=' + encodeURIComponent(row.point_id) + '&lat=' + Number(row.latitude).toFixed(6) + '&lng=' + Number(row.longitude).toFixed(6),
       emptyTab: true, canUpload: true,
     };
-    const showsNoSidewalk = () => ['sidewalks', 'odh-sidewalks'].includes(state.mode);
+    const yardPathBase = '/api/object-photo-points/yard-paths/district';
+    MODES['yard-paths'] = {
+      ...MODES['odh-sidewalks'],
+      base: yardPathBase,
+      photo: (frame, photo) => yardPathBase + avdFramePhoto(frame, photo),
+      preview: (frame, photo) => yardPathBase + avdFramePhoto(frame, photo) + '/preview',
+      reportFile: 'Svod_foto_dvorovye_dorozhki_SAO_',
+      title: (row) => 'Дворовые дорожки · ' + row.label, snapshot: 'Кадр дорожки ',
+      mapLink: (row) => (DISTRICT_SLUGS[row.district] || 'index') + '.html?yardPath=' + encodeURIComponent(row.source_point_id)
+        + '&yardFrame=' + encodeURIComponent(row.point_id),
+    };
+    const showsNoSidewalk = () => ['sidewalks', 'odh-sidewalks', 'yard-paths'].includes(state.mode);
     const KIND_NAMES = { dp: 'Детская площадка', sp: 'Спортивная площадка' };
     const mode = () => MODES[state.mode];
     const PAGE = 24;
@@ -305,17 +317,19 @@
       const status = el('noSidewalkStatus');
       status.textContent = 'Загружаем помеченные точки…';
       try {
-        const response = await api.request('/api/object-photo-points/sidewalk-test/no-sidewalk');
+        const isYard = state.mode === 'yard-paths';
+        el('noSidewalkGroup').querySelector('summary').textContent = isYard ? 'Дворовые дорожки · на проверку: нет дорожки' : 'Тротуары ОДХ · на проверку: нет тротуара';
+        const response = await api.request(isYard ? '/api/object-photo-points/yard-paths/no-sidewalk' : '/api/object-photo-points/sidewalk-test/no-sidewalk');
         const { points } = await response.json();
         if (run !== noSidewalkGeneration || !showsNoSidewalk() || api.user()?.role !== 'prefecture_admin') return;
         status.textContent = points.length ? 'Помечено точек: ' + points.length.toLocaleString('ru-RU') : 'Помеченных точек нет.';
         list.replaceChildren(...points.map(point => {
           const row = make('div', 'row');
-          row.append(make('span', '', point.district + ' · ' + point.street + ' · ' + point.id + ' · Нет тротуара'));
+          row.append(make('span', '', point.district + ' · ' + point.street + ' · ' + point.id + (isYard ? ' · Нет дорожки' : ' · Нет тротуара')));
           const slug = DISTRICT_SLUGS[point.district];
           if (slug) {
             const link = make('a', 'secondary', 'На карте →');
-            link.href = slug + '.html?sidewalkTest=' + encodeURIComponent(point.id);
+            link.href = slug + (isYard ? '.html?yardPath=' : '.html?sidewalkTest=') + encodeURIComponent(point.id);
             row.append(link);
           }
           return row;
@@ -576,7 +590,7 @@
       setStatus('objectStatus', pendingPhoto ? 'Снимок ждёт решения: принять или вернуть на доработку с комментарием.'
         : emptyPoint ? 'Фото ещё не загружено: загрузите снимок — он встанет на проверку.' : 'Снимок на доработке: ждём новую фотографию.');
       el('acceptObject').hidden = !pendingPhoto;
-      el('acceptObject').textContent = state.mode === 'odh-sidewalks' ? 'Принять кадр' : state.mode === 'paths' ? 'Принять фото' : 'Принять объект';
+      el('acceptObject').textContent = ['odh-sidewalks', 'yard-paths'].includes(state.mode) ? 'Принять кадр' : state.mode === 'paths' ? 'Принять фото' : 'Принять объект';
       el('acceptObject').onclick = pendingPhoto ? () => reviewPhotos([{ id: row.photo_id, point_id: row.point_id }], 'accepted', '') : null;
       el('nextObject').hidden = !((state.tab === 'pending' && !pendingPhoto) || state.tab === 'empty');
       lockReview(state.busy);
@@ -823,6 +837,7 @@
       el('exportArchive').textContent = 'Архив фото (ZIP)';
       el('exportReport').hidden = !mode().reportFile;
       el('noSidewalkGroup').hidden = !showsNoSidewalk();
+      el('noSidewalkGroup').querySelector('summary').textContent = state.mode === 'yard-paths' ? 'Дворовые дорожки · на проверку: нет дорожки' : 'Тротуары ОДХ · на проверку: нет тротуара';
       if (!showsNoSidewalk()) {
         noSidewalkGeneration++;
         el('noSidewalkGroup').open = false;

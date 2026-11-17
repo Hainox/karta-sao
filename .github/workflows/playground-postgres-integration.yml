@@ -43,3 +43,5 @@ jobs:
         working-directory: photo-service
       - run: node scripts/test-playground-postgres.mjs
         working-directory: photo-service
+      - run: node scripts/test-dpsp-postgres.mjs
+        working-directory: photo-service
