@@ -1,0 +1,18 @@
+Fixture: C:\Users\dmitr\.codex\.chatgpt-projects\g-p-6a907b424edc81918cd7a5daaadc3a60\cabinet-checkpoint\outputs\mobile-cabinets-20261117\qa\QA-035-test.png
+Workflow: capture=work state; API uses local Playwright mocks only
+Console/page errors: 0
+capture-360: file input 44px; file-selector-button 44px (min 44px); document 360/360px
+capture-390: file input 44px; file-selector-button 44px (min 44px); document 390/390px
+capture-390: overview focus returned=true
+capture-390: MAF focus returned=true
+capture-1280: file input 38.296875px; file-selector-button 22px (min 0px); document 1280/1280px
+capture-1280: overview focus returned=true
+capture-1280: MAF focus returned=true
+capture-card-390.png: 390x1539
+capture-card-1280.png: 1280x1225
+review-card-390.png: 390x1221
+review-card-1280.png: 1280x1187
+Review screenshots retained from the prior final capture; their UI has no file picker.
+comparison-concept3-vs-capture390.png: 804x1569
+Concept 3: 852x1846 → 390x845 (preserved aspect ratio)
+Capture 390: 390x1539 (unchanged at 390 CSS px)
