@@ -1,0 +1,12 @@
+Pages build/deploy for 80d8849ffe1bcd6dc6998f336763711300eb18ae: success
+Deployments API: github-pages environment, success
+https://hainox.github.io/karta-sao/dp-sp-cabinet/: HTTP 200; cache-busted; version marker=true; account-menu=true; release-content=true
+https://hainox.github.io/karta-sao/dp-sp-review/: HTTP 200; cache-busted; version marker=true; account-menu=true; release-content=true
+https://hainox.github.io/karta-sao/dp-sp-cabinet/cabinet.js: HTTP 200; blob live=ebf37a6ffec3c6142d393e881c4e843846b7fa18; blob release=ebf37a6ffec3c6142d393e881c4e843846b7fa18; byte-identical=true; mobileViewport=true; history/navigation guard=true; focus restore=true; back icon=true
+https://hainox.github.io/karta-sao/dp-sp-cabinet/cabinet.css: HTTP 200; blob live=d1645320da78c44f26601b29f6f2160bb36f67c8; blob release=d1645320da78c44f26601b29f6f2160bb36f67c8; byte-identical=true; mobile breakpoint=true; account-menu=true; file-selector-button=true
+https://hainox.github.io/karta-sao/dp-sp-cabinet/icons/back.svg: HTTP 200; bytes=273; svg=true
+browser dp-sp-cabinet 390px: HTTP 200; login=true; app-hidden=true; overflow=390/390; console/pageerrors=0; photo-api-requests=0; smoke=true
+browser dp-sp-cabinet 1280px: HTTP 200; login=true; app-hidden=true; overflow=1280/1280; console/pageerrors=0; photo-api-requests=0; smoke=true
+browser dp-sp-review 390px: HTTP 200; login=true; app-hidden=true; overflow=390/390; console/pageerrors=0; photo-api-requests=0; smoke=true
+browser dp-sp-review 1280px: HTTP 200; login=true; app-hidden=true; overflow=1280/1280; console/pageerrors=0; photo-api-requests=0; smoke=true
+Overall: PASS
