@@ -1,0 +1,82 @@
+[
+  {
+    "file": "icons/back.svg",
+    "label": "К списку",
+    "icon_ref": "lucide:arrow-left",
+    "library": "Lucide",
+    "source": "https://supericons.dev/?view=icons&preview=mcp&library=lucide&icon=lucide%3Aarrow-left",
+    "role": "decorative next to visible text"
+  },
+  {
+    "file": "icons/filter.svg",
+    "label": "Фильтры",
+    "icon_ref": "lucide:filter",
+    "library": "Lucide",
+    "source": "https://supericons.dev/?view=icons&preview=mcp&library=lucide&icon=lucide%3Afilter",
+    "role": "decorative next to visible text"
+  },
+  {
+    "file": "icons/camera.svg",
+    "label": "Сделать фото",
+    "icon_ref": "lucide:camera",
+    "library": "Lucide",
+    "source": "https://supericons.dev/?view=icons&preview=mcp&library=lucide&icon=lucide%3Acamera",
+    "role": "decorative next to visible text"
+  },
+  {
+    "file": "icons/gallery.svg",
+    "label": "Выбрать фото",
+    "icon_ref": "lucide:image",
+    "library": "Lucide",
+    "source": "https://supericons.dev/?view=icons&preview=mcp&library=lucide&icon=lucide%3Aimage",
+    "role": "decorative next to visible text"
+  },
+  {
+    "file": "icons/add.svg",
+    "label": "Добавить МАФ",
+    "icon_ref": "lucide:plus",
+    "library": "Lucide",
+    "source": "https://supericons.dev/?view=icons&preview=mcp&library=lucide&icon=lucide%3Aplus",
+    "role": "decorative next to visible text"
+  },
+  {
+    "file": "icons/send.svg",
+    "label": "Отправить на приёмку",
+    "icon_ref": "lucide:send",
+    "library": "Lucide",
+    "source": "https://supericons.dev/?view=icons&preview=mcp&library=lucide&icon=lucide%3Asend",
+    "role": "decorative next to visible text"
+  },
+  {
+    "file": "icons/zoom.svg",
+    "label": "Открыть фото",
+    "icon_ref": "lucide:zoom-in",
+    "library": "Lucide",
+    "source": "https://supericons.dev/?view=icons&preview=mcp&library=lucide&icon=lucide%3Azoom-in",
+    "role": "decorative next to visible text"
+  },
+  {
+    "file": "icons/accept.svg",
+    "label": "Принять объект",
+    "icon_ref": "lucide:check",
+    "library": "Lucide",
+    "source": "https://supericons.dev/?view=icons&preview=mcp&library=lucide&icon=lucide%3Acheck",
+    "role": "decorative next to visible text"
+  },
+  {
+    "file": "icons/return.svg",
+    "label": "Вернуть на доработку",
+    "icon_ref": "lucide:undo",
+    "library": "Lucide",
+    "source": "https://supericons.dev/?view=icons&preview=mcp&library=lucide&icon=lucide%3Aundo",
+    "role": "decorative next to visible text"
+  },
+  {
+    "file": "icons/accepted.svg",
+    "label": "Принятые",
+    "icon_ref": "lucide:clipboard-check",
+    "library": "Lucide",
+    "source": "https://supericons.dev/?view=icons&preview=mcp&library=lucide&icon=lucide%3Aclipboard-check",
+    "role": "decorative next to visible text"
+  }
+]
