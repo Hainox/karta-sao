@@ -59,6 +59,15 @@ window.createPointPopover = function ({ map, card, mapElement }) {
 
   function mount() {
     unmount();
+    // В режиме правки держим карточку у края окна: привязка к точке
+    // закрывает соседние стрелки, которыми нужно пользоваться при редактировании.
+    if (shell.classList.contains('editing') && !narrow.matches) {
+      shell.classList.remove('sheet');
+      shell.classList.add('edit-dock');
+      document.body.append(shell);
+      return;
+    }
+    shell.classList.remove('edit-dock');
     if (narrow.matches) {
       shell.classList.add('sheet');
       document.body.append(shell);
@@ -80,7 +89,7 @@ window.createPointPopover = function ({ map, card, mapElement }) {
   /** Окно не вылезает за края карты: открывается туда, где больше места, высота
       подстраивается под это место, по горизонтали окно сдвигается внутрь карты. */
   function fit() {
-    if (!opened || shell.classList.contains('sheet') || !shell.parentElement) return;
+    if (!opened || shell.classList.contains('sheet') || shell.classList.contains('edit-dock') || !shell.parentElement) return;
     const box = (mapElement || document.body).getBoundingClientRect();
     const pointY = shell.parentElement.getBoundingClientRect().top;
     // В правке окно отходит от точки дальше: вокруг неё ручка поворота стрелки.
