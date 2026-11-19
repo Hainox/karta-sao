@@ -340,6 +340,7 @@ window.initSidewalkShootLayer = function ({ map, slug, district, apiRequest, esc
       await load();
       return created;
     },
+    createYardPathPoint: options => yardPathLayer.createPoint(options),
     setVisible(on) {
       testLayer.setVisible(on);
       yardPathLayer.setVisible(on);
@@ -619,6 +620,26 @@ function initSidewalkTestLayer({ container, map, card, district, apiRequest, cen
     });
     const markActions = node('div', '', 'pin-actions');
     markActions.append(mark);
+    if (canEdit()) {
+      const removePoint = node('button', 'Удалить точку', 'danger');
+      removePoint.type = 'button';
+      removePoint.addEventListener('click', async () => {
+        if (!window.confirm('Удалить точку ' + point.id + ' с активной карты? Слоты и фото останутся в истории.')) return;
+        removePoint.disabled = true;
+        try {
+          await apiRequest(base + '/' + encodeURIComponent(point.id), { method: 'DELETE' });
+          clearSelection();
+          popover.close();
+          points = points.filter(item => item.id !== point.id);
+          const view = markers.get(point.id);
+          if (view) map.removeChild(view.marker);
+          markers.delete(point.id);
+          count.textContent = points.length.toLocaleString('ru-RU');
+          renderList();
+        } catch (error) { removePoint.disabled = false; status.textContent = 'Точка не удалена: ' + error.message; }
+      });
+      markActions.append(removePoint);
+    }
     content.append(buttons, status, photoPanel, markActions, markStatus);
     selection = { point, content, arrow: null, slot: null, refresh() {
       point.slots.forEach((slot, index) => {
@@ -685,6 +706,28 @@ function initSidewalkTestLayer({ container, map, card, district, apiRequest, cen
     flagged.replaceChildren();
   }
 
+  async function createPoint({ lng, lat, heading }) {
+    if (!canEdit()) throw new Error('Добавлять точки может только префектура.');
+    const response = await apiRequest(base, { method: 'POST', body: JSON.stringify({
+      district, coordinates: [lng, lat], azimuth: heading,
+    }) });
+    const { point: created } = await response.json();
+    checkbox.checked = true;
+    label.classList.remove('off');
+    layer.hidden = !allowed();
+    const loaded = await apiRequest(base + '?district=' + encodeURIComponent(district));
+    points = (await loaded.json()).points;
+    const point = points.find(value => value.id === created.id);
+    if (!point) throw new Error('Созданная точка не появилась в слое.');
+    count.textContent = points.length.toLocaleString('ru-RU');
+    hint.textContent = points.reduce((total, item) => total + item.slots.length, 0).toLocaleString('ru-RU')
+      + ' фотослотов. Стрелка появится после выбора кадра.';
+    list.hidden = false;
+    renderList();
+    draw();
+    return point;
+  }
+
   checkbox.addEventListener('change', async () => {
     label.classList.toggle('off', !checkbox.checked);
     stop();
@@ -723,6 +766,7 @@ function initSidewalkTestLayer({ container, map, card, district, apiRequest, cen
   more.addEventListener('click', () => { limit += 80; renderList(); });
 
   return {
+    createPoint,
     setVisible(visible) {
       layer.hidden = !visible || !allowed();
       if (!layer.hidden && linkedPoint && !checkbox.checked) {
@@ -948,7 +992,8 @@ function initYardPathLayer({ container, map, card, district, apiRequest, centerS
       photoPanel.append(input, upload);
     }
     const format = new Intl.NumberFormat('ru-RU', { maximumFractionDigits: 8 });
-    const slotButtons = point.slots.map((slot, index) => {
+    const slotButtons = [];
+    for (const [index, slot] of point.slots.entries()) {
       const button = node('button', 'Фотослот ' + (index + 1) + ' · ' + format.format(slot.azimuth) + '°');
       button.type = 'button';
       button.setAttribute('aria-pressed', 'false');
@@ -970,9 +1015,51 @@ function initYardPathLayer({ container, map, card, district, apiRequest, centerS
         status.textContent = 'Кадр ' + slot.id + ' · направление ' + format.format(slot.azimuth) + '°';
         showPhoto(slot);
       });
-      return button;
-    });
-    buttons.append(...slotButtons);
+      slotButtons.push(button);
+      buttons.append(button);
+      if (canEdit()) {
+        const remove = node('button', 'Убрать', 'danger');
+        remove.type = 'button';
+        remove.title = 'Убрать это направление из активной карты; фото останется в истории';
+        remove.addEventListener('click', async () => {
+          if (!window.confirm('Убрать направление ' + format.format(slot.azimuth) + '°? Оно исчезнет из карты и сводок. Фото останется в истории.')) return;
+          const selectedId = selection?.slot?.id === slot.id ? null : selection?.slot?.id;
+          remove.disabled = true;
+          try {
+            const response = await apiRequest(base + '/' + encodeURIComponent(point.id) + '/slots/' + encodeURIComponent(slot.id), { method: 'DELETE' });
+            const { point: saved } = await response.json();
+            point.slots = saved.slots.map(value => {
+              const old = point.slots.find(item => item.id === value.id);
+              return old ? { ...value, ...old, azimuth: value.azimuth } : { ...value, status: 'empty' };
+            });
+            openPoint(point, undefined, selectedId);
+          } catch (error) { remove.disabled = false; status.textContent = 'Направление не убрано: ' + error.message; }
+        });
+        buttons.append(remove);
+      }
+    }
+    if (!point.slots.length) buttons.append(node('p', 'У точки пока нет направлений.', 'pin-note'));
+    if (canEdit()) {
+      const add = node('button', '+ Направление', 'primary');
+      add.type = 'button';
+      add.addEventListener('click', async () => {
+        add.disabled = true;
+        try {
+          const azimuth = selection?.slot?.azimuth ?? 0;
+          const response = await apiRequest(base + '/' + encodeURIComponent(point.id) + '/slots', {
+            method: 'POST', body: JSON.stringify({ azimuth }),
+          });
+          const { point: saved } = await response.json();
+          const added = saved.slots.find(value => !point.slots.some(old => old.id === value.id));
+          point.slots = saved.slots.map(value => {
+            const old = point.slots.find(item => item.id === value.id);
+            return old ? { ...value, ...old, azimuth: value.azimuth } : { ...value, status: 'empty' };
+          });
+          openPoint(point, undefined, added?.id);
+        } catch (error) { add.disabled = false; status.textContent = 'Направление не добавлено: ' + error.message; }
+      });
+      buttons.append(add);
+    }
     const mark = node('button');
     mark.type = 'button';
     const markStatus = node('p', '', 'pin-note');
