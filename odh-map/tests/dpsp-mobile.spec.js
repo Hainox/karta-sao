@@ -101,10 +101,18 @@ test('оцифровка: после ошибки загрузки фото мо
       return 1;
     };
     navigator.geolocation.clearWatch = () => {};
+    Object.defineProperty(window, 'DeviceOrientationEvent', {
+      configurable: true,
+      value: { requestPermission: async () => 'granted' },
+    });
+    window.testCompassSamples = 0;
     const addListener = window.addEventListener.bind(window);
     window.addEventListener = (event, handler, options) => {
       if (event === 'deviceorientationabsolute') {
-        queueMicrotask(() => handler(new DeviceOrientationEvent(event, { absolute: true, alpha: 90, beta: 90, gamma: 0 })));
+        queueMicrotask(() => {
+          handler({ absolute: true, alpha: 90, beta: 90, gamma: 0 });
+          window.testCompassSamples += 1;
+        });
       }
       return addListener(event, handler, options);
     };
@@ -185,6 +193,7 @@ test('оцифровка: после ошибки загрузки фото мо
   await expect(page.getByRole('link', { name: 'Открыть на карте района' })).toHaveCount(0);
   await page.getByLabel('Тип МАФ').selectOption('bench');
   await page.getByRole('button', { name: 'Снять МАФ', exact: true }).click();
+  await page.waitForFunction(() => window.testCompassSamples === 1);
   await page.getByRole('button', { name: 'Сделать снимок' }).click();
   await page.getByRole('button', { name: 'Добавить МАФ', exact: true }).click();
 
@@ -192,6 +201,7 @@ test('оцифровка: после ошибки загрузки фото мо
   const mafCard = page.locator('.maf-item').filter({ hasText: 'Скамья × 1' });
   await expect(mafCard).toBeVisible();
   await mafCard.getByRole('button', { name: 'Снять МАФ' }).click();
+  await page.waitForFunction(() => window.testCompassSamples === 2);
   await page.getByRole('button', { name: 'Сделать снимок' }).click();
   await expect(page.locator('#message')).toHaveText('Фото МАФ сохранено');
   await expect(page.locator('.site-map [data-map="map"]')).toHaveText('55.81, 37.54');
