@@ -5,12 +5,17 @@ const make=(tag,text,cls)=>{const n=document.createElement(tag);if(text!=null)n.
 const base='/object-photo-points/dpsp',flow=base+'/workflow';
 const API='https://obhod-sao.ru/photo-api';
 const review=document.body.dataset.review==='true';
+const overviewExamples={
+ dp:{id:'e636cdbc-942d-569a-a24e-a72901bce1dd',address:'Планетная ул., 18'},
+ sp:{id:'a4700409-a480-5281-a571-dd5355f925ea',address:'Балтийская ул., 4'},
+};
 let token=localStorage.getItem('saoPhotoToken')||localStorage.getItem('sao-photo-token')||'';
 const incoming=new URLSearchParams(location.search);
 let linkedSite=/^[0-9a-f-]{36}$/i.test(incoming.get('site')||'')?incoming.get('site'):null;
 let queue=review?(incoming.get('queue')==='accepted'?'accepted':'review'):'work',rows=[],current=null,types=[],busy=false,listSeq=0,detailSeq=0,urls=[];
 const kind=k=>k==='dp'?'Детская площадка':'Спортивная площадка';
 let listScroll=0, queueScroll=0, photoTrigger=null, navigationSeq=0;
+let siteMap, activeCamera, mapRun=0;
 const mobileViewport=matchMedia('(max-width: 760px)');
 const mobile=()=>mobileViewport.matches;
 function showCard(id){
@@ -26,6 +31,7 @@ mobileViewport.addEventListener('change',()=>{
 });
 function showList(){
  ++navigationSeq;
+ clearCardMedia();
  document.body.classList.remove('card-open');++detailSeq;
  requestAnimationFrame(()=>{window.scrollTo(0,listScroll);$('queue').scrollTop=queueScroll;
  const selected=[...$('queue').children].find(e=>e.dataset.site===current?.point_id);selected?.focus({preventScroll:true});});
@@ -37,7 +43,7 @@ window.addEventListener('popstate',()=>{
 const conditions={ok:'Исправно',repair:'Требует ремонта',broken:'Неисправно'};
 function message(text){$('message').textContent=text||'';}
 function clearImages(){for(const url of urls)URL.revokeObjectURL(url);urls=[];}
-function loginView(text){$('login').hidden=false;$('main').hidden=true;$('top').hidden=true;$('loginMsg').textContent=text||'';clearImages();}
+function loginView(text){$('login').hidden=false;$('main').hidden=true;$('top').hidden=true;$('loginMsg').textContent=text||'';clearCardMedia();clearImages();}
 function appView(user){if(user.role!=='prefecture_admin')throw Error('Доступ только для префектуры.');$('login').hidden=true;$('main').hidden=false;$('top').hidden=false;$('userLine').textContent=(user.displayName||user.email||'')+' · Префектура';}
 async function req(path,opts={}){
  const headers=new Headers(opts.headers||{});
@@ -70,7 +76,7 @@ async function dictionaries(){
  const d=await api(base+'/dictionaries');types=d.types||[];const select=$('district'),prev=select.value;
  for(const row of d.districts||[]){const option=make('option',row.name);option.value=row.name;select.append(option);}select.value=prev;
 }
-function clearDetail(){document.body.classList.remove('card-open');if(history.state?.cabinetSite)history.replaceState(null,'',location.pathname+location.search);current=null;++detailSeq;clearImages();$('detail').replaceChildren(make('div','Выберите площадку','empty'));renderQueue();}
+function clearDetail(){document.body.classList.remove('card-open');if(history.state?.cabinetSite)history.replaceState(null,'',location.pathname+location.search);current=null;++detailSeq;clearCardMedia();clearImages();$('detail').replaceChildren(make('div','Выберите площадку','empty'));renderQueue();}
 function renderQueue(){
  const list=$('queue');list.replaceChildren();$('queueCount').textContent=rows.length.toLocaleString('ru-RU');
  for(const row of rows){const b=btn('',()=>{if(!busy)openSite(row.point_id).catch(e=>message(e.message));},'item'+(current?.point_id===row.point_id?' active':''));b.dataset.site=row.point_id;b.append(make('strong',row.address||'ID '+row.source_id),make('small',row.district+' · '+kind(row.kind)+' · ID '+row.source_id));list.append(b);}
@@ -88,42 +94,213 @@ async function resetQueue(){if(busy)return;message('Загружаем спис�
 async function openSite(id,allowBusy=false){
  if(busy&&!allowBusy)return;
  if(mobile()&&!document.body.classList.contains('card-open')){listScroll=window.scrollY;queueScroll=$('queue').scrollTop;}
- const seq=++detailSeq;clearImages();$('detail').replaceChildren(make('div','Загружаем карточку…','empty'));
+ const seq=++detailSeq;clearCardMedia();clearImages();$('detail').replaceChildren(make('div','Загружаем карточку…','empty'));
  const [d,w]=await Promise.all([api(base+'/sites/'+encodeURIComponent(id)),api(flow+'/sites/'+encodeURIComponent(id))]);
- if(seq!==detailSeq)return;current=d.site;renderDetail(d,w,seq);renderQueue();showCard(id);
+ if(seq!==detailSeq)return;
+ current=d.site;
+ const map=renderDetail(d,w,seq);
+ renderQueue();showCard(id);
+ map?.render();
 }
-async function photo(path,img,seq){
- try{const b=await (await req(path)).blob();if(seq!==detailSeq||!img.isConnected)return;const url=URL.createObjectURL(b);urls.push(url);img.src=url;img.onclick=()=>{photoTrigger=img;$('largePhoto').src=url;$('viewer').showModal();};img.tabIndex=0;img.setAttribute('role','button');img.setAttribute('aria-label','Открыть фото полностью');img.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();img.click();}};}
+function clearCardMedia(){
+ closeCamera();
+ ++mapRun;
+ siteMap?.destroy();
+ siteMap=null;
+}
+function sitePhotoMap(panel,site,frames,seq){
+ const select=panel.querySelector('select'),location=panel.querySelector('.map-photo-location');
+ for(const frame of frames){
+  const option=make('option',frame.label);
+  option.value=frame.id;
+  select.append(option);
+ }
+ select.closest('label').hidden=frames.length<2;
+ async function render(){
+  const run=++mapRun;
+  const isCurrent=()=>run===mapRun&&seq===detailSeq&&panel.isConnected&&!$('main').hidden;
+  const frame=frames.find(item=>item.id===select.value);
+  let shot=null;
+  try{
+   const {mountReviewMap}=await import('../districts/review-map.mjs');
+   if(frame?.blob){
+    const {readPhotoLocation}=await import('./photo-location.mjs');
+    shot=await readPhotoLocation(frame.blob);
+   }
+   if(!isCurrent())return;
+   const row=shot?.gps
+    ?{latitude:shot.gps[0],longitude:shot.gps[1],heading:shot.heading}
+    :site;
+   const angle=shot?.heading==null?'':' Направление кадра '+Math.round(shot.heading)%360+'°.';
+   if(shot?.gps){
+    location.textContent='Точка съёмки по GPS.'+(angle||' Направление не записано.');
+   }else{
+    location.textContent=frame?'Отметка площадки · GPS кадра недоступен.'+angle:'Отметка площадки · снимков пока нет.';
+   }
+   siteMap?.destroy();
+   siteMap=mountReviewMap(panel,row);
+  }catch{
+   if(isCurrent())panel.querySelector('[data-map="status"]').textContent='Мини-карта недоступна.';
+  }
+ }
+ select.onchange=render;
+ return {render,receive(id,blob){
+  const frame=frames.find(item=>item.id===id);
+  if(!frame)return;
+  frame.blob=blob;
+  if(select.value===id)render();
+ }};
+}
+async function photo(path,img,seq,onLoad){
+ try{const b=await (await req(path)).blob();if(seq!==detailSeq||!img.isConnected)return;const url=URL.createObjectURL(b);urls.push(url);img.src=url;img.onclick=()=>{photoTrigger=img;$('largePhoto').src=url;$('viewer').showModal();};img.tabIndex=0;img.setAttribute('role','button');img.setAttribute('aria-label','Открыть фото полностью');img.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();img.click();}};onLoad?.(b);}
  catch(e){if(seq===detailSeq&&img.isConnected){img.replaceWith(make('div','Не удалось загрузить фото: '+e.message,'empty'));}}
 }
-async function prepare(file){
- if(['image/jpeg','image/png','image/webp'].includes(file.type)&&file.size<=5*1024*1024)return file;
- if(!file.type.startsWith('image/'))throw Error('Выберите изображение JPEG, PNG или WebP.');
- let bitmap;
- try{bitmap=await createImageBitmap(file);}catch{throw Error('Не удалось прочитать изображение. Используйте JPEG или PNG.');}
- try{const ratio=Math.min(1,2400/Math.max(bitmap.width,bitmap.height));const canvas=document.createElement('canvas');canvas.width=Math.max(1,Math.round(bitmap.width*ratio));canvas.height=Math.max(1,Math.round(bitmap.height*ratio));canvas.getContext('2d').drawImage(bitmap,0,0,canvas.width,canvas.height);
-  const blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/jpeg',.84));
-  if(!blob||blob.size>5*1024*1024)throw Error('Фото превышает 5 МБ после сжатия.');
-  return new File([blob],file.name.replace(/\.[^.]+$/,'')+'.jpg',{type:'image/jpeg'});
- }finally{bitmap.close();}
+function closeCamera(){
+ if(!activeCamera)return;
+ const video=$('cameraPreview');
+ video.srcObject?.getTracks().forEach(track=>track.stop());
+ video.srcObject=null;
+ if(activeCamera.watch!=null)navigator.geolocation.clearWatch(activeCamera.watch);
+ window.removeEventListener('deviceorientationabsolute',activeCamera.orientation);
+ window.removeEventListener('deviceorientation',activeCamera.orientation);
+ activeCamera=null;
+ $('camera').close();
 }
-async function sendPhoto(path,file){const f=await prepare(file);return api(path,{method:'PUT',headers:{'Content-Type':f.type,'X-Photo-Filename':encodeURIComponent(f.name)},body:f});}
-function uploadInput(multiple=false){const e=make('input');e.type='file';e.accept='image/jpeg,image/png,image/webp';e.multiple=multiple;return e;}
+async function openCamera(title,onCapture){
+ if(busy||activeCamera)return;
+ const video=$('cameraPreview'),snap=$('cameraSnap'),status=$('cameraStatus');
+ const session={onCapture};
+ activeCamera=session;
+ $('cameraTitle').textContent=title;
+ snap.disabled=true;
+ status.textContent='Включаем камеру…';
+ $('camera').showModal();
+ try{
+  const orientationPermission=window.DeviceOrientationEvent?.requestPermission;
+  if(orientationPermission){
+   session.compass=orientationPermission.call(window.DeviceOrientationEvent).catch(()=>null);
+  }
+  if(!navigator.mediaDevices?.getUserMedia)throw Error('Съёмка доступна в браузере с поддержкой камеры по HTTPS.');
+  const stream=await navigator.mediaDevices.getUserMedia({
+   audio:false,video:{facingMode:{ideal:'environment'},width:{ideal:1920},height:{ideal:1080}},
+  });
+  if(activeCamera!==session){stream.getTracks().forEach(track=>track.stop());return;}
+  video.srcObject=stream;
+  await video.play();
+  if(activeCamera!==session)return;
+  observeCameraLocation(session);
+  status.textContent='';
+  snap.disabled=false;
+ }catch(error){
+  if(activeCamera!==session)return;
+  video.srcObject?.getTracks().forEach(track=>track.stop());
+  video.srcObject=null;
+  const cameraErrors={
+   NotAllowedError:'Нет доступа к камере. Разрешите его в браузере и откройте камеру снова.',
+   NotFoundError:'Камера не найдена. Откройте кабинет на устройстве с камерой.',
+   NotReadableError:'Камера занята или недоступна. Закройте другие приложения с камерой и повторите.',
+  };
+  status.textContent=cameraErrors[error.name]||(navigator.mediaDevices?.getUserMedia
+   ?'Не удалось включить камеру. Откройте её снова.':error.message);
+ }
+}
+function observeCameraLocation(session){
+ if(navigator.geolocation){
+  session.firstPosition=new Promise(resolve=>{
+   session.watch=navigator.geolocation.watchPosition(position=>{
+    session.position=position;
+    resolve();
+   },()=>resolve(),{enableHighAccuracy:true,timeout:6000,maximumAge:0});
+  });
+ }
+ Promise.all([import('./photo-location.mjs'),session.compass]).then(([{cameraDirection},permission])=>{
+  if(activeCamera!==session||(session.compass&&permission!=='granted'))return;
+  session.orientation=event=>{
+   const heading=cameraDirection(event);
+   if(heading!=null)session.direction={heading,at:Date.now()};
+  };
+  window.addEventListener('deviceorientationabsolute',session.orientation);
+  window.addEventListener('deviceorientation',session.orientation);
+ }).catch(()=>{});
+}
+async function captureFrame(){
+ const session=activeCamera,video=$('cameraPreview'),snap=$('cameraSnap');
+ if(!session||snap.disabled)return;
+ snap.disabled=true;
+ try{
+  if(!video.videoWidth||!video.videoHeight||!video.srcObject?.getVideoTracks().some(track=>track.readyState==='live')){
+   throw Error('Камера недоступна. Откройте её снова.');
+  }
+  const canvas=make('canvas');
+  const capturedAt=Date.now();
+  const heading=session.direction&&capturedAt-session.direction.at<2000?session.direction.heading:null;
+  const scale=Math.min(1,2400/Math.max(video.videoWidth,video.videoHeight));
+  canvas.width=Math.round(video.videoWidth*scale);
+  canvas.height=Math.round(video.videoHeight*scale);
+  canvas.getContext('2d').drawImage(video,0,0,canvas.width,canvas.height);
+  let blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/jpeg',.84));
+  if(activeCamera!==session)return;
+  if(!blob)throw Error('Не удалось сохранить кадр. Попробуйте снять ещё раз.');
+  if(!session.position&&session.firstPosition){
+   $('cameraStatus').textContent='Определяем место съёмки…';
+   await Promise.race([session.firstPosition,new Promise(resolve=>setTimeout(resolve,3500))]);
+  }
+  if(activeCamera!==session)return;
+  const position=session.position;
+  const gps=position&&Math.abs(capturedAt-position.timestamp)<20000
+   ?[position.coords.latitude,position.coords.longitude]:null;
+  if(gps||heading!=null){
+   const {embedPhotoLocation}=await import('./photo-location.mjs');
+   if(activeCamera!==session)return;
+   blob=embedPhotoLocation(blob,gps,heading);
+  }
+  if(blob.size>5*1024*1024)throw Error('Не удалось сохранить кадр. Попробуйте снять ещё раз.');
+  const file=new File([blob],'photo-'+capturedAt+'.jpg',{type:'image/jpeg'});
+  closeCamera();
+  session.onCapture(file);
+ }catch(error){
+  if(activeCamera!==session)return;
+  $('cameraStatus').textContent=error.message;
+  snap.disabled=false;
+ }
+}
+function cameraButton(text,title,onCapture,cls='btn'){
+ const control=btn(text,()=>openCamera(title,onCapture),cls);
+ const icon=make('img',null,'camera-icon');
+ icon.src='../dp-sp-cabinet/icons/camera.svg';
+ icon.alt='';
+ control.prepend(icon);
+ return control;
+}
+function sendPhoto(path,file){return api(path,{method:'PUT',headers:{'Content-Type':file.type,'X-Photo-Filename':encodeURIComponent(file.name)},body:file});}
 function mafForm(item,id){
  const form=make('form',null,'maf-form');
  const type=options(types.map(t=>[t.code,t.label]));
  const qty=make('input');qty.type='number';qty.min='1';qty.max='999';qty.required=true;qty.value=String(item?.quantity||1);
  const cond=options(Object.entries(conditions));cond.value=item?.condition||'ok';
  const comment=make('input');comment.maxLength=2000;comment.value=item?.comment||'';
- const file=uploadInput();if(item)type.value=item.type_code;
+ let capturedPhoto;
+ if(item)type.value=item.type_code;
  form.append(field('Тип МАФ',type),field('Количество',qty),field('Состояние',cond),field('Комментарий',comment));
- if(!item){file.required=true;form.append(field('Фото МАФ',file));}
  const submit=make('button',item?'Сохранить':'Добавить МАФ','btn primary');submit.type='submit';form.append(submit);
+ if(!item){
+  submit.disabled=true;
+  const capture=make('div',null,'maf-capture');
+  const status=make('span');status.setAttribute('role','status');
+  const camera=cameraButton('Снять МАФ','Фото МАФ',file=>{
+   capturedPhoto=file;
+   status.textContent='Кадр готов';
+   camera.lastChild.textContent='Переснять МАФ';
+   submit.disabled=false;
+  });
+  capture.append(camera,status);
+  submit.before(capture);
+ }
  form.onsubmit=e=>{e.preventDefault();const body={type_code:type.value,quantity:Number(qty.value),condition:cond.value,comment:comment.value};
-  const selected=file.files[0];
+  if(!item&&!capturedPhoto)return;
   mutate(async()=>{if(item){await post(base+'/maf/'+item.id,body,'PATCH');}
-   else{const prepared=await prepare(selected);const created=await post(base+'/sites/'+id+'/maf',body);
-    try{await sendPhoto(base+'/maf/'+created.id+'/photo',prepared);}
+   else{const created=await post(base+'/sites/'+id+'/maf',body);
+    try{await sendPhoto(base+'/maf/'+created.id+'/photo',capturedPhoto);}
     catch(err){throw Error('МАФ сохранён, но фото не загружено. Добавьте кадр к его карточке: '+err.message);}
    }},item?'МАФ обновлён':'МАФ и фотография сохранены');
  };return form;
@@ -135,34 +312,79 @@ function renderDetail(d,w,seq){
  detail.querySelector('h2').tabIndex=-1;
  const states={submitted:'На приёмке',accepted:'Принято',rework:'На доработке'};const state=make('p',states[w.workflow?.state]||'В работе','badge');
  const back=btn('К списку',()=>{if(history.state?.cabinetSite)history.back();else showList();},'btn mobile-back');const backIcon=make('img');backIcon.src='../dp-sp-cabinet/icons/back.svg';backIcon.alt='';backIcon.setAttribute('aria-hidden','true');back.prepend(backIcon);$('top').querySelector('.mobile-back')?.remove();$('top').prepend(back);
- const actions=make('div',null,'site-actions');
- if(s.district_slug){const a=make('a','Открыть на карте района','btn');a.href='../districts/'+encodeURIComponent(s.district_slug)+'.html?playground='+encodeURIComponent(id);a.target='_blank';a.rel='noopener';actions.append(a);}
+ detail.append(state);
+ if(review&&s.district_slug){
+  const districtLink=make('a','Открыть на карте района','btn');
+  districtLink.href='../districts/'+encodeURIComponent(s.district_slug)+'.html?playground='+encodeURIComponent(id);
+  districtLink.target='_blank';
+  districtLink.rel='noopener';
+  const actions=make('div',null,'site-actions');
+  actions.append(districtLink);
+  detail.append(actions);
+ }
  if(w.workflow?.state==='rework')detail.append(make('div','На доработку: '+w.workflow.review_comment,'reason'));
- const gallery=make('div',null,'gallery');detail.append(gallery);
- for(const item of photos){const box=make('figure');const img=make('img',null,'site-image');img.alt='Обзор площадки';box.append(img,make('figcaption',item.photo_filename));if(writable)box.append(btn('Убрать фото',()=>{if(confirm('Убрать этот кадр из текущей оцифровки?'))mutate(()=>api(flow+'/sites/'+id+'/photos/'+item.id,{method:'DELETE'}),'Фотография убрана');},'btn mini danger'));gallery.append(box);photo(flow+'/sites/'+id+'/photos/'+item.id,img,seq);}
- detail.append(state,actions);section(detail,'Обзорные фото · '+photos.length);
- if(!photos.length)detail.append(make('p','Новые обзорные фото ещё не загружены.','sub'));
- if(writable){const form=make('form',null,'buttons'),input=uploadInput(true),upload=make('button','Загрузить фото площадки','btn primary');input.required=true;input.setAttribute('aria-label','Новые обзорные фотографии площадки');form.append(input,upload);upload.type='submit';form.onsubmit=e=>{e.preventDefault();const files=[...input.files];mutate(async()=>{for(const f of files)await sendPhoto(flow+'/sites/'+id+'/photos',f);},'Обзорные фото сохранены');};detail.append(form);}
+ const overview=make('div',null,'overview-block');
+ let map;
+ if(review)detail.append(overview);
+ else {
+  const top=make('div',null,'capture-top');
+  const panel=$('siteMapTemplate').content.firstElementChild.cloneNode(true);
+  top.append(overview,panel);
+  detail.append(top);
+  const frames=photos.map((item,index)=>({id:'overview:'+item.id,label:'Обзорное фото '+(index+1)})).reverse();
+  for(const item of items){
+   if(item.photo_id)frames.push({id:'maf:'+item.id,label:'МАФ · '+item.type_label});
+  }
+  map=sitePhotoMap(panel,s,frames,seq);
+ }
+ section(overview,'Обзорные фото · '+photos.length);
+ if(writable){
+  overview.append(cameraButton('Снять обзорное фото','Обзорное фото площадки',
+   file=>mutate(()=>sendPhoto(flow+'/sites/'+id+'/photos',file),'Обзорное фото сохранено'),'btn primary overview-capture'));
+  const example=overviewExamples[s.kind];
+  if(example){
+   const figure=make('figure',null,'overview-example');
+   const img=make('img');
+   img.alt='Пример общего плана: '+kind(s.kind).toLowerCase();
+   const caption=make('figcaption');
+   caption.append(make('strong','Образец обзорного фото'),
+    make('p',example.address+' · первый обход','sub'),
+    make('p','Снимите площадку горизонтально с края. В кадре должны быть видны границы площадки, покрытие и оборудование.'));
+   figure.append(img,caption);
+   overview.append(figure);
+   photo('/object-photo-points/playgrounds/'+example.id+'/photo',img,seq);
+  }
+ }
+ const gallery=make('div',null,review?'gallery':'gallery capture-gallery');
+ (review?overview:detail).append(gallery);
+ for(const item of photos){const box=make('figure');const img=make('img',null,'site-image');img.alt='Обзор площадки';box.append(img,make('figcaption',item.photo_filename));if(writable)box.append(btn('Убрать фото',()=>{if(confirm('Убрать этот кадр из текущей оцифровки?'))mutate(()=>api(flow+'/sites/'+id+'/photos/'+item.id,{method:'DELETE'}),'Фотография убрана');},'btn mini danger'));gallery.append(box);photo(flow+'/sites/'+id+'/photos/'+item.id,img,seq,blob=>map?.receive('overview:'+item.id,blob));}
+ if(!photos.length&&!writable)overview.append(make('p','Обзорные фото пока отсутствуют.','sub'));
  section(detail,'Обнаруженные МАФ ('+items.length+')');
+ if(writable){
+  const add=make('details',null,'add-maf'),summary=make('summary','Добавить МАФ');
+  add.open=true;
+  add.append(summary,mafForm(null,id));
+  detail.append(add);
+ }
  for(const item of items){
   const row=make('div',null,'maf-item'),body=make('div',null,'maf-body');
-  if(item.photo_id){const img=make('img',null,'maf-photo');img.alt='Фото МАФ';row.append(img);photo(flow+'/maf/'+item.id+'/photo',img,seq);}
+  if(item.photo_id){const img=make('img',null,'maf-photo');img.alt='Фото МАФ';row.append(img);photo(flow+'/maf/'+item.id+'/photo',img,seq,blob=>map?.receive('maf:'+item.id,blob));}
   else row.append(make('div','Нет фото','maf-photo placeholder'));
   body.append(make('b',item.type_label+' × '+item.quantity),make('div',conditions[item.condition]||item.condition,'meta'));if(item.comment)body.append(make('p',item.comment,'comment'));
   if(writable){
-   const controls=make('div',null,'maf-actions'),input=uploadInput(),edit=make('div');input.hidden=true;
-   input.onchange=()=>{const f=input.files[0];if(f)mutate(()=>sendPhoto(base+'/maf/'+item.id+'/photo',f),'Фото МАФ сохранено');};
-   controls.append(btn(item.photo_id?'Заменить фото':'Добавить фото',()=>input.click(),'btn mini'),input,
+   const controls=make('div',null,'maf-actions'),edit=make('div');
+   controls.append(cameraButton(item.photo_id?'Переснять МАФ':'Снять МАФ','Фото МАФ',
+    file=>mutate(()=>sendPhoto(base+'/maf/'+item.id+'/photo',file),'Фото МАФ сохранено'),'btn mini'),
     btn('Изменить',()=>{if(edit.childNodes.length)edit.replaceChildren();else edit.append(mafForm(item,id));},'btn mini'),
     btn('Убрать МАФ',()=>{if(confirm('Убрать МАФ из текущей оцифровки?'))mutate(()=>api(base+'/maf/'+item.id,{method:'DELETE'}),'МАФ убран');},'btn mini danger'));
    body.append(controls,edit);
   }
   row.append(body);detail.append(row);
  }
- if(!items.length)detail.append(make('p','МАФ не добавлены.','sub'));
- if(writable){const add=make('details',null,'add-maf'),summary=make('summary','Добавить МАФ');add.append(summary,mafForm(null,id));detail.append(add);section(detail,'Завершение оцифровки');
+ if(!items.length&&!writable)detail.append(make('p','МАФ не добавлены.','sub'));
+ if(writable){section(detail,'Завершение оцифровки');
   const noMaf=make('input');noMaf.type='checkbox';
-  if(!items.length){const label=make('label');label.append(noMaf,document.createTextNode(' На площадке нет МАФ'));detail.append(label);}
+  if(!items.length){const label=make('label',null,'no-maf');label.append(noMaf,document.createTextNode('На площадке нет МАФ'));detail.append(label);}
   const finish=btn('Отправить на приёмку',()=>mutate(()=>post(flow+'/sites/'+id+'/submit',{noMaf:noMaf.checked}),'Объект передан на приёмку'),'btn primary');
   const block=make('div',null,'buttons submit-actions');block.append(finish);detail.append(block,make('p','Для завершения нужен новый общий снимок и фото каждого внесённого МАФ.','sub'));
  }else if(review&&w.workflow?.state==='submitted'){
@@ -171,11 +393,18 @@ function renderDetail(d,w,seq){
   btn('Вернуть на доработку',()=>{if(!comment.value.trim()){message('Укажите причину возврата.');comment.focus();return;}mutate(()=>post(flow+'/sites/'+id+'/decision',{decision:'rework',comment:comment.value}),'Объект возвращён в рабочий список');},'btn danger'));detail.append(comment,block);
  }else if(review&&w.workflow?.state==='accepted'){detail.append(make('p','Объект принят.','checked-note'));}
  syncDisabled();
+ return map;
 }
 $('loginForm').onsubmit=async e=>{e.preventDefault();try{const res=await fetch(API+'/auth/login',{method:'POST',credentials:'include',headers:{'Content-Type':'application/json'},body:JSON.stringify({login:$('email').value,email:$('email').value,password:$('password').value})});const d=await res.json();if(!res.ok||!d.token)throw Error(d.error||d.message||'Не удалось войти');token=d.token;localStorage.setItem('saoPhotoToken',token);appView(d.user||{});await dictionaries();await resetQueue();}catch(e){loginView(e.message);}};
 $('logout').onclick=async()=>{try{await req('/auth/logout',{method:'POST'});}catch{}token='';localStorage.removeItem('saoPhotoToken');localStorage.removeItem('sao-photo-token');clearDetail();loginView();};
 $('refresh').onclick=resetQueue;$('district').onchange=resetQueue;$('kind').onchange=resetQueue;
 if(review){$('reviewQueue').classList.toggle('primary',queue==='review');$('acceptedQueue').classList.toggle('primary',queue==='accepted');const setQueue=q=>{if(busy)return;queue=q;$('reviewQueue').classList.toggle('primary',q==='review');$('acceptedQueue').classList.toggle('primary',q==='accepted');resetQueue();};$('reviewQueue').onclick=()=>setQueue('review');$('acceptedQueue').onclick=()=>setQueue('accepted');}
 $('closeViewer').onclick=()=>$('viewer').close();$('viewer').onclose=()=>{$('largePhoto').removeAttribute('src');if(photoTrigger?.isConnected)photoTrigger.focus();};
+if(!review){
+ $('cameraCancel').onclick=closeCamera;
+ $('cameraSnap').onclick=captureFrame;
+ $('camera').oncancel=event=>{event.preventDefault();closeCamera();};
+ window.addEventListener('pagehide',closeCamera);
+}
 (async()=>{try{if(!token){loginView();return;}const d=await api('/auth/me');appView(d.user||{});await dictionaries();await resetQueue();}catch(e){loginView(e.message);}})();
 })();

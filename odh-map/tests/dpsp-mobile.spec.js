@@ -95,10 +95,60 @@ test('оцифровка: смена desktop/mobile сохраняет выбр�
 
 test('оцифровка: после ошибки загрузки фото можно дозагрузить к сохранённому МАФ', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
+  await page.addInitScript(() => {
+    navigator.geolocation.watchPosition = success => {
+      queueMicrotask(() => success({ coords: { latitude: 55.81, longitude: 37.54 }, timestamp: Date.now() }));
+      return 1;
+    };
+    navigator.geolocation.clearWatch = () => {};
+    Object.defineProperty(window, 'DeviceOrientationEvent', {
+      configurable: true,
+      value: { requestPermission: async () => 'granted' },
+    });
+    window.testCompassSamples = 0;
+    const addListener = window.addEventListener.bind(window);
+    window.addEventListener = (event, handler, options) => {
+      if (event === 'deviceorientationabsolute') {
+        queueMicrotask(() => {
+          handler({ absolute: true, alpha: 90, beta: 90, gamma: 0 });
+          window.testCompassSamples += 1;
+        });
+      }
+      return addListener(event, handler, options);
+    };
+    navigator.mediaDevices.getUserMedia = async () => {
+      const canvas = document.createElement('canvas');
+      canvas.width = 320;
+      canvas.height = 240;
+      const ctx = canvas.getContext('2d');
+      const paint = () => ctx.fillRect(0, 0, canvas.width, canvas.height);
+      const stream = canvas.captureStream(10);
+      paint();
+      const timer = setInterval(() => {
+        if (stream.getVideoTracks()[0].readyState === 'ended') clearInterval(timer);
+        else paint();
+      }, 100);
+      return stream;
+    };
+  });
   const maf = { id: 'maf-created-after-photo-error', type_code: 'bench', type_label: 'Скамья', quantity: 1, condition: 'ok', photo_id: null };
   let created = false;
+  let storedPhoto;
   let mafPosts = 0;
   let photoPuts = 0;
+  await page.route('https://api-maps.yandex.ru/**', route => route.fulfill({
+    contentType: 'text/javascript',
+    body: `window.ymaps = {
+      ready: resolve => resolve(),
+      Map: class {
+        container = { fitToViewport() {} };
+        geoObjects = { add() {} };
+        constructor(host, { center }) { host.textContent = center.join(', '); }
+        destroy() {}
+      },
+      Placemark: class { events = { add() {} }; }
+    };`,
+  }));
   await setup(page, false, null, async (route, path) => {
     if (path.endsWith('/dictionaries')) {
       await route.fulfill({ json: { types: [{ code: 'bench', label: 'Скамья' }], districts: [{ name: 'Аэропорт' }] } });
@@ -112,11 +162,24 @@ test('оцифровка: после ошибки загрузки фото мо
     }
     if (path.endsWith(`/maf/${maf.id}/photo`) && route.request().method() === 'PUT') {
       photoPuts += 1;
-      await route.fulfill({ status: 503, json: { error: 'Тестовая ошибка загрузки фото' } });
+      expect(route.request().headers()['content-type']).toBe('image/jpeg');
+      if (photoPuts === 1) {
+        await route.fulfill({ status: 503, json: { error: 'Тестовая ошибка загрузки фото' } });
+      } else {
+        storedPhoto = route.request().postDataBuffer();
+        await route.fulfill({ json: {} });
+      }
+      return true;
+    }
+    if (path.endsWith(`/maf/${maf.id}/photo`) && route.request().method() === 'GET') {
+      await route.fulfill({ contentType: 'image/jpeg', body: storedPhoto });
       return true;
     }
     if (path.endsWith(`/object-photo-points/dpsp/sites/${id}`) && route.request().method() === 'GET') {
-      await route.fulfill({ json: { site, items: created ? [maf] : [] } });
+      await route.fulfill({ json: {
+        site: { ...site, district_slug: 'aeroport', latitude: 55.8, longitude: 37.5 },
+        items: created ? [{ ...maf, photo_id: storedPhoto ? 'saved-photo' : null }] : [],
+      } });
       return true;
     }
     return false;
@@ -124,21 +187,27 @@ test('оцифровка: после ошибки загрузки фото мо
   await page.goto('http://127.0.0.1:8766/dp-sp-cabinet/');
   await page.locator('.item').click();
   await expect(page.locator('#detail h2')).toHaveText(site.address);
-  await page.locator('.add-maf summary').click();
+  await expect(page.locator('.add-maf')).toHaveJSProperty('open', true);
+  await expect(page.locator('input[type=file]')).toHaveCount(0);
+  await expect(page.locator('.site-map [data-map="map"]')).toHaveText('55.8, 37.5');
+  await expect(page.getByRole('link', { name: 'Открыть на карте района' })).toHaveCount(0);
   await page.getByLabel('Тип МАФ').selectOption('bench');
-  await page.getByLabel('Фото МАФ', { exact: true }).setInputFiles({
-    name: 'fixture.png',
-    mimeType: 'image/png',
-    buffer: Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+/aXcAAAAASUVORK5CYII=', 'base64')
-  });
+  await page.getByRole('button', { name: 'Снять МАФ', exact: true }).click();
+  await page.waitForFunction(() => window.testCompassSamples === 1);
+  await page.getByRole('button', { name: 'Сделать снимок' }).click();
   await page.getByRole('button', { name: 'Добавить МАФ', exact: true }).click();
 
   await expect(page.locator('#message')).toContainText('МАФ сохранён, но фото не загружено');
   const mafCard = page.locator('.maf-item').filter({ hasText: 'Скамья × 1' });
   await expect(mafCard).toBeVisible();
-  await expect(mafCard.getByRole('button', { name: 'Добавить фото' })).toBeVisible();
+  await mafCard.getByRole('button', { name: 'Снять МАФ' }).click();
+  await page.waitForFunction(() => window.testCompassSamples === 2);
+  await page.getByRole('button', { name: 'Сделать снимок' }).click();
+  await expect(page.locator('#message')).toHaveText('Фото МАФ сохранено');
+  await expect(page.locator('.site-map [data-map="map"]')).toHaveText('55.81, 37.54');
+  await expect(page.locator('.map-photo-location')).toHaveText('Точка съёмки по GPS. Направление кадра 270°.');
   expect(mafPosts).toBe(1);
-  expect(photoPuts).toBe(1);
+  expect(photoPuts).toBe(2);
 });
 
 for (const review of [false, true]) {
@@ -165,8 +234,8 @@ for (const review of [false, true]) {
         await expect(page.locator('#message')).toHaveText('Тестовая ошибка связи');
         await expect(reason).toHaveValue('Сохранить эту причину после ошибки');
       } else {
-        await page.locator('.add-maf summary').click();
-        await expect(page.getByLabel('Фото МАФ', { exact: true })).toBeVisible();
+        await expect(page.locator('.add-maf')).toHaveJSProperty('open', true);
+        await expect(page.getByRole('button', { name: 'Снять МАФ', exact: true })).toBeVisible();
       }
     });
   }
