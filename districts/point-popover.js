@@ -12,7 +12,7 @@ window.createPointPopover = function ({ map, card, mapElement }) {
     sidewalk: { label: 'Тротуар', color: '#7b4fc9' },
     door: { label: 'Входная группа', color: '#1d3c4f' },
   };
-  const narrow = window.matchMedia('(max-width: 720px)');
+  const narrow = window.matchMedia('(max-width: 820px)');
   const shell = document.createElement('div');
   shell.className = 'pin-pop';
   shell.setAttribute('role', 'dialog');
@@ -54,20 +54,20 @@ window.createPointPopover = function ({ map, card, mapElement }) {
   $('.pin-close').addEventListener('click', () => close());
 
   let marker = null;
+  let holder = null;
   let anchor = null;
   let opened = false;
 
   function mount() {
     unmount();
-    if (narrow.matches) {
-      shell.classList.add('sheet');
-      document.body.append(shell);
-      return;
-    }
-    shell.classList.remove('sheet');
-    const holder = document.createElement('div');
+    const sheet = narrow.matches;
+    shell.classList.toggle('sheet', sheet);
+    shell.classList.remove('below', 'sheet-top');
+    if (sheet) (mapElement || document.body).append(shell);
+    holder = document.createElement('div');
     holder.className = 'pin-anchor';
-    holder.append(shell);
+    if (!sheet) holder.append(shell);
+    // На телефоне якорь остаётся на карте, пока карточка стоит у края экрана.
     marker = new window.ymaps3.YMapMarker({ coordinates: anchor, zIndex: 5000 }, holder);
     map.addChild(marker);
   }
@@ -75,19 +75,27 @@ window.createPointPopover = function ({ map, card, mapElement }) {
   function unmount() {
     parking.append(shell);
     if (marker) { try { map.removeChild(marker); } catch (_) { /* уже снят */ } marker = null; }
+    holder = null;
   }
 
   /** Окно не вылезает за края карты: открывается туда, где больше места, высота
       подстраивается под это место, по горизонтали окно сдвигается внутрь карты. */
   function fit() {
-    if (!opened || shell.classList.contains('sheet') || !shell.parentElement) return;
+    if (!opened || !holder) return;
+    const sheet = shell.classList.contains('sheet');
     const box = (mapElement || document.body).getBoundingClientRect();
-    const pointY = shell.parentElement.getBoundingClientRect().top;
+    const pointY = holder.getBoundingClientRect().top;
     // В правке окно отходит от точки дальше: вокруг неё ручка поворота стрелки.
     const gap = shell.classList.contains('editing') ? 100 : 34;
     const above = pointY - box.top - gap;
     const below = box.bottom - pointY - gap;
     const natural = $('.pin-card').scrollHeight;
+    if (sheet) {
+      const top = below < Math.min(natural, 360) && above > below;
+      shell.classList.toggle('sheet-top', top);
+      shell.style.setProperty('--maxh', Math.max(0, Math.min(box.height * 0.72, top ? above : below)) + 'px');
+      return;
+    }
     const flip = above < Math.min(natural, 360) && below > above;
     shell.classList.toggle('below', flip);
     shell.style.setProperty('--maxh', Math.max(180, Math.min(560, flip ? below : above)) + 'px');
@@ -122,6 +130,7 @@ window.createPointPopover = function ({ map, card, mapElement }) {
     anchor = coordinates;
     opened = true;
     shell.classList.toggle('editing', editing);
+    shell.style.removeProperty('--maxh');
     shell.classList.remove('dimmed');
     card.className = 'card open pin-content';
     mount();
@@ -146,6 +155,7 @@ window.createPointPopover = function ({ map, card, mapElement }) {
     else if (opened) requestAnimationFrame(fit);
   }).observe(card, { attributes: true, attributeFilter: ['class'], childList: true, subtree: true });
   narrow.addEventListener('change', () => { if (opened) { mount(); requestAnimationFrame(fit); } });
+  if (mapElement) new ResizeObserver(() => { if (opened) requestAnimationFrame(fit); }).observe(mapElement);
 
   /** Пока точку тащат, окно прозрачно и не ловит мышь: видно, куда ставить. */
   function setDimmed(on) {
