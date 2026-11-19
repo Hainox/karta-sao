@@ -883,8 +883,10 @@ function initYardPathLayer({ container, map, card, district, apiRequest, centerS
     clearSelection();
     editor?.clear();
     centerSelection(point.coordinates, zoom);
+    // Карточка с фотослотами тоже должна уходить к краю карты в режиме правки:
+    // её стрелки и ручки относятся к выбранному слоту, а окно не должно их накрывать.
     popover.open({ coordinates: point.coordinates, kind: 'sidewalk', title: 'Дорожка ' + point.id,
-      subtitle: 'Дворовые дорожки · точки оцифровки · ' + point.id });
+      subtitle: 'Дворовые дорожки · точки оцифровки · ' + point.id, editing: Boolean(editor && canEdit()) });
     const content = node('section', '', 'pin-section');
     content.append(node('h3', 'Фотослоты · ' + point.slots.length));
     content.append(node('p', 'Объект АСУ ОДС: ' + point.sourceId + ' · ' + point.district, 'pin-note'));
