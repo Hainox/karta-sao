@@ -1,0 +1,149 @@
+:root {
+  --navy: #102e60;
+  --text: #1c2b33;
+  --muted: #5d6c75;
+  --line: #d3dde2;
+  --yellow: #ffcb00;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: #e9edf1;
+  color: var(--text);
+  font: 10.5pt/1.55 "DejaVu Sans", "Noto Sans", Verdana, "Segoe UI", Arial, sans-serif;
+}
+a { color: var(--navy); }
+:is(a, button):focus-visible { outline: 2px solid #2a6fdb; outline-offset: 3px; }
+
+.guide-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  min-height: 49px;
+  padding: 8px 14px;
+  background: var(--navy);
+  color: white;
+  box-shadow: 0 2px 8px #0003;
+  font: 600 13px/1.3 "Segoe UI", Arial, sans-serif;
+}
+.guide-toolbar strong { margin-right: auto; }
+.guide-toolbar :is(a, button) {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 6px 12px;
+  border: 0;
+  border-radius: 6px;
+  background: white;
+  color: var(--navy);
+  font: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+.guide-toolbar button { background: var(--yellow); }
+.guide-toolbar :is(a, button):focus-visible { outline-color: white; }
+
+.capture-guide {
+  width: min(210mm, calc(100% - 24px));
+  min-height: 297mm;
+  margin: 15px auto 40px;
+  padding: 15mm;
+  background: white;
+  box-shadow: 0 2px 14px #102e6024;
+}
+.capture-guide header {
+  margin-bottom: 5mm;
+  padding-bottom: 3mm;
+  border-bottom: 2px solid var(--navy);
+}
+.capture-guide header :is(h1, p) { margin: 0; }
+.capture-guide h1 {
+  color: var(--navy);
+  font-size: 18pt;
+  line-height: 1.2;
+}
+.capture-guide header .guide-org {
+  margin-bottom: 2mm;
+  color: var(--navy);
+  font-size: 8pt;
+  font-weight: 700;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+.capture-guide header .guide-subtitle { margin-top: 1mm; color: var(--muted); font-size: 9.5pt; }
+.capture-guide section { margin-top: 5mm; }
+.capture-guide h2 {
+  margin: 0 0 3mm;
+  padding: 1.6mm 3mm;
+  break-after: avoid;
+  border-radius: 4px;
+  background: var(--navy);
+  color: white;
+  font-size: 11.5pt;
+}
+.capture-guide section p { margin: 0 0 2.5mm; }
+.capture-guide ol { margin: 0 0 3mm; padding-left: 5.5mm; }
+.capture-guide li { margin-bottom: .8mm; padding-left: .5mm; }
+.capture-guide .guide-note {
+  margin: 3mm 0 4mm;
+  padding: 3mm 4mm;
+  break-inside: avoid;
+  border-left: 4px solid var(--yellow);
+  border-radius: 4px;
+  background: #fff7d6;
+}
+.capture-guide-example {
+  margin: 3mm 0 5mm;
+  padding: 4mm;
+  break-inside: avoid;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fbfdfe;
+}
+.capture-guide-example img { display: block; width: 100%; height: auto; border-radius: 6px; }
+.capture-guide-example figcaption { margin-top: 3mm; color: #425660; font-size: 8.5pt; }
+.guide-screens {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: 10px;
+  margin: 4mm 0;
+}
+.guide-screens figure {
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fbfdfe;
+}
+.guide-screens img { display: block; width: 100%; height: auto; }
+.guide-screens figcaption { padding: 10px 12px; color: var(--text); font-size: 9.5pt; }
+.guide-screens figcaption ol { margin-bottom: 0; }
+.guide-footer { margin-top: 6mm; padding-top: 2.5mm; border-top: 1px solid var(--line); }
+
+@media (max-width: 600px) {
+  .guide-toolbar :is(a, button) { min-height: 44px; }
+  .guide-toolbar strong { flex-basis: 100%; }
+  .capture-guide { padding: 20px 16px; }
+  .capture-guide h1 { font-size: 1.35rem; }
+  .capture-guide-example { padding: 8px; }
+  .guide-screens { grid-template-columns: minmax(0, 1fr); }
+}
+
+@page { size: A4; margin: 12mm 14mm; }
+@media print {
+  body { background: white; font-size: 9.5pt; line-height: 1.37; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .guide-toolbar, .guide-footer, .guide-screens, .guide-screen-note { display: none; }
+  .capture-guide { width: auto; min-height: 0; margin: 0; padding: 0; box-shadow: none; }
+  .guide-steps { columns: 2; column-gap: 7mm; }
+  .capture-guide section { margin: 0 0 3mm; }
+  .capture-guide li { break-inside: avoid; }
+  .capture-guide h2 { padding: 1.5mm 2mm; font-size: 10.5pt; }
+  .capture-guide .guide-note, .capture-guide-example { padding: 2.5mm; }
+  .capture-guide-example { max-width: 76mm; margin-inline: auto; }
+}
