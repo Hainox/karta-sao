@@ -99,6 +99,11 @@
 .pin-pop{transition:opacity .16s ease}
 .pin-pop.editing{bottom:100px}
 .pin-pop.editing.below{bottom:auto;top:100px}
+/* Карточка редактируемой точки закреплена у края окна, чтобы стрелки и ручки
+   направления оставались доступны вокруг выбранной точки. */
+.pin-pop.edit-dock{position:fixed;top:76px;right:16px;bottom:auto;left:auto;width:min(344px,calc(100vw - 32px));transform:none;z-index:10000}
+.pin-pop.edit-dock .pin-card{max-height:calc(100vh - 96px)}
+.pin-pop.edit-dock .pin-tail{display:none}
 .pin-pop.dimmed{opacity:0;pointer-events:none}
 .pin-pop.sheet.dimmed{opacity:.0}
 
