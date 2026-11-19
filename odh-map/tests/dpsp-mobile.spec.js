@@ -93,6 +93,26 @@ test('оцифровка: смена desktop/mobile сохраняет выбр�
   expect(await page.evaluate(() => history.state?.cabinetSite ?? null)).toBeNull();
 });
 
+test('ответственный ДП/СП видит назначенный район и не открывает приёмку', async ({ page }) => {
+  await setup(page, false, null, async (route, path) => {
+    if (path.endsWith('/auth/me')) {
+      await route.fulfill({ json: { user: { role: 'dpsp_district_editor', displayName: 'Тест', district: 'Аэропорт' } } });
+      return true;
+    }
+    return false;
+  });
+  await page.goto('http://127.0.0.1:8766/dp-sp-cabinet/');
+  await expect(page.locator('#userLine')).toHaveText('Тест · Аэропорт');
+  await expect(page.locator('#district')).toBeHidden();
+  await page.locator('.account-menu summary').click();
+  await expect(page.getByRole('link', { name: 'К приёмке' })).toHaveCount(0);
+  await expect(page.getByRole('button', { name: /Тестовая площадка/ })).toBeVisible();
+
+  await page.goto('http://127.0.0.1:8766/dp-sp-review/');
+  await expect(page.locator('#loginMsg')).toHaveText('Приёмка доступна только администратору.');
+  await expect(page.locator('#main')).toBeHidden();
+});
+
 test('оцифровка: после ошибки загрузки фото можно дозагрузить к сохранённому МАФ', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.addInitScript(() => {

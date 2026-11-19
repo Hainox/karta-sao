@@ -43,6 +43,7 @@ button,input,select,textarea{font:inherit}
 .site-meta span{display:block;color:var(--muted);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
 .site-meta b{font-size:13px}
 .site-actions{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 4px}
+.district-scoped .app .filters{grid-template-columns:minmax(0,1fr) auto}
 .btn{border:1px solid #cbd8cf;background:#fff;color:var(--ink);border-radius:8px;padding:8px 12px;cursor:pointer}
 .btn.primary{background:var(--brand);border-color:var(--brand);color:#fff}
 .btn.danger{background:var(--warn-soft);border-color:#e8c4a8;color:var(--warn)}
@@ -106,6 +107,18 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
 #cameraPreview{display:block;width:100%;max-height:60svh;aspect-ratio:4/3;object-fit:contain;background:#182521;border-radius:8px}
 #cameraStatus:empty{display:none}
 #camera .buttons{margin-bottom:0;justify-content:flex-end}
+.capture-guide{width:min(100%,48rem);margin:auto;padding:24px 16px 40px;font-size:16px;line-height:1.55}
+.capture-guide header{padding:20px 0 8px}
+.capture-guide h1{margin:0;font-size:clamp(1.65rem,5vw,2.4rem);line-height:1.2}
+.capture-guide h2{margin:0 0 10px;font-size:1.2rem}
+.capture-guide section{margin:0 0 14px;padding:16px;background:var(--panel);border:1px solid var(--line);border-radius:12px}
+.capture-guide ol{padding-inline-start:1.4em}
+.capture-guide li+li{margin-top:8px}
+.capture-guide a:not(.btn),.login .guide-link{color:var(--brand)}
+.capture-guide .btn{display:inline-flex;align-items:center;min-height:44px;text-decoration:none}
+.capture-guide-example{margin:16px 0}
+.capture-guide-example img{display:block;width:100%;height:auto;border-radius:8px}
+.capture-guide-example figcaption{margin-top:8px}
 .capture-top{display:grid;gap:12px}
 .capture-top>*{min-width:0}
 .capture-top .section{margin-top:0}
@@ -122,6 +135,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
  body[data-review="false"] .top{position:sticky;top:0;z-index:10}
  body[data-review="false"] .filters{grid-template-columns:repeat(2,minmax(0,1fr))}
  body[data-review="false"] .filters .sync{grid-column:1/-1}
+ .district-scoped .app .filters .sync{grid-column:auto}
  body[data-review="false"] .filters .field label{font-size:13px}
  body[data-review="false"] .filters select{min-height:44px}
  body[data-review="false"] .item strong{overflow-wrap:anywhere}

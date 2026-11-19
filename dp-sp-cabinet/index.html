@@ -1,8 +1,8 @@
 <!doctype html>
-<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Оцифровка ДП/СП и МАФ · САО</title><link rel="stylesheet" href="../dp-sp-cabinet/cabinet.css?v=20261119-location"></head>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Оцифровка ДП/СП и МАФ · САО</title><link rel="stylesheet" href="../dp-sp-cabinet/cabinet.css?v=20261119-guide"></head>
 <body data-review="false">
-<div class="login" id="login" hidden><form id="loginForm"><h2>Кабинет оцифровки</h2><p>Доступ только для префектуры.</p><div class="field"><label for="email">Логин</label><input id="email" required autocomplete="username"></div><div class="field"><label for="password">Пароль</label><input id="password" type="password" required autocomplete="current-password"></div><p><button class="btn primary">Войти</button></p><div class="notice" id="loginMsg" role="status"></div></form></div>
-<header class="top" id="top" hidden><div><h1>Оцифровка ДП/СП и МАФ · САО</h1><p id="userLine"></p></div><details class="account-menu"><summary>Кабинет</summary><div class="account-options"><a class="navlink" href="../dp-sp-review/">К приёмке →</a><button id="logout" type="button">Выйти</button></div></details></header>
+<div class="login" id="login" hidden><form id="loginForm"><h2>Кабинет оцифровки</h2><p>Войдите по выданному логину и паролю.</p><div class="field"><label for="email">Логин</label><input id="email" required autocomplete="username"></div><div class="field"><label for="password">Пароль</label><input id="password" type="password" required autocomplete="current-password"></div><p><button class="btn primary">Войти</button></p><div class="notice" id="loginMsg" role="status"></div><a class="guide-link" href="guide.html">Инструкция по оцифровке</a></form></div>
+<header class="top" id="top" hidden><div><h1>Оцифровка ДП/СП и МАФ · САО</h1><p id="userLine"></p></div><details class="account-menu"><summary>Кабинет</summary><div class="account-options"><a class="navlink" id="reviewLink" href="../dp-sp-review/">К приёмке →</a><a class="navlink" href="guide.html">Инструкция по оцифровке</a><button id="logout" type="button">Выйти</button></div></details></header>
 <main class="app" id="main" hidden>
 
 <section class="filters"><div class="field"><label for="district">Район</label><select id="district"><option value="">Все районы</option></select></div><div class="field"><label for="kind">Вид площадки</label><select id="kind"><option value="">ДП и СП</option><option value="dp">Детские</option><option value="sp">Спортивные</option></select></div><button class="sync" id="refresh">Обновить</button></section>
@@ -35,4 +35,4 @@
     <button type="button" class="btn primary" id="cameraSnap" disabled>Сделать снимок</button>
   </div>
 </dialog>
-<script src="../dp-sp-cabinet/cabinet.js?v=20261119-location"></script></body></html>
+<script src="../dp-sp-cabinet/cabinet.js?v=20261119-district"></script></body></html>

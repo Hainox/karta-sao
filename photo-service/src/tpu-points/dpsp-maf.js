@@ -3,9 +3,14 @@ import express from 'express';
 import { createDpspCaptureRouter, captureThumbnailHandler } from './dpsp-capture.js';
 import { resizeJpeg } from '../image-resize.js';
 import { safePhotoFilename, validatePhotoUpload } from './photo-markers.js';
+import { DPSP_EDITOR, dpspDistrict, dpspDistrictClause, dpspPointChildClause, requireDpspAdmin } from './dpsp-access.js';
 
 const UUID=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const TOKEN=/^[0-9a-f]{32}$/;
+const EXAMPLE_SITES=Object.freeze({
+ dp:'e636cdbc-942d-569a-a24e-a72901bce1dd',
+ sp:'a4700409-a480-5281-a571-dd5355f925ea',
+});
 
 // Слаги районных страниц districts/<slug>.html: по ним строятся ссылки
 // «На карте» в кабинете и таблице. Дубли с «ё» — на случай старых написаний.
@@ -135,8 +140,11 @@ export function createDpspMafRouter({pool,authenticate}) {
   res.set('Cache-Control','public, max-age=86400, immutable').set('X-Robots-Tag','noindex')
    .type(thumb.photo_mime_type).send(thumb.photo_bytes);
  }catch(e){next(e)}});
- // Только префектура: районные учётки в оцифровке МАФ не участвуют.
- router.use(authenticate,(req,res,next)=>req.user.role==='prefecture_admin'?next():res.status(403).json({error:'Кабинет оцифровки доступен префектуре.'}));
+ router.use(authenticate,(req,res,next)=>{
+  if(req.user.role==='prefecture_admin'||(req.user.role===DPSP_EDITOR&&dpspDistrict(req.user.district)))return next();
+  return res.status(403).json({error:'Нет доступа к кабинету оцифровки ДП/СП.'});
+ });
+ router.use(['/summary','/sheet.json','/sites/:id/check'],requireDpspAdmin);
  router.use('/workflow',createDpspCaptureRouter({pool}));
  router.param('id',(req,res,next,id)=>UUID.test(id)?next():res.status(400).json({error:'Неверный ID.'}));
  const audit=(client,userId,action,objectKey,metadata)=>client.query(
@@ -149,19 +157,37 @@ export function createDpspMafRouter({pool,authenticate}) {
   res.set('Cache-Control','no-store').json({generated_at:new Date().toISOString(),districts:rows,totals});
  }catch(e){next(e)}});
  router.get('/dictionaries',async(req,res,next)=>{try{
-  res.set('Cache-Control','no-store').json(await dictionaries(pool));
+  const data=await dictionaries(pool);
+  if(req.user.role===DPSP_EDITOR){
+   const district=dpspDistrict(req.user.district);
+   data.districts=data.districts.filter(row=>row.name===district);
+  }
+  res.set('Cache-Control','no-store').json(data);
+ }catch(e){next(e)}});
+ router.get('/examples/:kind',async(req,res,next)=>{try{
+  if(!Object.hasOwn(EXAMPLE_SITES,req.params.kind))return res.sendStatus(404);
+  const {rows:[photo]}=await pool.query(
+   "SELECT photo_bytes FROM playground_photo_slot_photos WHERE point_id=$1 AND status='accepted' ORDER BY uploaded_at DESC LIMIT 1",
+   [EXAMPLE_SITES[req.params.kind]]);
+  if(!photo)return res.sendStatus(404);
+  const preview=await resizeJpeg(photo.photo_bytes,{max:800});
+  res.set('Cache-Control','private, max-age=3600').type('image/jpeg').send(preview.bytes);
  }catch(e){next(e)}});
  router.get('/sites',async(req,res,next)=>{try{
-  const {where,params}=sitesWhere(req.query);
+  const scoped=req.user.role===DPSP_EDITOR;
+  const {where,params}=sitesWhere(scoped?{...req.query,district:null}:req.query);
+  const scope=dpspDistrictClause(req.user,'s.district',params);
   const limit=Math.min(Math.max(Number(req.query.limit)||3000,1),5000);
   const offset=Math.max(Number(req.query.offset)||0,0);
-  const sql=`SELECT * FROM (${siteBase}) s${where.length?` WHERE ${where.join(' AND ')}`:''}
+  const sql=`SELECT * FROM (${siteBase}) s WHERE ${where.join(' AND ')||'true'}${scope}
    ORDER BY s.district,s.kind,s.address LIMIT ${limit} OFFSET ${offset}`;
   const {rows}=await pool.query(sql,params);
   res.set('Cache-Control','no-store').json({sites:rows.map(addSlug)});
  }catch(e){next(e)}});
  router.get('/sites/:id',async(req,res,next)=>{try{
-  const site=(await pool.query(`${siteBase} AND p.id=$1`,[req.params.id])).rows[0];
+  const params=[req.params.id];
+  const scope=dpspDistrictClause(req.user,'p.district',params);
+  const site=(await pool.query(`${siteBase} AND p.id=$1${scope}`,params)).rows[0];
   if(!site)return res.status(404).json({error:'Площадка не найдена.'});
   const {rows}=await pool.query(itemsQuery,[site.point_id]);
   res.set('Cache-Control','no-store').json({
@@ -174,11 +200,13 @@ export function createDpspMafRouter({pool,authenticate}) {
   if(parsed.error)return res.status(422).json({error:parsed.error});
   if(!(await pool.query('SELECT 1 FROM dpsp_maf_types WHERE code=$1',[parsed.type_code])).rows[0])
    return res.status(422).json({error:'Неизвестный тип МАФ.'});
-  if(!(await pool.query('SELECT 1 FROM playground_photo_points WHERE id=$1 AND retired_at IS NULL',[req.params.id])).rows[0])
-   return res.status(404).json({error:'Площадка не найдена.'});
   const id=crypto.randomUUID();
-  await pool.query(`INSERT INTO dpsp_maf_items (id,point_id,type_code,quantity,condition,comment,created_by)
-   VALUES ($1,$2,$3,$4,$5,$6,$7)`,[id,req.params.id,parsed.type_code,parsed.quantity,parsed.condition,parsed.comment,req.user.sub]);
+  const params=[id,req.params.id,parsed.type_code,parsed.quantity,parsed.condition,parsed.comment,req.user.sub];
+  const scope=dpspDistrictClause(req.user,'district',params);
+  const created=await pool.query(`INSERT INTO dpsp_maf_items (id,point_id,type_code,quantity,condition,comment,created_by)
+   SELECT $1,id,$3,$4,$5,$6,$7 FROM playground_photo_points WHERE id=$2 AND retired_at IS NULL${scope} FOR UPDATE`,params);
+  if(!created.rowCount)
+   return res.status(404).json({error:'Площадка не найдена.'});
   await audit(pool,req.user.sub,'dpsp_maf_created',req.params.id,{mafId:id,type:parsed.type_code,quantity:parsed.quantity});
   res.status(201).json({id});
  }catch(e){next(e)}});
@@ -189,14 +217,18 @@ export function createDpspMafRouter({pool,authenticate}) {
   if(!fields.length)return res.status(422).json({error:'Нет изменений.'});
   if(parsed.type_code&&!(await pool.query('SELECT 1 FROM dpsp_maf_types WHERE code=$1',[parsed.type_code])).rows[0])
    return res.status(422).json({error:'Неизвестный тип МАФ.'});
+  const params=[req.params.id,...fields.map(f=>parsed[f])];
+  const scope=dpspPointChildClause(req.user,'dpsp_maf_items',params);
   const updated=await pool.query(`UPDATE dpsp_maf_items SET ${fields.map((field,i)=>`${field}=$${i+2}`).join(',')},updated_at=now()
-   WHERE id=$1 AND retired_at IS NULL RETURNING id`,[req.params.id,...fields.map(f=>parsed[f])]);
+   WHERE id=$1 AND retired_at IS NULL${scope} RETURNING id`,params);
   if(!updated.rowCount)return res.status(404).json({error:'МАФ не найден.'});
   await audit(pool,req.user.sub,'dpsp_maf_updated',req.params.id,{changes:fields});
   res.json({id:updated.rows[0].id});
  }catch(e){next(e)}});
  router.delete('/maf/:id',async(req,res,next)=>{try{
-  const retired=await pool.query('UPDATE dpsp_maf_items SET retired_at=now() WHERE id=$1 AND retired_at IS NULL RETURNING id',[req.params.id]);
+  const params=[req.params.id];
+  const scope=dpspPointChildClause(req.user,'dpsp_maf_items',params);
+  const retired=await pool.query(`UPDATE dpsp_maf_items SET retired_at=now() WHERE id=$1 AND retired_at IS NULL${scope} RETURNING id`,params);
   if(!retired.rowCount)return res.status(404).json({error:'МАФ не найден.'});
   await pool.query('UPDATE dpsp_maf_photo_tokens SET revoked_at=now() WHERE item_id=$1 AND revoked_at IS NULL',[req.params.id]);
   await audit(pool,req.user.sub,'dpsp_maf_retired',req.params.id,{});
@@ -210,7 +242,9 @@ export function createDpspMafRouter({pool,authenticate}) {
   let c;
   try{
    c=await pool.connect();await c.query('BEGIN');
-   const item=await c.query('SELECT id FROM dpsp_maf_items WHERE id=$1 AND retired_at IS NULL FOR UPDATE',[req.params.id]);
+   const params=[req.params.id];
+   const scope=dpspPointChildClause(req.user,'dpsp_maf_items',params);
+   const item=await c.query(`SELECT id FROM dpsp_maf_items WHERE id=$1 AND retired_at IS NULL${scope} FOR UPDATE`,params);
    if(!item.rows[0]){await c.query('ROLLBACK');return res.status(404).json({error:'МАФ не найден.'})}
    await c.query(`UPDATE dpsp_maf_photos SET status='superseded' WHERE item_id=$1 AND status='active'`,[req.params.id]);
    const photoId=crypto.randomUUID();
