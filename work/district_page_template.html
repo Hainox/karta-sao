@@ -290,18 +290,19 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
   function showCard(item) {
     centerSelection(item.feature?.geometry?.coordinates || item.geometry?.coordinates);
     const p = (item.feature?.properties || item.properties || {});
+    const isPedestrianPath = item.layerKey === 'peshehodnye_dorozhki';
     const rows = [
       ['Тип объекта', p.object_type_name],
       ['Покрытие', p.coating_type_name],
       ['Площадь, м²', p.total_area != null ? Number(p.total_area).toLocaleString('ru-RU') : null],
-      ['В составе', p.source_id ? null : p.parent_object_name],
+      ['В составе', !isPedestrianPath && !p.source_id ? p.parent_object_name : null],
       ['Статус', p.object_status_name],
-      ['Адрес', p.source_id ? p.parent_object_name : null],
-      ['ID в таблице', p.source_id],
+      ['Адрес', isPedestrianPath || p.source_id ? p.parent_object_name : null],
+      ['ID в таблице', p.source_id || (isPedestrianPath ? p.id : null)],
       ['Балансодержатель', p.balance_holder],
       ['Год благоустройства', p.improvement_year],
       ['Примечание', p.reference_note],
-      ['Источник', p.source],
+      ['Источник', isPedestrianPath && p.source === 'dts' ? 'АСУ ОДС' : p.source],
     ].filter(([, v]) => v != null && v !== '').map(([k, v]) => `<div><strong>${k}:</strong> ${escapeHtml(v)}</div>`).join('');
     const title = p.object_type_name || p.district || 'Объект';
     const geometry = item.feature?.geometry || item.geometry;
