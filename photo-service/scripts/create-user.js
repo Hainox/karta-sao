@@ -2,6 +2,7 @@ import { randomUUID } from 'node:crypto';
 import { Pool } from 'pg';
 import { photoServiceDatabaseConfig } from '../src/config.js';
 import { hashPassword, normalizeLogin } from '../src/auth.js';
+import { DPSP_EDITOR, dpspDistrict } from '../src/tpu-points/dpsp-access.js';
 
 function option(name) {
   const index = process.argv.indexOf(`--${name}`);
@@ -44,11 +45,13 @@ async function readHidden(prompt) {
 const login = normalizeLogin(option('login') ?? option('email'));
 const displayName = option('display-name');
 const role = option('role');
-const district = option('district') || null;
+const suppliedDistrict = option('district')?.trim() || null;
+const district = role === DPSP_EDITOR ? dpspDistrict(suppliedDistrict) : suppliedDistrict;
+const needsDistrict = role === 'district_editor' || role === DPSP_EDITOR;
 // mkd_editor — отдел МКД: фото первых этажей подъездов по всему округу, района нет.
-if (!login || !displayName || !['district_editor', 'prefecture_admin', 'mkd_editor'].includes(role)
-  || (role === 'district_editor' && !district) || (role !== 'district_editor' && district)) {
-  console.error('Usage: node scripts/create-user.js --login LOGIN --display-name NAME --role district_editor|prefecture_admin|mkd_editor [--district DISTRICT]');
+if (!login || !displayName?.trim() || !['district_editor', 'prefecture_admin', 'mkd_editor', DPSP_EDITOR].includes(role)
+  || (needsDistrict && !district) || (!needsDistrict && suppliedDistrict)) {
+  console.error('Usage: node scripts/create-user.js --login LOGIN --display-name NAME --role district_editor|prefecture_admin|mkd_editor|dpsp_district_editor [--district DISTRICT]');
   process.exit(2);
 }
 const password = await readHidden('Password (12+ chars, input hidden): ');

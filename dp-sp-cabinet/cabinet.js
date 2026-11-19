@@ -16,6 +16,7 @@ let queue=review?(incoming.get('queue')==='accepted'?'accepted':'review'):'work'
 const kind=k=>k==='dp'?'Детская площадка':'Спортивная площадка';
 let listScroll=0, queueScroll=0, photoTrigger=null, navigationSeq=0;
 let siteMap, activeCamera, mapRun=0;
+let assignedDistrict='';
 const mobileViewport=matchMedia('(max-width: 760px)');
 const mobile=()=>mobileViewport.matches;
 function showCard(id){
@@ -43,8 +44,24 @@ window.addEventListener('popstate',()=>{
 const conditions={ok:'Исправно',repair:'Требует ремонта',broken:'Неисправно'};
 function message(text){$('message').textContent=text||'';}
 function clearImages(){for(const url of urls)URL.revokeObjectURL(url);urls=[];}
-function loginView(text){$('login').hidden=false;$('main').hidden=true;$('top').hidden=true;$('loginMsg').textContent=text||'';clearCardMedia();clearImages();}
-function appView(user){if(user.role!=='prefecture_admin')throw Error('Доступ только для префектуры.');$('login').hidden=true;$('main').hidden=false;$('top').hidden=false;$('userLine').textContent=(user.displayName||user.email||'')+' · Префектура';}
+function loginView(text){
+ $('login').hidden=false;$('main').hidden=true;$('top').hidden=true;$('loginMsg').textContent=text||'';
+ ++listSeq;
+ rows=[];types=[];
+ clearDetail();
+ message('');
+}
+function appView(user){
+ const admin=user.role==='prefecture_admin';
+ const district=user.role==='dpsp_district_editor'&&user.district;
+ if(!admin&&(review||!district))throw Error(review?'Приёмка доступна только администратору.':'Нет доступа к кабинету оцифровки ДП/СП.');
+ assignedDistrict=admin?'':district;
+ document.body.classList.toggle('district-scoped',Boolean(assignedDistrict));
+ $('district').closest('.field').hidden=Boolean(assignedDistrict);
+ if($('reviewLink'))$('reviewLink').hidden=Boolean(assignedDistrict);
+ $('login').hidden=true;$('main').hidden=false;$('top').hidden=false;
+ $('userLine').textContent=[user.displayName||user.email,assignedDistrict||'Префектура'].filter(Boolean).join(' · ');
+}
 async function req(path,opts={}){
  const headers=new Headers(opts.headers||{});
  if(token)headers.set('Authorization','Bearer '+token);
@@ -74,7 +91,10 @@ async function mutate(action,done,reload=true){
 }
 async function dictionaries(){
  const d=await api(base+'/dictionaries');types=d.types||[];const select=$('district'),prev=select.value;
- for(const row of d.districts||[]){const option=make('option',row.name);option.value=row.name;select.append(option);}select.value=prev;
+ const all=make('option','Все районы');all.value='';
+ select.replaceChildren(...(assignedDistrict?[]:[all]));
+ for(const row of d.districts||[]){const option=make('option',row.name);option.value=row.name;select.append(option);}
+ select.value=assignedDistrict?select.options[0]?.value||'':prev;
 }
 function clearDetail(){document.body.classList.remove('card-open');if(history.state?.cabinetSite)history.replaceState(null,'',location.pathname+location.search);current=null;++detailSeq;clearCardMedia();clearImages();$('detail').replaceChildren(make('div','Выберите площадку','empty'));renderQueue();}
 function renderQueue(){
@@ -85,7 +105,7 @@ function renderQueue(){
 }
 async function loadQueue(){
  const seq=++listSeq;const q=new URLSearchParams({queue});
- if($('district').value)q.set('district',$('district').value);if($('kind').value)q.set('kind',$('kind').value);
+ if(!assignedDistrict&&$('district').value)q.set('district',$('district').value);if($('kind').value)q.set('kind',$('kind').value);
  const data=await api(flow+'/sites?'+q);if(seq!==listSeq)return;rows=data.sites||[];
  if(current&&!rows.some(r=>r.point_id===current.point_id))clearDetail();
  renderQueue();
@@ -348,11 +368,11 @@ function renderDetail(d,w,seq){
    img.alt='Пример общего плана: '+kind(s.kind).toLowerCase();
    const caption=make('figcaption');
    caption.append(make('strong','Образец обзорного фото'),
-    make('p',example.address+' · первый обход','sub'),
+    make('p',assignedDistrict?'Первый обход':example.address+' · первый обход','sub'),
     make('p','Снимите площадку горизонтально с края. В кадре должны быть видны границы площадки, покрытие и оборудование.'));
    figure.append(img,caption);
    overview.append(figure);
-   photo('/object-photo-points/playgrounds/'+example.id+'/photo',img,seq);
+   photo(assignedDistrict?base+'/examples/'+s.kind:'/object-photo-points/playgrounds/'+example.id+'/photo',img,seq);
   }
  }
  const gallery=make('div',null,review?'gallery':'gallery capture-gallery');

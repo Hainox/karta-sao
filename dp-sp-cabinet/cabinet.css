@@ -43,6 +43,7 @@ button,input,select,textarea{font:inherit}
 .site-meta span{display:block;color:var(--muted);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
 .site-meta b{font-size:13px}
 .site-actions{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 4px}
+.district-scoped .app .filters{grid-template-columns:minmax(0,1fr) auto}
 .btn{border:1px solid #cbd8cf;background:#fff;color:var(--ink);border-radius:8px;padding:8px 12px;cursor:pointer}
 .btn.primary{background:var(--brand);border-color:var(--brand);color:#fff}
 .btn.danger{background:var(--warn-soft);border-color:#e8c4a8;color:var(--warn)}
@@ -122,6 +123,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
  body[data-review="false"] .top{position:sticky;top:0;z-index:10}
  body[data-review="false"] .filters{grid-template-columns:repeat(2,minmax(0,1fr))}
  body[data-review="false"] .filters .sync{grid-column:1/-1}
+ .district-scoped .app .filters .sync{grid-column:auto}
  body[data-review="false"] .filters .field label{font-size:13px}
  body[data-review="false"] .filters select{min-height:44px}
  body[data-review="false"] .item strong{overflow-wrap:anywhere}

@@ -1,4 +1,5 @@
 import { createPhotoServicePointsAdapter } from './src/tpu-points/photo-service-points-adapter.js';
+import { dpspSessionAllowed } from './src/tpu-points/dpsp-access.js';
 import { createDashboardApp, DEFAULT_NEWS_URLS } from './src/dashboard.js';
 import { readFileSync } from 'node:fs';
 const tpuBoundary = JSON.parse(readFileSync(new URL('./src/tpu-points/sao_boundary_wgs84.geojson', import.meta.url), 'utf8'));
@@ -84,7 +85,7 @@ function sendError(response, request, statusCode, code, message = code) {
 }
 
 function pathOf(request) {
-  const raw = new URL(request.url || '/', 'http://photo-service.local').pathname;
+  const raw = new URL(request.originalUrl || request.url || '/', 'http://photo-service.local').pathname;
   if (basePath && raw.startsWith(`${basePath}/`)) return raw.slice(basePath.length) || '/';
   if (basePath && raw === basePath) return '/';
   return raw;
@@ -192,7 +193,8 @@ async function currentUser(request) {
       WHERE s.token_hash = $1 AND s.expires_at > now() AND u.active = true`,
     [hashSessionToken(token)],
   );
-  return result.rows[0] || null;
+  const user = result.rows[0];
+  return user && dpspSessionAllowed(user, pathOf(request)) ? user : null;
 }
 
 function clientKey(request) {
@@ -232,7 +234,7 @@ async function handleLogin(request, response) {
   const user = result.rows[0];
   if (!(await authenticateMapUser(user, body.password))) {
     loginThrottle.recordFailure(key);
-    return sendError(response, request, 401, 'invalid_credentials', 'Проверьте название района. Для префектуры требуется пароль.');
+    return sendError(response, request, 401, 'invalid_credentials', 'Проверьте логин и пароль или название района.');
   }
   // Public district entry must not reset the prefecture password failure counter.
   if (user.role !== 'district_editor') loginThrottle.clear(key);
