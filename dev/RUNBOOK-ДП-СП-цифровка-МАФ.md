@@ -84,10 +84,34 @@ $DC run --rm photo-service node scripts/create-user.js \
 починить одной командой. Файл — таблица без заголовка: логин, район, пароль
 через табуляцию или точку с запятой; в командной строке паролей нет.
 
+Контейнер фотослужбы работает с `read_only: true`, поэтому `docker compose cp`
+в него падает с `container rootfs is marked read-only`, а образ мог быть собран
+раньше скрипта. Запускайте скрипт одноразовым контейнером и подкладывайте файлы
+mount'ом — запись в контейнер не нужна:
+
 ```sh
-$DC exec photo-service node scripts/repair-dpsp-accounts.js /tmp/dpsp-accounts.tsv
-$DC exec photo-service node scripts/repair-dpsp-accounts.js /tmp/dpsp-accounts.tsv --apply
+cd /opt/sao-photo-service
+git fetch origin main
+git archive origin/main photo-service/scripts/repair-dpsp-accounts.js | tar -x -C /opt/sao-photo-service
+
+DC="docker compose -p sao-photo-service -f compose.yaml -f compose.recovery.yaml"
+
+$DC run --rm --no-deps --no-build --user root \
+  -v /opt/sao-photo-service/photo-service/scripts/repair-dpsp-accounts.js:/app/scripts/repair-dpsp-accounts.js:ro \
+  -v /root/dpsp-accounts.tsv:/tmp/dpsp-accounts.tsv:ro \
+  photo-service node scripts/repair-dpsp-accounts.js /tmp/dpsp-accounts.tsv
+
+$DC run --rm --no-deps --no-build --user root \
+  -v /opt/sao-photo-service/photo-service/scripts/repair-dpsp-accounts.js:/app/scripts/repair-dpsp-accounts.js:ro \
+  -v /root/dpsp-accounts.tsv:/tmp/dpsp-accounts.tsv:ro \
+  photo-service node scripts/repair-dpsp-accounts.js /tmp/dpsp-accounts.tsv --apply
+
+rm -f /root/dpsp-accounts.tsv
 ```
+
+`--user root` нужен только чтобы прочитать файл учёток с правами `600`; сам
+скрипт ничего не пишет на диск. `--no-build` берёт уже собранный образ, поэтому
+пересборка после правки скрипта не требуется.
 
 Без `--apply` скрипт только перечисляет, что изменится: создаст отсутствующие,
 вернёт роль `dpsp_district_editor`, район и активность, сбросит несовпадающий
