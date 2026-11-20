@@ -114,6 +114,33 @@ rm -f /root/dpsp-accounts.tsv
 правки скрипта не нужна; флаг `--no-build` есть не во всех версиях compose CLI
 (на сервере он отвечает `unknown flag`), поэтому его не используем.
 
+Если `compose.yaml` не лежит в текущем каталоге (стек могли поднять из другого),
+путь к файлам виден по метке контейнера:
+
+```sh
+docker inspect sao-photo-service-photo-service-1 \
+  --format '{{index .Config.Labels "com.docker.compose.project.config_files"}}'
+```
+
+Тогда запуск можно сделать вообще без compose: `/tmp` в контейнере — tmpfs,
+туда пишутся скрипт и файл учёток. Скрипт кладётся с расширением `.mjs` (вне
+`/app` нет `package.json`, и `.js` Node считает CommonJS), импорты в нём
+переводятся на абсолютные пути, а рядом создаётся ссылка на `node_modules`:
+
+```sh
+C=sao-photo-service-photo-service-1
+sed "s#'../src/#'/app/src/#g" /opt/sao-photo-service/photo-service/scripts/repair-dpsp-accounts.js > /tmp/repair.mjs
+
+docker exec -i "$C" sh -c 'ln -sfn /app/node_modules /tmp/node_modules; cat > /tmp/repair.mjs' < /tmp/repair.mjs
+docker exec -i "$C" sh -c 'cat > /tmp/dpsp-accounts.tsv' < /root/dpsp-accounts.tsv
+
+docker exec -i "$C" node /tmp/repair.mjs /tmp/dpsp-accounts.tsv
+docker exec -i "$C" node /tmp/repair.mjs /tmp/dpsp-accounts.tsv --apply
+
+docker exec -i "$C" sh -c 'rm -f /tmp/repair.mjs /tmp/dpsp-accounts.tsv /tmp/node_modules'
+rm -f /tmp/repair.mjs /root/dpsp-accounts.tsv
+```
+
 Без `--apply` скрипт только перечисляет, что изменится: создаст отсутствующие,
 вернёт роль `dpsp_district_editor`, район и активность, сбросит несовпадающий
 пароль и закроет сессии исправленных учёток. Работающие учётки с этим паролем
