@@ -1,0 +1,4 @@
+# Локальные снимки и геоданные фотослужбы. Корень main раздаётся GitHub Pages.
+/original-api*.json
+/data/
+/review-map/
