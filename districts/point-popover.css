@@ -103,6 +103,9 @@
 .pin-pop.editing.below:not(.sheet){bottom:auto;top:100px}
 .pin-pop.sheet.sheet-top{top:0;bottom:auto}
 .pin-pop.sheet.sheet-top .pin-card{border-radius:0 0 16px 16px;border-bottom:1px solid #c9d4d6}
+.pin-pop.editing.edit-dock{position:absolute;top:12px;right:12px;left:auto;bottom:auto;width:min(344px,calc(100% - 24px));transform:none;z-index:1000}
+.pin-pop.editing.edit-dock.dock-left{left:12px;right:auto}
+.pin-pop.edit-dock .pin-tail{display:none}
 .pin-pop.dimmed{opacity:0;pointer-events:none}
 .pin-pop.sheet.dimmed{opacity:.0}
 

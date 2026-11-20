@@ -31,6 +31,10 @@ test('catalog and district access, six-frame editing and restart', async () => {
   const get=(path,role,district=point.district)=>fetch(base+path,{headers:role?{'x-role':role,'x-district':encodeURIComponent(district)}:{}});
   const patch=(body,role='prefecture_admin',district=point.district)=>fetch(base+'/'+point.id,{
     method:'PATCH',headers:{'content-type':'application/json','x-role':role,'x-district':encodeURIComponent(district)},body:JSON.stringify(body)});
+  const post=(path,body,role='prefecture_admin')=>fetch(base+path,{
+    method:'POST',headers:{'content-type':'application/json','x-role':role,'x-district':encodeURIComponent(point.district)},body:JSON.stringify(body)});
+  const remove=(path,role='prefecture_admin')=>fetch(base+path,{
+    method:'DELETE',headers:{'x-role':role,'x-district':encodeURIComponent(point.district)}});
   const overview='/?district='+encodeURIComponent(point.district);
   try {
     assert.equal((await get(overview)).status,401);
@@ -49,7 +53,28 @@ test('catalog and district access, six-frame editing and restart', async () => {
     assert.equal(response.point.slots[0].azimuth,point.slots[0].azimuth);
     assert.equal((await patch({coordinates:[37.51,55.81]})).status,200);
     assert.equal((await patch({noSidewalk:true},'district_editor')).status,200);
+    const createdResponse=await post('/',{district:point.district,coordinates:[37.52,55.82],azimuth:135});
+    assert.equal(createdResponse.status,201);
+    const createdPoint=(await createdResponse.json()).point;
+    assert.equal(createdPoint.slots.length,1);
+    assert.equal(createdPoint.slots[0].azimuth,135);
+    assert.equal((await post('/',{district:point.district,coordinates:[38,56],azimuth:90})).status,400);
+    assert.equal((await post('/'+point.id+'/slots',{azimuth:240},'district_editor')).status,403);
+    const slotResponse=await post('/'+createdPoint.id+'/slots',{azimuth:240});
+    assert.equal(slotResponse.status,201);
+    const pointWithSlot=(await slotResponse.json()).point;
+    assert.equal(pointWithSlot.slots.length,2);
+    const addedSlot=pointWithSlot.slots.find(slot=>slot.azimuth===240);
+    assert.ok(addedSlot);
+    assert.equal((await remove('/'+createdPoint.id+'/slots/'+addedSlot.id,'district_editor')).status,403);
+    const removedSlot=await remove('/'+createdPoint.id+'/slots/'+addedSlot.id);
+    assert.equal(removedSlot.status,200);
+    assert.equal((await removedSlot.json()).point.slots.length,1);
+    assert.equal((await remove('/'+createdPoint.id,'district_editor')).status,403);
+    assert.equal((await remove('/'+createdPoint.id)).status,200);
     router=makeRouter();
+    const active=(await (await get(overview,'prefecture_admin')).json()).points;
+    assert.ok(!active.some(p=>p.id===createdPoint.id));
     const saved=(await (await get(overview,'prefecture_admin')).json()).points.find(p=>p.id===point.id);
     assert.equal(saved.slots[4].azimuth,42);
     assert.deepEqual(saved.coordinates,[37.51,55.81]);

@@ -62,7 +62,7 @@ window.createPointPopover = function ({ map, card, mapElement }) {
     unmount();
     const sheet = narrow.matches;
     shell.classList.toggle('sheet', sheet);
-    shell.classList.remove('below', 'sheet-top');
+    shell.classList.remove('below', 'sheet-top', 'edit-dock', 'dock-left');
     if (sheet) (mapElement || document.body).append(shell);
     holder = document.createElement('div');
     holder.className = 'pin-anchor';
@@ -84,7 +84,21 @@ window.createPointPopover = function ({ map, card, mapElement }) {
     if (!opened || !holder) return;
     const sheet = shell.classList.contains('sheet');
     const box = (mapElement || document.body).getBoundingClientRect();
-    const pointY = holder.getBoundingClientRect().top;
+    const point = holder.getBoundingClientRect();
+    const pointY = point.top;
+    if (!sheet && shell.classList.contains('editing')) {
+      const left = point.left - box.left;
+      const right = box.right - point.left;
+      const dock = Math.max(left, right) >= 344 + 12 + 100;
+      shell.classList.toggle('edit-dock', dock);
+      shell.classList.toggle('dock-left', dock && left > right);
+      const parent = dock ? (mapElement || document.body) : holder;
+      if (shell.parentElement !== parent) parent.append(shell);
+      if (dock) {
+        shell.style.setProperty('--maxh', Math.max(0, box.height - 24) + 'px');
+        return;
+      }
+    }
     // В правке окно отходит от точки дальше: вокруг неё ручка поворота стрелки.
     const gap = shell.classList.contains('editing') ? 100 : 34;
     const above = pointY - box.top - gap;
