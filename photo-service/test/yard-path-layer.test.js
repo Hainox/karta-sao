@@ -82,16 +82,47 @@ test('catalog and district access, six-frame editing and restart', async () => {
   } finally { await new Promise(resolve=>srv.close(resolve)); await rm(dir,{recursive:true,force:true}); }
 });
 
+test('single-frame catalog keeps one direction on catalog and manually created points', async () => {
+  const dir = await mkdtemp(join(tmpdir(), 'dts-single-'));
+  const catalogPath = join(dir, 'catalog.json');
+  const point = { id: 'test-dts', district: 'Аэропорт', balance: 'Аэропорт', coordinates: [37.51,55.81],
+    slots: [{ id: 'test-frame', azimuth: 0 }] };
+  await writeFile(catalogPath, JSON.stringify({version: 1, singleFrame: true, points: [point]}));
+  const app = express();
+  app.use(express.json(), createYardPathLayerRouter({ catalogPath, editsPath: join(dir,'edits.json'),
+    authenticate(req, _res, next) { req.user = {role: 'prefecture_admin'}; next(); },
+    pool: {query: async () => ({rows: []})} }));
+  const server = app.listen(0,'127.0.0.1');
+  try {
+    await new Promise(resolve => server.once('listening', resolve));
+    const base = 'http://127.0.0.1:' + server.address().port;
+    const post = (path, body) => fetch(base + path, {method:'POST', headers:{'content-type':'application/json'}, body:JSON.stringify(body)});
+    const created = (await (await post('/', {...point, azimuth:90})).json()).point;
+    const active = await (await fetch(base+'/?district='+encodeURIComponent(point.district))).json();
+    assert.equal(active.points.length,2);
+    for (const p of active.points) {
+      assert.equal(p.singleFrame,true);
+      assert.equal((await post('/'+p.id+'/slots',{azimuth:45})).status,409);
+      assert.equal((await fetch(base+'/'+p.id+'/slots/'+p.slots[0].id,{method:'DELETE'})).status,409);
+    }
+    assert.equal((await fetch(base+'/'+created.id,{method:'DELETE'})).status,200);
+  } finally { await new Promise(resolve=>server.close(resolve)); await rm(dir,{recursive:true,force:true}); }
+});
+
 test('production catalog: all points and slots, if privately provisioned', async (t) => {
   let catalog;
   try { catalog=JSON.parse(await readFile(new URL('../assets/yard-path-points.json', import.meta.url),'utf8')); }
   catch(error) { if(error.code==='ENOENT') return t.skip('private catalog not provisioned'); throw error; }
   const {points}=catalog;
   const frames=points.flatMap(p=>p.slots);
-  assert.equal(points.length,6563);
-  assert.equal(new Set(points.map(p=>p.id)).size,6563);
-  assert.equal(frames.length,16572);
-  assert.equal(new Set(frames.map(f=>f.id)).size,16572);
+  if (catalog.singleFrame) {
+    assert.ok(points.every(p=>p.slots.length===1));
+  } else {
+    assert.equal(points.length,6563);
+    assert.equal(frames.length,16572);
+  }
+  assert.equal(new Set(points.map(p=>p.id)).size,points.length);
+  assert.equal(new Set(frames.map(f=>f.id)).size,frames.length);
   assert.equal(new Set(points.map(p=>p.district)).size,16);
   assert.ok(frames.every(f=>Number.isFinite(f.azimuth)&&f.azimuth>=0&&f.azimuth<360));
 });

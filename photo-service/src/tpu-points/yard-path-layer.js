@@ -8,7 +8,7 @@ import { createAvdSidewalkPhotosRouter, districtOwnsSidewalk, loadSidewalkPhotos
 
 const DEFAULT_CATALOG = new URL('../../assets/yard-path-points.json', import.meta.url);
 
-function indexCatalog({ version, points }) {
+function indexCatalog({ version, points, singleFrame = false }) {
   if (version !== 1 || !Array.isArray(points) || !points.length) throw new Error('Некорректный каталог тестового слоя.');
   const districts = new Map();
   const byId = new Map();
@@ -22,7 +22,7 @@ function indexCatalog({ version, points }) {
     if (typeof id !== 'string' || !id || byId.has(id) || !DISTRICTS.has(district)
         || !Array.isArray(coordinates) || coordinates.length !== 2 || !coordinates.every(Number.isFinite)
         || Math.abs(coordinates[0]) > 180 || Math.abs(coordinates[1]) > 90
-        || !Array.isArray(slots) || (slots.length < 1 || slots.length > 6)) throw new Error('Некорректная тестовая точка.');
+        || !Array.isArray(slots) || slots.length < 1 || slots.length > (singleFrame ? 1 : 6)) throw new Error('Некорректная тестовая точка.');
     byId.set(id, point);
     const avd = isAvdSidewalkPoint(point);
     (avd ? avdPoints : districtPoints).push(point);
@@ -35,7 +35,7 @@ function indexCatalog({ version, points }) {
     if (!districts.has(district)) districts.set(district, []);
     districts.get(district).push(point);
   }
-  return { districts, byId, points, avdPoints, avdFrames, districtPoints, districtFrames };
+  return { districts, byId, points, avdPoints, avdFrames, districtPoints, districtFrames, singleFrame };
 }
 
 export const mergePoint = (point, edit) => {
@@ -90,6 +90,12 @@ export function createYardPathLayerRouter({ authenticate, boundary, pool, catalo
       .map(point => mergePoint(point, edits.get(point.id)));
     for (const [id, edit] of edits) {
       if (edit.createdPoint && !edit.deleted && !base.byId.has(id)) points.push(mergePoint(edit.createdPoint, edit));
+    }
+    if (base.singleFrame) {
+      for (const point of points) {
+        if (point.slots.length !== 1) throw new Error('Сохранённые правки несовместимы с каталогом ДТС.');
+        point.singleFrame = true;
+      }
     }
     return catalogView(points);
   };
@@ -180,6 +186,7 @@ export function createYardPathLayerRouter({ authenticate, boundary, pool, catalo
       const catalog = await loadCatalog();
       const point = catalog.byId.get(req.params.pointId);
       if (!point) return res.status(404).json({ error: 'Точка не найдена.' });
+      if (point.singleFrame) return res.status(409).json({error: 'Для другого направления добавьте отдельную точку ДТС.'});
       if (point.slots.length >= 12) return res.status(409).json({ error: 'У точки уже 12 направлений.' });
       const slot = { id: randomUUID(), azimuth };
       await saveEdit(point.id, current => ({ ...current, addedSlots: [...(current.addedSlots || []), slot] }));
@@ -194,6 +201,7 @@ export function createYardPathLayerRouter({ authenticate, boundary, pool, catalo
       if (!point || !point.slots.some(slot => slot.id === req.params.slotId)) {
         return res.status(404).json({ error: 'Точка или направление не найдены.' });
       }
+      if (point.singleFrame) return res.status(409).json({error: 'Единственный кадр ДТС можно убрать вместе с точкой.'});
       await saveEdit(point.id, current => ({ ...current,
         removedSlots: [...new Set([...(current.removedSlots || []), req.params.slotId])] }));
       res.json({ point: (await loadCatalog()).byId.get(point.id), archived: true });
