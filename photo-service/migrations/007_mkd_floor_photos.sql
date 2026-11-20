@@ -9,10 +9,10 @@
 -- Роль «Отдел МКД» работает по всему округу, поэтому района у неё нет.
 ALTER TABLE users DROP CONSTRAINT IF EXISTS users_role_check;
 ALTER TABLE users ADD CONSTRAINT users_role_check
-  CHECK (role IN ('district_editor', 'prefecture_admin', 'mkd_editor'));
+  CHECK (role IN ('district_editor', 'prefecture_admin', 'mkd_editor', 'dpsp_district_editor'));
 ALTER TABLE users DROP CONSTRAINT IF EXISTS users_check;
 ALTER TABLE users ADD CONSTRAINT users_check
-  CHECK ((role = 'district_editor' AND district IS NOT NULL) OR role IN ('prefecture_admin', 'mkd_editor'));
+  CHECK ((role IN ('district_editor', 'dpsp_district_editor') AND district IS NOT NULL) OR role IN ('prefecture_admin', 'mkd_editor'));
 
 CREATE TABLE IF NOT EXISTS mkd_floor_photos (
   id text PRIMARY KEY,

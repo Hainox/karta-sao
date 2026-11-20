@@ -340,6 +340,7 @@ window.initSidewalkShootLayer = function ({ map, slug, district, apiRequest, esc
       await load();
       return created;
     },
+    createYardPathPoint: options => yardPathLayer.createPoint(options),
     setVisible(on) {
       testLayer.setVisible(on);
       yardPathLayer.setVisible(on);
@@ -503,7 +504,7 @@ function initSidewalkTestLayer({ container, map, card, district, apiRequest, cen
     editor?.clear();
     centerSelection(point.coordinates, zoom);
     popover.open({ coordinates: point.coordinates, kind: 'sidewalk', title: point.street,
-      subtitle: 'Тротуары ОДХ · ' + point.id });
+      subtitle: 'Тротуары ОДХ · ' + point.id, editing: Boolean(editor && canEdit()) });
     const content = node('section', '', 'pin-section');
     content.append(node('h3', 'Фотослоты · ' + point.slots.length));
     content.append(node('p', 'Задание ' + point.taskId + ' · ' + point.balance, 'pin-note'));
@@ -763,8 +764,9 @@ function initYardPathLayer({ container, map, card, district, apiRequest, centerS
   const swatch = node('span', '', 'swatch');
   swatch.style.background = '#8b40c7';
   const count = node('span', '—', 'count');
-  label.append(checkbox, swatch, node('span', 'Дворовые дорожки · точки оцифровки', 'label'), count);
-  const hint = node('div', 'Выберите точку и фотослот, чтобы увидеть направление.', 'shoot-hint');
+  const layerName = 'Оцифровка ДТС';
+  label.append(checkbox, swatch, node('span', layerName, 'label'), count);
+  const hint = node('div', 'Выберите точку съёмки.', 'shoot-hint');
   hint.setAttribute('role', 'status');
   const list = node('details', '', 'shoot-list-box');
   list.hidden = true;
@@ -778,7 +780,7 @@ function initYardPathLayer({ container, map, card, district, apiRequest, centerS
   const flagTitle = node('h4', 'На проверку: нет дорожки');
   const more = node('button', 'Показать ещё');
   more.type = 'button';
-  list.append(node('summary', 'Список точек · Дворовые дорожки · точки оцифровки'), search, results, flagTitle, flagged, more);
+  list.append(node('summary', 'Список точек · ' + layerName), search, results, flagTitle, flagged, more);
   layer.append(label, hint, list);
   container.after(layer);
 
@@ -874,8 +876,14 @@ function initYardPathLayer({ container, map, card, district, apiRequest, centerS
     dot.style.background = background;
     dot.style.boxShadow = '0 0 0 2px ' + ring;
     dot.textContent = point.noSidewalk ? '!' : '';
-    element.title = 'Дворовые дорожки · точки оцифровки · ' + point.id + ' · ' + point.street + (label ? ' ' + label : '');
+    element.title = layerName + ' · ' + point.id + ' · ' + point.street + (label ? ' ' + label : '');
     element.setAttribute('aria-label', element.title);
+  }
+
+  function frameArrow(slot) {
+    const arrow = arrowSvg(slot.azimuth, '#8b40c7', '#542282');
+    arrow.dataset.slotId = slot.id;
+    return arrow;
   }
 
   function openPoint(point, zoom, frameId) {
@@ -883,12 +891,17 @@ function initYardPathLayer({ container, map, card, district, apiRequest, centerS
     clearSelection();
     editor?.clear();
     centerSelection(point.coordinates, zoom);
+    // Карточка с фотослотами тоже должна уходить к краю карты в режиме правки:
+    // её стрелки и ручки относятся к выбранному слоту, а окно не должно их накрывать.
     popover.open({ coordinates: point.coordinates, kind: 'sidewalk', title: 'Дорожка ' + point.id,
-      subtitle: 'Дворовые дорожки · точки оцифровки · ' + point.id });
+      subtitle: layerName + ' · ' + point.district, editing: Boolean(editor && canEdit()) });
     const content = node('section', '', 'pin-section');
-    content.append(node('h3', 'Фотослоты · ' + point.slots.length));
+    const single = point.slots.length === 1;
+    content.append(node('h3', single ? 'Фотослот' : 'Фотослоты · ' + point.slots.length));
     content.append(node('p', 'Объект АСУ ОДС: ' + point.sourceId + ' · ' + point.district, 'pin-note'));
-    if (editor && canEdit()) content.append(node('p', 'Перетащите маркер, чтобы перенести точку. Для поворота выберите фотослот и потяните за ручку стрелки. Правки сохраняются автоматически.', 'pin-note'));
+    if (editor && canEdit()) content.append(node('p', single
+      ? 'Перетащите точку или поверните стрелку за круглую ручку. Правки сохраняются автоматически.'
+      : 'Перетащите маркер, чтобы перенести точку. Для поворота выберите фотослот и потяните за ручку стрелки. Правки сохраняются автоматически.', 'pin-note'));
     const status = node('p', 'Выберите фотослот для показа стрелки.', 'pin-note');
     status.setAttribute('role', 'status');
     const buttons = node('div', '', 'pin-actions');
@@ -946,18 +959,19 @@ function initYardPathLayer({ container, map, card, district, apiRequest, centerS
       photoPanel.append(input, upload);
     }
     const format = new Intl.NumberFormat('ru-RU', { maximumFractionDigits: 8 });
-    const slotButtons = point.slots.map((slot, index) => {
+    const slotButtons = [];
+    for (const [index, slot] of point.slots.entries()) {
       const button = node('button', 'Фотослот ' + (index + 1) + ' · ' + format.format(slot.azimuth) + '°');
       button.type = 'button';
       button.setAttribute('aria-pressed', 'false');
       button.addEventListener('click', () => {
         if (selection?.content !== content || !allowed()) return;
-        selection.arrow?.remove();
-        const arrow = arrowSvg(slot.azimuth, '#8b40c7', '#542282');
-        arrow.style.scale = 'max(var(--shoot-arrow-scale,.35),.75)';
-        arrow.dataset.slotId = slot.id;
-        markers.get(point.id)?.element.append(arrow);
-        selection.arrow = arrow;
+        if (!single) {
+          selection.arrow?.remove();
+          selection.arrow = frameArrow(slot);
+          selection.arrow.style.scale = 'max(var(--shoot-arrow-scale,.35),.75)';
+          markers.get(point.id)?.element.append(selection.arrow);
+        }
         selection.slot = slot;
         popover.setHeading(slot.azimuth);
         bindEditor(point, slot);
@@ -968,9 +982,52 @@ function initYardPathLayer({ container, map, card, district, apiRequest, centerS
         status.textContent = 'Кадр ' + slot.id + ' · направление ' + format.format(slot.azimuth) + '°';
         showPhoto(slot);
       });
-      return button;
-    });
-    buttons.append(...slotButtons);
+      slotButtons.push(button);
+      buttons.append(button);
+      if (canEdit() && !point.singleFrame) {
+        const remove = node('button', 'Убрать', 'danger');
+        remove.type = 'button';
+        remove.title = 'Убрать это направление из активной карты; фото останется в истории';
+        remove.addEventListener('click', async () => {
+          if (!window.confirm('Убрать направление ' + format.format(slot.azimuth) + '°? Оно исчезнет из карты и сводок. Фото останется в истории.')) return;
+          const selectedId = selection?.slot?.id === slot.id ? null : selection?.slot?.id;
+          remove.disabled = true;
+          try {
+            const response = await apiRequest(base + '/' + encodeURIComponent(point.id) + '/slots/' + encodeURIComponent(slot.id), { method: 'DELETE' });
+            const { point: saved } = await response.json();
+            point.slots = saved.slots.map(value => {
+              const old = point.slots.find(item => item.id === value.id);
+              return old ? { ...value, ...old, azimuth: value.azimuth } : { ...value, status: 'empty' };
+            });
+            openPoint(point, undefined, selectedId);
+          } catch (error) { remove.disabled = false; status.textContent = 'Направление не убрано: ' + error.message; }
+        });
+        buttons.append(remove);
+      }
+    }
+    if (!point.slots.length) buttons.append(node('p', 'У точки пока нет направлений.', 'pin-note'));
+    if (canEdit() && !point.singleFrame) {
+      const add = node('button', '+ Направление', 'primary');
+      add.type = 'button';
+      add.addEventListener('click', async () => {
+        add.disabled = true;
+        try {
+          const azimuth = selection?.slot?.azimuth ?? 0;
+          const response = await apiRequest(base + '/' + encodeURIComponent(point.id) + '/slots', {
+            method: 'POST', body: JSON.stringify({ azimuth }),
+          });
+          const { point: saved } = await response.json();
+          const added = saved.slots.find(value => !point.slots.some(old => old.id === value.id));
+          point.slots = saved.slots.map(value => {
+            const old = point.slots.find(item => item.id === value.id);
+            return old ? { ...value, ...old, azimuth: value.azimuth } : { ...value, status: 'empty' };
+          });
+          openPoint(point, undefined, added?.id);
+        } catch (error) { add.disabled = false; status.textContent = 'Направление не добавлено: ' + error.message; }
+      });
+      buttons.append(add);
+    }
+    buttons.hidden = single && (point.singleFrame || !canEdit());
     const mark = node('button');
     mark.type = 'button';
     const markStatus = node('p', '', 'pin-note');
@@ -1000,6 +1057,26 @@ function initYardPathLayer({ container, map, card, district, apiRequest, centerS
     });
     const markActions = node('div', '', 'pin-actions');
     markActions.append(mark);
+    if (canEdit()) {
+      const removePoint = node('button', 'Удалить точку', 'danger');
+      removePoint.type = 'button';
+      removePoint.addEventListener('click', async () => {
+        if (!window.confirm('Удалить точку ' + point.id + ' с активной карты? Слоты и фото останутся в истории.')) return;
+        removePoint.disabled = true;
+        try {
+          await apiRequest(base + '/' + encodeURIComponent(point.id), { method: 'DELETE' });
+          clearSelection();
+          popover.close();
+          points = points.filter(item => item.id !== point.id);
+          const view = markers.get(point.id);
+          if (view) map.removeChild(view.marker);
+          markers.delete(point.id);
+          count.textContent = points.length.toLocaleString('ru-RU');
+          renderList();
+        } catch (error) { removePoint.disabled = false; status.textContent = 'Точка не удалена: ' + error.message; }
+      });
+      markActions.append(removePoint);
+    }
     content.append(buttons, status, photoPanel, markActions, markStatus);
     selection = { point, content, arrow: null, slot: null, refresh() {
       point.slots.forEach((slot, index) => {
@@ -1008,11 +1085,13 @@ function initYardPathLayer({ container, map, card, district, apiRequest, centerS
       if (this.slot) status.textContent = 'Кадр ' + this.slot.id + ' · направление ' + format.format(this.slot.azimuth) + '°';
     } };
     card.replaceChildren(content);
-    bindEditor(point);
-    if (frameId) {
+    if (single) {
+      slotButtons[0].click();
+    } else if (frameId) {
       const index = point.slots.findIndex(slot => slot.id === frameId);
       if (index >= 0) slotButtons[index].click();
-    }
+      else bindEditor(point);
+    } else bindEditor(point);
   }
 
   function draw() {
@@ -1023,6 +1102,7 @@ function initYardPathLayer({ container, map, card, district, apiRequest, centerS
       const dot = node('span', '', 'shoot-dot');
       dot.style.cssText = 'left:-8px;top:-8px;width:16px;height:16px;border-color:#fff;color:white;font:bold 11px/12px sans-serif;text-align:center';
       element.append(dot);
+      if (point.slots.length === 1) element.append(frameArrow(point.slots[0]));
       const key = keyOf(point);
       element.addEventListener('click', (event) => {
         event.stopPropagation();
@@ -1070,6 +1150,29 @@ function initYardPathLayer({ container, map, card, district, apiRequest, centerS
     flagged.replaceChildren();
   }
 
+  async function createPoint({ lng, lat, heading }) {
+    if (!canEdit()) throw new Error('Добавлять точки может только префектура.');
+    const response = await apiRequest(base, { method: 'POST', body: JSON.stringify({
+      district, coordinates: [lng, lat], azimuth: heading,
+    }) });
+    const { point: created } = await response.json();
+    checkbox.checked = true;
+    label.classList.remove('off');
+    layer.hidden = !allowed();
+    const loaded = await apiRequest(base + '?district=' + encodeURIComponent(district));
+    points = (await loaded.json()).points;
+    const point = points.find(value => value.id === created.id);
+    if (!point) throw new Error('Созданная точка не появилась в слое.');
+    count.textContent = points.length.toLocaleString('ru-RU');
+    hint.textContent = points.reduce((total, item) => total + item.slots.length, 0).toLocaleString('ru-RU')
+      + ' фотослотов. Выберите точку съёмки.';
+    list.hidden = false;
+    renderList();
+    for (const view of markers.values()) map.removeChild(view.marker);
+    draw();
+    return point;
+  }
+
   checkbox.addEventListener('change', async () => {
     label.classList.toggle('off', !checkbox.checked);
     stop();
@@ -1084,7 +1187,7 @@ function initYardPathLayer({ container, map, card, district, apiRequest, centerS
       points = payload.points;
       count.textContent = points.length.toLocaleString('ru-RU');
       hint.textContent = points.reduce((total, point) => total + point.slots.length, 0).toLocaleString('ru-RU')
-        + ' фотослотов. Стрелка появится после выбора кадра.';
+        + ' фотослотов. Выберите точку съёмки.';
       search.value = '';
       limit = 80;
       list.hidden = false;
@@ -1108,6 +1211,7 @@ function initYardPathLayer({ container, map, card, district, apiRequest, centerS
   more.addEventListener('click', () => { limit += 80; renderList(); });
 
   return {
+    createPoint,
     setVisible(visible) {
       layer.hidden = !visible || !allowed();
       if (!layer.hidden && linkedPoint && !checkbox.checked) {
@@ -1120,7 +1224,7 @@ function initYardPathLayer({ container, map, card, district, apiRequest, centerS
         label.classList.add('off');
         points = [];
         count.textContent = '—';
-        hint.textContent = 'Выберите точку и фотослот, чтобы увидеть направление.';
+        hint.textContent = 'Выберите точку съёмки.';
       }
     },
   };

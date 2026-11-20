@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="ru"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Оцифровка ДТС · проверка расстановки</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f4f5ef;color:#17382e;font:15px/1.4 Arial,sans-serif}
+main{height:100dvh;display:grid;grid-template-rows:auto 1fr}header,aside{background:#fff;padding:12px 16px}
+header{display:flex;align-items:center;gap:14px;flex-wrap:wrap;border-bottom:1px solid #bdccc3}
+h1{font-size:21px;margin:0 auto 0 0}label{display:inline-flex;align-items:center;gap:5px}select,button,input{font:inherit;min-height:36px}
+button,select,input[type=number]{background:#fff;color:inherit;border:1px solid #adbeb4;border-radius:7px;padding:5px 8px}
+button{cursor:pointer}button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid #327ea4}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 288px;min-height:0}.map{position:relative;min-height:0;overflow:hidden}
+canvas{width:100%;height:100%;display:block;touch-action:none;cursor:grab}canvas:active{cursor:grabbing}
+nav{position:absolute;right:12px;top:12px;display:grid;gap:4px}nav button{font-size:19px;font-weight:bold;width:40px}
+aside{border-left:1px solid #bdccc3;overflow:auto}h2{font-size:17px;margin:12px 0 6px}p{margin:6px 0 10px}
+aside label{display:flex;margin:4px 0}small{color:#496154}.legend{display:inline-block;width:12px;height:12px;border-radius:50%}
+.act{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}.note{padding:8px;background:#eff4ee;border-radius:6px}
+#bearing{width:80px}#point{overflow-wrap:anywhere}.street{font-weight:600}#credits{font-size:12px;color:#58665c;margin-top:12px}
+@media(max-width:740px){header{gap:5px 9px;padding:8px}h1{width:100%;font-size:17px}header select{max-width:min(48vw,250px);font-size:14px}
+.layout{grid-template-columns:1fr;grid-template-rows:minmax(180px,1fr) minmax(0,31dvh)}aside{border-left:0;border-top:1px solid #bdccc3;padding:6px 12px}aside h2{margin-top:4px}}
+</style>
+<main><header><h1>Оцифровка ДТС</h1><select id="district" aria-label="Район"></select><select id="example" aria-label="Участок"></select></header>
+<div class="layout"><div class="map"><canvas id="map" aria-label="Карта дорожек и направлений съёмки"></canvas>
+<nav><button id="plus" aria-label="Приблизить">+</button><button id="minus" aria-label="Отдалить">−</button><button id="fit" aria-label="Показать выбранный участок">⌖</button></nav></div>
+<aside><h2>Слои</h2>
+<label><input id="after" type="checkbox" checked><i class="legend" style="background:#08755c"></i>Расчётные точки</label>
+<label><input id="before" type="checkbox" checked><i class="legend" style="border:2px solid #934eaf"></i>Исходные точки</label>
+<label><input id="cuts" type="checkbox" checked><i class="legend" style="background:#ef9361"></i>Исключённые участки</label>
+<div id="details" aria-live="polite"></div><div id="point"></div>
+<p id="credits">Контуры дорожек и площадок — АСУ ОДС. Парки и здания — © OpenStreetMap contributors, ODbL. Север вверху карты.</p></aside></div></main>
+<script src="districts.js"></script><script>
+'use strict';
+const el=id=>document.getElementById(id), canvas=el('map'), ctx=canvas.getContext('2d');
+const rules={long:'Длинная дорожка',short:'Короткая дорожка',compact:'Компактная зона',branched:'Разветвлённая сеть',park:'Парк',dp:'У детской площадки',sp:'У спортивной площадки'};
+let data,selected=null,view,examples=[],edits={},pending=null,activeScript,revision,width,height;
+const gridM=111320, latM=110540;
+const xy=(coord)=>[(coord[0]-view.lon)*view.lonM,(coord[1]-view.lat)*latM];
+const screen=coord=>{const [x,y]=xy(coord);return [width/2+(x-view.x)*view.zoom,height/2-(y-view.y)*view.zoom]};
+const coordAt=(x,y)=>[view.lon+(view.x+(x-width/2)/view.zoom)/view.lonM,view.lat+(view.y-(y-height/2)/view.zoom)/latM];
+function bounds(seq) {
+  let x0=Infinity,x1=-Infinity,y0=Infinity,y1=-Infinity;
+  for(const ring of seq) for(const [x,y] of ring){x0=Math.min(x0,x);x1=Math.max(x1,x);y0=Math.min(y0,y);y1=Math.max(y1,y)}
+  return [x0,y0,x1,y1];
+}
+function fit(box) {
+  if(!box || !Number.isFinite(box[0]))return;
+  const [x0,y0]=xy(box.slice(0,2)),[x1,y1]=xy(box.slice(2));
+  view.x=(x0+x1)/2;view.y=(y0+y1)/2;
+  view.zoom=Math.max(.005,Math.min(8,(width-70)/Math.max(15,x1-x0),(height-58)/Math.max(15,y1-y0)));
+  draw();
+}
+const option=(text,value)=>new Option(text,value);
+for(const [name,file] of districts)el('district').add(option(name,file));
+function loadDistrict(){
+  pending=null;selected=null;data=null;view=null;drag=null;el('example').replaceChildren();
+  ctx.clearRect(0,0,width||0,height||0);el('details').replaceChildren();el('point').textContent='Загрузка района…';
+  activeScript?.remove();activeScript=document.createElement('script');activeScript.src=el('district').value;
+  activeScript.onerror=()=>{el('point').textContent='Не удалось открыть данные района. Проверьте файлы рядом с картой.'};
+  document.body.append(activeScript);
+}
+function showDistrict(payload) {
+  if(document.currentScript!==activeScript)return;
+  data=payload;
+  const first=data.before[0].xy;
+  view={lon:first[0],lat:first[1],lonM:gridM*Math.cos(first[1]*Math.PI/180),x:0,y:0,zoom:1};
+  for(const f of [...data.paths,...data.axes,...data.cuts,...data.masks])f.box=bounds(f.lines);
+  data.addresses=new Map(data.paths.map(f=>[f.src,f.address]));
+  data.original=new Map(data.after.map(p=>[p.id,p]));
+  revision='dts-review-'+data.revision+'-'+el('district').value;
+  try{edits=JSON.parse(localStorage.getItem(revision)||'{}')}catch{edits={}}
+  applyEdits();examples=[];
+  for(const [rule,label] of Object.entries(rules)){
+    const options=(['dp','sp','park'].includes(rule)?data.cuts:data.axes).filter(f=>f.rule===rule);
+    if(!options.length)continue;
+    const pick=options.find(f=>f.example)||options[0];
+    examples.push({label,feature:pick});
+  }
+  el('example').replaceChildren(option('Весь район','all'),...examples.map((e,i)=>option(e.label,i)));
+  if(examples.length)el('example').selectedIndex=1;
+  selectExample();
+}
+function applyEdits(){
+  const pts=new Map(data.original);
+  for(const [id,p] of Object.entries(edits)){if(p===null)pts.delete(id);else pts.set(id,p)}
+  data.working=[...pts.values()];
+}
+function persist(id,value){
+  const next={...edits,[id]:value};
+  try{localStorage.setItem(revision,JSON.stringify(next))}catch{el('point').textContent='Браузер запретил сохранение локальной правки.';return false}
+  edits=next;applyEdits();return true;
+}
+function selectExample(){
+  if(!data)return;
+  selected=null;pending=null;
+  const feature=examples[el('example').value]?.feature;
+  const b=feature?.box||bounds([data.before.map(p=>p.xy),data.working.map(p=>p.xy)].filter(v=>v.length));
+  if(!width){width=canvas.clientWidth;height=canvas.clientHeight}
+  fit(b);el('details').replaceChildren();
+  const desc=document.createElement('p');desc.className='note';desc.textContent=feature
+    ? [data.addresses.get(feature.src),'АСУ ОДС '+feature.src,feature.detail,
+       feature.route ? 'Ось '+feature.length+' м, точек '+data.working.filter(p=>p.route===feature.route).length : 'Контур '+feature.mask].filter(Boolean).join(' · ')
+    : data.before.length+' исходных точек · '+data.working.length+' расчётных точек';
+  el('details').append(desc);panel();
+}
+function lineFeature(f,color,fill,thickness,clip){
+  const b=f.box;if(b[0]>clip[2]||b[2]<clip[0]||b[1]>clip[3]||b[3]<clip[1])return;
+  ctx.beginPath();
+  for(const ring of f.lines){if(ring.length===1){const [x,y]=screen(ring[0]);ctx.moveTo(x+5,y);ctx.arc(x,y,5,0,Math.PI*2);continue}
+    let first=true;for(const c of ring){const [x,y]=screen(c);if(first){ctx.moveTo(x,y);first=false}else ctx.lineTo(x,y)}if(fill)ctx.closePath()}
+  if(fill){ctx.fillStyle=fill;ctx.fill('evenodd')}
+  ctx.strokeStyle=color;ctx.lineWidth=thickness;ctx.stroke();
+}
+function drawPoints(points,old){
+  const size=view.zoom<.15?2:view.zoom<.65?3.5:5;
+  for(const p of points){
+    const [x,y]=screen(p.xy);if(x< -22||y< -22||x>width+22||y>height+22)continue;
+    const color=old?'#934eaf':'#08755c';
+    ctx.lineWidth=old?1.25:1.5;
+    if(view.zoom>.22){
+      for(const [,angle] of p.frames){
+        const a=angle*Math.PI/180,dx=Math.sin(a),dy=-Math.cos(a),len=old?13:19;
+        const tx=x+dx*len,ty=y+dy*len;
+        ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(tx,ty);ctx.lineTo(tx-5*dx+3*dy,ty-5*dy-3*dx);
+        ctx.moveTo(tx,ty);ctx.lineTo(tx-5*dx-3*dy,ty-5*dy+3*dx);ctx.strokeStyle=color;ctx.stroke();
+      }
+    }
+    ctx.beginPath();ctx.arc(x,y,size,0,Math.PI*2);ctx.fillStyle=old?'white':color;ctx.fill();ctx.strokeStyle=old?color:'white';ctx.stroke();
+    if(selected?.id===p.id && selected.old===old){ctx.beginPath();ctx.arc(x,y,9,0,Math.PI*2);ctx.strokeStyle='#172b22';ctx.stroke()}
+  }
+}
+function draw(){
+  if(!view||!data||!width)return;
+  ctx.fillStyle='#f4f4ee';ctx.fillRect(0,0,width,height);
+  const clip=[...coordAt(-30,height+30),...coordAt(width+30,-30)];
+  if(el('cuts').checked)for(const f of data.masks)lineFeature(f,'#c7b6a2',f.rule==='park'?'#dce7cf':'#f8e3d1',.8,clip);
+  for(const f of data.paths)lineFeature(f,'#afa78e','#dfdac6',.8,clip);
+  for(const f of data.axes)lineFeature(f,'#aca68c',null,.7,clip);
+  if(el('cuts').checked)for(const f of data.cuts)lineFeature(f,'#bd623b','rgba(229,126,71,.63)',1,clip);
+  if(el('before').checked)drawPoints(data.before,true);
+  if(el('after').checked)drawPoints(data.working,false);
+  const metres=10**Math.floor(Math.log10(105/view.zoom)),w=metres*view.zoom;
+  ctx.fillStyle='#fff';ctx.fillRect(8,height-32,Math.max(w+12,55),26);
+  ctx.fillStyle='#273c31';ctx.fillRect(13,height-12,w,2);ctx.font='12px Arial';ctx.fillText(metres+' м',13,height-17);
+}
+function addText(host,tag,text,cls){const e=document.createElement(tag);e.textContent=text;if(cls)e.className=cls;host.append(e);return e}
+function button(host,text,act){const b=addText(host,'button',text);b.onclick=act;return b}
+function panel(){
+  const host=el('point');host.replaceChildren();
+  const p=selected && (selected.old?data.before:data.working).find(p=>p.id===selected.id);
+  if(p){
+    addText(host,'h2',p.id);addText(host,'p',data.addresses.get(p.src)||'АСУ ОДС '+p.src,'street');
+    addText(host,'small',(selected.old?'Исходная точка':'Расчётная точка')+' · '+p.xy[1].toFixed(6)+', '+p.xy[0].toFixed(6));
+    addText(host,'p',p.frames.map(([id,a])=>id+' · '+a+'°').join(' / '));
+    if(p.station!=null)addText(host,'small','От начала оси '+p.station+' м');
+    if(!selected.old){
+      const field=document.createElement('label');field.textContent='Направление, °';host.append(field);
+      const value=document.createElement('input');value.id='bearing';value.type='number';value.min=0;value.max=359.99999999;value.step='any';value.value=p.frames[0][1];field.append(value);
+      const actions=document.createElement('div');actions.className='act';host.append(actions);
+      button(actions,'Сохранить угол',()=>{if(value.value===''||!value.reportValidity())return;
+        if(persist(p.id,{...p,frames:[[p.frames[0][0],Number(value.value)]]})){draw();panel()}});
+      button(actions,'Перенести',()=>{pending={mode:'move',point:p};addText(host,'p','Укажите новое место на карте.')});
+      button(actions,'Убрать из копии',()=>{if(persist(p.id,null)){selected=null;draw();panel()}});
+    }
+  }else addText(host,'p','Нажмите на точку, чтобы проверить координаты, номер кадра и направление.');
+  const actions=document.createElement('div');actions.className='act';host.append(actions);
+  button(actions,'Добавить в копию',()=>{pending={mode:'add'};addText(host,'p','Укажите положение фотографа, затем задайте угол.')});
+  if(Object.keys(edits).length)button(actions,'Сбросить правки района',()=>{if(!confirm('Вернуть расчётную расстановку этого района?'))return;
+    localStorage.removeItem(revision);edits={};applyEdits();selected=null;draw();panel()});
+  addText(host,'small','Правки сохраняются в этом браузере. Видимость на местности требует проверки.');
+}
+function clickMap(x,y){
+  if(!data)return;
+  if(pending){
+    const xy=coordAt(x,y),p=pending.point||{id:'LOCAL-'+crypto.randomUUID(),src:'локальная правка',frames:[]};
+    const frames=p.frames.length?p.frames:[[p.id+'-1',0]];
+    if(persist(p.id,{...p,xy,frames})){pending=null;selected={id:p.id,old:false};el('after').checked=true;draw();panel()}
+    return;
+  }
+  let best=13,found=null;
+  for(const [points,old,visible] of [[data.working,false,el('after').checked],[data.before,true,el('before').checked]]){
+    if(!visible)continue;
+    for(const p of points){const [px,py]=screen(p.xy),d=Math.hypot(x-px,y-py);if(d<best){best=d;found={id:p.id,old}}}
+  }
+  selected=found;draw();panel();
+}
+function zoom(k,x=width/2,y=height/2){
+  if(!view)return;
+  const [a,b]=xy(coordAt(x,y));view.zoom=Math.min(35,Math.max(.005,view.zoom*k));
+  view.x=a-(x-width/2)/view.zoom;view.y=b+(y-height/2)/view.zoom;draw();
+}
+let drag;
+canvas.onpointerdown=e=>{if(!view)return;canvas.setPointerCapture(e.pointerId);drag=[e.clientX,e.clientY,view.x,view.y]};
+canvas.onpointermove=e=>{if(!drag)return;view.x=drag[2]-(e.clientX-drag[0])/view.zoom;view.y=drag[3]+(e.clientY-drag[1])/view.zoom;draw()};
+canvas.onpointerup=e=>{if(drag && Math.hypot(e.clientX-drag[0],e.clientY-drag[1])<5){const b=canvas.getBoundingClientRect();clickMap(e.clientX-b.left,e.clientY-b.top)}drag=null};
+canvas.onpointercancel=()=>{drag=null};
+canvas.onwheel=e=>{e.preventDefault();const b=canvas.getBoundingClientRect();zoom(e.deltaY<0?1.3:1/1.3,e.clientX-b.left,e.clientY-b.top)};
+el('plus').onclick=()=>zoom(1.6);el('minus').onclick=()=>zoom(1/1.6);
+el('fit').onclick=selectExample;el('district').onchange=loadDistrict;el('example').onchange=selectExample;
+for(const id of ['after','before','cuts'])el(id).onchange=draw;
+new ResizeObserver(()=>{const b=canvas.getBoundingClientRect();width=b.width;height=b.height;
+  const d=devicePixelRatio||1;canvas.width=Math.round(width*d);canvas.height=Math.round(height*d);ctx.setTransform(d,0,0,d,0,0);draw()}).observe(canvas);
+loadDistrict();
+</script></html>

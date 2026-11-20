@@ -31,6 +31,10 @@ test('catalog and district access, six-frame editing and restart', async () => {
   const get=(path,role,district=point.district)=>fetch(base+path,{headers:role?{'x-role':role,'x-district':encodeURIComponent(district)}:{}});
   const patch=(body,role='prefecture_admin',district=point.district)=>fetch(base+'/'+point.id,{
     method:'PATCH',headers:{'content-type':'application/json','x-role':role,'x-district':encodeURIComponent(district)},body:JSON.stringify(body)});
+  const post=(path,body,role='prefecture_admin')=>fetch(base+path,{
+    method:'POST',headers:{'content-type':'application/json','x-role':role,'x-district':encodeURIComponent(point.district)},body:JSON.stringify(body)});
+  const remove=(path,role='prefecture_admin')=>fetch(base+path,{
+    method:'DELETE',headers:{'x-role':role,'x-district':encodeURIComponent(point.district)}});
   const overview='/?district='+encodeURIComponent(point.district);
   try {
     assert.equal((await get(overview)).status,401);
@@ -49,12 +53,60 @@ test('catalog and district access, six-frame editing and restart', async () => {
     assert.equal(response.point.slots[0].azimuth,point.slots[0].azimuth);
     assert.equal((await patch({coordinates:[37.51,55.81]})).status,200);
     assert.equal((await patch({noSidewalk:true},'district_editor')).status,200);
+    const createdResponse=await post('/',{district:point.district,coordinates:[37.52,55.82],azimuth:135});
+    assert.equal(createdResponse.status,201);
+    const createdPoint=(await createdResponse.json()).point;
+    assert.equal(createdPoint.slots.length,1);
+    assert.equal(createdPoint.slots[0].azimuth,135);
+    assert.equal((await post('/',{district:point.district,coordinates:[38,56],azimuth:90})).status,400);
+    assert.equal((await post('/'+point.id+'/slots',{azimuth:240},'district_editor')).status,403);
+    const slotResponse=await post('/'+createdPoint.id+'/slots',{azimuth:240});
+    assert.equal(slotResponse.status,201);
+    const pointWithSlot=(await slotResponse.json()).point;
+    assert.equal(pointWithSlot.slots.length,2);
+    const addedSlot=pointWithSlot.slots.find(slot=>slot.azimuth===240);
+    assert.ok(addedSlot);
+    assert.equal((await remove('/'+createdPoint.id+'/slots/'+addedSlot.id,'district_editor')).status,403);
+    const removedSlot=await remove('/'+createdPoint.id+'/slots/'+addedSlot.id);
+    assert.equal(removedSlot.status,200);
+    assert.equal((await removedSlot.json()).point.slots.length,1);
+    assert.equal((await remove('/'+createdPoint.id,'district_editor')).status,403);
+    assert.equal((await remove('/'+createdPoint.id)).status,200);
     router=makeRouter();
+    const active=(await (await get(overview,'prefecture_admin')).json()).points;
+    assert.ok(!active.some(p=>p.id===createdPoint.id));
     const saved=(await (await get(overview,'prefecture_admin')).json()).points.find(p=>p.id===point.id);
     assert.equal(saved.slots[4].azimuth,42);
     assert.deepEqual(saved.coordinates,[37.51,55.81]);
     assert.equal(saved.noSidewalk,true);
   } finally { await new Promise(resolve=>srv.close(resolve)); await rm(dir,{recursive:true,force:true}); }
+});
+
+test('single-frame catalog keeps one direction on catalog and manually created points', async () => {
+  const dir = await mkdtemp(join(tmpdir(), 'dts-single-'));
+  const catalogPath = join(dir, 'catalog.json');
+  const point = { id: 'test-dts', district: 'Аэропорт', balance: 'Аэропорт', coordinates: [37.51,55.81],
+    slots: [{ id: 'test-frame', azimuth: 0 }] };
+  await writeFile(catalogPath, JSON.stringify({version: 1, singleFrame: true, points: [point]}));
+  const app = express();
+  app.use(express.json(), createYardPathLayerRouter({ catalogPath, editsPath: join(dir,'edits.json'),
+    authenticate(req, _res, next) { req.user = {role: 'prefecture_admin'}; next(); },
+    pool: {query: async () => ({rows: []})} }));
+  const server = app.listen(0,'127.0.0.1');
+  try {
+    await new Promise(resolve => server.once('listening', resolve));
+    const base = 'http://127.0.0.1:' + server.address().port;
+    const post = (path, body) => fetch(base + path, {method:'POST', headers:{'content-type':'application/json'}, body:JSON.stringify(body)});
+    const created = (await (await post('/', {...point, azimuth:90})).json()).point;
+    const active = await (await fetch(base+'/?district='+encodeURIComponent(point.district))).json();
+    assert.equal(active.points.length,2);
+    for (const p of active.points) {
+      assert.equal(p.singleFrame,true);
+      assert.equal((await post('/'+p.id+'/slots',{azimuth:45})).status,409);
+      assert.equal((await fetch(base+'/'+p.id+'/slots/'+p.slots[0].id,{method:'DELETE'})).status,409);
+    }
+    assert.equal((await fetch(base+'/'+created.id,{method:'DELETE'})).status,200);
+  } finally { await new Promise(resolve=>server.close(resolve)); await rm(dir,{recursive:true,force:true}); }
 });
 
 test('production catalog: all points and slots, if privately provisioned', async (t) => {
@@ -63,10 +115,14 @@ test('production catalog: all points and slots, if privately provisioned', async
   catch(error) { if(error.code==='ENOENT') return t.skip('private catalog not provisioned'); throw error; }
   const {points}=catalog;
   const frames=points.flatMap(p=>p.slots);
-  assert.equal(points.length,6563);
-  assert.equal(new Set(points.map(p=>p.id)).size,6563);
-  assert.equal(frames.length,16572);
-  assert.equal(new Set(frames.map(f=>f.id)).size,16572);
+  if (catalog.singleFrame) {
+    assert.ok(points.every(p=>p.slots.length===1));
+  } else {
+    assert.equal(points.length,6563);
+    assert.equal(frames.length,16572);
+  }
+  assert.equal(new Set(points.map(p=>p.id)).size,points.length);
+  assert.equal(new Set(frames.map(f=>f.id)).size,frames.length);
   assert.equal(new Set(points.map(p=>p.district)).size,16);
   assert.ok(frames.every(f=>Number.isFinite(f.azimuth)&&f.azimuth>=0&&f.azimuth<360));
 });

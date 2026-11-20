@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="ru">
 <head>
 <meta charset="utf-8">
@@ -170,7 +170,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
 </script>
 <link rel="stylesheet" href="../atlas-brand.css?v=20261021">
 <link rel="stylesheet" href="../atlas-hud.css?v=20261029b">
-<link rel="stylesheet" href="point-popover.css?v=20261029-edit">
+<link rel="stylesheet" href="point-popover.css?v=20261119-dts-release">
 </head>
 <body>
 <div class="app">
@@ -201,6 +201,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       <span class="add-title">Новая точка</span>
       <button id="shootToggle" class="hud-btn add-point" type="button" aria-pressed="false" hidden title="Поставить новую точку въездной группы: клик — место, второй клик — направление">+ Въездная группа</button>
       <button id="sidewalkAdd" class="hud-btn add-point" type="button" aria-pressed="false" hidden title="Поставить новую точку тротуара: клик — место, второй клик — направление">+ Тротуар</button>
+      <button id="yardPathAdd" class="hud-btn add-point" type="button" aria-pressed="false" hidden title="Поставить новую точку дворовой дорожки: клик — место, второй клик — направление">+ Дворовая дорожка</button>
     </div>
     <div class="shoot-hint hud-callout" id="shootHint">Точки и направления назначает префектура. Район загружает снимки на назначенные точки.</div>
     <label class="layer-row off" id="shootLayerRow" hidden><input type="checkbox" id="shootLayerToggle"><span class="swatch" style="background:#ffcb00"></span><span class="label">Точки съёмки · въездные группы</span><span class="count" id="shootLayerCount">0</span></label>
@@ -232,11 +233,11 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
 </div>
 <script src="../atlas-hud.js?v=20261028"></script>
 <script src="../atlas-summary.js?v=20261029b"></script>
-<script src="point-popover.js?v=20261029-edit"></script>
-<script src="point-editor.js?v=20261029-edit"></script>
+<script src="point-popover.js?v=20261119-dts-release"></script>
+<script src="point-editor.js?v=20261119-editor-dock"></script>
 <script src="point-stack.js?v=20261102"></script>
 <script src="playground-photo-layer.js?v=20261109-point"></script>
-<script src="sidewalk-shoot-layer.js?v=20261116-yardpaths"></script>
+<script src="sidewalk-shoot-layer.js?v=20261119-dts-release"></script>
 <script src="entrance-ref-layer.js?v=20261028"></script>
 <script>
 (() => {
@@ -297,19 +298,20 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
   function showCard(item) {
     centerSelection(item.feature?.geometry?.coordinates || item.geometry?.coordinates);
     const p = (item.feature?.properties || item.properties || {});
+    const isPedestrianPath = item.layerKey === 'peshehodnye_dorozhki';
     const rows = [
       ['Тип объекта', p.object_type_name],
       ['Покрытие', p.coating_type_name],
       ['Площадь, м²', p.total_area != null ? Number(p.total_area).toLocaleString('ru-RU') : null],
-      ['В составе', p.source_id ? null : p.parent_object_name],
+      ['В составе', !isPedestrianPath && !p.source_id ? p.parent_object_name : null],
       ['Статус', p.object_status_name],
       ['Популярная', p.popular ? 'да, №' + p.popular_rank : null],
-      ['Адрес', p.source_id ? p.parent_object_name : null],
-      ['ID в таблице', p.source_id],
+      ['Адрес', isPedestrianPath || p.source_id ? p.parent_object_name : null],
+      ['ID в таблице', p.source_id || (isPedestrianPath ? p.id : null)],
       ['Балансодержатель', p.balance_holder],
       ['Год благоустройства', p.improvement_year],
       ['Примечание', p.reference_note],
-      ['Источник', p.source],
+      ['Источник', isPedestrianPath && p.source === 'dts' ? 'АСУ ОДС' : p.source],
     ].filter(([, v]) => v != null && v !== '').map(([k, v]) => `<div><strong>${k}:</strong> ${escapeHtml(v)}</div>`).join('');
     const title = p.object_type_name || p.district || 'Объект';
     const geometry = item.feature?.geometry || item.geometry;
@@ -1255,7 +1257,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
   /* Карта всегда двигается мышью: клик и перетаскивание карта различает сама. */
   const MAP_BEHAVIORS = ['drag', 'scrollZoom', 'pinchZoom', 'oneFingerZoom', 'doubleTapZoom'];
 
-  const ADD_LABELS = { entrance: '+ Въездная группа', sidewalk: '+ Тротуар' };
+  const ADD_LABELS = { entrance: '+ Въездная группа', sidewalk: '+ Тротуар', yardPath: '+ Дворовая дорожка' };
   /** Новая точка: «+ Въездная группа» или «+ Тротуар», клик в месте съёмки, второй клик — направление.
       Стрелка черновика смотрит за мышью. Ставить можно подряд; «Готово» или Esc — выход. */
   function setShootMode(on, target = state.markTarget || 'entrance') {
@@ -1266,7 +1268,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     if (on) { state.popover?.close?.(); state.editor?.clear(); }
     state.picking = null;
     clearPreview();
-    for (const [id, kind] of [['shootToggle', 'entrance'], ['sidewalkAdd', 'sidewalk']]) {
+    for (const [id, kind] of [['shootToggle', 'entrance'], ['sidewalkAdd', 'sidewalk'], ['yardPathAdd', 'yardPath']]) {
       const active = on && target === kind;
       $(id).classList.toggle('active', active);
       $(id).setAttribute('aria-pressed', String(active));
@@ -1274,7 +1276,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     }
     $('map').classList.toggle('marking', on);
     $('shootHint').textContent = on
-      ? (target === 'sidewalk' ? 'Новая точка тротуара. ' : 'Новая точка въездной группы. ') + 'Шаг 1: кликните, где стоит фотограф. Шаг 2: кликните, куда снимать. Карту можно двигать мышью.'
+      ? (target === 'sidewalk' ? 'Новая точка тротуара. ' : target === 'yardPath' ? 'Новая точка дворовой дорожки. ' : 'Новая точка въездной группы. ') + 'Шаг 1: кликните, где поставить точку. Шаг 2: кликните направление первого кадра.'
       : `Точек съёмки: ${layerPointCount().toLocaleString('ru-RU')}. Нажмите на точку, чтобы перенести или повернуть её.`;
   }
 
@@ -1328,6 +1330,16 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     const picking = state.picking;
     if (!picking || picking.heading == null) return;
     if (!isPrefecture() || !state.serverOk) { $('shootHint').textContent = 'Точка не создана: нет полномочий или связи с сервером.'; return; }
+    if (state.markTarget === 'yardPath') {
+      try {
+        const created = await state.sidewalkLayer.createYardPathPoint({ lng: picking.lng, lat: picking.lat, heading: picking.heading });
+        state.picking = null;
+        clearPreview();
+        $('shootHint').textContent = 'Точка дворовой дорожки ' + created.id + ' поставлена. Ставьте следующую или нажмите «Готово».';
+        state.editor?.say('Точка дворовой дорожки поставлена');
+      } catch (error) { $('shootHint').textContent = 'Точка не сохранена: ' + error.message; }
+      return;
+    }
     if (state.markTarget === 'sidewalk') {
       try {
         const created = await state.sidewalkLayer.createPoint({ lng: picking.lng, lat: picking.lat, heading: picking.heading });
@@ -1407,6 +1419,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     // Видимость фото тротуаров ограничена своим районом; правки — только префектуре.
     $('shootToggle').hidden = !isPrefecture();
     $('sidewalkAdd').hidden = !isPrefecture() || !state.sidewalkLayer;
+    $('yardPathAdd').hidden = !isPrefecture() || !state.sidewalkLayer;
     if (!isPrefecture() && state.shootMode) setShootMode(false);
     if (!isPrefecture()) state.editor?.clear();
     $('modeBar').hidden = !isPrefecture();
@@ -1505,6 +1518,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
   state.summary = window.createPrefectureSummary?.({
     title: 'Сводка · ' + DISTRICT,
     storeKey: 'atlas-summary:district',
+    parent: document.querySelector('.app'),
     sources: [
       { label: 'Въездные группы', load: async () => (await statesOf(await apiRequest(`/object-photo-points?dataset=${DATASET}&district=${encodeURIComponent(DISTRICT)}`)))
         .filter((p) => !isGpkgPoint({ imported: p.imported === true || String(p.note || '').startsWith('Источник:'), label: p.label }))
