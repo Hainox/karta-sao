@@ -94,6 +94,10 @@ cd /opt/sao-photo-service
 git fetch origin main
 git archive origin/main photo-service/scripts/repair-dpsp-accounts.js | tar -x -C /opt/sao-photo-service
 
+# compose-файлы лежат в photo-service/; проверить можно так:
+# docker inspect sao-photo-service-photo-service-1 \
+#   --format '{{index .Config.Labels "com.docker.compose.project.config_files"}}'
+cd /opt/sao-photo-service/photo-service
 DC="docker compose -p sao-photo-service -f compose.yaml -f compose.recovery.yaml"
 
 $DC run --rm --no-deps --user root \
