@@ -96,12 +96,12 @@ git archive origin/main photo-service/scripts/repair-dpsp-accounts.js | tar -x -
 
 DC="docker compose -p sao-photo-service -f compose.yaml -f compose.recovery.yaml"
 
-$DC run --rm --no-deps --no-build --user root \
+$DC run --rm --no-deps --user root \
   -v /opt/sao-photo-service/photo-service/scripts/repair-dpsp-accounts.js:/app/scripts/repair-dpsp-accounts.js:ro \
   -v /root/dpsp-accounts.tsv:/tmp/dpsp-accounts.tsv:ro \
   photo-service node scripts/repair-dpsp-accounts.js /tmp/dpsp-accounts.tsv
 
-$DC run --rm --no-deps --no-build --user root \
+$DC run --rm --no-deps --user root \
   -v /opt/sao-photo-service/photo-service/scripts/repair-dpsp-accounts.js:/app/scripts/repair-dpsp-accounts.js:ro \
   -v /root/dpsp-accounts.tsv:/tmp/dpsp-accounts.tsv:ro \
   photo-service node scripts/repair-dpsp-accounts.js /tmp/dpsp-accounts.tsv --apply
@@ -110,8 +110,9 @@ rm -f /root/dpsp-accounts.tsv
 ```
 
 `--user root` нужен только чтобы прочитать файл учёток с правами `600`; сам
-скрипт ничего не пишет на диск. `--no-build` берёт уже собранный образ, поэтому
-пересборка после правки скрипта не требуется.
+скрипт ничего не пишет на диск. Образ берётся уже собранный — пересборка после
+правки скрипта не нужна; флаг `--no-build` есть не во всех версиях compose CLI
+(на сервере он отвечает `unknown flag`), поэтому его не используем.
 
 Без `--apply` скрипт только перечисляет, что изменится: создаст отсутствующие,
 вернёт роль `dpsp_district_editor`, район и активность, сбросит несовпадающий
