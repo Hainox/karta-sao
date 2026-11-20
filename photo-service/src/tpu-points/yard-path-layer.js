@@ -91,11 +91,12 @@ export function createYardPathLayerRouter({ authenticate, boundary, pool, catalo
     for (const [id, edit] of edits) {
       if (edit.createdPoint && !edit.deleted && !base.byId.has(id)) points.push(mergePoint(edit.createdPoint, edit));
     }
-    if (base.singleFrame) {
-      for (const point of points) {
-        if (point.slots.length !== 1) throw new Error('Сохранённые правки несовместимы с каталогом ДТС.');
-        point.singleFrame = true;
-      }
+    for (const point of points) {
+      if (base.singleFrame && point.slots.length !== 1) throw new Error('Сохранённые правки несовместимы с каталогом ДТС.');
+      // Точку ДТС снимают одним кадром. Лишние направления исходного каталога
+      // остаются в его файле как резерв, но в активную карту и выгрузки не идут.
+      if (point.slots.length > 1) point.slots = [point.slots[0]];
+      if (point.slots.length === 1) point.singleFrame = true;
     }
     return catalogView(points);
   };
