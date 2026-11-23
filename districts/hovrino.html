@@ -1309,7 +1309,8 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
   function handleMapClick(coordinates) {
     if (!isPrefecture() || !state.serverOk || !Array.isArray(coordinates) || coordinates.length < 2) return;
     const [lng, lat] = coordinates;
-    if (!state.shootMode || state.picking?.saving) return;
+    if (!state.shootMode) return;
+    if (state.picking?.saving) return;
     if (!state.picking) {
       state.picking = { lng, lat, heading: null };
       renderPreview();
