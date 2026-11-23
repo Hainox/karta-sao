@@ -785,9 +785,10 @@ function initYardPathLayer({ container, map, card, district, apiRequest, centerS
   container.after(layer);
 
   let points = [];
-  let markers = new Map();
+  const markers = new Map();
   let selection = null;
   let request = null;
+  let catalogLoaded = false;
   let limit = 80;
   let linkedPoint = new URLSearchParams(location.search).get('yardPath');
 
@@ -1094,28 +1095,24 @@ function initYardPathLayer({ container, map, card, district, apiRequest, centerS
     } else bindEditor(point);
   }
 
-  function draw() {
-    const next = new Map();
-    for (const point of points) {
-      const element = node('button', '', 'shoot-marker yard-path-shoot');
-      element.type = 'button';
-      const dot = node('span', '', 'shoot-dot');
-      dot.style.cssText = 'left:-8px;top:-8px;width:16px;height:16px;border-color:#fff;color:white;font:bold 11px/12px sans-serif;text-align:center';
-      element.append(dot);
-      if (point.slots.length === 1) element.append(frameArrow(point.slots[0]));
-      const key = keyOf(point);
-      element.addEventListener('click', (event) => {
-        event.stopPropagation();
-        if (!editor?.takeSuppressedClick(key)) openPoint(point);
-      });
-      const marker = new window.ymaps3.YMapMarker({ coordinates: point.coordinates, zIndex: 40,
-        ...(editor && canEdit() ? editor.dragHandlers(key) : {}) }, element);
-      map.addChild(marker);
-      const view = { marker, element, point };
-      next.set(point.id, view);
-      paintMark(view);
-    }
-    markers = next;
+  function drawPoint(point) {
+    const element = node('button', '', 'shoot-marker yard-path-shoot');
+    element.type = 'button';
+    const dot = node('span', '', 'shoot-dot');
+    dot.style.cssText = 'left:-8px;top:-8px;width:16px;height:16px;border-color:#fff;color:white;font:bold 11px/12px sans-serif;text-align:center';
+    element.append(dot);
+    if (point.slots.length === 1) element.append(frameArrow(point.slots[0]));
+    const key = keyOf(point);
+    element.addEventListener('click', (event) => {
+      event.stopPropagation();
+      if (!editor?.takeSuppressedClick(key)) openPoint(point);
+    });
+    const marker = new window.ymaps3.YMapMarker({ coordinates: point.coordinates, zIndex: 40,
+      ...(editor && canEdit() ? editor.dragHandlers(key) : {}) }, element);
+    map.addChild(marker);
+    const view = { marker, element, point };
+    markers.set(point.id, view);
+    paintMark(view);
   }
 
   function renderList() {
@@ -1141,6 +1138,7 @@ function initYardPathLayer({ container, map, card, district, apiRequest, centerS
   function stop() {
     request?.abort();
     request = null;
+    catalogLoaded = false;
     if (selection && card.contains(selection.content)) popover.close();
     clearSelection();
     for (const { marker } of markers.values()) map.removeChild(marker);
@@ -1150,33 +1148,40 @@ function initYardPathLayer({ container, map, card, district, apiRequest, centerS
     flagged.replaceChildren();
   }
 
+  function showPoints() {
+    count.textContent = catalogLoaded ? points.length.toLocaleString('ru-RU') : '—';
+    hint.textContent = catalogLoaded
+      ? points.reduce((total, point) => total + point.slots.length, 0).toLocaleString('ru-RU')
+        + ' фотослотов. Выберите точку съёмки.'
+      : 'Точка сохранена. Чтобы загрузить полный список, выключите и снова включите слой ДТС.';
+    list.hidden = false;
+    renderList();
+  }
+
   async function createPoint({ lng, lat, heading }) {
     if (!canEdit()) throw new Error('Добавлять точки может только префектура.');
     const response = await apiRequest(base, { method: 'POST', body: JSON.stringify({
       district, coordinates: [lng, lat], azimuth: heading,
     }) });
     const { point: created } = await response.json();
-    checkbox.checked = true;
-    label.classList.remove('off');
-    layer.hidden = !allowed();
-    const loaded = await apiRequest(base + '?district=' + encodeURIComponent(district));
-    points = (await loaded.json()).points;
-    const point = points.find(value => value.id === created.id);
-    if (!point) throw new Error('Созданная точка не появилась в слое.');
-    count.textContent = points.length.toLocaleString('ru-RU');
-    hint.textContent = points.reduce((total, item) => total + item.slots.length, 0).toLocaleString('ru-RU')
-      + ' фотослотов. Выберите точку съёмки.';
-    list.hidden = false;
-    renderList();
-    for (const view of markers.values()) map.removeChild(view.marker);
-    draw();
-    return point;
+    if (!canEdit() || layer.hidden) return created;
+
+    if (checkbox.checked && catalogLoaded) {
+      points.push(created);
+      drawPoint(created);
+      showPoints();
+    } else {
+      checkbox.checked = true;
+      await loadPoints(created);
+    }
+    return created;
   }
 
-  checkbox.addEventListener('change', async () => {
+  async function loadPoints(created) {
     label.classList.toggle('off', !checkbox.checked);
     stop();
     if (!checkbox.checked || !allowed()) return;
+    if (created) points.push(created);
     const controller = new AbortController();
     request = controller;
     hint.textContent = 'Загружаем точки дорожек…';
@@ -1185,28 +1190,31 @@ function initYardPathLayer({ container, map, card, district, apiRequest, centerS
       const payload = await response.json();
       if (request !== controller || !allowed() || !checkbox.checked) return;
       points = payload.points;
-      count.textContent = points.length.toLocaleString('ru-RU');
-      hint.textContent = points.reduce((total, point) => total + point.slots.length, 0).toLocaleString('ru-RU')
-        + ' фотослотов. Выберите точку съёмки.';
+      // Точка уже сохранена ответом POST, даже если каталог ещё не успел её показать.
+      if (created && !points.some(point => point.id === created.id)) points.push(created);
+      catalogLoaded = true;
       search.value = '';
       limit = 80;
-      list.hidden = false;
-      renderList();
-      draw();
-      if (linkedPoint) {
-        const point = markers.get(linkedPoint)?.point;
-        linkedPoint = null;
-        if (point) openPoint(point, 18, new URLSearchParams(location.search).get("yardFrame"));
-      }
     } catch (error) {
       if (request !== controller) return;
-      hint.textContent = 'Слой дорожек не загружен: ' + error.message;
-      checkbox.checked = false;
-      label.classList.add('off');
+      if (!created) {
+        hint.textContent = 'Слой дорожек не загружен: ' + error.message;
+        checkbox.checked = false;
+        label.classList.add('off');
+        return;
+      }
     } finally {
       if (request === controller) request = null;
     }
-  });
+    points.forEach(drawPoint);
+    showPoints();
+    if (linkedPoint) {
+      const point = markers.get(linkedPoint)?.point;
+      linkedPoint = null;
+      if (point) openPoint(point, 18, new URLSearchParams(location.search).get("yardFrame"));
+    }
+  }
+  checkbox.addEventListener('change', () => { void loadPoints(); });
   search.addEventListener('input', () => { limit = 80; renderList(); });
   more.addEventListener('click', () => { limit += 80; renderList(); });
 

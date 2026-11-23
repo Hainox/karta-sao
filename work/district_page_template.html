@@ -235,7 +235,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
 <script src="point-editor.js?v=20261119-editor-dock"></script>
 <script src="point-stack.js?v=20261102"></script>
 <script src="playground-photo-layer.js?v=20261109-point"></script>
-<script src="sidewalk-shoot-layer.js?v=20261123-dts-density"></script>
+<script src="sidewalk-shoot-layer.js?v=20261123-dts-create"></script>
 <script src="entrance-ref-layer.js?v=20261028"></script>
 <script>
 (() => {
@@ -1180,7 +1180,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
   function handleMapClick(coordinates) {
     if (!isPrefecture() || !state.serverOk || !Array.isArray(coordinates) || coordinates.length < 2) return;
     const [lng, lat] = coordinates;
-    if (!state.shootMode) return;
+    if (!state.shootMode || state.picking?.saving) return;
     if (!state.picking) {
       state.picking = { lng, lat, heading: null };
       renderPreview();
@@ -1203,13 +1203,19 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     if (!picking || picking.heading == null) return;
     if (!isPrefecture() || !state.serverOk) { $('shootHint').textContent = 'Точка не создана: нет полномочий или связи с сервером.'; return; }
     if (state.markTarget === 'yardPath') {
+      picking.saving = true;
       try {
         const created = await state.sidewalkLayer.createYardPathPoint({ lng: picking.lng, lat: picking.lat, heading: picking.heading });
+        if (state.picking !== picking) return;
         state.picking = null;
         clearPreview();
         $('shootHint').textContent = 'Точка дворовой дорожки ' + created.id + ' поставлена. Ставьте следующую или нажмите «Готово».';
         state.editor?.say('Точка дворовой дорожки поставлена');
-      } catch (error) { $('shootHint').textContent = 'Точка не сохранена: ' + error.message; }
+      } catch (error) {
+        if (state.picking === picking) $('shootHint').textContent = 'Точка не сохранена: ' + error.message;
+      } finally {
+        picking.saving = false;
+      }
       return;
     }
     if (state.markTarget === 'sidewalk') {
@@ -1395,7 +1401,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     if (event.key === 'Enter') $('shootLoginGo').click();
   });
 
-  for (const [id, kind] of [['shootToggle', 'entrance'], ['sidewalkAdd', 'sidewalk']]) {
+  for (const [id, kind] of [['shootToggle', 'entrance'], ['sidewalkAdd', 'sidewalk'], ['yardPathAdd', 'yardPath']]) {
     $(id).addEventListener('click', () => {
       if (!isPrefecture()) {
         $('shootLoginBox').hidden = false;
