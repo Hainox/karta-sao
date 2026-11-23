@@ -35,7 +35,7 @@ test('Оцифровка ДТС сразу показывает единстве
 });
 let script = template.slice(template.lastIndexOf('<script>') + 8, template.lastIndexOf('</script>'));
 script = script.slice(0, script.lastIndexOf('  createMap().catch')) +
-  'window.fieldwork={state,renderShootLogin};})();';
+  'window.fieldwork={state,renderShootLogin,handleMapClick,apiRequest};})();';
 script = script.replaceAll('{{DISTRICT}}', 'Дмитровский').replaceAll('{{SLUG}}', 'dmitrovskiy');
 
 for (const width of [390, 1280]) test(`район видит фото тротуаров без правок, ${width}`, async ({ page }) => {
@@ -166,3 +166,54 @@ for (const [layer, width] of [['yardPathLayer', 1280], ['yardPathLayer', 390], [
     await expect(page.getByRole('button', { name: /Фотослот 2 · 90°/ })).toBeVisible();
   });
 }
+
+test('кнопка ДТС создаёт одну точку, даже если повторная загрузка слоя недоступна', async ({ page }) => {
+  const html = template.replace(/<script\b[^>]*>[\s\S]*?<\/script>/g, '').replace(/<link\b[^>]*>/g, '');
+  await page.route('http://district.test/**', route => route.fulfill({ contentType: 'text/html', body: html }));
+  await page.goto('http://district.test/');
+  await page.addScriptTag({ path: path.join(root, 'districts/sidewalk-shoot-layer.js') });
+  await page.addScriptTag({ content: script });
+  await page.evaluate(() => {
+    const { state, apiRequest, renderShootLogin } = fieldwork;
+    const mapElement = document.getElementById('map');
+    const map = { addChild(marker) { mapElement.append(marker.element); }, removeChild(marker) { marker.element.remove(); } };
+    window.ymaps3 = { YMapMarker: class { constructor(_options, element) { this.element = element; } } };
+    state.map = map;
+    state.photoUser = { role: 'prefecture_admin' };
+    state.serverOk = true;
+    state.popover = { open() {}, close() {}, setHeading() {} };
+    state.sidewalkLayer = initSidewalkShootLayer({
+      map, district: 'Дмитровский', apiRequest, centerSelection() {}, popover: state.popover,
+      getUser: () => state.photoUser,
+    });
+    window.dtsWrites = [];
+    window.fetch = async (url, options) => {
+      if (options.method !== 'POST') throw new TypeError('Failed to fetch');
+      const body = JSON.parse(options.body);
+      window.dtsWrites.push({ url, body });
+      await new Promise(resolve => { window.finishDtsPost = resolve; });
+      const point = { id: 'manual-test', district: body.district, coordinates: body.coordinates,
+        street: 'Добавлена вручную', slots: [{ id: 'frame-test', azimuth: body.azimuth }] };
+      return Response.json({ point }, { status: 201 });
+    };
+    renderShootLogin();
+  });
+
+  const add = page.locator('#yardPathAdd');
+  await add.click();
+  await expect(add).toHaveAttribute('aria-pressed', 'true');
+  await page.evaluate(() => {
+    fieldwork.handleMapClick([37.51, 55.81]);
+    fieldwork.handleMapClick([37.52, 55.81]);
+    fieldwork.handleMapClick([37.53, 55.81]);
+  });
+  await expect.poll(() => page.evaluate(() => window.dtsWrites)).toEqual([{
+    url: 'https://obhod-sao.ru/photo-api/object-photo-points/yard-paths',
+    body: { district: 'Дмитровский', coordinates: [37.51, 55.81], azimuth: 90 },
+  }]);
+  await page.evaluate(() => { window.finishDtsPost(); });
+  await expect(page.locator('#shootHint')).toContainText('Точка дворовой дорожки manual-test поставлена');
+  await expect(page.locator('#yardPathLayer [role=status]')).toContainText('Точка сохранена');
+  await expect(page.locator('#map .yard-path-shoot .shoot-arrow')).toHaveCount(1);
+  await expect(page.locator('#map .preview')).toHaveCount(0);
+});
