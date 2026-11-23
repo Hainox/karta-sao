@@ -1097,7 +1097,7 @@ function initYardPathLayer({ container, map, card, district, apiRequest, centerS
   function draw() {
     const next = new Map();
     for (const point of points) {
-      const element = node('button', '', 'shoot-marker');
+      const element = node('button', '', 'shoot-marker yard-path-shoot');
       element.type = 'button';
       const dot = node('span', '', 'shoot-dot');
       dot.style.cssText = 'left:-8px;top:-8px;width:16px;height:16px;border-color:#fff;color:white;font:bold 11px/12px sans-serif;text-align:center';
