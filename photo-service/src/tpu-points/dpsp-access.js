@@ -8,7 +8,7 @@ export function dpspDistrict(value) {
 }
 
 export function dpspSessionAllowed(user, path) {
-  return user.role !== DPSP_EDITOR || path === '/auth/me' || path.startsWith('/object-photo-points/dpsp/');
+  return user.role !== DPSP_EDITOR || path === '/auth/me' || path.startsWith('/object-photo-points/dpsp/') || path === '/auth/logout' || path.startsWith('/object-photo-points/yard-paths/');
 }
 
 export function requireDpspAdmin(req, res, next) {
