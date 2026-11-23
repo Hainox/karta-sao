@@ -43,6 +43,12 @@ test('catalog and district access, one frame per point and restart', async () =>
     assert.ok(own.points.length>0);
     assert.ok(own.points.every(p=>p.district===point.district));
     assert.ok(own.points.every(p=>p.slots.length===1&&p.singleFrame===true));
+    const dpspOwn = await (await get('/district','dpsp_district_editor')).json();
+    assert.ok(dpspOwn.points.length > 0);
+    assert.ok(dpspOwn.points.every(p => p.district === point.district));
+    const dpspOther = await (await get('/district','dpsp_district_editor','Коптево')).json();
+    assert.ok(dpspOther.points.every(p => p.district === 'Коптево'));
+    assert.equal((await patch({coordinates:[37.52,55.82]},'dpsp_district_editor')).status,403);
     const different=points.find(p=>p.district!==point.district).district;
     assert.equal((await patch({noSidewalk:true},'district_editor',different)).status,403);
     assert.equal((await patch({slotId:point.slots[0].id,azimuth:42},'district_editor')).status,403);

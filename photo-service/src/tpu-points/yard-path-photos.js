@@ -16,7 +16,7 @@ export const isAvdSidewalkEditor = (user) => user.role === 'district_editor' && 
 // «Баланс» из последнего Excel. Правило для остановок и ДЭУ здесь не применяется.
 export const isAvdSidewalkPoint = (point) => isAutodorAccount(point.balance);
 const districtOwner = balance => balance === 'ГБУ «Жилищник района Ховрино»' ? 'Ховрино' : balance;
-export const isDistrictSidewalkEditor = user => user.role === 'district_editor' && DISTRICTS.has(user.district);
+export const isDistrictSidewalkEditor = user => ['district_editor', 'dpsp_district_editor'].includes(user.role) && DISTRICTS.has(user.district);
 export const districtOwnsSidewalk = (user, point) => isDistrictSidewalkEditor(user) && districtOwner(point.balance) === user.district;
 const isPrefecture = (req) => req.user.role === 'prefecture_admin';
 

@@ -59,7 +59,8 @@ for (const width of [390, 1280]) test(`район видит фото троту
     fieldwork.renderShootLogin();
   });
   await expect(page.locator('#sidewalkShootLayer')).toBeVisible();
-  await expect(page.locator('#sidewalkShootLayer input')).toBeChecked();
+  await expect(page.locator('#sidewalkShootLayer input')).not.toBeChecked();
+  await page.locator('#sidewalkShootLayer input').check();
   await page.locator('.sidewalk-shoot').dispatchEvent('click');
   await expect(page.locator('#card [data-sw-photo] input[type=file]')).toHaveCount(1);
   await expect(page.locator('#card [data-sw="delete"]')).toHaveCount(0);

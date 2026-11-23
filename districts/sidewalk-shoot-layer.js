@@ -341,10 +341,10 @@ window.initSidewalkShootLayer = function ({ map, slug, district, apiRequest, esc
       return created;
     },
     createYardPathPoint: options => yardPathLayer.createPoint(options),
+    setYardPathVisible: on => yardPathLayer.setVisible(on),
     setVisible(on) {
       testLayer.setVisible(on);
       yardPathLayer.setVisible(on);
-      if (on && !visible) isOn = true;
       visible = Boolean(on);
       if (!visible) {
         container.hidden = true;
@@ -751,7 +751,7 @@ function initYardPathLayer({ container, map, card, district, apiRequest, centerS
   };
   const keyOf = (point) => 'yard-path:' + point.id;
   const canEdit = () => getUser?.()?.role === 'prefecture_admin';
-  const canUpload = () => getUser?.()?.role === 'district_editor' && getUser?.()?.district === district;
+  const canUpload = () => ['district_editor', 'dpsp_district_editor'].includes(getUser?.()?.role) && getUser?.()?.district === district;
   const allowed = () => canEdit() || canUpload();
   const base = '/object-photo-points/yard-paths';
   const framePath = slot => base + '/district/frames/' + encodeURIComponent(slot.id);
