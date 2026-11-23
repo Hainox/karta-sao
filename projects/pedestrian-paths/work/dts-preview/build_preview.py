@@ -11,7 +11,8 @@ from pyproj import Geod, Transformer
 from shapely import STRtree, make_valid, transform, union_all
 from shapely.geometry import LineString, Point, Polygon, mapping, shape
 from shapely.errors import GEOSException
-from geometry import clip_contact, parts, plan
+from geometry import clip_contact, parts, plan, sports_cut
+from outer_views import allocate
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[3]
@@ -102,11 +103,30 @@ def build(snapshot, parks, out):
             sid = str(f['id'])
             if sid in old_by_source:
                 paths[sid] = polygon(f)
+    path_ids=list(paths)
+    all_paths=[paths[k] for k in path_ids]
+    path_tree=STRtree(all_paths)
+    split_collars={}
+    for site,kind,mid in masks:
+        if kind!='sp':
+            continue
+        touching=path_tree.query(site,predicate='dwithin',distance=0.10)
+        if len(touching)<2:
+            continue
+        for group in parts(union_all([all_paths[j] for j in touching]),'Polygon'):
+            cut,_,ring=sports_cut(group,site)
+            if ring:
+                for j in touching:
+                    clipped=all_paths[j].intersection(cut)
+                    if clipped.area>1e-6:
+                        split_collars[(path_ids[j],mid)]=clipped
     print('Контуры найдены',len(paths),'из',len(old_by_source),flush=True)
     groups, allowed_by_source = defaultdict(list), {}
     excluded, review, routes, proposals = [], [], [], []
     states, reason_ids, uncertain_ids = {}, defaultdict(set), defaultdict(set)
     confirmed_cuts = []
+    route_model = []
+    collars = []
     def mark(g, sid, district, reason):
         review.append(feature(g,sourceId=sid,district=district,reason=reason))
         uncertain_ids[district].add(sid)
@@ -137,9 +157,19 @@ def build(snapshot, parks, out):
                     mark(path,sid,district,f'Зазор до контура {mid} ({LABEL[kind]}): '+
                          f'{path.distance(mask):.2f} м, меньше расчётной ширины дорожки {width:.2f} м')
                 continue
+            ring = False
             if kind == 'park':
                 cut = path.intersection(mask)
                 ambiguous = cut.area == 0
+            elif kind == 'sp':
+                cut, ambiguous, ring = sports_cut(path,mask)
+                combined=split_collars.get((sid,mid))
+                if combined is not None:
+                    cut=cut.union(combined)
+                    ring=True
+                    ambiguous=False
+                if ring:
+                    collars.append((sid,cut,mid,district))
             else:
                 cut, ambiguous = clip_contact(path,mask)
             if ambiguous:
@@ -149,7 +179,7 @@ def build(snapshot, parks, out):
                 confirmed_cuts.append((sid,cut,kind,mid))
                 reason_ids[(district,kind)].add(sid)
                 excluded.append(feature(cut,sourceId=sid,district=district,kind=kind,maskId=mid,
-                    reason='Пересечение контура' if kind=='park' else 'Перекрытие или общая граница ДТС и площадки',
+                    reason='Замкнутый периметр СП и прилегающая входная часть' if ring else 'Пересечение контура' if kind=='park' else 'Перекрытие или общая граница ДТС и площадки',
                     scope='full' if path.difference(cut).area<1e-8 else 'partial'))
         left = path.difference(union_all(cuts)) if cuts else path
         # Protect against both through-building cameras and through-building rays.
@@ -178,6 +208,22 @@ def build(snapshot, parks, out):
                 mark(g,sid,district,'Исходная позиция вне контура своего объекта')
     # Two ASU records can cover the same pavement. Propagate spatially verified
     # cuts across overlapping sources before generating any stations.
+    # Separate dead-end access pieces may have a different ASU network ID.
+    # Require physical contact, a short confined extent and no through connection.
+    for owner,collar,mid,district in collars:
+        for k in path_tree.query(collar,predicate='dwithin',distance=0.05):
+            sid=path_ids[k]
+            g=all_paths[k]
+            if sid==owner or old_by_source[sid][0]['district']!=district:
+                continue
+            if not collar.buffer(8).covers(g) or g.length>45 or g.area>40:
+                continue
+            others=[all_paths[j] for j in path_tree.query(g,predicate='dwithin',distance=0.10)
+                    if path_ids[j] not in (owner,sid) and not collar.buffer(0.1).covers(all_paths[j])]
+            if others:
+                mark(g,sid,district,'Короткое примыкание у периметра СП '+mid+' имеет другие связи; проверить на месте')
+                continue
+            confirmed_cuts.append((owner,g,'sp',mid))
     cut_tree = STRtree([r[1] for r in confirmed_cuts])
     for group, rows in groups.items():
         clipped = []
@@ -236,9 +282,10 @@ def build(snapshot, parks, out):
                 mark(poly,sids[0],district,'Невозможно восстановить ось: '+str(exc))
                 continue
             rid = network+'-ДТС-'+str(seq)
-            if not views:
-                mark(poly,sids[0],district,'Не найдена позиция на осевой линии')
+            if not lines:
+                mark(poly,sids[0],district,'Не восстановлена ось участка')
                 continue
+            route_model.append(dict(rid=rid, district=district, network=network, sids=sids, related=related, poly=poly, lines=lines, rule=rule))
             sample_count, observed = counts['samples'],counts['covered']
             row = stats[district]
             row['samples'] += sample_count
@@ -248,8 +295,6 @@ def build(snapshot, parks, out):
                 row['compact_points'] += len(views)
                 row['compact_perimeter_points'] += sum(v['perimeter'] for v in views)
             row['routes'] += 1
-            if observed < sample_count:
-                mark(poly,sids[0],district,'На расчётной оси остались непокрытые контрольные точки')
             if rule=='long':
                 row['long_m'] += lines[0].length
                 row['long_points'] += len(views)
@@ -292,7 +337,42 @@ def build(snapshot, parks, out):
                     unique_samples=view['unique_samples'],perimeter=view['perimeter'],
                     main_projection_m=round(lines[0].project(pt),2) if rule=='long' else None,
                     review='Предварительный обзор; проверить доступность и видимость на месте'))
-    planned_sources = {sid for r in routes for sid in r['properties']['sourceIds']}
+    proposals, coverage = allocate(route_model, proposals, masks, walls)
+    write(out/'external-coverage.json',coverage)
+    keep={p['id'] for p in proposals}
+    for pid in list(assigned):
+        if pid not in keep:
+            del assigned[pid]
+            del states[pid]
+    for row in stats.values():
+        for key in ('new_points','created','long_points','compact_points','compact_perimeter_points','covered_samples'):
+            row[key]=0
+    for p in proposals:
+        row=stats[p['district']]
+        row['new_points']+=1
+        row['created']+=p['id'] not in assigned
+        row['long_points']+=p['rule']=='long'
+        row['compact_points']+=p['rule']=='compact'
+        row['compact_perimeter_points']+=p['rule']=='compact' and p['perimeter']
+    planned_sources=set()
+    unresolved_sources=set()
+    for f,record,model in zip(routes,coverage,route_model,strict=True):
+        assert f['properties']['routeId']==record['routeId']
+        f['properties'].update({k:v for k,v in record.items() if k not in ('sampleCoordinates','sampleIndicesByPoint')})
+        row=stats[record['district']]
+        row['covered_samples']+=record['covered']
+        row[record['mode']+'_routes_'+record['status']]+=1
+        if record['missingSamples']:
+            reason='Часть контрольных целей без подтверждённого обзора' if record['covered'] else 'Нет подтверждённой позиции для съёмки'
+            if record['mode']=='external':
+                reason+=' с внешней крупной дорожки'
+            review.append(feature(model['poly'],district=model['district'],sourceId=model['sids'][0],
+                                  sourceIds=model['sids'],routeId=model['rid'],reason=reason))
+            uncertain_ids[model['district']].update(model['sids'])
+            unresolved_sources.update(model['sids'])
+        if record['covered']:
+            planned_sources.update(model['sids'])
+    planned_sources-=unresolved_sources
     dispositions = []
     for p in old:
         sid=p['sourceId']
@@ -311,7 +391,7 @@ def build(snapshot, parks, out):
     metrics = dict(total=total,districts=stats,examples=examples,
         original_sha256=hashlib.sha256(snapshot.read_bytes()).hexdigest(),parks_sha256=hashlib.sha256(parks.read_bytes()).hexdigest(),
         source_ids=len(old_by_source),matched_source_ids=len(paths),sample_spacing_m=10,horizontal_fov_deg=70)
-    write(out/'catalog.json',dict(version=1,points=proposals))
+    write(out/'catalog.json',dict(version=1,singleFrame=True,points=proposals))
     for name,features in [('excluded',excluded),('review',review),('routes',routes)]:
         write(out/(name+'.geojson'),fc(features))
     write(out/'dispositions.json',dispositions)

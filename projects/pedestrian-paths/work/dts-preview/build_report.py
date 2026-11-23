@@ -36,11 +36,12 @@ def export():
         rows = []
         for f in features:
             p=f['properties']
-            row=[p['district'],p['sourceId'],p['reason']]
-            if cut:
-                row += [types[p['kind']],p['maskId'],scope[p['scope']]]
             pt = shape(f['geometry']).representative_point()
-            rows.append(row+[round(pt.y,7),round(pt.x,7)])
+            for source in p.get('sourceIds', [p['sourceId']]):
+                row=[p['district'],source,p['reason']]
+                if cut:
+                    row += [types[p['kind']],p['maskId'],scope[p['scope']]]
+                rows.append(row+[round(pt.y,7),round(pt.x,7)])
         register(filename,head+['Широта участка','Долгота участка'],sorted(rows))
     fields = [('old_points','Было точек'),('old_slots','Было кадров'),('old_multislot','Точек с несколькими кадрами'),
               ('new_points','Стало точек и кадров'),('retained','Сохранено позиций'),('moved','Перенесено'),
@@ -79,6 +80,17 @@ def export():
         '2. Сверить спорные объекты с районными специалистами и официальными границами парков. Для видимости и безопасности позиции нужна натурная проверка.',
         '3. Перед переключением отдельно согласовать замену каталога и перенос изменений на рабочий сервис и районные карты. Сохранить резервную копию сервера, повторить сверку фотографий и ручных правок по актуальной БД и подготовить откат.',
         '',f"На момент чтения все слоты были пустыми. Окончание чтения в UTC — {old['finishedAt']}. История вне текущего API требует сверки с БД. [Условия переноса и отката](../photo-compatibility.md) · [Судьба каждой исходной точки](dispositions.json) · [Новый каталог](catalog.json)"]
+    coverage=read(dest/'external-coverage.json')
+    outcomes=Counter(r['status'] for r in coverage if r['mode']=='external')
+    screenshot={'128352228700030','128352705700030','128351960600030','128352081600030'}
+    group=[r for r in coverage if screenshot.intersection(r['sourceIds'])]
+    points_used=sorted({pid for route in group for pid in route['pointIds']})
+    sports=next(r for r in read(dest/'excluded-sources.json') if r['sourceId']=='131608367800030')
+    n=md.index('## Как проверить и что согласовать')
+    md[n:n]=['## Проверка внутренних дорожек и спортивных периметров','',
+        f"У {sum(outcomes.values())} участков геометрия указывает на внутреннее положение. Внешние кадры полностью охватывают контрольные цели {outcomes['covered']} участков и частично охватывают {outcomes['partial']}. Для {outcomes['review']} внешний ракурс пока не подтверждён. Самостоятельные короткие дорожки сохраняют собственные задания.",'',
+        f"В Аэропорте четыре внутренних фрагмента первого примера обслуживает внешний кадр {', '.join(points_used)}. Охвачено {sum(r['covered'] for r in group)} из {sum(r['samples'] for r in group)} контрольных целей. Дорожка 131608367800030 у СП 131608340200027 на улице 8 Марта исключена целиком, площадь исключения {sports['excluded_area_m2']:.3f} м².",'',
+        '[Соответствие контрольных целей маршрутам и позициям](external-coverage.json)','']
     (dest/'Отчёт.md').write_text('\n'.join(md)+'\n',encoding='utf-8')
 
 

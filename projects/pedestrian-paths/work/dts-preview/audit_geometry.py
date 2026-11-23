@@ -5,8 +5,8 @@ import json
 import math
 
 from shapely import STRtree, union_all
-from shapely.geometry import Point, shape
-from build_preview import HERE, ROOT, METRIC, read, write, polygon, project, load_masks, buildings
+from shapely.geometry import LineString, Point, shape
+from build_preview import GEOD, HERE, ROOT, METRIC, read, write, polygon, project, load_masks, buildings
 
 
 def duplicates(points):
@@ -32,6 +32,11 @@ def audit():
     metrics=read(data/'summary.json')
     ids={p['id'] for p in new}
     slots={s['id'] for p in new for s in p['slots']}
+    old_ids={p['id'] for p in old}
+    old_slots={s['id'] for p in old for s in p['slots']}
+    import re
+    assert all(re.fullmatch('ДТС-[0-9a-f]{16}',pid) for pid in ids-old_ids), 'Некорректный новый ID точки'
+    assert all(re.fullmatch('ДТС-кадр-[0-9a-f]{16}',sid) for sid in slots-old_slots), 'Некорректный новый ID кадра'
     assert len(new)==len(ids)==len(slots)
     assert all(len(p['slots'])==1 and 0<=p['slots'][0]['azimuth']<360 for p in new)
     assert len({tuple(p['coordinates']) for p in new})==len(new), 'Совпадающие точки'
@@ -80,6 +85,60 @@ def audit():
             row['nearestOldAngleDifference_deg']=round(min(abs((q['slots'][0]['azimuth']-s['azimuth']+180)%360-180) for s in p['slots']),2)
     write(data/'dispositions.json',dispositions)
     route_rows=read(data/'routes.geojson')['features']
+    evidence=read(data/'external-coverage.json')
+    mapped={r['properties']['routeId']:r for r in route_rows}
+    assert len(evidence)==len(mapped)==len(route_rows)
+    by_rid={r['routeId']:r for r in evidence}
+    assert set(by_rid)==set(mapped)
+    projected={pid:project(Point(p['coordinates']),METRIC) for pid,p in proposed.items()}
+    from geometry import heading
+    bearings={}
+    expected_links=defaultdict(set)
+    obstacle_geoms=mask_geometries+walls
+    obstacle_tree=STRtree(obstacle_geoms)
+    for pid,p in proposed.items():
+        assert by_rid[p['routeId']]['mode']=='main'
+        lng,lat,_=GEOD.fwd(*p['coordinates'],p['slots'][0]['azimuth'],10)
+        bearings[pid]=heading(projected[pid].coords[0],METRIC.transform(lng,lat))
+    for record in evidence:
+        pts=record['sampleCoordinates']
+        missing=set(record['missingSamples'])
+        seen=set()
+        assert len(pts)==record['samples'] and len(missing)+record['covered']==len(pts)
+        assert set(record['pointIds'])==set(record['sampleIndicesByPoint'])
+        for pid,indices in record['sampleIndicesByPoint'].items():
+            expected_links[pid].add(record['routeId'])
+            p=proposed[pid]
+            assert p['district']==record['district']
+            if record['mode']=='external':
+                assert p['routeId']!=record['routeId']
+                assert mapped[p['routeId']]['properties']['length_m']+0.02>=1.25*mapped[record['routeId']]['properties']['length_m']
+            for k in indices:
+                assert k not in seen and 0<=k<len(pts)
+                seen.add(k)
+                dest=METRIC.transform(*pts[k])
+                origin=projected[pid].coords[0]
+                dist=math.dist(origin,dest)
+                assert dist<=100.001
+                if dist<0.002:
+                    continue
+                assert abs((heading(origin,dest)-bearings[pid]+180)%360-180)<=35.00001
+                assert not len(obstacle_tree.query(LineString([origin,dest]),predicate='intersects'))
+        assert seen==set(range(len(pts)))-missing
+        assert record['status']==('covered' if not missing else 'partial' if seen else 'review')
+        assert set(record['hostRouteIds'])=={proposed[pid]['routeId'] for pid in record['pointIds']}
+    for pid,p in proposed.items():
+        assert set(p['coveredRouteIds'])==expected_links[pid]
+    island_ids={'128352705700030','128352228700030','128352081600030','128351960600030'}
+    islands=[row for row in evidence if island_ids.intersection(row['sourceIds'])]
+    assert len(islands)==4 and all(row['mode']=='external' and row['status']=='covered' for row in islands)
+    assert not any(p['sourceId'] in island_ids for p in new)
+    assert all(not paths[sid].covers(xy) for sid in island_ids for xy in projected.values())
+    assert not any(p['sourceId']=='131608367800030' for p in new)
+    assert read(data/'catalog.json')['singleFrame'] is True
+    sports=next(row for row in cuts if row['properties']['sourceId']=='131608367800030'
+                and row['properties']['maskId']=='131608340200027' and row['properties']['scope']=='full')
+    assert not any('131608367800030' in row['sourceIds'] for row in evidence)
     by_route=defaultdict(list)
     for p in new:
         by_route[p['routeId']].append(p)

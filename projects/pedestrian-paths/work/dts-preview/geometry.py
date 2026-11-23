@@ -128,14 +128,7 @@ def plan(poly, obstacles=None, original_views=()):
     branched = secondary > max(8, main.length * 0.15)
     compact = main.length <= STEP and aspect <= 3 and (poly.area/rect.area > 0.65 or branched)
     rule = 'compact' if compact else 'branched' if branched else 'long' if main.length > STEP else 'short'
-    targets = []
-    for line in lines:
-        count = max(1, math.ceil(line.length / SAMPLE))
-        targets.extend(line.interpolate(i / count, normalized=True).coords[0] for i in range(count+1))
-    if compact:
-        # Interior observations also represent the breadth of a paved area.
-        targets.append(poly.representative_point().coords[0])
-    targets = list(dict.fromkeys(targets))
+    targets = sample_axis(lines, poly, rule)
     blockers = prep(obstacles) if obstacles is not None and not obstacles.is_empty else None
     def visible(a,b):
         return math.dist(a,b) <= STEP + 0.01 and (a == b or blockers is None or not blockers.intersects(LineString([a,b])))
@@ -235,3 +228,29 @@ def plan(poly, obstacles=None, original_views=()):
         for a in angles:
             old_seen.update(coverage(origin,a,range(len(targets))))
     return lines, chosen, dict(samples=len(targets), covered=sum(v>0 for v in frequency.values()), old_covered=len(old_seen)), rule
+
+def sports_cut(path, site):
+    """Use a closed, mapped collar as evidence for the surrounding pavement."""
+    basic, ambiguous = clip_contact(path, site)
+    if path.geom_type != 'Polygon' or not path.interiors:
+        return basic, ambiguous, False
+    enclosed = any(Polygon(h).intersection(site).area >= 0.90 * site.area for h in path.interiors)
+    if not enclosed or path.buffer(0.15).intersection(site.boundary).length < 0.8 * site.length:
+        return basic, ambiguous, False
+    width = 2 * path.area / path.length
+    near = site.buffer(min(8, max(3, 2 * width)))
+    # A bounded ring with a small entrance spur is one sports asset. Longer
+    # continuations are only cut within the perimeter strip.
+    if site.buffer(8).covers(path):
+        return path, False, True
+    return path.intersection(near).union(basic), False, True
+
+
+def sample_axis(lines, poly, rule):
+    samples = []
+    for line in lines:
+        count = max(1, math.ceil(line.length / SAMPLE))
+        samples.extend(line.interpolate(i/count, normalized=True).coords[0] for i in range(count+1))
+    if rule == 'compact':
+        samples.append(poly.representative_point().coords[0])
+    return list(dict.fromkeys(samples))
