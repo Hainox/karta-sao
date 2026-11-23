@@ -175,3 +175,7 @@
   .app > .hud-summary.inside{max-height:44dvh}
   .app > #map{grid-area:1 / 2 / span 2}
 }
+
+/* Направления ДТС остаются различимыми при близких обзорных позициях. */
+.shoot-marker.yard-path-shoot:not(.selected) .shoot-arrow{scale:clamp(.22,var(--shoot-arrow-scale,.35),.38)}
+.shoot-marker.yard-path-shoot .shoot-dot{left:-5px!important;top:-5px!important;width:10px!important;height:10px!important;box-shadow:0 0 0 1px #542282!important}
