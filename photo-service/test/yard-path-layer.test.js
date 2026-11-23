@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import express from 'express';
+import ExcelJS from 'exceljs';
 import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
@@ -46,6 +47,13 @@ test('catalog and district access, one frame per point and restart', async () =>
     const dpspOwn = await (await get('/district','dpsp_district_editor')).json();
     assert.ok(dpspOwn.points.length > 0);
     assert.ok(dpspOwn.points.every(p => p.district === point.district));
+    assert.equal((await get('/district/report.xlsx', 'dpsp_district_editor')).status, 403);
+    const report = await get('/district/report.xlsx', 'prefecture_admin');
+    assert.equal(report.status, 200);
+    assert.match(report.headers.get('content-disposition'), /Svod_foto_dvorovye_dorozhki_SAO_/);
+    const workbook = new ExcelJS.Workbook();
+    await workbook.xlsx.load(await report.arrayBuffer());
+    assert.equal(workbook.getWorksheet('Свод по районам').getCell('A1').text, 'Оцифровка дворовых дорожек ДТС');
     const dpspOther = await (await get('/district','dpsp_district_editor','Коптево')).json();
     assert.ok(dpspOther.points.every(p => p.district === 'Коптево'));
     assert.equal((await patch({coordinates:[37.52,55.82]},'dpsp_district_editor')).status,403);

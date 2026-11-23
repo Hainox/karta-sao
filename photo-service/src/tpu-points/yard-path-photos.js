@@ -164,12 +164,12 @@ export function createAvdSidewalkPhotosRouter({ authenticate, pool, loadCatalog,
       const generatedAt = new Date();
       const summary = summarizeDigitization({ points: slotPointsForReport((await loadQueueRows(req)).rows), generatedAt });
       const buffer = await buildDigitizationReport(summary, {
-        title: 'Оцифровка тротуаров ОДХ',
+        title: 'Оцифровка дворовых дорожек ДТС',
         pointTitle: 'Кадр',
       });
       const day = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Moscow' }).format(generatedAt);
       res.set({ 'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-        'Content-Disposition': `attachment; filename="Svod_foto_trotuary_odh_SAO_${day}.xlsx"`,
+        'Content-Disposition': `attachment; filename="Svod_foto_dvorovye_dorozhki_SAO_${day}.xlsx"`,
         'Cache-Control': 'private, no-store' }).send(buffer);
     } catch (error) { next(error); }
   });
