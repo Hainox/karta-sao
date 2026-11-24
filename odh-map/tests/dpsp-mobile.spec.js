@@ -111,6 +111,50 @@ test('ответственный ДП/СП видит назначенный р�
   await page.goto('http://127.0.0.1:8766/dp-sp-review/');
   await expect(page.locator('#loginMsg')).toHaveText('Приёмка доступна только администратору.');
   await expect(page.locator('#main')).toBeHidden();
+  await expect(page.getByRole('button', { name: 'Сводка по оцифровке' })).toBeHidden();
+});
+
+test('сводка новой оцифровки считает закрытые площадки и выгружает весь округ', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  let snapshotReads = 0;
+  await setup(page, true, null, async (route, path) => {
+    if (path.endsWith('/dictionaries')) {
+      await route.fulfill({ json: { types: [], districts: [
+        { name: 'Аэропорт' }, { name: 'Савеловский' }, { name: 'Сокол' },
+      ] } });
+    } else if (path.endsWith('/workflow/sheet.json')) {
+      snapshotReads++;
+      await route.fulfill({ json: { generated_at: '2026-11-23T21:25:00Z', sites: [
+        { point_id: '1', district: 'Аэропорт', kind: 'dp', state: 'accepted' },
+        { point_id: '2', district: 'Аэропорт', kind: 'sp', state: 'submitted' },
+        { point_id: '3', district: 'Савёловский', kind: 'sp', state: 'accepted' },
+        { point_id: '4', district: 'Савеловский', kind: 'dp', state: 'rework' },
+        { point_id: '5', district: 'Савеловский', kind: 'dp', state: 'work' },
+      ], photos: [{ point_id: '1' }, { point_id: '1' }] } });
+    } else return false;
+    return true;
+  });
+  await page.goto('http://127.0.0.1:8766/dp-sp-review/');
+  await page.locator('#district').selectOption('Аэропорт');
+  await page.getByRole('button', { name: 'Сводка по оцифровке' }).click();
+  const dialog = page.getByRole('dialog', { name: 'Сводка по оцифровке ДП и СП' });
+  await expect(dialog.getByText('24.11.2026', { exact: false })).toBeVisible();
+  const total = dialog.getByRole('row', { name: /^Итого по САО/ });
+  await expect(total.getByRole('cell')).toHaveText(['5', '2', '1', '1', '1', '40 %']);
+  await expect(dialog.getByRole('row', { name: /^Савеловский/ }).getByRole('cell')).toHaveText(['3', '1', '0', '1', '1', '33,33 %']);
+  await expect(dialog.getByRole('row', { name: /^Сокол/ }).getByRole('cell')).toHaveText(['0', '0', '0', '0', '0', '—']);
+  await dialog.getByLabel('Вид площадки в сводке').selectOption('sp');
+  await expect(total.getByRole('cell')).toHaveText(['2', '1', '1', '0', '0', '50 %']);
+  const downloaded = page.waitForEvent('download');
+  await dialog.getByRole('button', { name: 'Скачать Excel' }).click();
+  const file = await downloaded;
+  expect(file.suggestedFilename()).toBe('Сводка_оцифровки_ДП_СП_САО_2026-11-24.xlsx');
+  expect(await file.failure()).toBeNull();
+  await dialog.getByRole('button', { name: 'Закрыть' }).click();
+  await expect(dialog).toBeHidden();
+  await page.getByRole('button', { name: 'Сводка по оцифровке' }).click();
+  await expect(total.getByRole('cell')).toHaveText(['5', '2', '1', '1', '1', '40 %']);
+  expect(snapshotReads).toBe(2);
 });
 
 test('оцифровка: после ошибки загрузки фото можно дозагрузить к сохранённому МАФ', async ({ page }) => {
