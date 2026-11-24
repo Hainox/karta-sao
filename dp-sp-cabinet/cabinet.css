@@ -113,6 +113,20 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
 .capture-top .section{margin-top:0}
 .capture-top .site-map{margin:0}
 .capture-gallery:not(:empty){margin-top:12px}
+
+#completionReport{width:min(820px,95vw);padding:18px;color:var(--ink)}
+.completion-report-head,.completion-report-actions{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.completion-report-head h2{font-size:20px;margin:0}
+.completion-report-head form{margin:0}
+.completion-report-actions{align-items:end;margin-bottom:12px}
+#completionStatus{font-size:13px;color:var(--muted);margin:10px 0}
+.completion-report-scroll{overflow:auto;border:1px solid var(--line);border-radius:8px}
+#completionTable{width:100%;min-width:620px;border-collapse:collapse;font-variant-numeric:tabular-nums}
+#completionTable :is(th,td){padding:8px 10px;text-align:center;border-bottom:1px solid var(--line)}
+#completionTable th:first-child{text-align:left}
+#completionTable thead{background:var(--paper)}
+#completionTable tbody tr:first-child{background:var(--brand-soft);font-weight:700}
+#completionTable tbody tr:last-child>*{border-bottom:0}
 .no-maf{display:flex;align-items:center;gap:10px;min-height:44px;cursor:pointer}
 .no-maf input{width:20px;height:20px;accent-color:var(--brand)}
 

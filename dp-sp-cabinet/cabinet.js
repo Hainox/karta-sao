@@ -5,6 +5,7 @@ const make=(tag,text,cls)=>{const n=document.createElement(tag);if(text!=null)n.
 const base='/object-photo-points/dpsp',flow=base+'/workflow';
 const API='https://obhod-sao.ru/photo-api';
 const review=document.body.dataset.review==='true';
+const completionButton=$('openCompletionReport');
 const overviewExamples={
  dp:{id:'e636cdbc-942d-569a-a24e-a72901bce1dd',address:'Планетная ул., 18'},
  sp:{id:'a4700409-a480-5281-a571-dd5355f925ea',address:'Балтийская ул., 4'},
@@ -46,6 +47,7 @@ function message(text){$('message').textContent=text||'';}
 function clearImages(){for(const url of urls)URL.revokeObjectURL(url);urls=[];}
 function loginView(text){
  $('login').hidden=false;$('main').hidden=true;$('top').hidden=true;$('loginMsg').textContent=text||'';
+ if(completionButton){$('completionReport').close();completionButton.disabled=true;}
  ++listSeq;
  rows=[];types=[];
  clearDetail();
@@ -95,6 +97,7 @@ async function dictionaries(){
  select.replaceChildren(...(assignedDistrict?[]:[all]));
  for(const row of d.districts||[]){const option=make('option',row.name);option.value=row.name;select.append(option);}
  select.value=assignedDistrict?select.options[0]?.value||'':prev;
+ if(completionButton)completionButton.disabled=false;
 }
 function clearDetail(){document.body.classList.remove('card-open');if(history.state?.cabinetSite)history.replaceState(null,'',location.pathname+location.search);current=null;++detailSeq;clearCardMedia();clearImages();$('detail').replaceChildren(make('div','Выберите площадку','empty'));renderQueue();}
 function renderQueue(){
@@ -419,6 +422,21 @@ $('loginForm').onsubmit=async e=>{e.preventDefault();try{const res=await fetch(A
 $('logout').onclick=async()=>{try{await req('/auth/logout',{method:'POST'});}catch{}token='';localStorage.removeItem('saoPhotoToken');localStorage.removeItem('sao-photo-token');clearDetail();loginView();};
 $('refresh').onclick=resetQueue;$('district').onchange=resetQueue;$('kind').onchange=resetQueue;
 if(review){$('reviewQueue').classList.toggle('primary',queue==='review');$('acceptedQueue').classList.toggle('primary',queue==='accepted');const setQueue=q=>{if(busy)return;queue=q;$('reviewQueue').classList.toggle('primary',q==='review');$('acceptedQueue').classList.toggle('primary',q==='accepted');resetQueue();};$('reviewQueue').onclick=()=>setQueue('review');$('acceptedQueue').onclick=()=>setQueue('accepted');}
+if(completionButton){
+ let completionReport;
+ completionButton.onclick=async()=>{
+  try{
+   const { initCompletionReport }=await import('../dp-sp-review/completion-report.mjs?v=20261124');
+   if($('main').hidden||busy)return;
+   completionReport??=initCompletionReport({
+    dialog:$('completionReport'),
+    getDistricts:()=>[...$('district').options].map(option=>option.value).filter(Boolean),
+    getSnapshot:signal=>api(flow+'/sheet.json',{signal}),
+   });
+   completionReport();
+  }catch(e){message('Не удалось открыть сводку. '+e.message);}
+ };
+}
 $('closeViewer').onclick=()=>$('viewer').close();$('viewer').onclose=()=>{$('largePhoto').removeAttribute('src');if(photoTrigger?.isConnected)photoTrigger.focus();};
 if(!review){
  $('cameraCancel').onclick=closeCamera;

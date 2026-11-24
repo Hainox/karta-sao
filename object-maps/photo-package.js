@@ -55,5 +55,5 @@ globalThis.SaoPhotoPackage = (() => {
     entries.push({name:'README.txt',bytes:encoder.encode('Фотофиксация ТПУ и автомобильных парковок САО.\nmanifest.json содержит координаты, ID объектов, районы и привязку фото к точкам.\nНачальные точки рассчитаны по контурам ОДХ и требуют согласования места съёмки.\nАрхив подготовлен локально; передача для приёмки выполняется отдельно.\n')});
     return zip(entries);
   }
-  return {create};
+  return {create, zip};
 })();
