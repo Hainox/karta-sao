@@ -134,16 +134,14 @@ test('районная карта префектуры: создание, пов
   await expect(page.locator('[data-park-point]')).toHaveCount(0);
 });
 
-test('мобильная районная карта: фото одного слота, без инструментов разметки', async ({ page }) => {
+test('мобильная карта префектуры: фото одного слота', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 780 });
   const initialPoint = { id: '61281fe5-7dc1-4608-9774-208c0491c234', parkId, coordinates: [37.496, 55.864],
     revision: 1, slot: { id: frameId, azimuth: 70, status: 'empty' } };
-  await setup(page, 'dpsp_district_editor', initialPoint);
+  await setup(page, 'prefecture_admin', initialPoint);
   await showPark(page);
-  await expect(page.getByRole('button', { name: 'Добавить точку' })).toBeHidden();
   await page.locator('[data-park-point]').dispatchEvent('click');
   await expect(page.getByRole('heading', { name: 'Фотослот · 70°' })).toBeVisible();
-  await expect(page.getByLabel('Азимут, °')).toHaveCount(0);
   await page.locator('#card input[type=file]').setInputFiles({ name: 'park.png', mimeType: 'image/png', buffer: png });
   await expect(page.locator('#card').getByText('На проверке')).toBeVisible();
   await expect(page.locator('#card').getByAltText('Фото точки съёмки')).toBeVisible();
@@ -151,3 +149,16 @@ test('мобильная районная карта: фото одного сл
   expect(viewport.x).toBeGreaterThanOrEqual(0);
   expect(viewport.x + viewport.width).toBeLessThanOrEqual(390);
 });
+
+for (const role of ['district_editor', 'dpsp_district_editor']) {
+  test(`парковый слой скрыт на районной карте для ${role}`, async ({ page }) => {
+    const parkRequests = [];
+    page.on('request', request => {
+      if (request.url().includes('/object-photo-points/parks/')) parkRequests.push(request.url());
+    });
+    await setup(page, role);
+    await expect(page.locator('#yardPathLayer')).toBeVisible();
+    await expect(page.locator('#parkDigitizationLayer')).toBeHidden();
+    expect(parkRequests).toHaveLength(0);
+  });
+}

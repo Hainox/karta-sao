@@ -65,7 +65,9 @@ try {
   const coords = [37.542, 55.794];
   await list(a.district, { role: 'guest', status: 401 });
   await list(b.district, { role: 'editor', status: 403 });
-  assert.deepEqual(new Set((await list(a.district, { role: 'editor' })).parks.map(park => park.id)), new Set([a.id, unbounded.id]));
+  await list(a.district, { role: 'editor', status: 403 });
+  await list(b.district, { role: 'foreign', status: 403 });
+  assert.deepEqual(new Set((await list(a.district)).parks.map(park => park.id)), new Set([a.id, conflicted.id, unbounded.id]));
   await create({ parkId: null }, { status: 404 });
   await create({ parkId: b.id }, { status: 404 });
   await create({ parkId: unbounded.id }, { status: 422 });
@@ -89,26 +91,27 @@ try {
   await patch({ coordinates: [37.551, 55.794], revision: two.revision }, { status: 422 });
   const frame = '/frames/' + two.slot.id;
   const upload = (where, role, status = 201) => call(where + '/photo', { method: 'PUT', image: true, role, status });
-  await upload(frame, 'foreign', 404);
+  await upload(frame, 'foreign', 403);
   const conflictPoint = (await create({ parkId: conflicted.id, coordinates: [37.561, 55.794] })).point;
-  await upload('/frames/' + conflictPoint.slot.id, 'editor', 404);
-  const { photo } = await upload(frame, 'editor');
-  await upload(frame, 'editor', 409);
+  await upload('/frames/' + conflictPoint.slot.id, 'editor', 403);
+  await upload(frame, 'editor', 403);
+  const { photo } = await upload(frame, 'admin');
+  await upload(frame, 'admin', 409);
   const firstPhoto = frame + '/photos/' + photo.id;
-  assert.deepEqual(await call(firstPhoto, { role: 'editor' }), png);
-  await call(firstPhoto, { role: 'foreign', status: 404 });
+  assert.deepEqual(await call(firstPhoto), png);
+  await call(firstPhoto, { role: 'foreign', status: 403 });
   await erase(two.revision, 409);
   await call(firstPhoto + '/review', { method: 'POST', json: { decision: 'rejected', comment: 'Переснять' } });
   await erase(two.revision, 409);
-  const second = (await upload(frame, 'editor')).photo;
+  const second = (await upload(frame, 'admin')).photo;
   const three = (await patch({ coordinates: [37.551, 55.794], parkId: b.id, revision: two.revision, confirmReassignment: true })).point;
   assert.equal(three.slot.id, two.slot.id);
   assert.equal(three.slot.photoId, second.id);
   assert.equal(three.parkId, b.id);
   const newPhoto = frame + '/photos/' + second.id;
-  await call(newPhoto, { role: 'editor', status: 404 });
-  assert.deepEqual(await call(newPhoto, { role: 'foreign' }), png);
-  assert.equal((await list(b.district, { role: 'foreign' })).points[0].id, id);
+  await call(newPhoto, { role: 'editor', status: 403 });
+  assert.deepEqual(await call(newPhoto), png);
+  assert.equal((await list(b.district)).points[0].id, id);
   assert.equal((await list(a.district)).points.some(point => point.id === id), false);
   assert.equal((await pool.query('SELECT count(*)::int AS count FROM park_digitization_photos WHERE frame_id = $1', [one.slot.id])).rows[0].count, 2);
 
@@ -118,14 +121,14 @@ try {
 
   const empty = (await create({})).point;
   await call('/points/' + empty.id, { method: 'DELETE', json: { revision: empty.revision } });
-  await upload('/frames/' + empty.slot.id, 'editor', 404);
+  await upload('/frames/' + empty.slot.id, 'admin', 404);
   assert.equal((await list(a.district)).points.some(point => point.id === empty.id), false);
 
   const racing = (await create({})).point;
   const raw = 'http://127.0.0.1:' + server.address().port + base;
   const [uploadResult, deleteResult] = await Promise.all([
     fetch(raw + '/frames/' + racing.slot.id + '/photo', {
-      method: 'PUT', headers: { 'X-Test-Role': 'editor', 'Content-Type': 'image/png' }, body: png,
+      method: 'PUT', headers: { 'X-Test-Role': 'admin', 'Content-Type': 'image/png' }, body: png,
     }),
     fetch(raw + '/points/' + racing.id, {
       method: 'DELETE', headers: { 'X-Test-Role': 'admin', 'Content-Type': 'application/json' },

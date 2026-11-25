@@ -1,13 +1,10 @@
 import express from 'express';
 import { randomUUID } from 'node:crypto';
-import { dpspDistrict } from './dpsp-access.js';
 import { validateReview } from './object-slots.js';
 import { MAX_PHOTO_BYTES, PHOTO_MIME_TYPES, safePhotoFilename, validatePhotoUpload } from './photo-markers.js';
 import { DISTRICTS, isPointWithinBoundary } from './validation.js';
 
 const UUID = /^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i;
-const isAdmin = (req) => req.user.role === 'prefecture_admin';
-const districtOf = (req) => dpspDistrict(req.user.district);
 const fail = (status, message) => { throw Object.assign(new Error(message), { status }); };
 const pointNotFound = () => fail(404, 'Точка или фотослот не найдены.');
 const photoNotFound = () => fail(404, 'Фото не найдено.');
@@ -55,13 +52,9 @@ export function createParkDigitizationRouter({ pool, authenticate, boundary }) {
     res.set('Cache-Control', 'private, no-store');
     next();
   }, authenticate, (req, _res, next) => {
-    if (isAdmin(req) || (['district_editor', 'dpsp_district_editor'].includes(req.user.role) && districtOf(req))) return next();
-    fail(403, 'Парковая оцифровка доступна префектуре и районным исполнителям.');
-  });
-  const admin = (req, _res, next) => {
-    if (!isAdmin(req)) fail(403, 'Разметку точек и приёмку фото ведёт префектура.');
+    if (req.user.role !== 'prefecture_admin') fail(403, 'Парковая оцифровка пока доступна только префектуре.');
     next();
-  };
+  });
   for (const param of ['pointId', 'frameId', 'photoId']) {
     router.param(param, (_req, _res, next, value) => UUID.test(value) ? next() : pointNotFound());
   }
@@ -82,7 +75,6 @@ export function createParkDigitizationRouter({ pool, authenticate, boundary }) {
     'INSERT INTO audit_log (actor_user_id, action, object_key, metadata) VALUES ($1,$2,$3,$4::jsonb)',
     [req.user.id, action, 'park-digitization:' + point.id, JSON.stringify({ parkId: point.park_id, ...details })],
   );
-  const visible = (req, district) => isAdmin(req) || districtOf(req) === district;
 
   async function lockPoint(client, req) {
     const { pointId, frameId } = req.params;
@@ -90,9 +82,6 @@ export function createParkDigitizationRouter({ pool, authenticate, boundary }) {
     const { rows: [point] } = await client.query(`SELECT p.* FROM park_digitization_points p
       WHERE ${key} = $1 AND p.retired_at IS NULL FOR UPDATE OF p`, [pointId || frameId]);
     if (!point) pointNotFound();
-    // Повторная проверка парка после получения блокировки учитывает конкурентный перенос.
-    const { rows: [park] } = await client.query('SELECT district, registry_status FROM park_digitization_objects WHERE id = $1 FOR SHARE', [point.park_id]);
-    if (!visible(req, park.district) || (!isAdmin(req) && park.registry_status === 'conflict')) pointNotFound();
     return point;
   }
   async function getPark(client, id, district) {
@@ -108,17 +97,15 @@ export function createParkDigitizationRouter({ pool, authenticate, boundary }) {
   router.get('/district', async (req, res) => {
     const { district } = req.query;
     if (!DISTRICTS.has(district)) fail(400, 'Укажите район САО.');
-    if (!visible(req, district)) fail(403, 'Доступны парки только своего района.');
     const [parks, points, destinations] = await Promise.all([
-      pool.query(`SELECT * FROM park_digitization_objects WHERE district = $1 AND ($2::boolean OR registry_status <> 'conflict')
-        ORDER BY name, id`, [district, isAdmin(req)]),
-      pool.query(pointRead + ` AND o.district = $1 AND ($2::boolean OR o.registry_status <> 'conflict') ORDER BY p.id`, [district, isAdmin(req)]),
-      isAdmin(req) ? pool.query('SELECT id, name, district FROM park_digitization_objects ORDER BY district, name') : null,
+      pool.query('SELECT * FROM park_digitization_objects WHERE district = $1 ORDER BY name, id', [district]),
+      pool.query(pointRead + ' AND o.district = $1 ORDER BY p.id', [district]),
+      pool.query('SELECT id, name, district FROM park_digitization_objects ORDER BY district, name'),
     ]);
-    res.json({ parks: parks.rows, points: points.rows.map(toPoint), destinations: destinations?.rows });
+    res.json({ parks: parks.rows, points: points.rows.map(toPoint), destinations: destinations.rows });
   });
 
-  router.post('/points', admin, async (req, res) => {
+  router.post('/points', async (req, res) => {
     const input = req.body || {};
     const { id, district, parkId } = input;
     if (!DISTRICTS.has(district) || typeof id !== 'string' || !UUID.test(id)) fail(422, 'Укажите район и идентификатор новой точки.');
@@ -143,7 +130,7 @@ export function createParkDigitizationRouter({ pool, authenticate, boundary }) {
     res.status(201).json({ point: created });
   });
 
-  router.patch('/points/:pointId', admin, async (req, res) => {
+  router.patch('/points/:pointId', async (req, res) => {
     const input = req.body || {};
     const updated = await transaction(async (client) => {
       const point = await lockPoint(client, req);
@@ -166,7 +153,7 @@ export function createParkDigitizationRouter({ pool, authenticate, boundary }) {
     res.json({ point: updated });
   });
 
-  router.delete('/points/:pointId', admin, async (req, res) => {
+  router.delete('/points/:pointId', async (req, res) => {
     await transaction(async (client) => {
       const point = await lockPoint(client, req);
       checkRevision(req.body?.revision, point);
@@ -181,9 +168,8 @@ export function createParkDigitizationRouter({ pool, authenticate, boundary }) {
   router.get('/frames/:frameId/photos/:photoId', async (req, res) => {
     const { rows: [photo] } = await pool.query(`SELECT f.photo_bytes, f.photo_mime_type
       FROM park_digitization_photos f JOIN park_digitization_points p ON p.frame_id = f.frame_id
-      JOIN park_digitization_objects o ON o.id = p.park_id
-      WHERE f.frame_id = $1 AND f.id = $2 AND p.retired_at IS NULL AND ($3::boolean OR (o.district = $4 AND o.registry_status <> 'conflict'))`,
-    [req.params.frameId, req.params.photoId, isAdmin(req), districtOf(req) || null]);
+      WHERE f.frame_id = $1 AND f.id = $2 AND p.retired_at IS NULL`,
+    [req.params.frameId, req.params.photoId]);
     if (!photo) photoNotFound();
     res.set('X-Content-Type-Options', 'nosniff').type(photo.photo_mime_type).send(photo.photo_bytes);
   });
@@ -206,7 +192,7 @@ export function createParkDigitizationRouter({ pool, authenticate, boundary }) {
     res.status(201).json({ photo });
   });
 
-  router.post('/frames/:frameId/photos/:photoId/review', admin, async (req, res) => {
+  router.post('/frames/:frameId/photos/:photoId/review', async (req, res) => {
     const review = validateReview(req.body);
     if (!review.valid) fail(422, review.error);
     const photo = await transaction(async (client) => {

@@ -19,7 +19,6 @@ window.initParkDigitizationLayer = function ({
     return el;
   };
   const canEdit = () => getUser()?.role === 'prefecture_admin';
-  const allowed = () => canEdit() || (['district_editor', 'dpsp_district_editor'].includes(getUser()?.role) && getUser()?.district === district);
 
   const section = node('div');
   section.id = 'parkDigitizationLayer';
@@ -152,7 +151,7 @@ window.initParkDigitizationLayer = function ({
   function draw() {
     overlays.forEach(item => map.removeChild(item));
     overlays = [];
-    if (!checkbox.checked || !allowed()) return;
+    if (!checkbox.checked || !canEdit()) return;
     const park = selectedPark();
     const visiblePoints = points.filter(point => point.parkId === parkId);
     count.textContent = points.length.toLocaleString('ru-RU');
@@ -185,7 +184,6 @@ window.initParkDigitizationLayer = function ({
       () => openPoint(point, park, { focus: true }), 'shoot-item',
     )));
     if (park && !visiblePoints.length) rows.textContent = 'Точек пока нет.';
-    add.hidden = !canEdit();
     add.disabled = !parks.length;
   }
 
@@ -205,13 +203,13 @@ window.initParkDigitizationLayer = function ({
     closeCard();
     label.classList.toggle('off', !checkbox.checked);
     controls.hidden = !checkbox.checked;
-    if (controls.hidden || !allowed()) { draw(); return; }
+    if (controls.hidden || !canEdit()) { draw(); return; }
     status.textContent = 'Загружаем парки…';
     add.disabled = true;
     try {
       const response = await apiRequest(BASE + '/district?district=' + encodeURIComponent(district), { signal: controller.signal });
       const data = await response.json();
-      if (request !== controller || !allowed()) return;
+      if (request !== controller || !canEdit()) return;
       parks = data.parks;
       destinations = data.destinations || [];
       points = data.points;
@@ -260,12 +258,12 @@ window.initParkDigitizationLayer = function ({
         message.textContent = 'Загружаем фото…';
         try {
           const file = await preparePointPhoto(input.files[0]);
-          if (active?.content !== content || !allowed()) return;
+          if (active?.content !== content || !canEdit()) return;
           const response = await apiRequest(framePath(point) + '/photo', {
             method: 'PUT', headers: { 'Content-Type': file.type, 'X-Photo-Filename': encodeURIComponent(file.name) }, body: file,
           });
           const { photo } = await response.json();
-          if (!allowed()) return;
+          if (!canEdit()) return;
           const updated = { ...point, slot: { ...slot, photoId: photo.id, status: photo.status, comment: '' } };
           if (active?.content === content) openPoint(updated, selectedPark());
           if (points.find(item => item.id === point.id)?.revision === point.revision) updatePoint(updated);
@@ -274,7 +272,7 @@ window.initParkDigitizationLayer = function ({
         finally { input.value = ''; upload.disabled = false; }
       });
     }
-    if (slot.status !== 'pending' || !canEdit()) return;
+    if (slot.status !== 'pending') return;
     const comment = node('textarea');
     comment.placeholder = 'Причина возврата';
     comment.setAttribute('aria-label', 'Причина возврата');
@@ -284,7 +282,7 @@ window.initParkDigitizationLayer = function ({
       reviewActions.querySelectorAll('button').forEach(control => { control.disabled = true; });
       try {
         const { photo } = await changeRequest(framePath(point) + '/photos/' + slot.photoId + '/review', 'POST', { decision, comment: comment.value });
-        if (!allowed()) return;
+        if (!canEdit()) return;
         const updated = { ...point, slot: { ...slot, status: photo.status === 'rejected' ? 'rework' : photo.status, comment: comment.value.trim() } };
         if (active?.content === content) openPoint(updated, selectedPark());
         if (points.find(item => item.id === point.id)?.revision === point.revision) updatePoint(updated);
@@ -297,12 +295,12 @@ window.initParkDigitizationLayer = function ({
   }
 
   function openPoint(point, park, { isNew = false, focus = false } = {}) {
-    if (!allowed() || !park) return;
+    if (!canEdit() || !park) return;
     clearCard();
     if (focus) centerSelection(point.coordinates, 18);
     popover.open({
       coordinates: point.coordinates, kind: 'park', title: park.name,
-      subtitle: parkAsu(park), heading: point.slot.azimuth, editing: canEdit(),
+      subtitle: parkAsu(park), heading: point.slot.azimuth, editing: true,
     });
     const content = node('section', '', 'pin-section');
     const message = node('p', '', 'pin-note');
@@ -311,8 +309,6 @@ window.initParkDigitizationLayer = function ({
     card.replaceChildren(content);
     active = { content, point, isNew };
     if (!isNew) showPhoto(point, content, message);
-    if (!canEdit()) return;
-
     const coords = node('p', '', 'pin-note');
     const angle = node('input');
     angle.type = 'number';
@@ -377,7 +373,7 @@ window.initParkDigitizationLayer = function ({
         const data = isNew
           ? await changeRequest(BASE + '/points', 'POST', { ...input, district, id: point.id })
           : await changeRequest(pointPath(point), 'PATCH', { ...input, revision: point.revision, confirmReassignment: reassigned });
-        if (!allowed()) return;
+        if (!canEdit()) return;
         if (!parks.some(item => item.id === data.point.parkId)) {
           if (active?.content === content) closeCard();
           points = points.filter(item => item.id !== data.point.id);
@@ -413,7 +409,7 @@ window.initParkDigitizationLayer = function ({
         if (active?.content === content) closeCard();
         points = points.filter(item => item.id !== point.id);
         draw();
-        if (allowed()) status.textContent = 'Точка удалена.';
+        if (canEdit()) status.textContent = 'Точка удалена.';
       } catch (error) { message.textContent = 'Точка не удалена. ' + error.message; }
       finally { remove.disabled = false; }
     }, 'danger'));
@@ -437,7 +433,7 @@ window.initParkDigitizationLayer = function ({
     isPicking: () => Boolean(mode),
     cancelPicking() { resetMode(); },
     setVisible(on) {
-      section.hidden = !on || !allowed();
+      section.hidden = !on || !canEdit();
       if (!section.hidden) return;
       request?.abort();
       request = null;

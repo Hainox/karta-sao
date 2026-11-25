@@ -238,7 +238,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
 <script src="point-editor.js?v=20261119-editor-dock"></script>
 <script src="point-stack.js?v=20261102"></script>
 <script src="playground-photo-layer.js?v=20261109-point"></script>
-<script src="park-digitization-layer.js?v=1"></script>
+<script src="park-digitization-layer.js?v=2"></script>
 <script src="sidewalk-shoot-layer.js?v=20261125-parks"></script>
 <script src="entrance-ref-layer.js?v=20261028"></script>
 <script>
@@ -1435,7 +1435,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     $('shootLayerRow').hidden = !isPrefecture() && !isDistrictEditor();
     if (state.sidewalkLayer) {
       state.sidewalkLayer.setVisible(isPrefecture() || isDistrictEditor());
-      state.sidewalkLayer.setParkVisible?.(isPrefecture() || isDistrictEditor() || isDtsDistrictEditor());
+      state.sidewalkLayer.setParkVisible?.(isPrefecture());
       state.sidewalkLayer.setYardPathVisible(isPrefecture() || isDistrictEditor() || isDtsDistrictEditor());
     }
     if (state.entranceLayer) state.entranceLayer.setVisible(isPrefecture());
