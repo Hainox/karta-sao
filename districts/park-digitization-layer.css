@@ -1,0 +1,16 @@
+.park-controls, .park-edit-form { display: grid; gap: 8px; margin: 8px 0; }
+.park-controls[hidden] { display: none; }
+.park-controls select, .park-edit-form select, .park-edit-form textarea { width: 100%; }
+.park-controls select, .park-edit-form select, .park-edit-form textarea, .park-edit-form input {
+  background: #fff;
+  border: 1px solid #a6b6c1;
+  border-radius: 6px;
+  color: #18252e;
+  font: inherit;
+  padding: 6px;
+  box-sizing: border-box;
+}
+.park-edit-form input { width: 95px; }
+.park-edit-form textarea { resize: vertical; min-height: 58px; }
+.park-controls .shoot-item { width: 100%; text-align: left; }
+.park-controls .pin-actions, .park-edit-form .pin-actions { flex-wrap: wrap; }

@@ -171,6 +171,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
 <link rel="stylesheet" href="../atlas-brand.css?v=20261021">
 <link rel="stylesheet" href="../atlas-hud.css?v=20261029b">
 <link rel="stylesheet" href="point-popover.css?v=20261123-dts-density">
+<link rel="stylesheet" href="park-digitization-layer.css?v=1">
 </head>
 <body>
 <div class="app">
@@ -233,20 +234,23 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
 </div>
 <script src="../atlas-hud.js?v=20261028"></script>
 <script src="../atlas-summary.js?v=20261029b"></script>
-<script src="point-popover.js?v=20261119-dts-release"></script>
+<script src="point-popover.js?v=20261125-parks"></script>
 <script src="point-editor.js?v=20261119-editor-dock"></script>
 <script src="point-stack.js?v=20261102"></script>
 <script src="playground-photo-layer.js?v=20261109-point"></script>
-<script src="sidewalk-shoot-layer.js?v=20261123-dts-create"></script>
+<script src="park-digitization-layer.js?v=1"></script>
+<script src="sidewalk-shoot-layer.js?v=20261125-parks"></script>
 <script src="entrance-ref-layer.js?v=20261028"></script>
 <script>
 (() => {
   const SLUG = 'aeroport';
   const DISTRICT_NO = '1';
   const DISTRICT = 'Аэропорт';
-  const API_BASE = 'https://obhod-sao.ru/photo-api';
-  const TOKEN_KEY = 'sao-photo-token';
-  const USER_KEY = 'sao-photo-user';
+  const localPhotoApi = ['localhost', '127.0.0.1'].includes(location.hostname)
+    && new URLSearchParams(location.search).get('photoApi') === 'local';
+  const API_BASE = localPhotoApi ? 'http://' + location.hostname + ':8788' : 'https://obhod-sao.ru/photo-api';
+  const TOKEN_KEY = localPhotoApi ? 'sao-photo-token:local' : 'sao-photo-token';
+  const USER_KEY = localPhotoApi ? 'sao-photo-user:local' : 'sao-photo-user';
   const LOCAL_KEY = 'sao-photo-points:' + SLUG;
   const DATASET = 'sao_district_photo_points';
   const LAYERS = [
@@ -296,6 +300,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
   }
 
   function showCard(item) {
+    if (state.sidewalkLayer?.isParkPicking?.()) return;
     centerSelection(item.feature?.geometry?.coordinates || item.geometry?.coordinates);
     const p = (item.feature?.properties || item.properties || {});
     const isPedestrianPath = item.layerKey === 'peshehodnye_dorozhki';
@@ -366,7 +371,10 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       const scale = Math.min(1, Math.max(0.25, 2 ** ((z - 18) / 2)));
       $('map').style.setProperty('--shoot-arrow-scale', scale.toFixed(3));
     };
-    state.map.addChild(new YMapListener({ layer: 'any', onClick: (_object, event) => handleMapClick(event && event.coordinates), onMouseMove: (_object, event) => previewHeading(event && event.coordinates), onUpdate: ({ location }) => { applyArrowScale(location && location.zoom); state.popover?.reposition(); state.editor?.reposition(); } }));
+    state.map.addChild(new YMapListener({ layer: 'any', onClick: (_object, event) => {
+      const coordinates = event?.coordinates;
+      if (!state.sidewalkLayer?.handleParkMapClick?.(coordinates)) handleMapClick(coordinates);
+    }, onMouseMove: (_object, event) => previewHeading(event && event.coordinates), onUpdate: ({ location }) => { applyArrowScale(location && location.zoom); state.popover?.reposition(); state.editor?.reposition(); } }));
     applyArrowScale(state.map.zoom);
     let total = 0;
     for (const layer of LAYERS) {
@@ -395,7 +403,9 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
         $('playgroundPhotoLayer').querySelector('[data-message]').textContent = 'Фото площадок временно недоступны; показаны точки из таблицы.';
       }
     }
-    state.sidewalkLayer = window.initSidewalkShootLayer({ map: state.map, slug: SLUG, district: DISTRICT, apiRequest, escapeHtml, centerSelection, popover: state.popover, getUser: () => state.photoUser, preparePointPhoto, editor: state.editor });
+    state.sidewalkLayer = window.initSidewalkShootLayer({ map: state.map, slug: SLUG, district: DISTRICT, apiRequest, escapeHtml, centerSelection, popover: state.popover, getUser: () => state.photoUser, preparePointPhoto, editor: state.editor, bearing, featureStyle,
+      exitOtherEditing: () => { if (state.shootMode) setShootMode(false); state.editor?.clear(); },
+    });
     state.entranceLayer = window.initEntranceRefLayer({ map: state.map, slug: SLUG, escapeHtml, centerSelection, popover: state.popover });
     await loadPhotoPoints();
     renderShootMarkers();
@@ -1263,6 +1273,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
       Стрелка черновика смотрит за мышью. Ставить можно подряд; «Готово» или Esc — выход. */
   function setShootMode(on, target = state.markTarget || 'entrance') {
     if (on && (!isPrefecture() || !state.serverOk)) { $('shootHint').textContent = 'Новые точки ставит только префектура при работающем сервере.'; return; }
+    if (on) state.sidewalkLayer?.cancelParkPicking?.();
     state.shootMode = on;
     state.markTarget = target;
     if (on && target === 'entrance' && !state.shootLayerOn) setShootLayer(true);
@@ -1424,6 +1435,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
     $('shootLayerRow').hidden = !isPrefecture() && !isDistrictEditor();
     if (state.sidewalkLayer) {
       state.sidewalkLayer.setVisible(isPrefecture() || isDistrictEditor());
+      state.sidewalkLayer.setParkVisible?.(isPrefecture() || isDistrictEditor() || isDtsDistrictEditor());
       state.sidewalkLayer.setYardPathVisible(isPrefecture() || isDistrictEditor() || isDtsDistrictEditor());
     }
     if (state.entranceLayer) state.entranceLayer.setVisible(isPrefecture());
@@ -1578,6 +1590,7 @@ window.ymaps3Ready = new Promise((resolve, reject) => {
   });
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') {
+      state.sidewalkLayer?.cancelParkPicking?.();
       if (state.picking) { state.picking = null; clearPreview(); }
       if (state.shootMode) setShootMode(false);
       state.editor?.clear();

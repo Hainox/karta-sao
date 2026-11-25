@@ -8,7 +8,11 @@ export function dpspDistrict(value) {
 }
 
 export function dpspSessionAllowed(user, path) {
-  return user.role !== DPSP_EDITOR || path === '/auth/me' || path.startsWith('/object-photo-points/dpsp/') || path === '/auth/logout' || path.startsWith('/object-photo-points/yard-paths/');
+  return user.role !== DPSP_EDITOR
+    || path === '/auth/me' || path === '/auth/logout'
+    || path.startsWith('/object-photo-points/dpsp/')
+    || path.startsWith('/object-photo-points/yard-paths/')
+    || path.startsWith('/object-photo-points/parks/');
 }
 
 export function requireDpspAdmin(req, res, next) {

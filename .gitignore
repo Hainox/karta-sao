@@ -27,3 +27,7 @@ dev/templates/*.xlsx
 
 # Runtime catalog; generated from the supplied QGIS source on the server.
 photo-service/assets/yard-path-points.json
+
+# Контуры и расчёт парковых территорий загружаются из рабочего каталога фотослужбы.
+/projects/park-digitization/work/input/
+/projects/park-digitization/work/generated/
