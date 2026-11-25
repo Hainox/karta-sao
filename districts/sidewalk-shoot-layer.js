@@ -4,12 +4,16 @@
 // при каждом входе и выходе. Точки берутся со службы фото, где префектура их
 // переносит, поворачивает и удаляет. Если служба недоступна или точки туда ещё
 // не загружены, показывается опубликованный файл слоя — без правок.
-window.initSidewalkShootLayer = function ({ map, slug, district, apiRequest, escapeHtml, centerSelection, popover, getUser, preparePointPhoto, editor }) {
+window.initSidewalkShootLayer = function ({ map, slug, district, apiRequest, escapeHtml, centerSelection, popover, getUser, preparePointPhoto, editor, bearing, featureStyle, exitOtherEditing }) {
   const container = document.getElementById('sidewalkShootLayer');
   const card = document.getElementById('card');
   const API = '/object-photo-points/sidewalks';
   const testLayer = initSidewalkTestLayer({ container, map, card, district, apiRequest, centerSelection, popover, getUser, editor, arrowSvg, preparePointPhoto });
   const yardPathLayer = initYardPathLayer({ container, map, card, district, apiRequest, centerSelection, popover, getUser, editor, arrowSvg, preparePointPhoto });
+  const parkLayer = window.initParkDigitizationLayer?.({
+    container, map, card, district, apiRequest, centerSelection, popover, getUser, arrowSvg, preparePointPhoto,
+    bearing, featureStyle, exitOtherEditing,
+  });
   const STEP = 15;
   let points = [];
   let editable = false;
@@ -340,6 +344,10 @@ window.initSidewalkShootLayer = function ({ map, slug, district, apiRequest, esc
       await load();
       return created;
     },
+    setParkVisible: on => parkLayer?.setVisible(on),
+    handleParkMapClick: coordinates => parkLayer?.handleMapClick(coordinates),
+    isParkPicking: () => parkLayer?.isPicking(),
+    cancelParkPicking: () => parkLayer?.cancelPicking(),
     createYardPathPoint: options => yardPathLayer.createPoint(options),
     setYardPathVisible: on => yardPathLayer.setVisible(on),
     setVisible(on) {
