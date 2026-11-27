@@ -70,6 +70,7 @@ window.initParkDigitizationLayer = function ({
   let mode = null;
   let request = null;
   let draftMarker = null;
+  let linkedPoint = new URLSearchParams(location.search).get('parkPoint');
   const selectedPark = () => parks.find(park => park.id === parkId);
   const framePath = (point) => BASE + '/frames/' + point.slot.id;
   const pointPath = (point) => BASE + '/points/' + point.id;
@@ -214,7 +215,13 @@ window.initParkDigitizationLayer = function ({
       destinations = data.destinations || [];
       points = data.points;
       select.replaceChildren(new Option('Выберите парк', ''), ...parks.map(park => new Option(park.name, park.id)));
-      choosePark(parks.some(park => park.id === parkId) ? parkId : '');
+      const target = linkedPoint ? points.find(point => point.id === linkedPoint) : null;
+      choosePark(target?.parkId ?? (parks.some(park => park.id === parkId) ? parkId : ''));
+      if (linkedPoint) {
+        linkedPoint = null;
+        if (target) openPoint(target, selectedPark(), { focus: true });
+        else status.textContent = 'Точка по ссылке не найдена в этом районе.';
+      }
     } catch (error) {
       if (request !== controller || controller.signal.aborted) return;
       status.textContent = 'Слой не загружен. ' + error.message;
@@ -436,7 +443,13 @@ window.initParkDigitizationLayer = function ({
     cancelPicking() { resetMode(); },
     setVisible(on) {
       section.hidden = !on || !canEdit();
-      if (!section.hidden) return;
+      if (!section.hidden) {
+        if (linkedPoint && !checkbox.checked) {
+          checkbox.checked = true;
+          void load();
+        }
+        return;
+      }
       request?.abort();
       request = null;
       checkbox.checked = false;
