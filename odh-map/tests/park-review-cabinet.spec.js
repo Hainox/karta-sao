@@ -49,24 +49,46 @@ test('парки: фильтр по объекту, прежние статус�
   });
   await page.goto(mapPage + '#parks');
   await expect(page.getByRole('tab', { name: 'Парковые территории' })).toHaveAttribute('aria-selected', 'true');
-  await expect(page.locator('#counts .count-total strong')).toHaveText('7');
+  const progress = page.locator('#parkProgressLabel');
+  await expect(progress).toHaveText('Принято 1 из 7 точек');
+  await expect(page.getByRole('link', { name: 'Инструкция' })).toHaveAttribute('href', 'guides/park-review.html');
+  const parkSearch = page.getByRole('searchbox', { name: 'Поиск парка' });
+  await parkSearch.fill('970107243');
+  await expect(progress).toHaveText('Принято 1 из 5 точек');
+  await parkSearch.fill('несуществующий парк');
+  await expect(page.getByText('Парки не найдены. Измените запрос или сбросьте фильтры.')).toBeVisible();
+  await page.getByRole('button', { name: 'Сбросить фильтры' }).click();
+  await expect(parkSearch).toBeFocused();
+  await expect(progress).toHaveText('Принято 1 из 7 точек');
   await page.getByRole('combobox', { name: 'Район' }).selectOption('Тимирязевский');
   const parkFilter = page.getByRole('combobox', { name: 'Парк', exact: true });
   await expect(parkFilter.locator('option')).toHaveCount(3);
   await parkFilter.selectOption('dubki');
-  await expect(page.locator('#counts .count-total strong')).toHaveText('5');
-  await expect(page.locator('#counts .count-empty strong')).toHaveText('1');
+  await expect(progress).toHaveText('Принято 1 из 5 точек');
+  await expect(page.locator('#park-empty-count')).toHaveText('1');
+  await expect(page.locator('#parkScopeTitle')).toHaveText('Парк Дубки');
+  const update = page.waitForResponse(response => response.url().endsWith(base + '/review/queue'));
+  await page.getByRole('button', { name: 'Обновить', exact: true }).click();
+  await update;
+  await expect(parkFilter).toHaveValue('dubki');
+  await expect(page.locator('#parkUpdated')).toContainText('МСК');
   await expect(page.getByRole('button', { name: 'Архив фото (ZIP)' })).toBeHidden();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 
   const records = page.locator('#list .object-row');
   const back = page.getByRole('button', { name: /К списку точек/ });
-  await page.getByRole('tab', { name: 'Принято', exact: true }).click();
+  const pendingTab = page.getByRole('tab', { name: 'На проверке', exact: true });
+  await pendingTab.focus();
+  await pendingTab.press('ArrowRight');
+  await expect(page.getByRole('tab', { name: 'На доработке', exact: true })).toBeFocused();
+  await page.getByRole('tab', { name: 'На доработке', exact: true }).press('ArrowRight');
+  await expect(page.getByRole('tab', { name: 'Принято', exact: true })).toHaveAttribute('aria-selected', 'true');
   await records.first().click();
   await expect(page.locator('#objectTitle')).toHaveText('Парк Дубки');
   await expect(page.locator('#objectMeta')).toContainText('970107243');
   await expect(page.locator('#slotGrid img')).toBeVisible();
   await expect(page.locator('#objectMapLink')).toHaveAttribute('href', 'timiryazevskiy.html?parkPoint=point-4');
+  await expect(page.getByRole('link', { name: 'Инструкция' })).toHaveAttribute('href', 'guides/park-review.html#check');
   await expect(page.locator('#acceptObject')).toBeHidden();
   await back.click();
 
@@ -89,9 +111,9 @@ test('парки: фильтр по объекту, прежние статус�
   await page.locator('.reject-form textarea').fill('Проверить ракурс');
   await page.getByRole('button', { name: 'Отправить на доработку' }).click();
   await expect(page.locator('#workspace')).toBeVisible();
-  await expect(page.locator('#counts .count-review strong')).toHaveText('0');
-  await expect(page.locator('#counts .count-closed strong')).toHaveText('2');
-  await expect(page.locator('#counts .count-rework strong')).toHaveText('2');
+  await expect(page.locator('#park-pending-count')).toHaveText('0');
+  await expect(page.locator('#park-accepted-count')).toHaveText('2');
+  await expect(page.locator('#park-rework-count')).toHaveText('2');
   expect(decisions).toEqual([['frame-1', 'accepted'], ['frame-2', 'rejected']]);
 
   await parkFilter.selectOption('nearby');
@@ -100,4 +122,20 @@ test('парки: фильтр по объекту, прежние статус�
   await page.getByRole('tab', { name: 'ДТС', exact: true }).click();
   await expect(page.getByRole('tab', { name: 'На проверке', exact: true })).toHaveAttribute('aria-selected', 'true');
   await expect(page.getByRole('tab', { name: 'Без фото', exact: true })).toBeHidden();
+});
+
+test('инструкция открывается из парковой вкладки и возвращает в неё', async ({ page }) => {
+  await page.addInitScript(() => sessionStorage.setItem('odh-map-api-user-v1', JSON.stringify({ role: 'prefecture_admin' })));
+  await page.route('**/api/object-photo-points/**', route => route.fulfill({
+    json: { parks: [], counts: { total: 0, pending: 0, rework: 0, accepted: 0, empty: 0 }, pending: [], rework: [], accepted: [], empty: [] },
+  }));
+  await page.goto(mapPage + '#parks');
+  const popup = page.waitForEvent('popup');
+  await page.getByRole('link', { name: 'Инструкция' }).click();
+  const guide = await popup;
+  await expect(guide.getByRole('heading', { level: 1 })).toHaveText('Как принимать фотографии парков');
+  await guide.getByRole('link', { name: 'Проверка и решение' }).click();
+  await expect(guide).toHaveURL(/park-review\.html#check$/);
+  await guide.getByRole('link', { name: /В кабинет приёмки парков/ }).first().click();
+  await expect(guide).toHaveURL(mapPage + '#parks');
 });

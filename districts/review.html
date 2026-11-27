@@ -94,6 +94,44 @@
     .object-head{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:12px}
     .object-head h2{margin:4px 0 2px;font-size:18px}
     .slot-empty-box{display:grid;place-items:center;min-height:70px;background:#eef1ee;color:var(--muted);font-size:13px}
+    .park-workspace{margin-bottom:14px;padding:18px;border:1px solid var(--line);border-radius:14px;background:var(--panel)}
+    .park-heading,.park-scope{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    .park-heading h2{margin:0;font-size:22px;line-height:1.22}
+    .park-heading .actions{gap:8px}
+    .park-action{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:44px;text-decoration:none}
+    .park-action:focus-visible,.park-mode :is(input,select,button,a):focus-visible{outline:2px solid #176753;outline-offset:3px}
+    .park-icon{flex:none}
+    .park-filters{display:grid;grid-template-columns:1fr 1.15fr 1.45fr;gap:12px;align-items:end;margin:16px 0}
+    .park-filters label{display:grid;min-width:0;gap:4px;font-weight:700;font-size:13px}
+    .park-filters select,.park-search input{width:100%;min-width:0;min-height:44px;padding:9px 10px;border:1px solid #b9cbbf;border-radius:8px;background:white;color:var(--ink)}
+    .park-search{position:relative}
+    .park-search .park-icon{position:absolute;top:13px;left:11px;color:#526d61;pointer-events:none}
+    .park-search input{padding-left:36px}
+    .park-scope{border-top:1px solid var(--line);padding-top:13px}
+    .park-scope strong,.park-scope span{display:block}
+    .park-scope strong{font-size:16px}
+    .park-scope span,.park-queue-head time{font-size:13px;color:#526d61}
+    .park-progress{flex:0 1 240px;display:grid;gap:6px;min-width:180px}
+    .park-progress progress{width:100%;height:8px;accent-color:var(--green)}
+    .park-reset{min-height:44px;padding:5px 8px;border:0;background:transparent;color:var(--green);font-weight:700}
+    .park-queue-head{display:flex;align-items:center;justify-content:space-between;gap:6px 12px;flex-wrap:wrap;margin:18px 0 8px}
+    .park-queue-head h3{font-size:16px;margin:0}
+    .park-mode .tabs{width:100%;margin:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+    .park-mode .tab{display:flex;align-items:center;justify-content:space-between;gap:5px;min-height:44px;border-radius:9px;text-align:left}
+    .park-tab-count{display:none}
+    .park-mode .park-tab-count{display:inline-block;font-variant-numeric:tabular-nums}
+    .park-empty-action{display:block;min-height:44px;margin:12px auto 0}
+    .park-card-help{margin:0 0 10px}
+    #objectMapLink .park-icon{display:none}
+    #objectMapLink.park-action .park-icon{display:block}
+    @media(max-width:700px){
+      .park-workspace{padding:14px}
+      .park-filters{grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}
+      #parkFilterBox{grid-column:1/-1}
+      .park-mode .tabs{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .park-progress{flex:1 1 100%;order:3}
+    }
+    @media(max-width:360px){.park-filters{grid-template-columns:1fr}.park-mode .tab{padding-inline:9px}}
     @media(max-width:800px){.counts{grid-template-columns:repeat(2,minmax(0,1fr))}.tabs{margin-left:0}.toolbar select{min-width:0;width:100%}.toolbar label{flex:1 1 100%}}
   </style>
 </head>
@@ -123,6 +161,29 @@
         <button class="mode" type="button" role="tab" data-mode="yard-paths">ДТС</button>
         <button class="mode" type="button" role="tab" data-mode="parks">Парковые территории</button>
       </div>
+      <section id="parkWorkspace" class="park-workspace" aria-labelledby="parkHeading" hidden>
+        <header class="park-heading">
+          <h2 id="parkHeading">Приёмка парков</h2>
+          <!-- Lucide icons, ISC. See districts/lucide-license.txt. -->
+          <div class="actions">
+            <a class="secondary park-action" href="guides/park-review.html" target="_blank" rel="noopener"><svg class="park-icon" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>Инструкция</a>
+            <button class="secondary park-action" id="parkRefresh" type="button"><svg class="park-icon" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>Обновить</button>
+          </div>
+        </header>
+        <div class="park-filters">
+          <div id="parkDistrictMount"></div>
+          <label>Поиск парка<span class="park-search"><svg class="park-icon" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg><input id="parkSearch" type="search" placeholder="Название / ID" autocomplete="off"></span></label>
+          <label id="parkFilterBox">Парк<select id="parkFilter"><option value="">Все парки</option></select></label>
+        </div>
+        <div id="parkScope" class="park-scope" hidden>
+          <div><strong id="parkScopeTitle"></strong><span id="parkScopeInfo"></span></div>
+          <button class="park-reset" id="parkReset" type="button" hidden>Сбросить фильтры</button>
+          <div class="park-progress">
+            <span id="parkProgressLabel"></span>
+            <progress id="parkProgress" aria-labelledby="parkProgressLabel"></progress>
+          </div>
+        </div>
+      </section>
       <details class="panel" id="noSidewalkGroup" hidden>
         <summary>Тротуары ОДХ · на проверку: нет тротуара</summary>
         <p class="status" id="noSidewalkStatus" role="status"></p>
@@ -130,15 +191,15 @@
         <button class="secondary" id="refreshNoSidewalk" type="button">Обновить список</button>
       </details>
       <div class="counts" id="counts"></div>
-      <div class="toolbar">
-        <label>Район<select id="districtFilter"><option value="">Все районы САО</option></select></label>
+      <div id="parkQueueHead" class="park-queue-head" hidden><h3>Точки съёмки</h3><time id="parkUpdated" hidden></time></div>
+      <div class="toolbar" id="reviewToolbar">
+        <label id="districtFilterBox">Район<select id="districtFilter"><option value="">Все районы САО</option></select></label>
         <label id="kindFilterBox" hidden>Вид площадки<select id="kindFilter"><option value="">Детские и спортивные</option><option value="dp">Детские площадки</option><option value="sp">Спортивные площадки</option></select></label>
-        <label id="parkFilterBox" hidden>Парк<select id="parkFilter"><option value="">Все парки</option></select></label>
-        <div class="tabs" role="tablist" aria-label="Статус фото">
-          <button class="tab active" type="button" data-tab="pending" role="tab">На проверке</button>
-          <button class="tab" type="button" data-tab="rework" role="tab">На доработке</button>
-          <button class="tab" type="button" data-tab="accepted" data-park-only role="tab" hidden>Принято</button>
-          <button class="tab" type="button" data-tab="empty" data-park-only role="tab" hidden>Без фото</button>
+        <div class="tabs" id="reviewStatusTabs" role="tablist" aria-label="Статус фото">
+          <button class="tab active" type="button" data-tab="pending" role="tab">На проверке<span class="park-tab-count" id="park-pending-count" aria-hidden="true"></span></button>
+          <button class="tab" type="button" data-tab="rework" role="tab">На доработке<span class="park-tab-count" id="park-rework-count" aria-hidden="true"></span></button>
+          <button class="tab" type="button" data-tab="accepted" data-park-only role="tab" hidden>Принято<span class="park-tab-count" id="park-accepted-count" aria-hidden="true"></span></button>
+          <button class="tab" type="button" data-tab="empty" data-park-only role="tab" hidden>Без фото<span class="park-tab-count" id="park-empty-count" aria-hidden="true"></span></button>
         </div>
         <label id="photoFromFilter">Фото загружены с<input id="photoFrom" type="date"></label>
         <label id="photoToFilter">По<input id="photoTo" type="date"></label>
@@ -153,8 +214,9 @@
     <section id="objectView" hidden>
       <div class="object-head">
         <div><button class="secondary" id="backToList" type="button">← К списку точек</button><h2 id="objectTitle"></h2><div class="meta" id="objectMeta"></div></div>
-        <div class="actions"><button class="primary" id="acceptObject" type="button">Принять объект</button><a class="secondary" id="objectMapLink" target="_blank">Точка на карте района →</a></div>
+        <div class="actions"><button class="primary" id="acceptObject" type="button">Принять объект</button><a class="secondary" id="objectMapLink" target="_blank" rel="noopener"><svg class="park-icon" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Точка на карте района →</a><a class="secondary park-action" id="parkCardGuide" href="guides/park-review.html#check" target="_blank" rel="noopener" hidden>Инструкция</a></div>
       </div>
+      <p id="parkCardHint" class="status park-card-help" hidden>Сверьте парк, положение точки и направление стрелки с фотографией.</p>
       <p class="status" id="objectStatus" role="status"></p>
       <p class="status" id="acceptObjectHint"></p>
       <button class="secondary" id="nextObject" type="button" hidden>Следующая точка →</button>
@@ -249,6 +311,11 @@
         + '&yardFrame=' + encodeURIComponent(row.point_id),
     };
     const parkBase = '/api/object-photo-points/parks';
+    function parkReference(park) {
+      if (park?.asu_ids.length) return 'АСУ ОДС · ' + park.asu_ids.join(', ');
+      return park?.registry_status === 'absent_in_source'
+        ? 'По списку отсутствует в АСУ ОДС' : 'ID АСУ ОДС не подтверждён';
+    }
     MODES.parks = {
       base: parkBase,
       queue: '/review/queue',
@@ -257,9 +324,7 @@
       noun: 'точек', open: 'Открыть точку →', title: (row) => row.label, snapshot: 'Снимок парковой точки ',
       describe: (row) => {
         const park = state.queue.parks.find(item => item.id === row.park_id);
-        const reference = park?.asu_ids.length ? 'АСУ ОДС · ' + park.asu_ids.join(', ')
-          : park?.registry_status === 'absent_in_source' ? 'По списку отсутствует в АСУ ОДС' : 'ID АСУ ОДС не подтверждён';
-        return reference + ' · направление ' + Number(row.heading).toLocaleString('ru-RU') + '°';
+        return parkReference(park) + ' · направление ' + Number(row.heading).toLocaleString('ru-RU') + '°';
       },
       mapLink: (row) => (DISTRICT_SLUGS[row.district] || 'index') + '.html?parkPoint=' + encodeURIComponent(row.source_point_id),
     };
@@ -276,6 +341,11 @@
     };
     const state = { mode: modeFromHash(), queue: null, tab: 'pending', shown: PAGE, urls: [], objectId: null, busy: false, revision: 0, angles: new Map(), photoViews: [], photoGeneration: 0, archiveGeneration: 0 };
     let queueGeneration = 0;
+    let parkFilterIds = new Set();
+    const searchKey = (text) => text.toLocaleLowerCase('ru-RU').replaceAll('ё', 'е').trim();
+    const parkClock = new Intl.DateTimeFormat('ru-RU', {
+      timeZone: 'Europe/Moscow', hour: '2-digit', minute: '2-digit',
+    });
     // Выравниваем адрес по выбранному режиму: #avd-sidewalks становится #odh-sidewalks, мусорный чистится.
     if (location.hash.slice(1) !== state.mode) {
       history.replaceState(null, '', state.mode === 'entrances' ? location.pathname + location.search : '#' + state.mode);
@@ -365,18 +435,44 @@
       const district = el('districtFilter').value;
       const select = el('parkFilter');
       const selected = select.value;
-      const parks = state.queue.parks.filter(park => !district || park.district === district);
-      select.replaceChildren(new Option('Все парки', ''), ...parks.map(park =>
+      const query = searchKey(el('parkSearch').value);
+      const parks = state.queue.parks.filter(park => (!district || park.district === district)
+        && searchKey([park.name, park.district, ...park.asu_ids].join(' ')).includes(query));
+      parkFilterIds = new Set(parks.map(park => park.id));
+      select.replaceChildren(new Option(query ? 'Все найденные парки' : 'Все парки', ''), ...parks.map(park =>
         new Option(district ? park.name : park.name + ' · ' + park.district, park.id)));
-      if (parks.some(park => park.id === selected)) select.value = selected;
+      if (parkFilterIds.has(selected)) select.value = selected;
+    }
+
+    function renderParkScope() {
+      let total = 0, accepted = 0;
+      for (const status of ['pending', 'rework', 'accepted', 'empty']) {
+        const count = filteredRows(status).length;
+        el('park-' + status + '-count').textContent = count.toLocaleString('ru-RU');
+        total += count;
+        if (status === 'accepted') accepted = count;
+      }
+      const district = el('districtFilter').value;
+      const selected = state.queue.parks.find(park => park.id === el('parkFilter').value);
+      const query = el('parkSearch').value.trim();
+      const progress = el('parkProgress');
+      el('parkScope').hidden = false;
+      el('parkScopeTitle').textContent = selected?.name || district || 'Все парки САО';
+      el('parkScopeInfo').textContent = selected
+        ? selected.district + ' · ' + parkReference(selected)
+        : 'Парков в выборке · ' + parkFilterIds.size.toLocaleString('ru-RU');
+      el('parkProgressLabel').textContent = total
+        ? 'Принято ' + accepted.toLocaleString('ru-RU') + ' из ' + total.toLocaleString('ru-RU') + ' точек'
+        : 'В выборке пока нет точек';
+      progress.hidden = !total;
+      progress.max = total || 1;
+      progress.value = accepted;
+      el('parkReset').hidden = !(district || selected || query);
     }
 
     function renderCounts() {
-      let c = state.queue.counts;
-      if (state.mode === 'parks') {
-        const [pending, rework, accepted, empty] = ['pending', 'rework', 'accepted', 'empty'].map(tab => filteredRows(tab).length);
-        c = { pending, rework, accepted, empty, total: pending + rework + accepted + empty };
-      }
+      if (state.mode === 'parks') { renderParkScope(); return; }
+      const c = state.queue.counts;
       const items = [
         ['review', c.pending, mode().noun + ' на проверке'],
         ['rework', c.rework, mode().noun + ' на доработке'],
@@ -395,7 +491,8 @@
       const district = el('districtFilter').value;
       const kind = state.mode === 'playgrounds' ? el('kindFilter').value : '';
       const park = state.mode === 'parks' ? el('parkFilter').value : '';
-      return (!district || row.district === district) && (!kind || row.kind === kind) && (!park || row.park_id === park);
+      return (!district || row.district === district) && (!kind || row.kind === kind)
+        && (state.mode !== 'parks' || (parkFilterIds.has(row.park_id) && (!park || row.park_id === park)));
     }
 
     function filteredRows(tab = state.tab) {
@@ -421,7 +518,8 @@
           pending: ['загружено', row.uploaded_at], rework: ['отклонено', row.rejected_at],
           accepted: ['принято', row.reviewed_at], empty: ['фото не загружено'],
         }[state.tab].filter(Boolean).map((value, index) => index ? when(value) : value).join(' ');
-        const meta = make('div', 'meta', `${row.district} · ${mode().describe(row)}${row.point_no ? ' · ' + row.point_no : ''} · ` + whenText);
+        const coordinates = state.mode === 'parks' ? ' · ' + Number(row.latitude).toFixed(6) + ', ' + Number(row.longitude).toFixed(6) : '';
+        const meta = make('div', 'meta', `${row.district} · ${mode().describe(row)}${row.point_no ? ' · ' + row.point_no : ''} · ` + whenText + coordinates);
         info.append(make('strong', '', row.label), meta);
         meta.prepend(pill);
         if (row.no_sidewalk) meta.append(make('span', 'pill flagged', 'НЕТ ТРОТУАРА'));
@@ -431,7 +529,22 @@
       }));
       if (!all.length) {
         const ending = { pending: 'с фото на проверке', rework: 'на доработке', accepted: 'с принятым фото', empty: 'без фото' };
-        list.append(make('div', 'empty', 'Нет ' + mode().noun + ' ' + ending[state.tab] + '.'));
+        const empty = make('div', 'empty', 'Нет ' + mode().noun + ' ' + ending[state.tab] + '.');
+        if (state.mode === 'parks') {
+          if (!parkFilterIds.size) {
+            empty.textContent = 'Парки не найдены. Измените запрос или сбросьте фильтры.';
+          } else if (state.tab === 'pending') {
+            const alternative = filteredRows('empty').length ? ['empty', 'Показать точки без фото']
+              : filteredRows('accepted').length ? ['accepted', 'Показать принятые точки'] : null;
+            if (alternative) {
+              const action = make('button', 'secondary park-empty-action', alternative[1]);
+              action.type = 'button';
+              action.onclick = () => { setTab(alternative[0]); filterList(); };
+              empty.append(action);
+            }
+          }
+        }
+        list.append(empty);
       }
       el('more').hidden = shown.length >= all.length;
     }
@@ -540,6 +653,13 @@
       if (generation !== queueGeneration) return null;
       state.queue = queue;
       fillDistricts(); fillParks(); renderCounts(); render();
+      if (state.mode === 'parks') {
+        const updated = el('parkUpdated');
+        const now = new Date();
+        updated.dateTime = now.toISOString();
+        updated.textContent = 'Обновлено в ' + parkClock.format(now) + ' МСК';
+        updated.hidden = false;
+      }
       return state.queue;
     }
 
@@ -582,6 +702,7 @@
       clearReviewMap();
       clearUrls();
       el('acceptObject').hidden = true;
+      el('parkCardHint').hidden = true;
       el('nextObject').hidden = true;
       el('retryObject').hidden = true;
       el('acceptObjectHint').textContent = '';
@@ -613,6 +734,7 @@
       el('objectMapLink').href = mode().mapLink?.(row) || (DISTRICT_SLUGS[row.district] ? DISTRICT_SLUGS[row.district] + '.html' : 'index.html');
       grid.replaceChildren(pointCard(row, kind, openReviewMap(row)));
       const pendingPhoto = kind === 'pending';
+      el('parkCardHint').hidden = state.mode !== 'parks' || !pendingPhoto;
       if (pendingPhoto) prefetchNext(row);
       const status = {
         pending: 'Снимок ждёт решения: принять или вернуть на доработку с комментарием.',
@@ -799,6 +921,18 @@
     el('districtFilter').onchange = () => { fillParks(); filterList(); };
     el('kindFilter').onchange = filterList;
     el('parkFilter').onchange = filterList;
+    el('parkSearch').oninput = () => { fillParks(); filterList(); };
+    el('parkReset').onclick = () => {
+      el('districtFilter').value = el('parkFilter').value = el('parkSearch').value = '';
+      fillParks();
+      filterList();
+      el('parkSearch').focus();
+    };
+    el('parkRefresh').onclick = async () => {
+      el('parkRefresh').disabled = true;
+      try { await load(); }
+      finally { el('parkRefresh').disabled = false; }
+    };
     function showMode() {
       document.querySelectorAll('.mode').forEach((button) => {
         const active = button.dataset.mode === state.mode;
@@ -806,10 +940,15 @@
         button.setAttribute('aria-selected', String(active));
       });
       const parksMode = state.mode === 'parks';
+      el('workspace').classList.toggle('park-mode', parksMode);
+      for (const id of ['parkWorkspace', 'parkQueueHead', 'parkCardGuide']) el(id).hidden = !parksMode;
+      el('counts').hidden = parksMode;
+      el('objectMapLink').classList.toggle('park-action', parksMode);
+      if (parksMode) el('parkDistrictMount').append(el('districtFilterBox'));
+      else el('reviewToolbar').prepend(el('districtFilterBox'));
       for (const button of document.querySelectorAll('.tab[data-park-only]')) button.hidden = !parksMode;
       setTab(!parksMode && ['accepted', 'empty'].includes(state.tab) ? 'pending' : state.tab);
       el('kindFilterBox').hidden = state.mode !== 'playgrounds';
-      el('parkFilterBox').hidden = !parksMode;
       for (const id of ['exportAccepted', 'exportArchive', 'photoFromFilter', 'photoToFilter']) el(id).hidden = parksMode;
       // Сборка архива принадлежит вкладке, на которой её запустили. При смене
       // вкладки старый опрос прекращаем и возвращаем кнопке обычный вид, иначе
@@ -834,6 +973,10 @@
         history.replaceState(null, '', state.mode === 'entrances' ? location.pathname + location.search : '#' + state.mode);
         state.queue = null; state.shown = PAGE;
         el('list').replaceChildren(); el('counts').replaceChildren();
+        if (state.mode === 'parks') {
+          el('parkScope').hidden = el('parkUpdated').hidden = true;
+          for (const count of document.querySelectorAll('.park-tab-count')) count.textContent = '';
+        }
         showMode();
         await load();
       };
@@ -970,8 +1113,25 @@
         const active = button.dataset.tab === tab;
         button.classList.toggle('active', active);
         button.setAttribute('aria-selected', String(active));
+        if (state.mode === 'parks') {
+          button.tabIndex = active ? 0 : -1;
+          button.setAttribute('aria-describedby', 'park-' + button.dataset.tab + '-count');
+        } else {
+          button.removeAttribute('tabindex');
+          button.removeAttribute('aria-describedby');
+        }
       });
     }
+    el('reviewStatusTabs').onkeydown = (event) => {
+      if (state.mode !== 'parks' || !['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+      const buttons = [...el('reviewStatusTabs').querySelectorAll('button:not([hidden])')];
+      const current = buttons.findIndex(button => button.dataset.tab === state.tab);
+      const targets = { Home: 0, End: buttons.length - 1, ArrowLeft: current - 1, ArrowRight: current + 1 };
+      const next = buttons[(targets[event.key] + buttons.length) % buttons.length];
+      event.preventDefault();
+      next.focus();
+      next.click();
+    };
     document.querySelectorAll('.tab').forEach((tab) => {
       tab.onclick = () => {
         if (tab.hidden) return;
