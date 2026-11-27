@@ -6,7 +6,8 @@ const packageNamespace = 'http://schemas.openxmlformats.org/package/2006';
 const mime = 'application/vnd.openxmlformats-officedocument.spreadsheetml';
 const declaration = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>';
 const encoder = new TextEncoder();
-const escape = value => value.replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&apos;' })[char]);
+const escape = value => value.replace(/[\x00-\x08\x0B\x0C\x0E-\x1F]/g, '')
+  .replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&apos;' })[char]);
 
 // Индексы стилей: обычное число, заголовок, итог, процент, процент итога.
 const styles = `<styleSheet xmlns="${spreadsheet}">
@@ -20,26 +21,39 @@ const styles = `<styleSheet xmlns="${spreadsheet}">
   <cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles>
 </styleSheet>`;
 
-function worksheet(sheet, headings, asOf) {
-  const columns = 'ABCDEFG';
+function worksheet(sheet, defaultHeadings, asOf) {
+  const { headings = defaultHeadings, widths = [26, 16, 16, 16, 16, 16, 16],
+    percentColumn = 6, total = true, filter = false, rowHeight = 19 } = sheet;
+  const columns = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.slice(0, headings.length);
+  const lastColumn = columns.at(-1);
   const rows = [[`Сводка по оцифровке · ${sheet.name}`], [asOf], headings, ...sheet.rows];
+  const links = [];
   const data = rows.map((values, index) => {
     const number = index + 1;
-    const height = index === 0 || index === 2 ? 26 : 19;
+    const height = index === 0 || index === 2 ? 26 : index === 1 || (index === 3 && total) ? 19 : rowHeight;
     const cells = values.map((value, column) => {
-      const style = index === 0 || index === 2 ? 1 : index === 3 ? (column === 6 ? 4 : 2) : (column === 6 ? 3 : 0);
-      const key = `r="${columns[column]}${number}" s="${style}"`;
+      const percentage = column === percentColumn;
+      const style = index === 0 || index === 2 ? 1 : index === 3 && total ? (percentage ? 4 : 2) : (percentage ? 3 : 0);
+      const cell = columns[column] + number;
+      const key = `r="${cell}" s="${style}"`;
       if (typeof value === 'number') return `<c ${key}><v>${value}</v></c>`;
-      return `<c ${key} t="inlineStr"><is><t>${escape(value ?? '—')}</t></is></c>`;
+      if (value?.hyperlink) links.push({ cell, url: value.hyperlink, id: 'rId' + (links.length + 1) });
+      return `<c ${key} t="inlineStr"><is><t>${escape(String(value?.hyperlink ? value.text : value ?? '—'))}</t></is></c>`;
     });
     return `<row r="${number}" ht="${height}" customHeight="1">${cells.join('')}</row>`;
   });
-  return `<worksheet xmlns="${spreadsheet}">
-    <sheetViews><sheetView showGridLines="0" workbookViewId="0"><pane ySplit="4" topLeftCell="A5" activePane="bottomLeft" state="frozen"/></sheetView></sheetViews>
-    <cols><col min="1" max="1" width="26" customWidth="1"/><col min="2" max="7" width="16" customWidth="1"/></cols>
+  const frozenRows = total ? 4 : 3;
+  const columnWidths = widths.map((width, i) => `<col min="${i + 1}" max="${i + 1}" width="${width}" customWidth="1"/>`);
+  const hyperlinks = links.map(({ cell, id }) => `<hyperlink ref="${cell}" r:id="${id}"/>`);
+  const xml = `<worksheet xmlns="${spreadsheet}" xmlns:r="${documentRelationships}">
+    <sheetViews><sheetView showGridLines="0" workbookViewId="0"><pane ySplit="${frozenRows}" topLeftCell="A${frozenRows + 1}" activePane="bottomLeft" state="frozen"/></sheetView></sheetViews>
+    <cols>${columnWidths.join('')}</cols>
     <sheetData>${data.join('')}</sheetData>
-    <mergeCells count="2"><mergeCell ref="A1:G1"/><mergeCell ref="A2:G2"/></mergeCells>
+    ${filter && sheet.rows.length ? `<autoFilter ref="A3:${lastColumn}${rows.length}"/>` : ''}
+    <mergeCells count="2"><mergeCell ref="A1:${lastColumn}1"/><mergeCell ref="A2:${lastColumn}2"/></mergeCells>
+    ${links.length ? `<hyperlinks>${hyperlinks.join('')}</hyperlinks>` : ''}
   </worksheet>`;
+  return { xml, links };
 }
 
 export function completionWorkbook({ sheets, headings, asOf }) {
@@ -64,7 +78,13 @@ export function completionWorkbook({ sheets, headings, asOf }) {
     ]),
     'xl/styles.xml': styles,
   };
-  sheets.forEach((sheet, i) => { parts[`xl/${sheetPath(i)}`] = worksheet(sheet, headings, asOf); });
+  sheets.forEach((sheet, i) => {
+    const { xml, links } = worksheet(sheet, headings, asOf);
+    parts[`xl/${sheetPath(i)}`] = xml;
+    if (links.length) parts[`xl/worksheets/_rels/sheet${i + 1}.xml.rels`] = wrapRelationships(links.map(({ id, url }) =>
+      `<Relationship Id="${id}" Type="${documentRelationships}/hyperlink" Target="${escape(url)}" TargetMode="External"/>`,
+    ));
+  });
   const archive = globalThis.SaoPhotoPackage.zip(Object.entries(parts).map(([name, xml]) => ({ name, bytes: encoder.encode(declaration + xml) })));
   return new Blob([archive], { type: `${mime}.sheet` });
 }
