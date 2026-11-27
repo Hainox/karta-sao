@@ -148,6 +148,21 @@ test('мобильная карта префектуры: фото одного 
   const viewport = await page.getByRole('dialog', { name: park.name }).boundingBox();
   expect(viewport.x).toBeGreaterThanOrEqual(0);
   expect(viewport.x + viewport.width).toBeLessThanOrEqual(390);
+  page.once('dialog', dialog => dialog.accept());
+  await page.getByRole('button', { name: 'Удалить точку' }).click();
+  await expect(page.getByText('Точка удалена.')).toBeVisible();
+  await expect(page.locator('[data-park-point]')).toHaveCount(0);
+});
+
+test('принятая парковая точка защищена от удаления', async ({ page }) => {
+  const point = { id: '61281fe5-7dc1-4608-9774-208c0491c234', parkId, coordinates: [37.496, 55.864],
+    revision: 1, slot: { id: frameId, azimuth: 70, status: 'accepted', photoId: 'accepted-photo' } };
+  await setup(page, 'prefecture_admin', point);
+  await showPark(page);
+  await page.locator('[data-park-point]').dispatchEvent('click');
+  await expect(page.locator('#card').getByText('Принято', { exact: true })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Удалить точку' })).toHaveCount(0);
+  await expect(page.locator('#card').getByText('Принятую точку нельзя удалить.')).toBeVisible();
 });
 
 for (const role of ['district_editor', 'dpsp_district_editor']) {

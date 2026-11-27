@@ -157,8 +157,10 @@ export function createParkDigitizationRouter({ pool, authenticate, boundary }) {
     await transaction(async (client) => {
       const point = await lockPoint(client, req);
       checkRevision(req.body?.revision, point);
-      const { rowCount } = await client.query('SELECT 1 FROM park_digitization_photos WHERE frame_id = $1 LIMIT 1', [point.frame_id]);
-      if (rowCount) fail(409, 'В фотослоте есть фотография или история снимков. Точка защищена от удаления.');
+      const { rowCount } = await client.query(
+        "SELECT 1 FROM park_digitization_photos WHERE frame_id = $1 AND status = 'accepted'", [point.frame_id],
+      );
+      if (rowCount) fail(409, 'Принятую точку нельзя удалить.');
       await client.query('UPDATE park_digitization_points SET retired_at = now(), revision = revision + 1 WHERE id = $1', [point.id]);
       await audit(client, req, 'park_point_retired', point);
     });
