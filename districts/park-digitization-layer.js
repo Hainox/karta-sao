@@ -327,7 +327,7 @@ window.initParkDigitizationLayer = function ({
     angleLabel.append(angle);
     const reason = node('textarea');
     reason.maxLength = 500;
-    reason.placeholder = 'Обоснование съёмки вне контура или без контура';
+    reason.placeholder = 'Примечание к точке';
     reason.setAttribute('aria-label', 'Обоснование положения точки');
     reason.value = point.locationReason || '';
     const destination = node('select');
@@ -398,7 +398,8 @@ window.initParkDigitizationLayer = function ({
     }, 'primary');
     controls.append(button('Перенести на карте', () => pick('move', 'Нажмите на новое место съёмки.')),
       button('Задать стрелку на карте', () => pick('angle', 'Нажмите в направлении будущего кадра.')), save);
-    form.append(coords, angleLabel, reason);
+    form.append(coords, angleLabel, reason,
+      node('p', 'Точку можно ставить до 200 м за контуром парка. Если у парка нет контура, укажите обоснование.', 'pin-note'));
     if (!isNew && destinations.length > 1) {
       const owner = node('label', 'Парковая территория');
       owner.append(destination);
