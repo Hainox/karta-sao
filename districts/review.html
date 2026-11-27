@@ -124,6 +124,19 @@
     .park-card-help{margin:0 0 10px}
     #objectMapLink .park-icon{display:none}
     #objectMapLink.park-action .park-icon{display:block}
+    .park-report{width:min(1120px,calc(100% - 24px));max-height:calc(100dvh - 24px);margin:auto;border:1px solid var(--line);border-radius:14px;padding:18px;color:var(--ink)}
+    .park-report::backdrop{background:#10241ebb}
+    .park-report h2{margin:0;font-size:20px}
+    .park-report header,.park-report-actions{display:flex;align-items:center;justify-content:space-between;gap:8px 14px;flex-wrap:wrap}
+    .park-report-actions{margin-bottom:10px}
+    .park-report-actions select{margin-left:6px;padding:7px;border:1px solid var(--line);border-radius:8px;background:white;color:var(--ink)}
+    .park-report-scroll{max-height:min(58vh,540px);overflow:auto;border:1px solid var(--line);border-radius:9px}
+    .park-report table{width:100%;border-collapse:separate;border-spacing:0;font-variant-numeric:tabular-nums}
+    .park-report :is(th,td){padding:8px 10px;border-bottom:1px solid var(--line);text-align:center}
+    .park-report th{position:sticky;top:0;background:#123d33;color:white}
+    .park-report :is(th,td):first-child{text-align:left;min-width:132px}
+    .park-report tbody tr:first-child{background:#e7f4ee;font-weight:700}
+    .park-report tbody tr:nth-child(2n+3){background:#f5f8f5}
     @media(max-width:700px){
       .park-workspace{padding:14px}
       .park-filters{grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}
@@ -166,6 +179,7 @@
           <h2 id="parkHeading">Приёмка парков</h2>
           <!-- Lucide icons, ISC. See districts/lucide-license.txt. -->
           <div class="actions">
+            <button class="primary park-action" id="parkReportOpen" type="button" aria-haspopup="dialog">Сводка по оцифровке</button>
             <a class="secondary park-action" href="guides/park-review.html" target="_blank" rel="noopener"><svg class="park-icon" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>Инструкция</a>
             <button class="secondary park-action" id="parkRefresh" type="button"><svg class="park-icon" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>Обновить</button>
           </div>
@@ -236,6 +250,24 @@
       </div>
     </section>
   </main>
+  <dialog id="parkReport" class="park-report" aria-labelledby="parkReportTitle">
+    <header>
+      <h2 id="parkReportTitle">Сводка по оцифровке парков</h2>
+      <form method="dialog"><button class="secondary" type="submit">Закрыть</button></form>
+    </header>
+    <p class="status" id="parkReportStatus" role="status"></p>
+    <button class="secondary" id="parkReportRetry" type="button" hidden>Повторить загрузку</button>
+    <div id="parkReportContent" hidden>
+      <p class="status">Процент принятия — доля принятых точек от всех точек в выборке. Для парков без точек указан прочерк.</p>
+      <div class="park-report-actions">
+        <label>Разрез<select id="parkReportView"><option value="0">По районам</option><option value="1">По паркам</option></select></label>
+        <button class="primary" id="parkReportDownload" type="button">Скачать Excel</button>
+      </div>
+      <div class="park-report-scroll" id="parkReportScroll" role="region" aria-label="Таблица сводки" tabindex="0">
+        <table id="parkReportTable"><tbody></tbody></table>
+      </div>
+    </div>
+  </dialog>
   <dialog id="photoViewer" class="photo-viewer" aria-labelledby="photoViewerTitle">
     <header><h2 id="photoViewerTitle"></h2><button class="secondary" id="viewerClose" type="button" autofocus>Закрыть</button></header>
     <div id="photoStage" class="photo-stage"></div>
@@ -932,6 +964,25 @@
       el('parkRefresh').disabled = true;
       try { await load(); }
       finally { el('parkRefresh').disabled = false; }
+    };
+    let openParkReport;
+    el('parkReportOpen').onclick = async () => {
+      const button = el('parkReportOpen');
+      if (openParkReport) { openParkReport(); return; }
+      button.disabled = true;
+      try {
+        const { initParkCompletionReport } = await import('./park-completion-report.mjs?v=1');
+        openParkReport = initParkCompletionReport({
+          dialog: el('parkReport'),
+          getSnapshot: signal => api.request(parkBase + MODES.parks.queue, { signal }).then(response => response.json()),
+          getFilters: () => ({ district: el('districtFilter').value, parkId: el('parkFilter').value,
+            query: el('parkSearch').value, districts: Object.keys(DISTRICT_SLUGS) }),
+          mapLink: row => 'https://hainox.github.io/karta-sao/districts/' + MODES.parks.mapLink(row),
+        });
+        if (state.mode === 'parks' && api.user()?.role === 'prefecture_admin') openParkReport();
+      } catch (error) {
+        setStatus('listStatus', 'Не удалось открыть сводку. ' + error.message, true);
+      } finally { button.disabled = false; }
     };
     function showMode() {
       document.querySelectorAll('.mode').forEach((button) => {

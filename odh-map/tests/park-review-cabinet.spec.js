@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { readFile } from 'node:fs/promises';
 
 const base = '/api/object-photo-points/parks';
 const mapPage = 'http://127.0.0.1:8766/districts/review.html';
@@ -138,4 +139,48 @@ test('инструкция открывается из парковой вкла
   await expect(guide).toHaveURL(/park-review\.html#check$/);
   await guide.getByRole('link', { name: /В кабинет приёмки парков/ }).first().click();
   await expect(guide).toHaveURL(mapPage + '#parks');
+});
+
+test('сводка парков считает статусы, показывает парк без точек и выгружает выборку', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.clock.setFixedTime(new Date('2026-11-27T09:30:00Z'));
+  await page.addInitScript(() => sessionStorage.setItem('odh-map-api-user-v1', JSON.stringify({ role: 'prefecture_admin' })));
+  const queue = {
+    parks, counts: { total: 4, pending: 1, accepted: 1, rework: 1, empty: 1 },
+    pending: [row(parks[1], 2)],
+    accepted: [row(parks[0], 1)],
+    rework: [{ ...row(parks[0], 3), rejected_comment: 'Переснять с аллеи & сравнить', rejected_at: '2026-11-27T08:00:00Z' }],
+    empty: [row(parks[0], 4, false)],
+  };
+  let reads = 0;
+  await page.route('**/api/object-photo-points/parks/review/queue', route => {
+    reads++;
+    return route.fulfill({ json: queue });
+  });
+  await page.goto(mapPage + '#parks');
+  await expect(page.locator('#parkProgressLabel')).toHaveText('Принято 1 из 4 точек');
+  await page.getByRole('button', { name: 'Сводка по оцифровке' }).click();
+  const dialog = page.getByRole('dialog', { name: 'Сводка по оцифровке парков' });
+  const reportRows = dialog.locator('tbody tr');
+  await expect(reportRows.first().getByRole('cell')).toHaveText(['Итого по САО', '3', '1', '4', '1', '1', '1', '1', '25 %']);
+  await dialog.getByRole('combobox', { name: 'Разрез' }).selectOption({ label: 'По паркам' });
+  const zero = reportRows.filter({ hasText: parks[2].name });
+  await expect(zero.getByRole('cell')).toHaveText(['Ховрино', parks[2].name, 'Не подтверждён', '0', '0', '0', '0', '0', '—']);
+  await dialog.getByRole('button', { name: 'Закрыть' }).click();
+  await page.getByRole('searchbox', { name: 'Поиск парка' }).fill('970107243');
+  await page.getByRole('combobox', { name: 'Парк', exact: true }).selectOption('dubki');
+  await page.getByRole('button', { name: 'Сводка по оцифровке' }).click();
+  await expect(dialog.getByRole('status')).toContainText('Парк Дубки · Поиск «970107243»');
+  await expect(reportRows.nth(1).getByRole('cell')).toHaveText(['Тимирязевский', 'Парк Дубки', '970107243', '3', '1', '0', '1', '1', '33,33 %']);
+  expect(reads).toBe(3);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  const downloadPromise = page.waitForEvent('download');
+  await dialog.getByRole('button', { name: 'Скачать Excel' }).click();
+  const download = await downloadPromise;
+  expect(download.suggestedFilename()).toBe('Сводка_оцифровки_парков_САО_2026-11-27.xlsx');
+  const data = await readFile(await download.path());
+  expect(data.readUInt32LE()).toBe(0x04034b50);
+  expect(data.includes(Buffer.from('timiryazevskiy.html?parkPoint=point-3'))).toBe(true);
+  expect(data.includes(Buffer.from('Переснять с аллеи &amp; сравнить'))).toBe(true);
+  expect(data.includes(Buffer.from('Соседний парк'))).toBe(false);
 });
