@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Инструкция по приёмке парков · САО</title>
+  <style>
+    :root{color:#183c35;background:#f5f5ef;font:16px/1.55 "Segoe UI",Arial,sans-serif}
+    *{box-sizing:border-box}
+    body{margin:0}
+    a{color:#08634a;text-underline-offset:3px}
+    a:focus-visible{outline:2px solid #176753;outline-offset:4px}
+    .top{background:#123a32;color:white}
+    .wrap{width:min(calc(100% - 32px),850px);margin:auto}
+    .top nav{display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;justify-content:space-between;padding:14px 0}
+    .top a{color:#d5eadc}
+    main{padding:28px 0 48px}
+    h1,h2{line-height:1.2}
+    h1{font-size:clamp(26px,5vw,38px);margin:0 0 10px}
+    h2{font-size:21px;margin:0 0 10px}
+    p{margin:0 0 8px}
+    .intro{max-width:62ch;color:#526d61}
+    .steps{display:flex;flex-wrap:wrap;gap:8px 20px;padding:12px 0 16px;margin:0;list-style:none}
+    section{background:#fff;border:1px solid #d9e0da;border-radius:14px;padding:18px 20px;margin-bottom:12px;scroll-margin-top:12px}
+    ol{margin:0;padding-left:22px}
+    li+li{margin-top:5px}
+    .steps li+li{margin-top:0}
+    .status-list{margin:0}
+    .status-list div{display:grid;grid-template-columns:minmax(112px,155px) 1fr;gap:4px 16px;padding:9px 0}
+    .status-list div+div{border-top:1px solid #e4eae5}
+    .status-list dt{font-weight:700}.status-list dd{margin:0}
+    .note{margin:12px 0 0;padding:10px 12px;border-left:3px solid #0c7a5a;background:#e7f3ed}
+    .return{display:inline-block;margin-top:5px;font-weight:700}
+    @media(max-width:520px){main{padding-top:20px}section{padding:14px}.status-list div{grid-template-columns:1fr}}
+    @media print{
+      :root{background:#fff;font-size:10.5pt}
+      .wrap{width:100%}
+      .top,.steps,.return{display:none}
+      main{padding:0}
+      section{padding:10px 0;border:0;border-top:1px solid #aaa;border-radius:0;break-inside:avoid}
+    }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <nav class="wrap" aria-label="Навигация">
+      <strong>САО · Районные карты</strong>
+      <a href="../review.html#parks">← В кабинет приёмки парков</a>
+    </nav>
+  </header>
+  <main class="wrap">
+    <h1>Как принимать фотографии парков</h1>
+    <p class="intro">Инструкция для сотрудников префектуры. У каждой точки съёмки свой парк, одно направление и один фотослот.</p>
+    <nav aria-label="Разделы инструкции">
+      <ul class="steps">
+        <li><a href="#park">Выбор парка</a></li>
+        <li><a href="#check">Проверка и решение</a></li>
+        <li><a href="#statuses">Статусы точек</a></li>
+        <li><a href="#map">Работа на карте</a></li>
+      </ul>
+    </nav>
+    <section id="park">
+      <h2>Выберите парк</h2>
+      <ol>
+        <li>Войдите в кабинет приёмки под учётной записью префектуры и откройте вкладку <strong>«Парковые территории»</strong>.</li>
+        <li>Укажите район или опустите этот шаг для поиска по всему САО. В поле <strong>«Поиск парка»</strong> введите название либо ID АСУ ОДС. В списке <strong>«Парк»</strong> выберите конкретный объект.</li>
+        <li>Сверьте название и район в сводке. Если ID АСУ ОДС отсутствует или ожидает сверки, выберите парк по названию и району.</li>
+      </ol>
+      <p class="note">Счётчики отражают текущий выбор. Кнопка «Обновить» загружает свежие статусы, а «Сбросить фильтры» возвращает все парки САО.</p>
+    </section>
+    <section id="check">
+      <h2>Проверьте снимок и примите решение</h2>
+      <ol>
+        <li>Откройте <strong>«На проверке»</strong> и выберите точку. Сверьте парк, место и направление съёмки. По ссылке <strong>«Точка на карте района»</strong> откроется эта точка с её парком и стрелкой.</li>
+        <li>Убедитесь, что кадр актуален, соответствует направлению стрелки и даёт обзор нужного участка. Нажмите на снимок, чтобы увеличить его.</li>
+        <li>Если кадр подходит, нажмите <strong>«Принять кадр»</strong>. Если нужна пересъёмка, нажмите <strong>«Отклонить»</strong>, укажите причину и нажмите <strong>«Отправить на доработку»</strong>.</li>
+      </ol>
+      <p class="note">Укажите в комментарии, что исправить. Например, «Переснимите вдоль аллеи по стрелке, чтобы в кадр попал весь проход».</p>
+    </section>
+    <section id="statuses">
+      <h2>Что показывают статусы</h2>
+      <dl class="status-list">
+        <div><dt>На проверке</dt><dd>Снимок загружен и ждёт решения префектуры.</dd></div>
+        <div><dt>На доработке</dt><dd>Снимок возвращён. В карточке указана причина, по которой нужен новый кадр.</dd></div>
+        <div><dt>Принято</dt><dd>Снимок подтверждён. Его можно открыть в карточке. Точка защищена от удаления.</dd></div>
+        <div><dt>Без фото</dt><dd>Точка есть в плане съёмки и ждёт первого снимка.</dd></div>
+      </dl>
+    </section>
+    <section id="map">
+      <h2>Когда переходить на карту</h2>
+      <p>Ссылка из карточки открывает точку в слое <strong>«Оцифровка Парковых территорий»</strong> с выбранным парком.</p>
+      <ol>
+        <li>Для точки без фото или на доработке нажмите <strong>«Загрузить фото»</strong> в карточке на карте.</li>
+        <li>Чтобы добавить место съёмки, выберите парк на карте, нажмите <strong>«Добавить точку»</strong>, укажите место и направление и нажмите <strong>«Сохранить»</strong>.</li>
+        <li>Для существующей точки используйте <strong>«Перенести на карте»</strong> или <strong>«Задать стрелку на карте»</strong> и сохраните изменения. Для точки вне контура укажите обоснование.</li>
+      </ol>
+      <p class="note">После загрузки вернитесь в кабинет и нажмите <strong>«Обновить»</strong>. Точка появится во вкладке <strong>«На проверке»</strong>.</p>
+    </section>
+    <a class="return" href="../review.html#parks">← В кабинет приёмки парков</a>
+  </main>
+</body>
+</html>
