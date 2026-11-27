@@ -399,9 +399,11 @@ window.initParkDigitizationLayer = function ({
     }
     form.append(controls);
     content.append(form);
-    if (!isNew) controls.append(button('Удалить точку', async (event) => {
-      if (point.slot.photoId) { message.textContent = 'В фотослоте есть снимок. Точка защищена от удаления.'; return; }
-      if (!window.confirm('Убрать пустую точку с карты?')) return;
+    if (!isNew && point.slot.status === 'accepted') {
+      form.append(node('p', 'Принятую точку нельзя удалить.', 'pin-note'));
+    } else if (!isNew) controls.append(button('Удалить точку', async (event) => {
+      const prompt = point.slot.photoId ? 'Убрать точку с карты? Снимки останутся в истории.' : 'Убрать точку с карты?';
+      if (!window.confirm(prompt)) return;
       const remove = event.currentTarget;
       remove.disabled = true;
       try {

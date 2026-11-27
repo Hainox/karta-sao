@@ -100,9 +100,7 @@ try {
   const firstPhoto = frame + '/photos/' + photo.id;
   assert.deepEqual(await call(firstPhoto), png);
   await call(firstPhoto, { role: 'foreign', status: 403 });
-  await erase(two.revision, 409);
   await call(firstPhoto + '/review', { method: 'POST', json: { decision: 'rejected', comment: 'Переснять' } });
-  await erase(two.revision, 409);
   const second = (await upload(frame, 'admin')).photo;
   const three = (await patch({ coordinates: [37.551, 55.794], parkId: b.id, revision: two.revision, confirmReassignment: true })).point;
   assert.equal(three.slot.id, two.slot.id);
@@ -114,6 +112,25 @@ try {
   assert.equal((await list(b.district)).points[0].id, id);
   assert.equal((await list(a.district)).points.some(point => point.id === id), false);
   assert.equal((await pool.query('SELECT count(*)::int AS count FROM park_digitization_photos WHERE frame_id = $1', [one.slot.id])).rows[0].count, 2);
+  await call(newPhoto + '/review', { method: 'POST', json: { decision: 'accepted' } });
+  await erase(three.revision, 409);
+  assert.equal((await list(b.district)).points.find(point => point.id === id).slot.status, 'accepted');
+  assert.deepEqual(await call(newPhoto), png);
+
+  for (const state of ['pending', 'rejected']) {
+    const point = (await create({})).point;
+    const pendingFrame = '/frames/' + point.slot.id;
+    const { photo: pending } = await upload(pendingFrame, 'admin');
+    const photoPath = pendingFrame + '/photos/' + pending.id;
+    if (state === 'rejected') await call(photoPath + '/review', { method: 'POST', json: { decision: state, comment: 'Переснять' } });
+    const remove = { method: 'DELETE', json: { revision: point.revision } };
+    await call('/points/' + point.id, { ...remove, role: 'editor', status: 403 });
+    await call('/points/' + point.id, remove);
+    assert.ok(!(await list(a.district)).points.some(item => item.id === point.id));
+    await call(photoPath, { status: 404 });
+    const { rows: [stored] } = await pool.query('SELECT status, photo_bytes FROM park_digitization_photos WHERE id = $1', [pending.id]);
+    assert.deepEqual(stored, { status: state, photo_bytes: png });
+  }
 
   const laterLink = { ...seed, parks: [{ ...a, asu_ids: ['1'], registry_status: 'matched' }] };
   await importParks(pool, laterLink, { objectsOnly: true, updateRegistry: true });
@@ -135,11 +152,28 @@ try {
       body: JSON.stringify({ revision: racing.revision }),
     }),
   ]);
-  assert.ok([[201, 409], [404, 200]].some(([up, del]) => up === uploadResult.status && del === deleteResult.status));
+  assert.equal(deleteResult.status, 200);
+  assert.ok([201, 404].includes(uploadResult.status));
   const { rows: [record] } = await pool.query(`SELECT p.retired_at, EXISTS (
     SELECT FROM park_digitization_photos f WHERE f.frame_id = p.frame_id) AS has_photo
     FROM park_digitization_points p WHERE p.id = $1`, [racing.id]);
-  assert.equal(Boolean(record.retired_at) && record.has_photo, false);
+  assert.ok(record.retired_at);
+  assert.equal(record.has_photo, uploadResult.status === 201);
+
+  const accepting = (await create({})).point;
+  const acceptingFrame = '/frames/' + accepting.slot.id;
+  const { photo: pending } = await upload(acceptingFrame, 'admin');
+  const headers = { 'X-Test-Role': 'admin', 'Content-Type': 'application/json' };
+  const [reviewResult, retireResult] = await Promise.all([
+    fetch(raw + acceptingFrame + '/photos/' + pending.id + '/review', {
+      method: 'POST', headers, body: JSON.stringify({ decision: 'accepted' }),
+    }),
+    fetch(raw + '/points/' + accepting.id, {
+      method: 'DELETE', headers, body: JSON.stringify({ revision: accepting.revision }),
+    }),
+  ]);
+  assert.ok([[200, 409], [404, 200]].some(([review, retire]) =>
+    review === reviewResult.status && retire === retireResult.status));
   console.log('PASS: PostgreSQL · миграции, районы, привязка, один фотослот, правки, фотографии, гонка загрузки и удаления');
 } finally {
   if (server) await new Promise(resolve => server.close(resolve));
