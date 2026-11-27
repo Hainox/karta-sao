@@ -5,6 +5,7 @@ import { MAX_PHOTO_BYTES, PHOTO_MIME_TYPES, safePhotoFilename, validatePhotoUplo
 import { DISTRICTS, isPointWithinBoundary } from './validation.js';
 
 const UUID = /^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i;
+const PARK_BUFFER_METERS = 200;
 const fail = (status, message) => { throw Object.assign(new Error(message), { status }); };
 const pointNotFound = () => fail(404, 'Точка или фотослот не найдены.');
 const photoNotFound = () => fail(404, 'Фото не найдено.');
@@ -36,17 +37,48 @@ const pointRead = `SELECT p.*, o.district, o.name AS park_name, f.id AS photo_id
   ) f ON true
   WHERE p.retired_at IS NULL`;
 
-function position({ coordinates, azimuth, locationReason }, park, boundary) {
+function withinParkBuffer([longitude, latitude], geometry) {
+  const polygons = geometry.type === 'Polygon' ? [geometry.coordinates]
+    : geometry.type === 'MultiPolygon' ? geometry.coordinates : [];
+  // Метры на градус по двум осям WGS84 на широте точки.
+  const rad = Math.PI / 180;
+  const phi = latitude * rad;
+  const eccentricitySquared = 0.00669437999014;
+  const w = Math.sqrt(1 - eccentricitySquared * Math.sin(phi) ** 2);
+  const metersLongitude = 6378137 * rad * Math.cos(phi) / w;
+  const metersLatitude = 6378137 * rad * (1 - eccentricitySquared) / w ** 3;
+  const limitSquared = PARK_BUFFER_METERS ** 2;
+  for (const rings of polygons) {
+    for (const ring of rings) {
+      for (let i = 1; i < ring.length; i++) {
+        const [startLng, startLat] = ring[i - 1];
+        const [endLng, endLat] = ring[i];
+        const x = (longitude - startLng) * metersLongitude;
+        const y = (latitude - startLat) * metersLatitude;
+        const dx = (endLng - startLng) * metersLongitude;
+        const dy = (endLat - startLat) * metersLatitude;
+        const segmentSquared = dx ** 2 + dy ** 2;
+        const projection = segmentSquared ? (x * dx + y * dy) / segmentSquared : 0;
+        const t = Math.max(0, Math.min(1, projection));
+        if ((x - t * dx) ** 2 + (y - t * dy) ** 2 <= limitSquared) return true;
+      }
+    }
+  }
+  return false;
+}
+
+function position({ coordinates, azimuth, locationReason }, park, boundary, { checkParkDistance = true } = {}) {
   if (!Array.isArray(coordinates) || coordinates.length !== 2 || !coordinates.every(Number.isFinite)
       || !isPointWithinBoundary(coordinates, boundary)) fail(422, 'Укажите точку в пределах САО.');
   if (!Number.isFinite(azimuth) || azimuth < 0 || azimuth >= 360) fail(422, 'Укажите направление от 0° до 359,99°.');
   const reason = typeof locationReason === 'string' ? locationReason.trim() : '';
   if (reason.length > 500) fail(422, 'Обоснование должно быть не длиннее 500 символов.');
   const inside = park.geometry && isPointWithinBoundary(coordinates, { features: [{ geometry: park.geometry }] });
-  if (!inside && !reason) fail(422, park.geometry
-    ? 'Точка за пределами выбранного контура. Укажите, откуда и почему нужно снимать парк.'
-    : 'Контур отсутствует. Укажите ориентир и обоснуйте положение точки.');
-  return [...coordinates, azimuth, inside ? null : reason];
+  if (park.geometry && !inside && checkParkDistance && !withinParkBuffer(coordinates, park.geometry)) {
+    fail(422, `Точка находится дальше ${PARK_BUFFER_METERS} м от контура выбранного парка.`);
+  }
+  if (!park.geometry && !reason) fail(422, 'Контур отсутствует. Укажите ориентир и обоснуйте положение точки.');
+  return [...coordinates, azimuth, inside ? null : reason || null];
 }
 
 export function createParkDigitizationRouter({ pool, authenticate, boundary }) {
@@ -178,7 +210,7 @@ export function createParkDigitizationRouter({ pool, authenticate, boundary }) {
       const values = position({
         coordinates: input.coordinates ?? current.coordinates, azimuth: input.azimuth ?? current.slot.azimuth,
         locationReason: input.locationReason ?? (changesOwner || changesLocation ? null : point.location_reason),
-      }, park, boundary);
+      }, park, boundary, { checkParkDistance: changesOwner || changesLocation });
       await client.query(`UPDATE park_digitization_points SET park_id = $2, longitude = $3,
         latitude = $4, azimuth = $5, location_reason = $6, revision = revision + 1 WHERE id = $1`,
       [point.id, park.id, ...values]);

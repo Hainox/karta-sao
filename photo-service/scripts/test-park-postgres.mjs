@@ -24,7 +24,9 @@ const park = (district, name, geometry, registry_status) => ({
 });
 const a = park('Аэропорт', 'Тестовый парк', shape(37.54), 'absent_in_source');
 const b = park('Войковский', 'Тестовый парк 2', shape(37.55), 'matched');
-const conflicted = park('Аэропорт', 'Тестовый парк · спорный район', shape(37.56), 'conflict');
+const conflicted = park('Аэропорт', 'Тестовый парк · спорный район', {
+  type: 'MultiPolygon', coordinates: [shape(37.56).coordinates, shape(37.57).coordinates],
+}, 'conflict');
 const unbounded = park('Аэропорт', 'Тестовый парк без контура', null, 'unverified');
 const seed = { version: 1, parks: [a, b, conflicted, unbounded], points: [] };
 const png = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jM1kAAAAASUVORK5CYII=', 'base64');
@@ -77,6 +79,32 @@ try {
   await create({ parkId: unbounded.id, locationReason: 'Тестовый внешний проход' });
   await create({}, { role: 'editor', status: 403 });
   await create({ coordinates: [37.551, 55.794] }, { status: 422 });
+  const nearNorth = [37.5415, 55.79678]; // 198 м к северу от середины грани.
+  const farNorth = [37.5415, 55.79682]; // 203 м от той же грани.
+  const bufferPoint = (await create({ coordinates: nearNorth })).point;
+  assert.equal(bufferPoint.parkId, a.id);
+  assert.equal(bufferPoint.locationReason, null);
+  await create({ coordinates: farNorth, locationReason: 'Комментарий' }, { status: 422 });
+  const movedBuffer = (await call('/points/' + bufferPoint.id, {
+    method: 'PATCH', json: { coordinates: [37.537, 55.794], revision: bufferPoint.revision },
+  })).point;
+  await call('/points/' + bufferPoint.id, {
+    method: 'PATCH', json: { coordinates: farNorth, revision: movedBuffer.revision }, status: 422,
+  });
+  await call('/points/' + bufferPoint.id, { method: 'DELETE', json: { revision: movedBuffer.revision } });
+  const secondContour = (await create({
+    parkId: conflicted.id, coordinates: [37.5715, 55.79678], locationReason: 'Съёмка снаружи',
+  })).point;
+  assert.equal(secondContour.locationReason, 'Съёмка снаружи');
+  await call('/points/' + secondContour.id, { method: 'DELETE', json: { revision: secondContour.revision } });
+  const legacy = randomUUID();
+  await pool.query(`INSERT INTO park_digitization_points (id, park_id, frame_id, longitude, latitude, azimuth, location_reason)
+    VALUES ($1, $2, $3, $4, $5, 75, 'Старая точка за пределами допуска')`,
+  [legacy, a.id, randomUUID(), ...farNorth]);
+  const editedLegacy = (await call('/points/' + legacy, { method: 'PATCH', json: { azimuth: 90, revision: 1 } })).point;
+  assert.deepEqual(editedLegacy.coordinates, farNorth);
+  assert.equal(editedLegacy.slot.azimuth, 90);
+  await call('/points/' + legacy, { method: 'DELETE', json: { revision: editedLegacy.revision } });
   const id = randomUUID();
   const one = (await create({ id })).point;
   const retry = (await create({ id })).point;
