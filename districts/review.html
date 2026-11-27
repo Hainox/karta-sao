@@ -33,7 +33,7 @@
     .toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:end;margin-bottom:14px}
     .toolbar label{display:grid;gap:4px;font-size:12px;font-weight:700;color:var(--muted)}
     .toolbar select{min-width:190px;padding:8px;border:1px solid #cbd9ce;border-radius:8px;background:#fff}
-    .tabs{display:flex;gap:6px;margin-left:auto}
+    .tabs{display:flex;flex-wrap:wrap;gap:6px;margin-left:auto}
     .modes{display:flex;flex-wrap:wrap;gap:4px;max-width:100%;margin-bottom:14px;padding:4px;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
     .mode{padding:8px 16px;border:0;border-radius:9px;background:transparent;font-weight:800;color:var(--muted)}
     .mode.active{background:var(--green);color:#fff}
@@ -90,6 +90,7 @@
     .object-row .open{color:var(--green);font-weight:700;white-space:nowrap}
     .pill{display:inline-block;margin-right:6px;padding:1px 8px;border-radius:999px;font-size:11px;font-weight:800;color:#fff}
     .pill.review{background:var(--blue)}.pill.rework{background:var(--red)}.pill.accepted{background:var(--green)}.pill.flagged{background:#a83d13}
+    .pill.empty-status{background:#687873}
     .object-head{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:12px}
     .object-head h2{margin:4px 0 2px;font-size:18px}
     .slot-empty-box{display:grid;place-items:center;min-height:70px;background:#eef1ee;color:var(--muted);font-size:13px}
@@ -100,7 +101,7 @@
   <header class="topbar">
     <div>
       <h1>Кабинет приёмки · Районные карты</h1>
-      <div class="subtitle">Въездные группы, площадки ДП/СП, тротуары и ДТС. Примите фото или верните его району с комментарием. После решения открывается следующая точка.</div>
+      <div class="subtitle">Примите фото или верните его на доработку с комментарием. После решения открывается следующая точка.</div>
     </div>
     <div class="session"><span id="sessionInfo"></span><button class="secondary" id="logout" type="button" hidden>Выйти</button><a href="index.html">Карты районов →</a></div>
   </header>
@@ -120,6 +121,7 @@
         <button class="mode" type="button" role="tab" data-mode="sidewalks">Тротуары Дворы</button>
         <button class="mode" type="button" role="tab" data-mode="odh-sidewalks">Тротуары ОДХ</button>
         <button class="mode" type="button" role="tab" data-mode="yard-paths">ДТС</button>
+        <button class="mode" type="button" role="tab" data-mode="parks">Парковые территории</button>
       </div>
       <details class="panel" id="noSidewalkGroup" hidden>
         <summary>Тротуары ОДХ · на проверку: нет тротуара</summary>
@@ -131,12 +133,15 @@
       <div class="toolbar">
         <label>Район<select id="districtFilter"><option value="">Все районы САО</option></select></label>
         <label id="kindFilterBox" hidden>Вид площадки<select id="kindFilter"><option value="">Детские и спортивные</option><option value="dp">Детские площадки</option><option value="sp">Спортивные площадки</option></select></label>
-        <div class="tabs" role="tablist">
+        <label id="parkFilterBox" hidden>Парк<select id="parkFilter"><option value="">Все парки</option></select></label>
+        <div class="tabs" role="tablist" aria-label="Статус фото">
           <button class="tab active" type="button" data-tab="pending" role="tab">На проверке</button>
           <button class="tab" type="button" data-tab="rework" role="tab">На доработке</button>
+          <button class="tab" type="button" data-tab="accepted" data-park-only role="tab" hidden>Принято</button>
+          <button class="tab" type="button" data-tab="empty" data-park-only role="tab" hidden>Без фото</button>
         </div>
-        <label>Фото загружены с<input id="photoFrom" type="date"></label>
-        <label>По<input id="photoTo" type="date"></label>
+        <label id="photoFromFilter">Фото загружены с<input id="photoFrom" type="date"></label>
+        <label id="photoToFilter">По<input id="photoTo" type="date"></label>
         <button class="secondary" id="exportAccepted" type="button">Выгрузить принятые фото</button>
         <button class="secondary" id="exportReport" type="button">Excel: свод по фото</button>
         <button class="secondary" id="exportArchive" type="button">Архив фото (ZIP)</button>
@@ -243,6 +248,21 @@
       mapLink: (row) => (DISTRICT_SLUGS[row.district] || 'index') + '.html?yardPath=' + encodeURIComponent(row.source_point_id)
         + '&yardFrame=' + encodeURIComponent(row.point_id),
     };
+    const parkBase = '/api/object-photo-points/parks';
+    MODES.parks = {
+      base: parkBase,
+      queue: '/review/queue',
+      photo: (frame, photo) => parkBase + avdFramePhoto(frame, photo),
+      review: (photo) => avdFramePhoto(photo.point_id, photo.id) + '/review',
+      noun: 'точек', open: 'Открыть точку →', title: (row) => row.label, snapshot: 'Снимок парковой точки ',
+      describe: (row) => {
+        const park = state.queue.parks.find(item => item.id === row.park_id);
+        const reference = park?.asu_ids.length ? 'АСУ ОДС · ' + park.asu_ids.join(', ')
+          : park?.registry_status === 'absent_in_source' ? 'По списку отсутствует в АСУ ОДС' : 'ID АСУ ОДС не подтверждён';
+        return reference + ' · направление ' + Number(row.heading).toLocaleString('ru-RU') + '°';
+      },
+      mapLink: (row) => (DISTRICT_SLUGS[row.district] || 'index') + '.html?parkPoint=' + encodeURIComponent(row.source_point_id),
+    };
     const showsNoSidewalk = () => ['sidewalks', 'odh-sidewalks', 'yard-paths'].includes(state.mode);
     const KIND_NAMES = { dp: 'Детская площадка', sp: 'Спортивная площадка' };
     const mode = () => MODES[state.mode];
@@ -255,6 +275,7 @@
       return Object.hasOwn(MODES, hash) ? hash : hash === 'avd-sidewalks' ? 'odh-sidewalks' : 'entrances';
     };
     const state = { mode: modeFromHash(), queue: null, tab: 'pending', shown: PAGE, urls: [], objectId: null, busy: false, revision: 0, angles: new Map(), photoViews: [], photoGeneration: 0, archiveGeneration: 0 };
+    let queueGeneration = 0;
     // Выравниваем адрес по выбранному режиму: #avd-sidewalks становится #odh-sidewalks, мусорный чистится.
     if (location.hash.slice(1) !== state.mode) {
       history.replaceState(null, '', state.mode === 'entrances' ? location.pathname + location.search : '#' + state.mode);
@@ -324,26 +345,38 @@
 
     async function load() {
       setStatus('listStatus', 'Загружаем очередь…');
-      try {
-        state.queue = await json('/queue');
-        fillDistricts();
-        renderCounts();
-        render();
-      } catch (error) { setStatus('listStatus', 'Не удалось загрузить очередь: ' + error.message, true); }
+      try { await refreshQueue(); }
+      catch (error) { setStatus('listStatus', 'Не удалось загрузить очередь: ' + error.message, true); }
     }
 
     function fillDistricts() {
       const select = el('districtFilter');
       const current = select.value;
-      const groups = new Set([...Object.keys(DISTRICT_SLUGS), ...state.queue.pending.map(row => row.district), ...state.queue.rework.map(row => row.district), ...(state.queue.empty || []).map(row => row.district)]);
+      const groups = new Set([...Object.keys(DISTRICT_SLUGS), ...state.queue.pending.map(row => row.district),
+        ...state.queue.rework.map(row => row.district), ...(state.queue.parks || []).map(park => park.district)]);
       select.replaceChildren(new Option('Все районы САО', ''));
       for (const group of [...groups].sort((a, b) => a.localeCompare(b, 'ru'))) select.append(new Option(group, group));
       if (current && !groups.has(current)) select.append(new Option(current, current));
       select.value = current;
     }
 
+    function fillParks() {
+      if (state.mode !== 'parks' || !state.queue) return;
+      const district = el('districtFilter').value;
+      const select = el('parkFilter');
+      const selected = select.value;
+      const parks = state.queue.parks.filter(park => !district || park.district === district);
+      select.replaceChildren(new Option('Все парки', ''), ...parks.map(park =>
+        new Option(district ? park.name : park.name + ' · ' + park.district, park.id)));
+      if (parks.some(park => park.id === selected)) select.value = selected;
+    }
+
     function renderCounts() {
-      const c = state.queue.counts;
+      let c = state.queue.counts;
+      if (state.mode === 'parks') {
+        const [pending, rework, accepted, empty] = ['pending', 'rework', 'accepted', 'empty'].map(tab => filteredRows(tab).length);
+        c = { pending, rework, accepted, empty, total: pending + rework + accepted + empty };
+      }
       const items = [
         ['review', c.pending, mode().noun + ' на проверке'],
         ['rework', c.rework, mode().noun + ' на доработке'],
@@ -361,14 +394,18 @@
     function matchesFilters(row) {
       const district = el('districtFilter').value;
       const kind = state.mode === 'playgrounds' ? el('kindFilter').value : '';
-      return (!district || row.district === district) && (!kind || row.kind === kind);
+      const park = state.mode === 'parks' ? el('parkFilter').value : '';
+      return (!district || row.district === district) && (!kind || row.kind === kind) && (!park || row.park_id === park);
     }
 
     function filteredRows(tab = state.tab) {
       return state.queue[tab].filter(matchesFilters);
     }
 
-    const TAB_PILLS = { pending: ['review', 'на проверке'], rework: ['rework', 'на доработке'] };
+    const TAB_PILLS = {
+      pending: ['review', 'на проверке'], rework: ['rework', 'на доработке'],
+      accepted: ['accepted', 'принято'], empty: ['empty-status', 'без фото'],
+    };
     function render() {
       const list = el('list');
       const all = filteredRows();
@@ -380,8 +417,10 @@
         const info = make('div');
         const [pillClass, pillText] = TAB_PILLS[state.tab] || TAB_PILLS.pending;
         const pill = make('span', 'pill ' + pillClass, pillText);
-        const whenText = state.tab === 'pending' ? 'загружено ' + when(row.uploaded_at)
-          : state.tab === 'rework' ? 'отклонено ' + when(row.rejected_at) : 'фото не загружено';
+        const whenText = {
+          pending: ['загружено', row.uploaded_at], rework: ['отклонено', row.rejected_at],
+          accepted: ['принято', row.reviewed_at], empty: ['фото не загружено'],
+        }[state.tab].filter(Boolean).map((value, index) => index ? when(value) : value).join(' ');
         const meta = make('div', 'meta', `${row.district} · ${mode().describe(row)}${row.point_no ? ' · ' + row.point_no : ''} · ` + whenText);
         info.append(make('strong', '', row.label), meta);
         meta.prepend(pill);
@@ -390,8 +429,10 @@
         button.onclick = () => openPoint(row, state.tab);
         return button;
       }));
-      if (!all.length) list.append(make('div', 'empty', state.tab === 'pending' ? `Нет ${mode().noun} с фото на проверке.`
-        : `Нет ${mode().noun} на доработке.`));
+      if (!all.length) {
+        const ending = { pending: 'с фото на проверке', rework: 'на доработке', accepted: 'с принятым фото', empty: 'без фото' };
+        list.append(make('div', 'empty', 'Нет ' + mode().noun + ' ' + ending[state.tab] + '.'));
+      }
       el('more').hidden = shown.length >= all.length;
     }
 
@@ -481,26 +522,39 @@
 
     function currentRow(pointId) {
       const from = (rows, kind) => { const row = (rows || []).find((r) => r.point_id === pointId); return row ? { row, kind } : null; };
-      return from(state.queue.pending, 'pending') || from(state.queue.rework, 'rework') || null;
+      return from(state.queue.pending, 'pending') || from(state.queue.rework, 'rework')
+        || from(state.queue.accepted, 'accepted') || from(state.queue.empty, 'empty');
     }
 
     // Очередь тянется один раз: при переходе «кадр → кадр» она берётся из памяти,
     // а проверенная строка убирается локально. Раньше на один кадр уходило
     // два-три запроса по 1,8 МБ.
     async function refreshQueue() {
-      state.queue = await json('/queue');
-      fillDistricts(); renderCounts(); render();
+      const generation = ++queueGeneration;
+      let queue;
+      try { queue = await json(mode().queue || '/queue'); }
+      catch (error) {
+        if (generation !== queueGeneration) return null;
+        throw error;
+      }
+      if (generation !== queueGeneration) return null;
+      state.queue = queue;
+      fillDistricts(); fillParks(); renderCounts(); render();
       return state.queue;
     }
 
-    function dropPendingRow(pointId, decision) {
+    function dropPendingRow(pointId, decision, comment, reviewedAt) {
       const queue = state.queue; if (!queue) return;
       const index = queue.pending.findIndex(row => row.point_id === pointId);
       if (index < 0) return;
-      queue.pending.splice(index, 1);
+      const [row] = queue.pending.splice(index, 1);
       queue.counts.pending = Math.max(0, queue.counts.pending - 1);
       if (decision === 'accepted') queue.counts.accepted += 1;
       else if (decision === 'rejected') queue.counts.rework += 1;
+      if (state.mode === 'parks') {
+        if (decision === 'accepted') queue.accepted.unshift({ ...row, reviewed_at: reviewedAt });
+        else queue.rework.unshift({ ...row, rejected_at: reviewedAt, rejected_comment: comment });
+      }
       renderCounts(); render();
     }
 
@@ -558,12 +612,17 @@
       el('objectMeta').textContent = `${row.district} · ${mode().describe(row)}${row.point_no ? ' · ' + row.point_no : ''}${row.longitude != null ? ' · ' + Number(row.latitude).toFixed(6) + ', ' + Number(row.longitude).toFixed(6) : ''}`;
       el('objectMapLink').href = mode().mapLink?.(row) || (DISTRICT_SLUGS[row.district] ? DISTRICT_SLUGS[row.district] + '.html' : 'index.html');
       grid.replaceChildren(pointCard(row, kind, openReviewMap(row)));
-      prefetchNext(row);
       const pendingPhoto = kind === 'pending';
-      setStatus('objectStatus', pendingPhoto ? 'Снимок ждёт решения: принять или вернуть на доработку с комментарием.'
-        : 'Снимок на доработке: ждём новую фотографию.');
+      if (pendingPhoto) prefetchNext(row);
+      const status = {
+        pending: 'Снимок ждёт решения: принять или вернуть на доработку с комментарием.',
+        rework: 'Снимок на доработке: ждём новую фотографию.',
+        accepted: 'Фото точки принято.',
+        empty: 'Фото точки ещё не загружено.',
+      };
+      setStatus('objectStatus', status[kind]);
       el('acceptObject').hidden = !pendingPhoto;
-      el('acceptObject').textContent = ['odh-sidewalks', 'yard-paths'].includes(state.mode) ? 'Принять кадр' : 'Принять объект';
+      el('acceptObject').textContent = ['odh-sidewalks', 'yard-paths', 'parks'].includes(state.mode) ? 'Принять кадр' : 'Принять объект';
       el('acceptObject').onclick = pendingPhoto ? () => reviewPhotos([{ id: row.photo_id, point_id: row.point_id }], 'accepted', '') : null;
       el('nextObject').hidden = state.tab !== 'pending' || pendingPhoto;
       lockReview(state.busy);
@@ -637,6 +696,13 @@
         if (row.photo_id) node.append(photoBox(row.point_id, { id: row.photo_id }, 'Отклонённое фото точки ' + row.label, capture), body);
         if (!row.photo_id) node.append(make('div', 'slot-empty-box', 'Отклонённый снимок снят со слота'), body);
         body.append(make('p', 'comment', 'Что исправить: ' + (row.rejected_comment || '—')), make('div', 'meta', 'Отклонено ' + when(row.rejected_at) + '. Ждём новое фото.'));
+      } else if (kind === 'accepted') {
+        title.append(make('span', 'pill accepted', 'Принято'));
+        if (row.reviewed_at) body.append(make('div', 'meta', 'Принято ' + when(row.reviewed_at)));
+        node.append(photoBox(row.point_id, { id: row.photo_id }, 'Принятое фото точки ' + row.label, capture), body);
+      } else if (kind === 'empty') {
+        title.append(make('span', 'pill empty-status', 'Без фото'));
+        node.append(body);
       }
       return node;
     }
@@ -672,14 +738,16 @@
       const revision = state.revision;
       lockReview(true);
       let saved = false;
+      let reviewedAt;
       try {
         for (const photo of photos) {
           if (revision !== state.revision) return;
-          await json(mode().review(photo), { method: 'POST', body: JSON.stringify({ decision, comment }) });
+          const result = await json(mode().review(photo), { method: 'POST', body: JSON.stringify({ decision, comment }) });
+          reviewedAt = result?.photo?.reviewed_at;
         }
         saved = true;
         if (revision !== state.revision) return;
-        dropPendingRow(state.objectId, decision);
+        dropPendingRow(state.objectId, decision, comment, reviewedAt);
         if (state.tab === 'pending') await nextPoint();
         else await renderPoint();
       } catch (error) {
@@ -721,16 +789,28 @@
       try { await api.login(el('loginName').value.trim(), el('loginPassword').value); el('loginPassword').value = ''; el('loginStatus').textContent = ''; showSession(); }
       catch (error) { el('loginStatus').textContent = 'Вход не выполнен: ' + error.message; }
     };
-    el('logout').onclick = () => { api.clearSession(); noSidewalkGeneration++; el('noSidewalkGroup').open = false; el('noSidewalkList').replaceChildren(); backToList(); state.queue = null; el('list').replaceChildren(); showSession(); };
-    el('districtFilter').onchange = () => { state.shown = PAGE; render(); };
-    el('kindFilter').onchange = () => { state.shown = PAGE; render(); };
+    el('logout').onclick = () => { api.clearSession(); queueGeneration++; noSidewalkGeneration++; el('noSidewalkGroup').open = false; el('noSidewalkList').replaceChildren(); backToList(); state.queue = null; el('list').replaceChildren(); showSession(); };
+    function filterList() {
+      state.shown = PAGE;
+      if (!state.queue) return;
+      if (state.mode === 'parks') renderCounts();
+      render();
+    }
+    el('districtFilter').onchange = () => { fillParks(); filterList(); };
+    el('kindFilter').onchange = filterList;
+    el('parkFilter').onchange = filterList;
     function showMode() {
       document.querySelectorAll('.mode').forEach((button) => {
         const active = button.dataset.mode === state.mode;
         button.classList.toggle('active', active);
         button.setAttribute('aria-selected', String(active));
       });
+      const parksMode = state.mode === 'parks';
+      for (const button of document.querySelectorAll('.tab[data-park-only]')) button.hidden = !parksMode;
+      setTab(!parksMode && ['accepted', 'empty'].includes(state.tab) ? 'pending' : state.tab);
       el('kindFilterBox').hidden = state.mode !== 'playgrounds';
+      el('parkFilterBox').hidden = !parksMode;
+      for (const id of ['exportAccepted', 'exportArchive', 'photoFromFilter', 'photoToFilter']) el(id).hidden = parksMode;
       // Сборка архива принадлежит вкладке, на которой её запустили. При смене
       // вкладки старый опрос прекращаем и возвращаем кнопке обычный вид, иначе
       // на «Тротуарах» висел прогресс «139 из 4 466» от въездных групп.
@@ -887,14 +967,16 @@
     function setTab(tab) {
       state.tab = tab;
       document.querySelectorAll('.tab').forEach((button) => {
-        button.classList.toggle('active', button.dataset.tab === tab);
+        const active = button.dataset.tab === tab;
+        button.classList.toggle('active', active);
+        button.setAttribute('aria-selected', String(active));
       });
     }
     document.querySelectorAll('.tab').forEach((tab) => {
       tab.onclick = () => {
+        if (tab.hidden) return;
         setTab(tab.dataset.tab);
-        state.shown = PAGE;
-        render();
+        filterList();
       };
     });
     showSession();

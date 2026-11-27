@@ -9,6 +9,7 @@ const fail = (status, message) => { throw Object.assign(new Error(message), { st
 const pointNotFound = () => fail(404, 'Точка или фотослот не найдены.');
 const photoNotFound = () => fail(404, 'Фото не найдено.');
 const parkNotFound = () => fail(404, 'Выберите парк в этом районе.');
+const slotStatus = (status) => status === 'rejected' ? 'rework' : status || 'empty';
 const toPoint = (row) => ({
   id: row.id,
   parkId: row.park_id,
@@ -18,17 +19,19 @@ const toPoint = (row) => ({
   slot: {
     id: row.frame_id,
     azimuth: row.azimuth,
-    status: row.status === 'rejected' ? 'rework' : row.status || 'empty',
+    status: slotStatus(row.status),
     photoId: row.photo_id || null,
     comment: row.review_comment || '',
   },
 });
 
-const pointRead = `SELECT p.*, o.district, f.id AS photo_id, f.status, f.review_comment
+const pointRead = `SELECT p.*, o.district, o.name AS park_name, f.id AS photo_id, f.status, f.review_comment,
+  f.photo_filename, f.uploaded_at, f.reviewed_at
   FROM park_digitization_points p
   JOIN park_digitization_objects o ON o.id = p.park_id
   LEFT JOIN LATERAL (
-    SELECT i.id, i.status, i.review_comment FROM park_digitization_photos i WHERE i.frame_id = p.frame_id
+    SELECT i.id, i.status, i.review_comment, i.photo_filename, i.uploaded_at, i.reviewed_at
+    FROM park_digitization_photos i WHERE i.frame_id = p.frame_id
     ORDER BY (i.status <> 'rejected') DESC, i.uploaded_at DESC, i.id DESC LIMIT 1
   ) f ON true
   WHERE p.retired_at IS NULL`;
@@ -58,10 +61,10 @@ export function createParkDigitizationRouter({ pool, authenticate, boundary }) {
   for (const param of ['pointId', 'frameId', 'photoId']) {
     router.param(param, (_req, _res, next, value) => UUID.test(value) ? next() : pointNotFound());
   }
-  async function transaction(run) {
+  async function transaction(run, { readOnly = false } = {}) {
     const client = await pool.connect();
     try {
-      await client.query('BEGIN');
+      await client.query(readOnly ? 'BEGIN ISOLATION LEVEL REPEATABLE READ READ ONLY' : 'BEGIN');
       const result = await run(client);
       await client.query('COMMIT');
       return result;
@@ -103,6 +106,38 @@ export function createParkDigitizationRouter({ pool, authenticate, boundary }) {
       pool.query('SELECT id, name, district FROM park_digitization_objects ORDER BY district, name'),
     ]);
     res.json({ parks: parks.rows, points: points.rows.map(toPoint), destinations: destinations.rows });
+  });
+
+  router.get('/review/queue', async (_req, res) => {
+    const result = await transaction(async (client) => {
+      const { rows: parks } = await client.query(`SELECT id, district, name, asu_ids, registry_status
+        FROM park_digitization_objects ORDER BY district, name, id`);
+      const { rows: points } = await client.query(pointRead + ' ORDER BY f.uploaded_at NULLS LAST, o.district, o.name, p.id');
+      const queues = { pending: [], rework: [], accepted: [], empty: [] };
+      for (const point of points) {
+        queues[slotStatus(point.status)].push({
+          point_id: point.frame_id,
+          source_point_id: point.id,
+          park_id: point.park_id,
+          label: point.park_name,
+          district: point.district,
+          longitude: point.longitude,
+          latitude: point.latitude,
+          heading: point.azimuth,
+          photo_id: point.photo_id,
+          photo_filename: point.photo_filename,
+          uploaded_at: point.uploaded_at,
+          reviewed_at: point.reviewed_at,
+          rejected_at: point.status === 'rejected' ? point.reviewed_at : null,
+          rejected_comment: point.status === 'rejected' ? point.review_comment : null,
+        });
+      }
+      return {
+        parks, ...queues,
+        counts: { total: points.length, ...Object.fromEntries(Object.entries(queues).map(([key, rows]) => [key, rows.length])) },
+      };
+    }, { readOnly: true });
+    res.json(result);
   });
 
   router.post('/points', async (req, res) => {
@@ -201,7 +236,8 @@ export function createParkDigitizationRouter({ pool, authenticate, boundary }) {
       const point = await lockPoint(client, req);
       const { decision, comment } = review.value;
       const { rows: [item] } = await client.query(`UPDATE park_digitization_photos SET status = $3, review_comment = $4,
-        reviewed_by = $5, reviewed_at = now() WHERE frame_id = $1 AND id = $2 AND status = 'pending' RETURNING id, status`,
+        reviewed_by = $5, reviewed_at = now() WHERE frame_id = $1 AND id = $2 AND status = 'pending'
+        RETURNING id, status, reviewed_at`,
       [point.frame_id, req.params.photoId, decision, comment, req.user.id]);
       if (!item) fail(409, 'Снимок уже проверен или недоступен для этой точки.');
       await audit(client, req, 'park_photo_reviewed', point, { photoId: item.id, decision });

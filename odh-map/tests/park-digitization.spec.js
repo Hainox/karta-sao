@@ -165,6 +165,16 @@ test('принятая парковая точка защищена от уда�
   await expect(page.locator('#card').getByText('Принятую точку нельзя удалить.')).toBeVisible();
 });
 
+test('ссылка из приёмки сразу открывает точку и её парк', async ({ page }) => {
+  const point = { id: '61281fe5-7dc1-4608-9774-208c0491c234', parkId, coordinates: [37.496, 55.864],
+    revision: 1, slot: { id: frameId, azimuth: 70, status: 'empty' } };
+  await setup(page, 'prefecture_admin', point);
+  await page.goto(base + '?parkPoint=' + point.id);
+  await expect(page.getByLabel(/Оцифровка Парковых территорий/)).toBeChecked();
+  await expect(page.getByRole('combobox', { name: 'Парковая территория' })).toHaveValue(parkId);
+  await expect(page.getByRole('heading', { name: 'Фотослот · 70°' })).toBeVisible();
+});
+
 for (const role of ['district_editor', 'dpsp_district_editor']) {
   test(`парковый слой скрыт на районной карте для ${role}`, async ({ page }) => {
     const parkRequests = [];

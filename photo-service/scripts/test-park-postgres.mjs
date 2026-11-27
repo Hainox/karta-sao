@@ -59,6 +59,7 @@ try {
     return data;
   };
   const list = (district, options) => call('/district?district=' + encodeURIComponent(district), options);
+  const reviewQueue = options => call('/review/queue', options);
   const create = (overrides, options) => call('/points', { method: 'POST', status: 201, ...options,
     json: { id: randomUUID(), district: a.district, parkId: a.id, coordinates: [37.541, 55.794], azimuth: 75, ...overrides },
   });
@@ -67,6 +68,8 @@ try {
   await list(b.district, { role: 'editor', status: 403 });
   await list(a.district, { role: 'editor', status: 403 });
   await list(b.district, { role: 'foreign', status: 403 });
+  await reviewQueue({ role: 'guest', status: 401 });
+  await reviewQueue({ role: 'editor', status: 403 });
   assert.deepEqual(new Set((await list(a.district)).parks.map(park => park.id)), new Set([a.id, conflicted.id, unbounded.id]));
   await create({ parkId: null }, { status: 404 });
   await create({ parkId: b.id }, { status: 404 });
@@ -116,6 +119,17 @@ try {
   await erase(three.revision, 409);
   assert.equal((await list(b.district)).points.find(point => point.id === id).slot.status, 'accepted');
   assert.deepEqual(await call(newPhoto), png);
+  const initialQueue = await reviewQueue();
+  assert.equal(initialQueue.parks.find(item => item.id === a.id).registry_status, 'absent_in_source');
+  assert.deepEqual(initialQueue.counts, { total: 3, pending: 0, rework: 0, accepted: 1, empty: 2 });
+  const [accepted] = initialQueue.accepted;
+  assert.equal(accepted.source_point_id, id);
+  assert.equal(accepted.point_id, three.slot.id);
+  assert.equal(accepted.park_id, b.id);
+  assert.equal(accepted.label, b.name);
+  assert.equal(accepted.district, b.district);
+  assert.equal(accepted.photo_id, second.id);
+  assert.ok(accepted.reviewed_at);
 
   for (const state of ['pending', 'rejected']) {
     const point = (await create({})).point;
@@ -123,9 +137,16 @@ try {
     const { photo: pending } = await upload(pendingFrame, 'admin');
     const photoPath = pendingFrame + '/photos/' + pending.id;
     if (state === 'rejected') await call(photoPath + '/review', { method: 'POST', json: { decision: state, comment: 'Переснять' } });
+    const queue = await reviewQueue();
+    const [row] = queue[state === 'rejected' ? 'rework' : 'pending'];
+    assert.equal(row.park_id, a.id);
+    assert.equal(row.source_point_id, point.id);
+    assert.equal(row.photo_id, pending.id);
+    assert.equal(row.rejected_comment, state === 'rejected' ? 'Переснять' : null);
     const remove = { method: 'DELETE', json: { revision: point.revision } };
     await call('/points/' + point.id, { ...remove, role: 'editor', status: 403 });
     await call('/points/' + point.id, remove);
+    assert.deepEqual((await reviewQueue()).counts, initialQueue.counts);
     assert.ok(!(await list(a.district)).points.some(item => item.id === point.id));
     await call(photoPath, { status: 404 });
     const { rows: [stored] } = await pool.query('SELECT status, photo_bytes FROM park_digitization_photos WHERE id = $1', [pending.id]);
