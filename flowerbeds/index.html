@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Цветники САО — общая карта</title>
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="stylesheet" href="../atlas-brand.css?v=20261021">
+<style>
+:root{--ink:#102636;--muted:#60747b;--line:#d7e0e2;--paper:#f7f5ef;--accent:#0d827c}
+*{box-sizing:border-box}html,body{height:100%;margin:0;background:#dfe8e8;color:var(--ink);font-family:"Century Gothic",Inter,Arial,sans-serif}
+.shell{height:100%;display:flex;flex-direction:column}.top{display:flex;align-items:center;gap:16px;min-height:64px;padding:10px 22px;background:var(--paper);border-bottom:1px solid var(--line)}
+.top a{color:var(--accent);font-weight:800;text-decoration:none}.title{font-size:18px;font-weight:800}.subtitle{margin-left:auto;color:var(--muted);font-size:12px}
+.content{display:flex;flex:1;min-height:0;flex-direction:column}.summary{display:flex;align-items:center;gap:16px;padding:13px 22px;background:white;border-bottom:1px solid var(--line)}
+.summary p{margin:0;color:#43575f;font-size:13px;line-height:1.5}.legend{display:flex;flex-wrap:wrap;gap:8px 16px;margin-left:auto}
+.key{display:flex;align-items:center;gap:7px;color:#41535a;font-size:12px;white-space:nowrap}.dot{width:13px;height:13px;border:2px solid white;border-radius:50%;box-shadow:0 0 0 1px rgba(16,38,54,.25)}.green{background:#2a9a4b}.blue{background:#3194df}.orange{background:#f39218}
+.map{position:relative;flex:1;min-height:400px;background:#e5ecec}iframe{width:100%;height:100%;border:0}.open{position:absolute;right:14px;top:14px;padding:10px 13px;border:1px solid #d7e0e2;border-radius:9px;background:white;color:var(--accent);font-size:12px;font-weight:800;text-decoration:none;box-shadow:0 3px 10px #10263620}
+@media(max-width:760px){.top{min-height:56px;padding:8px 14px}.subtitle{display:none}.summary{align-items:flex-start;flex-direction:column;padding:12px 14px}.legend{margin-left:0}.map{min-height:65vh}}
+@media print{@page{size:A3 landscape;margin:0}html,body,.shell{height:100%;background:#fff}.top,.summary,.open{display:none}.map{min-height:0}iframe{height:100vh}}
+</style>
+</head>
+<body>
+<div class="shell">
+<header class="top"><a href="../hub/">← Городской атлас САО</a><span class="title">Цветники САО · общая карта округа</span><span class="subtitle">260 существующих · 22 проектных</span></header>
+<main class="content">
+<section class="summary" aria-label="Состав карты">
+<p>Единая карта округа по цветникам. Нажмите на отметку, чтобы посмотреть объект и его название. Состав подготовлен по реестру цветников и проектному каталогу.</p>
+<div class="legend" aria-label="Условные обозначения">
+<span class="key"><i class="dot green"></i>Существующие цветники · 260</span>
+<span class="key"><i class="dot blue"></i>Проектные: Жилищник / АвД САО · 18</span>
+<span class="key"><i class="dot orange"></i>Проектные: АвД · 4</span>
+</div></section>
+<div class="map">
+<iframe title="Общая карта цветников Северного административного округа" loading="eager" allowfullscreen src="https://yandex.ru/maps/213/moscow/?ll=37.563554%2C55.880227&mode=usermaps&source=constructorPrint&um=constructor%3Aa13871ea5b85c93aa369437da513027b074b310c5bf6937fd0e4f1535f71a323&z=12"></iframe>
+<a class="open" href="https://yandex.ru/maps/-/CXgcQIIW" target="_blank" rel="noopener">Открыть в Яндекс.Картах ↗</a>
+</div>
+</main>
+</div>
+</body>
+</html>
